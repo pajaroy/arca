@@ -1,0 +1,87 @@
+id: prompt_cargar_memorias_v0.1.2
+fecha: 2025-06-11
+autor: santi + centralesis
+version: 0.1.2
+estado: propuesta_mejora
+linked_to:
+  - cargar_memorias_v0.1.1.py
+  - auditoria_centralesis_MEM_2025-06-11_CENTRALESIS_VALIDACION_SCRIPT.yaml
+  - manifest_v0.1.1.yaml
+  - memoria_centralizada.yaml
+
+titulo: "Prompt para nueva versión del cargador de memorias institucionales y multiagente ALMA_RESIST v0.1.2 (con control de integridad, paginación y trazabilidad completa)"
+
+descripcion: |
+  Solicitud de actualización y robustecimiento incremental del script CLI para carga, validación y sincronización de memorias multiagente en un archivo único centralizado (YAML + JSON) para ALMA_RESIST.
+  Esta versión debe ser el nuevo estándar institucional, lista para escalar y auditar.
+
+objetivo:
+  - Incluir y validar campos obligatorios: 'id', 'fecha', 'agente', 'tipo', 'autor', 'contenido', 'modulo', 'tags'.
+  - Agregar campo 'hash' (SHA256 del contenido crítico; autogenerado si no está presente).
+  - Añadir campos opcionales: 'origen_archivo', 'fecha_ingreso', 'commit_ref'.
+  - Permitir filtros/queries por 'agente', 'tipo', 'tags', fechas desde CLI (modo básico).
+  - Incluir soporte para paginación/chunking (parámetro `--limit` y/o `--offset`).
+  - Verificar y registrar hash global del archivo tras cada operación; comparar con backup y alertar si hay diferencia inesperada.
+  - Implementar control de concurrencia (lockfile o advertencia si el archivo está en uso).
+  - Documentar y loggear cada operación de carga o modificación (changelog automático).
+  - Incluir comando `--metrics` para estadísticas básicas (cantidad total, por agente, por tipo, tamaño del archivo, últimos registros).
+  - Mantener compatibilidad con formato anterior y permitir migración batch (carpeta de entrada).
+  - Toda entrada debe ser fácilmente filtrable y trackeable.
+  - Validar con schema interno y siempre permitir dry-run seguro.
+  - Toda mejora y diferencia debe quedar documentada en changelog y memoria crítica institucional.
+
+ejemplo_memoria:
+  id: MEM_2025-06-11_01
+  fecha: 2025-06-11
+  agente: kael
+  tipo: institucional
+  modulo: cli/core
+  autor: kael
+  contenido: "Bitácora de acción crítica realizada por KAEL."
+  tags: [cli, core, critica]
+  hash: sha256:xxxxxxxxxx
+  origen_archivo: "migracion_kael_2025-06-01.yaml"
+  fecha_ingreso: 2025-06-11T18:23:00Z
+  commit_ref: 76e93cc1e5...
+
+requerimientos_tecnicos:
+  - Rechazar memorias sin los campos obligatorios.
+  - Hash SHA256 autogenerado y verificado por entrada.
+  - Validar unicidad de IDs en la carga y en merges batch.
+  - Paginación/chunking por CLI, útil para extracción y uso incremental por chat/agente.
+  - Control de integridad de archivo antes/después de cada operación.
+  - Backups automáticos con hash y timestamp.
+  - Soporte para batch import/export y dry-run en cada operación.
+  - Registrar changelog por operación.
+
+comandos_cli_sugeridos:
+  - --filter "agente=kael"
+  - --filter "tipo=institucional"
+  - --tags "trading"
+  - --limit 100 --offset 200
+  - --metrics
+  - --export-sqlite "ruta.db"
+  - --dry-run
+
+notas:
+  - Toda versión debe estar firmada y referenciada en memoria crítica institucional.
+  - Adjuntar sección de changelog estructurada.
+  - El script debe estar listo para integración futura con motores RAG y chat CLI multiagente.
+
+comentarios_auditoria:
+  - El prompt responde a la auditoría y dictamen críticos de Centralesis sobre escalabilidad, trazabilidad y control de integridad.
+  - Se prohibe consolidar archivo único sin estos refuerzos.
+  - El MVP debe poder ser auditado, segmentado, migrado y versionado sin intervención manual.
+
+glosario:
+  agente: "IA o humano responsable de la memoria"
+  hash: "SHA256 de campos críticos de la memoria"
+  modulo: "Sección o componente de origen de la memoria"
+  tags: "Lista de palabras clave asociadas"
+  origen_archivo: "Archivo original de donde se migró la memoria"
+  fecha_ingreso: "Fecha/hora de incorporación al archivo central"
+  commit_ref: "Hash de commit o referencia de cambio estructural"
+  paginación: "Carga/extracción por segmentos para evitar problemas de escalabilidad"
+
+frase_final: |
+  Ningún archivo, memoria o bitácora es más valioso que la trazabilidad y la integridad del sistema. La memoria viva es la mejor defensa contra la complacencia y el olvido.

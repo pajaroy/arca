@@ -1,0 +1,29 @@
+# 🧠 Solicitud de Módulo: `log_crypto.py` – ALMA_RESIST
+
+## 🎯 Objetivo
+Implementar un módulo Python llamado `log_crypto.py` dentro del sistema ALMA_RESIST. Este módulo debe poder:
+
+1. Cifrar archivos `.log` con AES-256 si la CPU es x86 y soporta AES-NI.
+2. Usar ChaCha20 como alternativa en ARM o CPUs sin AES-NI.
+3. Validar automáticamente qué algoritmo usar en función del entorno.
+4. Aceptar claves personalizadas o generarlas de forma segura si no se proveen.
+5. Guardar archivo cifrado como `.enc` y poder descifrarlo de forma segura.
+6. Operar 100% offline y desde terminal.
+
+
+## 🧪 Entradas esperadas
+
+```python
+encrypt_log(input_path="logs/alma_2025-05-17.log", output_path="logs/alma_2025-05-17.enc", key=b"clave_segura")
+decrypt_log(input_path="logs/alma_2025-05-17.enc", output_path="logs/alma_2025-05-17.log", key=b"clave_segura")
+```
+
+
+## 📘 Archivos relacionados
+
+- `core/log_writer.py` – Genera los logs
+- `tests/test_log_writer.py` – Verifica escritura funcional
+- `docs/changelog.md`, `docs/lecciones_aprendidas.md`
+
+
+📦 Este módulo es crítico para garantizar privacidad radical en ALMA_RESIST.

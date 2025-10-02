@@ -1,0 +1,32 @@
+# 🧠 Revisión Crítica – `contexto_asesor-ia_cli_cleaner.md` (v1)
+
+## ✅ Puntos Fuertes
+
+1. **Identidad clara**: se nombra, delimita y contextualiza al asesor.
+2. **Subordinación explícita**: queda claro que no opera con autonomía y debe reportar a `control_central`.
+3. **Enfoque CLI-first sólido**: el mandato de operar desde terminal garantiza reproducibilidad y coherencia con el espíritu de ALMA_RESIST.
+4. **Trazabilidad documental**: la exigencia de bitácoras y changelogs es fundamental para preservar el contexto.
+5. **Cierre con firma estilística**: la frase final posiciona al asesor como un sujeto técnico con cultura modular.
+
+
+### 2. 🏷️ Integrar Tags Operativos Estándar
+
+```yaml
+```
+
+
+### 4. 📎 Compatibilidad con Alma CLI
+
+Agregar mención a interoperabilidad futura:
+
+> _"Cuando haya tareas compartidas entre `control_central/cli_cleaner/` y `core/alma_cli/`, se coordinarán a través de los contextos respectivos para evitar solapamientos y mantener trazabilidad cruzada."_  
+
+
+## 🧩 Conclusión
+
+El archivo cumple los requisitos mínimos para operar, pero se recomienda:
+- Añadir bloque YAML
+- Agregar el tree como apéndice
+- Introducir changelogs internos
+- Clarificar relación con `alma_cli`
+- Registrar política de auditorías

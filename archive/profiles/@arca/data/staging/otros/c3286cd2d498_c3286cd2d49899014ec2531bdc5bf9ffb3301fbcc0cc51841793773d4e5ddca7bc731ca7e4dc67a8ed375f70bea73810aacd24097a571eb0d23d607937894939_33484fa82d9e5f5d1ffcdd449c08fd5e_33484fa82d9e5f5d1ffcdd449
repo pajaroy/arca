@@ -1,0 +1,29 @@
+# ⚙️ Módulos CLI – ALMA_RESIST
+
+Este directorio contiene **scripts ejecutables desde terminal (CLI)** diseñados para automatizar tareas internas críticas del sistema ALMA_RESIST.
+
+## 📌 Objetivo
+
+Proveer herramientas confiables, auditables y configurables para registrar eventos clave en el sistema, bajo una arquitectura modular y extensible.
+
+
+### 🧾 Changelog
+
+- **Ruta:** `changelog/add_changelog_entry_v0.1.2.py`
+- **Función:** Agrega entradas versionadas al changelog vivo de ALMA_RESIST.
+- **Características:**
+  - Validación de versión semántica (`0.X.Y`).
+  - Inserción ordenada (último al principio).
+  - Unicidad de versión garantizada.
+  - Backup automático y validación estructural.
+  - Soporte `--dry-run`, `--tags`, y rutas por parámetro.
+
+
+## 🔒 Auditoría y Buenas Prácticas
+
+Todos los scripts deben:
+- Tener versión clara en el nombre (`_vX.Y.Z.py`).
+- Soportar `--dry-run` y `--backup` por defecto.
+- Registrar sus acciones en bitácoras o changelog.
+- Mantener compatibilidad con el entorno CLI de ALMA_RESIST.
+

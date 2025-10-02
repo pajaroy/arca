@@ -1,0 +1,46 @@
+# 🔧 Prompt_Master_1.0_Mejoras.md – Fondo de Inversión Alma Mía
+
+Este archivo recopila todas las mejoras, ajustes y correcciones que surgen luego de la publicación de la versión `Prompt_Master_1.0_Alma_Mia.md`. Su objetivo es preparar el terreno para la futura versión `1.1`.
+
+
+## ✅ 2. Corrección de Lógica de Distribución de Ganancias
+
+La lógica actual de la distribución será reemplazada por una versión más clara:
+
+- Cada inversor **mantiene su propio contrato par a par** con la empresa Alma Mía.
+- Las **ganancias se dividen 50/50 entre el inversor y la empresa** sobre los beneficios individuales generados por su capital, no del total global.
+
+Ejemplo:
+- Santiago invierte $50 y gana $5 → recibe $2.50
+- ONG Cannabird invierte $100 y gana $10 → recibe $5
+- Alma Mía recibe el otro 50% de cada uno, no de un porcentaje agregado.
+
+
+## ✅ 4. Control de Versiones y Estructura Documental
+
+Se establece una lógica para mantener trazabilidad en el tiempo:
+
+- `Prompt_Master_1.0.md`: Versión base consolidada
+- `Prompt_Master_1.0_Mejoras.md`: Registro de cambios para versión 1.1
+- `Prompt_Master_1.1.md`: Próxima consolidación tras cierre del primer trimestre
+
+> Se sugiere crear una carpeta `Historial_De_Prompts` o `Versiones_Master` para dejar trazabilidad completa del crecimiento del fondo.
+
+
+Este archivo será el punto de partida para la siguiente evolución del proyecto Alma Mía.
+
+## ✅ 3. Nueva Nomenclatura para Archivos y Control de Versiones
+
+Para facilitar el orden cronológico y la lectura por carpetas o en sistemas como Obsidian / Notion / Git, se propone invertir la nomenclatura de versiones:
+
+| Versión Anterior                 | Nueva Nomenclatura Sugerida         |
+|----------------------------------|--------------------------------------|
+| Prompt_Master_1.0_Alma_Mia.md    | 1.0_Prompt_Master_Alma_Mia.md       |
+| Prompt_Master_1.0_Mejoras.md     | 1.0_Mejoras_Prompt_Master_Alma_Mia.md |
+| Prompt_Master_1.1_Alma_Mia.md    | 1.1_Prompt_Master_Alma_Mia.md       |
+
+> Esto asegura un orden natural en carpetas y facilita el seguimiento del progreso en el tiempo.
+
+
+Este documento funcionará como referencia para futuras decisiones estructurales y redacciones de versiones mayores.
+

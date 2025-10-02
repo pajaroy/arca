@@ -1,0 +1,125 @@
+---
+module: metodologias/archivadas/metodologia_adr_v1
+type: core
+status: in_progress
+created: '2025-05-21'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🧠 Metodología de Auditoría y Evolución Técnica (ADRs) – ALMA_RESIST (v1)
+
+📅 Versión: 1.0  
+📁 Archivo: metodologia_adr_v1.md  
+🎯 Objetivo: Establecer una forma profesional, clara y sencilla de registrar decisiones arquitectónicas importantes dentro del sistema ALMA_RESIST mediante el uso de Architecture Decision Records (ADRs).
+
+---
+
+## ✅ ¿Qué es un ADR?
+
+Un **Architecture Decision Record (ADR)** es un documento que responde:  
+> “¿Por qué tomamos esta decisión técnica en este punto del tiempo?”
+
+Su objetivo es dejar constancia de **decisiones estructurales, tecnológicas o estratégicas** que pueden afectar la evolución futura del sistema.
+
+---
+
+## 📘 ¿Cuándo crear un ADR?
+
+Usá un ADR cuando:
+
+- Se decide adoptar una arquitectura nueva (modularidad, CLI, IA local, etc.)
+- Se descarta una alternativa tecnológica
+- Se impone una convención (naming, carpetas, YAML, versionado)
+- Se identifica una deuda técnica que se posterga o una limitación consciente
+
+---
+
+## 📁 Ubicación oficial
+
+Todos los ADR deben guardarse en:  
+```
+docs/adr/
+```
+
+Nombrados de forma incremental y descriptiva:
+
+```
+docs/adr/001-estructura-modular.md
+docs/adr/002-versionado-semver.md
+docs/adr/003-ia-local-mistral.md
+```
+
+---
+
+## 📋 Plantilla sugerida
+
+```markdown
+# ADR 001 – [Título de la decisión]
+
+📅 Fecha: 2025-05-21  
+🎯 Estado: Adoptado | Rechazado | Exploratorio
+
+## Decisión
+Describe en una frase qué se decidió.
+
+## Contexto
+Explica la situación previa, el problema, la necesidad.
+
+## Alternativas consideradas
+Lista breve de otras opciones evaluadas.
+
+## Justificación
+Por qué se eligió esta solución y no otras.
+
+## Impacto
+Cómo afecta esta decisión al sistema. ¿Qué se modifica?
+
+## Relacionado con
+- Sprint_X
+- metodología_X
+- módulo afectado
+
+```
+
+---
+
+## 📘 Ejemplo real
+
+```markdown
+# ADR 002 – Adopción de versionado SemVer
+
+📅 Fecha: 2025-05-18  
+🎯 Estado: Adoptado
+
+## Decisión
+Utilizar `MAJOR.MINOR.PATCH` como convención de versionado global.
+
+## Contexto
+Se necesitaba un estándar para versionar snapshots y scripts sin ambigüedad.
+
+## Alternativas consideradas
+- Fechas (`2025-05-18`)
+- Commit hashes
+- Versionado manual ad-hoc
+
+## Justificación
+SemVer es ampliamente utilizado, fácil de entender y permite automatización futura.
+
+## Impacto
+Afecta a changelog.md, backups, carpetas `/versiones/`, y documentación general.
+
+## Relacionado con
+- metodologia_versionado_backups_v1.md
+- Sprint_2.2
+```
+
+---
+
+## 🧾 Changelog
+
+### 2025-05-21
+- Creación de la metodología v1 para auditoría evolutiva mediante ADRs.
+- Se define carpeta `/docs/adr/` como espacio oficial de decisiones técnicas.
+- Se incluye plantilla con campos mínimos y ejemplo real aplicado.
+

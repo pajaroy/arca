@@ -1,0 +1,33 @@
+metadata:
+  version: "0.1.0"
+  tipo: "readme"
+  schema: "almaresist.readme_v1"
+  descripcion: "Carpeta legacy con el primer script CLI de bitácoras. Se preserva únicamente para trazabilidad histórica y referencia de evolución documental."
+  estructura: "metadata + secciones"
+  tags:
+    - legacy
+    - bitacora
+    - cli
+    - v0.1.0
+    - referencia
+    - historial
+  linked_to: []
+  responsable: "Equipo de Operaciones"
+  hash_verificacion: ""
+  historial: []
+  last_modified: "2025-06-17T09:30:00Z"
+  last_modified_by: "Kael"
+secciones:
+  - titulo: "Contenido de la carpeta"
+    descripcion: |
+      - add_bitacora_entry_v0.1.0.py: Primer script funcional CLI para cargar entradas en la bitácora institucional.
+      - No se dispone del prompt YAML de requerimientos original para esta versión.
+  - titulo: "Estado y advertencias"
+    descripcion: |
+      - Esta versión se utilizó como prototipo y fue reemplazada por la versión v0.2.0 bajo estándares KAEL.
+      - Se mantiene aquí solo como referencia histórica. No debe usarse en producción ni para nuevas automatizaciones.
+  - titulo: "Notas"
+    descripcion: |
+      - Consultar el changelog principal para ver la evolución del sistema.
+      - Revisar la carpeta `/bitacora/v0.2.0/` para el estándar actual.
+      - Archivado por protocolo KAEL. No editar sin dejar registro institucional.

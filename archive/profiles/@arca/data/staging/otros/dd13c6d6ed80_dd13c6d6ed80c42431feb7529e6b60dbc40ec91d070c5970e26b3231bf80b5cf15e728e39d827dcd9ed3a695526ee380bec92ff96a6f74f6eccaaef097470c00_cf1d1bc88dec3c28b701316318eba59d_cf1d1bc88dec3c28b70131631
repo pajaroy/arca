@@ -1,0 +1,119 @@
+---
+module: metodologias/metodologia_snapshots_formales
+type: core
+status: in_progress
+created: '2025-05-28'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 📦 Metodología de Snapshots Formales (v1.0)
+
+## 🎯 Objetivo
+
+Definir un estándar profesional para la creación, documentación y uso de snapshots (versiones) dentro del sistema ALMA_RESIST, asegurando trazabilidad, claridad técnica y compatibilidad total con agentes IA.
+
+---
+
+## 🧠 Concepto de Snapshot Formal
+
+Un snapshot es una **captura verificable y completa** del estado del sistema ALMA_RESIST en un punto clave del tiempo (ej: cierre de sprint, hito mayor, refactor profundo).
+
+Cada snapshot:
+
+- Está documentado
+    
+- Es verificable mediante scripts de validación
+    
+- Es compatible con uso IA (IA-friendly)
+    
+- Puede ser restaurado o referenciado
+    
+
+---
+
+## 🗂 Estructura Estándar de un Snapshot
+
+Ubicación: `docs/versiones/vX.Y.Z_nombre/`
+
+Contenido mínimo:
+
+```
+📁 v0.0.0.4_sprint_2.5_auditoria/
+├── index.md                      # Índice general y guía de lectura del snapshot
+├── version.md                   # Detalles técnicos de la versión
+├── changelog.md                 # Cambios y mejoras introducidas
+├── bitacora.md                  # Comentarios técnicos del proceso
+├── README.md                    # Explicación del snapshot, enlaces cruzados
+├── resumen_mvp.md               # (opcional) Estado funcional hasta esta versión
+├── estructura.zip               # (opcional) Zip con archivos específicos si es necesario
+└── referencias/                 # (opcional) Recursos, imágenes, backups externos
+```
+
+---
+
+## 📌 Reglas de Oro
+
+1. ❌ No duplicar archivos del sistema dentro de la carpeta: usar referencias cruzadas.
+    
+2. ✅ README.md debe indicar cómo usar el snapshot y qué IA puede hacer con él.
+    
+3. ✅ Debe existir un `index.md` como mapa de navegación.
+    
+4. ✅ version.md debe incluir los metadatos estándar (`versión`, `fecha`, `autor`, `estado`, `hitos`, etc.).
+    
+5. ✅ Debe ser coherente con el cierre de sprint documentado en `docs/control/sprints_*`.
+    
+
+---
+
+## 🤖 Compatibilidad IA
+
+Para que un snapshot sea IA-friendly:
+
+- No debe tener estructuras anidadas innecesarias (máximo L3)
+    
+- Los archivos clave deben tener YAML válido si corresponde
+    
+- El `README.md` debe servir como prompt inicial o punto de entrada
+    
+- El `index.md` debe orientar al sistema o modelo sobre qué se puede usar
+    
+
+---
+
+## ✅ Checklist de Creación de Snapshot
+
+-  Validar estructura con `validate_docs.py`
+    
+-  Corregir metadatos con `fix_metadata.py`
+    
+-  Aplicar `force_snake_case_modules.py` si hay nombres mal escritos
+    
+-  Generar README.md e `index.md`
+    
+-  Copiar solo los archivos nuevos/modificados necesarios
+    
+-  Documentar todo en `changelog.md`
+    
+-  Validar que sea legible por IA desde `README.md`
+    
+
+---
+
+## 📎 Referencias cruzadas
+
+- `metodologia_versionado_backups_v2.md`
+    
+- `metodologia_doc_ia_v2.md`
+    
+- `metodologia_sprints_v2.md`
+    
+
+---
+
+## 🔄 Revisión futura
+
+Esta metodología debe revisarse y validarse al cierre de cada sprint mayor (2.x, 3.x, etc.) como parte del proceso de auditoría de metodología.
+
+> Última revisión: v1.0 – 2025-05-28

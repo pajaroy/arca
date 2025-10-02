@@ -1,0 +1,64 @@
+{
+  "version": "0.3.0",
+  "tipo": "changelog",
+  "schema": "almaresist.changelog_v1",
+  "descripcion": "Historial de cambios del módulo add_bitacora_entry v0.3.0 para el sistema de bitácoras institucionales ALMA_RESIST.\nEste changelog registra mejoras clave en robustez, gobernanza documental y antifallos respecto a versiones anteriores.\n",
+  "estructura": [
+    "cambios"
+  ],
+  "tags": [
+    "changelog",
+    "bitacora",
+    "cli",
+    "versionado",
+    "antifallos",
+    "almaresist"
+  ],
+  "linked_to": [
+    "../../src/add_bitacora_entry_v0.3.0.py",
+    "../../docs/prompt_add_bitacora_v0.3.0/prompt_add_bitacora_v0.3.0.yaml",
+    "../../docs/prompt_add_bitacora_v0.3.0/README.yaml",
+    "../../docs/README.yaml",
+    "../../README.yaml",
+    "../../../_legacy/v0.2.0/src/add_bitacora_entry_v0.2.0.py",
+    "../../../_legacy/v0.2.0/docs/prompt_add_bitacora/prompt_add_bitacora_entry_v0.2.0.yaml",
+    "../../../_legacy/v0.2.0/docs/README.yaml"
+  ],
+  "responsable": "Kael @ ALMA_RESIST",
+  "hash_verificacion": "sha256:pending",
+  "historial": [
+    "2025-06-17: Creación del changelog v0.3.0. Vinculación cruzada a scripts, prompts y versiones legacy para trazabilidad institucional total."
+  ],
+  "last_modified": "2025-06-17T12:55:00Z",
+  "last_modified_by": "Kael",
+  "cambios": [
+    {
+      "fecha": "2025-06-17T12:40:00Z",
+      "version": "0.3.0",
+      "descripcion": "Lanzamiento de la versión antifallos institucional. CLI modular con backups automáticos, validación extendida, changelog, triple formato y gobernanza documental total.\n",
+      "mejoras": [
+        "Backups automáticos y política de retención avanzada",
+        "Validación estricta de campos y metadatos",
+        "Hash institucional SHA-256 actualizado y verificado",
+        "Changelog automático integrado a los metadatos",
+        "Triple formato sincronizado (YAML/JSON/Markdown)",
+        "Restauración y validación de backups desde CLI",
+        "Logging avanzado y rotativo, integración de ayuda extendida y generación de docs técnicas automáticas",
+        "Modularidad para extensiones futuras"
+      ],
+      "responsable": "Kael @ ALMA_RESIST",
+      "hash_verificacion": "sha256:pending",
+      "last_modified": "2025-06-17T12:45:00Z",
+      "last_modified_by": "Kael"
+    },
+    {
+      "fecha": "2025-06-16",
+      "version": "0.2.0",
+      "descripcion": "Versión anterior: CLI con backups y triple formato, sin changelog automático ni restauración nativa. Carecía de antifallos extendidos, logging profesional y modularidad de producción.\n",
+      "responsable": "Kael @ ALMA_RESIST",
+      "hash_verificacion": "sha256:pending",
+      "last_modified": "2025-06-16T06:30:00Z",
+      "last_modified_by": "Kael"
+    }
+  ]
+}

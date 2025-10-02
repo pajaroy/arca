@@ -1,0 +1,16 @@
+# 🧠 ALMA_NLP
+
+Este módulo se encarga de detectar relaciones semánticas entre memorias ALMA utilizando procesamiento de lenguaje natural (NLP). 
+Utiliza embeddings y modelos como Sentence-BERT en español para medir similitud entre textos.
+
+## Funciones principales
+- Analizar similitud entre contenidos de memorias
+- Sugerir relaciones automáticas basadas en NLP
+- Integración futura con ChromaDB y visualización en grafo
+
+## Estructura
+- `dataset_test/` → Memorias de prueba (mínimo 50) para testear relaciones
+- `embeddings/` → Archivos vectoriales generados por el modelo
+- `logs/` → Historial de relaciones sugeridas y errores
+- `modelo/` → Archivos del modelo pre-entrenado o referencias
+- `prompts_hist/` → Registro de todos los prompts usados

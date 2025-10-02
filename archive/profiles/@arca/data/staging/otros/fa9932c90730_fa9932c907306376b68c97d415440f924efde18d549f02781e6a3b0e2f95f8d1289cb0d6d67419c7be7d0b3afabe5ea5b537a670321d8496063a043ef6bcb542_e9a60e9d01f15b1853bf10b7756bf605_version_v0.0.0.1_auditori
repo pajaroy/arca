@@ -1,0 +1,18 @@
+{
+  "version": "v0.0.0.1",
+  "nombre": "Auditoría Inicial",
+  "fecha": "2025-05-22",
+  "estado": "completo",
+  "descripcion": "Contiene los documentos y decisiones del primer proceso de auditoría del sistema ALMA_RESIST, incluyendo estructura, arquitectura y lecciones aprendidas.",
+  "archivos": [
+    "README.md",
+    "Sprint_1_Logging.md",
+    "auditoria_estructura.md",
+    "changelog.md",
+    "decisiones_arquitectonicas.md",
+    "hello_world.py",
+    "index.md",
+    "lecciones_aprendidas.md",
+    "version.json"
+  ]
+}

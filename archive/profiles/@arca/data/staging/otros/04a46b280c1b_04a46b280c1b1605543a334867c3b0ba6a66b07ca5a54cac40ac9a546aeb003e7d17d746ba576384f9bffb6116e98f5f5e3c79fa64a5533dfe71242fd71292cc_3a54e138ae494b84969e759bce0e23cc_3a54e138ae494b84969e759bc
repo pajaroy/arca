@@ -1,0 +1,135 @@
+---
+title: Tree control_central
+type: estructura
+module: control_central
+tags: [#estructura, #tree, #control_central, #contexto, #referencia]
+created: 2025-06-03
+---
+
+/home/bird/ALMA_RESIST/control_central
+├── archivo
+│   ├── datasets
+│   │   └── readme.md
+│   ├── downloads
+│   │   ├── archivados
+│   │   ├── historico
+│   │   ├── prompts
+│   │   └── readme.md
+│   ├── logs
+│   └── README.md
+├── asesor-ia
+│   ├── archivo
+│   │   ├── datasets
+│   │   ├── downloads
+│   │   ├── logs
+│   │   └── readme.md
+│   ├── comandos.md
+│   ├── config
+│   │   ├── readme.md
+│   │   └── settings.yaml
+│   ├── control
+│   │   ├── checklist_fase1_sync.md
+│   │   ├── readme.md
+│   │   └── sprint_actual.md
+│   ├── core
+│   │   ├── notebooks
+│   │   ├── README.md
+│   │   ├── scripts
+│   │   └── tests
+│   ├── docs
+│   │   ├── changelog.md
+│   │   ├── historicos
+│   │   ├── history
+│   │   ├── prompts
+│   │   └── README.md
+│   ├── interacciones
+│   │   ├── 2025-05-29_log_test.md
+│   │   └── readme.md
+│   ├── meta
+│   │   ├── module.yaml
+│   │   └── readme.md
+│   ├── metadata.yaml.md
+│   ├── prompt_base.md
+│   ├── README.md
+│   ├── scripts
+│   │   └── README.md
+│   ├── sessions
+│   │   ├── 20240601_activacion_sistema.md
+│   │   └── README.md
+│   ├── status
+│   │   ├── asesor_status.yaml
+│   │   └── readme.md
+│   ├── status.md
+│   └── templates
+│       └── README.md
+├── cli_cleaner
+│   └── control_central_cli_cleaner.md
+├── config
+│   └── readme.md
+├── control
+│   ├── checklists
+│   │   ├── checklists.md
+│   │   └── roadmap_0.0.0.2_2025-05-20.md
+│   ├── sprint_historicos
+│   │   ├── readme.md
+│   │   ├── sprint_actual_0.1_control_central.md
+│   │   └── sprint_actual_0.2_sincronizacion.md
+│   └── sprints_activos
+│       ├── prompts
+│       ├── README.md
+│       ├── sprint_0.3_infraestructura_asesor_ia.md
+│       └── sprint_actual.md
+├── core
+│   ├── notebooks
+│   │   └── readme.md
+│   ├── README.md
+│   ├── scripts
+│   │   └── README.md
+│   └── tests
+│       └── readme.md
+├── docs
+│   ├── changelog.md
+│   ├── contexto
+│   │   ├── contexto_asesor-ia_control-central_cli.md
+│   │   ├── contexto_asesor-ia_control-central_oficial.md
+│   │   ├── criterios_ubicacion_vivo.md
+│   │   ├── historico
+│   │   └── readme.md
+│   ├── history
+│   │   └── readme.md
+│   ├── journal
+│   │   ├── bitacoras
+│   │   ├── mapeo_sprint_archivos.md
+│   │   ├── prompts
+│   │   └── readme.md
+│   ├── planificacion
+│   │   ├── ideas
+│   │   ├── readme.md
+│   │   └── roadmaps
+│   ├── readme.md
+│   ├── ssh_aliases.md
+│   ├── sync
+│   │   ├── manual_sync.md
+│   │   └── problemas_comunes.md
+│   └── utilidades
+│       ├── control_central_docs_utilidades.zip
+│       ├── instalacion_inputleap_ssh_tmux.md
+│       ├── red_nodos_alma.md
+│       └── tree_control_central_L4.txt
+├── logs
+│   ├── auditorias
+│   │   └── 2025-05-29_prompt_audioria_001.md
+│   ├── log_integracion 1.md
+│   ├── log_integracion.md
+│   ├── logs_historicos
+│   │   └── readme.md
+│   └── README.md
+├── meta
+│   ├── module.yaml
+│   └── readme.md
+├── readme.md
+└── status
+    ├── alma_status.yaml
+    └── readme.md
+
+57 directories, 68 files

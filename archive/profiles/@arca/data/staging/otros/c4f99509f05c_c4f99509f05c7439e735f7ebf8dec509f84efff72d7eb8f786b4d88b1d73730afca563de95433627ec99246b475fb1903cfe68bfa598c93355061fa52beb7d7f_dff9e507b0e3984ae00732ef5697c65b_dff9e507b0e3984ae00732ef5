@@ -1,0 +1,110 @@
+# ✅ Checklist – Fase 1: Sincronización en Tiempo Real (Syncthing)
+📅 Fecha: 2025-06-01
+
+---
+
+## 🎯 Objetivo
+Sincronizar **bidireccionalmente y automáticamente** las carpetas críticas entre `ALMA_CORE` y `ALMA_RESIST` usando Syncthing.
+
+---
+
+## 📂 Carpetas a sincronizar
+
+- [ ] `~/ALMA_RESIST/obsidian_vault`
+- [ ] `~/ALMA_RESIST/` (incluye `core/`, `docs/`, `config/`, etc.)
+
+---
+
+## 🧱 Paso 1 – Configurar Syncthing
+
+- [ ] Lanzar Syncthing en ambas máquinas (`syncthing &`)
+- [ ] Acceder a interfaz: `http://localhost:8384`
+- [ ] Añadir el Device ID del otro nodo
+- [ ] Nombrar correctamente: `ALMA_CORE` / `ALMA_RESIST`
+- [ ] Compartir carpetas desde ALMA_CORE:
+  - [ ] `obsidian_vault`
+  - [ ] `ALMA_RESIST/`
+- [ ] Aceptar y replicar configuración desde ALMA_RESIST
+- [ ] Establecer ambas carpetas como **Send & Receive**
+
+---
+
+## 🧾 Paso 2 – Ignorar archivos sensibles
+
+- [ ] Crear archivo `.stignore` con contenido:
+
+```plaintext
+.env
+*.log
+__pycache__/
+*.pyc
+.vscode/
+downloads/
+```
+
+---
+
+## 🔁 Paso 3 – Validar sincronización
+
+- [ ] Ejecutar:
+
+```bash
+curl -s localhost:8384/rest/system/connections | jq .
+```
+
+- [ ] Verificar que ambos nodos estén `connected: true`
+
+---
+
+## 🧪 Paso 4 – Script de verificación
+
+- [ ] Crear script `sync_status.sh`:
+
+```bash
+#!/bin/bash
+echo "[🛰️ SYNC STATUS] Verificando conexión Syncthing..."
+curl -s http://localhost:8384/rest/system/connections | jq '.connections'
+```
+
+- [ ] Guardar en `ALMA_RESIST/core/scripts/`
+
+---
+
+## 🗃️ Paso 5 – Documentación
+
+- [ ] Crear archivo `docs/sync/README.md` con:
+
+```markdown
+# 📓 Configuración Syncthing – ALMA_RESIST
+
+## Nodos sincronizados
+
+- ALMA_CORE <--> ALMA_RESIST
+
+## Carpetas sincronizadas
+
+- ~/ALMA_RESIST/
+- ~/ALMA_RESIST/obsidian_vault/
+
+## Archivos ignorados
+
+Ver `.stignore` en cada carpeta.
+
+## Estado actual
+
+- Syncthing operativo ✅
+- Conexión establecida ✅
+- Sincronización bidireccional activa ✅
+```
+
+---
+
+## ✅ Resultado esperado
+
+- [ ] Cambios reflejados entre nodos en menos de 3 segundos
+- [ ] Reconexión automática en caso de caída
+
+---
+
+**Próxima fase** → `Fase 2: Backup GitHub + Log + Seguridad + Automatización`
+

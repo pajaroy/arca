@@ -1,0 +1,40 @@
+fecha: 2025-06-05
+
+# 📦 **Comandos útiles para TREE** (Linux)
+
+## 2. **Mostrar estructura de carpetas y archivos (por defecto, nivel completo)**
+
+```bash
+tree
+```
+
+## 4. **Mostrar hasta un nivel de profundidad específico**
+
+```bash
+tree -L 2      # Cambia el 2 por la profundidad que quieras
+```
+
+
+## 6. **Ver solo archivos que cumplan un patrón (por ejemplo, solo .md)**
+
+```bash
+tree -P "*.md"
+```
+
+
+## 8. **Ver cantidad de archivos y carpetas**
+
+```bash
+tree | tail -n 10
+```
+
+_Esto te muestra el cierre del tree con el resumen._
+
+## 10. **Combinar opciones (ejemplo pro)**
+
+```bash
+tree -L 3 -d --prune -I 'logs|__pycache__'
+```
+
+_tree -L 3 -d --prune -I 'logs|__pycache__'_
+

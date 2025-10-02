@@ -1,0 +1,50 @@
+¿Cuál es el orden óptimo para los siguientes fixers?
+Prioridad recomendada (de más “crítico” a más “refinamiento”):
+
+    Fix_Tipo:
+
+        Fundamental para que cada archivo deje claro qué es (README, script, doc, etc.).
+
+        Muchos fixers pueden actuar diferente según el tipo.
+
+    Fix_Hash:
+
+        Garantiza integridad y sirve como fingerprint.
+
+        Si no hacés cambios después, podés confiar en el hash para auditar todo.
+
+    Fix_Historial:
+
+        Da trazabilidad real (cuándo, quién, qué cambios).
+
+        Ideal que se actualice automáticamente si otros fixers tocan el archivo.
+
+    Fix_Tags:
+
+        Ayuda a clasificar, buscar, filtrar y entrenar ML.
+
+        Clave para sistemas IA/CLI y búsquedas inteligentes.
+
+    Fix_Descripcion:
+
+        Garantiza documentación mínima y contexto.
+
+        Permite auditar archivos “sin abrirlos”.
+
+    Fix_Estructura:
+
+        Muy útil en archivos complejos o módulos (README y scripts grandes).
+
+        Se puede automatizar en batch, pero suele necesitar revisión humana eventual.
+
+    Fix_LinkedTo:
+
+        Vital para grafos y RAG.
+
+        Puede ser complejo si hay muchas referencias cruzadas, pero con buena estructura inicial es fácil mantenerlo.
+
+    Fix_Schema:
+
+        Útil si usás validaciones formales o tenés múltiples versiones de plantilla.
+
+        Si todavía no versionaste schemas, puede esperar.

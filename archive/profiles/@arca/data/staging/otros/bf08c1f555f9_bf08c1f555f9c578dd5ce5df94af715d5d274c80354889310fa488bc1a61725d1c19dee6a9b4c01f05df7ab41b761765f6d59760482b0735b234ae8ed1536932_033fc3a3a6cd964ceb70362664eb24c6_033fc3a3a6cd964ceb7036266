@@ -1,0 +1,81 @@
+## 🧭 Roadmap General – ALMA_LOADER Post 3.0.3
+
+> **Objetivo central**: Consolidar un backend modular y escalable, listo para interactuar con IA y usuarios desde múltiples canales, manteniendo toda la lógica y explicaciones concentradas en dos archivos: `whitepaper_ALMA_LOADER_vX.X.md` y `prompt_technical_ALMA_LOADER_vX.X.md`.
+
+
+### 🧠 Fase 2 – Conexión con IA (primer nivel)
+
+**Objetivo**: Dotar al backend de capacidad básica de razonamiento y respuesta.
+
+1. **Nuevo endpoint `/v1/assistant/consultar`**
+    
+    - Recibe prompt + contexto opcional → responde con IA.
+        
+    - Usa memorias relevantes por búsqueda vectorial como contexto.
+        
+2. **Nuevo módulo `core/racionalizador.py`**
+    
+    - Llama a modelo de lenguaje externo (por ahora OpenAI u otro local).
+        
+    - Resuelve consultas tipo: "¿Qué anoté sobre cultivo ayer?", "Resumime mis gastos de la semana".
+        
+3. **Describir esta lógica en el `prompt técnico`**.
+    
+    - Incluir ejemplos de prompts que hace la IA hacia el backend.
+        
+4. **Agregar en el whitepaper una sección: “Capas de Interacción – Nivel 1: IA”**
+    
+    - Explicar cómo la IA accede al conocimiento del usuario sin modificarlo.
+        
+
+
+### 🔐 Fase 4 – Seguridad, Multiusuario, Deploy
+
+**Objetivo**: Preparar el sistema para uso real, sin perder simplicidad.
+
+1. Implementar JWT real, propietarios por memoria.
+    
+2. Endpoint de login y gestión de usuarios mínimos.
+    
+3. Dockerfile + docker-compose básico con FAISS.
+    
+4. Endpoint `/v1/deploy/status` para monitoreo básico (latencia, errores).
+    
+5. **Integración con Telegram y Shortcuts** como interfaz externa liviana.
+    
+
+
+## 📘 Mantenimiento de Archivos Base
+
+**WHITEPAPER**
+
+- Versión técnica y narrativa del sistema.
+    
+- Secciones recomendadas:
+    
+    1. Prólogo: qué es ALMA.
+        
+    2. Núcleo lógico.
+        
+    3. Módulos por dominio.
+        
+    4. Niveles de interacción (IA, API, usuario).
+        
+    5. Integración con cuadernos digitales.
+        
+    6. Roadmap en curso.
+        
+
+**PROMPT TÉCNICO**
+
+- Instrucciones estructuradas para que cualquier IA entienda:
+    
+    - Qué es cada endpoint.
+        
+    - Cómo funcionan los programas.
+        
+    - Ejemplos de uso.
+        
+    - Cuáles funciones puede ejecutar (según permisos, etapa del roadmap).
+        
+    - Instrucciones de fallback cuando algo no está implementado.

@@ -1,0 +1,19 @@
+# arca.yaml - Manifiesto Fundacional de ARCA
+metadatos:
+  id_unico: "manifiesto-YAML-003"
+  tipo: "manifiesto"
+  nombre: "arca_manifiesto.yaml"
+  version: "0.1.2"
+  estado: "activo"
+  fecha_creacion: "2025-07-14"
+  fecha_modificacion: "2025-07-14"
+
+arca:
+  descripcion: "Sistema autocreador para proyectos ML"
+  principios:
+    - "Autogeneración desde templates"
+    - "Trazabilidad mínima"
+    - "Configuración centralizada"
+  manifesto: "Asistente para scaffolding de proyectos ML"
+  creado_por: "Bird"
+  version: "0.1.0"

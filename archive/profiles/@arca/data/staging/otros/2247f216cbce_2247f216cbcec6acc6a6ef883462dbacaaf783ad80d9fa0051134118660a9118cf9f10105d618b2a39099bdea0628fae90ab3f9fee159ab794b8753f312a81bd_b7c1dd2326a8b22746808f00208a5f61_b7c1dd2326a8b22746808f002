@@ -1,0 +1,32 @@
+# Prompt para DeepSeek – Generar `core/validador.py`
+
+## 🎯 Objetivo
+
+Crear un módulo llamado `validador.py` dentro de la carpeta `core/`, que permita validar cualquier memoria contra un esquema JSON alojado en la carpeta `schemas/`.
+
+
+## 🧾 Ejemplo de uso:
+
+```python
+from core.validador import validar_esquema
+
+memoria = {
+    "id": "mem-001",
+    "contenido": "Texto ejemplo",
+    "categoria": "test",
+    "tags": ["#ejemplo"],
+    "visibilidad": "privada",
+    "owner_id": "usr-123",
+    "estado": "completado"
+}
+
+validar_esquema(memoria, "schema_base.json")
+```
+
+
+## 📌 Consideraciones
+
+- El sistema de rutas debe funcionar desde la raíz del proyecto
+- Compatible con FastAPI y Python 3.12
+- No requiere clases ni objetos, sólo función simple
+- Preparado para ser utilizado desde `core/memoria_saver.py`

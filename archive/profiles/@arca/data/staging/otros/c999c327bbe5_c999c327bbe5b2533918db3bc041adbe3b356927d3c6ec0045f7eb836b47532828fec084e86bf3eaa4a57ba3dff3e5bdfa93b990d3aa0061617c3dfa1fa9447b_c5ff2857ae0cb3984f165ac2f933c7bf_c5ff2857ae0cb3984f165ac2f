@@ -1,0 +1,81 @@
+# ALMA_RESIST v0.0.3
+
+🚀 **ALMA_RESIST** es un entorno NixOS modular y cifrado, diseñado para operar como nodo autónomo, auditable y preparado para tareas de hacking ético, trading, y gestión de datos, con máxima seguridad y trazabilidad.  
+
+Versión actual: **v0.0.3**  
+Fecha: **2025-06-27**
+
+
+## 🔐 Seguridad
+
+- **LUKS** en raíz:
+  - `/dev/mapper/alma_crypt` (Btrfs, compresión zstd)
+- Boot separado:
+  - `/boot` en `/dev/sda2` (vfat, fmask y dmask configurados)
+- Firewall activado (nftables):
+  - Permite solo puerto 22 (SSH).
+- Auditd habilitado para auditoría del sistema.
+- Placeholders para:
+  - AppArmor o SELinux
+  - Fail2ban
+  - Yubikey integration
+  - DNS over HTTPS/TLS
+
+
+## 👤 Usuario Configurado
+
+- Usuario principal: `alma`
+- Home directory: `/alma`
+- Shell: zsh
+- Grupos: wheel, networkmanager
+- Contraseña inicial: `umamia`
+
+
+## 🔧 Instalación
+
+1. Copiar archivos:
+   - hardware-configuration.nix
+   - configuration.nix
+
+2. Ejecutar:
+   ```bash
+   sudo nixos-rebuild switch
+   ```
+3. Para futuras actualizaciones:
+
+    ```bash
+    sudo nixos-rebuild switch --upgrade
+    ```
+    
+📝 Notas
+
+    UUID real de alma_crypt debe ser verificado en configuration.nix:
+
+    ```bash
+    device = "/dev/mapper/alma_crypt";
+    ```
+
+   - Tailscale está instalado pero no activado por defecto.
+
+   - Flakes preparados pero no en uso productivo aún.
+
+   - Compatible con system.stateVersion = "23.11".
+
+⚙️ Próximos Pasos
+
+    Configurar Flakes en producción.
+
+    Activar Tailscale o migrar a otra VPN.
+
+    Implementar contenedores (Docker, Podman).
+
+    Avanzar con ALMA_CORE y ALMA_DARK.
+
+    Definir política de backups cifrados.
+
+    Configurar repositorio privado (Gitea) o subir a GitHub temporalmente.
+
+    ALMA_RESIST — Pensado para no dejar huellas… salvo las que el pájaro decida. 🦜
+
+
+

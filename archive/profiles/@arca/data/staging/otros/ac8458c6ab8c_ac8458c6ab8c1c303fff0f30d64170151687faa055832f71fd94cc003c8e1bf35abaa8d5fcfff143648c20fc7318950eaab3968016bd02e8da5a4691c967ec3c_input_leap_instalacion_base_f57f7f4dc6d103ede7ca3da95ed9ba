@@ -1,0 +1,71 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_2138aa
+version: '1.0'
+formato: sh
+modulo: ALMA_RESIST
+titulo: Input Leap Instalacion Base
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:7b71747989441f2a697df983221c5662a16c137beabbf84262d4333ed6b73d50
+---
+#!/bin/bash
+
+# Instalación completa de Input Leap en sistemas tipo Debian (Parrot, Ubuntu, etc.)
+# Compatible con ALMA_CORE y ALMA_RESIST
+
+echo "📦 Instalando dependencias..."
+sudo apt update
+sudo apt install -y git cmake make g++ qt6-base-dev qt6-tools-dev \
+  libx11-dev libxext-dev libxrandr-dev libxinerama-dev libxtst-dev libxi-dev \
+  libssl-dev libavahi-compat-libdnssd-dev libcurl4-openssl-dev \
+  libgl1-mesa-dev pkg-config
+
+echo "🧬 Clonando repositorio input-leap con submódulos..."
+cd ~
+rm -rf input-leap
+git clone --recurse-submodules https://github.com/input-leap/input-leap.git
+cd input-leap
+mkdir build && cd build
+
+echo "🛠️ Corrigiendo compatibilidad con GCC 11+..."
+sed -i '1i#include <cstddef>' ../src/lib/platform/XKBUtil.cpp
+
+echo "⚙️ Compilando Input Leap..."
+cmake ..
+make -j$(nproc)
+sudo make install
+
+echo "✅ Instalación finalizada."
+
+echo "📁 Configurá el servidor con:"
+echo 'nano ~/.input-leap/input-leap.conf'
+echo ""
+echo "Ejemplo:"
+echo "-----------------------------"
+echo "section: screens"
+echo "    alma-core:"
+echo "    alma-resist:"
+echo "end"
+echo ""
+echo "section: links"
+echo "    alma-core:"
+echo "        left = alma-resist"
+echo "    alma-resist:"
+echo "        right = alma-core"
+echo "end"
+echo "-----------------------------"
+
+echo "🚀 Para iniciar manualmente:"
+echo "En alma-core:"
+echo "input-leaps --no-tray --disable-crypto --name alma-core --config ~/.input-leap/input-leap.conf"
+echo ""
+echo "En alma-resist:"
+echo "input-leapc --no-tray --disable-crypto --name alma-resist 192.168.1.33:24800"

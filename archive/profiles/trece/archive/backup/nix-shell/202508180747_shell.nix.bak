@@ -1,0 +1,44 @@
+{ pkgs ? import <nixpkgs> {} }:
+
+pkgs.mkShell {
+  name = "trece-env";
+
+  buildInputs = with pkgs; [
+    bash git gcc sqlite nodejs zip unzip
+    
+    # Python y herramientas esenciales
+    python3
+    python3Packages.venvShellHook  # <--- ¡Nuevo! Gestiona .venv automáticamente
+    python3Packages.pip
+    
+    # Paquetes Python (instalados globalmente en Nix)
+    python3Packages.pyyaml
+    python3Packages.pytest
+    python3Packages.pandas
+    python3Packages.numpy
+    python3Packages.tabulate
+  ];
+
+  shellHook = ''
+    # Configuración estándar
+    export TRECE_ROOT="$PWD"
+    export TRECE_CONFIG="$PWD/config/config.yaml"
+    
+    # Historial de bash
+    export HISTFILE="$PWD/.bash_history"
+    touch "$HISTFILE"
+    export HISTSIZE=100000
+    export HISTFILESIZE=100000
+    shopt -s histappend
+    export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+    # Carga .bashrc si existe
+    [ -f "$PWD/.bashrc" ] && source "$PWD/.bashrc"
+
+    # Verificación
+    echo "=== Entorno 'trece' activado ==="
+    echo "Paquetes Nix disponibles:"
+    python --version
+    pip --version
+  '';
+}

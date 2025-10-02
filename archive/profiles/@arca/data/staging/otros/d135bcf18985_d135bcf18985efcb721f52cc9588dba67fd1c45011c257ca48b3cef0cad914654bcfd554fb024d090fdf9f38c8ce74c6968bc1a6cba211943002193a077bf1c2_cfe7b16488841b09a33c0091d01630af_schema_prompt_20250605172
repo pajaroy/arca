@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PromptRequest",
+  "description": "Contrato para entrada del endpoint /responder",
+  "type": "object",
+  "properties": {
+    "prompt": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000,
+      "description": "Texto del prompt enviado al modelo LLM",
+      "example": "\u00bfCu\u00e1l es el sentido de la vida?"
+    }
+  },
+  "required": [
+    "prompt"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,24 @@
+
+# 🧠 Bitácora Técnica – 2025-05-29
+
+## 🗂 Tema central
+Consolidación estructural y conceptual de `control_central/` como nodo de mando operativo de ALMA_RESIST.
+
+## 📋 Tareas realizadas
+- Revisión completa del contenido actual de `control_central`.
+- Diagnóstico de carpetas y archivos faltantes con validación IA.
+- Generación de estructura modular estándar.
+- Creación de documentación base (`README`, `module.yaml`, `docs/readme.md`).
+- Validación cruzada con metodología `estructura_autonoma_v2`.
+- Detección de logs mal ubicados y preparación para migración.
+
+## 🧠 Reflexiones
+- Fue clave separar claramente `control_central/` de los scripts funcionales.
+- La decisión de migrar scripts a `cli_cleaner` refuerza la limpieza y trazabilidad del sistema.
+- Tener un changelog como apéndice permite mantener historia clara sin ruido operativo.
+
+## 🔜 Próximos pasos
+- Crear módulo `cli_cleaner/` y mover scripts de limpieza.
+- Documentar esta transición en un changelog de `cli_cleaner`.
+- Comenzar a registrar las validaciones diarias que se hagan desde `control_central`.
+

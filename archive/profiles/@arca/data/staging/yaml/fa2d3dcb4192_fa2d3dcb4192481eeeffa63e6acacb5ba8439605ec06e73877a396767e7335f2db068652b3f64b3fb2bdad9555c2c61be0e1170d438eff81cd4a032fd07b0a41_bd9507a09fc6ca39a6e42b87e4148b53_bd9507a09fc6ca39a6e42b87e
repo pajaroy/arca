@@ -1,0 +1,19 @@
+entradas:
+- fecha: '2025-06-13T02:37:20.692074'
+  accion: Creación del README.yaml modular raíz de ALMA_CORE (v0.1.1)
+  descripcion: Se redactó e implementó el README.yaml maestro modular de la carpeta
+    alma_core. Contiene bloques por módulo, campos index_rag, linked_to, trazabilidad
+    agente-IA y soporte futuro para versión JSON. Reemplaza la versión 0.1.0 que queda
+    archivada.
+  motivo: Era necesario establecer una raíz documental modular y auditable para que
+    el ecosistema ALMA_RESIST pueda ser navegado por agentes IA y humanos sin ambigüedades,
+    promoviendo trazabilidad, documentación viva y control de versiones.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - readme
+  - alma_core
+  - documentacion
+  - modularidad
+  - trazabilidad
+  - v0.1.1

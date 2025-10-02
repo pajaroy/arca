@@ -1,0 +1,210 @@
+{
+  "main": {
+    "id": "0aa0739b579d7827",
+    "type": "split",
+    "children": [
+      {
+        "id": "e0e2bcc41b6d3e70",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fe2647137ee93cd7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "control_central/asesor-ia/centralisis/docs/centralisis.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "centralisis"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "294dd77650ba11d1",
+    "type": "split",
+    "children": [
+      {
+        "id": "cdbdb1a8af55fdf3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "165255549fac2a14",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de archivos"
+            }
+          },
+          {
+            "id": "07f75113ff0156a7",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:#hechoPor_seba-rios",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Buscar"
+            }
+          },
+          {
+            "id": "ea8fe06351e5fda9",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "578b292525e7a6bf",
+    "type": "split",
+    "children": [
+      {
+        "id": "7e522fd9bb780659",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a42ae2c1135a7c1e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "control_central/ia_asistente/docs/sistema_asesor-IA.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for sistema_asesor-IA"
+            }
+          },
+          {
+            "id": "a484b78066781146",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "control_central/ia_asistente/docs/sistema_asesor-IA.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from sistema_asesor-IA"
+            }
+          },
+          {
+            "id": "c6336f28af0446bd",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "a77af9bd293f0e6c",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "control_central/ia_asistente/docs/sistema_asesor-IA.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of sistema_asesor-IA"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir selector rápido": false,
+      "graph:Abrir vista gráfica": false,
+      "canvas:Crear nuevo lienzo": false,
+      "daily-notes:Abrir la nota de hoy": false,
+      "templates:Insertar plantilla": false,
+      "command-palette:Abrir paleta de comandos": false
+    }
+  },
+  "active": "fe2647137ee93cd7",
+  "lastOpenFiles": [
+    "control_central/archivo/downloads/prompt_refactorizacion_post_auditoria.md",
+    "control_central/asesor-ia/centralisis/bitacoras/2025-06-06_renombrado_changelog.md",
+    "control_central/asesor-ia/centralisis/meta/changelog.md",
+    "control_central/asesor-ia/centralisis/meta/changelog_asesor_v1.md",
+    "control_central/asesor-ia/centralisis/bitacoras/2025-06-06_movimiento_auditoria.md",
+    "control_central/archivo/downloads/auditoria_centralesis_2025-06-06.md",
+    "control_central/asesor-ia/centralisis/meta/auditoria_centralesis_2025-06-06.md",
+    "control_central/asesor-ia/centralisis/docs/centralisis.md",
+    "control_central/archivo/downloads/modulo_contrato_tecnico_agregado_memorias.md",
+    "👤 Presentación Humana.md",
+    "control_central/asesor-ia/centralisis/contexto/centralisis_backup.yaml",
+    "control_central/asesor-ia/centralisis/contexto/centralisis.yaml.zip",
+    "control_central/asesor-ia/centralisis/bitacoras/2025-06-05_movimiento_inicial.md",
+    "control_central/asesor-ia/centralisis/contexto/centralisis.yaml",
+    "control_central/archivo/downloads/centralisis.yaml",
+    "control_central/archivo/downloads/centralesis.md",
+    "control_central/archivo/downloads/centralisis.md",
+    "control_central/asesor-ia/centralisis/bitacoras/README.md",
+    "control_central/asesor-ia/centralisis/docs/manifiesto_asesor.md",
+    "control_central/asesor-ia/centralisis/ubicacion.md",
+    "control_central/asesor-ia/centralisis/logs/README.md",
+    "control_central/asesor-ia/centralisis/README.md",
+    "control_central/asesor-ia/centralisis/docs/README.md",
+    "control_central/asesor-ia/centralisis/contexto/README.md",
+    "control_central/asesor-ia/centralisis/tools/README.md",
+    "control_central/asesor-ia/centralisis/tools",
+    "control_central/asesor-ia/centralisis/prompts/prompt_base_asesor.md",
+    "control_central/asesor-ia/centralisis/prompts/README.md",
+    "control_central/asesor-ia/centralisis/prompts",
+    "control_central/asesor-ia/centralisis/meta/changelog_asesor.md",
+    "control_central/asesor-ia/centralisis/meta/README.md",
+    "control_central/asesor-ia/centralisis/meta",
+    "control_central/asesor-ia/centralisis/memoria_viva/README.md",
+    "control_central/asesor-ia/centralisis/memoria_viva",
+    "control_central/asesor-ia/centralisis/logs",
+    "control_central/asesor-ia/centralisis/docs"
+  ]
+}

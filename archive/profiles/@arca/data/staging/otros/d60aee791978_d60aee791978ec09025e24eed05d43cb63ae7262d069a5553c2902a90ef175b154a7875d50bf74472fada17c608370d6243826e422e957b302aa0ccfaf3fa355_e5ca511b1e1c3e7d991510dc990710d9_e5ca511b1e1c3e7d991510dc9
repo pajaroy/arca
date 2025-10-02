@@ -1,0 +1,309 @@
+---
+module: control/sprints_activos/sprint_2_6_llm_server
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# ✅ Sprint 2.6 – LLM Server + Roadmap 0.0.0.2 – ALMA_RESIST
+
+📅 Versión objetivo: v0.0.0.2  
+🧠 Objetivo: Implementar el servidor MVP `idea_base_llm_server_0.0.0.4.1` y finalizar todas las tareas del roadmap técnico v0.0.0.2
+
+---
+
+## 🔧 Fase 1 – Servidor LLM MVP
+
+- [x] Crear API con FastAPI (`main.py`)
+- [x] Implementar endpoint `/responder` (asincrónico)
+- [x] Integrar `ModelWrapper` con llama.cpp (GGUF Q4)
+- [x] Documentar contratos en `docs/contracts/`
+  - [x] `schema_prompt.json`
+  - [x] `schema_respuesta.json`
+- [x] Implementar `TransportLayer` (JSON local)
+- [ ] Probar respuesta funcional desde CLI
+
+- [ ] Añadir manejo de errores en `/responder`:
+  - Validar si el modelo está cargado
+  - Detectar prompts inválidos
+
+
+---
+
+## 🔒 Fase 2 – Logging y Seguridad
+
+- [x] Usar `log_crypto.py` para cifrado AES-GCM
+- [ ] Registrar cada respuesta cifrada en SQLite
+- [ ] Validar contra JSON Schema
+- [x] Integrar con `context_tracker` para logs de actividad
+- [x] Registrar resultados en `memory_graph`
+- [x] Conectar `memory_graph` para indexar embeddings de respuestas
+- [x] Integrar `context_tracker` al registrar actividad/logs
+
+
+---
+
+## 🧪 Fase 3 – Pruebas Automatizadas
+
+- [x] Crear `test_cli.py` con flujo mínimo CLI → server
+- [x] Crear `test_llm.py` con mock del modelo
+- [x] Crear `test_log_writer.py` y `test_log_crypto.py` con `pytest`
+- [ ] Validar el flujo: CLI → respuesta → memoria → logging seguro
+- [ ] Reemplazar `test_llm.py` con prueba **end-to-end**:
+  - Validar flujo `CLI → servidor → memoria` directamente
+  - Evitar mocks innecesarios
+
+## 📌 Apéndice Técnico – Plan de Tests Automatizados (Fase 3)
+
+Este apéndice detalla la suite de tests necesaria para cubrir funcionalmente todos los módulos desarrollados en el Sprint 2.6 bajo el nuevo modelo modular de ALMA_RESIST. Todos los tests deben migrarse o crearse bajo la nueva arquitectura.
+
+---
+
+### ✅ Tests existentes a refactorizar
+
+| Archivo original     | Estado         | Acción recomendada                           |
+|----------------------|----------------|----------------------------------------------|
+| `test_llm.py`        | Obsoleto       | Refactorizar como `test_model_wrapper.py`    |
+| `test_cli.py`        | Parcial        | Migrar a `test_api_responder.py`             |
+| `test_log_crypto.py` | Parcial        | Mantener y extender                          |
+
+---
+
+### 🧪 Nuevos tests a implementar
+
+| Archivo sugerido          | Módulo testeado      | Casos clave                                                                 |
+| ------------------------- | -------------------- | --------------------------------------------------------------------------- |
+| `test_model_wrapper.py`   | `model_wrapper.py`   | Carga del modelo, errores por ruta inválida, generación con prompt válido   |
+| `test_api_responder.py`   | `main.py` (FastAPI)  | Status 200, 422 input inválido, 503 modelo no cargado, estructura de salida |
+| `test_transport_layer.py` | `transport_layer.py` | Envío y recuperación, validación con schema, escritura/lectura de archivos  |
+| `test_context_tracker.py` | `context_tracker.py` | Registro de interacción, validación JSON Schema, recuperación, limpieza     |
+| `test_log_writer.py`      | `log_writer.py`      | Escritura atómica, validación básica, simulación de error de disco          |
+| `test_log_crypto.py`      | `log_crypto.py`      | Cifrado, descifrado, detección de algoritmo, verificación de nonce          |
+| `test_memory_graph.py`    | `memory_graph.py`    | (Pendiente) Inserción de nodos, relaciones, exportación, búsqueda por peso  |
+
+---
+
+### 🧱 Requisitos técnicos
+
+- Usar `pytest` como motor principal
+- Evitar dependencias externas (usar mocks para modelo si es necesario)
+- Las rutas de escritura deben apuntar a carpetas temporales (`tmp/` o `tests/data`)
+- Agregar al menos un test por caso de error (input inválido, fallo en carga, etc.)
+- Incluir fixtures o mocks si el modelo no puede ser cargado durante CI
+
+---
+
+### 📂 Ubicación sugerida
+
+```plaintext
+tests/
+├── test_model_wrapper.py
+├── test_api_responder.py
+├── test_transport_layer.py
+├── test_context_tracker.py
+├── test_log_writer.py
+├── test_log_crypto.py
+└── test_memory_graph.py
+```
+
+---
+
+### 🧠 Notas finales
+
+Una vez finalizada esta suite, se podrá:
+- Validar automáticamente los endpoints
+- Simular interacciones completas
+- Auditar integridad de archivos
+- Iniciar testeo CI/CD desde CLI o pre-commit
+
+Este plan cumple los requisitos de la Fase 3 del Sprint 2.6 y establece una base sólida para testear futuras versiones del servidor.
+
+
+---
+
+## 🧹 Fase 4 – Documentación y Limpieza
+
+- [ ] Actualizar `README.md` con:
+  - [ ] comandos CLI
+  - [ ] requisitos mínimos de hardware
+  - [ ] dependencias Python
+- [ ] Completar `docs/decisiones_arquitectonicas.md` con diseño final del server
+- [ ] Ejecutar `tree` actualizado del sistema
+- [ ] Guardar en `docs/auditorias/estructura_v0.0.0.2.md`
+- [ ] Incluir requisitos de hardware mínimo:
+  - Mistral 7B Q4 (~6GB RAM)
+  - Alternativa: TinyLlama 1.1B (~2GB RAM)
+- [ ] Esquematizar `decisiones_arquitectonicas.md` sin detalle excesivo
+
+
+---
+
+## 🗃️ Fase 5 – Versionado y Cierre
+
+- [ ] Congelar versión `0.0.0.1` en `docs/versiones/`
+- [ ] Registrar hito del Sprint en `docs/hitos/`
+- [ ] Agregar lecciones aprendidas a `lecciones_aprendidas.md`
+- [ ] Confirmar cumplimiento de:
+  - [ ] `python core/cli.py` responde sin errores
+  - [ ] Se levanta modelo `.gguf` desde CLI
+  - [ ] Se guarda memoria como JSON cifrado
+  - [ ] Todas las pruebas pasan
+
+---
+
+## 🧭 Recomendación Operativa
+
+> “Un MVP no se mide por lo que incluye, sino por lo que resuelve. Priorizar es el arte de construir lo esencial sin perder de vista el horizonte.”
+
+
+---
+
+# 📎 Apéndice Sprint 2.6 – Feedback Técnico de DeepSeek
+
+Este apéndice resume los ajustes recomendados por DeepSeek para mejorar el Sprint 2.6 de ALMA_RESIST, sin duplicar tareas ya definidas. Aplica como guía adicional para asegurar escalabilidad, foco y realismo.
+
+---
+
+## 🛡️ Riesgos Técnicos Identificados
+
+- Sobrecarga de RAM:
+  - Solución: Usar TinyLlama si hay hardware limitado
+
+- Falta de retrocompatibilidad:
+  - Solución: Definir y documentar contratos JSON desde el inicio
+
+- Testing insuficiente:
+  - Solución: Incluir 2-3 pruebas críticas en `test_basico.sh`
+
+---
+
+## 📆 Plan Semanal Ajustado
+
+### Semana 1-2:
+- FastAPI + `/responder`
+- `ModelWrapper`
+- Manejo de errores
+
+### Semana 2-3:
+- Logging cifrado
+- `memory_graph`
+- `context_tracker`
+
+### Semana 3:
+- Test end-to-end
+- Validación de logs
+
+### Semana 4:
+- README.md + requisitos
+- Congelar versión + lecciones aprendidas
+
+---
+
+## 💡 Conclusión
+
+El Sprint 2.6 es totalmente viable si se priorizan:
+- Integraciones clave sobre documentación extensa
+- Pruebas funcionales sobre cobertura exhaustiva
+- TinyLlama como alternativa realista en hardware limitado
+
+> “La escalabilidad no es una meta, sino un hábito. Cada línea de código debe escribirse como si mañana tuviera que soportar diez veces su carga.”
+
+
+---
+
+## 📌 Apéndice: Resumen de Avance Técnico – Sprint 2.6 (2025-05-26)
+
+Este resumen agrupa todos los módulos, archivos y tareas ya completadas hasta la fecha, correspondientes a la Fase 1 y parcialmente a la Fase 2 del sprint.
+
+---
+
+### ✅ Módulos implementados
+
+- `core/llm_server/main.py`  
+  Servidor FastAPI con endpoint `/responder` asincrónico
+
+- `core/llm_server/model_wrapper.py`  
+  Integración con `llama.cpp`, carga de modelo GGUF, generación
+
+- `core/llm_server/transport_layer.py`  
+  Manejo de entrada/salida JSON validado contra contratos, persistencia local
+
+- `core/llm_server/integration/context_tracker.py`  
+  Registro contextual de interacciones, caché en memoria, formato JSONL validado
+
+- `core/llm_server/utils/log_writer.py`  
+  Logger estructurado con escritura atómica y rotación de logs
+
+- `core/llm_server/utils/log_crypto.py`  
+  Cifrado de logs con AES-256-GCM o ChaCha20 según hardware
+
+---
+
+### 📁 Documentación estructural
+
+- `docs/contracts/schema_prompt.json`  
+- `docs/contracts/schema_respuesta.json`  
+- `docs/contracts/README.md`  
+
+Todos alineados con los modelos de entrada/salida reales.
+
+---
+
+### ⚙️ Integración funcional
+
+- El endpoint `/responder` ya ejecuta el modelo, valida el prompt y genera respuesta
+- `ModelWrapper` es invocado correctamente desde `main.py`
+- Respuestas son validadas y pueden ser almacenadas por `TransportLayer`
+- Interacciones ya se registran automáticamente en `context_tracker`
+- Sistema de logs y cifrado preparado para activarse con mínima configuración extra
+
+---
+
+### 🧩 Pendientes inmediatos
+
+- Finalizar módulo `memory_graph.py`
+- Probar respuesta desde CLI
+- Integrar logging en tiempo real (`log_writer`)
+- Preparar test unitarios de entrada/salida (Fase 3)
+- Iniciar documentación final y cierre del sprint
+
+---
+# 📎 Apéndice Técnico – Sprint 2.6
+
+**Fecha:** 2025-05-28  
+**Ubicación del módulo:** `core/llm_server/utils/log_crypto.py`  
+**Versión:** `v0.0.0.4`
+
+---
+
+## 🔧 Refactor y Validación Criptográfica
+
+Durante el Sprint 2.6 se realizó una refactorización completa del módulo `log_crypto.py`, responsable del cifrado y descifrado de logs internos en ALMA_RESIST.
+
+### ✅ Logros:
+
+- ✅ **Todos los tests unitarios pasaron** (16/16 `pytest`)
+- 🔐 **Corrección de errores críticos** en el paso de claves y derivación de salt
+- 🧪 **Cobertura completa** con `pytest` usando `parametrize` (AES-GCM y ChaCha20)
+- 📄 Se redactó un **README técnico** con descripción de uso, funciones, algoritmos soportados y dependencias
+
+### 🛠️ Cambios técnicos principales:
+
+- `decrypt_log()` ahora recibe una `password` y se encarga internamente de derivar la clave + salt.
+- Se eliminaron llamadas erróneas a tuplas como claves directas.
+- Modularización de funciones internas: `_get_cipher`, `_read_salt`, `_derive_key`.
+
+---
+
+## 📁 Documentos Relacionados
+
+- `log_crypto.py` → [`core/llm_server/utils/log_crypto.py`](../core/llm_server/utils/log_crypto.py)
+- `test_log_crypto.py` → [`tests/test_log_crypto.py`](../tests/test_log_crypto.py)
+- `README_log_crypto.md` → Documentación técnica del módulo
+
+Este apéndice se considera **parte del cierre del Sprint 2.6** y no requiere entrada adicional en README global ni resumen MVP.  
+Será referenciado en el changelog general de Sprint al cierre formal.
+
+---

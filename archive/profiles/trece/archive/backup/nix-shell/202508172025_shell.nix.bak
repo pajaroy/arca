@@ -1,0 +1,43 @@
+{ pkgs ? import <nixpkgs> {} }:
+
+pkgs.mkShell {
+  name = "trece-env";
+
+  buildInputs = with pkgs; [
+    bash
+    git
+    gcc
+    sqlite
+    nodejs 
+    zip 
+    unzip
+
+    # paquetes python3
+    python3
+    python3Packages.pyyaml    
+    python3Packages.pytest
+    python3Packages.pandas
+    python3Packages.numpy
+    python3Packages.tabulate 
+  ];
+
+  shellHook = ''
+    # Variables de entorno
+    export TRECE_ROOT="$PWD"
+    export TRECE_CONFIG="$PWD/config/config.yaml"
+
+    # Configuración del historial de bash (¡FUNCIONARÁ AHORA!)
+    export HISTFILE="$PWD/.bash_history"
+    touch "$HISTFILE"
+    export HISTSIZE=100000
+    export HISTFILESIZE=100000
+    shopt -s histappend
+    export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+    # Carga .bashrc del proyecto
+    [ -f "$PWD/.bashrc" ] && source "$PWD/.bashrc"
+
+    # Verificación de activación
+    echo "===== trece ====="
+  '';
+}

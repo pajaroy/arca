@@ -1,0 +1,35 @@
+# 🧭 Índice General – ALMA_RESIST
+
+📝 Versión: 0.0.0.2  
+📅 Última actualización: 2025-05-23  
+👤 Responsable: Santi / pájaro
+
+
+## 📋 Auditorías y Checklists
+
+- [[auditorias/auditoria_estructura]]
+- [[checklists/checklist_auditoria_inicial]]
+- [[post_mortem_tecnico]]
+- [[decisiones_arquitectonicas]]
+- [[dependencias]]
+
+
+## 🛠️ Testing y Validación
+
+- [[testing/cli/test_cli_basics]]
+- [[testing/utils/test_metadata]]
+
+
+## 🧠 Referencias Técnicas
+
+- [[referencias/README]]
+- [[referencias/externas/README]]
+- [[referencias/externas/ia/README]]
+- [[referencias/externas/seguridad/README]]
+- [[referencias/externas/patrones/README]]
+
+## 🧭 Estado del Sistema
+
+Este índice representa el estado de navegación semántica actual del sistema.  
+Permite moverse entre módulos, documentación técnica, validación de metadatos, testing y versiones completas del proyecto.
+

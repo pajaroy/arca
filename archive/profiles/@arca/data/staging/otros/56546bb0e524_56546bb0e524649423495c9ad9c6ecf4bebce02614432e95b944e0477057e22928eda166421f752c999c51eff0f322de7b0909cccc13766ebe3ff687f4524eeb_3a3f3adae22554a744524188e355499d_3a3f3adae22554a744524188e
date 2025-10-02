@@ -1,0 +1,56 @@
+# 📤 Prompt Base – `exportar_feedback.py` (Fase 5.3 – ALMA_FEEDBACK)
+
+## 🎯 Objetivo
+Desarrollar un script que lea todas las memorias de `memorias_json_actualizadas/`, extraiga sus entradas de `"retroalimentacion"`, y exporte un resumen consolidado en distintos formatos.
+
+
+## 📤 Salidas esperadas
+
+1. `logs/feedback_consolidado.json`  
+   Todas las entradas de feedback estructuradas así:
+
+```json
+{
+  "memoria_id": "MEMHEALTH-022",
+  "origen": "MEMTRD-045",
+  "tipo": "riesgo_estres",
+  "descripcion": "...",
+  "score": 0.85,
+  "fecha": "2025-05-02T15:30:00"
+}
+```
+
+2. `logs/feedback_consolidado.md`  
+   Formato legible estilo Obsidian/Markdown:
+
+```markdown
+## 🧠 Feedback recibido – MEMHEALTH-022
+- **Desde:** MEMTRD-045
+- **Tipo:** riesgo_estres
+- **Score:** 0.85
+- **Descripción:** Posible correlación entre riesgo operativo y estrés personal
+- **Fecha:** 2025-05-02
+```
+
+3. (Opcional) Visualización por consola:
+   - Mostrar las memorias con más retroalimentación
+   - Filtrar por score o tipo
+
+
+## 📁 Estructura esperada
+
+```
+alma_loader/
+├── memorias_json_actualizadas/
+│   ├── MEMTRD-001.json
+│   └── MEMHEALTH-022.json
+├── logs/
+│   ├── feedback_consolidado.json
+│   ├── feedback_consolidado.md
+│   └── export_feedback.log
+└── scripts/
+    └── exportar_feedback.py
+```
+
+
+Este script permite consolidar el sistema de retroalimentación y preparar los datos para análisis posteriores (alertas globales, análisis temporal, revisión humana).

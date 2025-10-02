@@ -1,0 +1,171 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+yaml2all.py - Conversor universal YAML a JSON y Markdown frontalizado
+
+Convierte archivos YAML en su equivalente JSON y Markdown con front matter,
+manteniendo el trío de formatos sincronizados en la misma carpeta.
+
+Uso:
+    python yaml2all.py [--force] [--verbose] <ruta_archivo.yaml>
+
+Ejemplo:
+    python yaml2all.py /ruta/a/mi_archivo.yaml
+
+Genera:
+    mi_archivo.json  # Versión JSON equivalente
+    mi_archivo.md    # Versión Markdown con front matter YAML y bloques especiales
+
+Características:
+    - Preserva el formato original en el front matter
+    - Manejo de campos especiales en bloques YAML
+    - Codificación UTF-8 garantizada
+    - Validación estricta de YAML
+    - Protección contra sobrescritura accidental
+    - Mensajes de error descriptivos
+"""
+
+import os
+import sys
+import argparse
+import json
+import yaml
+from pathlib import Path
+
+# Campos especiales para extraer en el Markdown
+CAMPOS_ESPECIALES = ['plantilla_registro', 'ejemplo', 'body', 'contenido']
+
+def cargar_yaml(ruta_archivo):
+    """Carga y valida un archivo YAML
+    
+    Args:
+        ruta_archivo (str): Ruta al archivo .yaml
+    
+    Returns:
+        tuple: (contenido original, datos parseados)
+    
+    Raises:
+        SystemExit: Si hay errores de formato o archivo
+    """
+    try:
+        with open(ruta_archivo, 'r', encoding='utf-8') as f:
+            contenido_original = f.read()
+        
+        datos = yaml.safe_load(contenido_original)
+        if datos is None:
+            datos = {}
+            
+        return contenido_original, datos
+        
+    except FileNotFoundError:
+        print(f"Error: Archivo no encontrado - {ruta_archivo}")
+        sys.exit(1)
+    except yaml.YAMLError as e:
+        print(f"Error de sintaxis YAML:\n{str(e)}")
+        sys.exit(1)
+    except Exception as e:
+        print(f"Error inesperado: {str(e)}")
+        sys.exit(1)
+
+def generar_json(data, ruta_salida, force, verbose):
+    """Genera archivo JSON equivalente
+    
+    Args:
+        data (dict): Datos parseados del YAML
+        ruta_salida (str): Ruta de salida para el .json
+        force (bool): Sobrescribir si existe
+        verbose (bool): Modo verboso
+    """
+    if os.path.exists(ruta_salida) and not force:
+        print(f"Saltando JSON existente: {ruta_salida} (usa --force para sobrescribir)")
+        return
+
+    with open(ruta_salida, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+    
+    if verbose:
+        print(f"✓ JSON generado: {ruta_salida}")
+
+def generar_md(contenido_yaml, data, ruta_salida, force, verbose):
+    """Genera archivo Markdown con front matter y bloques especiales
+    
+    Args:
+        contenido_yaml (str): Contenido YAML original
+        data (dict): Datos parseados
+        ruta_salida (str): Ruta de salida para el .md
+        force (bool): Sobrescribir si existe
+        verbose (bool): Modo verboso
+    """
+    if os.path.exists(ruta_salida) and not force:
+        print(f"Saltando Markdown existente: {ruta_salida} (usa --force para sobrescribir)")
+        return
+
+    # Construir contenido Markdown
+    contenido_md = f"---\n{contenido_yaml}\n---\n\n"
+    
+    # Añadir bloques especiales si existen
+    for campo in CAMPOS_ESPECIALES:
+        if campo in data:
+            # Formatear título (snake_case a Title Case)
+            titulo = campo.replace('_', ' ').title()
+            contenido_md += f"## {titulo}\n\n```yaml\n"
+            
+            # Generar bloque YAML para el campo específico
+            bloque_especial = {campo: data[campo]}
+            contenido_md += yaml.dump(
+                bloque_especial,
+                allow_unicode=True,
+                width=1000,
+                sort_keys=False
+            )
+            contenido_md += "```\n\n"
+    
+    # Escribir archivo final
+    with open(ruta_salida, 'w', encoding='utf-8') as f:
+        f.write(contenido_md)
+    
+    if verbose:
+        print(f"✓ Markdown generado: {ruta_salida}")
+
+def main():
+    parser = argparse.ArgumentParser(
+        description='Convierte archivos YAML a JSON y Markdown con front matter',
+        epilog='Mantiene tríos de archivos (.yaml, .json, .md) sincronizados'
+    )
+    parser.add_argument(
+        'yaml_file',
+        metavar='ARCHIVO_YAML',
+        help='Ruta al archivo .yaml de entrada'
+    )
+    parser.add_argument(
+        '--force',
+        action='store_true',
+        help='Sobrescribe archivos existentes'
+    )
+    parser.add_argument(
+        '--verbose',
+        action='store_true',
+        help='Muestra detalles del proceso'
+    )
+    
+    args = parser.parse_args()
+    
+    # Validar extensión del archivo
+    if not args.yaml_file.lower().endswith(('.yaml', '.yml')):
+        print("Error: El archivo debe tener extensión .yaml o .yml")
+        sys.exit(1)
+    
+    # Cargar y validar YAML
+    contenido_original, datos = cargar_yaml(args.yaml_file)
+    base_path = Path(args.yaml_file).with_suffix('')
+    
+    # Generar archivos de salida
+    generar_json(datos, f"{base_path}.json", args.force, args.verbose)
+    generar_md(contenido_original, datos, f"{base_path}.md", args.force, args.verbose)
+    
+    if args.verbose:
+        print("✔ Proceso completado")
+
+if __name__ == "__main__":
+    main()

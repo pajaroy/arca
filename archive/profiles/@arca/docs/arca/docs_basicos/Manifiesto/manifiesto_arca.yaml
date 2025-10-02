@@ -1,0 +1,39 @@
+---
+uuid: "GENERAR-UUID-AQUI"
+tipo: manifiesto
+formato: yaml
+nombre: manifiesto_arca
+version: 0.1.0
+estado: activo
+fecha_creacion: "2025-07-16T20:45:00"
+fecha_modificacion: "2025-07-16T20:45:00"
+autor: Bird
+descripcion: |
+  Manifiesto del módulo Arca, definiendo su propósito, principios de diseño y objetivos técnicos.
+hash_integridad: "CALCULAR-HASH-AQUI"
+
+manifiesto:
+  proposito: >
+    Arca es el gestor documental modular de ALMA_RESIST. Su misión es organizar,
+    proteger y versionar todos los archivos, metadatos, índices y logs del sistema.
+    Sirve como base técnica para la integración de Machine Learning y búsquedas semánticas.
+
+  principios:
+    - Garantizar integridad de archivos mediante hashing.
+    - Mantener trazabilidad total de cada acción sobre documentos.
+    - Facilitar reconstrucción completa del sistema a partir de índices y metadatos.
+    - Usar estructuras de datos minimalistas, legibles y parseables por ML.
+    - Permitir integración futura con motores de búsqueda semántica y RAG.
+    - Documentar exhaustivamente cada cambio y operación realizada.
+
+  compromisos_tecnicos:
+    - Implementar índices sólidos y actualizables en tiempo real.
+    - Registrar logs detallados para auditoría.
+    - Diseñar APIs claras para interactuar con otros módulos de ALMA_RESIST.
+    - Preparar estructuras de datos aptas para alimentar pipelines de ML.
+    - Evitar tecnologías innecesarias que compliquen el mantenimiento.
+
+  objetivos_futuros:
+    - Integrar capacidades de predicción de acciones mediante ML (e.g. archivos más probables a crear).
+    - Conectar con vector stores como Chroma para búsquedas semánticas.
+    - Ampliar capacidades de auditoría y reporting automatizado.

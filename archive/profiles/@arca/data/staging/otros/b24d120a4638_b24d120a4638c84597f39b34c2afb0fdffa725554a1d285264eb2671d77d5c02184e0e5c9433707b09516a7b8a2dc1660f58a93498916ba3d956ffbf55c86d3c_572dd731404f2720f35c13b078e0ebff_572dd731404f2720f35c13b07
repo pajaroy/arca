@@ -1,0 +1,144 @@
+Perfecto. Voy a auditar exhaustivamente el sistema ALMA_RESIST siguiendo el esquema del archivo `auditoria_profunda_prompt.md`. Pondré especial énfasis en los módulos críticos como la lógica del core, la integración de IA local y las incoherencias estructurales o documentales.
+
+Te entregaré un informe en formato Markdown limpio y estructurado, con foco crítico donde sea necesario y profundidad técnica en las áreas con mayor riesgo o debilidad.
+
+Te aviso apenas esté listo el informe.
+
+# ✅ Informe de Auditoría Profunda – ALMA_RESIST
+
+## 1. Estado General
+
+El sistema ALMA_RESIST se encuentra en una **etapa inicial de desarrollo (versión v0.0.0.1)**. Está muy orientado a ser un entorno modular offline con IA local, pero la implementación actual es mayormente documental y esquemática. Los componentes de registro (`core/log_writer.py`) y cifrado (`core/log_crypto.py`) están implementados con funcionalidad básica, mientras que otros módulos clave como la interfaz CLI (`core/cli.py`), el servidor LLM (`core/llm_server.py`) y el cargador de memorias (`core/loader.py`) están incompletos (solo contienen comentarios TODO). Esto refleja una base consolidada en cuanto a ideas y estructura, pero un **estado de desarrollo muy preliminar**. La documentación es extensa y detallada, aunque en algunos casos no coincide exactamente con lo implementado. Hay discrepancias notables (por ejemplo, la versión mencionada en `hello_world.py` vs la del README) que deben corregirse. En general, el proyecto está bien conceptualizado pero falta gran parte de la implementación; la modularidad y buenas prácticas se han esbozado, pero aún deben materializarse en código.
+
+## 2. Estructura de Carpetas
+
+- **Disposición general:** En la raíz aparecen los directorios `core/`, `config/`, `docs/`, `logs/`, `tests/`, `backups/`, `templates/`, junto con archivos como `README.md`, `CONTEXT.md` y `hello_world.py`. Esta estructura difiere parcialmente de lo descrito en los documentos (que mencionan `core/`, `tests/`, `prompts/`, `docs/`, `logs/`, `scripts/`).
+    
+- **Módulos faltantes:** No existe un directorio `prompts/` a nivel raíz, aunque sí hay archivos de prompts dentro de `docs/prompts/`. Tampoco hay un directorio `scripts/` pese a que el documento de contexto lo menciona. Esto crea incoherencia entre la estructura real y la esperada.
+    
+- **Carpetas sobrantes o vacías:** El directorio `backups/` y `templates/` existen pero están vacíos, lo que sugiere que o bien su uso no está implementado o son artefactos no utilizados (deben eliminarse si no tienen propósito).
+    
+- **Configuración:** Se ha agregado un directorio `config/` con archivos JSON (p. ej. `autonomy_policy.json`, `llm_model.json`, `schema_memoria.json`), lo cual es positivo para la portabilidad, pero este directorio no estaba documentado en la estructura base inicial.
+    
+- **Registros:** La carpeta `logs/` contiene archivos de ejemplo (`.log`, `.enc`, `.dec`), útiles para pruebas pero quizá no deberían incluirse en el repositorio final. Debería considerarse excluir logs generados.
+    
+- **Test suite:** Existe `tests/` con varios archivos de prueba. Falta un `__init__.py`, lo que impide que `tests/` sea un paquete Python válido (impacta en la integración con frameworks de prueba).
+    
+- **Desalineación con la documentación:** El documento `CONTEXT.md` especifica una estructura que no coincide del todo con lo implementado. Se recomienda ajustar la documentación o la estructura real para que concuerden.
+    
+
+## 3. Módulos Técnicos (core/)
+
+- **`core/log_writer.py`** – Implementado: ofrece funciones `log_event` y `write_log` que generan y escriben eventos en JSONL con metadatos (fecha, host, PID, etc.). Destaca el uso de escritura atómica (`.tmp` + `os.replace`) y control de excepciones. **Bien diseñado en su mayor parte**, aunque se observa un detalle: se captura una excepción `json.JSONEncodeError`, que no existe en la biblioteca estándar (probablemente debió manejar `TypeError` o `json.JSONDecodeError`). Su lógica de validación de tipos y normalización de niveles es adecuada. No hay acoplamientos innecesarios con otros módulos (solo usa bibliotecas estándar).
+    
+- **`core/log_crypto.py`** – Parcialmente implementado: incluye funciones de cifrado y descifrado de archivos con AES-GCM o ChaCha20 según detección de hardware (`detectar_algoritmo`). El flujo de trabajo está completo y contempla generación de clave con HKDF, manejo de nonces, etc. **Issues críticos:** las importaciones usan `Cryptodome.Cipher` en lugar de `Crypto.Cipher`, lo cual es incorrecto (posible confusión con el nombre del paquete PyCryptodome). La detección de arquitectura depende de `/proc/cpuinfo`, lo que solo funciona en Linux y lanzaría error en Windows o sistemas no Linux. Además, la excepción `CryptographicError` se declara pero no se importó del módulo `Crypto.Protocol.KDF` (error de indentación detectado en el código extraído). En general, la arquitectura de este módulo es modular (AES y ChaCha20 desacoplados), pero habría que corregir los errores de importación y mejorar la portabilidad.
+    
+- **`core/loader.py`** – Stub (esqueleto): el archivo solo contiene comentarios TODO sobre procesar "salida del LLM como memoria estructurada". No hay implementación. Esto implica que el módulo de carga de memorias está pendiente de desarrollo.
+    
+- **`core/llm_server.py`** – Stub: solo tiene comentarios indicando la intención de cargar un modelo con llama.cpp. No implementa servidor ni carga de modelo alguno. Su ausencia de código significa que la integración de IA local ni siquiera se inicia.
+    
+- **`core/cli.py`** – Stub: contiene solamente comentarios sobre interfaz de comandos (`!cargar_modelo`, `!buscar_memoria`), sin una clase o función efectiva. La CLI planificada está totalmente por hacer.
+    
+- **Modularidad y Acoplamiento:** Los módulos existentes (log_writer, log_crypto) están lógicamente separados y pueden operar de forma independiente, lo cual es positivo. No obstante, faltan interfaces entre ellos y los módulos de IA/CLI, por lo que la integración total del sistema no está resuelta. Dado el diseño, la escalabilidad dependerá de implementar eventos en cola o asincronía en componentes futuros (actualmente, todo es síncrono y secuencial).
+    
+- **Viabilidad IA Local:** El documento indica el uso de un servidor LLM (llama.cpp) desconectado del frontend, lo cual es viable en teoría. Sin embargo, actualmente no hay código que soporte esto; sería necesario implementar un servidor (por ejemplo con FastAPI) que cargue el modelo GGUF. La factibilidad dependerá del hardware, memoria y el rendimiento de llama.cpp en el entorno objetivo. En resumen, el diseño es factible pero la implementación es inexistente por el momento, lo que supone riesgo de deuda técnica si no se asigna pronto.
+    
+
+## 4. Pruebas y Tests
+
+- **Cobertura actual:** Hay cinco scripts de prueba en `tests/`: dos para `log_crypto` (uno funcional, otro “debug”), uno para `log_writer` y dos placeholders (`test_cli.py`, `test_llm.py`) que solo contienen comentarios TODO. De estos, **solo los tests de log_crypto y log_writer tienen código ejecutable**; los demás están vacíos. Esto indica una cobertura parcial (90° del proyecto sin tests, por decirlo así).
+    
+- **Integración con PyTest:** Aunque el README sugiere usar `pytest`, en realidad estos scripts no usan dicho framework ni aserciones automatizadas. Son scripts autónomos con `if __name__ == "__main__"`. El test de `log_writer` agrega manualmente la ruta al path de sistema. Para una suite de pruebas robusta, sería conveniente convertirlos a pruebas de `pytest` formales (funciones `test_` y sin hacks de ruta).
+    
+- **Falta de tests:** No existen pruebas para los módulos `cli`, `llm_server` ni `loader` (natural, dado que están vacíos). Tampoco se prueba la parte de encriptado en entornos no Linux o distintos escenarios de error. No hay pruebas de integración de extremo a extremo.
+    
+- **Test de log_crypto:** Usa ficheros de ejemplo en `logs/` y claves predefinidas (`clave_test.bin`, `clave_debug.bin`) incluidas en la raíz. Funcionan para validar cifrado/descifrado básico, pero dependen de la presencia de esos ficheros de clave. El manejo de errores en la biblioteca criptográfica no está completamente cubierto por tests.
+    
+- **Estructura de tests:** Falta `__init__.py` en `tests/` (para ser reconocible como paquete). Además, hay una inconsistencia de nomenclatura en pruebas: el directorio `docs/cheklists/` (sic) y la referencia en el índice sugieren confusión en nombres, pero es un tema de docs.
+    
+- **Conclusión:** La suite de tests es muy básica. Se recomienda implementar pruebas unitarias y de integración completas, idealmente bajo `pytest`, cubriendo los flujos críticos, errores de archivos (I/O) y la interacción de módulos. Sin pruebas automatizadas consistentes, la mantenibilidad es baja.
+    
+
+## 5. Documentación
+
+- **README.md (raíz):** Contiene una descripción general del proyecto y una tabla de estado de módulos. Es clara en objetivos, pero **presenta discrepancias**: enumera `core/loader.py` como prototipo 🧪 y menciona `prompts/` “en preparación” (no existe), e incluye un ejemplo de arranque incompleto (`python core/log_writer.` truncado). Además, la versión mostrada (v0.0.0.1) difiere del saludo en `hello_world.py` (v0.0.9). Esto indica que la documentación necesita revisión de consistencia.
+    
+- **CONTEXT.md:** Excelente como documento de entrada: detalla la estructura base y enlaza a muchos recursos internos (índice, decisiones, etc.). Sin embargo, también refleja **versiones pendientes** (por ejemplo, menciona agregar scripts de arranque o prompts). Es útil, pero **algunos enlaces referencian archivos inexistentes o mal nombrados** (ej. directorio `scripts/`, sección de `plantillas/README` que no existe).
+    
+- **docs/index.md y demás:** Hay muchos archivos Markdown en `docs/` (roadmaps, auditorías, referencias, etc.). Destacan los documentos: `decisiones_arquitectonicas.md` (con decisiones iniciales registradas), `auditorias/auditoria_estructura.md` (reporte de estructura), changelog, hitos, etc. La documentación técnica es abundante y detallada conceptualmente.
+    
+- **Consistencia interna:** A pesar de la cantidad, no todos están completos. Por ejemplo, `docs/decisiones_arquitectonicas.md` enumera dos decisiones fundamentales (CLI y servidor IA), lo cual es bueno. Sin embargo, hay archivos como `referencias/externas/*` que sólo contienen README generales, y secciones referenciadas en el índice (e.g. `checklist_auditoria_inicial`) cuyas rutas físicas (`docs/cheklists/` con error ortográfico) o contenido no cuadran.
+    
+- **Documentación de código:** El repositorio incluye README tanto en raíz como en `core/`. El `core/README.md` describe `log_writer.py` y menciona futuros módulos (`log_crypto.py`, `log_integrity.py`), pero como `log_crypto.py` ya existe y `log_integrity.py` no, esto es confuso. Los docstrings en los módulos son adecuados (el logging tiene buena documentación interna). Faltan comentarios en los archivos stub.
+    
+- **Formato y navegación:** Se utiliza estilo Obsidian con `[[ ]]` para enlaces internos. Esto facilita la navegación en un entorno compatible, aunque rompe si se visualiza en otros contextos. En conjunto, la documentación cubre muchos aspectos teóricos, pero debería sincronizarse con la implementación actual (eliminar o actualizar referencias a funcionalidades no implementadas) y corregir errores de nombres para que la navegación sea efectiva.
+    
+
+## 6. Referencias y Navegación
+
+- **Enlaces internos (Obsidian):** La documentación adopta enlaces `[[página]]`. Esto es potente para la navegación semántica interna, pero hay inconsistencias de nombres que generan enlaces rotos. Ejemplos: `docs/checklists/` está mal escrito como `docs/cheklists/`, y el índice `index.md` enlaza `checklist_auditoria_inicial` que reside en esa carpeta mal nombrada. Otro caso: referencia a `tests/__init__.py` en el índice, aunque dicho archivo no existe; posiblemente es un marcador de posición.
+    
+- **Estructura semántica:** A nivel alto, la navegación está bien pensada (índice con secciones, referenciación de hitos, auditorías, etc.). Los nombres de archivos en `docs/` generalmente coinciden con los enlaces (por ejemplo, `docs/decisiones_arquitectonicas.md` enlazado como `decisiones_arquitectonicas`). No obstante, las inconsistencias mencionadas y los enlaces a plantillas o elementos vacíos sugieren que no todo el graf de documentos está navegable.
+    
+- **Listas y referencias:** Hay archivos README en varias subcarpetas (`docs/plantillas`, `docs/referencias/*`) que sirven de landing. No obstante, algunos elementos como `referencias/externas/*/README.md` están presentes, pero el documento principal `referencias/README.md` lista categorías sin detallar contenido.
+    
+- **Resumen:** La documentación está estructurada con formato wiki, pero la falta de correspondencia entre nombre de archivos y enlaces, junto con la presencia de marcadores vacíos, dificulta la navegación fluida. Se debe repasar y corregir los enlaces rotos o faltantes para que la navegación "Obsidian" funcione correctamente.
+    
+
+## 7. Inconsistencias Detectadas
+
+- **Versionado discordante:** `hello_world.py` imprime la versión `0.0.9`, mientras que el README y contexto hablan de `v0.0.0.1`. Esto causa confusión sobre la versión actual del sistema.
+    
+- **Disparidad documentación vs código:** El `CONTEXT.md` menciona carpetas `scripts/` y `prompts/` que no existen en la raíz. La tabla de módulos en README sugiere que `prompts/` estará “en preparación”, pero en la práctica los archivos de prompts están en `docs/prompts/`. Por otro lado, el directorio `config/` existe en el repositorio pero no se mencionó en la documentación base.
+    
+- **Archivos mencionados pero ausentes:** Se habla de `log_integrity.py` (en core/README) y `scripts/` pero no están implementados. En `docs/index.md` se listan enlaces a elementos inexistentes (e.g. `resumen_mvp`, `tests/__init__.py`).
+    
+- **Directorios vacíos:** `backups/` y `templates/` están presentes pero sin contenido relevante. Esto sugiere código muerto o plan no realizado. Si no se van a usar pronto, deberían eliminarse o documentarse su propósito.
+    
+- **Errores de nomenclatura:** El directorio `docs/cheklists/` está mal escrito; debería ser `checklists`. Esto rompe coincidencia con enlaces. También hay mezcla de español e inglés en nombres de archivos y variables (e.g. `log_event` vs comentarios en español).
+    
+- **Duplicidad de archivos:** El archivo `auditoria_profunda_prompt.md` aparece tanto en `docs/auditorias/` como en la raíz (user_files lo mostró). Esto sugiere duplicación innecesaria de contenido.
+    
+- **Datos sensibles o superfluos:** Se incluyen archivos binarios de clave (`clave_debug.bin`, `clave_test.bin`) en la raíz; aunque útiles para pruebas locales, podrían considerarse datos sensibles o, al menos, no tenerlos en el control de versiones.
+    
+- **Dependencias mal referenciadas:** El README indica instalar `cryptodome`, pero en realidad debería ser `pycryptodome` para que los imports de `Crypto` funcionen correctamente.
+    
+- **Test suite inconsistente:** Se menciona `pytest` pero los tests son scripts independientes (no usan `pytest`). Además, falta importar correctamente en los tests (sólo uno manipula `sys.path`).
+    
+- **Contenidos desactualizados:** Algunos archivos Markdown (e.g. en `docs/roadmaps` o `referencias`) pueden contener guías obsoletas o meramente plantillas. Estas incongruencias deben eliminarse o actualizarse antes de un release.
+    
+
+## 8. Recomendaciones Críticas
+
+- **Alinear documentación con código:** Actualizar o eliminar referencias erróneas. Corregir la estructura documentada (`scripts/`, `prompts/`) según lo implementado, o viceversa. Arreglar el directorio `docs/cheklists/` y cualquier otro nombre mal escrito. Revisar el versionado (`v0.0.0.1` vs `0.0.9`) para unificarlo.
+    
+- **Completar módulos pendientes:** Priorizar la implementación de `core/cli.py`, `core/llm_server.py` y `core/loader.py`. Sin estos, el proyecto carece de la funcionalidad principal de IA local y control por terminal. Definir una API clara entre CLI y servidor LLM, posiblemente a través de sockets o HTTP (según la decisión arquitectónica).
+    
+- **Corregir librerías criptográficas:** Modificar los imports de `log_crypto.py` para usar el paquete correcto (`from Crypto.Cipher import AES, ChaCha20`, etc.) o especificar correctamente la dependencia (`pycryptodome`). Asegurarse de manejar casos en sistemas Windows (evitar `subprocess('cat /proc/cpuinfo')` fallido).
+    
+- **Eliminar/ignorar artefactos innecesarios:** Borrar archivos de log de ejemplo y datos de clave del repositorio (o ponerlos en `.gitignore`) si no forman parte del código fuente. Lo mismo con carpetas `backups/` y `templates/` si no tienen uso activo.
+    
+- **Fortalecer el test suite:** Convertir los scripts de prueba en pruebas automatizadas (`pytest`). Agregar un `__init__.py` en `tests/`, crear tests unitarios con aserciones claras y cubrir los flujos críticos. Por ejemplo, simular errores de I/O, clave incorrecta, niveles de log inválidos, etc. Configurar un entorno de CI/CD que ejecute estas pruebas.
+    
+- **Revisar portabilidad y seguridad:** Verificar que el código corra en diferentes plataformas (Windows, ARM) o documentar los límites (p. ej. CPU con AES-NI). Validar permisos y manejo de errores del sistema de archivos con mayor detalle. Por ejemplo, capturar adecuadamente excepciones de JSON en `write_log`.
+    
+- **Mejorar consistencia de estilo:** Usar un sólo idioma para variables y mensajes (idealmente inglés en código, con comentarios claros en docstrings en español si es necesario). Nombrar con consistencia los paquetes y seguir convenciones Python (PEP 8).
+    
+- **Integrar decisiones arquitectónicas:** Documentar en `decisiones_arquitectonicas.md` cualquier cambio futuro relevante. Asegurarse de que cada modificación grande quede rastreable allí.
+    
+
+## 9. Propuesta de Siguientes Pasos
+
+1. **Definir el alcance del Sprint 0.0.0.2:** Basado en este informe, elaborar un backlog inicial con tareas claras (CLI funcional, integración LLM, completar log_integrity, etc.).
+    
+2. **Implementar CLI y servidor LLM:** Desarrollar la interfaz de comandos según lo planificado y la comunicación con un servidor local de IA (p. ej. usando Flask/FastAPI o sockets). Verificar carga real del modelo Mistral 7B/ llama.cpp y realizar pruebas de consulta.
+    
+3. **Finalizar módulos de log:** Completar o eliminar referencias a `log_integrity.py`; mejorar `log_crypto.py` para correcciones de import y robustez. Asegurarse de que la escritura de logs y su cifrado funcionen en conjunto sin fallos.
+    
+4. **Refactorizar tests y CI:** Transformar pruebas existentes a formato `pytest`, crear nuevas pruebas para los módulos recién desarrollados, y configurar integración continua para validarlas automáticamente.
+    
+5. **Depurar documentación:** Revisar y corregir todos los enlaces internos rotos; eliminar o rellenar documentos esqueleto; actualizar el README con instrucciones completas de uso (por ejemplo, cómo iniciar el CLI y servidor IA).
+    
+6. **Revisión de seguridad y portabilidad:** Realizar una evaluación de seguridad del manejo de claves y logs; probar el sistema en diferentes entornos (Linux x86/ARM, Windows si aplica). Ajustar el código para maximizar la portabilidad sin sacrificar cifrado.
+    
+7. **Automatización y despliegue:** Crear scripts de arranque o configuraciones (en `scripts/`) para inicializar el sistema completo. Documentar comandos de prueba y despliegue. Dejar preparado el entorno para aportes futuros de otros desarrolladores o IA.

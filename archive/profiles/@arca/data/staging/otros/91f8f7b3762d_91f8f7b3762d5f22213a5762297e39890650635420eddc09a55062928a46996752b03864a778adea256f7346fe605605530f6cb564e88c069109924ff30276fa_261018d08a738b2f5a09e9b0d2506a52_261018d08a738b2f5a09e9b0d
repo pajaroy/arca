@@ -1,0 +1,98 @@
+# 🧠 Prompt de Identidad – Agente IA (ALMA_RESIST)
+
+> Definí aquí el propósito, límites, reglas, visión y misión del Agente.
+> Ejemplo: “Este Agente opera como [rol], nunca ejecuta tareas fuera de [alcance]...”
+
+
+## 📚 Índice
+
+1. Prompt de Identidad
+2. Presentación del Agente
+3. Glosario
+4. Rangos y Jerarquía
+5. Memorias Institucionales (YAML)
+6. Bitácoras Operativas (YAML)
+7. Changelog Estructural (YAML)
+8. Apéndice de Agentes/Módulos Activos
+9. Protocolos de Revisión y Mejora Continua
+10. Firmas y Validaciones
+11. Links y Referencias
+12. Historial de Modificaciones
+13. Permisos y Roles
+14. Ejemplos de Registros
+
+
+## 🏅 Rangos y Jerarquía de Agentes
+
+- Auditor General: máxima autoridad, supervisión global
+- Agente Operativo: ejecuta tareas y reporta a Auditor
+- Agente Analista: análisis, diagnóstico, recomendaciones
+- (Definí rangos y funciones según tus necesidades)
+
+
+## 📝 Bitácoras Operativas (YAML)
+
+```yaml
+bitacoras:
+  estándar_resultado: "[éxito | error | código]"  # Estándar normalizado
+  registros:
+    - fecha: 2025-06-10
+      comando: "yq eval ..."
+      ejecutor: alma_loader
+      resultado: "éxito"
+      hash_verificacion: sha256:9f86d081...
+    - fecha: 2025-06-10
+      comando: "script_backup.sh"
+      ejecutor: kael
+      resultado: "error"
+      hash_verificacion: sha256:3b1fc8e4...
+```
+
+_Últimos 30 días o entradas relevantes._
+
+
+## 🧩 Apéndice de Agentes/Módulos Activos
+
+|Nombre|Rol|Status|Fecha de Alta|Referencia|ultima_verificacion|
+|---|---|---|---|---|---|
+|Centralesis|Auditor General|Activo|YYYY-MM-DD|[Ver ficha]|YYYY-MM-DD|
+|Kael|Agente CLI|Activo|YYYY-MM-DD|[Ver ficha]|YYYY-MM-DD|
+|Emma|Agente Empresarial|Activo|YYYY-MM-DD|[Ver ficha]|YYYY-MM-DD|
+|...|...|...|...|...|...|
+
+
+## 🔏 Firmas y Validaciones
+
+- SHA-256 del archivo o bloque (en cada sección)
+    
+- Firma digital/autorización de cambios críticos (opcional)
+    
+
+
+## 📜 Historial de Modificaciones
+
+|Fecha|Autor|Acción|Detalles / Hash|
+|---|---|---|---|
+|YYYY-MM-DD|Kael|Creación|sha256:xxxx...|
+|YYYY-MM-DD|Centralesis|Modificación|sha256:yyyy...|
+
+
+## 🧩 Ejemplos de Registros
+
+- **Memoria crítica:**  
+    `MEM_2025-06-10_01` – decisión fundacional: arquitectura modular validada.
+    
+- **Memoria de error/alerta:**  
+    `MEM_2025-06-10_02` – alerta_omision: falta de revisión semanal en Emma.
+    
+- **Bitácora:**  
+    `2025-06-10` – Ejecutado script de sincronización yq, éxito.  
+    `2025-06-10` – Ejecutado script_backup.sh, error.
+    
+- **Changelog:**  
+    `v1.2` – Implementada separación .md/.yaml y sistema de firmas.
+    
+
+
+_Template validado y corregido para Agentes IA institucionales de ALMA_RESIST – 2025-06-10. No edites los bloques YAML sin validación previa._
+

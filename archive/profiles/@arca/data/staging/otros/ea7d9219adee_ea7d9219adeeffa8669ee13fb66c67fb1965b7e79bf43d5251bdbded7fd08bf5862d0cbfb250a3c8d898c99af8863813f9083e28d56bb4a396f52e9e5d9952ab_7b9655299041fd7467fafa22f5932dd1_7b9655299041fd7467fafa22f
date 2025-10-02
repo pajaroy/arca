@@ -1,0 +1,45 @@
+
+import sqlite3
+
+def conectar_db(path='memorias.db'):
+    return sqlite3.connect(path)
+
+def validar_memorias(conn):
+    cursor = conn.cursor()
+
+    # Total de memorias
+    cursor.execute("SELECT COUNT(*) FROM memorias")
+    total = cursor.fetchone()[0]
+
+    # Por tipo
+    cursor.execute("SELECT tipo, COUNT(*) FROM memorias GROUP BY tipo")
+    tipos = cursor.fetchall()
+
+    # Por estado
+    cursor.execute("SELECT estado, COUNT(*) FROM memorias GROUP BY estado")
+    estados = cursor.fetchall()
+
+    # Por bloque
+    cursor.execute("SELECT bloque, COUNT(*) FROM memorias GROUP BY bloque")
+    bloques = cursor.fetchall()
+
+    print("📊 VALIDACIÓN DE MEMORIAS")
+    print(f"🔹 Total de memorias: {total}\n")
+
+    print("🔸 Por tipo:")
+    for tipo, count in tipos:
+        print(f"  - {tipo}: {count}")
+
+    print("\n🔸 Por estado:")
+    for estado, count in estados:
+        print(f"  - {estado}: {count}")
+
+    print("\n🔸 Por bloque:")
+    for bloque, count in bloques:
+        print(f"  - Bloque {bloque}: {count}")
+
+    conn.close()
+
+if __name__ == "__main__":
+    conn = conectar_db()
+    validar_memorias(conn)

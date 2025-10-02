@@ -1,0 +1,22 @@
+
+# Prompt para DeepSeek – Logging estructurado en JSON (`core/logging_config.py`)
+
+## 🎯 Objetivo
+Crea un módulo llamado `logging_config.py` que defina una función `configurar_logging_json()`.
+
+
+## ⚙️ Requisitos técnicos
+
+- Definir una clase `JsonFormatter(logging.Formatter)`
+- Sobrescribir `.format(record)` para generar salida JSON
+- Utilizar `json.dumps(...)` para construir el log como string
+- El módulo no debe tener dependencias externas
+
+
+## 🔌 Ejemplo de integración en main.py
+
+```python
+from core.logging_config import configurar_logging_json
+configurar_logging_json()
+```
+

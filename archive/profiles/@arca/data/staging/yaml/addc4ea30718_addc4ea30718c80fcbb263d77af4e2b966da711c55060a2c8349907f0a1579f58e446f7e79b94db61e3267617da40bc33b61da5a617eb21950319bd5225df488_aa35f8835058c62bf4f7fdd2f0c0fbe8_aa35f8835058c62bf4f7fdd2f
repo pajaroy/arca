@@ -1,0 +1,15 @@
+version: 0.4.0
+tipo: bitacora
+schema: almaresist.bitacora_v1
+descripcion: Bitácora institucional de ALMA_RESIST
+estructura: parquet + metadata
+tags:
+- bitacora
+- institucional
+linked_to: []
+responsable: Equipo de Operaciones
+hash_parquet: sha256:b5b34090b110defa1ac2ea53e7dbc2b4a3b9c4785bbdae020d33758c4bdee64d
+hash_metadata: sha256:4c6d765785ae281bb4ae07dda9d94c19e4ed37d6512e5d9230b549b3ac7fd0d3
+historial: []
+last_modified: '2025-07-07T08:09:57.393529+00:00'
+last_modified_by: system

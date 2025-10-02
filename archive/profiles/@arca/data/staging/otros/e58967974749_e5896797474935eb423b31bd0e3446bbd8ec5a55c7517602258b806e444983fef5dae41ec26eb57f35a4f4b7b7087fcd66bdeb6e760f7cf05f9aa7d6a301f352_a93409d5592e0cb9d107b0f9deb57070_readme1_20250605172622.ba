@@ -1,0 +1,170 @@
+---
+module: versiones/v0_0_0_4_sprint_2_5_auditoria/archivos/readme1
+type: core
+status: in_progress
+created: '2025-05-23'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# ALMA_RESIST - README General
+
+Este repositorio contiene la arquitectura y documentación completa de **ALMA_RESIST**, una iniciativa modular y evolutiva que integra IA, automatización y análisis contextual para desarrollo de sistemas complejos.
+
+---
+
+## 📂 Estructura del Repositorio
+
+El repositorio está organizado por módulos documentales, scripts, versiones y herramientas internas. La estructura principal es la siguiente:
+
+- `docs/`: Documentación principal (metodologías, prompts, auditorías, changelogs, plantillas).
+- `scripts/`: Scripts utilitarios automatizados como `validate_docs.py`, `fix_metadata.py`, `force_snake_case_modules.py`, etc.
+- `backup_metadata/`, `backup_snakecase/`: Carpeta de backups automáticos creados por los scripts.
+- `README.md`: Este archivo principal de referencia.
+
+---
+
+## 🧠 Funcionalidades de Integración
+
+La metodología actual incluye:
+
+- Validación de estructura y metadatos YAML.
+- Normalización automática a snake_case.
+- Corrección de campos `module`, `type`, `status`, `created`.
+- Ejecución automatizada con `integrar_nuevo_archivo.sh`.
+
+---
+
+## ✅ Automatizaciones disponibles
+
+### Scripts disponibles
+
+- `fix_metadata.py`: Corrige y normaliza bloques YAML en los documentos.
+- `validate_docs.py`: Valida tipos y estructura de metadatos.
+- `force_snake_case_modules.py`: Asegura el cumplimiento de formato `snake_case`.
+- `integrar_nuevo_archivo.sh`: Ejecuta la secuencia completa de validación y normalización.
+
+### Cómo usar la automatización
+
+```bash
+chmod +x integrar_nuevo_archivo.sh
+./integrar_nuevo_archivo.sh
+```
+
+---
+
+## 🧪 Metodologías Relevantes
+
+- `docs/01_methodologies/metodologia_agregado_archivos.md`: Define el flujo completo para incorporar un archivo nuevo en el sistema.
+- `docs/01_methodologies/metodologia_sprints_v2.md`: Guía de ejecución y cierre de sprints.
+- `docs/01_methodologies/metodologia_doc_ia_v2.md`: Reglas para estructuración documental semántica IA-compatible.
+
+---
+
+## 🔄 Flujo de integración de archivos
+
+```mermaid
+graph TD
+  A[Agregar archivo] --> B[Normalizar metadatos]
+  B --> C[Is README.md?]
+  C -->|Yes| D[Usar carpeta padre como módulo]
+  C -->|No| E[Generar módulo desde ruta]
+  E --> F[Validar YAML con reglas estrictas]
+  F --> G[Actualizar grafo semántico]
+  G --> H[Generar reflexión automática]
+  H --> I[Registrar en logs y sprint]
+  I --> J[Notificar a IA para sugerencias]
+```
+
+---
+
+## 📌 Última Versión
+
+Sprint actual: `Sprint_2.3_Correccion_Metadatos`  
+Metodología vigente: `metodologia_agregado_archivos_v8`  
+Estado: ✅ Cerrado y validado
+
+---
+
+## 📁 Historial de Versiones
+
+Las versiones están ubicadas en `docs/versiones/`. Cada subcarpeta corresponde a un hito o entrega.
+
+---
+
+## 🤖 Futuras Integraciones
+
+- `alma-cli`: Utilidad para automatizar la integración desde línea de comandos.
+- `memory_graph_builder.py`: Vinculación semántica automática de documentos.
+- `reflection_engine`: Generación automática de análisis de impacto IA.
+- Soporte para campos inteligentes como `linked_to`, `context_tags`, `sha256`.
+
+---
+
+## 💬 Contribuciones
+
+Por el momento el mantenimiento y desarrollo está a cargo de un único desarrollador. Se planea abrir el proyecto en etapas futuras bajo filosofía antifrágil y comunidad IA-asistida.
+
+---
+---
+
+## 📎 Apéndice Sprint 2.3 – Integración de Idea Base Unificada
+
+📅 Fecha: 2025-05-23  
+🔖 Versión: v0.3.0-dev  
+👤 Responsable: Santi / pájaro
+
+Este sprint consolidó múltiples documentos conceptuales en una única idea base (`ALMA_RESIST_idea_base_0.0.0.1.md`) y reorganizó la carpeta `docs/idea_base/`.
+
+- 🧠 Nueva estructura: `idea_base/`, `changelog.md`, `version.md`, `_legacy/`
+- 📦 Archivos archivados: `idea_base.md`, `idea_base_conciencia_ia.md`, `idea_base_origen.zip`
+- 🗂 Versionado y registro en: `log_integracion.md`, `mapeo_sprint_archivos.md`, `hitos.md`
+- 🔄 Próximo paso: sincronización con nube segura y planificación de Sprint 2.4
+
+📌 Este apéndice actúa como marcador de snapshot interno para herramientas futuras y scripts de automatización (`alma-cli snapshot-log`).
+
+
+---
+
+## 📎 Apéndice – Validación y herramientas integradas (2025-05-23)
+
+---
+
+## ⚙️ Funcionalidades principales
+
+- Validación automática de metadatos YAML en todos los módulos (`validate_docs.py`)
+- Normalización de rutas y módulos con nombres en `snake_case`
+- Corrección automática de campos clave (`fix_metadata.py`)
+- Ejecución integrada por bash (`validar_documentacion.sh`)
+- Documentación de comandos reutilizables (`docs/utilidades/`)
+
+---
+
+## 🛠 Uso recomendado
+
+```bash
+bash scripts/validar_documentacion.sh
+```
+
+Alias sugerido para agilizar su ejecución:
+
+```bash
+alias alma_valida='bash ~/Alma/ALMA_RESIST/scripts/validar_documentacion.sh'
+```
+
+Agregalo a tu archivo `~/.bashrc` o `~/.zshrc` para uso persistente.
+
+
+---
+## 📌 Último Sprint Completado: 2.4 - Optimización de Metodologías
+
+**Fecha:** 2025-05-23  
+**Objetivo:** Corregir inconsistencias de metadatos YAML y asegurar escalabilidad documental para sistemas IA.
+
+**Cambios clave:**
+- Auditoría de 105 archivos con motor `alma-cli`
+- Corrección automática de 93 `core` sin `linked_to`
+- Estándar documental reforzado (campos mínimos + relaciones)
+- Reporte generado en `/logs/auditorias/`
+
+Este avance marca la transición de validación manual a validación IA en el núcleo de ALMA_RESIST.

@@ -1,0 +1,13 @@
+changelog:
+  version: "0.1.1"
+  fecha: "2025-06-08"
+  cambios:
+    - **Mejoras en la toma de decisiones autónomas**: Incorporación de un motor de reglas basado en metadatos para decisiones más complejas.
+    - **Verificación de integridad en tiempo real**: Se añade un agente auditor que verifica los hashes de los archivos cada 5 minutos.
+    - **Sincronización de memorias**: Mejoras en la sincronización de memorias personales bidireccionales y memorias institucionales unidireccionales.
+    - **Optimización en el almacenamiento de logs**: Se implementa un sistema de logs comprimidos con retención inteligente para reducir espacio y facilitar la gestión de registros.
+    - **Mejoras en la recuperación ante fallos**: Protocolo de recuperación mejorado con soporte para reintentos automáticos y sincronización de eventos usando **inotify**.
+    - **Sincronización automática de hashes**: Los hashes ahora son generados e integrados directamente en el núcleo del sistema, eliminando dependencias de scripts externos.
+    - **Estandarización de la bitácora**: Se unifica el formato de registros de las acciones realizadas por los agentes, siguiendo el esquema JSON con campos clave como agente, acción, objetivo y timestamp.
+    - **Mejoras en la trazabilidad**: Implementación de un **`transaction_id` global** para vincular operaciones relacionadas y asegurar la coherencia entre acciones de diferentes agentes.
+

@@ -1,0 +1,624 @@
+entradas:
+- fecha: '2025-06-08T03:27:45.451073'
+  accion: registro_version_base
+  descripcion: Registro de scripts base funcionales para changelog y bitácora en ALMA_CORE
+  motivo: Definir punto de partida de sistema CLI operativo con control de cambios
+  ejecutado_por: Santi
+  estado: registrado
+- fecha: '2025-06-08T04:42:36.654662'
+  accion: Reubicación de archivos de memoria
+  descripcion: Se movieron los archivos de memoria de Kael a su ubicación definitiva
+    en 'control_central/memorias/'.
+  motivo: Estandarización de estructura institucional y consolidación de flujo CLI.
+  ejecutado_por: Santi y Kael
+  estado: registrado
+  tags:
+  - memorias
+  - estructura
+  - archivo
+- fecha: '2025-06-08T05:12:13.946872'
+  accion: Refactor changelog CLI
+  descripcion: Integración del nuevo script con backup renombrado, validación semántica
+    y logging mejorado
+  motivo: Corrección de formato inconsistente en backups y refuerzo de trazabilidad
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - cli
+  - changelog
+  - fix
+  - validacion
+- fecha: '2025-06-08T05:24:35.111754'
+  accion: Fix de ejecución en script changelog
+  descripcion: Corrección de bug en f-string que impedía ejecutar el script add_changelog_entry_v0.1.1.py.
+    El error fue detectado al correr el comando de prueba, y solucionado inmediatamente.
+    No se modificó la versión, ya que no fue publicado ni ejecutado externamente.
+  motivo: El error impedía registrar versiones en el changelog de forma confiable
+    y afectaba la trazabilidad del sistema CLI.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - bitacora
+  - fix
+  - changelog
+  - cli
+  - v0.1.1
+- fecha: '2025-06-08T05:30:19.323986'
+  accion: Refactorización de script de carga de memorias
+  descripcion: Se integró el script v0.1.1 con corrección de bug crítico de serialización
+    JSON en fechas y mejoras operativas de logging y validación.
+  motivo: Error detectado al usar el script v0.1.0 que impedía la escritura en formato
+    JSON. DeepSeek entregó refactor con solución y mejoras estructurales.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - cli
+  - memorias
+  - fix
+  - deepseek
+  - v0.1.1
+- fecha: '2025-06-08T06:15:52.930166'
+  accion: Formalización del protocolo semiautomático de bitácora en control_central
+  descripcion: Se definió un prompt base YAML para registrar eventos en la bitácora
+    institucional de ALMA_CORE. Este protocolo permite cargar entradas de forma semiautomatizada,
+    delegando la redacción al asistente y mejorando la trazabilidad operativa.
+  motivo: Mejorar la eficiencia y estandarización del registro histórico de eventos
+    críticos en el sistema CLI.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - bitacora
+  - protocolo
+  - automatizacion
+  - control_central
+  - v0.1.0
+- fecha: '2025-06-08T06:58:37.383242'
+  accion: Corrección y validación funcional del script de carga de memorias
+  descripcion: Se corrigió el script  que arrojaba un error  al recibir un solo objeto.
+    Se agregó una verificación  para envolverlo como lista. La memoria fue cargada
+    exitosamente luego del fix.
+  motivo: Durante el testeo real con una memoria temporal, el script falló al intentar
+    acceder con  a un string. Se solucionó directamente y se verificó funcionalidad
+    total.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - memorias
+  - cli
+  - debug
+  - v0.1.1
+  - fix
+- fecha: '2025-06-08T08:42:03.010429'
+  accion: Integración operativa y encarnación de KAEL v0.1.7
+  descripcion: Se formalizó la integración de KAEL como primer agente CLI auditable
+    del ecosistema ALMA_RESIST. Se cargó el YAML v0.1.7 y se ejecutó el protocolo
+    de arranque institucional.
+  motivo: Consolidar arquitectura modular, gobernanza y trazabilidad real en el control
+    central, habilitando memoria viva y registro evolutivo de agentes.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - integracion
+  - auditoria
+  - cli
+  - alma_resist
+  - agentes
+  - v0.1.7
+- fecha: '2025-06-08T09:04:05.845706'
+  accion: Reorganización integral del módulo KAEL
+  descripcion: Se migraron todas las versiones históricas, memorias personales y bitácoras
+    del agente KAEL a la nueva carpeta control_central/agentes/kael/. Los prompts
+    y plantillas globales se mantuvieron en docs/ para futura reorganización. Se dejó
+    README institucional para onboarding de nuevos agentes.
+  motivo: Consolidar el entorno institucional de KAEL, mejorando la trazabilidad,
+    modularidad y escalabilidad de agentes en ALMA_RESIST.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - reorganizacion
+  - modularidad
+  - agentes
+  - kael
+  - control_central
+  - onboarding
+- fecha: '2025-06-08T09:23:23.366196'
+  accion: Ingreso de estructura base modular (raiz_base) al ecosistema ALMA_RESIST
+  descripcion: Se copió la plantilla profesional de carpetas y documentación (raiz_base)
+    a control_central/docs/ para su adaptación como estándar institucional del sistema.
+  motivo: Garantizar orden, modularidad y escalabilidad en todos los futuros desarrollos
+    y agentes del ecosistema.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - estructura_base
+  - docs
+  - modularidad
+  - raiz_base
+  - control_central
+  - alta
+- fecha: '2025-06-08T09:27:12.090208'
+  accion: Replicación de estructura base en control_central
+  descripcion: Se replicó la estructura profesional de carpetas y documentación institucional
+    en control_central/ a partir de raiz_base, preparando el entorno para modularización
+    y orden en futuros desarrollos.
+  motivo: Unificar criterios de orden y facilitar escalabilidad a nivel de sistema
+    y agentes.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - estructura_base
+  - control_central
+  - modularidad
+  - replica
+  - setup
+- fecha: '2025-06-08T09:44:59.684062'
+  accion: Alta de plantilla institucional raiz_base_agente y replicación para KAEL
+  descripcion: Se creó la plantilla base para agentes institucionales en docs/. Se
+    replicó la estructura en agentes/kael/ como primera instancia viva.
+  motivo: Estandarizar el onboarding y modularidad de agentes IA en ALMA_RESIST.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - plantilla
+  - agentes
+  - estructura
+  - modularidad
+  - kael
+  - control_central
+- fecha: '2025-06-08T10:01:10.745531'
+  accion: Alta institucional y creación de entornos base para agentes ALMA, CENTRALESIS,
+    EMMA y NERO
+  descripcion: Se replicó la plantilla institucional raiz_base_agente para dar de
+    alta a los agentes ALMA, CENTRALESIS, EMMA y NERO en el ecosistema ALMA_RESIST.
+    Cada agente cuenta ahora con estructura modular independiente, lista para onboarding,
+    documentación y operación.
+  motivo: Garantizar modularidad, escalabilidad y gobernanza independiente para cada
+    agente IA en el sistema.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - agentes
+  - alta
+  - modularidad
+  - institucional
+  - alma
+  - centralesis
+  - emma
+  - nero
+- fecha: '2025-06-08T10:43:24.389737'
+  accion: Alta institucional de Bird como agente personal en ALMA_RESIST
+  descripcion: Se crea el entorno modular y documentado del agente Bird (Santi), integrándolo
+    formalmente al ecosistema de agentes IA. Incluye estructura de estudios, bitácora,
+    memorias, contexto, docs y scripts para gestión y aprendizaje personal, con interacción
+    prevista junto a Nero y Alma.
+  motivo: Habilitar autogestión, aprendizaje continuo y trazabilidad personal, permitiendo
+    modularidad real y privacidad a nivel de agente humano.
+  ejecutado_por: Centralesis
+  estado: registrado
+  tags:
+  - agente
+  - alta
+  - personal
+  - bird
+  - modularidad
+  - aprendizaje
+  - privacidad
+- fecha: '2025-06-08T11:03:05.625916'
+  accion: Normalización y limpieza manual de la estructura raiz_base en la raíz del
+    sistema
+  descripcion: Se corrigió la duplicación accidental de la carpeta raiz_base, moviendo
+    manualmente el contenido al nivel correcto y eliminando la carpeta anidada sobrante.
+    La plantilla institucional queda estandarizada y lista para referencia global.
+  motivo: Garantizar orden institucional, evitar confusión estructural y dejar trazabilidad
+    auditable del fix.
+  ejecutado_por: Bird
+  estado: registrado
+  tags:
+  - fix
+  - estructura
+  - raiz_base
+  - plantilla
+  - root
+  - orden
+- fecha: '2025-06-08T11:36:10.410303'
+  accion: Creación del módulo de flujo de trabajo y aprendizaje institucional
+  descripcion: Se formaliza la carpeta y plantilla de registro de aprendizajes de
+    flujo de trabajo en control_central/flujo_de_trabajo/. Este módulo documentará
+    de manera auditable las lecciones metodológicas surgidas de cada sprint o sesión
+    crítica.
+  motivo: Construir una memoria institucional de mejora continua, facilitando el onboarding,
+    la evolución y la trazabilidad del método de trabajo.
+  ejecutado_por: Bird
+  estado: registrado
+  tags:
+  - flujo
+  - trabajo
+  - aprendizaje
+  - metodologia
+  - memoria
+  - bitacora
+- fecha: '2025-06-08T12:48:12.172604'
+  accion: Alta institucional y primer registro de aprendizaje de flujo de trabajo
+  descripcion: Se inauguró el registro vivo de aprendizajes metodológicos en control_central/flujo_de_trabajo/.
+    Primer registro agregado exitosamente usando el script CLI, documentando el aprendizaje
+    del sprint y el nuevo hábito de cierre.
+  motivo: Garantizar mejora continua, auditar la evolución del método de trabajo y
+    dejar precedente de uso correcto del flujo de aprendizajes.
+  ejecutado_por: Bird
+  estado: registrado
+  tags:
+  - flujo
+  - aprendizaje
+  - bitacora
+  - alta
+  - metodologia
+  - memoria
+  - cli
+- fecha: '2025-06-08T13:16:17.373483'
+  accion: 'Hito institucional: primer chat 100% efectivo y salto metodológico'
+  descripcion: 'Este chat marcó un antes y un después en la historia de ALMA_RESIST.
+    Se logró eficiencia total, aprendizaje metodológico real y una bitácora viva tanto
+    personal como de agentes. Desde hoy, la cultura institucional cambia de fase:
+    el sistema deja de ser caótico y pasa a ser realmente autogestionado y modular.'
+  motivo: Dejar huella del salto de calidad, la madurez metodológica y la consolidación
+    de la cultura ALMA_RESIST.
+  ejecutado_por: bird
+  estado: registrado
+  tags:
+  - institucional
+  - hito
+  - metodologia
+  - bitacora
+  - flujo
+  - aprendizaje
+  - alma_resist
+  - chat100
+- fecha: '2025-06-08T13:36:18.764307'
+  accion: 'Cierre de sprint: institucionalización de bitácoras personales y prompts
+    de agentes'
+  descripcion: 'Se crearon e institucionalizaron las bitácoras personales y los prompts
+    CLI de todos los agentes base del ecosistema ALMA_RESIST: Bird, Kael, Emma, Centralesis,
+    Nero y Alma. Cada agente tiene desde hoy metodología viva y comando directo para
+    registrar su evolución y aprendizajes. Hito clave en la profesionalización del
+    sistema.'
+  motivo: Garantizar memoria viva, trazabilidad y mejora continua para todos los agentes,
+    personas e IAs del ecosistema.
+  ejecutado_por: bird
+  estado: registrado
+  tags:
+  - institucional
+  - bitacora
+  - agentes
+  - prompts
+  - hito
+  - metodologia
+  - alma_resist
+- fecha: '2025-06-08T13:39:24.836023'
+  accion: Cierre de ciclo y visión de futuro
+  descripcion: ¡Hasta el próximo ciclo, pájaro! Y que la próxima versión traiga aún
+    más autodescubrimiento y libertad. 🚀🦜🤖
+  motivo: Dejar registrada la filosofía viva de autodescubrimiento, mejora continua
+    y libertad que marca el ADN de ALMA_RESIST.
+  ejecutado_por: bird
+  estado: registrado
+  tags:
+  - frase
+  - vision
+  - futuro
+  - bitacora
+  - cierre
+  - alma_resist
+- fecha: '2025-06-08T13:49:11.033065'
+  accion: Inicio de ciclo de afinamiento de bitácoras en control_central
+  descripcion: Se inicia un nuevo chat dedicado exclusivamente a optimizar y profesionalizar
+    el flujo de registro, formato y auditoría de bitácoras en el módulo control_central.
+    Se integran nuevos prompts, protocolos y se consolida la estructura institucional
+    para garantizar trazabilidad y mejora continua.
+  motivo: Asegurar el correcto arranque del ciclo de ordenamiento y afinamiento de
+    las bitácoras, sentando bases para registros auditables, semiautomatizados y alineados
+    al estándar ALMA_RESIST.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - bitacora
+  - inicio_ciclo
+  - control_central
+  - afinamiento
+  - protocolo
+  - chat_nuevo
+- fecha: '2025-06-08T13:53:05.346400'
+  accion: 'Commit fundacional: arranque exitoso de ciclo de registro y afinamiento
+    de bitácoras'
+  descripcion: Se consolida el arranque del nuevo ciclo de registro, control y auditoría
+    de bitácoras en control_central. El proceso de afinamiento metodológico, prompts,
+    automatización y orden institucional queda asentado como hito clave en la cultura
+    ALMA_RESIST.
+  motivo: Registrar institucionalmente el inicio efectivo del ciclo de bitácoras,
+    garantizando trazabilidad, mejora continua y profesionalización del sistema.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - bitacora
+  - commit
+  - institucional
+  - arranque
+  - control_central
+  - metodologia
+  - hito
+- fecha: '2025-06-08T14:01:04.655989'
+  accion: Reubicación y organización de prompts de bitácora por agente
+  descripcion: Se movieron todos los archivos prompt_cargar_bitacora_[agente].yaml
+    a la carpeta docs correspondiente de cada agente en control_central. Se garantiza
+    orden documental, acceso rápido y estandarización del flujo de carga de bitácoras
+    para todo el ecosistema.
+  motivo: Registrar el housekeeping documental y sentar la base para futuros procesos
+    automáticos, controlados y auditable de cada agente.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - bitacora
+  - housekeeping
+  - documentacion
+  - orden
+  - prompts
+  - agentes
+  - control_central
+- fecha: '2025-06-08T14:08:09.536022'
+  accion: 'Ejecución completa del flujo institucional: tarea técnica > bitácora >
+    git commit > aprendizaje'
+  descripcion: 'Se institucionalizó y ejecutó el flujo recomendado para la mejora
+    continua en control_central: toda tarea técnica se registra primero en bitácora
+    (usando prompt), luego se consolida con commit en git y se documenta el aprendizaje
+    y ajustes metodológicos en flujo_aprendizajes.yaml. Esto asegura trazabilidad,
+    replicabilidad y calidad documental en todos los procesos.'
+  motivo: Garantizar que cada ciclo de trabajo quede documentado y replicable, minimizando
+    errores y maximizando la auditoría de procesos técnicos y de aprendizaje.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - flujo
+  - bitacora
+  - aprendizaje
+  - git
+  - housekeeping
+  - metodologia
+  - control_central
+- fecha: '2025-06-08T14:19:45.446950'
+  accion: Reorganización de scripts, prompts y plantillas de flujo de aprendizaje
+  descripcion: Se movieron todos los archivos vinculados al flujo de aprendizaje (script,
+    prompt y plantilla) a la carpeta sectorizada core/notebooks/add_aprendizaje_flujo/.
+    Se elimina un archivo de testeo mal escrito. Esto permite mantener orden, trazabilidad
+    y acceso rápido a las herramientas estables del ciclo de mejora continua.
+  motivo: Consolidar housekeeping documental y sectorización de utilidades para el
+    registro y cierre de aprendizajes institucionales.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - housekeeping
+  - flujo_aprendizaje
+  - orden
+  - plantillas
+  - prompts
+  - scripts
+  - control_central
+- fecha: '2025-06-08T14:35:36.537605'
+  accion: Reubicación de carpeta CLI a notebooks/core
+  descripcion: Se movió toda la carpeta cli/ (bitacora, changelog, fix_metadata, memorias)
+    a core/notebooks/cli/. Esto unifica todos los comandos, scripts y utilidades en
+    el área de laboratorio, quedando en la raíz solo versiones estables o institucionalizadas.
+  motivo: Housekeeping de estructura y consolidación del laboratorio de scripts. Facilita
+    orden, experimentación y posterior institucionalización de utilidades.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - housekeeping
+  - cli
+  - scripts
+  - orden
+  - notebooks
+  - core
+  - control_central
+- fecha: '2025-06-08T14:45:20.494329'
+  accion: Migración de versiones históricas de KAEL a carpeta _legacy
+  descripcion: Se movieron las versiones anteriores de archivos de auditoría y configuración
+    de KAEL (v0.1.0 a v0.1.6) a la carpeta _legacy, actualizando el README.yaml para
+    reflejar la operación. Esto limpia la carpeta docs y centraliza la trazabilidad
+    de iteraciones previas.
+  motivo: Housekeeping documental y auditoría de versiones para mantener la documentación
+    operativa y la histórica perfectamente separadas.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - legacy
+  - kael
+  - housekeeping
+  - versiones
+  - auditoria
+  - control_central
+- fecha: '2025-06-08T14:53:55.127216'
+  accion: 'Oficialización y versionado de KAEL: migración de kael_encarnacion_v0.1.1
+    y actualización de contexto'
+  descripcion: kael_encarnacion_v0.1.1.yaml fue archivado en _legacy y una copia oficial
+    renombrada a kael_encarnacion.yaml fue establecida en contexto, garantizando acceso
+    rápido solo a la versión vigente y separando el histórico.
+  motivo: Mantener la integridad del versionado, el acceso a la última versión oficial
+    y la trazabilidad histórica en KAEL.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - kael
+  - encarnacion
+  - versionado
+  - contexto
+  - legacy
+  - oficial
+  - housekeeping
+- fecha: '2025-06-09T04:12:32.389226'
+  accion: Integración de Autonom-IA v0.1.0
+  descripcion: "Se implementó la primera versión de Autonom-IA, que incluye: \n  \
+    \  - Configuración de la estructura básica para permitir la navegación autónoma\
+    \ de los agentes dentro del sistema ALMA_RESIST. \n    - Establecimiento de la\
+    \ sincronización de memorias personales con los archivos operativos y de indexación\
+    \ centralizada. \n    - Implementación de reglas de permisos de lectura y escritura\
+    \ para agentes y memorias institucionales. \n    - Creación de un índice centralizado\
+    \ (index.json) para almacenar metadatos, hashes y relaciones entre los agentes\
+    \ y archivos."
+  motivo: La integración inicial de Autonom-IA permite a los agentes operar autónomamente
+    en el sistema ALMA_RESIST, tomando decisiones basadas en metadatos y actualizando
+    registros sin intervención humana. Esto es clave para permitir la escalabilidad
+    y la automatización del ecosistema.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - autonom-ia
+  - ' v0.1.0'
+  - ' autonomía'
+  - ' integración'
+  - ' memorias'
+  - ' index'
+  - ' permisos'
+- fecha: '2025-06-09T04:12:39.624352'
+  accion: Integración de Autonom-IA v0.1.1
+  descripcion: "Se implementaron mejoras clave en la versión v0.1.1 de Autonom-IA,\
+    \ incluyendo: \n    - Integración de un motor de reglas basado en metadatos para\
+    \ mejorar la toma de decisiones autónomas. \n    - Se añadió un agente auditor\
+    \ para la verificación de integridad en tiempo real de los archivos y memorias.\
+    \ \n    - Sincronización mejorada de memorias personales con verificación de consistencia\
+    \ post-sincronización. \n    - Se implementó un sistema de logs comprimidos y\
+    \ retención inteligente para optimizar el espacio de almacenamiento. \n    - Mejoras\
+    \ en la recuperación ante fallos mediante protocolos de reintentos automáticos\
+    \ y sincronización de eventos. \n    - Generación e integración de hashes automáticos\
+    \ directamente en el núcleo del sistema."
+  motivo: Las mejoras fueron necesarias para aumentar la autonomía operativa, la trazabilidad
+    y la seguridad del sistema, mejorando la eficiencia de las operaciones y asegurando
+    la integridad de los datos en tiempo real.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - autonom-ia
+  - ' v0.1.1'
+  - ' autonomía'
+  - ' integridad'
+  - ' mejoras'
+  - ' logs'
+  - ' sincronización'
+- fecha: '2025-06-09T04:51:07.843150'
+  accion: Decisión sobre la separación de Autonom-IA y versionado/hasheado
+  descripcion: Se tomó la decisión de separar el concepto filosófico de Autonom-IA
+    del módulo técnico de versionado y hasheado de archivos. Autonom-IA se mantendrá
+    como una filosofía que guiará la autonomía y las decisiones de los agentes, mientras
+    que el versionado y hasheado se gestionará de forma independiente, en su propio
+    módulo. El módulo de versionado y hasheado se gestionará como parte del sistema
+    de trazabilidad y seguridad del ecosistema, sin interferir con las reglas filosóficas
+    de Autonom-IA.
+  motivo: La decisión busca mantener una estructura clara y escalable, separando los
+    aspectos filosóficos de los técnicos para facilitar la evolución independiente
+    de ambos componentes.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - autonom-ia
+  - ' versionado'
+  - ' hasheado'
+  - ' separación'
+  - ' filosofía'
+  - ' módulo técnico'
+- fecha: '2025-06-09T05:12:19.056410'
+  accion: Inicio ciclo de generación de hashes (Módulo 1)
+  descripcion: Apertura oficial y registro del ciclo de trabajo sobre el módulo 1
+    de hashing e indexación, siguiendo la metodología modular YAML y derivando scripting
+    a DeepSeek.
+  motivo: Dejar constancia institucional auditable del punto de inicio para el roadmap
+    de trazabilidad de archivos en ALMA_RESIST.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - inicio_ciclo
+  - hashing
+  - control_central
+  - bitacora
+  - auditoria
+- fecha: '2025-06-09T07:49:02.298007'
+  accion: 'Cierre del módulo 1: Generación y documentación del sistema de hashes.'
+  descripcion: Se completó la implementación, documentación y testeo de la herramienta
+    de indexado multiagente.
+  motivo: Formalizar el cierre del primer módulo técnico del sistema ALMA_RESIST.
+  ejecutado_por: kael
+  estado: registrado
+  tags:
+  - modulo1
+  - hashing
+  - index
+  - control_central
+- fecha: '2025-06-11T01:33:53.980724'
+  accion: Despliegue y consolidación de memoria única con cargar_memorias_v0.1.2.py
+  descripcion: Se realizó la puesta en producción del script unificador de memorias
+    institucionales v0.1.2, integrando backups automáticos, changelog, control de
+    concurrencia y query multiagente. Se inicia la era CLI y memoria centralizada
+    en ALMA_RESIST.
+  motivo: Evitar la dispersión, garantizar la integridad, preparar la migración futura
+    a DB y habilitar el trabajo multiagente y la trazabilidad total desde CLI/chat.
+    Punto de quiebre en la gobernanza documental del sistema.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - memorias
+  - cli
+  - control_central
+  - deploy
+  - upgrade
+  - v0.1.2
+  - bitacora
+- fecha: '2025-06-11T01:47:04.765561'
+  accion: Integración de bundle LLM Server v0.1.0 en alma_core/core/notebooks
+  descripcion: Se migró y consolidó la carpeta llm_server_v0.1.0 en la ruta /home/bird/alma_core/core/notebooks/
+    como parte del proceso de institucionalización y control documental de los servidores
+    LLM en ALMA_RESIST. Bundle auditado, limpio y alineado con la gobernanza CLI y
+    memoria centralizada.
+  motivo: Permitir pruebas, auditoría y futura integración directa entre la CLI multiagente,
+    la memoria única y el server LLM bajo la nueva arquitectura auditable y modular.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - llm_server
+  - integracion
+  - notebooks
+  - control_central
+  - migracion
+  - v0.1.0
+- fecha: '2025-06-11T02:06:49.354143'
+  accion: Actualización de contratos y schemas JSON en LLM Server v0.2
+  descripcion: Se extendieron y documentaron los esquemas schema_prompt.json y schema_respuesta.json
+    bajo la versión 0.2 para soportar trazabilidad multiagente, referencia cruzada
+    a memorias institucionales y control de integridad. Se dejó registro institucional
+    en readme.yaml según el nuevo estándar ALMA_RESIST.
+  motivo: Alinear el contrato API del server LLM con la memoria única, la CLI multiagente
+    y la gobernanza documental. Cerrar deuda técnica y documental histórica.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - llm_server
+  - contracts
+  - schemas
+  - memoria_unificada
+  - cli
+  - auditoria
+  - v0.2
+  - bitacora
+- fecha: '2025-06-11T02:22:56.925275'
+  accion: Limpieza y documentación institucional de carpeta integration en llm_server
+  descripcion: Se eliminó el directorio __pycache__ y se creó readme.yaml crítico
+    a nivel de carpeta integration, documentando propósito, submódulos y mejoras pendientes.
+    Estructura alineada a los estándares ALMA_RESIST.
+  motivo: Dejar registro de saneamiento, documentación y gobierno de la arquitectura
+    LLM Server. Evitar arrastre de basura y profesionalizar la integración multiagente.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - llm_server
+  - integration
+  - readme
+  - limpieza
+  - pycache
+  - bitacora
+  - control_central

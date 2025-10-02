@@ -1,0 +1,59 @@
+#!/bin/bash
+# Script: 01_instalar_systemd_boot.sh
+# Descripción: Instala base de Arch y configura systemd-boot como bootloader UEFI
+
+set -e
+
+echo "[+] Instalando el sistema base..."
+pacstrap -K /mnt base linux linux-firmware btrfs-progs sudo networkmanager grub efibootmgr vim nano
+
+echo "[+] Generando fstab..."
+genfstab -U /mnt >> /mnt/etc/fstab
+
+echo "[+] Entrando al sistema..."
+arch-chroot /mnt /bin/bash <<EOF
+
+echo "[+] Configurando zona horaria y locales..."
+ln -sf /usr/share/zoneinfo/America/Argentina/Buenos_Aires /etc/localtime
+hwclock --systohc
+echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+locale-gen
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
+echo "KEYMAP=la-latin1" > /etc/vconsole.conf
+
+echo "[+] Configurando hostname y red..."
+echo "dark-alma" > /etc/hostname
+echo "127.0.0.1 localhost" >> /etc/hosts
+echo "::1       localhost" >> /etc/hosts
+echo "127.0.1.1 dark-alma.localdomain dark-alma" >> /etc/hosts
+
+echo "[+] Creando usuario..."
+useradd -m -G wheel alma
+echo alma:umamia | chpasswd
+echo root:umamia | chpasswd
+echo "%wheel ALL=(ALL:ALL) ALL" >> /etc/sudoers
+
+echo "[+] Instalando systemd-boot..."
+bootctl install
+
+echo "[+] Configurando systemd-boot..."
+UUID=$(blkid -s UUID -o value /dev/mapper/alma_crypt)
+cat <<BOOT > /boot/loader/entries/arch.conf
+title   Arch Linux
+linux   /vmlinuz-linux
+initrd  /initramfs-linux.img
+options cryptdevice=UUID=$UUID:alma_crypt root=/dev/mapper/alma_crypt rw
+BOOT
+
+cat <<LOADER > /boot/loader/loader.conf
+default arch
+timeout 3
+editor no
+LOADER
+
+echo "[+] Habilitando servicios..."
+systemctl enable NetworkManager
+
+EOF
+
+echo "[+] Instalación base completa. Podés reiniciar el sistema."

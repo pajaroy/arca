@@ -1,0 +1,22 @@
+# 📋 Sprint 2.1 – Profesionalización de la Estructura Documental
+
+📅 Fecha: 2025-05-21  
+🔢 Versión: v0.0.0.2  
+🏁 Objetivo: Dejar la versión `v0.0.0.2_CLI_FINAL` completamente profesionalizada y lista para pasar a LLM
+
+
+## 🧪 Testing Base
+
+- [ ] Crear carpeta `testing/`
+- [ ] Crear archivo `testing/cli/test_cli_basics.md` con test manual de comandos
+- [ ] Crear `testing/README.md` explicando cómo testear cada módulo
+
+
+## 🧠 .project.md – Estado del Sistema
+
+- [ ] Crear archivo `docs/.project.md` con:
+  - Versión actual
+  - Siguiente sprint
+  - Estado por módulo (`CLI`, `LLM`, `Memoria`, `Loader`, `Logging`, etc.)
+  - Mini resumen estilo changelog
+

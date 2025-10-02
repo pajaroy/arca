@@ -1,0 +1,76 @@
+#!/bin/bash
+# @arca-file-classifier.sh - Versión portable
+# Uso: ./classifier.sh [RUTA_BASE] (ej: ./classifier.sh /mnt/backup/@arca)
+
+# ==============================================================================
+# CONFIGURACIÓN AUTOMÁTICA
+# ==============================================================================
+
+# 1. Determinar ruta base (si no se especifica)
+BASE_DIR="${1:-$HOME/@arca}"
+if [[ ! -d "$BASE_DIR" ]]; then
+    echo "❌ Error: Directorio base no encontrado: $BASE_DIR" >&2
+    echo "   Uso: $0 [ruta_base_arca]" >&2
+    exit 1
+fi
+
+# 2. Rutas derivadas (se crean si no existen)
+SOURCE_DIR="${BASE_DIR}/.source/og/archivo"
+DEST_DIR="${BASE_DIR}/.source/og/processed"
+LOG_DIR="${BASE_DIR}/.source/logs"
+mkdir -p "$SOURCE_DIR" "$DEST_DIR" "$LOG_DIR"
+
+LOG_FILE="${LOG_DIR}/classifier_$(date +%Y%m%d).log"
+
+# 3. Extensiones a clasificar
+declare -A EXT_MAP=(
+    [".py"]="python"
+    [".yaml"]="yaml"
+    [".yml"]="yaml"
+    [".md"]="markdown"
+    [".sql"]="sql"
+    [".csv"]="csv"
+)
+
+# ==============================================================================
+# FUNCIÓN PRINCIPAL (igual que antes)
+# ==============================================================================
+classify_files() {
+    echo "[$(date)] Iniciando clasificación en ${BASE_DIR}..." | tee -a "$LOG_FILE"
+    
+    mkdir -p "${DEST_DIR}/"{python,yaml,markdown,sql,csv,otros}
+    
+    find "$SOURCE_DIR" -type f | while read -r file; do
+        filename=$(basename "$file")
+        ext=".${filename##*.}"
+        category=${EXT_MAP[$ext]:-otros}
+        dest_path="${DEST_DIR}/${category}/${filename}"
+        
+        if [[ -f "$dest_path" ]]; then
+            echo "⚠️  Duplicado: ${filename} (saltando)" | tee -a "$LOG_FILE"
+            continue
+        fi
+        
+        if mv -n "$file" "$dest_path" 2>/dev/null; then
+            hash=$(b3sum "$dest_path" | cut -d' ' -f1)
+            echo "${dest_path},${hash},$(date +%FT%T)" >> "$LOG_FILE"
+            echo "✅ ${filename} → ${category}"
+        else
+            echo "❌ Error moviendo ${filename}" | tee -a "$LOG_FILE"
+        fi
+    done
+}
+
+# ==============================================================================
+# EJECUCIÓN
+# ==============================================================================
+main() {
+    echo "=== INICIO DE EJECUCIÓN ===" > "$LOG_FILE"
+    echo "BASE_DIR: $BASE_DIR" >> "$LOG_FILE"
+    classify_files
+    echo "=== RESUMEN ==="
+    echo "Clasificación completada en: $DEST_DIR"
+    echo "Log detallado: $LOG_FILE"
+}
+
+main "$@"

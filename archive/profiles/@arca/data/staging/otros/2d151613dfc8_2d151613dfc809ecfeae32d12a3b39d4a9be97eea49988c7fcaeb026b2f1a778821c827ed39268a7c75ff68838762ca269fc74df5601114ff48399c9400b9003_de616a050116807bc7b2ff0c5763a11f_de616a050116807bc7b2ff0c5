@@ -1,0 +1,48 @@
+
+# import_memorias.py
+import json
+import os
+import requests
+
+INPUT_FILE = "data/memorias/importaciones/memorias_formato_nuevo.json"
+ERROR_DIR = "data/memorias/errores/"
+API_URL = "http://localhost:8000/v1/memorias"
+
+os.makedirs(ERROR_DIR, exist_ok=True)
+
+def cargar_memorias():
+    with open(INPUT_FILE, "r", encoding="utf-8") as f:
+        memorias = json.load(f)
+
+    total = len(memorias)
+    exitosas = 0
+    fallidas = 0
+
+    for i, memoria in enumerate(memorias, 1):
+        print(f"[{i}/{total}] Enviando memoria ID: {memoria['id']}...")
+        try:
+            response = requests.post(API_URL, json=memoria)
+            if response.status_code == 200:
+                print("✅ Guardada correctamente")
+                exitosas += 1
+            else:
+                print(f"❌ Falló con status {response.status_code}")
+                guardar_error(memoria, response.status_code)
+                fallidas += 1
+        except Exception as e:
+            print(f"💥 Error inesperado: {e}")
+            guardar_error(memoria, "exception")
+            fallidas += 1
+
+    print("\nResumen final:")
+    print(f"✔️  Éxito: {exitosas}")
+    print(f"❌  Fallos: {fallidas}")
+    print(f"📊  Total: {total}")
+
+def guardar_error(memoria, error_code):
+    error_path = os.path.join(ERROR_DIR, f"{memoria['id']}_error_{error_code}.json")
+    with open(error_path, "w", encoding="utf-8") as f:
+        json.dump(memoria, f, indent=2, ensure_ascii=False)
+
+if __name__ == "__main__":
+    cargar_memorias()

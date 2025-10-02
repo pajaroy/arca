@@ -1,0 +1,25 @@
+# 💡 Idea Base – Automatización del Registro Documental
+
+## Objetivo
+
+Implementar un sistema unificado que permita automatizar la generación de contenido estructurado para todos los registros del sistema ALMA_RESIST. Esto incluye sprints, snapshots, scripts, versiones y documentación general, evitando errores, omisiones y reduciendo tareas repetitivas.
+
+
+## Componentes
+
+- `plantillas_registro/`: Contendrá archivos `.tpl` (Markdown con variables) para cada tipo de evento
+- `registrar_evento.py`: Script principal que recibe parámetros (tipo, archivo, versión, fecha, etc.) y genera bloques listos para integrar
+- Módulos compatibles:
+  - Sprints (`sprint`)
+  - Scripts (`script`)
+  - Snapshots (`snapshot`)
+  - Documentos (`doc`)
+  - Auditorías (`audit`)
+  - Plantillas (`template`)
+
+
+## Ubicación sugerida
+
+Guardar en: `docs/idea_base/automatizacion_registro.md`
+
+Este documento servirá como referencia y especificación inicial para el desarrollo del sistema de automatización del registro formal en ALMA_RESIST.

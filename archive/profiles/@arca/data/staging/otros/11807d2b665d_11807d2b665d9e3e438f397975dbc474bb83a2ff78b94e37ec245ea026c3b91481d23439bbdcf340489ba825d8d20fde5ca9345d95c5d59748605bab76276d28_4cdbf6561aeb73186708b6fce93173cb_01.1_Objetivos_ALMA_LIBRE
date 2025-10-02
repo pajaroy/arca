@@ -1,0 +1,26 @@
+# 0.1_Objetivos_ALMA_LIBRE_(Versión_Fundacional)
+
+## 📅 Fecha: 10 de abril de 2025
+
+🔖 Estado: Primera versión oficial – núcleo ético y funcional del sistema
+
+
+### 🎯 **Objetivos técnicos del proyecto**
+
+1. Crear una aplicación modular de escritorio (Python) que funcione como base de operaciones de todas las mini-apps del usuario.
+2. Integrar múltiples motores de IA:
+    - GPT-4 como IA creativa, emocional, colaborativa.
+    - Oyama (u open source) como IA crítica, reflexiva, descentralizada.
+3. Diseñar una estructura de carpetas, módulos y sesiones legibles, replicables y adaptables.
+4. Registrar todas las versiones, ideas y conversaciones de forma trazable y evolutiva.
+5. Desarrollar un sistema que pueda funcionar **offline** y sin dependencia constante de servidores externos.
+6. Crear un sistema de consulta distribuido: el usuario podrá preguntar algo y decidir con qué IA quiere interactuar.
+7. Mantener toda la lógica integrada con Notion, Markdown o formatos de datos abiertos (.json / .csv).
+
+
+### 🛠️ ¿Qué representa “Objetivos 0.1”?
+
+- Son el manifiesto fundacional del sistema.
+- Son la base sobre la cual se construirán las siguientes versiones (0.2, 0.3…).
+- Deben ser revisados con frecuencia, pero no reescritos. Solo se avanza con versión nueva.
+- Sirven para no desviarse del camino original, y a la vez, mostrar cómo ese camino evoluciona.

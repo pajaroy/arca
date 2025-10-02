@@ -1,0 +1,9 @@
+# ALMA_RESIST – Idea Base v0.0.9
+
+Versión refinada con mejoras menores:
+- Comentarios específicos en `cli.py`
+- Test mínimo en `tests/test_cli.py`
+- Esquema inicial de API REST
+- Confirmación de esta versión como núcleo de trabajo
+
+Documentación IA-Friendly y modular lista para comenzar el desarrollo activo.

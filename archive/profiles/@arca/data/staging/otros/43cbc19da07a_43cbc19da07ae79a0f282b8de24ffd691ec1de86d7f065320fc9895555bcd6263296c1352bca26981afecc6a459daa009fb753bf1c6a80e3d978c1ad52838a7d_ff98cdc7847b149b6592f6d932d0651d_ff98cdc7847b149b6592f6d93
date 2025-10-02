@@ -1,0 +1,30 @@
+# 🚀 Protocolo de Inicio de Proyectos – Sistema ALMA
+
+## 🎯 Objetivo
+
+Crear una metodología estandarizada para lanzar **cualquier nuevo proyecto** (trading, programación, empresarial, cultivo, etc.) manteniendo sincronía entre lo **físico, digital y estratégico**.
+
+
+### 📓 Registro Inicial en Cuadernos Físicos
+
+#### Según tipo de proyecto:
+
+|Tipo de proyecto|Cuaderno físico|Registro inicial sugerido|
+|---|---|---|
+|General / Filosófico|Cuaderno transversal – Sección 1 (General)|Esbozo de propósito y alcance.|
+|Fondo / Inversión|Cuaderno del Fondo|Estructura financiera, metas de capital.|
+|Trading|Cuaderno de Trading|Estrategia, hipótesis, marco de riesgo.|
+|Programación|Cuaderno de Programación|Arquitectura conceptual, módulos, funciones.|
+|Multitemático / exploratorio|Block de Borradores|Mapa mental, lluvia de ideas inicial.|
+
+> También podés registrar la **tarea inicial en el cuaderno de tareas diarias**, como “Iniciar proyecto: [Nombre] – Crear estructura base + objetivos”.
+
+
+## ✅ Checklist de Inicio de Proyecto
+
+markdown
+
+CopiarEditar
+
+`🟩 Elegir nombre y carpeta madre del proyecto 🟩 Crear carpeta base con estructura mínima 🟩 Redactar README con objetivo y contexto 🟩 Crear seguimiento_proyecto.md 🟩 Registrar en cuaderno físico correspondiente 🟩 Generar prompt base (si aplica) 🟩 Crear primer entry en changelog 🟩 Relacionar memorias clave (si ya existen)`
+

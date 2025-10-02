@@ -1,0 +1,6 @@
+---
+nombre_modulo: raiz_base
+descripcion: Módulo raíz base de ejemplo según la estructura ALMA_RESIST
+version: 1.0.0
+---
+

@@ -1,0 +1,11 @@
+## 🧠 ¿Qué podrías agregar para subir a nivel profesional pro?
+
+### 1. `docs/sprints_activos/README.md`
+
+Con esta explicación:
+# 📂 Sprints Activos
+
+Esta carpeta contiene los sprints en curso.  
+Cuando un sprint se completa, se archiva dentro de su versión correspondiente en `docs/versiones/`.
+
+- Sprint 3 → LLM Server (pendiente)

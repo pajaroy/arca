@@ -1,0 +1,10 @@
+
+# force_snake_case_modules.py
+
+Fuerza el campo `module` en cada archivo Markdown a seguir la convención `snake_case`.
+
+## Uso
+
+```bash
+python3 force_snake_case_modules.py --root ./docs --backup --verbose
+```

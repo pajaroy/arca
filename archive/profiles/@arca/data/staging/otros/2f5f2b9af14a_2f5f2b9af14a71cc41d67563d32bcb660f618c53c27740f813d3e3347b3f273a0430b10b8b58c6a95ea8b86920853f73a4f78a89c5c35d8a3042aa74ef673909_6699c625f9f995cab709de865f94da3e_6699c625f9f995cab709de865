@@ -1,0 +1,22 @@
+# README – whitepaper
+
+Esta carpeta contiene el documento consolidado del **whitepaper técnico y filosófico** del sistema ALMA_RESIST.
+
+## 📁 Ruta
+`docs/arquitectura/whitepaper/`
+
+## 📌 Propósito
+
+- Centralizar la versión oficial del **whitepaper** que define los fundamentos, objetivos, principios y arquitectura base del sistema.
+- Actuar como puente entre la idea fundacional (`idea_base/`) y la implementación técnica concreta (`prompt_tecnico/`).
+- Servir como documento de referencia para colaboradores, entidades externas o futuras versiones del sistema.
+
+## 📄 Documentos esperados
+
+- `whitepaper_v1.md` (versión formal consolidada del whitepaper)
+- `README.md` (este archivo)
+
+## 🧠 Recomendación
+
+El whitepaper debe mantenerse **estable** y revisarse sólo cuando haya un cambio profundo en la visión del sistema. Para cambios más frecuentes, utilizar `idea_base/` o `changelog.md`.
+

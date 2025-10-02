@@ -1,0 +1,18 @@
+version: "0.2.0"
+tipo: "readme"
+schema: "almaresist.readme_v1"
+descripcion: |
+  Módulo completo para la gestión y sincronización de memorias institucionales ALMA_RESIST. Mantiene historial de versiones, trazabilidad de cambios y estructura modular por versión.
+estructura:
+  - _legacy/: "Versiones antiguas y scripts históricos"
+  - v0.2.0/: "Versión actual estable y operativa"
+tags: [memorias, cli, institucional, versionado, modular]
+linked_to:
+  - _legacy/README.yaml
+  - v0.2.0/README.yaml
+responsable: "Equipo de Operaciones"
+hash_verificacion: "sha256:pending"
+historial:
+  - "Migración y consolidación de todas las versiones hasta v0.2.0"
+last_modified: "2025-06-18T13:45:00Z"
+last_modified_by: "Kael"

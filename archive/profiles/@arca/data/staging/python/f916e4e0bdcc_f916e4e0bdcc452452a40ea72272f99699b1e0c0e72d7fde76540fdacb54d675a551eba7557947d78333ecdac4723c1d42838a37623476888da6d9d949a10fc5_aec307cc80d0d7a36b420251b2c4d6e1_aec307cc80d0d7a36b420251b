@@ -1,0 +1,254 @@
+#!/usr/bin/env python3
+"""
+Script CLI para carga y sincronización de memorias institucionales (v0.1.1)
+Autor: Kael & Santi
+Fecha: 2025-06-08
+Mejoras:
+  - Corrección serialización JSON con fechas
+  - Validación y normalización de formato fecha (ISO)
+  - Mejoras en logging y auditoría CLI
+"""
+import argparse
+import os
+import sys
+import json
+import yaml
+import logging
+from datetime import datetime, date
+from collections import OrderedDict
+import shutil
+
+# Configuración avanzada de logging
+logging.basicConfig(level=logging.WARNING, format='%(levelname)s: %(message)s')
+logger = logging.getLogger('ALMA_RESIST_MEMCLI')
+
+# Estructura mínima requerida para memorias
+CAMPOS_REQUERIDOS = ['id', 'fecha', 'tipo', 'autor', 'contenido']
+
+def validar_estructura(memoria):
+    """Valida estructura mínima y formato de campos"""
+    # Verificar campos requeridos
+    faltantes = [campo for campo in CAMPOS_REQUERIDOS if campo not in memoria]
+    if faltantes:
+        logger.error(f"Campos faltantes: {', '.join(faltantes)}")
+        return False
+    
+    # Validación especial para fecha
+    fecha_val = memoria['fecha']
+    if isinstance(fecha_val, date):
+        memoria['fecha'] = fecha_val.isoformat()  # Normalizar a ISO
+    elif isinstance(fecha_val, str):
+        try:
+            # Verificar formato ISO básico
+            datetime.strptime(fecha_val, "%Y-%m-%d")
+        except ValueError:
+            logger.error(f"Formato fecha inválido: {fecha_val} (requerido YYYY-MM-DD)")
+            return False
+    else:
+        logger.error(f"Tipo de fecha no soportado: {type(fecha_val)}")
+        return False
+    
+    return True
+
+def cargar_archivo(ruta):
+    """Carga y parsea archivos YAML o Markdown con frontmatter"""
+    try:
+        with open(ruta, 'r', encoding='utf-8') as f:
+            contenido = f.read()
+            
+        if not contenido.strip():
+            logger.warning(f"Archivo vacío: {ruta}")
+            return []
+            
+        if ruta.endswith('.yaml') or ruta.endswith('.yml'):
+            return yaml.safe_load(contenido) or []
+        
+        elif ruta.endswith('.md'):
+            if not contenido.startswith('---\n'):
+                raise ValueError("Formato Markdown inválido: falta frontmatter")
+            partes = contenido.split('---\n', 2)
+            if len(partes) < 3:
+                raise ValueError("Formato Markdown inválido: delimitadores insuficientes")
+            
+            frontmatter = yaml.safe_load(partes[1])
+            frontmatter['contenido'] = partes[2].strip()
+            return [frontmatter]
+        
+        else:
+            raise ValueError("Formato de archivo no soportado")
+    
+    except Exception as e:
+        logger.error(f"Error procesando {ruta}: {str(e)}")
+        return []
+
+def crear_backup(archivo, directorio=None):
+    """Crea backup con timestamp del archivo original"""
+    try:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        nombre_backup = f"{os.path.basename(archivo)}.backup_{timestamp}"
+        destino = os.path.join(directorio or os.path.dirname(archivo), nombre_backup)
+        
+        shutil.copy2(archivo, destino)
+        logger.info(f"Backup creado: {destino}")
+        return True
+    
+    except Exception as e:
+        logger.error(f"Error en backup de {archivo}: {str(e)}")
+        return False
+
+def sincronizar_memorias(args):
+    """Lógica principal de carga y sincronización"""
+    # Cargar y normalizar memorias existentes
+    memorias_existentes = cargar_archivo(args.memoria_yaml) or []
+    mapa_existentes = {m['id']: m for m in memorias_existentes}
+    
+    # Cargar nuevas memorias
+    nuevas_memorias = cargar_archivo(args.entrada)
+    if isinstance(nuevas_memorias, dict):  # caso de una sola memoria
+        nuevas_memorias = [nuevas_memorias]
+    if not nuevas_memorias:
+        logger.error("No se encontraron memorias válidas en el archivo de entrada")
+        return False
+    
+    # Contadores detallados
+    procesadas = []
+    duplicados = []
+    invalidas = []
+    errores_fecha = []
+    
+    for memoria in nuevas_memorias:
+        mem_id = memoria.get('id', 'SIN_ID')
+        
+        # Validación en dos fases
+        if not validar_estructura(memoria):
+            invalidas.append(mem_id)
+            continue
+            
+        # Detectar duplicados
+        if memoria['id'] in mapa_existentes:
+            if args.modo == 'replace':
+                procesadas.append(('REEMPLAZADA', memoria))
+            else:
+                duplicados.append(memoria['id'])
+        else:
+            procesadas.append(('AGREGADA', memoria))
+    
+    # Modo dry-run: mostrar simulación detallada
+    if args.dry_run:
+        logger.info("\n" + "="*60)
+        logger.info("📋 RESULTADO SIMULACIÓN (dry-run)")
+        logger.info("="*60)
+        for accion, memoria in procesadas:
+            logger.info(f"[{accion}] {memoria['id']}: {memoria['tipo']} por {memoria['autor']}")
+        
+        if duplicados:
+            logger.info("\n🚫 DUPLICADOS DETECTADOS (no procesados):")
+            logger.info("\n".join(f" - {d}" for d in duplicados))
+        
+        if invalidas:
+            logger.info(f"\n❌ ENTRADAS INVÁLIDAS: {len(invalidas)}")
+            logger.info("IDs: " + ", ".join(invalidas))
+        
+        logger.info("\n💾 Resumen:")
+        logger.info(f" - Nuevas: {len([a for a, _ in procesadas if a == 'AGREGADA'])}")
+        logger.info(f" - Actualizaciones: {len([a for a, _ in procesadas if a == 'REEMPLAZADA'])}")
+        logger.info(f" - Duplicados: {len(duplicados)}")
+        logger.info(f" - Inválidas: {len(invalidas)}")
+        return True
+    
+    # Crear backups antes de modificar
+    crear_backup(args.memoria_yaml, args.backup_dir)
+    crear_backup(args.memoria_json, args.backup_dir)
+    
+    # Aplicar cambios
+    for accion, memoria in procesadas:
+        if accion == 'REEMPLAZADA':
+            # Actualizar entrada existente
+            for i, existente in enumerate(memorias_existentes):
+                if existente['id'] == memoria['id']:
+                    memorias_existentes[i] = memoria
+                    break
+        else:
+            # Agregar nueva entrada
+            memorias_existentes.append(memoria)
+    
+    # Guardar archivos actualizados con serialización segura
+    try:
+        with open(args.memoria_yaml, 'w', encoding='utf-8') as f:
+            yaml.dump(memorias_existentes, f, allow_unicode=True, sort_keys=False)
+        
+        with open(args.memoria_json, 'w', encoding='utf-8') as f:
+            json.dump(memorias_existentes, f, indent=2, ensure_ascii=False, default=str)
+        
+        # Reporte final de operación
+        logger.info("\n" + "="*60)
+        logger.info("✅ RESULTADO DE CARGA")
+        logger.info("="*60)
+        logger.info(f"📦 Memorias procesadas: {len(procesadas)}")
+        logger.info(f"  ┣ Nuevas: {len([a for a, _ in procesadas if a == 'AGREGADA'])}")
+        logger.info(f"  ┗ Actualizadas: {len([a for a, _ in procesadas if a == 'REEMPLAZADA'])}")
+        logger.info(f"🚫 Duplicados omitidos: {len(duplicados)}")
+        logger.info(f"❌ Entradas inválidas: {len(invalidas)}")
+        
+        if invalidas:
+            logger.info("\n🔍 IDs inválidos detectados:")
+            logger.info(", ".join(invalidas))
+        
+        return True
+    
+    except Exception as e:
+        logger.error(f"⛔ Error guardando cambios: {str(e)}")
+        return False
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Carga y sincronización de memorias institucionales ALMA_RESIST v0.1.1",
+        epilog="Filosofía: Trazabilidad total | Auditoría CLI | Sincronización bidireccional",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
+    
+    # Argumentos requeridos
+    parser.add_argument('--entrada', required=True, help='Ruta al archivo con nuevas memorias')
+    parser.add_argument('--memoria-yaml', required=True, help='Ruta al archivo YAML oficial')
+    parser.add_argument('--memoria-json', required=True, help='Ruta al archivo JSON oficial')
+    
+    # Opciones de funcionamiento
+    parser.add_argument('--modo', choices=['append', 'replace'], default='append',
+                        help='Modo de integración: append (agrega) o replace (sobrescribe)')
+    parser.add_argument('--backup-dir', help='Directorio personalizado para backups')
+    
+    # Flags de control
+    parser.add_argument('--dry-run', action='store_true', help='Simula operación sin guardar cambios')
+    parser.add_argument('--verbose', action='store_true', help='Muestra detalles de ejecución')
+    parser.add_argument('--debug', action='store_true', help='Modo diagnóstico con salida extendida')
+    
+    args = parser.parse_args()
+    
+    # Configurar verbosidad
+    if args.debug:
+        logger.setLevel(logging.DEBUG)
+    elif args.verbose:
+        logger.setLevel(logging.INFO)
+    
+    # Validaciones iniciales
+    if not os.path.exists(args.entrada):
+        logger.error(f"Archivo de entrada no encontrado: {args.entrada}")
+        sys.exit(1)
+    
+    for archivo in [args.memoria_yaml, args.memoria_json]:
+        if not os.path.exists(archivo):
+            logger.warning(f"Archivo oficial no encontrado: {archivo}. Se creará uno nuevo.")
+            try:
+                with open(archivo, 'w') as f:
+                    f.write('[]')
+                logger.info(f"Archivo vacío creado: {archivo}")
+            except Exception as e:
+                logger.error(f"Error creando {archivo}: {str(e)}")
+                sys.exit(1)
+    
+    # Ejecutar proceso principal
+    exito = sincronizar_memorias(args)
+    sys.exit(0 if exito else 1)
+
+if __name__ == "__main__":
+    main()

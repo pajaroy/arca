@@ -1,0 +1,105 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_bc7fd1
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Test Model Wrapper
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:1fa14343af83e2936198cb6e73eac36ca4b2f57fa4e13d81b5aa7734c3b98655
+---
+import pytest
+from unittest.mock import Mock, patch, MagicMock
+from core.llm_server.model_wrapper import ModelWrapper
+import os
+import logging
+
+# Fixture para mockear completamente llama.cpp
+@pytest.fixture
+def mock_llama_cpp():
+    with patch("core.llm_server.model_wrapper.model_wrapper.Llama") as mock_llama_cls:
+        # Crear una instancia mock de Llama
+        mock_instance = MagicMock()
+        
+        # Configurar el mock para que no intente cargar el modelo real
+        mock_instance.create_completion.return_value = {
+            "choices": [{"text": "Respuesta generada por el modelo"}]
+        }
+        mock_instance.__llama_version__ = "0.1.0"
+        mock_instance._params = Mock(n_params=7_000_000_000)
+        
+        # Configurar la clase mock
+        mock_llama_cls.return_value = mock_instance
+        
+        yield mock_llama_cls, mock_instance
+
+# Fixture para instancia de ModelWrapper
+@pytest.fixture
+def valid_model_wrapper(mock_llama_cpp, tmp_path):
+    # Crear archivo de modelo temporal
+    model_path = tmp_path / "mock_model.gguf"
+    model_path.touch()
+    return ModelWrapper(str(model_path), quantization="Q4")
+
+# Tests de carga de modelo
+def test_model_loading_success(valid_model_wrapper, mock_llama_cpp):
+    mock_llama_cls, mock_instance = mock_llama_cpp
+    valid_model_wrapper.load_model()
+
+    assert valid_model_wrapper.is_loaded(), "El modelo debería estar cargado"
+    mock_llama_cls.assert_called_once()
+    assert mock_instance == valid_model_wrapper._model
+
+def test_model_loading_failure(tmp_path):
+    non_existent_path = tmp_path / "non_existent.gguf"
+    with pytest.raises(FileNotFoundError):
+        ModelWrapper(str(non_existent_path)).load_model()
+
+# Tests de generación de texto
+def test_text_generation(valid_model_wrapper, mock_llama_cpp):
+    valid_model_wrapper.load_model()
+    prompt = "¿Cuál es el sentido de la vida?"
+    response = valid_model_wrapper.generate(prompt)
+
+    assert isinstance(response, str), "La respuesta debe ser un string"
+    assert "Respuesta generada" in response, "Respuesta no coincide con el mock"
+    valid_model_wrapper._model.create_completion.assert_called_once_with(
+        prompt=prompt,
+        max_tokens=512,
+        temperature=0.7,
+        top_p=0.95,
+        repeat_penalty=1.1,
+        echo=False
+    )
+
+def test_generation_without_loaded_model(valid_model_wrapper):
+    with pytest.raises(RuntimeError, match="no cargado"):
+        valid_model_wrapper.generate("Test")
+
+# Tests de metadatos y estado
+def test_model_info(valid_model_wrapper, mock_llama_cpp):
+    valid_model_wrapper.load_model()
+    info = valid_model_wrapper.get_model_info()
+
+    assert info["nombre"] == "mock_model.gguf"
+    assert info["cuantización"] == "Q4"
+    assert info["parametros"] == "7.0B"
+    assert info["versión_llama.cpp"] == "0.1.0"
+
+def test_unloaded_model_info(valid_model_wrapper):
+    info = valid_model_wrapper.get_model_info()
+    assert info["status"] == "no cargado"
+
+# Test de representación
+def test_repr(valid_model_wrapper, tmp_path):
+    model_name = os.path.basename(valid_model_wrapper.model_path)
+    expected_repr = f"ModelWrapper({model_name}, cargado=False)"
+    assert repr(valid_model_wrapper) == expected_repr

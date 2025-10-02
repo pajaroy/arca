@@ -1,0 +1,18 @@
+# @arca/config/global.yaml
+paths:
+  root: "/home/arca/@arca"  # ✅ Ruta absoluta definitiva
+  database: "${paths.root}/database"
+  processed_db: "${paths.database}/processed/arca.db"  # ✅ Única DB SQLite
+  schemas: "${paths.root}/meta"  # Schema SQL y YAML
+
+env:
+  default_python: "python3.9"
+  log_level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+
+
+# Configuración específica de módulos (ejemplo)
+modules:
+  database:
+    vacuum_interval: "weekly"  # Opcional: cada cuánto compactar DB
+  nlp:
+    default_model: "es_core_news_sm"  # Modelo spaCy

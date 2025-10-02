@@ -1,0 +1,38 @@
+# 🧠 Prompt Técnico – CLI Modular ALMA_RESIST (v2, sin cmd.Cmd)
+
+
+## ⚙️ Requisitos funcionales
+
+- Al ejecutar `python core/cli.py`, debe iniciarse un prompt tipo:
+  ```
+  alma>
+  ```
+- El usuario puede ingresar comandos como:
+  - `!ayuda`
+  - `!salir`
+  - `!resumir "texto"`
+  - `!buscar_memoria "tag"`
+- Cada comando se define como una función externa en un archivo separado dentro de `commands/`.
+
+
+## 🔧 Requisitos técnicos
+
+- `core/cli.py` debe actuar como un **router** de comandos:
+  - Lee entrada del usuario (`input`)
+  - Separa comando (`!comando`) de argumentos
+  - Busca en un diccionario cargado dinámicamente desde `commands/`
+  - Ejecuta la función `run(args)` correspondiente
+- Si el comando no existe, debe mostrar un mensaje de error.
+- Debe incluir comando `!ayuda` que imprima los comandos disponibles (basado en las claves del router).
+
+
+## 🔐 Restricciones
+
+- **No usar `cmd.Cmd`, argparse, click ni frameworks externos.**
+- Todo debe funcionar con funciones planas (`def run(args):`)
+- El sistema debe ser extensible: para agregar un comando, basta con crear un archivo `.py` con función `run(args)`.
+
+
+## 🧠 En resumen
+
+Implementar un CLI minimalista, sólido y extensible para ALMA_RESIST, basado en arquitectura modular y sin dependencias mágicas. Este CLI debe estar listo para integrarse a IA local, logs y memoria a futuro.

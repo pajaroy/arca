@@ -1,0 +1,67 @@
+## 5. Flujos Internos – ALMA LIBRE v0.0.6.2 (Optimizado)
+
+ALMA LIBRE funciona como un sistema vivo de circulación de información.  
+Su objetivo no es solo almacenar datos, sino **establecer rutas claras, controladas y trazables** que conecten CUADERNOS, MÓDULOS, BITÁCORA y EMPRESAS.
+
+Los flujos internos permiten:
+
+- Evitar duplicación o pérdida de conocimiento.
+- Mantener memoria organizada, accesible y reutilizable.
+- Permitir que IAs operen con contexto y sin interferencias.
+- Establecer ciclos de mejora técnica y evolución estructural.
+
+
+### 🔄 5.2 Diagnóstico Técnico Automatizado
+
+```text
+validador_estructura.py → BITACORA_CENTRAL/DIAGNOSTICOS/
+```
+
+- Script automático recorre la estructura, busca errores y genera checklist
+- Detecta: duplicados, carpetas vacías, nombres mal formateados
+- Se integra al ciclo de versión con logs y fecha de ejecución
+
+
+### ⚙️ 5.4 Flujos Modulares con Logs Unificados
+
+```text
+Input → MODULO → output/ + log.yaml + BITACORA_CENTRAL/
+```
+
+- Cada módulo genera logs con plantilla estándar (`log_template.yaml`)
+- Formato incluye: fecha, tipo, descripción, archivos modificados
+- Todos los logs pueden sincronizarse con `BITACORA_CENTRAL/LOGS_MODULOS/`
+
+
+### 🌱 5.6 Formalización de Ideas
+
+```text
+CUADERNOS/*.cu/ → validación → EMPRESAS/*.emp/
+```
+
+- Ideas maduras se promueven a documentación institucional
+- Versión, autor y fecha se registran en `changelog.md` o `whitepaper`
+
+
+### 📡 5.8 Reporte de Estado de Módulos
+
+```text
+módulo → reporte_estado.py → BITACORA_CENTRAL/LOGS_MODULOS/
+```
+
+- Script genera resúmenes diarios del uso de módulos
+- Se almacenan como logs estandarizados
+- Incluyen: actividad, errores, duración, fecha
+
+
+## 📑 Cambios aplicados en Flujos Internos v0.0.6.2
+
+- ✅ Incorporado `validador_estructura.py` como módulo técnico de revisión automatizada
+- ✅ Añadido control de versión a vectores (`vector_db.json`)
+- ✅ Propuesto `sync_bitacora.py` con verificación por hash (en planificación)
+- ✅ Unificado formato de logs con plantilla YAML (`log_template.yaml`)
+- ✅ CLI Assistant pasa a estado experimental (ya no reservado)
+- ✅ Nuevo módulo `reporte_estado.py` para monitoreo de actividad
+- ✅ Diagrama de flujo actualizado
+- ✅ Redacción simplificada y semántica para lectura por IAs
+

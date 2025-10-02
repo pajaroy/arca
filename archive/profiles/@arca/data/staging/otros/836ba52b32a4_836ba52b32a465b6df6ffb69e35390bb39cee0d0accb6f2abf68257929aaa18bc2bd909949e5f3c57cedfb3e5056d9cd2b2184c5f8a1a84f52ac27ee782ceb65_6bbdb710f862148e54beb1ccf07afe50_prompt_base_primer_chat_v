@@ -1,0 +1,60 @@
+
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5 (v0.1)
+
+## 🎯 Objetivo General
+
+Desarrollar un **roadmap técnico ejecutable** para implementar ALMA_RESIST como un sistema modular offline con IA local, priorizando:
+
+- **Soberanía tecnológica:** sin dependencia de servicios externos.
+- **Privacidad radical:** sin telemetría, logs solo locales.
+- **Mantenibilidad humana:** 1 desarrollador + IA como copiloto.
+- **Desarrollo desde terminal:** con documentación automática vía ALMA_LOADER.
+
+
+## 🧪 Qué debe generar GPT-4.5
+
+### 1. Roadmap Técnico por Fases (3-6 meses)
+
+#### Fase 1 (Semanas 1-4):
+- CLI funcional con `!cargar_modelo`
+- LLM básico con Mistral GGUF 4-bit
+- Inicio de integración con ALMA_LOADER
+
+#### Fase 2 (Semanas 5-8):
+- Motor LLM intercambiable (llama.cpp, textgen-webui)
+- Comandos `!resumir`, `!buscar` con SQLite
+
+#### Fase 3 (Semana 9+):
+- Autonomía limitada (acciones no destructivas)
+- Despliegue con Dockerfile/AppImage
+
+
+### 3. Herramientas y Estructura
+
+- Python 3.10+, C++ opcional
+- Librerías: llama-cpp-python, FAISS, SQLAlchemy
+- Distribución sugerida:
+```bash
+pip install alma_resist_cli
+pip install alma_resist_llm
+```
+
+
+## 🔒 Restricciones Estrictas
+
+- Sin conexión a internet en runtime
+- Hardware mínimo: CPU x86_64 + 8GB RAM
+- Solo herramientas open-source (MIT, Apache 2.0)
+
+
+## 📝 Instrucción Final para GPT-4.5
+
+Analiza `ALMA_LIBRE/` y `idea_base_0.0.9.md`. Luego:
+
+- Generá un **roadmap semanal detallado**, priorizando CLI y LLM.
+- Incluí:
+  - Checklist por módulo
+  - Dependencias y riesgos
+  - Comandos CLI de ejemplo
+  - Plan de documentación automatizada
+

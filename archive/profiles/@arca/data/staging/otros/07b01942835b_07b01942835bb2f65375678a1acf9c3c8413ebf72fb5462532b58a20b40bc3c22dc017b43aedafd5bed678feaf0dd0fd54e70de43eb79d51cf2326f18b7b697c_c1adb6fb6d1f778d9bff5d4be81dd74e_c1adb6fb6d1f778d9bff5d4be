@@ -1,0 +1,12 @@
+# 📦 Metodologías Archivadas
+
+Este directorio contiene versiones anteriores de metodologías utilizadas en el sistema ALMA_RESIST.
+
+Estas metodologías han sido **reemplazadas**, **ajustadas** o **fusionadas** en versiones nuevas, pero se conservan para fines de trazabilidad histórica, aprendizaje o documentación comparativa.
+
+## 📚 Contenido
+
+- Versiones `v1` de estructuras modulares, interacción IA, documentación, etc.
+- Pueden contener enfoques superados o parcialmente vigentes.
+- Todas están debidamente fechadas y marcadas como `deprecated`.
+

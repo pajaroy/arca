@@ -1,0 +1,82 @@
+
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5 (v0.6)
+
+## 🎯 Objetivo General
+
+Desarrollar un roadmap técnico completo para implementar **ALMA_RESIST**, priorizando:
+
+- Memoria y logging estructurado desde el Sprint 1.
+- Módulo de chat funcional y encriptado.
+- Sistema completamente offline, auto-documentado y resiliente.
+- Privacidad radical: sin conexiones externas, eliminación segura de datos.
+
+
+## ⚙️ Especificaciones del Entorno
+
+- SO: Linux x86_64 (Debian 12+ / Ubuntu 22.04+)
+- RAM: 8GB
+- CPU: 4 núcleos
+- Python: 3.10.12+
+- Todo funciona sin conexión a internet.
+
+
+## 📁 Archivos Adjuntos
+
+- `ALMA_LIBRE/`
+- `idea_base_0.0.9.md`
+- `docs/flujo_secuencial.mmd`
+
+
+## ✅ Checklists Clave
+
+### ALMA_LOADER
+- [ ] Guarda logs cifrados en JSON
+- [ ] Verifica integridad con SHA-256
+- [ ] Permite restauración parcial desde backup
+- [ ] Genera `docs/memoria_desarrollo.md`
+
+### Chat con Memoria
+- [ ] Historial persistente en SQLite cifrado (AES-256)
+- [ ] Comando `alma chat` con auto-log de cada mensaje
+- [ ] `alma --clear-chat` y `alma --restore-chat` operativos
+
+
+## 🧩 Ejemplo de Código – Chat + Logging
+
+```python
+def manejar_chat(usuario: str, mensaje: str) -> str:
+    """Procesa mensajes y guarda historial encriptado."""
+    try:
+        respuesta = generar_respuesta_ia(mensaje)
+        with open("chat_history.db", "a+") as db:
+            encrypted_entry = encrypt_entry(f"{usuario}: {mensaje} -> {respuesta}")
+            db.write(encrypted_entry + "\n")
+        ALMA_LOADER.log_interaccion("chat", metadata=usuario)
+        return respuesta
+    except Exception as e:
+        logger.error(f"[E-301] Fallo en chat: {e}")
+        return "Error: consulte logs con `alma --view-errors`"
+```
+
+
+## 📈 Diagrama de Dependencias (Actualizado)
+
+```mermaid
+graph TD
+    A[CLI] --> B[Chat con Memoria]
+    A --> C[LLM]
+    B --> D[ALMA_LOADER]
+    C --> D
+    D --> E[Backups Encriptados]
+    D --> F[Documentación Automática]
+```
+
+
+# 📋 Changelog v0.6
+
+- ✅ Sprint 1 ahora inicia con ALMA_LOADER operativo
+- ✅ Sprint 2 desarrolla el módulo de chat con memoria y cifrado
+- ✅ Ejemplo completo de manejo de chat y logs cifrados
+- ✅ Nuevos comandos CLI (`--clear-chat`, `--restore-chat`)
+- ✅ Diagrama de dependencias actualizado con módulo de chat central
+- ✅ Políticas de retención específicas para interacción conversacional

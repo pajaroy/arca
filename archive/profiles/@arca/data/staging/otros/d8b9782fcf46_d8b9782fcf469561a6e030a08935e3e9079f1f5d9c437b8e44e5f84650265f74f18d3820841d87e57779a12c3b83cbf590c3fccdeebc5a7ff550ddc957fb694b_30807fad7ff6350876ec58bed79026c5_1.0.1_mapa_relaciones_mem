@@ -1,0 +1,19 @@
+
+# 🌐 Mapa de Relaciones – Sistema de Memorias ALMA LIBRE
+
+Este documento describe cómo se relacionan entre sí las carpetas de memorias, módulos, cuadernos y empresas dentro del ecosistema ALMA LIBRE.
+
+
+## 🏢 Conexiones Institucionales
+
+| Empresa           | Relacionada con...                                                |
+|------------------|--------------------------------------------------------------------|
+| `fondo_alma_mia` | `gestor_trading`, `finanzas_personales`, `trading`, `fondo_inversion`, `bitacora_central` |
+| `cannabird`      | `canavir_cultivo`, `medicina_alternativa`, `reflexion`, `programacion`, `creatividad_y_empresa` |
+
+
+## 📘 Ejemplo de memoria conectada:
+
+```yaml
+```
+

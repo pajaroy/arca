@@ -1,0 +1,18 @@
+# Template_Registro_Diario_Entregas
+
+# 📆 Registro Diario de Entregas – {{FECHA}}
+
+## 📦 Entregas del Día
+
+| # | Destinatario | Cantidad (g) | Precio por g ()|*TipodeEntrega*|*IngresoTotal*() |  |  |
+| --- | --- | --- | --- | --- | --- |
+| 1 |  |  |  | (Venta / Donación / Canje) |  |
+| 2 |  |  |  |  |  |
+
+
+## 📊 Resumen Diario
+
+- Total entregado: ___ g
+- Total ingreso generado: $ ___
+- Total de destinatarios: ___
+- Tipo de entregas más frecuentes: ___

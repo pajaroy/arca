@@ -1,0 +1,101 @@
+---
+module: prompts/prompt_base_cli_modular_v2
+type: core
+status: in_progress
+created: '2025-05-20'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🧠 Prompt Técnico – CLI Modular ALMA_RESIST (v2, sin cmd.Cmd)
+
+---
+
+## 🎯 Objetivo
+
+Diseñar un archivo `core/cli.py` funcional y escalable para el sistema ALMA_RESIST.  
+Esta CLI será el **núcleo interactivo del sistema**, operando desde terminal como un shell personalizado, sin depender de `cmd.Cmd`.
+
+---
+
+## ⚙️ Requisitos funcionales
+
+- Al ejecutar `python core/cli.py`, debe iniciarse un prompt tipo:
+  ```
+  alma>
+  ```
+- El usuario puede ingresar comandos como:
+  - `!ayuda`
+  - `!salir`
+  - `!resumir "texto"`
+  - `!buscar_memoria "tag"`
+- Cada comando se define como una función externa en un archivo separado dentro de `commands/`.
+
+---
+
+## 📁 Estructura esperada
+
+```
+ALMA_RESIST/
+├── core/
+│   └── cli.py
+├── commands/
+│   ├── ayuda.py           → def run(args: str): ...
+│   ├── salir.py
+│   ├── resumir.py
+│   └── buscar_memoria.py
+```
+
+---
+
+## 🔧 Requisitos técnicos
+
+- `core/cli.py` debe actuar como un **router** de comandos:
+  - Lee entrada del usuario (`input`)
+  - Separa comando (`!comando`) de argumentos
+  - Busca en un diccionario cargado dinámicamente desde `commands/`
+  - Ejecuta la función `run(args)` correspondiente
+- Si el comando no existe, debe mostrar un mensaje de error.
+- Debe incluir comando `!ayuda` que imprima los comandos disponibles (basado en las claves del router).
+
+---
+
+## 🧪 Testeo básico
+
+Debe poderse testear llamando directamente a funciones de comandos con argumentos simulados.
+
+---
+
+## 🔐 Restricciones
+
+- **No usar `cmd.Cmd`, argparse, click ni frameworks externos.**
+- Todo debe funcionar con funciones planas (`def run(args):`)
+- El sistema debe ser extensible: para agregar un comando, basta con crear un archivo `.py` con función `run(args)`.
+
+---
+
+## ✅ Resultado esperado
+
+Un CLI funcional con esta interacción:
+
+```bash
+$ python core/cli.py
+alma> !ayuda
+Comandos disponibles:
+  !ayuda
+  !salir
+  !resumir
+  !buscar_memoria
+
+alma> !resumir "este es un texto largo"
+Resumiendo: este es un texto largo... (simulado)
+
+alma> !salir
+Hasta luego.
+```
+
+---
+
+## 🧠 En resumen
+
+Implementar un CLI minimalista, sólido y extensible para ALMA_RESIST, basado en arquitectura modular y sin dependencias mágicas. Este CLI debe estar listo para integrarse a IA local, logs y memoria a futuro.

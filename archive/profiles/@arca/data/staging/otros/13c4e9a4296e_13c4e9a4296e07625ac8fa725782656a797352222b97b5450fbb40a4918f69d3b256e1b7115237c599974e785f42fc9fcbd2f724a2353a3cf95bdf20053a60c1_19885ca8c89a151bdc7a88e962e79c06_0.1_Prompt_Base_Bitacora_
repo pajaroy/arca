@@ -1,0 +1,64 @@
+# 📘 Prompt Base 0.1 – Bitácora Trading Alma Mía
+
+## 🎯 Objetivo del Sistema
+Crear un archivo Excel funcional y escalable para registrar toda la operativa del fondo **Alma Mía**, incluyendo operaciones reales, estrategias aplicadas, backtesting, capitales aportados, evolución del capital, y distribución de ganancias entre inversores.
+
+El sistema debe permitir trazabilidad completa de cada trade, claridad emocional y operativa, y cálculo automático de métricas clave para la toma de decisiones.
+
+
+### 2. `Trades_Ejecutados`
+> Registro completo de todas las operaciones reales ejecutadas.
+
+| Campo                  | Descripción                                                  |
+|-----------------------|--------------------------------------------------------------|
+| Trade #               | Número secuencial del trade                                   |
+| Fecha                 | Fecha de ejecución                                            |
+| Activo                | Ej: BTC, ETH, XAUUSD                                          |
+| Dirección             | Long / Short                                                 |
+| Estrategia / Setup    | Identificador de la estrategia aplicada                      |
+| Entry, SL, TP1–TP4    | Niveles operativos                                            |
+| Risk (%)              | Porcentaje de riesgo asignado (según plan)                   |
+| RR TP1 / TP2          | Ratio beneficio/riesgo alcanzado                             |
+| Resultado             | TP1 / BE / SL                                                 |
+| PnL (%) / PnL (USD)   | Resultado porcentual y en dinero                              |
+| Comentarios Pre/Dur/Post | Reflexiones y notas emocionales en cada etapa del trade |
+
+
+### 4. `Resultados_Backtesting`
+> Análisis agregado del backtesting para evaluar estrategias.
+
+| Campo               | Descripción                       |
+|--------------------|-----------------------------------|
+| Estrategia         | Nombre de la estrategia            |
+| Cantidad de Trades | Total de operaciones               |
+| Ganadores / Perdedores | Conteo individual               |
+| Winrate (%)        | Porcentaje de efectividad          |
+| Avg RR             | Ratio beneficio/riesgo promedio    |
+| Profit Total (%)   | Ganancia acumulada simulada        |
+
+
+### 6. `Resultados_Reales`
+> Resumen diario o semanal con evolución del capital.
+
+| Campo               | Descripción                              |
+|---------------------|------------------------------------------|
+| Fecha               | Día o semana analizada                   |
+| Trades Totales      | Conteo                                  |
+| Ganadores / Perdedor| Conteo                                  |
+| PnL Diario (%) / USD| Rentabilidad del día                     |
+| Capital Inicial     | Antes del período                        |
+| Capital Final       | Después del período                      |
+| Notas               | Cualquier detalle relevante              |
+
+
+### 8. `Resumen_Global`
+> Hoja de control con métricas clave del sistema.
+
+| Campo                   | Descripción                            |
+|-------------------------|----------------------------------------|
+| Total Trades            | Cantidad acumulada                     |
+| Ganancia Total (%)      | Rentabilidad acumulada                 |
+| Capital Actual (USD)    | Incluye aportes y ganancias            |
+| Capital Inicial         | Del fondo                              |
+| Winrate General (%)     | Efectividad histórica                  |
+| Último Update           | Fecha de actualización                 |

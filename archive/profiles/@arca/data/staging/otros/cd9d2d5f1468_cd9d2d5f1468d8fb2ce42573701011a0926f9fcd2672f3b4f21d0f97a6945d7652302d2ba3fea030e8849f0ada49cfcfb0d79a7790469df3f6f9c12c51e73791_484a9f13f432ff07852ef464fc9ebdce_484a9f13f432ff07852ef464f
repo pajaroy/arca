@@ -1,0 +1,157 @@
+Aquí está la implementación del endpoint para el ALMA_LOADER:
+
+python
+
+Copy
+
+Download
+
+# api/v1/memorias.py
+from enum import Enum
+from fastapi import APIRouter
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel
+from core.memoria_saver import guardar_memoria
+
+# Definición de Enums y modelos Pydantic
+class VisibilidadEnum(str, Enum):
+    publica = "publica"
+    privada = "privada"
+    solo_sistema = "solo_sistema"
+
+class MemoriaIn(BaseModel):
+    id: str
+    contenido: str
+    categoria: str
+    tags: list[str]
+    visibilidad: VisibilidadEnum
+    owner_id: str
+
+class MemoriaOut(BaseModel):
+    resultado: str
+    estado: str
+    mensaje: str
+
+# Configuración del router
+router = APIRouter(
+    prefix="/v1/memorias",
+    tags=["memorias"]
+)
+
+@router.post(
+    "/",
+    response_model=MemoriaOut,
+    summary="Registrar nueva memoria",
+    description="""
+    Endpoint para ingreso de memorias al sistema ALMA_LOADER.
+    
+    Valida y almacena memorias usando:
+    - Validación de esquema con Pydantic
+    - Guardado robusto con rollback automático
+    - Cifrado de contenido privado
+    - Vectorización en FAISS
+    """,
+    responses={
+        200: {"description": "Memoria almacenada exitosamente"},
+        400: {"description": "Error de validación o guardado"}
+    }
+)
+async def crear_memoria(memoria: MemoriaIn):
+    """Proceso principal de registro de memorias"""
+    try:
+        # Convertir modelo a dict y guardar
+        resultado = guardar_memoria(memoria.dict())
+        
+        # Determinar código de estado
+        status_code = 200 if resultado["resultado"] == "ok" else 400
+        
+        return JSONResponse(
+            content=resultado,
+            status_code=status_code
+        )
+        
+    except Exception as e:
+        # Capturar errores inesperados
+        return JSONResponse(
+            status_code=500,
+            content={
+                "resultado": "error",
+                "estado": "error_critico",
+                "mensaje": f"Error interno del servidor: {str(e)}"
+            }
+        )
+
+**Características principales:**
+
+1. **Validación estricta con Pydantic:**
+    
+    - Campos obligatorios y tipos específicos
+        
+    - Enum para `visibilidad` con valores permitidos
+        
+    - Validación automática de estructura
+        
+2. **Respuestas estandarizadas:**
+    
+    - Modelo `MemoriaOut` para formato consistente
+        
+    - Códigos de estado HTTP claros (200/400)
+        
+    - Documentación OpenAPI integrada
+        
+3. **Integración con el core:**
+    
+    - Conversión automática a dict para `guardar_memoria`
+        
+    - Manejo de resultados del sistema de guardado
+        
+    - Compatibilidad completa con el flujo de guardado
+        
+4. **Documentación enriquecida:**
+    
+    - Descripción detallada en OpenAPI
+        
+    - Ejemplos de respuestas documentadas
+        
+    - Metadatos para Swagger/Redoc
+        
+5. **Manejo de errores:**
+    
+    - Captura de excepciones inesperadas
+        
+    - Respuestas de error estructuradas
+        
+    - Códigos de estado apropiados
+        
+
+**Uso del endpoint:**
+
+python
+
+Copy
+
+Download
+
+# main.py (ejemplo de integración)
+from fastapi import FastAPI
+from api.v1.memorias import router as memorias_router
+
+app = FastAPI()
+app.include_router(memorias_router)
+
+# Ejecutar con: uvicorn main:app --reload
+
+**Flujo típico:**
+
+1. Cliente envía POST con JSON válido
+    
+2. FastAPI valida estructura con `MemoriaIn`
+    
+3. Se llama al sistema de guardado central
+    
+4. Se procesa y almacena en SQLite + FAISS
+    
+5. Se devuelve resultado del proceso
+    
+
+Este diseño cumple con todos los requisitos y está listo para integración en un sistema mayor manteniendo el desacoplamiento y la escalabilidad.

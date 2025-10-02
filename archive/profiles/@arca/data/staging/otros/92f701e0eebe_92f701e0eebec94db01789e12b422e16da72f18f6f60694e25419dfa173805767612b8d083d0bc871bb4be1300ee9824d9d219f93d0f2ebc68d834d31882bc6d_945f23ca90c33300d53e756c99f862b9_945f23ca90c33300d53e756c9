@@ -1,0 +1,67 @@
+
+# Sprint 0.1 Control Central - Diagnóstico de Estructura ALMA_RESIST
+
+## Diagnóstico de la Estructura de Carpetas
+
+Este es el diagnóstico de la estructura actual de `ALMA_RESIST` extraída del archivo comprimido. A continuación, se detallan las recomendaciones y los puntos clave para realizar una reestructuración ordenada, siguiendo la metodología `estructura_autonoma_v2`.
+
+### 1. **`alma_empresa/`**
+   - **Archivos encontrados**: `IA_asistente`, `asesoria`, `docs`, `entidades`, `equipo`, `readme.md`
+   - **Recomendación**: 
+     - Organizar `docs/` con `readme.md` detallado y asegurarse de que cumpla con la estructura modular esperada.
+     - Verificar el contenido de los directorios `IA_asistente` y `asesoria` para asegurar que estén alineados con la metodología.
+
+### 2. **`archivo/`**
+   - **Archivos encontrados**: `.gitkeep`, `README.md`
+   - **Recomendación**: 
+     - Crear las carpetas `datasets/`, `logs/` y `downloads/` según la metodología.
+     - Asegurarse de que todos los archivos temporales (logs) estén bien controlados y no versionados.
+
+### 3. **`config/`**
+   - **Archivos encontrados**: `autonomy_policy.json`, `llm_model.json`, `readme.md`, `schema_memoria.json`
+   - **Recomendación**: 
+     - Agregar `settings.yaml` para completar la configuración del módulo.
+     - Incluir una plantilla `.env.example` para asegurar que el módulo pueda ser configurado de manera estandarizada.
+
+### 4. **`control/`**
+   - **Archivos encontrados**: `readme.md`, `sprints_activos`
+   - **Recomendación**: 
+     - Crear el archivo `sprint_actual.md` para reflejar el backlog activo, tal como se indica en la metodología.
+     - Estructurar las carpetas de manera que todos los módulos de control estén bien definidos y accesibles desde `control_central`.
+
+### 5. **`core/`**
+   - **Archivos encontrados**: `README.md`, `Untitled`, `__init__.py`, `__pycache__`, `chat_cli`, `cli_cleaner`, `core.zip`, `launcher`, `llm_server`, `loader.py`, `notebooks`, `scripts`, `tests`
+   - **Recomendación**: 
+     - Eliminar o mover archivos innecesarios como `Untitled` y `core.zip` que no aportan al proyecto.
+     - Asegurar que `notebooks/` y `scripts/` tengan una organización clara y fácil de navegar.
+
+### 6. **`docs/`**
+   - **Archivos encontrados**: `99_rfc`, `TODO.md`, `api_rest.md`, `arquitectura`, `decisiones_arquitectonicas.md`, `dependencias.md`, `faq_ia.md`, `flujo_secuencial.mmd`, `hitos.md`, `index.md`, `introduccion`, `journal`, `lecciones_aprendidas.md`, `metodologias`, `modules`, `mvp`, `planificacion`, `post_mortem_tecnico.md`, `project.md`, `prompt_inicio_chat_alma_resist_assist.md`, `prompts`, `readme.md`, `referencias`, `resumen_secciones.md`, `utilidades`, `version.md`, `versiones`
+   - **Recomendación**: 
+     - Organizar la carpeta `docs/` en subdirectorios más claros, como `docs/introduccion/`, `docs/arquitectura/`, etc.
+     - Asegurar que cada archivo relevante tenga su correspondiente `changelog.md` y `journal` para reflejar la evolución y decisiones clave.
+
+### 7. **`logs/`**
+   - **Archivos encontrados**: `alma_2025-05-17.dec`, `alma_2025-05-17.enc`, `alma_debug_test.enc`, `auditorias`, `cli.log`, `logs.zip`, `readme.md`
+   - **Recomendación**: 
+     - Los logs deben estar bien organizados, y evitar tener archivos comprimidos innecesarios (`logs.zip`).
+     - Incluir un archivo `.gitignore` que excluya estos archivos del versionado.
+
+### 8. **`tests/`**
+   - **Archivos encontrados**: `__init__.py`, `__pycache__`, `_legacy`, `changelog_test_log_writer_v0.0.0.4.md`, `cli`, `context_tracker`, `index.md`, `memory_graph`, `model_wrapper`, `readme.md`, `test_api_responder.py`, `test_cli.py`, `test_llm.py`, `test_log_crypto.py`, `test_log_crypto_debug.py`, `test_log_writer.py`, `test_log_writer_v0.0.0.4.py`, `transport_layer`, `utils`, `version.yaml`
+   - **Recomendación**: 
+     - Limpiar los archivos en `_legacy/` y asegurar que los tests estén organizados por áreas funcionales.
+     - Mejorar el control de versiones de los archivos de test con un archivo `version.yaml` más detallado.
+
+---
+
+## ✅ **Próximos Pasos**:
+
+1. **Reestructurar los módulos según la metodología**: Crear las carpetas y archivos faltantes, y mover los archivos a sus ubicaciones correctas.
+2. **Actualizar la documentación** en `docs/` con el contenido y cambios propuestos en este diagnóstico.
+3. **Automatizar la auditoría**: Desarrollar scripts o herramientas que puedan realizar verificaciones automáticas de la estructura según los estándares establecidos.
+
+---
+
+**Este documento debe guardarse como parte del sprint 0.1 en `control_central`**.
+

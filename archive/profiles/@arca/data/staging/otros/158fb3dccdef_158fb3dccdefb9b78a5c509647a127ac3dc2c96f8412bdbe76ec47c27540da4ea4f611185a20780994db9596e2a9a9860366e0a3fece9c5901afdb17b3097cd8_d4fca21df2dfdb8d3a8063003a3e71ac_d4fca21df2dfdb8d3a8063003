@@ -1,0 +1,57 @@
+{
+  "version": "0.1.0",
+  "tipo": "prompt",
+  "schema": "almaresist.prompt_script_cli_v1",
+  "descripcion": "Prompt para desarrollar un script CLI universal en Python que tome cualquier archivo .yaml como entrada y genere automáticamente, en la misma carpeta:\n  - Su versión en .json (estructura equivalente)\n  - Su versión en .md con encabezado YAML (front matter) y el contenido especial renderizado como bloque markdown yaml si corresponde.\nAsí, por cada .yaml siempre existen los archivos trigéminos: .yaml (fuente), .json y .md (frontalizado para lectura/documentación/portabilidad).\n",
+  "objetivo": "Garantizar portabilidad, visualización multiplataforma y facilidad de parsing tanto por humanos como por IA/document indexers, manteniendo siempre el trío de archivos sincronizados por cada recurso estructural.\n",
+  "especificaciones": [
+    "El script debe recibir como argumento la ruta de un archivo .yaml existente.",
+    {
+      "Al ejecutarse, debe crear (en la misma carpeta)": [
+        "Un archivo .json con la misma información, en formato JSON, codificación UTF-8, indentado.",
+        "Un archivo .md con el contenido original como encabezado YAML (front matter) y, si el archivo tiene campos especiales como 'plantilla_registro', 'ejemplo', 'body' o 'contenido', incluirlos como bloque yaml indentado después del front matter."
+      ]
+    },
+    "No debe sobrescribir archivos existentes a menos que se invoque con el flag --force.",
+    "El nombre base de cada salida debe coincidir con el archivo original (solo cambia extensión).",
+    "El script debe validar existencia y formato del YAML y mostrar errores claros.",
+    "Usar PyYAML para manejar YAML, json estándar para JSON.",
+    "Estructura y código modular, con funciones separadas para cada conversión.",
+    "Permitir futuras ampliaciones (soporte batch, actualización hash, otros formatos).",
+    "Logging simple (por consola) cada vez que se genera un archivo.",
+    "Incluye comentarios explicativos en el código.",
+    "Compatible con rutas absolutas y relativas."
+  ],
+  "ejemplo_uso": "python yaml2all.py /ruta/a/archivo.yaml\n# genera /ruta/a/archivo.json y /ruta/a/archivo.md en la misma carpeta.\n",
+  "flags_opcionales": [
+    {
+      "--force": "Sobrescribe los archivos de salida si ya existen."
+    },
+    {
+      "--verbose": "Muestra mensajes extra de log."
+    }
+  ],
+  "notas": [
+    "El archivo .md debe ser compatible con sistemas de documentación basados en markdown (Obsidian, Docusaurus, etc.) y mostrar siempre el front matter yaml arriba.",
+    "Si no existe campo especial, sólo dejar el front matter como body del markdown.",
+    "Preparar el código para fácil integración en sistemas CI/CD, scripts masivos o módulos de otros agentes."
+  ],
+  "criterios_calidad": [
+    "Código modular y legible, fácil de testear y mantener.",
+    "Output siempre en UTF-8.",
+    "Mensajes de error útiles y detallados.",
+    "README o docstring breve al inicio del script."
+  ],
+  "tags": [
+    "conversor",
+    "yaml",
+    "json",
+    "markdown",
+    "cli",
+    "automatizacion"
+  ],
+  "responsable": "bird",
+  "hash_verificacion": "sha256:pending",
+  "last_modified": "2025-06-17T01:20:00Z",
+  "last_modified_by": "kael"
+}

@@ -1,0 +1,18 @@
+version: 0.1.0
+uuid: dd557ab1-9a50-454c-9089-27f2a3a34010
+tipo: ''
+schema: ''
+estado: ''
+descripcion: ''
+estructura:
+- ''
+tags: []
+linked_to: []
+responsable: ''
+hash_verificacion: sha256:cab8a580ffc9e09b041f35ce142f89d965a755beb02c28a7c66d7af51f42c838
+historial:
+- fecha: ''
+  descripcion: ''
+last_modified: '2025-07-10T02:11:02Z'
+last_modified_by: alma
+title: README

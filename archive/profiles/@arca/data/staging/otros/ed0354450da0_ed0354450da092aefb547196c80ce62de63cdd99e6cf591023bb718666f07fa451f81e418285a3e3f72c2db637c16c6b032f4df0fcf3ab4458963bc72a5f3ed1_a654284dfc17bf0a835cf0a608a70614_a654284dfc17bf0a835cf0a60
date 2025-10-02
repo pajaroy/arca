@@ -1,0 +1,39 @@
+## 🧩 FASE 5 – Sistema de Retroalimentación y Alerta Contextual
+
+**Fecha de cierre:** 2025-05-02  
+**Versión:** 0.0.6  
+**Módulo:** `alma_feedback/`
+
+
+### ✅ Implementaciones Realizadas
+
+- `monitor_alertas.py`:
+  - Escaneo cruzado de memorias por pares.
+  - Aplicación dinámica de reglas activas definidas en `config_alertas.json`.
+  - Output estructurado en `logs/alertas.json`.
+
+- `reglas_alerta.py`:
+  - Reglas como `alerta_riesgo_estres`, `alerta_contradiccion_ideologica`, etc.
+  - Preparado para añadir nuevas reglas fácilmente.
+
+- `visor_alertas.py`:
+  - Visualización mejorada en consola (colores + emojis).
+  - Exportación a `logs/alertas_resumen.md`.
+  - Filtros por tipo de alerta.
+
+- `registrar_feedback.py`:
+  - Integra alertas como objetos dentro de `retroalimentacion[]`.
+  - Validación estricta con JSON Schema.
+  - Detección de duplicados con hash MD5.
+  - Backups automáticos de memorias antes de modificar.
+  - Procesamiento multihilo con métricas y logs.
+
+
+### 🧠 Valor Estratégico
+
+Este sistema sienta las bases de la **IA Reflexiva de ALMA**, capaz de:
+
+- Detectar patrones y contradicciones personales.
+- Dejar trazabilidad lógica en cada memoria.
+- Facilitar futuras decisiones basadas en feedback interno.
+

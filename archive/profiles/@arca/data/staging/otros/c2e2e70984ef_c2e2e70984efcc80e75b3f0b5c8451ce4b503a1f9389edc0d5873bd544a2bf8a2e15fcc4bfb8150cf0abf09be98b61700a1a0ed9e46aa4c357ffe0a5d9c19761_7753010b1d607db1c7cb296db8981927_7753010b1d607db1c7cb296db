@@ -1,0 +1,20 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_1218c2
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: '  Init  '
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:79b4f67e0fabae860b4f17608255a224ef3611b4a7da758a5d86748b4d4e636f
+---
+# Exposición directa del motor de cifrado
+from .log_crypto import CryptoEngine

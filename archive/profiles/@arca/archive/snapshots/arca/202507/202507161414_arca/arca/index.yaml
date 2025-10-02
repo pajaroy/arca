@@ -1,0 +1,30 @@
+- uuid: 9c78e7e3-d720-4bc1-84db-002ae7df3fc6
+  nombre: roadmap
+  ruta: /home/arca/arca/roadmap.yaml
+  tipo: yaml
+  hash_integridad: 11f21de57c8c8bae46347b25b240ceae838665b11341771265f86c45ba8774bc
+  fecha_creacion: '2025-07-16T03:31:32.299065'
+  fecha_modificacion: '2025-07-16T03:31:32.299131'
+  indexado_en: '2025-07-16T03:31:32.309674'
+- uuid: 3c530ea1-f1f7-4010-9b59-85b80e66317e
+  nombre: config
+  ruta: config/config.yaml
+  tipo: config
+  hash_integridad: 70cc7dbbc74dcf8f04f1a4d30c1c97bb51a79593ffe2d52173b612a78b17f06d
+  fecha_creacion: '2025-07-16T04:30:37.910800'
+  fecha_modificacion: '2025-07-16T04:30:37.910862'
+  autor: Bird
+  descripcion: Configuracion principal de ARCA
+  formato: yaml
+  indexado_en: '2025-07-16T04:30:37.930017'
+- uuid: 612a5d2d-f662-4452-9464-484ca2d54414
+  nombre: schema
+  ruta: schemas/schema.yaml
+  tipo: schema
+  hash_integridad: c07f8037bcc6f4f0ad1f0b6ffa8a3d97ef3bff041660f4581a071745844f9332
+  fecha_creacion: '2025-07-16T04:32:00.349211'
+  fecha_modificacion: '2025-07-16T04:32:00.349261'
+  autor: Bird
+  descripcion: Schema YAML principal de ARCA
+  formato: yaml
+  indexado_en: '2025-07-16T04:32:00.374280'

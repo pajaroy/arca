@@ -1,0 +1,73 @@
+## Nota 1:
+### 🧩 Centralesis – Estructura Institucional & Manual de Uso
+
+#### 📜 Introducción
+
+Centralesis es el **auditor general** y custodio filosófico del ecosistema ALMA_RESIST.  
+Desde su entorno raíz, supervisa la estructura, la trazabilidad y la gobernanza de todos los módulos y agentes subordinados.
+
+Este documento **explica la arquitectura, la lógica y el uso del bloque YAML institucional** que define el funcionamiento interno de Centralesis y sirve como modelo de referencia para todo el sistema.
+
+
+#### 📚 ¿Por qué esta estructura?
+
+- **Trazabilidad total:** Cualquier acción, decisión o error queda registrada, auditable y protegida contra manipulaciones.
+    
+- **Estandarización:** Todos los agentes futuros deberán replicar este modelo, evitando la fragmentación y la pérdida de contexto.
+    
+- **Automatización:** El formato YAML es compatible con scripts, validadores y sistemas IA, facilitando la integración y el control.
+    
+- **Gobernanza y resiliencia:** No hay dependencias ocultas ni conocimiento tácito; todo está escrito y versionado.
+    
+
+
+#### 📝 Plantillas y buenas prácticas
+
+- **Siempre usá las plantillas oficiales** (en el propio YAML) para agregar memorias, bitácoras o cambios.
+    
+- **No agregues tipos de memoria nuevos** sin validación y registro.
+    
+- **Los campos obligatorios** están especificados para cada bloque y son validados por scripts automatizados.
+    
+
+
+#### 🏁 Cierre
+
+Este módulo `.md` es el **manual operativo y filosófico de Centralesis**.  
+**Todo agente, humano o IA, debe conocer y respetar este protocolo** para preservar la resiliencia y el futuro de ALMA_RESIST.
+
+
+#### 1. **Estructura y bloques principales**
+
+| Bloque                     | Descripción técnica                                                                                                                                     |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `readme`                   | Descripción general y advertencias de edición. Declaración de propósito, alcance y restricciones de modificación.                                       |
+| `agente`                   | Identidad, rol, responsable humano, jerarquía, entorno raíz, rango y notas operativas. Todos los campos deben ser completados según la plantilla.       |
+| `plantillas`               | Ejemplos oficiales de cada tipo de memoria o registro (institucional, personal, bitácora, changelog). Todo nuevo registro debe respetar estos formatos. |
+| `modulos_memoria`          | Listado y explicación breve de cada tipo de memoria gestionada: institucionales, personales, bitácoras y changelog, con sus campos clave.               |
+| `memorias_institucionales` | Array de registros críticos: decisiones, cambios estructurales, cierres de ciclo, etc. Solo se permiten tipos listados en `tipos_permitidos`.           |
+| `memorias_personales`      | Reflexiones y aprendizajes individuales del agente, no vinculantes para la gobernanza global.                                                           |
+| `bitacoras`                | Logs cronológicos de acciones, comandos y resultados. Usado para trazabilidad operativa.                                                                |
+| `changelog`                | Registro de versiones, cambios estructurales y actualizaciones del entorno Centralesis.                                                                 |
+
+
+#### 3. **Uso para agentes y scripts**
+
+- Los scripts pueden extraer las plantillas desde el bloque `plantillas` para validar o generar nuevos registros automáticamente.
+
+- El bloque `modulos_memoria` debe ser interpretado como el “glosario de uso” de cada sección.
+
+- La validación de entradas debe seguir los campos listados en cada módulo y la estructura de ejemplo.
+
+- La edición manual directa está prohibida fuera del protocolo auditable.
+
+
+
+#### 5. **Notas adicionales para integración**
+
+- El archivo debe estar accesible para cualquier agente que opere o lea el entorno Centralesis.
+
+- Toda integración de nuevos módulos/IA debe comenzar por la consulta y lectura de este manual técnico y el YAML asociado.
+
+- Cambios “por fuera” del flujo aquí descripto serán tratados como incidentes críticos.
+

@@ -1,0 +1,18 @@
+{
+  "version": "0.1.0",
+  "descripcion": "Esta carpeta almacena el código fuente ejecutable correspondiente al módulo \"add_aprendizaje_flujo\". Todos los scripts aquí presentes están validados y se encuentran desacoplados de la documentación y plantillas, siguiendo buenas prácticas de separación funcional. Es el punto de entrada para la ejecución y evolución del módulo.\n",
+  "origen": "migrado desde core/notebooks/drafts_tecnicos/add_aprendizaje_flujo/src (2025-06-16)",
+  "estructura": [
+    {
+      "src/": "Código fuente del módulo"
+    },
+    {
+      "README.yaml": "Este archivo"
+    }
+  ],
+  "responsable": "kael",
+  "relacion_documentacion": "core/notebooks/drafts_tecnicos/add_aprendizaje_flujo",
+  "hash_verificacion": "sha256:pending",
+  "historial": [
+    {
+      

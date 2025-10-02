@@ -1,0 +1,4 @@
+# 📁 schema/
+Contiene definiciones formales de los esquemas JSON utilizados para validar memorias.
+
+- `schema_base.json`: Estructura obligatoria de una memoria ALMA.

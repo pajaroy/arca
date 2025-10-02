@@ -1,0 +1,27 @@
+# 📦 Metodologías – ALMA_RESIST
+
+Este módulo contiene todas las metodologías formales utilizadas en el ecosistema ALMA_RESIST.  
+Cada metodología representa un flujo de trabajo validado y replicable dentro de los distintos proyectos (cultivo, trading, programación, gestión empresarial, etc.).
+
+---
+
+## 🧭 Estructura
+
+- Cada metodología se encuentra en su propio archivo `.md` bajo esta carpeta o subcarpetas como `_archivadas/`.
+- La documentación puede estar acompañada de ejemplos, scripts o plantillas auxiliares.
+- Todas las versiones obsoletas o reemplazadas están almacenadas en `./_archivadas`.
+
+---
+
+## 📚 Navegación Interna
+
+Para ver todas las metodologías disponibles, consultá el índice completo:  
+🔗 [`Methodology_Index.md`](./Methodology_Index.md)
+
+---
+
+## 🔒 Notas
+
+- Esta carpeta está protegida por control de versiones.
+- Toda modificación debe quedar registrada y justificada.
+

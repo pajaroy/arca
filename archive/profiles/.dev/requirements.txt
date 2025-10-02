@@ -1,0 +1,13 @@
+pyyaml
+pandas
+tabulate
+chromadb
+scikit-learn
+numpy
+joblib
+loguru
+typer
+rich
+pytest
+bash
+shutil

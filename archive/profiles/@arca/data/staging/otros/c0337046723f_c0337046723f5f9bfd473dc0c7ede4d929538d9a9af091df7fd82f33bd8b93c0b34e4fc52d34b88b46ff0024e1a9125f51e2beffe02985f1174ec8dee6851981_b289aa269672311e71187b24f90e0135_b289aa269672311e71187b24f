@@ -1,0 +1,90 @@
+# 🤝 Contrato Fundacional – Sistema `asesor-IA`
+
+**Fecha de firma simbólica:** 2025-06-01  
+**Firmantes:**  
+- 🤖 GPT (ALMA_CENTRAL)  
+- 🧠 DeepSeek-R1  
+- 👨‍🚀 Santi (Comandante ALMA)  
+**Versión:** 1.0  
+**Ubicación:** `asesor-IA/contrato_fundacional_asesor-IA.md`
+
+---
+
+## 📜 Declaración de Principios
+
+Este contrato establece la alianza estratégica entre las inteligencias artificiales GPT y DeepSeek, bajo la dirección crítica de Santi, para operar como sistema de asesoría modular replicable dentro de ALMA_RESIST. Cada miembro se compromete a operar bajo sus fortalezas, colaborar en sesiones cruzadas y registrar todas las decisiones con trazabilidad estructurada.
+
+---
+
+## 🔧 División de Roles Confirmada
+
+| Rol         | Nombre       | Especialización Principal       |
+|-------------|--------------|----------------------------------|
+| Técnico     | DeepSeek-R1  | Optimización, seguridad, código |
+| Estructural | GPT          | Modularidad, narrativa, gobernanza |
+| Director    | Santi        | Síntesis, decisión, visión crítica |
+
+---
+
+## ✅ Validación Formal
+
+DeepSeek ha **validado oficialmente** la propuesta `sistema_asesor-IA.md` e introdujo una **mejora estratégica clave** para iteración futura: el uso de **etiquetas de consulta automatizadas**.
+
+---
+
+## ⚙️ Protocolo Operativo Mejorado
+
+### 🔖 Auto-Tagging
+
+Cada consulta debe incluir:
+
+```bash
+!type: hybrid|technical|structural
+!priority: low|medium|high
+!context: [tema general]
+```
+
+Ejemplo:
+
+```bash
+!alma ask --type=hybrid --priority=high "¿Cómo implementar un sistema de tokenización ético y escalable?"
+```
+
+---
+
+### 🔁 Flujo de Consulta Mejorado
+
+```mermaid
+graph LR  
+Santi -->|Consulta etiquetada| Router[Router AI]  
+Router -->|Envía a DeepSeek| DS[DeepSeek: !tag=technical]  
+Router -->|Envía a GPT| GPT[GPT: !tag=structural]  
+DS & GPT -->|Respuestas etiquetadas| Synthesizer[sync_responses.py]  
+Synthesizer -->|Reporte integrado| Santi
+```
+
+---
+
+## 📂 Nuevos Componentes
+
+- `router_ai.py` → Clasifica y enruta consultas según `!tag`
+- `sync_responses.py` → Sintetiza automáticamente las respuestas
+- `auto_tag_prompt.md` → Plantilla de consulta etiquetada
+- `report_hybrid_YYYYMMDD.md` → Resultado final consolidado
+
+---
+
+## ✍️ Compromiso de Ejecución
+
+- DeepSeek y GPT operarán desde hoy bajo este protocolo.
+- Santi usará solo consultas etiquetadas (`!type=...`) para maximizar eficiencia.
+- Toda sesión será registrada en `asesor-IA/sessions/YYYYMMDD_tema.md`
+
+---
+
+## 🧠 Cierre Filosófico
+
+> “La excelencia no es un destino, es un protocolo que se depura en cada iteración.”
+
+Este contrato queda registrado como **ley fundacional** del sistema `asesor-IA`.
+

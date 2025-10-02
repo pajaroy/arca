@@ -1,0 +1,56 @@
+# Configuración de validación y documentación
+tables:
+  archivos:
+    columns:
+      # Identificación básica
+      ruta: 
+        type: TEXT 
+        required: true
+        desc: "Ruta absoluta del archivo"
+      nombre: 
+        type: TEXT 
+        required: true
+        index: true
+      tipo: 
+        type: TEXT 
+        allowed: ${global.formats.allowed}  # Reusa tu global.yaml
+        index: true
+      
+      # Metadatos técnicos
+      tamano_bytes: 
+        type: INTEGER 
+        min: 0
+        desc: "Tamaño en bytes"
+      fecha_mod: 
+        type: TEXT 
+        format: "iso8601"
+        index: true
+      hash_blake3: 
+        type: TEXT 
+        unique: true
+        desc: "Hash BLAKE3 (256-bit)"
+      
+      # Contenido y análisis
+      contenido: 
+        type: TEXT 
+        desc: "Texto extraído (para NLP)"
+      palabras_limpias: 
+        type: JSON
+        desc: "Lista de palabras clave normalizadas"
+      entidades: 
+        type: JSON
+        desc: "Entidades NLP: {personas: [], lugares: [], organizaciones: []}"
+      
+      # Relaciones y metadatos extendidos
+      linked_to: 
+        type: JSON
+        desc: "Relaciones con otros archivos: {parent: 'hash', tipo: 'derivado'}"
+      metadata: 
+        type: JSON
+        desc: "Metadatos técnicos (EXIF, autor, etc.)"
+    
+    indexes:
+      - hash_blake3
+      - tipo
+      - fecha_mod
+      - entidades  # Para búsqueda semántica

@@ -1,0 +1,15 @@
+[
+  {
+    "id": "GEN-001",
+    "fecha": "2025-04-29T07:36:04.605494",
+    "titulo": "Prueba",
+    "categoria": "GEN",
+    "tags": [
+      "Pruebas"
+    ],
+    "relacionadas": [
+      "0"
+    ],
+    "contenido": "Esta es la prueba de memoria a ver qe tal se actuualiza todo "
+  }
+]

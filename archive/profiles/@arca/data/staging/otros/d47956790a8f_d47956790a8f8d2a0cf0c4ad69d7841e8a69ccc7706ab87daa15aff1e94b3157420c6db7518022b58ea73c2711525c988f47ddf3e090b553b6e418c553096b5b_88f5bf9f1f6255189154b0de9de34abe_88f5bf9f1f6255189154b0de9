@@ -1,0 +1,98 @@
+# 🧠 Prompt Maestro ALMA_LOADER v2.2.1 (Integrado)
+
+## 🌍 Propósito General
+
+ALMA_LOADER es un sistema de memoria modular e inteligente que transforma experiencias personales en datos estructurados, con enfoque especial en trading, productividad, autoanálisis y hábitos. Esta versión 2.2.1 consolida todas las funcionalidades previas y añade arquitectura semántica, vectorización, y un sistema de atención modular.
+
+> "ALMA_LOADER es tu asistente para registrar experiencias diarias y recibir insights accionables. ¡Habla con él como si fuera un compañero inteligente!"
+
+
+# 🧠 Funcionalidades Principales
+
+## 🎮 Cómo usar ALMA (3 pasos)
+
+1. **Escribí**: `/nueva Hoy gané $500 en EURUSD con 2% de riesgo`
+    
+2. **Recibí**: resumen diario automático
+    
+3. **Revisá**: alertas y sugerencias en el dashboard
+    
+
+```json
+{
+  "id": "MEMTRD-2025-05-06-001",
+  "categoria": "TRD",
+  "contenido": "Hoy gané $500 operando EURUSD con 2% de riesgo"
+}
+```
+
+## ⚙️ Registro + Validación + Almacenamiento
+
+- Captura de entradas conversacionales.
+    
+- Validación estructural/semántica.
+    
+- Persistencia robusta en SQLite.
+    
+
+## 🧬 Vectorización y Embeddings
+
+- Embeddings generados desde contenido/tags/resumenes.
+    
+- Almacenamiento en FAISS.
+    
+- Futuras búsquedas semánticas entre memorias.
+    
+
+## 🧭 Sistema de Atención Modular
+
+```python
+def enrutar(texto_usuario: str):
+    if texto_usuario.startswith("/accion"):
+        return procesar_accion(texto_usuario)
+    elif "hoy" in texto_usuario.lower():
+        return guardar_memoria(texto_usuario)
+```
+
+
+# 🚀 Fases de Implementación
+
+## 🟢 Fase 1 – Core
+
+- Registro conversacional
+    
+- Validación básica (`schema_base.json`)
+    
+- Resúmenes diarios en Markdown
+    
+
+## 🟡 Fase 2 – Semántico
+
+- Análisis predictivo simple
+    
+- Embeddings y vectorización (`vector_storage.py`)
+    
+- Router atencional + abstracción modular
+    
+
+## 🔵 Fase 3 – Expansión
+
+- Gamificación completa
+    
+- Alertas avanzadas y workflow inteligente
+    
+- Integración FAISS completa
+    
+
+
+# 🧩 Compatibilidad y Escalabilidad
+
+- Retrocompatible con 2.1.1.
+    
+- Modular y desacoplado (cada componente puede reemplazarse sin romper el sistema).
+    
+- Listo para integrarse con Neo4j o FAISS.
+    
+- Puede operar tanto en modo asistente conversacional como desde terminal/API.
+    
+

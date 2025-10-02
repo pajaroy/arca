@@ -1,0 +1,29 @@
+version: "0.3.0"
+tipo: "readme"
+schema: "almaresist.readme_v1"
+descripcion: |
+  Prompt técnico-institucional para el desarrollo del script CLI de bitácoras v0.3.0 en ALMA_RESIST.
+  Este archivo contiene los requerimientos detallados para DeepSeek u otros desarrolladores, 
+  priorizando antifallos, trazabilidad y gobernanza documental.
+estructura:
+  - "prompt_add_bitacora_entry_v0.3.0.yaml"
+tags:
+  - bitacora
+  - cli
+  - prompt
+  - requerimientos
+  - v0.3.0
+  - almaresist
+linked_to:
+  - "../../src/add_bitacora_entry_v0.2.0.py"
+  - "../../docs/prompt_add_bitacora/prompt_add_bitacora_entry_v0.2.0.yaml"
+  - "../../docs/readme_tecnico/readme_tecnico.yaml"
+  - "prompt_add_bitacora_entry_v0.3.0.yaml"
+  - "../../README.yaml"
+  - "../../../README.yaml"
+responsable: "Equipo de Operaciones ALMA_RESIST"
+hash_verificacion: "sha256:pending"
+historial:
+  - "2025-06-17: Creación del README para la carpeta de prompt v0.3.0. Vinculación cruzada a versión anterior y fuentes."
+last_modified: "2025-06-17T12:15:00Z"
+last_modified_by: "Kael"

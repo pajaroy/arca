@@ -1,0 +1,71 @@
+# ALMA LIBRE v0.4 – Objetivo: Integración real de IA
+
+## ✅ Estado actual (v0.3)
+- Mistral se ejecuta al iniciar el sistema correctamente.
+- El bot puede transcribir, acumular ideas y generar resúmenes en Markdown.
+- Los comandos `/resumen` y `/estado` funcionan.
+- No hay procesamiento real de IA, solo estructuración con lógica estática.
+
+## 🚀 Objetivo para v0.4
+- Integrar prompts reales para procesamiento IA con Mistral:
+  - Comando `/analiza` para que resuma con sentido crítico los chats.
+  - Comando `/mejora` que detecte patrones, errores o mejoras sugeridas.
+  - Generación automática de ideas clave con etiquetas tipo `#idea`, `#tarea`, `#alerta`.
+
+## 🛠️ Cambios planificados
+- [ ] Crear archivo `ia.py` con funciones de inferencia reales.
+- [ ] Adaptar `resumen.py` para usar respuestas de Mistral vía API.
+- [ ] Mejorar el manejo del buffer para separar ideas automáticamente.
+- [ ] Agregar logs internos de IA para entrenamiento futuro.
+
+## 🧪 Posible futuro para v0.5
+- Integrar LLaMA o Claude si es necesario.
+- Hacer que el bot sugiera acciones sin necesidad de pedirle comandos.
+
+tags:: #roadmap #v04 #mistral #inteligencia-artificial #tareas
+
+  
+
+Estado actual – ALMA LIBRE v0.3 (FINALIZADA)
+
+  
+
+  
+
+- El bot de transcripción ya funciona con comandos /resumen y /estado
+- Los resúmenes se guardan automáticamente cada noche como .md
+- Se detectan ideas en tiempo real desde el buffer
+- Se configuró el servidor Mistral local como entorno persistente
+- El script iniciar_mistral.sh se ejecuta automáticamente al iniciar el sistema
+- Toda la infraestructura de IA local está activa, aunque aún no integrada al bot
+
+  
+
+  
+
+  
+
+  
+
+  
+
+Próximos objetivos – ALMA LIBRE v0.4 (EN PLANIFICACIÓN)
+
+  
+
+  
+
+- Integrar el servidor Mistral local (localhost:5000) al bot para generar resúmenes reales con IA
+- Construir un sistema de prompts IA que analice el buffer acumulado y devuelva insights
+- Conectar ALMA LIBRE con el sistema de ingestión de memorias de ALMA LOADER
+- Agregar nuevos comandos:  
+    
+
+- /diagnóstico → análisis de contexto
+- /insight → generación de ideas clave
+- /acción → sugerencias prácticas o decisiones
+
+-   
+    
+- Estandarizar respuesta de IA en formato Markdown + tags + memoria temporal
+- Evaluar un sistema de revisión manual para memorias generadas antes de ser indexadas

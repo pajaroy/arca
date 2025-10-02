@@ -1,0 +1,19 @@
+id: README_BITACORA_SCRIPT_2025-06-06_01
+modulo: control_central/asesor-ia/core/notebooks/bitacora_script
+tipo: script
+nombre: bitacora_script
+autor: Kael
+fecha: 2025-06-06
+version: 1.0
+status: inicial
+tags: [bitacora, automatizacion, scripts, yaml, cli, modularidad]
+descripcion: |
+  Script modular para agregar entradas estructuradas a la bitácora viva de ALMA_RESIST en formato YAML.
+  Permite registrar eventos, decisiones y reflexiones de manera automática y estandarizada.
+  Incluye soporte para documentación, ejemplos y pruebas unitarias en src/ y docs/.
+objetivo: Automatizar y estandarizar el registro de eventos en la bitácora viva institucional.
+estructura:
+  - README.md
+  - README.yaml
+  - src/
+  - docs/

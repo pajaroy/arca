@@ -1,0 +1,35 @@
+# 🧠 OBJETIVOS DE VERSIÓN – Prompt Base ALMA LIBRE v0.3
+
+📅 Fecha: 2025-04-22
+
+
+## ✅ Mejoras previstas para v0.3
+
+1. **Modo de Lectura para IA**
+   - Instrucciones claras para modelos como GPT, Ollama o DeepSeek.
+   - Indicar qué archivos leer, en qué orden, y cómo interpretar relaciones.
+
+2. **Clasificación por Tipo de Memoria**
+   - Incorporar subtipos: General, Técnica, Emocional, Estratégica, Sincronización.
+   - Clarificar el uso de cada tipo en el Prompt Base.
+
+3. **Tabla de Uso Práctico por Carpeta**
+   - Agregar un resumen funcional que indique:
+     - Qué se hace en cada carpeta
+     - Qué IA lo puede leer
+     - Qué memoria lo rige
+
+4. **Guía para IA Futura**
+   - Sección especial con instrucciones explícitas para cualquier IA conectada al sistema.
+   - Regla: Toda IA debe pasar primero por la Memoria General y el Mapa de Memorias.
+
+5. **Estructura para Memoria Sintética**
+   - Introducir la idea de memoria mensual o trimestral que sintetice:
+     - Estado emocional
+     - Progreso operativo
+     - Integraciones nuevas
+
+6. **Preparación para Metadata Automatizada**
+   - Conectar con `metadata_memorias.csv`
+   - Mencionar posibilidad de actualización automática con `alma_metadata_sync.py`
+

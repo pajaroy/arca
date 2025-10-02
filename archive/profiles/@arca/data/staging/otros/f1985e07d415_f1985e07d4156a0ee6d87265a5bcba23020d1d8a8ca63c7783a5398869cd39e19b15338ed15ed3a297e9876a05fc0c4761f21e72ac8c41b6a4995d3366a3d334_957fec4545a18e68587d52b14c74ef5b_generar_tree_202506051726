@@ -1,0 +1,11 @@
+### ✅ Comando desde `/home/bird/Alma/ALMA_RESIST`
+
+#### Nivel 3:
+```bash
+tree -L 3 -d . > ../tree_ALMA_RESIST_L3.txt
+```
+
+#### Nivel 4:
+```bash
+tree -L 4 -d . > ../tree_ALMA_RESIST_L4.txt
+```

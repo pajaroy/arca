@@ -1,0 +1,206 @@
+{
+  "main": {
+    "id": "0aa0739b579d7827",
+    "type": "split",
+    "children": [
+      {
+        "id": "e0e2bcc41b6d3e70",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fe2647137ee93cd7",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Nueva pestaña"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "294dd77650ba11d1",
+    "type": "split",
+    "children": [
+      {
+        "id": "cdbdb1a8af55fdf3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "165255549fac2a14",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de archivos"
+            }
+          },
+          {
+            "id": "07f75113ff0156a7",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:#hechoPor_seba-rios",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Buscar"
+            }
+          },
+          {
+            "id": "ea8fe06351e5fda9",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 222.5
+  },
+  "right": {
+    "id": "578b292525e7a6bf",
+    "type": "split",
+    "children": [
+      {
+        "id": "7e522fd9bb780659",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a42ae2c1135a7c1e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "control_central/ia_asistente/docs/sistema_asesor-IA.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for sistema_asesor-IA"
+            }
+          },
+          {
+            "id": "a484b78066781146",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "control_central/ia_asistente/docs/sistema_asesor-IA.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from sistema_asesor-IA"
+            }
+          },
+          {
+            "id": "c6336f28af0446bd",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "a77af9bd293f0e6c",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "control_central/ia_asistente/docs/sistema_asesor-IA.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of sistema_asesor-IA"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir selector rápido": false,
+      "graph:Abrir vista gráfica": false,
+      "canvas:Crear nuevo lienzo": false,
+      "daily-notes:Abrir la nota de hoy": false,
+      "templates:Insertar plantilla": false,
+      "command-palette:Abrir paleta de comandos": false
+    }
+  },
+  "active": "fe2647137ee93cd7",
+  "lastOpenFiles": [
+    "requirements.txt",
+    "readme.md",
+    "memory_graph.json",
+    "hello_world.py",
+    "git",
+    "context_history.jsonl",
+    "tests/utils/__pycache__/test_metadata.cpython-311-pytest-8.3.5.pyc",
+    "tests/transport_layer/__pycache__/test_transport_layer.cpython-311-pytest-8.3.5.pyc",
+    "tests/model_wrapper/__pycache__/test_model_wrapper.cpython-311-pytest-8.3.5.pyc",
+    "tests/memory_graph/__pycache__/test_memory_graph.cpython-311-pytest-8.3.5.pyc",
+    "tests/context_tracker/__pycache__/test_context_tracker.cpython-311-pytest-8.3.5.pyc",
+    "tests/context_tracker/__pycache__/__init__.cpython-311.pyc",
+    "tests/context_tracker/readme.md",
+    "tests/cli/test_cli_basics.md",
+    "tests/_legacy/changelog_test_log_writer_v0.0.0.3.md",
+    "tests/readme.md",
+    "tests/index.md",
+    "tests/changelog_test_log_writer_v0.0.0.4.md",
+    "staging/README.md",
+    "prompts/2025-06-03_prompt_identidad_ia.md",
+    "metodologias/2025-06-03_metodologia_estructura_cli_ia_v1.md",
+    "logs/auditorias/prompts/2025-05-28_prompt_log_crypto_auditoria_respuesta.md",
+    "logs/auditorias/prompts/2025-05-28_prompt_log_crypto_auditoria.md",
+    "logs/auditorias/prompts/2025-05-28_auditoria_log_writer_sprint_2.6.md",
+    "logs/auditorias/auditoria_profunda_prompt.md",
+    "logs/auditorias/auditoria_profunda_2025-05-20.md",
+    "logs/auditorias/auditoria_estructura.md",
+    "logs/auditorias/auditoria_20250523_0953_UnificacionMetadatos.md",
+    "logs/auditorias/auditoria_2025-05-23_UnificacionMetadatos.md",
+    "logs/auditorias/README.md",
+    "logs/readme.md",
+    "ideas/alma_chat_instructions.md",
+    "ideas/sincronizacion_automatica.md",
+    "ideas/README.md",
+    "ia_asistente/interacciones/readme.md",
+    "ia_asistente/interacciones/2025-05-29_log_test.md"
+  ]
+}

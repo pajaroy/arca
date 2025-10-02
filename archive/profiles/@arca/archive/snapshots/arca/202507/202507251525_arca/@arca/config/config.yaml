@@ -1,0 +1,39 @@
+sistema:
+  nombre: ALMA_RESIST
+  modo: produccion  # o desarrollo
+  version: "0.1.0"
+
+paths:
+  base: "/home/arca/@arca"
+  config: "config/config.yaml"
+  indices: "index/"
+  data: "datasets/"
+  schemas_yaml_dir: "meta/"
+  schemas_sql_dir: "meta/"
+
+logs:
+  level: "INFO"
+  destino: "db"   
+  table: "logs"
+  
+database:
+  sqlite_path: "database/arca.db"
+  vector_store: "chroma"
+  model_path: "modelos/"
+
+hash:
+  algoritmo: blake3
+
+ml:
+  modelo_path: "modelos/"
+  vector_store: "chroma"
+  db_path: "database/arca.sqlite"
+
+flags:
+  debug: false
+  test_mode: false
+
+exclusions:
+  folders:
+    - ".dev"
+    - ".env"

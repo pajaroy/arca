@@ -1,0 +1,19 @@
+# Módulo `Alma_Monitor`
+
+`Alma_Monitor` es el módulo responsable de auditar los logs generados por el resto de los módulos del sistema ALMA LIBRE. Analiza registros estructurados, detecta patrones de errores, genera alertas y produce un informe resumen diario.
+
+## Funcionalidades clave
+
+- Revisión de todos los logs generados por los módulos activos
+- Categorización de eventos por severidad
+- Detección de picos de error o fallos repetidos
+- Generación de resumen `.md` y `.yaml` con estadísticas
+
+## Estructura de logs esperada
+
+Basada en: `RECURSOS_Y_AYUDAS/plantillas/log_template/log_template.yaml`
+
+## Output
+
+- Reporte general: `output/reporte_monitor_YYYYMMDD.yaml`
+- Resumen diario: `output/resumen_monitor_YYYYMMDD.md`

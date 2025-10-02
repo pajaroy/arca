@@ -1,0 +1,48 @@
+# 📜 ALMA LIBRE – Resumen de Funcionamiento y Estructura Base
+
+
+## 2. Estructura Principal de Carpetas
+
+El sistema ALMA LIBRE se organiza bajo las siguientes carpetas principales:
+
+- `/modules/` – Módulos funcionales independientes que abordan distintas áreas de trabajo.
+    
+- `/docs/` – Documentación viva: onboarding, changelogs, whitepapers, plantillas.
+    
+- `/src/` – Código fuente principal: núcleo lógico, APIs, CLI, interfaces gráficas.
+    
+- `/data/` – Gestión de bases de datos, memorias, registros (logs) y backups.
+    
+- `/apps/` – Aplicaciones desarrolladas desde el ecosistema ALMA LIBRE, externas al core.
+    
+- `/tests/` – Pruebas unitarias, de integración y end-to-end del sistema.
+    
+- `/scripts/` – Automatizaciones de mantenimiento, deploy y sincronización.
+    
+
+Cada carpeta sigue un patrón estándar de documentación (`README.md`), asegurando coherencia en todo el sistema.
+
+
+## 4. Conexión e Integración entre Módulos
+
+- **Trading** se conecta con **Geopolitics** y **Finance** para una toma de decisiones fundamentada en análisis históricos y económicos.
+    
+- **Health** opera de manera relativamente independiente pero alimenta datos de control de productividad general.
+    
+- **Bitácora Central** es el **punto de partida** de todo proyecto: desde aquí se generan nuevas ideas, proyectos, mejoras y derivaciones a otros módulos.
+    
+- **Programming** da soporte tecnológico transversal, desarrollando aplicaciones, herramientas y utilidades para todos los demás módulos.
+    
+
+
+## 6. Bases para la creación de Diagramas de Flujo
+
+- El flujo inicia en **Bitácora Central** (toma de decisiones).
+    
+- Se ramifica hacia módulos según necesidad: Trading, Finance, Health, etc.
+    
+- La programación actúa como columna vertebral de automatización.
+    
+- Data Management (bases de datos en `/data/`) sirve como sustento histórico, validación y registro.
+    
+

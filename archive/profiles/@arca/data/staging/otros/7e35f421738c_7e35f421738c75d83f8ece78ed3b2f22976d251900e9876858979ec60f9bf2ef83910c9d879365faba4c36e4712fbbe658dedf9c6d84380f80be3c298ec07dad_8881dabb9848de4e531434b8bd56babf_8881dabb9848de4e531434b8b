@@ -1,0 +1,8 @@
+def parse_content(file_path: Path) -> tuple:
+    """Maneja múltiples formatos con detección automática"""
+    if file_path.suffix == '.md':
+        post = frontmatter.load(file_path)
+        return post.content, post.metadata
+    elif file_path.suffix in ('.yaml', '.yml'):
+        return None, yaml.safe_load(file_path.read_text())
+    # ... soporte para JSON, etc.

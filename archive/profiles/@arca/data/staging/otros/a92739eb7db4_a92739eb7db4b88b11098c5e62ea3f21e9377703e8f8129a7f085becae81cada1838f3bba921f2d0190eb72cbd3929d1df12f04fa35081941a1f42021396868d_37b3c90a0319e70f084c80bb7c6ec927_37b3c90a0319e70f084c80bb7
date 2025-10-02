@@ -1,0 +1,21 @@
+### ✅ **ALMA LIBRE v0.0.3**
+
+- Lo trabajamos como **buffer_bot.py + resumen.py**
+    
+- Incluye:
+    
+    - Integración real con modelo local (Mistral o DeepSeek) vía `text-generation-webui`
+        
+    - Comando `/resumen`
+        
+    - Comando `/estado`
+        
+    - Extracción real de ideas clave desde buffer acumulado
+        
+    - Guardado automático en `.md` al final del día
+        
+    - Logging modular
+        
+
+📁 Estaba todo armado en dos archivos: `buffer_bot.py` y `resumen.py`, con estructura preparada para escalar.
+

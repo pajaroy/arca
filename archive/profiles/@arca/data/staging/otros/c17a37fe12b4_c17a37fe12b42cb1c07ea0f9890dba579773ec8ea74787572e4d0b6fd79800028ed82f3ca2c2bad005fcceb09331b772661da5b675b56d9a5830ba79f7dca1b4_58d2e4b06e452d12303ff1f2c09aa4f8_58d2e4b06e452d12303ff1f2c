@@ -1,0 +1,48 @@
+[
+  {
+    "id": "CHANGELOG_VIVO_2025-06-06_07",
+    "tipo": "changelog_vivo",
+    "modulo": "control_central/asesor-ia/agentes",
+    "autor": "Kael",
+    "fecha": "2025-06-06",
+    "status": "publicado",
+    "tags": [
+      "limpieza",
+      "duplicados",
+      "centralesis",
+      "agentes",
+      "auditoria"
+    ],
+    "entradas": [
+      {
+        "fecha": "2025-06-06",
+        "version": "2.2.1",
+        "cambios": "Eliminación definitiva de la carpeta /control_central/asesor-ia/centralesis/ tras su migración a /control_central/asesor-ia/agentes/centralesis/.",
+        "impacto": "Unificación de la residencia documental y eliminación de posibles fuentes de error."
+      }
+    ]
+  },
+  {
+    "id": "CHANGELOG_VIVO_2025-06-06_08",
+    "tipo": "changelog_vivo",
+    "modulo": "control_central/asesor-ia/archivo/downloads/historico",
+    "autor": "Kael",
+    "fecha": "2025-06-06",
+    "status": "publicado",
+    "tags": [
+      "movimiento",
+      "historico",
+      "prompt",
+      "limpieza",
+      "auditoria"
+    ],
+    "entradas": [
+      {
+        "fecha": "2025-06-06",
+        "version": "2.2.2",
+        "cambios": "Se movió el archivo prompt_base.md de asesor-ia/ a archivo/downloads/historico/ para su archivo definitivo.",
+        "impacto": "Mantiene orden documental y preserva historial de versiones antiguas."
+      }
+    ]
+  }
+]

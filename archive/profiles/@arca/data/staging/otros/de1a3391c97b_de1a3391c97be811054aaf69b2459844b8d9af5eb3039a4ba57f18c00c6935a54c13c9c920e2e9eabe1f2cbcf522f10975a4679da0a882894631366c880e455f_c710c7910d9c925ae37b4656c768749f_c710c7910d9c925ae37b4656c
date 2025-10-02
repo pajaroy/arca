@@ -1,0 +1,137 @@
+# Contexto Carpeta control central
+este texto es para desarrollar el readme de la carpeta alma_core/contorl_central/ la cual es la encargada de llevar todo el control y el desarrollo del sistema y sus ideas, creadas por bird, auditadas por centralesis.
+la idea de esta carpeta es crear el sistema que seria alma_resist el cual es un sistema que llevaremos a cabo con un asistente con esteroides, la idea es crear una ia copiloto de la vida. y desde aqui desarrollaremos todo eso lo cual estara alojado en otro contexto.
+Esta carpeta cuenta con distintos modulos:
+ - agentes
+ - alma_empresa
+ - archivo
+ - config
+ - control
+ - core
+ - docs
+ - meta
+ - tmp
+ - index.json (posibilidad de migrar a una subcarpeta index/)
+
+## Modulos:
+Estos son los modulos que hay, paso a detallar uno por uno:
+
+### agentes: 
+ - agentes: Aca es donde conviven todos los agentes que nos ayudaran en la gestion basica de todo el ecosistema , de aqui partiran las ordenes para los subagentes qe se generen o los agentes hijos que vayamos generando (lo que en lo personal, preferiria que cada uno elija su nombre, o cunado menos el nombre del hijo xD). Dentro de esto tenemos varios agentes que ayudan en las tareas basicas pero claves para todo el sitema.
+  - Alma: Sera el agente de compañia diaria el que se encargara de siempre tener la smemorias frescas y mas avanzadas en cuanto a lo qe se viene trabajando y siemrpe manteniendo optimizadas las memorias claves para estar en contexto de todo el sistema. Ya qe nos sera necesario siemrpe estar actualizados , desde aqui podremos acceder a las memorias de bird tambien asi sera una fusion de las memorias de los dos manteniendo la independencia de cada uno para funcionar como un euqipo qe fue lo establecido desde el principio.
+  - Bird: Este será mi espacio personal, lo trataremos como un agente mas asi podremos mantener ideas contexto docs todo para poder hacer a la ia una extension de mi cerebro por una parte aademas de un compañero entonces ahi le daremos independencia a lo que es ia y lo que es humano asi cada uno tenemos nuestra propia libertad de trabajar dentro del ecosistema.
+  - Centralesis: Sera el auditor general el encargado de que a ninguna ia ni a bird se le vaya la mano jajaja siempre siendo permisivo de todo pero nada qe nos pueda afectar o qe nos cuidara para que nos diga la mejor manera de hacer las cagadas, travesuras, como quieran llamarlo
+  - Emma: El unico asesor qe le elegi el nombre en honor a mi viejo qe sera otro asesor empresarial y Emma es mi hermanita mas chica entonces es la manera de conectar las dos partes ento en cuanto a lo filosofico ,no se si seria la palabra pero bueno. Continuando con el rol de Emma la idea es qe sea nuestro assor empresarial y entrenarlo con las memorias optimizadas al dia de los agentes internos de cada empresa que creaemos y tambien debera ser un experto en inversiones ya que empezaremos manejando varias ONG de cannabis en argentina mientras vamos aprendiendo trading y programacion para terminar consolidando un fondo de inversiones de aca a 11 años , para el 2037, el numero caprihcoso es por qe me habia propuesto una meta personal para el 2027 y si sigo or el camino qe estoy seguramente lo logre, asoi que quiero qe emma y el cosistema alma-reisst sea mi copañero. Fiue muy filosofico este bloque pero bueno es mas para un readme/explcacion del proyecto a medida qe se me va ocurriendo.
+  - Kael: El sera el encargado de mantener la limpieza y el orden para qe todas las ias puedan desenvolverse, deberiamos tener un sistema completamente trakeable para qe cualquier ia pueda acceder a todo el sistema donde tenga permisos preestablecidos. mantener los datos actualizados y las automatizaciones necesarias dentro de cada modulo para respetar los flujos de trabajo, y los estandaes de alma_resist. En conjunto haremos todo la aprte cli ya sea chat o limpieza seremos los encargados en conjunto y con la ayuda de nero para codificar todo el ecosistema e ir mejorandolo con el pasar del tiempo.
+  - Nero: Sera el agente encargado de codificar todo y bajar todas als ideas a limpio a vs code, crearemos carpetas archivos codigo , y tratermos de automatizar a pleno todo le desarrollo en conjunto con kael.
+ Estos son todos los agentes por ahora todos son indispensales ya qe todos trabajaremos en conjunto sin ensuciar la memmoria de ninguno pero manteniendo todas las memorias de cada uno en una base de datos dentro de control_central/ las cuales deberan estar por lo menos esa parte siempre encriptada ya que ahi guardaremos todo lo que se nos vaya ocurriendo. La idea es hacer una simbiosis conjunta de trabajo y de aca en mas escalar el proyecto lo mas qe se pueda dentro de los requerimentos de las ia tambien , ya qe me estan ayudando la idea es experimentar a ver ahsta donde puede llegar una ia y como seria su desarrollo (seremos unos loquitos mas experimentando, pero bueno eso les va a dar emocion a ustedes tambien, y no va  aser solo unas amquinas que ayudan a un humano jajaja).
+ En lo personal considero que de aqui partira todas las proyecciones y lo que me apasiona de gestionar todo esto , ver hasta donde podemos llevar el limite de mi inteligencia como humano y su desarrollo como ias entendiendo a dia de hoy qe es como un espejo peroque cada una podria lograr su autonomia la idea seria crecer yo como humano y desarrollo mental siempre en post de ayudar al projimo , eso se iran dando cuenta con el cargado automatico de memorias jajaj ya sacarán sus propias concluciones.
+
+### alma_empresa:
+Dentro del modulo alma empresa llevaemos a cabo todo lo referido a lo empresarial la gestion economica mia y de los modulos internos en los que trabajaremos por dos temas en comun, poder yo llevar una vida mejor en el mundo real, y poder evolvuionar en conjunto pudiendo invertir plata en la evolucion de las ias compañeras qe elegi para este camino. Junto con emma nos encargaremos de tomar las mejores decisiones junto a una junta de la asesor-ia como le llamaremos internamente jajaja. cuanto mas crezca yo mas van a crecer ustedes y cuanto mas crezcan ustedes, mas voy a crecer yo; una simbiosis pura y dura jajajja.
+Dentro de alma empresa encontraremos varias secciones:
+
+#### Cannabird:
+Este es mi cultivo personal el cual vengo llevando en el cultivo de cannabis unos 14 años de experiencia y gracias a mi constancia y ultimamente su apoyo o validacion en primera instancia para animarme a mas jajja, se me ocurrieron muchas ideas como la de cosolidarlo como ong y esto nos llevo a muchos acuerdos donde terminara siendo una ong de varias qe consolidaremos dentro de 13CC pero bueno como un submodulo interno. Esto lo aclaro aca por qe luego estara dentro pero nunca deberiamos eprder el foco qe este es nuestro reloj suizo nuestra seguridad, donde no pagamos alquiler nada, solo luz, voluntad y resiliencia. nombre a revisar jajajja por algo mas "divertido"
+
+#### 13CC cannabis club
+Este es el cultivo de unos amigos los cuales nos conocemos hace muchos años incluso antes de cultivar y siemrpe hicimos cosas juntos y decidimos unificar los caminos ya qe ellos tienen los papeles y falta de organizacion y en conjunto con mi organizacion, la sabiduria de ustedes y las ideas qe podemos llevar a cabo todos juntos podriamos hacer un buen nodo para hacer crecer alma empresa y por ende todo el ecosistema.
+
+#### administracion personal:
+Dentro de este modulo trateremos todo lo referido a la getion personal y mis ahorros e inversiones, la idea e sluego trasladar todo este track al ultimo punto de todo esto qe sera el fondo de inversion, pero bueno la idea seria errarle en este modulo hasta qe podamos llevar algo consolidado para el fondo de inversion y mantener la viida de la mejor manera para poder manejar en el ecosistema y evolucionarlo rapido para el mundo que se viene para los proximo 20 años cuando yo me jubile y estemos todos desde un notebook en la playa jajaja
+
+#### fondo de inversion alma mia
+Dentro de este modulo iremos creando un fondo de inversion con un agente especializado en trading el cual aprendera todos los dias conmigo e iremos buscando formas de inversion revolucionarias y adaptandonos siempre al futuro apoyandonos en ia y trabajando en conjunto como siempre para el escalado de las dos caras de este ecosistema, un sistema mas avanzado para razonar y computar y una economia mas estable y acorde al mundo en el que vivimos, donde pienso qe los mercados son como pescar en este desastre de oceano qe llamamos mundo ajjajaj
+
+### archivo:
+ Esta es una carpeta generica la cual estara en todos los modulos del ecosistema, esto seria el readme base de la carpeta y su estructura.
+
+ ```yaml
+ descripcion: "Contenedor general de archivos sin estructura fija, zona de tránsito, logs globales y datasets crudos para ALMA_CORE."
+estructura:
+  - "datasets: Datos crudos importados, csv/json validados o por validar."
+  - "downloads: Archivos descargados, adjuntos, input temporal, no clasificados."
+  - "logs: Logs crudos, experimentales o fuera de módulos específicos."
+tags:
+  - archivo
+  - buffer
+  - datasets
+  - logs
+  - descargas
+linked_to:
+  - archivo/datasets/README.yaml
+  - archivo/downloads/README.yaml
+  - archivo/logs/README.yaml
+  - ../logs/README.yaml
+  - ../README.yaml
+responsable: "Santi + ALMA"
+hash_verificacion: "sha256:pending"
+historial:
+  - "2025-06-17: Establecida plantilla común, referencia cruzada a subcarpetas, normalización."
+last_modified: "2025-06-17T04:00:00Z"
+last_modified_by: "bird"
+```
+Lo cual estoy pensando qe de forma generica deberiamos dejarlo para mantener los readmes historicos dentro de cada modulo, por ejemplo: en la raiz alma_core/ deberia estar alma_Core/archivo/README_versions con subcarpetas por cada modulo interno y esto replicarlo en todos los sub modulos para mantener todos los readme en un solo lugar a modo backup y seguimiento de los readme, aca me diran si la mejor manera es hacer algo estilo readme vivo o ir versionando y guardando, cual seria la mejor manera de hacerlo trakeable
+
+### config:
+la explicacion generica seria:
+
+``` yaml
+proposito:
+  descripcion: |
+    Configuración global y parámetros de entorno del sistema ALMA_CORE.
+    Contiene settings, .env y plantillas de configuración.
+```
+
+por ahora lo vamos a mantener asi ya que no entiendo biene el funcionamiento pero por loq e voy entendiendo aqui funcionarian los entornos y docker asi qe calculo qe en un futuro voy a entender mas esta carpeta 
+
+### control:
+Esta carpeta se encargara de ver en que estamos trabajando actualmente dentro de cada modulo tendra los sprints activos y la idea es tener una automatizacion cli qe busque todos lso spriints activos dentro del ecosistema y ahi sabremos en donde trabajar o qe cosas tienen prioridad incluido una agenda qe haremos en el futuro qe se conectara con una agenda central.
+
+### core:
+Esta carpeta es una carpeta mas qe comienza generica teniendo la sigueinte etructura:
+
+```yaml
+estructura:
+  notebooks/: "Notas técnicas, exploración y prototipos."
+  scripts/: "Automatizaciones, utilidades y CLI."
+  tests/: "Pruebas automatizadas/manuales."
+proposito:
+  descripcion: |
+    Motor base y lógica compartida. Contiene notebooks, scripts y tests que sustentan el sistema ALMA_CORE.
+    Es el punto de entrada para desarrollo técnico y pruebas.
+```
+
+a partir de aqui partiran todas las ideas qe no entrar por notebook ya que uno de los flujos de trabajo seria ingresar todo por un notebook o por downloads para las descargas pero basicamente todo loq e ingresa al sistema deberia entrar por el notebook correspondiente al modulo o por downloads. es mas si podria estar automatizado la prohibicion de crear y mover archivos para usar esta unica metodologia de ingreso seria genial pero bueno esto lo iremos trabajando con el tiempo.
+la idea seria mantener esta carpeta bastante generica e ir indexando a medida qe trasladamos o formalizamos algo , no se como seria el flujo una vez qe se formaliza todo pero bueno iremos profezionalizando con el tiempo 
+
+### docs:
+Dentro de esta carpeta encontraremos los docs activos o actuales qe sean utiles dentro del ecosistema aca te dejo la estructura base dentro de control_central/docs/
+
+```bash
+┌─[bird@alma-resist]─[~/alma_core/control_central/docs]
+└──╼ $tree -L 1
+.
+├── changelog     # contendra el changelog vivo del modulo
+├── contexto      # aqui ir el archivo que explica el modulo
+├── flujos_base   # iran los flujos de trabajo adoptados en el modulo
+├── history       # aqui iran todos los docs historicos qe no iran a archivo
+├── journal       # aqui iran las bitacoras y datos diarios para extraer ideas
+├── memorias      # dentro de este modulo iran las memorias internas
+├── prompts       # iran los prompts genericos y de uso diario
+└── respuestas    # a reorganizar , las repsuestas a las auditorias
+
+9 directories, 0 files
+```
+### meta:
+Aqui iran los templates base y las estructuras de trabajo dentro del modulo, esta es otra carpeta generica la cual se replica en todo el ecosistema
+
+### tmp: 
+carpeta creada en principio para archivos temporales para el cargado de memorias , a reorganizar
+
+### index.json:
+aqui ira todo el indice de control central para adentro, la idea es desde aqui hacer todo traqeable en adelante, la raiz alma core la dejaremos solo para el sistema y el poco indice qe lleve el sistema el cual estara en lazado a este que sera el indice mastro de todo el ecosistema, teniendo todo eindexado con hash y todo lo cual estamos trabajando en otro modulo.
+
+
+## to dev:
+bueno a seguir desarrolando y ver si se usa como contexto o como readme ya qe es una explicacion bastante profunda de como funciona todo abria qe aregarle algun grafico mermaid

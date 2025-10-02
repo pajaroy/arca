@@ -1,0 +1,29 @@
+
+# 📁 Carpeta PROMPT – Sistema ALMA LIBRE
+
+Esta carpeta contiene todos los archivos de instrucciones base que permiten a una IA comprender, operar y escalar el sistema ALMA LIBRE. 
+
+## 📄 Archivos incluidos
+
+### ✅ Prompt_Activo.md
+Prompt principal actualmente en uso. Es el más actualizado (v0.8.0.2) y refleja toda la lógica funcional del sistema, incluyendo:
+- Módulo de Chat (`alma_chat.py`)
+- Comandos /guardar, /leer y backup diario
+- Estructura de la base `memorias.db`
+- Comportamiento esperado por IA
+- Glosario y arquitectura general
+
+Este es el archivo que debe compartirse o cargarse a cualquier modelo IA (GPT, DeepSeek, Ollama) para permitir una interacción efectiva.
+
+### 🌱 0.7.8.1_Prompt_Escalable_ALMA_LIBRE.md
+Prompt histórico base. Fue el punto de partida del sistema escalable. Se conserva como referencia o para comparar evolución.
+
+## 🧭 Uso recomendado
+
+1. Siempre mantener **un solo Prompt_Activo.md**
+2. Guardar versiones antiguas con número y fecha.
+3. No editar `Prompt_Activo.md` directamente: hacer los cambios en una copia, validarlos, y luego reemplazar.
+4. Compartir solo `Prompt_Activo.md` con inteligencias externas.
+
+## 🧪 Próxima evolución
+En la próxima fase (v0.8.1), se sumará un `PROMPT_IA.md` específico para el módulo de respuesta inteligente (alma_ia.py) e integración con Ollama o DeepSeek.

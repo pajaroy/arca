@@ -1,0 +1,29 @@
+
+# 🧠 RONDA 0 – Fundamentos del Sistema de Memorias ALMA LIBRE
+
+Este documento resume la visión estructural, emocional y operativa del sistema de memorias dentro del ecosistema ALMA LIBRE, según la reflexión directa de su creador humano (Santi).
+
+
+## 2. ¿Las IAs deberían acceder a las memorias?
+
+Sí. Todas las IAs que se conecten al sistema deben poder:
+
+- Leer las memorias en carpetas organizadas
+- Usarlas como contexto para responder en el chat principal
+- Aprender progresivamente del contenido que Santi escriba y almacene
+
+
+## 4. ¿Qué tan interactivas deben ser las memorias?
+
+Se definen tres niveles de interacción:
+
+- 🟢 **Básico:** lectura/escritura manual desde terminal
+- 🟡 **Contextual:** el chat consulta automáticamente lo que necesita
+- 🔴 **Proactivo:** el sistema propone guardar, clasificar o relacionar nuevos conceptos
+
+ALMA Sync comenzará en modo básico, y evolucionará hacia el modo contextual y proactivo.
+
+
+**Documento interno | Ronda 0 – Versión exploratoria**  
+**Actualizado por:** Santi & ALMA  
+**Fecha:** 2025-04-24  

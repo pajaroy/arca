@@ -1,0 +1,48 @@
+# 🧠 Prompt Base – Reestructuración Profunda de Carpetas con IA (GPT-4.5)
+
+## 🎯 Objetivo General
+Quiero reorganizar de forma profesional todos mis backups, carpetas y archivos acumulados desde que comencé a trabajar en el proyecto ALMA LIBRE, sin borrar nada, solo ordenando y estructurando todo con máxima claridad, trazabilidad y escalabilidad.
+
+
+## 🔧 Herramientas que uso actualmente
+
+- **ChatGPT Plus (GPT-4.5)**: Para memoria, estrategia, reflexión y automatización.
+- **DeepSeek**: Para generación y corrección de código, optimización de prompts.
+- **Obsidian (pago)**: Como base de notas modular, memoria digital personal.
+- **Notion**: Potencial herramienta de apoyo para uso colaborativo con el equipo.
+- **iPhone 13 (iOS 18.4.1)**: Notas diarias, recordatorios, agenda, Google Calendar.
+- **Cuadernos físicos**: Uno para cada sector: trading, programación y empresas.
+
+
+## 📦 Estructura deseada como punto de partida
+
+```
+ALMA_LIBRE/
+├── 00_BACKUPS_HISTORICOS/
+│   ├── v1.0.0_2024-03/
+│   ├── v2.0.0_2024-06/
+│   └── changelogs/
+├── 01_EMPRESAS/
+│   ├── 13CC/
+│   ├── Cannabird/
+│   └── Documentos legales/
+├── 02_CUADERNOS_DIGITALES/
+│   ├── trading/
+│   ├── programacion/
+│   └── fondo_empresa/
+├── 03_PROYECTOS/
+│   ├── alma_loader/
+│   ├── automatizacion_vpd/
+│   └── exploraciones/
+├── 04_DESARROLLO_CODIGO/
+│   ├── DeepSeek/
+│   └── Modulos IA/
+├── 05_EQUIPO/
+│   └── trabajo_colaborativo_13cc/
+├── 06_RECURSOS_Y_AYUDAS/
+│   └── prompts, scripts, ideas, esquemas
+```
+
+
+## 🎯 Resultado esperado
+Una carpeta madre ALMA_LIBRE totalmente organizada y modular, con todos mis backups integrados, archivos reubicados, proyectos separados por tipo, y herramientas integradas que faciliten colaboración, seguimiento, automatización y toma de decisiones estratégicas.

@@ -1,0 +1,11 @@
+# 📁 archivo/ – Área General de Archivos
+
+Esta carpeta contiene archivos de soporte general para el sistema ALMA_RESIST. Se usa para almacenar datasets, descargas y logs temporales.
+
+## Subdirectorios
+
+- `datasets/`: Archivos de datos externos o internos que sirven como referencia o input para otros módulos.
+- `downloads/`: Descargas directas desde internet o fuentes externas antes de ser procesadas.
+- `logs/`: Registros informales o automáticos no vinculados a otros módulos específicos.
+
+📌 Esta carpeta **no se sincroniza** con GitHub ni nodos críticos salvo que se indique lo contrario.

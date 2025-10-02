@@ -1,0 +1,69 @@
+#!/bin/bash
+
+# Configuración
+TRECE_DIR="$HOME/trece"
+VERSION_PATTERN="^version: [\"']?([0-9]+\.[0-9]+\.[0-9]+)[\"']?"
+PYTHON_SCRIPT="$HOME/arca/src/core/versionado.py"
+
+# Función para mostrar ayuda
+mostrar_ayuda() {
+    echo "Sistema de Versionado Trece"
+    echo ""
+    echo "Uso: trece <comando> [argumentos]"
+    echo ""
+    echo "Comandos:"
+    echo "  versionar <ruta>    Versionar un archivo o directorio"
+    echo "  restaurar <ruta> <versión> Restaurar una versión específica"
+    echo "  listar <ruta>       Listar versiones disponibles"
+    echo "  ayuda               Mostrar esta ayuda"
+    echo ""
+    echo "Ejemplos:"
+    echo "  trece versionar ~/proyecto/script.py"
+    echo "  trece versionar ~/mi_proyecto"
+    echo "  trece restaurar ~/proyecto/script.py 1.0.0"
+    echo "  trece listar ~/proyecto/script.py"
+}
+
+# Función para ejecutar el script Python
+ejecutar_python() {
+    if [[ ! -f "$PYTHON_SCRIPT" ]]; then
+        echo "Error: No se encuentra el script Python en $PYTHON_SCRIPT"
+        echo "Por favor, crea el script versionado.py en esa ubicación"
+        exit 1
+    fi
+    
+    python3 "$PYTHON_SCRIPT" "$@"
+}
+
+# Manejo de comandos
+case "$1" in
+    "versionar")
+        if [[ -z "$2" ]]; then
+            echo "Error: Debes especificar una ruta para versionar"
+            exit 1
+        fi
+        ejecutar_python "versionar" "$2"
+        ;;
+    "restaurar")
+        if [[ -z "$2" || -z "$3" ]]; then
+            echo "Error: Debes especificar una ruta y versión para restaurar"
+            exit 1
+        fi
+        ejecutar_python "restaurar" "$2" "$3"
+        ;;
+    "listar")
+        if [[ -z "$2" ]]; then
+            echo "Error: Debes especificar una ruta para listar versiones"
+            exit 1
+        fi
+        ejecutar_python "listar" "$2"
+        ;;
+    "ayuda"|"help"|"--help"|"-h")
+        mostrar_ayuda
+        ;;
+    *)
+        echo "Comando no reconocido: $1"
+        echo "Usa 'trece ayuda' para ver los comandos disponibles"
+        exit 1
+        ;;
+esac

@@ -1,0 +1,58 @@
+id: "[obligatorio, id único, puede ser ruta relativa o slug tipo readme_core_v0.1.1]"
+version: "[versión actual, formato semántico o incremental]"
+tipo: "[readme, script, doc, manifest, etc]"
+schema: "[nombre.schema_v1]"  # Para validación futura
+fecha_creacion: "[YYYY-MM-DD]"
+fecha_actualizacion: "[YYYY-MM-DD]"
+autor: "[nombre o equipo]"
+estado: "[in_progress | stable | legacy | deprecated]"
+responsable: "[usuario o agente a cargo]"
+last_modified: "[YYYY-MM-DDTHH:MM:SSZ]"
+last_modified_by: "[nombre o alias]"
+hash_actual: "[sha256:xxxxxxx | pendiente]"
+anterior: "[ruta al anterior si aplica]"
+linked_to:
+  - "[otras rutas de readmes o manifest relacionados]"
+tags:
+  - "[palabras_clave, categorías, etc]"
+
+descripcion: |
+  Breve resumen del propósito de la carpeta/módulo/script/documento.
+  Qué función cumple, a qué proyecto/nodo pertenece, y alcance.
+  Idealmente, un párrafo o bullet points.
+
+estructura:
+  - "[archivo_o_subcarpeta]: [breve descripcion de cada elemento clave]"
+  # Ejemplo:
+  - src/: "Scripts principales"
+  - docs/: "Documentación y prompts"
+  - changelog/: "Historial de cambios"
+
+uso_basico: |
+  Ejemplo CLI, librería, notebook, etc.  
+  Ej: python3 script.py --ayuda
+
+proposito: |
+  Explicación larga, proyección futura o visión del módulo.
+
+changelog:
+  - fecha: "[YYYY-MM-DD]"
+    version: "[x.y.z]"
+    cambios: |
+      - Lista de cambios, fixes, refactorizaciones, etc.
+
+notas_operativas: |
+  Tips internos, links a documentación, advertencias, TODOs, dependencias externas, etc.
+
+# Campos opcionales pero recomendados:
+relacion_rag:           # Índice o relación semántica IA, útil para sistemas RAG
+dependencias:
+  scripts: []
+  archivos_criticos: []
+  ultima_revision: "[YYYY-MM-DD]"
+modulos_activos: []
+hashing_index: 
+  descripcion: |
+    Cada carpeta y archivo relevante es registrado con SHA-256 y auditado en cada commit relevante.
+  ultima_revision: "[YYYY-MM-DD]"
+proyeccion_futura: []

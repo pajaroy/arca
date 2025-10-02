@@ -1,0 +1,48 @@
+# 🧠 ALMA_LOADER – Documentación v3.0.2 (Base)
+
+Este documento centraliza toda la información clave del sistema ALMA_LOADER. Contiene la visión estratégica, las guías técnicas, el historial de cambios, una guía de onboarding y un módulo de contribución.
+
+
+## 🛠️ Guía Técnica (Prompt)
+
+Describe cómo cada módulo opera internamente:
+- Conversión de lenguaje natural a JSON estructurado
+- Validación de esquema (`schema_base.json`)
+- Almacenamiento dual SQLite + FAISS
+- Enrutamiento de atención y resúmenes automatizados
+- Hooks y extensiones futuras
+
+
+## 🚀 Guía de Onboarding
+
+1. **Usuarios**: Leer sección “Visión General” y usar comandos sugeridos
+2. **Desarrolladores / IAs**: Leer “Guía Técnica” y testear funciones
+3. **Colaboradores**: Ver sección “Cómo Contribuir” y el Roadmap activo
+
+
+> Para contribuciones mayores, crear una nueva rama y proponer PR con documentación mínima.
+
+> Este documento se irá completando en cada fase de la versión 3.0.2
+
+## 🌍 Documentación Web (Futuro)
+
+ALMA_LOADER está diseñado para poder convertirse en una documentación web navegable.
+
+Se recomienda utilizar:
+
+- [`mkdocs`](https://www.mkdocs.org/) → para generar sitios estáticos a partir de archivos Markdown. Ideal para este tipo de documentación técnica modular.
+- [`Sphinx`](https://www.sphinx-doc.org/) → si se desea integrar documentación Python con autodocumentación de código fuente.
+
+### 📁 Estructura sugerida para `mkdocs`
+
+```
+/docs/
+├── index.md  ← Presentación general
+├── whitepaper.md
+├── prompt_tecnico.md
+├── api.md
+├── roadmap.md
+└── contribucion.md
+```
+
+> Esta integración puede incluir navegación por temas, búsqueda semántica y despliegue automático en GitHub Pages o Netlify.

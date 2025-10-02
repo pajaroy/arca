@@ -1,0 +1,21 @@
+
+# 📝 CHANGELOG – ALMA LIBRE 0.0.6-corregido
+
+## 📅 Fecha: 2025-05-11
+
+### ✅ Correcciones aplicadas:
+- Eliminación de duplicados internos entre CUADERNOS y EMPRESAS.
+- Eliminación o verificación de `sync_drive_maestro.sh` duplicado (confirmado único).
+- Creación de glosario oficial y documentación estructural (`Estructura_de_carpetas.md`).
+- Limpieza de nombres mal formateados (`\n` en nombres) y ortografía en carpetas.
+- Reorganización de proyectos dentro de MODULOS.
+- Preparación de carpetas `RECURSOS_Y_AYUDAS/` y estandarización de rutas.
+- Agregado de `README.md` por cada carpeta principal del sistema.
+- Establecimiento de `version.txt` como indicador de release viva.
+- Revisión final de checklist aplicada paso a paso.
+
+### 🧠 Orientado a:
+- Interoperabilidad con modelos IA (Google AI Studio, Notebook LM, Obsidian).
+- Escalabilidad futura de proyectos empresariales, cuadernos, automatizaciones y memorias.
+- Claridad total en navegación, trazabilidad y documentación viva.
+

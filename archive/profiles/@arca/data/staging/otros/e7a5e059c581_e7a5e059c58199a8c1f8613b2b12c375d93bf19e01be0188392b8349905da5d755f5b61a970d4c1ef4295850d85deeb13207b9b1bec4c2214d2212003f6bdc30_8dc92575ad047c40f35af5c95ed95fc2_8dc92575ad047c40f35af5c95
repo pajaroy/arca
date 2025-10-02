@@ -1,0 +1,31 @@
+# 📘 Sistema de Resúmenes de Trabajo Diario
+
+Este módulo contiene los registros diarios de trabajo humano dentro del ecosistema `ALMA_RESIST`, organizados por persona y tipo de enfoque.  
+Cada registro sigue una estructura estandarizada, optimizada tanto para lectura humana (Obsidian) como para ingestión automática (RAG + IA).
+
+
+## 📂 Estructura de Carpetas
+
+Este directorio está dividido por personas, cada una con su propio enfoque operativo:
+
+### 🦅 `bird_trabajo_diario/`
+Registro general integral.  
+Incluye planificación, ejecución, bloqueos, decisiones, reflexiones y próximos pasos.  
+Modelo base de resúmenes tipo `resumen_humano_full`.
+
+### 🧠 `coco_trabajo_diario/`
+Foco operativo, técnico y táctico.  
+Incluye logs de tareas concretas realizadas, comandos ejecutados, problemas técnicos y soluciones aplicadas.
+
+### 🧘 `pablito_trabajo_diario/`
+Foco introspectivo y emocional.  
+Incluye estado emocional, barreras personales, aprendizajes vivenciales, sentido del trabajo y motivación.
+
+
+## 🚧 Estado del desarrollo
+
+- ✅ Estructura de carpetas definida
+- ⏳ Plantilla `resumen_humano_full` en diseño
+- 🔜 Integración con CLI para carga automática
+- 🔜 Implementación de `validador_schema`
+

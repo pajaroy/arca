@@ -1,0 +1,14 @@
+# 📄 log_writer.py – Changelog v0.0.0.6
+
+**Estado:** ✅ Estable, con mejoras estructurales.
+
+## 🔧 Cambios principales:
+- Se convirtió `secure_rotation` en método de instancia (`self`) para evitar error de tipo `TypeError` al ser llamado desde los tests.
+- Se agregó control de existencia de directorio en `secure_rotation` con `os.makedirs(..., exist_ok=True)`.
+- Se refactorizó `log_event` para validar tipo de `message` correctamente (mantiene validación estricta).
+- Se agregaron excepciones controladas para operaciones de escritura y errores de disco.
+- Se aplicó un sistema más robusto de logging interno con mensajes claros en consola en caso de error.
+
+## 🧪 Cobertura esperada:
+- Rotación segura de logs.
+- Escritura robusta incluso bajo condiciones simuladas de fallo.

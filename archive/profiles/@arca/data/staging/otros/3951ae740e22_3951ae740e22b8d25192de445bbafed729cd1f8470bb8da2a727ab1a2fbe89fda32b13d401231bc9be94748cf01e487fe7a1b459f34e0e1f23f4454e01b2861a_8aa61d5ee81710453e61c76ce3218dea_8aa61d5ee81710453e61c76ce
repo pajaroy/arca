@@ -1,0 +1,161 @@
+## 🧾 Changelog – ALMA_RESIST
+
+
+### ✅ v0.2 – 2025-05-17 – Cifrado Funcional
+
+- ✅ Implementado `log_crypto.py` con soporte AES-256-GCM y ChaCha20
+- ✅ Validación automática de arquitectura y fallback en ARM
+- ✅ Escritura binaria con encabezado identificador (`b"AES\x00"`)
+- ✅ Test funcional `test_log_crypto.py` verificado
+
+🏁 **Hito 002**: Módulo de cifrado funcional operativo  
+🔐 Inicio de trazabilidad antifrágil
+
+
+### ✅ v0.0.0.2 – 2025-05-20 – CLI Modular Finalizada
+
+- ✅ Reescrito `core/cli.py` con arquitectura CLI modular sin `cmd.Cmd`
+- ✅ Comandos cargados dinámicamente desde `commands/` (formato `run(args)`)
+- ✅ Manejo de errores completo y mensajes personalizados
+- ✅ `!ayuda` funcional y generada automáticamente desde los comandos cargados
+- ✅ Comandos válidos: `!ayuda`, `!salir`, `!resumir`, `!buscar_memoria`
+- ✅ Eliminadas versiones anteriores obsoletas
+- ✅ Estructura preparada para futura integración con LLM local, logging y memoria dinámica
+
+📁 Estructura Nueva:
+
+```
+core/
+└── cli.py
+
+commands/
+├── ayuda.py
+├── salir.py
+├── resumir.py
+└── buscar_memoria.py
+```
+
+🏁 **Hito 004**: CLI Modular funcional y operativo
+🧠 Punto de partida para integrar módulos de IA locales
+
+
+## 🧾 v0.0.0.1 – Auditoría Técnica Finalizada
+
+📅 Fecha: 2025-05-20  
+🎯 Descripción: Consolidación de la base estructural, documental y operativa del sistema ALMA_RESIST.
+
+
+### 🔍 Auditoría
+
+- Ejecución real de `tree -L 3` y registro en `docs/auditorias/auditoria_estructura.md`
+- Verificación y limpieza de archivos redundantes
+- Consolidación de `idea_base.md` oficial y archivo `idea_base_legacy.zip`
+
+
+### 🧠 Estado
+
+Este changelog marca el **cierre funcional de la versión v0.0.0.1**, y habilita el inicio del **sprint técnico v0.0.0.2** bajo condiciones de trazabilidad completa.
+
+## 🌀 2025-05-21 – Cierre del Sprint 2.2: Metodologías Base
+
+🔢 Versión: v0.0.0.2  
+📂 Sprint: Sprint_2.2_Metodologias_Base  
+🧱 Descripción: Se definieron y validaron todas las metodologías clave del sistema ALMA_RESIST.
+
+- ✅ metodologia_estructura_modular_v2.md
+- ✅ metodologia_sprints_v2.md
+- ✅ metodologia_versionado_backups_v1.md
+- ✅ metodologia_doc_ia_v2.md
+- ✅ metodologia_adr_v2.md
+- ✅ metodologia_interaccion_ia_v2.md
+
+
+### 🔄 Sprint 2.1 – Estructura Documental (2025-05-23)
+
+- 🆕 Creada carpeta `estructura_doc/` con plantillas reutilizables
+- ✅ Implementado sistema de testing base (`testing/cli/`, `utils/`)
+- 📝 Consolidación de documentos vivos: `TODO.md`, `.project.md`, `version.md`
+- 🧠 Preparación de entorno para integración de IA
+- 📦 Snapshot generado: `v0.0.0.2_estructura_documental`
+- 🔑 Hash: `0f61c8c5f3ab0b08b1c8c189b2e9a6ef3db47d0d4b0f63b246ac9ef8079d3a35`
+
+
+## [2025-05-23] Finalización Sprint 2.4 - Optimización de Metodologías
+
+- Se estandarizaron 105 documentos Markdown bajo el esquema YAML unificado.
+- Se corrigieron todos los documentos `type: core` sin `linked_to`.
+- Se validó semánticamente el campo `domain` vs `tags`.
+- Se implementó y ejecutó `alma-cli audit` con generación automática de reportes.
+- Se añadieron backups automáticos y validación incremental.
+
+## [0.0.0.5] - 2025-05-28
+### Cambios en `log_crypto`
+- Refactor completo basado en auditoría.
+- Soporte para cifrado basado en contraseña con `salt` embebido.
+- Mejoras en validación de logs cifrados.
+- Renombrado de funciones para seguir convenciones en inglés.
+### 🗓️ 2025-06-02 – Sprint 0.2 – Consolidación de Backup y Protocolo de Ingreso
+
+**🔧 Cambios Estructurales**
+
+- Se creó la carpeta `archivo/downloads/` para contener archivos temporales, descargados o en revisión.
+    
+- Se creó la carpeta `docs/sync/` con README asociado para estructurar documentación de sincronización entre nodos.
+    
+- Se agregó `core/apps/` al `.gitignore` para evitar subir binarios pesados (como `.AppImage`).
+    
+- Se implementó y testeó el script `install_cron_backup.sh`, que configura un backup automático vía cron cada 15 minutos.
+    
+- Se creó el alias `autobackup` para facilitar su activación post-reinicio.
+    
+
+**🧠 Protocolos y Conductas**
+
+- Se definió un nuevo protocolo de ingreso de archivos y se documentó en `protocolo_ingreso_archivos.md`.
+    
+- Se reforzó el hábito de trabajar íntegramente desde terminal para evitar conflictos de sincronización.
+    
+- Se consolidó el enfoque modular de scripts (`core/scripts/backup_to_git/`) y el uso de logs silenciosos (`nohup`).
+    
+
+**🔄 Sincronización**
+
+- Confirmada la autenticación SSH entre `alma-core` y `alma-resist`.
+    
+- Validada la sincronización correcta de Git entre nodos y GitHub.
+    
+- En proceso: script `sync_status.sh` para chequeo cruzado de estado entre nodos.
+    
+
+**🔖 Tags**  
+`sprint_0.2` `backup_git` `protocolo_ingreso` `estructura_modular` `conducta_terminal` `cronjob_sync`
+
+
+## 📆 2025-06-03 – Consolidación CLI y Estructura Ejecutable
+
+### 🧠 Auditor CLI General – Kael
+- Se formaliza el asesor `Kael` como **auditor CLI general del sistema ALMA_RESIST**.
+- Se define su archivo de contexto como `[[Kael]]`, con sección viva de reportes.
+- Se estructura su entorno en `control_central/kael/`.
+
+### 🧩 Modularidad Ejecutable
+- Se renombra `core/cli_cleaner/` a `core/run_kael/`, adoptando la convención `run_<asistente>`.
+- Se establece esta convención para todos los módulos IA ejecutables del sistema.
+
+### 🗃️ Limpieza de Descargas y Archivos Vivos
+- Se mueven a `historico/` todos los archivos temporales o no versionados correctamente dentro de:
+  - `control_central/archivo/downloads/`
+  - `control_central/docs/`
+- Se renombran archivos sin fecha según criterio de `[[criterios_ubicacion_vivo.md]]`.
+
+### 🌐 Estandarización de Enlaces Internos
+- Se adopta como convención general el uso de `[[...]]` para referenciar documentos internos desde Obsidian o VS Code.
+- Se actualizan los encabezados de documentos clave con enlaces simbólicos y tags IA-friendly.
+
+### 🧱 Estructuras de Tree y Diagnóstico
+- Se generan los tree completos de las siguientes rutas para revisión:
+  - `ALMA_RESIST/`
+  - `ALMA_RESIST/control_central/`
+  - `ALMA_RESIST/core/`
+- Se registran en `control_central/docs/contexto/`.
+

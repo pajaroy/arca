@@ -1,0 +1,26 @@
+
+## 🧩 Formato de IDs y Estructura de Nuevas Memorias
+
+Cada memoria debe incluir un **ID único** siguiendo esta convención estructural:
+
+- `MEM-[MOD]-XXX`  
+  Donde:
+  - `MEM` = Memoria
+  - `[MOD]` = Código del módulo:
+    - `GEN` → Generales
+    - `TRD` → Trading
+    - `CAP` → Capital y Finanzas
+    - `REF` → Reflexiones Personales
+    - `SAL` → Salud y Bienestar
+    - `HIS` → Históricas
+    - `GEO` → Geopolítica
+    - `ECO` → Económica
+  - `XXX` = Número correlativo sin repetir
+
+### 📌 Ejemplo de Título
+```markdown
+## MEM-TRD-001 | 2025-04-30 - Primer Trade Documentado
+```
+
+
+Este esquema asegura orden, trazabilidad y futuras conexiones entre módulos, incluso en versiones automatizadas.

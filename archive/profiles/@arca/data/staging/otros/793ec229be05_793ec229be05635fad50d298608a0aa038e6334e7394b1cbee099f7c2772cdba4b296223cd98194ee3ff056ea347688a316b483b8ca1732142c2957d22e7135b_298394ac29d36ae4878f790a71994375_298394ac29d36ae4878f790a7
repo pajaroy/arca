@@ -1,0 +1,29 @@
+# 🧠 Sprint 2.3 – Integración de Idea Base Unificada
+
+📅 Inicio: 2025-05-23  
+📅 Cierre estimado: 2025-05-25  
+👤 Responsable: Santi / pájaro  
+🔖 Estado: En curso  
+📦 Versión destino: v0.3.0-dev
+
+
+## 📁 Alcance
+
+- Archivar versiones anteriores:
+  - `idea_base.md`
+  - `idea_base_conciencia_ia.md`
+- Integrar como principal:
+  - `idea_base_unificada.md`
+- Documentar la integración:
+  - `README.md` en carpeta `docs/idea_base/`
+  - `changelog.md` para seguimiento de cambios
+- Automatizar integración futura de ideas base
+
+
+## 🛠️ Próximos pasos
+
+- [ ] Ejecutar scripts de normalización
+- [ ] Registrar cambios
+- [ ] Planificar escalado hacia IA modular (`memory_graph`, `reflection_engine`)
+
+📐 Este sprint fue ejecutado según la metodología vigente: `metodologia_agregado_archivos.md` v8 (2025-05-22)

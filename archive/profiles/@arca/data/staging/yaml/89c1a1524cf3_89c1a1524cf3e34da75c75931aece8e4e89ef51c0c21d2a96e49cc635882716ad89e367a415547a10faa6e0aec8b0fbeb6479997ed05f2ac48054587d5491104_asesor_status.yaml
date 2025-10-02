@@ -1,0 +1,16 @@
+# Estado Interno del Módulo asesor-IA
+updated: 2025-06-01
+
+estado_general: activo
+deepseek:
+  online: true
+  modo: tech_mode=strict
+gpt:
+  online: true
+  modo: estructura
+último_debate: 2025-06-01
+último_conflicto: ninguno
+versión_operativa: 1.0
+propuestas_pendientes:
+  - sincronización doble nodo
+  - validación modulo_cli

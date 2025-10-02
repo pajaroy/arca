@@ -1,0 +1,127 @@
+
+# Sprint 2.5: Auditoría estructural ALMA_RESIST
+
+## Objetivo
+Reorganizar, limpiar y optimizar la estructura documental del proyecto ALMA_RESIST, asegurando el cumplimiento total de convenciones internas.
+
+## Fase 1: Preparación
+- [x] Crear branch o copia local (`sprint_2.5_auditoria`)
+- [x] Realizar backup completo (`zip` o similar)
+- [x] Leer y repasar metodología de sprints (`metodologia_sprints_v2.md`)
+
+## Fase 2: Eliminación de redundancias
+- [x] Eliminar carpetas vacías o innecesarias:
+  - [x] `backup_metadata/`
+  - [x] `backup_linked_to/`
+  - [x] `backup_snakecase/`
+  - [x] `commands/`
+  - [x] `venv/`
+- [x] Consolidar pruebas:
+  - [x] Mover contenido útil de `testing/` a `tests/`
+  - [x] Eliminar `testing/` y `test_kits/`
+- [x] Unificar auditorías:
+  - [x] Trasladar contenido de `docs/auditorias/` a `logs/auditorias/`
+  - [x] Eliminar carpeta vacía (`docs/auditorias/`)
+
+## Fase 3: Corrección de estructura documental
+- [x] Corregir nombres incorrectos:
+  - [x] Renombrar `docs/resgistros/` a `docs/registros/`
+  - [x] Renombrar `logs_histo╠üricos/` a `logs_historicos/`
+- [ ] Aplicar `snake_case` uniforme en todos los archivos
+- [x] Verificar y corregir prefijo de versionado (`ideas_base_legacy` → `v0.0.0.0_legacy`)
+- [x] Reubicar archivos clave:
+  - [x] `CONTEXT.md` → `docs/introduccion/context.md`
+  - [x] `version.md` → `docs/introduccion/version.md`
+- [ ] Crear o actualizar `README.md` en cada carpeta principal
+
+## Fase 4: Validación de metadatos YAML
+- [ ] Añadir o corregir bloque YAML `frontmatter` en todos los `.md` importantes
+  - Campos obligatorios:
+    - [ ] `module`
+    - [ ] `type`
+    - [ ] `status`
+    - [ ] `created`
+- [ ] Ejecutar script de validación YAML (si aplica)
+
+## Fase 5: Organización modular de carpetas
+- [ ] Organizar documentación dentro de `docs/` por módulos claros:
+  - [ ] `introduccion/`
+  - [ ] `arquitectura/`
+  - [ ] `metodologias/`
+  - [ ] `control/` (auditorías, bitácoras)
+  - [ ] `utilidades/`
+- [ ] Consolidar y ordenar carpetas cronológicamente dentro de `versiones/`
+- [ ] Trasladar respaldos relevantes a `archive/`
+
+## Fase 6: Automatización y Scripts
+- [ ] Centralizar scripts y herramientas:
+  - [ ] Mover automatizaciones de otras carpetas a `scripts/`
+  - [ ] Actualizar `README.md` en `scripts/`
+
+## Fase 7: Control de calidad y revisión final
+- [ ] Ejecutar revisión cruzada:
+  - [ ] Verificación manual de estructura
+  - [ ] Validar checklist con script automático (si aplica)
+- [ ] Generar árbol visual actualizado (`tree`)
+- [ ] Realizar commit detallado describiendo cambios realizados
+- [ ] Actualizar `CHANGELOG.md` con acciones del Sprint 2.5
+
+## Fase 8: Cierre del Sprint
+- [ ] Solicitar revisión técnica interna o externa
+- [ ] Documentar aprendizajes o ajustes metodológicos
+- [ ] Integrar cambios definitivos a rama principal
+- [ ] Comunicar cierre del Sprint 2.5 al equipo
+
+
+
+## 📌 Principios rectores
+
+- **Minimalismo estructural:** menos carpetas, más significado. Toda redundancia debe eliminarse o fusionarse.
+- **Modularidad estricta:** cada carpeta/documento debe responder a una función, no a una ocurrencia caótica.
+- **Nombrado determinista:** los nombres deben permitir inferir su función y nivel jerárquico sin abrir los archivos.
+- **Versionado semántico:** ningún archivo o carpeta sin una razón de versión clara debe sobrevivir.
+- **YAML como contrato semántico:** todo archivo Markdown relevante debe iniciar con metadatos YAML claros, válidos y coherentes.
+- **Separación de contextos:** documentación no es código, código no es bitácora, bitácora no es auditoría. Cada tipo de contenido tiene su lugar y reglas.
+
+
+## 🧭 Criterios de éxito
+
+- Estructura final reduce el número total de carpetas innecesarias sin pérdida de significado.
+- Todos los `.md` clave tienen un bloque YAML válido con al menos los campos: `module`, `type`, `status`, `created`.
+- Los `README.md` existen en todas las carpetas de primer y segundo nivel con explicación funcional del contenido.
+- El árbol de carpetas puede visualizarse de forma clara en una sola pantalla (máximo 3 niveles).
+- Se puede ejecutar un script y validar que no hay archivos mal ubicados, sin prefijos, ni carpetas vacías.
+
+
+## ⚠️ Errores a evitar
+
+- Reorganizar sin respaldo previo.
+- Borrar contenido sin verificar si es redundante o sólo mal ubicado.
+- No dejar trazabilidad de los cambios: todo cambio debe ser registrado en `CHANGELOG.md` y el commit debe ser descriptivo.
+- Romper rutas relativas usadas en scripts, si aún no fueron modularizadas.
+
+
+# 🧩 Apéndice para Auditoría Técnica Futura – Sprint 2.6 o superior (2025-05-25)
+
+Este apéndice documenta ideas de mejora y expansión para futuras auditorías estructurales o técnicas dentro de ALMA_RESIST, basadas en la experiencia del Sprint 2.5.
+
+## 🔧 Propuestas de mejora para `validate_docs.py`
+
+- **Autocompletado de YAML faltante:** Opción `--fix-missing` para insertar un bloque mínimo si no existe.
+    
+- **Validación de nombre de archivo:** Comprobar que el nombre del archivo `.md` siga `snake_case`.
+    
+- **Salida estructurada JSON:** Agregar opción `--json` para integración con CI/CD o IA.
+    
+- **Generación de reporte Markdown:** Crear `docs/reportes/validacion_sprint_X.md` al finalizar la validación.
+    
+- **Validación cruzada de ubicación real del archivo con su campo** `**module**`**.**
+    
+
+## 🧠 Oportunidades para extensión IA
+
+- **Análisis semántico del frontmatter**: Sugerir automáticamente cambios si el módulo, tipo o estado no coinciden con el contenido.
+    
+- **Clasificación automática de archivos nuevos sin YAML.**
+    
+- **Sugerencias de mejora estilística para documentos `.md` incompletos o con errores.

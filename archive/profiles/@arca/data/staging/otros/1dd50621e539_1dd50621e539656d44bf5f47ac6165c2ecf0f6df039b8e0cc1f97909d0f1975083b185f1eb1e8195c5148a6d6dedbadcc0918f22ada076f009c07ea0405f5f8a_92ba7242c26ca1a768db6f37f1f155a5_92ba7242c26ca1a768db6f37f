@@ -1,0 +1,23 @@
+# 📚 Interdependencias entre Módulos – ALMA LIBRE
+
+Este documento registra las dependencias lógicas y funcionales entre los distintos módulos del sistema ALMA LIBRE. Su propósito es evitar ciclos, garantizar trazabilidad y coordinar correctamente los flujos de datos y funciones entre módulos.
+
+
+## ⚙️ Formato de comunicación
+
+Todos los módulos deben comunicarse a través de:
+- Archivos `.json`, `.yaml` o `.md`
+- Funciones importables o scripts por CLI
+- Nunca acceder directamente a variables internas de otro módulo
+- Usar rutas relativas a `MODULOS/` y `BITACORA_CENTRAL/`
+
+
+## 🧪 Ejemplo de dependencia bien estructurada
+
+```python
+# CLI Assistant usando Alma_Loader como dependencia
+from Alma_Loader.src.loader import search_vector_db
+
+resultados = search_vector_db("estrategia BTC")
+```
+

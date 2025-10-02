@@ -1,0 +1,35 @@
+
+## 🎯 Objetivo
+Crear un script único en Python llamado `alma_sync.py` que unifique todas las funciones operativas del sistema ALMA LIBRE.
+
+## 🛠️ Funcionalidades que debe incluir:
+
+### 1. `read`
+- Lee memorias desde `memorias.db`
+- Filtros: `--bloque`, `--tipo`, `--estado`
+
+### 2. `write`
+- Crea nuevas memorias desde terminal
+- Campos requeridos: `--titulo`, `--tipo`, `--bloque`, `--seccion`, `--contenido`
+- Opcional: `--etiquetas`, `--version`, `--estado`
+
+### 3. `validate`
+- Verifica:
+  - Títulos duplicados
+  - Secciones duplicadas dentro del mismo bloque
+  - Campos obligatorios vacíos
+  - Falta de versión o estado
+
+### 4. `backup`
+- Crea un `.zip` con:
+  - `memorias.db`
+  - `Prompt actual`
+  - `README`
+  - `CHANGELOG`
+- Guarda con nombre: `backup_YYYY-MM-DD_HHMM.zip`
+
+## 📁 Extras
+- Estructura limpia de funciones separadas
+- Uso de `argparse` para subcomandos
+- Comentarios claros por sección
+- Modularidad para agregar `gui` o `ollama` más adelante

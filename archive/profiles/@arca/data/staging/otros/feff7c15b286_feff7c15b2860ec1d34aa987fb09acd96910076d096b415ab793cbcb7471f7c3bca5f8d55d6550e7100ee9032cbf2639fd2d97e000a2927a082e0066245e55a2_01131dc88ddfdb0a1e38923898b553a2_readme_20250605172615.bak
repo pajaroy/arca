@@ -1,0 +1,21 @@
+# 📄 Contratos JSON – ALMA_RESIST
+
+Esta carpeta contiene los contratos de datos utilizados por el servidor LLM del proyecto ALMA_RESIST.
+
+## Archivos
+
+- `schema_prompt.json`: Define la estructura esperada del prompt enviado al endpoint `/responder`.
+- `schema_respuesta.json`: Define la estructura de la respuesta devuelta por el servidor, incluyendo metadatos del modelo.
+
+## Propósito
+
+Estos contratos permiten:
+
+- Validación estructural automática
+- Testing independiente de la API
+- Evolución segura del sistema
+- Integración con clientes externos
+
+## Especificaciones
+
+Todos los esquemas siguen el estándar **JSON Schema Draft-07**.

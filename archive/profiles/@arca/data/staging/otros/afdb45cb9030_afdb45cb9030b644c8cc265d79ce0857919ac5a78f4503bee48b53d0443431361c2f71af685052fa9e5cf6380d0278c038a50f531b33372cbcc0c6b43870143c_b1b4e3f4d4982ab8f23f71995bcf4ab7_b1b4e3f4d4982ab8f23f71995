@@ -1,0 +1,9 @@
+# 🧪 testing/
+
+Esta carpeta contiene pruebas manuales y utilitarias para verificar el correcto funcionamiento del sistema ALMA_RESIST.
+
+## 📁 Estructura
+
+- `cli/`: Pruebas manuales para la interfaz de línea de comandos.
+- `utils/`: Scripts de validación y testing de automatizaciones.
+

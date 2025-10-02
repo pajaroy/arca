@@ -1,0 +1,91 @@
+.
+├── CLI
+├── Documents
+│   ├── Arquitectura_Base
+│   │   ├── Arquitectura_Base.md
+│   │   └── README.md
+│   ├── Contexto
+│   ├── Fix_Descripcion
+│   │   └── README.md
+│   ├── Fix_Estructura
+│   │   └── README.md
+│   ├── Fix_Hash
+│   │   └── README.md
+│   ├── Fix_Historial
+│   │   ├── Prompt_Fix_Historial
+│   │   │   ├── Prompt_Fix_Historial.yaml
+│   │   │   └── README.yaml
+│   │   ├── README.md
+│   │   └── README.yaml
+│   ├── Fix_Last_Modified
+│   │   ├── Caracteristicas_y_Funcionamiento
+│   │   │   ├── Caracteristicas_y_Funcionamiento.md
+│   │   │   └── Caracteristicas_y_Funcionamiento.yaml
+│   │   ├── Prompt_Fix_Last_Modified
+│   │   │   └── Prompt_Fix_Last_Modified.md
+│   │   └── README.md
+│   ├── Fix_LinkedTo
+│   │   └── README.md
+│   ├── Fix_Responsable
+│   │   ├── Prompt_Fix_Responsable
+│   │   │   ├── Prompt_FiX_Responsable.md
+│   │   │   ├── Prompt_Fix_Responsable.yaml
+│   │   │   ├── README.md
+│   │   │   └── README.yaml
+│   │   ├── README.md
+│   │   └── README.yaml
+│   ├── Fix_Schema
+│   │   └── README.md
+│   ├── Fix_Tags
+│   │   └── README.md
+│   ├── Fix_Tipo
+│   │   ├── Prompt_Fix_Tipo_v0.1.0
+│   │   │   ├── Prompt_Fix_Tipo_v0.1.0.md
+│   │   │   └── Prompt_Fix_Tipo.yaml
+│   │   └── README.md
+│   ├── Fix_Version
+│   │   └── README.md
+│   ├── orden_optimo.md
+│   └── README.md
+├── README.md
+├── README.yaml
+├── Src
+│   ├── Fix_Descripcion
+│   │   └── README.md
+│   ├── Fix_Estructura
+│   │   └── README.md
+│   ├── Fix_Hash
+│   │   └── README.md
+│   ├── Fix_Historial
+│   │   ├── Fix_Historial.py
+│   │   ├── README.md
+│   │   └── README.yaml
+│   ├── Fix_Last_Modified
+│   │   ├── Fix_Last_Modified.py
+│   │   └── README.md
+│   ├── Fix_LinkedTo
+│   │   └── README.md
+│   ├── Fix_Responsable
+│   │   ├── fix_responsable.py
+│   │   ├── README.md
+│   │   └── README.yaml
+│   ├── Fix_Schema
+│   │   └── README.md
+│   ├── Fix_Tags
+│   │   └── README.md
+│   ├── Fix_Tipo
+│   │   ├── Fix_Tipo.py
+│   │   └── README.md
+│   ├── Fix_Version
+│   │   └── README.md
+│   └── README.md
+├── Templates
+│   ├── metadata_template.md
+│   ├── Metadata_Template.yaml
+│   └── README.md
+├── Tests
+│   └── README.md
+├── tree_Fix_Metadata.txt
+└── Tree_Fix_Metadata.txt
+
+35 directories, 54 files

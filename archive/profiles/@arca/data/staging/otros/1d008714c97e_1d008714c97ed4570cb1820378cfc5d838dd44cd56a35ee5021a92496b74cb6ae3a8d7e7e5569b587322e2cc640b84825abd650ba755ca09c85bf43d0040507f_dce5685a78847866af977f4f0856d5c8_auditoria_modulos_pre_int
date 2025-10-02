@@ -1,0 +1,39 @@
+
+# 📋 Auditoría Técnica de Módulos Previos a Integración en ALMA_RESIST v3
+
+Este documento evalúa los módulos existentes recuperados en `/MODULOS/`, indicando su propósito actual, potencial de integración a ALMA_RESIST y los pasos necesarios para adaptarlos.
+
+
+## ✅ 2. Alma_Monitor
+
+**Función actual:** Logs, visualización de prompts/respuestas, posiblemente rastreo de reflexión.
+
+**Propuesta de integración:**
+- Convertir en `src/monitor/` como auditor visual de outputs IA
+- Opcional: modo interactivo tipo dashboard local
+
+**Checklist de adaptación:**
+- [ ] Redirigir logs de reflexión desde `reflection_engine.py`
+- [ ] Crear `monitor/reflection_auditor.py`
+- [ ] Conectar con `test_ethics.py` para trazabilidad ética
+
+
+## ✅ 4. validador_duplicados
+
+**Función actual:** Prevención de duplicación de textos o embeddings en memoria
+
+**Propuesta de integración:**
+- Módulo `src/core/deduplicator.py`
+- Llamado cada vez que se guarda nuevo fragmento en memoria
+
+**Checklist de adaptación:**
+- [ ] Integrar en `memoria_saver.py` como función previa al guardado
+- [ ] Crear test: `test_deduplicator.sh`
+- [ ] Opcional: ejecutar en `alma_wizard --optimize`
+
+
+## 🧠 Conclusión
+
+Los módulos existentes pueden ser reutilizados sin reescribirlos desde cero. Con pequeñas adaptaciones y estandarización de rutas + cifrado + contratos YAML, pueden convertirse en el núcleo operativo real de ALMA_RESIST.
+
+> "Lo simbiótico no se impone: se acopla. Cada módulo aquí es un nervio potencial de ALMA."

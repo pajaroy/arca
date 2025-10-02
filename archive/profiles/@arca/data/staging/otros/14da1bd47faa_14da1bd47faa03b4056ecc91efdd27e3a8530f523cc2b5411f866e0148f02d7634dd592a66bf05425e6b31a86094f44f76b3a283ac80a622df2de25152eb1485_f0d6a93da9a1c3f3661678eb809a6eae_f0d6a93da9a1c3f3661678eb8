@@ -1,0 +1,26 @@
+para q# 🗺️ Roadmap – ALMA_LOADER v3.0.3
+
+Versión enfocada en incorporar seguridad, manejo robusto de errores, preparación para API REST autenticada y mayor modularidad.
+
+
+## 🌐 Fase B – API REST con Versionado y Modularización
+
+- [x] Cambiar todos los endpoints a prefijo `/v1/`.
+- [x] Ampliar diseño para modularización por área: `/v1/trading`, `/v1/cultivo`, etc.
+- [x] Planificar integración con `OAuth2` o `JWT`.
+- [x] Incluir `owner_id` en el cuerpo de `POST /memorias`.
+- [x] Preparar compatibilidad con `openapi-generator`.
+
+
+## 🧩 Fase D – Integraciones y Refactor técnico
+
+- [ ] Crear archivo independiente `hook_manager.py` y desacoplar del core.
+- [ ] Comenzar preparación de Dockerfile y `docker-compose.yaml`.
+- [ ] Evaluar Redis como cache semántico (`query → resultados`).
+- [ ] Planificar migración de grafo a Neo4j para relaciones complejas.
+
+
+- [ ] hacer resumen de version y agregarlo al whitepaper
+
+> Esta versión marca el inicio de un enfoque seguro, desacoplado y preparado para escalar profesionalmente el sistema.
+

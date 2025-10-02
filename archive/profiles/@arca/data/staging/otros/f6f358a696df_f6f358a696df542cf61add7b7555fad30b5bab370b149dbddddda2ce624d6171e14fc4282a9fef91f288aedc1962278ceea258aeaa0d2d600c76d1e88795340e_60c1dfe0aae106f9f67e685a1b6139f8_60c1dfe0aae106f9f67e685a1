@@ -1,0 +1,38 @@
+# 🧰 Registro de Herramientas Activadas – Sistema ALMA LIBRE
+
+Este documento registra todas las herramientas adoptadas dentro del sistema ALMA LIBRE, incluyendo su función, estado de adopción, fecha de inicio y observaciones clave. Su propósito es dar trazabilidad, facilitar futuras migraciones, y mantener coherencia técnica y estratégica en la evolución del sistema.
+
+
+## ✅ Herramientas Activas (Base Estratégica)
+
+### 1. Obsidian (con plugins)
+- **Función**: Estructura principal del sistema ALMA LIBRE. Almacena módulos, cuadernos digitales, bitácoras y plantillas.
+- **Uso**: Modularidad, backlinks, control de versiones, integración futura con GPT.
+- **Estado**: Activo
+- **Observaciones**: Versión paga; plugins clave: `Dataview`, `Text Generator`, `Outliner`, `Kanban`.
+
+### 2. ChatGPT Plus (GPT-4.5)
+- **Función**: Copiloto principal de razonamiento contextual y planificación.
+- **Uso**: Redacción de memorias, resumen de actividades, asistencia profunda.
+- **Estado**: Activo
+- **Observaciones**: Se emplea tanto en sesiones sueltas como para generar módulos internos.
+
+### 3. NotebookLM
+- **Función**: IA contextual por cuaderno/proyecto.
+- **Uso**: Exploración semántica, QA por área, resúmenes largos.
+- **Estado**: Activo
+- **Observaciones**: Se mantiene un notebook por módulo (trading, cultivo, programación, fondo).
+
+### 4. DeepSeek / DeepSeek-Coder
+- **Función**: Asistente de generación y revisión de código.
+- **Uso**: Desarrollo de scripts, validadores, automatizaciones.
+- **Estado**: Activo
+- **Observaciones**: Se utiliza especialmente para los módulos `alma_loader`, `validador_semántico.py`, etc.
+
+
+## 🧭 Próximos pasos sugeridos
+- [ ] Vincular Tana con contenidos derivados de Obsidian (experimentación)
+- [ ] Configurar LlamaIndex conectado a carpetas ALMA
+- [ ] Testeo de LM Studio con markdown reales de ALMA
+- [ ] Evaluar exportaciones automáticas de Obsidian → Notion
+

@@ -1,0 +1,46 @@
+version: "0.1.0"
+title: "Contexto Base de ALMA_CLEANER"
+uuid: "REEMPLAZAR_POR_UUID"
+tipo: "contexto"
+descripcion: >
+  ALMA_CLEANER es el módulo centralizado encargado de la limpieza, validación, normalización
+  y gestión de metadatos en todos los archivos críticos del sistema ALMA_RESIST. 
+  Su objetivo es asegurar que cada archivo, script, documento o configuración mantenga
+  integridad estructural, trazabilidad verificable y memoria histórica auditable
+  por humanos y agentes IA.
+
+  Comandado por el agente KAEL (auditor principal), ALMA_CLEANER es la puerta de entrada
+  y control para cualquier flujo de datos, migración de scripts, y mantenimiento estructural
+  dentro del ecosistema ALMA_RESIST. Facilita la interoperabilidad entre agentes (Emma, Alma, Centralesis, etc.)
+  y permite establecer protocolos claros para la colaboración, revisión y evolución de todo el sistema.
+
+  En el futuro, ALMA_CLEANER evolucionará hacia un framework modular, capaz de integrarse con cualquier
+  entorno de desarrollo (CLI, notebooks, pipelines automatizados), gestionando logs, hashes, responsables
+  y cambios en tiempo real, asegurando gobernanza profesional y autonomía progresiva.
+
+estado: "draft"
+responsable: ["Bird", "KAEL"]
+tags: ["contexto", "auditoría", "cleaner", "kael", "alma_resist", "memoria", "modularidad", "trazabilidad"]
+estructura: 
+  - gestión centralizada de metadatos
+  - validación automática de integridad y formato
+  - generación y control de logs auditables
+  - manejo y actualización de responsables/usuarios
+  - interoperabilidad IA-humano y entre agentes
+  - soporte para historial, hashes, linked_to y campos críticos
+linked_to: []
+hash_verificacion: "sha256:pending"
+historial:
+  - fecha: "2025-07-09T00:00:00Z"
+    descripcion: "Contexto base creado por Bird y diseñado para comandancia de KAEL."
+last_modified: ""
+last_modified_by: ""
+created_at: "2025-07-09T00:00:00Z"
+created_by: "Bird"
+proceso_origen: "definicion_manual"
+input_data: []
+output_data: []
+comentarios: >
+  Este contexto sienta la base para todo el ciclo de vida documental y programático de ALMA_RESIST.
+  Ningún archivo crítico debe escapar de su control. Las futuras versiones integrarán validadores
+  automáticos, integración con pipelines CI/CD, y reportes auto-generados para auditoría interna.

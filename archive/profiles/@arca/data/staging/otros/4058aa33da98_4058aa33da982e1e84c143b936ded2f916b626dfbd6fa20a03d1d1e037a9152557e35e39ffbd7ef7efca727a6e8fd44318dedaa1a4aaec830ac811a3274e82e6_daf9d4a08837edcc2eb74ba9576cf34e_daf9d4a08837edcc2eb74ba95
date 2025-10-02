@@ -1,0 +1,24 @@
+# ⚙️ Estado del Asistente IA – ALMA_RESIST
+
+---
+
+## 🧠 Estado General
+- **Estado:** ACTIVO
+- **Modo de operación:** Local (servidor Mistral)
+
+## 🔌 Backend Actual
+- **Modelo LLM:** Mistral 7B – `text-generation-webui`
+- **Servidor LLM:** `llm_server` versión 0.2.1-beta
+- **Script de integración:** `resumen.py` versión 0.3
+
+## 🕒 Última actualización
+- **Fecha:** 2025-05-29
+- **Usuario:** Santiago Calvo (`bird@parrot`)
+- **Evento:** Activación inicial y estructura base configurada
+
+## 📂 Ruta de trabajo
+- `ALMA_RESIST/control_central/ia_asistente/`
+
+---
+
+> 🧩 Este archivo se actualiza manualmente o desde CLI. Puede usarse para diagnóstico automático en futuras versiones del módulo `cli_cleaner`.

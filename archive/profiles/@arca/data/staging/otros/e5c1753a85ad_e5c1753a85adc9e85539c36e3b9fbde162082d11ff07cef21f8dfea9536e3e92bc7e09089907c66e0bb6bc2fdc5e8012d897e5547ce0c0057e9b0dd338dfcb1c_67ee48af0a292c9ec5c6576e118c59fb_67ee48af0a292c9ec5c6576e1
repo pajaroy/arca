@@ -1,0 +1,31 @@
+
+# 🧠 Diagnóstico del Sprint 2.6 – Módulo `llm_server`
+
+Fecha: 2025-05-28  
+Versión base: v0.0.0.5
+
+
+## 🧪 Tests
+
+### Archivos detectados:
+- ✅ `test_main.py`
+- ✅ `test_transport_layer.py`
+- ✅ `test_model_wrapper.py`
+
+### Estado:
+- ⚠️ Estructura general correcta, pero no se encontró ejecución ni resultados de `pytest`
+- ❌ No hay mocks reales definidos para inputs de modelo
+- ❌ No hay test de integración end-to-end aún
+
+
+## 🧩 Elementos críticos que aún faltan para cerrar Sprint 2.6
+
+- [ ] `scripts/validate_docs.py` y `fix_metadata.py`
+- [ ] `scripts/run_auditoria_automatica.sh`
+- [ ] Prompt de prueba funcional (`ask_example.sh` o vía CLI)
+- [ ] Log interno encriptado (con `log_crypto.py`)
+- [ ] Bitácora mínima generada con IA real desde buffer
+- [ ] Documentación final: README + changelog + `docs/decisiones_arquitectonicas.md`
+- [ ] Validación automática de contratos JSON (`schema_prompt.json`, etc.)
+
+

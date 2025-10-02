@@ -1,0 +1,37 @@
+---
+tipo: configuracion_json
+id: CONFIGURACION_JSON_2025-06-05_5dd5fe
+version: '1.0'
+formato: json
+modulo: ALMA_RESIST
+titulo: Schema Prompt
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:2c4d5605354e51ab83ffa238bae191805fdf0afd0ed2c270eab7eb080ffa194b
+---
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PromptRequest",
+  "description": "Contrato para entrada del endpoint /responder",
+  "type": "object",
+  "properties": {
+    "prompt": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000,
+      "description": "Texto del prompt enviado al modelo LLM",
+      "example": "\u00bfCu\u00e1l es el sentido de la vida?"
+    }
+  },
+  "required": [
+    "prompt"
+  ],
+  "additionalProperties": false
+}

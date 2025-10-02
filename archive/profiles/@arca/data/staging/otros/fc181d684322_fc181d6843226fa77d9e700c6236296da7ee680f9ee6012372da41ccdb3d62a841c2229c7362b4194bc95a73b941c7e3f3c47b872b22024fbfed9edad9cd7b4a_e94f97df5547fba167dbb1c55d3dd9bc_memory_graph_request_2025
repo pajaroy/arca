@@ -1,0 +1,59 @@
+---
+module: prompts/memory_graph_request
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🧠 Solicitud de Implementación – `memory_graph.py` – Sprint 2.6 – ALMA_RESIST
+
+## 🎯 Objetivo
+
+Implementar el módulo `memory_graph.py`, responsable de construir un grafo semántico de interacciones basado en los prompts y respuestas registradas por el servidor ALMA_RESIST. Este módulo servirá como base para el razonamiento reflexivo y búsqueda de memoria contextual.
+
+---
+
+## 📘 Requisitos
+
+### Clase: `MemoryGraph`
+
+- Métodos esperados:
+  - `add_node(concept: str) -> str`  
+    Agrega un nodo único al grafo semántico.
+  - `create_edge(from_concept: str, to_concept: str, weight: float = 1.0) -> None`  
+    Crea una relación ponderada entre dos conceptos.
+  - `get_related(concept: str, top_k: int = 5) -> list[str]`  
+    Recupera los conceptos más relacionados a partir de pesos acumulados.
+  - `export_graph(file_path: str) -> None`  
+    Exporta el grafo a JSON o GraphML para visualización futura.
+
+### Condiciones:
+- Guardar estructura internamente como diccionario `{ nodo: { nodo_vecino: peso } }`
+- Prevenir duplicados en nodos
+- Incrementar peso si la relación ya existe
+- Guardar el grafo en archivo local `memory_graph.json`
+- Preparado para extender a FAISS o embedding vectorial en el futuro
+
+---
+
+## 🧪 Ejemplo de uso
+
+```python
+from integration.memory_graph import MemoryGraph
+
+mg = MemoryGraph()
+mg.add_node("inteligencia")
+mg.add_node("adaptación")
+mg.create_edge("inteligencia", "adaptación", weight=0.9)
+mg.get_related("inteligencia")
+```
+
+---
+
+## 📎 Contexto
+
+- Sprint: 2.6 – LLM Server
+- Integra datos desde: `context_tracker`, `TransportLayer`
+- Fundamento del módulo de reflexión semántica de ALMA

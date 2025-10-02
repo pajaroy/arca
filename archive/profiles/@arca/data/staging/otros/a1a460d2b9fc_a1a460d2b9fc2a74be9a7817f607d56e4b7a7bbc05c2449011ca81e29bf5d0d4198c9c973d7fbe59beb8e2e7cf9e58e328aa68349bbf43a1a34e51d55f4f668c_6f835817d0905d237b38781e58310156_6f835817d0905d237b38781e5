@@ -1,0 +1,75 @@
+{
+  "id": "readme_alma_core_meta_v0.1.2",
+  "version": "0.1.2",
+  "fecha_actualizacion": "2025-06-17T00:00:00+00:00",
+  "autor": "Santi + ALMA",
+  "estado": "activo",
+  "anterior": "readme_alma_core_meta_v0.1.1.yaml",
+  "hash_actual": "sha256:pending",
+  "proposito": {
+    "descripcion": "Carpeta base de plantillas y estándares de metadatos para todo el ecosistema ALMA_RESIST/ALMA_CORE.\nAquí se definen los formatos, templates y manifestos estructurales que regulan la creación y\ndocumentación de módulos, carpetas y archivos clave del sistema. Punto de partida para auditar,\nversionar y mantener la coherencia de la arquitectura documental.\n",
+    "ultima_revision": "2025-06-17"
+  },
+  "linked_to": [
+    "archivo/README.yaml",
+    "config/README.yaml",
+    "control/README.yaml",
+    "control_central/README.yaml",
+    "core/README.yaml",
+    "docs/README.yaml",
+    "logs/README.yaml",
+    "meta/metadata_template/README.yaml",
+    "meta/module_template/README.yaml",
+    "meta/readme_template/README.yaml"
+  ],
+  "estructura": {
+    "metadata_template/": {
+      "descripcion": "Plantilla para definición y estandarización de metadatos estructurados.",
+      "contenido": [
+        {
+          "metadata_template.yaml": "Archivo base para copiar/adaptar como metadata en módulos."
+        },
+        {
+          "README.yaml": "Explicación y guía de uso del template."
+        }
+      ]
+    },
+    "module_template/": {
+      "descripcion": "Plantilla de definición modular. Estructura base de cualquier módulo del sistema.",
+      "contenido": [
+        {
+          "module.yaml": "Template YAML para módulos."
+        },
+        {
+          "README.yaml": "Manual de uso y estructura del template de módulo."
+        }
+      ]
+    },
+    "readme_template/": {
+      "descripcion": "Plantilla universal para crear README.yaml estandarizados en cualquier carpeta o módulo.",
+      "contenido": [
+        {
+          "README_template.yaml": "Archivo de plantilla base para README."
+        },
+        {
+          "README.yaml": "Explicación y buenas prácticas para su aplicación."
+        }
+      ]
+    },
+    "README.yaml": "Este archivo institucional; referencia general a los templates y guía de la carpeta meta."
+  },
+  "uso_basico": "1. Navegar a la subcarpeta correspondiente y copiar el template necesario.\n2. Adaptar los campos a la nueva carpeta/módulo/archivo.\n3. Mantener siempre el README actualizado y enlazado en 'linked_to' para trazabilidad IA y auditoría.\n4. Los cambios en plantillas deben quedar registrados en el changelog de esta carpeta.\n",
+  "notas_operativas": "- Toda modificación en un template debe ir acompañada de un cambio en este README y su changelog.\n- Los templates sirven de fuente de verdad para todo el sistema.\n- En caso de ampliar o agregar nuevas plantillas, seguir la misma estructura de subcarpetas y documentación.\n",
+  "changelog": [
+    {
+      "fecha": "2025-06-16",
+      "version": "0.1.1",
+      "cambios": "- README institucional inicial, referencia a templates y links circulares para navegación futura.\n"
+    },
+    {
+      "fecha": "2025-06-17",
+      "version": "0.1.2",
+      "cambios": "- Reestructura total de la carpeta meta: cada template tiene subcarpeta y README propio.\n- Añadidos campos de estructura, uso y notas operativas.\n- Linked_to actualizados para referencia directa a cada template.\n- Mejoras en descripción y guía de navegación documental.\n"
+    }
+  ]
+}

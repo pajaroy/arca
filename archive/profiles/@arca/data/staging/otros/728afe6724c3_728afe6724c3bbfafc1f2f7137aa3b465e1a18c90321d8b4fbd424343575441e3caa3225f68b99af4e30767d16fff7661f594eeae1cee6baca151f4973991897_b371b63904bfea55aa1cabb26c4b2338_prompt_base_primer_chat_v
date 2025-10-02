@@ -1,0 +1,78 @@
+
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5 (v0.3)
+
+## 🎯 Objetivo General
+
+Desarrollar un roadmap técnico ejecutable y justificado para implementar **ALMA_RESIST**, un sistema modular offline con IA local, basado en:
+
+- Soberanía tecnológica total (sin nubes, sin telemetría).
+- Privacidad radical (logging encriptado, sin conexión).
+- Mantenibilidad humana (1 desarrollador + IA como copiloto).
+- Trabajo diario: 10 hs por día promedio.
+
+
+## 🔄 Metodología de Desarrollo
+
+- **Iterativa**: roadmap en sprints semanales (3 a 6 meses)
+- **TDD**: test unitario antes de implementación
+- **Documentación embebida**: Google-style docstrings
+
+
+## 🧪 Qué debe generar GPT-4.5
+
+### 1. Roadmap Técnico por Sprint (3–6 meses)
+
+> **Formato requerido: tabla markdown**
+| Sprint | Hito | Tareas Clave | Esfuerzo (horas) | Dependencias | Criterio de Éxito |
+|--------|------|--------------|------------------|--------------|--------------------|
+
+> **Prioridad:** Soberanía tecnológica y logging privado
+
+### 2. Checklists por Módulo (CLI, LLM, Loader)
+
+> Plantilla:
+```markdown
+- [ ] Comando `alma --help` muestra documentación embebida.
+- [ ] Sistema de errores con códigos (`E-102: Fallo en carga`).
+- [ ] CLI no ejecuta conexiones externas (modo offline verificado).
+```
+
+### 3. Diagrama de Dependencias Técnicas
+
+```mermaid
+graph TD
+    A[CLI] --> B[LLM]
+    B --> C[ALMA_LOADER]
+    C --> D[Autonomía Limitada]
+```
+
+### 4. Justificaciones Técnicas Críticas
+
+> **Decisión:** Usar SQLAlchemy para la DB  
+> **Razón:** Soporte offline + integración con backups cifrados
+
+> **Pregunta Crítica:** ¿Cómo evitar dependencia de APIs externas para logging?
+
+
+## 🖥️ Optimización para Hardware Limitado
+
+- Swap como RAM extendida
+- Carga parcial de modelo (paginación)
+- Desactivar caché de contexto
+- CLI "modo minimalista"
+
+
+## 🧩 Código Ejemplo Solicitado
+
+> Implementar función `cargar_modelo()` con manejo de errores + docstring
+
+
+# 📋 Changelog v0.3
+
+- ✅ Añadido entorno técnico detallado y obligatorio
+- ✅ Roadmap con formato de tabla markdown obligatorio
+- ✅ Ejemplos de checklist por módulo embebidos
+- ✅ Preguntas críticas que la IA debe responder
+- ✅ Justificaciones técnicas obligatorias por herramienta o elección
+- ✅ Validación por sprint con "criterio de éxito"
+- ✅ Reforzada prioridad de privacidad y autonomía

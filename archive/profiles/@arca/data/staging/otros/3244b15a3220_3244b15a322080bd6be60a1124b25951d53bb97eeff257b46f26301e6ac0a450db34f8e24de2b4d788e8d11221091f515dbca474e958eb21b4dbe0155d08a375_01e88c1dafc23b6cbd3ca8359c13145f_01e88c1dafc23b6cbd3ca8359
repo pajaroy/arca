@@ -1,0 +1,55 @@
+# ALMA_RESIST - README General
+
+Este repositorio contiene la arquitectura y documentación completa de **ALMA_RESIST**, una iniciativa modular y evolutiva que integra IA, automatización y análisis contextual para desarrollo de sistemas complejos.
+
+
+## 🧠 Funcionalidades de Integración
+
+La metodología actual incluye:
+
+- Validación de estructura y metadatos YAML.
+- Normalización automática a snake_case.
+- Corrección de campos `module`, `type`, `status`, `created`.
+- Ejecución automatizada con `integrar_nuevo_archivo.sh`.
+
+
+## 🧪 Metodologías Relevantes
+
+- `docs/01_methodologies/metodologia_agregado_archivos.md`: Define el flujo completo para incorporar un archivo nuevo en el sistema.
+- `docs/01_methodologies/metodologia_sprints_v2.md`: Guía de ejecución y cierre de sprints.
+- `docs/01_methodologies/metodologia_doc_ia_v2.md`: Reglas para estructuración documental semántica IA-compatible.
+
+
+## 📌 Última Versión
+
+Sprint actual: `Sprint_2.3_Correccion_Metadatos`  
+Metodología vigente: `metodologia_agregado_archivos_v8`  
+Estado: ✅ Cerrado y validado
+
+
+## 🤖 Futuras Integraciones
+
+- `alma-cli`: Utilidad para automatizar la integración desde línea de comandos.
+- `memory_graph_builder.py`: Vinculación semántica automática de documentos.
+- `reflection_engine`: Generación automática de análisis de impacto IA.
+- Soporte para campos inteligentes como `linked_to`, `context_tags`, `sha256`.
+
+
+## 📎 Apéndice – Validación y herramientas integradas (2025-05-23)
+
+
+## 🛠 Uso recomendado
+
+```bash
+bash scripts/validar_documentacion.sh
+```
+
+Alias sugerido para agilizar su ejecución:
+
+```bash
+alias alma_valida='bash ~/Alma/ALMA_RESIST/scripts/validar_documentacion.sh'
+```
+
+Agregalo a tu archivo `~/.bashrc` o `~/.zshrc` para uso persistente.
+
+

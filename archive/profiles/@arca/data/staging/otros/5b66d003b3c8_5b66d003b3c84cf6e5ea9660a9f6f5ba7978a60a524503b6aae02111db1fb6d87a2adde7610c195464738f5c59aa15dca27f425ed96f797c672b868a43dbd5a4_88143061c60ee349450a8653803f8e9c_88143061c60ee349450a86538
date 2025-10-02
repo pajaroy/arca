@@ -1,0 +1,3 @@
+# 📁 database/
+Almacena la base de datos principal en formato SQLite (`alma.db`).
+Esta carpeta también puede contener herramientas de migración o inicialización.

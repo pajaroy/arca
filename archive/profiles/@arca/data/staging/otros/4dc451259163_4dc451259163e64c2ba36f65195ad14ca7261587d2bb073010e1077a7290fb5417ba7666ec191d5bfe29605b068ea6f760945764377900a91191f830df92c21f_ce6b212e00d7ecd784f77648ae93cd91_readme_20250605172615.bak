@@ -1,0 +1,64 @@
+# Módulo `llm_server/` – ALMA_RESIST
+
+Este módulo representa el núcleo del servidor de lenguaje natural (LLM) dentro del sistema ALMA_RESIST. Se encarga de la carga de modelos, gestión de contexto, cifrado de logs y transporte de mensajes con IA local o remota.
+
+---
+
+## 🧱 Estructura de carpetas
+
+```
+llm_server/
+├── __init__.py
+├── main.py                  ← Punto de entrada del servidor FastAPI
+├── model_wrapper.py         ← Clase principal para interactuar con modelos LLM
+├── transport_layer.py       ← Manejo de solicitudes y respuestas con contexto
+├── integration/
+│   ├── context_tracker.py
+│   └── memory_graph.py
+├── utils/
+│   ├── log_crypto.py
+│   └── log_writer.py
+```
+
+---
+
+## 🧠 Funcionalidad principal
+
+- **Carga de modelos LLM locales** (ej. Mistral vía `llama.cpp`)
+- **Seguimiento de contexto conversacional**
+- **Encriptado/descifrado seguro de logs**
+- **Logging estructurado con firma**
+- **Orquestación de respuestas IA vía `transport_layer`**
+
+---
+
+## 🚀 Cómo iniciar el servidor
+
+```bash
+uvicorn core.llm_server.main:app --reload
+```
+
+---
+
+## 🧪 Cómo correr los tests
+
+```bash
+PYTHONPATH=. pytest tests/
+```
+
+---
+
+## 📋 Dependencias clave
+
+- `llama-cpp` (si aplica)
+- `fastapi`, `uvicorn`
+- `cryptography`
+- `pytest`
+
+---
+
+## 📦 Estado del módulo
+
+Versión: `0.0.0.4.1`  
+Mantenimiento: activo  
+Auditoría pendiente: sí (DeepSeek)

@@ -1,0 +1,57 @@
+# 📘 Metodología de Documentación para Humanos + IA – ALMA_RESIST (v1)
+
+📅 Versión: 1.0  
+📁 Archivo: metodologia_doc_ia_v1.md  
+🎯 Objetivo: Establecer un estándar de documentación que sea simultáneamente legible para humanos, y navegable, indexable y procesable por sistemas de IA como Alma.
+
+
+## 🧠 Fundamento
+
+La IA funciona mejor cuando la documentación:
+
+- Tiene **estructura explícita**
+- Usa **tags consistentes**
+- Declara **relaciones entre módulos**
+- Se puede leer como una base de datos viva
+
+Por eso se define el uso obligatorio del bloque `frontmatter` YAML.
+
+module: "core/cli"
+type: "core"          # core | external | tool | integration | draft
+domain: "infraestructura"   # general | cultivo | historia | ia | trading
+tags: ["CLI", "modularidad", "entrada"]
+status: "stable"      # in_progress | stable | deprecated
+linked_to: ["memoria", "resumen"]
+created: "2025-05-21"
+version: "0.2"
+
+## 🏷️ Campos requeridos
+
+| Campo       | Descripción técnica                                                        |
+|-------------|-----------------------------------------------------------------------------|
+| `module`    | Identificador único del módulo o documento                                  |
+| `type`      | Tipo de documento: núcleo, externo, herramienta, integración, etc.          |
+| `domain`    | Dominio funcional principal (ej: cultivo, historia, IA, trading)            |
+| `tags`      | Lista de palabras clave normalizadas                                        |
+| `linked_to` | Otros módulos relacionados                                                  |
+| `status`    | Estado del documento                                                        |
+| `version`   | Versión local del documento o módulo                                        |
+| `created`   | Fecha de creación                                                           |
+
+
+## 📘 Ejemplo completo
+
+```markdown
+
+# Loader – Núcleo de Carga de Modelo LLM
+
+Este módulo se encarga de inicializar, cargar y coordinar el modelo IA local utilizado por Alma...
+```
+
+
+## 🔄 Relación con otras metodologías
+
+- Requiere implementación dentro de: `estructura_modular_v2`
+- Afecta directamente a: `sprints_v2`, `auditoría_adr`, `interacción_ia`
+- Será utilizada en: `alma-cli`, `alma-loader`, `grafos_ia`
+

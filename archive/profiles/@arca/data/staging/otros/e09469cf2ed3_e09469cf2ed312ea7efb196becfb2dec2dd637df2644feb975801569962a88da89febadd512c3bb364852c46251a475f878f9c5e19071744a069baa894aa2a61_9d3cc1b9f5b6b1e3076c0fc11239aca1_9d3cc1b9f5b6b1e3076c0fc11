@@ -1,0 +1,13 @@
+
+# 📜 CHANGELOG – ALMA LIBRE v0.8.0
+
+🗓️ Fecha de inicio: 23 de abril de 2025  
+📦 Estado: Activa – en desarrollo continuo
+
+
+## 🧪 Tests Técnicos
+
+- `test_sync.py` funcional y validado con salida de base de datos + YAML
+
+
+🧠 ¡Esta versión es el salto al sistema ALMA real!

@@ -1,0 +1,64 @@
+id: prompt_contexto_seguimiento_inteligente_v0.1.0
+version: "0.1.0"
+tipo: "prompt_contexto"
+schema: "almaresist.prompt_contexto.v1"
+descripcion: |
+  Este prompt contextualiza el propósito y funcionamiento del módulo `seguimiento_inteligente`,
+  diseñado para registrar, sistematizar y escalar el control de cultivos de cannabis de forma
+  manual en una primera etapa, con proyección a automatización por sensores físicos conectados
+  vía Arduino u otras tecnologías.
+
+  El sistema comienza con una carga semanal de datos tomada desde medidores como el "Keep it Fresh 6 en 1"
+  y se estructura en YAML bajo un formato unificado por planta. A futuro se espera usar estos datos
+  para análisis automatizado, alertas inteligentes y control adaptativo del entorno de cultivo.
+
+objetivo_general: |
+  Permitir el registro estructurado, auditable y trazable de datos de cultivo (por planta),
+  en ciclos semanales, con foco en flexibilidad manual inicial y escalabilidad futura.
+
+estructura_datos:
+  frecuencia: semanal
+  entidad_base: planta
+  campos_estandar:
+    - id_planta (string, formato: cultivoXXX_pltYYY)
+    - nombre_visible (string, alias o etiqueta)
+    - fertilidad:
+        valor (float)
+        unidad (string, típicamente "µs/cm")
+    - humedad:
+        valor (float)
+        unidad (string, "%")
+    - luz:
+        valor (float)
+        unidad (string, "lux")
+    - estado_critico (bool)
+    - observaciones (string libre)
+
+template_base: |
+  - planta:
+      id_planta: cultivo004_plt001
+      nombre_visible: PLT-001
+      fertilidad:
+        valor: 0
+        unidad: "µs/cm"
+      humedad:
+        valor: 0
+        unidad: "%"
+      luz:
+        valor: 0
+        unidad: "lux"
+      estado_critico: true
+      observaciones: ''
+
+notas:
+  - Este template se puede duplicar por cada planta por semana.
+  - Los valores son ingresados manualmente al principio.
+  - Las observaciones permiten registrar eventos externos, síntomas o anomalías.
+  - La etiqueta `estado_critico` sirve como marcador de riesgo para futuras alertas IA.
+
+futuro:
+  - Validación automática vía schema en `meta/schema_seguimiento_inteligente.yaml`
+  - Recolección automática vía sensores y nodos físicos
+  - Análisis de evolución planta por planta
+  - Visualización temporal (dashboard por cultivo)
+

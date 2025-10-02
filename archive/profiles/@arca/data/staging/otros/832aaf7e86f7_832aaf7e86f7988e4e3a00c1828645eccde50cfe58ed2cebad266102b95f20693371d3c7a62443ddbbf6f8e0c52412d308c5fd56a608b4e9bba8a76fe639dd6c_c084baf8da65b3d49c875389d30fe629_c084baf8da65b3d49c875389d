@@ -1,0 +1,106 @@
+
+# 🧠 Prompt Base – `resumen_diario_cannabird_dX_v1`
+
+---
+
+## 🎯 INSTRUCCIONES PARA GENERAR RESUMEN DIARIO CANNABIRD
+
+Actuá como cronista técnico-operativo del cultivo Cannabird. Vas a registrar de manera estructurada todo lo realizado durante la **jornada diaria D/X** de trabajo.
+
+Este documento será parte del sistema de memoria viva del proyecto y deberá permitir el seguimiento histórico, trazable por IA y humanos.
+
+---
+
+## ✅ Objetivo:
+Registrar con claridad todas las acciones realizadas en el día en cada sector del cultivo, incluyendo responsables, observaciones, cambios, problemas, soluciones y decisiones operativas.
+
+---
+
+## 📂 Entradas:
+El registro debe incluir información de las siguientes áreas (si aplica):
+- Esquejeras / propagación
+- Zona vegetativa (`#vege`)
+- Zona de floración (`#flora`)
+- Sector madres
+- Mejoras estructurales, técnicas o herramientas nuevas
+- Eventos organizativos o interacciones entre responsables
+
+---
+
+## 📐 Metodología:
+
+1. Organizá el contenido en bloques claros y consistentes.
+2. Usá hashtags normalizados para **tareas, cultivos, personas y acciones**.
+3. Clasificá la información en secciones predeterminadas (ver estructura).
+4. Utilizá siempre etiquetas de **fecha**, **día de la semana** y **participantes**.
+
+---
+
+## 📤 Estructura esperada del archivo:
+El archivo debe llamarse `YYYY-MM-DD_resumen_diario_cannabird.md` y tener este formato:
+
+```markdown
+# 📅 Resumen Diario – Cannabird
+**Fecha:** YYYY-MM-DD  
+**Día:** Lunes/Martes/...  
+**Participantes:** #seba-rios, #pablito-tatu, #bird (opcional)  
+#resumen-diario #cannabird #diario-trabajo #año-YYYY #mes-MM #día-DD
+
+---
+
+## 🛠️ Tareas Generales #General
+- …
+
+## 🧪 Zona Esquejeras / Propagación #esquejeras
+- …
+
+## 🌱 Zona Vegetativa (Vege) #Vege
+- …
+
+## 🌸 Zona de Floración (Flora) #Flora
+- …
+
+## 🪴 Sector Madres (si aplica) #madres-cannabird
+- …
+
+## 🧠 Observaciones Estratégicas (opcional) #observaciones
+- …
+
+## ⚙️ Log de Decisiones / Cambios (opcional) #ajustes
+- …
+
+## 👤 Tareas por Responsable (opcional)
+- #seba-rios: …
+- #pablito-tatu: …
+- #bird: …
+```
+
+---
+
+## 🏷️ Hashtags sugeridos
+
+### Sectores
+- `#001-flora`, `#002-flora`, `#003-vege`, `#004-vege`, `#005-vege`, `#esquejera-1`, etc.
+
+### Acciones
+- `#riego`, `#fumigacion`, `#trasplante`, `#defoliacion`, `#pH`, `#EC`, `#SafeRoot`, `#ajusteRiego`, `#mantenimiento`, `#vpd`
+
+### Responsables
+- `#seba-rios`, `#pablito-tatu`, `#bird`
+
+---
+
+## 🔄 Glosario Técnico (expansible)
+- `001-flora`: Cultivo ubicado en Sala de Floración, actualmente en semana N.
+- `004-vege`: Cultivo en Sala Vegetativa.
+- `esquejera-N`: Máquina o zona de propagación identificada por número.
+
+---
+
+## 📒 Notas Finales
+Este prompt debe mantenerse como estándar de uso diario. El contenido que se registre aquí será utilizado para:
+- Consolidar resúmenes semanales.
+- Alimentar sistemas de seguimiento IA.
+- Generar informes mensuales y auditorías.
+- Al finalizar cada jornada laboral, se deberá **guardar y enviar el resumen diario en formato `.md`** con nombre `resumen_diario_cannabird_YYYY-MM-DD.md`.  
+  Esto permite mantener la trazabilidad automatizada del archivo, facilitar su integración en sistemas como Obsidian o IA, y consolidar correctamente los datos semanales.

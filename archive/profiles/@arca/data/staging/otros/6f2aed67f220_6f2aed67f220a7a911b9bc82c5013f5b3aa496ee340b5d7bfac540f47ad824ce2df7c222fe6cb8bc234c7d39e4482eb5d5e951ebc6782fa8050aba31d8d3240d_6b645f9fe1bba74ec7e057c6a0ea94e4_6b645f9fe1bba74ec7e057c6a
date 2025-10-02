@@ -1,0 +1,27 @@
+# 🧰 Comandos útiles del sistema ALMA_RESIST
+
+Este documento reúne comandos Bash y alias recomendados para el uso y mantenimiento del sistema.
+
+
+## 🔁 Actualización de metadatos
+
+```bash
+python3 scripts/fix_metadata.py --backup
+```
+
+
+## 🔍 Validación avanzada (estructura, tipo, estado, fechas)
+
+```bash
+python3 scripts/validate_docs.py --path ./docs --verbose
+```
+
+
+## 📁 Ubicación de scripts clave
+
+| Script                        | Propósito                                |
+|------------------------------|-------------------------------------------|
+| `scripts/validate_docs.py`   | Validación integral de metadatos          |
+| `scripts/fix_metadata.py`    | Corrección automática de metadatos        |
+| `scripts/force_snake_case_modules.py` | Normalización de nombres de módulos |
+| `scripts/validar_documentacion.sh` | Orquestador de validaciones y limpieza |

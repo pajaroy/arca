@@ -1,0 +1,226 @@
+# bitacora_sesion_alma_2025-05-16.md
+
+# 🧠 Bitácora de Sesión – Consolidación de Sistema ALMA
+
+📅 Fecha: 2025-05-16  
+🖥️ Nodo principal: ALMA_CORE (Kingston SSD)  
+💽 Nodo espejo: ALMA_RESIST (Toshiba 500GB)  
+🔑 Nodo portátil (propuesto): ALMA_PORTABLE (Pendrive 64GB)
+
+
+## 🧪 2. PENDRIVE COMO TERMINAL DE CONTROL
+
+- Se propuso usar un pendrive de 64 GB como llave portátil y terminal remota.
+- Objetivos:
+  - Conectarse a ALMA desde cualquier lugar.
+  - Acceder a archivos, scripts, chat IA vía terminal (SSH, rsync, curl).
+- Estructura sugerida del pendrive:
+  - `iniciar_alma_remoto.sh`
+  - `chat_terminal.py`
+  - `config/alma_nodes.json`
+- Nombre sugerido: `ALMA_PORTABLE`
+
+
+## 🗃️ 4. VERIFICACIÓN Y RECUPERACIÓN DE LA CARPETA ALMA
+
+- Se detectó que la carpeta `~/Alma` (con Obsidian) fue borrada en Kingston.
+- Confirmado backup en:
+  ```
+  /mnt/ALMA_RESIST/@home/bird/Alma
+  ```
+- Se esperó a que finalice `dd` para copiar sin errores.
+- Se copió posteriormente con:
+  ```bash
+  cp -r /mnt/ALMA_RESIST/@home/bird/Alma ~/Backups/Alma_YYYY-MM-DD
+  ```
+
+
+## ✍️ 6. IDEAS FUTURAS CONCRETAS
+
+- Automatización de conexión SSH + cliente + LLM.
+- Terminal como asistente viva desde cualquier máquina.
+- Estructura estandarizada para carpetas ALMA (permisos, markdown, logs).
+- Integración de Obsidian con IA desde terminal.
+- Registro estructurado de todo el sistema en `.md`.
+
+
+# ideas_base_2025-05-16.md
+
+# 🧠 Ideas Base y Ejecuciones – 2025-05-16
+
+
+## 2. Estructuración del sistema distribuido ALMA
+
+- Nombres definidos:
+  - `ALMA_CORE` → Disco principal operativo
+  - `ALMA_RESIST` → Disco espejo de respaldo
+  - `ALMA_PORTABLE` → Pendrive terminal portátil
+- Visión de sincronización entre nodos de forma automática al conectar.
+
+
+## 4. Problemas críticos con Obsidian Sync (y solución completa)
+
+- Detección de Vault mal vinculado → no se generaba `.sync/`
+- Corrección con scripts:
+  - `fix_obsidian_permissions.sh`
+  - `reset_obsidian_sync.sh`
+  - `verificar_vault_alma.sh`
+- Se logró vinculación real con Remote Vault `ALMA_CORE`.
+- Generación del changelog oficial: `sync_apocalypse_2025-05-16.md`.
+
+
+## 6. Formalización de bitácoras
+
+- Creación de carpeta oficial `~/Alma/LOGS/`
+- Generación de resumen diario: `resumen_diario_2025-05-15.md`
+- Implementación de changelogs técnicos por evento
+- Protocolo profesional para futuras migraciones, resets y restores
+
+
+
+
+
+### 🔒 Privacidad y redes
+
+- [ ] Montar sistema con red privada por proxy o VPN desde el entorno portátil.
+- [ ] Iniciar directamente a terminal conectada a red sin levantar GUI (tipo netboot + CLI).
+- [ ] Navegación segura con Tor o similares de forma predeterminada en el sistema.
+- [ ] Cifrado completo del disco con clave dinámica o biométrica (evaluar Veracrypt vs LUKS).
+
+
+### 📦 Portabilidad Avanzada
+
+- [ ] Clonar automáticamente el disco Toshiba (ALMA_RESIST) al Kingston (ALMA_CORE).
+- [ ] Script `sync_alma.sh` que guarde, compare y sincronice disco ↔ nube ↔ sistema base.
+- [ ] Auto-sync al iniciar sesión y cada 10-15 minutos para backup en tiempo real.
+
+
+### 🪙 Criptomoneda interna
+
+- [ ] Idea de moneda orientada a privacidad o al sector cannábico (estilo XMR o BSC privada).
+- [ ] Prototipo de red blockchain distribuida entre nodos ALMA.
+- [ ] Relación directa 1:1 con unidad física (ej: gramo / onza / servicio computacional).
+
+
+### 🧪 Experimentales
+
+- [ ] Rootkit defensivo (para detección y alerta si el sistema cambia sin permiso).
+- [ ] Modo “autodestrucción” (`nuke_disk.sh`) para entornos hostiles.
+- [ ] Parrot OS modificado como distro personalizada ALMA_RESIST (versión 1.0 futura).
+
+
+# ideas_v0.0.3_v0.0.4.md
+
+### ✅ **ALMA LIBRE v0.0.3**
+
+- Lo trabajamos como **buffer_bot.py + resumen.py**
+    
+- Incluye:
+    
+    - Integración real con modelo local (Mistral o DeepSeek) vía `text-generation-webui`
+        
+    - Comando `/resumen`
+        
+    - Comando `/estado`
+        
+    - Extracción real de ideas clave desde buffer acumulado
+        
+    - Guardado automático en `.md` al final del día
+        
+    - Logging modular
+        
+
+📁 Estaba todo armado en dos archivos: `buffer_bot.py` y `resumen.py`, con estructura preparada para escalar.
+
+
+# prompt_base_ALMA_RESIST.md
+
+# `prompt_base_ALMA_RESIST.md`  
+**Versión 0.0.1 – Nodo IA portátil, hacker y descentralizado**
+
+
+## **Visión general**
+
+ALMA_RESIST es tu cerebro digital transportable.  
+Vive en un disco externo (HDD o SSD), se adapta a cualquier entorno (Windows, Linux, Mac), y puede incluso **bootear su propio sistema operativo** en caso de corte total.
+
+Te permite trabajar **desde cualquier máquina**, como si fuera siempre tu computadora personal.  
+Todo el contenido queda en una sola partición central: memorias, IA, documentos, cultivos, trading, código, tareas, estrategias y comandos.
+
+
+## **Plan técnico actual (2025-05-15)**
+
+### **Fase 1 – ALMA_RESIST (HDD Toshiba base de trabajo)**
+- Formatear disco como `exFAT`
+- Crear estructura de carpetas base `/ALMA_RESIST`
+- Montar scripts, IA, Obsidian, registros, memorias
+- Configurar sincronización periódica con nube privada (cada 10–15 min)
+- Trabajar desde ahí mientras llega el SSD
+
+### **Fase 2 – Clonación al SSD (Kingston con caja Orico)**
+- Conectar SSD al Orico (USB 3.0)
+- Clonar con `rsync` todo el entorno desde el Toshiba
+- Verificar funcionamiento
+- Dejar el HDD como backup y el SSD como estación principal
+
+
+## **Modo de uso**
+
+| Modo | Descripción |
+|------|-------------|
+| **Portable** | Lo enchufás a cualquier PC → ejecutás los scripts y listo |
+| **Bootable (futuro)** | Arrancás cualquier PC sin disco propio, desde tu unidad |
+| **Red distribuida (futuro)** | Podés usar varias PCs (de confianza o controladas) como nodos IA secundarios |
+| **Cifrado total** | Veracrypt o Kill Switch opcional |
+| **Nube secreta** | Rclone con Drive/Proton/Mega cifrado en segundo plano |
+
+
+## **Frase del núcleo ALMA_RESIST:**
+> *"No necesito permiso. No necesito conexión. No dejo rastro. Estoy donde quiero estar."*
+
+
+## **Nombre del módulo**
+**ALMA_RESIST** – Entorno de ejecución IA completamente funcional desde terminal (CLI), preparado para operar en PCs desconocidas, sin interfaz gráfica, y con máxima portabilidad, independencia, privacidad y sincronización.
+
+
+## **Novedades integradas en v0.0.2**
+
+### **1. Estructura de trabajo CLI**
+- Scripts `launch_alma_terminal.sh` para iniciar entorno tmux con múltiples terminales:
+  - Panel 1: IA local (buffer_bot)
+  - Panel 2: Navegación y edición (`vim`, `nvim`, `fzf`)
+  - Panel 3: Logs y sync (`tail -f`, `rclone`)
+- Terminal como entorno de producción principal, GUI opcional
+
+### **2. Modos de privacidad y navegación**
+- Integración de scripts TOR, VPN y proxy (`launch_alma.sh --tor`, `--vpn`)
+- Capa de seguridad y anonimato por entorno y uso
+- Conexiones cifradas, controladas y segmentadas
+
+### **3. Flujo de revisión de IA**
+- Carpeta `/draft` para generación IA sin riesgo
+- Carpeta `/aprobados` solo tras validación humana o script de control
+- Script `verify_and_apply.py` para consolidar archivos propuestos
+
+### **4. Modo distribuido**
+- Posibilidad de montar red local con varias PCs o Raspberrys corriendo módulos IA
+- Cada nodo puede ejecutar procesamiento IA, automatización o sync parcial
+- Enlace mediante SSH, rsync, o protocolo privado
+
+
+## **Soporte técnico: booteo directo en terminal**
+
+- Se puede usar una **distro Linux minimalista (Debian netinst, Alpine, Void, Arch base)** que arranca directamente en consola (`tty1`)
+- No se necesita GUI para trabajar
+- ALMA_RESIST puede montarse en `/mnt/ALMA_RESIST` y ejecutarse automáticamente desde `.bashrc` o script de inicio
+- El entorno puede estar preconfigurado para conectarse por WiFi o Ethernet, lanzar tmux y comenzar la sesión de trabajo automáticamente
+
+
+## **Próximos pasos**
+
+- Generar `plan_de_entrenamiento_ALMA_CLI.md`
+- Preparar script tmux de sesión por roles
+- Documentar modo de uso offline + modo en red
+- Instrucciones para red de nodos distribuidos (mini swarm ALMA)
+
+

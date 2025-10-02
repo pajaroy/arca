@@ -1,0 +1,36 @@
+# 🗂️ Log Writer Module – Histórico de Versiones (Código + Markdown)
+
+Este directorio contiene las versiones del módulo `LogWriter`, tanto en formato `.py` como `.md` documentado.
+
+## 📄 Archivos incluidos
+
+- **v0.0.0.1**:
+  - Código fuente: `log_writer_v0.0.0.1.py`
+  - Documento `.md`: `log_writer_v0.0.0.1.md`
+  - 🔎 Primera versión funcional del logger. Incluye generación estructurada de eventos y escritura atómica.
+
+- **v0.0.0.2**:
+  - Código fuente: `log_writer_v0.0.0.2.py`
+  - Documento `.md`: `log_writer_v0.0.0.2.md`
+  - 🔎 Se mejora el manejo de archivos temporales. Se refactoriza la estructura interna.
+
+- **v0.0.0.3**:
+  - Código fuente: `log_writer_v0.0.0.3.py`
+  - Documento `.md`: `log_writer_v0.0.0.3.md`
+  - 🔎 Validación estricta de tipos en eventos y limpieza general del código.
+
+- **v0.0.0.4**:
+  - Código fuente: `log_writer_v0.0.0.4.py`
+  - Documento `.md`: `log_writer_v0.0.0.4.md`
+  - 🔎 Se añade variable de entorno `DEFAULT_LOG_DIR` para mayor flexibilidad.
+
+- **v0.0.0.5**:
+  - Código fuente: `log_writer_v0.0.0.5.py`
+  - Documento `.md`: `log_writer_v0.0.0.5.md`
+  - 🔎 Compatibilidad ampliada con sistemas Windows. Mejora de rotación y manejo de logs existentes.
+
+- **v0.0.0.6**:
+  - Código fuente: `log_writer_v0.0.0.6.py`
+  - Documento `.md`: `log_writer_v0.0.0.6.md`
+  - 🔎 Versión más madura del módulo. Corrección final de detalles en escritura y rotación. Listo para producción.
+

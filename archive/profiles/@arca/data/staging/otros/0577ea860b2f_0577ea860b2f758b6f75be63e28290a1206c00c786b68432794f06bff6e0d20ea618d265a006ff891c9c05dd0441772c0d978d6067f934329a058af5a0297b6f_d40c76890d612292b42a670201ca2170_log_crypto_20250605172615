@@ -1,0 +1,99 @@
+import os
+import logging
+import cpuinfo
+from typing import Optional
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM, ChaCha20Poly1305
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from cryptography.hazmat.backends import default_backend
+
+logger = logging.getLogger("alma_crypto")
+
+class CryptoEngine:
+    def __init__(self, algorithm=None):
+        self.backend = default_backend()
+        self.algorithm = algorithm or self.detectar_algoritmo()
+        logger.info(f"Algoritmo seleccionado: {self.algorithm}")
+
+    def detectar_algoritmo(self):
+        try:
+            info = cpuinfo.get_cpu_info()
+            if 'aes' in info['flags'] and 'sse2' in info['flags']:
+                return 'AES-256-GCM'
+        except Exception as e:
+            logger.warning(f"Fallo en detección de hardware: {str(e)}")
+        return 'ChaCha20'
+
+    def generar_clave(self, password: bytes = None, salt: bytes = None):
+        if password:
+            if not salt:
+                salt = os.urandom(16)
+            kdf = PBKDF2HMAC(
+                algorithm=hashes.SHA3_256(),
+                length=32,
+                salt=salt,
+                iterations=100_000,
+                backend=self.backend
+            )
+            key = kdf.derive(password)
+            return key, salt
+        return os.urandom(32), None
+
+    def _get_cipher(self, key: bytes):
+        if self.algorithm == 'AES-256-GCM':
+            return AESGCM(key)
+        return ChaCha20Poly1305(key)
+
+    def encrypt_log(self, input_file: str, output_file: str, key: bytes, salt: Optional[bytes] = None) -> None:
+        nonce = os.urandom(12 if self.algorithm == 'AES-256-GCM' else 24)
+        cipher = self._get_cipher(key)
+
+        with open(input_file, 'rb') as f_in:
+            plaintext = f_in.read()
+        encrypted = cipher.encrypt(nonce, plaintext, None)
+
+        with open(output_file, 'wb') as f_out:
+            if salt:
+                f_out.write(salt)
+            f_out.write(nonce + encrypted)
+
+        logger.debug(f"Log cifrado: {input_file} -> {output_file}")
+
+    def decrypt_log(self, input_path: str, output_path: str, *, password: bytes = None, key: bytes = None, salt: Optional[bytes] = None):
+        with open(input_path, 'rb') as f_in:
+            data = f_in.read()
+
+        offset = 0
+
+        if password is not None:
+            if salt is None:
+                salt = data[:16]
+                offset += 16
+            key, _ = self.generar_clave(password, salt)
+        elif key is not None:
+            if salt is not None:
+                offset += 16
+        else:
+            raise ValueError("Se debe proporcionar 'password' o 'key'.")
+
+        nonce_len = 12 if self.algorithm == 'AES-256-GCM' else 24
+        nonce = data[offset:offset + nonce_len]
+        ciphertext = data[offset + nonce_len:]
+
+        cipher = self._get_cipher(key)
+        decrypted = cipher.decrypt(nonce, ciphertext, None)
+
+        with open(output_path, 'wb') as f_out:
+            f_out.write(decrypted)
+
+        logger.debug(f"Log descifrado: {input_path} -> {output_path}")
+
+    @staticmethod
+    def validar_log_cifrado(path: str) -> bool:
+        try:
+            with open(path, 'rb') as f:
+                data = f.read()
+            return len(data) > 28  # salt + nonce mínimo
+        except Exception:
+            return False
+

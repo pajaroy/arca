@@ -1,0 +1,110 @@
+import os
+import json
+import numpy as np
+from pathlib import Path
+from tqdm import tqdm
+from sentence_transformers import SentenceTransformer
+from sklearn.metrics.pairwise import cosine_similarity
+import logging
+
+# Configuración inicial
+DATASET_DIR = Path("dataset_test")
+LOGS_DIR = Path("logs")
+MODEL_NAME = "hiiamsid/sentence_similarity_spanish_es"
+SIMILARITY_THRESHOLD = 0.75
+TOP_N = 5
+
+# Configurar logging
+logging.basicConfig(filename=LOGS_DIR/'procesamiento.log', 
+                    level=logging.INFO,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
+
+class MemoriaProcessor:
+    def __init__(self):
+        self.model = SentenceTransformer(MODEL_NAME)
+        self.memorias = []
+        self.embeddings = []
+        
+    def cargar_memorias(self):
+        memorias_validas = []
+        
+        for json_file in tqdm(list(DATASET_DIR.glob("*.json")), desc="Procesando archivos"):
+            try:
+                with open(json_file, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                if 'id' not in data or 'contenido' not in data:
+                    raise ValueError("Campos requeridos faltantes")
+                memorias_validas.append({
+                    'id': data['id'],
+                    'contenido': data['contenido'][:1000]
+                })
+            except Exception as e:
+                logging.error(f"Error en {json_file.name}: {str(e)}")
+                continue
+        self.memorias = memorias_validas
+        
+    def generar_embeddings(self):
+        contenidos = [m['contenido'] for m in self.memorias]
+        batch_size = 32
+        self.embeddings = []
+        for i in tqdm(range(0, len(contenidos), batch_size), desc="Generando embeddings"):
+            batch = contenidos[i:i+batch_size]
+            self.embeddings.extend(self.model.encode(batch))
+        self.embeddings = np.array(self.embeddings)
+        
+    def calcular_relaciones(self):
+        relaciones = []
+        n = len(self.memorias)
+        sim_matrix = cosine_similarity(self.embeddings)
+        for i in tqdm(range(n), desc="Analizando relaciones"):
+            for j in range(i+1, n):
+                if sim_matrix[i][j] > SIMILARITY_THRESHOLD:
+                    relaciones.append({
+                        'memoria_1': self.memorias[i]['id'],
+                        'memoria_2': self.memorias[j]['id'],
+                        'score': round(float(sim_matrix[i][j]), 3)
+                    })
+        return sorted(relaciones, key=lambda x: x['score'], reverse=True)
+    
+    def visualizar_grafo(self, relaciones):
+        try:
+            import networkx as nx
+            import matplotlib.pyplot as plt
+            G = nx.Graph()
+            for rel in relaciones:
+                G.add_node(rel['memoria_1'])
+                G.add_node(rel['memoria_2'])
+                G.add_edge(rel['memoria_1'], rel['memoria_2'], weight=rel['score'])
+            pos = nx.spring_layout(G)
+            plt.figure(figsize=(12, 8))
+            nx.draw_networkx_nodes(G, pos, node_size=500, node_color='lightblue')
+            nx.draw_networkx_edges(G, pos, width=1.0, alpha=0.5)
+            nx.draw_networkx_labels(G, pos)
+            edge_labels = {(u, v): d['weight'] for u, v, d in G.edges(data=True)}
+            nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels)
+            plt.title("Relaciones entre Memorias")
+            plt.axis('off')
+            plt.savefig("logs/grafo_relaciones.png", dpi=300)
+            print("✅ Grafo guardado en logs/grafo_relaciones.png")
+        except ImportError:
+            print("\nAdvertencia: networkx/matplotlib no instalados. Omitiendo visualización.")
+            
+    def ejecutar(self):
+        LOGS_DIR.mkdir(exist_ok=True)
+        self.cargar_memorias()
+        if not self.memorias:
+            print("No se encontraron memorias válidas.")
+            return
+        self.generar_embeddings()
+        relaciones = self.calcular_relaciones()
+        with open(LOGS_DIR/'relaciones_sugeridas.json', 'w', encoding='utf-8') as f:
+            json.dump(relaciones, f, indent=2, ensure_ascii=False)
+        print(f"\nTop {TOP_N} relaciones:")
+        for rel in relaciones[:TOP_N]:
+            print(f"{rel['memoria_1']} ↔ {rel['memoria_2']} (Score: {rel['score']})")
+        if input("\n¿Generar visualización de grafo? [s/N]: ").lower() == 's':
+            self.visualizar_grafo(relaciones)
+
+if __name__ == "__main__":
+    processor = MemoriaProcessor()
+    processor.ejecutar()

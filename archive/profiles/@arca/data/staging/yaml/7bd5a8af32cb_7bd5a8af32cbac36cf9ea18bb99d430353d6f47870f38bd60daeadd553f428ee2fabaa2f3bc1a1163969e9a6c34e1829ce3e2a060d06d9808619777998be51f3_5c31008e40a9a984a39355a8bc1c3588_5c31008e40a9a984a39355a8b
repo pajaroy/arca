@@ -1,0 +1,18 @@
+version: "0.2.0"
+tipo: "readme"
+schema: "almaresist.readme_v1"
+descripcion: "Carpeta dedicada a plantillas y prompts técnicos asociados al módulo add_aprendizaje_flujo, centralizando archivos de apoyo para documentación y automatización."
+estructura:
+  - plantilla_aprendizaje_flujo.yaml: Plantilla base para nuevos aprendizajes de flujo
+  - prompt_add_aprendizaje_flujo.yaml: Prompt estandarizado para registrar aprendizajes
+  - README.yaml: Este archivo
+tags: [documentacion, drafts_tecnicos, flujo_trabajo, aprendizaje]
+linked_to:
+  - ../README.yaml
+  - ../../../scripts/add_aprendizaje_flujo/README.yaml
+responsable: "kael"
+hash_verificacion: "sha256:pending"
+historial:
+  - "2025-06-16: Adaptación a la plantilla universal de metadatos"
+last_modified: "2025-06-16T23:59:00Z"
+last_modified_by: "bird"

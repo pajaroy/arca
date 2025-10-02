@@ -1,0 +1,88 @@
+
+# 🧠 ALMA RESIST v2 — Arquitectura Unificada y Resiliente
+
+
+## 🧱 ARQUITECTURA EN CAPAS
+
+### 🔧 Nodos físicos
+
+| Nodo         | Rol operativo                        |
+|--------------|--------------------------------------|
+| `ALMA_CORE`  | PC madre, ejecución local principal  |
+| `ALMA_RESIST`| Disco externo cifrado (entorno IA)   |
+| `ALMA_NODE`  | Pendrive con backups + claves        |
+| `ALMA_BLACK` | VPS offshore seguro (procesamiento crítico) |
+
+### ⚙️ Modos de operación
+
+| Modo        | Uso principal                          | Requisitos                      |
+|-------------|-----------------------------------------|----------------------------------|
+| `local`     | Reflexión diaria, portable              | AES, SQLite, CLI                |
+| `black`     | Procesamiento remoto cifrado            | GPG, SSH, rsync, Tailscale      |
+
+
+## 🔄 FLUJOS CRÍTICOS
+
+### Diagrama: Procesamiento reflexivo local (ASCII)
+
+```
+[CUADERNOS/] 
+     ↓ 
+[alma_loader] → [memorias.db]
+     ↓
+[reflection_engine]
+     ↓
+[BITACORA_CENTRAL/] ← [!resumen]
+```
+
+### Diagrama: Transferencia Black
+
+```
+[black_input/] 
+     ↓ alma_encrypt.sh
+[.gpg file] 
+     ↓ rsync
+[ALMA_BLACK]
+```
+
+
+## 🧪 CONTRATOS PENDIENTES
+
+### `context_tracker.yaml`
+```yaml
+tarea_id: UUID
+timestamp: ISO8601
+actor: "humano|ia"
+evento: "creación|modificación|reflexión"
+```
+
+### `reflection_engine.yaml`
+```yaml
+origen: doc_id
+tipo_reflexión: "crítica|propuesta|duda"
+tags: ["ética", "proceso"]
+embedding_relacionado: vector[...]
+```
+
+
+## 🧙 INTERFAZ PARA NO TÉCNICOS
+
+### `alma_wizard` CLI interactiva
+
+- Configuración inicial de claves
+- Modo de operación guiado (local/black)
+- Diagnóstico de errores comunes
+- Recuperación post-caída
+
+
+## 📚 GLOSARIO UNIFICADO
+
+| Término            | Significado                                                  |
+|--------------------|--------------------------------------------------------------|
+| **Modo Black**     | Operación remota segura vía VPS                              |
+| **ALMA_NODE**      | Pendrive con claves maestras y backups                       |
+| **Reflexión IA**   | Generación semántica de críticas o propuestas                |
+| **Embedding**      | Representación vectorial de significado                      |
+| **Bitácora**       | Registro cifrado de interacciones y reflexiones              |
+| **Simulación MITM**| Prueba que simula ataques man-in-the-middle                  |
+

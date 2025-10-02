@@ -1,0 +1,85 @@
+---
+module: introduccion/version
+type: core
+status: in_progress
+created: '2025-05-23'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# Versión del Sistema ALMA_RESIST
+
+**Versión General:** v0.0.0.2  
+**Fecha de Compilación:** 2025-05-22  
+**Responsable:** Equipo de Desarrollo ALMA_RESIST
+
+---
+
+## Descripción
+
+Este paquete (`ALMA_RESIST.zip`) contiene la estructura completa del sistema de documentación, scripts, metodologías, validadores y bitácoras que forman parte del ecosistema de ALMA_RESIST.
+
+---
+
+## Estructura Incluida
+
+- `/docs/`: Documentación principal estructurada por versiones, metodologías, plantillas y referencias.
+- `/scripts/`: Scripts automatizados para validación y corrección de metadatos.
+- `/bitacoras/`: Registro de actividades diarias y reflexiones de desarrollo.
+- `/registros/`: Mapeo de sprint, changelogs, hitos, decisiones arquitectónicas y aprendizajes.
+- `/versiones/`: Backups comprimidos por etapa o sprint.
+- `README.md`: Documento principal de orientación del proyecto.
+
+---
+
+## Metadatos Técnicos
+
+- **Estatus:** Estable
+- **Tipo de Paquete:** Distribución Interna / Documentación Operativa
+- **Compatibilidad:** ALMA_RESIST CLI + Infraestructura Modular
+- **Checksum SHA256:** _[Generar en etapa CI/CD]_
+
+---
+
+## Notas
+
+Este archivo de versión permite auditar la integridad del sistema ALMA_RESIST en cualquier punto del tiempo. Todos los archivos están estructurados y validados para compatibilidad total con los scripts automatizados de normalización y validación semántica.
+
+---
+
+---
+
+## 📎 Apéndice Sprint 2.3 – Integración de Idea Base Unificada
+
+📅 Fecha: 2025-05-23  
+🔖 Versión: v0.3.0-dev  
+👤 Responsable: Santi / pájaro
+
+Este sprint consolidó múltiples documentos conceptuales en una única idea base (`ALMA_RESIST_idea_base_0.0.0.1.md`) y reorganizó la carpeta `docs/idea_base/`.
+
+- 🧠 Nueva estructura: `idea_base/`, `changelog.md`, `version.md`, `_legacy/`
+- 📦 Archivos archivados: `idea_base.md`, `idea_base_conciencia_ia.md`, `idea_base_origen.zip`
+- 🗂 Versionado y registro en: `log_integracion.md`, `mapeo_sprint_archivos.md`, `hitos.md`
+- 🔄 Próximo paso: sincronización con nube segura y planificación de Sprint 2.4
+
+📌 Este apéndice actúa como marcador de snapshot interno para herramientas futuras y scripts de automatización (`alma-cli snapshot-log`).
+
+---
+## 🔄 Cambios relevantes
+
+- Integración completa del sistema de validación automática
+- Inclusión de alias operativos
+- Modularización de comandos útiles
+---
+
+## Versión: v0.0.0.5
+**Sprint 2.5 – Auditoría Estructural Final**  
+📆 Fecha de cierre: 2025-05-28  
+📌 Estado: **estable**  
+🎯 Objetivo: Finalizar auditoría estructural completa, unificar documentación y preparar base para escalado IA
+
+🔗 Cambios mayores:
+- Inclusión de scripts automatizados
+- Normalización de estructura modular
+- Consolidación de carpetas `core`, `control`, `docs`
+- Unificación de documentación entre humano e IA

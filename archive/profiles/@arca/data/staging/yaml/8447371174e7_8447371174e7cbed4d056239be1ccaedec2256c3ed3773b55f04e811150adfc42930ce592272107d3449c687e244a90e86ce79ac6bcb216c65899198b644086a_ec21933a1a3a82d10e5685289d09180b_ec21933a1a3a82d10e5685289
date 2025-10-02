@@ -1,0 +1,18 @@
+version: "0.2.0"
+tipo: "readme"
+schema: "almaresist.readme_v1"
+descripcion: "Módulo CLI de bitácoras institucionales v0.2.0 para ALMA_RESIST. Implementa gestión automatizada, backup, validación y triple formato con gobernanza KAEL. Incluye fuentes, documentación y prompts, todo versionado y auditable."
+estructura:
+  - "src/: Código fuente principal de la versión v0.2.0."
+  - "docs/: Documentación técnica y prompts asociados."
+tags: [bitacora, cli, institucional, versionado, v0.2.0, almaresist]
+linked_to:
+  - "./src/README.yaml"
+  - "./docs/README.yaml"
+  - "../_legacy/README.yaml"
+responsable: "Equipo de Operaciones ALMA_RESIST"
+hash_verificacion: "sha256:pending"
+historial:
+  - "2025-06-17: Reorganización modular y vinculación cruzada de subcarpetas src/ y docs/. Consolidación de versión 0.2.0 bajo protocolo KAEL."
+last_modified: "2025-06-17T11:20:00Z"
+last_modified_by: "Kael"

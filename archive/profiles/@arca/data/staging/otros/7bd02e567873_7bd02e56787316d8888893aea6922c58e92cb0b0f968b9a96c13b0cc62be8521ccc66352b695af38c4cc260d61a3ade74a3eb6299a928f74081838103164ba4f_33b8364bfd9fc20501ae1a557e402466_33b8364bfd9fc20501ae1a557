@@ -1,0 +1,13 @@
+# Prompt para DeepSeek – Documento de Interdependencias
+
+Crear un archivo `modulos_interdependencias.md` que documente las relaciones entre los módulos de un sistema modular como ALMA LIBRE.
+
+Debe indicar:
+- Qué módulos dependen de otros
+- Por qué
+- Bajo qué formato de comunicación
+- Cuáles son las reglas para evitar ciclos y acoplamientos fuertes
+
+Formato: Markdown con tablas, ejemplos, normas, anotaciones futuras.
+
+Este archivo servirá para auditar flujos y coordinar diseño modular entre humanos e IAs.

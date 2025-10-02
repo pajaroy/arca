@@ -1,0 +1,23 @@
+version: "0.1.0"
+tipo: "README"
+schema: "almaresist.readme_v1"
+descripcion: "Repositorio de datasets crudos, estructurados o importados. Punto de ingreso para datos que requieren validación, normalización o transformación antes de integrarse al sistema."
+estructura:
+  - ".csv/.json/.xlsx: Datasets tabulares o estructurados, fuente principal para procesamiento posterior."
+  - "incoming/: Subcarpeta para nuevos datasets pendientes de revisión."
+  - "processed/: Subcarpeta para datasets ya validados y listos para uso."
+tags:
+  - datasets
+  - datos_crudos
+  - validacion
+  - transformacion
+  - procesamiento
+linked_to:
+  - ../README.yaml
+  - ../../docs/README.yaml
+responsable: "Santi + ALMA"
+hash_verificacion: "sha256:pending"
+historial:
+  - "2025-06-17: Plantilla inicial, definición de estructura y enlaces con documentación global."
+last_modified: "2025-06-17T04:00:00Z"
+last_modified_by: "bird"

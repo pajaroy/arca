@@ -1,0 +1,15 @@
+id: flujo_001
+nombre: Registro de Bitácora CLI
+version: 0.1.0
+fecha_creacion: 2025-06-07
+script: control_central/cli/bitacora/add_bitacora_entry_v0.1.2.py
+archivos_afectados:
+  - control_central/docs/bitacora_viva.yaml
+validaciones:
+  - Backup automático del archivo original
+  - Validación de campos requeridos (autor, descripcion, impacto)
+  - Timestamp automático si no se pasa fecha
+ejemplo_de_uso: >
+  python3 add_bitacora_entry_v0.1.2.py --autor "Santi" --descripcion "Inicio ALMA_CORE" ...
+relacionado_con:
+  - memorias_kael.yaml

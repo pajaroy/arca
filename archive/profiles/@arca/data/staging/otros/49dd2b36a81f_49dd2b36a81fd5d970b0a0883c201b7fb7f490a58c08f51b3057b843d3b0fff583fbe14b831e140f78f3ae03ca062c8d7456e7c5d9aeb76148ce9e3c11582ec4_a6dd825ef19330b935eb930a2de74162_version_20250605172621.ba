@@ -1,0 +1,23 @@
+---
+module: versiones/v0_0_0_2_estructura_documental/version
+type: core
+status: in_progress
+created: '2025-05-23'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🗂️ version.md – Snapshot Consolidado
+
+- Versión: v0.0.0.2_estructura_documental
+- Fecha: 2025-05-23
+- Hash: 0f61c8c5f3ab0b08b1c8c189b2e9a6ef3db47d0d4b0f63b246ac9ef8079d3a35
+- Mantenedor: Santi / pájaro
+- Descripción: Snapshot de profesionalización estructural listo para escalar con IA.
+
+## 🔄 Cambios clave
+
+- Estandarización de documentación con plantillas reutilizables
+- Implementación de testing base manual y automático
+- Integración de trazabilidad viva (`TODO.md`, `.project.md`)
+- Consolidación documental del Sprint 2.1

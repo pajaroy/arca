@@ -1,0 +1,3 @@
+# Módulo: check_env
+
+Verifica las variables de entorno necesarias y su estado.

@@ -1,0 +1,52 @@
+---
+module: prompts/log_writer_request
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🧠 Solicitud de Implementación – `log_writer.py` – Sprint 2.6 – ALMA_RESIST
+
+## 🎯 Objetivo
+
+Implementar el módulo `log_writer.py`, encargado de registrar eventos estructurados del sistema ALMA_RESIST en archivos de log en formato JSONL.
+
+Este módulo es parte del sistema de trazabilidad segura y debe integrarse con los componentes del servidor LLM.
+
+---
+
+## 📘 Requisitos
+
+- Escribir logs en formato **JSONL (JSON por línea)**
+- Crear directorio `logs/` automáticamente si no existe
+- Nombres de archivo basados en la fecha actual: `alma_YYYY-MM-DD.log`
+- Permitir escritura segura (uso de archivo temporal `.tmp` antes de renombrar)
+- Funciones requeridas:
+  - `log_event(event_type: str, message: str, module: str = "core") -> dict`
+    - Devuelve un diccionario estructurado con timestamp, tipo, mensaje, PID, host y plataforma
+  - `write_log(event: dict) -> bool`
+    - Escribe el evento en el archivo del día. Devuelve `True` si tuvo éxito.
+- Validación de tipos para los argumentos
+- Tolerancia a errores leves (espacio en disco, codificación)
+- Preparado para mover a `core/llm_server/utils/log_writer.py`
+
+---
+
+## 🧪 Ejemplo de uso
+
+```python
+from utils.log_writer import log_event, write_log
+
+evento = log_event("INFO", "Inicio del servidor LLM", "main")
+ok = write_log(evento)
+```
+
+---
+
+## 📎 Contexto
+
+- Sprint: 2.6 – Logging y Seguridad
+- Se usará desde `main.py`, `transport_layer.py` y módulos futuros
+- Compatible con cifrado posterior por `log_crypto.py`

@@ -1,0 +1,31 @@
+# Instalación mínima de Arch Linux con LUKS (modo BIOS)
+
+**Fecha:** 2025-06-23
+**Modo:** BIOS (Legacy Boot)
+**Encriptación:** LUKS + Btrfs
+**Hostname:** `alma`
+
+
+## 🔧 2. Preparar entorno `arch-chroot`
+
+```bash
+mount --types proc /proc /mnt/proc
+mount --rbind /sys /mnt/sys
+mount --make-rslave /mnt/sys
+mount --rbind /dev /mnt/dev
+mount --make-rslave /mnt/dev
+mount --bind /run /mnt/run
+mount --make-slave /mnt/run
+
+arch-chroot /mnt
+```
+
+
+## 🧨 4. Desmontar y cerrar LUKS
+
+```bash
+umount -R /mnt
+swapoff /dev/sda2
+cryptsetup close alma_root
+```
+

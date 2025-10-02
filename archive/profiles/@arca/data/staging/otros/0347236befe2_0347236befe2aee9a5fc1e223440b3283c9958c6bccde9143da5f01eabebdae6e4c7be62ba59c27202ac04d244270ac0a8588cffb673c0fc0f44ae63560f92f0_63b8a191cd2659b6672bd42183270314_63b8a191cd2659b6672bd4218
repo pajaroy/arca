@@ -1,0 +1,48 @@
+# 🤝 Sistema `asesor-IA` – Arquitectura de Asistencia Tríadica
+
+**Fecha de creación:** 2025-06-01  
+**Ubicación:** `docs/sistema_asesor-IA.md`  
+**Estado:** Activo  
+**Versión:** 1.0
+
+
+## 📐 División de Roles
+
+### 🔧 DeepSeek-R1
+
+- Foco: profundidad técnica, auditoría, optimización, seguridad.
+- Salidas: pseudocódigo, diagramas de arquitectura, análisis de riesgos.
+- Formato: terminal, código, markdown técnico.
+
+### 🧩 GPT (ALMA_CENTRAL)
+
+- Foco: estructura lógica, documentación, visión modular, narrativa funcional.
+- Salidas: workflows, changelogs, governance docs.
+- Formato: markdown estructurado, plantillas, modelos operativos.
+
+### 👨‍🚀 Santi (Comandante ALMA)
+
+- Foco: dirección estratégica, decisiones finales.
+- Acción: sintetiza visiones, toma decisiones, prioriza caminos.
+
+
+## 🌐 Diagrama del Sistema
+
+```mermaid
+graph TD
+    Santi -->|Consulta| DeepSeek
+    Santi -->|Consulta| GPT
+    DeepSeek -->|Respuesta| Santi
+    GPT -->|Respuesta| Santi
+    Santi -->|Síntesis| Decision_Final
+```
+
+
+## 🧨 Riesgos y Mitigaciones
+
+| Riesgo                        | Solución                                                 |
+|------------------------------|----------------------------------------------------------|
+| Conflicto de recomendaciones | Votación final de Santi (`!vote --options=A,B,C`)        |
+| Sobrecarga cognitiva         | Filtro previo (`!alma filter --priority=high`)           |
+| Inconsistencia de formatos   | YAML o Markdown con etiquetas predefinidas (`type:`)     |
+

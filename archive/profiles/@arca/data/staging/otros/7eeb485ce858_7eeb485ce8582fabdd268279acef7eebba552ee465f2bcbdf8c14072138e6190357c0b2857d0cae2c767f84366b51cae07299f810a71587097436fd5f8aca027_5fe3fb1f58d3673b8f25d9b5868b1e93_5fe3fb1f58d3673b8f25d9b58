@@ -1,0 +1,19 @@
+# 📝 changelog.md – Evolución de la Idea Base
+
+## [Sprint 2.3] - 2025-05-23
+
+### Integración
+
+- Se fusionaron los siguientes documentos:
+  - `idea_base.md`
+  - `idea_base_conciencia_ia.md`
+- Se creó el documento consolidado:
+  - `ALMA_RESIST_idea_base_0.0.0.1.md`
+
+### Cambios estructurales
+
+- Se reorganizó la carpeta `idea_base/`
+- Se movieron los archivos anteriores a `idea_base/_legacy/`
+- Se generaron archivos de control: `README.md`, `version.md`, `changelog.md`
+
+📐 Esta operación se realizó bajo la metodología v8 `metodologia_agregado_archivos.md`

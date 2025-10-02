@@ -1,0 +1,35 @@
+# 🧠 log_writer
+
+Módulo principal para el registro estructurado, validado y seguro de eventos del sistema ALMA_RESIST.
+
+## Funcionalidades
+
+- Escritura atómica de logs
+- Formato JSON estructurado con validación
+- Compatibilidad multiplataforma (Linux/Windows)
+- Manejo de errores robusto
+- Rotación automática de logs antiguos
+- Conversión automática de tipos
+- Validación opcional de metadatos
+
+## Archivos
+
+- `log_writer.py` → versión activa del módulo
+- `log_writer_v0.0.0.7.py` → última versión registrada
+- `changelog_log_writer_v0.0.0.7.md` → cambios registrados
+- `_legacy/` → versiones anteriores
+
+## Uso
+
+```python
+from core.llm_server.utils.log_writer.log_writer import LogWriter
+
+writer = LogWriter()
+event = writer.log_event("INFO", "Sistema inicializado")
+writer.write_log(event)
+```
+
+## Recomendaciones
+
+- Integrar con `log_crypto` para cifrado posterior
+- Ejecutar tests ubicados en `tests/test_log_writer.py` para validar integridad

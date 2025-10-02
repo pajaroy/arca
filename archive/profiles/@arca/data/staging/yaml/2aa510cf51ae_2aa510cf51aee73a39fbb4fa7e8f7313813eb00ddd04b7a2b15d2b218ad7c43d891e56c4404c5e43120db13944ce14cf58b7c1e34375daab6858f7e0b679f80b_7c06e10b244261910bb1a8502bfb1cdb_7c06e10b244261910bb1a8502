@@ -1,0 +1,175 @@
+# add_bitacora_entry_changelog_v0.1.2.yaml
+version: "0.1.2"
+fecha: "2025-06-08"
+autor: "Equipo ALMA_RESIST DevOps"
+descripcion: "Versión mejorada del script de bitácora con modularización, rutas configurables y nuevas funcionalidades"
+estado: "implementado"
+impacto: "Mayor flexibilidad en el registro de eventos y preparación para integración con sistema CLI central"
+
+cambios:
+  - id: CAMBIO_01
+    tipo: "mejora"
+    descripcion: "Rutas configurables mediante argumentos CLI"
+    detalles: |
+      Se eliminaron las rutas hardcoded BITACORA_FILE y BACKUP_DIR
+      Ahora son configurables con:
+        --bitacora [ruta]
+        --backup-dir [directorio]
+    relacionado_con: SUG_001
+    implementacion: |
+      parser.add_argument('--bitacora', default=DEFAULT_BITACORA_FILE)
+      parser.add_argument('--backup-dir', default=DEFAULT_BACKUP_DIR)
+
+  - id: CAMBIO_02
+    tipo: "refactor"
+    descripcion: "Modularización de funciones para reutilización"
+    detalles: "Creación de función agregar_entrada_bitacora() que puede ser llamada desde otros módulos"
+    relacionado_con: SUG_002
+    implementacion: |
+      def agregar_entrada_bitacora(accion, descripcion, motivo, ejecutado_por, ...):
+          # Lógica central modularizada
+          return nueva_entrada
+
+  - id: CAMBIO_03
+    tipo: "mejora"
+    descripcion: "Implementación de sistema de logging con niveles verbosidad"
+    detalles: |
+      Reemplazo de debug_print() por sistema logging estándar
+      Niveles: --verbose (info), --debug (debug), default (solo errores)
+    relacionado_con: SUG_003
+    implementacion: |
+      logger = logging.getLogger('bitacora')
+      configurar_logging(verbose, debug)
+
+  - id: CAMBIO_04
+    tipo: "nueva funcionalidad"
+    descripcion: "Adición de modo dry-run"
+    detalles: "Simula la operación sin modificar archivos, útil para pruebas"
+    relacionado_con: SUG_004
+    implementacion: |
+      parser.add_argument('--dry-run', action='store_true')
+      guardar_bitacora(..., dry_run=args.dry_run)
+
+  - id: CAMBIO_05
+    tipo: "mejora"
+    descripcion: "Creación automática de archivo si no existe"
+    detalles: "El script ahora crea el archivo de bitácora si no existe"
+    implementacion: |
+      if not os.path.exists(archivo):
+          with open(archivo, 'w') as f:
+              yaml.dump({'entradas': []}, f)
+
+  - id: CAMBIO_06
+    tipo: "mejora"
+    descripcion: "Creación automática de directorios necesarios"
+    detalles: "Crea directorios padre si no existen para bitácora y backups"
+    implementacion: |
+      os.makedirs(backup_dir, exist_ok=True)
+      os.makedirs(os.path.dirname(archivo), exist_ok=True)
+
+  - id: CAMBIO_07
+    tipo: "mejora"
+    descripcion: "Salida estructurada al usuario"
+    detalles: "Presentación clara de la entrada agregada en formato resumido"
+    implementacion: |
+      print("\nENTRADA AGREGADA EXITOSAMENTE")
+      print("="*50)
+      print(f"Acción:    {nueva_entrada['accion']}")
+      ...
+
+  - id: CAMBIO_08
+    tipo: "optimización"
+    descripcion: "Manejo robusto de excepciones"
+    detalles: "Mejor control de errores en todas las operaciones críticas"
+    implementacion: |
+      try:
+          # Operaciones
+      except Exception as e:
+          logger.error(f"Error crítico: {str(e)}")
+          sys.exit(1)
+
+  - id: CAMBIO_09
+    tipo: "documentación"
+    descripcion: "Actualización de comentarios y ayuda"
+    detalles: "Mejora en documentación interna y mensajes de ayuda CLI"
+    implementacion: |
+      Mejora en formatter_class=argparse.ArgumentDefaultsHelpFormatter
+      Descripciones más completas en cada argumento
+
+  - id: CAMBIO_10
+    tipo: "configuración"
+    descripcion: "Valores por defecto mejorados"
+    detalles: "Uso de constantes para rutas por defecto más manejables"
+    implementacion: |
+      DEFAULT_BITACORA_FILE = "/home/bird/.../bitacora_viva.yaml"
+      DEFAULT_BACKUP_DIR = "/home/bird/.../backups"
+
+dependencias:
+  - python: ">=3.8"
+  - bibliotecas:
+      - argparse
+      - yaml
+      - logging
+      - shutil
+      - os
+      - sys
+      - datetime
+
+pruebas_realizadas:
+  - descripcion: "Agregado de entrada básica con rutas por defecto"
+    comando: |
+      python add_bitacora_entry_v2.py \
+        --accion "Prueba básica" \
+        --descripcion "Descripción prueba" \
+        --motivo "Validación funcional" \
+        --ejecutado_por "Tester"
+    resultado: "Entrada creada exitosamente en bitácora principal"
+
+  - descripcion: "Uso con rutas personalizadas"
+    comando: |
+      python add_bitacora_entry_v2.py \
+        --accion "Prueba rutas" \
+        --descripcion "Prueba directorio personalizado" \
+        --motivo "Validación rutas alternativas" \
+        --ejecutado_por "Tester" \
+        --bitacora "/tmp/bitacora_test.yaml" \
+        --backup-dir "/tmp/backups_bitacora"
+    resultado: "Archivo creado en /tmp con backup correspondiente"
+
+  - descripcion: "Modo dry-run"
+    comando: |
+      python add_bitacora_entry_v2.py \
+        --accion "Dry-run test" \
+        --descripcion "Validación sin escritura" \
+        --motivo "Prueba modo simulación" \
+        --ejecutado_por "Tester" \
+        --dry-run
+    resultado: "Mensaje DRY-RUN sin modificar archivos"
+
+  - descripcion: "Modo verbose y debug"
+    comando: |
+      python add_bitacora_entry_v2.py \
+        --accion "Logging test" \
+        --descripcion "Prueba niveles log" \
+        --motivo "Validación verbosidad" \
+        --ejecutado_por "Tester" \
+        --verbose \
+        --debug
+    resultado: "Salida detallada con información de depuración"
+
+integracion_futura:
+  - sistema: "CLI Central ALMA_RESIST"
+    modulo: "bitacora"
+    funcionalidad: "Registro automatizado de operaciones críticas"
+  - sistema: "Sistema CI/CD"
+    uso: "Registro de despliegues y eventos de pipeline"
+  - sistema: "Monitorización"
+    uso: "Registro de incidentes y acciones correctivas"
+
+tags:
+  - bitacora
+  - cli
+  - logging
+  - yaml
+  - automation
+  - alma_resist_v0.1.2

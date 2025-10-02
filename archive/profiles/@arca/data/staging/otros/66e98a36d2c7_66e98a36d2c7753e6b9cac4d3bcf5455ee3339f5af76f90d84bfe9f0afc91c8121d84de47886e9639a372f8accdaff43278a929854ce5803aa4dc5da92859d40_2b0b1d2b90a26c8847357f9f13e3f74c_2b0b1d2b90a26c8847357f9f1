@@ -1,0 +1,21 @@
+# 🧭 ALMA_RESIST – Carpeta `control/`
+
+
+## 🧩 Subcarpetas y componentes
+
+| Carpeta / Archivo                  | Descripción                                                                 |
+|-----------------------------------|-----------------------------------------------------------------------------|
+| `sprints_activos/`                | Enlaces y referencias a los sprints activos dentro de cada módulo          |
+| `checklists/`                     | Listas de verificación por sprint, auditoría o mantenimiento               |
+| `bitacora.md`                     | Registro informal de decisiones, correcciones o eventos no estructurados   |
+| `estado_general.md`               | Estado actual de cada módulo (manual o automático)                         |
+| `sprints_index.md`                | Índice central de todos los sprints activos referenciados desde acá        |
+
+
+## 🔧 Futuro
+
+Este módulo podrá integrarse con:
+- Un script CLI (`cli_cleaner` o `cli_tracker`)
+- Visualizaciones tipo grafo desde Obsidian
+- Automatización parcial de auditorías técnicas y comparativas de versión
+

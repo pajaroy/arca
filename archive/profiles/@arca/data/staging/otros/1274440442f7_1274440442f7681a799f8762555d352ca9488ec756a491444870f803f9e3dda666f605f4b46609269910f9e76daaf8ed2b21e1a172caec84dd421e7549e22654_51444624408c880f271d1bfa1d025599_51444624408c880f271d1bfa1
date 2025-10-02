@@ -1,0 +1,9 @@
+# 📜 Changelog
+
+`→ A partir del 02/06/2025, se adopta el formato v2 diario como estándar`.
+## 📅 2025-06-02 – Reestructuración Cannabird
+
+- 🧹 Integrados resúmenes diarios corregidos (semana 22)
+- 📦 Reubicados resúmenes semanales (`s21`, `s22`) a carpetas definitivas
+- 📁 Prompts movidos a `control/prompts/`
+- 🧾 Reuniones semanales relocalizadas

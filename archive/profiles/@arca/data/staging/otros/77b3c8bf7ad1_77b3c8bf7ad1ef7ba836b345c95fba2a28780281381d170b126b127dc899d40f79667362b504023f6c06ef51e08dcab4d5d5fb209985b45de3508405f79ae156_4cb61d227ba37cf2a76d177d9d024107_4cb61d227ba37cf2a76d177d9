@@ -1,0 +1,20 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_611575
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: '  Init  '
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:cb86a8f669e22e952d613ccf68cc5521e76588fb0de04cb8701ce80632b8c126
+---
+# Exposición directa del escritor de logs
+from .log_writer import LogWriter, DEFAULT_LOG_DIR

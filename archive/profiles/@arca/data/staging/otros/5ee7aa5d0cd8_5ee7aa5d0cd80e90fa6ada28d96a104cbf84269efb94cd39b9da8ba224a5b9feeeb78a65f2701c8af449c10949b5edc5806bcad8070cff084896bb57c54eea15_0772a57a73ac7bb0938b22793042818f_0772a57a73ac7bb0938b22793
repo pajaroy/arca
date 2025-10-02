@@ -1,0 +1,30 @@
+# 📁 Plantillas – ALMA_RESIST
+
+Esta carpeta contiene plantillas estandarizadas para facilitar la creación, documentación y normalización de contenido dentro del ecosistema ALMA_RESIST.
+
+Cada plantilla responde a un tipo documental con estructura predefinida, metadatos YAML esperados y se ajusta a la arquitectura modular antifrágil del sistema.
+
+## 🧩 Contenido
+
+- `plantilla_checklist.md`: Estructura recomendada para checklists operativos por sprint o módulo.
+- `plantilla_decision_arquitectonica.md`: Formato estándar para documentar decisiones clave de diseño.
+- `plantilla_documento.md`: Base genérica para cualquier documento con YAML y cuerpo estructurado.
+- `plantilla_post_mortem.md`: Estructura reflexiva para análisis post-evento.
+- `plantilla_prompt_tecnico.md`: Guía para redactar prompts técnicos reutilizables o versionables.
+- `plantilla_readme.md`: Base para generar README.md en cualquier submódulo del sistema.
+- `plantilla_version.md`: Documento para versionar componentes, métodos o estructuras.
+
+## 🧠 Reglas de uso
+
+- Toda nueva documentación debe partir desde una de estas plantillas.
+- Los metadatos YAML deben completarse antes de hacer commit.
+- El uso correcto de estas plantillas asegura trazabilidad, lectura uniforme y compatibilidad con los validadores del sistema (`validate_docs.py`).
+
+## 🔄 Actualización
+
+Si una plantilla necesita actualización, crear una copia nueva con versión (`_v2`, `_v3`, etc.) y mover la anterior a `archive/` si aplica.
+
+## 🛡️ Mantenimiento
+
+Este módulo es mantenido como parte del Sprint de control documental y puede ser auditado por `docs/sprints_activos/`.
+

@@ -1,0 +1,13 @@
+# 📜 Changelog Institucional – Centralesis (ALMA_RESIST)
+
+> Registra todos los cambios estructurales, decisiones de arquitectura, auditorías y mejoras críticas.  
+> Actualizar en cada ciclo de mejora, revisión o migración importante.
+
+
+## Pendientes y próximos pasos
+
+- Implementar reemplazo de método `awk` por `yq` en toda la gestión de memorias.
+- Añadir validación de schema y hooks automáticos previo al merge de nuevas memorias.
+- Normalizar tags y métricas críticas en revisiones programadas.
+- Implementar ciclo de revisión programada automático (cronjob).
+

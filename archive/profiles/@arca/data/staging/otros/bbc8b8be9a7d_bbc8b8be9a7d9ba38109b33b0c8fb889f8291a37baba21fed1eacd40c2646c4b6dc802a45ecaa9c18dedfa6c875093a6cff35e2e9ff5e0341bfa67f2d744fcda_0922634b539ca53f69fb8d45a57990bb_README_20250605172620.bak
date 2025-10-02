@@ -1,0 +1,47 @@
+---
+module: referencias/externas/patrones/readme
+type: core
+status: in_progress
+created: '2025-05-20'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 📄 README – Referencias – Patrones de Arquitectura
+
+📁 Ruta: docs/referencias/externas/patrones  
+📅 Creado: 2025-05-20  
+👤 Responsable: Usuario + IA
+
+---
+
+## 🎯 Propósito
+
+Esta carpeta contiene documentos y artículos sobre patrones de diseño estructural.  
+Su objetivo es guiar la arquitectura modular del sistema en base a buenas prácticas.
+
+---
+
+## 📂 Contenido esperado
+
+- Archivos .md documentales
+- Archivos técnicos organizados por tema
+- Plantillas o referencias estructurales
+
+---
+
+## 📌 Reglas de uso
+
+- Evitá archivos sueltos sin README
+- Mantené este README actualizado si cambia la estructura interna
+- No usar para registros temporales (usar `logs/` o `backups/`)
+
+---
+
+## 🔗 Navegación relacionada
+
+- [CONTEXT.md]
+- [docs/index.md] (si aplica)
+- [docs/RFC_metodologia.md] (si define esta carpeta)
+
+---

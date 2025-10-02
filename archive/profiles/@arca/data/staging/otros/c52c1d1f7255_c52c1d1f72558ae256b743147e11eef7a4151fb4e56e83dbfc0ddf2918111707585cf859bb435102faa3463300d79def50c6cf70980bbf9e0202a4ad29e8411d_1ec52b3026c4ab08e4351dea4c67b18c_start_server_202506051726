@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# Obtener directorio base del proyecto
+BASE_DIR=$(dirname "$(dirname "$(dirname "$(dirname "$(readlink -f "$0")")")")")
+VENV_DIR="$BASE_DIR/.venv"
+SERVER_DIR="$BASE_DIR/core/llm_server"
+
+# Función para crear contratos
+create_contracts() {
+    CONTRACTS_DIR="$SERVER_DIR/docs/contracts"
+    mkdir -p "$CONTRACTS_DIR"
+    
+    # Crear schema_prompt.json
+    cat > "$CONTRACTS_DIR/schema_prompt.json" <<EOF
+{
+  "type": "object",
+  "properties": {
+    "prompt": {"type": "string"},
+    "context": {"type": "array", "items": {"type": "string"}}
+  },
+  "required": ["prompt"]
+}
+EOF
+
+    # Crear schema_respuesta.json
+    cat > "$CONTRACTS_DIR/schema_respuesta.json" <<EOF
+{
+  "type": "object",
+  "properties": {
+    "respuesta": {"type": "string"},
+    "metadata": {"type": "object"}
+  },
+  "required": ["respuesta"]
+}
+EOF
+    
+    echo "✅ Contratos creados en $CONTRACTS_DIR"
+}
+
+# Función para iniciar el servidor
+start_server() {
+    echo "🔧 Activando entorno virtual..."
+    source "$VENV_DIR/bin/activate"
+    
+    echo "📝 Creando contratos si es necesario..."
+    create_contracts
+    
+    echo "🚀 Iniciando servidor en http://0.0.0.0:8000"
+    cd "$BASE_DIR"
+    uvicorn core.llm_server.main:app --host 0.0.0.0 --port 8000
+}
+
+# Ejecutar
+if [ -d "$VENV_DIR" ]; then
+    start_server
+else
+    echo "❌ Error: Entorno virtual no encontrado en $VENV_DIR"
+    echo "   Por favor crea un entorno virtual primero:"
+    echo "   python -m venv .venv"
+    exit 1
+fi

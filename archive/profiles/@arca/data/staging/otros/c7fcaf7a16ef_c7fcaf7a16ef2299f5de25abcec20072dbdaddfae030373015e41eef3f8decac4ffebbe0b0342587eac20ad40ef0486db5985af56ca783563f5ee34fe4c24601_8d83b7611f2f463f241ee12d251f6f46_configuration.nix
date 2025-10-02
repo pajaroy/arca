@@ -1,0 +1,142 @@
+# ============================================
+# Imports
+# ============================================
+
+{ config, pkgs, lib, ... }:
+
+{
+  imports =
+    [ ./hardware-configuration.nix ];
+
+# ============================================
+# Boot Loader
+# ============================================
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # LUKS Configuration
+  boot.initrd.luks.devices."alma_crypt".device = "/dev/sda3";
+
+# ============================================
+# File Systems
+# ============================================
+
+  fileSystems."/" = {
+    device = "/dev/mapper/alma_crypt";
+    fsType = "btrfs";
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/sda2";
+    fsType = "vfat";
+    options = [ "fmask=0022" "dmask=0022" ];
+  };
+
+# ============================================
+# Networking
+# ============================================
+
+  networking.hostName = "alma-resist";
+  networking.networkmanager.enable = true;
+
+# ============================================
+# Security Placeholders
+# ============================================
+
+  # Placeholder → nftables firewall configuration
+  # networking.firewall.enable = true;
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+
+  # Placeholder → Fail2ban
+  # services.fail2ban.enable = true;
+
+  # Placeholder → AppArmor or SELinux
+  # security.apparmor.enable = true;
+  # security.selinux.enable = true;
+
+  # Placeholder → Yubikey integration
+  # services.pcscd.enable = true;
+
+  # Placeholder → System Auditing
+  # services.auditd.enable = true;
+
+# ============================================
+# User Accounts
+# ============================================
+
+  users.users.alma = {
+    isNormalUser = true;
+    home = "/home/alma";
+    extraGroups = [ "wheel" "networkmanager" ];
+    initialPassword = "umamia";
+    shell = pkgs.bash;
+  };
+
+# ============================================
+# Environment Packages
+# ============================================
+
+  environment.systemPackages = with pkgs; [
+    # Utilities
+    vim
+    wget
+    curl
+    htop
+    parted
+    tree
+    btrfs-progs
+    cryptsetup
+
+    # Compression tools
+    zip
+    unzip
+    p7zip
+
+    # Programming
+    python3
+
+    # Editors
+    vscode
+
+    # Encryption tools
+    gnupg
+    age
+
+    # Version Control
+    git
+
+    # Tailscale (installed but not enabled yet)
+    tailscale
+  ];
+
+# ============================================
+# Services
+# ============================================
+
+  # OpenSSH installed but disabled for now
+  services.openssh.enable = false;
+
+  # Placeholder → Tailscale service
+  # services.tailscale.enable = true;
+  # services.tailscale.extraConfig = ''
+  #   ...
+  # '';
+
+# ============================================
+# Nix & Flakes
+# ============================================
+
+  # Enable unfree packages
+  nixpkgs.config.allowUnfree = true;
+
+  # Enable flakes and nix-command
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+# ============================================
+# System Version
+# ============================================
+
+  system.stateVersion = "23.11";
+}

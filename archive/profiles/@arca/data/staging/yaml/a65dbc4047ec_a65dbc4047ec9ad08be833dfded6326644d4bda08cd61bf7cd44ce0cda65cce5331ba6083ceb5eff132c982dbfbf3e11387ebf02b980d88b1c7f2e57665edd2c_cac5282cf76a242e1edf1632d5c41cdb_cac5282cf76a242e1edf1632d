@@ -1,0 +1,20 @@
+# /home/bird/alma_core/core/notebooks/alma-cli/README.yaml
+version: "0.1.0"
+tipo: "README"
+schema: "almaresist.readme_v1"
+descripcion: |
+  Suite CLI de ALMA: scripts y utilidades para automatización, registro de bitácoras, carga de memorias, changelog y gestión de flujos en el ecosistema ALMA_RESIST. 
+  Todos los comandos CLI centralizados para máxima trazabilidad y reutilización.
+estructura:
+  - add_bitacora_entry_v0.1.0.py: Registro automatizado de entradas de bitácora.
+  - [otros scripts CLI...]
+tags: [cli, alma, automatizacion, bitacora, core]
+linked_to:
+  - ../../README.yaml
+  - ../README.yaml
+responsable: "Kael"
+hash_verificacion: "sha256:pending"
+historial:
+  - "2025-06-18: Reubicación y renombrado a alma-cli para evitar ambigüedad y ordenar estructura."
+last_modified: "2025-06-18T00:00:00Z"
+last_modified_by: "Kael"

@@ -1,0 +1,30 @@
+# arca.yaml - Manifiesto Fundacional de ARCA
+metadatos:
+  id_unico: "manifiesto-YAML-002"
+  tipo: "manifiesto"
+  nombre: "arca_manifiesto.yaml"
+  version: "0.1.1"
+  estado: "archivado"
+  fecha_creacion: "2025-07-14"
+  fecha_modificacion: "2025-07-14"
+
+arca:
+  descripcion: |
+    ARCA es un sistema que se auto-configura y genera código básico para Machine Learning.
+    No es complejo: usa plantillas YAML y scripts simples para crear archivos y carpetas.
+    Ideal para proyectos pequeños de ML que necesitan orden.
+
+  principios:
+    - Autogeneración: "Crea archivos base (como .yaml o .py) a partir de ejemplos."
+    - ML básico: "Guarda configuraciones de modelos simples (sklearn, keras)."
+    - Logging: "Registra solo lo esencial: errores, nuevos archivos y cambios."
+
+  manifesto: |
+    ARCA es como un asistente que:
+    1. Crea archivos iniciales para tus proyectos de ML.
+    2. Guarda cómo configuraste tus modelos.
+    3. Registra qué hiciste por si lo olvidas.
+
+  creado_por: "Bird"
+  fecha_nacimiento: "2025-07-14"
+  version: "0.1.0"

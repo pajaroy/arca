@@ -1,0 +1,93 @@
+id: seguimiento_inteligente_v0.1.0
+version: "0.1.0"
+tipo: "contexto"
+schema: "almaresist.contexto_modulo_v1"
+descripcion: >
+  Documento base del módulo `seguimiento_inteligente`, encargado de sistematizar, registrar y analizar
+  los datos del cultivo 004 en forma semanal, bajo criterios de trazabilidad, compatibilidad IA/RAG,
+  escalabilidad futura y automatización progresiva.
+
+estructura:
+  - archivo/datasets
+  - archivo/downloads
+  - archivo/logs
+  - config/settings.json
+  - config/settings.yaml
+  - config/readme.md
+  - control/sprint_actual.md
+  - control/readme.md
+  - core/notebooks
+  - core/scripts
+  - core/tests
+  - docs/journal
+  - docs/changelog.md
+  - docs/readme.md
+  - meta/module.yaml
+  - meta/readme.md
+  - readme.md
+
+linked_to:
+  - /home/bird/alma_core/control_central/agentes/bird/core/notebooks/seguimiento_004/s25
+  - almaresist.medicion_cultivo_v1
+  - sensores Arduino (futuro)
+  - dashboard IA (futuro)
+
+tags: [cultivo, trazabilidad, automatizacion, medicion, inteligencia, analisis, almaresist]
+
+responsable: "bird"
+hash_verificacion: "sha256:pending"
+
+historial:
+  - "2025-06-17: Inicio del módulo y estructura base generada."
+  - "2025-06-17: Reformateo de mediciones cultivo004 semana 01 al estándar v0.2.0."
+
+last_modified: "2025-06-17T22:45:00Z"
+last_modified_by: "bird"
+
+proposito: >
+  El módulo `seguimiento_inteligente` nace con el fin de registrar, normalizar y analizar semanalmente
+  todas las mediciones de parámetros ambientales y fisiológicos de cada planta del cultivo 004.
+  El objetivo a corto plazo es estructurar y escalar este proceso manual, para que en el futuro
+  pueda ser automatizado con sensores (Arduino, ESP32, etc.) y analizado por agentes IA conectados al sistema ALMA.
+
+estandares_de_carga:
+  formato:
+    planta:
+      id_planta: "cultivo004_plt001"
+      nombre_visible: "PLT-001"
+      fertilidad:
+        valor: 44
+        unidad: "µs/cm"
+      humedad:
+        valor: 52
+        unidad: "%"
+      luz:
+        valor: 217
+        unidad: "lux"
+      estado_critico: false
+      observaciones: ""
+  archivo_semanal: "mediciones_cultivo004_semana_XX_v0.X.X.yaml"
+  resumen_semana:
+    total_plantas: 40
+    promedio_fertilidad: 45.2
+    promedio_humedad: 50.8
+    promedio_luz: 231.4
+    plantas_en_alerta: 3
+    observaciones_generales: "Varias plantas presentan humedad alta, revisar riego."
+
+etapas_futuras:
+  - Escalamiento a sensores físicos: conexión de Arduinos con medidores de EC, humedad y luz.
+  - Carga automatizada: scripts en `core/scripts/` para ingestión desde archivos `.csv` o APIs.
+  - Análisis IA: integración con modelos locales o vía RAG para detección de anomalías o sugerencias de cultivo.
+  - Dashboard visual: panel para seguimiento semanal desde web local o terminal.
+
+consideraciones:
+  - Los archivos deben poder convertirse fácilmente a `.json` y `.csv`.
+  - La trazabilidad de versiones se mantiene mediante changelog y hash.
+  - Se sugiere auditar semanalmente los datos con un agente IA o revisión humana.
+
+estado_actual:
+  - Estructura de carpetas creada
+  - Primer archivo de mediciones reformateado y validado
+  - Prompt `prompt_reformatear_mediciones_cultivo004_v0.2.0` ejecutado con éxito
+  - Pendiente: carga automatizada, script de resumen, validación completa por schema

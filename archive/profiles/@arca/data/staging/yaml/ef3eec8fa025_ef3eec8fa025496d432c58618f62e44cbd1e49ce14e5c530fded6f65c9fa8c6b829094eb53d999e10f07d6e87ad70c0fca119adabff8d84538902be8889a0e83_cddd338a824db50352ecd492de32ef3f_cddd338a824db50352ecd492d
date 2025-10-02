@@ -1,0 +1,58 @@
+# ===================================================================
+# METADATOS ALMA_CLEANER v0.1.0 - TEMPLATE EXPLICATIVO
+# Usar este archivo como guía base para todos los documentos/scripts.
+# Todos los campos importantes están explicados.
+# ===================================================================
+
+version: "0.1.0"             # Versión del template de metadatos
+
+title: ""                    # Título legible del archivo/script/documento
+
+uuid: ""                     # UUID único global (generado automáticamente)
+
+tipo: ""                     # Tipo de recurso (script, doc, config, dataset, etc.)
+
+schema: ""                   # Ruta o URL de esquema de validación (opcional)
+
+estado: ""                   # Estado del recurso: draft, active, deprecated, etc.
+
+descripcion: ""              # Descripción clara y concisa del contenido y propósito
+
+estructura:                  # Lista de secciones, clases, funciones, columnas, etc.
+  - ""
+
+tags:                        # Lista de palabras clave para búsqueda o IA
+  - ""
+
+linked_to:                   # Lista de archivos, scripts, módulos o recursos vinculados
+  - ""
+
+responsable:                 # Lista de responsables (usuarios, equipos, agentes)
+  - ""
+
+hash_verificacion: ""        # Checksum (sha256:xxxx...) para verificar integridad
+
+historial:                   # Lista de eventos históricos relevantes
+  - fecha: ""                # Fecha ISO 8601 (YYYY-MM-DD o con hora)
+    descripcion: ""          # Ej: "Creación del archivo", "Cambio de estructura", etc.
+
+last_modified: ""            # Fecha de última modificación (ISO 8601)
+last_modified_by: ""         # Usuario/Agente que realizó la última modificación
+
+created_at: ""               # Fecha de creación del archivo (ISO 8601)
+created_by: ""               # Usuario/Agente que creó el archivo
+
+# ======== CAMPOS AVANZADOS / OPCIONALES ========
+
+proceso_origen: ""           # Proceso/script que originó este archivo (si aplica)
+input_data:                  # Datos o archivos de entrada (para scripts/generados)
+  - ""
+output_data:                 # Datos o archivos de salida/generados
+  - ""
+comentarios: ""              # Espacio libre para notas o aclaraciones técnicas
+
+# ===================================================================
+# USO: Completar solo los campos que correspondan según el recurso.
+# Los campos lista siempre deben ser arrays YAML (aunque sea uno solo).
+# La integridad del template facilita la trazabilidad y auditoría IA.
+# ===================================================================

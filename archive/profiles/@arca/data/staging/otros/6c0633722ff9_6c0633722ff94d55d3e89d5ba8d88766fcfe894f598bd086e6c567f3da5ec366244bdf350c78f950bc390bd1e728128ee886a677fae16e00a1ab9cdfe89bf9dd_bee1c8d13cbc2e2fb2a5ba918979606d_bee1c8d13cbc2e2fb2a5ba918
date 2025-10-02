@@ -1,0 +1,11 @@
+# alma_empresa/ – Gestión Empresarial de ALMA_RESIST
+
+Este módulo contiene toda la gestión, documentación, memorias y automatizaciones empresariales del ecosistema ALMA_RESIST.
+
+- **docs/**: Documentación, papers, estrategias, protocolos y recursos institucionales.
+- **bitacoras/**: Bitácoras empresariales, log de reuniones, decisiones, hitos, etc.
+- **memorias/**: Memorias de gestión, evolución de procesos, registros automáticos.
+- **actas/**: Actas y acuerdos formales, cambios societarios, hitos legales y contractuales.
+- **scripts/**: Automatizaciones, reportes y herramientas de gestión interna.
+
+Incluye el onboarding de agentes como Emma (asesor empresarial IA), memorias de gestión, y registro auditable de la evolución de ALMA_RESIST como empresa.

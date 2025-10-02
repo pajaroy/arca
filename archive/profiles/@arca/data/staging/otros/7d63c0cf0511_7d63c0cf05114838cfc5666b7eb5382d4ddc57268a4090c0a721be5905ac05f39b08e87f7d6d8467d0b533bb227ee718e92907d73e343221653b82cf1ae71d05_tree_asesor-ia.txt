@@ -1,0 +1,150 @@
+.
+├── agentes
+│   ├── alma
+│   │   ├── archivo
+│   │   ├── bitacoras
+│   │   ├── config
+│   │   ├── contexto
+│   │   ├── control
+│   │   ├── core
+│   │   ├── docs
+│   │   ├── logs
+│   │   ├── memoria_viva
+│   │   ├── meta
+│   │   ├── prompts
+│   │   ├── README.md
+│   │   ├── tools
+│   │   └── ubicacion.md
+│   ├── bitacora_viva.json
+│   ├── bitacora_viva.md
+│   ├── bitacora_viva.yaml
+│   ├── centralesis
+│   │   ├── archivo
+│   │   ├── bitacoras
+│   │   ├── config
+│   │   ├── contexto
+│   │   ├── control
+│   │   ├── core
+│   │   ├── docs
+│   │   ├── logs
+│   │   ├── memoria_viva
+│   │   ├── meta
+│   │   ├── prompts
+│   │   ├── README.md
+│   │   ├── tools
+│   │   └── ubicacion.md
+│   ├── emma
+│   │   ├── archivo
+│   │   ├── bitacoras
+│   │   ├── config
+│   │   ├── contexto
+│   │   ├── control
+│   │   ├── core
+│   │   ├── docs
+│   │   ├── logs
+│   │   ├── memoria_viva
+│   │   ├── meta
+│   │   ├── prompts
+│   │   ├── README.md
+│   │   └── tools
+│   └── kael
+│       ├── archivo
+│       ├── bitacoras
+│       ├── config
+│       ├── contexto
+│       ├── control
+│       ├── control_central_cli_cleaner.md
+│       ├── core
+│       ├── docs
+│       ├── logs
+│       ├── memoria_viva
+│       ├── meta
+│       ├── prompts
+│       ├── README.md
+│       ├── tools
+│       └── ubicacion.md
+├── archivo
+│   ├── datasets
+│   │   └── README.md
+│   ├── downloads
+│   │   ├── historico
+│   │   └── README.md
+│   ├── logs
+│   │   └── README.md
+│   └── README.md
+├── centralesis
+│   └── contexto
+│       └── centralesis.md
+├── comandos.md
+├── config
+│   ├── README.md
+│   └── settings.yaml
+├── control
+│   ├── checklist_fase1_sync.md
+│   ├── README.md
+│   └── sprint_actual.md
+├── core
+│   ├── notebooks
+│   │   ├── flujo_de_agentes
+│   │   ├── proyecto_alma
+│   │   ├── proyecto_emma
+│   │   ├── proyecto_kael
+│   │   └── README.md
+│   ├── README.md
+│   ├── scripts
+│   │   └── README.md
+│   └── tests
+│       └── README.md
+├── docs
+│   ├── changelog.md
+│   ├── changelog.yaml
+│   ├── historicos
+│   │   ├── confirmacion_de_rol_deepseek.md
+│   │   ├── confirmacion_de_rol_gpt.md
+│   │   ├── Contexto-IA.md
+│   │   ├── contrato_fundacional_asesor-IA_v1.md
+│   │   ├── contrato_fundacional_asesor-IA_v2.md
+│   │   └── README.md
+│   ├── history
+│   │   └── README.md
+│   ├── prompts
+│   │   ├── prompt_asesor_backup_terminal_v1.md
+│   │   ├── prompt_base_asistente_IA_control_central.md
+│   │   └── README.md
+│   └── README.md
+├── interacciones
+│   ├── 2025-05-29_log_test.md
+│   └── README.md
+├── meta
+│   ├── module.yaml
+│   └── README.md
+├── metadata.yaml.md
+├── prompt_base.md
+├── README.md
+├── scripts
+│   └── README.md
+├── sessions
+│   ├── 20240601_activacion_sistema.md
+│   └── README.md
+├── status
+│   ├── asesor_status.yaml
+│   └── README.md
+├── status.md
+├── templates
+│   ├── ALMA_RESIST_agentes_idea_base.md
+│   ├── asesor_base
+│   │   ├── bitacoras
+│   │   ├── contexto
+│   │   ├── docs
+│   │   ├── logs
+│   │   ├── memoria_viva
+│   │   ├── meta
+│   │   ├── prompts
+│   │   ├── README.md
+│   │   ├── tools
+│   │   └── ubicacion.md
+│   ├── README.md
+│   └── template_agente_ia_base_v2.md
+└── tree_asesor-ia.txt
+
+90 directories, 58 files

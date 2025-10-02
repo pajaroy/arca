@@ -1,0 +1,42 @@
+---
+module: todo
+type: core
+status: in_progress
+created: '2025-05-23'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# ✅ TODO.md – Seguimiento de Tareas (Sprint 2.1 → 2.5)
+
+📅 Última actualización: 2025-05-28  
+🔁 Formato tipo Kanban para seguimiento de tareas y pendientes técnicos en ALMA_RESIST.
+
+---
+
+## [!] En curso
+- [!] Redacción de `.project.md` para estado general del sistema
+- [!] Integración de sistema de testing manual (`testing/`)
+- [!] Registro final en `README.md`, `CONTEXT.md`, `version.md`
+- [!] Revisión final de estructura y snapshot en `docs/versiones/`
+
+## [ ] Pendiente
+- [ ] Subir validadores y scripts documentados a repositorio seguro
+- [ ] Documentar sistema de CLI IA (`core/cli.py`) para Sprint 2.6
+- [ ] Unificar interfaz humano ↔ IA con ejemplos en `prompt_tecnico_base.md`
+
+## [x] Completado
+- [x] Consolidación de snapshot `v0.0.0.2_estructura_documental`
+- [x] Firma final y cierre de Sprint 2.1 en el documento principal
+- [x] Creación de carpeta `estructura_doc/` con plantillas
+- [x] Generación de `plantilla_documento.md`, `plantilla_readme.md`, `plantilla_version.md`
+- [x] Redacción y descarga del apéndice de checklist final
+- [x] Implementación de `validate_docs.py` con validación flexible
+- [x] Automatización de backups en `fix_metadata.py`
+- [x] Modularización de comandos útiles (`utilidades/comandos_utiles/`)
+- [x] Ejecución y validación del pipeline bash `validar_documentacion.sh`
+- [x] Reestructuración completa con `README.md` por carpeta
+- [x] Consolidación del sistema como MVP operativo estable
+- [x] Ejecución de scripts: `force_snake_case_modules.py`, `add_linked_to_minimo.py`
+- [x] Auditoría hasta L4 de carpetas activas
+- [x] Cierre y validación de Sprint 2.5 – versión `v0.0.0.5`

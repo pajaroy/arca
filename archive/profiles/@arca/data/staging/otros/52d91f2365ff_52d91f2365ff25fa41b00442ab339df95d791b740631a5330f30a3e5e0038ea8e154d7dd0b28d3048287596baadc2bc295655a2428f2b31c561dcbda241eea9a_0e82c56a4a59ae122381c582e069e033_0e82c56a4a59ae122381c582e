@@ -1,0 +1,26 @@
+# 🚀 Roadmap ALMA LIBRE v0.0.6.3
+
+📅 Planificación: 2025-05-12  
+🎯 Objetivo central: Activar funcionalidades asistenciales reales de IA y CLI  
+👤 Responsable: santi
+
+
+## 📋 Checklist v0.0.6.3 – Alma como Asistente
+
+### 🔌 CLI Inteligente
+- [ ] Crear módulo: `MODULOS/CLI_Assistant/`
+- [ ] Comando: `alma buscar <término>` (vector search)
+- [ ] Comando: `alma resumir <fecha>` (resumen diario/semanal)
+- [ ] Comando: `alma diagnosticar` (estado del sistema)
+- [ ] Guardar logs en `BITACORA_CENTRAL/LOGS_CLI/`
+
+### 📬 Feedback automático
+- [ ] Desarrollar `recolector_feedback.py`
+- [ ] IA o humano guarda sugerencias directamente
+- [ ] Estándar basado en `feedback_sugerencia.yaml`
+
+### 📈 Métricas internas
+- [ ] Medir archivos cargados por semana
+- [ ] Detectar qué módulos se usan
+- [ ] Registrar actividad en `BITACORA_CENTRAL/METRICAS/`
+

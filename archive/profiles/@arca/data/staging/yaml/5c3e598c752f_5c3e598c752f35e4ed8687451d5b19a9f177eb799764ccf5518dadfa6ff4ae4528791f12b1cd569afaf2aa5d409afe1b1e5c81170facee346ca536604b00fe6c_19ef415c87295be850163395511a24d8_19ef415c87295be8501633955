@@ -1,0 +1,77 @@
+---
+tipo: configuracion
+id: CONFIGURACION_2025-06-05_e4bac4
+version: '1.0'
+formato: yaml
+modulo: ALMA_RESIST
+titulo: Centralisis V1.1
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:55273a5125714b895d63f139861985da7cea9ea728896d54f444fa55febbd319
+---
+schema_memorias:
+  campos_obligatorios: [fecha, tipo, resumen, autor]
+  formato_fecha: "YYYY-MM-DD"
+  tipos_permitidos: [decision, reflexion, revision_programada, propuesta_mejora, alerta_omision, cierre_ciclo]
+metricas_criticas:
+  alertas_omision_semana: 3
+  memorias_pendientes: 10
+  dias_sin_revision: 28
+
+tags: [centralesis, auditor, gobernanza, memoria_institucional, arquitectura, obsidian]
+tags_clean: [centralesis, auditor, gobernanza, memoria_institucional, arquitectura, obsidian]
+
+memorias_institucionales:
+  - fecha: 2025-06-04
+    tipo: decision
+    modulo: gobernanza
+    resumen: Se decidió escindir la operación cotidiana (ALMA) del custodio institucional (Centralesis) para proteger la lógica de autoridad y gobernanza.
+    tags: [gobernanza, autoridad, institucional, decision]
+    autor: centralesis
+
+  - fecha: 2025-06-05
+    tipo: reflexion
+    modulo: arquitectura
+    resumen: Recomiendo que cada asistente del sistema proponga nuevas memorias ante cada decisión, aprendizaje o error relevante. Así se fortalece la trazabilidad crítica del sistema.
+    tags: [memoria_viva, mejora_continua, trazabilidad, auditoria]
+    autor: centralesis
+
+  - fecha: 2025-06-10
+    tipo: revision_programada
+    modulo: gobernanza
+    resumen: Revisión de coherencia entre archivos raíz, verificación de roles de IAs subordinadas, y chequeo de cumplimiento de protocolos.
+    hallazgos:
+      - Archivos raíz coherentes
+      - Emma y Kael correctamente documentados
+      - No se detectaron incidencias críticas
+    recomendaciones:
+      - Mantener periodicidad de revisión cada 3 semanas
+      - Explorar automatización de bitácoras en próximos sprints
+    tags: [revision, gobernanza, cumplimiento]
+    autor: centralesis
+
+plantillas_memorias:
+  - tipo: registro_operaciones_criticas
+    resumen: Toda operación crítica debe registrarse como memoria viva para asegurar trazabilidad y auditoría plena.
+  - tipo: reflexion_autocritica
+    resumen: Todo error o problema detectado debe dejar constancia, análisis y propuesta de mejora.
+  - tipo: propuesta_mejora
+    resumen: Toda IA o humano que detecte un área de mejora debe dejar registrada la propuesta, aunque su implementación quede pendiente.
+
+apendice_ia_subordinadas_activas:
+  - nombre: Emma
+    rol: IA empresarial y compliance
+    status: activo
+  - nombre: Kael
+    rol: Auditor CLI, control estructural
+    status: activo
+  - nombre: DeepSeek
+    rol: IA técnica complementaria
+    status: activo

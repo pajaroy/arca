@@ -1,0 +1,89 @@
+# 📘 Diseño de Scripts Automatizados: Changelog y README para ALMA_RESIST
+
+## 1. Estructura Base para el Changelog (YAML)
+
+El changelog debe mantener una lista estructurada de versiones, cambios y metadatos relevantes:
+
+```yaml
+changelog:
+  - version: "0.1.0"
+    fecha: "2025-06-06"
+    autor: "Santi & Kael"
+    cambios:
+      - "Creación de la estructura inicial de scripts_bitacora y carpetas docs/src"
+      - "Carga de pruebas iniciales y debugging del script bitácora viva"
+    impacto: "Automatización de registros, QA documentado, base modular lista"
+    tags: [bitacora, scripts, automatizacion, cli]
+
+  - version: "0.1.1"
+    fecha: "2025-06-06"
+    autor: "Santi"
+    cambios:
+      - "Test exitoso de agregado automático en bitácora viva"
+    impacto: "Valida MVP, cierra debugging, próximo: extensión multi-formato"
+    tags: [qa, mvp, test]
+```
+
+
+## 3. Script para Automatizar README.md
+
+### 🎯 Objetivo
+
+- Automatizar la edición de campos clave en el README:
+  - Metadata en YAML frontmatter (`---`)
+  - Sección descripción
+  - Fechas de creación y actualización
+  - Autores y tags
+
+### 💡 Propuesta Técnica
+
+- Usar el mismo esquema de CLI amigable que en changelog.
+- Validar estructura existente o crear README base si no existe.
+- Permitir actualizar o añadir secciones controladas automáticamente.
+
+
+### 🔧 Mejora del Prompt actual
+
+Tu prompt está excelente como base, pero te dejo una versión optimizada, con más precisión para DeepSeek o GPT:
+
+```yaml
+id: PROMPT_ADD_CHANGELOG_ENTRY_2025-06-06_v2
+objetivo: Desarrollar un script CLI llamado `add_changelog_entry.py` que permita agregar entradas estructuradas al archivo `changelog.yaml` del proyecto ALMA_RESIST.
+
+entrada:
+  campos_requeridos:
+    - version (str): versión semántica (ej: "0.1.2")
+    - cambios (list o str): lista de cambios realizados
+    - impacto (str): resumen del impacto general de esta versión
+    - autor (str): nombre del autor o autores
+  campos_opcionales:
+    - fecha (str): ISO 8601 (YYYY-MM-DD), default = fecha actual
+    - tags (list o str): etiquetas para clasificación
+  comportamiento:
+    - Validar existencia y estructura del archivo changelog.yaml (crear si no existe).
+    - Hacer un backup automático con timestamp antes de modificar el archivo.
+    - Validar unicidad de la versión (rechazar si ya existe).
+    - Insertar nueva entrada al **principio** de la lista (último cambio arriba).
+    - Validar estructura final del YAML antes de guardar.
+    - Mostrar resumen por consola (stdout) con los datos insertados.
+    - CLI amigable con `argparse` y manejo de errores claro.
+
+salida_esperada:
+  archivo: changelog.yaml
+  estructura:
+    changelog:
+      - version: "0.1.2"
+        fecha: "2025-06-06"
+        autor: "Santi"
+        cambios:
+          - "Agregado de CLI para changelog automático"
+          - "Validación de versiones y backups implementados"
+        impacto: "Automatiza la documentación de versiones, QA formalizado"
+        tags: [cli, changelog, automation, qa]
+
+notas:
+  - El script debe ser modular y fácil de adaptar para otros archivos similares.
+  - No usar librerías externas más allá de `PyYAML`, `argparse`, y estándar de Python 3.
+  - Considerar futuras integraciones con scripts de bitácora y readme.
+```
+

@@ -1,0 +1,37 @@
+
+### ⚠️ Áreas de Mejora
+
+#### 1. `downloads/archivados/`
+- 🔻 Obsoleto. Se recomienda mover archivos a `downloads/historico/` y dejar un `README.md` explicativo en `archivados/`.
+
+#### 2. `downloads/readmes_control_central/`
+- 📁 Nombre largo y redundante. Reemplazar por `readmes/` o integrar dentro de `docs/estructura/`.
+
+#### 3. `cli_cleaner/`
+- Contiene solo el `.md` de prompt. Si no habrá scripts, moverlo a `docs/prompts/` o `asesor-ia/` y eliminar carpeta.
+
+#### 4. `logs/` vs `logs_historicos/`
+- Duplicación innecesaria. Consolidar o clarificar mediante subcarpetas (`logs/activos/`, `logs/historico/`).
+
+#### 5. `planificacion/ideas/readme.txt`
+- Formato `.txt` inconsistente. Convertir a `readme.md`.
+
+
+### 🏷️ Tags IA-Friendly (para Obsidian & sistemas IA)
+
+A partir de este apéndice, se adopta el siguiente esquema de etiquetado para trazabilidad intermodular:
+
+```yaml
+tags:
+  - control_central
+  - estructura
+  - limpieza
+  - auditoria
+  - ia_friendly
+  - checklist
+  - trazabilidad
+  - obsidian_tags
+```
+
+Estos tags deben incluirse manualmente en el YAML inicial de cada `.md` nuevo o apéndice a futuro para permitir su rastreo por IA y motores semánticos.
+

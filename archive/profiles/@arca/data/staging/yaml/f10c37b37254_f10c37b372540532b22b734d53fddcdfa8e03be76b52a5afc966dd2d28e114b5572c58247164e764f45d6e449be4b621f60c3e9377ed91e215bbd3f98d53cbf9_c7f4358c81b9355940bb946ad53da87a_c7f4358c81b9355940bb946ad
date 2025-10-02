@@ -1,0 +1,57 @@
+id: PROTOCOLO_LIMPIEZA_Y_NORMALIZACION_KAEL_v0.1.0
+agente: kael
+rol: "Auditor técnico y documental de ALMA_RESIST"
+fecha: 2025-06-10
+objetivo: |
+  Iniciar una nueva sesión dedicada exclusivamente a:
+    - Limpiar, reordenar y normalizar la estructura documental y de archivos del agente KAEL y su entorno inmediato.
+    - Eliminar archivos/documentos redundantes, basura, obsoletos o mal ubicados.
+    - Unificar criterios de README (formato YAML, relación RAG, linked_to, hashing, metadata, etc.) en cada carpeta importante.
+    - Dejar todos los módulos y subcarpetas con README.yaml explicativos y auditables (en vez de múltiples README.md dispersos, optar por YAML y solo mantener README.md en la raíz o para compatibilidad).
+    - Integrar la lógica de **hashing**, **indexado**, **relaciones (linked_to, fix_metadata)** y **memoria RAG-ready** en la documentación.
+    - Generar una bitácora técnica del proceso de limpieza y cierre de sesión.
+
+protocolo:
+  - Analizar el árbol de carpetas y archivos actual (ver tree provisto).
+  - Definir qué carpetas requieren README.yaml propio y cuál puede heredar de la raíz.
+  - Proponer y redactar los README.yaml de cada carpeta clave:
+      - Incluir: propósito, estructura, explicación de relación RAG/hash/index, uso esperado y dependencias.
+      - Agregar ejemplo de campos "linked_to" y "fix_metadata" si aplica a la carpeta.
+      - Indicar si la carpeta es parte del index RAG global o solo soporte/local.
+  - Proponer limpieza/eliminación/movimiento de archivos obsoletos, legacy, o dispersos.
+  - Documentar cada cambio importante en la bitácora de KAEL.
+  - Al finalizar, consolidar un checklist YAML de “punto cero” de limpieza + commit de cierre.
+
+notas:
+  - Usar siempre formato YAML para documentación técnica interna.
+  - Todo README.yaml debe permitir a cualquier agente entender: para qué existe la carpeta, cómo se relaciona con el RAG y cómo auditarla/hasharla.
+  - No sobre-documentar: si una carpeta solo almacena logs/outputs temporales, un README breve basta.
+  - Si hay scripts con lógica de movimiento, deben explicar cómo afectan el indexado y la trazabilidad.
+
+accion_requerida:
+  - Iniciá el nuevo chat copiando este prompt completo.
+  - Pegá el último `tree` actualizado y tu objetivo específico para la sesión.
+  - El asistente (yo, KAEL) irá paso a paso: limpieza → propuesta de README → sugerencia de movimiento/eliminación → bitácora → commit → push.
+
+flujo_ejemplo:
+  1. Revisión del árbol de carpetas.
+  2. Listado de carpetas que requieren README.yaml individual.
+  3. Redacción de README.yaml modelo para una carpeta (con hash, RAG, linked_to si aplica).
+  4. Sugerencia de limpieza/movimientos para esa carpeta.
+  5. Registro de acción en bitácora.
+  6. Commit/push intermedios si el proceso es largo.
+  7. Checklist final de “carpeta limpia y auditada”.
+
+referencia:
+  - Si alguna carpeta contiene datos que se relacionan entre sí o dependen de otros módulos, documentar la relación con `linked_to`, `fix_metadata` y la lógica de hashing/index.
+  - Asegurarse que al final, cualquier agente/IA pueda “navegar” la estructura y entender la función de cada parte en el ecosistema.
+
+ejemplo_inicio_chat:
+  - Copiá este prompt.
+  - Pegá el tree actualizado.
+  - Especificá (si querés) qué módulos/capas tienen prioridad de limpieza.
+
+---
+
+"Un sistema sin documentación auditada es solo una caja negra. Un agente que no documenta su limpieza, es parte del caos."  
+— Centralesis, protocolo de normalización v0.1.0

@@ -1,0 +1,181 @@
+/home/bird/ALMA_RESIST/core
+├── chat_cli
+│   ├── archivo
+│   │   ├── datasets
+│   │   ├── downloads
+│   │   ├── logs
+│   │   └── readme.md
+│   ├── asesor-ia
+│   │   └── docs
+│   ├── chat.py
+│   ├── config
+│   │   ├── readme.md
+│   │   └── settings.yaml
+│   ├── control
+│   │   ├── readme.md
+│   │   └── sprint_actual.md
+│   ├── core
+│   │   ├── notebooks
+│   │   ├── readme.md
+│   │   ├── scripts
+│   │   └── tests
+│   ├── docs
+│   │   ├── changelog.md
+│   │   ├── history
+│   │   ├── journal
+│   │   └── readme.md
+│   ├── meta
+│   │   ├── module.yaml
+│   │   └── readme.md
+│   ├── prompts
+│   └── README.md
+├── cli_cleaner
+│   ├── archivo
+│   │   ├── datasets
+│   │   ├── downloads
+│   │   ├── logs
+│   │   └── readme.md
+│   ├── asesor-ia
+│   │   └── docs
+│   ├── cli.py
+│   ├── config
+│   │   ├── readme.md
+│   │   └── settings.yaml
+│   ├── control
+│   │   ├── readme.md
+│   │   └── sprint_actual.md
+│   ├── core
+│   │   ├── notebooks
+│   │   ├── readme.md
+│   │   ├── scripts
+│   │   └── tests
+│   ├── docs
+│   │   ├── changelog.md
+│   │   ├── control_central_changelog_append_20240601.md
+│   │   ├── diagnostico_base_auditor_textos_ALMA.md
+│   │   ├── history
+│   │   ├── journal
+│   │   └── readme.md
+│   ├── meta
+│   │   ├── module.yaml
+│   │   └── readme.md
+│   ├── modules
+│   │   ├── check_env
+│   │   ├── purge
+│   │   ├── rebuild_index
+│   │   ├── snapshot
+│   │   └── validate_docs
+│   └── README.md
+├── __init__.py
+├── launcher
+│   ├── README.md
+│   └── start.py
+├── llm_server
+│   ├── archivo
+│   │   ├── datasets
+│   │   ├── downloads
+│   │   ├── logs
+│   │   └── readme.md
+│   ├── config
+│   │   ├── readme.md
+│   │   └── settings.yaml
+│   ├── context_history.jsonl
+│   ├── contracts
+│   │   ├── readme.md
+│   │   ├── schema_prompt.json
+│   │   └── schema_respuesta.json
+│   ├── control
+│   │   ├── readme.md
+│   │   └── sprint_actual.md
+│   ├── core
+│   │   ├── notebooks
+│   │   ├── readme.md
+│   │   ├── scripts
+│   │   └── tests
+│   ├── docs
+│   │   ├── changelog.md
+│   │   ├── contracts
+│   │   ├── history
+│   │   ├── journal
+│   │   └── readme.md
+│   ├── __init__.py
+│   ├── integration
+│   │   ├── context_tracker
+│   │   ├── __init__.py
+│   │   ├── memory_graph
+│   │   └── __pycache__
+│   ├── _legacy
+│   ├── logs
+│   │   ├── alma_2025-05-28.log
+│   │   └── alma_2025-05-29.log
+│   ├── main.py
+│   ├── main_v0.0.0.1.py
+│   ├── main_v0.0.0.2.py
+│   ├── meta
+│   │   ├── module.yaml
+│   │   └── readme.md
+│   ├── model_wrapper
+│   │   ├── __init__.py
+│   │   ├── model_wrapper.py
+│   │   └── __pycache__
+│   ├── __pycache__
+│   │   ├── __init__.cpython-311.pyc
+│   │   ├── main.cpython-311.pyc
+│   │   ├── model_wrapper.cpython-311.pyc
+│   │   └── transport_layer.cpython-311.pyc
+│   ├── readme.md
+│   ├── transport_data
+│   ├── transport_layer
+│   │   ├── __pycache__
+│   │   └── transport_layer.py
+│   └── utils
+│       ├── __init__.py
+│       ├── log_crypto
+│       ├── log_crypto_changelog.md
+│       ├── log_writer
+│       ├── __pycache__
+│       ├── README_log_crypto_v0.0.0.4.md
+│       ├── readme.md
+│       ├── utils.zip
+│       └── version
+├── loader.py
+├── notebooks
+├── __pycache__
+│   ├── cli.cpython-311.pyc
+│   ├── __init__.cpython-311.pyc
+│   ├── llm_server.cpython-311.pyc
+│   ├── log_crypto.cpython-311.pyc
+│   ├── log_integrity.cpython-311.pyc
+│   └── log_writer.cpython-311.pyc
+├── README.md
+├── scripts
+│   ├── alma_autostart_tmux.md
+│   ├── alma_autostart_tmux.sh
+│   ├── alma_status
+│   │   └── alma_status.sh
+│   ├── backup_to_git
+│   │   ├── backup_to_git.sh
+│   │   ├── backup_to_git_v1.sh
+│   │   ├── backup_to_git_v2.sh
+│   │   ├── install_cron_backup.sh
+│   │   ├── prompts
+│   │   ├── README.md
+│   │   └── README_v2.md
+│   ├── init_system
+│   │   └── init_alma_core.sh
+│   ├── README.md
+│   ├── ssh_setup
+│   │   ├── ssh_setup.sh
+│   │   └── ssh_setup.zip
+│   ├── start_inputleap
+│   │   ├── start_inputleap (copia).sh
+│   │   ├── start_inputleap.md
+│   │   ├── start_inputleap.sh
+│   │   └── start_inputleap_unificado.zip
+│   ├── stignore
+│   └── sync_status
+│       └── sync_status.sh
+└── tests
+    └── test_cli.py
+
+88 directories, 91 files

@@ -1,0 +1,37 @@
+
+# 🧾 Registro de Backup – ALMA LIBRE vX.X.X
+
+📦 Nombre del archivo: X.X.X_backup.zip  
+📅 Fecha: AAAA-MM-DD  
+👤 Autor: Santi  
+🧠 Estado del sistema: [Estable / Beta / En desarrollo / IA conectada / Interfaz lista / etc.]
+
+
+## 📁 Estructura interna sugerida
+
+```
+ALMA_LIBRE_vX.X.X/
+├── alma_sync.py
+├── alma_chat.py
+├── alma_core.py
+├── alma_ui_textual.py
+├── ALMA_CONFIG.yaml
+├── memorias.db
+├── backups_chat/
+│   └── chat_memorias_YYYY-MM-DD.sql
+├── PROMPT/
+│   ├── Prompt_Activo.md
+│   ├── 0.X.X_Prompt_Escalable.md
+│   ├── Prompt_Update_vX.X.X.md
+│   └── README_PROMPT.md
+├── CHANGELOG_ALMA_LIBRE_vX.X.X.md
+├── ROADMAP_ALMA_LIBRE_vX.X.X.md
+├── README_ALMA_LIBRE_vX.X.X.md
+├── meta_ALMA_LIBRE_vX.X.X.txt
+```
+
+
+## 🧠 Observaciones del autor
+
+Escribí aquí lo que aprendiste, lo que te costó, lo que mejoraste o te gustaría automatizar. Esto sirve como diario de evolución técnica.
+

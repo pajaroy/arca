@@ -1,0 +1,46 @@
+# 🧩 ENTIDADES – ALMA_EMPRESA
+
+## 📌 Descripción General
+
+La carpeta `entidades/` contiene las unidades operativas autónomas vinculadas a **ALMA_EMPRESA**, tanto en su rol legal (ONGs, empresas, cooperativas), como en su función económica y productiva. Cada entidad tiene su propia estructura modular, pero responde a un marco estratégico común trazado por ALMA.
+
+Estas entidades están alineadas a la misión de ALMA: combinar impacto social, producción sustentable y automatización con IA.
+
+## 🧱 Entidades actualmente integradas
+
+- **Cannabird/** → ONG orientada al cultivo, investigación y producción de cannabis con fines medicinales y sociales.
+- **13CC/** → ONG aliada con impacto social y proyección territorial. Proceso de formalización interna en curso.
+
+
+Cada una de estas entidades se gestiona como una carpeta autónoma siguiendo la metodología `estructura_autonoma_v2`, con su propio roadmap, control y documentación.
+
+## 🧬 Criterios para integrar nuevas entidades
+
+- Tener una **estructura organizativa clara** (roles definidos).
+- Alinearse con los valores institucionales de ALMA.
+- Poseer documentación fundacional o una proyección clara.
+- Respetar la modularidad: cada carpeta debe poder moverse como unidad autónoma.
+
+## 🧭 Estado Actual
+
+- Las carpetas están en distintas fases de formalización.
+- Se está estandarizando la documentación interna.
+- En curso la definición de vínculos entre entidades vía `control/`.
+
+## 🧱 Metodología Aplicada
+
+Cada entidad debe tener:
+- `docs/` con README, bitácoras y changelog.
+- `config/` para definiciones estructurales.
+- `control/` con tareas, checklists y sprints.
+- Vinculación explícita al módulo `ALMA_EMPRESA`.
+
+## 📌 Proyección 2025
+
+- Formalizar Cannabird como ONG modelo replicable.
+- Integrar 13CC como ONG federada bajo un estándar único.
+- Establecer sistema de control cruzado con `ALMA_RESIST/control`.
+
+---
+
+📄 Documento generado el 2025-05-29 bajo la metodología oficial ALMA.

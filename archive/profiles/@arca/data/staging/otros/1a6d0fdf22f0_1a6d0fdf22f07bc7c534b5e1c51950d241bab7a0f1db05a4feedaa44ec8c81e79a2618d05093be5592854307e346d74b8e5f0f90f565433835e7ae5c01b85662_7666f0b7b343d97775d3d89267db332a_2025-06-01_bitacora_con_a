@@ -1,0 +1,136 @@
+# 📘 Bitácora de Trabajo – 2025-06-01
+
+## 📍 Contexto
+Segundo día de reinicio total del sistema ALMA_RESIST. El objetivo principal del día es **llevar a cabo el Sprint 0.2** correspondiente a la sincronización total de los nodos `ALMA_CORE` y `ALMA_RESIST`, así como establecer las bases para un sistema de bitácoras IA-friendly.
+
+## 📦 Actividades Principales
+
+- Se estableció oficialmente el prompt base para bitácoras: [[prompt_bitacora_control_central]].
+- Confirmación de sincronización entre nodos como punto prioritario.
+- Organización de archivos críticos: creación de carpetas `/status/` en `control_central/` y `asesor-ia/`.
+- Inicia la implementación del Sprint 0.2:
+  - Instalación y configuración de Syncthing en ambos nodos.
+  - Definición de carpetas a sincronizar (`ALMA_RESIST/`, `obsidian_vault/`).
+  - Inicio de documentación viva en `docs/sync/`.
+
+## 📌 Enlace al Sprint
+Archivo base: `control_central/control/sprint_actual.md`  
+Sprint activo: `sprint_actual_0.2_sincronizacion.md`
+
+## 🛠️ Pendientes Críticos
+
+- [ ] Finalizar scripts de verificación (`sync_status.sh`).
+- [ ] Crear backup automático a GitHub vía `cron`.
+- [ ] Validación CLI con comando `alma status --sync`.
+- [ ] Cierre del README en `docs/sync/`.
+
+## 🧠 Reflexiones del Día
+
+El segundo día de reinstalación del sistema reafirma la necesidad de:
+- Estandarizar los prompts y registros diarios.
+- Automatizar todo el flujo de trabajo para asegurar replicabilidad y tolerancia a errores.
+
+> Hoy consolidamos el eje operativo más crítico del sistema: **sincronización total**.
+
+---
+
+### 📁 Estado de Carpetas
+
+- [x] `control_central/status/`
+- [x] `control_central/asesor-ia/status/`
+- [x] `docs/journal/prompts/` con prompt de bitácora
+
+---
+
+### 🔖 Tags de memoria futura
+
+`#bitacora` `#sync` `#sprint_0.2` `#control_central` `#nodos` `#alma_resist`
+
+---
+
+## 📎 Apéndice – Consolidación de la Jornada
+
+---
+
+### 🗂️ Acción Registrada: Generación de READMEs
+
+En el día 2025-06-01 se documentaron los módulos clave de `control_central/` con archivos `README.md` IA-friendly para permitir navegación, trazabilidad y asistencia técnica futura.
+
+📁 Carpetas documentadas:
+- `archivo/`
+- `asesor-ia/core/`
+- `asesor-ia/docs/`
+- `core/scripts/`
+- `logs/`
+- `status/`
+
+---
+
+### 🧠 Detalle del Día: Consolidación de Sincronización y Backup
+
+#### ✅ Contexto General
+
+En esta jornada se avanzó en la implementación del Sprint 0.2 con foco en:
+- Establecer la **sincronización permanente** entre `ALMA_CORE` y `ALMA_RESIST`.
+- Configurar el sistema de **backups automáticos a GitHub**.
+- Normalizar la **estructura de carpetas** y trazabilidad mediante `README.md`.
+- Preparar la infraestructura para auditorías futuras.
+
+---
+
+### 🔄 Sincronización entre nodos
+
+🔧 Se instaló y configuró **Syncthing** en ambos nodos.  
+📁 Se definió `/home/bird/ALMA_RESIST` como carpeta madre a sincronizar.  
+📡 Confirmada la sincronización completa y funcional en tiempo real.  
+🧾 Se registraron los pasos de instalación, claves, y pruebas cruzadas.  
+🔐 Clave SSH configurada manualmente con validación contra GitHub.
+
+---
+
+### 🧾 Backup automático a GitHub
+
+💡 Se diseñó y ejecutó el script `backup_to_git.sh` con las siguientes características:
+- Monitorización de cambios en `ALMA_RESIST/` usando `inotifywait`.
+- Commits automáticos al detectar modificaciones.
+- Push automático al branch `main`.
+- Log detallado en: `/home/bird/ALMA_RESIST/control_central/logs/backup_git/backup_git.log`
+
+📌 Se solucionaron errores como:
+- Configuración SSH ausente o incorrecta.
+- Claves no autorizadas en GitHub.
+- Conflictos por archivos eliminados sin `git rm`.
+- Multiplicación de procesos por ejecución redundante.
+
+---
+
+### 🛠️ Lecciones operativas del día
+
+- Todo archivo debe ser eliminado con `git rm` para no interrumpir el flujo del sistema.
+- Es fundamental establecer **conductas estrictas de manipulación** del entorno ALMA_RESIST.
+- Se recomienda trabajar siempre desde la terminal y registrar los movimientos críticos.
+- Los `README.md` fueron generados por carpeta para facilitar navegación modular.
+
+---
+
+### 📁 Carpetas documentadas hoy
+
+- `control_central/status/`
+- `control_central/asesor-ia/core/`
+- `control_central/core/scripts/`
+- `control_central/logs/backup_git/`
+- `control_central/archivo/`
+
+---
+
+### 🧭 Camino a seguir
+
+- [ ] Integrar este apéndice como documento anexo en la bitácora principal.
+- [ ] Estandarizar el uso de `git` en ambas PCs.
+- [ ] Documentar en `docs/protocolos/` la conducta operativa para alta replicabilidad.
+
+---
+
+### 🧷 Etiquetas de memoria
+
+`#bitacora #sync #sprint_0.2 #backup_git #protocolos #logs #ssh #conducta_terminal`

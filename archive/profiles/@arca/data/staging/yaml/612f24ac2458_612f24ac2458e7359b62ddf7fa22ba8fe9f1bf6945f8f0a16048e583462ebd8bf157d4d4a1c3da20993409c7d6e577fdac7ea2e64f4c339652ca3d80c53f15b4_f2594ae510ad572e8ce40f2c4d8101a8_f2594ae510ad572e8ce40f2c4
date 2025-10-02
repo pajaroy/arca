@@ -1,0 +1,14 @@
+# Plantilla estándar de logs para módulos de ALMA LIBRE
+
+fecha: "2025-05-14 14:32"
+modulo: nombre_del_modulo
+tipo: info | advertencia | error | crítico
+descripcion: >
+  Descripción breve del evento registrado. Ejemplo: "Archivo duplicado detectado, acción descartada".
+
+archivos_afectados:
+  - CUADERNOS/trading.cu/docs/idea.md
+  - BITACORA_CENTRAL/RESUMENES/S20/idea.md
+
+usuario: IA | humano | sistema
+etiquetas: [trazabilidad, validación, error]

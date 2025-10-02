@@ -1,0 +1,124 @@
+# 🧭 Criterios de Ubicación – control_central vs raíz ALMA_RESIST
+
+## ✅ ¿Qué va dentro de `control_central/`?
+
+| Tipo de archivo/carpeta                     | ¿Va dentro? | Ubicación ideal                                                  |
+|--------------------------------------------|-------------|------------------------------------------------------------------|
+| Prompt del sistema de limpieza              | ✅ Sí       | `control_central/prompts/`                                      |
+| Bitácoras de limpieza y control             | ✅ Sí       | `control_central/docs/journal/`                                 |
+| Changelogs internos                         | ✅ Sí       | `control_central/docs/changelog.md`                             |
+| Scripts para mantener el orden              | ✅ Sí       | `control_central/scripts/`                                      |
+| Asistentes IA específicos de control        | ✅ Sí       | `control_central/asesor-ia/`                                    |
+| Readmes de contexto                         | ✅ Sí       | `control_central/docs/contexto/`                                |
+| Listado de tareas pendientes internas       | ✅ Sí       | `control_central/tareas/` (opcional)                            |
+| Reglas de gobernanza del sistema            | ✅ Sí       | `control_central/gobernanza/` o dentro de `contexto/`           |
+
+
+## 📌 Regla de Oro
+
+> **Todo lo que sea sobre “cómo se organiza ALMA_RESIST” va en `control_central/`. Todo lo que sea sobre “lo que hace ALMA_RESIST” va fuera.**
+
+
+🗂️ Archivo generado por `cli_cleaner` – junio 2025
+
+
+
+## 📌 Apéndice – Unificación de Archivos Procesados en `downloads/historico/` (2025-06-03)
+
+- A partir de junio 2025, se establece que todo archivo descargado y ya integrado al sistema será renombrado con fecha y movido a un único directorio:
+
+  ```
+  control_central/archivo/downloads/historico/
+  ```
+
+- Formato recomendado: `YYYY-MM-DD_nombre-del-archivo.md`
+- Esto reemplaza prácticas anteriores como `archivados/YYYY-MM-DD/`
+- Beneficios:
+  - ✅ Mayor simplicidad para acceso por scripts e IA
+  - ✅ Compatible con `find`, `grep`, `fzf`, etc.
+  - ✅ No requiere recorrer subdirectorios
+- Esta política aplica a todos los módulos de ALMA_RESIST desde `control_central/` hacia abajo, y se recomienda replicarla progresivamente.
+
+🧠 *"Un solo histórico plano, muchas IAs felices."*
+
+
+## 🏷️ Tags IA-Friendly:
+```yaml
+tags:
+  - raiz_operativa
+  - cli_global
+  - estandarizacion
+  - control_central
+  - ubicacion
+  - comandos
+```
+
+Esta convención deberá ser replicada en todos los módulos IA, y utilizada como criterio base para entrenar futuros asistentes técnicos CLI.
+
+
+### 🔁 Nota sobre `alma-cli` (futuro)
+
+Se planifica automatizar este flujo con el comando:
+
+```bash
+alma-cli ingest archivo.zip
+```
+
+Que realizará clasificación, sugerencia de destino, movimiento, registro automático y renombrado.
+
+
+
+## 📌 Apéndice de revisión – 2025-06-03
+
+### ✅ Cambios implementados:
+
+- Se corrigió el criterio original que indicaba que todo ingreso de archivos debía realizarse por `ALMA_RESIST/downloads/`.
+- Aclaración: **cada módulo debe manejar su propio `downloads/`**, y se permite ingreso por la ruta correspondiente según el módulo en uso (por ejemplo: `control_central/archivo/downloads/`).
+- Se estableció que los **protocolos deben estar registrados en el archivo interno del módulo**, con trazabilidad clara, para que el asesor general pueda auditar los movimientos.
+
+### 🧠 Notas IA-Friendly:
+
+- Se consolida la lógica modular por `downloads` internos en vez de un punto de ingreso único.
+- Se acepta la **autonomía de ingreso de archivos por contexto** mientras haya registro formal del procedimiento.
+- Esta decisión optimiza la descentralización del sistema y su escalabilidad futura por CLI y por IA.
+
+### 🏷️ Tags: 
+#ubicacion #criterios #descargas #estructura #modularidad #descargas_modulares #ingreso_archivos #trazabilidad #ia-friendly
+
+
+## 📂 Descargas y almacenamiento temporal
+
+- Todos los archivos que ingresen desde fuera del sistema deben almacenarse inicialmente en:
+  ```
+  /ALMA_RESIST/archivo/downloads/
+  ```
+- En caso de ser específicos a un módulo, el ingreso inicial se hace por:
+  ```
+  /ALMA_RESIST/<modulo>/archivo/downloads/
+  ```
+
+## 📦 Archivado histórico
+
+- Cualquier archivo procesado o utilizado debe trasladarse a su correspondiente:
+  ```
+  /ALMA_RESIST/<modulo>/archivo/downloads/historico/
+  ```
+  con su respectivo nombre fechado (`YYYY-MM-DD_...`).
+
+## 📁 Ubicación lógica final
+
+| Tipo de archivo                        | Ubicación lógica recomendada                                     |
+|----------------------------------------|------------------------------------------------------------------|
+| Contextos IA o CLI                     | `control_central/archivo/downloads/historico/`                  |
+| Metodologías                           | `docs/metodologias/`                                            |
+| Bitácoras / Changelogs por día         | `control_central/archivo/downloads/historico/`                  |
+| Readmes de estructura                  | `control_central/archivo/readmes_control_central/...`           |
+
+## 🧠 Observación general
+
+Todos los criterios de ubicación deben estar siempre reflejados dentro del archivo de contexto del módulo donde se esté trabajando. Esto permite trazabilidad y autonomía del asistente IA asociado a cada nodo o módulo.
+
+title: Apéndice - Enlaces y Rutas desde la Raíz del Sistema
+date: 2025-06-04
+tags: [#criterios_ubicacion, #enlaces, #paths, #navegacion_estructura, #alma_resist]
+

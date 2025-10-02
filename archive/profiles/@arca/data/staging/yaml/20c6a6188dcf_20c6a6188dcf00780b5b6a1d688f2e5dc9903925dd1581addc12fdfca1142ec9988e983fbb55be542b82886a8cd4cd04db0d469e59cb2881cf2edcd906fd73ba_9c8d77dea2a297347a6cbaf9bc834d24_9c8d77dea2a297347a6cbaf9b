@@ -1,0 +1,34 @@
+---
+tipo: configuracion
+id: CONFIGURACION_2025-06-05_5a1b33
+version: '1.0'
+formato: yaml
+modulo: ALMA_RESIST
+titulo: Asesor Status
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:963eb41e3bed6f702c3db6d77fc1c79d0592181c1982473bd6718d1a47e8151c
+---
+# Estado Interno del Módulo asesor-IA
+updated: 2025-06-01
+
+estado_general: activo
+deepseek:
+  online: true
+  modo: tech_mode=strict
+gpt:
+  online: true
+  modo: estructura
+último_debate: 2025-06-01
+último_conflicto: ninguno
+versión_operativa: 1.0
+propuestas_pendientes:
+  - sincronización doble nodo
+  - validación modulo_cli

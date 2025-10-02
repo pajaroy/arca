@@ -1,0 +1,50 @@
+# 🌀 Sprint 2.2 – Metodologías Base del Sistema
+
+📅 Fecha de inicio: 2025-05-21  
+🔢 Versión asociada: v0.0.0.2  
+🎯 Objetivo: Diseñar y definir todas las metodologías internas clave que gobernarán el sistema ALMA_RESIST para asegurar escalabilidad, trazabilidad, integración futura y colaboración humano-IA.
+
+
+## 🧱 Metodologías a Definir
+
+- [x] **Metodología de Estructura Modular y Carpetas**
+  - ¿Cómo debe organizarse una carpeta integrable a ALMA_RESIST?
+  - Estructura mínima, `README.md`, `bitacora.md`, `scripts/`, `docs/`, etc.
+
+- [x] **Metodología de Sprints**
+  - Ciclo activo → cerrado → versionado
+  - Archivos necesarios: `Sprint_X.md`, planificación, retrospectiva, checklist
+
+- [x] **Metodología de Versionado**
+  - Convenciones como `v0.0.0.2_FINAL`, `_snapshot`, `legacy/`
+  - Separación clara entre código activo y archivado
+
+- [x] **Metodología de Backups**
+  - Cuándo hacer copias, cómo nombrarlas
+  - Integración futura con Git o backups automáticos
+
+- [x] **Metodología de Documentación Humano + IA**
+  - Uso de frontmatter YAML
+  - Estructura legible y semantic-friendly
+  - Tags, dominio, tipo, impacto
+
+- [x] **Metodología de Auditoría y Evolución**
+  - Uso de ADRs (`adr/NNN-decision.md`)
+  - Cómo registrar decisiones críticas o refactors estructurales
+
+- [x] **Metodología de Interacción con IA**
+  - Cómo Alma accede, interpreta y navega la documentación
+  - Protocolo para darle contexto, logs, decisiones, y tareas
+
+
+## 🗂️ Ubicación sugerida
+
+Este sprint se guarda en:  
+📁 `docs/sprints_activos/Sprint_2.2_Metodologias_Base.md`
+
+Una vez cerrado, se migrará a su carpeta correspondiente en:
+📁 `docs/versiones/v0.0.0.2_CLI_FINAL/sprints/`
+
+
+Nota:
+✅ Se definió `metodologia_estructura_modular_v2.md` como estándar vigente tras revisión crítica externa.

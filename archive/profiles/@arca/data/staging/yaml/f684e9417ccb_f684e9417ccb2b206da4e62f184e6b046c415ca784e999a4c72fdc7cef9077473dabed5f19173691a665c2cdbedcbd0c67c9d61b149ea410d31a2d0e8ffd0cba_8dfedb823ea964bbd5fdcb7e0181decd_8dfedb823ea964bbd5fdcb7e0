@@ -1,0 +1,41 @@
+id: SUGERENCIAS_MEJORA_CHANGELOG_SCRIPT_2025-06-07
+modulo: control_central/asesor-ia/core/notebooks/changelog_script
+fecha: '2025-06-07'
+autor: GPT (auditor externo)
+relacionado_con: add_changelog_entry.py
+estado: pendiente
+descripcion: Sugerencias de mejora para robustecer y escalar el script CLI de changelog
+  de ALMA_RESIST
+mejoras_propuestas:
+- id: MEJORA_01
+  titulo: Ruta configurable desde CLI
+  descripcion: Permitir definir con --changelog la ruta de destino, en lugar de una
+    constante fija en el script.
+  impacto: Portabilidad y control del entorno
+- id: MEJORA_02
+  titulo: Conversión robusta de listas (cambios, tags)
+  descripcion: Agregar función `parse_lista(valor, separador)` para manejar correctamente
+    strings o listas.
+  impacto: Soporte CLI y Python sin errores de tipo
+- id: MEJORA_03
+  titulo: Autocreación de directorio
+  descripcion: Agregar función `asegurar_directorio()` para evitar errores al guardar
+    en rutas no creadas.
+  impacto: Robustez en entornos nuevos o scripts automatizados
+- id: MEJORA_04
+  titulo: Versión automática opcional
+  descripcion: Agregar lógica que, si no se pasa versión, la infiere a partir del
+    último registro.
+  impacto: Agilidad y menor error humano en registros rápidos
+- id: MEJORA_05
+  titulo: Control de duplicación con hash (futuro)
+  descripcion: Implementar hash (MD5/SHA1) opcional para evitar duplicados invisibles
+    con versión similar.
+  impacto: Integridad semántica en changelog a gran escala
+prioridad: alta
+tags:
+- cli
+- changelog
+- mejoras
+- automatizacion
+- auditoria

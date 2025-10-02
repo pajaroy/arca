@@ -1,0 +1,1565 @@
+### 2. **Exclusión ampliable**
+- Permitir que el usuario agregue exclusiones específicas con un archivo `.fix_metadata_ignore` (sintaxis tipo `.gitignore`).
+
+### 3. **Flujo seguro**
+- **Nunca debe auto-modificarse** ni modificar el propio script/carpeta.
+- Debe siempre crear **backup previo** a modificar cualquier archivo.
+- **Modo dry-run**: simular cambios sin modificar archivos.
+- **Logs estructurados** por acción: cambios, errores, archivos saltados, backups.
+- **No debe borrar ni truncar archivos aunque detecte metadata inválida**: siempre loguear, nunca borrar.
+
+### 4. **Metadata universal a aplicar**
+El bloque YAML debe tener, como mínimo, los siguientes campos (con comentarios y validaciones):
+
+```yaml
+```
+5. Características del script
+
+    Recorrer en profundidad solo las carpetas relevantes (ver exclusiones arriba).
+
+    Verificar y corregir el bloque YAML, completando campos faltantes (con valores razonables por defecto/documentados).
+
+    Calcular y actualizar hash_integridad SHA256 del contenido excluyendo este campo.
+
+    Logs de cambios, backups realizados, errores detectados.
+
+    Reporte resumen al finalizar.
+
+    Fácilmente replicable: al copiar a cualquier módulo, funciona sin cambios salvo rutas.
+
+    Parámetro de carpeta raíz opcional, autodetección de entorno ALMA_RESIST.
+
+    Dejar configuraciones claras y comentarios para personalización.
+
+    Modular, con funciones separadas y comentarios abundantes.
+
+6. Prácticas pro
+
+    El script nunca debe dejar archivos corruptos ni en estado incompleto (rollback automático si hay error en escritura).
+
+    Soporte para ampliar lista de exclusión por parámetro CLI.
+
+    El log puede ser en .jsonl o .yaml para facilitar parsing IA/auditoría.
+
+    Resumen final: archivos procesados, modificados, saltados, errores, backups hechos, dry-run vs real.
+
+Extras
+
+    Programar en Python 3, preferentemente solo usando dependencias estándar (salvo PyYAML).
+
+    Dejar toda la lógica en un solo archivo principal.
+
+    Dejar la referencia a este prompt/IDEA en el header del script generado.
+
+    El script debe estar listo para ejecutarse desde cualquier carpeta core/scripts/fix_metadata/.
+
+Referencia oficial:
+[IDEA_2025-06-06_01] – ALMA_RESIST | Santiago Calvo | Centralesis v2.3
+Instrucciones finales
+
+    Cumplí TODOS los criterios arriba detallados.
+
+    Si no podés hacer algo exactamente igual, aclaralo en comentarios y dejá el punto listo para ajustar manualmente.
+
+    El script debe ser “production ready” para ser usado y adaptado en cualquier otro módulo del sistema ALMA_RESIST.
+    ---
+
+## 🟢 **Archivo descargable**
+
+[Descargar prompt_fix_metadata_v2.md](sandbox:/mnt/data/prompt_fix_metadata_v2.md)
+
+> **Podés copiar el contenido directamente o usar el archivo para cargarlo en DeepSeek o cualquier plataforma de generación IA!**
+
+¿Te gustaría agregar alguna advertencia, nota personal, o link de referencia extra?  
+¿O lo dejamos así, listo para darle play en DeepSeek?
+
+
+Con esto, el script generado será mucho más “humano-friendly” y auditable,  
+y DeepSeek sabrá que debe priorizar la comunicación clara del estado final del proceso.
+
+
+## Objetivo:
+
+Desarrollar un script profesional y auditable, mejorando la versión anterior, que recorra en profundidad cada módulo ALMA_RESIST y estandarice los bloques de metadata YAML en archivos críticos, **dejando registro en logs de TODO archivo procesado, saltado, modificado o con error**. Incluir las siguientes mejoras:
+
+
+### **Checklist funcional mínimo:**
+
+- Recorrer recursivamente desde la raíz de módulo hacia abajo.
+- Solo procesar extensiones soportadas (`.md`, `.yaml`, `.yml`, `.json`, `.py`, `.sh`).
+- Nunca tocar archivos binarios, temporales, logs ni archivos propios del script.
+- Loguear todas las acciones, incluyendo archivos saltados.
+- Backup antes de modificar.
+- Colorizar y mostrar notificaciones claras al usuario: ✔️ éxito, ⚠️ advertencia, ❌ error.
+- Resumir rutas de backups y acciones al final del proceso.
+- Código limpio, documentado y modular, fácil de adaptar.
+
+
+**Instrucciones finales:**  
+- Implementá cada mejora con comentarios claros.
+- Si alguna mejora no puede hacerse exactamente igual, aclaralo en el código.
+- El script debe ser fácilmente portable a cualquier otro módulo, solo ajustando rutas si hace falta.
+
+
+Ejemplo de log para archivo modificado:
+
+```json
+{
+  "file": "core/notebooks/2025-06-05_memorias_base_generales.md",
+  "timestamp": "2025-06-11T11:22:34",
+  "action": "updated",
+  "changes": {...},
+  "backup": "core/notebooks/2025-06-05_memorias_base_generales_20250611T112234.bak",
+  "prompt_ref": "IDEA_2025-06-06_01"
+}
+```
+
+
+    Este prompt debe dejar el script listo para usarse en producción y como referencia para todos los módulos futuros del sistema ALMA_RESIST.
+
+## Archivo: 2025-06-04_bitacora_limpieza_inicial.md
+Contenido:
+# 2025-06-04_bitacora_limpieza_inicial.md
+
+## Acción: Limpieza y consolidación inicial de `asesor-ia`
+### Ejecutor: Kael (supervisión Santi)
+### Objetivo: Dejar estructura limpia y modular, siguiendo convención ALMA_RESIST
+
+#### Cambios:
+- Movidos archivos legacy y temporales de `archivo/downloads/` a `archivo/downloads/historico/`.
+- Actualizado `README.md` en cada subcarpeta para explicar su propósito.
+- Archivos sueltos (`comandos.md`, etc.) reubicados o archivados.
+- Renombrados todos los `readme.md` → `README.md` para estandarizar.
+- Documentado todo el proceso en esta bitácora.
+
+#### Checklist:
+- [x] `archivo/downloads/` limpio y con histórico
+- [x] Sin archivos huérfanos en la raíz
+- [x] Naming consistente en `README.md`
+- [x] Bitácora creada y referenciada en README principal de `kael/bitacoras/`
+
+## Apéndice – Registro de copia de template de agente IA
+
+**Fecha:** 2024-06-04  
+**Responsable:** Santi  
+**Acción:** Copia local de plantilla base de agente IA para edición
+
+
+**Motivo:**
+
+> Mantener una versión editable y específica del template base, sin alterar el original, permitiendo ajustes progresivos y trazabilidad durante el desarrollo del agente Centralisis.
+
+
+**Detalle de la acción:**
+
+- El archivo `template_agente_ia_base_v2.md` fue movido desde `/asesor-ia/archivo/downloads/` a `/asesor-ia/templates/`.
+    
+- Objetivo: centralizar y facilitar el acceso a plantillas de agentes en la carpeta estándar de templates.
+    
+
+**Motivo:**
+
+> Mejorar la organización y el acceso a plantillas clave, evitando duplicidad y desorden en la carpeta de descargas.
+
+**Comando ejecutado:**
+
+```bash
+mv archivo/downloads/template_agente_ia_base_v2.md templates/
+```
+
+
+**Detalle de la acción:**
+
+- El archivo `encabezado_base_centralisis.md` fue movido de `/control_central/archivo/downloads/` a `/control_central/asesor-ia/archivo/downloads/`.
+    
+- Objetivo: concentrar todos los archivos de templates, encabezados y recursos propios de agentes IA dentro de la carpeta correspondiente a asesor-ia.
+    
+
+**Motivo:**
+
+> Unificar la documentación y recursos clave de agentes IA en el espacio central de trabajo, evitando dispersión y facilitando el acceso.
+
+**Comando ejecutado:**
+```bash
+mv /home/bird/ALMA_RESIST/control_central/archivo/downloads/encabezado_base_centralisis.md /home/bird/ALMA_RESIST/control_central/asesor-ia/archivo/downloads/
+```
+
+
+
+Notas:
+
+    Todo movimiento de archivos clave es registrado para asegurar trazabilidad y rápida localización.
+
+    Si el archivo sufre cambios futuros, se documentará en la bitácora correspondiente.
+
+
+**Detalle de la acción:**
+
+- El archivo `ALMA_RESIST_agentes_idea_base.md` fue movido desde `/asesor-ia/archivo/downloads/` a `/asesor-ia/templates/`.
+    
+- **Objetivo:** Centralizar la “idea base” en la carpeta de templates, garantizando acceso inmediato para la creación, revisión y despliegue de todos los agentes IA.
+    
+- Se agregó referencia al archivo en el `README.md` de la carpeta `templates/`, explicitando su carácter de documento clave y lectura obligatoria.
+    
+
+**Motivo:**
+
+> Mantener el principio rector de los agentes IA siempre a la vista, ordenado y fuera de rutas de archivos transitorios o secundarios.
+
+**Comando ejecutado:**
+```bash
+mv archivo/downloads/ALMA_RESIST_agentes_idea_base.md templates/
+```
+
+## Apéndice – Eliminación de archivos innecesarios en la raíz
+
+**Fecha:** 2024-06-04  
+**Responsable:** Santi  
+**Acción:** Eliminación de archivos ajenos al control de versiones y operatividad del entorno
+
+
+
+## Resumen Ejecutivo
+
+El día 2025-06-04 se ejecutó un proceso completo de auditoría, rescate y consolidación del sistema ALMA_RESIST. Se realizó:
+
+- Diagnóstico y confirmación de corrupción del repositorio git.
+- Generación y verificación de backup físico completo en pendrive dedicado (`BKPFISICO`).
+- Formateo profesional y validación de almacenamiento externo.
+- Flujo de recuperación con clonación limpia desde el remoto.
+- Merge manual de cambios desde los backups locales al nuevo repo.
+- Sincronización final con push al remoto y documentación del proceso.
+- Relinkeo y restauración de la carpeta en Syncthing y ajuste de Obsidian para continuidad de trabajo.
+- Verificación de integridad, limpieza y consolidación de los entornos.
+
+## Archivo: 2025-06-04_bitacora_restauracion_alma_resist.md
+Contenido:
+# Bitácora – 2025-06-04 – Rescate, Backup Físico y Restauración de ALMA_RESIST
+
+
+## Detalle de pasos ejecutados
+
+1. **Detección y diagnóstico de corrupción git**
+    
+    - Identificación de errores fatales (`.git/objects/... está vacío/corrupto`) imposibilitando cualquier push/commit.
+        
+2. **Backup físico**
+    
+    - Selección y formateo seguro de pendrive (`/dev/sdd1`, label: `BKPFISICO`) como almacenamiento de respaldo.
+        
+    - Montaje manual con permisos de usuario para garantizar escritura sin root.
+        
+    - Generación de snapshot total del sistema con:
+        
+        ```bash
+        zip -r /media/bird/BKPFISICO/ALMA_RESIST_2025-06-04_sistema_completo.zip .
+        ```
+        
+3. **Clonación y recuperación del repo**
+    
+    - Clonación limpia usando SSH:
+        
+        ```bash
+        git clone git@github.com:pajaroy/ALMA_RESIST.git ALMA_RESIST_NEW
+        ```
+        
+    - Renombrado de la carpeta corrupta y repositorio nuevo para restaurar la estructura original.
+        
+    - Copia selectiva de archivos y cambios desde el backup manual:
+        
+        ```bash
+        cp -ru /home/bird/ALMA_RESIST_BACKUP_2025-06-04/* /home/bird/ALMA_RESIST/
+        ```
+        
+    - Commit y push final consolidando todos los cambios restaurados.
+        
+4. **Re-sincronización con Syncthing y ajuste de Obsidian**
+    
+    - Remoción segura de la carpeta en Syncthing sin pérdida de datos.
+        
+    - Re-linkeo de la ruta actualizada como carpeta principal y forzado de escaneo/sync.
+        
+    - Configuración de Obsidian para abrir la ruta de vault correcta.
+        
+5. **Notas y recomendaciones**
+    
+    - Evitar siempre manipular `.git` a mano, sincronizaciones en caliente sobre `.git`, o cortes durante operaciones críticas.
+        
+    - Usar siempre backup físico y redundante antes de cualquier operación masiva.
+        
+    - Documentar toda intervención relevante para trazabilidad y recuperación futura.
+
+## 2025-06-05 – Duplicación de centralesis.md para reformas
+
+Se duplicó el archivo centralesis.md desde /archivo/downloads/ hacia /centralisis/contexto/ con el fin de realizar reformas independientes, manteniendo la versión original en su ubicación previa para trazabilidad y control de cambios.
+
+Este archivo funcionará como base de trabajo para las modificaciones estructurales de centralesis.
+
+## 2025-06-05 – Movida íntegra de contexto a docs/contexto
+
+Se movió la carpeta `contexto` íntegra a `docs/contexto` en el módulo `centralesis`,  
+resguardando la versión previa de `docs/contexto` como backup (`docs/contexto_backup_2025-06-05`) para evitar sobrescrituras o pérdidas accidentales.
+
+**Motivo:**  
+Reordenar la documentación y mantener integridad de archivos, asegurando que nada se pierda en el proceso.
+
+Se recomienda revisar ambas carpetas para depurar redundancias cuando corresponda.
+
+# 2025-06-06_movimiento_reestructuracion.md
+
+## Acción:
+Copia del archivo `docs/contexto/centralesis.md` a `core/notebooks/2025-06-06_reestructuracion_centralesis.md`  
+Motivo: Trabajar en la reestructuración y desarrollo de contenido sin alterar el original.
+
+## Detalles:
+- Archivo fuente: `/docs/contexto/centralesis.md`
+- Destino: `/core/notebooks/2025-06-06_reestructuracion_centralesis.md`
+- Formato de nombre: `[fecha]_reestructuracion_centralesis.md`
+- Criterio: Mantener la trazabilidad y versionado limpio durante el proceso de reestructuración.
+
+## Estado:
+Copia realizada y registrada en bitácora.
+
+----
+
+
+
+## 🧠 Fundación y metodología
+
+- Este documento es la **memoria fundacional** del sistema de Agentes IA de ALMA_RESIST.
+- El objetivo es mantener **memoria viva, bitácora operativa y changelog** integrados, con referencias externas cuando el volumen lo requiera.
+- La filosofía es **modular, auditable, incremental** y orientada a la mejora continua:  
+  cada Agente tiene su propio header, bloques YAML y referencias, pero sigue el mismo esquema de arquitectura.
+- **Todo cambio o decisión estructural debe registrarse aquí** antes de ser externalizado a los archivos automáticos (`.yaml`) de automatización.
+
+
+## 🚀 Metodología incremental
+
+- Cada Agente IA o módulo institucional inicia con este esquema.
+- Todo flujo de trabajo y crecimiento se trackea por commits y registros en bitácora.
+- La exportación automática a YAML es el output operativo, nunca la fuente primaria de decisiones.
+
+# Agentes IA – Notas de estilo
+
+- _“Agente”_ implica autonomía, especialización y responsabilidad dentro del sistema.
+    
+- Cada Agente es un nodo crítico, no un asistente subordinado.
+    
+- La gobernanza del ecosistema surge de la interacción de Agentes, humanos y reglas auditablemente consensuadas.
+    
+
+## Archivo: template_agente_ia_base_v2.md
+Contenido:
+# 🧠 Prompt de Identidad – Agente IA (ALMA_RESIST)
+
+> Definí aquí el propósito, límites, reglas, visión y misión del Agente.
+> Ejemplo: “Este Agente opera como [rol], nunca ejecuta tareas fuera de [alcance]...”
+
+
+## 📚 Índice
+
+1. Prompt de Identidad
+2. Presentación del Agente
+3. Glosario
+4. Rangos y Jerarquía
+5. Memorias Institucionales (YAML)
+6. Bitácoras Operativas (YAML)
+7. Changelog Estructural (YAML)
+8. Apéndice de Agentes/Módulos Activos
+9. Protocolos de Revisión y Mejora Continua
+10. Firmas y Validaciones
+11. Links y Referencias
+12. Historial de Modificaciones
+13. Permisos y Roles
+14. Ejemplos de Registros
+
+
+## 🏅 Rangos y Jerarquía de Agentes
+
+- Auditor General: máxima autoridad, supervisión global
+- Agente Operativo: ejecuta tareas y reporta a Auditor
+- Agente Analista: análisis, diagnóstico, recomendaciones
+- (Definí rangos y funciones según tus necesidades)
+
+
+## 📝 Bitácoras Operativas (YAML)
+
+```yaml
+bitacoras:
+  estándar_resultado: "[éxito | error | código]"  # Estándar normalizado
+  registros:
+    - fecha: 2025-06-10
+      comando: "yq eval ..."
+      ejecutor: alma_loader
+      resultado: "éxito"
+      hash_verificacion: sha256:9f86d081...
+    - fecha: 2025-06-10
+      comando: "script_backup.sh"
+      ejecutor: kael
+      resultado: "error"
+      hash_verificacion: sha256:3b1fc8e4...
+```
+
+_Últimos 30 días o entradas relevantes._
+
+
+## 🧩 Apéndice de Agentes/Módulos Activos
+
+|Nombre|Rol|Status|Fecha de Alta|Referencia|ultima_verificacion|
+|---|---|---|---|---|---|
+|Centralesis|Auditor General|Activo|YYYY-MM-DD|[Ver ficha]|YYYY-MM-DD|
+|Kael|Agente CLI|Activo|YYYY-MM-DD|[Ver ficha]|YYYY-MM-DD|
+|Emma|Agente Empresarial|Activo|YYYY-MM-DD|[Ver ficha]|YYYY-MM-DD|
+|...|...|...|...|...|...|
+
+
+## 🔏 Firmas y Validaciones
+
+- SHA-256 del archivo o bloque (en cada sección)
+    
+- Firma digital/autorización de cambios críticos (opcional)
+    
+
+
+## 📜 Historial de Modificaciones
+
+|Fecha|Autor|Acción|Detalles / Hash|
+|---|---|---|---|
+|YYYY-MM-DD|Kael|Creación|sha256:xxxx...|
+|YYYY-MM-DD|Centralesis|Modificación|sha256:yyyy...|
+
+
+## 🧩 Ejemplos de Registros
+
+- **Memoria crítica:**  
+    `MEM_2025-06-10_01` – decisión fundacional: arquitectura modular validada.
+    
+- **Memoria de error/alerta:**  
+    `MEM_2025-06-10_02` – alerta_omision: falta de revisión semanal en Emma.
+    
+- **Bitácora:**  
+    `2025-06-10` – Ejecutado script de sincronización yq, éxito.  
+    `2025-06-10` – Ejecutado script_backup.sh, error.
+    
+- **Changelog:**  
+    `v1.2` – Implementada separación .md/.yaml y sistema de firmas.
+    
+
+
+_Template validado y corregido para Agentes IA institucionales de ALMA_RESIST – 2025-06-10. No edites los bloques YAML sin validación previa._
+
+## Archivo: sprint_actual.sync-conflict-20250604-050446-EHTW5G7.md
+Contenido:
+
+# 🚀 Sprint Actual 0.2 – Sincronización Total Inteligente
+
+Este sprint tiene como objetivo lograr una **sincronización total e inteligente** entre los dos nodos principales (`ALMA_CORE` y `ALMA_RESIST`), los sistemas externos (GitHub, Obsidian), y garantizar backups automáticos diarios. Es la base para una operación continua, profesional y resiliente.
+
+
+## ✅ Checklist de Implementación
+
+### 🗂️ Sincronización entre nodos con Syncthing
+
+- [x] Instalar y validar Syncthing en ALMA_CORE y ALMA_RESIST
+- [x] Configurar carpetas sincronizadas: `ALMA_RESIST/`, `obsidian_vault/`
+- [x] Crear y aplicar plantilla `.stignore` personalizada
+- [x] Verificar que no haya duplicaciones ni conflictos
+
+### 🌐 Sincronización con GitHub
+
+- [x] Crear `backup_to_git.sh` para commit automático diario
+- [ ] Agendar con `cron` o `systemd.timer`
+- [x] Validar commits manuales sólo desde ALMA_CORE
+- [x] Registrar actividad en `logs/backup_git.log`
+
+### 🧠 Obsidian Vault (versión Pro)
+
+- [x] Validar integración del vault en `ALMA_RESIST/obsidian_vault/`
+- [x] Verificar escritura sin conflictos desde VS Code
+- [ ] Documentar estructura interna del vault (`README.md`, `index.md`)
+
+### 💻 Entorno de edición y control
+
+- [x] Configurar VS Code como editor principal
+- [x] Validar extensiones necesarias para Markdown y Git
+
+### 📊 Monitoreo y Logs
+
+- [x] Crear `sync_status.sh` que loguee estado de carpetas y conexión
+- [x] Agregar `alma_status.sh` que muestre estado general de sincronización
+- [x] Crear carpeta `logs/` si no existe
+
+### 📘 Documentación en `docs/sync/`
+
+- [ ] Crear manual de instalación de sincronización
+- [ ] Especificar rutas, flujos, scripts y comandos
+- [ ] Documentar fallas comunes y solución
+
+
+## 🧩 Notas Finales
+
+- Se validará como cerrado cuando todos los puntos estén resueltos y validados en ambos nodos.
+- Las bitácoras de instalación se guardan en `docs/journal/bitacoras/`.
+
+
+Este cierre marca oficialmente la conclusión del Sprint 0.1 de diagnóstico y nos habilita a trabajar con bases limpias en los próximos sprints estructurales y técnicos del sistema.
+
+## Archivo: bitacora_instalacion_alma_resist.md
+Contenido:
+
+# 🛠️ Bitácora de Instalación desde 0 – ALMA_RESIST
+
+Documentación base de instalación, configuración y sincronización inicial entre nodos `ALMA_CORE` y `ALMA_RESIST`. Este documento actúa como **bitácora fundacional**, indispensable para reproducir el entorno y garantizar la continuidad del sistema.
+
+
+## 🖱️ 2. Sincronización de mouse entre PCs con Input Leap
+
+Instalación y compilación manual desde repositorio oficial para compatibilidad con sistemas Parrot OS / Debian:
+
+```bash
+# Clonar y compilar Input Leap
+sudo apt install -y git cmake make g++ qt6-base-dev qt6-tools-dev libx11-dev libxext-dev libxrandr-dev libxinerama-dev libxtst-dev libxi-dev libssl-dev libavahi-compat-libdnssd-dev libcurl4-openssl-dev libgl1-mesa-dev pkg-config
+git clone --recurse-submodules https://github.com/input-leap/input-leap.git
+cd input-leap && mkdir build && cd build
+sed -i '1i#include <cstddef>' ../src/lib/platform/XKBUtil.cpp
+cmake ..
+make -j$(nproc)
+sudo make install
+```
+
+**Ejemplo de configuración** (`~/.input-leap/input-leap.conf`):
+
+```plaintext
+section: screens
+    alma-core:
+    alma-resist:
+end
+
+section: links
+    alma-core:
+        left = alma-resist
+    alma-resist:
+        right = alma-core
+end
+```
+
+
+## 🗂️ 4. Sincronización de carpetas con rsync
+
+Archivo `.rsync_exclude` recomendado:
+
+```
+__pycache__/
+*.pyc
+*.tmp
+.DS_Store
+```
+
+Comando:
+
+```bash
+rsync -avz --delete --exclude-from=.rsync_exclude /home/bird/ALMA_RESIST/ bird@192.168.1.36:/home/bird/ALMA_RESIST/
+```
+
+
+## 🧠 6. Instalación de Obsidian (modo terminal)
+
+```bash
+sudo apt install -y wget libfuse2
+mkdir -p $HOME/apps/obsidian && cd $_
+wget $(curl -s https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest | grep "browser_download_url.*AppImage" | grep -v "arm64" | cut -d : -f 2,3 | tr -d ") -O Obsidian.AppImage
+chmod +x Obsidian.AppImage
+./Obsidian.AppImage &
+```
+
+⚠️ Requiere entorno gráfico X11. No apto para modo headless.
+
+
+## 🧾 Observaciones finales
+
+- Sistema replicado con éxito en ambas máquinas
+- Input Leap funcionando entre escritorios
+- Estructura `ALMA_RESIST/` sincronizada y lista para automatización futura
+- Obsidian operativo como herramienta central de documentación
+
+# 🧩 Apéndice – Backup automático a GitHub con `backup_to_git.sh`
+
+## 📁 Ubicación del script
+`/home/bird/ALMA_RESIST/core/scripts/backup_to_git/backup_to_git.sh`
+
+## 📌 Requisitos
+
+```bash
+sudo apt install inotify-tools git
+```
+
+## 🛠️ Pasos de configuración
+
+```bash
+# 1. Configurar Git si aún no está hecho
+git config --global user.name "bird"
+git config --global user.email "distribuidorasolar365@gmail.com"
+
+# 2. Verificar que ALMA_RESIST sea repositorio Git
+cd ~/ALMA_RESIST
+git init
+git remote add origin git@github.com:pajaroy/alma_resist.git
+git branch -M main
+git pull origin main
+
+# 3. Dar permisos y lanzar en segundo plano
+chmod +x /home/bird/ALMA_RESIST/core/scripts/backup_to_git/backup_to_git.sh
+nohup /home/bird/ALMA_RESIST/core/scripts/backup_to_git/backup_to_git.sh > /dev/null 2>&1 &
+```
+
+## 🔐 Clave SSH y autenticación
+
+```bash
+ssh-keygen -t ed25519 -C "distribuidorasolar365@gmail.com"
+cat ~/.ssh/id_ed25519.pub  # Copiar a GitHub > Settings > SSH Keys
+ssh -T git@github.com      # Verificar autenticación
+```
+
+## 🧠 Notas importantes
+
+- Este script monitoriza cambios en tiempo real y los **sube automáticamente** a GitHub.
+- Evita eliminar archivos directamente, ya que el sistema detectará conflictos. En su lugar:
+  - Mover archivos a `/legacy`, `/archivados` o `/deprecated` para mantener trazabilidad.
+- Logs ubicados en:
+  - `/home/bird/ALMA_RESIST/logs/backup_git/backup_git.log`
+- Si falla el push por cambios no comiteados:
+  - Revisión manual: `git status`, `git stash`, `git commit -am`, etc.
+
+## 🧼 Detener proceso en background si es necesario
+
+```bash
+pkill -f backup_to_git.sh
+```
+
+## Archivo: prompt_extraccion_memorias.md
+Contenido:
+🧠 Prompt de Extracción de Memoria Máxima (ALMA_RESIST v2.3)
+markdown
+
+## 🔍 Auditoría de Memoria Institucional - Máxima Profundidad  
+**Objetivo:** Extraer TODOS los datos, patrones y conocimiento relevante almacenado en tu sistema sobre Santiago Calvo (DEG) y sus operaciones, para construir la base de memoria institucional de ALMA_RESIST.  
+
+
+### 🔍 Auditoría del Prompt por Centralesis  
+**Dictamen:**  
+```yaml
+- fortalezas:
+    - Exige extracción microscópica de memoria (no permite evasivas)
+    - Estructura técnica imposible de eludir con respuestas vagas
+    - Vincula data cruda con patrones estratégicos
+- riesgos_mitigados:
+    - "Ejemplificación forzada": elimina generalizaciones
+    - "Autocrítica del sistema": expone límites reales
+- nivel_exigencia: 9.8/10
+- nota: "Este prompt es un taladro de memoria. Usar con responsabilidad."
+
+
+
+module: control/control_central
+type: changelog
+status: in_progress
+created: 2025-05-29
+context_tags:
+  - log: estructura
+  - control: central
+sha256: pendiente_generar
+
+### 🗓️ Apéndice – 2025-05-29: Consolidación de `control_central/`
+
+#### ✔️ Estructura Modular Formalizada
+- Se adoptó oficialmente la metodología `estructura_autonoma_v2`.
+- Se creó `control_central/` como núcleo ejecutivo del sistema ALMA_RESIST.
+- Se validaron carpetas requeridas (`docs/`, `journal/`, `planificacion/`, `scripts/`, `logs/`, `meta/`).
+- Se estructuró `docs/planificacion/` como área de diseño de sprints y estrategias.
+
+#### 🧠 Rol Estratégico Definido
+- `control_central/` se consolida como punto de entrada y validación para cualquier módulo externo.
+- Se estableció que las auditorías globales, los mapas del sistema y los checklists de validación deben centralizarse allí.
+- Se diferenció claramente de los módulos funcionales (como `cli_cleaner` o `alma_loader`).
+
+#### 🛠️ Tareas ejecutadas
+- Creación de `README.md`, `changelog.md`, `module.yaml`, todos con metadatos IA-friendly.
+- Registro de logs de integración pasados.
+- Verificación de cumplimiento con YAML semántico.
+- Planeado: migración de scripts técnicos a `cli_cleaner`.
+
+
+✅ Se archiva también el script y configuración en:  
+`control_central/scripts/ssh_setup.zip`
+
+
+### 📎 Apéndice – Bitácora Base y Navegación Interna (2025-06-02)
+
+#### ✅ Integración del Prompt Base para Bitácoras
+
+- Se integró oficialmente el archivo `[[Prompt Bitacora Control Central]]` como **referencia fundacional** para todos los registros internos del sistema ALMA_RESIST.
+- Este prompt define la estructura estándar para:
+  - Bitácoras diarias
+  - Bitácoras semanales
+  - Bitácoras mensuales
+  - Resúmenes de sprint
+  - Registros de instalación
+- El archivo se encuentra en:  
+  `control_central/docs/journal/prompts/Prompt Bitacora Control Central.md`
+
+#### 🔗 Navegación semántica
+
+- Se resolvió un error de enlace relacionado al uso incorrecto de acentos en `[[Prompt Bitacora Control Central]]`.
+- Se renombró el archivo y se ajustó el título en YAML para permitir navegación correcta vía Obsidian.
+
+```yaml
+```
+
+#### 🔄 Proyección a futuro
+
+- A partir de esta integración se proyecta:
+  - Uso regular de bitácoras con versión estructurada (por día, semana, mes).
+  - Implementación futura de un **prompt técnico automatizado** para generación IA de bitácoras a partir del uso real del sistema.
+  - Consolidación semanal de cambios en `control_central/docs/journal/weekly/` y resúmenes mensuales en `monthly/`.
+
+🧠 *Este paso marca el inicio formal del sistema de trazabilidad documental de ALMA_RESIST. Desde este punto, cada decisión podrá rastrearse, auditarse y reconstruirse de forma asistida por IA.*
+
+### [2025-06-03] Movimiento de archivo `emma_v2.md` a contexto oficial
+
+- Se movió `emma_v2.md` desde `archivo/downloads/` a `docs/contexto/` para formalizar el contexto operativo de Emma como parte de control_central.
+- Acción ejecutada vía CLI desde la raíz según los criterios `criterios_ubicacion_vivo.md`.
+## Archivo: changelog.sync-conflict-20250604-050447-EHTW5G7.md
+Contenido:
+## 🧾 Changelog – ALMA_RESIST
+
+
+### ✅ v0.2 – 2025-05-17 – Cifrado Funcional
+
+- ✅ Implementado `log_crypto.py` con soporte AES-256-GCM y ChaCha20
+- ✅ Validación automática de arquitectura y fallback en ARM
+- ✅ Escritura binaria con encabezado identificador (`b"AES\x00"`)
+- ✅ Test funcional `test_log_crypto.py` verificado
+
+🏁 **Hito 002**: Módulo de cifrado funcional operativo  
+🔐 Inicio de trazabilidad antifrágil
+
+
+### ✅ v0.0.0.2 – 2025-05-20 – CLI Modular Finalizada
+
+- ✅ Reescrito `core/cli.py` con arquitectura CLI modular sin `cmd.Cmd`
+- ✅ Comandos cargados dinámicamente desde `commands/` (formato `run(args)`)
+- ✅ Manejo de errores completo y mensajes personalizados
+- ✅ `!ayuda` funcional y generada automáticamente desde los comandos cargados
+- ✅ Comandos válidos: `!ayuda`, `!salir`, `!resumir`, `!buscar_memoria`
+- ✅ Eliminadas versiones anteriores obsoletas
+- ✅ Estructura preparada para futura integración con LLM local, logging y memoria dinámica
+
+📁 Estructura Nueva:
+
+```
+core/
+└── cli.py
+
+commands/
+├── ayuda.py
+├── salir.py
+├── resumir.py
+└── buscar_memoria.py
+```
+
+🏁 **Hito 004**: CLI Modular funcional y operativo
+🧠 Punto de partida para integrar módulos de IA locales
+
+
+## 🧾 v0.0.0.1 – Auditoría Técnica Finalizada
+
+📅 Fecha: 2025-05-20  
+🎯 Descripción: Consolidación de la base estructural, documental y operativa del sistema ALMA_RESIST.
+
+
+### 🔍 Auditoría
+
+- Ejecución real de `tree -L 3` y registro en `docs/auditorias/auditoria_estructura.md`
+- Verificación y limpieza de archivos redundantes
+- Consolidación de `idea_base.md` oficial y archivo `idea_base_legacy.zip`
+
+
+### 🧠 Estado
+
+Este changelog marca el **cierre funcional de la versión v0.0.0.1**, y habilita el inicio del **sprint técnico v0.0.0.2** bajo condiciones de trazabilidad completa.
+
+## 🌀 2025-05-21 – Cierre del Sprint 2.2: Metodologías Base
+
+🔢 Versión: v0.0.0.2  
+📂 Sprint: Sprint_2.2_Metodologias_Base  
+🧱 Descripción: Se definieron y validaron todas las metodologías clave del sistema ALMA_RESIST.
+
+- ✅ metodologia_estructura_modular_v2.md
+- ✅ metodologia_sprints_v2.md
+- ✅ metodologia_versionado_backups_v1.md
+- ✅ metodologia_doc_ia_v2.md
+- ✅ metodologia_adr_v2.md
+- ✅ metodologia_interaccion_ia_v2.md
+
+
+### 🔄 Sprint 2.1 – Estructura Documental (2025-05-23)
+
+- 🆕 Creada carpeta `estructura_doc/` con plantillas reutilizables
+- ✅ Implementado sistema de testing base (`testing/cli/`, `utils/`)
+- 📝 Consolidación de documentos vivos: `TODO.md`, `.project.md`, `version.md`
+- 🧠 Preparación de entorno para integración de IA
+- 📦 Snapshot generado: `v0.0.0.2_estructura_documental`
+- 🔑 Hash: `0f61c8c5f3ab0b08b1c8c189b2e9a6ef3db47d0d4b0f63b246ac9ef8079d3a35`
+
+
+## [2025-05-23] Finalización Sprint 2.4 - Optimización de Metodologías
+
+- Se estandarizaron 105 documentos Markdown bajo el esquema YAML unificado.
+- Se corrigieron todos los documentos `type: core` sin `linked_to`.
+- Se validó semánticamente el campo `domain` vs `tags`.
+- Se implementó y ejecutó `alma-cli audit` con generación automática de reportes.
+- Se añadieron backups automáticos y validación incremental.
+
+## [0.0.0.5] - 2025-05-28
+### Cambios en `log_crypto`
+- Refactor completo basado en auditoría.
+- Soporte para cifrado basado en contraseña con `salt` embebido.
+- Mejoras en validación de logs cifrados.
+- Renombrado de funciones para seguir convenciones en inglés.
+### 🗓️ 2025-06-02 – Sprint 0.2 – Consolidación de Backup y Protocolo de Ingreso
+
+**🔧 Cambios Estructurales**
+
+- Se creó la carpeta `archivo/downloads/` para contener archivos temporales, descargados o en revisión.
+    
+- Se creó la carpeta `docs/sync/` con README asociado para estructurar documentación de sincronización entre nodos.
+    
+- Se agregó `core/apps/` al `.gitignore` para evitar subir binarios pesados (como `.AppImage`).
+    
+- Se implementó y testeó el script `install_cron_backup.sh`, que configura un backup automático vía cron cada 15 minutos.
+    
+- Se creó el alias `autobackup` para facilitar su activación post-reinicio.
+    
+
+**🧠 Protocolos y Conductas**
+
+- Se definió un nuevo protocolo de ingreso de archivos y se documentó en `protocolo_ingreso_archivos.md`.
+    
+- Se reforzó el hábito de trabajar íntegramente desde terminal para evitar conflictos de sincronización.
+    
+- Se consolidó el enfoque modular de scripts (`core/scripts/backup_to_git/`) y el uso de logs silenciosos (`nohup`).
+    
+
+**🔄 Sincronización**
+
+- Confirmada la autenticación SSH entre `alma-core` y `alma-resist`.
+    
+- Validada la sincronización correcta de Git entre nodos y GitHub.
+    
+- En proceso: script `sync_status.sh` para chequeo cruzado de estado entre nodos.
+    
+
+**🔖 Tags**  
+`sprint_0.2` `backup_git` `protocolo_ingreso` `estructura_modular` `conducta_terminal` `cronjob_sync`
+
+
+## 📆 2025-06-03 – Consolidación CLI y Estructura Ejecutable
+
+### 🧠 Auditor CLI General – Kael
+- Se formaliza el asesor `Kael` como **auditor CLI general del sistema ALMA_RESIST**.
+- Se define su archivo de contexto como `[[Kael]]`, con sección viva de reportes.
+- Se estructura su entorno en `control_central/kael/`.
+
+### 🧩 Modularidad Ejecutable
+- Se renombra `core/cli_cleaner/` a `core/run_kael/`, adoptando la convención `run_<asistente>`.
+- Se establece esta convención para todos los módulos IA ejecutables del sistema.
+
+### 🗃️ Limpieza de Descargas y Archivos Vivos
+- Se mueven a `historico/` todos los archivos temporales o no versionados correctamente dentro de:
+  - `control_central/archivo/downloads/`
+  - `control_central/docs/`
+- Se renombran archivos sin fecha según criterio de `[[criterios_ubicacion_vivo.md]]`.
+
+### 🌐 Estandarización de Enlaces Internos
+- Se adopta como convención general el uso de `[[...]]` para referenciar documentos internos desde Obsidian o VS Code.
+- Se actualizan los encabezados de documentos clave con enlaces simbólicos y tags IA-friendly.
+
+### 🧱 Estructuras de Tree y Diagnóstico
+- Se generan los tree completos de las siguientes rutas para revisión:
+  - `ALMA_RESIST/`
+  - `ALMA_RESIST/control_central/`
+  - `ALMA_RESIST/core/`
+- Se registran en `control_central/docs/contexto/`.
+
+## Archivo: Methodology_Index.md
+Contenido:
+# 📚 Índice de Metodologías – ALMA_RESIST
+
+Este índice recopila las metodologías formales aplicadas en el sistema ALMA_RESIST. Cada metodología representa una práctica documentada, versionada y replicable.
+
+
+## 📁 Subcarpetas
+
+- [_archivadas/](./_archivadas) – Métodos obsoletos o reemplazados
+- [_propuestas/](./_propuestas) – Métodos en etapa de evaluación
+
+## Archivo: metodologia_adr_v2.md
+Contenido:
+# 🧠 Metodología de Auditoría y Evolución Técnica (ADRs) – ALMA_RESIST (v2)
+
+📅 Versión: 2.0  
+📁 Archivo: metodologia_adr_v2.md  
+🎯 Objetivo: Registrar decisiones técnicas críticas de forma estructurada, trazable e indexable por IA, sin sobrecargar al operador único.
+
+
+## 📋 Estructura Base (con metadatos YAML)
+
+```yaml
+```
+
+```markdown
+# ADR 002 – Adopción de versionado SemVer
+
+📅 Fecha: 2025-05-18  
+
+## Decisión  
+Usar `MAJOR.MINOR.PATCH` como convención de versionado global.  
+
+## Contexto  
+Se necesitaba un estándar claro para snapshots y scripts internos.  
+
+## Alternativas consideradas  
+- Fechas (`2025-05-18`)  
+- Commit hashes  
+- Versionado manual ad-hoc  
+
+## Justificación  
+SemVer es ampliamente adoptado y permite automatización futura.  
+
+## Impacto  
+- Afecta carpetas `/versiones/`  
+- Modifica `changelog.md`  
+- Permite validaciones IA por versión
+```
+
+
+## 🛠️ Automatización futura
+
+- Se podrá generar con:  
+```bash
+alma-cli create-adr --title "Uso de IA local"
+```
+
+- Este comando inferirá los campos desde el contexto del proyecto.
+
+
+## 📎 Relacionado con
+
+- `metodologia_doc_ia_v2.md`
+- `estructura_modular_v2`
+- `Methodology_Index.md`
+- `alma-cli`
+
+## Archivo: metodologia_agregado_archivos.md
+Contenido:
+# Metodología de Agregado de Archivos ALMA\_RESIST (v8)
+
+## Objetivo
+
+Establecer una metodología clara, automatizable y escalable para la integración de nuevos archivos en el ecosistema ALMA\_RESIST, garantizando:
+
+* Consistencia estructural (metadatos, rutas, convenciones)
+* Trazabilidad en los sprints y logs
+* Integración futura con componentes IA: memory\_graph, prompt\_orchestrator, reflection\_engine
+
+
+## Scripts Utilizados
+
+* `scripts/fix_metadata.py`: corrige o completa metadatos YAML
+* `scripts/validate_docs.py`: valida estructura, tipos, estados y snake\_case
+* `scripts/force_snake_case_modules.py`: refactoriza metadatos a snake\_case
+
+
+## Automatización y Validaciones
+
+En futuras versiones (v9+), este proceso se automatizará con un CLI:
+
+```bash
+alma-cli integrate --file ./docs/nuevo/archivo.md --sprint 2.3
+```
+
+Lo que hará:
+
+* Corrección de metadatos
+* Validación completa
+* Registro automático en logs
+* Actualización de grafo semántico
+* Generación de reflexión IA
+
+
+## Flujo Visual Propuesto
+
+```mermaid
+graph TD
+  A[Agregar archivo] --> B[Normalizar metadatos]
+  B --> C{Es README.md?}
+  C -->|Sí| D[Usar carpeta padre como módulo]
+  C -->|No| E[Generar módulo desde ruta]
+  E --> F[Validar YAML con reglas estrictas]
+  F --> G[Actualizar grafo semántico]
+  G --> H[Generar reflexión automática]
+  H --> I[Registrar en logs y sprint]
+  I --> J[Notificar a IA para sugerencias]
+```
+
+
+## Ejemplo de Metadatos Enriquecidos
+
+```yaml
+```
+
+
+**Responsable:** Santi
+**Versión:** 8
+**Fecha de aprobación:** 2025-05-22
+
+
+
+module: metodologias/metodologia_doc_ia_v2
+type: core
+status: in_progress
+created: '2025-05-21'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+
+## ✅ Aplicación
+
+Aplica a todo archivo `.md` que documente:
+
+- Módulos técnicos
+- Prompts, comandos, scripts
+- Documentos internos del sistema ALMA_RESIST
+- Sprints, decisiones, registros técnicos
+
+module: "core/cli"          # ID del módulo o archivo
+type: "core"                # core | tool | external | integration | draft
+status: "in_progress"       # in_progress | stable | deprecated
+created: "2025-05-21"       # Fecha de creación
+
+# Opcionales (recomendados)
+domain: "infraestructura"   # general | cultivo | ia | historia | trading
+tags: ["CLI", "entrada"]
+linked_to: ["resumen"]
+version: "0.2"
+
+## 🧠 Política de Migración
+
+- Etapa 1: Solo aplicar a nuevos documentos.
+- Etapa 2: Migración progresiva durante mantenimientos o refactors.
+- Etapa 3: Auditoría total IA-assistida con validación semántica (futuro).
+
+
+## 📘 Glosario Rápido
+
+| Campo    | Ejemplo            | Descripción                                |
+|----------|--------------------|--------------------------------------------|
+| module   | core/loader        | Ruta única relativa                        |
+| type     | core, tool, draft  | Tipo de documento                          |
+| domain   | ia, historia       | Dominio funcional                          |
+| status   | stable             | Estado actual del documento                |
+| version  | 0.1, 1.0.0         | Versión local                              |
+| tags     | ["memoria"]        | Palabras clave normalizadas                |
+| linked_to| ["core/cli"]       | Módulos relacionados                       |
+
+
+## 🧾 Changelog
+
+### 2025-05-21
+- [v2.0] Se redujeron los campos obligatorios a 4
+- Se añadió política de migración progresiva
+- Se introdujo el comando `alma-cli doc-init` para asistencia automática
+- Se añadió glosario resumido para campo `type`, `domain`, `tags`
+
+
+
+
+## 📦 Estructura Base
+
+```bash
+nombre_modulo/
+├── control/                # Tareas, checklists y seguimiento interno
+│   └── sprint_actual.md    # Tareas vigentes o backlog activo
+│
+├── docs/                   # Documentación estructurada
+│   ├── readme.md           # Descripción funcional del módulo
+│   ├── changelog.md        # Registro de cambios semánticos
+│   ├── journal/            # Bitácoras informales o de proceso
+│   └── history/            # Archivos anteriores y evolución
+│
+├── archivo/                # Recursos crudos o de registro
+│   ├── datasets/           # Datos CSV, JSON, XLSX, etc.
+│   ├── logs/               # Logs de ejecución, pruebas, eventos
+│   └── downloads/          # Archivos externos temporales (no versionar)
+│
+├── core/                   # Código fuente del módulo
+│   ├── scripts/            # Scripts funcionales
+│   ├── notebooks/          # Análisis exploratorios en Jupyter
+│   └── tests/              # Tests unitarios o de validación
+│
+├── config/                 # Configuraciones del entorno
+│   ├── .env.example        # Plantilla de variables de entorno
+│   └── settings.yaml       # Configuración del módulo
+│
+└── meta/                   # Metadatos y esquema del módulo
+    └── module.yaml         # Esquema estructural IA-friendly
+```
+
+
+## 🧩 Ventajas
+
+- 📦 **Modularidad**: cada módulo es portátil, desacoplado y escalable.
+- 🧠 **IA-friendly**: diseño listo para indexación semántica o automatización.
+- 🔍 **Auditoría clara**: trazabilidad interna sin depender de repos externo.
+- 🔄 **Replicable**: se puede copiar directamente a otro proyecto o contexto.
+
+
+## 🌱 Ejemplo de Aplicación
+
+Una carpeta `alma_trading/` podría iniciar con:
+
+- `code/scripts/estrategia_volatilidad.py`
+- `documents/readme.md`: con descripción del módulo
+- `documents/changelog.md`: registrando la versión `v0.0.1`
+- `archivo/datasets/eurusd_2025.csv`
+- `config/.env.example`: con claves y variables
+- `meta/module.yaml`: detallando propósito, inputs y outputs del módulo
+
+
+## ## 🧾 Historial de versiones anteriores
+
+
+> 📁 Esta metodología reemplaza a la versión anterior:  
+> [[metodologia_estructura_autonoma_v1]] en Obsidian.  
+> Archivada el: 2025-05-29  
+> Estado: `deprecated`  
+> Motivo: Mejoras de estructura, claridad y compatibilidad IA-ready
+
+
+module: metodologias/metodologia_estructura_modular_v2
+type: core
+status: in_progress
+created: '2025-05-22'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+
+## ✅ Aplicación
+
+Esta metodología se aplica a:
+
+- Dominios funcionales (trading, cultivo, historia, etc.)
+- Módulos técnicos (CLI, LLM, memoria, loader)
+- Proyectos externos integrables (13CC, Cannabird, Fondo Alma Mía)
+
+
+## 🔄 Versionado recomendado
+
+En lugar de una carpeta `versionado/`, se recomienda usar:
+
+- Git tags: `git tag v0.0.0.1`
+- Git branches: para snapshot o exploraciones (`snapshot/llm_experiment`)
+- Backups de snapshots manuales → irán a `docs/versiones/`
+
+
+## 🧠 Metadatos para IA
+
+Cada módulo debe contener al inicio de su `README.md` el siguiente frontmatter YAML:
+
+```yaml
+```
+
+Este bloque debe ser interpretado por sistemas de IA para clasificación, relación y visualización.
+
+
+## 🔗 Relación con otros documentos
+
+- [`Sprint_2.2_Metodologias_Base.md`](Sprint_2.2_Metodologias_Base.md)
+- [`Methodology_Index.md`](./Methodology_Index.md)
+
+
+## 🧾 Changelog
+
+### 📌 Versión 2.0 – 2025-05-21
+**Cambios respecto a la versión 1.0:**
+
+- 🔁 Renombrado `bitacora.md` a `dev_journal.md`, aclarando su rol informal y reflexivo.
+- 🗃 Eliminada la carpeta `versionado/`; ahora se recomienda el uso de Git tags y ramas.
+- 📘 Añadido bloque de metadatos YAML estándar para IA (frente a bloques markdown ad-hoc).
+- 🧠 Definidos los valores válidos para los campos `type`, `status`, `tags` y `linked_to`.
+- 📝 Incorporados ejemplos reales en la sección de convenciones de nombres (`gen_`, `load_`, etc.).
+- 📚 Añadidas referencias cruzadas a `Methodology_Index.md` y `Sprint_2.2_Metodologias_Base.md`.
+- 🧰 Sugeridas herramientas complementarias: `mkdocs.yml`, `validate_structure.py`, Git hooks.
+
+
+module: metodologias/metodologia_interaccion_ia_v2
+type: core
+status: in_progress
+created: '2025-05-22'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+
+## ✅ Cambios en esta versión
+
+- Se añadieron metadatos YAML como estándar obligatorio
+- Se formalizaron los modos de interacción IA
+- Se definieron acciones válidas por rol IA
+- Se incluyó validación progresiva y comandos CLI simulados
+
+module: "core/cli"
+type: "core"
+status: "stable"
+created: "2025-05-21"
+tags: ["entrada", "modularidad"]
+linked_to: ["resumen", "loader"]
+sprint: "Sprint_2.2"
+version: "0.2"
+
+## 🤖 Modos de Operación IA
+
+| Modo       | Acción Permitida                        | Interfaz     |
+|------------|------------------------------------------|--------------|
+| `lector`   | Leer y parsear documentos con YAML       | CLI / LLM    |
+| `auditor`  | Verificar formato, relaciones y faltantes| CLI / LLM    |
+| `asistente`| Sugerencias y generación sin escritura   | LLM / Chat   |
+| `operador` | Acciones sobre archivos (⚠ requiere validación) | CLI futura  |
+
+
+## 🛠️ Soporte CLI esperado
+
+```bash
+alma-cli validate --module core/cli
+alma-cli suggest --for resumen.md
+alma-cli doc-init --module resumen
+```
+
+## Archivo: metodologia_snapshots_formales.md
+Contenido:
+# 📦 Metodología de Snapshots Formales (v1.0)
+
+## 🎯 Objetivo
+
+Definir un estándar profesional para la creación, documentación y uso de snapshots (versiones) dentro del sistema ALMA_RESIST, asegurando trazabilidad, claridad técnica y compatibilidad total con agentes IA.
+
+
+## 🗂 Estructura Estándar de un Snapshot
+
+Ubicación: `docs/versiones/vX.Y.Z_nombre/`
+
+Contenido mínimo:
+
+```
+📁 v0.0.0.4_sprint_2.5_auditoria/
+├── index.md                      # Índice general y guía de lectura del snapshot
+├── version.md                   # Detalles técnicos de la versión
+├── changelog.md                 # Cambios y mejoras introducidas
+├── bitacora.md                  # Comentarios técnicos del proceso
+├── README.md                    # Explicación del snapshot, enlaces cruzados
+├── resumen_mvp.md               # (opcional) Estado funcional hasta esta versión
+├── estructura.zip               # (opcional) Zip con archivos específicos si es necesario
+└── referencias/                 # (opcional) Recursos, imágenes, backups externos
+```
+
+
+## 🤖 Compatibilidad IA
+
+Para que un snapshot sea IA-friendly:
+
+- No debe tener estructuras anidadas innecesarias (máximo L3)
+    
+- Los archivos clave deben tener YAML válido si corresponde
+    
+- El `README.md` debe servir como prompt inicial o punto de entrada
+    
+- El `index.md` debe orientar al sistema o modelo sobre qué se puede usar
+    
+
+
+## 📎 Referencias cruzadas
+
+- `metodologia_versionado_backups_v2.md`
+    
+- `metodologia_doc_ia_v2.md`
+    
+- `metodologia_sprints_v2.md`
+    
+
+## Archivo: metodologia_sprints_v2.md
+Contenido:
+# 🌀 Metodología de Sprints – ALMA_RESIST (v2)
+
+📅 Versión: 2.0  
+📁 Archivo: metodologia_sprints_v2.md  
+🎯 Objetivo: Establecer un flujo de trabajo modular, trazable y semántico para gestionar sprints dentro del sistema ALMA_RESIST, optimizado para una persona con soporte de IA y automatización futura.
+
+
+## 🔁 Ciclo de Vida del Sprint
+
+### Estados posibles y transiciones
+
+| Estado     | Acción Requerida                                                                 |
+|------------|-----------------------------------------------------------------------------------|
+| Activo     | Sprint en ejecución                                                              |
+| Cerrado    | Checklist validado, changelog actualizado, metadatos `exit_criteria` cumplidos   |
+| Archivado  | Sprint movido a carpeta `docs/versiones/`, registrado en `Methodology_Index.md`  |
+
+sprint_id: 2.3
+topic: "Integración de modelo LLM"
+status: "active"
+started: "2025-05-21"
+tags: ["llm", "ia", "memoria"]
+exit_criteria: ["changelog_updated", "docs_generated"]
+linked_modules:
+  - name: "core/cli.py"
+    version: ">=2.3"
+  - name: "resumen.py"
+    version: "0.5"
+blocks: ["Sprint_3.1_LLM_Integration"]
+
+## 📝 Estructura del Archivo de Sprint
+
+```markdown
+# Sprint X – Título
+
+📅 Inicio: YYYY-MM-DD  
+🌀 Estado: activo / cerrado / archivado  
+📦 Versión asociada: vX.X.X
+
+
+## 📋 Checklist de tareas
+- [x] Implementar comando `!ayuda` en CLI
+- [ ] Migrar loader a modelo LLM local
+- [ ] Escribir test en `scripts/test_loader.py`
+
+
+## 🗂️ Progreso del Sprint
+| Tarea                              | Estado | Responsable   |
+|------------------------------------|--------|----------------|
+| Implementar validación IA inicial  | 🟡     | Operador + IA |
+| Crear script de resumen automático | 🔴     | IA             |
+
+
+## 📎 Archivos relacionados
+- `core/cli.py`
+- `changelog.md`
+- `docs/sprints_activos/Sprint_2.3_LLM.md`
+
+
+## 🧠 IA como Asistente de Sprint
+
+Casos de uso:
+
+- Verificación automática de `exit_criteria`
+- Generación del resumen para hitos.md
+- Validación de consistencia entre YAML y archivos afectados
+
+
+## 📘 Referencias
+
+- `metodologia_estructura_modular_v2.md`
+- `Methodology_Index.md`
+- `Sprint_2.2_Metodologias_Base.md`
+
+
+
+### 🧾 Apéndice: Registro Final Detallado (Sprint Closure)
+
+> Este apéndice detalla los pasos concretos que deben ejecutarse al cerrar cualquier sprint, para garantizar trazabilidad, documentación formal y empaquetado versionado.
+
+
+#### 📦 2. Archivos requeridos para cierre
+
+Mover o copiar a `docs/versiones/vX.X.X_NOMBRE/`:
+
+- `README.md`, `version.md` (explicación y control)
+- `changelog.md` (entrada específica del sprint)
+- `hitos.md`, `lecciones_aprendidas.md`, `TODO.md`
+- `mapeo_sprint_archivos.md`, `log_integracion.md`
+- Bitácora con la fecha del cierre: `bitacoras/bitacora_YYYY-MM-DD.md`
+- `CONTEXT.md`, `index.md` actualizados si corresponde
+
+
+#### 🔁 4. Registro en la historia
+
+Actualizar:
+
+- `hitos.md`: Nuevo hito con ID y descripción clara
+- `lecciones_aprendidas.md`: Reflexión técnica del sprint
+- `changelog.md`: Con `## [vX.X.X] - YYYY-MM-DD`
+- `mapeo_sprint_archivos.md`: Relación entrada/salida
+- `log_integracion.md`: Qué se agregó, archivó o reemplazó
+
+
+Esta rutina debe aplicarse sistemáticamente al finalizar cualquier sprint para evitar deuda técnica, documentación inconexa o trazabilidad incompleta.
+
+
+module: metodologias/metodologia_versionado_backups_v1
+type: core
+status: in_progress
+created: '2025-05-21'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+
+## ✅ Aplicación
+
+- Módulos técnicos o funcionales (CLI, loader, IA, memoria)
+- Documentación (metodologías, prompts, bitácoras)
+- Proyectos externos integrados (13CC, Cannabird)
+
+
+## 🏷️ Git Tags
+
+- Toda versión debe ir acompañada de:
+  - `git tag vX.X.X`
+  - Referencia en `changelog.md`
+
+**Ejemplo:**
+```bash
+git commit -am "v0.2.0 – Nueva versión con CLI funcional"
+git tag v0.2.0
+```
+
+
+## 💾 Backups Manuales
+
+- Backup físico en disco externo (ej: `ALMA_RESIST_TOSHIBA`)
+- Backup zip en nube privada (Google Drive, Nextcloud, etc.)
+- Idealmente: siempre después de una versión `MINOR` o `MAJOR`
+
+
+## 🔗 Reglas cruzadas
+
+- Toda nueva versión debe impactar:
+  - `changelog.md`
+  - `hitos.md`
+  - (opcional) `README.md` de módulo
+
+## Archivo: 2025-06-05_auditoria_estructura_centralesis.sync-conflict-20250605-164822-EHTW5G7.md
+Contenido:
+2025-06-05: Se migraron centralisis.md y centralisis.yaml al entorno definitivo de Centralesis (docs/ y contexto/) - [by Centralesis]
+
+# 2025-06-06_movimiento_contexto_centralesis.md
+
+## Acción:
+Movimiento de la carpeta `docs/contexto/` a la raíz de Centralesis como `contexto/`.
+
+## Motivo:
+Tener el contexto principal siempre visible y accesible en la raíz del entorno para referencia rápida y edición frecuente.
+
+## Estado:
+Movimiento realizado, sin alteraciones en los archivos internos.
+
+# 2025-06-10_actualizacion_estado_centralesis.md
+
+## Acción:
+- Eliminado `contexto/centralesis.md` tras su respaldo en histórico.
+- Movido `core/notebooks/2025-06-05_reestructuracion_centralesis.md` a `contexto/` y creado backup de referencia.
+
+## Motivo:
+Actualización de la base operativa y resguardo de versiones clave de Centralesis para trabajo futuro.
+
+## Estado:
+Entorno limpio y archivos clave respaldados.
+
+
+# 2025-06-10_limpieza_post_centralisis_2.1.md
+
+## Acción:
+- Archivos de auditoría, memorias base y reestructuraciones movidos a `archivo/historico/`.
+- Eliminados archivos corruptos de conflicto generados por sincronización.
+- README añadido a la nueva carpeta histórico para trazabilidad.
+
+## Motivo:
+Limpieza y organización tras la actualización de Centralesis 2.1.  
+Resguardo ordenado del historial y remoción de archivos innecesarios.
+
+## Estado:
+Entorno de notebooks limpio, histórico institucional actualizado.
+
+
+
+# Bitácora – Creación de carpeta fix_metadata en core/scripts/
+
+## Acción realizada
+Se crea la carpeta `/core/scripts/fix_metadata/` dentro del entorno Centralesis,  
+junto con su archivo `README.md` correspondiente.
+
+## Motivo
+Centralizar el desarrollo, almacenamiento y documentación de scripts dedicados a:
+- Corregir, añadir o actualizar encabezados YAML en archivos del entorno.
+- Uniformar la metadata y garantizar compatibilidad con los sistemas de automatización, Obsidian y agentes IA.
+
+## Detalles
+- La carpeta fue creada como espacio base para futuros scripts de formateo y validación masiva.
+- El README describe los objetivos y buenas prácticas para su uso.
+- Todo script agregado debe estar documentado, versionado y probado antes de aplicación en lote.
+
+## Estado final
+Infraestructura lista y versionada en Git.  
+Entorno preparado para futuros flujos de automatización de metadata.
+
+
+
+
+
+
+## ⚙️ Funcionalidad
+
+- Monitorea cambios en `/home/bird/ALMA_RESIST` con `inotifywait`.
+- Ejecuta: `git add`, `commit`, `pull --rebase`, y `push` en la branch `main`.
+- Excluye `.git/` y todos los archivos definidos en `.gitignore`.
+- Guarda logs en: `/home/bird/ALMA_RESIST/control_central/logs/backup_git/backup_git.log`
+- Usa bloqueo por PID para evitar instancias duplicadas.
+
+
+## 🧪 Requisitos
+
+- `inotify-tools`
+- Acceso SSH a GitHub ya configurado
+- Repositorio inicializado y con remoto válido
+
+
+`#git` `#backup` `#automático` `#scripts` `#core`
+
+
+
+## ✅ Cambios Técnicos Implementados
+
+### 🧠 Nuevos Módulos
+
+- `MODULOS/sync_bitacora/` – Sincronización validada de resúmenes por hash SHA-256 y encabezados YAML
+- `MODULOS/validador_duplicados/` – Comparación por hash y similitud textual entre CUADERNOS y BITÁCORA
+- `MODULOS/Alma_Monitor/` – Auditoría de logs estructurados y generación de reportes de actividad
+
+
+### 📦 Plantillas Nuevas
+
+Ubicadas en `RECURSOS_Y_AYUDAS/plantillas/`:
+
+- `checklist_promocion.md` – Validación para promoción de módulos
+- `feedback_sugerencia.yaml` – Formato estándar de sugerencias IA/humano
+- `log_template.yaml` – Estructura común para trazabilidad de eventos
+
+
+## 📘 Whitepaper
+
+- [x] Se agregará sección 6.7 con resumen del documento `casos_uso_reales.md` (en curso)
+
+
+## 🧩 Tareas Finales de Versión
+
+- [ ] Crear `00_BACKUPS_HISTORICOS/v0.0.6.2.zip` con toda la estructura actual
+- [ ] Actualizar `version.txt` a `0.0.6.2` en raíz del sistema
+

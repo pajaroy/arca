@@ -1,0 +1,47 @@
+# 📁 Guía de Alias SSH entre ALMA_CORE y ALMA_RESIST
+
+**Ubicación sugerida:** `control_central/docs/utilidades/ssh_aliases.md`  
+**Fecha:** 2025-06-01  
+**Autor:** bird
+
+
+## ✅ Archivo de configuración SSH
+
+Editar o crear el archivo `~/.ssh/config` en **ambas máquinas** con el siguiente contenido:
+
+```ssh
+Host resist
+    HostName 192.168.1.36
+    User bird
+
+Host core
+    HostName 192.168.1.33
+    User bird
+```
+
+
+## 🧪 Verificación
+
+### En alma-core:
+```bash
+ssh resist
+```
+
+### En alma-resist:
+```bash
+ssh core
+```
+
+✅ Si entrás sin que te pida contraseña, quedó bien configurado.
+
+
+## 📌 Estado final esperado
+
+```bash
+# Desde alma-core
+bird@alma-core:~$ ssh resist
+
+# Desde alma-resist
+bird@alma-resist:~$ ssh core
+```
+

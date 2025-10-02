@@ -1,0 +1,26 @@
+# 🧨 Sync Apocalypse – 2025-05-16
+
+📅 Fecha: 2025-05-16  
+🧠 Evento: Sincronización masiva forzada desde Vault `ALMA_CORE` hacia carpeta `~/Alma`
+
+
+## 📂 Carpeta vinculada
+
+- Local: `/home/bird/Alma`
+- Vault Remoto: `ALMA_CORE`
+
+
+## 🧪 A revisar
+
+- Posibles conflictos en notas y duplicados
+- Organización de carpetas en ALMA_LIBRE y submódulos
+- Estado de archivos `.md` modificados por última vez
+
+
+## 🚀 Estado final
+
+✅ Sync funcional  
+✅ Vault remoto activo  
+✅ Carpeta local reconocida  
+✅ Sistema estable y operativo
+

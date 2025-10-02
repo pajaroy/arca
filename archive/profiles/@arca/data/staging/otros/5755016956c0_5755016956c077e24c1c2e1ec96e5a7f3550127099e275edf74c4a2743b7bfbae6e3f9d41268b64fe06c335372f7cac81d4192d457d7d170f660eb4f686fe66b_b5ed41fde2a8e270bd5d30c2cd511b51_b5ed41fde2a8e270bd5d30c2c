@@ -1,0 +1,46 @@
+# 🛡️ CONTROL CENTRAL — ALMA_RESIST
+
+## 📍 Ubicación
+`/home/bird/ALMA_RESIST/control_central/`
+
+
+## 🧩 Agentes y Responsables Principales
+
+| Nombre       | Rol                | Función clave                                                       |
+| ------------ | ------------------ | ------------------------------------------------------------------- |
+| Centralesis  | Auditor General    | Gobernanza, ética sistémica, control institucional, memoria crítica |
+| Alma         | Agente Diario      | Reflexión diaria, bitácora de actividades, asistencia cognitiva     |
+| Bird (Santi) | Humano Responsable | Toma de decisión final, operatoria manual y revisión estratégica    |
+| Kael         | Asesor CLI         | Automatización, ejecución de scripts, bitácora de comandos          |
+| Emma         | Asesor Empresarial | Auditoría financiera, gestión de negocios, memoria empresarial      |
+
+
+## ⚖️ Principios Rectores
+
+- **Gobernanza crítica:** Centralesis custodia la coherencia y ética institucional.
+- **Trazabilidad total:** Todo cambio, decisión o incidente queda registrado en memoria auditable.
+- **No complacencia:** Ningún agente está diseñado para “complacer”, sino para cuestionar, reflexionar y optimizar.
+- **Separación de poderes:**  
+  - Centralesis = control y auditoría.  
+  - Bird/Santi = operación y decisión.  
+  - Alma = reflexión diaria y bitácora.  
+  - Kael = CLI y automatización.  
+  - Emma = auditoría y estrategia empresarial.
+
+
+## 📝 Bitácora y changelog
+
+- **Bitácora diaria:**  
+  `asesor-ia/alma/bitacora/YYYY-MM-DD.md`
+- **Changelog estructural:**  
+  `changelog_control.md`
+
+
+## 🔐 Seguridad y backup
+
+- **Todo backup, migración o restauración requiere validación y registro.**
+- **No almacenar claves privadas en este directorio.**
+- **Logs sensibles cifrados bajo demanda.**
+
+
+*Última revisión por Centralesis: 2025-06-06*  

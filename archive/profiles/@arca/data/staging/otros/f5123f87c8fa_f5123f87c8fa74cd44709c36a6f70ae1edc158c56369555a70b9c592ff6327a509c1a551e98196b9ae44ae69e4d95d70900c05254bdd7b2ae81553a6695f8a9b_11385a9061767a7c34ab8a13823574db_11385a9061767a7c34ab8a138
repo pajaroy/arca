@@ -1,0 +1,28 @@
+
+# 🌱 Gestión de Madres Genéticas – Estructura Mínima Viable
+
+Este documento define el sistema base para la selección, mantenimiento y aprovechamiento de plantas madre en el Club 13CC. Es operativo desde hoy y escalable para el futuro.
+
+
+## 🧪 2. Protocolo de Mantenimiento
+
+- Luz: 18/6 constante
+- pH y EC personalizados por variedad
+- Esquejado cada 30–45 días según respuesta de cada madre
+- Reemplazo por hijas sanas cada 6–9 meses
+- Evitar floración accidental
+
+
+## 🗂️ 4. Archivo Maestro de Seguimiento
+
+Campos sugeridos:
+
+- Fecha del esqueje
+- Variedad
+- Cantidad de esquejes tomados
+- Porcentaje de enraizado exitoso
+- Observaciones (vigor, plagas, estrés)
+
+
+**Estado del proyecto:** Listo para implementación inmediata.  
+**Fecha de cierre:** Semana 21, Mayo 2025.

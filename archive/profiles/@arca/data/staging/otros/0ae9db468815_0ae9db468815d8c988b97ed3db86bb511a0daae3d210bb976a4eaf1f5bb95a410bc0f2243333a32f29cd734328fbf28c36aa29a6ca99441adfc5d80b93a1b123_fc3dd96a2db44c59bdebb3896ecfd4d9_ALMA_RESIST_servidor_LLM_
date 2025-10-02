@@ -1,0 +1,39 @@
+# 🧠 ALMA_RESIST – Servidor LLM Local (Base Técnica)
+
+## 🎯 Objetivo
+
+Montar un servidor de modelos LLM que funcione **de forma local, offline y automática** en el entorno **ALMA_RESIST** (disco Toshiba). Este servidor recibirá consultas desde un cliente CLI por terminal y será completamente portable a otros nodos del sistema (ALMA_CORE, pendrive, etc.).
+
+
+### 2. Ejecución Automática
+
+- Scripts `.sh` + archivos `.desktop` en `~/.config/autostart/`
+- Alternativa pro: configuración con `systemd` para persistencia y monitoreo
+- Arranca automáticamente al prender la PC sin GUI ni navegador
+
+
+### 4. Estructura de Carpetas del Módulo
+
+```plaintext
+ALMA_SERVER_LLM/
+├── config/
+│   └── llm_model.json          # Define modelo y parámetros
+├── logs/
+│   └── chat_log.md             # Guarda los chats
+├── scripts/
+│   ├── start_llm_server.sh     # Inicia el servidor
+│   └── start_llm_chat.sh       # Cliente CLI
+├── system/
+│   └── autostart/
+│       ├── start_llm_server.desktop
+│       └── start_llm_chat.desktop
+```
+
+
+## 🧱 Modularidad y Portabilidad
+
+- Totalmente ejecutable desde cualquier PC con Linux
+- Diseñado para operar sin entorno gráfico
+- Permite reemplazo de modelos, motor o backend sin romper compatibilidad
+- Estructura fija y documentada para ALMA_RESIST, ALMA_CORE y dispositivos portables
+

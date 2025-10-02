@@ -1,0 +1,61 @@
+---
+title: "Bitácora de cierre operativo – Cannabird"
+date: 2025-06-02
+author: Santi & Asesor-IA_CLI
+tags: [#bitacora, #reestructuracion, #limpieza-final, #cannabird, #journal]
+status: cerrado
+linked_to: alma_empresa/entidades/cannabird
+---
+
+# 🧾 Bitácora de Jornada – 2025-06-02
+
+Hoy se llevó a cabo una jornada completa de reestructuración y limpieza profunda del módulo `Cannabird`, dentro del sistema ALMA_RESIST.  
+El objetivo fue consolidar la arquitectura de carpetas, validar los archivos operativos y archivar o eliminar todo lo innecesario.
+
+---
+
+## ✅ Acciones Realizadas
+
+### 📁 Reestructuración de archivos legacy
+
+- 📦 `resumenes diarios` del 26/05 al 01/06 movidos a `docs/resumenes_semanales/diarios/s22/`
+- 📦 `resumenes semanales`:
+  - `s21_resumen_semanal.md` → `semanales/s21/`
+  - `s22_resumen_mejorado.md` → `semanales/s22/`
+- 🧠 Prompts antiguos movidos a `control/prompts/historico/`
+- 📌 Prompts oficiales (v2 y v3) ubicados en `control/prompts/oficiales/`
+- 🧾 Reunión `s22` movida a `docs/reuniones_semanales/`
+
+---
+
+### 🧹 Limpieza final
+
+- Eliminadas carpetas obsoletas en `_legacy/resumenes_cannabird/`
+- `.docx` no utilizados archivados en `archivo/descartes_raw/docx/`
+- `prompts` redundantes movidos a `archivo/historico/prompts_migrados/`
+- Apéndices integrados reubicados en `archivo/historico/contexto_apendices/`
+- Se dejó `archivo/downloads/` completamente limpia
+
+---
+
+## 🗂 Posicionamiento del módulo
+
+Se estableció como convención general que toda operación desde CLI en Cannabird debe ejecutarse desde la ruta base:
+
+```bash
+cd /home/bird/ALMA_RESIST/alma_empresa/entidades/cannabird/
+```
+
+Esto asegura consistencia, simplicidad en scripts y claridad operativa.
+
+---
+
+## 📌 Estado del módulo
+
+**Estatus final del sistema:** ✅ 100% CONSOLIDADO  
+**Asesor responsable:** Asesor-IA_CLI  
+**Usuario supervisor:** Santi
+
+Este archivo funciona como cierre formal de la jornada y puede integrarse al journal general de `docs/`.
+
+**Tags globales:** `#reestructuracion`, `#limpieza`, `#estructura`, `#journal`, `#modulo-cannabird`

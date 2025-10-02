@@ -1,0 +1,20 @@
+# 📚 Índice – Bitácora 2025-06-01
+
+Este directorio contiene los documentos generados durante el 1 de junio de 2025, correspondientes al Sprint 0.2 del sistema `ALMA_RESIST`. Se documentan tanto los eventos operativos como los apéndices técnicos que sustentan la jornada.
+
+
+## 📂 Finalidad del Directorio
+
+Esta carpeta registra el **progreso diario detallado**, con foco en:
+
+- Consolidación del **backup automático a GitHub**
+- Configuración cruzada con **Syncthing**
+- Estandarización de flujos y conducta operativa
+- Ensayos de eliminación, conflictos, y reglas de trazabilidad
+- Comportamiento observado de scripts autónomos en entorno real
+
+
+## 🔖 Etiquetas sugeridas para indexado
+
+`#bitacora_diaria #sprint_0.2 #backup_git #sync #apendice_tecnico #protocolos`
+

@@ -1,0 +1,21 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_b3b3a1
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Hello World
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:9a84adde9595fe18794965fb82edbf0989648a54f94cebf23444e2b10004789a
+---
+def main():
+    print("Bienvenido a ALMA_RESIST v0.0.0.2")
+    # TODO: conectar con modelo LLM

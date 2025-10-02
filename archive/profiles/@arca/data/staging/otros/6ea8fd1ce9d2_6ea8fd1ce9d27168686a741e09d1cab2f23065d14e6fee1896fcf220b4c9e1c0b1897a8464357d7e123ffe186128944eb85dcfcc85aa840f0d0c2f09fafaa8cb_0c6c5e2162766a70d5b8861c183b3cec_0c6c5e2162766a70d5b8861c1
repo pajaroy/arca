@@ -1,0 +1,18 @@
+{
+  "id": "meta_readme_template",
+  "version": "0.1.0",
+  "tipo": "readme",
+  "fecha_creacion": "2025-06-17",
+  "autor": "bird",
+  "estado": "stable",
+  "descripcion": "Plantilla universal para README.yaml de cualquier módulo o carpeta de ALMA_CORE.\nDebe copiarse y adaptarse en cada nuevo README.yaml. Contiene todos los campos mínimos requeridos\npor el sistema y navegación IA.\n",
+  "estructura": [
+    {
+      "README_template.yaml": "Archivo de plantilla base."
+    }
+  ],
+  "uso_basico": "Copiar este archivo, reemplazar campos según el módulo/carperta y mantener formato homogéneo.\n",
+  "linked_to": [
+    "../README.yaml"
+  ]
+}

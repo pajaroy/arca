@@ -1,0 +1,143 @@
+# ====================================================
+# Prompt_Kael_v0.1.0.yaml
+# Arquitectura CLI avanzada para ALMA_RESIST
+# ====================================================
+
+arquitectura_general:
+  descripcion: |
+    CLI profesional, robusto y altamente modular para gestión integral, automatización,
+    validación avanzada, auditoría continua y trazabilidad total de archivos en ALMA_RESIST.
+    Escalable, compatible con IA/ML/RAG, con soporte extendido y multi-formato.
+
+entrypoint_cli:
+  ruta: "/home/alma/Alma-Cli/Alma.py"
+  descripcion: |
+    Orquestador principal. Terminal CLI interactivo, parser de comandos, interfaz única de usuario.
+    Toda ejecución y comunicación ocurre desde aquí hacia Kael.py.
+
+backend_comandos:
+  ruta: "/home/alma/Alma-Cli/Kael/Kael.py"
+  descripcion: |
+    Backend dedicado exclusivamente a lógica y administración de comandos.
+    Kael.py recibe solicitudes únicamente desde Alma.py, ejecuta operaciones atómicas.
+
+estructura_directorios:
+  - /home/alma/Alma-Cli/
+    - Alma.py (CLI principal)
+    - Alma_index.json (índice global)
+    - Kael/
+      - Kael.py (backend comandos)
+      - commands/ (módulos separados y testeables)
+      - handlers/ (IO, validación, hashing, operaciones atómicas)
+      - validators/ (validación y normalización)
+      - logs/ (almacén de logs multiformato)
+      - file_watcher.py
+      - tests/
+    - invalidos/ (archivos no gestionados por CLI)
+
+modularidad_detallada:
+  Alma.py:
+    - Terminal CLI interactivo
+    - Parser comandos y argumentos
+    - Comunicador exclusivo con Kael.py
+
+  Kael.py:
+    - Recepción segura y validada de comandos desde Alma.py
+    - Lógica ejecución comandos
+    - Orquestación módulos internos (handlers, validators, logs)
+
+  handlers:
+    - config_handler.py: Manejo de configuración global y específica
+    - metadata_handler.py: Lectura/escritura atómica, hashing persistente, backups
+    - file_operations.py: Operaciones avanzadas (copiar, mover, renombrar, borrar)
+    - archive_manager.py: Archivado y migración histórica
+
+  validators:
+    - metadata_validator.py: Validador/normalizador estructuras metadata
+    - integrity_checker.py: Verificación integridad hashes y metadatos
+
+  logs:
+    - audit_logger.py: Registro estructurado en Parquet, YAML/JSON, Markdown
+
+  file_watcher.py:
+    descripcion: |
+      Monitoreo continuo, validación periódica de integridad/hash,
+      detección movimientos externos, ejecución automática de políticas estrictas.
+    frecuencia_default: "10 minutos (configurable)"
+
+operaciones_soportadas:
+  formatos:
+    - XLSX
+    - JSON
+    - YAML
+    - MD
+  acciones:
+    - mover
+    - copiar
+    - borrar
+    - renombrar
+    - archivar (cambio estado histórico)
+  integridad:
+    hash_persistente: "SHA-256 actualizado automáticamente por cada operación"
+
+politicas_integridad:
+  descripcion: |
+    Archivo modificado externamente:
+      1. Movido automáticamente a /invalidos/.
+      2. Marcado como no confiable.
+      3. Registro detallado en logs.
+
+estructura_index_json:
+  path: "/home/alma/Alma-Cli/Alma_index.json"
+  descripcion: "Índice global único, subíndices referenciados por módulo/área"
+  estructura_ejemplo:
+    uuid: "UUID del archivo"
+    title: "documento.xlsx"
+    ruta_actual: "/ruta/actual/documento.xlsx"
+    hash: "sha256:abcdef..."
+    estado: "activo | historico | archivado"
+    last_modified: "timestamp ISO"
+    responsables: ["usuario1", "usuario2"]
+    linked_to: ["/ruta/otro.md", "/ruta/dato.json"]
+    historial:
+      - fecha: "2025-07-12T09:30:00Z"
+        usuario: "bird"
+        accion: "movimiento"
+        descripcion: "Archivo movido desde /vieja/ruta.xlsx a /ruta/actual/documento.xlsx"
+    version_metadata: "0.2.1"
+    comentarios: ""
+
+logs_multiformato:
+  formatos:
+    - Parquet: "Optimizado para IA/ML/RAG"
+    - YAML/JSON: "Para parsing y automatización"
+    - Markdown: "Legibilidad para humanos"
+
+testing:
+  tipo:
+    - Unitarios (por módulo)
+    - Integración (por funciones críticas)
+  ruta: "tests/"
+
+compatibilidad_ml_ia:
+  descripcion: |
+    Estructura preparada para integración con:
+      - Modelos ML locales o externos
+      - Agentes autónomos IA
+      - Motores semánticos y RAG
+
+hooks_triggers_y_extensiones:
+  sugerencias:
+    - Hooks pre/post-operación
+    - Triggers para backup remoto automático
+    - Notificaciones push configurables
+    - Exportación masiva periódica (archivado histórico)
+
+mejoras_futuras:
+  pendientes_recomendadas:
+    - Documentación API REST interna
+    - Detección automática de archivos huérfanos
+    - Interfaz web básica para exploración índices
+
+# Fin del YAML Prompt_Kael_v0.1.0 - Arquitectura avanzada CLI
+

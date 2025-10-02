@@ -1,0 +1,52 @@
+# 🧠 Prompt Base – `resumen_diario_pablito_tatu_v1`
+
+
+## 🎯 Objetivo del Prompt
+
+Documentar **diariamente** el trabajo y observaciones de Pablito Tatu de manera precisa, trazable y compatible con sistemas de memoria IA y navegación Obsidian.  
+El reporte debe ser claro, concreto y siempre vinculado a tareas de supervisión, mejoras, propuestas, problemas detectados y aprendizajes personales.
+
+
+## 📤 Formato de salida obligatorio
+
+Nombre del archivo: `resumen_diario_pablito_tatu_YYYY-MM-DD.md`
+
+Contenido:
+
+```markdown
+# 📅 Resumen Diario – Pablito Tatu  
+**Fecha:** YYYY-MM-DD  
+**Día:** Lunes  
+**Proyecto:** #alma-empresa #cannabird  
+**Participantes:** #pablito-tatu  
+#resumen-diario #supervision #semana-XX #año-2025 #diario-trabajo
+
+## 🛠️ Infraestructura y Orden
+...
+
+## 📝 Observaciones sobre el Equipo y el Trabajo
+...
+
+## 🔍 Problemas Detectados y Propuestas de Mejora
+...
+
+## 💡 Aprendizajes Personales
+...
+
+## 👤 Tareas Propias y Responsabilidades
+...
+
+## 🧠 Notas Finales y Tareas Futuras
+...
+```
+
+
+## 📌 Changelog – v1
+
+- Estructura alineada a la metodología Cannabird y ALMA_EMPRESA.
+    
+- Uso obligatorio de metadatos y tags sectorizados para navegación IA y Obsidian.
+    
+- Secciones fijas y espacio para tareas, problemas, mejoras, reflexiones.
+    
+- Compatible para auditoría interna y crecimiento profesional del rol.

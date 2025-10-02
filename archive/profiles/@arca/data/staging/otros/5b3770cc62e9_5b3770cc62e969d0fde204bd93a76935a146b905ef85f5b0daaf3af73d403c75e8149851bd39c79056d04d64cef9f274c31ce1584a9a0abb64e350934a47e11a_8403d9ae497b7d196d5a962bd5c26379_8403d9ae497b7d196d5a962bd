@@ -1,0 +1,13 @@
+{
+  "id": "MEMGEN-002",
+  "fecha": "2025-04-30T10:09:40.342274",
+  "titulo": "Memoria Web 002",
+  "categoria": "GEN",
+  "tags": [
+    "memoria-web",
+    "#reflexion"
+  ],
+  "contenido": "El usuario desea mantener un resumen técnico continuo y actualizado del progreso en cada módulo del sistema ALMA, incluyendo ALMA_LOADER, para uso personal y como referencia para DeepSeek. Este resumen debe incluir funciones del sistema, avances por fecha y hora, y estar orientado a mantener trazabilidad de implementación.",
+  "relacionadas": [],
+  "impacto_en": []
+}

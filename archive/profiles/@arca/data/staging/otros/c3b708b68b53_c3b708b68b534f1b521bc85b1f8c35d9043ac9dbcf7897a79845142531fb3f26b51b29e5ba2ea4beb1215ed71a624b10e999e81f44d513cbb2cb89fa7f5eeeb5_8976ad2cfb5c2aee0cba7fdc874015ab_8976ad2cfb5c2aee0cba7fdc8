@@ -1,0 +1,41 @@
+
+# 📌 Mapa Interactivo – ALMA LIBRE
+**Versión:** 1.0  
+**Última actualización:** 2025-04-25  
+**Propósito:** Visualizar la relación entre cuadernos, módulos, memorias y flujos de retroalimentación del sistema.  
+
+
+## 🔍 Mini-diagramas por Sección
+
+```mermaid
+graph LR
+  A01[01_Alma_General] --> M01[01_Bitacora_Central]
+  A02[02_Medicina_Alternativa] --> M02[02_Salud_y_RPL]
+  A03[03_Geopolitica] --> M03[03_Noticias_Globales]
+  A04[04_Trading] --> M04[04_Gestor_de_Trades]
+  A05[05_Finanzas_Personales] --> M05[05_Control_de_Finanzas]
+  A06[06_Programacion] --> M06[06_Desarrollo_de_Apps]
+  A07[07_Cannabird] --> M07[07_Cultivo_Cannabird]
+  A08[08_Fondo_Alma_Mia] --> M08[08_Gestion_Fondo_Inversion]
+  A09[09_Creatividad_y_Empresas] --> M09[09_Modulo_Empresas]
+  M04 -->|Alimenta| M08
+  A03 -->|Contexto para| M04
+  A01 -->|Cruce emocional| M02
+```
+
+
+## 📁 Ubicación sugerida
+
+Este archivo debe guardarse en:
+
+```
+/95_memorias_base/MAPA_INTERACTIVO.md
+```
+
+Y actualizarse automáticamente mediante el script:
+
+```bash
+python generar_mapa.py
+```
+
+> Este mapa sirve como índice visual para usuarios nuevos, IAs conectadas y auditores del sistema.

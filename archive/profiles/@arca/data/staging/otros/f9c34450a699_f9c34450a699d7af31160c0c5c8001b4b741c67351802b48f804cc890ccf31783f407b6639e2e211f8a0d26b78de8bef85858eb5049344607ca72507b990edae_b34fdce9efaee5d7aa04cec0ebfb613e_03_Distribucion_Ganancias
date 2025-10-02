@@ -1,0 +1,43 @@
+# 💰 03_Distribucion_Ganancias_Alma_Mia_v1.1.md
+
+Documento institucional que establece la política de distribución de ganancias del fondo Alma Mía.  
+Versión ajustada: incorpora distribución trimestral con fecha posterior a cierre de trimestre.
+
+
+## 📈 II. Lógica de Resultados
+
+- Se reportarán **únicamente resultados realizados** (no flotante, no proyecciones).
+- Premisa institucional: *“Resultados pasados no garantizan resultados futuros.”*
+- Solo se muestran resultados efectivamente cerrados y confirmados.
+
+
+## 🔒 IV. Bonificación por Capital Bloqueado
+
+| Duración del Bloqueo | Bonificación Extra |
+|----------------------|--------------------|
+| 6 meses              | +5% sobre la ganancia correspondiente |
+| 12 meses             | +10% sobre la ganancia correspondiente |
+
+> Las bonificaciones aplican únicamente en **Fase Alfa y Beta**.  
+> Se calculan sobre las ganancias netas distribuidas y se descuentan del porcentaje correspondiente al fondo (Alma Mía).
+
+
+## 📚 VI. Ejemplo de Distribución
+
+**Inversor A:**  
+- Aporte: $100  
+- Resultado trimestral: +20% = $20  
+- Sin bloqueo → recibe 50% = $10
+
+**Inversor B:**  
+- Aporte: $100  
+- Resultado: +20% = $20  
+- Bloqueado 6 meses → recibe 55% = $11
+
+
+## 📎 VIII. Conexión con Otros Documentos
+
+- `04_Criterios_Calculo_Ganancias.md`
+- Bitácora de Trading
+- Contrato Simbólico de cada inversor
+

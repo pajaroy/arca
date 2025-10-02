@@ -1,0 +1,47 @@
+# 🧠 Prompt DeepSeek – Script Universal Fix Metadata v3 para ALMA_RESIST
+
+
+### **Novedades obligatorias v3**
+
+1. **Log de archivos saltados y motivo**:  
+   - Todo archivo excluido, saltado o no soportado debe quedar registrado en el log con acción `skipped` y motivo (`excluded by pattern`, `unsupported extension`, etc.).
+
+2. **Exclusión automática de logs**:  
+   - El script nunca debe procesar archivos con extensión `.log` ni el propio archivo de log generado por el script.
+
+3. **Campo autor robusto**:  
+   - Si falla `os.getlogin()`, usar `'desconocido'` como valor por defecto para el campo `autor` en metadata.
+
+4. **Referencia al prompt/IDEA**:  
+   - Incluir en cada registro de log un campo tipo `"prompt_ref": "IDEA_2025-06-06_01"` para trazabilidad.
+
+5. **Rutas de backup en el resumen final**:  
+   - Al terminar, mostrar cuántos archivos fueron respaldados y la ruta de los backups realizados.
+
+6. **Modo dry-run y resumen final mejorado**:  
+   - En modo diagnóstico, mostrar archivos que habrían sido modificados/saltados.  
+   - Al finalizar, resumen total: modificados, saltados, errores, backups hechos, dry-run vs real.
+
+7. **Configuración clara de exclusión**:  
+   - Seguir soportando exclusiones vía lista interna, archivo `.fix_metadata_ignore`, y parámetros CLI.
+
+8. **Nunca auto-modificarse ni dañar logs o sistema**:  
+   - Proteger la carpeta/logs del propio script por defecto.
+
+
+## **Referencia oficial:**  
+[IDEA_2025-06-06_01] – ALMA_RESIST | Santiago Calvo | Centralesis v2.3
+
+
+## Ejemplo de log para archivo saltado:
+
+```json
+{
+  "file": "core/notebooks/2025-06-05_memorias_base_generales.md",
+  "timestamp": "2025-06-11T11:22:33",
+  "action": "skipped",
+  "reason": "excluded by pattern",
+  "prompt_ref": "IDEA_2025-06-06_01"
+}
+```
+

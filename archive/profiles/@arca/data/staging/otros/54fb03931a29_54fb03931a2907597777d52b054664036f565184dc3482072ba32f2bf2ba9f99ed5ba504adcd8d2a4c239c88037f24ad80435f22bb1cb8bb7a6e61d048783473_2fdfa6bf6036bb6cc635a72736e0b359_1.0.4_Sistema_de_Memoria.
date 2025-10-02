@@ -1,0 +1,37 @@
+
+# 🧠 Sistema de Memorias Vivas – ALMA LIBRE v1.0.4 (post-Ronda0)
+
+Este documento expande la estructura del sistema de memorias tras la Ronda 0 de diseño estratégico y filosófico del proyecto ALMA LIBRE. Se integra el rol de las IAs, los niveles de interacción con las memorias y la capacidad de aprendizaje del sistema.
+
+
+## 🔗 Relaciones entre Carpetas
+
+Se mantienen las conexiones anteriores y se añade profundidad emocional, institucional y estratégica.
+
+### Relaciones clave actualizadas:
+
+- `alma_general` → núcleo semántico vinculado a todos los cuadernos
+- `reflexion` → ahora también asociada a `relacion_humano_ia.md`
+- `geopolítica_actualidad` → clave en decisiones de `fondo_inversion` y `fondo_alma_mia`
+- `bitacora_central` → registro emocional, técnico y narrativo completo del sistema
+- `relacion_humano_ia` → interactúa con todos los chats, sesiones personales y la IA integrada
+
+tipo: memoria
+titulo: "Título de la entrada"
+fecha: 2025-04-24
+estado: activa
+conectada_a: ["modulo_x", "cuaderno_y", "empresa_z"]
+prioridad: alta
+nivel_interactivo: contextual
+
+## 🔁 Nuevos estados posibles (desde Ronda 0)
+
+- `estado: activa`
+- `estado: archivada`
+- `estado: backup`
+
+
+**Versión:** 1.0.4  
+**Fecha:** 2025-04-24  
+**Actualizado tras:** Ronda 0  
+**Autoría:** Santi & ALMA

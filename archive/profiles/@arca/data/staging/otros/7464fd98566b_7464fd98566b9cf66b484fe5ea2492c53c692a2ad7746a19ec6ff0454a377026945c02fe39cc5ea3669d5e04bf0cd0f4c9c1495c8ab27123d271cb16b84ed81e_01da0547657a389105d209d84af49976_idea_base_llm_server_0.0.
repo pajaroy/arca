@@ -1,0 +1,139 @@
+---
+module: versiones/v0_0_0_5_llm_server/idea_base_llm_server_0_0_0_4_0_feedback
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+Feedback: Deepseek
+**Respuesta Estructurada a la Auditoría Técnica de ALMA_RESIST**
+
+---
+
+### **1. Priorización: Roadmap vs. Escalabilidad del Servidor**
+
+**Decisión:**  
+**Completar primero los módulos críticos del roadmap** (`context_tracker`, `reflection_engine`, y tests automatizados), pero **implementar el servidor LLM en su versión mínima viable (MVP)**.
+
+- **Razones:**
+    
+    - Sin `context_tracker` y `reflection_engine`, el servidor carece de contexto para operar de forma simbiótica.
+        
+    - Un servidor MVP (FastAPI + 1 modelo local) permite validar el flujo `CLI → servidor → memoria` sin sobre-ingeniería.
+        
+    - **Evitar deuda técnica:** Diseñar el servidor para que sea modular, facilitando futuras mejoras (ej: migrar a Docker/gRPC cuando los otros módulos estén estables).
+        
+
+---
+
+### **2. Cuellos de Botella en la Idea Base v0.0.0.4.0**
+
+**Problemas críticos:**
+
+- **RAM:** Cargar Mistral 7B (~13GB) + TinyLlama (~2GB) en paralelo exige >16GB de RAM.
+    
+    - _Solución:_ Usar modelos cuantizados (GGUF Q4) y limitar modelos concurrentes según hardware.
+        
+- **Comunicación lenta:** El event bus JSON y multiprocessing añaden latencia.
+    
+    - _Solución:_ Reemplazar JSON con Protocol Buffers para mensajes internos.
+        
+- **Asincronía bloqueante:** FastAPI maneja requests HTTP, pero los LLMs son bloqueantes.
+    
+    - _Solución:_ Ejecutar inferencias en threads separados con `asyncio.to_thread`.
+        
+
+---
+
+### **3. Escalabilidad Futura**
+
+**Fortalezas y mejoras:**
+
+- **ModelWrapper + Router** son una base sólida, pero requieren:
+    
+    - **Abstracción de transporte:** Implementar una capa `TransportLayer` para soportar gRPC, REST, o sockets sin cambiar el core.
+        
+    - **Contratos estrictos:** Definir schemas con Protobuf/JSON Schema para inputs/salidas.
+        
+- **Federación de ALMAs:** La arquitectura podría escalar si:
+    
+    - Se usa NATS/JetStream para mensajería distribuida.
+        
+    - Se implementa autenticación mTLS entre nodos.
+        
+
+---
+
+### **4. Mejoras sin Perder Simplicidad**
+
+**Acciones inmediatas:**
+
+- **Abstraer la carga de modelos:** Crear una clase `ModelLoader` que gestione formatos (GGUF, safetensors) y dependencias (llama.cpp, vLLM).
+    
+- **Simplificar Docker:** Usar un solo contenedor con todos los modelos (para MVP), no uno por modelo.
+    
+- **Reemplazar SQLite con DuckDB:** Solo si se requiere paralelismo en logging (ej: >100 transacciones/segundo). Para el MVP, SQLite es suficiente.
+    
+- **Eliminar el event bus JSON temporal:** Usar llamadas directas entre módulos (vía funciones) hasta que se necesite escalar.
+    
+
+---
+
+### **5. SQLite vs. DuckDB**
+
+**Recomendación:**
+
+- **Mantener SQLite en MVP:** Es portable, requiere cero configuración, y funciona en disco externo.
+    
+- **Planificar migración a DuckDB:** Cuando:
+    
+    - El volumen de logs supere 1GB.
+        
+    - Se necesiten consultas analíticas complejas (ej: joins entre embeddings y bitácora).
+        
+
+---
+
+### **Conclusión y Pasos Clave**
+
+1. **MVP del servidor (2 semanas):**
+    
+    - FastAPI + 1 modelo (Mistral 7B cuantizado).
+        
+    - Integración básica con `context_tracker` y `memory_graph`.
+        
+    - Logging en SQLite con cifrado AES-GCM.
+        
+2. **Post-MVP (versión 0.5.0):**
+    
+    - Migrar a gRPC + NATS.
+        
+    - Dockerizar modelos individualmente.
+        
+    - Implementar `ModelRouter` con embeddings.
+        
+
+```python
+
+# Ejemplo de ModelLoader simplificado (MVP)
+class ModelLoader:
+    def __init__(self, model_path: str, quantization: str = "Q4"):
+        self.model = self._load_gguf(model_path, quantization)
+    
+    def _load_gguf(self, path: str, quantization: str):
+        # Implementación con llama.cpp
+        return llama_model
+    
+    def generate(self, prompt: str) -> str:
+        return self.model(prompt)
+```
+
+**Cita final:**
+
+> _“La escalabilidad no es un lujo, sino una consecuencia de módulos bien definidos y contratos claros.”_
+
+New chat
+
+AI-generated, for reference only

@@ -1,0 +1,10 @@
+import jsonschema
+from jsonschema import Draft7Validator
+
+def validate_metadata(data: dict, schema: dict) -> bool:
+    try:
+        Draft7Validator(schema).validate(data)
+        return True
+    except jsonschema.ValidationError as e:
+        logging.error(f"Error de validación: {e.message}")
+        return False

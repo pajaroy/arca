@@ -1,0 +1,34 @@
+# arquitectura_archivos.yaml
+# Flujo básico para creación y gestión de archivos en ARCA
+metadatos:
+  id_unico: "flujo-YAML-001"
+  tipo: "borrador"
+  nombre: "flujo_archivos.yaml"
+  version: "0.1.0"
+  estado: "activo"
+  fecha_creacion: "2025-07-14"
+  fecha_modificacion: "2025-07-14"
+
+flujo_archivos:
+  descripcion: |
+    Flujo mínimo recomendado para la creación, identificación y registro
+    de archivos dentro del sistema ARCA. Esta arquitectura asegura
+    trazabilidad y consistencia desde el nacimiento de cada archivo.
+
+  pasos:
+    - paso: "Crear archivo vacío o con estructura mínima."
+      detalle: "El archivo nace en la ubicación deseada, sin metadatos o solo con placeholders."
+    - paso: "Insertar metadatos iniciales (con UUID en modo placeholder)."
+      detalle: "Agregar bloque de metadatos básicos, dejando el campo id_unico vacío o como 'PENDIENTE'."
+    - paso: "Asignar UUID único real."
+      detalle: "Un script reemplaza el placeholder por un UUID válido y único."
+    - paso: "Completar el resto de los metadatos básicos."
+      detalle: "Actualizar nombre, tipo, autor, fechas, estado, versión, etc."
+    - paso: "Calcular hash de integridad y actualizar el campo."
+      detalle: "El hash se calcula sobre el archivo ya con los metadatos completos y se escribe en el campo correspondiente."
+    - paso: "Indexar el archivo (opcional, según workflow)."
+      detalle: "Registrar el archivo y sus metadatos en un índice global para auditoría y búsquedas."
+
+  nota: |
+    Este flujo puede ser automatizado por scripts independientes o en cadena.
+    Cada paso asegura integridad y unicidad del sistema documental.

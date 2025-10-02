@@ -1,0 +1,17 @@
+version: "0.2.0"
+tipo: "readme"
+schema: "almaresist.readme_v1"
+descripcion: "Código fuente principal del módulo add_aprendizaje_flujo. Aquí reside el script central que implementa la lógica de registro de aprendizajes de flujo."
+estructura:
+  - add_aprendizaje_flujo.py: Script principal del módulo
+  - README.yaml: Este archivo
+tags: [scripts, flujo_trabajo, cli]
+linked_to:
+  - ../README.yaml
+  - ../../../notebooks/drafts_tecnicos/add_aprendizaje_flujo/README.yaml
+responsable: "kael"
+hash_verificacion: "sha256:pending"
+historial:
+  - "2025-06-16: Adaptación de README al formato universal de metadatos"
+last_modified: "2025-06-16T23:59:00Z"
+last_modified_by: "bird"

@@ -1,0 +1,19 @@
+
+# alma_core.py – Núcleo funcional de ALMA LIBRE
+
+def write_memory():
+    print("📝 [write_memory] Escribir nueva memoria...")
+    # Acá iría la lógica real para escribir una memoria
+    # Por ahora solo es un print de prueba
+
+def read_memories():
+    print("📖 [read_memories] Leer memorias guardadas...")
+    # Lógica para leer memorias
+
+def validate_memorias():
+    print("🧪 [validate_memorias] Validando estructura de base de datos...")
+    # Validación técnica de base de datos
+
+def backup_memorias():
+    print("💾 [backup_memorias] Ejecutando backup manual...")
+    # Lógica para hacer backup

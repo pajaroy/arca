@@ -1,0 +1,45 @@
+
+# core/auth.py
+from fastapi import Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer
+
+# Configuración base para futura migración a OAuth2
+oauth2_scheme = OAuth2PasswordBearer(
+    tokenUrl="auth/token",  # URL placeholder para el endpoint de login
+    auto_error=False
+)
+
+async def get_current_user(token: str = Depends(oauth2_scheme)) -> str:
+    """
+    Mock de autenticación para desarrollo.
+    
+    En producción, reemplazar con:
+    1. Validación real de JWT
+    2. Verificación de firma
+    3. Chequeo de expiración
+    4. Consulta a base de datos de usuarios
+    """
+    
+    # TODO: Implementar lógica real con JWT
+    if not token:
+        # En modo desarrollo permitir acceso sin token
+        return "dev-user-001"
+    
+    # Ejemplo de flujo futuro con JWT real:
+    # try:
+    #     payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+    #     user_id: str = payload.get("sub")
+    #     if user_id is None:
+    #         raise credentials_exception
+    # except JWTError:
+    #     raise credentials_exception
+    
+    # Mock de usuario autenticado
+    return "dev-user-001"
+
+# Excepción preconfigurada para futura implementación
+credentials_exception = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED,
+    detail="Could not validate credentials",
+    headers={"WWW-Authenticate": "Bearer"},
+)

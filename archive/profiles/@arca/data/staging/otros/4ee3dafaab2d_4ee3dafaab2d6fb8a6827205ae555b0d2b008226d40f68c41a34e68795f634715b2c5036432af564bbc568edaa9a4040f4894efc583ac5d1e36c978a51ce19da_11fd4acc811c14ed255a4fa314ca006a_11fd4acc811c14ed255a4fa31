@@ -1,0 +1,104 @@
+# ✅ Resumen MVP – ALMA_RESIST v0.0.0.1
+
+📝 Versión: 0.0.0.1  
+📅 Última actualización: 2025-05-20  
+👤 Responsable: Usuario + IA
+
+
+## 🎯 Objetivo del MVP v0.0.0.1
+
+Establecer una **estructura mínima funcional y auditable** que permita:
+- Registro de logs estructurados (`log_writer.py`)
+- Logs cifrados funcionales (`log_crypto.py`)
+- Documentación trazable de hitos y auditoría técnica
+- Base Obsidian-compatible para navegación semántica
+- Control de cambios (changelog, hitos, versión viva)
+
+
+## ❌ Pendientes Críticos para MVP
+
+- [ ] `index.md` (navegación Obsidian central)
+- [ ] `test_loader.py` u otro test funcional real
+- [ ] Script CLI de monitoreo o ejecución mínima (`main.py`)
+- [ ] Declaración de dependencias (`docs/dependencias.md`)
+- [ ] Documentación general de instalación
+
+
+## 📂 Ubicación recomendada
+
+Guardar este archivo como:
+
+```
+docs/mvp/resumen_mvp_v0.0.0.1.md
+```
+
+Cuando se alcance una nueva versión funcional significativa, se congelará y se creará una nueva versión:  
+`resumen_mvp_v0.0.0.2.md`, etc.
+
+# ✅ Resumen MVP – ALMA_RESIST v0.0.0.2
+
+📝 Versión: 0.0.0.2  
+📅 Última actualización: 2025-05-21  
+👤 Responsable: Usuario + IA
+
+
+## ⚙️ Componentes Nuevos
+
+| Componente               | Estado   | Notas                                                  |
+|--------------------------|----------|----------------------------------------------------------|
+| `core/cli.py`            | ✅        | CLI modular funcional y probado                         |
+| `commands/`              | ✅        | Comandos por archivo con autoload dinámico              |
+| `logs/cli.log`           | ✅        | Logging IA-trazable implementado                        |
+| `tests/test_cli.py`      | ✅        | Test básico funcional de CLI                            |
+| `01_methodologies/`      | ✅        | Metodologías base organizadas y activas                 |
+| `Methodology_Index.md`   | ✅        | Índice navegable para IA                                |
+
+
+## ❌ Pendientes Relevantes para v0.0.0.3
+
+- [ ] Implementar `alma_loader.py` con memoria real
+- [ ] Validación de módulos con IA local
+- [ ] Script de extracción de ideas desde buffer (resumen inteligente)
+- [ ] Integración inicial con `Mistral` o LLM local
+
+## 🧾 Resumen Sprint 2.2 – Metodologías Base
+
+📅 Fecha de cierre: 2025-05-21  
+🔢 Versión asociada: v0.0.0.2_CLI_FINAL  
+📁 Sprint: Sprint_2.2_Metodologias_Base  
+
+
+### 🧠 Valor estratégico
+
+Este sprint estableció el marco operativo que permite que:
+
+- La IA navegue semánticamente el sistema
+- Los módulos sean trazables, versionables e integrables
+- Se puedan escalar componentes de forma modular sin perder el control estructural
+
+
+✅ Sprint cerrado formalmente. Listo para archivarse.
+
+## 🧾 Resumen Sprint 2.1 – Estructura Documental
+
+📅 Fecha de cierre: 2025-05-23  
+🔢 Versión asociada: v0.0.0.2_estructura_documental  
+📁 Sprint: Sprint_2.1_Profesionalizacion_Estructura
+
+
+### 🧠 Valor estratégico
+
+Esta versión convierte a ALMA_RESIST en un sistema trazable, modular y documentado para ser expandido por IA.
+
+- Mejora en la interoperabilidad documental
+- Preparación para reflexión semántica
+- Consolidación como entorno de desarrollo técnico-vivo
+
+
+### ✅ Avance MVP - Sprint 2.4
+
+- Consolidación de infraestructura documental con metadatos unificados.
+- Primer auditoría ejecutada con motor CLI (`alma-cli`) sobre 105 documentos.
+- Backups estructurados, validación YAML estandarizada y reglas semánticas activas.
+- Se establece base técnica para el futuro módulo de memoria semántica y sugerencias IA.
+

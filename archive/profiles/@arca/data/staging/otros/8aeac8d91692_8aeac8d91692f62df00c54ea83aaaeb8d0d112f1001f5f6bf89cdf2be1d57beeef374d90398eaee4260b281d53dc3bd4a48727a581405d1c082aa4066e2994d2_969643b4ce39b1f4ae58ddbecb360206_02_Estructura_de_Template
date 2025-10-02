@@ -1,0 +1,50 @@
+# 02_Estructura_de_Templates_y_Flujos
+
+# 
+
+## 📘 `02_Estructura_de_Templates_y_Flujos.md`
+
+```markdown
+markdown
+CopiarEditar
+# 🧩 Estructura de Templates y Flujos de Trabajo – ALMA LIBRE v0.6
+
+Este documento define la lógica de uso de plantillas (`templates`) dentro del sistema ALMA LIBRE: su ubicación, frecuencia de uso y el flujo de trabajo asociado a cada módulo.
+
+
+## 🔁 Frecuencia y uso
+
+| Frecuencia | Tipo de template                             | Carpeta                         | Acción esperada                       |
+|------------|----------------------------------------------|----------------------------------|----------------------------------------|
+| Diario     | Registro Cultivo, Diario Emocional, Trading  | Cannabird, Bitácora, Trades     | Copiar → Pegar en módulo real → Completar |
+| Semanal    | Tabla Trading, Resumen Emocional, Salud      | Resumenes/, Gestor de Trades    | Al final de la semana → Evaluar       |
+| Mensual    | Balance económico, salud, producción          | Finanzas, Cannabird, Salud      | Al fin de mes → Consolidar info       |
+| Estrategia | Setup específico (PPP, NYOpen, Wyckoff)       | Trading/Estrategias             | Usar al ejecutar o backtestear trade  |
+| Puntual    | Entrega, Producción, Cosecha, Ficha persona   | Cannabird Cultivo               | Tras cada corte o entrega             |
+
+
+### 🌱 04_Cannabird_Cultivo
+
+- Diario: `Registro_Diario_Cultivo`, `Entregas_Diarias`
+- Cosecha: `Registro_Cosecha_y_Produccion`
+- Mensual: `Resumen_Economico_Mensual`
+- Cliente: `Ficha_Destinatario`
+
+
+### 🧬 03_Salud_y_RPL
+
+- Diario: `Rutina_Salud_Diaria`, `Template_Desayuno_Merienda`, `Comidas`
+- Semanal: `Resumen_Semanal_Salud`
+
+
+### 📡 01_Noticias_Globales
+
+- Diario: `Resumen_Diario_Noticias`
+- Semanal: `Resumen_Semanal_Contexto`
+
+
+> "Una buena plantilla hoy es una mente menos ocupada mañana."
+
+```
+
+[README](02_Estructura_de_Templates_y_Flujos%201d8dcc9f5a8a808f9e8ad325f57f8c55/README%201d8dcc9f5a8a80489734e4ac8c17e2a0.md)

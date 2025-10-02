@@ -1,0 +1,132 @@
+[
+  {
+    "memoria_1": "MEMHIST-012",
+    "memoria_2": "MEMHIST-002",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMHIST-012",
+    "memoria_2": "MEMHIST-004",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMHIST-012",
+    "memoria_2": "MEMHIST-008",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMHIST-012",
+    "memoria_2": "MEMHIST-001",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMHEALTH-007",
+    "memoria_2": "MEMHEALTH-014",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMHEALTH-007",
+    "memoria_2": "MEMHEALTH-011",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMHEALTH-007",
+    "memoria_2": "MEMHEALTH-009",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMHEALTH-007",
+    "memoria_2": "MEMHEALTH-016",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMHIST-002",
+    "memoria_2": "MEMHIST-004",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMHIST-002",
+    "memoria_2": "MEMHIST-008",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMHIST-002",
+    "memoria_2": "MEMHIST-001",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMHEALTH-014",
+    "memoria_2": "MEMHEALTH-011",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMHEALTH-014",
+    "memoria_2": "MEMHEALTH-009",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMHEALTH-014",
+    "memoria_2": "MEMHEALTH-016",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMHIST-004",
+    "memoria_2": "MEMHIST-008",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMHIST-004",
+    "memoria_2": "MEMHIST-001",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMCAP-003",
+    "memoria_2": "MEMCAP-005",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMCAP-003",
+    "memoria_2": "MEMCAP-017",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMPROG-013",
+    "memoria_2": "MEMPROG-020",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMPROG-013",
+    "memoria_2": "MEMPROG-006",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMHEALTH-011",
+    "memoria_2": "MEMHEALTH-009",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMHEALTH-011",
+    "memoria_2": "MEMHEALTH-016",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMPROG-020",
+    "memoria_2": "MEMPROG-006",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMHEALTH-009",
+    "memoria_2": "MEMHEALTH-016",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMHIST-008",
+    "memoria_2": "MEMHIST-001",
+    "score": 1.0
+  },
+  {
+    "memoria_1": "MEMCAP-005",
+    "memoria_2": "MEMCAP-017",
+    "score": 1.0
+  }
+]

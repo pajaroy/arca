@@ -1,0 +1,38 @@
+Desarrolla un script en Python llamado `add_changelog_entry.py` que permita agregar nuevas entradas a un archivo `changelog.yaml` estructurado como una lista (ver ejemplo abajo). El script debe:
+- Tomar los campos: versión, cambios (lista o string), impacto, autor, fecha (auto si no se pasa), tags.
+- Validar y cargar el changelog existente (crear si no existe).
+- Hacer backup automático previo.
+- Agregar la nueva entrada al principio de la lista (último primero).
+- Validar unicidad de versión.
+- Salir si la estructura queda inconsistente.
+
+**Ejemplo de estructura:**
+
+```yaml
+changelog:
+  - version: "0.1.1"
+    fecha: "2025-06-06"
+    autor: "Santi"
+    cambios:
+      - "Test exitoso de agregado automático en bitácora viva"
+    impacto: "Valida MVP"
+    tags: [qa, mvp, test]
+    autor: "Santi"
+    ```
+
+2. Script CLI para agregar entradas al changelog
+
+¿Qué debe hacer el script?
+
+    Tomar argumentos por CLI (--version, --cambios, --impacto, --autor, --tags, --fecha).
+
+    Agregar la nueva versión como un bloque al YAML de changelog.
+
+    Hacer backup automático antes de modificar.
+
+    Validar estructura antes y después.
+
+    Opcional: autogenerar fecha/hora y autor si no se pasa.
+
+Prompt para DeepSeek/GPT (adaptalo según tu motor):
+```

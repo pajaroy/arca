@@ -1,0 +1,155 @@
+titulo: "ALMA_CLI_CLEANER v0.1.1 - Prompt de Diseño y Especificación Mejorado"
+descripcion: |
+  Módulo CLI centralizado para limpieza, validación, creación y auditoría de metadatos en el sistema ALMA_RESIST.
+  El objetivo es contar con una herramienta robusta, auditable y fácil de mantener, que permita operar sobre cualquier archivo relevante del sistema desde la terminal.
+  Usable por humanos y por IAs (Kael, Centralesis), con arquitectura extensible.
+
+autores:
+  - nombre: Santi (Bird)
+    rol: Arquitecto, usuario principal
+  - nombre: Alma
+    rol: IA soporte y documentación
+mantenedores:
+  - nombre: Kael
+    rol: Agente IA de auditoría y CLI
+  - nombre: Centralesis
+    rol: Agente IA de control central
+
+changelog:
+  - version: 0.1.1
+    fecha: 2025-07-10
+    autor: Santi
+    descripcion: Se incorporan especificaciones avanzadas de contexto, retrocompatibilidad, roles, política de errores y hooks.
+
+objetivo_general: |
+  Automatizar y profesionalizar el manejo de metadatos ALMA_RESIST, asegurando trazabilidad, control de cambios y cumplimiento de estándares en todos los archivos clave.
+
+contexto_operativo:
+  ejecutores_permitidos:
+    - humano
+    - IA (Kael)
+    - IA (Centralesis)
+  permisos_por_subcomando:
+    crear: [humano, Kael]
+    validar: [humano, Kael, Centralesis]
+    limpiar: [humano, Kael]
+    set_responsable: [humano, Kael]
+    log: [humano, Kael, Centralesis]
+  compatibilidad_minima: 0.1.0
+  templates_requeridos:
+    - Meta/Metadatos_Template.yaml
+
+archivos_soportados:
+  - ".md"
+  - ".yaml"
+  - ".yml"
+  - ".py"
+  # Si otro tipo => warning + no ejecuta acción.
+
+migraciones:
+  politica_retrocompatibilidad: |
+    Si el archivo tiene template viejo, sugerir migración automática o abortar con warning. Registrar en el log cualquier intervención de migración.
+  version_template_minima: 0.1.0
+
+configuracion:
+  archivo: alma_cleaner_config.yaml
+  logs:
+    ruta: /home/alma/Alma-Cli/Logs/Cleaner.parquet
+    nivel: INFO # Configurable: DEBUG, INFO, WARNING, ERROR
+    formato: parquet # Opción futura: csv/yaml
+    loguear_errores: true
+
+politica_errores:
+  modo: strict # Opciones: strict (aborta), relaxed (warning, sigue)
+  log_si_fallo: true
+  mensaje_usuario: "Error crítico, abortando. Ver logs."
+
+hooks:
+  pre_comando: null # Permitir definir scripts o funciones hook antes de operar (ej. backup automático)
+  post_comando: null
+
+subcomandos:
+  - crear:
+      descripcion: "Crear archivo nuevo con metadatos completos y formato estándar."
+      argumentos:
+        - archivo: "Ruta de archivo a crear."
+        - --title: "Título inicial del archivo."
+        - --responsable: "Responsable(s) inicial(es)."
+      requisitos: "Si el archivo existe, debe abortar salvo que se use --force."
+      resultado: "Archivo creado con metadatos completos: title, uuid, historial, etc."
+      ejemplo: |
+        alma_cli_cleaner crear /ruta/archivo.md --title "Bitácora 13CC" --responsable "Bird"
+  - validar:
+      descripcion: "Validar y/o reparar encabezado de metadatos (campos, tipos, valores)."
+      argumentos:
+        - archivo: "Ruta del archivo a validar."
+      resultado: "Corrige y deja el archivo conforme al template. Reporta cambios y deja log."
+      ejemplo: |
+        alma_cli_cleaner validar /ruta/archivo.yaml
+  - limpiar:
+      descripcion: "Normalizar campos, remover espacios, estandarizar tipos y formatos."
+      argumentos:
+        - archivo: "Ruta del archivo a limpiar."
+      resultado: "Archivo con metadatos limpios, sin basura ni valores inválidos."
+      ejemplo: |
+        alma_cli_cleaner limpiar /ruta/archivo.md
+  - set_responsable:
+      descripcion: "Asignar o modificar el/los responsable(s) y actualizar auditoría."
+      argumentos:
+        - archivo: "Ruta del archivo."
+        - --responsable: "Nuevo(s) responsable(s)."
+      resultado: "Campo responsable actualizado y log/auditoría de cambio."
+      ejemplo: |
+        alma_cli_cleaner set_responsable /ruta/archivo.md --responsable "Centralesis"
+  - log:
+      descripcion: "Mostrar historial/auditoría/log de cambios sobre el archivo."
+      argumentos:
+        - archivo: "Ruta del archivo."
+      resultado: "Listado de operaciones previas, quién y cuándo realizó cambios."
+      ejemplo: |
+        alma_cli_cleaner log /ruta/archivo.md
+
+features_extra:
+  - "Soporte para .md, .yaml, .py (bloque YAML en docstring)."
+  - "Logs centralizados y auditables en formato parquet/csv/yaml (según config)."
+  - "Integración futura con CLI multiagente ALMA (Kael, Centralesis, etc)."
+  - "Resiliencia ante errores, dry-run, y opción --force para operaciones críticas."
+  - "Hooks pre/post comando para backups, validaciones externas, etc."
+  - "Puede crecer modular: desde un solo script hasta un paquete completo."
+  - "API de retorno: stdout estándar y opción de salida JSON para integración."
+
+ia_metadata:
+  reservados_para_ia: true
+  comentarios: |
+    Espacio para que IAs futuras de ALMA (Kael, Centralesis, LLMs) anoten sugerencias, alertas o refactors automáticos sobre la operación y código base.
+  pendiente:
+    - Integrar feedback de agentes externos en la lógica de auditoría y control.
+    - Implementar análisis semántico del historial y proponer mejoras al template.
+
+ejemplos_de_uso:
+  - crear nuevo archivo: |
+      alma_cli_cleaner crear /path/to/file.md --title "Bitácora" --responsable "Bird"
+  - validar archivo existente: |
+      alma_cli_cleaner validar /path/to/file.yaml
+  - limpiar archivo: |
+      alma_cli_cleaner limpiar /path/to/file.md
+  - asignar responsable: |
+      alma_cli_cleaner set_responsable /path/to/file.md --responsable "Kael"
+  - mostrar historial/log: |
+      alma_cli_cleaner log /path/to/file.md
+
+notas:
+  - "No hace falta implementar toda la lógica compleja todavía: arrancar con la estructura y el flujo CLI base."
+  - "Documentar internamente (docstrings) cada función/acción de manera clara y profesional."
+  - "Prioridad: trazabilidad, simplicidad y facilidad de extensión."
+  - "El sistema debe ser usable tanto en CLI local como desde terminal remota/SSH."
+  - "Si se detecta archivo binario o no soportado: warning y aborta sin modificar."
+  - "Proveer siempre código de salida 0=OK, 1=error crítico."
+
+pendientes:
+  - Definir template de metadatos único y documentado.
+  - Especificar estructura de logs y niveles de detalle.
+  - Migrador automático para templates viejos.
+  - Changelog documentado desde la v0.1.0.
+  - Pruebas de edge-cases y documentación de errores comunes.
+  - Integrar feedback de agentes IA en auditoría.

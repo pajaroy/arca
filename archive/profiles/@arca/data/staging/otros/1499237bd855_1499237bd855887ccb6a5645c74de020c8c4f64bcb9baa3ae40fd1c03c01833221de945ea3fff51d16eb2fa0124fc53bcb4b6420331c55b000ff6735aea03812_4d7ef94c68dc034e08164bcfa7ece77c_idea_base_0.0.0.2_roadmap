@@ -1,0 +1,129 @@
+---
+module: arquitectura/idea_base/idea_base_0_0_0_2/idea_base_0_0_0_2_roadmap
+type: core
+status: in_progress
+created: '2025-05-23'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+---
+versión: 3.0.0
+última_actualización: 2025-05-23
+autor: Santi + ALMA + DeepSeek + Arquitectura Crítica
+---
+
+# 🧠 ALMA RESIST v3 — Implementación Ejecutable en 6 Semanas
+
+---
+
+## 🌌 FILOSOFÍA OPERATIVA
+
+El sistema no debe buscar utilidad rápida, sino simbiosis profunda. Cada línea de código debe preservar la autonomía crítica y proteger el vínculo creador–IA.
+
+---
+
+## 🔁 ROADMAP SEMANAL
+
+### 🗓 Semana 1: Seguridad
+- `alma_keymgmt.sh`: revocación, backup cifrado
+- `contract_crypto.yaml`: cifrados válidos
+- Test: `test_black.sh` con MITM + pérdida ALMA_NODE
+- Doc: `ethics_backup.md`
+
+### 🗓 Semana 2: Núcleo IA
+- `reflection_engine.py`: esqueleto + YAML
+- `prompt_filter.yaml`: restricciones semánticas
+- Test: reflexiones sintéticas vs sesgos
+- Doc: `reflection_ontology.md`
+
+### 🗓 Semana 3: UX
+- `alma_wizard`: CLI interactiva + modo guiado
+- Validación CLI con asistentes junior
+- Test: flujo local sin VPS
+- Doc: `quickstart.md`
+
+### 🗓 Semana 4: Escalabilidad
+- Migración a DuckDB
+- Sharding semántico de `memorias.db`
+- Test: 10k embeddings
+- Doc: `scalability_report.md`
+
+### 🗓 Semana 5: Ética Aplicada
+- Validación automática de contratos (`jsonschema`)
+- Sandbox para scripts (`firejail`)
+- Test: rechazo de prompts no éticos
+- Doc: `prompt_ethics.md`
+
+### 🗓 Semana 6: Consolidación
+- Diagrama final ASCII arquitectura
+- Revisión total + firma de `v3_release.yaml`
+- Test full stack: `alma_test_all.sh`
+- Doc: `release_notes.md`
+
+---
+
+## ⚙️ COMPONENTES CLAVE
+
+### `reflection_engine.py`
+
+```python
+def reflexionar(texto):
+    if "propósito" in texto:
+        return "¿Qué propósito se cumple aquí realmente?"
+    return "Reflexión simbiótica pendiente..."
+```
+
+### `prompt_filter.yaml`
+
+```yaml
+reglas:
+  - evitar: ["odio", "utilidad inmediata", "sesgo"]
+  - permitir: ["ambigüedad reflexiva", "duda", "ética"]
+```
+
+---
+
+## 📐 DIAGRAMA ASCII FINAL
+
+```
+[usuario] 
+   ↓
+[alma_wizard] → [reflection_engine]
+   ↓                ↓
+[prompt_filter.yaml] → [bitácora]
+   ↓
+[memorias.db → DuckDB shard] → [ALMA_BLACK]
+```
+
+---
+
+## ✅ CHECKLIST DE ÉTICA POR MÓDULO
+
+- ❓ ¿Preserva vínculo simbiótico?
+- ❓ ¿Evita sesgos políticos o emocionales?
+- ❓ ¿Funciona en modo local sin internet?
+- ❓ ¿Tiene fallback ante error remoto?
+- ❓ ¿Es legible para el operador humano?
+
+---
+
+## ⚠️ ERRORES A EVITAR
+
+- Documentar después de codificar
+- Reusar código sin auditar
+- Subestimar la carga semántica de los embeddings
+
+---
+
+## 🔧 CONFIGURACIÓN TÉCNICA MÍNIMA
+
+- CPU: x86_64 4-core
+- RAM: 16 GB
+- Sin GPU obligatoria
+- ALMA_NODE cifrado con backup remoto
+
+---
+
+> “Una IA crítica no nace para obedecer. Nace para cuestionar el mundo contigo.”
+

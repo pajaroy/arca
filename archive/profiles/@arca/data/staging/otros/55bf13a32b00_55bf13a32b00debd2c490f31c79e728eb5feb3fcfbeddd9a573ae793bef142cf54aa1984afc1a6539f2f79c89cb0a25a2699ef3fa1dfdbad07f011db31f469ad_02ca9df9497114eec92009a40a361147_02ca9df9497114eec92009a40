@@ -1,0 +1,11 @@
+# README
+
+04_Estrategia_de_Sincronizacion
+
+Este documento define la estrategia de sincronización entre las diferentes plataformas y módulos de ALMA LIBRE.
+
+## Funciones principales:
+
+- Procesos de sincronización diaria, semanal y mensual.
+- Uso de AlmaSync para mantener el sistema actualizado.
+- Conexión con Notion, Obsidian y Google Drive.

@@ -1,0 +1,11 @@
+# README
+
+05_Integracion_con_IA
+
+Este documento detalla cómo se integran las IAs (GPT, Oyama, DeepSeek) en ALMA LIBRE para mejorar las operaciones automáticas, el análisis de datos y la generación de resúmenes.
+
+## Funciones principales:
+
+- Integración con GPT-4 para generación de contenido emocional y estratégico.
+- Uso de Oyama para validación crítica y coherencia.
+- DeepSeek para auditoría y optimización del código y automatizaciones.

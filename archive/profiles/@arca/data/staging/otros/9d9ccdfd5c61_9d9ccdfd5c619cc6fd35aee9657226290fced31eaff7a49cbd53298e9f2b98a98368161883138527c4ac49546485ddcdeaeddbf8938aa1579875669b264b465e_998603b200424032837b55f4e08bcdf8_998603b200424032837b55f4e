@@ -1,0 +1,17 @@
+# 📋 Changelog – ALMA_LOADER Prompt Técnico
+
+## [3.0.0] – 2025-05-06
+
+### ✨ Added
+- Módulos principales 100% documentados
+- Interfaz abstracta de almacenamiento `BaseStorage`
+- Router atencional con ejemplo de uso
+- Estructura JSON extendida con relaciones y embeddings
+- Flujo técnico por fases
+
+### 🔄 Changed
+- Unificación de la arquitectura 2.1.1 y 2.2.0
+- Nueva estructura en secciones funcionales
+
+### ❌ Removed
+- Descripciones duplicadas y obsoletas de versiones anteriores

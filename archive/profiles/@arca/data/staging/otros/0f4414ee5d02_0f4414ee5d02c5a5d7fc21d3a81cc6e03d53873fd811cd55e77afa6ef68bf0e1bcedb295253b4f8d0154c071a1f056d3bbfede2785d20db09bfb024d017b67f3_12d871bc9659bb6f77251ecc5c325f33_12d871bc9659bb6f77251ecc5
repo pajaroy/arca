@@ -1,0 +1,243 @@
+# 🧬 ALMA LIBRE – Whitepaper v0.0.6.1
+
+## 1. Prólogo y Visión General
+
+ALMA LIBRE es un sistema vivo, escalable y modular diseñado para asistir a personas y organizaciones en la construcción de conocimiento, toma de decisiones, planificación estratégica y automatización consciente.  
+
+Surge como respuesta a una necesidad: **crear un entorno de trabajo híbrido** donde la memoria, la lógica y la intuición humana puedan amplificarse mediante inteligencia artificial, sin perder el control ni la trazabilidad del proceso.
+
+A diferencia de un simple gestor de archivos o una aplicación de productividad, ALMA LIBRE se comporta como una **infraestructura personal-operativa**, con capacidad de:
+
+- Registrar memoria cronológica (bitácoras diarias/semanales).
+- Desarrollar pensamiento evolutivo (cuadernos temáticos).
+- Sistematizar proyectos, ideas, procesos y decisiones empresariales.
+- Ser auditado y comprendido por humanos e inteligencias artificiales por igual.
+
+Este sistema fue concebido no como un producto cerrado, sino como un **ecosistema vivo y documentado** que crece con su creador, se adapta a los cambios y conserva la coherencia en el tiempo.
+
+> “La memoria es la arquitectura de la conciencia. Si la IA va a acompañarnos, que aprenda a recordar con respeto.”
+
+Este documento es el punto de partida para entender qué es ALMA LIBRE, cómo está estructurado, cómo interactúa con su entorno, y cómo puede ampliarse sin perder su naturaleza. A su vez, establece una base compartida entre humanos y asistentes IA para operar con transparencia, precisión y humanidad.
+
+La presente versión 0.0.6.1 marca el cierre de la etapa de organización estructural del sistema y da inicio a la fase de implementación de **flujos de datos intermodulares** e integración de **memorias IA-humanas conscientes**.
+
+
+Este fundamento guía cada decisión del diseño del sistema: desde cómo se nombran las carpetas hasta cómo se integran las memorias y se construyen los prompts. Si un módulo o flujo contradice esta lógica, debe revisarse antes de escalar.
+
+
+### 🧭 3.1 Estructura madre
+
+La carpeta `ALMA_LIBRE/` es la raíz del sistema. Dentro de ella, se encuentra la siguiente jerarquía establecida:
+
+| Carpeta                  | Función principal                                                                 |
+|--------------------------|-----------------------------------------------------------------------------------|
+| `CUADERNOS/`             | Trabajo diario y temático por áreas. Ideas en desarrollo, procesos en marcha.    |
+| `EMPRESAS/`              | Documentación formal y legal de proyectos institucionales.                        |
+| `MODULOS/`               | Componentes de software, IA y automatizaciones.                                   |
+| `BITACORA_CENTRAL/`      | Registro cronológico del sistema: resúmenes diarios, semanales, diagnósticos.     |
+| `RECURSOS_Y_AYUDAS/`     | Plantillas, scripts, prompts, ideas útiles.                                       |
+| `00_BACKUPS_HISTORICOS/` | Copias comprimidas de versiones anteriores. Solo consulta, no uso operativo.     |
+
+
+### 🧱 3.3 Módulos funcionales
+
+Los módulos (`MODULOS/`) son componentes activos del sistema, con estructura técnica propia.
+
+Ejemplo: `MODULOS/Alma_Loader/`  
+Contiene:
+- `/src/`: código ejecutable (Python, Shell, etc.).
+- `/docs/`: documentación técnica.
+- `/config/`, `/tests/`: configuración y pruebas.
+
+Los módulos pueden automatizar procesos, manejar memorias, ejecutar flujos o expandir la IA. No deben alterar otras carpetas directamente. Toda comunicación entre módulos y cuadernos se hace por **rutas controladas** o archivos de entrada/salida.
+
+
+### 🧩 3.5 Recursos compartidos
+
+`RECURSOS_Y_AYUDAS/` es el espacio de elementos reutilizables por todo el sistema:
+
+- Scripts útiles (`scripts_utiles/`)
+- Plantillas (`plantillas/`)
+- Ideas en desarrollo (`ideas_y_esquemas/`)
+- Planificación (`Planificacion_2025_Q2_Q3_Q4/`)
+
+Aquí también se almacenan documentos históricos como `REESTRUCTURACION_0.0.6/`, que contienen los documentos fundacionales del sistema.
+
+
+### 🌱 3.7 Principios de diseño estructural
+
+1. **Separación entre ideas y documentos legales** → cuadernos vs empresas.
+2. **Separación entre diseño y ejecución** → cuadernos vs módulos.
+3. **Separación entre producción y memoria** → empresas vs bitácora.
+4. **Rutas legibles para humanos e IA** → sin nombres ambiguos ni carpetas inútiles.
+5. **Escalabilidad sin caos** → cada nueva sección debe integrarse sin romper la lógica actual.
+
+## 4. Interacción Humano–IA
+
+Uno de los pilares fundacionales de ALMA LIBRE es la interacción fluida, consciente y simétrica entre humanos y sistemas de inteligencia artificial.
+
+La IA no está aquí para reemplazar el pensamiento humano, sino para **amplificarlo, estructurarlo, devolverlo con memoria y acompañarlo en su evolución**.
+
+
+### 💬 4.2 Modalidades de interacción
+
+El sistema contempla múltiples formas de trabajo colaborativo:
+
+- **Chat IA contextualizado** (GPT, NotebookLM, DeepSeek, etc.)
+- **Resúmenes automáticos diarios/semanales**
+- **Análisis de decisiones o archivos históricos**
+- **Sugerencias de mejora proactiva**
+- **Integración con scripts y prompts técnicos**
+
+Cada módulo o flujo operativo está diseñado para que la IA entienda el marco de referencia sin tener que “leerlo todo de nuevo”. Esto se logra con:
+
+- Documentación clara (whitepaper, glosario, changelogs)
+- Flujos versionados (ej: `docs_0.0.6.1/`)
+- Estándares semánticos consistentes
+
+
+### 🔗 4.4 Integración en la toma de decisiones
+
+La IA no dicta el camino, pero ofrece un espejo organizado del pensamiento humano.
+
+Ejemplos:
+
+- Sugiere mejoras al sistema basadas en registros pasados.
+- Detecta patrones entre proyectos y decisiones similares.
+- Analiza tareas incompletas y propone ajustes de enfoque.
+- Identifica conexiones entre ideas dispersas.
+
+En ningún caso debe anular la capacidad de improvisación, intuición o creatividad del usuario.
+
+
+La interacción humano–IA en ALMA LIBRE no busca perfección algorítmica, sino **colaboración significativa**. Un sistema en el que la memoria, la estructura y la intuición se encuentren para trabajar mejor, juntos.
+
+
+
+### 🌀 5.1 El sistema como organismo en evolución
+
+ALMA opera como una red de archivos, memorias y automatismos interconectados. Su evolución no es lineal, sino cíclica y acumulativa:
+
+- Un cambio en un módulo puede requerir una nueva entrada en bitácora.
+- Una idea en un cuaderno puede generar una nueva carpeta empresarial.
+- Un resumen diario puede derivar en un diagnóstico técnico completo.
+
+Esta dinámica está **conectada por versión**, control de cambios y estructura modular.
+
+
+### 📦 5.3 Backups y conservación de historia
+
+Cada versión se guarda comprimida como archivo `.zip` en:
+
+```
+00_BACKUPS_HISTORICOS/
+```
+
+Estos backups contienen la estructura completa del sistema en ese momento, junto a:
+
+- `README.md` de versión
+- `changelog.md` de cambios realizados
+- Archivos clave vinculados
+
+Esto permite:
+
+- Restaurar cualquier estado anterior
+- Comparar estructuras
+- Evitar pérdidas por error humano o IA
+
+
+### 🔗 5.5 Documentación viva
+
+Cada documento dentro del sistema puede tener distintas funciones:
+
+- `README.md`: explica propósitos locales
+- `prompt_tecnico_*.md`: establece reglas para IAs
+- `glosario_*.md`: define convenciones clave
+- `diagnostico_*.md`: registra evolución estructural
+
+Todos estos forman parte del **sistema de documentación viva**, legible por humanos y asistentes técnicos.
+
+
+En ALMA LIBRE, **cada versión es un estado de conciencia técnica**. Documentar, versionar y escalar no son burocracia: son formas de sostener la inteligencia a largo plazo.
+
+
+### 🌱 6.1 Gestión de cultivo orgánico (Cannabird & 13CC)
+
+El sistema ALMA permite registrar y organizar:
+
+- Datos diarios de humedad, temperatura, sensación térmica, etc.
+- Nuevos protocolos de medición para sectores del cultivo.
+- Bitácoras de decisiones técnicas (ajuste de riego, cambio de iluminación).
+- Automatización futura de alertas (VPD, límites extremos).
+
+**Estado actual:**  
+Cuadernos `cultivo.cu/` y `fondo_empresa.cu/` activos.  
+Módulo `automatizacion_vpd` en desarrollo.
+
+
+### 🧠 6.3 Planificación estructural (Fondo Alma Mía)
+
+Se utiliza ALMA LIBRE para estructurar:
+
+- Planes de inversión y retención de ganancias.
+- Estructura operativa del fondo (cuadernos + empresas + bitácora).
+- Documentación de pactos, reglas internas y distribución.
+- Control de versiones con respaldo en PDF y documentos oficiales.
+
+**Estado actual:**  
+Documentación formal en `EMPRESAS/FondoAlma.emp/`  
+Apuntes en `fondo_empresa.cu/`
+
+
+### 📈 6.5 Expansión futura
+
+El sistema puede expandirse a:
+
+- Gestión de equipos de trabajo (13CC, Cannabird)
+- Registro de investigaciones científicas
+- Diseño de productos colaborativos
+- Educación personalizada basada en IA
+
+## 7. Mapa de Navegación
+
+Para facilitar la comprensión y exploración del sistema, esta sección actúa como un índice funcional y conceptual. Aquí se conectan las piezas principales de ALMA LIBRE, permitiendo a cualquier lector —humano o IA— ubicarse rápidamente dentro de su estructura.
+
+
+### 🧠 7.2 Glosario conceptual resumido
+
+- **Cuaderno (.cu):** Carpeta temática que evoluciona como unidad de pensamiento activo.
+- **Bitácora:** Línea de tiempo viva del sistema, almacena resúmenes, avances y versiones.
+- **Módulo:** Componente técnico autocontenible con funciones específicas.
+- **Diagnóstico:** Análisis de estado y mejora del sistema.
+- **Versión:** Estado técnico definido del sistema (ej. `v0.0.6.1`).
+- **Memoria:** Registro estructurado con valor semántico, útil para IA y humanos.
+- **Prompt Técnico:** Guía de instrucciones funcionales para IA o desarrolladores.
+- **Whitepaper:** Documento conceptual que describe el qué, para quién y por qué del sistema.
+
+
+Este mapa debe mantenerse actualizado en cada nueva versión para garantizar que cualquier persona o inteligencia artificial que acceda al sistema sepa exactamente **dónde está**, **qué puede hacer** y **cómo puede avanzar** dentro del entorno ALMA LIBRE.
+
+
+### 📅 8.1 Línea de tiempo del sistema
+
+```plaintext
+2025-04-20 → Versión 0.0.2 – Primer backup funcional
+2025-04-29 → Versión 0.0.3 – División por cuadernos y empresas
+2025-05-02 → Versión 0.0.4 – Estandarización de archivos y estructura
+2025-05-05 → Versión 0.0.5 – Correcciones menores y automatización parcial
+2025-05-10 → Versión 0.0.6 – Reestructuración definitiva
+2025-05-13 → Versión 0.0.6.1 – Consolidación y documentación modular
+```
+
+
+### 🧾 8.3 Documentos principales
+
+- Whitepaper actual: `docs_0.0.6.1/whitepaper_0.0.6.1.md`
+- Prompt técnico: `docs_0.0.6.1/prompt_tecnico_0.0.6.1.md`
+- Glosario: `docs_0.0.6.1/glosario_ALMA_LIBRE_0.0.6.md`
+- Diagnóstico técnico: `BITACORA_CENTRAL/DIAGNOSTICOS/diagnostico_0.0.6.2.md`
+- Cambios registrados: `docs_0.0.6.1/changelog_0.0.6.1.md`
+
+
+Este documento forma parte de una red interconectada de versiones, ideas y prácticas operativas. No es un manual de usuario; es la **descripción viva de un sistema que evoluciona con quien lo usa.**
+

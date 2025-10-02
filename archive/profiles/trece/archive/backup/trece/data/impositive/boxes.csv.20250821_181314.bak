@@ -1,0 +1,12 @@
+id,name,entitie_id,inicial,alias,description,notes
+1,caja_club,13,10394931.93,,cuenta de gastos con bruni,
+2,caja_chica,13,2421813.51,,caja diaria,
+3,bb_gory,24,725508.74,
+4,bb_bird,21,,bird94,
+5,mp_bird,21,,bird.13cc
+6,mp_club,13,,13cannabisclub
+7,mp_corto,23,,1440skate
+8,mp_gory,24,,1440.skate.bjj
+9,caja_bird,21,1296000,,,saldo inicial le queda a favor
+10,caja_corto,23,450000,,,saldo inicial le queda a favor
+11,caja_gory,24,150000,,,saldo inicial le queda a favor

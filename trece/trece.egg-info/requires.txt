@@ -1,0 +1,13 @@
+blake3
+ruamel.yaml
+chromadb
+scikit-learn
+numpy
+pandas
+joblib
+loguru
+typer
+rich
+
+[dev]
+pytest

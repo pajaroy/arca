@@ -1,0 +1,15 @@
+
+## ⚙️ Extras técnicos:
+
+- Debe soportar flags por línea de comando:
+  - `--root` para especificar directorio base (default: ./docs)
+  - `--dry-run` para simular sin escribir archivos
+  - `--verbose` para mostrar información detallada
+
+- Usar:
+  - `PyYAML` para manejar YAML
+  - `pathlib` y `argparse`
+  - `datetime` para la fecha del backup
+
+- **No usar librerías externas fuera del entorno estándar de Python.**
+

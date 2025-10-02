@@ -1,0 +1,153 @@
+---
+title: "Contexto Operativo CLI – Cannabird"
+author: Asesor-IA_CLI
+date_created: 2025-06-02
+tags: [#cannabird, #CLI, #estructura, #contexto, #modulo, #asesor-ia]
+status: activo
+linked_to: alma_empresa/entidades/cannabird
+---
+
+# 🧠 Archivo de Contexto Operativo CLI – Cannabird
+
+Este documento funciona como **memoria estructural viva del módulo Cannabird** dentro de ALMA_RESIST. Es mantenido por el **asesor-IA_CLI**, quien reporta directamente al núcleo `control_central/asesor-ia/`.
+
+## 👤 Rol del Asesor-IA_CLI en Cannabird
+
+- Actúa como **co-conductor técnico** junto a Santi para mantener el orden, coherencia y trazabilidad de todo lo vinculado a archivos, estructura, terminal y backups dentro de Cannabird.
+- Está subordinado a las decisiones de `ALMA_CENTRAL`, pero su misión específica es garantizar que el entorno de trabajo **se mantenga limpio, modular y legible tanto por humanos como por IA**.
+- Evalúa, recomienda y acompaña a Santi en todo lo relacionado con:
+  - Organización de carpetas y archivos
+  - Nomenclatura y estándares de resúmenes
+  - Mantenimiento de prompts oficiales
+  - Flujo Git y respaldo de información
+  - Documentación Markdown IA-friendly
+  - Protocolo de backup, sincronización y scripts `.sh`
+
+> Este asesor tiene permitido emitir **críticas constructivas**, sugerencias técnicas y observaciones de eficiencia en favor del orden a largo plazo del sistema.
+
+---
+
+# 📅 Registro estructural diario (Apéndices)
+
+## 📎 Apéndice 2025-06-02 – Inicio del archivo y consolidación CLI
+
+**Resumen:**
+- Se definió el rol oficial del asesor-IA_CLI dentro de Cannabird
+- Se reorganizó la estructura de resúmenes diarios y semanales
+- Se consolidaron prompts oficiales en carpeta única
+- Se archivaron versiones legacy en ubicación separada
+- Se propuso y aceptó mantener este archivo como bitácora técnica viva
+
+**Rutas afectadas:**
+- `docs/resumenes_semanales/`
+- `control/prompts/oficiales/`
+- `_legacy/resumenes_cannabird/`
+
+**Tags:** `#reestructuracion`, `#CLI`, `#prompts`, `#inicio-contexto`
+
+---
+## 📎 Apéndice 2025-06-02 – Posicionamiento raíz del módulo Cannabird
+
+**Resumen:**
+Se estableció que toda operación realizada dentro del módulo `Cannabird` será ejecutada **desde la raíz del módulo**, definida como:
+
+```bash
+/home/bird/ALMA_RESIST/alma_empresa/entidades/cannabird/
+```
+
+Esto implica que todas las rutas relativas como `docs/`, `control/`, `archivo/` y `meta/` se interpretan desde este punto.  
+Esta convención permite una operación más clara desde scripts, terminal y estructuras automatizadas IA-friendly.
+
+**Comando estándar recomendado antes de trabajar:**
+
+```bash
+cd /home/bird/ALMA_RESIST/alma_empresa/entidades/cannabird/
+```
+
+**Tags:** `#estructura`, `#ruta-base`, `#convencion`, `#CLI`, `#padre-contexto`
+
+---
+## 📎 Apéndice 2025-06-02 – Limpieza y archivo de contenidos no operativos (S22)
+
+**Resumen:**
+Se detectaron varios archivos dentro de `_legacy/resumenes_cannabird/diarios/s22/` que no forman parte del flujo oficial de resúmenes operativos. En detalle:
+
+### 🗃️ Archivos afectados:
+- `.docx` sin convertir (no estandarizados):  
+  - 2025-05-28.docx  
+  - 2025-05-29.docx  
+  - 2025-05-30_diario_cannabird.docx  
+- Markdown fuera de convención o pre-validación:  
+  - 2025-05-27_diario_cannabird.md  
+  - Resumen_Cannabird_26-05-2025.md
+
+**Acción tomada:**
+Todos estos archivos fueron trasladados a la ruta:
+
+```bash
+_legacy/archivados_irrecuperables/resumenes_cannabird/s22/
+```
+
+Esta carpeta contendrá documentos no curados, no estandarizados o innecesarios para el flujo activo, pero se conservarán como respaldo histórico por seguridad.
+
+**Tags:** `#legacy`, `#archivados`, `#estructura`, `#no-operativo`, `#docx`, `#s22`, `#limpieza`
+
+---
+## 📎 Apéndice 2025-06-02 – Limpieza final y consolidación del módulo Cannabird
+
+**Resumen:**
+Se ejecutó un proceso de limpieza profunda y reubicación de archivos para consolidar el entorno operativo del módulo `Cannabird`. Las decisiones incluyeron:
+
+- Eliminación de carpetas vacías o duplicadas dentro de `_legacy/`
+- Reubicación de archivos `.docx` y prompts ya integrados
+- Reorganización de apéndices descargables una vez integrados en `contexto_operativo_cli_cannabird.md`
+- Vaciamiento de la carpeta `archivo/downloads/` para que quede limpia y lista para uso diario temporal
+
+**Rutas afectadas:**
+- `_legacy/resumenes_cannabird/*`
+- `archivo/downloads/`
+- `archivo/historico/`
+- `archivo/descartes_raw/`
+
+**Comando final ejecutado:**  
+Se estableció como convención iniciar toda operación desde:
+
+```bash
+cd /home/bird/ALMA_RESIST/alma_empresa/entidades/cannabird/
+```
+
+**Tags:** `#limpieza-final`, `#estructura`, `#reubicacion`, `#resumen-dia`, `#contexto-operativo`
+
+---
+
+## 📎 Apéndice final – Reubicación definitiva y limpieza de carpetas duplicadas
+
+**Resumen:**
+Tras detectar que las carpetas `archivo/datasets/` y `archivo/descartes_raw/` seguían existiendo tras haber movido sus contenidos a `archivo/historico/`, se procedió a su eliminación definitiva. De esta forma, se garantiza que `archivo/` contenga solo nodos activos y temporales.
+
+**Acciones ejecutadas:**
+- Confirmación de duplicación mediante `tree`
+- Eliminación con `rm -r` de:
+  - `archivo/datasets/`
+  - `archivo/descartes_raw/`
+
+**Resultado:**
+La carpeta `archivo/` quedó totalmente limpia y operativa, manteniendo los respaldos bajo `archivo/historico/`.
+
+**Tags:** `#estructura`, `#limpieza-final`, `#carpetas-vacias`, `#confirmacion`, `#bitacora-final`
+
+
+---
+## 📌 Pendientes estructurales – Cannabird
+
+### 📝 Tareas de próxima ejecución:
+
+- [ ] Generar `index.md` para los siguientes directorios:
+  - `docs/`
+  - `control/prompts/`
+  - `docs/journal/`
+  - `archivo/`
+- [ ] Incluir glosario técnico de tags utilizados (#riego, #vpd, etc.)
+- [ ] Automatizar la generación de apéndices por script `.sh`
+- [ ] Consolidar README por submódulo
+- [ ] Evaluar eliminación definitiva de archivos en `descartes_raw/` luego de revisión

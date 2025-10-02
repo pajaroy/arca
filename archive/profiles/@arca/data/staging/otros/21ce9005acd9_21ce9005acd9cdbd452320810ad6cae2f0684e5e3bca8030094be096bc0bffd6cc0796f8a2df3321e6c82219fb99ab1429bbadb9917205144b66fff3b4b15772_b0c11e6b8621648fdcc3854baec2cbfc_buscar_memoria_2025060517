@@ -1,0 +1,6 @@
+def run(args):
+    """Busca memorias por tag"""
+    if not args:
+        print("Error: Uso correcto -> !buscar_memoria \"tag\"")
+        return
+    print(f"Buscando memorias con tag: '{args}'... (simulado)")

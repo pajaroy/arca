@@ -1,0 +1,19 @@
+
+# 🌐 Mapa de Relaciones – Sistema de Memorias ALMA LIBRE v1.0.4
+
+Actualización post-Ronda 0 que incorpora conexiones filosóficas, técnicas y emocionales del sistema de memorias.
+
+
+## 🏢 Conexiones Institucionales
+
+| Empresa           | Relacionada con...                                                              |
+|------------------|----------------------------------------------------------------------------------|
+| `fondo_alma_mia` | `gestor_trading`, `finanzas_personales`, `trading`, `fondo_inversion`, `bitacora_central`, `geopolítica_actualidad` |
+| `cannabird`      | `canavir_cultivo`, `medicina_alternativa`, `reflexion`, `programacion`, `creatividad_y_empresa` |
+
+
+## 📘 Ejemplo actualizado de memoria conectada:
+
+```yaml
+```
+

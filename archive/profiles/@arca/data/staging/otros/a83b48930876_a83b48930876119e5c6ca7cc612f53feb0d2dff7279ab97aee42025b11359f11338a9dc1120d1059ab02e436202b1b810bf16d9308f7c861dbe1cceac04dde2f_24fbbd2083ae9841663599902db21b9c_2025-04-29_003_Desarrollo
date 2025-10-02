@@ -1,0 +1,17 @@
+.
+## 📅 **Fecha**: 2025-04-29
+
+## 🧩 **Contexto de Trabajo**: Optimización del sistema de memorias para ALMA
+
+
+### 🗂 **Tareas pendientes**
+
+- 🧠 Rediseñar las memorias actuales con campos enriquecidos.
+    
+- 🔁 Agregar el campo `impacto_en` con peso y descripción del impacto.
+    
+- 🧪 Preparar la plantilla definitiva para todas las nuevas memorias.
+    
+- 📊 Crear un changelog y glosario específico para `memoria_loader`.
+    
+- 💡 Iniciar automatización futura: carga JSON ↔ GitHub ↔ Obsidian.

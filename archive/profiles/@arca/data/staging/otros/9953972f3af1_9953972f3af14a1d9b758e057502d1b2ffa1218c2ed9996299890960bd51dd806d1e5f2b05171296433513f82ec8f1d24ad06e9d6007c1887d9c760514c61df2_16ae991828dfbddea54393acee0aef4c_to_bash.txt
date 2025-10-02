@@ -1,0 +1,5 @@
+sudo cryptsetup luksOpen /dev/sda3 alma_crypt
+
+
+sudo mount /dev/mapper/alma_crypt /mnt/
+sudo mount /dev/sda2 /mnt/boot/efi

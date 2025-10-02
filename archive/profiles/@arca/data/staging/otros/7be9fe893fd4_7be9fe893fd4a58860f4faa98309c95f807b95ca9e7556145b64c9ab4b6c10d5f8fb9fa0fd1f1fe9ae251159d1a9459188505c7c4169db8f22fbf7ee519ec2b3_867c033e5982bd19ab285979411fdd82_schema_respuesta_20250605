@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RespuestaLLM",
+  "description": "Contrato para salida del endpoint /responder",
+  "type": "object",
+  "properties": {
+    "respuesta": {
+      "type": "string",
+      "description": "Texto generado por el modelo LLM"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "modelo": {
+          "type": "string"
+        },
+        "longitud_prompt": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "modelo",
+        "longitud_prompt",
+        "timestamp"
+      ]
+    }
+  },
+  "required": [
+    "respuesta",
+    "metadata"
+  ],
+  "additionalProperties": false
+}

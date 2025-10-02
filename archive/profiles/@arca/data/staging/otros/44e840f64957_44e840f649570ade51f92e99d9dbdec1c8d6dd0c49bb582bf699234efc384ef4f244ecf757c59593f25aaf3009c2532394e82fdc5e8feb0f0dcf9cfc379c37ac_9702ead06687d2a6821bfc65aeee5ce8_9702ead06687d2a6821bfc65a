@@ -1,0 +1,31 @@
+# 🧠 ALMA_LOADER v2.2.0
+
+ALMA_LOADER es un sistema conversacional modular diseñado para registrar, analizar y aprender de experiencias personales diarias, con enfoque especial en trading, productividad y bienestar. Esta versión 2.2.0 introduce una arquitectura más robusta y escalable.
+
+## 🚀 ¿Qué hace?
+- Convierte texto natural en memorias estructuradas.
+- Valida automáticamente usando un esquema JSON.
+- Almacena de forma optimizada en SQLite.
+- Genera resúmenes automáticos en Markdown.
+- Prepara la base para búsquedas semánticas usando FAISS.
+- Enruta automáticamente las entradas según tipo (acción, reflexión, memoria).
+
+## 🧩 Componentes Nuevos
+- `BaseStorage`: interfaz universal para adaptarse a cualquier sistema de almacenamiento.
+- `SQLiteStorage`: versión actual funcional y optimizada.
+- `VectorStorage`: diseño inicial para integración futura de búsquedas semánticas.
+- `router_atencional.py`: enrutador experimental según intención del input.
+
+## 📂 Estructura Recomendada
+/alma_loader/
+├── core_nl.py
+├── validador.py
+├── base_storage.py
+├── sqlite_storage.py
+├── vector_storage.py
+├── resumenes.py
+├── router_atencional.py
+├── reglas_dinamicas.json
+├── prompt_master_2.2.0.md
+├── CHANGELOG.md
+└── README.md

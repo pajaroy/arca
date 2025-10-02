@@ -1,0 +1,34 @@
+# ðŸ““ Changelog â€“ LogWriter
+
+## VersiÃ³n v0.0.0.5 â€“ 2025-05-28
+
+### ðŸ›  Cambios principales
+
+#### ðŸ”§ `log_writer.py`
+- âœ… Se agregÃ³ `DEFAULT_LOG_DIR` como ruta por defecto para los logs (`Path.cwd() / "logs"`).
+- ðŸ§  Se corrigiÃ³ el uso de atributos mal definidos:
+  - `self.LOG_DIR` â†’ `self.log_dir`
+  - `cls.LOG_DIR` en `secure_rotation()` â†’ uso de `self.log_dir`
+- ðŸ”„ Se actualizÃ³ el mÃ©todo `write_log()` para:
+  - Usar archivos temporales correctamente (`.tmp`)
+  - Escribir logs de manera atÃ³mica
+  - Eliminar archivos temporales luego de usarlos
+- ðŸ’£ Manejo de errores mejorado con `try/except` para `IOError`, `OSError` y `ValueError`.
+- ðŸ§¼ `secure_rotation()` ahora es un mÃ©todo de instancia, no de clase.
+- ðŸ“† Se agregÃ³ rotaciÃ³n de archivos de log por antigÃ¼edad (por defecto, 7 dÃ­as).
+
+#### ðŸ§ª `test_log_writer.py`
+- ðŸ§ª Se actualizÃ³ el `fixture log_writer` para usar `tmp_path`.
+- âœ… Se corrigiÃ³ el nombre de campo en `log_event`: `type` â†’ `event_type`.
+- ðŸ§ª Se aÃ±adieron pruebas para:
+  - Escritura atÃ³mica (`test_atomic_write`)
+  - ValidaciÃ³n de campos (`test_type_validation`)
+  - Integridad del log (`test_log_integrity`)
+  - RotaciÃ³n (`test_log_rotation`)
+  - Fallo simulado de disco (`test_disk_failure`)
+  - Directorio por defecto (`test_default_log_dir`)
+- ðŸ§¹ Pruebas garantizan eliminaciÃ³n de archivos temporales y correcta escritura.
+
+### ðŸ“Œ Estado
+> Todos los tests pasaron correctamente en entorno local (pytest 8.3.5 â€“ Python 3.11.2). âœ…
+

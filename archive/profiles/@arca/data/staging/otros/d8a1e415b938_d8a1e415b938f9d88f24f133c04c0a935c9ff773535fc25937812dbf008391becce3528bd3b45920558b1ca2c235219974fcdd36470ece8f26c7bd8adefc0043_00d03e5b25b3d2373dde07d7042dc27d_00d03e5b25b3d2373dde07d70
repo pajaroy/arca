@@ -1,0 +1,74 @@
+# 🌀 Metodología de Sprints – ALMA_RESIST (v2)
+
+📅 Versión: 2.0  
+📁 Archivo: metodologia_sprints_v2.md  
+🎯 Objetivo: Establecer un flujo de trabajo modular, trazable y semántico para gestionar sprints dentro del sistema ALMA_RESIST, optimizado para una persona con soporte de IA y automatización futura.
+
+
+## 🔁 Ciclo de Vida del Sprint
+
+### Estados posibles y transiciones
+
+| Estado     | Acción Requerida                                                                 |
+|------------|-----------------------------------------------------------------------------------|
+| Activo     | Sprint en ejecución                                                              |
+| Cerrado    | Checklist validado, changelog actualizado, metadatos `exit_criteria` cumplidos   |
+| Archivado  | Sprint movido a carpeta `docs/versiones/`, registrado en `Methodology_Index.md`  |
+
+sprint_id: 2.3
+topic: "Integración de modelo LLM"
+status: "active"
+started: "2025-05-21"
+tags: ["llm", "ia", "memoria"]
+exit_criteria: ["changelog_updated", "docs_generated"]
+linked_modules:
+  - name: "core/cli.py"
+    version: ">=2.3"
+  - name: "resumen.py"
+    version: "0.5"
+blocks: ["Sprint_3.1_LLM_Integration"]
+
+## 📝 Estructura del Archivo de Sprint
+
+```markdown
+# Sprint X – Título
+
+📅 Inicio: YYYY-MM-DD  
+🌀 Estado: activo / cerrado / archivado  
+📦 Versión asociada: vX.X.X
+
+
+## 📋 Checklist de tareas
+- [x] Implementar comando `!ayuda` en CLI
+- [ ] Migrar loader a modelo LLM local
+- [ ] Escribir test en `scripts/test_loader.py`
+
+
+## 🗂️ Progreso del Sprint
+| Tarea                              | Estado | Responsable   |
+|------------------------------------|--------|----------------|
+| Implementar validación IA inicial  | 🟡     | Operador + IA |
+| Crear script de resumen automático | 🔴     | IA             |
+
+
+## 📎 Archivos relacionados
+- `core/cli.py`
+- `changelog.md`
+- `docs/sprints_activos/Sprint_2.3_LLM.md`
+
+
+## 🧠 IA como Asistente de Sprint
+
+Casos de uso:
+
+- Verificación automática de `exit_criteria`
+- Generación del resumen para hitos.md
+- Validación de consistencia entre YAML y archivos afectados
+
+
+## 📘 Referencias
+
+- `metodologia_estructura_modular_v2.md`
+- `Methodology_Index.md`
+- `Sprint_2.2_Metodologias_Base.md`
+

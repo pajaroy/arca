@@ -1,0 +1,47 @@
+## 🚀 Roadmap ALMA_LOADER v3.0.2
+
+### 📁 Documentación Unificada
+
+1.  Crear un único `README.md` con secciones divididas:
+    
+    - 📌 Visión General (Whitepaper)
+        
+    - 🛠️ Guía Técnica (Prompt)
+        
+    - 📋 Historial de Cambios
+        
+    - 🧠 Guía de Onboarding
+        
+    - 🛠️ Cómo Contribuir
+        
+2.  Consolidar los dos `CHANGELOG.md` en uno solo, con subtítulos:
+    
+    - Prompt Técnico
+        
+    - Whitepaper
+        
+3.  Agregar enlaces cruzados entre documentos (`[Ver Whitepaper](#)` / `[Ver Prompt Técnico](#)`)
+    
+4.  Eliminar redundancias como la tabla módulo-script duplicada
+    
+
+
+### 🧭 Mejorar Experiencia de Usuario
+
+7.  Convertir la explicación integral en una “Guía de Onboarding”:
+    
+    - Para Usuarios
+        
+    - Para Devs o IAs
+        
+    - Para Contribuidores
+        
+8.  Agregar sección “Cómo Contribuir” con pasos claros:
+    
+    - Proponer mejoras
+        
+    - Ejecutar tests
+        
+    - Editar roadmap
+        
+9.  Sugerir futura integración con `mkdocs` o `Sphinx` para generar docs web

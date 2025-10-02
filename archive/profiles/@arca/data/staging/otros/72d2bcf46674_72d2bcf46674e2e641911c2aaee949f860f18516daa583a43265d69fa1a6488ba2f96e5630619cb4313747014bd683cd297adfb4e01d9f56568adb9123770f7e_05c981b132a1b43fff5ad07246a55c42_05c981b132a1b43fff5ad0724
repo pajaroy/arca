@@ -1,0 +1,71 @@
+# 🌐 _Propuesta v3 – Interacción IA Distribuida + Asistente Autónomo
+
+📅 Fecha propuesta: 2025-05-21  
+📁 Archivo: _propuesta_v3_interaccion_ia.md  
+🎯 Objetivo: Escalar la metodología de interacción IA para permitir funcionamiento autónomo, multiproceso y descentralizado.
+
+
+## 🧠 Funcionalidades planeadas
+
+- `alma-bot` con memoria conversacional + comandos de acción
+- Indexación gráfica de relaciones (`grafo.md`)
+- Sistema de alertas IA para detectar documentos desactualizados
+- Sistema de scoring automático por módulo (completitud, enlaces, tags)
+
+
+## 🧾 Propuesta modular
+
+- IA como copiloto de documentación (Markdown + YAML + prompts)
+- Componentes desacoplados para sugerencia, validación y ejecución
+- Respaldo automático de toda intervención IA
+
+
+## 🛠️ Mejoras Clave Propuestas (Para Integrar en v3)
+
+### 1. **Manejo de Errores y Excepciones**  
+```yaml
+# En YAML de módulos  
+error_handling:  
+  - type: "missing_yaml"  
+    action: "notify_and_quarantine"  
+  - type: "broken_link"  
+    action: "suggest_fix"  
+```
+
+**Beneficio**: Protocolo claro para IA al encontrar inconsistencias  
+**Implementación**: Añadir sección "Fallos Conocidos y Recuperación" en la documentación
+
+
+### 3. **Sistema de Scoring Granular**
+
+| Criterio             | Peso | Métrica                               |
+|----------------------|------|----------------------------------------|
+| Completitud YAML     | 30%  | Campos obligatorios presentes          |
+| Relaciones válidas   | 25%  | `linked_to` apunta a módulos reales    |
+| Freshness            | 20%  | Última actualización < 30 días         |
+| Consistencia de tags | 25%  | Tags usados ≥3 veces en el dominio     |
+
+
+### 5. **Prompt Engineering Integrado**
+
+```python
+# Ejemplo en alma-bot  
+def generate_prompt(module):  
+    return f"""Eres Alma, IA de ALMA_RESIST.  
+    Contexto: {module['domain']}, tags: {module['tags']}.  
+    Tarea: Generar resumen ejecutivo de cambios.  
+    Restricciones: Usar markdown, máximo 3 párrafos.  
+    """  
+```
+
+**Recomendación**: Incluir plantillas de prompts en `docs/ia_prompts/`
+
+
+### 🚀 Implementación Priorizada
+
+| Mejora             | Esfuerzo | Impacto | Fase Target |
+|--------------------|----------|---------|-------------|
+| Manejo de errores  | Medio    | Alto    | Fase 1      |
+| Sistema de scoring | Alto     | Medio   | Fase 2      |
+| Monitorización     | Bajo     | Alto    | Fase 3      |
+

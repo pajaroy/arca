@@ -1,0 +1,32 @@
+# 🔭 Propuesta de Implementación Modular – Documentación Humano + IA (v2)
+
+📅 Fecha: 2025-05-21  
+📁 Asociado a: `Sprint_2.2_Metodologias_Base`  
+🎯 Propósito: Integrar progresivamente una estructura documental semántica IA-friendly que sea viable para un único operador, con capacidad de escalar a automatización parcial.
+
+
+## 📋 Cambios Introducidos en `metodologia_doc_ia_v2.md`
+
+| Mejora                      | Descripción técnica clave                                                    |
+|----------------------------|-------------------------------------------------------------------------------|
+| 🔹 Reducción de campos      | De 8 a 4 campos obligatorios (`module`, `type`, `status`, `created`)         |
+| 🔹 Campos opcionales        | `domain`, `tags`, `linked_to`, `version` quedan como sugeridos               |
+| 🔹 Política de migración    | Etapas 1–2–3 para evitar sobrecarga en documentos existentes                  |
+| 🔹 Glosario técnico         | Referencias rápidas para `type`, `domain`, `status`                          |
+| 🔹 Comando `alma-cli`       | Especificación base para autocompletar bloques YAML vía CLI con IA           |
+
+
+## 🧠 Beneficios esperados
+
+- Trazabilidad semántica sin burocracia
+- IA como asistente documental real
+- Minimización de deuda técnica
+- Posibilidad de detección de módulos huérfanos, duplicados o sin versionar
+
+
+## 🔄 Estado actual
+
+✅ Ya se generó y archivó la metodología v2  
+🔜 Pendiente implementación de `alma-cli doc-init`  
+🧩 Listo para ser referenciado en próximas decisiones ADR
+

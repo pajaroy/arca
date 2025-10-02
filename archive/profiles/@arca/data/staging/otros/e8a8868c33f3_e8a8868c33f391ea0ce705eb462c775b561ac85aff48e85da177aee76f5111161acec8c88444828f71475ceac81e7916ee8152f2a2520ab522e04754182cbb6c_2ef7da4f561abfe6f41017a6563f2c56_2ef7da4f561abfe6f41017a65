@@ -1,0 +1,51 @@
+# 🕸️ ALMA_NEO4J – Módulo de Grafo Semántico
+
+**📅 Estado actual:** Fase 4 – Implementación inicial completa (2025-05-01)
+
+
+## 📦 Contenido
+
+```
+alma_neo4j/
+├── setup_neo4j.cql           # Índices y constraints iniciales (Cypher)
+├── cargar_grafo.py           # Script principal de carga a Neo4j
+├── .env                      # Configuración de conexión
+├── README.md                 # Este documento
+├── seguimiento.md            # Progreso técnico
+├── prompt_base.md            # Prompt histórico del módulo
+├── queries/                  # Plantillas de consulta Cypher
+├── scripts/                  # Scripts auxiliares (en blanco por ahora)
+├── logs/                     # Logs del proceso de carga
+└── prompts_hist/             # Prompts anteriores
+```
+
+
+## 🛠 Configuración inicial
+
+1. Crear el archivo `.env` con tus credenciales de acceso:
+```
+NEO4J_URI=bolt://localhost:7687
+NEO4J_USER=neo4j
+NEO4J_PASSWORD=tu_contraseña
+```
+
+2. Ejecutar la configuración de constraints e índices:
+```bash
+cypher-shell -u neo4j -p tu_contraseña < setup_neo4j.cql
+```
+
+
+## 🔍 Consultas de ejemplo (Cypher)
+
+```cypher
+// Buscar memorias impactadas por una específica
+MATCH (m1:Memoria {id: "MEMTRD-045"})-[:IMPACTA]->(m2)
+RETURN m1, m2
+
+// Ver todos los tags de una memoria
+MATCH (m:Memoria {id: "MEMTRD-045"})-[:TIENE_TAG]->(t:Tag)
+RETURN t
+```
+
+
+Este módulo permitirá que ALMA piense en red y no solo en línea. 🔗🧠

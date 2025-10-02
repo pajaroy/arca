@@ -1,0 +1,41 @@
+# Base: Python 3.11 slim
+FROM python:3.11-slim
+
+# Evitar preguntas interactivas de apt
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Instalar utilidades del sistema que realmente se pueden instalar en el contenedor
+RUN apt-get update && apt-get install -y \
+    vim wget git curl htop tmux tree unzip direnv \
+    sqlite3 xterm zip nano \
+    ranger ncdu \
+    && rm -rf /var/lib/apt/lists/*
+
+# Directorio de trabajo
+WORKDIR /arca
+
+# Copiar pyproject y instalar dependencias de Python
+COPY pyproject.toml ./
+COPY src/ ./src
+
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir .
+
+# Copiar código y carpetas de persistencia
+
+COPY config/ ./config
+COPY archive/ ./archive
+COPY docs/ ./docs
+COPY database/ ./database
+COPY logs/ ./logs
+COPY templates/ ./templates
+COPY data/ ./data
+
+# Copiar .bashrc personalizado
+COPY .bashrc /root/.bashrc
+
+# Establecer shell por defecto
+SHELL ["/bin/bash", "-c"]
+
+# Comando por defecto comentado para usar el contenedor como entorno interactivo
+# CMD ["python", "src/alma.py"]

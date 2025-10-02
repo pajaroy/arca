@@ -1,0 +1,48 @@
+#!/bin/bash
+# Script: 00_particionado_y_config_base.sh
+# Descripción: Prepara las particiones principales, encripta con LUKS, y configura Btrfs
+
+set -e
+
+echo "[+] Configurando zona horaria y teclado..."
+loadkeys la-latin1
+timedatectl set-ntp true
+
+echo "[+] Limpiando disco y creando particiones..."
+# CAMBIA sda por el disco que corresponda en tu sistema
+DISK="/dev/sda"
+
+# Desmontar por si hay algo montado
+umount -R /mnt || true
+cryptsetup close alma_crypt || true
+
+# Crear particiones (GPT)
+parted --script "$DISK" \
+    mklabel gpt \
+    mkpart ESP fat32 1MiB 513MiB \
+    set 1 boot on \
+    mkpart primary linux-swap 513MiB 16897MiB \
+    mkpart primary ext4 16897MiB 100%
+
+echo "[+] Formateando particiones..."
+mkfs.fat -F32 "${DISK}1"
+mkswap "${DISK}2"
+swapon "${DISK}2"
+
+echo "[+] Encriptando partición raíz con LUKS..."
+echo -n "umamia" | cryptsetup luksFormat "${DISK}3" -
+echo -n "umamia" | cryptsetup open "${DISK}3" alma_crypt -
+
+echo "[+] Formateando con Btrfs..."
+mkfs.btrfs /dev/mapper/alma_crypt
+
+echo "[+] Montando sistema de archivos..."
+mount /dev/mapper/alma_crypt /mnt
+btrfs subvolume create /mnt/@
+umount /mnt
+
+mount -o compress=zstd,subvol=@ /dev/mapper/alma_crypt /mnt
+mkdir -p /mnt/boot
+mount "${DISK}1" /mnt/boot
+
+echo "[+] Particionado y montaje completado correctamente."

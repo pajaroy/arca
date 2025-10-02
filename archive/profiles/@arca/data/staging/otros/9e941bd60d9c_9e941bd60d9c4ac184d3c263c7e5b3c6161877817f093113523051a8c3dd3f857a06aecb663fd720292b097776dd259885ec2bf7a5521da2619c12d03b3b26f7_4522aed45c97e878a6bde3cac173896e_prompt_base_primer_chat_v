@@ -1,0 +1,56 @@
+
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5 (v0.2)
+
+## 🎯 Objetivo General
+
+Desarrollar un roadmap técnico ejecutable para implementar ALMA_RESIST como sistema modular offline con IA local, priorizando:
+
+- Soberanía tecnológica: Operación sin dependencias externas.
+- Privacidad radical: Sin telemetría, logs solo locales.
+- Mantenibilidad humana: 1 desarrollador + IA como copiloto.
+- Integración fluida: Desarrollo desde terminal usando ALMA_LOADER para documentación automática.
+
+
+## 🧱 Base de Investigación
+
+### Archivos Adjuntos:
+
+- 📁 ALMA_LIBRE/: Estructura esqueleto (scripts, configs, tests, docs).
+- 📄 idea_base_0.0.9.md: Visión técnica, whitepaper, prompt técnico.
+- 🧭 flujo_secuencial.mmd: Diagrama de interacción CLI → LLM → Loader.
+
+
+## ⚠️ Análisis de Riesgos Detallado
+
+| Riesgo                        | Impacto             | Mitigación                                 |
+|------------------------------|---------------------|--------------------------------------------|
+| Modelo no carga en CPU vieja | Bloqueo funcional   | Quantización 3-bit + validación anticipada |
+| Corrupción de DB             | Pérdida de memoria  | Backups automáticos cada 6 hs              |
+| Scripts incompatibles        | Retrabajo masivo    | CI/CD local con pruebas semanales          |
+
+
+## 🔄 Retroalimentación Automatizada
+
+- Logs en JSON deben alimentar:
+  - `docs/reporte_auto.md`: resumen semanal
+  - `docs/errores_comunes.md`: base de fallos y soluciones
+  - `docs/benchmarks.md`: rendimiento en distintas máquinas
+
+
+## 📚 Documentación Automatizada
+
+- ALMA_LOADER debe generar:
+  - `docs/api.md`: resumen de comandos y módulos
+  - `docs/reporte_auto.md`: progreso semanal
+  - `docs/memoria_desarrollo.md`: registros históricos
+
+
+# 📋 Changelog v0.2
+
+- ✅ Añadida metodología de desarrollo (iterativa, TDD, docstrings)
+- ✅ Sección de riesgos técnicos con tabla detallada
+- ✅ Ejemplo de implementación crítica (cargar_modelo)
+- ✅ Diagrama de dependencias técnicas con Mermaid.js
+- ✅ Sección de retroalimentación con ALMA_LOADER
+- ✅ Detalles de optimización para hardware limitado
+- ✅ Nuevas reglas de documentación generada por IA

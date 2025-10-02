@@ -1,0 +1,65 @@
+
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5 (v0.7)
+
+## 🎯 Objetivo General
+
+Desarrollar un roadmap técnico ejecutable y antifrágil para **ALMA_RESIST**, priorizando:
+
+- Cifrado y privacidad extrema desde el Sprint 1.
+- Módulo de chat persistente, optimizado para bajo consumo.
+- Logging automático, documentación embebida, y pruebas automatizadas.
+- Recuperación completa incluso ante corrupción parcial de datos.
+
+
+## ⚙️ Especificaciones del Entorno
+
+- SO: Linux x86_64 (Debian 12+ / Ubuntu 22.04+)
+- RAM mínima: 8GB
+- CPU: 4 núcleos
+- Python: 3.10.12+ (venv)
+- Sin acceso a internet
+- TPM o archivo cifrado disponible
+
+
+## 🔄 Metodología
+
+- Ciclos semanales (sprints)
+- Pruebas automatizadas: pytest + Locust
+- TDD con validación cruzada
+- Documentación embebida (Google docstrings)
+
+
+## ✅ Checklists Críticos
+
+### ALMA_LOADER
+- [ ] Logging JSON con metadata cifrada
+- [ ] Backup automático con verificación SHA-256
+- [ ] Restauración parcial si DB está corrupta (reconstrucción desde logs)
+
+### CHAT
+- [ ] Solo los últimos 100 mensajes en RAM (paginación)
+- [ ] Almacenamiento comprimido en disco (LZ4)
+- [ ] Comando `alma --clear-chat` elimina con `shred -u`
+
+### PRUEBAS
+- [ ] `run_tests.sh` automatiza pruebas unitarias (pytest)
+- [ ] Validación de cifrado con OpenSSL
+- [ ] Simulación de carga con Locust
+
+
+## 🧠 Políticas de Recuperación
+
+- Si falla la restauración de la DB: regenerar desde logs cifrados
+- Si fallan los logs: usar backup diario anterior + checksum validado
+- CLI debe notificar y registrar intentos fallidos en `logs/errors.md`
+
+
+## 📝 Instrucción Final para GPT-4.5
+
+> Utilizando `ALMA_LIBRE/` y `idea_base_0.0.9.md`, generá un sistema que:
+- Inicie con logging cifrado desde el Sprint 1
+- Implemente chat persistente optimizado
+- Cuente con backup restaurable incluso tras fallos críticos
+- Genere documentación embebida y estructurada
+- Incluya pruebas automatizadas con cobertura real
+

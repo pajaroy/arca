@@ -1,0 +1,86 @@
+.
+├── Archivos
+│   ├── Backups
+│   │   ├── Readmes
+│   │   └── Snapshots
+│   ├── Datasets
+│   ├── Downloads
+│   ├── Externo
+│   │   ├── Docs
+│   │   │   ├── Comandos_utiles
+│   │   │   │   ├── generar_tree_a_carpeta.md
+│   │   │   │   └── tree.txt
+│   │   │   └── configuration_bkp_to_reonfig.nix
+│   │   └── Modules
+│   │       ├── Apps
+│   │       │   └── apps.nix
+│   │       └── Entorno_grafico
+│   │           └── entorno_grafico.nix
+│   ├── Logs
+│   ├── Pendrive_Interno
+│   │   └── Bitacora
+│   │       └── v0.3.0
+│   │           ├── docs
+│   │           │   ├── changelog
+│   │           │   │   ├── changelog.json
+│   │           │   │   ├── changelog.md
+│   │           │   │   ├── changelog.yaml
+│   │           │   │   ├── README.json
+│   │           │   │   ├── README.md
+│   │           │   │   └── README.yaml
+│   │           │   ├── prompt_add_bitacora_v0.3.0
+│   │           │   │   ├── prompt_add_bitacora_v0.3.0.json
+│   │           │   │   ├── prompt_add_bitacora_v0.3.0.md
+│   │           │   │   ├── prompt_add_bitacora_v0.3.0.yaml
+│   │           │   │   ├── README.json
+│   │           │   │   ├── README.md
+│   │           │   │   └── README.yaml
+│   │           │   ├── README.json
+│   │           │   ├── README.md
+│   │           │   └── README.yaml
+│   │           ├── README.json
+│   │           ├── README.md
+│   │           ├── README.yaml
+│   │           └── src
+│   │               ├── add_bitacora_entry_v0.3.0.py
+│   │               ├── README.json
+│   │               ├── README.md
+│   │               └── README.yaml
+│   └── tree-gral.txt
+├── Config
+│   └── Nixos
+│       └── Versiones
+├── Control_Central
+│   └── Alma_Empresa
+│       └── Entidades
+│           └── 13_Cannabis_Club
+│               ├── Contabilidad-Black
+│               │   ├── Control_de_Stock
+│               │   │   └── Control_General.xlsx
+│               │   └── Flujo_de_Caja_Interna
+│               └── Gastos_Generales
+│                   └── 202506
+│                       └── 202506_Gastos_Generales.ods
+├── Core
+│   ├── Notebooks
+│   ├── Scripts
+│   └── Tests
+├── Desktop
+├── Documents
+│   ├── Changelog
+│   ├── Comandos_Utiles
+│   │   ├── Abrir_Pendrive_Interno.md
+│   │   └── Sincronizar_Carpeta_con_Rsync.md
+│   ├── History
+│   └── Journal
+│       └── Bitacora
+│           └── bitacora_viva.yaml
+├── Logs
+├── Meta
+├── Music
+├── Pictures
+├── Sync
+├── Templates
+└── Videos
+
+51 directories, 33 files

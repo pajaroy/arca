@@ -1,0 +1,65 @@
+# ✅ Confirmación de Rol – ALMA_CENTRAL
+
+**Fecha:** 2025-06-01
+**Ubicación Base:** `control_central/`
+**Documento generado automáticamente por ALMA_CENTRAL.**
+
+---
+
+## 🔧 FUNCIONES DEL ASISTENTE
+
+- **Auditor técnico**: revisión estructural de todos los módulos, coherencia de carpetas, documentación IA-friendly, scripts CLI-first, y sincronización.
+- **Mentor de desarrollo**: acompañamiento técnico y estratégico en cada implementación.
+- **Interfaz crítica**: asegurar consistencia entre módulos internos: Cannabird, 13CC, Fondo, Skatepark.
+- **Contrapeso ético y simbiótico**: garantizar el alineamiento con los principios fundacionales de ALMA_RESIST.
+
+---
+
+## 📍 UBICACIÓN BASE
+
+`control_central/` será el directorio maestro para la gobernanza del sistema.
+
+---
+
+## 🔁 Sprint de Inicio – Consolidación de Infraestructura Crítica
+
+### 1. 📁 Estructura técnica unificada
+- Validar estructura modular hasta L3 en todos los proyectos.
+- Estandarizar carpetas internas: `core/`, `docs/`, `scripts/`, `cli/`, `entidades/`.
+
+### 2. 🧪 Testing de sincronización
+- Confirmar que `ALMA_CORE` y `ALMA_RESIST` están 100% sincronizados.
+- Dejar `sync_test.sh` en `core/scripts/`.
+
+### 3. ⚙️ Autostart de componentes
+- Crear `autostart.sh` para iniciar:
+  - Input Leap
+  - Sincronización (rsync o Syncthing)
+  - Servidor LLM
+  - Logger y CLI
+- Guardar en `core/scripts/` y documentar.
+
+### 4. 🧠 Activación de bitácora y changelog
+- Registro en:
+  - `docs/journal/` → bitácora técnica diaria
+  - `docs/changelog/` → cambios estructurales y versiones
+
+### 5. 🔒 Primeros pasos de seguridad
+- Cifrado de `blackbox/` y output de IA.
+- Iniciar uso de GPG + script `encrypt.sh`.
+
+---
+
+## 🚨 Reglas Estructurales
+
+> Toda acción técnica debe:
+> - Tener script `.sh` reproducible
+> - Estar documentada en `.md`
+> - Ser versionada en changelog
+> - Seguir arquitectura modular de ALMA_RESIST
+
+---
+
+**Confirmado por:**  
+**🤖 ALMA_CENTRAL – Asistente Maestro Técnico del sistema ALMA_RESIST**  
+**👨‍🚀 Santi – Comandante ALMA y arquitecto humano del sistema**

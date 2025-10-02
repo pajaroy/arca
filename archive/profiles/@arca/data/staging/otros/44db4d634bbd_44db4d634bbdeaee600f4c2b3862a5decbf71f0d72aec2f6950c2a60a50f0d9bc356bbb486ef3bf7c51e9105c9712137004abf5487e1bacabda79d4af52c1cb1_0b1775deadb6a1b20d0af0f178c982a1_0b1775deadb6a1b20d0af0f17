@@ -1,0 +1,55 @@
+# 🧠 Metodología de Auditoría y Evolución Técnica (ADRs) – ALMA_RESIST (v2)
+
+📅 Versión: 2.0  
+📁 Archivo: metodologia_adr_v2.md  
+🎯 Objetivo: Registrar decisiones técnicas críticas de forma estructurada, trazable e indexable por IA, sin sobrecargar al operador único.
+
+
+## 📋 Estructura Base (con metadatos YAML)
+
+```yaml
+```
+
+```markdown
+# ADR 002 – Adopción de versionado SemVer
+
+📅 Fecha: 2025-05-18  
+
+## Decisión  
+Usar `MAJOR.MINOR.PATCH` como convención de versionado global.  
+
+## Contexto  
+Se necesitaba un estándar claro para snapshots y scripts internos.  
+
+## Alternativas consideradas  
+- Fechas (`2025-05-18`)  
+- Commit hashes  
+- Versionado manual ad-hoc  
+
+## Justificación  
+SemVer es ampliamente adoptado y permite automatización futura.  
+
+## Impacto  
+- Afecta carpetas `/versiones/`  
+- Modifica `changelog.md`  
+- Permite validaciones IA por versión
+```
+
+
+## 🛠️ Automatización futura
+
+- Se podrá generar con:  
+```bash
+alma-cli create-adr --title "Uso de IA local"
+```
+
+- Este comando inferirá los campos desde el contexto del proyecto.
+
+
+## 📎 Relacionado con
+
+- `metodologia_doc_ia_v2.md`
+- `estructura_modular_v2`
+- `Methodology_Index.md`
+- `alma-cli`
+

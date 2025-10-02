@@ -1,0 +1,13 @@
+{
+  "id": "MEMGEN-010",
+  "fecha": "2025-04-30T10:09:40.342274",
+  "titulo": "Memoria Web 010",
+  "categoria": "GEN",
+  "tags": [
+    "memoria-web",
+    "#reflexion"
+  ],
+  "contenido": "Siempre que el usuario solicite desarrollo o mejora de código, prefiere pedir asistencia a DeepSeek para obtener resultados más óptimos. Este enfoque se aplicará especialmente en la categoría de programación y debe integrarse al sistema ALMA como una memoria asociada al terminal.",
+  "relacionadas": [],
+  "impacto_en": []
+}

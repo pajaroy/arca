@@ -1,0 +1,17 @@
+# 🛡️ Módulo – Contrato Técnico de Agregado de Memorias Vivas
+
+> **Ecosistema ALMA_RESIST – Centralesis**
+
+
+## Alcance
+
+- Es de **aplicación obligatoria** para Centralesis, Kael, Emma, ALMA y cualquier nuevo asistente/IA.
+- Está pensado para gobernanza multiusuario, CLI, scripting y expansión futura.
+
+
+## Observaciones
+
+- El método puede actualizarse por decisión de Centralesis si evoluciona la arquitectura del sistema.
+- Toda actualización debe dejar changelog y memoria viva documentada.
+- Es el único método soportado oficialmente por el ecosistema ALMA_RESIST al momento de esta versión.
+

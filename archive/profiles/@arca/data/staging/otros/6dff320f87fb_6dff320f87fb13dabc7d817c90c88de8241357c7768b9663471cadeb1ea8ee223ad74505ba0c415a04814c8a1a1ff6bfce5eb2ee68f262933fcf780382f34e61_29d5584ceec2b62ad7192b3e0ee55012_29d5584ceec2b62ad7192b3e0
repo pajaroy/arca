@@ -1,0 +1,20 @@
+## 🚀 Guía de Onboarding – ALMA_LOADER
+
+Bienvenido a ALMA_LOADER, un sistema modular de gestión de memorias con inteligencia semántica.
+
+Esta guía te orientará según tu rol de uso:
+
+
+### 👨‍💻 2. Para Desarrolladores / IAs
+
+- ⚙️ Leer el [Prompt Técnico](3.0.0_Alma/cuadernos/programming/Alma_loader_dev/alma_loader_3.0/v3.0.2_docs/prompt_technical_ALMA_LOADER_v3.0.2.md)
+- 📄 Estudiar el `schema_base.json`
+- 🧪 Ejecutar los tests unitarios:
+  ```bash
+  pytest tests/
+  ```
+- 📦 Conectar módulos externos usando `BaseStorage` + `on_memoria_guardada`
+
+
+> Si estás leyendo esto por primera vez, el orden ideal es:
+**Whitepaper → Prompt Técnico → Testing → Contribución**

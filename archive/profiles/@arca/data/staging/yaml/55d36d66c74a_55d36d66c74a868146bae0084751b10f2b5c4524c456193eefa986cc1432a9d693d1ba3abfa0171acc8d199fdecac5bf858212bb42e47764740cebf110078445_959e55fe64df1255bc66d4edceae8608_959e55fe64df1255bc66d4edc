@@ -1,0 +1,64 @@
+---
+version: 0.1.0
+id: IDEA_2025-06-07_MEMCLI
+tipo: idea_base_script
+formato: yaml
+modulo: control_central/cli/memorias/
+titulo: "Script CLI para carga y sincronización de memorias institucionales (v0.1.0)"
+autor: Kael & Santi
+fecha_creacion: 2025-06-07
+status: propuesta
+tags: [cli, memoria, yaml, json, validacion, logging, auditoria, alma_resist]
+descripcion: >
+  Desarrollo de un script CLI en Python para automatizar la carga de nuevas memorias 
+  institucionales en el sistema ALMA_RESIST, asegurando sincronización entre los archivos
+  `memorias.yaml` y `memorias.json`, con validación de estructura, control de duplicados 
+  y backups automáticos. Este script completa la trilogía de automatización (bitácora, changelog, memorias).
+
+objetivo_general: >
+  Permitir la carga de una o varias memorias desde un archivo externo (`.yaml` o `.md`)
+  al sistema oficial, manteniendo trazabilidad, validación y sincronización bidireccional 
+  entre YAML y JSON.
+
+requisitos_tecnicos:
+  - Lenguaje: Python 3.x
+  - Interfaz: argparse (CLI)
+  - Validación semántica: estructura mínima requerida (id, fecha, tipo, autor, contenido)
+  - Modo `--dry-run` y `--verbose` como los otros módulos CLI
+  - Detectar conflictos de ID y reportarlos sin sobrescribir
+  - Generar backup automático de los archivos destino
+  - Soporte para entrada `.yaml` estándar o `.md` con frontmatter
+  - Opción `--modo` con valores posibles: `append` (agrega), `replace` (sobrescribe por ID)
+  - Logging estructurado de cada acción con resumen final
+
+estructura_cli:
+  argumentos:
+    --entrada: Ruta al archivo de entrada con nuevas memorias (requerido)
+    --memoria-yaml: Ruta al archivo `memorias.yaml` oficial (requerido)
+    --memoria-json: Ruta al archivo `memorias.json` oficial (requerido)
+    --modo: Modo de integración (`append` o `replace`)
+    --dry-run: Simula la operación sin guardar cambios
+    --verbose: Muestra salida detallada de lo que ocurre
+    --backup-dir: Ruta opcional donde guardar los backups (por defecto junto al archivo)
+    --debug: Modo de salida extendida para diagnósticos internos
+
+resultados_esperados:
+  - Entrada validada con feedback inmediato
+  - Carga segura y sin sobrescritura accidental
+  - Actualización sincronizada entre YAML y JSON
+  - Informe final legible desde terminal (resumen por ID cargado o rechazado)
+  - Compatible con estructura ALMA_RESIST y filosofía modular
+
+notas:
+  - Este script es complementario a `add_bitacora_entry` y `add_changelog_entry`
+  - El diseño debe respetar la filosofía de trazabilidad total, separación de funciones y auditabilidad CLI
+  - Si hay entradas mal formateadas o inválidas, deben ser ignoradas con log de advertencia
+
+inspirado_en:
+  - cargar_memorias_v3.py (versión previa funcional no integrada al CLI)
+  - add_changelog_entry_v0.1.2.py (modelo de CLI modular con backups y validación)
+  - estructura central de ALMA_RESIST v0.1.x
+
+hash_integridad: sha256:pending
+...
+

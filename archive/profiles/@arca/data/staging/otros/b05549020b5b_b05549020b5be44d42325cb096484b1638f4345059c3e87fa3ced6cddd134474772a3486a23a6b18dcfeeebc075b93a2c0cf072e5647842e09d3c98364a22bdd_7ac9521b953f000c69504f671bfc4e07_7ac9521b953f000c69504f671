@@ -1,0 +1,19 @@
+# 📁 scripts/
+
+Este directorio contiene herramientas auxiliares (scripts) utilizadas para automatizar tareas comunes dentro del ecosistema ALMA_RESIST.
+
+Todos los scripts aquí presentes están diseñados bajo las metodologías oficiales del sistema y son compatibles con flujos humanos + IA.
+
+
+## 🧩 Convenciones
+
+- Todos los scripts deben tener cabecera explicativa y documentación mínima.
+- Los nombres deben usar `snake_case`.
+- Los scripts deben ser independientes y no romper si se ejecutan desde otra ruta base.
+- Los scripts críticos se versionan como parte de los releases (`/versiones/`).
+
+
+**Ubicación:** `ALMA_RESIST/scripts/`  
+**Mantenedor:** Operador IA + Colaborador humano  
+**Licencia:** MIT
+

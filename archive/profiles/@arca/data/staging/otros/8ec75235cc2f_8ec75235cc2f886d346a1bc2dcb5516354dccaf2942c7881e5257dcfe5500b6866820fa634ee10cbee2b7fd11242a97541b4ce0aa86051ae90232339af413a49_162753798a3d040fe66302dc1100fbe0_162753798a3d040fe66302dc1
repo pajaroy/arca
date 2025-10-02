@@ -1,0 +1,43 @@
+## 🧠 ¿Qué estamos creando?
+
+Estamos desarrollando una **infraestructura base de procesamiento de memorias** para ALMA, que te permite:
+
+- **Guardar, visualizar, validar y estructurar memorias personales o de sistema.**
+    
+- Tener una base **JSON estructurada (máquina)** y una vista **Markdown legible (humano)**.
+    
+- Preparar todo para futuras funciones como grafo semántico, IA relacional, interfaz web, API REST, etc.
+    
+
+
+### 2. `validador_custom.py` + `reglas.py`
+
+> 🔍 **Aseguran calidad semántica.**
+
+- Revisa que cada memoria tenga los **tags adecuados según la categoría** (TRD → `#riesgo`, etc.).
+    
+- Te ayuda a mantener el orden y la coherencia del sistema.
+    
+- Si estás sobreoperando sin reflexionar, el sistema lo puede detectar.
+    
+
+
+### 4. `memorias_md/`
+
+> 🗃 **Salida legible de memorias.**
+
+- Acá van los archivos que podés **leer, linkear o visualizar como red** en Obsidian.
+    
+
+
+## 🧩 ¿Qué ganás con esto?
+
+- Evitás caos a futuro: cada memoria está bien formada y ubicada.
+    
+- Podés escalar a cientos o miles de memorias sin perder el control.
+    
+- ALMA puede "razonar" sobre lo que viviste, hiciste o pensaste.
+    
+- Te preparás para implementar relaciones automáticas entre ideas, estrés, hábitos, decisiones de trading, salud y más.
+    
+

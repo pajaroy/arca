@@ -1,0 +1,4 @@
+{"timestamp": "2025-05-29T14:43:19.655612Z", "type": "startup", "module": "llm_server", "message": "Inicializando servicios...", "pid": 250090, "host": "parrot", "platform": "Linux-6.12.12-amd64", "metadata": {}}
+{"timestamp": "2025-05-29T14:43:22.335817Z", "type": "startup", "module": "llm_server", "message": "Modelo cargado: /home/bird/Alma/ALMA_RESIST/core/llm_server/models/mistral-7b-q4.gguf", "pid": 250090, "host": "parrot", "platform": "Linux-6.12.12-amd64", "metadata": {}}
+{"timestamp": "2025-05-29T14:43:22.336601Z", "type": "startup", "module": "llm_server", "message": "Capa de transporte inicializada", "pid": 250090, "host": "parrot", "platform": "Linux-6.12.12-amd64", "metadata": {}}
+{"timestamp": "2025-05-29T14:43:22.336993Z", "type": "startup", "module": "llm_server", "message": "Servicio completamente inicializado", "pid": 250090, "host": "parrot", "platform": "Linux-6.12.12-amd64", "metadata": {}}

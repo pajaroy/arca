@@ -1,0 +1,98 @@
+# 2025-06-04_bitacora_limpieza_inicial.md
+
+## Acción: Limpieza y consolidación inicial de `asesor-ia`
+### Ejecutor: Kael (supervisión Santi)
+### Objetivo: Dejar estructura limpia y modular, siguiendo convención ALMA_RESIST
+
+#### Cambios:
+- Movidos archivos legacy y temporales de `archivo/downloads/` a `archivo/downloads/historico/`.
+- Actualizado `README.md` en cada subcarpeta para explicar su propósito.
+- Archivos sueltos (`comandos.md`, etc.) reubicados o archivados.
+- Renombrados todos los `readme.md` → `README.md` para estandarizar.
+- Documentado todo el proceso en esta bitácora.
+
+#### Checklist:
+- [x] `archivo/downloads/` limpio y con histórico
+- [x] Sin archivos huérfanos en la raíz
+- [x] Naming consistente en `README.md`
+- [x] Bitácora creada y referenciada en README principal de `kael/bitacoras/`
+
+## Apéndice – Registro de copia de template de agente IA
+
+**Fecha:** 2024-06-04  
+**Responsable:** Santi  
+**Acción:** Copia local de plantilla base de agente IA para edición
+
+
+**Motivo:**
+
+> Mantener una versión editable y específica del template base, sin alterar el original, permitiendo ajustes progresivos y trazabilidad durante el desarrollo del agente Centralisis.
+
+
+**Detalle de la acción:**
+
+- El archivo `template_agente_ia_base_v2.md` fue movido desde `/asesor-ia/archivo/downloads/` a `/asesor-ia/templates/`.
+    
+- Objetivo: centralizar y facilitar el acceso a plantillas de agentes en la carpeta estándar de templates.
+    
+
+**Motivo:**
+
+> Mejorar la organización y el acceso a plantillas clave, evitando duplicidad y desorden en la carpeta de descargas.
+
+**Comando ejecutado:**
+
+```bash
+mv archivo/downloads/template_agente_ia_base_v2.md templates/
+```
+
+
+**Detalle de la acción:**
+
+- El archivo `encabezado_base_centralisis.md` fue movido de `/control_central/archivo/downloads/` a `/control_central/asesor-ia/archivo/downloads/`.
+    
+- Objetivo: concentrar todos los archivos de templates, encabezados y recursos propios de agentes IA dentro de la carpeta correspondiente a asesor-ia.
+    
+
+**Motivo:**
+
+> Unificar la documentación y recursos clave de agentes IA en el espacio central de trabajo, evitando dispersión y facilitando el acceso.
+
+**Comando ejecutado:**
+```bash
+mv /home/bird/ALMA_RESIST/control_central/archivo/downloads/encabezado_base_centralisis.md /home/bird/ALMA_RESIST/control_central/asesor-ia/archivo/downloads/
+```
+
+
+
+Notas:
+
+    Todo movimiento de archivos clave es registrado para asegurar trazabilidad y rápida localización.
+
+    Si el archivo sufre cambios futuros, se documentará en la bitácora correspondiente.
+
+
+**Detalle de la acción:**
+
+- El archivo `ALMA_RESIST_agentes_idea_base.md` fue movido desde `/asesor-ia/archivo/downloads/` a `/asesor-ia/templates/`.
+    
+- **Objetivo:** Centralizar la “idea base” en la carpeta de templates, garantizando acceso inmediato para la creación, revisión y despliegue de todos los agentes IA.
+    
+- Se agregó referencia al archivo en el `README.md` de la carpeta `templates/`, explicitando su carácter de documento clave y lectura obligatoria.
+    
+
+**Motivo:**
+
+> Mantener el principio rector de los agentes IA siempre a la vista, ordenado y fuera de rutas de archivos transitorios o secundarios.
+
+**Comando ejecutado:**
+```bash
+mv archivo/downloads/ALMA_RESIST_agentes_idea_base.md templates/
+```
+
+## Apéndice – Eliminación de archivos innecesarios en la raíz
+
+**Fecha:** 2024-06-04  
+**Responsable:** Santi  
+**Acción:** Eliminación de archivos ajenos al control de versiones y operatividad del entorno
+

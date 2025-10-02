@@ -1,0 +1,1 @@
+Esta carpeta contiene el backup previo a reformar los scripts centralizados.

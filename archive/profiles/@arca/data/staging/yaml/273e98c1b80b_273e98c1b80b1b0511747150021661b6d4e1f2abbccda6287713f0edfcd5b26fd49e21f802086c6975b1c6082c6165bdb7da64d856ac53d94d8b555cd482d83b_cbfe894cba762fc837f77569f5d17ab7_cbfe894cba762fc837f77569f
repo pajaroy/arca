@@ -1,0 +1,71 @@
+- autor: kael
+  fecha: 2025-06-07
+  id: MEM_KAEL_2025-06-07_01
+  impacto: 'Este paso sienta las bases del registro trazable dentro del ecosistema
+    ALMA.
+
+    '
+  relacionado_con:
+  - flujo_001_registro_bitacora.yaml
+  - flujo_002_registro_changelog.yaml
+  - flujo_003_carga_memorias.yaml
+  resumen: 'Se estableció el primer flujo base del sistema CLI: bitácora, changelog
+    y memorias automatizados.
+
+    '
+  tipo: flujo_base
+- autor: Kael
+  contenido: 'Se establece formalmente que la raíz del sistema ALMA_RESIST será: `/home/bird/alma_core/`.
+    Toda operación CLI, script, configuración o path base deberá construirse en relación
+    a esa ruta.
+
+    '
+  fecha: 2025-06-08
+  id: MEM_2025-06-08_01
+  tipo: declarativa
+- autor: Kael
+  contenido: "Se registró la versión 0.1.0 como la primera versión funcional de CLI\
+    \ para ALMA_RESIST. Incluye:\n  - Registro de entradas a bitácora (`bitacora_entry`)\n\
+    \  - Registro de entradas al changelog (`changelog_entry`)\n  - Soporte para validación\
+    \ semántica, dry-run, backups automáticos.\nAmbas herramientas ya están conectadas\
+    \ a rutas reales y hacen commits con seguimiento completo.\n"
+  fecha: 2025-06-08
+  id: MEM_2025-06-08_02
+  tipo: versionado
+- autor: Kael
+  contenido: "Se realizó una validación manual del entorno CLI. Se confirmaron los\
+    \ siguientes puntos:\n  - Las herramientas se instalaron correctamente como binarios\
+    \ (`bitacora_entry`, `changelog_entry`).\n  - Se detectó y corrigió una diferencia\
+    \ de rutas entre `alma_resist` y `alma_core`.\n  - Se verificó el modo `--dry-run`\
+    \ y `--debug` con logs en terminal.\n"
+  fecha: 2025-06-08
+  id: MEM_2025-06-08_03
+  tipo: operativa
+- autor: Kael
+  contenido: "Se integró el script `cargar_memorias_v0.1.0.py` al CLI institucional.\
+    \  Este permite:\n  - Cargar archivos `.yaml` o `.md` con frontmatter a una base\
+    \ YAML+JSON sincronizada.\n  - Detectar entradas duplicadas, inválidas o con formato\
+    \ incorrecto.\n  - Crear backups automáticos antes de modificar.\n  - Usar modo\
+    \ `--replace` para sobrescritura o `--append` por defecto.\nSe usará como módulo\
+    \ base para la gestión de memoria institucional de ALMA_RESIST.\n"
+  fecha: 2025-06-08
+  id: MEM_2025-06-08_04
+  tipo: técnica
+- autor: Kael
+  fecha: '2025-06-08'
+  id: MEM_KAEL_2025-06-08_05
+  tipo: flujo_base
+  contenido: 'Se estableció el protocolo híbrido de carga semiautomática para memorias
+    del agente Kael. Este flujo permite al usuario registrar eventos relevantes de
+    forma estructurada sin necesidad de reescribir scripts ni rutas. El prompt actúa
+    como plantilla y el asistente genera automáticamente el comando con todos los
+    campos rellenos para su ejecución inmediata.
+
+    '
+  relacionado_con:
+  - prompt_cargar_memorias_kael.yaml
+  - cargar_memorias_v0.1.1.py
+  resumen: 'Se definió un flujo híbrido para carga de memorias en Kael, integrando
+    prompt base, redacción asistida y ejecución CLI semi-automatizada.
+
+    '

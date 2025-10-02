@@ -1,0 +1,46 @@
+# 🌟 ALMA_RESIST – Roadmap Técnico Integral (Checklist)
+
+Roadmap técnico unificado con prioridad en **chat funcional**, **aprendizaje activo** e **infraestructura antifrágil**.  
+**Formato:** Checklist modular para seguimiento en Obsidian.  
+**Actualizado al:** 2025-05-19
+
+
+## 📌 **Fase 2: Infraestructura Segura y Aprendizaje Activo**
+### Sprint 3 – Autonomía Básica
+- [ ] Analizar logs para detectar patrones (`alma_auto_eval.py`).
+- [ ] Comando `!sugerir` con propuestas de optimización.
+- [ ] Registrar aceptación/rechazo de sugerencias en `logs/feedback.json`.
+- [ ] **Métrica:** `> 60%` de sugerencias aceptadas.
+
+### Sprint 4 – Cifrado y Resiliencia
+- [ ] Cifrar logs con ChaCha20 (fallback AES-NI si hay GPU).
+- [ ] Validar integridad con SHA3 (`system/check_sha3.sh`).
+- [ ] Script de recuperación de logs corruptos (`system/recover_logs.py`).
+- [ ] **Documentación:** Actualizar `docs/security_policy.md`.
+
+### Sprint 5 – Monitoreo Predictivo
+- [ ] Implementar `alma_monitor.py` (RAM/CPU/temperatura).
+- [ ] Alertas: `>80% RAM`, `>75°C`, `swap >20%`.
+- [ ] Modo supervivencia (`system/survival_mode.sh`).
+- [ ] **Métrica:** Alertas en `< 5s` tras evento crítico.
+
+
+## 📊 **Seguimiento de Progreso**
+| Fase | Tareas Totales | Tareas Completadas | Avance (%) |
+|------|----------------|--------------------|------------|
+| Fase 1 | 8 | 0 | 0% |
+| Fase 2 | 10 | 0 | 0% |
+| Fase 3 | 12 | 0 | 0% |
+
+
+## ✅ Sprint 2.5 – FINALIZADO
+
+- Auditoría semántica completa del sistema
+- Normalización de metadatos y nombres
+- Generación masiva de `README.md`
+- Integración de scripts automatizados
+- Creación del pipeline `run_auditoria_automatica.sh`
+- Consolidación conceptual (`idea_base`, `whitepaper`, `prompt_tecnico`)
+
+> 🔜 Siguiente etapa: **Sprint 2.6 – CLI IA Modular** (pendiente de apertura)
+

@@ -1,0 +1,43 @@
+# 🧠 Diagnóstico Base – Auditoría de Limpieza Semántica en ALMA_RESIST
+
+**Fecha:** 2025-06-01  
+**Responsable IA:** auditor_textos_ALMA  
+**Responsable humano:** Santi / pájaro  
+**Módulo propuesto:** alma-cli/auditor_textos/
+
+
+## 🔍 Diagnóstico Inicial
+
+### ✔️ Fortalezas
+
+- Uso consistente de metodologías con buena documentación (`estructura_modular`, `snapshots_formales`, `sprints_v2`, etc.)
+- Arquitectura modular clara hasta L4
+- Cultura fuerte de versionado (`versionado_backups`, `metadatos YAML`)
+- Ciclo de trabajo trazado con sprints y ADR
+
+### ❌ Debilidades
+
+- Aún no hay un sistema automatizado de validación semántica
+- Algunas carpetas/módulos carecen de `README.md`, `metadatos.yaml` o `dev_journal.md`
+- No se especifica aún una política de nomenclatura universal de tags
+- No hay todavía un validador semántico que alerte sobre errores de frontmatter, etiquetas repetidas o links rotos
+
+
+## 📎 Reglas mínimas por archivo
+
+- YAML válido, con `module`, `type`, `status`, `tags`, `linked_to`, etc.
+- Sin encabezados duplicados
+- Etiquetas bien declaradas en YAML
+- Títulos únicos por documento (solo un `#`)
+- Documentación cruzada (`linked_to`)
+
+
+## ✅ Recomendaciones de avance
+
+1. Crear módulo `alma-cli/auditor_textos`
+2. Definir `reglas.json` con criterios de validación
+3. Cargar taxonomía oficial de tags
+4. Crear script `validate_yaml.py`
+5. Comenzar auditoría progresiva por `metodologias/` y `docs/`
+6. Proyectar IA futura para `alma optimize file.md`
+

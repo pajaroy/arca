@@ -1,0 +1,46 @@
+{
+    "descripcion": "Sistema mejorado para autonom\u00eda avanzada dentro de ALMA_RESIST, incluyendo mejoras en la toma de decisiones, verificaci\u00f3n de integridad y un sistema de recuperaci\u00f3n ante fallos.",
+    "objetivo": "Mejorar la autonom\u00eda de los agentes, optimizar la trazabilidad, y garantizar la seguridad mediante la integraci\u00f3n de verificaci\u00f3n en tiempo real y un sistema de reglas automatizadas.",
+    "estructura": [
+        {
+            "nombre": "Agentes",
+            "descripcion": "Directorios y archivos de cada agente con metadatos."
+        },
+        {
+            "nombre": "Bit\u00e1cora",
+            "descripcion": "Registro comprimido con retenci\u00f3n inteligente."
+        },
+        {
+            "nombre": "Memorias institucionales",
+            "descripcion": "Acceso solo lectura, con propuesta de cambios."
+        },
+        {
+            "nombre": "Memorias personales",
+            "descripcion": "Memorias sincronizadas bidireccionalmente con validaci\u00f3n de integridad."
+        },
+        {
+            "nombre": "Index.json",
+            "descripcion": "\u00cdndice centralizado actualizado con hashes y metadatos."
+        },
+        {
+            "nombre": "Navegacion_map.yaml",
+            "descripcion": "Mapa de navegaci\u00f3n que define las relaciones entre los agentes y componentes del sistema."
+        }
+    ],
+    "acciones_autonomas": [
+        {
+            "navegar": "Los agentes navegan aut\u00f3nomamente por su directorio asignado."
+        },
+        {
+            "decisiones": "Los agentes toman decisiones basadas en metadatos, con un motor de reglas basado en cambios de archivos."
+        },
+        {
+            "sincronizaci\u00f3n": "Sincronizaci\u00f3n bidireccional de memorias personales con verificaci\u00f3n de consistencia."
+        }
+    ],
+    "protocolo_integridad": "Los agentes ser\u00e1n responsables de validar la integridad de sus archivos y memorias utilizando un agente auditor independiente.",
+    "protocolo_sincronizacion": {
+        "bidireccional": "Sincronizaci\u00f3n en tiempo real de memorias personales.",
+        "unidireccional": "Sincronizaci\u00f3n de memorias institucionales hacia los agentes."
+    }
+}

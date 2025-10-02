@@ -1,0 +1,34 @@
+id: readme_control_central_v0.1.1
+version: 0.1.1
+fecha_actualizacion: 2025-06-16T00:00:00Z
+autor: Centralesis + ALMA
+estado: "activo"
+anterior: null
+hash_actual: sha256:pending
+
+proposito:
+  descripcion: |
+    Núcleo de gobierno y multiagente de ALMA_RESIST. Contiene agentes, memoria viva y trazabilidad institucional.
+    Aquí reside la lógica central y los principales agentes del sistema.
+  ultima_revision: 2025-06-16
+
+linked_to:
+  - archivo/README.yaml
+  - config/README.yaml
+  - control/README.yaml
+  - control_central/README.yaml
+  - core/README.yaml
+  - docs/README.yaml
+  - logs/README.yaml
+  - meta/README.yaml
+
+estructura:
+  agentes/: "Carpetas de cada agente institucional."
+  bitacora/: "Bitácora institucional."
+  changelog/: "Cambios y milestones del sistema."
+  memorias/: "Memoria institucional sincronizada."
+
+changelog:
+  - fecha: 2025-06-16
+    version: 0.1.1
+    cambios: "Actualización de links y descripción, alineado a la estructura global."

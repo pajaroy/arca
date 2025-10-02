@@ -1,0 +1,80 @@
+# 🧠 IDEA BASE – ALMA RESIST
+
+📝 Estado: Versión activa (sin número)  
+📅 Última revisión: 2025-05-20  
+👤 Autor: Usuario + IA
+
+
+## 🧱 Arquitectura General
+
+### 📦 Nodos físicos
+
+- **ALMA_CORE** (PC madre): entorno principal de trabajo.
+- **ALMA_RESIST** (disco externo): entorno espejo, operativo y desconectable.
+- **ALMA_NODE** (pendrive): entorno minimalista, nodal, acceso remoto o emergencia.
+
+### 🧠 Capas funcionales
+
+| Capa               | Descripción |
+|--------------------|-------------|
+| **Motor IA**       | Mistral, DeepSeek o LLM local vía `llama.cpp` o `text-generation-webui` |
+| **CLI enriquecido**| Terminal interactiva con comandos personalizados y logs |
+| **ALMA_LOADER**    | Módulo de memoria estructurada (ingesta, resumen, vectorización) |
+| **Logs cifrados**  | `log_writer.py` + `log_crypto.py` para trazabilidad con privacidad |
+| **Memoria Viva**   | Resúmenes diarios/semanales, bitácoras y reflexiones, accesibles por IA |
+
+
+## ⚙️ Componentes Clave
+
+### 🔹 CLI Inteligente
+
+- Prompt minimalista y comandos como `!resumen`, `!estado`, `!run`, `!load`
+- Logs automáticos
+- Scripts auditables
+
+### 🔹 Servidor LLM Desacoplado
+
+- `llama-cpp-server`, FastAPI o Flask con endpoint local
+- Permite conexión desde CLI, scripts, iPhone o interfaz futura
+
+### 🔹 ALMA_LOADER
+
+- Carga `.md`, `.json`, `.sqlite`
+- Vectoriza, resume y clasifica
+- Conecta memorias a IA local
+
+### 🔹 ALMA_MONITOR (futuro)
+
+- Sugiere acciones a partir de logs y resúmenes
+- Detecta patrones y anomalías
+- Aprende del ciclo de uso
+
+
+## 🧭 Documentación Estándar
+
+Todo módulo o carpeta debe incluir:
+
+- `README.md`
+- `changelog.md` (o sección interna al pie)
+- `estructura.md` si es compleja
+- `prompt.md` si interactúa con IA
+
+
+## 🌐 Escalabilidad prevista
+
+| Componente | Expansión prevista |
+|------------|---------------------|
+| GUI Web    | Vía FastAPI/Flask + WebUI opcional |
+| Sincronización nube | Rclone, Git o rsync remoto |
+| IA móvil   | SSH desde iPhone, comandos remotos |
+| Multi-IA   | Posible conexión a múltiples LLM desde distintos nodos |
+
+
+## ✅ MVP Actual
+
+- CLI básica funcional
+- Logs con cifrado
+- `ALMA_LOADER` prototipo operativo
+- Prompt técnico creado
+- Primeros resúmenes generados
+

@@ -1,0 +1,15 @@
+{
+    "files.exclude": {
+      "**/.git": true,
+      "**/.DS_Store": true,
+      "**/node_modules": true,
+
+      "**/.config": true,
+      "**/.cache": true,   
+      "**/.pytest_cache": true, 
+      "**/.obsidian": true, 
+      "**/.bash_history": true,
+      "**/.venv": true,
+      "**/.stfolder": true,
+    }
+  }

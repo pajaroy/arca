@@ -1,0 +1,15 @@
+# 🧠 Solicitud de Implementación – `ModelWrapper` – Sprint 2.6 – ALMA_RESIST
+
+## 🎯 Objetivo
+
+Implementar el archivo `model_wrapper.py` que defina la clase `ModelWrapper`, utilizada por el servidor LLM (`main.py`) del proyecto ALMA_RESIST. Esta clase es responsable de cargar un modelo `.gguf` usando `llama.cpp` y generar respuestas a partir de un prompt de texto.
+
+
+## 🧪 Ejemplo de uso
+
+```python
+wrapper = ModelWrapper("models/mistral-7b-q4.gguf")
+wrapper.load_model()
+respuesta = wrapper.generate("¿Qué es la termodinámica?")
+```
+

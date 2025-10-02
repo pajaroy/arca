@@ -1,0 +1,48 @@
+---
+id: integration_llm_server_v0.2
+modulo: integration
+version: 0.2
+standard: ALMA_RESIST_v0.2
+descripcion: |
+  Módulos críticos para integración, tracking de contexto, grafo de memorias y gestión universal de modelos LLM bajo el estándar ALMA_RESIST v0.2.
+  Cada módulo implementa campos universales y valida integridad, permitiendo interoperabilidad y auditoría multiagente en todo el ecosistema.
+campos_universales:
+  - id: "Identificador único universal (string, requerido)"
+  - agente: "Nombre del agente responsable (string, requerido)"
+  - timestamp: "Marca temporal UTC ISO8601 (auto)"
+  - tags: "Lista de etiquetas de clasificación"
+  - hash: "Hash SHA-256 calculado automáticamente"
+  - metadata: "Datos extendidos según tipo de módulo"
+  - memoria_ref: "Lista de IDs de memorias institucionales referenciadas"
+scripts_principales:
+  - schemas.py: "Define AlmaBaseModel y lógica de hashing/validación universal"
+  - context_tracker.py: "Registra y consulta interacciones prompt-respuesta"
+  - memory_graph.py: "Gestiona grafo semántico de conceptos y relaciones"
+  - model_wrapper.py: "Gestiona la generación y auditoría de llamadas a modelos LLM"
+  - logging_config.py: "Configura logging estructurado y auditoría centralizada"
+dependencias:
+  - pydantic>=2.5
+  - networkx>=3.0
+ejemplo_uso: |
+  # Ejemplo de registro en context_tracker:
+  tracker.add_interaction(
+      id="CTX_2025-06-11_001",
+      agente="kael",
+      prompt="¿Qué es memoria institucional?",
+      response="Sistema centralizado de conocimiento...",
+      tags=["memoria", "ALMA"],
+      metadata={"model": "Mistral-7B"},
+      memoria_ref=["MEM_2025-06-11_09"]
+  )
+mejoras_pendientes:
+  - Agregar logging_config.py para logging centralizado (auditoría única)
+  - Integrar CLI multiagente y exportadores (JSONL, Parquet)
+  - Documentar ejemplos de uso real en carpeta examples/
+  - Conectar a dashboard de auditoría y bitácora institucional
+linked_to:
+  - alma_core/control_central/bitacora/bitacora_viva.yaml
+  - alma_core/core/notebooks/llm_server_v0.1.0/memoria_centralizada.yaml
+estado: "EN USO — versión modular, universal y auditable"
+
+---
+

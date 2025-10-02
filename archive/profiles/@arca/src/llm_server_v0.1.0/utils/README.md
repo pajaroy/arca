@@ -1,0 +1,28 @@
+---
+id: utils_llm_server_v0.2
+modulo: utils
+version: 0.2
+standard: ALMA_RESIST_v0.2
+descripcion: |
+  Utilidades críticas y backends institucionales para manejo de logs, cifrado y operaciones auxiliares del LLM Server.
+  Esta carpeta contiene módulos plug-and-play para garantizar privacidad, trazabilidad, rotación y consulta de logs en todo el ecosistema ALMA_RESIST.
+  Cada utilidad es autónoma, auditable e integrable en cualquier módulo principal.
+submodulos:
+  - log_crypto: "Cifrado y descifrado de logs (AES-256/Fernet), CLI de privacidad, rotación de claves."
+  - log_writer: "Rotación, escritura y consulta avanzada de logs estructurados. Soporte para hooks de cifrado/compresión."
+campos_universales:
+  - id
+  - agente
+  - timestamp
+  - tags
+  - hash
+  - metadata
+linked_to:
+  - alma_core/core/notebooks/llm_server_v0.1.0/integration/logging_config.py
+  - alma_core/core/notebooks/llm_server_v0.1.0/integration/transport_layer/transport_layer.py
+  - alma_core/control_central/bitacora/bitacora_viva.yaml
+  - alma_core/core/notebooks/llm_server_v0.1.0/logs/
+estado: "EN USO — infraestructura estable y modular"
+
+---
+

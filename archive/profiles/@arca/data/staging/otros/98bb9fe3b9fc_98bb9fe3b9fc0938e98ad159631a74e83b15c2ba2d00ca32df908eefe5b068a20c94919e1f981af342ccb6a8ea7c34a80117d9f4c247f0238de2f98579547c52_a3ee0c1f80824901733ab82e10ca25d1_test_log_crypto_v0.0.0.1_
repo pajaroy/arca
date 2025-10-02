@@ -1,0 +1,129 @@
+import pytest
+import os
+from pathlib import Path
+from core.llm_server.utils.log_crypto import CryptoEngine, validar_log_cifrado
+import json
+import logging
+
+# Fixture para engine de cifrado
+@pytest.fixture(params=['AES-256-GCM', 'ChaCha20'])
+def crypto_engine(request, monkeypatch):
+    engine = CryptoEngine()
+
+    def mock_detectar_algo():
+        return request.param
+
+    monkeypatch.setattr(engine, "detectar_algoritmo", mock_detectar_algo)
+    return engine
+
+# Fixture para archivos temporales
+@pytest.fixture
+def sample_log(tmp_path):
+    log_file = tmp_path / "test.log"
+    data = [{"timestamp": "2024-01-01", "event": "test"}]
+    log_file.write_text("\n".join(json.dumps(d) for d in data))
+    return log_file
+
+# Test de cifrado/descifrado completo
+def test_full_encryption_decryption(crypto_engine, sample_log, tmp_path):
+    encrypted = tmp_path / "encrypted.enc"
+    decrypted = tmp_path / "decrypted.log"
+
+    key = crypto_engine.encrypt_log(str(sample_log), str(encrypted))
+
+    assert encrypted.exists()
+    assert encrypted.stat().st_size > sample_log.stat().st_size
+
+    crypto_engine.decrypt_log(str(encrypted), str(decrypted), key)
+
+    assert decrypted.read_text() == sample_log.read_text()
+
+    encrypted_data = encrypted.read_bytes()
+    nonce_len = 12 if crypto_engine.algorithm == 'AES-256-GCM' else 24
+    assert len(encrypted_data) >= nonce_len
+
+# Test de generación de claves
+def test_key_generation(crypto_engine):
+    key1 = crypto_engine.generar_clave()
+    assert len(key1) == 32
+
+    password = b"secret"
+    salt = os.urandom(16)
+    key2 = crypto_engine.generar_clave(password, salt)
+    key3 = crypto_engine.generar_clave(password, salt)
+
+    assert len(key2) == 32
+    assert key2 == key3
+
+# Test de validación de logs
+def test_validate_encrypted_log(crypto_engine, sample_log, tmp_path):
+    encrypted = tmp_path / "valid.enc"
+    crypto_engine.encrypt_log(str(sample_log), str(encrypted))
+
+    assert CryptoEngine.validar_log_cifrado(str(encrypted))
+
+    invalid = tmp_path / "invalid.enc"
+    invalid.write_bytes(b"short")
+    assert not CryptoEngine.validar_log_cifrado(str(invalid))
+
+# Test de descifrado con clave incorrecta
+def test_wrong_key_decryption(crypto_engine, sample_log, tmp_path, caplog):
+    encrypted = tmp_path / "test.enc"
+    crypto_engine.encrypt_log(str(sample_log), str(encrypted))
+
+    with pytest.raises(Exception):
+        crypto_engine.decrypt_log(
+            str(encrypted),
+            str(tmp_path / "failed.log"),
+            os.urandom(32)
+        )
+
+    assert "Error descifrando" in caplog.text
+
+# Test de manejo de errores
+def test_encryption_failure(crypto_engine, tmp_path, caplog):
+    invalid_input = tmp_path / "missing.log"
+
+    with pytest.raises(Exception):
+        crypto_engine.encrypt_log(str(invalid_input), "output.enc")
+
+    assert "Error cifrando" in caplog.text
+
+# Test de algoritmos específicos
+def test_algorithm_specifics(crypto_engine):
+    nonce_len = 12 if crypto_engine.algorithm == 'AES-256-GCM' else 24
+    assert len(os.urandom(nonce_len)) == nonce_len
+
+# Test de integridad de datos
+def test_data_integrity(crypto_engine, sample_log, tmp_path):
+    encrypted = tmp_path / "data.enc"
+    decrypted = tmp_path / "data.log"
+
+    key = crypto_engine.encrypt_log(str(sample_log), str(encrypted))
+    crypto_engine.decrypt_log(str(encrypted), str(decrypted), key)
+
+    original = sample_log.read_bytes()
+    restored = decrypted.read_bytes()
+    assert original == restored
+
+# Test de formato cifrado
+def test_encryption_format(crypto_engine, sample_log, tmp_path):
+    encrypted = tmp_path / "format.enc"
+    key = crypto_engine.encrypt_log(str(sample_log), str(encrypted))
+
+    data = encrypted.read_bytes()
+    nonce_len = 12 if crypto_engine.algorithm == 'AES-256-GCM' else 24
+    assert len(data) == nonce_len + (len(sample_log.read_bytes()) + 16)
+
+# Test de rotación de claves
+def test_key_rotation(crypto_engine):
+    key1 = crypto_engine.generar_clave()
+    key2 = crypto_engine.generar_clave()
+    assert key1 != key2
+
+# Limpieza de archivos
+@pytest.fixture(autouse=True)
+def cleanup(tmp_path):
+    yield
+    for f in tmp_path.glob("*"):
+        f.unlink()

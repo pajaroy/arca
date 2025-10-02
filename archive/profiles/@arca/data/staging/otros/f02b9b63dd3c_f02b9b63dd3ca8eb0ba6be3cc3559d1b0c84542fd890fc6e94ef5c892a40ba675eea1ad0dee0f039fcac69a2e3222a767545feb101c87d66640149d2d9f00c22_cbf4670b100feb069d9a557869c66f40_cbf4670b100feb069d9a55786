@@ -1,0 +1,30 @@
+# 📘 Glosario de Convenciones – ALMA LIBRE v0.0.6.2
+
+Este glosario explica las reglas de nombrado, organización y codificación utilizadas dentro de la estructura del sistema ALMA LIBRE, y debe mantenerse actualizado en cada subversión.
+
+
+## 📚 Carpetas Principales
+
+- `ALMA_LIBRE/`: Carpeta madre del sistema. Contiene todo lo necesario para el funcionamiento completo del entorno.  
+- `CUADERNOS/`: Reúne cuadernos temáticos organizados por área de trabajo (finanzas, IA, cultivo, etc.).
+- `EMPRESAS/`: Reúne la documentación estructural, legal y operativa de cada proyecto formal.
+- `MODULOS/`: Contiene proyectos de software o automatización estructurados. Cada uno debe tener `src/` (código), `docs/` (documentación), `tests/` (si aplica).
+- `BITACORA_CENTRAL/`: Núcleo cronológico. Guarda resúmenes diarios, semanales, diagnósticos y trazabilidad de decisiones.
+- `RECURSOS_Y_AYUDAS/`: Contiene plantillas, prompts, scripts, ideas reutilizables y elementos auxiliares compartidos.
+
+
+## 🛠️ MODULOS
+
+- Todo módulo formal debe vivir en `MODULOS/NOMBRE_DEL_MODULO/` y tener:
+  - `src/`: Código fuente del módulo.
+  - `docs/`: Documentación, changelogs, especificaciones.
+  - `config/` o `tests/` si corresponde.
+- El nombre de la carpeta del módulo **no debe incluir la versión** (usar `version.txt` o `CHANGELOG.md` dentro para controlar versión).
+
+
+## 📌 Notas Especiales
+
+- `_archivo_temp__`: Carpeta transitoria para elementos no clasificados o colisiones. Se debe vaciar periódicamente.
+- `REESTRUCTURACION_0.0.6/`: Contiene documentos del proceso de consolidación estructural. Puede integrarse a `RECURSOS_Y_AYUDAS/docs/` si se considera parte del archivo histórico.
+- `BACKUPS_HISTORICOS/`: Contiene zips y versiones pasadas. NO debe usarse como fuente activa.
+- `logs/`: Carpeta destinada a la salida de scripts o programas. Incluir `README.md` explicativo aunque esté vacía.

@@ -1,0 +1,61 @@
+
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5 (v1.1)
+
+## 🎯 Objetivo General
+
+Diseñar e implementar un sistema offline modular con IA local llamado **ALMA_RESIST**, que:
+
+- Sea antifrágil, resiliente y autónomo
+- Aprenda de su propia operación (auto-documentación + auto-evaluación)
+- Funcione en hardware limitado y arquitecturas emergentes
+- Se adapte dinámicamente a escenarios extremos y estrés
+
+
+## 🧪 Roadmap Técnico – con KPIs
+
+```markdown
+| Sprint | Hito              | Tareas Clave                         | Métrica Esperada                    | Umbral Crítico             |
+|--------|-------------------|--------------------------------------|-------------------------------------|-----------------------------|
+| 1      | ALMA_LOADER Core  | Logging + Cifrado + Rotación clave  | Hash verificado, <5s de inicialización | Falla de cifrado → crítico  |
+| 2      | Chat Persistente  | SQLite + paginación RAM             | <50MB por 1000 mensajes, <1.2s resp. | >2s respuesta → red flag    |
+| 3      | Pruebas E2E       | Compatibilidad + stress             | 98% cobertura de tests               | Cobertura <80% → investigar |
+| 4      | Modo Survival     | RAM 2GB, CPU 1 núcleo               | Funciona en ARM sin swap             | >2.5GB RAM → revisión        |
+| 5      | Quantización IA   | Quant dinámico (3bit-8bit)          | -40% RAM en promedio                 | Falla en precisión → crítico |
+```
+
+
+## 🔁 Autoevaluación por Sprint
+
+- [ ] Script `alma_auto_eval.py`:  
+  - Compara benchmarks entre versiones  
+  - Lista errores frecuentes  
+  - Calcula consumo de RAM, disco y CPU  
+  - Sugerencias IA para siguiente sprint
+
+
+## 🔌 Eficiencia Energética
+
+- **Modo Bajo Consumo:**  
+  - [ ] Limitar frecuencia CPU al 50% si está en batería  
+  - [ ] Suspender logs detallados si carga <20%  
+  - [ ] Consolidar tareas para minimizar ciclos
+
+
+## 📝 Ejemplo de Justificación Técnica
+
+```markdown
+> **Decisión:** Usar DuckDB en vez de SQLite  
+> **Alternativas Consideradas:**  
+> - SQLite: simple, limitado en queries complejas  
+> - PostgreSQL: potente pero requiere servidor  
+> **Razón Final:** DuckDB es embedded, soporta SQL complejo y es portable
+```
+
+
+# 📋 Changelog v1.1
+
+- ✅ Instrucciones específicas por sección para GPT-4.5
+- ✅ Métricas de rendimiento + KPIs en cada sprint
+- ✅ Autoevaluación por sprint + documentación acumulativa
+- ✅ Modo bajo consumo + simulación con datos sintéticos
+- ✅ Soporte planificado para aceleradores (GPU/NPU) y RISC-V

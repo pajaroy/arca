@@ -1,0 +1,3 @@
+name,path,extension,type,date_created,status
+versionado,/home/arca/trece/.dev/src/versionado/versionado.py,.py,script,2025-08-22,active
+backup,/home/arca/trece/.dev/src/backup/backup.py,.py,script,2025-08-22,active

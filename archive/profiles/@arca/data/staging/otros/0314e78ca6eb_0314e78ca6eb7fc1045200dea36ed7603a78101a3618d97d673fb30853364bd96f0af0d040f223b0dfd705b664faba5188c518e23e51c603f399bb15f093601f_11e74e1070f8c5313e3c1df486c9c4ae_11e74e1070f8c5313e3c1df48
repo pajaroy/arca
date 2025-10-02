@@ -1,0 +1,41 @@
+# 🗺️ Mapeo de Archivos por Sprint
+
+Relación detallada entre cada sprint y los archivos/documentos producidos, con contexto y trazabilidad.
+
+## Sprint 2.3 – Corrección de Metadatos
+
+| Archivo                            | Descripción                                  | Estado | Fuente       |
+| ---------------------------------- | -------------------------------------------- | ------ | ------------ |
+| `README.md`                        | Resumen general del sistema actualizado      | Final  | Manual       |
+| `resumen_secciones.md`             | Resumen de secciones y componentes clave     | Final  | Manual       |
+| `lecciones_aprendidas.md`          | Aprendizajes técnicos y metodológicos        | Final  | Manual       |
+| `hitos.md`                         | Hitos alcanzados durante el sprint           | Final  | Manual       |
+| `changelog.md`                     | Cambios realizados en esta versión           | Final  | Manual       |
+| `decisiones_arquitectonicas.md`    | Decisiones clave a nivel de arquitectura     | Final  | Manual       |
+| `fix_metadata.py`                  | Script para normalizar metadatos YAML        | En uso | Automatizado |
+| `force_snake_case_modules.py`      | Script para convertir módulos a snake_case   | En uso | Automatizado |
+| `integrar_nuevo_archivo.sh`        | Bash de integración y validación completa    | En uso | Automatizado |
+| `metodologia_agregado_archivos.md` | Protocolo oficial de integración de archivos | Final  | Manual       |
+
+
+
+## Sprint 2.1 – Profesionalización de la Estructura Documental
+
+| Archivo                                     | Descripción                                      | Estado | Fuente       |
+|---------------------------------------------|--------------------------------------------------|--------|--------------|
+| `docs/estructura_doc/`                      | Plantillas documentales reutilizables            | Final  | Manual       |
+| `testing/cli/test_cli_basics.md`            | Prueba manual del CLI                            | Final  | Manual       |
+| `testing/utils/test_metadata.py`            | Validador automático de metadatos YAML           | Final  | Automatizado |
+| `docs/TODO.md`                              | Registro vivo de tareas                          | Final  | Manual       |
+| `docs/.project.md`                          | Estado modular del sistema                       | Final  | Manual       |
+| `versiones/v0.0.0.2_estructura_documental/` | Snapshot consolidado con hash y firma            | Final  | Manual       |
+| `CONTEXT.md`                                | Actualización del estado general del sistema     | Final  | Manual       |
+| `index.md`                                  | Navegación semántica actualizada                 | Final  | Manual       |
+| `hitos.md`                                  | Hito 007 agregado al histórico                   | Final  | Manual       |
+| `lecciones_aprendidas.md`                   | Lecciones aprendidas del Sprint 2.1              | Final  | Manual       |
+| `changelog.md`                              | Entrada del Sprint 2.1 con hash y cambios clave  | Final  | Manual       |
+
+
+> Todos estos archivos fueron validados con `validate_docs.py` y versionados en `v0.0.0.2_documentacion`.
+
+

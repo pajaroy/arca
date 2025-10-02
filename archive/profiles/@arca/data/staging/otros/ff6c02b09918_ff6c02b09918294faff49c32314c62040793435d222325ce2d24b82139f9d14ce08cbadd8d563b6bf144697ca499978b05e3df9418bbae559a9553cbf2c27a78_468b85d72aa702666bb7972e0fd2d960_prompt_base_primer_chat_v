@@ -1,0 +1,89 @@
+
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5 (v0.4)
+
+## 🎯 Objetivo General
+
+Desarrollar un roadmap técnico ejecutable, seguro y privado para implementar **ALMA_RESIST**, un sistema modular de IA offline con las siguientes prioridades:
+
+- Soberanía tecnológica: No depende de la nube.
+- Privacidad radical: Logs cifrados y control local total.
+- Mantenibilidad humana: Desarrollador + IA copiloto (10hs/día de trabajo promedio).
+- Optimizado para hardware limitado.
+
+
+## ⚙️ Especificaciones del Entorno
+
+**Objetivo Mínimo de Hardware:**
+- SO: Linux x86_64 (Debian 12+ / Ubuntu 22.04+)
+- RAM: 8 GB
+- CPU: 4 núcleos sin GPU
+- Python: 3.10.12+ (uso de venv)
+- Entorno 100% offline (uso de scripts locales para dependencias)
+
+
+## 🧱 Archivos Adjuntos
+
+- 📁 `ALMA_LIBRE/`
+- 📄 `idea_base_0.0.9.md`
+- 📈 `docs/flujo_secuencial.mmd`
+
+
+### 2. Checklists por Módulo
+
+#### CLI
+```markdown
+- [ ] Comando `alma --help` funcional
+- [ ] Sistema de errores con códigos únicos (E-101, E-202)
+- [ ] Verifica modo offline (sin conexión externa)
+```
+
+#### LLM
+```markdown
+- [ ] Script `install_offline.sh` instala todas las dependencias necesarias
+- [ ] Validación de checksum SHA-256 para modelos y paquetes
+```
+
+#### ALMA_LOADER
+```markdown
+- [ ] `alma --restore-backup` restaura logs y DB desde copia encriptada
+- [ ] Logging automático en formato JSON
+- [ ] Auto-documentación semanal: `docs/reporte_auto.md`
+```
+
+
+### 4. Código Crítico con Manejo de Errores
+
+```python
+def cargar_modelo(ruta: str, quant: int) -> bool:
+    """Carga modelo GGUF con validaciones estrictas."""
+    try:
+        if not os.path.exists(ruta):
+            raise FileNotFoundError("E-201: Archivo .gguf no encontrado")
+        if quant not in {3, 4, 8}:
+            raise ValueError("E-202: Quantización no soportada")
+        # Lógica de carga con llama.cpp aquí
+        return True
+    except Exception as e:
+        logger.error(f"[E-999] Fallo al cargar modelo: {e}")
+        return False
+```
+
+
+### 6. Políticas de Retención de Datos
+
+```markdown
+**Política de Logs:**
+- Retención máxima: 30 días
+- Eliminación segura: overwrite + borrado físico
+```
+
+
+# 📋 Changelog v0.4
+
+- ✅ Añadida sección **Roles del Equipo** (Desarrollador + IA)
+- ✅ Roadmap ahora incluye columna **Prioridad**
+- ✅ Checklists de manejo de dependencias offline (`install_offline.sh`)
+- ✅ Ejemplo ampliado de código con errores custom y logging
+- ✅ Sprint dedicado a validación cross-hardware
+- ✅ Mecanismo de restauración de backups desde ALMA_LOADER
+- ✅ Políticas de retención de logs añadidas

@@ -1,0 +1,145 @@
+
+# 🤖 Proyección Modular IA-Friendly – ALMA_RESIST
+
+## 🎯 Objetivo
+
+Definir las mejores prácticas para estructurar cada herramienta o módulo del ecosistema ALMA_RESIST de forma que sea **IA-operable**, **autocontenida** y **semánticamente coherente**. Esto permite que en el futuro una IA pueda:
+
+- Leer un módulo sin contexto externo
+- Ejecutar, diagnosticar y documentar tareas
+- Realizar cambios con trazabilidad clara
+- Operar como asistente de mantenimiento o expansión
+
+---
+
+## 🧱 Estructura Recomendable para Cada Módulo
+
+```
+nombre_modulo/
+├── control/
+│   └── sprint_actual.md
+│
+├── docs/
+│   ├── readme.md
+│   ├── changelog.md
+│   ├── journal/
+│   └── history/
+│
+├── archivo/
+│   ├── datasets/
+│   ├── logs/
+│   └── downloads/
+│
+├── core/
+│   ├── scripts/
+│   ├── notebooks/
+│   └── tests/
+│
+├── config/
+│   ├── .env.example
+│   └── settings.yaml
+│
+├── meta/
+│   └── module.yaml
+│
+└── IA-assistant.md  ← nuevo archivo sugerido
+```
+
+---
+
+## 🧠 ¿Por qué cada módulo debe tener esta estructura?
+
+- **Autonomía**: Cada carpeta se comporta como una mini-app auditable.
+- **Escalabilidad**: Nuevas herramientas se integran sin romper lo anterior.
+- **Automatización futura**: Una IA puede leer y operar sobre un módulo.
+- **Portabilidad**: Podés copiar la carpeta y se comporta igual en cualquier entorno.
+
+---
+
+## ✅ Buenas Prácticas IA-Friendly
+
+1. **Repetir la estructura completa por herramienta o subproyecto.**
+2. **Nombrar carpetas y archivos en `snake_case`, descriptivos y consistentes.**
+3. **Incluir `meta/module.yaml` con campos como:**
+   ```yaml
+   nombre_modulo: cli_cleaner
+   descripcion: Limpieza automatizada de logs y archivos obsoletos
+   entradas: ["archivo/logs/"]
+   salidas: ["archivo/logs_clean/"]
+   version: 0.2.1
+   tipo_modulo: herramienta
+   ```
+
+4. **Usar `readme.md` con enfoque técnico:**
+   - ¿Qué hace el módulo?
+   - ¿Cómo se ejecuta?
+   - ¿Qué entradas/salidas espera?
+
+5. **Registrar cambios en `changelog.md` con contexto:**
+   - ¿Por qué se hizo?
+   - ¿Qué impacto tuvo?
+   - ¿Qué quedó pendiente?
+
+6. **Tener bitácora informal en `journal/` para decisiones, obstáculos, ideas.**
+7. **No versionar `downloads/`, `logs/` ni `.env` (usá `.gitignore`).**
+
+---
+
+## 🧩 Nuevo Archivo Sugerido: `IA-assistant.md`
+
+Este archivo define el **rol de una IA** sobre el módulo.
+
+### 📘 Ejemplo:
+
+```markdown
+# 🤖 Asistente IA – Módulo `cli_cleaner`
+
+## 🧠 Rol del Asistente
+
+Tu tarea como IA es:
+- Diagnosticar archivos dentro de `archivo/logs/`
+- Ejecutar los scripts de limpieza si detectás exceso o errores
+- Escribir resultados en `changelog.md` y registrar contexto en `journal/`
+
+## ⚙️ Instrucciones
+
+- No eliminar archivos sin registrarlos
+- Usar `config/settings.yaml` para conocer los límites
+- Actualizar `meta/module.yaml` si cambiás entradas o salidas
+
+## 📌 Estado
+
+Este módulo está activo y funcionando en entorno ALMA_RESIST.
+```
+
+---
+
+## 🔍 Proyección Futura
+
+Con esta estructura podrás:
+
+- Indexar módulos semánticamente (por embeddings o IA local)
+- Conectar módulos con grafos (usando Obsidian, D3.js, etc.)
+- Implementar un **Agente IA explorador** que recorra tu sistema
+- Realizar diagnósticos automáticos y alertas por módulo
+
+---
+
+## 🚀 Siguientes pasos sugeridos
+
+- [ ] Generar plantilla `IA-assistant.md`
+- [ ] Establecer convención de tags en YAML para clasificación IA
+- [ ] Crear script para validar estructura de cada módulo automáticamente
+- [ ] Diseñar panel de control con resumen de todos los módulos (`index.md`)
+- [ ] Integrar IA local para operar por módulo (inferencia, lectura, cambios)
+
+---
+
+## 📎 Conclusión
+
+> Si cada herramienta de ALMA_RESIST mantiene esta estructura modular, clara y semántica, vas a poder construir un sistema donde cada módulo sea una unidad operable y comprensible por una IA.  
+> El futuro de este diseño es tener agentes que lean, actúen y mejoren cada parte del sistema sin intervención humana constante.
+
+---
+
+📂 Documento generado por ALMA_ASSIST | Junio 2025

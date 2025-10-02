@@ -1,0 +1,63 @@
+version: 0.2
+
+# 🧠 Arquitectura Futurista: VS Code + ALMA\_RESIST + LLM Server + Agentes IA
+
+## 1. Servidor LLM central (local o dedicado)
+
+* **Modelos soportados:** Mistral, DeepSeek, Llama, etc.
+* **Interfaz:** expone una API (HTTP, websocket o CLI) para interactuar con múltiples agentes.
+
+## 2. Agentes IA especializados
+
+* Cada agente tiene su **rol** y acceso a memorias y comandos específicos.
+
+  * Ejemplos: `Agente Dev (Copiloto VS Code)`, `Agente Auditor`, `Agente Documentador`, `Agente Memoria Histórica`, etc.
+* **Memoria compartida:** todos pueden acceder a las memorias globales de ALMA\_RESIST.
+
+## 3. Chat CLI de ALMA\_RESIST
+
+* Interfaz principal donde se interactúa con los agentes según el contexto.
+* **Ejemplos de uso:**
+
+  * `almaresist> dev: sugerime refactor para el script X`
+  * `almaresist> auditor: revisá dependencias del módulo Y`
+* El agente Dev puede, además, interactuar con VS Code si está correctamente integrado.
+
+## 4. Integración VS Code <-> Agente Dev
+
+* Plugins/extensiones recomendadas: **Continue**, **Open Interpreter**, o una integración custom.
+
+  * Permiten que VS Code envíe código, contexto y pedidos al agente IA central.
+  * El agente responde en un panel lateral o directamente en los archivos.
+* Alternativamente, un script/microservicio puede sincronizar logs, memorias y tareas entre VS Code y ALMA\_RESIST (por archivos, sockets o API REST).
+
+## 5. Gestión de memorias y logs
+
+* Todo lo que ocurre (comandos, ideas, errores, snippets, decisiones) se registra en el sistema de memorias de ALMA\_RESIST.
+* Accesibilidad total: cualquier agente o vos mismo podés auditar el historial.
+* Se pueden guardar “momentos clave”, insights, problemas recurrentes, etc.
+
+
+# 🛠️ ¿Cómo arrancar?
+
+## 1. Definir el “agente Dev”
+
+* ¿Cuál será su **rol**?
+* ¿Qué memorias debe registrar?
+* ¿Qué comandos debe poder ejecutar?
+
+## 2. Decidir la integración
+
+* ¿Vas a usar una extensión lista (**Continue**, **Open Interpreter**) o harás un script propio para conectar VS Code con tu server LLM?
+
+## 3. Armar la estructura de memorias
+
+* ¿Formato?: YAML / JSON / Markdown
+* ¿Ubicación?: carpeta central, repo, etc.
+
+## 4. Probar el flujo
+
+* Levantá el server, conectá el agente y hacé un test de ida y vuelta:
+
+  * VS Code → LLM → respuesta → registro en memorias → auditoría por CLI.
+

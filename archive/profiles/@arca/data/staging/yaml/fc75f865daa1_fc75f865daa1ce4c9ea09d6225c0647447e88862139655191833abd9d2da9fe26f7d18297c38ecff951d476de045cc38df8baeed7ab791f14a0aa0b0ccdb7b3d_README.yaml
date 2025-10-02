@@ -1,0 +1,48 @@
+# README para el sistema Autonom-IA
+
+nombre: Autonom-IA System
+descripcion: |
+  El sistema **Autonom-IA** tiene como objetivo permitir que los agentes de ALMA_RESIST operen de manera autónoma dentro de su entorno. Esto incluye la capacidad de navegar por las carpetas del sistema, tomar decisiones basadas en datos y metadatos, actualizar archivos y colaborar entre ellos sin intervención humana constante. 
+
+  El sistema está diseñado con un enfoque modular, asegurando que cada agente, memoria y bitácora tenga su propio espacio mientras se mantiene la coherencia global a través del **índice de metadatos**.
+
+  **Autonom-IA** permite a los agentes interactuar, gestionar sus registros y decisiones mientras mantienen trazabilidad y gobernanza dentro del ecosistema.
+
+estructura_del_sistema:
+  - **agentes/**: Carpeta que contiene las subcarpetas de cada agente (KAEL, CENTRALESIS, EMMA, etc.), con sus archivos y metadatos.
+  - **bitacora/**: Registros globales de todas las actividades de los agentes.
+  - **memorias/**: Memorias personales (editable) y memorias institucionales (readonly).
+  - **control_central/**: Módulo central que gestiona el ecosistema de agentes y sus interacciones.
+  - **index.json**: El índice centralizado de metadatos de todo el sistema, que conecta a los agentes, memorias y bitácoras.
+  - **autonom-ia_system.yaml**: El archivo que describe la idea base del sistema, sus objetivos, y las reglas de operación para los agentes.
+
+funcionalidad_principal:
+  - **Navegación autónoma**: Los agentes pueden navegar dentro de su directorio y tomar decisiones basadas en los archivos presentes.
+  - **Trazabilidad y gobernanza**: Todas las acciones realizadas por los agentes se registran en bitácoras y se pueden auditar en cualquier momento.
+  - **Memorias modulares**: Cada agente mantiene sus memorias personales sincronizadas con su archivo operativo, mientras que las memorias institucionales son centralizadas y no pueden ser modificadas directamente por los agentes.
+  - **Interacción entre agentes**: Los agentes pueden colaborar entre sí, derivando tareas y registrando sus interacciones en el sistema.
+
+estructura_de_metadatos:
+  - **hash_verificacion**: Cada archivo tiene un hash único para garantizar la integridad y trazabilidad de los cambios.
+  - **fecha_modificacion**: La fecha en que se realizó la última modificación en el archivo.
+  - **autor_modificacion**: Quién o qué agente hizo la modificación.
+  - **commit_ref**: Referencia a la versión o commit en el sistema de control de versiones (si corresponde).
+  
+protocolo_de_sincronizacion:
+  - **bidireccional**: Las memorias personales de los agentes se sincronizan entre el archivo operativo y su referencia en el sistema central.
+  - **unidireccional**: Las memorias institucionales solo se sincronizan desde el archivo central hacia los agentes (readonly).
+
+uso_y_protocolo:
+  - Los agentes deben cargar este archivo YAML como parte de su configuración inicial.
+  - Cada agente tiene un espacio personal para registrar sus actividades, pensamientos y reflexiones.
+  - Las acciones de los agentes deben ser audibles y rastreables a través de la bitácora.
+  - Cualquier interacción que involucre una modificación de la memoria institucional debe ser derivada a Centralesis para validación.
+
+# Protocolo de Navegación:
+  - Los agentes pueden leer archivos dentro de sus carpetas asignadas.
+  - Los agentes deben seguir las reglas de permisos, nunca modificando la memoria institucional directamente.
+  - Las interacciones entre agentes se registran en sus respectivas bitácoras.
+
+# Ejemplo de sincronización de memorias:
+  - Las memorias personales son sincronizadas con su archivo operativo y el archivo central.
+  - Cada modificación en las memorias genera una entrada en la bitácora personal y en el índice.

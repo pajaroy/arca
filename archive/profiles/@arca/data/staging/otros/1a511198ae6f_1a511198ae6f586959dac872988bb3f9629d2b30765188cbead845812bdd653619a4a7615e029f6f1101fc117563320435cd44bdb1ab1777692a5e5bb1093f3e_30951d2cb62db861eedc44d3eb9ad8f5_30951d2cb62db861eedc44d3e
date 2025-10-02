@@ -1,0 +1,42 @@
+# 🧠 CONTEXTO GENERAL – 13CC
+
+Este documento ofrece un resumen estratégico y organizacional del proyecto 13CC, para uso institucional y técnico.  
+Está diseñado como contexto base para IA, nuevos miembros, asesores o entidades externas.
+
+
+## 🏗️ Modelo de trabajo institucional
+
+13CC trabaja bajo un modelo modular y jerárquico:
+
+- ONG madre (13CC): núcleo legal, social y documental
+- Anexos: unidades operativas descentralizadas (ej. Cannabird)
+- Cúpula operativa: dirección estratégica y ejecutiva
+- Carpetas digitales: cada módulo tiene estructura propia (legal, fundacional, socios, reuniones, registros)
+- Ciclo de reuniones: define toma de decisiones, validación de roles y seguimiento de tareas
+- Contabilidad dual: sistema YING (white legal) y YANG (black control interno)
+
+
+## 🧠 Cúpula Operativa
+
+Conformada por los tres roles principales:
+
+| Nombre              | Rol                                     |
+|---------------------|------------------------------------------|
+| Santiago Calvo      | Director Ejecutivo de Gestión (DEG)      |
+| Sebastián “Gory”    | Responsable General de Cultivo 13CC      |
+| Ariel Abaca         | Responsable de Relaciones y Marketing    |
+
+Cada uno tiene su propia carpeta operativa y funciones definidas. El DEG coordina todo el sistema.
+
+
+## 📊 Registro, seguimiento y control
+
+- Cada unidad debe presentar un balance mensual
+- Las reuniones se documentan según guías y formularios estándar
+- Se utilizan roadmaps y metas trimestrales para medir avances
+- Los cambios estructurales se registran en `changelog.md`
+- El sistema está sincronizado con Google Drive para acceso del equipo
+
+
+**Última actualización:** 2025-05-08  
+**Autor:** Santiago Calvo (DEG)

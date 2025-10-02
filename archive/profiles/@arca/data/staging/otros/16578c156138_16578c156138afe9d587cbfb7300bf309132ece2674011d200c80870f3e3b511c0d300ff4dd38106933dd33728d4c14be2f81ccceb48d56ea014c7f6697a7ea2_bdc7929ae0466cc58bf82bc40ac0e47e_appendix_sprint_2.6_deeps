@@ -1,0 +1,86 @@
+---
+module: versiones/v0_0_0_5_llm_server/appendix_sprint_2_6_deepseek
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 📎 Apéndice Sprint 2.6 – Feedback Técnico de DeepSeek
+
+Este apéndice resume los ajustes recomendados por DeepSeek para mejorar el Sprint 2.6 de ALMA_RESIST, sin duplicar tareas ya definidas. Aplica como guía adicional para asegurar escalabilidad, foco y realismo.
+
+---
+
+## 🔧 Ajustes a Tareas Existentes
+
+### ✅ Fase 1 – Servidor LLM MVP
+
+- [ ] Añadir manejo de errores en `/responder`:
+  - Validar si el modelo está cargado
+  - Detectar prompts inválidos
+
+### ✅ Fase 2 – Logging y Seguridad
+
+- [ ] Conectar `memory_graph` para indexar embeddings de respuestas
+- [ ] Integrar `context_tracker` al registrar actividad/logs
+
+### ✅ Fase 3 – Pruebas
+
+- [ ] Reemplazar `test_llm.py` con prueba **end-to-end**:
+  - Validar flujo `CLI → servidor → memoria` directamente
+  - Evitar mocks innecesarios
+
+### ✅ Fase 4 – Documentación
+
+- [ ] Incluir requisitos de hardware mínimo:
+  - Mistral 7B Q4 (~6GB RAM)
+  - Alternativa: TinyLlama 1.1B (~2GB RAM)
+- [ ] Esquematizar `decisiones_arquitectonicas.md` sin detalle excesivo
+
+---
+
+## 🛡️ Riesgos Técnicos Identificados
+
+- Sobrecarga de RAM:
+  - Solución: Usar TinyLlama si hay hardware limitado
+
+- Falta de retrocompatibilidad:
+  - Solución: Definir y documentar contratos JSON desde el inicio
+
+- Testing insuficiente:
+  - Solución: Incluir 2-3 pruebas críticas en `test_basico.sh`
+
+---
+
+## 📆 Plan Semanal Ajustado
+
+### Semana 1-2:
+- FastAPI + `/responder`
+- `ModelWrapper`
+- Manejo de errores
+
+### Semana 2-3:
+- Logging cifrado
+- `memory_graph`
+- `context_tracker`
+
+### Semana 3:
+- Test end-to-end
+- Validación de logs
+
+### Semana 4:
+- README.md + requisitos
+- Congelar versión + lecciones aprendidas
+
+---
+
+## 💡 Conclusión
+
+El Sprint 2.6 es totalmente viable si se priorizan:
+- Integraciones clave sobre documentación extensa
+- Pruebas funcionales sobre cobertura exhaustiva
+- TinyLlama como alternativa realista en hardware limitado
+
+> “La escalabilidad no es una meta, sino un hábito. Cada línea de código debe escribirse como si mañana tuviera que soportar diez veces su carga.”

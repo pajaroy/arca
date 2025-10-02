@@ -1,0 +1,20 @@
+# 📁 Snapshot v0.0.0.4 – Auditoría Sprint 2.5
+
+Esta carpeta documenta el cierre formal del Sprint 2.5 de ALMA_RESIST.  
+No contiene archivos funcionales duplicados. Se trabaja con referencias a la estructura viva.
+
+## 🗂 Documentación general referenciada:
+
+- `README.md` general: `/ALMA_RESIST/README.md`
+- Bitácora de cambios: `/ALMA_RESIST/docs/introduccion/changelog.md`
+- Contexto del sistema: `/ALMA_RESIST/docs/introduccion/context.md`
+- Estado del proyecto: `/ALMA_RESIST/docs/introduccion/project.md`
+
+## 📚 Contenido de este snapshot:
+
+- `version.md` → Descripción de esta versión
+- `checklist_auditoria.md` → Verificación de criterios del Sprint 2.5
+- `apendices_*.md` → Observaciones y acciones complementarias
+- `descargas/` → Archivos generados automáticamente (si aplica)
+
+> 💡 Recomendación: este snapshot es documental y referencial, no funcional. Para navegar el sistema real, dirigirse al repositorio raíz.

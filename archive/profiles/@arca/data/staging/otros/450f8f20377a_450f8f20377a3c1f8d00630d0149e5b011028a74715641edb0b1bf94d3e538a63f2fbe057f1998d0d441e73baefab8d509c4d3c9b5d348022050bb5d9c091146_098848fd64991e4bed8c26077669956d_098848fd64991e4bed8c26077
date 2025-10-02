@@ -1,0 +1,19 @@
+# 📝 CHANGELOG – ALMA LIBRE v0.0.6.1
+
+## 📅 Fecha de Lanzamiento: 2025-05-11
+
+### 🔧 Correcciones Finales Aplicadas
+- Revisión completa de archivos con referencias antiguas a `13_CANNABIS_CLUB`, estandarizados como `13CC`.
+- Reemplazo de nombres de archivo con espacios por guiones bajos para unificación de estilo y mayor compatibilidad.
+- Validación completa de duplicados y limpieza de restos residuales no estructurados.
+- Confirmación de ubicación final de scripts auxiliares, reorganizados en `RECURSOS_Y_AYUDAS/Scripts_Utiles/`.
+
+### ✅ Consolidaciones Documentales
+- Se generó diagnóstico completo (`diagnostico_v0.0.6.1.md`) validando que la estructura es estable, interoperable y legible para IA y humanos.
+- Se creó plantilla semanal de seguimiento para registrar el estado técnico y organizativo.
+- Se generó resumen técnico semanal para Semana 19 documentando esta transición final.
+
+### 📂 Gestión de Versionado
+- Se actualizó `version.txt` a `v0.0.6.1`.
+- Se archivaron `CHANGELOG_0.0.6.md` y `README_0.0.6.md` en `BACKUPS_HISTORICOS/changelogs/`.
+

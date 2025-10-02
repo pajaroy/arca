@@ -1,0 +1,45 @@
+
+import sqlite3
+import argparse
+
+def conectar_db(path='memorias.db'):
+    conn = sqlite3.connect(path)
+    return conn
+
+def consultar_memorias(conn, bloque=None, estado=None, tipo=None):
+    cursor = conn.cursor()
+    query = "SELECT id, titulo, bloque, seccion, tipo, estado, version FROM memorias WHERE 1=1"
+    params = []
+
+    if bloque:
+        query += " AND bloque = ?"
+        params.append(str(bloque))
+
+    if estado:
+        query += " AND estado = ?"
+        params.append(estado)
+
+    if tipo:
+        query += " AND tipo = ?"
+        params.append(tipo)
+
+    query += " ORDER BY bloque, seccion"
+
+    cursor.execute(query, params)
+    resultados = cursor.fetchall()
+
+    print(f"🔍 Resultados encontrados: {len(resultados)}\n")
+    for r in resultados:
+        print(f"🧠 [{r[0]}] {r[1]} (Bloque {r[2]}, Sección {r[3]}) – Tipo: {r[4]} – Estado: {r[5]} – v{r[6]}")
+
+    conn.close()
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Leer memorias de la base de datos ALMA LIBRE")
+    parser.add_argument("--bloque", help="Número del bloque (1, 2, 3...)")
+    parser.add_argument("--estado", help="Estado de la memoria (activa, archivada, etc.)")
+    parser.add_argument("--tipo", help="Tipo de memoria (emocional, técnica, estratégica...)")
+    args = parser.parse_args()
+
+    conn = conectar_db()
+    consultar_memorias(conn, bloque=args.bloque, estado=args.estado, tipo=args.tipo)

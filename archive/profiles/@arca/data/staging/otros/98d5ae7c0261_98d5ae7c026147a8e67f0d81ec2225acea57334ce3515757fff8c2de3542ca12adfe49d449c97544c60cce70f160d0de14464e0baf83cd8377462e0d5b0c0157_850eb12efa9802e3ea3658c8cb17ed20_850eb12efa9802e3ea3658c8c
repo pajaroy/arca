@@ -1,0 +1,117 @@
+Aquí tienes la implementación base del módulo de autenticación:
+
+python
+
+Copy
+
+Download
+
+# core/auth.py
+from fastapi import Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer
+
+# Configuración base para futura migración a OAuth2
+oauth2_scheme = OAuth2PasswordBearer(
+    tokenUrl="auth/token",  # URL placeholder para el endpoint de login
+    auto_error=False
+)
+
+async def get_current_user(token: str = Depends(oauth2_scheme)) -> str:
+    """
+    Mock de autenticación para desarrollo.
+    
+    En producción, reemplazar con:
+    1. Validación real de JWT
+    2. Verificación de firma
+    3. Chequeo de expiración
+    4. Consulta a base de datos de usuarios
+    """
+    
+    # TODO: Implementar lógica real con JWT
+    if not token:
+        # En modo desarrollo permitir acceso sin token
+        return "dev-user-001"
+    
+    # Ejemplo de flujo futuro con JWT real:
+    # try:
+    #     payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+    #     user_id: str = payload.get("sub")
+    #     if user_id is None:
+    #         raise credentials_exception
+    # except JWTError:
+    #     raise credentials_exception
+    
+    # Mock de usuario autenticado
+    return "dev-user-001"
+
+# Excepción preconfigurada para futura implementación
+credentials_exception = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED,
+    detail="Could not validate credentials",
+    headers={"WWW-Authenticate": "Bearer"},
+)
+
+**Características clave:**
+
+1. **Estructura para OAuth2:**
+    
+    - Uso de `OAuth2PasswordBearer` como base
+        
+    - Configuración inicial de seguridad
+        
+    - Placeholder para endpoint de login
+        
+2. **Mock de autenticación:**
+    
+    - Retorna usuario de desarrollo por defecto
+        
+    - Permite acceso sin token en desarrollo
+        
+    - Comentarios explicativos para migración
+        
+3. **Preparación para JWT:**
+    
+    - Variables preconfiguradas para excepciones
+        
+    - Sección TODO para implementación real
+        
+    - Ejemplo de flujo de validación comentado
+        
+
+**Ejemplo de uso en endpoint:**
+
+python
+
+Copy
+
+Download
+
+from fastapi import APIRouter, Depends
+from core.auth import get_current_user
+
+router = APIRouter()
+
+@router.post("/memorias/privadas")
+async def crear_memoria_privada(
+    contenido: str,
+    user_id: str = Depends(get_current_user)
+):
+    return {
+        "mensaje": "Memoria privada creada",
+        "owner": user_id
+    }
+
+**Pasos para migración futura:**
+
+1. Implementar endpoint `/auth/token`
+    
+2. Agregar sistema de usuarios real
+    
+3. Habilitar generación/validación de JWT
+    
+4. Remover mock y habilitar validación real
+    
+5. Configurar secretos y claves de cifrado
+    
+
+Este diseño proporciona una base segura y escalable para la evolución del sistema de autenticación.

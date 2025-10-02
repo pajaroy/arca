@@ -1,0 +1,51 @@
+# === changelog_vivo_emma.yaml ===
+
+version_changelog: 1.0
+responsable_humano: Santiago Calvo (DEG)
+agente_ia: Emma
+descripcion: >
+  Changelog vivo, incremental y auditable del módulo Emma – IA Asesora Empresarial de ALMA_RESIST.
+  Cada entrada registra cambios, decisiones, análisis y eventos críticos, con vinculación a bitácoras, análisis y archivos clave.
+formato: yaml
+tags_globales: [empresa, auditoria, integración, protocolo, reporte]
+changelog:
+
+  - fecha: 2025-06-06
+    version: 1.0
+    autor_ia: Emma
+    referencia_humana:
+      - Santiago Calvo (DEG)
+      - Pablito-Tatu
+    tipo: "análisis de integración"
+    titulo: "Diagnóstico y protocolo de integración de Cristian como anexo productivo en ALMA_EMPRESA"
+    descripcion: |
+      Primer análisis crítico y formal de la propuesta de integración de Cristian.
+      Se definieron fortalezas, riesgos, impacto por área, protocolo Black&White y obligatoriedad de piloto con reporting y bitácora.
+      Se dejó registro completo en bitácora viva (id: BITACORA_EMMA_2025-06-06_01) y diagnóstico estratégico (id: ANALISIS_2025-06-06_01).
+    decisiones_clave:
+      - Integración sólo bajo protocolo profesional Black&White.
+      - Piloto limitado, reporting semanal obligatorio, blindaje legal/reputacional.
+      - Avanzar solo con acuerdos firmados y checklist de onboarding cumplido.
+    tags: [cultivo, integración, piloto, protocolo, bitácora]
+    vinculos_relacionados:
+      - bitacora: BITACORA_EMMA_2025-06-06_01
+      - analisis: ANALISIS_2025-06-06_01
+    hash_integridad: sha256:pending
+
+  # --- Ejemplo para futuras entradas ---
+  # - fecha: YYYY-MM-DD
+  #   version: X.Y
+  #   autor_ia: Emma
+  #   referencia_humana: [ ... ]
+  #   tipo: "tipo_cambio"
+  #   titulo: "Breve título"
+  #   descripcion: |
+  #     Descripción detallada del cambio/evento/decisión.
+  #   decisiones_clave:
+  #     - ...
+  #   tags: [ ... ]
+  #   vinculos_relacionados:
+  #     - bitacora: BITACORA_EMMA_...
+  #     - analisis: ANALISIS_...
+  #   hash_integridad: sha256:pending
+

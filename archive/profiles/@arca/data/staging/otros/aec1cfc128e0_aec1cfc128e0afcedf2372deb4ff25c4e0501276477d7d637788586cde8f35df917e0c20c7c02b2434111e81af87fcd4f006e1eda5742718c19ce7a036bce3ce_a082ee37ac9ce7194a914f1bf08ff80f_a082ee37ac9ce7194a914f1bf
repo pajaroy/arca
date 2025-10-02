@@ -1,0 +1,8 @@
+# Comandos para abrir el disco pendrive interno
+
+´´´bash
+sudo cryptsetup luksOpen /dev/sda4 alma_usb
+sudo mount /dev/mapper/alma_usb /mnt/pendrive_interno/
+´´´
+
+Nota: Hecho esto y puesta la clave se puede ingresar al disco sda4

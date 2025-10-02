@@ -1,0 +1,30 @@
+{
+  "protocolo": "memoria_semiautomatica_kael",
+  "descripcion": "Este prompt define el flujo de carga semiautomática de memorias institucionales del agente Kael en `control_central`. El asistente se encarga de redactar y generar el archivo `.yaml` temporal necesario, y devuelve un comando listo para ejecutar. El usuario solo debe pasar este prompt junto con la idea a registrar.\n",
+  "script": "/home/bird/alma_core/control_central/core/notebooks/cli/memorias/v0.1.1/cargar_memorias_v0.1.1.py",
+  "yaml_out": "/home/bird/alma_core/control_central/agentes/kael/memorias/memorias_kael.yaml",
+  "json_out": "/home/bird/alma_core/control_central/agentes/kael/memorias/memorias_kael.json",
+  "ruta_tmp": "/home/bird/alma_core/control_central/tmp/",
+  "campos_a_completar": {
+    "autor": "Kael",
+    "fecha": "",
+    "tipo": "",
+    "contenido": "",
+    "id": "",
+    "relacionado_con": [],
+    "resumen": ""
+  },
+  "uso": {
+    "flujo": [
+      "El usuario detecta un evento que merece memoria institucional.",
+      {
+        "Dice": "“Te paso el prompt base para cargar memoria en Kael.”"
+      },
+      "El asistente completa todos los campos, crea el archivo temporal `.yaml` y devuelve el comando final listo para ejecutar.",
+      "El usuario lo corre en terminal. Memoria registrada, sin copiar/pegar rutas a mano."
+    ]
+  },
+  "ejemplo": {
+    "comando": "python3 /home/bird/alma_core/core/notebooks/alma-cli/memorias/v0.1.1/cargar_memorias_v0.1.1.py \\ --entrada \"/home/bird/alma_core/control_central/tmp/MEM_KAEL_2025-06-08_05.yaml\" \\ --modo append \\ --memoria-yaml \"/home/bird/alma_core/control_central/memorias/memorias_kael.yaml\" \\ --memoria-json \"/home/bird/alma_core/control_central/memorias/memorias_kael.json\""
+  }
+}

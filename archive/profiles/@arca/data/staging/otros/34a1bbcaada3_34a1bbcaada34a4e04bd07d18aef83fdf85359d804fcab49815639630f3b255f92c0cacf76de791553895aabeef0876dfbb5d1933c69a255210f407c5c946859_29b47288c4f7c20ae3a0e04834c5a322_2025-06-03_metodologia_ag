@@ -1,0 +1,61 @@
+# Metodología de Agregado de Archivos ALMA\_RESIST (v8)
+
+## Objetivo
+
+Establecer una metodología clara, automatizable y escalable para la integración de nuevos archivos en el ecosistema ALMA\_RESIST, garantizando:
+
+* Consistencia estructural (metadatos, rutas, convenciones)
+* Trazabilidad en los sprints y logs
+* Integración futura con componentes IA: memory\_graph, prompt\_orchestrator, reflection\_engine
+
+
+## Scripts Utilizados
+
+* `scripts/fix_metadata.py`: corrige o completa metadatos YAML
+* `scripts/validate_docs.py`: valida estructura, tipos, estados y snake\_case
+* `scripts/force_snake_case_modules.py`: refactoriza metadatos a snake\_case
+
+
+## Automatización y Validaciones
+
+En futuras versiones (v9+), este proceso se automatizará con un CLI:
+
+```bash
+alma-cli integrate --file ./docs/nuevo/archivo.md --sprint 2.3
+```
+
+Lo que hará:
+
+* Corrección de metadatos
+* Validación completa
+* Registro automático en logs
+* Actualización de grafo semántico
+* Generación de reflexión IA
+
+
+## Flujo Visual Propuesto
+
+```mermaid
+graph TD
+  A[Agregar archivo] --> B[Normalizar metadatos]
+  B --> C{Es README.md?}
+  C -->|Sí| D[Usar carpeta padre como módulo]
+  C -->|No| E[Generar módulo desde ruta]
+  E --> F[Validar YAML con reglas estrictas]
+  F --> G[Actualizar grafo semántico]
+  G --> H[Generar reflexión automática]
+  H --> I[Registrar en logs y sprint]
+  I --> J[Notificar a IA para sugerencias]
+```
+
+
+## Ejemplo de Metadatos Enriquecidos
+
+```yaml
+```
+
+
+**Responsable:** Santi
+**Versión:** 8
+**Fecha de aprobación:** 2025-05-22
+

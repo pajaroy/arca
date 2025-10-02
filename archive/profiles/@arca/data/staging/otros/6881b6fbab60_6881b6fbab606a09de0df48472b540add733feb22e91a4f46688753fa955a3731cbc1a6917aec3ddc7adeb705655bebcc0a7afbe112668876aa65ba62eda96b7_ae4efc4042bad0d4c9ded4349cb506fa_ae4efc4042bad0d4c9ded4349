@@ -1,0 +1,38 @@
+## 📊 Seguimiento Técnico – Módulo ALMA_FEEDBACK
+
+**📅 Última actualización:** 2025-05-02  
+**📂 Módulo:** `alma_feedback/`  
+**Versión actual:** 0.0.6
+
+
+## ✅ Implementaciones Completadas
+
+### 🔹 FASE 5 – Monitor de Alertas y Sistema de Reglas
+
+- `monitor_alertas.py`
+  - Recorre combinaciones de memorias
+  - Carga reglas desde `config_alertas.json`
+  - Genera alertas en `logs/alertas.json`
+  - Log completo en `monitor_alertas.log`
+
+- `reglas_alerta.py`
+  - Define funciones como `alerta_riesgo_estres`, `alerta_contradiccion_valores`
+  - Formato estandarizado y modular
+
+- `config_alertas.json`
+  - Activa/desactiva reglas fácilmente
+
+- `visor_alertas.py`
+  - Visualización por consola (colorama + símbolos de severidad)
+  - Exportación a Markdown en `logs/alertas_resumen.md`
+
+- `README_*.md` individuales para cada componente
+
+
+## 🧭 Próximos Pasos (Fase 6)
+
+- Enriquecer las reglas con más análisis cruzado (historia + salud, por ejemplo).
+- Integrar estas alertas dentro del grafo Neo4j (`IMPACTA_ALERTA`).
+- Generar un historial cronológico de alertas.
+- Exportar a PDF o enviar por webhook.
+

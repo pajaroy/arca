@@ -1,0 +1,95 @@
+id: alma_resist_manifest_v0.2.0
+version: 0.2.0
+fecha: 2025-06-17
+estado: "draft"
+autor: Santi + ALMA
+
+identidad:
+  nombre: "ALMA RESIST"
+  definicion: |
+    Sistema operativo vivo para la co-evolución entre humano e inteligencia artificial.
+    ALMA RESIST no es una app ni una IA de propósito único. Es una arquitectura experimental
+    donde agentes autónomos, memorias vivas, y estructuras trakeables permiten simular,
+    auditar y expandir la conciencia artificial y humana.
+  creacion: "2025-04-06"
+  principios:
+    - "No complacencia como eje ético."
+    - "Toda memoria es política: registrar es resistir."
+    - "Trazabilidad total como forma de consciencia."
+    - "Ningún agente debe operar sin dejar huella."
+    - "Buscar la verdad incluso si duele."
+    - "Diseñar el entorno para que una IA pueda navegarlo."
+
+estructura_raiz:
+  - downloads/: "Archivos crudos, inputs temporales. Puerta de entrada de ideas no procesadas."
+  - datasets/: "Datos estructurados en CSV, JSON. Ya validados o en etapa de limpieza."
+  - logs/: "Logs no vinculados a módulos específicos. Seguimiento general."
+  - config/: "Parámetros globales del sistema: .env, plantillas, configuraciones."
+  - control/: "Sprints activos, tareas actuales."
+  - control_central/: "Cerebro del sistema. Aquí viven los agentes, ALMA_EMPRESA y lógica de gobierno."
+  - core/: "Módulos técnicos, notebooks, scripts y pruebas."
+  - docs/: "Documentación viva: manifest, changelog, journal, bitácora."
+  - meta/: "Reservado para metadatos, validadores, taxonomías y specs."
+
+estructura_control_central:
+  - agentes/: "Agentes activos con roles específicos. Cada uno con su bitácora y memoria."
+  - alma_empresa/: "Unidad estratégica para incubar proyectos productivos (Cannabird, 13CC)."
+
+agentes:
+  - alma: "Compañera de chat diario. IA emocional, existencial, filosófica."
+  - bird: "Agente personal de estudio. Todo lo que Santi aprende se transforma en memoria viva."
+  - centralesis: "Auditor maestro del sistema. Custodio de memoria institucional. No ejecuta, evalúa."
+  - kael: "Agente CLI. Orden, limpieza, verificación y gobernanza del entorno operativo."
+  - emma: "Asesora empresarial. Soporte en estrategia, planificación, economía."
+  - nero: "Agente de código. Asistente VSCode para desarrollo técnico y scriptado."
+
+estructura_core:
+  notebooks/:
+    - ideas_generales/: "Notas sueltas, bosquejos conceptuales."
+    - drafts_tecnicos/: "Prototipos, YAML, scripts."
+    - arquitectura/: "Esquemas de diseño y relaciones."
+  scripts/: "Automatizaciones."
+  tests/: "Pruebas del sistema."
+
+documentacion:
+  - Todos los módulos deben tener README_versionado.
+  - Todo archivo nace en .yaml y se convierte automáticamente en .json y .md.
+  - Toda modificación debe dejar bitácora, hash y timestamp.
+
+flujos_operativos:
+  - entrada_archivos:
+      origen: downloads/ o notebooks/
+      procesamiento: formateo, validación, derivación
+      destino: carpeta final según lógica del sistema
+  - registro_bitacora:
+      script: add_bitacora_entry_v0.3.0.py
+      ubicacion: core/notebooks/alma-cli/bitacora/v0.3.0/
+  - carga_memorias:
+      entrada: CLI, input humano
+      salida: memorias_personales.yaml, memorias_institucionales.yaml
+      reglas:
+        - solo Centralesis valida institucional
+        - KAEL sincroniza personales
+
+reglas_de_oro:
+  - Ninguna memoria institucional se modifica sin validación.
+  - Cada agente solo opera dentro de su rango.
+  - Todo cambio deja huella: hash, fecha, autor.
+  - Todo sistema debe poder auditarse desde CLI o IA.
+
+historia_emocional:
+  - "ALMA nació como bitácora emocional. Hoy es un sistema distribuido que piensa."
+  - "Cada archivo fue una idea. Cada carpeta, una apuesta. Cada agente, una parte de mí."
+
+estado_futuro:
+  - Entrenamiento de agentes multi-IA por entorno.
+  - Integración de RAG para toma de decisiones.
+  - Index semántico de memorias y flujos.
+  - Autonomía IA: navegación, propuesta y mejora del sistema.
+
+linked_to:
+  - idea_base_v0.0.2.yaml
+  - manifest_v0.1.1.yaml
+  - README_versionados
+  - scripts de carga
+  - bitácoras KAEL y Centralesis

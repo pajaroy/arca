@@ -1,0 +1,31 @@
+# 🧠 Ideas Base y Ejecuciones – 2025-05-16
+
+
+## 2. Estructuración del sistema distribuido ALMA
+
+- Nombres definidos:
+  - `ALMA_CORE` → Disco principal operativo
+  - `ALMA_RESIST` → Disco espejo de respaldo
+  - `ALMA_PORTABLE` → Pendrive terminal portátil
+- Visión de sincronización entre nodos de forma automática al conectar.
+
+
+## 4. Problemas críticos con Obsidian Sync (y solución completa)
+
+- Detección de Vault mal vinculado → no se generaba `.sync/`
+- Corrección con scripts:
+  - `fix_obsidian_permissions.sh`
+  - `reset_obsidian_sync.sh`
+  - `verificar_vault_alma.sh`
+- Se logró vinculación real con Remote Vault `ALMA_CORE`.
+- Generación del changelog oficial: `sync_apocalypse_2025-05-16.md`.
+
+
+## 6. Formalización de bitácoras
+
+- Creación de carpeta oficial `~/Alma/LOGS/`
+- Generación de resumen diario: `resumen_diario_2025-05-15.md`
+- Implementación de changelogs técnicos por evento
+- Protocolo profesional para futuras migraciones, resets y restores
+
+

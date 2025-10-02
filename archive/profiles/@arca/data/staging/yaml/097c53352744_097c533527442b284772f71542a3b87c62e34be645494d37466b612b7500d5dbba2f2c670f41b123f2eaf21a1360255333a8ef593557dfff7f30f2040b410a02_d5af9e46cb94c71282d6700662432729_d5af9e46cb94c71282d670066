@@ -1,0 +1,44 @@
+metadata:
+  version: 0.3.0
+  tipo: bitacora
+  schema: almaresist.bitacora_v1
+  descripcion: Bitácora personal de bird
+  estructura: metadata + entradas
+  tags:
+  - bitacora
+  - personal
+  - bird
+  linked_to: []
+  responsable: bird
+  hash_verificacion: sha256:c3b079a641ca8fe9e36a3d7f89b0227be3171fcaa8cf51d95744ba8bf00ef24c
+  historial: []
+  last_modified: '2025-06-18T23:58:58Z'
+  last_modified_by: bird
+entradas:
+- fecha: '2025-06-18T23:59:19.645236+00:00'
+  accion: Inicialización carpeta resumenes_de_trabajo
+  descripcion: Se creó la estructura base con subcarpetas para bird, coco y pablito
+    dentro de core/notebooks/resumenes_de_trabajo. Esto marca el inicio formal del
+    sistema de resúmenes diarios humanos, compatible con lectura IA y RAG.
+  motivo: Establecer trazabilidad desde el inicio del módulo de resúmenes humanos
+  ejecutado_por: bird
+  estado: registrado
+  tags:
+  - estructura
+  - resumenes
+  - humanos
+  - bitacora
+  id: 91b13a4b-b08f-408e-b3eb-8d04e2a287e7
+- fecha: '2025-06-19T00:37:19.118904+00:00'
+  accion: Prueba post-configuración de log central
+  descripcion: Bitácora cargada luego de reconfigurar el sistema para que todos los
+    logs se archiven en alma_core/logs/bitacora_*.log
+  motivo: Validar configuración definitiva del entorno de logging centralizado
+  ejecutado_por: bird
+  estado: registrado
+  tags:
+  - logging
+  - bitacora
+  - test
+  - centralizacion
+  id: 8b63064b-fd02-42d5-9972-65c050b956fb

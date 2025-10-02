@@ -1,0 +1,73 @@
+---
+module: versiones/v0_0_0_5_llm_server/descargas/appendix_sprint_2_6_deepseek
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+## 📌 Apéndice Técnico – Plan de Tests Automatizados (Fase 3)
+
+Este apéndice detalla la suite de tests necesaria para cubrir funcionalmente todos los módulos desarrollados en el Sprint 2.6 bajo el nuevo modelo modular de ALMA_RESIST. Todos los tests deben migrarse o crearse bajo la nueva arquitectura.
+
+---
+
+### ✅ Tests existentes a refactorizar
+
+| Archivo original     | Estado         | Acción recomendada                           |
+|----------------------|----------------|----------------------------------------------|
+| `test_llm.py`        | Obsoleto       | Refactorizar como `test_model_wrapper.py`    |
+| `test_cli.py`        | Parcial        | Migrar a `test_api_responder.py`             |
+| `test_log_crypto.py` | Parcial        | Mantener y extender                          |
+
+---
+
+### 🧪 Nuevos tests a implementar
+
+| Archivo sugerido            | Módulo testeado             | Casos clave                                                                 |
+|-----------------------------|-----------------------------|------------------------------------------------------------------------------|
+| `test_model_wrapper.py`     | `model_wrapper.py`          | Carga del modelo, errores por ruta inválida, generación con prompt válido   |
+| `test_api_responder.py`     | `main.py` (FastAPI)         | Status 200, 422 input inválido, 503 modelo no cargado, estructura de salida |
+| `test_transport_layer.py`   | `transport_layer.py`        | Envío y recuperación, validación con schema, escritura/lectura de archivos  |
+| `test_context_tracker.py`   | `context_tracker.py`        | Registro de interacción, validación JSON Schema, recuperación, limpieza     |
+| `test_log_writer.py`        | `log_writer.py`             | Escritura atómica, validación básica, simulación de error de disco          |
+| `test_log_crypto.py`        | `log_crypto.py`             | Cifrado, descifrado, detección de algoritmo, verificación de nonce          |
+| `test_memory_graph.py`      | `memory_graph.py`           | (Pendiente) Inserción de nodos, relaciones, exportación, búsqueda por peso  |
+
+---
+
+### 🧱 Requisitos técnicos
+
+- Usar `pytest` como motor principal
+- Evitar dependencias externas (usar mocks para modelo si es necesario)
+- Las rutas de escritura deben apuntar a carpetas temporales (`tmp/` o `tests/data`)
+- Agregar al menos un test por caso de error (input inválido, fallo en carga, etc.)
+- Incluir fixtures o mocks si el modelo no puede ser cargado durante CI
+
+---
+
+### 📂 Ubicación sugerida
+
+```plaintext
+tests/
+├── test_model_wrapper.py
+├── test_api_responder.py
+├── test_transport_layer.py
+├── test_context_tracker.py
+├── test_log_writer.py
+├── test_log_crypto.py
+└── test_memory_graph.py
+```
+
+---
+
+### 🧠 Notas finales
+
+Una vez finalizada esta suite, se podrá:
+- Validar automáticamente los endpoints
+- Simular interacciones completas
+- Auditar integridad de archivos
+- Iniciar testeo CI/CD desde CLI o pre-commit
+
+Este plan cumple los requisitos de la Fase 3 del Sprint 2.6 y establece una base sólida para testear futuras versiones del servidor.

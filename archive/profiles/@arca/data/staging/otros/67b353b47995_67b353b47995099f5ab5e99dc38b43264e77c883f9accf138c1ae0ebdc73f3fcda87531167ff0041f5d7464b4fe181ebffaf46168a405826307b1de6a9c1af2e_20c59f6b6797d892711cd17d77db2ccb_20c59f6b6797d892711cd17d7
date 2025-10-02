@@ -1,0 +1,10 @@
+# 📚 Índice de Metodologías – ALMA_RESIST
+
+Este índice recopila las metodologías formales aplicadas en el sistema ALMA_RESIST. Cada metodología representa una práctica documentada, versionada y replicable.
+
+
+## 📁 Subcarpetas
+
+- [_archivadas/](./_archivadas) – Métodos obsoletos o reemplazados
+- [_propuestas/](./_propuestas) – Métodos en etapa de evaluación
+

@@ -1,0 +1,60 @@
+# 📘 Whitepaper ALMA_LOADER v3.0
+
+## 1. Prólogo
+
+_Contexto humano, origen del proyecto, visión de ALMA como sistema vivo._
+
+## 2. ¿Qué es ALMA_LOADER?
+
+_Explicación general en lenguaje simple de su función y utilidad._
+
+## 3. Casos de Uso
+
+- Diario de trading inteligente
+    
+- Asistente de reflexión personal
+    
+- Registro emocional y hábitos
+    
+- Dashboard de decisiones + alertas
+    
+
+## 4. Arquitectura Conceptual
+
+- Núcleo de procesamiento
+    
+- Validación de memorias
+    
+- Almacenamiento y recuperación
+    
+- Módulo de atención
+    
+- Vectorización semántica (FAISS)
+    
+
+## 5. Diagramas del Sistema
+
+```mermaid
+%% Diagramas tipo flujo de datos, arquitectura de memoria, enrutamiento...
+```
+
+## 6. Escalabilidad y Visión Futura
+
+- Desde SQLite a Neo4j/FAISS
+    
+- Integración con agentes inteligentes
+    
+- Exportación web + voz + API
+    
+- Modo reflexión asistida + visión largo plazo
+    
+
+## 7. Recomendaciones de Integración
+
+- Cómo acoplarlo con apps, bots o interfaces humanas
+    
+- API endpoints ideales (futuros)
+    
+- Formatos de input/output esperados
+    
+

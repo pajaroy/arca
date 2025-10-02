@@ -1,0 +1,14 @@
+# 📓 Bitácora – Inicio Formal del Sistema `asesor-IA`
+
+**Fecha:** 2025-06-01  
+**Ubicación:** `asesor-IA/docs/journal/20240601_bitacora_inicio.md`  
+**Estado del Sistema:** 🟢 Activo
+
+
+## 🧠 Puntos Pendientes / A Debatir (propuestos por DeepSeek)
+
+- [ ] ¿Cómo estructurar el componente `router_ai.py`?
+- [ ] ¿Qué formato exacto debe tener `deepseek_response_template.yml`?
+- [ ] ¿Quién ejecuta el fallback en el protocolo de conflicto si ambos modelos se bloquean?
+- [ ] ¿Cómo reflejar estas decisiones en `memory_graph` o `bitacora_central`?
+

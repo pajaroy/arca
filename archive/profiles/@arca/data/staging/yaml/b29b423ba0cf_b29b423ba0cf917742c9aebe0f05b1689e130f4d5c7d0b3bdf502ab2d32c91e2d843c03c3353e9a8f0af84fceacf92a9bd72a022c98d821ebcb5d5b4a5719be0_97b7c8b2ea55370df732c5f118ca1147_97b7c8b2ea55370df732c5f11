@@ -1,0 +1,34 @@
+version: 0.1.1
+id: SCRIPT_ADDCHANGELOG_V0.1.1
+fecha: 2025-06-08
+script: add_changelog_entry_v0.1.1.py
+modulo: control_central/cli/changelog
+tipo: refactor
+autor: DeepSeek (revisado por Kael)
+estado: estable
+descripcion: >
+  Refactor del script CLI de changelog para corregir el formato de los archivos
+  de backup y mejorar la trazabilidad mediante logs más informativos.
+  Esta versión mantiene compatibilidad total con v0.1.0 y corrige problemas estructurales menores.
+
+cambios:
+  - Corregido formato de backups: `changelog.backup_<timestamp>.yaml`
+  - Validación de existencia antes de crear backup
+  - Manejo robusto de errores con `try/except` y mensajes explícitos
+  - Nuevos mensajes de log con prefijos INFO/ERROR
+  - Conservada estructura CLI y compatibilidad con Python 3.8+
+
+impacto: >
+  Mejora la integridad y trazabilidad del sistema de changelog en ALMA_RESIST.
+  Evita conflictos con herramientas que dependen de extensiones `.yaml`.
+
+retrocompatibilidad: total
+dependencias_nuevas: ninguna
+testing:
+  - dry-run con backups simulados
+  - prueba real de escritura con backups activos
+  - test en entorno CLI sin errores en ejecución
+
+archivos_afectados:
+  - add_changelog_entry_v0.1.1.py
+  - changelog.yaml (backupeado correctamente)

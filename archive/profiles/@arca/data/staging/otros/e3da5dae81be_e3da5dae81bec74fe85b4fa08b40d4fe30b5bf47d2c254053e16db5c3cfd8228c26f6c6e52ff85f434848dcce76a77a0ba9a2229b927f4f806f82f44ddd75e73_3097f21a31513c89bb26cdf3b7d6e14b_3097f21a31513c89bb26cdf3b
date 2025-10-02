@@ -1,0 +1,27 @@
+
+# 🧠 ALMA LIBRE v0.7.8.1 – Terminal Unificada
+
+Esta versión incorpora el script principal `alma_sync_v0.7.8.1.py`, que unifica todas las operaciones del sistema ALMA LIBRE en un solo archivo funcional.
+
+
+## 🖥️ Ejemplos de uso desde terminal
+
+```bash
+# Crear nueva memoria
+python alma_sync_v0.7.8.1.py write \
+    --titulo "Reflexión Inicial" \
+    --tipo "Emocional" \
+    --bloque "1" \
+    --seccion "1.1" \
+    --contenido "Primera entrada en la bitácora..."
+
+# Leer memorias filtradas
+python alma_sync_v0.7.8.1.py read --tipo Emocional
+
+# Validar integridad
+python alma_sync_v0.7.8.1.py validate
+
+# Crear backup completo del sistema
+python alma_sync_v0.7.8.1.py backup
+```
+

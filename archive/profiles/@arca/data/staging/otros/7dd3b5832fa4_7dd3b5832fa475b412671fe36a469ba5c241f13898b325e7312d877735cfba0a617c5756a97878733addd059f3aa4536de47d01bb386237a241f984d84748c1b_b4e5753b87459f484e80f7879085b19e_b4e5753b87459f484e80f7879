@@ -1,0 +1,3 @@
+{
+  "campos": ["fecha", "tema", "resumen", "etiquetas", "estado_emocional"]
+}

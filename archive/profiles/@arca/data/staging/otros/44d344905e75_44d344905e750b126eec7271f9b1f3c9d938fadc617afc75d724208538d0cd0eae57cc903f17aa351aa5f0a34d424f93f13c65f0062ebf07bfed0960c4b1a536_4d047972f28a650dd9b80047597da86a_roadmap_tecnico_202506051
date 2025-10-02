@@ -1,0 +1,116 @@
+---
+module: roadmap_tecnico
+type: core
+status: in_progress
+created: '2025-05-20'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🌟 ALMA_RESIST – Roadmap Técnico Integral (Checklist)
+
+Roadmap técnico unificado con prioridad en **chat funcional**, **aprendizaje activo** e **infraestructura antifrágil**.  
+**Formato:** Checklist modular para seguimiento en Obsidian.  
+**Actualizado al:** 2025-05-19
+
+---
+
+## 📌 **Fase 1: Desarrollo Inicial (MVP Chat-CLI)**
+### Sprint 1 – Chat Básico + Logs
+- [ ] Implementar CLI interactiva con LLM local (`cli.py`).
+- [ ] Guardar logs en `.md`/`.json` en `ALMA_RESIST/logs/`.
+- [ ] Comandos básicos: `!reset`, `!help`, `!exit`.
+- [ ] Pruebas de usabilidad con prompts simples (10+ usuarios beta).
+- [ ] **Documentación:** Crear `docs/cli_guide.md` (comandos básicos).
+
+### Sprint 2 – Persistencia + ALMA_LOADER Inicial
+- [ ] Almacenar historial en SQLite cifrado (`user/history.db`).
+- [ ] Script ETL diario (`ALMA_LOADER/etl_daily.py`).
+- [ ] Comandos: `!memoria [tema]`, `!buscar "[texto]"`.
+- [ ] **Métrica:** Tiempo de respuesta `< 2s` en consultas.
+
+---
+
+## 📌 **Fase 2: Infraestructura Segura y Aprendizaje Activo**
+### Sprint 3 – Autonomía Básica
+- [ ] Analizar logs para detectar patrones (`alma_auto_eval.py`).
+- [ ] Comando `!sugerir` con propuestas de optimización.
+- [ ] Registrar aceptación/rechazo de sugerencias en `logs/feedback.json`.
+- [ ] **Métrica:** `> 60%` de sugerencias aceptadas.
+
+### Sprint 4 – Cifrado y Resiliencia
+- [ ] Cifrar logs con ChaCha20 (fallback AES-NI si hay GPU).
+- [ ] Validar integridad con SHA3 (`system/check_sha3.sh`).
+- [ ] Script de recuperación de logs corruptos (`system/recover_logs.py`).
+- [ ] **Documentación:** Actualizar `docs/security_policy.md`.
+
+### Sprint 5 – Monitoreo Predictivo
+- [ ] Implementar `alma_monitor.py` (RAM/CPU/temperatura).
+- [ ] Alertas: `>80% RAM`, `>75°C`, `swap >20%`.
+- [ ] Modo supervivencia (`system/survival_mode.sh`).
+- [ ] **Métrica:** Alertas en `< 5s` tras evento crítico.
+
+---
+
+## 📌 **Fase 3: Optimización y Escalabilidad**
+### Sprint 6 – Feedback y Optimización
+- [ ] Sistema de feedback: `¿Fue útil? [Sí/No]`.
+- [ ] Ajustar sugerencias basadas en `logs/feedback.json`.
+- [ ] Refinar prompts del LLM (`ALMA_SERVER_LLM/prompts/`).
+- [ ] **Documentación:** `docs/feedback_analysis.md`.
+
+### Sprint 7 – Integración GPU/ONNX
+- [ ] Soporte para modelos ONNX en GPU (`llm_onnx.py`).
+- [ ] Optimizar inferencia con TensorRT (si NVIDIA GPU detectada).
+- [ ] **Métrica:** `>3x` aceleración vs CPU.
+
+### Sprint 8 – DuckDB y Análisis Avanzado
+- [ ] Migrar análisis históricos a DuckDB (`ALMA_LOADER/duckdb_analytics.py`).
+- [ ] Consultas complejas: `!analizar "uso de RAM últimos 7 días"`.
+- [ ] **Documentación:** `docs/duckdb_integration.md`.
+
+### Sprint 9 – Pruebas de Resiliencia
+- [ ] Simular corrupción de logs (`tests/corrupt_logs.py`).
+- [ ] Pruebas de inyección SQL en bases locales.
+- [ ] Validar modo supervivencia bajo estrés térmico.
+- [ ] **Métrica:** Recuperación en `< 30s` tras fallo.
+
+---
+
+## 📊 **Seguimiento de Progreso**
+| Fase | Tareas Totales | Tareas Completadas | Avance (%) |
+|------|----------------|--------------------|------------|
+| Fase 1 | 8 | 0 | 0% |
+| Fase 2 | 10 | 0 | 0% |
+| Fase 3 | 12 | 0 | 0% |
+
+---
+
+## 🔗 **Archivos Relacionados en Obsidian**
+- [[ALMA_RESIST-idea_base]]  
+- [[ALMA_RESIST-PROMPT_TECNICO]]  
+- [[ALMA_RESIST-Whitepaper]]  
+
+### 📎 Anexos
+
+
+-  [[roadmap_tecnico_detallado.pdf|🧾 PDF – Roadmap Técnico Detallado (v0.0.1)]]
+
+
+
+
+**✨ Copia este contenido en un nuevo archivo .md en Obsidian y usa checkboxes ( [ ] → [x] ) para marcar el progreso.**
+
+---
+
+## ✅ Sprint 2.5 – FINALIZADO
+
+- Auditoría semántica completa del sistema
+- Normalización de metadatos y nombres
+- Generación masiva de `README.md`
+- Integración de scripts automatizados
+- Creación del pipeline `run_auditoria_automatica.sh`
+- Consolidación conceptual (`idea_base`, `whitepaper`, `prompt_tecnico`)
+
+> 🔜 Siguiente etapa: **Sprint 2.6 – CLI IA Modular** (pendiente de apertura)
+

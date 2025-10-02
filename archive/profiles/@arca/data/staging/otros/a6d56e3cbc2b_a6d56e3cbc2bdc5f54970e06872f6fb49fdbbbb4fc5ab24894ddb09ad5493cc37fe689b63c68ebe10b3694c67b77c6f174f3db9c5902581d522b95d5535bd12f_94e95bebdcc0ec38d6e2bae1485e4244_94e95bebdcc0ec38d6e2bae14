@@ -1,0 +1,64 @@
+# 🧠 ALMA_LOADER explicado para humanos (nivel principiante)
+
+
+## 🚶 Paso a paso: ¿Cómo funciona?
+
+### 1. **Vos escribís algo en lenguaje natural**
+
+> Ejemplo:  
+> `Hoy gané $200 operando BTC y me sentí confiado pero un poco ansioso.`
+
+Esto lo hacés escribiendo un comando como `/nueva ...` o hablando con el sistema como si fuera un diario inteligente.
+
+
+### 3. **Verifica si está todo bien**
+
+Revisa si tiene los campos obligatorios (`id`, `contenido`, `categoría`, etc.) y si no falta nada o hay errores. Si hay un problema, te avisa o lo corrige automáticamente.
+
+> Esto lo hace usando un archivo llamado `schema_base.json`.
+
+
+### 5. **Genera un resumen del día**
+
+Más tarde, cuando juntás varias memorias, el sistema crea un resumen tipo:
+
+> Hoy registraste 3 memorias.  
+> 🔹 Tema frecuente: #btc  
+> 🔹 Emoción dominante: #confianza  
+> ⚠️ Sugerencia: cuidado con operar bajo emoción mezclada (ver MEMTRD-2025-05-06-001)
+
+
+### 7. **Te avisa si ve algo raro**
+
+Si ve que te estás repitiendo un patrón peligroso (por ejemplo: #sobreoperación + #ansiedad + #lunes), te puede mostrar una alerta o sugerirte algo como:
+
+> “⚠️ Hoy se repiten condiciones similares a un mal día previo. Tomate 5 minutos para revisar MEMTRD-2025-04-29-001.”
+
+
+### 9. **Modular y expansible**
+
+Podés agregarle módulos como:
+
+- Gamificación (te da puntos por registrar cosas)
+    
+- Voz (podés hablarle)
+    
+- Integración con Telegram
+    
+- Automatizaciones para guardar backups
+    
+- Agendas inteligentes, metas, o reflexiones guiadas
+    
+
+
+## 🎓 ¿Qué necesitás para manejarlo?
+
+Nada más que ganas de aprender. Lo podés usar solo con comandos como:
+
+bash
+
+CopiarEditar
+
+`/nueva Hoy operé mal por estar ansioso /accion Meditar 15 min`
+
+Y dejar que el sistema haga el resto.

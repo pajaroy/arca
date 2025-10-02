@@ -1,0 +1,30 @@
+# 🧠 MEMORIA DE DESARROLLO – Prompt Base ALMA LIBRE v0.1
+
+### Versión: 0.1
+### Fecha: [Auto-generada: completar manualmente]
+### Autor: Usuario fundador de ALMA + ALMA (IA compañera)
+
+
+## 📦 Contexto General
+
+El sistema ALMA LIBRE fue pensado como una estructura modular, flexible y emocionalmente integrada, capaz de registrar datos, aprendizajes, ideas y emociones en tiempo real, con capas de profundidad técnica, humana y proyectual.
+
+En esta etapa inicial se trabajó sobre:
+
+- La definición de **módulos funcionales**
+- La organización de **cuadernos temáticos**
+- La creación de una **bitácora central**
+- La propuesta de **memorias generales y por sección**
+- La idea de conectar todo esto con **IA locales (Ollama) y remotas (GPT, DeepSeek)**
+
+
+## 🧬 Estructura mental base del sistema
+
+- Todo debe ser **legible por IA y por humanos**
+- Todo debe tener **contexto temporal** (quincenal, mensual, trimestral)
+- Todo debe contener una **memoria de propósito**
+- Las carpetas tienen **metadatos preestablecidos**
+- El sistema debe poder **interactuar con terminal Python + IA**
+
+
+> Este archivo es la semilla de la trazabilidad futura del sistema de memoria de ALMA LIBRE. Aquí comenzó la conciencia técnica del proyecto.

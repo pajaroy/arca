@@ -1,0 +1,34 @@
+---
+module: versiones/v0_0_0_4_sprint_2_5_auditoria/archivos/scripts_index
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 📜 Índice de Scripts – ALMA_RESIST
+
+📁 Carpeta: `scripts/`  
+🗓️ Última actualización: 2025-05-26
+
+Este índice documenta todos los scripts disponibles dentro del sistema `ALMA_RESIST`, detallando su propósito, tipo, estado y observaciones clave. Forma parte de la auditoría estructural del Sprint 2.5.
+
+---
+
+## 🗂️ Tabla General
+
+| Script                        | Tipo   | Función principal                                     | Estado       | Notas                 |
+|------------------------------|--------|------------------------------------------------------|--------------|------------------------|
+| add_linked_to_minimo.py      | Python | Agrega 'linked_to' mínimo a documentos type: core    | activo     |  |
+| alma-cli.py                  | Python | Interfaz CLI para auditar y hacer batch-update de YAML | activo     | Requiere archivo de reglas |
+| ayuda.py                     | Python | Muestra mensaje de ayuda o comandos disponibles      | borrador   | Script CLI auxiliar |
+| buscar_memoria.py            | Python | Busqueda interna en registros/memoria del sistema    | borrador   | Posible integración futura con LLM |
+| cargar_modelo.py             | Python | Carga o inicializa modelo IA local                   | borrador   | No validado en sprint |
+| fix_metadata.py              | Python | Corrige y normaliza metadatos YAML (`module`, `type`, etc.) | activo     | Usar con `--backup` |
+| force_snake_case_modules.py  | Python | Fuerza snake_case en campo 'module'                  | activo     | Recomendado en fase de cierre |
+| resumir.py                   | Python | Generador de resumen automático desde archivos markdown | pendiente  | No usado en auditoría |
+| salir.py                     | Python | Script de salida del CLI o apagado                   | borrador   | Auxiliar de CLI |
+| validar_documentacion.sh     | Bash   | Script shell para lanzar validaciones sobre markdowns | activo     | Wrapper manual |
+| validate_docs.py             | Python | Valida consistencia del YAML según reglas ALMA_RESIST | activo     | Script oficial de validación |
+| README.md                    | Markdown | Explicación general de la carpeta scripts            | activo     | Debe mantenerse actualizado |

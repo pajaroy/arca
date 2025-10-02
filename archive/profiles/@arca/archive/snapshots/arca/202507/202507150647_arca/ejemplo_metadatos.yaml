@@ -1,0 +1,17 @@
+metadatos:
+  id_unico: "ejemplo-YAML-001"  # cfg/sch/log
+  tipo: "ejemplo"  # único campo variable
+  nombre: "ejemplo_metadatos"
+  version: "0.1.0"
+  estado: "activo"
+  fecha_creacion: "2025-07-15"
+  autor: "Bird"
+
+metadatos:
+  id_unico: "[prefijo]-[NOMBRE]-001"  # cfg/sch/log
+  tipo: "tipo_archivo"  # único campo variable
+  nombre: "[nombre_archivo]"
+  version: "0.1.0"
+  estado: "borrador|activo"
+  fecha_creacion: "YYYY-MM-DD"
+  autor: "Bird"

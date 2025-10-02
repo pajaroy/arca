@@ -1,0 +1,8 @@
+from pathlib import Path
+
+base_path = Path(__file__).parent.parent
+schema_path = base_path / "schemas" / "schema_base.json"
+
+print("Ruta esperada:", schema_path)
+print("¿Existe el archivo?", schema_path.exists())
+

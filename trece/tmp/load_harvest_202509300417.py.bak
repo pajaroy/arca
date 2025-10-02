@@ -1,0 +1,100 @@
+import csv
+import logging
+from pathlib import Path
+from typing import List, Dict, Any
+from datetime import datetime
+from .db import db_manager
+
+logger = logging.getLogger(__name__)
+
+def load_harvest_from_csv(file_path: Path):
+    """Cargar cosechas desde archivo CSV"""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as file:
+            reader = csv.DictReader(file)
+            harvests = list(reader)
+        
+        success_count = 0
+        for harvest_data in harvests:
+            try:
+                # Para CSV, esperamos datos completos
+                create_harvest(
+                    genetic_name=harvest_data['genetic'],
+                    grams=float(harvest_data['grams']),
+                    harvest_date=harvest_data['harvest_date'],
+                    module_name=harvest_data['module'],
+                    quality_notes=harvest_data.get('quality_notes')
+                )
+                success_count += 1
+            except Exception as e:
+                logger.error(f"Error creando cosecha: {e}")
+        
+        logger.info(f"✅ Cargadas {success_count}/{len(harvests)} cosechas desde {file_path}")
+        
+    except Exception as e:
+        logger.error(f"Error cargando archivo CSV: {e}")
+        raise
+
+def create_harvest(
+    genetic_name: str,
+    grams: float,
+    harvest_date: str,
+    module_name: str,
+    quality_notes: str = None
+):
+    """Crear una cosecha directamente"""
+    # Obtener IDs por nombre
+    genetic_id = _get_genetic_id(genetic_name)
+    module_id = _get_or_create_module(module_name)
+    
+    # Crear la cosecha principal
+    harvest_id = db_manager.insert_and_get_id(
+        """INSERT INTO harvests 
+           (module_id, harvest_date, total_grams, notes, status)
+           VALUES (?, ?, ?, ?, ?)""",
+        (module_id, harvest_date, grams, quality_notes, 'completed')
+    )
+    
+    # Crear el item de cosecha
+    db_manager.insert_and_get_id(
+        """INSERT INTO harvest_items 
+           (harvest_id, genetic_id, grams, quality_notes)
+           VALUES (?, ?, ?, ?)""",
+        (harvest_id, genetic_id, grams, quality_notes)
+    )
+    
+    # Registrar movimiento de stock
+    db_manager.insert_and_get_id(
+        """INSERT INTO stock_movements 
+           (genetic_id, movement_type, quantity, reference_table, reference_id, movement_date)
+           VALUES (?, 'in', ?, 'harvest_items', ?, ?)""",
+        (genetic_id, grams, harvest_id, harvest_date)
+    )
+    
+    logger.info(f"✅ Cosecha de {grams}g de {genetic_name} registrada")
+    return harvest_id
+
+def _get_genetic_id(genetic_name: str) -> int:
+    """Obtener ID de genética por nombre"""
+    result = db_manager.fetchone(
+        "SELECT id FROM genetics WHERE name = ?",
+        (genetic_name,)
+    )
+    if not result:
+        raise ValueError(f"Genética '{genetic_name}' no encontrada")
+    return result['id']
+
+def _get_or_create_module(module_name: str) -> int:
+    """Obtener o crear módulo por nombre"""
+    result = db_manager.fetchone(
+        "SELECT id FROM modules WHERE name = ?",
+        (module_name,)
+    )
+    if result:
+        return result['id']
+    
+    # Crear nuevo módulo
+    return db_manager.insert_and_get_id(
+        "INSERT INTO modules (name, description) VALUES (?, ?)",
+        (module_name, f"Módulo {module_name}")
+    )

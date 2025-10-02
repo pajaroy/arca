@@ -1,0 +1,53 @@
+id: prompt_alma_cli_v0.1.0
+version: 0.1.0
+autor: Santi + ALMA_CENTRAL
+estado: "draft"
+tags: [cli, modular, automatizacion, multiagente, ia, auditable, memoria, changelog, metadata, arquitectura]
+proposito: |
+  Quiero diseñar el mejor CLI multiagente del mundo, orientado a workflows de automatización, gestión de memoria, changelog y metadata, pensado para operar, versionar y documentar sistemas IA y humanos en proyectos como ALMA_RESIST.
+  El CLI debe ser **modular**, **extensible**, con código limpio y documentación clara.
+  **Requisito**: Soporte para agregados de nuevas funciones/paquetes mediante scripts, integración de agentes IA, logging avanzado, validación de datos, edición de memoria, trazabilidad de cambios, y posibilidad de orquestar subcomandos (bitácora, changelog, metadata, memorias, etc).
+  
+modulos_existentes:
+  - bitacora: scripts para registrar entradas de actividad (logs, reflexiones, decisiones).
+  - changelog: scripts para agregar, versionar y consultar cambios por módulo.
+  - fix_metadata: scripts y utilidades para validar, reparar o comparar metadata en YAML/JSON.
+  - memorias: CLI para cargar, consultar y sincronizar memorias (registros estructurados, ideas, buffers IA).
+  - Otros: carpetas/versiones históricas, prompts y archivos de configuración asociados.
+
+objetivos_funcionales:
+  - Todo debe operar desde terminal/CLI, **sin depender de UI**.
+  - Cada módulo debe poder ejecutarse y mantenerse por separado (independencia, pruebas unitarias).
+  - Debe ser fácil agregar nuevos subcomandos y módulos.
+  - **Memoria auditable**: cada acción debe dejar registro; integrar logging y bitácora.
+  - Changelogs por módulo y versión, con formato YAML/JSON/MD.
+  - Integración futura de agentes IA locales/remotos como asistentes de CLI (ej: invocar LLM para sugerencias, resúmenes, QA).
+  - Auto-documentación: cada script/modulo genera o actualiza su propio README y changelog.
+  - Soporte para validación de entradas y argumentos (argparse/typer/click).
+  - Diseño limpio, portable y seguro (sin hardcodear rutas, permitir configuración por settings.yaml/env).
+
+ideas_especiales:
+  - Posibilidad de “comandar” IA desde CLI (prompt injection, integración a LLM por API/local).
+  - Logging avanzado (rotación, multi-formato, filtrado por agente/modulo).
+  - Auditoría interna (scripts para auditar el estado, reportes y diagnóstico).
+  - Soporte para plugins o extensiones de terceros.
+  - Exportación/importación de memorias y logs.
+  - Compatibilidad multiplataforma (Linux, Mac, Windows, WSL).
+
+requests:
+  - Revisá el tree adjunto y sugerí refactors de estructura y mejoras críticas.
+  - Sugerí scripts/core wrappers para unificar la lógica CLI.
+  - Propón cómo automatizar changelogs y bitácoras con IA.
+  - Armá un **roadmap** para pasar del v0.1.0 actual al v1.0.0 profesional.
+  - Proponé estandarización de prompts y metadata por módulo.
+  - Sugerí integración con YAML2ALL y futuras herramientas de conversión.
+
+ejemplo_arbol_actual:
+  (Pega el tree actual — ya lo tenés arriba)
+
+respuesta_esperada:
+  - Diagnóstico crítico (sin complacencias) de la estructura y módulos.
+  - Sugerencias de refactor, nuevos módulos, mejoras de calidad.
+  - Propuesta de arquitectura CLI profesional (cómo orquestar módulos y extensiones).
+  - Roadmap técnico por iteraciones.
+  - (Opcional: primeros ejemplos de scripts/wrappers base o layout de CLI modular).

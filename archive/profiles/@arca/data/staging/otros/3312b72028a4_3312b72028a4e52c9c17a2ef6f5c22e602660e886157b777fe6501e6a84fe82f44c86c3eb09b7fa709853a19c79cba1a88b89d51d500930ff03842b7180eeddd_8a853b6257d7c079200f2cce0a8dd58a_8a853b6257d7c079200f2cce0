@@ -1,0 +1,147 @@
+Aquí tienes la implementación de `main.py` siguiendo los requisitos:
+
+python
+
+Copy
+
+Download
+
+# main.py
+import logging
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from api.v1.memorias import router as memorias_router
+from core.memoria_saver import guardar_memoria  # Para verificar dependencias
+from cifrado import cifrar_contenido  # Para verificar clave Fernet
+
+# Configuración inicial de logging
+logging.basicConfig(
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    level=logging.INFO
+)
+logger = logging.getLogger(__name__)
+
+# Crear instancia de FastAPI
+app = FastAPI(
+    title="ALMA_LOADER API",
+    description="API principal para el sistema de gestión de memorias ALMA_LOADER",
+    version="1.0.0",
+)
+
+# Configurar CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Incluir routers
+app.include_router(memorias_router)
+
+@app.on_event("startup")
+async def verificar_dependencias():
+    """Verifica conexión con dependencias críticas al iniciar"""
+    checks = {
+        "SQLite": verificar_sqlite,
+        "FAISS": verificar_faiss,
+        "Fernet": verificar_clave_cifrado
+    }
+    
+    for service, check in checks.items():
+        try:
+            check()
+            logger.info(f"✅ {service} - Conexión exitosa")
+        except Exception as e:
+            logger.error(f"❌ {service} - Error de conexión: {str(e)}")
+            # En producción, podríamos querer detener el inicio aquí
+            # raise RuntimeError(f"Fallo en dependencia crítica: {service}")
+
+def verificar_sqlite():
+    """Verifica conexión básica con SQLite"""
+    from sqlite_storage import obtener_conexion
+    conn = obtener_conexion()
+    conn.execute("SELECT 1").fetchone()
+    conn.close()
+
+def verificar_faiss():
+    """Verifica disponibilidad de FAISS"""
+    from vector_storage import obtener_indice
+    if not obtener_indice():
+        raise RuntimeError("Índice FAISS no inicializado")
+
+def verificar_clave_cifrado():
+    """Verifica que el cifrado funciona con la clave actual"""
+    test_string = "test_alma_loader"
+    cifrado = cifrar_contenido(test_string)
+    if not cifrado:
+        raise RuntimeError("Error en cifrado/descifrado")
+
+**Características principales:**
+
+1. **Configuración de FastAPI:**
+    
+    - Metadatos OpenAPI básicos
+        
+    - Middleware CORS configurado para desarrollo
+        
+    - Router de memorias integrado
+        
+2. **Verificación de dependencias:**
+    
+    - Chequeo de SQLite con query básica
+        
+    - Verificación de índice FAISS
+        
+    - Prueba de cifrado funcional
+        
+    - Logging detallado de estado
+        
+3. **Configuración de logging:**
+    
+    - Formato estructurado
+        
+    - Nivel INFO por defecto
+        
+    - Logger único para toda la aplicación
+        
+4. **Escalabilidad:**
+    
+    - Fácil de agregar nuevos routers
+        
+    - Sistema de chequeo extensible
+        
+    - Configuración lista para producción
+        
+
+**Ejecución:**
+
+bash
+
+Copy
+
+Download
+
+uvicorn main:app --reload
+
+**Flujo de inicio:**
+
+1. Inicia aplicación FastAPI
+    
+2. Configura CORS y logging
+    
+3. Incluye endpoints de memorias
+    
+4. Al startup:
+    
+    - Verifica conexión con SQLite
+        
+    - Comprueba índice FAISS
+        
+    - Valida cifrado Fernet
+        
+    - Registra resultados en logs
+        
+
+Este diseño proporciona una base sólida para el sistema mientras mantiene buenas prácticas de desarrollo y operación.

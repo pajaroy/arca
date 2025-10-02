@@ -1,0 +1,174 @@
+---
+module: lecciones_aprendidas
+type: core
+status: in_progress
+created: '2025-05-22'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🧠 Lecciones Aprendidas – ALMA_RESIST
+
+📝 Versión: 0.0.0.1  
+📅 Última actualización: 2025-05-20  
+👤 Responsable: Usuario + IA
+
+---
+
+## Sprint 1 – Logging (2025-05-17)
+
+- Validar tipos de eventos garantiza integridad de la estructura.
+- La escritura atómica evita corrupción ante fallas de energía.
+- El uso de `ensure_ascii=False` mejora compatibilidad con caracteres especiales.
+- La inclusión de metadatos del sistema facilita el diagnóstico offline.
+- Es mejor usar `"n/a"` como valor por defecto cuando el hostname no es confiable.
+
+## Sprint 1 – Logging (Subtarea 2) – Cifrado Funcional (2025-05-17)
+
+- 📌 El cifrado AES-GCM requiere cuidado con los offsets binarios (header exacto de 4 bytes).
+- 📌 El `nonce` debe tener longitud de 12 bytes, no se debe asumir longitud de lectura.
+- 📌 El uso de encabezados binarios (`b"AES\x00"`) permite detección rápida del algoritmo.
+- 📌 Leer 8 bytes donde sólo hay 4 puede corromper el flujo de descifrado: bug crítico detectado.
+- ✅ Se confirmó que PyCryptodome maneja bien el fallback a ChaCha20 si no hay AES-NI.
+
+---
+
+## Sprint 2 – Auditoría Técnica y Estructura Inicial (2025-05-20)
+
+- 📁 Toda auditoría debe quedar documentada en un archivo `auditoria_estructura.md`.
+- 📌 El árbol de carpetas es tan importante como el código: auditable y coherente.
+- ❌ Se identificaron malas prácticas como `archivos/` genérica → eliminar o renombrar siempre.
+- ✅ Estandarizar los logs, los prompts, los tests y los changelogs como secciones separadas evita caos futuro.
+- ✅ Las tareas deben derivar de checklists claras (`checklist_auditoria_inicial.md`) y tener trazabilidad en `hitos.md`.
+
+---
+
+## Sprint 2 – Gobernanza y Control de Versiones (2025-05-20)
+
+- ✅ Las versiones deben mantenerse vivas (`hitos.md`) pero congelarse cuando cambian fases.
+- 📌 Una carpeta `/docs/versiones/` bien organizada facilita rollback, auditoría y revisión externa.
+- 📌 Cada versión debe tener su propio changelog, hitos y resumen MVP al momento de cierre.
+- ✅ El `changelog.md` debe registrarse por versión, no como log desordenado de cambios sueltos.
+
+---
+
+## Sprint 2 – Documentación y Navegación Obsidian (2025-05-20)
+
+- ✅ Usar `[[enlaces]]` en vez de rutas duras (`/docs/...`) permite navegación semántica y grafo Obsidian.
+- ✅ Separar las carpetas por propósito (`mvp/`, `auditorias/`, `checklists/`, `versiones/`) reduce fricción mental.
+- 📌 Tener un `index.md` desde el principio es esencial, incluso si es mínimo: actúa como cerebro del sistema.
+
+---
+
+## Sprint 3 – Lecciones de Auditoría Técnica (2025-05-20)
+
+### 📚 Estructura y Documentación
+
+- ✅ La incorporación del paso 0 (planificación por checklist) mejora radicalmente la trazabilidad y evita ejecución sin dirección.
+- ✅ El uso de `tree` para capturar la estructura real facilita auditorías futuras y control de integridad de carpetas.
+- ✅ Las plantillas internas (`checklist`, `prompt`, `post-mortem`, etc.) aceleran el desarrollo manteniendo estándares.
+
+### 🧠 Gobernanza y Trazabilidad
+
+- ✅ Registrar cada bloque en `hitos.md`, `changelog.md`, y `lecciones_aprendidas.md` solo al final del sprint evita ruido documental innecesario.
+- ✅ El concepto de “bloque cerrado” permite agrupar cambios sin contaminar el resumen MVP ni los logs técnicos día a día.
+
+### 🗂️ Estructura semántica
+
+- ✅ Integrar referencias técnicas externas (`docs/referencias/externas/`) separa bien la inspiración de la implementación.
+- ✅ Tener una única `idea_base.md` activa mejora la claridad general del proyecto y evita contradicciones con versiones anteriores.
+---
+
+## Sprint 4 – CLI Modular (2025-05-20)
+
+### 🧠 Lecciones clave
+
+- ❌ `cmd.Cmd` no es adecuado para arquitecturas modulares: su introspección depende de métodos definidos en clase, no permite escalar por archivos.
+- ✅ Separar comandos en funciones `run(args)` por archivo mejora mantenimiento, testing y extensión.
+- ✅ Construir un router CLI propio permite mayor control, logging, ayuda dinámica y robustez.
+- ✅ Agregar logs desde el principio (nivel `INFO`, `WARNING`, `ERROR`) permite auditar uso real del sistema y preparar futuros modelos de autoajuste.
+- ✅ Mantener el `README.md` del módulo actualizado con ejemplos y comandos válidos ayuda al onboarding técnico futuro.
+---
+### 2025-05-21 – Formalización de la metodología de estructura modular v2
+- Se adoptó como estándar oficial la versión 2 tras validación externa y revisión crítica.
+- Se elimina el uso de `versionado/`, se refuerzan convenciones, y se integran bloques YAML semánticos para IA.
+
+---
+## 📘 Sprint 2.2 – Metodologías Base
+
+🧠 Lecciones aprendidas:
+- Definir reglas claras desde el inicio facilita enormemente la integración futura de módulos.
+- Es más eficiente trabajar con plantillas y convenciones unificadas que improvisar por sprint.
+- Documentar con metadatos YAML permite que la IA navegue, sugiera y valide sin intervención constante.
+- Separar propuestas, versiones y archivos activos da orden visual y mental al operador único.
+---
+## Sprint 2.3 – Corrección de Metadatos
+
+- La automatización temprana reduce errores humanos y acelera el ritmo del proyecto.
+- Las validaciones estrictas de `validate_docs.py` obligan a mantener la integridad semántica.
+- El uso de `snake_case` en los módulos mejora la interoperabilidad futura con IA.
+- Integrar validación y normalización como pasos estándar de agregado es clave para la escalabilidad.
+- Documentar bien los procesos permite enfocarse en lo importante y facilita delegación futura.
+
+---
+
+### 📘 Sprint 2.1 – Profesionalización de la Estructura Documental (2025-05-23)
+
+#### ✅ Lo que funcionó
+
+- Consolidar una estructura documental modular (`docs/`, `testing/`, `estructura_doc/`) agilizó la gestión del proyecto.
+    
+- Automatizar la validación de metadatos (`test_metadata.py`) mejoró la trazabilidad y redujo errores humanos.
+    
+- Implementar plantillas con frontmatter estandarizado permitió avanzar hacia interoperabilidad IA sin fricción.
+    
+- Incluir `TODO.md` y `.project.md` facilitó el seguimiento vivo del estado del sistema.
+    
+
+#### ⚠️ Lo que se puede mejorar
+
+- Incluir metadatos desde el inicio en todos los documentos evitaría ciclos de corrección posteriores.
+    
+- Estandarizar la nomenclatura y formato de carpetas (`/resgistros/` vs `/registros/`) debería aplicarse antes de integrar archivos nuevos.
+    
+
+#### 🧠 Aprendizaje estratégico
+
+- Documentar con estructura semántica desde el Sprint 2.1 sienta las bases para IA con reflexión y navegación futura.
+    
+- La combinación de control de versiones, testing, documentación viva y hashing de snapshots crea un sistema auditable y antifrágil.
+    
+
+---
+
+### 📘 Sprint 2.3 – Integración de Idea Base Unificada (2025-05-23)
+
+#### ✅ Lo que funcionó
+
+- Consolidar múltiples fuentes conceptuales en un solo documento (`idea_base_unificada.md`) eliminó ambigüedad y redundancia.
+    
+- Archivar versiones anteriores en `_legacy/` mantuvo trazabilidad sin contaminar la versión activa.
+    
+- Acompañar la integración con `README.md`, `version.md` y `changelog.md` facilitó el versionado humano y técnico.
+    
+- Documentar el flujo como metodología (`metodologia_agregado_archivos.md`) sienta base para integraciones futuras reproducibles.
+    
+
+#### ⚠️ Lo que se puede mejorar
+
+- Automatizar el archivado y validación de metadatos ahorraría tiempo manual.
+    
+- Incluir el registro de hash o tag en el momento de la integración evitaría omisiones posteriores.
+    
+
+#### 🧠 Reflexión clave
+
+Este sprint demostró que incluso ideas complejas y divergentes pueden unificarse de forma coherente cuando se aplica una metodología disciplinada.
+
+---
+## 🧠 Lección Aprendida - Sprint 2.4
+
+- La validación semántica (`linked_to`, `domain`, `tags`) es crítica y debe automatizarse desde el principio.
+- Separar reglas de validación en archivos independientes mejora la trazabilidad del conocimiento.
+- El uso de scripts como `add_linked_to_minimo.py` y `alma-cli.py` redujo significativamente el trabajo manual.
+- Es fundamental definir claramente cuándo se requiere qué metadato en cada tipo de documento (`type`).

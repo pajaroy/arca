@@ -1,0 +1,30 @@
+## 🧾 Changelog – ALMA_RESIST
+
+
+### ✅ v0.2 – 2025-05-17 – Cifrado Funcional
+
+- ✅ Implementado `log_crypto.py` con soporte AES-256-GCM y ChaCha20
+- ✅ Validación automática de arquitectura y fallback en ARM
+- ✅ Escritura binaria con encabezado identificador (`b"AES\x00"`)
+- ✅ Test funcional `test_log_crypto.py` verificado
+
+🏁 **Hito 002**: Módulo de cifrado funcional operativo  
+🔐 Inicio de trazabilidad antifrágil
+
+
+## 🧾 v0.0.0.1 – Auditoría Técnica Finalizada
+
+📅 Fecha: 2025-05-20  
+🎯 Descripción: Consolidación de la base estructural, documental y operativa del sistema ALMA_RESIST.
+
+
+### 🔍 Auditoría
+
+- Ejecución real de `tree -L 3` y registro en `docs/auditorias/auditoria_estructura.md`
+- Verificación y limpieza de archivos redundantes
+- Consolidación de `idea_base.md` oficial y archivo `idea_base_legacy.zip`
+
+
+### 🧠 Estado
+
+Este changelog marca el **cierre funcional de la versión v0.0.0.1**, y habilita el inicio del **sprint técnico v0.0.0.2** bajo condiciones de trazabilidad completa.

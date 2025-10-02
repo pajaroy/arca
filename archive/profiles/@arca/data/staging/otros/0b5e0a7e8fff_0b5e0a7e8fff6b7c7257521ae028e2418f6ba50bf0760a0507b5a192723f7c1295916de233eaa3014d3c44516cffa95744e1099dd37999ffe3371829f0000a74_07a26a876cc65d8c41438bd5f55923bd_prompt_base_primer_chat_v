@@ -1,0 +1,58 @@
+
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5 (v1.3)
+
+## 🎯 Objetivo General
+
+Desarrollar y escalar **ALMA_RESIST** como un sistema operativo IA offline, antifrágil, autosuficiente y orientado a ejecución real en hardware extremo.
+
+Debe:
+
+- Adaptarse dinámicamente a la arquitectura del sistema (x86, ARM, RISC-V)
+- Optimizar el consumo energético según entorno operativo
+- Evaluarse y autoajustarse en cada sprint
+- Prever fallos críticos con monitoreo y simulaciones
+- Ser implementable desde CLI sin dependencias externas
+
+
+## ✅ Validación Cross-Architecture
+
+Script `test_arch.sh` debe:
+
+- Detectar `uname -m` automáticamente  
+- Ejecutar tests optimizados por plataforma  
+- Generar `benchmarks_arch.md` con resultados comparativos
+
+
+## 🔐 Tecnología Emergente – Fases ONNX/TensorRT
+
+**Sprint 6**  
+- Crear wrapper C++  
+- Validar precisión <0.5% margen error  
+- Benchmark vs CPU  
+
+**Sprint 7**  
+- Quantización ONNX  
+- Soporte NPU con OpenVINO  
+- Transición a GPU-only en ALMA_SERVER_LLM
+
+
+## 📈 Documentación por Sprint
+
+`docs/reporte_sprint.md` debe incluir:
+
+- Comparativas RAM/CPU por sprint  
+- Top 3 errores nuevos  
+- Gráficos con Plotly exportables  
+- Código con comentarios IA  
+- Comandos replicables
+
+
+## 📋 Changelog v1.3
+
+- ✅ Validación por arquitectura con test_arch.sh
+- ✅ Roadmap de adopción ONNX/TensorRT por fases
+- ✅ Monitoreo predictivo por IA con sugerencias automatizadas
+- ✅ SQL injections sintéticas + falla multi-nodo en cluster
+- ✅ Políticas energéticas específicas por trigger contextual
+- ✅ Documentación visual interactiva con HTML/Plotly
+- ✅ Refactor visual de roadmap en tabla central y secciones plegables

@@ -1,0 +1,19 @@
+# README – planificacion
+
+Esta carpeta forma parte del sistema modular de ALMA_RESIST y cumple una función clave dentro del entorno de documentación técnica.
+
+## 📁 Ruta
+`docs/control/planificacion`
+
+## 📌 Propósito
+
+- **planificacion**
+
+
+- planificacion: Contiene roadmaps, proyecciones, y documentos relacionados con planificación estratégica o técnica.
+
+
+## 🧠 Notas
+
+Esta carpeta debe mantenerse ordenada y actualizada. Si algún documento cambia de función, debe reubicarse o marcarse con un `status: deprecated` en su metadata YAML.
+

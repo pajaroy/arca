@@ -1,0 +1,107 @@
+---
+tipo: bitacora
+id: BITACORA_2025-06-05_b375be
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Log Writer V0.0.0.6
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:2be5c074e24e4c5813b5d4c1a3c21509c63279ce9a86905cd022c96a6fcdbb8b
+---
+import os
+import json
+import logging
+from pathlib import Path
+from datetime import datetime, timedelta
+from typing import Optional, Dict, Any
+
+logger = logging.getLogger(__name__)
+
+# Directorio por defecto para logs
+DEFAULT_LOG_DIR = Path.cwd() / "logs"
+
+class LogWriter:
+    def __init__(self, log_dir: Optional[str] = None):
+        self.log_dir = Path(log_dir) if log_dir else DEFAULT_LOG_DIR
+        self.log_dir.mkdir(parents=True, exist_ok=True)
+
+    @staticmethod
+    def log_event(event_type: str, message: str, module: str = "core", metadata: Optional[Dict[str, Any]] = None) -> Dict:
+        if not isinstance(message, str):
+            raise TypeError("El campo 'message' debe ser str")
+        if metadata is not None and not isinstance(metadata, dict):
+            raise TypeError("El campo 'metadata' debe ser un dict si se proporciona")
+
+        return {
+            "timestamp": datetime.utcnow().isoformat() + "Z",
+            "type": event_type.lower(),
+            "module": module,
+            "message": message,
+            "pid": os.getpid(),
+            "host": os.uname().nodename,
+            "platform": os.uname().sysname + "-" + os.uname().release,
+            "metadata": metadata or {}
+        }
+
+    def _get_log_path(self) -> Path:
+        date_str = datetime.utcnow().strftime("%Y-%m-%d")
+        return self.log_dir / f"alma_{date_str}.log"  # Corregido: self.log_dir
+
+    def write_log(self, event: Dict) -> bool:
+        log_path = self._get_log_path()
+        temp_path = log_path.with_suffix(".tmp")
+
+        try:
+            if not all(key in event for key in ("timestamp", "type", "message")):
+                raise ValueError("Evento mal formado")
+
+            line = json.dumps(event, ensure_ascii=False) + "\n"
+
+            # Escribir en archivo temporal
+            with open(temp_path, "a", encoding="utf-8") as f:
+                f.write(line)
+
+            # Mover a archivo final (manera compatible con Windows)
+            if log_path.exists():
+                with open(log_path, "a", encoding="utf-8") as f_main:
+                    with open(temp_path, "r", encoding="utf-8") as f_temp:
+                        f_main.write(f_temp.read())
+                temp_path.unlink()
+            else:
+                temp_path.rename(log_path)
+
+            logger.debug(f"Evento registrado: {event['type']} ({event['module']})")
+            return True
+
+        except (IOError, OSError) as e:
+            logger.error(f"Error escribiendo log: {str(e)}")
+            try:
+                if temp_path.exists():
+                    temp_path.unlink()
+            except:
+                pass
+            return False
+
+        except ValueError as e:
+            logger.warning(f"Evento inválido: {str(e)}")
+            return False
+
+    def secure_rotation(self, days: int = 7):  # Cambiado a método de instancia
+        cutoff = datetime.utcnow() - timedelta(days=days)
+        for file in self.log_dir.glob("alma_*.log"):
+            try:
+                date_str = file.stem.split("_")[1]
+                file_date = datetime.strptime(date_str, "%Y-%m-%d")
+                if file_date < cutoff:
+                    file.unlink()
+            except Exception as e:
+                logger.warning(f"No se pudo rotar {file}: {str(e)}")
+               

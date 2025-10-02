@@ -1,0 +1,32 @@
+# 🧠 PLAN – AlmaSync v1
+
+## Objetivo:
+Diseñar una herramienta o conjunto de scripts que sincronicen automáticamente la información de ALMA LIBRE entre plataformas.
+
+## 🛠️ Fases propuestas:
+
+1. 📁 Sincronización básica
+   - Crear scripts Python para leer/escribir archivos entre:
+     - Obsidian (carpeta local)
+     - Google Drive (respaldo)
+     - Notion (organizador visual)
+
+2. 🧩 Modularización de AlmaSync
+   - Separar por funciones:
+     - escritura diaria
+     - exportación mensual
+     - sincronización de templates
+
+3. 🤖 Conexión con IAs
+   - Permitir enviar contenido a:
+     - GPT (por API)
+     - IA local tipo Ollama o DeepSeek para auditoría
+
+4. 📡 Automatización futura
+   - Cron jobs o triggers manuales
+   - Reportes semanales
+   - Integración opcional con Telegram o WhatsApp
+
+
+## 🔮 Futuro:
+AlmaSync será el puente entre tu sistema local, la nube y tu IA compañera.

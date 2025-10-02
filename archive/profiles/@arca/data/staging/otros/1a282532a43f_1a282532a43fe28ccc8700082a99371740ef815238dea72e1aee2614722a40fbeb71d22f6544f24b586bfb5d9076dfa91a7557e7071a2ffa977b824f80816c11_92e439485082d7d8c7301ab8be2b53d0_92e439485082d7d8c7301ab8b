@@ -1,0 +1,41 @@
+# 🧠 Lecciones Aprendidas – ALMA_RESIST
+
+📝 Versión: 0.0.0.1  
+📅 Última actualización: 2025-05-20  
+👤 Responsable: Usuario + IA
+
+
+## Sprint 2 – Auditoría Técnica y Estructura Inicial (2025-05-20)
+
+- 📁 Toda auditoría debe quedar documentada en un archivo `auditoria_estructura.md`.
+- 📌 El árbol de carpetas es tan importante como el código: auditable y coherente.
+- ❌ Se identificaron malas prácticas como `archivos/` genérica → eliminar o renombrar siempre.
+- ✅ Estandarizar los logs, los prompts, los tests y los changelogs como secciones separadas evita caos futuro.
+- ✅ Las tareas deben derivar de checklists claras (`checklist_auditoria_inicial.md`) y tener trazabilidad en `hitos.md`.
+
+
+## Sprint 2 – Documentación y Navegación Obsidian (2025-05-20)
+
+- ✅ Usar `[[enlaces]]` en vez de rutas duras (`/docs/...`) permite navegación semántica y grafo Obsidian.
+- ✅ Separar las carpetas por propósito (`mvp/`, `auditorias/`, `checklists/`, `versiones/`) reduce fricción mental.
+- 📌 Tener un `index.md` desde el principio es esencial, incluso si es mínimo: actúa como cerebro del sistema.
+
+
+## Sprint 4 – CLI Modular (2025-05-20)
+
+### 🧠 Lecciones clave
+
+- ❌ `cmd.Cmd` no es adecuado para arquitecturas modulares: su introspección depende de métodos definidos en clase, no permite escalar por archivos.
+- ✅ Separar comandos en funciones `run(args)` por archivo mejora mantenimiento, testing y extensión.
+- ✅ Construir un router CLI propio permite mayor control, logging, ayuda dinámica y robustez.
+- ✅ Agregar logs desde el principio (nivel `INFO`, `WARNING`, `ERROR`) permite auditar uso real del sistema y preparar futuros modelos de autoajuste.
+- ✅ Mantener el `README.md` del módulo actualizado con ejemplos y comandos válidos ayuda al onboarding técnico futuro.
+## 📘 Sprint 2.2 – Metodologías Base
+
+🧠 Lecciones aprendidas:
+- Definir reglas claras desde el inicio facilita enormemente la integración futura de módulos.
+- Es más eficiente trabajar con plantillas y convenciones unificadas que improvisar por sprint.
+- Documentar con metadatos YAML permite que la IA navegue, sugiera y valide sin intervención constante.
+- Separar propuestas, versiones y archivos activos da orden visual y mental al operador único.
+
+

@@ -1,0 +1,11 @@
+
+# 📋 Changelog – `control_central/`
+
+## v0.0.1 – 2025-05-29
+
+- 🧠 Se formaliza la carpeta `control_central/` como núcleo operativo de ALMA_RESIST.
+- 📁 Se define estructura base con carpetas `logs/`, `scripts/`, `checklist/`, `auditorias/`, `planificacion/`, `journal/`.
+- ✍️ Se migran registros de integración desde `logs/auditorias/` y otros orígenes al nuevo estándar.
+- 🛠️ Se prepara la validación modular para nuevas integraciones.
+- 🧾 Se crea este changelog con formato IA-friendly.
+

@@ -1,0 +1,34 @@
+{
+  "id": "readme_alma_core_control_v0.1.1",
+  "version": "0.1.1",
+  "fecha_actualizacion": "2025-06-16T00:00:00+00:00",
+  "autor": "Santi + ALMA",
+  "estado": "activo",
+  "anterior": null,
+  "hash_actual": "sha256:pending",
+  "proposito": {
+    "descripcion": "Seguimiento de sprints, objetivos y flujo operativo de ALMA_CORE.\nCentraliza la gestión de ciclos activos y registros de planificación.\n",
+    "ultima_revision": "2025-06-16"
+  },
+  "linked_to": [
+    "archivo/README.yaml",
+    "config/README.yaml",
+    "control/README.yaml",
+    "control_central/README.yaml",
+    "core/README.yaml",
+    "docs/README.yaml",
+    "logs/README.yaml",
+    "meta/README.yaml"
+  ],
+  "estructura": {
+    "sprint_actual.md": "Seguimiento del sprint activo.",
+    "otros": "Histórico de planes, ciclos y logs operativos."
+  },
+  "changelog": [
+    {
+      "fecha": "2025-06-16",
+      "version": "0.1.1",
+      "cambios": "README estructurado para gobernanza circular y navegabilidad global."
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+# 🛣️ ROADMAP – ALMA LIBRE
+
+Versión Actual: **0.8.0**  
+Última actualización: 2024-04-23  
+Estado: Fase 2 (Integración Técnica Inicial) – En curso
+
+
+## 🔧 FASE 2 – Integración Técnica Inicial (v0.8.0)
+
+🔹 Base de datos y terminal
+- [x] `memorias.db` funcionando con SQLite
+- [x] `alma_sync.py` con `read`, `write`, `edit`, `validate`, `backup`
+- [x] Estructura unificada de scripts
+
+🔹 Automatización y control
+- [x] Validación avanzada: duplicados, conflictos de secciones
+- [x] Backup automático cada 7 días desde `ALMA_CONFIG.yaml`
+- [x] Prompt activo con versión YAML (`prompt_version`)
+
+🔹 Soporte y documentación
+- [x] `ALMA_CONFIG.yaml` operativo
+- [x] README para cada subcarpeta clave
+- [x] Carpeta PROMPT centralizada
+
+🔹 (Opcional Fase 2)
+- [ ] Test técnico automatizado básico (`test_sync.py`)
+- [ ] Interfaz visual (GUI mínima con Textual o PySimpleGUI)
+- [ ] Modo "análisis histórico" (consulta por fecha)
+
+✅ **FASE 2 – En desarrollo (80% completado)**
+

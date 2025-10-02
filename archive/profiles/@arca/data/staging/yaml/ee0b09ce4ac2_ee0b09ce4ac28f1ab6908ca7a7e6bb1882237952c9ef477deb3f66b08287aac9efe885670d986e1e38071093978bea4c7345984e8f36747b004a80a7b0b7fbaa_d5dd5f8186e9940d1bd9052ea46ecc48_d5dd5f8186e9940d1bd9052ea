@@ -1,0 +1,8 @@
+autor: kael
+fecha: 2025-06-10
+tipo: propuesta
+contenido: |
+  Estandarizar documentación interna en YAML y consolidar lógica de RAG, hashing y relaciones linked_to/fix_metadata en todos los README de carpetas clave.
+id: MEM_KAEL_2025-06-10_01
+relacionado_con: []
+resumen: "Documentar todo punto crítico con lógica RAG y relaciones técnicas para facilitar trazabilidad y aprendizaje futuro de agentes."

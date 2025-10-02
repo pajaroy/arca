@@ -1,0 +1,53 @@
+
+# 🚀 Sprint Actual 0.2 – Sincronización Total Inteligente
+
+Este sprint tiene como objetivo lograr una **sincronización total e inteligente** entre los dos nodos principales (`ALMA_CORE` y `ALMA_RESIST`), los sistemas externos (GitHub, Obsidian), y garantizar backups automáticos diarios. Es la base para una operación continua, profesional y resiliente.
+
+
+## ✅ Checklist de Implementación
+
+### 🗂️ Sincronización entre nodos con Syncthing
+
+- [x] Instalar y validar Syncthing en ALMA_CORE y ALMA_RESIST
+- [x] Configurar carpetas sincronizadas: `ALMA_RESIST/`, `obsidian_vault/`
+- [ ] Crear y aplicar plantilla `.stignore` personalizada
+- [ ] Verificar que no haya duplicaciones ni conflictos
+
+### 🌐 Sincronización con GitHub
+
+- [x] Crear `backup_to_git.sh` para commit automático diario
+- [ ] Agendar con `cron` o `systemd.timer`
+- [x] Validar commits manuales sólo desde ALMA_CORE
+- [x] Registrar actividad en `logs/backup_git.log`
+
+### 🧠 Obsidian Vault (versión Pro)
+
+- [ ] Validar integración del vault en `ALMA_RESIST/obsidian_vault/`
+- [ ] Verificar escritura sin conflictos desde VS Code
+- [ ] Documentar estructura interna del vault (`README.md`, `index.md`)
+
+### 💻 Entorno de edición y control
+
+- [ ] Configurar VS Code como editor principal
+- [ ] Validar extensiones necesarias para Markdown y Git
+
+### 📊 Monitoreo y Logs
+
+- [ ] Crear `sync_status.sh` que loguee estado de carpetas y conexión
+- [ ] Agregar `alma_status.sh` que muestre estado general de sincronización
+- [ ] Crear carpeta `logs/` si no existe
+
+### 📘 Documentación en `docs/sync/`
+
+- [ ] Crear manual de instalación de sincronización
+- [ ] Especificar rutas, flujos, scripts y comandos
+- [ ] Documentar fallas comunes y solución
+
+
+## 🧩 Notas Finales
+
+- Se validará como cerrado cuando todos los puntos estén resueltos y validados en ambos nodos.
+- Las bitácoras de instalación se guardan en `docs/journal/bitacoras/`.
+
+
+Este cierre marca oficialmente la conclusión del Sprint 0.1 de diagnóstico y nos habilita a trabajar con bases limpias en los próximos sprints estructurales y técnicos del sistema.

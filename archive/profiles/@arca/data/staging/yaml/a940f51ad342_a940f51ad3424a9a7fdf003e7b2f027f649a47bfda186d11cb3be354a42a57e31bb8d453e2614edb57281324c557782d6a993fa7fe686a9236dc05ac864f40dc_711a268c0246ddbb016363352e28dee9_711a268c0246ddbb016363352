@@ -1,0 +1,47 @@
+id: seguimiento_inteligente_cultivo004_semana_01
+version: "0.2.0"
+tipo: "seguimiento_planta"
+schema: "almaresist.seguimiento.inteligente.v1"
+descripcion: |
+  Seguimiento individual semanal de cada planta del cultivo 004 (inicio floración).
+  Medición realizada con medidor Keep It Fresh.
+  Registros preparados para trazabilidad IA/RAG.
+
+fecha: 2025-06-17
+cultivo_id: cultivo004
+fase: floracion
+semana: 01
+medidor: Keep It Fresh 6 en 1
+
+plantas:
+  - planta:
+      id_planta: cultivo004_plt001
+      nombre_visible: PLT-001
+      fertilidad:
+        valor: 450
+        unidad: µs/cm
+      humedad:
+        valor: 38
+        unidad: "%"
+      luz:
+        valor: 800
+        unidad: lux
+      estado_critico: false
+      observaciones: "Buen desarrollo inicial de floración. Sustrato en equilibrio."
+
+  - planta:
+      id_planta: cultivo004_plt002
+      nombre_visible: PLT-002
+      fertilidad:
+        valor: 520
+        unidad: µs/cm
+      humedad:
+        valor: 40
+        unidad: "%"
+      luz:
+        valor: 750
+        unidad: lux
+      estado_critico: false
+      observaciones: "Levemente menor exposición lumínica."
+
+# Más plantas pueden agregarse bajo el mismo patrón

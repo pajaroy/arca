@@ -1,0 +1,78 @@
+# 🗂️ **ALMA LIBRE – 2.0.0 Prompt – Estructura de Carpetas Base**
+
+## 📜 Introducción
+
+Este documento establece la **estructura oficial de carpetas** del Proyecto **ALMA LIBRE** versión **2.0.0**, diseñada para garantizar:
+
+- Escalabilidad a largo plazo.
+    
+- Modularidad técnica y filosófica.
+    
+- Óptima organización para trabajo humano-IA.
+    
+- Preparación para futuras migraciones a servidor, nube o aplicaciones web/escritorio.
+    
+
+Esta estructura es el primer paso operativo en la consolidación profesional del proyecto.
+
+
+## 📁 Detalle de Carpetas
+
+### /docs
+
+- Contiene la documentación oficial del proyecto:
+    
+    - **/whitepaper**: Documento madre que guía la filosofía y técnica.
+        
+    - **/diagrams**: Diagramas de flujo, arquitectura, esquemas.
+        
+    - **/onboarding**: Guías de entrada para nuevos desarrolladores.
+        
+    - **/rfc**: Propuestas de cambios técnicos (Request for Comments).
+        
+    - **/changelogs**: Registro histórico de cambios por versión.
+        
+
+
+### /data
+
+- Gestión de información viva:
+    
+    - **/db**: Bases de datos locales (SQLite inicial).
+        
+    - **/logs**: Registro de eventos, errores, actividades.
+        
+    - **/backups**: Copias de seguridad periódicas de datos críticos.
+        
+    - **/memories**: Memorias históricas, resumidas y temáticas.
+        
+
+
+### /tests
+
+- Sistema de aseguramiento de calidad:
+    
+    - **/unit**: Pruebas individuales de funciones y métodos.
+        
+    - **/integration**: Validación de módulos combinados.
+        
+    - **/e2e**: Testeo del flujo completo desde usuario hasta almacenamiento.
+        
+
+
+## 📋 Reglas de Estructuración
+
+- **Nombres descriptivos en inglés** para estandarización técnica internacional.
+    
+- **Prohibido prefijos numéricos** (`01_`, `02_`, etc.) para escalabilidad limpia.
+    
+- **Separación estricta de teoría (.cu) y práctica (.mod)** dentro de los módulos si aplica.
+    
+- **Licenciamiento abierto** desde el día 1 para garantizar independencia y libertad del sistema.
+    
+
+
+# 🌱 Cierre
+
+Esta estructura marca el **inicio formal y técnico del Proyecto ALMA LIBRE versión 2.0.0**.  
+Cada paso futuro deberá respetar y construir sobre esta base sólida, viva y consciente.

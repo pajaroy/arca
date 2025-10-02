@@ -1,0 +1,14 @@
+# 📁 descartes_raw/docx
+
+Esta carpeta contiene archivos `.docx` **no estructurados ni integrados** al sistema operativo actual.
+
+### 🗂 Contenido típico:
+- Archivos previos a la conversión Markdown
+- Resúmenes que no pasaron por curaduría ni estandarización
+- Registros no utilizados pero que se conservan como respaldo
+
+### 📌 Política:
+Los archivos aquí **no se eliminan**, pero tampoco se usan en flujos activos.
+Están disponibles solo como consulta histórica o por si se requiere recuperación futura.
+
+**Tags:** `#docx`, `#respaldo`, `#legacy`, `#sinEstandarizar`, `#descartes`

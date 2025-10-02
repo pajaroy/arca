@@ -1,0 +1,11 @@
+
+# 📚 Índice de Versiones – Log Writer
+
+| Versión | Archivo Python | Archivo Markdown | Descripción breve |
+|---------|----------------|------------------|--------------------|
+| v0.0.0.1 | [log_writer_v0.0.0.1.py](../log_writer_v0.0.0.1.py) | [log_writer_v0.0.0.1.md](./log_writer_v0.0.0.1.md) | Primera versión funcional del logger. Incluye generación estructurada de eventos y escritura atómica. |
+| v0.0.0.2 | [log_writer_v0.0.0.2.py](../log_writer_v0.0.0.2.py) | [log_writer_v0.0.0.2.md](./log_writer_v0.0.0.2.md) | Se mejora el manejo de archivos temporales. Se refactoriza la estructura interna. |
+| v0.0.0.3 | [log_writer_v0.0.0.3.py](../log_writer_v0.0.0.3.py) | [log_writer_v0.0.0.3.md](./log_writer_v0.0.0.3.md) | Validación estricta de tipos en eventos y limpieza general del código. |
+| v0.0.0.4 | [log_writer_v0.0.0.4.py](../log_writer_v0.0.0.4.py) | [log_writer_v0.0.0.4.md](./log_writer_v0.0.0.4.md) | Se añade variable de entorno `DEFAULT_LOG_DIR` para mayor flexibilidad. |
+| v0.0.0.5 | [log_writer_v0.0.0.5.py](../log_writer_v0.0.0.5.py) | [log_writer_v0.0.0.5.md](./log_writer_v0.0.0.5.md) | Compatibilidad ampliada con sistemas Windows. Mejora de rotación y manejo de logs existentes. |
+| v0.0.0.6 | [log_writer_v0.0.0.6.py](../log_writer_v0.0.0.6.py) | [log_writer_v0.0.0.6.md](./log_writer_v0.0.0.6.md) | Versión más madura del módulo. Corrección final de detalles en escritura y rotación. Listo para producción. |

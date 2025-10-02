@@ -1,0 +1,10 @@
+
+# validate_docs.py
+
+Valida los metadatos YAML de cada archivo `.md` bajo `docs/`. Soporta validación flexible con tolerancia a `_`.
+
+## Uso
+
+```bash
+python3 validate_docs.py --path ./docs --verbose
+```

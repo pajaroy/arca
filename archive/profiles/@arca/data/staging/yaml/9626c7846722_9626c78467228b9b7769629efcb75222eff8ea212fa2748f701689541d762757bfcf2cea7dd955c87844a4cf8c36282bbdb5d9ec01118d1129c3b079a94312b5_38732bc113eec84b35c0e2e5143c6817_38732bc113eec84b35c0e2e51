@@ -1,0 +1,38 @@
+version: 0.1.1
+id: PROMPT_2025-06-08_ADDCHANGELOG
+tipo: refactor_script
+modulo: control_central/cli/changelog
+titulo: "Refactor del script CLI de changelog con fix en backups"
+autor: Kael
+fecha_creacion: 2025-06-08
+status: en_desarrollo
+linked_to: []
+descripcion: >
+  Se requiere una nueva versión del script `add_changelog_entry.py` que solucione un problema en la generación de archivos de backup y mejore la trazabilidad del CLI.
+
+  En la versión actual (v0.1.0), los archivos de backup son generados con nombres como:
+    changelog.yaml.backup_20250608_032813
+  Esto deja el archivo sin la extensión `.yaml` al final, lo que genera conflictos para editores, herramientas CI y scripts de procesamiento por extensión.
+
+objetivos:
+  - Parchear la lógica de backup para que el archivo resultante tenga extensión `.yaml` válida.
+  - Mantener retrocompatibilidad y estructura CLI actual.
+  - Mejorar nombres de backup con formato:
+      changelog.backup_20250608_032813.yaml
+  - Validar existencia del archivo original antes de backup.
+  - Incluir logging claro en consola (`INFO:` cuando crea backup, `ERROR:` si falla).
+
+sugerencias_de_codigo:
+  - Usar `os.path.basename()` y `os.path.dirname()` para reconstruir rutas del backup.
+  - Usar `datetime.now().strftime("%Y%m%d_%H%M%S")` para timestamp.
+
+consideraciones:
+  - Evitar agregar nuevas dependencias externas.
+  - Mantener compatibilidad con `Python 3.8+`.
+  - El archivo debe ser ejecutable como CLI (`if __name__ == "__main__":`).
+
+notas_extra:
+  - El archivo resultante deberá guardarse como:
+      `control_central/cli/changelog/v0.1.1/add_changelog_entry_v0.1.1.py`
+  - También se creará un `changelog.yaml` específico de esta versión.
+

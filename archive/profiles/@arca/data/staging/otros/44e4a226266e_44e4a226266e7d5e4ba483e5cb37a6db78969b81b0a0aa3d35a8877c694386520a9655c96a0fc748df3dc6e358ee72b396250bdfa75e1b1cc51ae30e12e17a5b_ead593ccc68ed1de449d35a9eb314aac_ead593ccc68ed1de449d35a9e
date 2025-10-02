@@ -1,0 +1,32 @@
+
+# ✅ Validación completa de documentación
+
+Ejecuta el script de validación que inspecciona toda la estructura documental (`docs/`).
+
+## 🔧 Comando
+
+```bash
+bash scripts/validar_documentacion.sh
+```
+
+## 🧪 Alias recomendado
+
+```bash
+alias alma_valida='bash ~/Alma/ALMA_RESIST/scripts/validar_documentacion.sh'
+```
+
+Agregalo en tu archivo `~/.bashrc` o `~/.zshrc` para usarlo fácilmente:
+
+```bash
+source ~/.bashrc
+# o
+source ~/.zshrc
+```
+
+## 📌 Detalles
+
+Este script realiza:
+
+- Validación sintáctica de los metadatos YAML
+- Normalización de nombres de módulos a `snake_case`
+- Corrección automática de campos requeridos

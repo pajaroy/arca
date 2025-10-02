@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# ================================
+# ALMA_RESIST - Iniciar Servidor LLM
+# ================================
+
+# Activar entorno virtual
+echo "🔧 Activando entorno virtual..."
+source .venv/bin/activate || { echo "❌ No se pudo activar el entorno virtual"; exit 1; }
+
+# Establecer puerto y host (personalizable)
+HOST="0.0.0.0"
+PORT="8000"
+APP_PATH="core.llm_server.main:app"
+
+# Verificar modelo cargado
+MODEL_PATH="core/llm_server/models/mistral-7b-q4.gguf"
+if [ ! -f "$MODEL_PATH" ]; then
+  echo "❌ Modelo no encontrado en $MODEL_PATH"
+  exit 1
+fi
+
+# Iniciar servidor FastAPI con Uvicorn
+echo "🚀 Iniciando servidor en http://$HOST:$PORT ..."
+uvicorn "$APP_PATH" --reload --host "$HOST" --port "$PORT"

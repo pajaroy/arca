@@ -1,0 +1,31 @@
+{
+  "version": "0.3.0",
+  "tipo": "readme",
+  "schema": "almaresist.readme_v1",
+  "descripcion": "Versión antifallos y auditable del CLI de bitácoras.\nImplementa backup automático, triple formato, changelog, documentación modular y restauración segura.\n",
+  "estructura": [
+    "src/",
+    "docs/"
+  ],
+  "tags": [
+    "bitacora",
+    "cli",
+    "v0.3.0",
+    "estable",
+    "auditable",
+    "institucional"
+  ],
+  "linked_to": [
+    "docs/README.yaml",
+    "src/README.yaml",
+    "../_legacy/v0.2.0/README.yaml",
+    "../_legacy/readme/README.yaml"
+  ],
+  "responsable": "Kael @ ALMA_RESIST",
+  "hash_verificacion": "sha256:pending",
+  "historial": [
+    "2025-06-17: Publicación y consolidación de la versión v0.3.0 antifallos."
+  ],
+  "last_modified": "2025-06-17T13:16:00Z",
+  "last_modified_by": "Kael"
+}

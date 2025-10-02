@@ -1,0 +1,33 @@
+### Cambios clave:
+
+1. **Estructura de directorios:**
+    
+    - Organización clara con paquetes Python válidos (archivos `__init__.py`)
+        
+    - Separación clara entre implementación y pruebas
+        
+2. **Corrección de importaciones:**
+    
+    - Eliminada la importación circular en `context_tracker.py`
+        
+    - Rutas de importación consistentes
+        
+3. **Mejoras en ContextTracker:**
+    
+    - Carga inicial del caché desde el archivo
+        
+    - Validación de datos al cargar el historial
+        
+    - Manejo más robusto de líneas corruptas
+        
+    - Permisos de archivo mejor gestionados
+        
+4. **Pruebas actualizadas:**
+    
+    - Manejo de codificación UTF-8 en todas las operaciones de archivo
+        
+    - Verificación de permisos más flexible
+        
+    - Corrección de la lógica de longitud del historial
+        
+    - Manejo adecuado de datos corruptos

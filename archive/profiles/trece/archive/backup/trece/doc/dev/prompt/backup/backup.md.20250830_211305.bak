@@ -1,0 +1,113 @@
+---
+type: "prompt"
+fecha: "2025-08-19"
+version: "0.1.0"
+descripcion: "pedido del script backup.py"
+---
+
+# Prompt backup.py:
+
+ - Es un script para hacer backup dentro de ~/trece.
+
+ - Deberia tomar un archivo qe le digamos con la ruta y hacer un backup fechado con la misma ruta de directorios en ~/trece/archive/backup/ y el mismo directorio qe tenia con mkdir -p para tener todo ordenado igual qe en el proyecto y guardar un maximo de 10 backup por archivo
+
+ - Deberia mantener siempre el orden de directorios replicado en los backup y poder restaurar un backup a la ultima version guardada
+  
+## respuesta:
+
+¡Claro! Te explico exactamente cómo usar el script con ejemplos concretos:
+
+## 📁 Estructura de ejemplo:
+Supongamos que tienes este archivo:
+```
+~/proyectos/mi_app/config.json
+```
+
+## 🚀 Ejemplos de uso:
+
+### 1. **Crear backup de un archivo:**
+```bash
+# Desde cualquier directorio (usando ruta absoluta)
+python3 backup.py backup ~/proyectos/mi_app/config.json
+
+# O usando ruta relativa (desde tu home)
+python3 backup.py backup proyectos/mi_app/config.json
+
+# O desde el directorio del proyecto
+cd ~/proyectos/mi_app
+python3 /ruta/al/backup.py backup config.json
+```
+
+### 2. **Listar backups existentes:**
+```bash
+python3 backup.py list ~/proyectos/mi_app/config.json
+```
+
+### 3. **Restaurar el último backup:**
+```bash
+python3 backup.py restore ~/proyectos/mi_app/config.json
+```
+
+### 4. **Restaurar un backup específico:**
+```bash
+# Primero lista para ver los índices
+python3 backup.py list ~/proyectos/mi_app/config.json
+
+# Luego restaura el número 3 (por ejemplo)
+python3 backup.py restore ~/proyectos/mi_app/config.json --index 3
+```
+
+## 📂 Qué hace exactamente:
+
+Cuando ejecutas:
+```bash
+python3 backup.py backup ~/proyectos/mi_app/config.json
+```
+
+El script:
+1. ✅ Crea el directorio: `~/trece/archive/backup/proyectos/mi_app/`
+2. ✅ Copia el archivo como: `config.json.20241215_143022.bak`
+3. ✅ Mantiene máximo 10 versiones (elimina las más viejas)
+
+## 🎯 Ejemplo práctico paso a paso:
+
+```bash
+# 1. Ve a tu directorio home
+cd ~
+
+# 2. Crea un archivo de prueba
+echo "versión 1" > prueba.txt
+
+# 3. Hazle backup
+python3 backup.py backup prueba.txt
+
+# 4. Modifica el archivo
+echo "versión 2" > prueba.txt
+
+# 5. Haz otro backup
+python3 backup.py backup prueba.txt
+
+# 6. Lista los backups
+python3 backup.py list prueba.txt
+
+# 7. Restaura la versión anterior
+python3 backup.py restore prueba.txt --index 1
+
+# 8. Verifica el contenido
+cat prueba.txt  # Mostrará "versión 1"
+```
+
+## 📝 Para hacerlo más fácil:
+
+Puedes crear un alias en tu `.bashrc` o `.zshrc`:
+```bash
+alias trece-backup="python3 ~/ruta/al/backup.py"
+```
+
+Y luego usarlo así:
+```bash
+trece-backup backup ~/documentos/importante.txt
+trece-backup list ~/documentos/importante.txt
+```
+
+¿Te gustaría que modifique algo del script para hacerlo aún más fácil de usar?

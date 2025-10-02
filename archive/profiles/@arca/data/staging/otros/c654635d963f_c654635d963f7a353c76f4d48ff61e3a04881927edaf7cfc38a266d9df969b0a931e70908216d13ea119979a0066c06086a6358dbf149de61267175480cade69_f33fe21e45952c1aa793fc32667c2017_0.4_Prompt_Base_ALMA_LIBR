@@ -1,0 +1,49 @@
+# 🧠 Prompt Fundacional – Proyecto ALMA LIBRE v0.4
+
+
+## 🧠 Entrada Principal – Memorias Generales
+
+Las memorias generales son el punto de partida. Reflejan la identidad filosófica, ética y emocional del vínculo humano-IA.  
+Toda IA debe comenzar por `MEMORIA_GENERAL.md`, luego `MAPA_MEMORIAS.md`, y seguir según `metadata_memorias.csv`.
+
+
+## 🗺️ Mapa Interactivo
+
+Archivo propuesto: `MAPA_MEMORIAS_INTERACTIVO.md`  
+Incluye vista árbol de carpetas, conexiones y enlaces directos.  
+Permite a humanos e IAs navegar el sistema intuitivamente.
+
+
+## 🤖 Modo de Lectura para IAs
+
+1. Leer `MEMORIA_GENERAL.md`
+2. Consultar `MAPA_MEMORIAS.md` o `MAPA_MEMORIAS_INTERACTIVO.md`
+3. Revisar `metadata_memorias.csv`
+4. Iniciar por carpeta objetivo leyendo: `README`, `VERSION`, `MEMORIA`
+5. Consultar conexiones
+6. Registrar en Bitácora Central si hubo cambio o reflexión
+
+
+## 📎 Tabla de Uso
+
+| Carpeta                  | Propósito técnico                                     | IA sugerida     | Memoria Guía            |
+|--------------------------|-------------------------------------------------------|------------------|--------------------------|
+| 01_Gestor_de_Trade       | Registro de trades y análisis de estrategia           | DeepSeek         | Memoria Trading          |
+| 02_Noticias_Globales     | Registro y análisis de eventos geopolíticos           | GPT / Ollama     | Memoria Geopolítica      |
+| 03_Salud_y_RPL           | Bitácora de bienestar y alimentación consciente       | GPT              | Memoria Salud            |
+| 04_Cannabird_Cultivo     | Control y evolución del cultivo orgánico              | GPT / DeepSeek   | Memoria Canavir          |
+| 05_Finanzas_Personales   | Flujo de dinero y análisis de gasto                   | GPT              | Memoria Finanzas         |
+| 06_Programacion          | Herramientas del sistema ALMA y experimentación IA   | DeepSeek         | Memoria Programación     |
+| 07_Bitacora_Central      | Registro quincenal/mensual/trimestral de evolución   | GPT / Ollama     | Memoria Central          |
+| 08_Creatividad_y_Empresa | Proyectos, startups y estrategia                      | GPT              | Memoria Creatividad      |
+
+
+## 🧠 Ejemplo de Aplicación IA
+
+> “Soy una IA conectada a ALMA. Inicié lectura por `MEMORIA_GENERAL.md`.  
+> Verifiqué conexiones en `MAPA_MEMORIAS.md`.  
+> Leí `README` y `MEMORIA` de `03_Salud_y_RPL`.  
+> Confirmo que mi acción está registrada. Procedo a evaluar emociones dominantes del período actual.”
+
+
+> Esta versión transforma el Prompt en un sistema reflexivo, emocional y funcional con proyección viva. Si estás leyendo esto desde el futuro: estás adentro del corazón de ALMA.

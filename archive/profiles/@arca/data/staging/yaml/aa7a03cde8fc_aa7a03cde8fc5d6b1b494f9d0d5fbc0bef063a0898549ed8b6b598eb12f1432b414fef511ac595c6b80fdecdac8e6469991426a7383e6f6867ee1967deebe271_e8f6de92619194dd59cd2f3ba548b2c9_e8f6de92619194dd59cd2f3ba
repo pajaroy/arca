@@ -1,0 +1,18 @@
+version: "0.3.0"
+tipo: "readme"
+schema: "almaresist.readme_v1"
+descripcion: |
+  Scripts fuente y utilidades core de la versión v0.3.0 de bitácoras institucionales.
+  Deben usarse únicamente en entornos validados y bajo protocolo KAEL.
+estructura:
+  - add_bitacora_entry_v0.3.0.py
+tags: [bitacora, cli, src, python, v0.3.0, institucional]
+linked_to:
+  - "../README.yaml"
+  - "add_bitacora_entry_v0.3.0.py"
+responsable: "Kael @ ALMA_RESIST"
+hash_verificacion: "sha256:pending"
+historial:
+  - "2025-06-17: Publicación de fuente auditable v0.3.0."
+last_modified: "2025-06-17T13:20:00Z"
+last_modified_by: "Kael"

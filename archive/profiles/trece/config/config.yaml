@@ -1,0 +1,22 @@
+# ~/trece/config/config.yaml
+
+paths:
+  archive:
+    active: "archive/active"
+    backup: "archive/backup"
+    exports: "archive/exports"
+    history: "archive/history"
+  database: "database/trece.db"
+  meta:
+    schema_sql: "meta/schema.sql"
+    schema_yaml: "meta/schema.yaml"
+  src:
+    core: "src/core"
+    scripts: "src/script"   # <- corregido plural (si aplica)
+    utils: "src/util"       # <- corregido plural (si aplica)
+  templates: "templates"
+  tmp: "tmp"
+
+settings:
+  default_template: "template_flujo_interno_beta.csv"
+  # db_connection lo podés generar en el código a partir de paths.database

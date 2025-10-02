@@ -1,0 +1,84 @@
+- id: BITACORA_VIVA_2025-06-06_09
+  tipo: bitacora_viva
+  modulo: control_central/asesor-ia/core/notebooks/scripts_bitacora
+  autor: Kael
+  fecha: 2025-06-06
+  status: registrado
+  tags: [scripts, bitacora, changelog, automatizacion, cli, modularidad]
+  entradas:
+    - fecha: 2025-06-06
+      accion: "Creación de estructura scripts_bitacora"
+      descripcion: >
+        Se creó la carpeta scripts_bitacora con subcarpetas docs y src, y archivos README para alojar los scripts de automatización de bitácora y changelog de ALMA_RESIST.
+      motivo: "Centralizar y automatizar la gestión documental viva de ALMA_RESIST."
+      ejecutado_por: "Kael (CLI, con Santi)"
+      estado: "Finalizado, estructura lista para cargar scripts."
+- id: BITACORA_VIVA_2025-06-06_10
+  tipo: bitacora_viva
+  modulo: control_central/asesor-ia/core/notebooks
+  autor: Kael
+  fecha: 2025-06-06
+  status: registrado
+  tags: [estructura, modularidad, scripts, bitacora, changelog, convertidor]
+  entradas:
+    - fecha: 2025-06-06
+      accion: "Creación de subcarpetas modulares para scripts de gestión documental"
+      descripcion: >
+        Se crearon las carpetas bitacora_script, changelog_script y convert_multiformato, cada una con src, docs y README.md internos para máxima modularidad y orden documental.
+      motivo: "Separar claramente las funciones de bitácora, changelog y conversión de formatos en ALMA_RESIST."
+      ejecutado_por: "Kael (CLI, con Santi)"
+      estado: "Finalizado, listo para alojar desarrollo de scripts."
+  entradas:
+    - fecha: 2025-06-06
+      accion: "Preparación y debug de entorno de pruebas para script bitácora viva"
+      descripcion: |
+        - Se detectó incompatibilidad de formato en el archivo bitacora_viva.yaml.
+        - Se respaldó el archivo original con timestamp antes de cualquier modificación.
+        - Se vació el archivo y se dejó sólo 'entradas: []' para asegurar compatibilidad con el script MVP.
+        - Se ejecutó la primer prueba de agregado automático, sin éxito (no se insertó entrada).
+        - Se mantiene entorno listo para debugging, registro y seguimiento.
+      motivo: "Debug, QA y aseguramiento de integridad previa a automatización."
+      ejecutado_por: "Santi & Kael"
+      estado: "En test - proceso registrado y controlado"
+      tags:
+        - debug
+        - bitacora
+        - mvp
+        - backup
+        - auditoria
+
+
+
+
+
+
+
+---
+- id: CHANGELOG_VIVO_2025-06-06_09
+  tipo: changelog_vivo
+  modulo: control_central/asesor-ia/core/notebooks/scripts_bitacora
+  autor: Kael
+  fecha: 2025-06-06
+  status: publicado
+  tags: [scripts, bitacora, changelog, automatizacion, cli, modularidad]
+  entradas:
+    - fecha: 2025-06-06
+      version: "1.0"
+      cambios: >
+        Alta de estructura base scripts_bitacora/ para automatización de bitácoras y changelogs vivos en ALMA_RESIST.
+      impacto: >
+        Se establece el entorno para la gestión automatizada y multiplataforma de eventos y cambios institucionales.
+- id: CHANGELOG_VIVO_2025-06-06_10
+  tipo: changelog_vivo
+  modulo: control_central/asesor-ia/core/notebooks
+  autor: Kael
+  fecha: 2025-06-06
+  status: publicado
+  tags: [estructura, modularidad, scripts, bitacora, changelog, convertidor]
+  entradas:
+    - fecha: 2025-06-06
+      version: "1.0"
+      cambios: >
+        Creación de las carpetas bitacora_script, changelog_script y convert_multiformato, con su estructura base (src, docs, README.md) bajo core/notebooks.
+      impacto: >
+        Se optimiza la modularidad y la mantenibilidad del entorno de scripts para la gestión documental viva.

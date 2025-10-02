@@ -1,0 +1,43 @@
+
+# 📄 Changelog - Prompt ALMA_LOADER Individual v2.1.0
+
+## ✅ Mejoras Completas Integradas
+
+### 🔄 Interfaz Conversacional
+- Soporte para ingreso de memorias en lenguaje natural con conversión automática a formato JSON.
+
+### 📊 Resúmenes Diarios Automáticos
+- Generación de resúmenes por categoría, alertas destacadas y sugerencias basadas en patrones.
+
+### 🏆 Sistema Gamificado
+- Asignación de puntos por hábitos productivos, niveles desbloqueables, incentivo al uso constante.
+
+### 📅 Integración con Calendario
+- Alertas automáticas para acciones próximas a vencer y revisiones periódicas.
+
+### ⚡ Acciones Rápidas
+- Soporte para comandos del tipo `/accion` para registrar hábitos comunes (ej: meditar, ajustar riesgo).
+
+### ☁️ Backups en la Nube
+- Sincronización automática de archivos JSON a servicios como Google Drive/Dropbox.
+
+### 🧠 Módulo Predictivo y Analytics
+- Incorporación estructurada de `alma_analytics.py` para análisis y predicción de resultados.
+- Soporte para entrenamiento de modelos simples (Logistic Regression, Random Forest).
+- Visualización de correlaciones entre tags, emociones y resultados.
+
+### 🧩 Reglas Dinámicas
+- Nuevas reglas `if-then` en el schema para sugerencias contextuales.
+
+### 📋 Dashboard Automatizado
+- Exportación HTML/Markdown de estadísticas clave por categoría, tags y emociones.
+
+### 🛡️ Automatización y Limpieza
+- Cronjob sugerido para validaciones, limpieza y backup automático.
+
+### 🔔 Alertas Inteligentes
+- Sistema propuesto de alertas inmediatas ante condiciones de alto riesgo.
+
+### 📘 Documentación Extendida
+- Inclusión futura de `README.md` con guía de instalación y uso básico.
+

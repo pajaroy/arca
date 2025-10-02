@@ -1,0 +1,41 @@
+# 🔍 Auditoría Técnica – Módulo `log_crypto.py` + `test_log_crypto.py`
+**Sistema:** ALMA_RESIST  
+**Versión base:** v0.0.0.4.1  
+**Ruta módulo:** `core/llm_server/utils/log_crypto.py`  
+**Ruta test:** `tests/test_log_crypto.py`  
+**Fecha:** 2025-05-28  
+**Auditor responsable:** DeepSeek AI
+
+
+## 🧠 Puntos a Evaluar
+
+1. **Cifrado y descifrado:**  
+   - ¿Es robusto y seguro el sistema de cifrado con AES-256-GCM y ChaCha20?
+   - ¿Se manejan correctamente los errores de descifrado?
+   - ¿Está bien gestionado el `nonce`, padding y claves?
+
+2. **Generación de claves:**  
+   - ¿Los métodos usados para generar claves son criptográficamente seguros?
+   - ¿Se reutiliza adecuadamente la lógica de generación para distintos usos?
+
+3. **Validación de logs cifrados:**  
+   - ¿El mecanismo de validación implementado (`validar_log_cifrado`) detecta correctamente archivos truncados o malformados?
+
+4. **Cobertura de tests:**  
+   - ¿Los tests cubren todos los flujos esperados?
+   - ¿Incluyen pruebas de errores, claves incorrectas y validaciones?
+
+5. **Estilo y modularidad:**  
+   - ¿El código sigue buenas prácticas de Python (nombres, estructura, excepciones)?
+   - ¿Se integra bien con el resto del sistema ALMA_RESIST (imports, __init__, etc.)?
+
+
+## 📢 Notas del Desarrollador
+
+- El entorno usa rutas relativas y se ejecuta desde CLI con:
+  ```bash
+  PYTHONPATH=/home/bird/Alma/ALMA_RESIST pytest tests/test_log_crypto.py -v
+  ```
+
+- El error actual impide correr los tests por falta del paquete `llama_cpp`, requerido por `model_wrapper.py`. Se sugiere aislar la dependencia para auditar `log_crypto` de forma independiente.
+

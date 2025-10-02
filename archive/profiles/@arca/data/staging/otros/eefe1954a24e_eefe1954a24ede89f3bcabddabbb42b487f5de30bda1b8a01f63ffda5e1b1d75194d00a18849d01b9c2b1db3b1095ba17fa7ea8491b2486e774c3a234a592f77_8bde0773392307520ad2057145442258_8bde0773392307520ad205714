@@ -1,0 +1,13 @@
+# Prompt para IAs o humanos – Generación de logs estandarizados
+
+Usar la plantilla `log_template.yaml` como formato común de eventos registrados por módulos de ALMA LIBRE.
+
+Debe completarse con:
+- Fecha y hora del evento
+- Nombre del módulo que genera el log
+- Tipo de evento: info, advertencia, error, crítico
+- Descripción breve del suceso
+- Archivos afectados (si los hay)
+- Fuente: IA, humano o sistema
+
+Este estándar permite centralizar y auditar la actividad de todos los módulos del sistema de forma trazable y compatible.

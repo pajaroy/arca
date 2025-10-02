@@ -1,0 +1,17 @@
+# 🧠 Solicitud de Implementación – `context_tracker.py` – Sprint 2.6 – ALMA_RESIST
+
+## 🎯 Objetivo
+
+Implementar el módulo `context_tracker.py`, encargado de registrar y mantener un historial contextual estructurado de interacciones en el servidor ALMA_RESIST. Este historial será clave para futuras reflexiones automáticas, reconstrucción de diálogos y razonamiento semántico.
+
+
+## 🧪 Ejemplo de uso
+
+```python
+from integration.context_tracker import ContextTracker
+
+tracker = ContextTracker()
+tracker.track_interaction("¿Qué es la resiliencia?", "La capacidad de...", {"modelo": "mistral"})
+historial = tracker.get_history(5)
+```
+

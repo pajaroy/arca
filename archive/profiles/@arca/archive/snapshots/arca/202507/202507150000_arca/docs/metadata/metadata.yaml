@@ -1,0 +1,27 @@
+# ===============================
+# METADATOS UNIVERSALES - ARCA
+# ===============================
+metadatos:
+  id_unico: "f4a3b2c1-..."       # UUID único del archivo/registro
+  tipo: "config"                 # (config | doc | log | model | script | memoria | db | dataset | otro)
+  nombre: "configuracion_base"
+  version: "0.1.0"
+  estado: "activo"               # (activo | borrador | obsoleto | legado | testeando)
+  fecha_creacion: "2025-07-14T19:00:00-03:00"
+  fecha_modificacion: "2025-07-14T19:00:00-03:00"
+  autor: "Bird"
+  colaboradores: ["Alma"]
+  descripcion: "Archivo base de configuración inicial para el módulo ARCA."
+  tags: ["arca", "configuracion", "sistema", "v0.1.0"]
+  dependencia_modulos: ["alma", "db", "logs"]   # Referencias cruzadas
+  path_fisico: "/config/configuracion_base.yaml"
+  hash_integridad: "2ab36c...7e91"              # SHA256/MD5 para control de integridad
+  origen: "manual"                              # (manual | autogenerado | importado | IA | migracion)
+  permisos: "rw-r--r--"                         # Permisos UNIX, opcional
+  confidencialidad: "pública"                   # (pública | interna | privada | confidencial)
+  referencias_externas: []                      # Ej: links, DOI, dataset, fuente
+  historial:
+    - version: "0.1.0"
+      fecha: "2025-07-14"
+      cambios: "Creación inicial del archivo."
+    # Agregar cambios sucesivos aquí

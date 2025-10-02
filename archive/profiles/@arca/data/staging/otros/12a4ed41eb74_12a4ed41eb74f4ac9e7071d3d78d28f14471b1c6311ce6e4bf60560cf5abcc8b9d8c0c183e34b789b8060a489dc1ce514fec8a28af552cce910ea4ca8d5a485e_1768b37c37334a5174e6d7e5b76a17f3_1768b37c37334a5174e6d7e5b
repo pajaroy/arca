@@ -1,0 +1,86 @@
+{
+    "type": "object",
+    "required": [
+        "id",
+        "categoria",
+        "contenido",
+        "tags"
+    ],
+    "properties": {
+        "id": {
+            "type": "string"
+        },
+        "categoria": {
+            "type": "string"
+        },
+        "contenido": {
+            "type": "string"
+        },
+        "tags": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "resumen_inferido": {
+            "type": "string"
+        },
+        "embedding_id": {
+            "type": "string"
+        },
+        "vector": {
+            "type": "array",
+            "items": {
+                "type": "number"
+            }
+        },
+        "intencion_detectada": {
+            "type": "string"
+        },
+        "origen_input": {
+            "type": "string"
+        },
+        "relaciones": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "tipo": {
+                        "type": "string"
+                    },
+                    "target_id": {
+                        "type": "string"
+                    },
+                    "peso": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "tipo",
+                    "target_id",
+                    "peso"
+                ]
+            }
+        },
+        "visibilidad": {
+            "type": "string",
+            "enum": [
+                "publica",
+                "privada",
+                "solo_sistema"
+            ]
+        },
+        "owner_id": {
+            "type": "string"
+        },
+        "estado": {
+            "type": "string",
+            "enum": [
+                "pendiente",
+                "guardado",
+                "vectorizado",
+                "error"
+            ]
+        }
+    }
+}

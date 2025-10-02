@@ -1,0 +1,114 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_a5d967
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Force Snake Case Modules
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:c81a839369f7f74234390748a016f355a5f27f53ec9aad40c16fed9ee7679fd9
+---
+#!/usr/bin/env python3
+# force_snake_case_modules.py â€“ Normaliza el campo "module" en snake_case en todos los .md
+
+import os
+import re
+import yaml
+import argparse
+import logging
+import unicodedata
+from datetime import datetime
+from pathlib import Path
+import shutil
+
+# Config
+DEFAULT_ROOT = "./docs"
+BACKUP_DIR = "./backup_snakecase"
+DATE_FORMAT = '%Y-%m-%d'
+
+def slugify(value):
+    value = unicodedata.normalize('NFKD', value)
+    value = value.encode('ascii', 'ignore').decode('ascii')
+    value = re.sub(r'[\s\-\.]', '_', value)
+    value = re.sub(r'[^a-z0-9_/]', '', value.lower())
+    value = re.sub(r'_+', '_', value)
+    value = re.sub(r'_+/_+', '/', value)
+    value = value.strip('_/')
+    parts = [part.strip('_') for part in value.split('/') if part.strip('_')]
+    return '/'.join(parts)
+
+def extract_yaml(content):
+    if content.startswith('---\n'):
+        parts = content.split('---\n', 2)
+        if len(parts) >= 3:
+            return parts[1].strip(), parts[2].lstrip()
+    return None, content
+
+def update_module_field(metadata, raw_module):
+    original = metadata.get('module', '')
+    new_value = slugify(raw_module)
+    if original != new_value:
+        metadata['module'] = new_value
+        return original, new_value
+    return None, None
+
+def create_backup(file_path, root_path):
+    backup_dir = Path(BACKUP_DIR) / datetime.now().strftime('%Y%m%d')
+    backup_dir.mkdir(parents=True, exist_ok=True)
+    backup_file = backup_dir / file_path.relative_to(root_path)
+    backup_file.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(file_path, backup_file)
+    logging.debug(f"Backup en: {backup_file}")
+
+def process_file(file_path, root_path, dry_run, backup):
+    content = file_path.read_text(encoding='utf-8')
+    yaml_block, body = extract_yaml(content)
+    if not yaml_block:
+        return False
+
+    metadata = yaml.safe_load(yaml_block)
+    if not metadata or 'module' not in metadata:
+        return False
+
+    raw_module = str(file_path.relative_to(root_path)).replace('\\', '/').replace('.md', '')
+    original, updated = update_module_field(metadata, raw_module)
+
+    if original and updated:
+        new_yaml = yaml.dump(metadata, sort_keys=False, allow_unicode=True, default_flow_style=False)
+        new_content = f"---\n{new_yaml}---\n{body}"
+        if not dry_run:
+            if backup:
+                create_backup(file_path, root_path)
+            file_path.write_text(new_content, encoding='utf-8')
+        print(f"âœ… {file_path} | module: '{original}' â†’ '{updated}'")
+        return True
+    return False
+
+def main():
+    parser = argparse.ArgumentParser(description="Forzar snake_case en campo 'module'")
+    parser.add_argument('--root', default=DEFAULT_ROOT, help='Directorio raÃ­z a procesar')
+    parser.add_argument('--dry-run', action='store_true', help='Simular sin escribir cambios')
+    parser.add_argument('--backup', action='store_true', help='Crear backups')
+    parser.add_argument('--verbose', action='store_true', help='Mostrar detalles')
+    args = parser.parse_args()
+
+    logging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO)
+    root_path = Path(args.root).resolve()
+    changed_files = 0
+
+    for file_path in root_path.rglob('*.md'):
+        if process_file(file_path, root_path, args.dry_run, args.backup):
+            changed_files += 1
+
+    print(f"\nðŸ“Š Archivos modificados: {changed_files}")
+
+if __name__ == "__main__":
+    main()

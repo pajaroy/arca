@@ -1,0 +1,220 @@
+---
+tipo: script_principal
+id: SCRIPT_PRINCIPAL_2025-06-05_4eef8d
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Main V0.0.0.1
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:93ade65d6e7a39a77ccd9845d941fafdce7a1eadce2865c49debb525f8e7c4d8
+---
+# core/llm_server/main.py
+import asyncio
+from datetime import datetime
+from typing import Optional
+from fastapi import FastAPI, HTTPException, status, BackgroundTasks
+from pydantic import BaseModel, Field
+import logging
+from .model_wrapper.model_wrapper import ModelWrapper
+from .transport_layer.transport_layer import TransportLayer
+from .integration.context_tracker import ContextTracker
+from .integration.memory_graph import MemoryGraph
+from .utils.log_writer import LogWriter
+from .utils.log_crypto import CryptoEngine
+
+# Configuración inicial
+app = FastAPI(title="ALMA_RESIST LLM Server", version="0.0.0.4.1")
+logger = logging.getLogger("alma_server")
+model_wrapper: Optional[ModelWrapper] = None
+context_tracker = ContextTracker()
+memory_graph = MemoryGraph()
+log_writer = LogWriter()
+crypto_engine = CryptoEngine()
+
+# Esquemas de validación Pydantic
+class PromptRequest(BaseModel):
+    prompt: str = Field(..., min_length=1, max_length=2000,
+                        example="¿Cuál es el sentido de la vida?",
+                        description="Prompt para la IA reflexiva")
+
+class HealthCheck(BaseModel):
+    status: str
+    model_loaded: bool
+    model_info: Optional[dict]
+    context_entries: int
+    graph_nodes: int
+
+def log_event(event_type: str, message: str, metadata: Optional[dict] = None):
+    """Registra un evento estructurado con encriptación"""
+    event = log_writer.log_event(
+        event_type=event_type,
+        message=message,
+        module="llm_server",
+        metadata=metadata
+    )
+    log_writer.write_log(event)
+
+def encrypt_logs_background():
+    """Tarea en segundo plano para cifrar logs antiguos"""
+    try:
+        for log_file in log_writer.log_dir.glob("*.log"):
+            if not crypto_engine.validar_log_cifrado(str(log_file)):
+                encrypted_file = str(log_file) + ".enc"
+                key, salt = crypto_engine.generar_clave()
+                crypto_engine.encrypt_log(str(log_file), encrypted_file, key, salt)
+                log_file.unlink()
+                log_event("security", f"Log cifrado: {log_file.name}")
+    except Exception as e:
+        logger.error(f"Error en cifrado de logs: {str(e)}")
+
+@app.on_event("startup")
+async def initialize_services():
+    """Inicializa todos los servicios al arrancar el servidor"""
+    global model_wrapper
+    
+    try:
+        # 1. Cargar modelo LLM
+        model_path = "models/mistral-7b-q4.gguf"
+        model_wrapper = ModelWrapper(model_path, quantization="Q4")
+        model_wrapper.load_model()
+        log_event("startup", f"Modelo cargado: {model_path}")
+        
+        # 2. Inicializar capa de transporte
+        transport_layer = TransportLayer(
+            contracts_dir="docs/contracts/",
+            base_dir="transport_data"
+        )
+        log_event("startup", "Capa de transporte inicializada")
+        
+        # 3. Cargar contexto previo si existe
+        context_history = context_tracker.get_history()
+        if context_history:
+            memory_graph.merge_from_context(context_tracker)
+            log_event("context", 
+                     f"Contexto histórico cargado: {len(context_history)} interacciones")
+        
+    except Exception as e:
+        logger.critical(f"Error crítico en inicialización: {str(e)}")
+        raise RuntimeError("Fallo en inicialización del servidor") from e
+
+@app.post("/responder", response_model=dict,
+          responses={
+              200: {"description": "Respuesta generada exitosamente"},
+              503: {"description": "Modelo no cargado o no disponible"}
+          })
+async def generate_response(
+    request: PromptRequest, 
+    background_tasks: BackgroundTasks
+):
+    """Endpoint principal para generación de respuestas reflexivas"""
+    if not model_wrapper or not model_wrapper.is_loaded():
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="El modelo no está cargado"
+        )
+
+    try:
+        # Generar respuesta asíncrona
+        response = await asyncio.to_thread(
+            model_wrapper.generate, 
+            request.prompt
+        )
+        
+        # Registrar en contexto
+        context_tracker.track_interaction(
+            prompt=request.prompt,
+            response=response,
+            metadata={
+                "model": model_wrapper.get_model_info()["nombre"],
+                "module": "llm_server"
+            }
+        )
+        
+        # Actualizar grafo de memoria
+        background_tasks.add_task(
+            memory_graph.create_edge,
+            request.prompt,
+            response,
+            weight=0.8
+        )
+        
+        log_event("response", "Respuesta generada", {
+            "prompt_length": len(request.prompt),
+            "response_length": len(response)
+        })
+        
+        return {
+            "respuesta": response,
+            "metadata": {
+                "modelo": model_wrapper.get_model_info()["nombre"],
+                "longitud_prompt": len(request.prompt),
+                "timestamp": datetime.utcnow().isoformat()
+            }
+        }
+        
+    except Exception as e:
+        log_event("error", "Error generando respuesta", {
+            "error": str(e),
+            "prompt": request.prompt[:100]
+        })
+        logger.error(f"Error en generación: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Error interno procesando la solicitud"
+        )
+
+@app.get("/health", response_model=HealthCheck)
+async def health_check():
+    """Endpoint de verificación de salud del servicio"""
+    model_info = model_wrapper.get_model_info() if model_wrapper else None
+    return {
+        "status": "OK" if model_wrapper and model_wrapper.is_loaded() else "ERROR",
+        "model_loaded": model_wrapper.is_loaded() if model_wrapper else False,
+        "model_info": model_info,
+        "context_entries": len(context_tracker),
+        "graph_nodes": len(memory_graph.graph)
+    }
+
+@app.get("/context/history")
+async def get_context_history(limit: int = 10):
+    """Obtiene el historial de contexto reciente"""
+    return context_tracker.get_history(limit)
+
+@app.get("/memory/graph")
+async def get_memory_graph():
+    """Exporta el grafo de memoria en formato JSON"""
+    return dict(memory_graph.graph)
+
+@app.post("/memory/export")
+async def export_memory_graph(format: str = "json"):
+    """Exporta el grafo de memoria a un archivo"""
+    try:
+        filename = f"memory_export_{datetime.utcnow().strftime('%Y%m%d')}"
+        if format == "json":
+            memory_graph.export_graph(f"{filename}.json", "json")
+        else:
+            memory_graph.export_graph(f"{filename}.graphml", "graphml")
+        return {"status": "success", "file": filename}
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error exportando grafo: {str(e)}"
+        )
+
+@app.post("/logs/encrypt")
+async def encrypt_logs_task(background_tasks: BackgroundTasks):
+    """Inicia el cifrado de logs en segundo plano"""
+    background_tasks.add_task(encrypt_logs_background)
+    return {"status": "started", "message": "Cifrado de logs iniciado en segundo plano"}
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000, log_level="info")

@@ -1,0 +1,76 @@
+
+# main.py
+import logging
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from api.v1.memorias import router as memorias_router
+from api.v1.trading import router as trading_router
+from api.v1.cultivo import router as cultivo_router
+from core.memoria_saver import guardar_memoria  # Para verificar dependencias
+from core.cifrado import cifrar_contenido  # Para verificar clave Fernet
+
+# Configuración inicial de logging
+from core.logging_config import configurar_logging_json
+configurar_logging_json()
+logging.getLogger("main").info("🚀 ALMA_LOADER API inicializada")
+
+logger = logging.getLogger(__name__)
+
+# Crear instancia de FastAPI
+app = FastAPI(
+    title="ALMA_LOADER API",
+    description="API principal para el sistema de gestión de memorias ALMA_LOADER",
+    version="1.0.0",
+)
+
+# Configurar CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Incluir routers
+app.include_router(memorias_router)
+app.include_router(trading_router)
+app.include_router(cultivo_router)
+
+@app.on_event("startup")
+async def verificar_dependencias():
+    """Verifica conexión con dependencias críticas al iniciar"""
+    checks = {
+        "SQLite": verificar_sqlite,
+        "FAISS": verificar_faiss,
+        "Fernet": verificar_clave_cifrado
+    }
+    
+    for service, check in checks.items():
+        try:
+            check()
+            logger.info(f"✅ {service} - Conexión exitosa")
+        except Exception as e:
+            logger.error(f"❌ {service} - Error de conexión: {str(e)}")
+            # En producción, podríamos querer detener el inicio aquí
+            # raise RuntimeError(f"Fallo en dependencia crítica: {service}")
+
+def verificar_sqlite():
+    """Verifica conexión básica con SQLite"""
+    from sqlite_storage import obtener_conexion
+    conn = obtener_conexion()
+    conn.execute("SELECT 1").fetchone()
+    conn.close()
+
+def verificar_faiss():
+    """Verifica disponibilidad de FAISS"""
+    from vector_storage import obtener_indice
+    if not obtener_indice():
+        raise RuntimeError("Índice FAISS no inicializado")
+
+def verificar_clave_cifrado():
+    """Verifica que el cifrado funciona con la clave actual"""
+    test_string = "test_alma_loader"
+    cifrado = cifrar_contenido(test_string)
+    if not cifrado:
+        raise RuntimeError("Error en cifrado/descifrado")

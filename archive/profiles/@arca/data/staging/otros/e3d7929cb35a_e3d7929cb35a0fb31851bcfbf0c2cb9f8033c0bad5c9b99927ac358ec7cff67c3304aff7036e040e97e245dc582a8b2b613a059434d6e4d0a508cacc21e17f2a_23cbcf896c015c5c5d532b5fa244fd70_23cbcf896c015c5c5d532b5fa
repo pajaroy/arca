@@ -1,0 +1,40 @@
+
+from textual.app import App, ComposeResult
+from textual.widgets import Button, Header, Footer, Static
+from textual.containers import Vertical
+from alma_core import write_memory, read_memories, validate_memorias, backup_memorias
+
+class AlmaMenu(Static):
+    def compose(self) -> ComposeResult:
+        yield Button("📝 Escribir nueva memoria", id="write")
+        yield Button("📖 Leer memorias", id="read")
+        yield Button("🧪 Validar base de datos", id="validate")
+        yield Button("💾 Backup manual", id="backup")
+        yield Button("❌ Salir", id="exit")
+
+class AlmaApp(App):
+    CSS_PATH = None
+    TITLE = "ALMA LIBRE – Terminal Visual"
+    SUB_TITLE = "Menú principal"
+
+    def compose(self) -> ComposeResult:
+        yield Header()
+        yield AlmaMenu()
+        yield Footer()
+
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        button_id = event.button.id
+        if button_id == "write":
+            write_memory()
+        elif button_id == "read":
+            read_memories()
+        elif button_id == "validate":
+            validate_memorias()
+        elif button_id == "backup":
+            backup_memorias()
+        elif button_id == "exit":
+            self.exit()
+
+if __name__ == "__main__":
+    app = AlmaApp()
+    app.run()

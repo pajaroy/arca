@@ -1,0 +1,16 @@
+{
+  "id": "PROMPT_BITACORA_CENTRALESIS_2025-06-08_01",
+  "tipo": "prompt_cuestionario_cli",
+  "modulo": "agentes/centralesis/bitacoras",
+  "titulo": "Carga automática de bitácora personal de Centralesis",
+  "descripcion": "Centralesis debe dejar registro de cada auditoría institucional, reflexión filosófica o mejora sistémica relevante.\nCompletá el cuestionario y generá el comando CLI correspondiente.\n",
+  "campos_pregunta": [
+    "¿Qué reflexión, hallazgo o auditoría filosófica desea dejar Centralesis?",
+    "¿Qué impacto tiene esto en la gobernanza o filosofía de ALMA_RESIST?",
+    "¿Advertencias o recomendaciones para la evolución futura del sistema?",
+    "Notas o comentarios institucionales."
+  ],
+  "instrucciones_ia": "- Respondé con rigor técnico y filosófico.\n- Generá el comando CLI usando add_bitacora_entry_v0.1.0.py\n- Usá la ruta: /home/bird/alma_core/control_central/agentes/centralesis/bitacoras/bitacora_personal_centralesis.yaml\n- Mostrá solo el comando y los campos completos.\n",
+  "ejemplo_comando": "python3 /home/bird/alma_core/control_central/core/notebooks/cli/bitacora/add_bitacora_entry_v0.1.0.py \\\n  --accion \"...\" \\\n  --descripcion \"...\" \\\n  --motivo \"...\" \\\n  --ejecutado_por \"centralesis\" \\\n  --tags \"reflexion,bitacora,centralesis,auditoria,filosofia\" \\\n  --bitacora \"/home/bird/alma_core/control_central/agentes/centralesis/bitacoras/bitacora_personal_centralesis.yaml\"\n",
+  "notas": "Este prompt es para registrar auditorías filosóficas, institucionales y recomendaciones estratégicas.\n"
+}

@@ -1,0 +1,76 @@
+metadatos:
+  id_unico: "cfg-ARCA-001"
+  tipo: "configuracion_principal"
+  nombre: "config.yaml"
+  version: "0.1.0"
+  estado: "archivado"
+  fecha_creacion: "2025-07-15"
+  autor: "Bird"
+
+# config.yaml
+
+config:
+  version: "0.1.0"
+  project: "ARCA"
+  default_author: "Bird"
+  base_path: "/home/arca/arca"  # ¡Clave! Punto = misma carpeta donde está config.yaml
+  schemas:
+    json: "schema.json"
+    sql: "schema.sql" 
+    yaml: "schema.yaml"
+  tracked_directories: []
+  tracked_extensions:
+    - ".yaml"
+    - ".yml"
+    - ".md"
+    - ".json"
+    - ".py"
+    - ".sql"
+    - ".csv"
+  
+  hash_algorithm: "sha256"
+  uuid_algorithm: "uuid4"
+  default_permissions: "rw-r--r--"
+  default_confidentiality: "public"
+  
+  logging:
+    ruta: "logs.parquet"  # Relativo a base_path
+    formato: "parquet"
+
+  formatos_soportados:
+    yaml:
+      delimiter: "---\n"
+      end_delimiter: "---\n"
+      frontmatter_type: "yaml"
+    yml:
+      delimiter: "---\n"
+      end_delimiter: "---\n"
+      frontmatter_type: "yaml"
+    md:
+      delimiter: "---\n"
+      end_delimiter: "---\n"
+      frontmatter_type: "yaml"
+    json:
+      delimiter: ""
+      end_delimiter: ""
+      frontmatter_type: "json"
+    py:
+      delimiter: "\"\"\"\n"
+      end_delimiter: "\"\"\"\n"
+      frontmatter_type: "yaml"
+    sql:
+      delimiter: "/*\n"
+      end_delimiter: "*/\n"
+      frontmatter_type: "yaml"
+    csv:
+      delimiter: "#---\n"
+      end_delimiter: "#---\n"
+      frontmatter_type: "yaml"
+
+  campos_obligatorios:
+    - uuid
+    - tipo
+    - nombre
+    - version
+    - hash_integridad
+    - estado

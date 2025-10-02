@@ -1,0 +1,12 @@
+---
+module: faq_ia
+type: core
+status: in_progress
+created: '2025-05-17'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# FAQ para IAs
+- CUDA faltante: Instalar driver compatible
+- Memoria insuficiente: Usar modelos 3-4bit

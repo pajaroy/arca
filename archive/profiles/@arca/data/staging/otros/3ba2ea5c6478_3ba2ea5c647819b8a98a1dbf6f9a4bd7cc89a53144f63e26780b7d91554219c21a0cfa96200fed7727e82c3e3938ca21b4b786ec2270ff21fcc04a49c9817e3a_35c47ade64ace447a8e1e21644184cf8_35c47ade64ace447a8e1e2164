@@ -1,0 +1,18 @@
+## 🎯 Objetivo: Sistema de control contable bifurcado
+
+- **WHITE (YING):** todos los **gastos documentables** del club → alquiler, insumos, mejoras, herramientas, etc.
+    
+- **BLACK (YANG):** todos los **ingresos informales** provenientes de la venta de producción.
+    
+- La conexión entre ambos: usar el ingreso de la hoja negra como **"origen de fondos anónimo"** para justificar egresos reales en la blanca (_sin trazabilidad directa, pero con consistencia lógica_).
+    
+
+
+## 🧠 Cómo se administra este sistema
+
+|Área|Qué se anota|Ejemplo|
+|---|---|---|
+|**YING**|Todo lo que puede tener factura o justificativo|Tierra, macetas, luminarias, alquiler, reparaciones|
+|**YANG**|Todo ingreso de venta (flor, aceite, derivados)|$200.000 de producción mensual, anotado con fecha y lote|
+|**SÍNTESIS**|Cruce de ambos → ¿cuánto del black cubre gastos white? ¿Cuánto se reserva?|$50.000 usado como “aporte anónimo” para comprar LED|
+

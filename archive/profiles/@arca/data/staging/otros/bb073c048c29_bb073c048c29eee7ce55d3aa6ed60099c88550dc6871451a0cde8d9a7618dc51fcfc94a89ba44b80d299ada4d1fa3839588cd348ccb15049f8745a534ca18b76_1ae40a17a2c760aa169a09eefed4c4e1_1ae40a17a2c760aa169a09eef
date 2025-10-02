@@ -1,0 +1,3 @@
+# API REST (Propuesta Inicial)
+- /generate [POST]: genera texto desde prompt
+- /status [GET]: retorna estado del modelo

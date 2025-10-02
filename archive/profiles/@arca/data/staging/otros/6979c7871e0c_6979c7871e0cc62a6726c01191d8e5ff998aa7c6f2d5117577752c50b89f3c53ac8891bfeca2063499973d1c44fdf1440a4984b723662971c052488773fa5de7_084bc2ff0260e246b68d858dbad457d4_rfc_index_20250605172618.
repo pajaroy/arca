@@ -1,0 +1,25 @@
+---
+module: 99_rfc/rfc_index
+type: core
+status: in_progress
+created: '2025-05-22'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 📚 Índice de RFCs – ALMA_RESIST
+
+Este documento lista todos los RFCs (Request for Comments) del sistema, con su estado actual, versión y ubicación.
+
+---
+
+| ID       | Título                                 | Estado     | Versión | Ubicación                                 |
+|----------|----------------------------------------|------------|---------|--------------------------------------------|
+| RFC-0001 | Gobernanza modular del sistema         | ✅ Activo  | v2.0    | `docs/99_rfc/RFC_0001_metodologia_v2.md`   |
+| RFC-0001 | Gobernanza modular del sistema (v1)    | 🗃 Archivado | v1.0    | `docs/versiones/v0.0.0.1/rfc/RFC_0001_metodologia.md` |
+| RFC-0001 | Guía operativa aplicada (v1)           | 🗃 Archivado | v1.0    | `docs/versiones/v0.0.0.1/rfc/RFC_0001_metodologia_general.md` |
+
+---
+
+📁 Este índice será actualizado con cada nuevo RFC o versión.
+

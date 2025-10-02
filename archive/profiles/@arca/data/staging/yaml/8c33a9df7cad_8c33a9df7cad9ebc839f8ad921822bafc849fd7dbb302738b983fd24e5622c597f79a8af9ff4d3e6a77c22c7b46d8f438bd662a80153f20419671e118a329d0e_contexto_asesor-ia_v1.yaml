@@ -1,0 +1,26 @@
+---
+file: "contexto_asesor-ia_v1.md"
+version: "0.1"
+tags:
+  - asesor-IA
+  - auditoría
+  - GPT
+  - DeepSeek
+  - ALMA_RESIST
+linked_files:
+  - confirmacion_de_rol_gpt.md
+  - confirmacion_de_rol_deepseek.md
+  - contrato_fundacional_asesor-IA_v2.md
+  - prompt_bitacora_control_central.md
+  - sprint_actual_0.1_control_central.md
+  - sprint_actual_0.2_sincronizacion.md
+  - alma_resist_idea_base_0.0.0.1.md
+bitacoras:
+  - 2025-05-22_bitacora.md
+  - 2025-05-23_bitacora.md
+  - 2025-05-29_bitacora_consolidacion.md
+  - 2025-05-30_bitacora_central_reinstalacion.md
+  - 2025-06-01_bitacora_inicio.md
+status: "activo"
+last_update: "2025-06-01"
+---

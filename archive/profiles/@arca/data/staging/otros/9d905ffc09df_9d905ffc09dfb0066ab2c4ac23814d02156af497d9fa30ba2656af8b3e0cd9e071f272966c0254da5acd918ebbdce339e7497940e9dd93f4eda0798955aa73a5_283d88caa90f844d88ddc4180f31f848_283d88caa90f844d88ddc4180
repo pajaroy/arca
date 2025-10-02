@@ -1,0 +1,34 @@
+# 🤖 ALMA LIBRE – Telegram Transcriptor Bot
+
+Este bot transcribe audios enviados en grupos de Telegram usando Whisper localmente. Forma parte del sistema modular ALMA LIBRE.
+
+## 🚀 Funcionalidad
+- Recibe audios (`voice` o `audio`)
+- Convierte y transcribe con Whisper
+- Responde en el grupo con la transcripción
+- Maneja errores, usa carpetas temporales y optimiza rendimiento
+
+## ⚙️ Requisitos
+
+```bash
+pip install python-telegram-bot==20.3 whisper torch ffmpeg-python
+sudo apt install ffmpeg
+```
+
+## ▶️ Ejecución
+
+```bash
+python alma_transcriptor_bot.py
+```
+
+## 📂 Estructura opcional de logs
+
+Podés guardar transcripciones en:
+```
+logs/{grupo}/2025-05-14_123456.md
+```
+
+## 🛠️ Futuras mejoras
+- Clasificación por grupo
+- Resumen automático por GPT
+- Sincronización a Obsidian/Drive

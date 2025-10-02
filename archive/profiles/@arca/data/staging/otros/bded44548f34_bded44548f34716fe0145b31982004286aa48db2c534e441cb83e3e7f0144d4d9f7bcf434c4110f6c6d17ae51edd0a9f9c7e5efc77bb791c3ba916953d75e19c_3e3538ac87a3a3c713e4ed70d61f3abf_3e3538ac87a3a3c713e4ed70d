@@ -1,0 +1,20 @@
+# 🌐 Sincronización Automática – ALMA_CORE & ALMA_RESIST
+
+
+## Solución elegida: Syncthing
+
+### Ventajas
+- Sincronización peer-to-peer en tiempo real (LAN, WiFi, Internet).
+- Multiplataforma, interfaz web, control de versiones.
+- No requiere servidores externos ni servicios en la nube.
+- Configuración simple y control total sobre qué y cuándo sincronizar.
+
+
+## Extras
+
+- Se puede limitar el uso de ancho de banda, activar versiones históricas, y definir carpetas excluidas.
+- Es posible agregar un backup secundario en Google Drive, GitBook o disco externo como respaldo adicional.
+
+
+**Este sistema deja tus datos duplicados y sincronizados, listos para cualquier emergencia.**
+

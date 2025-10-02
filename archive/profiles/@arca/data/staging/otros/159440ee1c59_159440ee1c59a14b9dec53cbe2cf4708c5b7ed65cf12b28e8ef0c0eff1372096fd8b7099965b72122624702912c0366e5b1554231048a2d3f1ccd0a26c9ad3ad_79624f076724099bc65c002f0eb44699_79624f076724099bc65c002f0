@@ -1,0 +1,42 @@
+# ALMA_RESIST – Sistema Modular de Automatización IA
+
+**ALMA_RESIST** es un sistema modular, portátil y asistido por inteligencia artificial diseñado para gestionar, automatizar y documentar proyectos complejos con trazabilidad total.  
+Combina CLI, IA local, metodologías evolutivas y estructura documental compatible con humanos e IAs.
+
+> Versión actual: `v0.0.0.5`  
+> Estado: `estable`  
+> Sprint: `2.5` – Auditoría Final y Consolidación  
+> Última actualización: `2025-05-28`
+
+
+## 🔗 Archivos clave
+
+- `docs/version.md` → versión y ciclo de vida actual
+- `docs/changelog.md` → cambios históricos y lecciones aprendidas
+- `docs/control/sprints_activos/sprint_2.5_auditoria_checklist.md` → auditoría estructural
+- `docs/arquitectura/whitepaper/whitepaper_v1.md` → consolidación conceptual
+- `docs/arquitectura/prompt_tecnico/prompt_tecnico_base.md` → entrada técnica para IAs
+- `run_auditoria_automatica.sh` → pipeline de validación automática
+
+
+## 🧪 Metodologías Relevantes
+
+- `docs/control/metodologias/metodologia_agregado_archivos.md`
+- `docs/control/metodologias/metodologia_doc_ia.md`
+- `docs/control/metodologias/metodologia_sprints.md`
+
+
+## 🤖 IA y Semántica
+
+ALMA_RESIST está optimizado para ser comprendido por modelos IA locales o remotos. Utiliza campos YAML (`module`, `type`, `status`, `created`, `linked_to`, `context_tags`) y estructuras uniformes para facilitar procesamiento automático, indexación y búsqueda semántica.
+
+
+## 📌 Último Sprint Completado: 2.5 – Auditoría Final y Consolidación
+
+- Auditoría semántica completa del repositorio
+- Correcciones aplicadas a más de 100 archivos
+- Revisión profunda de `docs/`, `logs/`, `scripts/`
+- Limpieza de carpetas y mejora en `README.md`
+- Generación de documentación automatizada y validadores
+
+

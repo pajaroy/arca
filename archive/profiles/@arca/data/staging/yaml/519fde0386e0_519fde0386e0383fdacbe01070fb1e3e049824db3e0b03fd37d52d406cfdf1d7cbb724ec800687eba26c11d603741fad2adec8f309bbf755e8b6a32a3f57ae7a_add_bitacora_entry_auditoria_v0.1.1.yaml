@@ -1,0 +1,31 @@
+auditoria_script: add_bitacora_entry_v2
+version: 2.0
+estado: listo_con_observaciones
+auditor: kael
+fecha_revision: 2025-06-07
+
+diagnostico_general: >
+  El script cumple bien su función específica: registrar entradas estructuradas en una bitácora YAML. Es robusto en validación, tiene backups automáticos, y controles detallados por consola (debug). Sin embargo, está demasiado acoplado a su ruta absoluta, tiene muchas impresiones internas y aún no es 100% reutilizable como módulo dentro de un CLI.
+
+puntos_fuertes:
+  - Validación estricta de estructura y contenido
+  - Backups automáticos funcionales
+  - Debugging útil para QA
+  - Argumentos bien definidos
+  - Control de errores limpio y explícito
+
+debilidades:
+  - Ruta absoluta fija (`BITACORA_FILE`) limita reusabilidad
+  - Debug_print debería estar desactivable (modo silencioso por default)
+  - No está preparado como módulo (sin funciones exportables o `if __name__ == "__main__"` desacoplado)
+  - No distingue entre ejecución directa y uso importado
+  - No tiene test unitarios asociados
+
+recomendaciones:
+  - [ ] Pasar ruta por CLI obligatoriamente (`--bitacora` sin default hardcoded)
+  - [ ] Reemplazar `print()` por `logger.debug/info` y usar `--verbose`
+  - [ ] Separar lógica en funciones importables y dejar `main()` como wrapper
+  - [ ] Agregar test unitarios básicos (pytest) para validar entradas
+  - [ ] Permitir escribir en `stdout` en vez de archivo (modo dry-run)
+
+apto_para_integrar_al_cli: true_con_modularizacion

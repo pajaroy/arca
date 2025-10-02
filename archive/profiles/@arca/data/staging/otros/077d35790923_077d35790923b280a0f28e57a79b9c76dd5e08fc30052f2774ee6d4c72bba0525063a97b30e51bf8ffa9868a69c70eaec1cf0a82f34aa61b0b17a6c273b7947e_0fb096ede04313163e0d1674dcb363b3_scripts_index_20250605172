@@ -1,0 +1,29 @@
+---
+module: utilidades/scripts/scripts_index
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 📋 Índice Técnico de Scripts
+
+📁 Carpeta: `docs/utilidades/scripts/`  
+📅 Generado: 2025-05-26
+
+---
+
+| Script                        | Tipo   | Función principal                                        | Estado     | Notas                  |
+|------------------------------|--------|----------------------------------------------------------|------------|-------------------------|
+| add_linked_to_minimo.py      | Python | Agrega campo 'linked_to' mínimo a documentos 'core'        | activo     |  |
+| alma-cli.py                  | Python | CLI para auditoría de YAML y actualizaciones masivas       | activo     | Requiere archivo de reglas |
+| ayuda.py                     | Python | Muestra comandos disponibles en CLI                        | borrador   |  |
+| buscar_memoria.py            | Python | Búsqueda de registros/memorias internas del sistema        | borrador   |  |
+| cargar_modelo.py             | Python | Carga inicial de modelo LLM o IA local                     | borrador   |  |
+| fix_metadata.py              | Python | Corrige campos YAML como module/type/status/created        | activo     | Usar con backup |
+| force_snake_case_modules.py  | Python | Fuerza snake_case en campo 'module'                        | activo     |  |
+| resumir.py                   | Python | Generador automático de resúmenes de documentos .md        | pendiente  |  |
+| salir.py                     | Python | Script de salida / cierre del CLI                          | borrador   |  |
+| validate_docs.py             | Python | Valida la estructura del YAML con reglas semánticas        | activo     |  |
+| validar_documentacion.sh     | Bash   | Script shell auxiliar para lanzar validaciones             | activo     |  |

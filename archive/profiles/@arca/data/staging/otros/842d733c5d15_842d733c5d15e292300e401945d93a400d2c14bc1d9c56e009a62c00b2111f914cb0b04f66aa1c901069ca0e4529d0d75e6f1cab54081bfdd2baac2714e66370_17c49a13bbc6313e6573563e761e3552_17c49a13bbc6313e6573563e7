@@ -1,0 +1,81 @@
+# 🧠 CONTEXT.md – ALMA_RESIST
+
+📅 Última actualización: 2025-05-23  
+👤 Responsable: Santi / pájaro  
+🔖 Estado actual: Documentación estructural consolidada, testing mínimo implementado, sistema preparado para integración IA
+
+
+## 🧩 Estado Actual (Snapshot: `v0.0.0.2_estructura_documental`)
+
+Este snapshot marca el **cierre del Sprint 2.1 – Profesionalización de la Estructura Documental**, consolidando:
+
+- Estructura de carpetas y documentación técnica (`docs/`)
+- Plantillas reutilizables en formato YAML (`estructura_doc/`)
+- Testing manual y automatizado de metadatos (`testing/`)
+- Registro vivo de tareas (`TODO.md`) y estado global (`.project.md`)
+- Empaquetado de versión con hash único y firma de cierre
+
+🧠 El sistema se encuentra listo para escalar hacia módulos inteligentes de memoria, reflexión, CLI dinámico y navegación IA.
+
+
+## 📌 Archivos Principales
+
+### 📘 Idea y Arquitectura
+- [[idea_base/idea_base]]
+- [[ALMA_RESIST/docs/decisiones_arquitectonicas]]
+- [[RFC_0001_metodologia]]
+
+### 📑 Control del Proyecto
+- [[ALMA_RESIST/docs/hitos]]
+- [[ALMA_RESIST/docs/introduccion/changelog]]
+- [[ALMA_RESIST/docs/lecciones_aprendidas]]
+- [[dependencias]]
+
+### 📂 Documentación Modular
+- [[metodologia/metodologia_de_trabajo]]
+- [[ALMA_RESIST/docs/arquitectura/estructura_doc/readme]]
+- [[referencias/README]]
+- [[referencias/externas/README]]
+- [[referencias/externas/ia/README]]
+- [[referencias/externas/seguridad/README]]
+- [[referencias/externas/patrones/README]]
+
+### 🔍 Auditorías y Registros
+- [[auditorias/auditoria_estructura]]
+- [[post_mortem_tecnico]]
+
+## 🧠 Estado del Proyecto
+
+✔️ Auditoría técnica completa  
+✔️ Documentación modular viva  
+✔️ Testing básico funcionando  
+✔️ Scripts de integración estandarizados  
+🔜 Próximo paso: integración IA (memoria + reflexión semántica + comandos)
+
+
+## 📎 Apéndice Sprint 2.3 – Integración de Idea Base Unificada
+
+📅 Fecha: 2025-05-23  
+🔖 Versión: v0.3.0-dev  
+👤 Responsable: Santi / pájaro
+
+Este sprint consolidó múltiples documentos conceptuales en una única idea base (`ALMA_RESIST_idea_base_0.0.0.1.md`) y reorganizó la carpeta `docs/idea_base/`.
+
+- 🧠 Nueva estructura: `idea_base/`, `changelog.md`, `version.md`, `_legacy/`
+- 📦 Archivos archivados: `idea_base.md`, `idea_base_conciencia_ia.md`, `idea_base_origen.zip`
+- 🗂 Versionado y registro en: `log_integracion.md`, `mapeo_sprint_archivos.md`, `hitos.md`
+- 🔄 Próximo paso: sincronización con nube segura y planificación de Sprint 2.4
+
+📌 Este apéndice actúa como marcador de snapshot interno para herramientas futuras y scripts de automatización (`alma-cli snapshot-log`).
+
+
+## 🌍 Contexto Sprint 2.4
+
+En este sprint se abordó una necesidad crítica: garantizar la coherencia estructural y semántica del repositorio.  
+Dado el crecimiento exponencial de archivos `.md` en el sistema ALMA_RESIST, era indispensable:
+
+- Definir una taxonomía clara (`type`, `domain`, `status`)
+- Establecer relaciones cruzadas (`linked_to`)
+- Integrar validación automática y trazabilidad IA
+
+Este sprint sienta las bases para la navegación semántica, inferencias de contexto y modularidad inteligente futura.

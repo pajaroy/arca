@@ -1,0 +1,54 @@
+# 📘 Log de Integración – ALMA_RESIST
+
+Este registro documenta la integración estructurada de componentes, scripts, metodologías y documentación asociada, como parte del proceso evolutivo del sistema ALMA_RESIST.
+
+
+### 📄 Archivos afectados
+
+- Todos los archivos bajo `docs/` fueron procesados por:
+  - `fix_metadata.py` (v4)
+  - `force_snake_case_modules.py`
+  - `validate_docs.py`
+
+### 🔄 Scripts involucrados
+
+- `fix_metadata.py`: Corrige YAML, normaliza metadatos y fechas.
+- `force_snake_case_modules.py`: Ajusta los valores del campo `module` a snake_case.
+- `validate_docs.py`: Verifica integridad y formato de cada archivo.
+- `integrar_nuevo_archivo.sh`: Ejecuta todo el flujo anterior de forma automática.
+
+### 📁 Estructura validada y organizada
+
+- Archivos migrados a snake_case.
+- README.md actualizado con el nuevo flujo.
+- Metadatos estandarizados para 100+ documentos.
+- Validación 100% exitosa al final del sprint.
+
+### 🧠 Impacto
+
+- Documentación IA-compatible.
+- Base sólida para procesos automáticos futuros.
+- Reducción de errores semánticos y duplicaciones.
+
+### 🔗 Relación con otros módulos
+
+- `metodologia_agregado_archivos_v8.md`: Documento madre que rige el flujo de integración.
+- `metodologia_sprints_v2.md`: Registra la metodología para ejecución y cierre de sprints.
+- `resumen_mvp.md`: Resume el progreso global alcanzado en esta versión.
+
+
+## 🧠 Sprint 2.3 – Integración de Idea Base Unificada
+
+📅 Fecha de integración: 2025-05-23  
+📁 Carpeta afectada: `docs/idea_base/`  
+📦 Versión de referencia: `v0.3.0-dev`  
+🔧 Estado: ✅ Finalizado
+
+
+### 🧰 Acciones
+
+- Archivos antiguos movidos a `docs/idea_base/_legacy/`
+- Generación de documentación estructural
+- Empaquetado de backups históricos en `_legacy.zip`
+- Documentación lista para ser usada como nodo raíz semántico
+

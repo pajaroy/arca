@@ -1,0 +1,55 @@
+# 🕵️ Auditoría Crítica Institucional de Centralesis (ALMA_RESIST)
+
+**Por:** Auditor Senior de Ecosistemas IA – Cumplimiento y Gobernanza  
+**Fecha:** 2025-06-06
+
+
+## 🛠️ Tabla de Mejoras Prioritarias
+
+| Área                | Problema                        | Recomendación                                                                                                                                         | Prioridad   |
+|---------------------|---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
+| Integridad Estructural | Duplicidad `.md`/`.yaml`      | Eliminar secciones YAML de `.md`; usar `.md` solo para documentación humana                                                                          | 🔴 Alta     |
+| Seguridad de Datos  | Método `awk` vulnerable         | Reemplazar por: `yq eval '.memorias_institucionales += [load("memoria_temp.yaml")]' -i archivo.yaml`                                                 | 🔴 Crítica  |
+| Gobernanza          | Revisiones sin enforcement      | Implementar: <br>• Cron job para activar `revision_programada` cada 21 días<br>• Umbrales métricos para "crítico" (ej: >3 `alertas_omision`/semana)  | 🟠 Media-Alta|
+| Interoperabilidad   | Tags problemáticos              | Normalizar tags:<br>• Usar `tag_gobernanza` en vez de `#gobernanza`<br>• Añadir campo `tags_clean: [gobernanza]` en YAML                             | 🟠 Media    |
+| Parsing/Escalabilidad| Registros "siempre"            | Convertir en `plantillas_memorias` separadas; generar instancias con UUID y fecha                                                                    | 🟢 Baja     |
+| Auditabilidad       | Validación débil                | Añadir:<br>• Schema JSON para memorias<br>• Hook pre-commit con `yamllint --strict`                                                                  | 🟠 Media    |
+
+
+### 2. Módulo de Alertas Estratificadas
+
+```mermaid
+graph TD
+    A[Evento] --> B{Gravedad}
+    B -->|Crítico| C[Notificar DEG + Centralesis]
+    B -->|Alto| D[Memoria + Revisión 24h]
+    B -->|Medio| E[Registro en bitácora]
+    B -->|Bajo| F[Agregar a próxima revisión]
+```
+
+
+### 4. Integración Profunda con Obsidian
+
+- Automatizar generación de:
+    - Grafos de relaciones entre memorias
+    - Alertas visuales por tags críticos
+    - Backlinks automáticos en notas relacionadas
+
+
+## 📈 Conclusión de Auditoría
+
+Centralesis establece un marco filosófico y técnico sólido, pero presenta riesgos operativos críticos en su implementación actual.  
+La versión 1.1 debe priorizar:
+
+- Eliminación de redundancias entre `.md` y `.yaml`
+- Migración a herramientas YAML robustas (`yq` vs `awk`)
+- Implementación de mecanismos automáticos de enforcement
+- Normalización de estructuras para parsing escalable
+
+> "Un sistema de memoria institucional debe ser tan confiable como inmutable. Los hallazgos aquí expuestos comprometen ambos principios."
+>
+> — Dictamen final del auditor
+
+**Revisión técnica recomendada:** 7 días calendario  
+**Prioridad de implementación:** 🔴 Crítica
+

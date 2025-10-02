@@ -1,0 +1,50 @@
+# ✅ Sprint 0.1 – Reestructuración IA_asistente (ALMA_EMPRESA)
+
+📁 Carpeta base: `ALMA_EMPRESA/IA_asistente`  
+🧭 Metodología aplicada: `metodologia_estructura_autonoma_v2`  
+📅 Fecha de inicio: 2025-05-29
+
+
+## 📋 Checklist de tareas
+
+### 📁 Estructura
+- [ ] Crear estructura interna mínima:
+  ```
+  IA_asistente/
+  ├── docs/
+  │   ├── readme.md
+  │   ├── changelog.md
+  │   └── bitacoras/
+  ├── scripts/
+  ├── config/
+  ├── tests/
+  ├── logs/
+  └── meta/
+      └── module.yaml
+  ```
+
+### 📝 Documentación
+- [ ] Redactar `docs/readme.md` con objetivo y contexto del módulo
+- [ ] Generar `docs/changelog.md` (v0.1 como primera entrada)
+- [ ] Crear bitácora inicial en `docs/bitacoras/` con tareas de este sprint
+- [ ] Crear `meta/module.yaml` con los metadatos del módulo
+
+### ⚙️ Configuración
+- [ ] Crear carpeta `config/` y definir estructura inicial de parámetros o tokens si aplica
+
+### 📂 Código y ejecución
+- [ ] Evaluar si hay scripts existentes o placeholders que mover a `scripts/`
+- [ ] Preparar estructura para posibles pruebas en `tests/`
+
+### 🧾 Control de calidad
+- [ ] Añadir `.gitignore` si fuera un módulo versionable por separado
+- [ ] Validar formato Markdown y enlaces IA-friendly
+
+
+## 🔄 Próximos pasos
+
+Al finalizar este sprint:
+- Validar el módulo con `fix_metadata` si está disponible.
+- Agregar referencia cruzada desde `ALMA_EMPRESA/docs/readme.md`.
+- Escalar el modelo a otras subcarpetas (equipo, asesoría, entidades).
+

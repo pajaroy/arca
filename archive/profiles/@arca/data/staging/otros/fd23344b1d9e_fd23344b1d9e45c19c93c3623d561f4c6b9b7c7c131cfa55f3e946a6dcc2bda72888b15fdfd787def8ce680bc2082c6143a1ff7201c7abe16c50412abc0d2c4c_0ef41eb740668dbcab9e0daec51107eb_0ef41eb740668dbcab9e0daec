@@ -1,0 +1,164 @@
+"""
+memoria_loader.py - Gestor de Memorias para ALMA
+"""
+
+import json
+import os
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, List, Optional, TypedDict
+
+import click
+
+# Typing
+class Memoria(TypedDict):
+    id: str
+    fecha: str
+    titulo: str
+    categoria: str
+    tags: List[str]
+    relacionadas: List[str]
+    contenido: str
+
+# Configuración
+MEMORIAS_JSON = Path("memorias.json")
+OBSIDIAN_DIR = Path("obsidian_exports")
+CHANGELOG_FILE = Path("CHANGELOG.md")
+BACKUP_DIR = Path("backups")
+
+# Esquema de validación
+CATEGORIAS_VALIDAS = {"GEN", "TRD", "CAP", "PROG", "REFLEX", "HEALTH", "HIST", "GEO", "ECO"}
+
+# Helpers
+def cargar_memorias() -> List[Memoria]:
+    if not MEMORIAS_JSON.exists():
+        return []
+    with open(MEMORIAS_JSON, "r") as f:
+        return json.load(f)
+
+def guardar_memorias(memorias: List[Memoria]) -> None:
+    BACKUP_DIR.mkdir(exist_ok=True)
+    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    backup_path = BACKUP_DIR / f"memorias_{timestamp}.json"
+    if MEMORIAS_JSON.exists():
+        MEMORIAS_JSON.rename(backup_path)
+    with open(MEMORIAS_JSON, "w") as f:
+        json.dump(memorias, f, indent=2)
+
+def validar_memoria(memoria: Memoria) -> bool:
+    try:
+        categoria = memoria["id"].split("-")[0]
+        if categoria not in CATEGORIAS_VALIDAS:
+            return False
+        datetime.fromisoformat(memoria["fecha"])
+        if not isinstance(memoria["tags"], list):
+            return False
+        return all([
+            memoria["id"],
+            memoria["titulo"],
+            memoria["categoria"] == categoria,
+            isinstance(memoria["relacionadas"], list)
+        ])
+    except (KeyError, ValueError):
+        return False
+
+def generar_id(categoria: str) -> str:
+    memorias = cargar_memorias()
+    ids_existentes = [m["id"] for m in memorias if m["id"].startswith(categoria)]
+    if not ids_existentes:
+        return f"{categoria}-001"
+    ultimo_num = max(int(id.split("-")[1]) for id in ids_existentes)
+    return f"{categoria}-{ultimo_num + 1:03d}"
+
+def actualizar_changelog(accion: str, memoria_id: str) -> None:
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    entry = f"## {timestamp} - {accion} memoria {memoria_id}\n"
+    with open(CHANGELOG_FILE, "a") as f:
+        f.write(entry)
+
+@click.group()
+def cli():
+    pass
+
+@cli.command()
+@click.option("--titulo", prompt=True)
+@click.option("--categoria", type=click.Choice(CATEGORIAS_VALIDAS), prompt=True)
+@click.option("--tags", prompt="Tags (separados por comas)")
+@click.option("--relacionadas", prompt="IDs relacionados (separados por comas)")
+@click.option("--contenido", prompt=True)
+def add_memoria(titulo: str, categoria: str, tags: str, relacionadas: str, contenido: str):
+    nueva_memoria: Memoria = {
+        "id": generar_id(categoria),
+        "fecha": datetime.now().isoformat(),
+        "titulo": titulo,
+        "categoria": categoria,
+        "tags": [t.strip() for t in tags.split(",")],
+        "relacionadas": [r.strip() for r in relacionadas.split(",") if r.strip()],
+        "contenido": contenido
+    }
+    if not validar_memoria(nueva_memoria):
+        click.echo("Error: Memoria no válida")
+        return
+    memorias = cargar_memorias()
+    memorias.append(nueva_memoria)
+    guardar_memorias(memorias)
+    actualizar_changelog("Añadida", nueva_memoria["id"])
+    click.echo(f"Memoria {nueva_memoria['id']} creada exitosamente!")
+
+@cli.command()
+@click.argument("memoria_id")
+def edit_memoria(memoria_id: str):
+    memorias = cargar_memorias()
+    for i, mem in enumerate(memorias):
+        if mem["id"] == memoria_id:
+            nueva_contenido = click.edit(mem["contenido"])
+            if nueva_contenido:
+                memorias[i]["contenido"] = nueva_contenido.strip()
+                guardar_memorias(memorias)
+                actualizar_changelog("Editada", memoria_id)
+                click.echo("Memoria actualizada!")
+            return
+    click.echo("Memoria no encontrada")
+
+@cli.command()
+@click.option("--id", help="Buscar por ID exacto")
+@click.option("--tag", help="Buscar por tag")
+@click.option("--fecha", help="Buscar por fecha (YYYY-MM-DD)")
+def search_memoria(id: Optional[str], tag: Optional[str], fecha: Optional[str]):
+    memorias = cargar_memorias()
+    resultados = memorias
+    if id:
+        resultados = [m for m in resultados if m["id"] == id]
+    if tag:
+        resultados = [m for m in resultados if tag in m["tags"]]
+    if fecha:
+        resultados = [m for m in resultados if m["fecha"].startswith(fecha)]
+    for mem in resultados:
+        click.echo(f"\n[{mem['id']}] {mem['titulo']}")
+        click.echo(f"Tags: {', '.join(mem['tags'])}")
+        click.echo(f"Contenido: {mem['contenido'][:100]}...")
+
+@cli.command()
+def export_memorias_md():
+    OBSIDIAN_DIR.mkdir(exist_ok=True)
+    memorias = cargar_memorias()
+    for mem in memorias:
+        contenido = f"""# {mem['titulo']}
+
+**ID**: `{mem['id']}`  
+**Fecha**: {mem['fecha']}  
+**Categoría**: {mem['categoria']}  
+**Tags**: {', '.join(mem['tags'])}  
+**Relacionadas**: {', '.join(mem['relacionadas']) or 'Ninguna'}
+
+---
+
+{mem['contenido']}
+"""
+        file_path = OBSIDIAN_DIR / f"{mem['id']}.md"
+        with open(file_path, "w") as f:
+            f.write(contenido)
+    click.echo(f"Exportadas {len(memorias)} memorias a Markdown")
+
+if __name__ == "__main__":
+    cli()

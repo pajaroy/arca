@@ -1,0 +1,222 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_0b2dd6
+version: '1.0'
+formato: sh
+modulo: ALMA_RESIST
+titulo: Chat V0.0.0.1
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:f62265260fde2f79435fc8e641a9420af351794e28d7bab13e84c4cc3825bebe
+---
+#!/bin/bash
+
+# Configuración
+API_URL="http://localhost:8000/responder"
+HISTORY_FILE="/tmp/alma_chat_history.txt"
+DEBUG_LOG="/tmp/alma_chat_debug.log"
+
+# Colores
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+NC='\033[0m' # No Color
+
+# Limpiar pantalla al inicio
+clear
+
+# Función para enviar mensajes a la API
+send_to_alma() {
+    local prompt="$1"
+    
+    # Escapar el prompt usando jq para formar un JSON válido
+    local json_payload
+    json_payload=$(jq -n --arg prompt "$prompt" '{"prompt": $prompt}')
+    
+    if [ $? -ne 0 ]; then
+        echo -e "${RED}Error al formatear el prompt a JSON${NC}" >> "$DEBUG_LOG"
+        return 1
+    fi
+    
+    # Enviar usando curl y capturar salida y código de estado
+    local response
+    response=$(curl -s -X POST "$API_URL" \
+        -H "Content-Type: application/json" \
+        -d "$json_payload" 2>>"$DEBUG_LOG")
+    local curl_exit=$?
+    
+    if [ $curl_exit -ne 0 ]; then
+        echo -e "${RED}Error de red al conectar con el servidor (código: $curl_exit)${NC}" >> "$DEBUG_LOG"
+        return 1
+    fi
+    
+    # Extraer respuesta
+    local answer
+    answer=$(echo "$response" | jq -r '.respuesta')
+    local jq_exit=$?
+    
+    if [ $jq_exit -ne 0 ]; then
+        echo -e "${RED}Error al parsear la respuesta del servidor${NC}" >> "$DEBUG_LOG"
+        echo "Respuesta cruda: $response" >> "$DEBUG_LOG"
+        return 1
+    fi
+    
+    if [ "$answer" == "null" ] || [ -z "$answer" ]; then
+        echo -e "${RED}Error: Respuesta vacía o nula del servidor${NC}" >> "$DEBUG_LOG"
+        echo "Respuesta cruda: $response" >> "$DEBUG_LOG"
+        return 1
+    fi
+    
+    echo "$answer"
+}
+
+# Función para mostrar historial
+show_history() {
+    if [ -f "$HISTORY_FILE" ]; then
+        echo -e "\n${YELLOW}--- Historial del Chat (últimas 10 entradas) ---${NC}"
+        tail -n 10 "$HISTORY_FILE" | awk '{if($1=="Tú:") print "\033[0;32m" $0 "\033[0m"; else print "\033[0;34m" $0 "\033[0m";}'
+        echo -e "${YELLOW}------------------------------------------------${NC}\n"
+    else
+        echo -e "${YELLOW}No hay historial disponible.${NC}"
+    fi
+}
+
+# Función para mostrar un spinner mientras se espera
+spinner() {
+    local pid=$1
+    local delay=0.1
+    local spinner_chars=('⣾' '⣽' '⣻' '⢿' '⡿' '⣟' '⣯' '⣷')
+    local i=0
+    while kill -0 "$pid" 2>/dev/null; do
+        i=$(( (i+1) %8 ))
+        printf "\r${CYAN}%s${NC} %s" "${spinner_chars[$i]}" "$2"
+        sleep $delay
+    done
+    printf "\r\033[K" # Limpiar línea
+}
+
+# Función principal de chat
+chat_loop() {
+    # Crear archivo de historial si no existe
+    touch "$HISTORY_FILE"
+    
+    echo -e "${GREEN}╔════════════════════════════════════════════╗"
+    echo -e "║    BIENVENIDO AL CHAT CON ${PURPLE}ALMA_RESIST${GREEN}     ║"
+    echo -e "╚════════════════════════════════════════════╝${NC}"
+    echo -e "${BLUE}Comandos especiales:"
+    echo -e "  ${YELLOW}salir${BLUE}     - Terminar la sesión"
+    echo -e "  ${YELLOW}historial${BLUE} - Mostrar historial de conversación"
+    echo -e "  ${YELLOW}limpiar${BLUE}   - Borrar historial de conversación"
+    echo -e "  ${YELLOW}debug${BLUE}     - Ver logs de depuración${NC}"
+    echo ""
+    
+    while true; do
+        echo -en "${GREEN}╔═[Tú]\n╚══> ${NC}"
+        read -r user_input
+        
+        # Manejar comandos especiales
+        case "$user_input" in
+            salir)
+                echo -e "${YELLOW}╔════════════════════════════════════════════╗"
+                echo -e "║             ¡HASTA PRONTO!                 ║"
+                echo -e "╚════════════════════════════════════════════╝${NC}"
+                return 0
+                ;;
+            historial)
+                show_history
+                continue
+                ;;
+            limpiar)
+                > "$HISTORY_FILE" # Limpiar contenido del historial
+                echo -e "${YELLOW}Historial borrado.${NC}"
+                continue
+                ;;
+            debug)
+                echo -e "\n${PURPLE}=== ÚLTIMOS ERRORES (${DEBUG_LOG}) ===${NC}"
+                tail -n 5 "$DEBUG_LOG" 2>/dev/null || echo "No hay logs de depuración"
+                echo -e "${PURPLE}====================================${NC}\n"
+                continue
+                ;;
+        esac
+        
+        # Registrar en historial
+        echo "Tú: $user_input" >> "$HISTORY_FILE"
+        
+        # Obtener respuesta en segundo plano
+        echo -en "${CYAN}ALMA está procesando tu mensaje...${NC}"
+        (send_to_alma "$user_input" > /tmp/alma_response.tmp) 2>>"$DEBUG_LOG" &
+        local alma_pid=$!
+        
+        # Mostrar spinner mientras espera
+        spinner $alma_pid "Procesando..."
+        
+        # Esperar a que termine el proceso en segundo plano
+        wait $alma_pid
+        local alma_status=$?
+        
+        # Leer respuesta
+        local response
+        response=$(</tmp/alma_response.tmp)
+        rm -f /tmp/alma_response.tmp
+        
+        if [ $alma_status -eq 0 ]; then
+            # Mostrar respuesta con formato
+            echo -e "${BLUE}╔═[ALMA]\n╚══> ${NC}$response"
+            
+            # Registrar respuesta
+            echo "ALMA: $response" >> "$HISTORY_FILE"
+        else
+            echo -e "\n${RED}╔════════════════════════════════════════════╗"
+            echo -e "║  ERROR: NO SE PUDO OBTENER RESPUESTA       ║"
+            echo -e "║  Ver 'debug' para más detalles             ║"
+            echo -e "╚════════════════════════════════════════════╝${NC}"
+        fi
+    done
+}
+
+# Limpiar al salir
+cleanup() {
+    rm -f /tmp/alma_response.tmp
+    echo -e "\n${YELLOW}Sesión finalizada. Historial guardado en: $HISTORY_FILE${NC}"
+}
+trap cleanup EXIT
+
+# Verificar dependencias
+check_dependencies() {
+    local missing=0
+    
+    if ! command -v jq &> /dev/null; then
+        echo -e "${RED}❌ Error: Necesitas instalar 'jq' para procesar las respuestas JSON${NC}"
+        echo "   Instala con: sudo apt install jq"
+        missing=1
+    fi
+    
+    if ! command -v curl &> /dev/null; then
+        echo -e "${RED}❌ Error: Necesitas instalar 'curl' para hacer peticiones HTTP${NC}"
+        echo "   Instala con: sudo apt install curl"
+        missing=1
+    fi
+    
+    return $missing
+}
+
+# Inicio del script
+if check_dependencies; then
+    # Crear archivo de debug si no existe
+    touch "$DEBUG_LOG"
+    echo -e "\n${CYAN}Iniciando sesión de chat - $(date)${NC}" >> "$DEBUG_LOG"
+    
+    chat_loop
+else
+    exit 1
+fi

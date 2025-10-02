@@ -1,0 +1,65 @@
+version: "0.3.0"
+tipo: "prompt"
+schema: "almaresist.prompt_script_v1"
+descripcion: |
+  Solicitud de upgrade del script institucional CLI para bitácoras ALMA_RESIST (add_bitacora_entry).
+  La nueva versión debe priorizar robustez antifallos, gobernanza documental, trazabilidad, y escalabilidad máxima.
+  El objetivo es eliminar errores humanos y consolidar la gobernanza institucional del módulo.
+estructura:
+  - backups automáticos y política de retención configurable
+  - generación y actualización automática de hash SHA-256 institucional
+  - changelog automático en cada bitácora (alta, edición, eliminación)
+  - validación estricta de estructura y tipos de campos antes de cada escritura
+  - sincronización triple formato robusta (.yaml, .json, .md) y recursiva
+  - logging institucional avanzado (archivos rotativos, integración externa)
+  - modularidad y extensibilidad para futuras integraciones
+  - interfaz CLI antifallos (preview, confirmación, dry-run avanzado, restore-backup)
+  - comandos para validación y restauración de backups
+  - documentación generada automáticamente y ayuda extendida en CLI
+tags:
+  - bitacora
+  - cli
+  - antifallos
+  - changelog
+  - hashing
+  - backup
+  - auditoria
+  - almaresist
+  - versionado
+linked_to:
+  - "../src/add_bitacora_entry_v0.2.0.py"
+  - "../docs/prompt_add_bitacora/prompt_add_bitacora_entry_v0.2.0.yaml"
+  - "../docs/readme_tecnico/readme_tecnico.yaml"
+responsable: "Equipo de Operaciones ALMA_RESIST"
+hash_verificacion: "sha256:pending"
+historial:
+  - "2025-06-17: Creación del prompt técnico para desarrollo de v0.3.0 bajo enfoque antifallos y gobernanza total."
+last_modified: "2025-06-17T12:00:00Z"
+last_modified_by: "Kael"
+requerimientos_detallados:
+  1: |
+    Backups automáticos indestructibles antes de modificar cualquier archivo, con política de retención configurable.
+  2: |
+    Cálculo y actualización automática del hash SHA-256 institucional en cada cambio, registrado en el campo 'hash_verificacion' y backups.
+  3: |
+    Changelog automático por cada acción (alta, edición, eliminación) con fecha, acción, usuario, hash previo y nuevo.
+  4: |
+    Validación estricta de estructura y tipos de campos. Abortado seguro si hay error y registro de alerta con opción de rollback.
+  5: |
+    Sincronización triple formato robusta (.yaml, .json, .md), con alerta ante divergencias y opción de regeneración forzada.
+  6: |
+    Logging institucional avanzado (archivos rotativos, integración externa, logs de errores, warnings, operaciones, timestamps y usuario).
+  7: |
+    Modularidad de código para soportar extensiones (firmas digitales, backups en nube, triggers externos).
+  8: |
+    Interfaz CLI antifallos, preview de cambios, confirmación interactiva, simulación extendida (dry-run), comando de validación y restauración de backups.
+  9: |
+    Documentación generada automáticamente y ayuda extendida en CLI (help avanzado, ejemplos, advertencias, mejores prácticas).
+criterios_calidad:
+  - Código auditable, legible y extensible.
+  - Nunca modificar sin backup y validación previa.
+  - Todo cambio debe reflejarse en bitácora, changelog y logs automáticos.
+  - Compatibilidad con agentes IA y sistemas de monitoreo externos.
+indicacion_final: >
+  Prioridad absoluta en robustez, transparencia y gobernanza institucional. 
+  No optimizar para velocidad ni MVP: el foco es máxima confiabilidad, auditoría y trazabilidad.

@@ -1,0 +1,303 @@
+.
+├── Archivos
+│   ├── Backups
+│   │   ├── Readmes
+│   │   └── Snapshots
+│   ├── Datasets
+│   ├── Downloads
+│   ├── Externo
+│   │   ├── alma-cli
+│   │   │   ├── bitacora
+│   │   │   │   ├── _legacy
+│   │   │   │   │   ├── README.json
+│   │   │   │   │   ├── README.md
+│   │   │   │   │   ├── README.yaml
+│   │   │   │   │   ├── v0.1.0
+│   │   │   │   │   │   ├── add_bitacora_entry_v0.1.0.py
+│   │   │   │   │   │   ├── README.json
+│   │   │   │   │   │   ├── README.md
+│   │   │   │   │   │   └── README.yaml
+│   │   │   │   │   └── v0.2.0
+│   │   │   │   │       ├── docs
+│   │   │   │   │       │   ├── prompt_add_bitacora
+│   │   │   │   │       │   │   ├── prompt_add_bitacora_entry_v0.2.0.json
+│   │   │   │   │       │   │   ├── prompt_add_bitacora_entry_v0.2.0.md
+│   │   │   │   │       │   │   ├── prompt_add_bitacora_entry_v0.2.0.yaml
+│   │   │   │   │       │   │   ├── README.json
+│   │   │   │   │       │   │   ├── README.md
+│   │   │   │   │       │   │   └── README.yaml
+│   │   │   │   │       │   ├── README.json
+│   │   │   │   │       │   ├── README.md
+│   │   │   │   │       │   ├── readme_tecnico
+│   │   │   │   │       │   │   ├── README.json
+│   │   │   │   │       │   │   ├── README.md
+│   │   │   │   │       │   │   ├── readme_tecnico.yaml
+│   │   │   │   │       │   │   └── README.yaml
+│   │   │   │   │       │   └── README.yaml
+│   │   │   │   │       ├── README.json
+│   │   │   │   │       ├── README.md
+│   │   │   │   │       ├── README.yaml
+│   │   │   │   │       └── src
+│   │   │   │   │           ├── add_bitacora_entry_v0.2.0.py
+│   │   │   │   │           ├── README.json
+│   │   │   │   │           ├── README.md
+│   │   │   │   │           └── README.yaml
+│   │   │   │   ├── README.json
+│   │   │   │   ├── README.md
+│   │   │   │   ├── README.yaml
+│   │   │   │   └── v0.3.0
+│   │   │   │       ├── docs
+│   │   │   │       │   ├── changelog
+│   │   │   │       │   │   ├── changelog.json
+│   │   │   │       │   │   ├── changelog.md
+│   │   │   │       │   │   ├── changelog.yaml
+│   │   │   │       │   │   ├── README.json
+│   │   │   │       │   │   ├── README.md
+│   │   │   │       │   │   └── README.yaml
+│   │   │   │       │   ├── prompt_add_bitacora_v0.3.0
+│   │   │   │       │   │   ├── prompt_add_bitacora_v0.3.0.json
+│   │   │   │       │   │   ├── prompt_add_bitacora_v0.3.0.md
+│   │   │   │       │   │   ├── prompt_add_bitacora_v0.3.0.yaml
+│   │   │   │       │   │   ├── README.json
+│   │   │   │       │   │   ├── README.md
+│   │   │   │       │   │   └── README.yaml
+│   │   │   │       │   ├── README.json
+│   │   │   │       │   ├── README.md
+│   │   │   │       │   └── README.yaml
+│   │   │   │       ├── README.json
+│   │   │   │       ├── README.md
+│   │   │   │       ├── README.yaml
+│   │   │   │       └── src
+│   │   │   │           ├── add_bitacora_entry_v0.3.0.py
+│   │   │   │           ├── README.json
+│   │   │   │           ├── README.md
+│   │   │   │           └── README.yaml
+│   │   │   ├── changelog
+│   │   │   │   ├── add_changelog_entry_v0.1.0.py
+│   │   │   │   └── v0.1.1
+│   │   │   │       ├── add_changelog_entry_v0.1.1.py
+│   │   │   │       ├── changelog.yaml
+│   │   │   │       └── prompt_add_changelog_entry_v0.1.1.yaml
+│   │   │   ├── docs
+│   │   │   │   ├── prompt_alma_cli_v0.1.0.yaml
+│   │   │   │   └── roadmap_alma_cli_v1.0.0.yaml
+│   │   │   ├── fix_metadata
+│   │   │   │   ├── alma-cli
+│   │   │   │   ├── _legacy
+│   │   │   │   │   ├── v0.1.0
+│   │   │   │   │   │   ├── fix_metadata_v0.1.0.py
+│   │   │   │   │   │   ├── prompt_fix_metadata_v0.1.0.json
+│   │   │   │   │   │   ├── prompt_fix_metadata_v0.1.0.md
+│   │   │   │   │   │   └── prompt_fix_metadata_v0.1.0.yaml
+│   │   │   │   │   └── v0.2.0
+│   │   │   │   │       ├── auditorias
+│   │   │   │   │       │   ├── auditoria_fix_metadata_v0.2.0.json
+│   │   │   │   │       │   ├── auditoria_fix_metadata_v0.2.0.md
+│   │   │   │   │       │   └── auditoria_fix_metadata_v0.2.0.yaml
+│   │   │   │   │       ├── bin
+│   │   │   │   │       │   └── fix_metadata.py
+│   │   │   │   │       ├── config
+│   │   │   │   │       │   ├── logging_config.json
+│   │   │   │   │       │   ├── logging_config.md
+│   │   │   │   │       │   └── logging_config.yaml
+│   │   │   │   │       ├── lib
+│   │   │   │   │       │   ├── metadata
+│   │   │   │   │       │   │   ├── core.py
+│   │   │   │   │       │   │   ├── diff_tool.py
+│   │   │   │   │       │   │   ├── __init__.py
+│   │   │   │   │       │   │   ├── logger.py
+│   │   │   │   │       │   │   └── validator.py
+│   │   │   │   │       │   └── utils
+│   │   │   │   │       │       ├── concurrency.py
+│   │   │   │   │       │       └── file_utils.py
+│   │   │   │   │       └── schemas
+│   │   │   │   │           └── metadata.schema.json
+│   │   │   │   └── prompt_fix_metadata_v0.1.1.yaml
+│   │   │   ├── memorias
+│   │   │   │   ├── _legacy
+│   │   │   │   │   ├── README.json
+│   │   │   │   │   ├── README.md
+│   │   │   │   │   ├── README.yaml
+│   │   │   │   │   ├── v0.1.0
+│   │   │   │   │   │   ├── cargar_memorias_v0.1.0.py
+│   │   │   │   │   │   ├── prompt_cargar_memorias_v0.1.0.yaml
+│   │   │   │   │   │   ├── README.json
+│   │   │   │   │   │   ├── README.md
+│   │   │   │   │   │   └── README.yaml
+│   │   │   │   │   ├── v0.1.1
+│   │   │   │   │   │   ├── cargar_memorias_v0.1.1.py
+│   │   │   │   │   │   ├── changelog_cargar_memorias_v0.1.1.json
+│   │   │   │   │   │   ├── changelog_cargar_memorias_v0.1.1.md
+│   │   │   │   │   │   ├── changelog_cargar_memorias_v0.1.1.yaml
+│   │   │   │   │   │   ├── prompt_cargar_memorias_v0.1.1.json
+│   │   │   │   │   │   ├── prompt_cargar_memorias_v0.1.1.md
+│   │   │   │   │   │   ├── prompt_cargar_memorias_v0.1.1.yaml
+│   │   │   │   │   │   ├── README.json
+│   │   │   │   │   │   ├── README.md
+│   │   │   │   │   │   └── README.yaml
+│   │   │   │   │   └── v0.1.2
+│   │   │   │   │       ├── cargar_memorias_v0.1.2.py
+│   │   │   │   │       ├── changelog_cargar_memorias_v0.1.2.json
+│   │   │   │   │       ├── changelog_cargar_memorias_v0.1.2.md
+│   │   │   │   │       ├── changelog_cargar_memorias_v0.1.2.yaml
+│   │   │   │   │       ├── prompt_cargar_memorias_v0.1.2.yaml
+│   │   │   │   │       ├── README.json
+│   │   │   │   │       ├── README.md
+│   │   │   │   │       └── README.yaml
+│   │   │   │   ├── README.json
+│   │   │   │   ├── README.md
+│   │   │   │   ├── README.yaml
+│   │   │   │   └── v0.2.0
+│   │   │   │       ├── changelog
+│   │   │   │       │   ├── changelog.json
+│   │   │   │       │   ├── changelog.md
+│   │   │   │       │   ├── changelog.yaml
+│   │   │   │       │   ├── README.json
+│   │   │   │       │   ├── README.md
+│   │   │   │       │   └── README.yaml
+│   │   │   │       ├── promp_cargar_memorias
+│   │   │   │       │   ├── prompt_cargar_memorias_v0.2.0.json
+│   │   │   │       │   ├── prompt_cargar_memorias_v0.2.0.md
+│   │   │   │       │   ├── prompt_cargar_memorias_v0.2.0.yaml
+│   │   │   │       │   ├── README.json
+│   │   │   │       │   ├── README.md
+│   │   │   │       │   └── README.yaml
+│   │   │   │       ├── README.json
+│   │   │   │       ├── README.md
+│   │   │   │       ├── README.yaml
+│   │   │   │       └── src
+│   │   │   │           ├── cargar_memorias_v0.2.0.py
+│   │   │   │           ├── README.json
+│   │   │   │           ├── README.md
+│   │   │   │           └── README.yaml
+│   │   │   ├── README.json
+│   │   │   ├── README.md
+│   │   │   └── README.yaml
+│   │   ├── asd.txt
+│   │   ├── Docs
+│   │   │   ├── Comandos_utiles
+│   │   │   │   ├── generar_tree_a_carpeta.md
+│   │   │   │   └── tree.txt
+│   │   │   └── configuration_bkp_to_reonfig.nix
+│   │   ├── Modules
+│   │   │   ├── Apps
+│   │   │   │   └── apps.nix
+│   │   │   └── Entorno_grafico
+│   │   │       └── entorno_grafico.nix
+│   │   ├── refaccion_bitacora_v0.3.0.md
+│   │   └── to_bash.txt
+│   ├── Logs
+│   ├── Pendrive_Interno
+│   │   └── Bitacora
+│   │       └── v0.3.0
+│   │           ├── docs
+│   │           │   ├── changelog
+│   │           │   │   ├── changelog.json
+│   │           │   │   ├── changelog.md
+│   │           │   │   ├── changelog.yaml
+│   │           │   │   ├── README.json
+│   │           │   │   ├── README.md
+│   │           │   │   └── README.yaml
+│   │           │   ├── prompt_add_bitacora_v0.3.0
+│   │           │   │   ├── prompt_add_bitacora_v0.3.0.json
+│   │           │   │   ├── prompt_add_bitacora_v0.3.0.md
+│   │           │   │   ├── prompt_add_bitacora_v0.3.0.yaml
+│   │           │   │   ├── README.json
+│   │           │   │   ├── README.md
+│   │           │   │   └── README.yaml
+│   │           │   ├── README.json
+│   │           │   ├── README.md
+│   │           │   └── README.yaml
+│   │           ├── README.json
+│   │           ├── README.md
+│   │           ├── README.yaml
+│   │           └── src
+│   │               ├── add_bitacora_entry_v0.3.0.py
+│   │               ├── README.json
+│   │               ├── README.md
+│   │               └── README.yaml
+│   └── tree-gral.txt
+├── Config
+├── Control_Central
+│   ├── Agentes
+│   │   └── Bird
+│   │       └── Impositivo
+│   │           └── Libro_Diario_Deudas.xlsx
+│   └── Alma_Empresa
+│       └── Entidades
+│           └── 13_Cannabis_Club
+│               └── Impositivo
+│                   ├── Archivo
+│                   │   └── History
+│                   │       └── registro_ingresos_negros_3CC.xlsx
+│                   ├── Control_de_Stock
+│                   │   └── Control_General.xlsx
+│                   ├── Deudas_Generales
+│                   │   └── Registro_de_Cuentas_por_Pagar_y_por_Cobrar.xlsx
+│                   ├── Flujo_de_Caja_Interna
+│                   │   ├── 202506
+│                   │   │   └── 01_bird_1_detalle.xlsx
+│                   │   └── 202507
+│                   │       ├── 02_Bruni_1_Detalle.xlsx
+│                   │       └── 03_Bird_2_Detalle.xlsx
+│                   ├── Gastos_Generales
+│                   │   └── 202507
+│                   │       └── 202507_Gastos_Generales.xlsx
+│                   └── Meta
+│                       └── Libro_Diario_Template.xlsx
+├── Core
+│   ├── Notebooks
+│   │   ├── Cargar_Bitacoras
+│   │   │   ├── Cargar_Bitacoras.py
+│   │   │   └── README.yaml
+│   │   └── README.yaml
+│   ├── Scripts
+│   └── Tests
+├── Desktop
+├── Documents
+│   ├── Changelog
+│   ├── Comandos_Utiles
+│   │   ├── Abrir_Pendrive_Interno.md
+│   │   └── Sincronizar_Carpeta_con_Rsync.md
+│   ├── configuration.nix
+│   ├── History
+│   ├── Journal
+│   │   ├── Bitacora
+│   │   │   ├── backups
+│   │   │   │   ├── bitacora_backup_20250707_080959.parquet
+│   │   │   │   ├── bitacora_backup_20250707_082848.parquet
+│   │   │   │   ├── bitacora_backup_20250707_083644.parquet
+│   │   │   │   ├── bitacora_backup_20250707_085816.parquet
+│   │   │   │   ├── bitacora_backup_20250707_090523.parquet
+│   │   │   │   ├── bitacora_backup_20250707_091440.parquet
+│   │   │   │   ├── bitacora_backup_20250707_180528.parquet
+│   │   │   │   ├── bitacora_backup_20250707_181111.parquet
+│   │   │   │   ├── bitacora_viva.metadata.yaml
+│   │   │   │   ├── metadata_backup_20250707_080959.yaml
+│   │   │   │   ├── metadata_backup_20250707_082848.yaml
+│   │   │   │   ├── metadata_backup_20250707_083644.yaml
+│   │   │   │   ├── metadata_backup_20250707_085816.yaml
+│   │   │   │   ├── metadata_backup_20250707_090523.yaml
+│   │   │   │   ├── metadata_backup_20250707_091440.yaml
+│   │   │   │   ├── metadata_backup_20250707_180528.yaml
+│   │   │   │   ├── metadata_backup_20250707_181111.yaml
+│   │   │   │   └── README.yaml
+│   │   │   ├── bitacora_viva.metadata.yaml
+│   │   │   └── bitacora_viva.parquet
+│   │   └── README.yaml
+│   └── Protocolo_Consultas_Seguras
+│       └── Protocolo_Consultas_Seguras.md
+├── Downloads
+├── Logs
+│   └── bitacora_202507.log
+├── Meta
+├── Music
+├── Pictures
+├── publickey
+├── requirements.txt
+├── Sync
+├── Templates
+├── tree.txt
+└── Videos
+
+100 directories, 201 files

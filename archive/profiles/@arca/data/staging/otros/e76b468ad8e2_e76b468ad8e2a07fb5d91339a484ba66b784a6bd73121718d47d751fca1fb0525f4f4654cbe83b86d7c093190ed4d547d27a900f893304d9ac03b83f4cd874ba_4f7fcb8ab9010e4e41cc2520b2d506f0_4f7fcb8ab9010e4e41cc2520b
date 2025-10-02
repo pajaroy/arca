@@ -1,0 +1,1039 @@
+# prompt_base_primer_chat.md
+
+
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5
+
+## 🎯 Objetivo General
+
+Desarrollar un **roadmap técnico realista y completo** para la implementación de ALMA_RESIST como sistema modular offline con IA local, enfocado en:
+
+- Soberanía tecnológica y privacidad.
+- Trabajo humano intensivo (10 hs diarias de dedicación).
+- Modularidad y escalabilidad.
+- Colaboración humano-IA (IA como copiloto real de desarrollo).
+
+Este roadmap será ejecutado progresivamente, primero con GPT-4.5 y luego sostenido y expandido por GPT-4.0 y DeepSeek.
+
+
+## 🧪 Qué debe generar GPT-4.5
+
+### 🧭 1. Roadmap Técnico General
+
+- Duración proyectada: **3 a 6 meses** (basado en ~10 hs diarias de trabajo humano)
+- Entregables por fase (módulos funcionales)
+- Estructura por semanas o sprints (etapas lógicas)
+- Estimación de complejidad y orden de ejecución
+- Requisitos técnicos y dependencias por módulo
+
+### ✅ 2. Checklists por Módulo
+
+- Listado detallado de pasos para cada componente (CLI, LLM, Loader, etc.)
+- Precondiciones, tareas, entregables y pruebas
+
+### 🛠️ 3. Propuesta de herramientas
+
+- Lenguajes, librerías, frameworks mínimos necesarios
+- Elección de motores LLM (llama.cpp, Mistral, DeepSeek)
+- Recomendaciones de estructura de carpetas y paquetes
+
+### 📊 4. Sugerencias adicionales
+
+- Qué replantear de la estructura actual
+- Qué preservar como base sólida
+- Cómo garantizar mantenibilidad y seguridad
+
+
+## 🧠 Contexto para la IA
+
+- La arquitectura ya fue pensada y documentada (v0.0.9)
+- El sistema ya cuenta con carpeta ALMA_LIBRE esqueleto
+- Se desea una segunda iteración más limpia, desde cero, pero manteniendo los aprendizajes actuales
+- El objetivo es usar esta investigación para relanzar ALMA_RESIST con máxima claridad y sostenibilidad
+
+
+# prompt_base_primer_chat_v0.1.md
+
+
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5 (v0.1)
+
+## 🎯 Objetivo General
+
+Desarrollar un **roadmap técnico ejecutable** para implementar ALMA_RESIST como un sistema modular offline con IA local, priorizando:
+
+- **Soberanía tecnológica:** sin dependencia de servicios externos.
+- **Privacidad radical:** sin telemetría, logs solo locales.
+- **Mantenibilidad humana:** 1 desarrollador + IA como copiloto.
+- **Desarrollo desde terminal:** con documentación automática vía ALMA_LOADER.
+
+
+## 🧪 Qué debe generar GPT-4.5
+
+### 1. Roadmap Técnico por Fases (3-6 meses)
+
+#### Fase 1 (Semanas 1-4):
+- CLI funcional con `!cargar_modelo`
+- LLM básico con Mistral GGUF 4-bit
+- Inicio de integración con ALMA_LOADER
+
+#### Fase 2 (Semanas 5-8):
+- Motor LLM intercambiable (llama.cpp, textgen-webui)
+- Comandos `!resumir`, `!buscar` con SQLite
+
+#### Fase 3 (Semana 9+):
+- Autonomía limitada (acciones no destructivas)
+- Despliegue con Dockerfile/AppImage
+
+
+### 3. Herramientas y Estructura
+
+- Python 3.10+, C++ opcional
+- Librerías: llama-cpp-python, FAISS, SQLAlchemy
+- Distribución sugerida:
+```bash
+pip install alma_resist_cli
+pip install alma_resist_llm
+```
+
+
+## 🔒 Restricciones Estrictas
+
+- Sin conexión a internet en runtime
+- Hardware mínimo: CPU x86_64 + 8GB RAM
+- Solo herramientas open-source (MIT, Apache 2.0)
+
+
+## 📝 Instrucción Final para GPT-4.5
+
+Analiza `ALMA_LIBRE/` y `idea_base_0.0.9.md`. Luego:
+
+- Generá un **roadmap semanal detallado**, priorizando CLI y LLM.
+- Incluí:
+  - Checklist por módulo
+  - Dependencias y riesgos
+  - Comandos CLI de ejemplo
+  - Plan de documentación automatizada
+
+
+# prompt_base_primer_chat_v0.10.md
+
+
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5 (v0.10)
+
+## 🎯 Objetivo General
+
+Diseñar y proyectar un sistema modular, antifrágil y completamente offline llamado **ALMA_RESIST**, que:
+
+- Sea adaptable a futuro y evolutivo
+- Priorice soberanía tecnológica y privacidad radical
+- Funcione incluso en hardware extremo o degradado
+- Se documente a sí mismo
+- Incorpore a la IA como copiloto activo
+
+
+## ⚙️ Entorno Técnico
+
+- SO: Linux x86_64 (Debian/Ubuntu)
+- RAM mínima: 8 GB (meta: 2 GB en modo survival)
+- CPU: 4 núcleos
+- Python 3.10.12+
+- Sin conexión a internet
+- Soporte opcional para dispositivos externos (pendrives, discos)
+
+
+## 📁 Archivos Base
+
+- `ALMA_LIBRE/` (estructura conceptual editable)
+- `idea_base_0.0.9.md`
+- `docs/flujo_secuencial.mmd`
+
+
+## 🔮 Futuros Desarrollos (12+ meses)
+
+```markdown
+| Objetivo               | Tecnologías Potenciales   | Beneficio Esperado                     |
+|------------------------|---------------------------|----------------------------------------|
+| WASM Execution         | WebAssembly, Rust         | Ejecución segura en navegadores        |
+| CLI multiplataforma    | Go, Kotlin/Native         | Soporte Android/IoT                    |
+| IA local con LoRA      | Mistral, GGUF + LoRA      | Personalización offline en tiempo real |
+```
+
+
+## 📚 Documentación Evolutiva
+
+- [ ] `docs/arquitectura_evolutiva.md`
+  - Módulos nuevos y deprecados
+  - Justificaciones de cada cambio estructural
+  - Instrucciones para modernizar sin romper estabilidad
+
+
+## 📝 Instrucción Final para GPT-4.5 (v1.0)
+
+> Como IA Copiloto, tu tarea es:  
+1. Interpretar `ALMA_LIBRE/` como **estructura conceptual** editable.  
+2. Proponer roadmap técnico por fases con tareas ordenadas y dependencias.  
+3. Justificar cada decisión técnica en formato de tabla.  
+4. Incluir visión a 12+ meses con tecnologías emergentes.  
+5. Simular escenarios extremos y validar recuperación.  
+6. Proyectar crecimiento evolutivo sin perder compatibilidad.  
+7. Sugerir código, pruebas automatizadas y documentación crítica.
+
+
+# prompt_base_primer_chat_v0.2.md
+
+
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5 (v0.2)
+
+## 🎯 Objetivo General
+
+Desarrollar un roadmap técnico ejecutable para implementar ALMA_RESIST como sistema modular offline con IA local, priorizando:
+
+- Soberanía tecnológica: Operación sin dependencias externas.
+- Privacidad radical: Sin telemetría, logs solo locales.
+- Mantenibilidad humana: 1 desarrollador + IA como copiloto.
+- Integración fluida: Desarrollo desde terminal usando ALMA_LOADER para documentación automática.
+
+
+## 🧱 Base de Investigación
+
+### Archivos Adjuntos:
+
+- 📁 ALMA_LIBRE/: Estructura esqueleto (scripts, configs, tests, docs).
+- 📄 idea_base_0.0.9.md: Visión técnica, whitepaper, prompt técnico.
+- 🧭 flujo_secuencial.mmd: Diagrama de interacción CLI → LLM → Loader.
+
+
+## ⚠️ Análisis de Riesgos Detallado
+
+| Riesgo                        | Impacto             | Mitigación                                 |
+|------------------------------|---------------------|--------------------------------------------|
+| Modelo no carga en CPU vieja | Bloqueo funcional   | Quantización 3-bit + validación anticipada |
+| Corrupción de DB             | Pérdida de memoria  | Backups automáticos cada 6 hs              |
+| Scripts incompatibles        | Retrabajo masivo    | CI/CD local con pruebas semanales          |
+
+
+## 🔄 Retroalimentación Automatizada
+
+- Logs en JSON deben alimentar:
+  - `docs/reporte_auto.md`: resumen semanal
+  - `docs/errores_comunes.md`: base de fallos y soluciones
+  - `docs/benchmarks.md`: rendimiento en distintas máquinas
+
+
+## 📚 Documentación Automatizada
+
+- ALMA_LOADER debe generar:
+  - `docs/api.md`: resumen de comandos y módulos
+  - `docs/reporte_auto.md`: progreso semanal
+  - `docs/memoria_desarrollo.md`: registros históricos
+
+
+# 📋 Changelog v0.2
+
+- ✅ Añadida metodología de desarrollo (iterativa, TDD, docstrings)
+- ✅ Sección de riesgos técnicos con tabla detallada
+- ✅ Ejemplo de implementación crítica (cargar_modelo)
+- ✅ Diagrama de dependencias técnicas con Mermaid.js
+- ✅ Sección de retroalimentación con ALMA_LOADER
+- ✅ Detalles de optimización para hardware limitado
+- ✅ Nuevas reglas de documentación generada por IA
+
+
+
+## ⚙️ Especificaciones del Entorno
+
+**Entorno Objetivo:**
+- SO: Linux x86_64 (Debian 12+ o Ubuntu 22.04+)
+- RAM mínima: 8GB (modo baja memoria activado)
+- Python: 3.10.12+ (venv recomendado)
+- CPU: 4 núcleos sin GPU
+- Todo debe funcionar offline
+
+
+## 🧱 Archivos Adjuntos
+
+- 📁 `ALMA_LIBRE/`: estructura esqueleto y ejemplos funcionales
+- 📄 `idea_base_0.0.9.md`: visión técnica, estructura y objetivos
+- 📈 `docs/flujo_secuencial.mmd`: interacción CLI → LLM → Loader
+
+
+## 📊 Análisis de Riesgos
+
+| Riesgo | Impacto | Mitigación |
+|--------|---------|------------|
+| Modelo GGUF no carga | Bloqueo funcional | Quantización 3-bit + hardware test |
+| Corrupción de logs | Pérdida de trazabilidad | Backups SHA-256 cada 6 horas |
+| Documentación inconsistente | Errores acumulativos | ALMA_LOADER como generador automático de docs |
+
+
+## 📚 Documentación Generada Automáticamente
+
+ALMA_LOADER debe producir:
+- `docs/api.md`: definición de comandos
+- `docs/errores_comunes.md`: base de fallos
+- `docs/memoria_desarrollo.md`: memoria histórica diaria
+- `docs/benchmarks.md`: rendimiento en CPU
+
+
+## 📝 Instrucción Final para GPT-4.5
+
+> Analizá `ALMA_LIBRE/` y `idea_base_0.0.9.md`.  
+> Generá un roadmap **estructurado, justificado y accionable** que incluya:
+
+- Roadmap por sprint en tabla markdown
+- Diagramas Mermaid.js para flujos y dependencias
+- Justificación técnica de cada decisión (herramientas, estructura, método)
+- Ejemplos de código crítico
+- Validación de éxito por tarea/sprint
+- Estrategias para privacidad radical, logging autónomo y CI/CD sin nube
+
+
+# prompt_base_primer_chat_v0.4.md
+
+
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5 (v0.4)
+
+## 🎯 Objetivo General
+
+Desarrollar un roadmap técnico ejecutable, seguro y privado para implementar **ALMA_RESIST**, un sistema modular de IA offline con las siguientes prioridades:
+
+- Soberanía tecnológica: No depende de la nube.
+- Privacidad radical: Logs cifrados y control local total.
+- Mantenibilidad humana: Desarrollador + IA copiloto (10hs/día de trabajo promedio).
+- Optimizado para hardware limitado.
+
+
+## ⚙️ Especificaciones del Entorno
+
+**Objetivo Mínimo de Hardware:**
+- SO: Linux x86_64 (Debian 12+ / Ubuntu 22.04+)
+- RAM: 8 GB
+- CPU: 4 núcleos sin GPU
+- Python: 3.10.12+ (uso de venv)
+- Entorno 100% offline (uso de scripts locales para dependencias)
+
+
+## 🧱 Archivos Adjuntos
+
+- 📁 `ALMA_LIBRE/`
+- 📄 `idea_base_0.0.9.md`
+- 📈 `docs/flujo_secuencial.mmd`
+
+
+### 2. Checklists por Módulo
+
+#### CLI
+```markdown
+- [ ] Comando `alma --help` funcional
+- [ ] Sistema de errores con códigos únicos (E-101, E-202)
+- [ ] Verifica modo offline (sin conexión externa)
+```
+
+#### LLM
+```markdown
+- [ ] Script `install_offline.sh` instala todas las dependencias necesarias
+- [ ] Validación de checksum SHA-256 para modelos y paquetes
+```
+
+#### ALMA_LOADER
+```markdown
+- [ ] `alma --restore-backup` restaura logs y DB desde copia encriptada
+- [ ] Logging automático en formato JSON
+- [ ] Auto-documentación semanal: `docs/reporte_auto.md`
+```
+
+
+### 4. Código Crítico con Manejo de Errores
+
+```python
+def cargar_modelo(ruta: str, quant: int) -> bool:
+    """Carga modelo GGUF con validaciones estrictas."""
+    try:
+        if not os.path.exists(ruta):
+            raise FileNotFoundError("E-201: Archivo .gguf no encontrado")
+        if quant not in {3, 4, 8}:
+            raise ValueError("E-202: Quantización no soportada")
+        # Lógica de carga con llama.cpp aquí
+        return True
+    except Exception as e:
+        logger.error(f"[E-999] Fallo al cargar modelo: {e}")
+        return False
+```
+
+
+### 6. Políticas de Retención de Datos
+
+```markdown
+**Política de Logs:**
+- Retención máxima: 30 días
+- Eliminación segura: overwrite + borrado físico
+```
+
+
+# 📋 Changelog v0.4
+
+- ✅ Añadida sección **Roles del Equipo** (Desarrollador + IA)
+- ✅ Roadmap ahora incluye columna **Prioridad**
+- ✅ Checklists de manejo de dependencias offline (`install_offline.sh`)
+- ✅ Ejemplo ampliado de código con errores custom y logging
+- ✅ Sprint dedicado a validación cross-hardware
+- ✅ Mecanismo de restauración de backups desde ALMA_LOADER
+- ✅ Políticas de retención de logs añadidas
+
+
+
+## 👥 Roles del Equipo
+
+- **Desarrollador Principal:** Implementa, prueba, mantiene el entorno offline.
+- **IA Copiloto (GPT-4.5):** Sugiere código, evalúa diseño, documenta interacciones y automatiza reportes.
+
+
+## 🔄 Metodología
+
+- Desarrollo iterativo por sprints semanales (3–6 meses)
+- Test-driven development (TDD)
+- Documentación embebida (Google-style docstrings)
+- Validación cuantificable por sprint
+
+
+## 🧪 Qué debe generar GPT-4.5
+
+### 1. Roadmap Técnico – Tabla Markdown
+
+```markdown
+| Sprint | Hito                      | Tareas Clave                           | Prioridad | Esfuerzo (h) | Dependencias   | Criterio de Éxito                                 |
+|--------|---------------------------|----------------------------------------|-----------|--------------|----------------|---------------------------------------------------|
+| 1      | CLI mínima funcional      | Comando `!cargar_modelo`               | Alta      | 10           | Python, llama  | CLI responde en <2s en CPU de 4 núcleos          |
+| 2      | Validación Cross-Hardware | Simulación en CPU 2/4/8 núcleos        | Alta      | 8            | CLI, LLM       | Benchmarks registrados en `docs/benchmarks.md`   |
+```
+
+
+### 3. Diagrama de Dependencias Técnicas
+
+```mermaid
+graph TD
+    A[CLI] --> B[LLM]
+    B --> C[ALMA_LOADER]
+    C --> D[Backups + Autonomía]
+```
+
+
+### 5. Preguntas Críticas y Reglas de Integración
+
+> **¿Cómo restaurar sistema desde backups corruptos parcialmente?**  
+> **¿Cómo garantizar que la auto-documentación no filtre datos sensibles?**
+
+> **Requerimiento:** Todas las respuestas deben reflejarse en:
+- Checklists
+- Diseño de módulos
+- Roadmap y criterios de éxito
+
+
+## 📝 Instrucción Final para GPT-4.5
+
+> Analizá `ALMA_LIBRE/` y `idea_base_0.0.9.md`  
+> Luego generá un roadmap técnico que:
+
+- Esté estructurado por sprints con tabla markdown
+- Justifique cada herramienta, decisión, librería o técnica
+- Incluya código funcional listo para producción
+- Implemente validación técnica y benchmarks
+- Documente cómo manejar backups, restauraciones y actualizaciones sin internet
+- Integre las respuestas a preguntas críticas en decisiones de diseño
+
+
+# prompt_base_primer_chat_v0.6.md
+
+
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5 (v0.6)
+
+## 🎯 Objetivo General
+
+Desarrollar un roadmap técnico completo para implementar **ALMA_RESIST**, priorizando:
+
+- Memoria y logging estructurado desde el Sprint 1.
+- Módulo de chat funcional y encriptado.
+- Sistema completamente offline, auto-documentado y resiliente.
+- Privacidad radical: sin conexiones externas, eliminación segura de datos.
+
+
+## ⚙️ Especificaciones del Entorno
+
+- SO: Linux x86_64 (Debian 12+ / Ubuntu 22.04+)
+- RAM: 8GB
+- CPU: 4 núcleos
+- Python: 3.10.12+
+- Todo funciona sin conexión a internet.
+
+
+## 📁 Archivos Adjuntos
+
+- `ALMA_LIBRE/`
+- `idea_base_0.0.9.md`
+- `docs/flujo_secuencial.mmd`
+
+
+## ✅ Checklists Clave
+
+### ALMA_LOADER
+- [ ] Guarda logs cifrados en JSON
+- [ ] Verifica integridad con SHA-256
+- [ ] Permite restauración parcial desde backup
+- [ ] Genera `docs/memoria_desarrollo.md`
+
+### Chat con Memoria
+- [ ] Historial persistente en SQLite cifrado (AES-256)
+- [ ] Comando `alma chat` con auto-log de cada mensaje
+- [ ] `alma --clear-chat` y `alma --restore-chat` operativos
+
+
+## 🧩 Ejemplo de Código – Chat + Logging
+
+```python
+def manejar_chat(usuario: str, mensaje: str) -> str:
+    """Procesa mensajes y guarda historial encriptado."""
+    try:
+        respuesta = generar_respuesta_ia(mensaje)
+        with open("chat_history.db", "a+") as db:
+            encrypted_entry = encrypt_entry(f"{usuario}: {mensaje} -> {respuesta}")
+            db.write(encrypted_entry + "\n")
+        ALMA_LOADER.log_interaccion("chat", metadata=usuario)
+        return respuesta
+    except Exception as e:
+        logger.error(f"[E-301] Fallo en chat: {e}")
+        return "Error: consulte logs con `alma --view-errors`"
+```
+
+
+## 📈 Diagrama de Dependencias (Actualizado)
+
+```mermaid
+graph TD
+    A[CLI] --> B[Chat con Memoria]
+    A --> C[LLM]
+    B --> D[ALMA_LOADER]
+    C --> D
+    D --> E[Backups Encriptados]
+    D --> F[Documentación Automática]
+```
+
+
+# 📋 Changelog v0.6
+
+- ✅ Sprint 1 ahora inicia con ALMA_LOADER operativo
+- ✅ Sprint 2 desarrolla el módulo de chat con memoria y cifrado
+- ✅ Ejemplo completo de manejo de chat y logs cifrados
+- ✅ Nuevos comandos CLI (`--clear-chat`, `--restore-chat`)
+- ✅ Diagrama de dependencias actualizado con módulo de chat central
+- ✅ Políticas de retención específicas para interacción conversacional
+
+
+
+## 👥 Roles del Equipo
+
+- **Desarrollador:** Ejecuta implementación, pruebas, control de seguridad.
+- **IA Copiloto:** Genera código, documentación, testeo automatizado y sugerencias de recuperación.
+
+
+## 🔐 Gestión de Claves
+
+- Clave maestra derivada con PBKDF2-SHA512 (100,000 iteraciones).
+- IV separado del contenido cifrado.
+- Almacenamiento seguro: TPM o archivo con doble encriptación (AES + GPG).
+
+
+## 🧪 Roadmap Técnico (v0.7)
+
+```markdown
+| Sprint | Hito          | Tareas Clave (Orden)                     | Prioridad | Esfuerzo (h) | Criterio de Éxito                            |
+|--------|---------------|------------------------------------------|-----------|--------------|-----------------------------------------------|
+| 1      | ALMA_LOADER   | 1. Logging básico → 2. Cifrado AES-256   | Crítica   | 14           | Logs encriptados y almacenados seguro (TPM)   |
+| 2      | Chat funcional| 1. SQLite + AES → 2. CLI `alma chat`     | Alta      | 16           | Historial cifrado, respuesta <1.5s             |
+| 3      | Pruebas E2E   | `run_tests.sh` con pytest + locust       | Alta      | 10           | 95% cobertura de tests                         |
+```
+
+
+## 🧩 Código con Docstring Estilo Google
+
+```python
+def encrypt_entry(data: str) -> bytes:
+    """Encripta datos con AES-256 en modo CBC.
+
+    Args:
+        data: Cadena a encriptar.
+
+    Returns:
+        bytes: Entrada cifrada con IV adjunto.
+
+    Raises:
+        EncryptionError: Si falla la derivación o el cifrado.
+    """
+    ...
+```
+
+
+## 📈 Diagrama de Flujo de Datos (v0.7)
+
+```mermaid
+graph TD
+    A[CLI] --> B[Chat]
+    B --> C[ALMA_LOADER]
+    C --> D[(Backups)]
+    C --> E[Documentación]
+    D --> F{Recuperación}
+    E --> G[Memoria de Desarrollo]
+```
+
+
+# 📋 Changelog v0.7
+
+- ✅ Subprioridades en cada Sprint
+- ✅ Docstrings estilo Google en ejemplos de código
+- ✅ Gestión segura de claves AES con PBKDF2 y TPM
+- ✅ Pruebas automatizadas con `run_tests.sh` (pytest + locust)
+- ✅ Estrategias de recuperación ante corrupción total o parcial
+- ✅ Compresión y paginación de historial de chat
+- ✅ Diagrama de flujo de datos actualizado
+
+
+
+## 👥 Roles del Equipo
+
+- **Desarrollador:** Implementa, testea, mantiene la integridad.
+- **IA Copiloto:** Sugiere código robusto, documenta fallos, automatiza pruebas.
+
+
+## 🔄 Metodología
+
+- Sprints semanales con tareas priorizadas
+- Test-driven development con cobertura +98%
+- Auto-documentación y validación continua
+- Manejo proactivo de fallos y restauración parcial
+
+
+## 🧪 Roadmap Técnico (v0.8)
+
+```markdown
+| Sprint | Hito            | Tareas Clave (Orden)                         | Prioridad | Esfuerzo (h) | Criterio de Éxito                            |
+|--------|------------------|----------------------------------------------|-----------|--------------|-----------------------------------------------|
+| 1      | ALMA_LOADER      | 1. Logging JSON → 2. Cifrado + Rotación      | Crítica   | 14           | Logs cifrados con clave rotativa activa       |
+| 2      | Chat Persistente | 1. SQLite AES256 → 2. Historial optimizado   | Alta      | 12           | Cache limpio, chat responde <1.5s             |
+| 3      | Pruebas E2E      | 1. Restauración DB → 2. Stress RAM/SWAP      | Alta      | 12           | 98% cobertura, uso swap <5% bajo carga         |
+```
+
+
+## 🧩 Ejemplo de Prueba E2E
+
+```python
+def test_restauracion_parcial():
+    """Valida que ALMA_LOADER reconstruya la DB desde logs cifrados."""
+    corromper_db()
+    resultado = alma_loader.restaurar()
+    assert resultado["db_reconstruida"] is True, "Fallo en restauración parcial"
+```
+
+
+## 📈 Diagrama de Flujo de Datos (Actualizado)
+
+```mermaid
+graph TD
+    A[CLI] --> B[Chat Persistente]
+    B --> C[ALMA_LOADER]
+    C --> D[(Backups)]
+    C --> E[Documentación]
+    D --> F{Recuperación}
+    E --> G[Memoria de Desarrollo]
+    F --> H[guia_emergencia.md]
+```
+
+
+# 📋 Changelog v0.8
+
+- ✅ Manejo de errores con codificación y sugerencias CLI
+- ✅ Documentación automática: `guia_emergencia.md`
+- ✅ Clave maestra rotativa + bloqueo CLI
+- ✅ Pruebas automatizadas por sprint (pytest, openssl)
+- ✅ Uso de mmap y cache en chat persistente
+- ✅ Diagrama extendido con guía y recuperación integrada
+
+
+
+## 👥 Roles del Equipo
+
+### Desarrollador
+- Implementa scripts, revisa logs, realiza backups y mantiene claves.
+
+### IA Copiloto (GPT-4.5)
+- Sugiere optimizaciones (ej: cambiar gzip por LZ4).
+- Genera documentación automática (`docs/auditoria_auto.md`, `docs/ia_suggested_changes.md`).
+- Ayuda a planificar los sprints y estructura modular del proyecto.
+- Participa en ciclos de validación, recuperación y seguridad.
+
+
+## 🔄 Metodología
+
+- Ciclos semanales de desarrollo (sprints)
+- TDD + benchmarks cuantificables
+- Logging cifrado + backups con rotación
+- Interacción humano-IA mediante CLI
+- Documentación y recuperación automática
+
+
+## 🧪 Roadmap Técnico – Tabla v0.9
+
+```markdown
+| Sprint | Hito              | Tareas Clave (Orden)                         | Prioridad | Esfuerzo (h) | Criterio de Éxito                                     |
+|--------|-------------------|----------------------------------------------|-----------|--------------|--------------------------------------------------------|
+| 1      | ALMA_LOADER       | 1. Logging → 2. Cifrado AES256 + Rotación    | Crítica   | 14           | Logs cifrados, clave almacenada segura, hash verificado |
+| 2      | Chat Persistente  | 1. Historial SQLite AES256 → 2. Optimización | Alta      | 12           | <50MB por 1000 mensajes, <1.2s por respuesta            |
+| 3      | Pruebas E2E       | 1. Restauración DB → 2. Stress RAM + Swap    | Alta      | 12           | 98% cobertura de tests, uso de swap <5%                |
+```
+
+
+## 🔐 Ejemplo de Código: Rotación de Claves
+
+```python
+def rotar_clave_maestra(clave_actual: str) -> str:
+    """Genera una nueva clave maestra derivada y la guarda cifrada."""
+    nueva_clave = hashlib.pbkdf2_hmac('sha512', clave_actual.encode(), salt, 150_000)
+    with open("clave_maestra.enc", "wb") as f:
+        f.write(encrypt(nueva_clave, clave_actual))
+    return nueva_clave
+```
+
+
+## 📈 Diagrama de Flujo (v0.9)
+
+```mermaid
+graph TD
+    A[Desarrollador] --> B[CLI]
+    B --> C[IA Copiloto]
+    C --> D[ALMA_LOADER]
+    D --> E[(Backups)]
+    C --> F[Documentación]
+    E --> G{Recuperación}
+    F --> H[guia_emergencia.md]
+```
+
+
+# 📋 Changelog v0.9
+
+- ✅ Añadida gestión de paquetes offline con firma GPG
+- ✅ Incluida interacción activa Desarrollador–IA
+- ✅ Métricas estrictas para almacenamiento y latencia
+- ✅ Ejemplo de rotación de claves AES256 incluido
+- ✅ Comando para backup físico en dispositivos externos
+- ✅ Diagrama actualizado con la IA como nodo activo
+- ✅ Documentación dividida por funciones críticas
+
+
+
+## 👥 Roles del Equipo
+
+**Desarrollador**
+- Implementa, audita, migra, recupera
+
+**IA Copiloto (GPT-4.5)**
+- Sugiere mejoras, justifica decisiones
+- Documenta evolución (auditoria_auto.md, ia_suggested_changes.md)
+- Propone reemplazos tecnológicos
+- Genera pruebas y scripts automáticos
+
+
+## 🧪 Roadmap por Sprint
+
+```markdown
+| Sprint | Hito                  | Tareas Clave                          | Criterio de Éxito                              |
+|--------|-----------------------|---------------------------------------|------------------------------------------------|
+| 1      | ALMA_LOADER Core      | Logging cifrado + rotación clave      | Cifrado AES256, hash verificado, auto-backup   |
+| 2      | Chat Persistente      | SQLite + paginación RAM               | <50MB por 1000 mensajes, <1.2s por respuesta    |
+| 3      | Pruebas E2E           | Compatibilidad + stress + recuperación| 98% cobertura, funciona con 4GB RAM, 2 núcleos  |
+| 4      | Modo Survival         | RAM reducida + CPU limitada           | Funciona con 2GB RAM, sin swap                  |
+| 5      | Quantización IA       | Carga dinámica (3-bit a 8-bit)        | 40% menos uso de RAM en modelos                 |
+```
+
+
+## 🧩 Ejemplo de Justificación Técnica
+
+```markdown
+> **Decisión:** Usar Rust para módulos críticos  
+> **Alternativas:**  
+> - C++: Alto rendimiento, pero sin seguridad de memoria automática  
+> - Python: Simple, pero ineficiente en bajo nivel  
+> **Razón Final:** Rust combina rendimiento tipo C++ con memoria segura y portabilidad WASM.
+```
+
+
+## 🔄 Pruebas de Compatibilidad Retroactiva
+
+- [ ] Probar nuevos módulos en ALMA_LOADER v0.9
+- [ ] Validación manual en Intel Core i3, HDD, 4GB RAM
+- [ ] Test sin conexión, sin swap, 1 núcleo
+
+
+## 🔃 Política de Actualización de Modelos
+
+- Script `update_models_offline.py`
+  - Soporte para descarga desde carpeta local compartida
+  - Verificación SHA3-512
+  - Quantización por perfil de RAM
+
+
+## 📝 Instrucción Final para GPT-4.5 (v1.0)
+
+Como IA Copiloto:
+
+1. Interpretá `ALMA_LIBRE/` como base conceptual editable.
+2. Proponé mejoras técnicas con ejemplos reales de justificación.
+3. Generá scripts de migración (`migrate_v0.9_to_v1.0.sh`).
+4. Incluí pruebas de compatibilidad retroactiva y escenarios extremos.
+5. Definí la política de actualización y recuperación sin internet.
+6. Proyectá a arquitecturas futuras (TPM, RISC-V, LoRA).
+7. Documentá toda decisión técnica con formato estructurado.
+
+
+# prompt_base_primer_chat_v1.1.md
+
+
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5 (v1.1)
+
+## 🎯 Objetivo General
+
+Diseñar e implementar un sistema offline modular con IA local llamado **ALMA_RESIST**, que:
+
+- Sea antifrágil, resiliente y autónomo
+- Aprenda de su propia operación (auto-documentación + auto-evaluación)
+- Funcione en hardware limitado y arquitecturas emergentes
+- Se adapte dinámicamente a escenarios extremos y estrés
+
+
+## 🧪 Roadmap Técnico – con KPIs
+
+```markdown
+| Sprint | Hito              | Tareas Clave                         | Métrica Esperada                    | Umbral Crítico             |
+|--------|-------------------|--------------------------------------|-------------------------------------|-----------------------------|
+| 1      | ALMA_LOADER Core  | Logging + Cifrado + Rotación clave  | Hash verificado, <5s de inicialización | Falla de cifrado → crítico  |
+| 2      | Chat Persistente  | SQLite + paginación RAM             | <50MB por 1000 mensajes, <1.2s resp. | >2s respuesta → red flag    |
+| 3      | Pruebas E2E       | Compatibilidad + stress             | 98% cobertura de tests               | Cobertura <80% → investigar |
+| 4      | Modo Survival     | RAM 2GB, CPU 1 núcleo               | Funciona en ARM sin swap             | >2.5GB RAM → revisión        |
+| 5      | Quantización IA   | Quant dinámico (3bit-8bit)          | -40% RAM en promedio                 | Falla en precisión → crítico |
+```
+
+
+## 🔁 Autoevaluación por Sprint
+
+- [ ] Script `alma_auto_eval.py`:  
+  - Compara benchmarks entre versiones  
+  - Lista errores frecuentes  
+  - Calcula consumo de RAM, disco y CPU  
+  - Sugerencias IA para siguiente sprint
+
+
+## 🔌 Eficiencia Energética
+
+- **Modo Bajo Consumo:**  
+  - [ ] Limitar frecuencia CPU al 50% si está en batería  
+  - [ ] Suspender logs detallados si carga <20%  
+  - [ ] Consolidar tareas para minimizar ciclos
+
+
+## 📝 Ejemplo de Justificación Técnica
+
+```markdown
+> **Decisión:** Usar DuckDB en vez de SQLite  
+> **Alternativas Consideradas:**  
+> - SQLite: simple, limitado en queries complejas  
+> - PostgreSQL: potente pero requiere servidor  
+> **Razón Final:** DuckDB es embedded, soporta SQL complejo y es portable
+```
+
+
+# 📋 Changelog v1.1
+
+- ✅ Instrucciones específicas por sección para GPT-4.5
+- ✅ Métricas de rendimiento + KPIs en cada sprint
+- ✅ Autoevaluación por sprint + documentación acumulativa
+- ✅ Modo bajo consumo + simulación con datos sintéticos
+- ✅ Soporte planificado para aceleradores (GPU/NPU) y RISC-V
+
+
+
+## 👥 Roles del Equipo
+
+**Desarrollador**
+- Ejecuta, mantiene, valida en hardware real
+
+**IA Copiloto (GPT-4.5)**
+- Genera tareas desglosadas (2–4h)
+- Documenta decisiones y errores
+- Propone refactorizaciones justificadas
+- Evalúa rendimiento entre ciclos
+- Proyecta roadmap evolutivo
+
+
+## 🛠️ Código con Errores Defensivos (Fail-safe)
+
+```python
+try:
+    cargar_modelo(ruta)
+except ModeloCorruptoError as e:
+    logger.error(f"E-501: {e}")
+    if not intentar_reparar_modelo(ruta):
+        raise SistemaCriticoError("Fallo irrecuperable en modelo")
+except HardwareIncompatibleError:
+    activar_modo_survival()
+```
+
+
+## ⚡ Políticas de Energía Inteligente
+
+```markdown
+**Modo Bajo Consumo Activado si:**  
+- Batería <30% (`upower`)  
+- Temp. CPU >80°C (`lm-sensors`)  
+- Swap >15% por 10 minutos  
+- Flag `--low-energy` activado manualmente  
+```
+
+
+## 🔍 Validación Cross-Platform
+
+Script: `test_cross_platform.sh`
+
+- [ ] Debian 12 x86_64  
+- [ ] Raspberry Pi OS (ARMv8)  
+- [ ] QEMU emulando RISC-V  
+- [ ] Comprobación de compatibilidad con binarios preexistentes
+
+
+## 🧠 Documentación Evolutiva
+
+- `docs/lecciones_aprendidas.md`  
+  - Falla + solución aplicada + tiempo de resolución  
+  - Refactorización propuestas exitosas  
+  - Anti-patrones detectados (pickle, eval, etc.)
+
+
+# 📋 Changelog v1.2
+
+- ✅ Ejemplo de subtareas detalladas
+- ✅ Código fail-safe con errores anidados
+- ✅ Activación contextual del modo bajo consumo
+- ✅ Validación cross-platform (x86, ARM, RISC-V)
+- ✅ Visualización por sprint con métricas gráficas
+- ✅ Documentación evolutiva y comparativa automatizada
+
+
+
+## 🛠️ Instrucción Final para GPT-4.5 (v1.3)
+
+Como IA Copiloto:
+
+1. **Generá tests específicos por arquitectura**  
+   - NEON en ARM  
+   - AVX/AVX2 en x86  
+   - Pure software fallback para RISC-V  
+
+2. **Propón políticas de energía granular**  
+   - Limitación de núcleos por `taskset`  
+   - Enfriamiento forzado por frecuencia  
+   - Prioridad de procesos en modo batería
+
+3. **Detallá un roadmap en fases para ONNX/TensorRT**  
+   - Fase 1: Precisión y wrapper GPU (Sprint 6)  
+   - Fase 2: Quantización dinámica + NPU (Sprint 7)  
+
+4. **Simulá ataques y fallos multi-nodo en clusters**  
+   - SQL injection sintético en logs  
+   - Fallo de 2/3 nodos (degradación funcional)  
+   - Pérdida de refrigeración → modo reducción 30% CPU
+
+5. **Mejorá alma_auto_eval.py** con IA que sugiera mejoras basadas en rendimiento:  
+```python
+def sugerir_optimizaciones():
+    if uso_ram > 2.5 * kpi_ram:
+        return "Revisar mmap o paginación parcial"
+    if latencia_media > 2:
+        return "Activar quantización 3-bit en inferencia"
+```
+
+6. **Implementá monitoreo predictivo**  
+   - Script `alma_monitor.py` con alertas en tiempo real  
+   - Detección de sobreuso o patrón de fallos  
+   - Sugerencia de mitigación automática
+
+7. **Incluí documentación interactiva**  
+   - Gráficos HTML/Plotly  
+   - Links a líneas de código problemáticas  
+   - Comandos ejecutables inline
+
+8. **Simplificá la estructura visual del roadmap**  
+   - Tabla principal con hipervínculos  
+   - Secciones plegables (`<details>` en Markdown)
+
+
+## ⚡ Modo Bajo Consumo Detallado
+
+Condiciones:
+
+- [ ] Batería <15%  
+- [ ] Temperatura >80ºC (CPU)  
+- [ ] Swap >20% durante 10min  
+- [ ] CPU limitada por `cpufreq-set`  
+- [ ] Logging detallado deshabilitado  
+- [ ] HDD/I/O en modo throttled
+
+
+## 🔥 Escenarios de Estrés
+
+**Datos Sintéticos:**  
+- 10k mensajes con inputs anómalos  
+- Logs corruptos + headers ilegibles  
+- Ataques tipo SQL Injection  
+- Fallos en disco + RAM + red simulados
+
+
+## 📚 Lecciones Aprendidas
+
+`docs/lecciones_aprendidas.md` incluirá:
+
+- Fallos + solución aplicada  
+- Refactors eficaces  
+- Herramientas descartadas y por qué  
+- Alternativas tecnológicas y sus pruebas
+
+
+# prompt_base_primer_chat_v1.4.md
+
+
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5 (v1.4)
+
+## 🎯 Objetivo General
+
+Diseñar, ejecutar y evolucionar **ALMA_RESIST** como un sistema IA offline robusto, antifrágil y preparado para arquitecturas diversas, priorizando soberanía tecnológica, eficiencia energética y recuperación ante fallos extremos.
+
+
+## 🧩 Fragmento del Roadmap (ejemplo)
+
+```markdown
+| Sprint | Hito                      | Subtareas                                               | Métrica        | Éxito esperado                    |
+|--------|---------------------------|----------------------------------------------------------|----------------|-----------------------------------|
+| 1      | Logging cifrado           | JSON estructurado, AES-256, SHA3, test recuperación     | <1.5s carga    | Sin fallos con 1k logs corruptos |
+| 2      | Chat persistente          | SQLite encriptado, paginación, `--clear-chat`           | <2s respuesta  | Uso RAM <1.8GB con 1k mensajes   |
+| 3      | Autoevaluación + IA       | `alma_auto_eval.py`, `reporte_sprint.md`                | 95% cobertura  | Mejora en cada iteración         |
+```
+
+
+## 🧠 Preguntas guía para IA
+
+- ¿Cómo garantizar compatibilidad entre módulos nuevos y `ALMA_LIBRE/`?
+- ¿Qué estrategia de fallback usar si falla el monitoreo?
+- ¿Cómo optimizar la inferencia sin GPU en CPUs ARMv8?
+
+
+¡Este prompt está listo para iniciar la primera conversación con GPT-4.5!  
+Adjuntá:  
+- `prompt_base_primer_chat_v1.4.md`  
+- `ALMA_LIBRE/`  
+- `idea_base_0.0.9.md`
+
+

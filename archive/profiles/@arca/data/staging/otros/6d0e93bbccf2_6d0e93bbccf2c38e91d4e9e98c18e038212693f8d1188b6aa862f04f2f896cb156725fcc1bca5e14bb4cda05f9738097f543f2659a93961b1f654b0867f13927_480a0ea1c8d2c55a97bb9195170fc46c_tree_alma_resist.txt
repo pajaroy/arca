@@ -1,0 +1,388 @@
+.
+├── 2025-06-06_backup_pre_fix_metadata.zip
+├── changelog.md
+├── control_central
+│   ├── archivo
+│   │   ├── datasets
+│   │   │   └── readme.md
+│   │   ├── downloads
+│   │   │   ├── archivados
+│   │   │   │   ├── 2025-06-01
+│   │   │   │   └── readme.md
+│   │   │   ├── asesor_base.zip
+│   │   │   ├── centralesis.zip
+│   │   │   ├── centralisis_v1.1.md
+│   │   │   ├── centralisis_v1.1.yaml
+│   │   │   ├── historico
+│   │   │   │   ├── 2025-06-03_alma.md
+│   │   │   │   ├── 2025-06-03_apendice_contexto_control-central_cli.md
+│   │   │   │   ├── 2025-06-03_apendice_contexto_control_central_cli.md
+│   │   │   │   ├── 2025-06-03_apendice_criterios_ubicacion.md
+│   │   │   │   ├── 2025-06-03_apendice_historico_contexto_cli.md
+│   │   │   │   ├── 2025-06-03_apendice_historico_criterios.md
+│   │   │   │   ├── 2025-06-03_apendice_nombres_modulos_ejecutables.md
+│   │   │   │   ├── 2025-06-03_apendice_protocolo_ingreso_contexto_cli.md
+│   │   │   │   ├── 2025-06-03_apendice_protocolo_ingreso_criterios.md
+│   │   │   │   ├── 2025-06-03_apendice_raiz_contexto_cli.md
+│   │   │   │   ├── 2025-06-03_apendice_raiz_criterios_ubicacion.md
+│   │   │   │   ├── 2025-06-03_changelog_apendice.md
+│   │   │   │   ├── 2025-06-03_contexto_asesor-ia_cli_cleaner.md
+│   │   │   │   ├── 2025-06-03_contexto_asesor-ia_control-central_oficial.md
+│   │   │   │   ├── 2025-06-03_contexto_Kael_control-central_cli.md
+│   │   │   │   ├── 2025-06-03_emma.md
+│   │   │   │   ├── 2025-06-03_protocolo_ingreso_archivos.md
+│   │   │   │   ├── 2025-06-03_readmes_control_central
+│   │   │   │   ├── 2025-06-04_apendice_control_central_cli.md
+│   │   │   │   ├── 2025-06-04_apendice_criterios_ubicacion_general.md
+│   │   │   │   ├── apendice_diagnostico_control_central_2025-06-03.md
+│   │   │   │   ├── contexto_oficial_asesor-ia_control-central_v1.md
+│   │   │   │   ├── contexto_oficial_asesor-ia_control-central_v2.md
+│   │   │   │   ├── kael.md
+│   │   │   │   └── Sin título.md
+│   │   │   ├── modulo_contrato_tecnico_agregado_memorias.md
+│   │   │   ├── prompt_arranque_centralisis.md
+│   │   │   ├── prompt_arranque_centralisis_v2.md
+│   │   │   ├── prompt_refactorizacion_post_auditoria.md
+│   │   │   ├── prompts
+│   │   │   ├── propuesta_alma_v2.md
+│   │   │   ├── propuesta_alma_v3.md
+│   │   │   ├── protocolo_ingreso_archivos.md
+│   │   │   ├── readme.md
+│   │   │   ├── readmes_control_central
+│   │   │   │   ├── 2025-06-01_apendice_bitacora.md
+│   │   │   │   ├── archivo
+│   │   │   │   ├── asesor-ia
+│   │   │   │   ├── core
+│   │   │   │   ├── logs
+│   │   │   │   ├── readmes_control_central.zip
+│   │   │   │   └── status
+│   │   │   └── template_asesor-ia.md
+│   │   ├── logs
+│   │   └── README.md
+│   ├── asesor-ia
+│   │   ├── agentes
+│   │   │   ├── alma
+│   │   │   │   ├── archivo
+│   │   │   │   ├── bitacoras
+│   │   │   │   ├── config
+│   │   │   │   ├── contexto
+│   │   │   │   ├── control
+│   │   │   │   ├── core
+│   │   │   │   ├── docs
+│   │   │   │   ├── logs
+│   │   │   │   ├── memoria_viva
+│   │   │   │   ├── meta
+│   │   │   │   ├── prompts
+│   │   │   │   ├── README.md
+│   │   │   │   ├── tools
+│   │   │   │   └── ubicacion.md
+│   │   │   ├── bitacora_viva_backup_20250606_025555.yaml
+│   │   │   ├── bitacora_viva.json
+│   │   │   ├── bitacora_viva.md
+│   │   │   ├── bitacora_viva.yaml
+│   │   │   ├── centralesis
+│   │   │   │   ├── archivo
+│   │   │   │   ├── bitacoras
+│   │   │   │   ├── config
+│   │   │   │   ├── contexto
+│   │   │   │   ├── control
+│   │   │   │   ├── core
+│   │   │   │   ├── docs
+│   │   │   │   ├── logs
+│   │   │   │   ├── memoria_viva
+│   │   │   │   ├── meta
+│   │   │   │   ├── prompts
+│   │   │   │   ├── README.md
+│   │   │   │   ├── tools
+│   │   │   │   └── ubicacion.md
+│   │   │   ├── emma
+│   │   │   │   ├── archivo
+│   │   │   │   ├── bitacoras
+│   │   │   │   ├── config
+│   │   │   │   ├── contexto
+│   │   │   │   ├── control
+│   │   │   │   ├── core
+│   │   │   │   ├── docs
+│   │   │   │   ├── logs
+│   │   │   │   ├── memoria_viva
+│   │   │   │   ├── meta
+│   │   │   │   ├── prompts
+│   │   │   │   ├── README.md
+│   │   │   │   └── tools
+│   │   │   └── kael
+│   │   │       ├── archivo
+│   │   │       ├── bitacoras
+│   │   │       ├── config
+│   │   │       ├── contexto
+│   │   │       ├── control
+│   │   │       ├── control_central_cli_cleaner.md
+│   │   │       ├── core
+│   │   │       ├── docs
+│   │   │       ├── logs
+│   │   │       ├── memoria_viva
+│   │   │       ├── meta
+│   │   │       ├── prompts
+│   │   │       ├── README.md
+│   │   │       ├── tools
+│   │   │       └── ubicacion.md
+│   │   ├── archivo
+│   │   │   ├── datasets
+│   │   │   │   └── README.md
+│   │   │   ├── downloads
+│   │   │   │   ├── historico
+│   │   │   │   └── README.md
+│   │   │   ├── logs
+│   │   │   │   └── README.md
+│   │   │   └── README.md
+│   │   ├── comandos.md
+│   │   ├── config
+│   │   │   ├── .env.example
+│   │   │   ├── README.md
+│   │   │   └── settings.yaml
+│   │   ├── control
+│   │   │   ├── checklist_fase1_sync.md
+│   │   │   ├── README.md
+│   │   │   └── sprint_actual.md
+│   │   ├── core
+│   │   │   ├── notebooks
+│   │   │   │   ├── bitacora_script
+│   │   │   │   ├── bitacora_y_changelog_vivo_de_la_sesion.yaml
+│   │   │   │   ├── changelog_script
+│   │   │   │   ├── convert_multiformato
+│   │   │   │   ├── copiloto_vs_code_seed_v0.1.md
+│   │   │   │   ├── copiloto_vs_code_seed_v0.2.md
+│   │   │   │   ├── flujo_de_agentes
+│   │   │   │   ├── nero_seed_presentacion.md
+│   │   │   │   ├── proyecto_alma
+│   │   │   │   ├── proyecto_emma
+│   │   │   │   ├── proyecto_kael
+│   │   │   │   └── README.md
+│   │   │   ├── README.md
+│   │   │   ├── scripts
+│   │   │   │   └── README.md
+│   │   │   └── tests
+│   │   │       └── README.md
+│   │   ├── docs
+│   │   │   ├── changelog.json
+│   │   │   ├── changelog.md
+│   │   │   ├── changelog.yaml
+│   │   │   ├── historicos
+│   │   │   │   ├── confirmacion_de_rol_deepseek.md
+│   │   │   │   ├── confirmacion_de_rol_gpt.md
+│   │   │   │   ├── Contexto-IA.md
+│   │   │   │   ├── contrato_fundacional_asesor-IA_v1.md
+│   │   │   │   ├── contrato_fundacional_asesor-IA_v2.md
+│   │   │   │   └── README.md
+│   │   │   ├── history
+│   │   │   │   └── README.md
+│   │   │   ├── prompts
+│   │   │   │   ├── prompt_asesor_backup_terminal_v1.md
+│   │   │   │   ├── prompt_base_asistente_IA_control_central.md
+│   │   │   │   └── README.md
+│   │   │   └── README.md
+│   │   ├── interacciones
+│   │   │   ├── 2025-05-29_log_test.md
+│   │   │   └── README.md
+│   │   ├── meta
+│   │   │   ├── module.yaml
+│   │   │   └── README.md
+│   │   ├── metadata.yaml.md
+│   │   ├── README.md
+│   │   ├── scripts
+│   │   │   └── README.md
+│   │   ├── sessions
+│   │   │   ├── 20240601_activacion_sistema.md
+│   │   │   └── README.md
+│   │   ├── status
+│   │   │   ├── asesor_status.yaml
+│   │   │   └── README.md
+│   │   ├── status.md
+│   │   ├── templates
+│   │   │   ├── ALMA_RESIST_agentes_idea_base.md
+│   │   │   ├── asesor_base
+│   │   │   │   ├── bitacoras
+│   │   │   │   ├── contexto
+│   │   │   │   ├── docs
+│   │   │   │   ├── logs
+│   │   │   │   ├── memoria_viva
+│   │   │   │   ├── meta
+│   │   │   │   ├── prompts
+│   │   │   │   ├── README.md
+│   │   │   │   ├── tools
+│   │   │   │   └── ubicacion.md
+│   │   │   ├── README.md
+│   │   │   └── template_agente_ia_base_v2.md
+│   │   ├── tree_asesor-ia.txt
+│   │   └── .txt
+│   ├── bitacora
+│   │   └── backups
+│   │       ├── bitacora_backup_20250606_035341.yaml
+│   │       ├── bitacora_backup_20250606_035811.yaml
+│   │       ├── bitacora_backup_20250606_040557.yaml
+│   │       └── bitacora_backup_20250607_142417.yaml
+│   ├── cli
+│   │   ├── bitacora
+│   │   │   └── add_bitacora_entry_v0.1.2.py
+│   │   ├── changelog
+│   │   │   └── add_changelog_entry_v0.1.2.py
+│   │   └── readme.md
+│   ├── config
+│   │   └── readme.md
+│   ├── control
+│   │   ├── checklists
+│   │   │   ├── checklists.md
+│   │   │   └── roadmap_0.0.0.2_2025-05-20.md
+│   │   ├── sprint_historicos
+│   │   │   ├── readme.md
+│   │   │   ├── sprint_actual_0.1_control_central.md
+│   │   │   └── sprint_actual_0.2_sincronizacion.md
+│   │   └── sprints_activos
+│   │       ├── prompts
+│   │       │   ├── prompt_sprint_0.3_infraestructura_asesor_ia.md
+│   │       │   └── prompt_sprint_sync_total_v1.md
+│   │       ├── README.md
+│   │       ├── sprint_0.3_infraestructura_asesor_ia.md
+│   │       ├── sprint_actual.md
+│   │       └── sprint_actual.sync-conflict-20250604-050446-EHTW5G7.md
+│   ├── core
+│   │   ├── notebooks
+│   │   │   ├── archivo
+│   │   │   │   └── legacy_tests
+│   │   │   ├── cargar_memorias
+│   │   │   │   ├── cargar_memorias_changelog_v3.md
+│   │   │   │   ├── cargar_memorias.md
+│   │   │   │   ├── cargar_memorias.py
+│   │   │   │   ├── cargar_memorias_v3.py
+│   │   │   │   ├── prompt_maestro_cargador_memorias.md
+│   │   │   │   ├── prompt_maestro_cargador_memorias_v3.md
+│   │   │   │   ├── prompt_maestro_cargador_memorias_v4.md
+│   │   │   │   ├── prompt_maestro_cargador_memorias.yaml
+│   │   │   │   └── README.md
+│   │   │   ├── cargar_memorias_changelog_v2.md
+│   │   │   ├── cargar_memorias_changelog_v3.md
+│   │   │   ├── cargar_memorias_v3.py
+│   │   │   ├── changelog_v3.0.0_alma_resist.yaml
+│   │   │   ├── comandos_utiles.md
+│   │   │   ├── flujo_de_agentes
+│   │   │   │   └── idea_base.md
+│   │   │   ├── memorias
+│   │   │   │   └── README.md
+│   │   │   ├── memorias_institucionales.md
+│   │   │   ├── memorias_institucionales.yaml
+│   │   │   ├── readme_control_central.md
+│   │   │   └── readme.md
+│   │   ├── README.md
+│   │   ├── scripts
+│   │   │   ├── README.md
+│   │   │   └── start_inputleap.sh
+│   │   └── tests
+│   │       └── readme.md
+│   ├── docs
+│   │   ├── changelog.md
+│   │   ├── changelog_vivo.yaml
+│   │   ├── changelog_vivo.yaml.backup_20250607_145742
+│   │   ├── changelog.yaml
+│   │   ├── contexto
+│   │   │   ├── contexto_asesor-ia_v1.md
+│   │   │   ├── contexto_asesor-ia_v1.yaml
+│   │   │   ├── criterios_ubicacion_vivo.md
+│   │   │   ├── emma.md
+│   │   │   ├── historico
+│   │   │   │   ├── 2025-06-04_alma.md
+│   │   │   │   ├── contexto_asesor-ia_v1.md
+│   │   │   │   ├── contexto_asesor-ia_v1.yaml
+│   │   │   │   ├── contexto_oficial_asesor-ia_control-central_v1.1.md
+│   │   │   │   ├── contexto_oficial_asesor-ia_control-central_v1.1.yaml
+│   │   │   │   ├── contexto_oficial_asesor-ia_control-central_v1.2.md
+│   │   │   │   ├── contexto_oficial_asesor-ia_control-central_v1.2.yaml
+│   │   │   │   └── contexto_oficial_asesor-ia_control-central_v1.sync-conflict-20250603-023156-VOWS2Q7.md
+│   │   │   └── readme.md
+│   │   ├── history
+│   │   │   └── readme.md
+│   │   ├── journal
+│   │   │   ├── bitacoras
+│   │   │   │   ├── 2025-05-22_bitacora.md
+│   │   │   │   ├── 2025-05-23_bitacora.md
+│   │   │   │   ├── 2025-05-29_bitacora_consolidacion.md
+│   │   │   │   ├── 2025-05-30_bitacora_central_reinstalacion.md
+│   │   │   │   ├── 2025-06-01_bitacora_con_apendice_final.md
+│   │   │   │   ├── 2025-06-02_bitacora.md
+│   │   │   │   ├── 2025-06-03_bitacora_reorganizacion_cli_cleaner.md
+│   │   │   │   ├── 2025-06-05_alta_repo_alma_libre.md
+│   │   │   │   ├── 2025-06-05_bitacoras.yaml
+│   │   │   │   ├── 2025-06-05_creacion_carpetas_y_limpieza.md
+│   │   │   │   ├── 2025-06-06_bitacora_fix_metadata.md
+│   │   │   │   ├── bitacora_viva.yaml
+│   │   │   │   └── README.md
+│   │   │   ├── mapeo_sprint_archivos.md
+│   │   │   ├── prompts
+│   │   │   │   ├── prompt_bitacora_central.md
+│   │   │   │   └── prompt_bitacora_control_central.md
+│   │   │   └── readme.md
+│   │   ├── planificacion
+│   │   │   ├── ideas
+│   │   │   │   ├── estructura_ia_friendly.md
+│   │   │   │   └── readme.txt
+│   │   │   ├── readme.md
+│   │   │   └── roadmaps
+│   │   │       └── roadmap_tecnico_detallado.md
+│   │   ├── readme.md
+│   │   ├── sync
+│   │   │   ├── manual_sync.md
+│   │   │   └── problemas_comunes.md
+│   │   └── utilidades
+│   │       ├── control_central_docs_utilidades.zip
+│   │       ├── instalacion
+│   │       │   └── bitacora_instalacion_alma_resist.md
+│   │       ├── instalacion_inputleap_ssh_tmux.md
+│   │       ├── prompt_extraccion_memorias.md
+│   │       ├── prompt_universal_bitacora_y_changelog.md
+│   │       ├── readme.md
+│   │       ├── red_nodos_alma.md
+│   │       └── tree_control_central_L4.txt
+│   ├── logs
+│   │   ├── auditorias
+│   │   │   └── 2025-05-29_prompt_audioria_001.md
+│   │   ├── logs_historicos
+│   │   │   └── readme.md
+│   │   └── README.md
+│   ├── memorias
+│   │   ├── bitacora_viva.json
+│   │   ├── bitacora_viva.yaml
+│   │   ├── CHANGELOG.md
+│   │   ├── memorias_avanzadas.yaml
+│   │   ├── memorias.json
+│   │   ├── memorias_nuevas.json
+│   │   ├── memorias_nuevas.yaml
+│   │   ├── memorias.yaml
+│   │   └── README.md
+│   ├── meta
+│   │   ├── module.yaml
+│   │   └── readme.md
+│   ├── readme.md
+│   ├── status
+│   │   ├── alma_status.yaml
+│   │   └── readme.md
+│   └── .stfolder
+├── debug.log
+├── .obsidian
+│   ├── appearance.json
+│   ├── app.json
+│   ├── core-plugins.json
+│   ├── workspace.json
+│   ├── workspace.sync-conflict-20250606-014514-EHTW5G7.json
+│   ├── workspace.sync-conflict-20250606-015210-EHTW5G7.json
+│   ├── workspace.sync-conflict-20250606-162120-EHTW5G7.json
+│   ├── workspace.sync-conflict-20250607-044409-VOWS2Q7.json
+│   ├── workspace.sync-conflict-20250607-044428-VOWS2Q7.json
+│   ├── workspace.sync-conflict-20250607-044808-VOWS2Q7.json
+│   ├── workspace.sync-conflict-20250607-130646-VOWS2Q7.json
+│   ├── workspace.sync-conflict-20250607-130844-VOWS2Q7.json
+│   ├── workspace.sync-conflict-20250607-132058-VOWS2Q7.json
+│   └── workspace.sync-conflict-20250607-132251-VOWS2Q7.json
+├── readme.md
+├── .stfolder
+├── test_memorias.py
+└── tree_alma_resist.txt
+
+150 directories, 236 files

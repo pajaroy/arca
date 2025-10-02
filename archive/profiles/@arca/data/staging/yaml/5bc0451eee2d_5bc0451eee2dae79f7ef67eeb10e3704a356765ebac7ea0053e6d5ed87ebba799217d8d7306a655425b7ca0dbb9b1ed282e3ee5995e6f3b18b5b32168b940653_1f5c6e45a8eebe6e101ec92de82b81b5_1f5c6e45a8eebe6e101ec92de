@@ -1,0 +1,20 @@
+version: "0.2.0"
+tipo: "readme"
+schema: "almaresist.readme_v1"
+descripcion: |
+  Versión estable y auditada del módulo CLI para la gestión de memorias institucionales. Incluye backups automáticos, triple formato, changelog dedicado y prompts técnicos asociados.
+estructura:
+  - changelog/: "Changelog de la versión 0.2.0"
+  - promp_cargar_memorias/: "Prompts técnicos y de ingeniería"
+  - src/: "Código fuente de la versión estable"
+tags: [memorias, cli, v0.2.0, changelog, prompts, src]
+linked_to:
+  - changelog/changelog.yaml
+  - promp_cargar_memorias/README.yaml
+  - src/cargar_memorias_v0.2.0.py
+responsable: "Equipo de Operaciones"
+hash_verificacion: "sha256:pending"
+historial:
+  - "v0.2.0 consolidada y puesta en producción el 2025-06-18 por Kael"
+last_modified: "2025-06-18T13:40:00Z"
+last_modified_by: "Kael"

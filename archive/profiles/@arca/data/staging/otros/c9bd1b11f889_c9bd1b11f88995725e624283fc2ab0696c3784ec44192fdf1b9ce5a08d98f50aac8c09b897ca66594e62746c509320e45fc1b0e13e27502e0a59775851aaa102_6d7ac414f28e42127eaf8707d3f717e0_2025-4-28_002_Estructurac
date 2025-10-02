@@ -1,0 +1,65 @@
+# 🧠 **Resumen técnico – Sesión ALMA LIBRE (Hoy)**
+
+## 📦 Estructuración de Módulos Principales
+
+- Consolidamos `/modules/` como el núcleo operativo de ALMA LIBRE.
+    
+- Cada módulo tiene **README.md** propio explicativo:
+    
+    - `/trading`
+        
+    - `/health`
+        
+    - `/geopolitics`
+        
+    - `/finance`
+        
+    - `/bitacora_central`
+        
+    - `/programming`
+        
+
+## 📂 Creación de Subcarpetas Internas (por módulo)
+
+- **Trading**: cuaderno, gestor de trades, backtesting, trades no tomados, resumen.
+    
+- **Health**: cuaderno, cronograma de salud, investigaciones de salud, control diario.
+    
+- **Geopolitics**: cuaderno geopolítico, historia, historia argentina, conspiranoico, científico, investigaciones geopolíticas.
+    
+- **Finance**: cuaderno finanzas personales, cannabird, cannabird_exe, alma_mia_fondo, alma_mia_fondo_exe, historia económica.
+    
+- **Bitácora Central**: cuaderno, sesiones psico trading, debates IA-humano.
+    
+- **Programming**: cuaderno, desarrollo, stack.
+    
+
+## 📋 Documentación Interna (Docs)
+
+- Creamos estructura para `/docs/`:
+    
+    - `/onboarding/` con su propio README (listo para incluir plantillas y manuales internos).
+        
+    - `/changelogs/` con su propio README (listo para registrar versiones del proyecto).
+        
+
+## 📜 Plantillas de Uso
+
+- Plantilla estándar de `README.md` generada para todas las carpetas.
+    
+- Definimos formato oficial para documentación en el whitepaper.
+    
+
+## 🔥 Correcciones críticas aplicadas
+
+- Agregamos README.md a **todas las subcarpetas** y **módulos principales**.
+    
+- Ajustamos errores menores de falta de documentación en módulos raíz.
+
+
+# 📣 Estado actual del proyecto:
+
+✅ **Infraestructura modular 80% lista.**  
+✅ **Documentación básica 80% lista.**  
+✅ **Preparado para entrar en fase técnica (src, bases de datos y apps).**
+

@@ -1,0 +1,1 @@
+Script para manejar todos los archivos desde un script movimiento indexado para mantener el orden del proyecto

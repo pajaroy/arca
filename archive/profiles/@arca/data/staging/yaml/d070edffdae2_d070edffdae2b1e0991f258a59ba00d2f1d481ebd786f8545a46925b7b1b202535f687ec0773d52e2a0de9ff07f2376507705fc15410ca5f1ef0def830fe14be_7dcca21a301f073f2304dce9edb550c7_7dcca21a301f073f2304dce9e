@@ -1,0 +1,15 @@
+# README – Notebooks Técnicos / Add Aprendizaje Flujo
+version: 0.1.0
+descripcion: >
+  Esta carpeta contiene documentación, plantillas y prompts técnicos relacionados al módulo "add_aprendizaje_flujo".
+  Aquí se almacenan únicamente los recursos de referencia, experimentación o drafts que NO corresponden al código fuente ejecutable.
+  Funciona como zona de staging documental antes de migrar a la documentación oficial.
+origen: migrado desde control_central/core/notebooks/add_aprendizaje_flujo (2025-06-16)
+estructura:
+  - docs/: Plantillas y prompts YAML asociadas
+  - README.yaml: Este archivo
+responsable: kael
+relacion_modulo: core/scripts/add_aprendizaje_flujo
+hash_verificacion: sha256:pending
+historial:
+  - 2025-06-16: Creación inicial tras reorganización de carpetas y separación de código/documentación

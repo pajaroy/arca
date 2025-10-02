@@ -1,0 +1,84 @@
+# 📋 Sprint 2.1 – Profesionalización de la Estructura Documental
+
+📅 Fecha: 2025-05-21  
+🔢 Versión: v0.0.0.2  
+🏁 Objetivo: Dejar la versión `v0.0.0.2_CLI_FINAL` completamente profesionalizada y lista para pasar a LLM
+
+
+## 🧪 Testing Base
+
+- [x] Crear carpeta `testing/`
+- [x] Crear archivo `testing/cli/test_cli_basics.md` con test manual de comandos
+- [x] Crear `testing/README.md` explicando cómo testear cada módulo
+
+
+## 🧠 .project.md – Estado del Sistema
+
+- [x] Crear archivo `docs/.project.md` con:
+  - Versión actual
+  - Siguiente sprint
+  - Estado por módulo (`CLI`, `LLM`, `Memoria`, `Loader`, `Logging`, etc.)
+  - Mini resumen estilo changelog
+
+
+  ### 📎 Apéndice – Cambios adicionales integrados (2025-05-22)
+
+Durante la consolidación final del Sprint 2.1 se incorporaron las siguientes tareas adicionales para profesionalizar la estructura documental y cerrar el sistema de trazabilidad:
+
+- 📁 **Creación de carpeta `bitacoras/`**
+  - Plantilla base `bitacora_template.md`
+  - Registro inicial `bitacora_2025_05_22.md`
+  - `README.md` explicativo de uso de bitácoras
+
+- 🧠 **Implementación de sistema de trazabilidad y logs**
+  - `log_integracion.md` para registrar incorporaciones de archivos y módulos
+  - `mapeo_sprint_archivos.md` con vinculación entre documentos y sprints correspondientes
+
+- 🗂️ **Organización de versiones documentales**
+  - Compresión y documentación de versiones:
+    - `v0.0.0.1_auditoria.zip`
+    - `v0.0.0.2_CLI_FINAL.zip`
+    - `v0.0.0.2_metodologias.zip`
+    - `v0.0.0.2_documentacion.zip`
+  - Cada versión contiene `README.md` y `version.md`
+
+- 📝 **Normalización total de la estructura**
+  - Corrección automática de metadatos con `fix_metadata.py`
+  - Conversión de módulos a `snake_case` con `force_snake_case_modules.py`
+  - Automatización completa mediante el script `integrar_nuevo_archivo.sh`
+
+Estas acciones fortalecen la base documental y habilitan futuras integraciones con herramientas IA, versionado automatizado y sistemas de reflexión.
+
+
+## 📦 Estructura documental faltante
+
+- [x] Crear carpeta `docs/estructura_doc/` (si se define como necesaria)
+  - [x] Incluir `README.md` explicativo
+  - [x] Incluir `plantilla_documento.md`
+
+## 🧪 Testing Base
+
+- [x] Crear carpeta `testing/`
+  - [x] `testing/README.md` con instructivo de pruebas
+  - [x] `testing/cli/test_cli_basics.md` con casos manuales
+  - [x] `testing/utils/test_metadata.py` para scripts
+
+## 📝 Gestión de tareas y estado del proyecto
+
+- [x] Crear archivo `docs/TODO.md` tipo kanban con secciones:
+  - `[!] En curso`
+  - `[ ] Pendiente`
+  - `[x] Completado`
+
+- [x] Crear archivo `docs/.project.md` con:
+  - Versión actual del sistema
+  - Próximo sprint planificado
+  - Estado por módulo (`CLI`, `LLM`, `Loader`, etc.)
+  - Resumen breve estilo changelog
+
+
+✍️ Cierre oficial del Sprint 2.1  
+📅 Fecha: 2025-05-23  
+👤 Autor: Santi / pájaro  
+🔏 Snapshot generado: v0.0.0.2_estructura_documental  
+🔑 Hash: `0f61c8c5f3ab0b08b1c8c189b2e9a6ef3db47d0d4b0f63b246ac9ef8079d3a35`

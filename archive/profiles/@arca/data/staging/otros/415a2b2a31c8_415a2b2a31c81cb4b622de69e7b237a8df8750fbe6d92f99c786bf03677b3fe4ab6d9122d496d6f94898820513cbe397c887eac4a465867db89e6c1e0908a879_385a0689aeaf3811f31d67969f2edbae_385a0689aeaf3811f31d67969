@@ -1,0 +1,19 @@
+## 📎 Apéndice 2025-06-02 – Posicionamiento raíz del módulo Cannabird
+
+**Resumen:**
+Se estableció que toda operación realizada dentro del módulo `Cannabird` será ejecutada **desde la raíz del módulo**, definida como:
+
+```bash
+/home/bird/ALMA_RESIST/alma_empresa/entidades/cannabird/
+```
+
+Esto implica que todas las rutas relativas como `docs/`, `control/`, `archivo/` y `meta/` se interpretan desde este punto.  
+Esta convención permite una operación más clara desde scripts, terminal y estructuras automatizadas IA-friendly.
+
+**Comando estándar recomendado antes de trabajar:**
+
+```bash
+cd /home/bird/ALMA_RESIST/alma_empresa/entidades/cannabird/
+```
+
+**Tags:** `#estructura`, `#ruta-base`, `#convencion`, `#CLI`, `#padre-contexto`

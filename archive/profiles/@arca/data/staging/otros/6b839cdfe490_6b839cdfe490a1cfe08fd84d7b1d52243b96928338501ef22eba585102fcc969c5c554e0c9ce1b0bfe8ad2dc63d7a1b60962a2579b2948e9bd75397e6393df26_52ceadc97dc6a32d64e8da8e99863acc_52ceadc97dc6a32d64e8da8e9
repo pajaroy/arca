@@ -1,0 +1,28 @@
+{
+  "id": "log_crypto_llm_server_v0.2",
+  "modulo": "log_crypto",
+  "version": 0.2,
+  "standard": "ALMA_RESIST_v0.2",
+  "descripcion": "Backend de cifrado/descifrado de logs (AES-256/Fernet).\nPermite cifrar logs críticos automáticamente, gestionar rotación de claves y ofrecer descifrado manual por CLI.\nSoporta integración directa con log_writer y logging_config.\n",
+  "campos_universales": [
+    "id",
+    "agente",
+    "timestamp",
+    "hash",
+    "metadata"
+  ],
+  "scripts_principales": [
+    {
+      "log_crypto.py": "Cifra y descifra logs, integra con rotación automática"
+    }
+  ],
+  "dependencias": [
+    "cryptography",
+    "logging_config"
+  ],
+  "ejemplo_uso": "from log_crypto import encrypt_log, decrypt_log\nencrypt_log(\"mi_log.log\", clave)\n",
+  "linked_to": [
+    "alma_core/control_central/bitacora/bitacora_viva.yaml"
+  ],
+  "estado": "EN USO — auditable, preparado para privacidad avanzada"
+}

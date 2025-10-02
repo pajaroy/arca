@@ -1,0 +1,59 @@
+import pandas as pd
+from pathlib import Path
+from datetime import datetime
+
+DATA_DIR = Path.home() / "trece/data"
+
+# Cargar CSVs
+withdrawals = pd.read_csv(DATA_DIR / "withdrawals.csv")
+expenses = pd.read_csv(DATA_DIR / "expenses.csv")
+entities = pd.read_csv(DATA_DIR / "entities.csv")
+concepts = pd.read_csv(DATA_DIR / "concepts.csv")
+
+# Limpiar columnas Unnamed
+for df in [withdrawals, expenses, entities, concepts]:
+    df = df.loc[:, ~df.columns.str.contains("^Unnamed")]
+
+# Convertir fechas a datetime
+withdrawals["date"] = pd.to_datetime(withdrawals["date"])
+expenses["date"] = pd.to_datetime(expenses["date"])
+
+# Obtener mes actual
+hoy = datetime.today()
+mes_actual = hoy.month
+anio_actual = hoy.year
+
+# Filtrar solo datos del mes actual
+withdrawals_actual = withdrawals[(withdrawals["date"].dt.month == mes_actual) & (withdrawals["date"].dt.year == anio_actual)]
+expenses_actual = expenses[(expenses["date"].dt.month == mes_actual) & (expenses["date"].dt.year == anio_actual)]
+
+# 🔹 Retiros por socio en mes actual
+retiros_mes = withdrawals_actual.groupby("entitie_id")[["grams", "total_price"]].sum().reset_index()
+retiros_mes = pd.merge(retiros_mes, entities, left_on="entitie_id", right_on="id", how="left")
+retiros_mes = retiros_mes.rename(columns={"name": "entity_name", "grams": "total_grams", "price": "total_price"})
+retiros_mes = retiros_mes[["entity_name", "total_grams", "total_price"]]
+
+# 🔹 Gastos por concepto en mes actual
+gastos_mes = expenses_actual.groupby("concept_id")["amount"].sum().reset_index()
+gastos_mes = pd.merge(gastos_mes, concepts, left_on="concept_id", right_on="id", how="left")
+gastos_mes = gastos_mes.rename(columns={"name": "concept_name", "amount": "total_expenses"})
+gastos_mes = gastos_mes[["concept_name", "total_expenses"]]
+
+# 🔹 Resumen general mes actual
+total_grams = withdrawals_actual["grams"].sum()
+total_price = withdrawals_actual["total_price"].sum() if "price" in withdrawals_actual.columns else 0
+total_expenses = expenses_actual["amount"].sum()
+
+# 🔹 Mostrar resultados
+print(f"\n📊 BALANCE MES ACTUAL ({hoy.strftime('%B %Y')})\n")
+
+print("Retiros por socio:")
+print(retiros_mes.to_string(index=False))
+
+print("\nGastos por concepto:")
+print(gastos_mes.to_string(index=False))
+
+print("\nResumen general:")
+print(f"Total gramos retirados: {total_grams}")
+print(f"Total precio retirado: {total_price}")
+print(f"Total gastos: {total_expenses}")

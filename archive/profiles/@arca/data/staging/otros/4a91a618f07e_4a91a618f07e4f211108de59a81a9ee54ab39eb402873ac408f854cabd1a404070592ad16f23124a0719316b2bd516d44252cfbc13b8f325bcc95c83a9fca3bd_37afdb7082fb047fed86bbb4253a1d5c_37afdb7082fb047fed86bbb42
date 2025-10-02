@@ -1,0 +1,26 @@
+Esta carpeta contiene el archivo para sincronizar las carpetas
+
+## ✅ Pasos finales
+
+1. Guardá este script como `sync_alma_drive.sh`
+    
+2. Hacélo ejecutable:
+    
+
+bash
+
+CopiarEditar
+
+`chmod +x sync_alma_drive.sh`
+
+3. Ejecutá con:
+```bash
+./sync_alma_drive.sh --menu
+```
+
+o automático:
+
+
+```bash
+`./sync_alma_drive.sh --auto`
+```

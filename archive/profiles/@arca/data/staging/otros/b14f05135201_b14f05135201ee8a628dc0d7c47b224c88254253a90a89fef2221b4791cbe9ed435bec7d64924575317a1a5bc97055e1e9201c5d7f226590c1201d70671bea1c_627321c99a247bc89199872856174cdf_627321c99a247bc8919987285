@@ -1,0 +1,44 @@
+# 🧱 Metodología Profesional Básica – MVP Unipersonal (ALMA RESIST)
+
+> 📌 Esta metodología operativa está regida por la definición oficial establecida en [[RFC_0001_metodologia]]
+> Cambios mayores deben reflejarse en un nuevo RFC (RFC-0002, RFC-0003, etc.), mientras que este archivo puede seguir actualizándose día a día.
+
+📝 Versión activa  
+📅 Última actualización: 2025-05-20  
+👤 Responsable: Usuario + IA
+
+
+## 1️⃣ Creación del Módulo
+
+- Crear carpeta: `core/[nombre_modulo]/`
+- Archivo base: `main.py`, o `[nombre_modulo]_core.py`
+
+
+## 3️⃣ Prompt Técnico Asociado
+
+- Archivo en `prompts/prompt_[nombre_modulo].md`
+- Debe contener:
+  - Qué resuelve
+  - Cómo se invoca
+  - Qué dependencias tiene
+  - Contexto si es asistido por IA
+
+
+## 📄 Archivos Centrales del Proyecto
+
+| Archivo                          | Rol |
+|----------------------------------|-----|
+| `docs/changelog.md`              | Registro técnico de implementación |
+| `docs/resumen_mvp.md`           | Estado general del sistema operativo |
+| `docs/dependencias.md`          | Librerías y herramientas requeridas |
+| `docs/hitos.md`                 | Eventos estructurales clave |
+| `docs/post_mortem_tecnico.md`   | Incidentes o rediseños |
+| `docs/decisiones_arquitectonicas.md` | Justificación de elecciones estratégicas |
+
+
+## 📜 Changelog Interno
+
+### v0.0.0.1 – 2025-05-20
+- Estructura profesional para tareas técnicas establecida
+- Agregado el paso 0 como fase obligatoria de planificación
+- Unificación de criterios de trazabilidad documental

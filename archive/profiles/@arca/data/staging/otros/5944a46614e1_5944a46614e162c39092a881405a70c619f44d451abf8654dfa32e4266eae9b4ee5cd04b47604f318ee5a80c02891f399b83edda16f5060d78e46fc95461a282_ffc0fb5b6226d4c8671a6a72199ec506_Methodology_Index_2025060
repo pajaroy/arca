@@ -1,0 +1,27 @@
+# 📚 Índice de Metodologías – ALMA_RESIST
+
+Este índice recopila las metodologías formales aplicadas en el sistema ALMA_RESIST. Cada metodología representa una práctica documentada, versionada y replicable.
+
+---
+
+## 📦 Metodologías Actuales
+
+- [📁 Estructura Autónoma](metodologia_estructura_autonoma_v2.md)
+- [📁 Estructura Modular](metodologia_estructura_modular_v2.md)
+- [📁 Interacción con IA](metodologia_interaccion_ia_v2.md)
+- [📁 Agregado de Archivos](metodologia_agregado_archivos.md)
+- [📁 Versionado y Backups](metodologia_versionado_backups_v1.md)
+- [📁 ADR (Decisiones Arquitectónicas)](metodologia_adr_v2.md)
+- [📁 Documentación IA-ready](metodologia_doc_ia_v2.md)
+- [📁 Snapshots Formales](metodologia_snapshots_formales.md)
+- [📁 Metodología de Sprints](metodologia_sprints_v2.md)
+
+---
+
+## 📁 Subcarpetas
+
+- [_archivadas/](./_archivadas) – Métodos obsoletos o reemplazados
+- [_propuestas/](./_propuestas) – Métodos en etapa de evaluación
+
+---
+Última actualización: 2025-05-29

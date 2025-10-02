@@ -1,0 +1,104 @@
+#!/usr/bin/env python3
+# add_linked_to_minimo.py - Agrega linked_to mínimo a documentos core
+
+import argparse
+from pathlib import Path
+from datetime import datetime
+import yaml
+import shutil
+
+DEFAULT_LINK = ['metodologia_doc_ia_v2.md']
+BACKUP_DIR = Path('./backup_linked_to')
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(description='Agrega linked_to mínimo a documentos core')
+    parser.add_argument('--root', type=Path, default=Path('./docs'),
+                       help='Directorio base a procesar (default: ./docs)')
+    parser.add_argument('--dry-run', action='store_true',
+                       help='Simular ejecución sin modificar archivos')
+    parser.add_argument('--verbose', '-v', action='store_true',
+                       help='Mostrar detalles del procesamiento')
+    return parser.parse_args()
+
+def process_file(file_path, args):
+    try:
+        content = file_path.read_text(encoding='utf-8')
+    except Exception as e:
+        print(f"❌ Error leyendo {file_path}: {str(e)}")
+        return False
+
+    # Extraer bloque YAML
+    yaml_block = []
+    in_yaml = False
+    lines = content.split('\n')
+
+    for line in lines:
+        if line.strip() == '---':
+            if in_yaml:
+                yaml_block.append(line)
+                break
+            in_yaml = True
+        if in_yaml:
+            yaml_block.append(line)
+
+    try:
+        metadata = yaml.safe_load('\n'.join(yaml_block[1:-1])) or {}
+    except yaml.YAMLError as e:
+        print(f"❌ YAML inválido en {file_path}: {str(e)}")
+        return False
+
+    # Verificar condiciones para modificación
+    if metadata.get('type') == 'core' and 'linked_to' not in metadata:
+        if args.verbose:
+            print(f"⚡ Documento core sin linked_to: {file_path}")
+
+        # Crear backup
+        backup_path = BACKUP_DIR / datetime.now().strftime('%Y-%m-%d') / file_path.name
+        if not args.dry_run:
+            backup_path.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy(file_path, backup_path)
+            if args.verbose:
+                print(f"🔒 Backup creado: {backup_path}")
+
+        # Modificar metadata
+        metadata['linked_to'] = DEFAULT_LINK
+        new_yaml = yaml.dump(metadata, allow_unicode=True, sort_keys=False)
+
+        # Reconstruir contenido
+        new_content = f"---\n{new_yaml}---\n" + '\n'.join(lines[len(yaml_block):])
+
+        # Escribir cambios
+        if not args.dry_run:
+            file_path.write_text(new_content, encoding='utf-8')
+            if args.verbose:
+                print(f"✨ Modificado: {file_path}")
+        return True
+
+    return False
+
+def main():
+    args = parse_arguments()
+    modified_count = 0
+    total_processed = 0
+
+    if not args.root.exists():
+        print(f"❌ Directorio no encontrado: {args.root}")
+        return
+
+    print(f"🔍 Procesando documentos en: {args.root.resolve()}")
+
+    for md_file in args.root.rglob('*.md'):
+        total_processed += 1
+        if process_file(md_file, args):
+            modified_count += 1
+
+    print(f"\n📊 Resultados:")
+    print(f"• Archivos procesados: {total_processed}")
+    print(f"• Archivos modificados: {modified_count}")
+    print(f"• Modo dry-run: {'activado' if args.dry_run else 'desactivado'}")
+
+    if not args.dry_run:
+        print(f"• Backups guardados en: {BACKUP_DIR}")
+
+if __name__ == "__main__":
+    main()

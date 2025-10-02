@@ -1,0 +1,43 @@
+# 📘 Estrategias Operativas – Módulo de Trading ALMA LIBRE
+
+Este archivo detalla cada una de las estrategias actualmente aplicadas en el sistema ALMA LIBRE.
+
+Cada estrategia tiene su lógica propia, su nivel de riesgo asignado por activo, y su método de gestión operativo y emocional.
+
+
+## 2. 🗽 Estrategia NY Open (apertura de Nueva York)
+
+### ✅ Aplicación:
+
+- Activos: Nasdaq 100 (NAS100) y S&P 500 (SPX500)
+- Temporalidad: Entrada en 5M / Contexto en 15M, 1H y 4H (ideal con Wyckoff)
+
+### 🎯 Condiciones:
+
+- Se forma una caja entre las 9:30 y 11:00 (hora NY)
+- Se toma el máximo y el mínimo de esa caja
+- Esperar que una vela de 5M rompa el rango
+- Confirmar retesteo del nivel de ruptura
+
+### ⚖️ Gestión:
+
+- SL en el otro extremo de la caja
+- TP1 en 1:1 (50%)
+- TP2 abierto (50% restante)
+
+### 🟡 Riesgo:
+
+- Mitad: 1%
+- Completo: 2% (si hay divergencia a favor en 5M)
+
+### ❌ Invalidaciones:
+
+- Divergencia en contra del trade en 5M
+- Contexto macro no claro
+
+
+✍️ Estas estrategias están sujetas a evolución constante, y cada entrada se registra con un template específico.
+
+También se evalúan semanalmente en la Tabla de Rendimiento y dentro del proceso de Psicología del Trading.
+
+> “No importa cuántas estrategias conozcas. Lo que importa es con cuánta conciencia las ejecutás.”

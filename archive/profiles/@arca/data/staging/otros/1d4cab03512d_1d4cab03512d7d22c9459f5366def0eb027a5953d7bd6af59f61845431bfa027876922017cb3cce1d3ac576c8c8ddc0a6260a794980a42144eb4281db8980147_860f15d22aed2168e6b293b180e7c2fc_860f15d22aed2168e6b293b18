@@ -1,0 +1,8 @@
+
+## Ejemplo
+
+```yaml
+ejemplo:
+  comando: python3 /home/bird/alma_core/core/notebooks/alma-cli/memorias/v0.1.1/cargar_memorias_v0.1.1.py \ --entrada "/home/bird/alma_core/control_central/tmp/MEM_KAEL_2025-06-08_05.yaml" \ --modo append \ --memoria-yaml "/home/bird/alma_core/control_central/memorias/memorias_kael.yaml" \ --memoria-json "/home/bird/alma_core/control_central/memorias/memorias_kael.json"
+```
+

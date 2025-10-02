@@ -1,0 +1,54 @@
+# ===========================
+# tipos_base.yaml
+# Tipos de archivos reconocidos por ARCA
+# ===========================
+
+tipos_archivos:
+  config:
+    descripcion: "Configuración, parámetros y settings del sistema."
+    extensiones: [".yaml", ".yml", ".json"]
+    ejemplo: "/config/configuracion_base.yaml"
+  doc:
+    descripcion: "Documentos, papers, changelogs, manuales de uso."
+    extensiones: [".md", ".rst", ".txt"]
+    ejemplo: "/docs/changelog.md"
+  log:
+    descripcion: "Logs, bitácoras, auditoría, historial de acciones."
+    extensiones: [".log", ".txt", ".yaml", ".json"]
+    ejemplo: "/logs/acciones.log"
+  model:
+    descripcion: "Modelos de ML, artefactos entrenados, embeddings."
+    extensiones: [".pkl", ".joblib", ".pt", ".onnx"]
+    ejemplo: "/models/modelo_entrenado.pkl"
+  script:
+    descripcion: "Scripts de automatización, helpers, migraciones."
+    extensiones: [".py", ".sh", ".ipynb"]
+    ejemplo: "/scripts/backup_db.py"
+  memoria:
+    descripcion: "Memorias contextuales, resúmenes diarios, sugerencias IA."
+    extensiones: [".yaml", ".md"]
+    ejemplo: "/alma/memoria_2025-07-14.yaml"
+  db:
+    descripcion: "Bases de datos, backups, archivos de persistencia avanzada."
+    extensiones: [".db", ".sqlite", ".sql", ".json"]
+    ejemplo: "/db/arca.sqlite"
+  dataset:
+    descripcion: "Conjuntos de datos para ML, entrenamiento, validación."
+    extensiones: [".csv", ".xlsx", ".parquet", ".json"]
+    ejemplo: "/datasets/historico_acciones.csv"
+  asset:
+    descripcion: "Recursos multimedia: imágenes, diagramas, audio, video."
+    extensiones: [".png", ".jpg", ".svg", ".mp3", ".mp4"]
+    ejemplo: "/assets/diagrama_arca.png"
+  test:
+    descripcion: "Pruebas unitarias, de integración, ejemplos de testeo."
+    extensiones: [".py", ".sh", ".ipynb"]
+    ejemplo: "/tests/test_config.py"
+  public:
+    descripcion: "Archivos exportables, públicos, preparados para compartir."
+    extensiones: [".pdf", ".zip", ".html"]
+    ejemplo: "/public/whitepaper_arca.pdf"
+  otro:
+    descripcion: "Archivo no categorizado, pendiente de análisis."
+    extensiones: []
+    ejemplo: ""

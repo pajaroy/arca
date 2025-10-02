@@ -1,0 +1,23 @@
+"""
+---
+version: 0.1.0
+title: validador_metadata
+uuid: ba12a350-65a3-4648-b81f-6a6fecbcd21e
+tipo: ''
+schema: ''
+estado: ''
+descripcion: ''
+estructura:
+  - ''
+tags: []
+linked_to: []
+responsable:
+  - Bird
+hash_verificacion: sha256:a5ad74ce0b058ff5e28252165b3d3bb5820ecdd742f56166b14ae83edf29223e
+historial:
+  - fecha: '2025-07-10T02:11:11Z'
+    descripcion: Creación del archivo
+last_modified: ''
+last_modified_by: ''
+---
+"""

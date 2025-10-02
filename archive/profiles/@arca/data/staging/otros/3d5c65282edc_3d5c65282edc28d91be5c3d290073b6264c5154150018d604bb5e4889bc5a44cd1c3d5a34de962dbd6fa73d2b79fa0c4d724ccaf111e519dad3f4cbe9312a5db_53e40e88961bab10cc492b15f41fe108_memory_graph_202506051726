@@ -1,0 +1,20 @@
+{
+  "filosof\u00eda": {
+    "ciencia": 0.8,
+    "tecnolog\u00eda": 0.44999999999999996
+  },
+  "ciencia": {
+    "filosof\u00eda": 0.24,
+    "tecnolog\u00eda": 1.2
+  },
+  "tecnolog\u00eda": {
+    "ciencia": 0.36,
+    "filosof\u00eda": 1.5
+  },
+  "existencialismo": {
+    "ia": 0.5
+  },
+  "ia": {
+    "existencialismo": 0.15
+  }
+}

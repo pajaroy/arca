@@ -1,0 +1,133 @@
+# ===========================================
+# CONTEXTO EXPLICATIVO - ALMA_CLI_CLEANER v0.1.6
+# Para comprensión, refactorización y migración IA
+# ===========================================
+
+descripcion_general: |
+  CLI avanzado para gestión, validación, limpieza y auditoría de metadatos en archivos (Markdown, YAML, Python)
+  dentro del ecosistema ALMA_RESIST. Implementa operaciones robustas, seguras y auditables sobre archivos de texto
+  con encabezado de metadatos YAML, bajo esquema definido y auditable. Soporta versionado, migraciones de templates,
+  backups automáticos, escritura atómica y logging estructurado multi-formato (JSON/YAML/Parquet).
+  Arquitectura modular, cada operación clave es función aislada y testeable.
+  Foco en integridad, trazabilidad y compatibilidad CLI/Linux.
+
+objetivos_clave:
+  - Validar y normalizar metadatos de archivos bajo un template formal.
+  - Prevenir corrupción con escritura atómica y backups automáticos.
+  - Permitir migración entre templates/versiones de metadatos.
+  - Llevar historial de cambios en los archivos y en logs externos.
+  - Controlar responsables y vinculación cruzada entre archivos.
+  - Facilitar auditoría automática por agentes IA o humanos.
+  - Soporte dry-run, force, salida JSON y configuración externa.
+
+arquitectura_modular:
+  - Clases principales:
+      MetadataValidator: Validación/normalización/migración de metadatos.
+      MetadataHandler: Lectura, extracción, hash y escritura atómica de metadatos.
+      FileLock: Bloqueo de archivos con timeout seguro vía fcntl.
+      AuditLogger: Registro estructurado de auditoría en múltiples formatos.
+  - Subcomandos CLI:
+      crear, validar, limpiar, set_responsable, set_linked, log
+
+estructura_componentes:
+  MetadataValidator:
+    proposito: "Valida estructura y tipos de metadatos, normaliza datos y realiza migración de templates antiguos al actual."
+    metodos:
+      - validate: "Chequea campos requeridos y tipos, devuelve errores."
+      - normalize: "Limpia y corrige campos, listas y strings."
+      - migrate_template: "Migra campos antiguos, elimina obsoletos, actualiza historial y template_version."
+
+  MetadataHandler:
+    proposito: "Maneja lectura/escritura atómica de archivos, extracción de metadatos, backups y generación de hash."
+    metodos:
+      - extract_metadata: "Detecta tipo de archivo (.md, .yaml, .py), extrae metadatos YAML y cuerpo de contenido."
+      - atomic_write: "Escritura atómica segura con backup/rollback y bloqueo por lockfile."
+      - write_metadata: "Serializa y escribe metadatos (preserva formato), actualiza hash de verificación."
+      - calculate_hash: "Devuelve hash SHA-256 del contenido."
+
+  FileLock:
+    proposito: "Controla acceso concurrente a archivos críticos mediante lockfile y timeout configurable."
+
+  AuditLogger:
+    proposito: "Acumula, estructura y descarga logs de auditoría en formatos estructurados (JSON/YAML/Parquet)."
+    metodos:
+      - add_log_entry: "Agrega registro con contexto antes/despues y detalles de la operación."
+      - flush_logs: "Vuelca buffer de logs al destino configurado, normalizando estructura."
+
+subcomandos_CLI:
+  crear:
+    descripcion: "Crea nuevo archivo con metadatos iniciales. Soporta tipo, responsables, vínculos y body básico."
+    entradas: archivo, title, responsable, linked_to, force, dry_run
+    salida: status, mensaje, uuid (y log)
+  validar:
+    descripcion: "Valida metadatos y estructura. Opcionalmente repara/migra template si --force. Corrige errores comunes."
+    entradas: archivo, force, dry_run
+    salida: status, lista de errores, cambios, hash, log
+  limpiar:
+    descripcion: "Elimina campos no estándar y normaliza estructura. Rellena historial si hubo cambios."
+    entradas: archivo
+    salida: status, cambios, log
+  set_responsable:
+    descripcion: "Cambia responsables de archivo. Actualiza historial y last_modified."
+    entradas: archivo, responsables
+    salida: status, log
+  set_linked:
+    descripcion: "Agrega archivos vinculados (linked_to). Evita duplicados. Actualiza historial."
+    entradas: archivo, linked_to
+    salida: status, log
+  log:
+    descripcion: "Muestra historial interno de cambios en el archivo."
+    entradas: archivo
+    salida: historial
+
+flujo_operativo:
+  1. El usuario invoca el CLI con un subcomando y argumentos.
+  2. El sistema carga configuración (puede ser externa YAML).
+  3. Se inicializan logger y metadata_handler.
+  4. El subcomando ejecuta el flujo correspondiente:
+      - Extrae/valida/escribe metadatos.
+      - Aplica backup y escritura atómica si hay cambios.
+      - Registra todos los eventos en el logger.
+  5. El logger descarga logs al final de la ejecución (formato configurable).
+
+manejo_errores_y_seguridad:
+  - Toda operación de escritura usa atomic_write + backups.
+  - Si ocurre error, se hace rollback automático y se loguea el evento.
+  - Soporta dry-run para simulación sin cambios.
+  - Admite force para reparaciones/validaciones forzadas.
+  - Manejo explícito de locks para evitar race conditions.
+
+entrada_salida_formato:
+  - Entradas: archivos de texto (.md, .yaml, .py con docstring YAML), argumentos CLI, config YAML.
+  - Salidas: archivos modificados, logs de auditoría, stdout, JSON/YAML/Parquet.
+
+personalizacion_extensibilidad:
+  - Configurable por archivo alma_cleaner_config.yaml.
+  - Fácil de extender a otros tipos de archivo/texto si se define extractor y writer.
+  - Logueo estructurado apto para ingestión en sistemas RAG, SIEM o IA supervisoras.
+
+dependencias_criticas:
+  - ruamel.yaml (YAML robusto y ordenado)
+  - pyarrow (logs en Parquet)
+  - fcntl (locks)
+  - argparse (CLI robusto)
+  - hashlib, shutil, tempfile (seguridad escritura)
+
+notas_tecnicas:
+  - Pensado para ejecución en sistemas Linux/Unix.
+  - Preparado para ser llamado por agentes IA, scripts de integración continua, o en pipelines de validación documental.
+
+ventajas_diseño:
+  - Integridad: evita corrupción por cortes, bugs, concurrencia.
+  - Trazabilidad total: todo queda logueado, historial interno y externo.
+  - Transparente a IA: todo flujo y campo tiene semántica explícita.
+  - Migración fácil: módulos independientes, pocas dependencias cruzadas.
+
+limitaciones_conocidas:
+  - No procesa archivos binarios (los ignora).
+  - No valida semántica del contenido de los archivos, sólo el header.
+  - No implementa servidor/daemon, es sólo CLI.
+
+# Para refactor o porting:
+# Replicar estructura modular: validación, extracción, escritura, logging, atomicidad y rollback.
+# Mantener política de historial y hash de verificación.

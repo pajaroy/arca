@@ -1,0 +1,43 @@
+## 🧾 Changelog – ALMA_RESIST
+
+
+### ✅ v0.2 – 2025-05-17 – Cifrado Funcional
+
+- ✅ Implementado `log_crypto.py` con soporte AES-256-GCM y ChaCha20
+- ✅ Validación automática de arquitectura y fallback en ARM
+- ✅ Escritura binaria con encabezado identificador (`b"AES\x00"`)
+- ✅ Test funcional `test_log_crypto.py` verificado
+
+🏁 **Hito 002**: Módulo de cifrado funcional operativo  
+🔐 Inicio de trazabilidad antifrágil
+
+
+
+### 📂 Estructura y Organización
+
+- Creación y normalización de:
+  - `docs/post_mortem_tecnico.md`
+  - `docs/decisiones_arquitectonicas.md`
+  - `docs/dependencias.md`
+  - `docs/plantillas/`
+  - `docs/referencias/externas/{seguridad, ia, patrones}`
+- Corrección de `metodologia_de_trabajo.md` con integración del paso 0 (checklist previa)
+- Estandarización de navegación semántica Obsidian vía `docs/index.md`
+
+
+### 📁 Gobernanza Técnica
+
+- Implementación de plantillas reutilizables para:
+  - Checklist
+  - Prompt técnico
+  - Decisión arquitectónica
+  - Post-mortem técnico
+- Formalización de flujos de documentación y actualizaciones
+
+## 2025-05-21
+
+- 📘 Se establece oficialmente la `metodologia_estructura_modular_v2.md` como guía vigente.
+- 📄 Se reemplaza la `v1`, que queda archivada.
+- 📁 Se crea `_propuesta_v3_estructura_modular.md` con plan de escalabilidad futura.
+
+

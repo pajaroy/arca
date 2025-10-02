@@ -1,0 +1,32 @@
+
+## 🧠 Alta de repo raíz “alma_libre” y primer push auditado
+
+- Se inicializó y configuró repo limpio en https://github.com/pajaroy/alma_libre
+- Push inicial auditado, ejecutado desde la raíz del proyecto.
+- No se detectaron conflictos ni arrastre de versiones previas.
+- Estructura, comandos y metodología CLI quedan validados para futuras auditorías.
+- Se registra como hito base para la nueva era de ALMA_RESIST.
+
+tipo: bitacora_test_db
+modulo: control_central/memorias
+fecha: 2025-06-06
+status: activo
+responsable: Kael (auditor CLI)
+tags: [memorias, base_datos, auditoria, yaml, json, alma_resist, ia-friendly]
+linked_to: [[memorias.yaml]], [[memorias.json]], [[cargar_memorias_v2.py]]
+
+
+## 📎 Registro de acción – 2025-06-06
+- Se movieron todos los archivos “cargar_memorias*” y “prompt_maestro_cargador_memorias*” de la raíz de notebooks a la carpeta notebooks/cargar_memorias/.
+- Justificación: limpiar y modularizar el espacio de trabajo, cumplir la convención de organización CLI/IA.
+- Acción registrada por Kael (auditor CLI).
+
+[[core/notebooks/cargar_memorias/README.md]]
+
+
+## 📎 Registro de acción – 2025-06-06
+- Se creó la estructura modelo para el agente emma bajo asesor-ia, replicando la estructura base de centralesis.
+- Se completaron subcarpetas faltantes en kael y alma para unificar la arquitectura de agentes.
+- Acciones realizadas con rsync para preservar README.md y carpetas vacías, sin duplicar archivos de datos.
+- Todo el entorno asesor-ia queda con la misma lógica modular y auditable.
+

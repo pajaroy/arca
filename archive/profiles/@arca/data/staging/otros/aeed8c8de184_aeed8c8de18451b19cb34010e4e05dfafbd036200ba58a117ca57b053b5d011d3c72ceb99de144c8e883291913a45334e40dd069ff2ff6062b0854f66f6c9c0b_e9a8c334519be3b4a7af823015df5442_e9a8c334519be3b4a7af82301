@@ -1,0 +1,9 @@
+# 📁 docs/ – Documentación del Asesor-IA
+
+Este módulo contiene documentos activos e históricos relacionados al funcionamiento del asesor técnico.
+
+- `historicos/`: Documentos obsoletos o reemplazados.
+- `history/`: Versiones anteriores de documentos activos, resguardadas por auditoría.
+- `prompts/`: Prompts en uso para interacción GPT u otras IAs.
+
+🧠 Toda entrada debe estar fechada y vinculada al sprint, bitácora o decisión que la generó.

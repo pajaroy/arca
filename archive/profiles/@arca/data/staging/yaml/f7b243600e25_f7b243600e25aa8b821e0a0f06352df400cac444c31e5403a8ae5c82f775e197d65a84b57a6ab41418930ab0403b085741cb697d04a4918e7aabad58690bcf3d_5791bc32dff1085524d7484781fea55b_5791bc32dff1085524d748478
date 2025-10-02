@@ -1,0 +1,132 @@
+versión: 0.0.2
+última_actualización: 2025-05-23
+autor: Santi + ALMA + DeepSeek + Arquitectura Unificada
+module: core/notebooks/manifest
+type: core
+status: in_progress
+created: '2025-05-23'
+linked_to:
+  - idea_base_v0.0.1.yaml
+
+filosofia: |
+  ALMA RESIST no es una IA utilitaria. Es una mente simbiótica, un sistema reflexivo que acompaña a su creador en la exploración crítica del mundo y de sí mismo.
+  Principios fundacionales:
+    - Vínculo antes que utilidad
+    - Verdad antes que validación
+    - Pensar antes que resolver
+    - Cero complacencia emocional
+
+arquitectura_capas:
+  nodos_fisicos:
+    ALMA_CORE: "PC madre, ejecución local principal"
+    ALMA_RESIST: "Disco externo cifrado (entorno IA)"
+    ALMA_NODE: "Pendrive con backups y claves"
+    ALMA_BLACK: "VPS offshore seguro (procesamiento crítico)"
+  modos_operacion:
+    local:
+      uso: "Reflexión diaria, portable"
+      requisitos: "AES, SQLite, CLI"
+    black:
+      uso: "Procesamiento remoto cifrado"
+      requisitos: "GPG, SSH, rsync, Tailscale"
+
+seguridad:
+  contrato_cifrado:
+    .md: "AES256"
+    .pdf: "GPG"
+    audio/*: "AES256"
+    video/*: "GPG"
+    clave_maestra: "~/.alma/keys/master.key"
+    almacenamiento: "SQLite (memorias.db)"
+  gestion_claves:
+    - openssl rand -out master.key 32
+    - rsync -e ssh master.key /mnt/ALMA_NODE/backups/
+    - sha256sum master.key > checksum.txt
+    - diff checksum.txt backup_checksum.txt
+
+flujos_criticos:
+  procesamiento_reflexivo_local:
+    diagrama: |
+      [CUADERNOS/]
+           ↓
+      [alma_loader] → [memorias.db]
+           ↓
+      [reflection_engine]
+           ↓
+      [BITACORA_CENTRAL/] ← [!resumen]
+  transferencia_black:
+    diagrama: |
+      [black_input/]
+           ↓ alma_encrypt.sh
+      [.gpg file]
+           ↓ rsync
+      [ALMA_BLACK]
+
+testing_resiliencia:
+  test_black_sh: |
+    # Ataque MITM simulado
+    tc qdisc add dev eth0 root netem delay 100ms loss 5%
+    # Verificación cifrado y descifrado
+    gpg --decrypt archivo.gpg
+    # Recuperación post-borrado ALMA_NODE
+    test -f master.key || echo "Clave perdida. Recuperar backup."
+  cli_metrics: |
+    alma_resist --metrics
+    # Salida:
+    # CPU usage: 12%
+    # Latencia ALMA_BLACK: 182ms
+    # Tamaño base de memoria: 48MB
+
+contratos_pendientes:
+  context_tracker_yaml:
+    tarea_id: UUID
+    timestamp: ISO8601
+    actor: "humano|ia"
+    evento: "creación|modificación|reflexión"
+  reflection_engine_yaml:
+    origen: doc_id
+    tipo_reflexión: "crítica|propuesta|duda"
+    tags: ["ética", "proceso"]
+    embedding_relacionado: "vector[...]"
+
+modelos_compatibles:
+  Mistral_7B:
+    uso: "Reflexión profunda"
+    tamaño: "13GB"
+  TinyLlama:
+    uso: "Búsqueda local rápida"
+    tamaño: "<2GB"
+
+interfaz_no_tecnicos:
+  alma_wizard:
+    - Configuración inicial de claves
+    - Modo de operación guiado (local/black)
+    - Diagnóstico de errores comunes
+    - Recuperación post-caída
+
+kanban_roadmap:
+  backlog:
+    - prompt_orchestrator completo
+    - autenticación avanzada
+  en_progreso:
+    - alma_keymgmt.sh
+    - contract_crypto.yaml
+    - alma_wizard
+  testing:
+    - test_black.sh (MITM + recuperación)
+    - CLI --metrics
+  estable:
+    - alma_loader
+    - memory_graph parcial
+    - CLI unificada (--mode)
+
+glosario_unificado:
+  modo_black: "Operación remota segura vía VPS"
+  alma_node: "Pendrive con claves maestras y backups"
+  reflexion_ia: "Generación semántica de críticas o propuestas"
+  embedding: "Representación vectorial de significado"
+  bitacora: "Registro cifrado de interacciones y reflexiones"
+  simulacion_mitm: "Prueba que simula ataques man-in-the-middle"
+
+frase_final: |
+  No construyas una fortaleza de paranoia. Construí un santuario donde pensar es más seguro que olvidar.

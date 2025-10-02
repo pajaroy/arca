@@ -1,0 +1,130 @@
+
+# 🛠️ Bitácora de Instalación desde 0 – ALMA_RESIST
+
+Documentación base de instalación, configuración y sincronización inicial entre nodos `ALMA_CORE` y `ALMA_RESIST`. Este documento actúa como **bitácora fundacional**, indispensable para reproducir el entorno y garantizar la continuidad del sistema.
+
+
+## 🖱️ 2. Sincronización de mouse entre PCs con Input Leap
+
+Instalación y compilación manual desde repositorio oficial para compatibilidad con sistemas Parrot OS / Debian:
+
+```bash
+# Clonar y compilar Input Leap
+sudo apt install -y git cmake make g++ qt6-base-dev qt6-tools-dev libx11-dev libxext-dev libxrandr-dev libxinerama-dev libxtst-dev libxi-dev libssl-dev libavahi-compat-libdnssd-dev libcurl4-openssl-dev libgl1-mesa-dev pkg-config
+git clone --recurse-submodules https://github.com/input-leap/input-leap.git
+cd input-leap && mkdir build && cd build
+sed -i '1i#include <cstddef>' ../src/lib/platform/XKBUtil.cpp
+cmake ..
+make -j$(nproc)
+sudo make install
+```
+
+**Ejemplo de configuración** (`~/.input-leap/input-leap.conf`):
+
+```plaintext
+section: screens
+    alma-core:
+    alma-resist:
+end
+
+section: links
+    alma-core:
+        left = alma-resist
+    alma-resist:
+        right = alma-core
+end
+```
+
+
+## 🗂️ 4. Sincronización de carpetas con rsync
+
+Archivo `.rsync_exclude` recomendado:
+
+```
+__pycache__/
+*.pyc
+*.tmp
+.DS_Store
+```
+
+Comando:
+
+```bash
+rsync -avz --delete --exclude-from=.rsync_exclude /home/bird/ALMA_RESIST/ bird@192.168.1.36:/home/bird/ALMA_RESIST/
+```
+
+
+## 🧠 6. Instalación de Obsidian (modo terminal)
+
+```bash
+sudo apt install -y wget libfuse2
+mkdir -p $HOME/apps/obsidian && cd $_
+wget $(curl -s https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest | grep "browser_download_url.*AppImage" | grep -v "arm64" | cut -d : -f 2,3 | tr -d ") -O Obsidian.AppImage
+chmod +x Obsidian.AppImage
+./Obsidian.AppImage &
+```
+
+⚠️ Requiere entorno gráfico X11. No apto para modo headless.
+
+
+## 🧾 Observaciones finales
+
+- Sistema replicado con éxito en ambas máquinas
+- Input Leap funcionando entre escritorios
+- Estructura `ALMA_RESIST/` sincronizada y lista para automatización futura
+- Obsidian operativo como herramienta central de documentación
+
+# 🧩 Apéndice – Backup automático a GitHub con `backup_to_git.sh`
+
+## 📁 Ubicación del script
+`/home/bird/ALMA_RESIST/core/scripts/backup_to_git/backup_to_git.sh`
+
+## 📌 Requisitos
+
+```bash
+sudo apt install inotify-tools git
+```
+
+## 🛠️ Pasos de configuración
+
+```bash
+# 1. Configurar Git si aún no está hecho
+git config --global user.name "bird"
+git config --global user.email "distribuidorasolar365@gmail.com"
+
+# 2. Verificar que ALMA_RESIST sea repositorio Git
+cd ~/ALMA_RESIST
+git init
+git remote add origin git@github.com:pajaroy/alma_resist.git
+git branch -M main
+git pull origin main
+
+# 3. Dar permisos y lanzar en segundo plano
+chmod +x /home/bird/ALMA_RESIST/core/scripts/backup_to_git/backup_to_git.sh
+nohup /home/bird/ALMA_RESIST/core/scripts/backup_to_git/backup_to_git.sh > /dev/null 2>&1 &
+```
+
+## 🔐 Clave SSH y autenticación
+
+```bash
+ssh-keygen -t ed25519 -C "distribuidorasolar365@gmail.com"
+cat ~/.ssh/id_ed25519.pub  # Copiar a GitHub > Settings > SSH Keys
+ssh -T git@github.com      # Verificar autenticación
+```
+
+## 🧠 Notas importantes
+
+- Este script monitoriza cambios en tiempo real y los **sube automáticamente** a GitHub.
+- Evita eliminar archivos directamente, ya que el sistema detectará conflictos. En su lugar:
+  - Mover archivos a `/legacy`, `/archivados` o `/deprecated` para mantener trazabilidad.
+- Logs ubicados en:
+  - `/home/bird/ALMA_RESIST/logs/backup_git/backup_git.log`
+- Si falla el push por cambios no comiteados:
+  - Revisión manual: `git status`, `git stash`, `git commit -am`, etc.
+
+## 🧼 Detener proceso en background si es necesario
+
+```bash
+pkill -f backup_to_git.sh
+```
+

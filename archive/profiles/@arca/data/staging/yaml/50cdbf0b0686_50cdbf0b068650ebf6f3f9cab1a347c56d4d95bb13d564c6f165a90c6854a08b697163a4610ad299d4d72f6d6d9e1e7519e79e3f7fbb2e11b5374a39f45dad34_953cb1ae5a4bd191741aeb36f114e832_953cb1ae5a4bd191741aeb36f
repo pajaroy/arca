@@ -1,0 +1,41 @@
+id: IDEA_BASE_BITACORA_SCRIPT_2025-06-06_01
+tipo: idea_base_script
+modulo: control_central/asesor-ia/core/notebooks/bitacora_script
+autor: Santi & Kael
+fecha_creacion: 2025-06-06
+status: en_desarrollo
+version: 0.1
+tags: [bitacora, script, automatizacion, spec, blueprint]
+titulo: "Idea base del script de automatización de bitácora viva"
+objetivo: >
+  Definir el propósito, requisitos y estructura para el desarrollo del script que permitirá agregar entradas estructuradas a la bitácora viva de ALMA_RESIST.
+descripcion: |
+  Este documento semilla especifica los objetivos, reglas y requerimientos del script 'add_bitacora_entry.py'.
+  El objetivo es estandarizar y automatizar el registro de eventos, decisiones y reflexiones en la bitácora viva (YAML) institucional, garantizando compatibilidad con humanos, IA y procesos automatizados.
+requisitos_funcionales:
+  - El script debe agregar una nueva entrada (evento) en la bitácora viva YAML.
+  - Debe validar la estructura del YAML antes y después de la adición.
+  - Debe registrar campos mínimos: fecha, accion, descripcion, motivo, ejecutado_por, estado.
+  - Soportar argumentos CLI y, opcionalmente, modo interactivo.
+  - Hacer backup del archivo previo a cada modificación.
+requisitos_no_funcionales:
+  - Código portable y documentado.
+  - Sin dependencias innecesarias.
+  - Compatible con validadores YAML estándar.
+criterios_exito:
+  - Toda entrada queda correctamente registrada, sin romper la estructura.
+  - No se pierde información previa.
+  - El script es reutilizable y extensible.
+mejoras_optimizables:
+  - Permitir agregar la entrada también en bitácora viva MD y JSON de manera sincronizada.
+  - Soporte de templates de entrada customizables por agente o contexto.
+  - Registro automático del autor si no se especifica.
+  - Campos extendidos: adjuntos, links, hashes u otros metadatos arbitrarios.
+  - Rollback automático si la estructura queda malformada tras la operación.
+  - Validación de unicidad de ID antes de agregar.
+  - Fecha y hora automática si no se indica.
+  - Logger de ejecución y errores independiente de la bitácora viva.
+  - CLI robusta con ayuda extendida y soporte interactivo y batch.
+  - Modo dry-run para pruebas sin modificar archivos.
+  - Validación de estructura previa y posterior a cada operación.
+  - Hash de integridad individual por entrada, si se requiere máxima auditoría.

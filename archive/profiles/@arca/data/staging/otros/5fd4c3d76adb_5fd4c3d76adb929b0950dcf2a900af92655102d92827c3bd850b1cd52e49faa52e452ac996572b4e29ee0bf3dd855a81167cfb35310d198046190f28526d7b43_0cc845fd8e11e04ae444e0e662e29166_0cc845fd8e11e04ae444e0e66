@@ -1,0 +1,41 @@
+# 🗒️ Bitácoras Diarias de Desarrollo
+
+La carpeta `bitacoras/` centraliza los registros diarios del trabajo realizado dentro del sistema ALMA_RESIST. Su propósito es proporcionar trazabilidad, facilitar la evaluación del progreso y servir como fuente de reflexión, auditoría o entrenamiento de módulos de IA.
+
+## 📁 Estructura Recomendada
+
+```
+bitacoras/
+├── 2025/
+│   ├── 2025-05-20.md
+│   ├── 2025-05-21.md
+│   └── 2025-05-22.md
+└── plantilla_bitacora.md
+```
+
+- Cada archivo debe seguir el formato `YYYY-MM-DD.md`.
+- Se agrupan por año si se desea mayor orden.
+
+## 🧱 Contenido de Cada Bitácora
+
+Una bitácora debe registrar:
+
+1. **Resumen del día**
+2. **Tareas realizadas**
+3. **Retos o problemas**
+4. **Decisiones tomadas**
+5. **Avances clave (scripts, metodologías, validaciones, documentación)**
+6. **Próximos pasos**
+
+Estas secciones permiten capturar el flujo de trabajo y nutrir otros módulos como `reflections/`, `logs/`, `mapeo_sprint_archivos.md` o incluso el `memory_graph`.
+
+## 🧠 ¿Por qué son importantes?
+
+- Documentan decisiones informales antes de que se formalicen.
+- Sirven como memoria del proyecto para días posteriores.
+- Pueden alimentar futuros sistemas de IA de planificación o resumen.
+- Fortalecen la transparencia del proceso.
+
+## 🔄 Integración futura
+
+En versiones futuras se prevé automatizar su creación desde `alma-cli` o generar resúmenes automáticos desde `logs/`, validando sincronización con `sprint.yaml`.

@@ -1,0 +1,1 @@
+Esta carpeta contiene los archivos validados en la reunion S19

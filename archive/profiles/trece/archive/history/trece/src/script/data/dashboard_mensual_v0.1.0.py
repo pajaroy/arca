@@ -1,0 +1,52 @@
+# ---
+# type: "script"
+# fecha: "2025-08-19"
+# version: "0.1.0"
+# descripcion: "Script parahacer el dashboard mensual"
+# ---
+
+import pandas as pd
+from pathlib import Path
+
+DATA_DIR = Path.home() / "trece/data/impositive"
+
+# Cargar CSVs
+withdrawals = pd.read_csv(DATA_DIR / "withdrawals.csv")
+expenses = pd.read_csv(DATA_DIR / "expenses.csv")
+entities = pd.read_csv(DATA_DIR / "entities.csv")
+concepts = pd.read_csv(DATA_DIR / "concepts.csv")
+
+# Limpiar columnas Unnamed
+for df in [withdrawals, expenses, entities, concepts]:
+    df = df.loc[:, ~df.columns.str.contains("^Unnamed")]
+
+# Convertir fechas a datetime
+withdrawals["date"] = pd.to_datetime(withdrawals["date"])
+expenses["date"] = pd.to_datetime(expenses["date"])
+
+# 🔹 RESUMEN RETIROS POR SOCIO POR MES
+withdrawals_monthly = withdrawals.groupby([withdrawals["date"].dt.to_period("M"), "entitie_id"])[["grams", "total_price"]].sum().reset_index()
+withdrawals_monthly = pd.merge(withdrawals_monthly, entities, left_on="entitie_id", right_on="id", how="left")
+withdrawals_monthly = withdrawals_monthly.rename(columns={"name": "entity_name", "grams": "total_grams", "price": "total_price"})
+withdrawals_monthly = withdrawals_monthly[["date", "entity_name", "total_grams", "total_price"]]
+
+# 🔹 RESUMEN GASTOS POR CONCEPTO POR MES
+expenses_monthly = expenses.groupby([expenses["date"].dt.to_period("M"), "concept_id"])["amount"].sum().reset_index()
+expenses_monthly = pd.merge(expenses_monthly, concepts, left_on="concept_id", right_on="id", how="left")
+expenses_monthly = expenses_monthly.rename(columns={"name": "concept_name", "amount": "total_expenses"})
+expenses_monthly = expenses_monthly[["date", "concept_name", "total_expenses"]]
+
+# 🔹 RESUMEN GENERAL POR MES
+total_withdrawals = withdrawals.groupby(withdrawals["date"].dt.to_period("M"))[["grams", "total_price"]].sum().rename(columns={"grams": "total_grams", "price": "total_price"})
+total_expenses = expenses.groupby(expenses["date"].dt.to_period("M"))["amount"].sum().rename("total_expenses")
+resumen_general = pd.concat([total_withdrawals, total_expenses], axis=1).fillna(0)
+
+# 🔹 Mostrar resultados en pantalla
+print("\n📊 Dashboard mensual - Retiros por socio:")
+print(withdrawals_monthly.to_string(index=False))
+
+print("\n📊 Dashboard mensual - Gastos por concepto:")
+print(expenses_monthly.to_string(index=False))
+
+print("\n📊 Dashboard mensual - Resumen general:")
+print(resumen_general)

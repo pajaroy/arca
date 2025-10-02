@@ -1,0 +1,24 @@
+# 🧠 Prompt Base – `relacionador_nlp.py` (ALMA_NLP)
+
+**Contexto del sistema:**  
+Estoy desarrollando un módulo NLP dentro de un sistema de memorias personales (ALMA) que guarda cada memoria como un archivo `.json`. Cada memoria tiene este formato:
+
+```json
+{
+  "id": "MEMTRD-045",
+  "fecha": "2025-05-01",
+  "titulo": "Overtrading en sesión NY",
+  "categoria": "TRD",
+  "tags": ["#riesgo", "#impulsividad"],
+  "contenido": "Hoy operé sin respetar el plan y terminé sobreoperando..."
+}
+```
+
+
+## 🕸 Función opcional: Visualización de relaciones (grafo)
+
+- Usar `networkx` y `matplotlib` para mostrar un grafo:
+  - Cada nodo es una memoria (`id`)
+  - Cada arista representa una relación con `score > 0.75`
+  - Etiquetar aristas con el valor del score
+

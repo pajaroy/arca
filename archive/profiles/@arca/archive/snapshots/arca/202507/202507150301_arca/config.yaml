@@ -1,0 +1,31 @@
+# config.yaml
+metadatos:
+  id_unico: "cfg-ARCA-001"
+  tipo: "configuracion_principal"
+  nombre: "config.yaml"
+  version: "0.1.0"
+  estado: "activo"
+  fecha_creacion: "2025-07-15"
+  autor: "Bird"
+
+config:
+  version: "0.1.0"
+  project: "ARCA"
+  default_author: "Bird"
+  base_path: "/home/arca/arca"  # ¡Clave! Punto = misma carpeta donde está config.yaml
+  schemas:
+    json: "schema.json"
+    sql: "schema.sql" 
+    yaml: "schema.yaml"
+  tracked_directories: []
+  tracked_extensions:
+    - ".yaml"
+    - ".md"
+    - ".json"
+  hash_algorithm: "sha256"
+  uuid_algorithm: "uuid4"
+  default_permissions: "rw-r--r--"
+  default_confidentiality: "public"
+  logging:
+    ruta: "logs.parquet"  # Relativo a base_path
+    formato: "parquet"

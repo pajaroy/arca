@@ -1,0 +1,89 @@
+# 🧠 CONTEXTO GENERAL – 13CC
+
+Este documento ofrece un resumen estratégico y organizacional del proyecto 13CC, para uso institucional y técnico.  
+Está diseñado como contexto base para IA, nuevos miembros, asesores o entidades externas.
+
+---
+
+## 🌿 ¿Qué es 13CC?
+
+13 Cannabis Club es una ONG de cultivo con base en Argentina, registrada como asociación civil simple.  
+Su objetivo es la producción responsable de cannabis con fines comunitarios, terapéuticos y de investigación informal.  
+Opera bajo una estructura profesional, con un enfoque legal, contable, organizativo y técnico.
+
+---
+
+## 🏗️ Modelo de trabajo institucional
+
+13CC trabaja bajo un modelo modular y jerárquico:
+
+- ONG madre (13CC): núcleo legal, social y documental
+- Anexos: unidades operativas descentralizadas (ej. Cannabird)
+- Cúpula operativa: dirección estratégica y ejecutiva
+- Carpetas digitales: cada módulo tiene estructura propia (legal, fundacional, socios, reuniones, registros)
+- Ciclo de reuniones: define toma de decisiones, validación de roles y seguimiento de tareas
+- Contabilidad dual: sistema YING (white legal) y YANG (black control interno)
+
+---
+
+## 🧩 Anexos actuales
+
+### `Anexo_1_CANNABIRD`
+- Cultivo privado bajo gestión completa del DEG (Santiago Calvo)
+- Cuenta con estructura interna completa: legal, reuniones, socios, reglamentos
+- Aplica los mismos protocolos de reuniones y balances que el club madre
+
+### `Anexo_2`
+- Reservado para futura expansión
+
+---
+
+## 🧠 Cúpula Operativa
+
+Conformada por los tres roles principales:
+
+| Nombre              | Rol                                     |
+|---------------------|------------------------------------------|
+| Santiago Calvo      | Director Ejecutivo de Gestión (DEG)      |
+| Sebastián “Gory”    | Responsable General de Cultivo 13CC      |
+| Ariel Abaca         | Responsable de Relaciones y Marketing    |
+
+Cada uno tiene su propia carpeta operativa y funciones definidas. El DEG coordina todo el sistema.
+
+---
+
+## 📅 Reuniones y toma de decisiones
+
+### Tipos de reuniones:
+- `Semanales` (operativas): minutas internas por unidad
+- `Mensuales` (administrativas): actas formales por unidad (firmadas)
+- `Trimestrales` (globales): consolidación de balances, decisiones generales
+
+### ¿Dónde se cargan?
+- En las carpetas `05_REUNIONES/` y `01_REUNIONES/` dentro de cada anexo
+- Las actas mensuales y trimestrales se firman y se registran en el libro oficial
+
+---
+
+## 📊 Registro, seguimiento y control
+
+- Cada unidad debe presentar un balance mensual
+- Las reuniones se documentan según guías y formularios estándar
+- Se utilizan roadmaps y metas trimestrales para medir avances
+- Los cambios estructurales se registran en `changelog.md`
+- El sistema está sincronizado con Google Drive para acceso del equipo
+
+---
+
+## 📌 Estado actual
+
+- Estructura de carpetas 100% implementada
+- Roles definidos y validados
+- Sistema de reuniones en funcionamiento
+- Documentación base generada
+- Primer roadmap operativo en ejecución
+
+---
+
+**Última actualización:** 2025-05-08  
+**Autor:** Santiago Calvo (DEG)

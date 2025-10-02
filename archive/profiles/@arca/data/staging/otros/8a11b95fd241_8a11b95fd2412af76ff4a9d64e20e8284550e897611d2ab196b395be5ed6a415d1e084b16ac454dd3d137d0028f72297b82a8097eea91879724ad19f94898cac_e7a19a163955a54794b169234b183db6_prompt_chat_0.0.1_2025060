@@ -1,0 +1,111 @@
+---
+module: prompts/prompt_chat_0_0_1
+type: core
+status: in_progress
+created: '2025-05-17'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5 (v1.4)
+
+## 🎯 Objetivo General
+
+Diseñar, ejecutar y evolucionar **ALMA_RESIST** como un sistema IA offline robusto, antifrágil y preparado para arquitecturas diversas, priorizando soberanía tecnológica, eficiencia energética y recuperación ante fallos extremos.
+
+---
+
+## 🧭 Instrucción Final para GPT-4.5
+
+Como IA Copiloto, desarrollá un roadmap técnico **usando `ALMA_LIBRE/` e `idea_base_0.0.9.md` como base conceptual, no estructural**. Tu tarea incluye:
+
+1. **Roadmap técnico realista (3–6 meses)**  
+   - Sprint por sprint (tablas markdown con hipervínculos)  
+   - Subtareas de 2–4h con justificaciones técnicas  
+
+2. **Validación multiplataforma y por arquitectura**  
+   - x86_64, ARMv8, RISC-V  
+   - Script `test_arch.sh` detecta y ejecuta tests optimizados  
+   - Reporte comparativo en `docs/benchmarks_arch.md`
+
+3. **Políticas de energía avanzadas**  
+   - `taskset`, `cpufreq-set`, I/O throttling  
+   - Activación automática por condiciones: batería <15%, CPU >80°C, swap >20%  
+   - Desactivación de módulos no críticos  
+
+4. **Monitoreo predictivo en tiempo real**  
+   - `alma_monitor.py`: alertas por RAM, temperatura, uso de CPU  
+   - IA que propone mitigaciones automáticas
+
+5. **Autoevaluación y aprendizaje evolutivo**  
+   - `alma_auto_eval.py`: compara métricas entre sprints  
+   - IA genera sugerencias + benchmarks + próximos pasos  
+
+6. **Integración de tecnologías emergentes (roadmap ONNX/TensorRT)**  
+   - Sprint 6: Wrapper C++ GPU, validación de precisión  
+   - Sprint 7: Quantización dinámica, soporte NPU con OpenVINO  
+
+7. **Simulaciones extremas**  
+   - Corrupción de logs + headers ilegibles  
+   - SQL injection sintética  
+   - Pérdida de refrigeración → modo survival 30% CPU  
+   - Fallo 2/3 nodos de cluster (evaluar degradación)
+
+8. **Documentación inteligente y ejecutable**  
+   - `docs/reporte_sprint.md`: KPIs, gráficos interactivos Plotly, código rastreable  
+   - `docs/lecciones_aprendidas.md`: refactors, fallos, herramientas descartadas  
+   - `docs/arquitectura_evolutiva.md`: cómo integrar nuevas tecnologías sin romper compatibilidad
+
+9. **Migración y actualización automática**  
+   - Script `alma_update.sh` para mover config/logs/versiones  
+   - Checklist retrocompatibilidad (versión previa a actual)
+
+---
+
+## 🧩 Fragmento del Roadmap (ejemplo)
+
+```markdown
+| Sprint | Hito                      | Subtareas                                               | Métrica        | Éxito esperado                    |
+|--------|---------------------------|----------------------------------------------------------|----------------|-----------------------------------|
+| 1      | Logging cifrado           | JSON estructurado, AES-256, SHA3, test recuperación     | <1.5s carga    | Sin fallos con 1k logs corruptos |
+| 2      | Chat persistente          | SQLite encriptado, paginación, `--clear-chat`           | <2s respuesta  | Uso RAM <1.8GB con 1k mensajes   |
+| 3      | Autoevaluación + IA       | `alma_auto_eval.py`, `reporte_sprint.md`                | 95% cobertura  | Mejora en cada iteración         |
+```
+
+---
+
+## 🔐 Detalles Técnicos Clave
+
+- 🛠️ `test_arch.sh`: Detecta arquitectura y lanza pruebas optimizadas
+- 📈 `alma_monitor.py`: RAM, CPU, disco, temperatura → alertas
+- 🧠 `alma_auto_eval.py`: Análisis entre sprints, IA sugiere cambios
+- 🧪 `generate_synthetic_data.py`: 10k mensajes, modelos rotos, ataques sintéticos
+- 🔄 `alma_update.sh`: Migración de configuraciones entre versiones
+
+---
+
+## 🧠 Preguntas guía para IA
+
+- ¿Cómo garantizar compatibilidad entre módulos nuevos y `ALMA_LIBRE/`?
+- ¿Qué estrategia de fallback usar si falla el monitoreo?
+- ¿Cómo optimizar la inferencia sin GPU en CPUs ARMv8?
+
+---
+
+## 📋 Changelog v1.4
+
+- ✅ Instrucciones explícitas para validar en múltiples arquitecturas
+- ✅ Roadmap en fases con hipervínculos y subtareas detalladas
+- ✅ Documentación interactiva y ejecutable por sprint
+- ✅ Scripts para migración, monitoreo y validación integrados
+- ✅ Preguntas orientativas para IA en fase de planificación
+- ✅ Escenarios de estrés más extremos + modo survival reactivo
+- ✅ Sistema retrocompatible y modular, listo para escalar
+
+---
+
+¡Este prompt está listo para iniciar la primera conversación con GPT-4.5!  
+Adjuntá:  
+- `prompt_base_primer_chat_v1.4.md`  
+- `ALMA_LIBRE/`  
+- `idea_base_0.0.9.md`

@@ -1,0 +1,86 @@
+---
+module: versiones/v0_0_0_2_documentacion/readme_v0_0_0_2_documentacion
+type: core
+status: in_progress
+created: '2025-05-22'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 📦 v0.0.0.2_documentacion – Sprint de Normalización de Documentación ALMA_RESIST
+
+## 🔍 Objetivo del Sprint
+
+Este paquete contiene los resultados del **Sprint 2.3 - Corrección de Metadatos y Documentación** del proyecto ALMA_RESIST. El objetivo principal fue estandarizar y validar todos los archivos Markdown (`.md`) del repositorio bajo una metodología automatizada, asegurando:
+
+- Metadatos YAML completos, válidos y en formato correcto.
+- Nombres de módulos en `snake_case`.
+- Respaldo y trazabilidad de los archivos modificados.
+- Validación automática de la estructura documental.
+- Preparación para integración semántica con IA.
+
+---
+
+## 📂 Contenido del ZIP
+
+```
+v0.0.0.2_documentacion/
+├── scripts/
+│   ├── fix_metadata.py
+│   ├── force_snake_case_modules.py
+│   ├── validate_docs.py
+│   └── integrar_nuevo_archivo.sh
+├── metodologies/
+│   └── metodologia_agregado_archivos.md
+├── registros/
+│   ├── log_integracion.md
+│   └── mapeo_sprint_archivos.md
+├── backups/
+│   ├── backup_metadata/20250522/...
+│   └── backup_snakecase/20250522/...
+├── README.md
+└── VERSION.txt
+```
+
+---
+
+## 🧠 Scripts Clave
+
+- `fix_metadata.py`: Corrige campos YAML (`module`, `type`, `status`, `created`).
+- `force_snake_case_modules.py`: Normaliza el campo `module` a formato `snake_case`.
+- `validate_docs.py`: Verifica que todos los documentos tengan estructura y metadatos válidos.
+- `integrar_nuevo_archivo.sh`: Ejecuta todo el proceso completo para nuevos archivos (integración oficial v8).
+
+---
+
+## 🛠 Metodología Aplicada
+
+Se siguió la **metodología v8**: `metodologia_agregado_archivos.md`, que define paso a paso cómo integrar archivos con respaldo, validación y estandarización, con vistas a futuras integraciones IA.
+
+---
+
+## 🧾 Logs de Sprint
+
+Los archivos `log_integracion.md` y `mapeo_sprint_archivos.md` documentan cada agregado, su origen y su vinculación con tareas y sprints.
+
+---
+
+## 🔐 Trazabilidad
+
+Los backups generados se almacenan con fechas y rutas relativas, garantizando una restauración simple si es necesario.
+
+---
+
+## 🤖 Futuras Integraciones
+
+La estructura está preparada para futuras automatizaciones con los módulos:
+
+- `memory_graph_builder`
+- `context_tracker`
+- `reflection_engine`
+
+---
+
+## 🧬 Versión
+
+Ver `VERSION.txt` para el identificador oficial de esta entrega.

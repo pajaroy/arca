@@ -1,0 +1,41 @@
+prompt:
+  objetivo: |
+    Crear un script Python llamado `arca_creator.py` que permita generar archivos nuevos en el ecosistema ARCA con un frontmatter válido, siguiendo la configuración y los esquemas definidos en config.yaml y schema.yaml.
+
+  imports_requeridos:
+    - from load_config import CONFIG
+    - from validate_schemas import validar_schemas
+    - from logger import logger
+    - import uuid
+    - import hashlib
+    - from datetime import datetime
+    - from pathlib import Path
+
+  funcionalidades:
+    - Genera archivos nuevos (nunca sobrescribe archivos existentes).
+    - Aplica un frontmatter con todos los campos obligatorios definidos en CONFIG['campos_obligatorios'].
+    - Calcula automáticamente:
+        - uuid (según CONFIG['uuid_algorithm'])
+        - hash_integridad (usando CONFIG['hash_algorithm'])
+        - fecha_creacion (en formato ISO)
+    - Usa la plantilla y delimitadores de CONFIG['formatos_soportados'] para cada tipo de archivo soportado.
+    - Valida el esquema final con validar_schemas().
+    - Maneja errores y loggea eventos críticos y exitosos usando logger.
+    - Estructura modular: separar la lógica de generación de metadatos, hashing y escritura de archivos.
+    - Priorizar soporte robusto para .csv y .yaml (en especial para libros diarios).
+    - Usar rutas absolutas relativas a Path(CONFIG['base_path']).
+
+  interfaz_CLI:
+    ejemplo_uso: |
+      python arca_creator.py [tipo_archivo] [nombre] --autor "opcional" --descripcion "opcional"
+    ejemplo_real: |
+      python arca_creator.py csv libro_diario_enero --autor "Bird" --descripcion "Registro diario"
+
+  robustez:
+    - Validación de extensiones soportadas consultando CONFIG['formatos_soportados'].
+    - Manejo de errores con logs claros y descriptivos (ejemplo: logger.info(f"Creado: {ruta_archivo}")).
+    - No sobrescribir nunca archivos existentes.
+    - Estructura y estilo profesional, funciones documentadas con Google-style docstrings.
+
+  salida_esperada: |
+    Un script CLI y módulo importable, que cree archivos nuevos con frontmatter válido, trazabilidad de hash_integridad y uuid, soporte de múltiples formatos y logging robusto, totalmente alineado a la configuración central del sistema ARCA.

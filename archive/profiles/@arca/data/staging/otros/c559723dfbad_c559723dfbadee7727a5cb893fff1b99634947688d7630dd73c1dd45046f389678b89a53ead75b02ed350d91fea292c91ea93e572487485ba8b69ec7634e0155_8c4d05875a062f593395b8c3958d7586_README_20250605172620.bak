@@ -1,0 +1,47 @@
+---
+module: referencias/externas/ia/readme
+type: core
+status: in_progress
+created: '2025-05-20'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 📄 README – Referencias – IA
+
+📁 Ruta: docs/referencias/externas/ia  
+📅 Creado: 2025-05-20  
+👤 Responsable: Usuario + IA
+
+---
+
+## 🎯 Propósito
+
+Esta carpeta contiene documentación técnica, model cards y benchmarks de modelos LLM usados en el sistema.  
+Su objetivo es respaldar decisiones en IA tomadas en RFCs y en `decisiones_arquitectonicas.md`.
+
+---
+
+## 📂 Contenido esperado
+
+- Archivos .md documentales
+- Archivos técnicos organizados por tema
+- Plantillas o referencias estructurales
+
+---
+
+## 📌 Reglas de uso
+
+- Evitá archivos sueltos sin README
+- Mantené este README actualizado si cambia la estructura interna
+- No usar para registros temporales (usar `logs/` o `backups/`)
+
+---
+
+## 🔗 Navegación relacionada
+
+- [CONTEXT.md]
+- [docs/index.md] (si aplica)
+- [docs/RFC_metodologia.md] (si define esta carpeta)
+
+---

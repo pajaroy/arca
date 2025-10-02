@@ -1,0 +1,26 @@
+# ✅ Solicitud de Test – `test_memory_graph.py` – ALMA_RESIST Sprint 2.6
+
+Este test debe cubrir el módulo `memory_graph.py`, el cual implementa un grafo semántico orientado con nodos únicos y aristas ponderadas para representar relaciones entre prompts, respuestas y conceptos derivados de interacciones previas.
+
+
+## 🧪 Casos de prueba sugeridos
+
+| Caso                                             | Resultado esperado                                 |
+|--------------------------------------------------|----------------------------------------------------|
+| Inserción de nodos nuevos                        | Devuelve ID único, evita duplicados               |
+| Búsqueda de ID por contenido                     | Devuelve ID correcto o None si no existe          |
+| Creación de aristas con peso                     | Aparecen en exportación con peso correcto         |
+| Recuperación de nodos relacionados               | Devuelve nodos conectados por encima del threshold|
+| Exportación en JSON                              | Formato válido, contiene nodos y edges            |
+| Exportación en GraphML                           | Salida con estructura estándar                    |
+| Borrado del grafo (`clear`)                      | Estado limpio, sin nodos ni relaciones            |
+| Robustez con datos repetidos                     | No rompe relaciones, no duplica nodos             |
+| Validación de errores                            | Lanza excepción si se conecta nodo inexistente    |
+
+
+## 📂 Archivos relacionados
+
+- `memory_graph.py` (módulo implementado)
+- `context_tracker.py` (integración sugerida)
+- `test_context_tracker.py` (ya implementado)
+

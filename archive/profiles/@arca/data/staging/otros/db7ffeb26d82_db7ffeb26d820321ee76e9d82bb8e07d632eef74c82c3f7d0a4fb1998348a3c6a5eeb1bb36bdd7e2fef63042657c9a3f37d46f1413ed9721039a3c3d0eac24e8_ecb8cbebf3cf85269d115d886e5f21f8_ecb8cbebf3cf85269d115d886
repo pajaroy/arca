@@ -1,0 +1,41 @@
+# 🧠 api/v1/memorias.py – Endpoint de ingreso de memorias ALMA_LOADER
+
+"""
+Este módulo define el endpoint REST POST /v1/memorias para registrar nuevas memorias en el sistema ALMA_LOADER.
+
+✅ Requisitos funcionales:
+1. Usar FastAPI y definir un `APIRouter()`
+2. Endpoint: POST /v1/memorias
+3. Entrada: JSON con estructura validada por Pydantic (modelo `MemoriaIn`)
+   - Debe incluir obligatoriamente: `id`, `contenido`, `categoria`, `tags`, `visibilidad`, `owner_id`
+4. Lógica:
+   - Validar que el JSON cumpla el esquema
+   - Llamar a `guardar_memoria()` del módulo `core/memoria_saver.py`
+   - Devolver el resultado como JSON
+5. Respuesta:
+   - Código 200 si fue exitoso
+   - Código 400 si hubo error de validación o de guardado
+6. El módulo debe ser desacoplado para poder incluirse con `include_router()` en `main.py`
+
+📦 Estructura de carpetas:
+- Este archivo debe estar en `api/v1/memorias.py`
+- La función `guardar_memoria` se importa desde `core.memoria_saver`
+
+📎 Extras:
+- Usar modelos de Pydantic para validación (`MemoriaIn`, `MemoriaOut`)
+- Agregar `summary` y `description` en el decorador del endpoint
+- Anotar tipos para OpenAPI y compatibilidad con documentación automática
+
+🔒 Nota:
+Aún no incluir autenticación real, pero el campo `owner_id` es obligatorio.
+"""
+
+# Ejemplo de entrada JSON esperada:
+# {
+#     "id": "mem-001",
+#     "contenido": "Hoy operé BTC y aprendí sobre correlaciones",
+#     "categoria": "trading",
+#     "tags": ["#btc", "#estrategia"],
+#     "visibilidad": "privada",
+#     "owner_id": "user-123"
+# }

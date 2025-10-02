@@ -1,0 +1,19 @@
+validador_schema:
+  campos_obligatorios: [version, fecha, cambios]
+
+registros:
+  - version: "1.0"
+    fecha: 2025-06-05
+    cambios: >
+      - Creación de la carpeta centralesis/ como entorno operativo institucional.
+      - Integración de manual técnico (.md) y bloque YAML institucional como referencia obligatoria.
+      - Definición y documentación de la estructura inicial: módulos, bitácora, changelog, plantillas y permisos.
+      - Primera auditoría CLI validada por Kael.
+  - version: "1.1"
+    fecha: 2025-06-06
+    cambios: >
+      - Correcciones de sintaxis e indentación en todos los YAML.
+      - Registro y backup manual de estado fundacional.
+      - Formalización de protocolos de referencia cruzada entre README, paper y YAML.
+      - Inclusión de prompt de arranque en todos los manuales y documentación.
+      - Habilitación para automatización y flujo de ingreso/versionado de datos.

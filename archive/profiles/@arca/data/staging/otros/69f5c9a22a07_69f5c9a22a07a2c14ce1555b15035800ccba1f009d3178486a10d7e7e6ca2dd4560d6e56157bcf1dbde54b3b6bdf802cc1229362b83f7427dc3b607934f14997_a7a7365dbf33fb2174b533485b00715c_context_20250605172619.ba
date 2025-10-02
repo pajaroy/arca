@@ -1,0 +1,166 @@
+---
+module: introduccion/context
+type: core
+status: in_progress
+created: '2025-05-23'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🧠 CONTEXT.md – ALMA_RESIST
+
+📅 Última actualización: 2025-05-23  
+👤 Responsable: Santi / pájaro  
+🔖 Estado actual: Documentación estructural consolidada, testing mínimo implementado, sistema preparado para integración IA
+
+---
+
+## 🧾 Contexto Histórico
+
+El presente documento refleja la evolución progresiva del sistema ALMA_RESIST.  
+Se conserva el historial técnico para trazabilidad de decisiones, cierres de sprint y evolución modular.
+
+---
+
+## 🧩 Estado Actual (Snapshot: `v0.0.0.2_estructura_documental`)
+
+Este snapshot marca el **cierre del Sprint 2.1 – Profesionalización de la Estructura Documental**, consolidando:
+
+- Estructura de carpetas y documentación técnica (`docs/`)
+- Plantillas reutilizables en formato YAML (`estructura_doc/`)
+- Testing manual y automatizado de metadatos (`testing/`)
+- Registro vivo de tareas (`TODO.md`) y estado global (`.project.md`)
+- Empaquetado de versión con hash único y firma de cierre
+
+🧠 El sistema se encuentra listo para escalar hacia módulos inteligentes de memoria, reflexión, CLI dinámico y navegación IA.
+
+---
+
+## 🗂 Estructura Base
+
+```
+ALMA_RESIST/
+├── core/                  → Módulos funcionales actuales
+├── tests/                 → Test unitarios por módulo
+├── prompts/               → Prompts técnicos asociados
+├── docs/                  → Documentación técnica, histórica y estratégica
+├── logs/                  → Registros estructurados (pueden estar cifrados)
+└── scripts/               → Scripts auxiliares (arranque, backups, automatizaciones)
+```
+
+---
+
+## 📌 Archivos Principales
+
+### 📘 Idea y Arquitectura
+- [[idea_base/idea_base]]
+- [[ALMA_RESIST/docs/decisiones_arquitectonicas]]
+- [[RFC_0001_metodologia]]
+
+### 📑 Control del Proyecto
+- [[ALMA_RESIST/docs/hitos]]
+- [[ALMA_RESIST/docs/introduccion/changelog]]
+- [[ALMA_RESIST/docs/lecciones_aprendidas]]
+- [[ALMA_RESIST/docs/dependencias]]
+
+### 📂 Documentación Modular
+- [[metodologia/metodologia_de_trabajo]]
+- [[ALMA_RESIST/docs/arquitectura/estructura_doc/readme]]
+- [[ALMA_RESIST/docs/referencias/README]]
+- [[ALMA_RESIST/docs/referencias/externas/README]]
+- [[ALMA_RESIST/docs/referencias/externas/ia/README]]
+- [[ALMA_RESIST/docs/referencias/externas/seguridad/README]]
+- [[ALMA_RESIST/docs/referencias/externas/patrones/README]]
+
+### 🔍 Auditorías y Registros
+- [[ALMA_RESIST/logs/auditorias/auditoria_estructura]]
+- [[ALMA_RESIST/docs/post_mortem_tecnico]]
+
+---
+
+## 🧱 Módulos Técnicos Actuales
+
+| Módulo               | Ubicación             | Estado  |
+|----------------------|------------------------|---------|
+| Logging estructurado | `core/log_writer.py`   | ✅ |
+| Cifrado de logs      | `core/log_crypto.py`   | ✅ |
+| ALMA_LOADER base     | `core/loader.py`       | 🧪 (prototipo) |
+
+---
+## 🧠 Estado del Proyecto
+
+✔️ Auditoría técnica completa  
+✔️ Documentación modular viva  
+✔️ Testing básico funcionando  
+✔️ Scripts de integración estandarizados  
+🔜 Próximo paso: integración IA (memoria + reflexión semántica + comandos)
+
+---
+
+## 🧭 Próximos Pasos
+
+👉 Crear checklist para Sprint Técnico 0.0.0.3  
+👉 Definir objetivo técnico: CLI inteligente, memoria modular, IA mínima funcional  
+👉 Iniciar integración de reflexión automatizada y feedback semántico de documentos
+
+---
+
+## 📎 Apéndice Sprint 2.3 – Integración de Idea Base Unificada
+
+📅 Fecha: 2025-05-23  
+🔖 Versión: v0.3.0-dev  
+👤 Responsable: Santi / pájaro
+
+Este sprint consolidó múltiples documentos conceptuales en una única idea base (`ALMA_RESIST_idea_base_0.0.0.1.md`) y reorganizó la carpeta `docs/idea_base/`.
+
+- 🧠 Nueva estructura: `idea_base/`, `changelog.md`, `version.md`, `_legacy/`
+- 📦 Archivos archivados: `idea_base.md`, `idea_base_conciencia_ia.md`, `idea_base_origen.zip`
+- 🗂 Versionado y registro en: `log_integracion.md`, `mapeo_sprint_archivos.md`, `hitos.md`
+- 🔄 Próximo paso: sincronización con nube segura y planificación de Sprint 2.4
+
+📌 Este apéndice actúa como marcador de snapshot interno para herramientas futuras y scripts de automatización (`alma-cli snapshot-log`).
+
+---
+## 📎 Apéndice – Estado operativo validado (2025-05-23)
+
+El sistema ALMA_RESIST implementa un pipeline interno de validación documental completamente funcional y validado, alineado con la metodología modular declarada.
+
+### 🧠 Capacidades integradas
+
+- Validación sintáctica y semántica de todos los archivos `.md` mediante `validate_docs.py`
+- Corrección automática de metadatos YAML (`fix_metadata.py`)
+- Normalización de rutas modulares (`force_snake_case_modules.py`)
+- Ejecución centralizada vía script bash (`validar_documentacion.sh`)
+- Backup automático de los cambios en carpetas versionadas
+- Registro sistemático en bitácoras, changelogs y decisiones arquitectónicas
+
+### 📁 Documentación asociada
+
+- `docs/utilidades/`
+- `docs/decisiones_arquitectonicas.md`
+- `docs/changelog.md`
+- `docs/resgistros/bitacoras/bitacora_2025-05-23.md`
+- `scripts/`
+
+Este conjunto funcional sienta la base para una futura integración CI/CD y garantiza trazabilidad completa sobre la estructura viva del sistema.
+
+---
+
+## 🌍 Contexto Sprint 2.4
+
+En este sprint se abordó una necesidad crítica: garantizar la coherencia estructural y semántica del repositorio.  
+Dado el crecimiento exponencial de archivos `.md` en el sistema ALMA_RESIST, era indispensable:
+
+- Definir una taxonomía clara (`type`, `domain`, `status`)
+- Establecer relaciones cruzadas (`linked_to`)
+- Integrar validación automática y trazabilidad IA
+
+Este sprint sienta las bases para la navegación semántica, inferencias de contexto y modularidad inteligente futura.
+
+---
+
+## 🔄 Apéndice Sprint 2.5
+
+Durante este sprint se consolidó la estructura modular como arquitectura final del sistema. Se validaron nombres, carpetas, scripts, y puntos de entrada. El contexto general ahora puede ser interpretado tanto por humanos como por asistentes IA, facilitando búsquedas, automatizaciones y trazabilidad.
+
+El contenido anterior de este archivo queda como referencia del proceso previo al rediseño.

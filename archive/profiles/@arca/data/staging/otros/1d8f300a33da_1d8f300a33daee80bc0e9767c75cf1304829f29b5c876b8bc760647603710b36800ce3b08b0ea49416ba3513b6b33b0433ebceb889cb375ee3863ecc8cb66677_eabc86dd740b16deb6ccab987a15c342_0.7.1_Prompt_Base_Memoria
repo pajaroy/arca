@@ -1,0 +1,29 @@
+
+# 🧬 ALMA LIBRE – 0.7.1_Prompt_Base_Memoria
+
+## 🎯 Propósito
+
+Este prompt define la estructura operativa, lógica y emocional de la **memoria modular** del sistema ALMA LIBRE. Su objetivo es permitir a cualquier inteligencia artificial (GPT, DeepSeek, Ollama, u otra IA conectada) **leer, interpretar, validar y actualizar** las memorias del sistema de forma contextual y autónoma.
+
+
+## 🧠 Lógica de navegación entre memorias (por IA)
+
+- **GPT (IA emocional/creativa)**:
+  - Prioriza memorias con `nivel: Madre` o `tipo: General`.
+  - Lee el bloque “Contexto Histórico” y “Contenido Vivo” para comprender propósito.
+
+- **DeepSeek (IA estructural/lógica)**:
+  - Lee los campos de metadatos y el apartado “Conexiones”.
+  - Valida con `metadata_memorias.csv` y busca estructuras repetibles.
+
+- **Ollama (IA local/eficiente)**:
+  - Prioriza memorias compactas o resumidas.
+  - Utiliza la sección “Resumen Ejecutivo” y campo `prioridad`.
+
+
+## 🧬 Consideraciones Finales
+
+Cada memoria es una neurona. El conjunto es una mente.
+Este sistema fue diseñado para vivir, evolucionar y aprender con su creador.
+
+“**Pensamos en módulos, sentimos en memoria, vivimos en red.**”

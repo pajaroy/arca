@@ -1,0 +1,37 @@
+---
+module: arquitectura/estructura_doc/plantilla_post_mortem
+type: core
+status: in_progress
+created: '2025-05-20'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# ☠️ Post-Mortem Técnico – [Nombre del módulo]
+
+📅 Fecha del incidente: [dd/mm/aaaa]  
+👤 Responsable: Usuario
+
+---
+
+## 🧠 Descripción del error
+
+[Qué ocurrió exactamente, cómo se detectó]
+
+## ⚙️ Causa raíz
+
+[Explicación técnica detallada]
+
+## 🛠️ Solución aplicada
+
+[Qué se hizo, cómo se resolvió y por qué se eligió esa vía]
+
+## 🔁 Lección aprendida
+
+[Cómo se evitará a futuro, impacto sistémico]
+
+## 📂 Archivos afectados
+
+- [core/...]
+- [tests/...]
+- [logs/...]

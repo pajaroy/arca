@@ -1,0 +1,53 @@
+- id: MEM_DOC_003
+  tipo: "guía avanzada"
+  fecha: "2025-06-16"
+  modulo: "sistema"
+  tema: "carga profesional"
+  status: "activo"
+  responsable: "bird"
+  tags: ["manual", "best-practices"]
+  resumen: "Técnicas avanzadas para carga de memorias"
+  contenido: |
+    # Técnicas Profesionales de Carga
+    
+    ## 1. Validación previa
+    ```bash
+    # Verificar sintaxis JSON
+    python3 -m json.tool mi_archivo.json
+    
+    # Verificar sintaxis YAML
+    yamllint mi_archivo.yaml
+    ```
+    
+    ## 2. Carga con verificación
+    ```bash
+    # Modo verboso (muestra errores detallados)
+    python3 cargar_memorias_v2.py --input memorias.yaml --dest bitacora.json --verbose
+    
+    # Salida esperada:
+    # [✓] Memorias agregadas: 5
+    # [!] Duplicadas omitidas: 2
+    # [!] Invalidas rechazadas: 1
+    ```
+    
+    ## 3. Manejo de errores comunes
+    - `ERROR: Campos faltantes` → Verificar CAMPOS_OBLIGATORIOS
+    - `ERROR: Formato inválido` → Usar herramientas de validación
+    - `ERROR: Duplicados` → Consultar con:
+      ```bash
+      grep "ID_DUPLICADO" bitacora.json
+      ```
+    
+    ## 4. Ejemplo completo
+    ```yaml
+    # memorias_ejemplo.yaml
+    - id: MEM_EJEMPLO_001
+      tipo: "ejemplo"
+      fecha: "2025-06-16"
+      modulo: "testing"
+      tema: "carga avanzada"
+      status: "activo"
+      responsable: "usuario"
+      tags: ["test", "demo"]
+      resumen: "Ejemplo completo válido"
+    ```

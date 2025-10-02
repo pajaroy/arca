@@ -1,0 +1,30 @@
+{
+  "id": "integration_model_wrapper_v0.2",
+  "modulo": "model_wrapper",
+  "version": 0.2,
+  "standard": "ALMA_RESIST_v0.2",
+  "descripcion": "Módulo de abstracción para la gestión universal de modelos LLM.\nValida entradas y salidas con campos universales y registra toda interacción para auditoría y trazabilidad.\n",
+  "scripts": [
+    "model_wrapper.py",
+    "__init__.py"
+  ],
+  "campos_universales": [
+    "id",
+    "agente",
+    "timestamp",
+    "tags",
+    "hash",
+    "metadata",
+    "memoria_ref"
+  ],
+  "funcion": "- Permite inicializar, invocar y auditar modelos LLM (Mistral, Llama, etc).\n- Todas las operaciones quedan auditadas y referenciadas a memoria institucional.\n- Integrable con context_tracker y memory_graph para flujo de datos universal.\n",
+  "mejoras_pendientes": [
+    "Modularización por tipo de modelo (plug-and-play).",
+    "Expansión a logging distribuido y monitoreo de métricas."
+  ],
+  "linked_to": [
+    "../schemas/schemas.py",
+    "../../../../control_central/bitacora/bitacora_viva.yaml"
+  ],
+  "estado": "FUNCIONAL, alineado al estándar ALMA_RESIST v0.2."
+}

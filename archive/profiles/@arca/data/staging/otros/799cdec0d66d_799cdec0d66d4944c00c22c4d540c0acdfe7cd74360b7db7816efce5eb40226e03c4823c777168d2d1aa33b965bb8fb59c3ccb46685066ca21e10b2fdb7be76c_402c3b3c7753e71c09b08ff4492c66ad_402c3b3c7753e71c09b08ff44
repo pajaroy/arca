@@ -1,0 +1,19 @@
+---
+title: Apendice – Bitácora 2025-06-01
+type: journal_appendix
+linked_to: bitacora_inicio
+---
+
+## 🗂️ Acción Registrada: Generación de READMEs
+
+En el día 2025-06-01 se documentaron los módulos clave de `control_central/` con archivos `README.md` IA-friendly para permitir navegación, trazabilidad y asistencia técnica futura.
+
+📁 Carpetas documentadas:
+- `archivo/`
+- `asesor-ia/core/`
+- `asesor-ia/docs/`
+- `core/scripts/`
+- `logs/`
+- `status/`
+
+Esta acción marca el cierre de la fase inicial de organización documental del Sprint 0.2.

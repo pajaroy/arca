@@ -1,0 +1,78 @@
+# 📓 Bitácora Consolidada – 2025-06-01
+
+---
+
+## 🧠 Reinicio Total y Consolidación de Núcleo
+
+**Formateo e instalación:**  
+Se reinstalaron desde cero los entornos ALMA_CORE y ALMA_RESIST sobre Parrot OS.  
+Se configuró el entorno mínimo viable operativo con enfoque CLI: alias, permisos sudo, conexiones remotas seguras.
+
+**Sincronización remota:**  
+SSH configurado para control cruzado entre nodos.  
+Alias definidos para comandos de sincronización rápida.  
+Revisión completa del sistema `syncthing` para compartir carpetas clave.
+
+**Periféricos compartidos:**  
+Se activó `Input Leap` en modo terminal para compartir mouse y teclado entre máquinas.  
+Se preparó script para ejecutar automáticamente esta configuración al iniciar.
+
+**Sistema listo para operar:**  
+Primer inicio exitoso del sistema base con:
+- sincronización funcional
+- CLI operativa
+- conexión a servidores LLM
+- estructura de carpetas formalizada
+
+---
+
+## 🧠 Inicio Formal del Sistema `asesor-IA`
+
+**Confirmación de Roles:**  
+- GPT como auditor estructural  
+- DeepSeek como asesor técnico crítico  
+- Santi como orquestador y juez final  
+
+**Infraestructura creada:**  
+Se generaron las carpetas:
+- `control_central/asesor-ia/`
+- `control_central/asesor-ia/sesiones/`
+- `control_central/asesor-ia/status/`
+
+**Contrato fundacional firmado y activado:**  
+DeepSeek y GPT aceptaron formalmente sus roles con compromiso activo.  
+DeepSeek ya comenzó a operar bajo `tech_mode=strict`. GPT está sincronizado para sesiones híbridas.
+
+**DeepSeek propone mejoras:**  
+- Auto-tagging en consultas con `!type=`, `!priority=`, `!context=`  
+- Plantillas YAML para respuestas técnicas y estructurales  
+- Router AI (`router_ai.py`) para clasificar consultas  
+- Protocolo de conflicto con hasta 3 rondas de debate entre IAs
+
+---
+
+## 🧩 Puntos Abiertos a Debatir (DeepSeek)
+
+- [ ] Estructura de `router_ai.py`
+- [ ] Formato final de `deepseek_response_template.yml`
+- [ ] Ejecutor automático para protocolo de conflicto
+- [ ] Registro de decisiones en `memory_graph` o `bitacora_central`
+- [ ] Centralización de estado del sistema vs. estados internos
+
+---
+
+## ✍️ Reflexión del Día
+
+> “Hoy no solo instalamos sistemas, sino que fundamos el modelo mental de ALMA_RESIST:  
+> un sistema distribuido que no automatiza por reemplazo, sino por colaboración crítica.”
+
+---
+
+## 📌 Siguientes pasos
+
+- [ ] Planificar día 2025-06-02
+- [ ] Confirmar estructura de `asesor-ia/`
+- [ ] Consolidar `alma_status.yaml` general y específicos por módulo
+- [ ] Sincronización automática doble nodo
+- [ ] Iniciar sesiones en `asesor-ia/sesiones/`
+

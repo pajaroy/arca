@@ -1,0 +1,60 @@
+# 📁 `context_tracker/` – Módulo de Seguimiento de Interacciones
+
+Este módulo forma parte de la arquitectura de `ALMA_RESIST`, y se encarga de registrar, validar y recuperar interacciones históricas entre el usuario y el sistema IA.
+
+## 📌 Objetivo
+
+Registrar de forma estructurada y validada cada interacción del sistema, incluyendo:
+- Prompt ingresado
+- Respuesta generada
+- Metadatos del contexto (modelo usado, módulo activo, etiquetas, etc.)
+- Timestamp con formato UTC ISO8601
+
+## 📂 Estructura
+
+| Archivo / Carpeta | Descripción |
+|-------------------|-------------|
+| `__init__.py` | Inicializador de paquete Python |
+| `context_tracker.py` | Implementación principal del `ContextTracker` |
+| `chengelog_context_tracker_v0.0.0.2.md` | Registro de cambios para la versión 0.0.0.2 |
+| `_legacy/` | Implementaciones antiguas para trazabilidad histórica |
+| `__pycache__/` | Archivos cacheados por Python (ignorar) |
+
+## ⚙️ Funcionalidades Clave
+
+- Validación con `jsonschema`
+- Esquema de datos flexible con campos opcionales
+- Almacenamiento en formato `JSONL` (una interacción por línea)
+- Cache interno de hasta 100 entradas para mejorar performance
+- Manejo de archivos corruptos
+- Borrado y reinicialización segura del historial
+
+## 🧪 Estado de Pruebas
+
+El módulo cuenta con cobertura total desde `tests/context_tracker/`. Los test actuales verifican:
+- Registro válido e inválido
+- Persistencia entre sesiones
+- Manejo de líneas corruptas
+- Orden cronológico correcto
+- Límite de caché
+- Permisos de archivo
+- Limpieza de historial
+
+✅ Última ejecución: **todos los tests pasaron correctamente**
+
+## 🚧 Pendientes
+
+- Revisión de duplicación entre entradas por ID único
+- Sincronización con sistema de memoria ALMA externa (futuro)
+- Posible separación entre interacciones de usuario y sistema
+
+## 🧠 Integración
+
+Este módulo se importa desde:
+```python
+from core.llm_server.integration.context_tracker import ContextTracker
+```
+
+---
+
+> Este README forma parte del sistema de documentación interna ALMA_RESIST. Para más información, consultar `/docs/estructura_modular.md` o `/docs/metodologia_testeo.md`.

@@ -1,0 +1,8 @@
+
+## Contenido
+
+```yaml
+contenido:
+- add_bitacora_entry_v0.2.0.py: Script CLI principal para carga de entradas en la bitácora institucional, con validación, backups y sincronización triple-formato.
+```
+

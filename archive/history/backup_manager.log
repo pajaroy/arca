@@ -1,0 +1,14 @@
+2025-09-24 04:23:03 - __main__ - INFO - Backup Manager inicializado
+2025-09-24 04:23:03 - __main__ - WARNING - No se encontraron archivos con extensiones soportadas en: /arca/test/asd.txt
+2025-09-24 04:24:02 - __main__ - INFO - Backup Manager inicializado
+2025-09-24 04:24:02 - __main__ - INFO - Backup creado exitosamente: /arca/archive/backup/test/test_asd.md_prueba_2025-09-24_04-24-02.tar.gz
+2025-09-24 04:24:02 - __main__ - INFO - Archivos incluidos: 1
+2025-09-24 04:25:13 - __main__ - INFO - Backup Manager inicializado
+2025-09-24 04:25:13 - __main__ - INFO - Backup creado exitosamente: /arca/archive/backup/test/prueba/test_prueba_test.md_prueba_2025-09-24_04-25-13.tar.gz
+2025-09-24 04:25:13 - __main__ - INFO - Archivos incluidos: 1
+2025-09-24 04:28:41 - __main__ - INFO - Backup Manager inicializado
+2025-09-24 04:28:41 - __main__ - INFO - Backup creado exitosamente: /arca/archive/backup/test/prueba/test_prueba_test.md_prueba_2025-09-24_04-28-41.tar.gz
+2025-09-24 04:28:41 - __main__ - INFO - Archivos incluidos: 1
+2025-09-24 04:29:50 - __main__ - INFO - Backup Manager inicializado
+2025-09-24 04:29:50 - __main__ - INFO - Backup creado exitosamente: /arca/archive/backup/test/prueba/test_prueba_test.md_prueba_2025-09-24_04-29-50.tar.gz
+2025-09-24 04:29:50 - __main__ - INFO - Archivos incluidos: 1

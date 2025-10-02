@@ -1,0 +1,26 @@
+id: readme_core_2025-06-08
+nombre: "README institucional carpeta core"
+ruta: "control_central/core/"
+version: "0.1.0"
+descripcion: |
+  Carpeta principal de desarrollo, prototipado y laboratorio para todo el ecosistema ALMA_RESIST.
+  Aquí deben crearse todos los proyectos, scripts, módulos y prototipos antes de ser declarados versión estable.
+  Solo las versiones estables y validadas deben bajarse a la raíz del repositorio o a carpetas institucionales finales.
+filosofia:
+  - Cada nuevo proyecto va en su propia subcarpeta temática.
+  - No se deben dejar archivos sueltos: usar siempre subcarpetas y README propio.
+  - Solo se baja a la raíz lo ya documentado y validado.
+subcarpetas_recomendadas:
+  - notebooks: "Ideas, experimentos, research y primeros textos de cualquier módulo o agente."
+  - [nombre_modulo]: "Cada módulo o script mayor en subcarpeta propia."
+notas:
+  - No confundir con 'downloads/' (solo para archivos externos o ajenos al sistema).
+  - El orden es clave para evitar deuda técnica y mantener trazabilidad.
+  - Se recomienda dejar README en cada subcarpeta principal.
+estado: "En desarrollo – usar como estándar de orden para toda la fase de laboratorio."
+tags:
+  - core
+  - proyectos
+  - desarrollo
+  - laboratorio
+  - institucional

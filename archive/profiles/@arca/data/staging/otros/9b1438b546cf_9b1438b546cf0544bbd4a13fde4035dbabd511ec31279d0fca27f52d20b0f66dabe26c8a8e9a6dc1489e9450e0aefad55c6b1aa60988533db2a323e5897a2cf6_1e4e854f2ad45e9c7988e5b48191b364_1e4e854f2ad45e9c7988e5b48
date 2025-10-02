@@ -1,0 +1,98 @@
+---
+tipo: bitacora
+id: BITACORA_2025-06-05_ae0125
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Log Writer V0.0.0.2
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:4fb087abf23db2ef17d7594e296d47540315dc8c1c1fc4b9c3f1829c9379a90f
+---
+
+import os
+import json
+import logging
+from datetime import datetime, timedelta
+from pathlib import Path
+from typing import Dict, Optional
+import platform
+
+logger = logging.getLogger("alma_writer")
+
+class LogWriter:
+    def __init__(self, log_dir: Optional[str] = None):
+        self.log_dir = Path(log_dir or "./logs")
+        self.log_dir.mkdir(parents=True, exist_ok=True)
+
+    def _get_log_path(self) -> Path:
+        filename = f"alma_{datetime.utcnow().strftime('%Y-%m-%d')}.log"
+        return self.log_dir / filename
+
+    def write_log(self, event: Dict) -> bool:
+        log_path = self._get_log_path()
+        temp_path = log_path.with_suffix(".tmp")
+
+        try:
+            if not all(key in event for key in ("timestamp", "type", "message")):
+                raise ValueError("Evento mal formado")
+
+            line = json.dumps(event, ensure_ascii=False) + "\n"
+
+            with open(temp_path, "a", encoding="utf-8") as f:
+                f.write(line)
+
+            with open(log_path, "a", encoding="utf-8") as final_log:
+                with open(temp_path, "r", encoding="utf-8") as temp_in:
+                    final_log.write(temp_in.read())
+
+            temp_path.unlink(missing_ok=True)
+
+            logger.debug(f"Evento registrado: {event['type']} ({event.get('module', 'unknown')})")
+            return True
+
+        except (IOError, OSError) as e:
+            logger.error(f"Error escribiendo log: {str(e)}")
+            try:
+                if temp_path.exists():
+                    temp_path.unlink()
+            except:
+                pass
+            return False
+        except (TypeError, json.JSONDecodeError):
+            logger.error("Error en la codificación del evento JSON.")
+            return False
+
+    @staticmethod
+    def log_event(level: str, message: str, module: str = "core", metadata: Optional[Dict] = None) -> Dict:
+        return {
+            "timestamp": datetime.utcnow().isoformat() + "Z",
+            "type": level.lower(),
+            "module": module,
+            "message": str(message),
+            "pid": os.getpid(),
+            "host": platform.node(),
+            "platform": platform.platform(),
+            "metadata": metadata or {}
+        }
+
+    @staticmethod
+    def secure_rotation(days: int = 7, log_dir: Optional[str] = None):
+        dir_path = Path(log_dir or "./logs")
+        cutoff = datetime.utcnow() - timedelta(days=days)
+        for log_file in dir_path.glob("alma_*.log"):
+            try:
+                date_str = log_file.stem.split("_")[1]
+                log_date = datetime.strptime(date_str, "%Y-%m-%d")
+                if log_date < cutoff:
+                    log_file.unlink()
+                    logger.info(f"Log eliminado por rotación: {log_file}")
+            except Exception as e:
+                logger.warning(f"No se pudo procesar {log_file}: {str(e)}")

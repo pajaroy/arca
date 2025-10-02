@@ -1,0 +1,37 @@
+---
+module: project
+type: core
+status: in_progress
+created: '2025-05-23'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🧠 .project.md – Estado General del Sistema ALMA_RESIST
+
+📅 Fecha: 2025-05-23  
+🔢 Versión actual: v0.0.0.2  
+🔜 Próximo sprint: v0.0.0.3 – Integración IA básica
+
+---
+
+## 📊 Estado por módulo
+
+- `CLI:` ✅ Estable y documentado
+- `LLM:` ⏳ No iniciado – pendiente de arquitectura
+- `Memoria:` 🔧 En definición – se está evaluando persistencia
+- `Loader:` ✅ Automatizado por `integrar_nuevo_archivo.sh`
+- `Logging:` ✅ Funcional – log_integracion.md en uso
+
+---
+
+## 🧾 Cambios recientes
+
+- Se estandarizó la estructura documental (`estructura_doc/`)
+- Se generaron plantillas reutilizables para documentación
+- Se preparó el sistema para auditar y escalar con trazabilidad total
+
+---
+
+✍️ Responsable: Santi / pájaro  
+🧠 Este archivo refleja el estado vivo del sistema y debe actualizarse con cada cambio relevante.

@@ -1,0 +1,14 @@
+metadata:
+  version: "0.2.0"
+  tipo: "bitacora"
+  schema: "almaresist.bitacora_v1"
+  descripcion: "Bitácora institucional de ALMA_RESIST"
+  estructura: "metadata + entradas"
+  tags: ["bitacora", "institucional"]
+  linked_to: []
+  responsable: "Equipo de Operaciones"
+  hash_verificacion: ""
+  historial: []
+  last_modified: ""
+  last_modified_by: ""
+entradas: []

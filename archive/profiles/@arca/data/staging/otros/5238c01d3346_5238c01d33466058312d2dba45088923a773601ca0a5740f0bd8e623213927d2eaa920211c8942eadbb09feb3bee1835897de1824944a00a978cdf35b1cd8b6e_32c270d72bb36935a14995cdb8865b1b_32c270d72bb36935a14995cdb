@@ -1,0 +1,49 @@
+# 📦 Metodología de Snapshots Formales (v1.0)
+
+## 🎯 Objetivo
+
+Definir un estándar profesional para la creación, documentación y uso de snapshots (versiones) dentro del sistema ALMA_RESIST, asegurando trazabilidad, claridad técnica y compatibilidad total con agentes IA.
+
+
+## 🗂 Estructura Estándar de un Snapshot
+
+Ubicación: `docs/versiones/vX.Y.Z_nombre/`
+
+Contenido mínimo:
+
+```
+📁 v0.0.0.4_sprint_2.5_auditoria/
+├── index.md                      # Índice general y guía de lectura del snapshot
+├── version.md                   # Detalles técnicos de la versión
+├── changelog.md                 # Cambios y mejoras introducidas
+├── bitacora.md                  # Comentarios técnicos del proceso
+├── README.md                    # Explicación del snapshot, enlaces cruzados
+├── resumen_mvp.md               # (opcional) Estado funcional hasta esta versión
+├── estructura.zip               # (opcional) Zip con archivos específicos si es necesario
+└── referencias/                 # (opcional) Recursos, imágenes, backups externos
+```
+
+
+## 🤖 Compatibilidad IA
+
+Para que un snapshot sea IA-friendly:
+
+- No debe tener estructuras anidadas innecesarias (máximo L3)
+    
+- Los archivos clave deben tener YAML válido si corresponde
+    
+- El `README.md` debe servir como prompt inicial o punto de entrada
+    
+- El `index.md` debe orientar al sistema o modelo sobre qué se puede usar
+    
+
+
+## 📎 Referencias cruzadas
+
+- `metodologia_versionado_backups_v2.md`
+    
+- `metodologia_doc_ia_v2.md`
+    
+- `metodologia_sprints_v2.md`
+    
+

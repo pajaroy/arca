@@ -1,0 +1,30 @@
+---
+module: arquitectura/estructura_doc/plantilla_decision_arquitectonica
+type: core
+status: in_progress
+created: '2025-05-20'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🧱 Plantilla – Registro de Decisión Arquitectónica
+
+### 🧩 Decisión: [Título breve]
+
+📅 Fecha: [dd/mm/aaaa]  
+🔍 Contexto:
+[Qué necesidad, problema o evaluación motivó esta decisión]
+
+🧠 Alternativas consideradas:
+[Qué otras opciones se evaluaron y por qué se descartaron]
+
+✅ Decisión final:
+[Qué se eligió, por qué, y cómo se implementará]
+
+📂 Impacto estructural:
+[A qué módulos afecta, qué dependencias crea o simplifica]
+
+🔗 Relacionado:
+- [idea_base.md]
+- [decisiones_arquitectonicas.md]
+- [changelog.md]

@@ -1,0 +1,61 @@
+
+# ALMA_RESIST – Idea Base v0.0.6
+
+## 🧠 Resumen Ejecutivo
+
+ALMA_RESIST es un sistema operativo modular, portátil y offline con capacidades de inteligencia artificial local, pensado para contextos sin conexión, colaboración híbrida humano-IA, y máxima privacidad/autonomía. Esta versión refuerza la arquitectura para que cualquier IA avanzada (como GPT-4.5) o colaborador humano pueda comprender, mantener y escalar el sistema desde el primer contacto.
+
+
+### 📁 Estructura Base (ALMA_LIBRE)
+
+```
+ALMA_LIBRE/
+├── core/               # Scripts ejecutables (CLI, LLM, Loader, Autonomía)
+├── config/             # Perfiles, modelos, políticas de IA
+├── docs/               # Whitepaper, Prompt Técnico, FAQ, Migración
+├── tests/              # Scripts y casos de prueba
+├── logs/               # Conversaciones, errores, auditoría
+├── backups/            # Respaldos de memoria y configuración
+└── CONTEXT.md          # Resumen ultra-conciso para IA y onboarding rápido
+```
+
+
+### 🤖 Prompt Técnico v1.0 (docs/PROMPT_TECNICO.md)
+
+- Formato estricto de interacción:
+  - Input: JSON con contexto
+  - Output: código funcional/documentación bajo restricciones
+- Reglas explícitas de dependencia
+- Casos de ejemplo añadidos:
+  - Optimización de scripts
+  - Ajuste de configuración IA para hardware limitado
+  - Creación de documentación Markdown desde logs
+- Preguntas guía para IA añadidas
+
+
+### 🛠️ Mejoras Técnicas y de Mantenibilidad
+
+- Matriz de pruebas expandida:
+  - CPUs antiguas
+  - Modelos Mistral cuantizados 3-4 bit
+- FAQ IA (docs/faq_ia.md): errores comunes + soluciones (ej: CUDA faltante, incompatibilidades RAM)
+- Guía de migración desde v0.0.5 actualizada
+- Notas de benchmark separadas por entorno
+
+
+# 📋 Changelog v0.0.6 (Respecto a v0.0.5)
+
+### 📚 Documentación:
+- Se agregó `CONTEXT.md` para onboarding de IAs y humanos
+- Se expandió `PROMPT_TECNICO.md` con ejemplos y preguntas orientativas
+- Whitepaper revisado con filosofía, roadmap, casos reales y ética
+
+### 📦 Estructura:
+- `ALMA_LIBRE/` se definió como base, pero no obligatoria
+- Guía clara para iniciar desde cero sin dependencias previas
+
+### 🧪 Técnicos:
+- Matriz de pruebas ampliada a casos extremos (RAM baja, CPU antigua)
+- Diagrama Mermaid.js actualizado
+- `faq_ia.md` añadido con soluciones típicas
+

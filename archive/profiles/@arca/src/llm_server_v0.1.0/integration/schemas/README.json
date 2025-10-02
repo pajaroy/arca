@@ -1,0 +1,26 @@
+{
+  "id": "integration_schemas_v0.2",
+  "modulo": "schemas",
+  "version": 0.2,
+  "standard": "ALMA_RESIST_v0.2",
+  "descripcion": "Define el modelo de datos base (AlmaBaseModel) y valida todos los campos universales exigidos en el ecosistema ALMA_RESIST.\nPermite control de integridad, generación automática de hash y timestamp, y facilita la extensión futura.\n",
+  "script_principal": "schemas.py",
+  "campos_universales": [
+    "id",
+    "agente",
+    "timestamp",
+    "tags",
+    "hash",
+    "metadata",
+    "memoria_ref"
+  ],
+  "funcion": "- Valida y serializa datos críticos para context_tracker, memory_graph y model_wrapper.\n- Unifica la estructura de datos en todo el sistema.\n",
+  "mejoras_pendientes": [
+    "Soporte dinámico para versiones de esquema.",
+    "Documentación de dependencias cruzadas por módulo."
+  ],
+  "linked_to": [
+    "../../../../control_central/bitacora/bitacora_viva.yaml"
+  ],
+  "estado": "CRÍTICO Y FUNCIONAL, base de toda interoperabilidad."
+}

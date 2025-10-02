@@ -1,0 +1,61 @@
+id: SCRIPT_DOCUMENTATION_HASHING_MULTIAGENTE_v0.1.0
+nombre: "Generación de Hashes Multi-agente para ALMA_RESIST"
+autor: "bird"
+fecha: "2025-06-09"
+descripcion: |
+  Este script es parte del módulo de generación de hashes dentro de ALMA_RESIST. Su principal función es calcular los hashes de los archivos dentro de una ruta objetivo (directorio o archivo individual) y registrar estos hashes junto con metadatos relevantes en un índice centralizado (index.json).
+  
+  Está diseñado para ser usado en un entorno multi-agente, permitiendo que diferentes agentes ejecuten este proceso de manera autónoma y manteniendo un registro completo de todos los cambios. El script asegura trazabilidad completa de los archivos a través de su hash y otros metadatos, como comentarios, agentes, permisos, tamaño, etc.
+
+propiedades:
+  - **Objetivo**:
+      - Calcular el hash de cada archivo en una ruta específica.
+      - Registrar la información en un índice centralizado para garantizar la trazabilidad y auditoría.
+      - Proporcionar un sistema de logs por agente y habilitar la ejecución de hooks externos.
+  - **Dependencias**:
+      - Python 3.x
+      - Bibliotecas: `hashlib`, `json`, `argparse`, `logging`, `uuid`, `subprocess`
+  - **Parámetros de Entrada**:
+      - `--ruta_objetivo`: Ruta del archivo o directorio objetivo. *(obligatorio)*
+      - `--algoritmo`: Algoritmo de hashing (por defecto `sha256`).
+      - `--index`: Ruta al archivo de índice. *(opcional, default: ./index.json)*
+      - `--excluir`: Patrones de archivos a excluir del proceso (por ejemplo `*.tmp,*.bak`).
+      - `--agente`: Identificador del agente ejecutor. *(obligatorio)*
+      - `--comentario`: Comentario adicional sobre la acción (opcional).
+      - `--logs_por_agente`: Genera un log separado para cada agente (opcional).
+      - `--origen_disparo`: Indica el origen del disparo (manual, watcher, etc).
+      - `--dry-run`: Modo de prueba, no modifica el índice.
+      - `--output`: Formato de salida (CLI, JSON, YAML).
+      
+  - **Flujo de trabajo**:
+      1. El agente ejecutor ejecuta el script sobre una ruta objetivo.
+      2. Se calculan los hashes de cada archivo que no esté excluido.
+      3. La información se guarda en un índice centralizado (si el archivo `index.json` no existe, se crea).
+      4. Se ejecutan hooks configurados (si existen).
+      5. Los logs se guardan en la carpeta de logs específica del agente.
+
+  - **Consideraciones**:
+      - Este script debe ser ejecutado por un agente autorizado, y se debe asegurar que los permisos de escritura en el índice sean correctos.
+      - Es importante mantener el índice actualizado y no modificarlo directamente.
+      - Cada ejecución genera un identificador único de sesión, lo que facilita el rastreo de cambios en el sistema.
+
+ejemplo_uso:
+  - **Uso básico**:
+    ```bash
+    python3 /home/bird/alma_core/control_central/core/scripts/hashing_multiagente_v0.1.0.py \
+      --ruta_objetivo /home/bird/alma_core/control_central \
+      --index /home/bird/alma_core/control_central/index.json \
+      --agente kael \
+      --comentario "Test de hashing v0.1.0" \
+      --logs_por_agente \
+      --output CLI
+    ```
+
+  - **Descripción del ejemplo**:
+      - Se ejecuta el script sobre el directorio `control_central`, calculando el hash de los archivos.
+      - Se registra la información en `index.json` y se crean logs específicos para el agente `kael`.
+      
+notas:
+  - Este script está diseñado para garantizar que cada acción y cada archivo procesado quede registrado con trazabilidad completa.
+  - En el futuro, este script podrá ser ampliado para soportar más algoritmos de hash y más características de automatización.
+  - Este proceso de hash es el primer paso para construir un sistema robusto de auditoría e integridad de archivos en el entorno ALMA_RESIST.

@@ -1,0 +1,13 @@
+# 🧠 ALMA_RESIST – Snapshot: v0.0.0.2_idea_base_unificada
+
+Este snapshot corresponde al cierre del Sprint 2.3, enfocado en la consolidación de la **idea base unificada** del sistema ALMA_RESIST.
+
+Incluye:
+
+- Integración del documento `ALMA_RESIST_idea_base_0.0.0.1.md`
+- Archivos legacy correctamente archivados en `_legacy/`
+- Registro histórico, decisiones, changelogs y bitácoras asociadas
+- Conformidad con la metodología `metodologia_agregado_archivos.md`
+
+Este hito representa el cierre conceptual del diseño ideológico del sistema y prepara la base para futuras implementaciones técnicas automatizadas.
+

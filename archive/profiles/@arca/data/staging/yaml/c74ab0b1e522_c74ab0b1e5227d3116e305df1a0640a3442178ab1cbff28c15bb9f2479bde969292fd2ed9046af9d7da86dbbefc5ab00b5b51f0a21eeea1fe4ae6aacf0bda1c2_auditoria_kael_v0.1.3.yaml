@@ -1,0 +1,23 @@
+id: MEM_AUD_2025-06-08_01
+fecha: 2025-06-08
+tipo: auditoria
+modulo: control_central/kael
+resumen: >
+  Auditoría exhaustiva de KAEL v0.1.3 realizada por Centralesis/DeepSeek.
+  Se detectaron desviaciones en tipos de memoria, hashes no implementados, jerarquía ambigua, y ausencia de validación estructural en plantillas.
+  El agente KAEL no cumple criterios operativos para producción bajo los estándares de ALMA_RESIST.
+impacto: >
+  Riesgo alto de fragmentación institucional, pérdida de trazabilidad y posibles conflictos de gobernanza.
+recomendaciones:
+  - Alinear 'tipos_permitidos' de memorias_institucionales con el estándar Centralesis (MEM_2025-06-05_04).
+  - Implementar hashes SHA-256 reales y automáticos en todos los registros (bitácora, memoria, changelog).
+  - Corregir rol de KAEL a "Agente Operativo CLI (subordinado a Centralesis)" y eliminar referencias de autoridad ambigua.
+  - Añadir schemas de validación estructural en todas las plantillas (campos obligatorios).
+  - Incluir en la plantilla de derivación los campos: impacto, recomendaciones y hash de la consulta original.
+  - Añadir bloque de principios ALMA_RESIST en la definición de KAEL.
+  - Integrar auditorías programadas cada 7 días y reporte automático a Centralesis.
+  - Automatizar controles para rechazar cualquier registro sin hash o campos obligatorios.
+  - Derivar esta memoria al responsable humano para corrección en un plazo máximo de 48h.
+tags: [auditoria, kael, gobernanza, deuda_tecnica]
+autor: Centralesis
+hash_verificacion: sha256:9a3f... # Reemplazar por hash real al registrar

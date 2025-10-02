@@ -1,0 +1,20 @@
+# 📚 README – Referencias Externas
+
+📁 Ruta: docs/referencias/externas/  
+📅 Creado: 2025-05-20  
+👤 Responsable: Usuario + IA
+
+
+## 📂 Subcategorías actuales
+
+- `ia/` → Model cards, comparativas de LLM, pruebas de inferencia
+- `seguridad/` → Cifrado, políticas antifrágiles, estándares tipo LUKS, GPG, OWASP
+- `patrones/` → Patrones de arquitectura (Clean, Hexagonal, Onion)
+
+
+## 🔗 Enlaces relacionados
+
+- [[ALMA_RESIST/docs/decisiones_arquitectonicas]]
+- [[RFC_0001_metodologia]]
+- [[idea_base/idea_base]]
+

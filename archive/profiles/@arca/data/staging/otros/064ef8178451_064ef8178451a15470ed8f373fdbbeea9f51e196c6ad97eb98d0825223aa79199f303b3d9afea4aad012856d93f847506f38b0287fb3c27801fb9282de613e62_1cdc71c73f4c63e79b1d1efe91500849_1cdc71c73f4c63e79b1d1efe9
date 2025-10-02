@@ -1,0 +1,56 @@
+# 🌱 Propuesta para Versión 3 – Metodología de Estructura Modular
+
+📅 Fecha de captura: 2025-05-21  
+🧩 Estado: En evaluación  
+🔁 Origen: Feedback externo tras implementación de v2
+
+
+## 🚀 Mejoras Estratégicas Propuestas
+
+### 1. Automatización y Verificación
+
+- [ ] Agregar `validate_structure.py` como script base:
+    - Valida presencia de metadatos YAML
+    - Verifica carpetas obligatorias (`docs/`, `scripts/`)
+- [ ] Proveer Git hooks (`.git/hooks/pre-commit`) para validación previa a commits
+- [ ] Crear flujo de validación automática en CI/CD (GitHub Actions / GitLab CI)
+
+
+### 3. Gestión de Dependencias Avanzada
+
+- [ ] Permitir `linked_to:` con versión mínima por módulo:
+```yaml
+linked_to:
+  - module: "ALMA_CORE"
+    version: ">=2.3"
+```
+
+
+### 5. Seguridad para Módulos Externos
+
+- [ ] Checklist obligatorio en `docs/metodologia_local.md` para integraciones externas:
+    - Firma digital
+    - Documentación de APIs (`docs/api.md`)
+    - Pruebas automatizadas (`scripts/test_integration_*.py`)
+
+
+### 7. IA como Asistente Activo
+
+- [ ] Generar `changelog.md` automático desde commits
+- [ ] Detectar módulos huérfanos (`linked_to: []`)
+- [ ] Sugerir tags desde contenido de `dev_journal.md`
+
+
+### 9. Retrocompatibilidad Formal
+
+- [ ] Política en `README.md` global:
+    - Semver obligatorio
+    - Breaking change → nueva versión mayor
+- [ ] Script de migración (`scripts/migrate_modulo_v1_to_v2.py`)
+
+
+## 🔁 Revisión periódica sugerida
+
+Reevaluar esta propuesta cada 3 meses o cada 5 módulos nuevos.  
+Implementar gradualmente en función del ROI real para el operador.
+

@@ -1,0 +1,66 @@
+# 🌐 Sincronización Automática – ALMA_CORE & ALMA_RESIST
+
+---
+
+## Objetivo
+
+Implementar sincronización **totalmente automática y en tiempo real** entre dos equipos:
+- PC de escritorio (ALMA_CORE)
+- Notebook (ALMA_RESIST)
+
+El sistema debe permitir trabajar indistintamente en ambos, manteniendo los archivos siempre idénticos, **sin intervención manual** y sin depender exclusivamente de la nube.
+
+---
+
+## Solución elegida: Syncthing
+
+### Ventajas
+- Sincronización peer-to-peer en tiempo real (LAN, WiFi, Internet).
+- Multiplataforma, interfaz web, control de versiones.
+- No requiere servidores externos ni servicios en la nube.
+- Configuración simple y control total sobre qué y cuándo sincronizar.
+
+---
+
+## Pasos base de implementación
+
+1. **Instalar Syncthing** en ambas máquinas:
+    ```bash
+    sudo apt install syncthing
+    ```
+
+2. **Iniciar Syncthing**:
+    ```bash
+    syncthing
+    ```
+    (Acceder vía navegador a `http://localhost:8384`)
+
+3. **Agregar carpetas a sincronizar**  
+   Ejemplo: `~/ALMA_CORE/` y `~/ALMA_RESIST/`
+
+4. **Emparejar ambos dispositivos**  
+   (Agregar el Device ID de cada máquina en la otra para habilitar la sincronización)
+
+5. **Verificar estado en la interfaz web**  
+   - Ambos dispositivos deben aparecer como "conectados"
+   - El estado de la carpeta debe ser "Sincronizado"
+
+---
+
+## Extras
+
+- Se puede limitar el uso de ancho de banda, activar versiones históricas, y definir carpetas excluidas.
+- Es posible agregar un backup secundario en Google Drive, GitBook o disco externo como respaldo adicional.
+
+---
+
+## Observaciones
+
+- Syncthing detecta y replica cambios automáticamente, sin necesidad de intervención.
+- Se recomienda probar una restauración periódica para validar la integridad de la sincronización.
+- Guardar este protocolo como referencia para futuras instalaciones o recuperaciones.
+
+---
+
+**Este sistema deja tus datos duplicados y sincronizados, listos para cualquier emergencia.**
+

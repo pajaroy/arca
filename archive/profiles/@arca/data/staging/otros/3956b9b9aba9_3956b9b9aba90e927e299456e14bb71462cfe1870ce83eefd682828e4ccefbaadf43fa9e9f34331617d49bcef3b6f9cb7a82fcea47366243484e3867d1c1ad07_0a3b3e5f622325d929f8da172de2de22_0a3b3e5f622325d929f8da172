@@ -1,0 +1,17 @@
+# 📦 v0.0.0.2_estructura_documental – Sprint 2.1
+
+📅 Fecha: 2025-05-23  
+🔖 Versión: v0.0.0.2  
+🔏 Hash: `0f61c8c5f3ab0b08b1c8c189b2e9a6ef3db47d0d4b0f63b246ac9ef8079d3a35`  
+👤 Responsable: Santi / pájaro
+
+
+## 🎯 Objetivo del Sprint
+
+Esta versión consolida la estructura documental del sistema ALMA_RESIST, incorporando:
+
+- Plantillas base reutilizables
+- Testing manual de CLI y metadatos
+- Sistema de trazabilidad (TODO.md, .project.md)
+- Preparación total para integraciones con módulos IA
+

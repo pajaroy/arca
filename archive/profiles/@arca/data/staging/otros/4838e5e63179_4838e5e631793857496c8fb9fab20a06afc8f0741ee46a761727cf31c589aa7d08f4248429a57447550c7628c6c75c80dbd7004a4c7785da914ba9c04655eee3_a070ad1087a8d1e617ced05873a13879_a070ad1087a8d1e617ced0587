@@ -1,0 +1,24 @@
+---
+tipo: configuracion_json
+id: CONFIGURACION_JSON_2025-06-05_a0bc23
+version: '1.0'
+formato: json
+modulo: ALMA_RESIST
+titulo: Llm Model
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:c63ddf7f313ba5b0ae64f7d78051186daa7500eeb711d8f8ca46b2115738a283
+---
+{
+  "modelo": "Mistral-7B-Instruct.Q4_K_M",
+  "motor": "llama.cpp",
+  "ruta_modelo": "models/mistral.gguf",
+  "threads": 6
+}

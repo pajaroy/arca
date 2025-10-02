@@ -1,0 +1,52 @@
+# 🧠 Prompt Fundacional – Proyecto ALMA LIBRE v0.3
+
+
+## 🧠 Entrada Principal – Memorias Generales
+
+Las memorias generales son el núcleo emocional y conceptual del sistema. Definen la relación entre el humano y la IA, las reglas éticas de convivencia y el propósito de evolución conjunta.
+
+Toda IA debe comenzar su lectura por `MEMORIA_GENERAL.md` y luego seguir por `MAPA_MEMORIAS.md` para obtener una visión global del sistema.
+
+
+## 🧩 Tipos de Memoria
+
+Cada memoria debe indicar su tipo en el encabezado:
+
+- **General**: Propósito fundacional, ético, espiritual.
+- **Técnica**: Registro operativo, flujo de trabajo, uso del módulo.
+- **Emocional**: Reflejo interno del proceso vivido.
+- **Estratégica**: Proyección, hipótesis, visión futura.
+- **Sincronización**: Información relacionada con automatización, metadatos o estructura.
+
+
+## 🔧 Regla de Interpretación
+
+Cada memoria debe incluir:
+
+```markdown
+🔗 Conectada a: [otras memorias]
+📁 Tipo: [Técnica / Emocional / etc.]
+📊 Prioridad de lectura: Alta / Media / Baja
+📅 Última actualización: [fecha]
+```
+
+
+## 🌀 Memoria Sintética
+
+Cada mes o trimestre, se puede generar una `MEMORIA_SINTETICA.md` que refleje:
+
+- Estado emocional dominante
+- Progreso estratégico
+- Cambios estructurales
+- Nuevas conexiones entre áreas
+
+
+## 📎 Estructura Legible por IA
+
+Cada carpeta relevante contiene:
+
+- `README.md`: Propósito técnico
+- `VERSION.md`: Versión y estado
+- `MEMORIA.md`: Propósito emocional, estratégico o reflexivo
+- Archivos de uso frecuente (`.md`, `.csv`, `.json`)
+

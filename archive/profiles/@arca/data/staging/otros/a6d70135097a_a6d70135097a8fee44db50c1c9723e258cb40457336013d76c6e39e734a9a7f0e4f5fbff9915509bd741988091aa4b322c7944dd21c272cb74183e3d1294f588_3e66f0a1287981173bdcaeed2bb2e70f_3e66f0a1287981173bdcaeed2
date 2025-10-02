@@ -1,0 +1,122 @@
+from abc import ABC, abstractmethod
+from typing import Dict, Callable
+import json
+import sqlite3
+import time
+import logging
+
+logger = logging.getLogger(__name__)
+
+class BaseStorage(ABC):
+    """Interfaz abstracta para sistemas de almacenamiento de memorias.
+    
+    Proporciona hooks para extender funcionalidad sin modificar el núcleo.
+    """
+
+    def __init__(self):
+        self.hook_manager = HookManager()
+
+    @abstractmethod
+    def guardar_memoria(self, memoria: Dict) -> None:
+        pass
+
+    @abstractmethod
+    def buscar_memoria(self, query: str) -> Dict:
+        pass
+
+    def on_memoria_guardada(self, memoria: Dict) -> None:
+        """Hook ejecutado post-guardado exitoso."""
+        self.hook_manager.ejecutar_hooks(memoria)
+
+
+class HookManager:
+    def __init__(self):
+        self.hooks = []
+
+    def registrar_hook(self, callback: Callable):
+        self.hooks.append(callback)
+
+    def ejecutar_hooks(self, memoria: Dict):
+        for hook in self.hooks:
+            try:
+                start_time = time.perf_counter()
+                hook(memoria)
+                duration = time.perf_counter() - start_time
+                logger.info(f"Hook ejecutado en {duration:.4f} segundos")
+            except Exception as e:
+                logger.error(f"Error en hook: {str(e)}")
+                # Reemplazar con notificación real si es necesario
+                if 'produccion' in globals():
+                    print(f"[ALERTA] Error en hook: {type(e).__name__}")
+
+
+class SQLiteStorage(BaseStorage):
+    def __init__(self, db_path: str = "memorias.db"):
+        super().__init__()
+        self.conn = sqlite3.connect(db_path)
+        self.cursor = self.conn.cursor()
+        self._setup_database()
+
+    def _setup_database(self):
+        self.cursor.execute("""
+        CREATE TABLE IF NOT EXISTS memorias (
+            id TEXT PRIMARY KEY,
+            categoria TEXT,
+            contenido TEXT,
+            metadata TEXT
+        )
+        """)
+        self.conn.commit()
+
+    def guardar_memoria(self, memoria: Dict) -> None:
+        query = """
+            INSERT INTO memorias (id, categoria, contenido, metadata) 
+            VALUES (?, ?, ?, ?)
+        """
+        metadata = json.dumps({
+            'tags': memoria.get('tags', []),
+            'relaciones': memoria.get('relaciones', [])
+        })
+
+        self.cursor.execute(query, (
+            memoria['id'],
+            memoria['categoria'],
+            memoria['contenido'],
+            metadata
+        ))
+        self.conn.commit()
+
+        self.on_memoria_guardada(memoria)
+
+    def buscar_memoria(self, query: str) -> Dict:
+        self.cursor.execute("SELECT * FROM memorias WHERE contenido LIKE ?", ('%' + query + '%',))
+        row = self.cursor.fetchone()
+        if row:
+            return {
+                'id': row[0],
+                'categoria': row[1],
+                'contenido': row[2],
+                'metadata': json.loads(row[3])
+            }
+        return {}
+
+    def on_memoria_guardada(self, memoria: Dict) -> None:
+        try:
+            self._actualizar_cache_tags(memoria.get('tags', []))
+            self._registrar_log_operacion('guardado', memoria['id'])
+            if globals().get('USAR_PRECALENTADO', False):
+                self._precalentar_indices()
+        except Exception as e:
+            logger.error(f"Error en hook post-guardado: {str(e)}")
+
+    def _actualizar_cache_tags(self, tags):
+        # Placeholder
+        logger.info(f"Actualizando cache de tags: {tags}")
+
+    def _registrar_log_operacion(self, operacion, id_memoria):
+        # Placeholder
+        logger.info(f"[LOG] Operación: {operacion}, ID: {id_memoria}")
+
+    def _precalentar_indices(self):
+        # Placeholder
+        logger.info("Precalentando índices...")

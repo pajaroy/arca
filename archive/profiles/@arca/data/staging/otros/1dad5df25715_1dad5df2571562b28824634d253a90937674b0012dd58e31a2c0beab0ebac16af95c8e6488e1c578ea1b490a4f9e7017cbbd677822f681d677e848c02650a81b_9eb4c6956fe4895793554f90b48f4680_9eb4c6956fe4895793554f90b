@@ -1,0 +1,27 @@
+
+# 📘 Seguimiento Inicial – Proyecto ALMA_LOADER
+
+## 🧠 Proyecto: ALMA_LOADER Individual v2.1.1
+
+### 🎯 Propósito del Seguimiento
+Este documento tiene como objetivo registrar y organizar todo el progreso realizado en el desarrollo del sistema ALMA_LOADER, permitiendo retomar el trabajo en cualquier momento sin perder el hilo. Funciona como bitácora central de avances, decisiones, versiones y tareas clave.
+
+
+## 🔧 Últimos Elementos Producidos
+
+- ✅ Prompt `2.1.1` (con separaciones entre core y avanzado).
+- ✅ Roadmap optimizado con riesgos, dependencias y fases.
+- ✅ Presentación técnica oficial (`Presentacion_ALMA_LOADER_v2.1.1.md`).
+- ✅ Tableros Kanban por fase + plantilla base.
+- ✅ Sistema de archivos organizado para backups y seguimiento.
+
+
+## 🗃 Archivos de Referencia Clave
+
+- `prompt_master_2.1.1_simplificado.md` → Prompt actual
+- `Roadmap_ALMA_LOADER_v2.1.1_Optimizado.md` → Plan técnico
+- `Kanban_Fase_1_Core.md` → Tablero principal operativo
+- `Presentacion_ALMA_LOADER_v2.1.1.md` → Explicación técnica oficial
+
+
+*(Actualizar este documento después de cada semana o hito importante del roadmap.)*

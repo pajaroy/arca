@@ -1,0 +1,41 @@
+# Prompt Universal – Carga de Flujo de Aprendizaje Vivo
+
+id: PROMPT_FLUJO_APRENDIZAJE_2025-06-08_01
+tipo: prompt_cuestionario_cli
+modulo: flujo_de_trabajo
+titulo: "Carga automática de flujos de aprendizaje vivo"
+descripcion: |
+  Al finalizar cada sesión, completá el siguiente cuestionario para registrar el aprendizaje metodológico.
+  La IA debe responder y generar el comando CLI listo para el script de carga en el YAML objetivo.
+  
+  Esto institucionaliza la mejora continua, auditable y replicable en cualquier módulo o agente del ecosistema ALMA_RESIST.
+
+campos_pregunta:
+  - "¿Qué aprendiste hoy del sistema, la IA o los flujos propuestos?"
+  - "¿Qué aprendió el sistema de tu forma de trabajar, tus preferencias o bloqueos?"
+  - "¿Qué ajuste concreto se implementó en la metodología?"
+  - "¿Qué consejo le darías a un Santi/agente del futuro para mejorar el flujo?"
+  - "¿Qué NO hay que volver a hacer?"
+  - "Observaciones o reflexiones extra."
+
+instrucciones_ia: |
+  - Responde a cada pregunta de forma breve y auditable.
+  - Generá el comando CLI para cargar la entrada usando el script:
+      add_aprendizaje_flujo.py
+  - La ruta por defecto es /home/bird/alma_core/control_central/flujo_de_trabajo/flujo_aprendizajes.yaml,
+    pero debe poder ser modificada si otro módulo o agente lo requiere.
+  - Imprimí solo el comando y la estructura de campos, nada más.
+
+ejemplo_comando: |
+  python3 /home/bird/alma_core/control_central/core/notebooks/flujo_de_trabajo/add_aprendizaje_flujo.py \
+    --que_aprendi "..." \
+    --que_aprendio_sistema "..." \
+    --cambio_metodologico "..." \
+    --consejo_futuro "..." \
+    --error_evitar "..." \
+    --observaciones "..." \
+    --flujo_aprendizajes "/home/bird/alma_core/control_central/flujo_de_trabajo/flujo_aprendizajes.yaml"
+
+notas: |
+  Usá siempre esta plantilla para institucionalizar el cierre reflexivo y auditable de cada sesión o sprint.
+  Este flujo es compatible y escalable para cualquier agente, área o módulo, solo cambiando la ruta de destino del YAML.

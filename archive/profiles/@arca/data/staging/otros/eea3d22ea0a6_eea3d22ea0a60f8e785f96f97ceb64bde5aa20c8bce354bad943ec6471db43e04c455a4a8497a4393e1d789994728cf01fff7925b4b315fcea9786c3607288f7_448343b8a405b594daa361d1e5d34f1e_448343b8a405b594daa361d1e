@@ -1,0 +1,370 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_dac4b0
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Fix Metadata V1
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:79e405d106f44a2921bdee6c593e156f62ebacf6b3030261e1ecd77d4bb77aa8
+---
+#!/usr/bin/env python3
+# fix_metadata.py - Script universal de correcci√≥n de metadatos para ALMA_RESIST
+
+"""
+üìù Script: fix_metadata.py
+üîñ ID: SCRIPT_2025-06-05_01
+üõ†Ô∏è Funci√≥n: Validar, corregir y estandarizar metadatos en archivos cr√≠ticos del ecosistema ALMA_RESIST.
+üìö Referencia: [IDEA_2025-06-06_01]
+"""
+
+import os
+import sys
+import re
+import hashlib
+import json
+import argparse
+import datetime
+import shutil
+from pathlib import Path
+from typing import Dict, List, Tuple, Optional
+
+# =====================================================================
+# CONFIGURACI√ìN GLOBAL
+# =====================================================================
+SUPPORTED_EXTENSIONS = ['.md', '.yaml', '.yml', '.json', '.py', '.sh']
+METADATA_FIELDS = [
+    'version', 'id', 'tipo', 'formato', 'modulo', 'titulo', 'autor',
+    'fecha_creacion', 'fecha_actualizacion', 'status', 'version_sistema',
+    'origen', 'tags', 'hash_integridad', 'linked_to', 'descripcion'
+]
+MODULE_MARKER = "ALMA_RESIST"  # Nombre esperado del directorio ra√≠z del m√≥dulo
+SCRIPT_VERSION = "1.0"
+ALMA_VERSION = "Centralesis v2.3"  # Versi√≥n por defecto del sistema
+
+# =====================================================================
+# FUNCIONES PRINCIPALES
+# =====================================================================
+
+def find_module_root(start_path: Path) -> Path:
+    """
+    Busca recursivamente hacia arriba el directorio ra√≠z del m√≥dulo ALMA_RESIST
+    
+    Args:
+        start_path: Ruta inicial (ubicaci√≥n del script)
+    
+    Returns:
+        Path del directorio ra√≠z del m√≥dulo
+    
+    Raises:
+        FileNotFoundError: Si no se encuentra el directorio ra√≠z
+    """
+    current_path = start_path.resolve()
+    while current_path != current_path.parent:
+        if current_path.name == MODULE_MARKER:
+            return current_path
+        current_path = current_path.parent
+    
+    raise FileNotFoundError("No se encontr√≥ el directorio ra√≠z del m√≥dulo ALMA_RESIST")
+
+def extract_metadata(content: str) -> Tuple[Optional[Dict], str, bool]:
+    """
+    Extrae el bloque de metadatos YAML del contenido de un archivo
+    
+    Args:
+        content: Contenido completo del archivo
+    
+    Returns:
+        tuple: (metadatos, contenido restante, existe_metadata)
+    """
+    metadata_pattern = r'^---\s*\n(.*?)\n---\s*\n(.*)$'
+    match = re.match(metadata_pattern, content, re.DOTALL)
+    
+    if match:
+        try:
+            metadata_str = match.group(1)
+            rest_content = match.group(2)
+            # Convertir el string YAML a diccionario
+            metadata = yaml.safe_load(metadata_str) if metadata_str else {}
+            return (metadata or {}, rest_content, True)
+        except Exception:
+            pass
+    
+    return ({}, content, False)
+
+def calculate_content_hash(metadata: Dict, rest_content: str) -> str:
+    """
+    Calcula el hash SHA256 del contenido excluyendo el campo hash_integridad
+    
+    Args:
+        metadata: Diccionario de metadatos
+        rest_content: Contenido del archivo despu√©s del bloque de metadatos
+    
+    Returns:
+        str: Hash SHA256 en formato 'sha256:<hash>'
+    """
+    # Clonar metadatos excluyendo el campo de hash
+    metadata_without_hash = metadata.copy()
+    metadata_without_hash.pop('hash_integridad', None)
+    
+    # Reconstruir contenido sin hash
+    reconstructed_content = (
+        "---\n" +
+        yaml.dump(metadata_without_hash, sort_keys=False) +
+        "---\n" +
+        rest_content
+    )
+    
+    # Calcular hash
+    sha256 = hashlib.sha256()
+    sha256.update(reconstructed_content.encode('utf-8'))
+    return f"sha256:{sha256.hexdigest()}"
+
+def generate_id(tipo: str, date_str: str, counter: int) -> str:
+    """
+    Genera un ID √∫nico seg√∫n el est√°ndar ALMA_RESIST
+    
+    Args:
+        tipo: Tipo de registro (documento, script, etc.)
+        date_str: Fecha en formato YYYY-MM-DD
+        counter: N√∫mero secuencial
+    
+    Returns:
+        str: ID en formato <TIPO>_<FECHA>_<CONTADOR>
+    """
+    return f"{tipo.upper()}_{date_str}_{counter:02d}"
+
+def determine_file_type(file_path: Path) -> str:
+    """
+    Determina el tipo de archivo basado en su extensi√≥n y contenido
+    
+    Args:
+        file_path: Ruta al archivo
+    
+    Returns:
+        str: Tipo de documento (documento, script, configuracion, etc.)
+    """
+    ext = file_path.suffix.lower()
+    content = file_path.read_text(encoding='utf-8')[:500].lower()
+    
+    if ext == '.md':
+        if 'changelog' in content:
+            return 'changelog'
+        if 'bit√°cora' in content or 'log' in content:
+            return 'bitacora'
+        return 'documento'
+    elif ext in ['.py', '.sh']:
+        return 'script'
+    elif ext in ['.yaml', '.yml', '.json']:
+        return 'configuracion'
+    return 'documento'
+
+def normalize_metadata(metadata: Dict, file_path: Path, module_root: Path, counter: int) -> Tuple[Dict, Dict]:
+    """
+    Normaliza los metadatos seg√∫n el est√°ndar ALMA_RESIST
+    
+    Args:
+        metadata: Metadatos existentes
+        file_path: Ruta al archivo
+        module_root: Directorio ra√≠z del m√≥dulo
+        counter: Contador para generaci√≥n de IDs
+    
+    Returns:
+        tuple: (metadatos normalizados, cambios realizados)
+    """
+    changes = {}
+    today = datetime.date.today().isoformat()
+    rel_path = file_path.relative_to(module_root.parent if module_root.name == MODULE_MARKER else module_root)
+    module_name = rel_path.parts[0] if rel_path.parts else "desconocido"
+    
+    # Determinar tipo de archivo
+    current_type = metadata.get('tipo', '').lower()
+    if not current_type or current_type not in ['fundacional', 'decision', 'bitacora', 'changelog', 'script', 'configuracion']:
+        new_type = determine_file_type(file_path)
+        if current_type != new_type:
+            changes['tipo'] = {'old': current_type, 'new': new_type}
+            metadata['tipo'] = new_type
+    
+    # Generar/actualizar ID si es necesario
+    if not metadata.get('id') or not re.match(r'^[A-Z]+_\d{4}-\d{2}-\d{2}_\d{2}$', metadata['id']):
+        new_id = generate_id(metadata['tipo'], today, counter)
+        changes['id'] = {'old': metadata.get('id'), 'new': new_id}
+        metadata['id'] = new_id
+    
+    # Campos obligatorios con valores por defecto
+    defaults = {
+        'version': '1.0',
+        'formato': file_path.suffix[1:],
+        'modulo': module_name,
+        'titulo': file_path.stem.replace('_', ' ').title(),
+        'autor': os.getlogin(),
+        'fecha_creacion': today,
+        'fecha_actualizacion': today,
+        'status': 'activo',
+        'version_sistema': ALMA_VERSION,
+        'origen': 'automatico',
+        'tags': [],
+        'linked_to': [],
+        'descripcion': 'Documento procesado autom√°ticamente'
+    }
+    
+    for field, default in defaults.items():
+        current_val = metadata.get(field)
+        if not current_val:
+            changes[field] = {'old': current_val, 'new': default}
+            metadata[field] = default
+    
+    # Actualizar fecha de actualizaci√≥n siempre
+    changes.setdefault('fecha_actualizacion', {'old': metadata.get('fecha_actualizacion'), 'new': today})
+    metadata['fecha_actualizacion'] = today
+    
+    return metadata, changes
+
+def process_file(file_path: Path, module_root: Path, dry_run: bool, log_file: Path, counter: int) -> Dict:
+    """
+    Procesa un archivo individual, normalizando sus metadatos
+    
+    Args:
+        file_path: Ruta al archivo
+        module_root: Directorio ra√≠z del m√≥dulo
+        dry_run: Modo de simulaci√≥n
+        log_file: Ruta para registro de cambios
+        counter: Contador para generaci√≥n de IDs
+    
+    Returns:
+        dict: Resultado de la operaci√≥n
+    """
+    result = {
+        'file': str(file_path),
+        'timestamp': datetime.datetime.now().isoformat(),
+        'changes': {},
+        'backup': None,
+        'error': None
+    }
+    
+    try:
+        content = file_path.read_text(encoding='utf-8')
+        metadata, rest_content, has_metadata = extract_metadata(content)
+        
+        # Normalizar metadatos
+        new_metadata, changes = normalize_metadata(metadata, file_path, module_root, counter)
+        result['changes'] = changes
+        
+        # Calcular hash de integridad
+        new_metadata['hash_integridad'] = calculate_content_hash(new_metadata, rest_content)
+        
+        # Construir nuevo contenido
+        new_metadata_block = yaml.dump(new_metadata, sort_keys=False, allow_unicode=True)
+        new_content = f"---\n{new_metadata_block}---\n{rest_content}"
+        
+        # Verificar si hay cambios reales
+        if new_content == content and has_metadata:
+            result['action'] = 'no_change'
+            return result
+        
+        # Crear backup si no estamos en dry-run
+        backup_path = None
+        if not dry_run:
+            backup_time = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+            backup_path = file_path.with_name(f"{file_path.stem}_{backup_time}.bak")
+            shutil.copy2(file_path, backup_path)
+            result['backup'] = str(backup_path)
+        
+        # Aplicar cambios si no es dry-run
+        if not dry_run:
+            file_path.write_text(new_content, encoding='utf-8')
+            result['action'] = 'updated' if has_metadata else 'created'
+        else:
+            result['action'] = 'simulated_update'
+        
+        # Registrar cambios
+        if log_file:
+            with open(log_file, 'a', encoding='utf-8') as log:
+                log.write(json.dumps(result, ensure_ascii=False) + '\n')
+        
+    except Exception as e:
+        result['error'] = str(e)
+        result['action'] = 'error'
+        if log_file:
+            with open(log_file, 'a', encoding='utf-8') as log:
+                log.write(json.dumps(result, ensure_ascii=False) + '\n')
+    
+    return result
+
+def main():
+    """Funci√≥n principal del script"""
+    parser = argparse.ArgumentParser(description='Herramienta de normalizaci√≥n de metadatos ALMA_RESIST')
+    parser.add_argument('--dry-run', action='store_true', help='Simular cambios sin modificar archivos')
+    parser.add_argument('--log-file', default='fix_metadata.log', help='Ruta del archivo de registro')
+    args = parser.parse_args()
+    
+    # Configurar entorno
+    script_dir = Path(__file__).parent
+    log_path = script_dir / args.log_file
+    counter = 1
+    
+    try:
+        # Inicializar log
+        if log_path.exists():
+            log_path.rename(log_path.with_name(f"{log_path.stem}_backup{log_path.suffix}"))
+        
+        # Encontrar ra√≠z del m√≥dulo
+        module_root = find_module_root(script_dir)
+        print(f"üìÇ M√≥dulo identificado: {module_root}")
+        
+        # Recorrer archivos soportados
+        processed = 0
+        for root, _, files in os.walk(module_root):
+            for file in files:
+                file_path = Path(root) / file
+                if file_path.suffix.lower() in SUPPORTED_EXTENSIONS:
+                    result = process_file(
+                        file_path, 
+                        module_root,
+                        args.dry_run,
+                        log_path,
+                        counter
+                    )
+                    counter += 1
+                    processed += 1
+                    
+                    status = ""
+                    if result['action'] == 'error':
+                        status = f"‚ùå Error: {result['error']}"
+                    elif result['changes']:
+                        status = f"‚ú® Modificado ({len(result['changes'])} campos)"
+                    else:
+                        status = "‚è≠Ô∏è Sin cambios"
+                    
+                    print(f"{status} - {file_path}")
+        
+        # Resumen de ejecuci√≥n
+        mode = "SIMULACI√ìN" if args.dry_run else "EJECUCI√ìN"
+        print(f"\n‚úÖ {mode} COMPLETADA")
+        print(f"‚Ä¢ Archivos procesados: {processed}")
+        print(f"‚Ä¢ Registro de cambios: {log_path}")
+        
+    except Exception as e:
+        print(f"‚õî Error cr√≠tico: {str(e)}")
+        sys.exit(1)
+
+# =====================================================================
+# INICIALIZACI√ìN
+# =====================================================================
+if __name__ == "__main__":
+    # Comprobar dependencias
+    try:
+        import yaml
+    except ImportError:
+        print("‚úã Error: Se requiere PyYAML. Instale con: pip install PyYAML")
+        sys.exit(1)
+    
+    main()

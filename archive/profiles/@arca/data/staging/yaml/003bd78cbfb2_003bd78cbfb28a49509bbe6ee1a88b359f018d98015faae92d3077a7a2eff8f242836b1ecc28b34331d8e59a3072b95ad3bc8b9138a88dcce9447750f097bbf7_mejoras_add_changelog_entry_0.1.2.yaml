@@ -1,0 +1,42 @@
+id: SUGERENCIAS_SCRIPT_CHANGELOG_2025-06-07
+script: add_changelog_entry_v0.1.2.py
+autor: Kael (Auditor CLI)
+estado_actual: listo_para_integracion
+objetivo_mejoras: >
+  Optimizar el script para máxima reutilización y versatilidad como módulo CLI y motor de changelog.
+
+sugerencias:
+  - id: SUG_101
+    titulo: "Ruta del changelog como argumento"
+    descripcion: >
+      Reemplazar ruta fija `CHANGELOG_FILE = "changelog.yaml"` por argumento CLI `--changelog`.
+      Dejar default si se omite, pero permitir configurarlo.
+    prioridad: alta
+
+  - id: SUG_102
+    titulo: "Separar lógica en módulo reutilizable"
+    descripcion: >
+      Extraer funciones principales (cargar, validar, agregar entrada) a un archivo `changelog_lib.py`
+      que pueda ser importado por otros scripts o CLI principal.
+    prioridad: alta
+
+  - id: SUG_103
+    titulo: "Validar formato de versión semántica"
+    descripcion: >
+      Usar regex para validar formato tipo X.Y.Z y evitar versiones inválidas por error de tipeo.
+    prioridad: media
+
+  - id: SUG_104
+    titulo: "Agregar modo dry-run"
+    descripcion: >
+      Permitir ver qué se va a escribir sin modificar el archivo, útil para pruebas e integración externa.
+    prioridad: media
+
+  - id: SUG_105
+    titulo: "Tests unitarios mínimos"
+    descripcion: >
+      Incluir tests con datos falsos para verificar inserción, unicidad y estructura post-proceso.
+    prioridad: baja
+
+apto_para_integracion_directa: sí
+condicion: Recomendado integrarlo ya y modularizar luego si es necesario

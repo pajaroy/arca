@@ -1,0 +1,56 @@
+# 🧱 Metodología de Estructura Modular y Carpetas (v2)
+
+📅 Versión: 2.0  
+📦 Archivo: metodologia_estructura_modular_v2.md  
+🎯 Objetivo: Establecer una estructura profesional, legible para humanos e indexable por IA, aplicable a cualquier módulo, dominio o unidad dentro del sistema ALMA_RESIST.
+
+
+## 📦 Estructura Base Recomendada
+
+```
+[módulo]/
+├── README.md               # Propósito, uso, links relevantes
+├── dev_journal.md          # Registro informal de ideas, decisiones, dudas
+├── changelog.md            # Registro técnico estructurado por versión
+├── estructura/             # Diagramas, mapas conceptuales, visuales (opcional)
+├── docs/
+│   ├── metodologia_local.md   # Descripción técnica interna del módulo
+│   └── notas_tecnicas.md     # Apuntes, decisiones parciales, referencias
+├── scripts/                # Automatizaciones propias del módulo
+├── data/                   # Datos de entrada, salida, pruebas
+```
+
+
+## 📘 Convenciones de Nomenclatura
+
+Ejemplos válidos:
+
+- `gen_dataset.py`, `load_config.sh`, `test_memory_integrity.py`
+- `scripts/` con prefijos claros según función:
+  - `gen_` → generación
+  - `load_` → carga/importación
+  - `test_` → pruebas
+- Archivos Markdown:
+  - Título en `#`, subsecciones con `##` o `###`
+  - Listas estructuradas y enlaces cruzados
+
+module: "nombre_modulo"
+type: "core" # core | external | technical | organizational
+version: "0.1"
+status: "in_progress" # stable | deprecated | legacy
+tags: ["cultivo", "IA", "documentación"]
+linked_to: ["ALMA_CORE", "memoria", "loader"]
+
+## 🧰 Herramientas Sugeridas
+
+- `mkdocs.yml` (opcional) para generar documentación estática
+- Script `validate_structure.py` para verificar estructura mínima
+- Hooks Git para validar metadatos antes del commit
+
+
+## 📜 Notas Finales
+
+- La `dev_journal.md` es informal, puede contener notas personales, dudas, intuiciones.
+- El `changelog.md` es formal: debe registrar cambios verificables por versión.
+- La estructura puede adaptarse mientras se mantengan estos principios semánticos y de trazabilidad.
+

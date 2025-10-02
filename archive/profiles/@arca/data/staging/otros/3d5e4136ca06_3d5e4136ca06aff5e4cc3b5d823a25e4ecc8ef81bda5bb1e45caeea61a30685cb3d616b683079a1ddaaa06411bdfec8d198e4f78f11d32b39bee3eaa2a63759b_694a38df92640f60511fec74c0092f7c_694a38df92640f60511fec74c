@@ -1,0 +1,8 @@
+# Prompt para desarrollo del módulo `sync_bitacora.py`
+
+Quiero que me ayudes a crear un script en Python llamado `sync_bitacora.py`, ubicado en la ruta `MODULOS/sync_bitacora/`, que cumpla la siguiente función dentro del sistema ALMA LIBRE:
+
+## Función:
+Sincronizar archivos Markdown (`.md`) desde `CUADERNOS/*/docs/` hacia `BITACORA_CENTRAL/RESUMENES/SXX/`, validando por hash SHA-256 y metadatos internos. Evitar duplicados y registrar cambios en un log.
+
+[...] (ver historial para texto completo)

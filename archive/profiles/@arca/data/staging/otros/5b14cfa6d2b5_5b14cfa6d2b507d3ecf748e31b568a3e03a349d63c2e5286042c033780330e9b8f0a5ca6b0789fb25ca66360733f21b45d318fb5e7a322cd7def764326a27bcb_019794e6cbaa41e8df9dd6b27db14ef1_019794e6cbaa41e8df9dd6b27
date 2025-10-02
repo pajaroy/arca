@@ -1,0 +1,6 @@
+{
+  "version": "v0.0.0.1",
+  "fecha_congelado": "2025-05-20",
+  "estado": "Post-auditor\u00eda inicial",
+  "comentarios": "Versi\u00f3n estable inicial con estructura base, logging parcial y documentaci\u00f3n incompleta. L\u00f3gica CLI y servidor IA no implementados a\u00fan."
+}

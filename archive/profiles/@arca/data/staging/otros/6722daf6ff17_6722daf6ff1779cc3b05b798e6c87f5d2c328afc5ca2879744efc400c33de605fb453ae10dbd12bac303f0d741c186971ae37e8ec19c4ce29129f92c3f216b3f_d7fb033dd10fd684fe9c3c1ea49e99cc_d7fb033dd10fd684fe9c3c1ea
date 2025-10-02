@@ -1,0 +1,1592 @@
+## 6. ✅ Próximos pasos sugeridos
+
+- [ ] Redactar **acta privada de socios** con roles, capital y participación.
+- [ ] Armar **modelo Excel de simulación de ingresos y fondos**.
+- [ ] Establecer reglas de retiro y reinversión del fondo del Club.
+- [ ] Crear **registro de ventas y producción** por lote y productor.
+
+
+
+## 📦 1. Inventario de Madres
+
+Crear una hoja o base de datos con los siguientes campos:
+
+| Variedad   | Genética base | Origen   | Fecha selección | Características     | Rendimiento | Estado |
+|------------|----------------|----------|------------------|----------------------|-------------|--------|
+| G13 Haze   | Sativa         | Canavir  | 01/04/2025       | Lenta, aromática     | Alto        | Activa |
+
+
+## 🧱 3. Infraestructura Física
+
+- Espacio requerido: 1m² cada 3–4 madres
+- Iluminación: LED baja potencia o T5
+- Ventilación constante
+- Macetas con etiquetas permanentes
+- Control de humedad básico (50–70%)
+
+
+# ✅ Ruta Práctica de Implementación
+
+## 🔹 Etapa 1 – Implementación física inmediata
+- [ ] Separar espacio exclusivo para madres
+- [ ] Preparar condiciones (luz, temperatura, humedad)
+- [ ] Etiquetar madres seleccionadas con código y nombre
+- [ ] Tomar foto y ficha básica
+
+## 🔹 Etapa 2 – Registro inicial manual
+- [ ] Crear hoja de papel o libreta con registro básico
+- [ ] Anotar variedad, fecha de esqueje y observaciones
+
+## 🔹 Etapa 3 – Digitalización y trazabilidad
+- [ ] Volcar datos a Excel/Notion tras 2 ciclos
+- [ ] Agregar campo de estado (activa, en reposo, a reemplazar)
+- [ ] Visualizar en formato de tablero de seguimiento (tipo semáforo)
+
+## Archivo: resumen_consolidado_reuniones_13CC_mayo_2025.md
+Contenido:
+# 🗓 Resumen Consolidado – Reuniones 13CC Mayo 2025
+
+**Autor:** Santiago Calvo (DEG)  
+**Formato:** Documento combinado para uso institucional y presentación oficial
+
+
+## 🗓 Reunión S21 – 22 de Mayo de 2025
+Reunión S21 – Club 13CC
+
+Fecha estimada: 2025-05-22
+
+Responsable de la redacción: Santiago Calvo (DEG)
+
+Formato: Documento de trabajo previo a validación oficial
+
+# 🗓 Reunión S21 – Club 13CC
+
+**Fecha estimada:** 2025-05-22
+
+**Responsable de la redacción:** Santiago Calvo (DEG)
+
+**Formato:** Documento de trabajo previo a validación oficial
+
+
+2. 🛹 Organización Mataderos Skatepark y vinculación institucional
+
+Objetivo:
+
+Separar Mataderos Skatepark como estructura operativa paralela, pero conectada con 13CC.
+
+Tareas:
+
+Armar la **estructura metodológica y operativa** de Mataderos Skatepark desde 13CC.
+
+Crear **asociación civil propia** para el Skatepark.
+
+Definir mecanismo legal para **relacionar 13CC y Mataderos** sin superposición institucional.
+
+Consolidar equipo operativo con roles iniciales:
+
+Santiago Calvo – Gestión estratégica general del proyecto y vinculación institucional
+
+Ariela Abacá – Co-dirección operativa del Skatepark y coordinación ejecutiva
+
+María – Facilitadora organizacional / relaciones humanas internas
+
+Encargada de cuidar el clima organizacional, supervisar el cumplimiento de compromisos y actuar como nexo entre los distintos actores para prevenir o mediar conflictos.
+
+Matías “Pelado” y Axel – Roles operativos dentro del Skatepark
+
+Encargados de ejecutar tareas funcionales, coordinar espacios físicos, colaborar en eventos y logística.
+
+Caco – Relaciones sociales, difusión y comunicación pública
+
+Contacto con medios, actores comunitarios y canales institucionales externos.
+
+Mateo – Coordinación de la escuelita de skate
+
+Este rol debe estar formalmente separado del vínculo con 13CC para respetar los límites institucionales con actividades para menores.
+
+Aclaración crítica:
+
+**13CC no puede estar vinculado institucionalmente a menores** por normativa ONG.
+
+Se debe definir claramente la **separación entre la ONG y las actividades recreativas para menores**.
+
+
+4. ⚖ Relaciones institucionales clave: contador y abogado
+
+Objetivo:
+
+Consolidar las asesorías permanentes del Club.
+
+Tareas:
+
+Establecer **relación con un contador**:
+
+Consultar sobre “donaciones ficticias” o capital inicial integrado
+
+Establecer **relación formal con un abogado**
+
+Crear carpetas digitales separadas:
+
+`/asesorias/contable/`
+
+`/asesorias/legal/`
+
+Documentar todos los intercambios y resúmenes para futuras consultas
+
+
+**Última edición:** 2025-05-21
+
+**Redactado para presentación en Reunión S21**
+
+
+
+
+## 📌 Información del Cargo
+- **Cargo:** Coordinador de Gestión Contable y Socios  
+- **Persona asignada:** Federico  
+- **Reporta a:** Santiago (DG), Gory (gestión operativa), Contador externo  
+- **Restricción:** No tiene acceso a manejo de fondos directo
+
+
+## 📋 Herramientas Necesarias
+- Acceso a Drive compartido (solo lectura de caja).
+- Planilla mensual de control.
+- Agenda compartida.
+- Archivo actualizado de socios (Notion o Excel).
+- Plantillas de actas de reuniones.
+
+
+## 🧭 Valor Estratégico del Rol
+Este rol permite separar la operación financiera del manejo físico de fondos, profesionalizando la gestión y garantizando orden y trazabilidad. También mejora la experiencia del socio, integrando medicina, administración y vínculo legal.
+
+
+
+
+## 1. 📤 Avales, proyectos externos y presupuesto de donaciones
+
+### Objetivo:
+Definir política interna de avales y contribuciones estratégicas del Club.
+
+### Tareas:
+- Establecer **criterios de aval interno**: a quiénes se avala, en qué cantidad, y por qué.
+- Armar **presupuesto mensual de donaciones**, con dos rubros separados:
+  - **Avales internos**
+  - **Proyectos externos**
+- Definir la postura ante la propuesta del **Flaco Vázquez** (artista local vinculado a rap y cultura):
+  - Organizar reunión inicial
+  - Evaluar potencial de sponsor y eventos culturales
+
+
+notas: charlado con gory , quque los corredores qe tengan reprocan podran reisir un sponsor mensual de 10g , con proyeccion a subir esto si generan movimiento en las redes 
+
+
+
+## 3. 🔁 Reinserción de Nikito
+
+### Contexto:
+Nikito es parte histórica del club. Se alejó y ahora está volviendo con otra actitud y propuesta.
+
+### Objetivo:
+- Integrarlo con claridad estructural, sin repetir conflictos anteriores.
+- Esperar su reunión con "el Corto" (Ariel Abacá).
+- Asignarle rol tipo **“Comodin”**: operativo, estratégico, flexible.
+- Proteger su espacio sin sobrecargar ni exponer.
+
+
+## 5. ✅ Tareas previas a validar en reunión S21
+
+- [ ] Definir monto mensual para avales y proyectos
+- [ ] Reunión con Flaco Vázquez programada o esbozada
+- [ ] Armar borrador de estructura legal para Mataderos Skatepark
+- [ ] Esquema inicial de roles en el Park
+- [ ] Plan de reinserción Nikito con límites y funciones claras
+- [ ] Primer contacto con contador y abogado agendado
+- [ ] Crear estructura digital de asesorías (`/asesorias/`)
+
+## Archivo: colaboracion_flaco_vazquez.md
+Contenido:
+## 🔍 Evaluación de colaboración con Flaco Vázquez (artista under de rap urbano)
+
+### 1. 🎤 Perfil general del agente externo
+
+- **Flaco Vázquez** es un artista de la escena **rap under argentina**. Tiene llegada a círculos culturales alternativos, probablemente con buena convocatoria barrial.
+    
+- Su valor principal: **capital simbólico + red comunitaria** (más que económico directo).
+    
+- Lo que no sabemos aún: ¿maneja sponsors? ¿organiza eventos propios? ¿cómo se financia?
+    
+
+
+### 🔹 Etapa 2 – Evaluación institucional (semana siguiente)
+
+**En base a la charla**, se define si:
+
+- Es viable avanzar con algún tipo de colaboración (evento conjunto, sponsor compartido, etc.).
+    
+- O si se lo mantiene en la red de contactos sin compromisos formales por ahora.
+    
+
+## Archivo: expectativas_flaco_vazquez_13CC.md
+Contenido:
+# 🎤 Colaboración con Flaco Vázquez – Expectativas del Club 13CC
+
+**Fecha estimada de presentación:** 2025-05-31  
+**Documento base para discusión interna – Reunión S22**  
+**Redactor inicial:** Santiago Calvo  
+
+
+## 🎯 ¿Qué espera 13CC de esta colaboración?
+
+### 1. **Capital simbólico**
+- Asociar el nombre de 13CC a la cultura urbana barrial y autogestiva
+- Ganar presencia en escenas culturales legítimas y con llegada real
+
+### 2. **Difusión orgánica**
+- Mención en redes sociales, flyers, eventos
+- Visibilidad para 13CC sin necesidad de inversión publicitaria directa
+
+### 3. **Coproducción de eventos**
+- Posibilidad de organizar una fecha en conjunto (en el galpón o espacio afín)
+- Compartir recursos logísticos y técnicos
+- Ensayo de un modelo de trabajo cultural replicable
+
+### 4. **Testeo metodológico**
+- Usar la colaboración como prueba piloto para profesionalizar vínculos con artistas
+- Definir cómo negociar, qué condiciones establecer, qué resultados esperar
+- Medir retorno institucional, operativo y simbólico
+
+
+## ✅ Próximos pasos propuestos
+
+1. Realizar reunión informal con Flaco (Corto o Santi)
+2. Completar ficha de evaluación cultural
+3. Presentar síntesis al grupo
+4. Tomar decisión conjunta sobre tipo de vínculo (si lo hubiera)
+
+## Archivo: prereunion_S22_13CC.md
+Contenido:
+# 🗓 Reunión S22 – Club 13CC
+**Fecha estimada:** 2025-05-31  
+**Responsables:** Santiago Calvo (DEG) + Gory (Tesorería)  
+**Formato:** Documento de trabajo previo a validación oficial
+
+
+### Subrubros definidos:
+
+- **Avales internos** → Solo en casos de necesidad urgente o aporte estratégico para miembros activos.
+    
+- **Proyectos externos** → Congelados salvo propuesta de alto impacto validada y con recursos externos garantizados (sponsors, canje, etc.).
+    
+
+
+## 🔹 2. ⚡ Resolución pendiente – Aumento de amperaje
+
+- El Club espera para esta semana una **resolución oficial por parte de EDESUR o proveedor correspondiente**.
+- Este punto es **condición clave para reactivar el plan de reinserción de Nikito** y para el uso pleno del galpón.
+- Se establece que **no se avanzará en nuevas tareas estructurales** sin esa habilitación.
+
+
+## 🔹 4. 📋 Metodología de trabajo – Implementación de resúmenes diarios y semanales
+
+- Se implementará en 13CC la misma metodología que en Cannabird:
+  - **Resumen diario** por unidad o sector (informal)
+  - **Resumen semanal consolidado** (para revisión grupal los viernes)
+- Objetivo: profesionalizar el seguimiento de tareas, avances y conflictos.
+- Medio: Markdown interno, centralizado por Santi y replicado en formato físico o digital según necesidad.
+
+## Archivo: colaboracion_flaco_vazquez_unificado.md
+Contenido:
+# 🎤 Colaboración con Flaco Vázquez – Documento Consolidado para Reunión S22
+
+**Fecha estimada de presentación:** 2025-05-31  
+**Documento base para discusión interna – Club 13CC**  
+**Redactor inicial:** Santiago Calvo  
+
+
+### ✅ Protocolo propuesto para vinculación con artistas/organizaciones externas
+
+#### 🔹 Etapa 1 – Diagnóstico básico (hacer esta semana)
+
+**Objetivo:** Tener una primera reunión corta e informal. Preguntas base:
+
+1. ¿Con qué frecuencia hace eventos?  
+2. ¿Tiene vínculos con marcas o sponsors? ¿Quién le financia los proyectos? ¿Cómo se maneja con los sponsors?  
+3. ¿Busca apoyo económico, organizativo o simbólico de 13CC?  
+4. ¿Tiene antecedentes de trabajo con otras organizaciones o clubes?
+
+**Encargado:** Santiago o Caco (como nexo con lo cultural)
+
+#### 🔹 Etapa 2 – Evaluación institucional (semana siguiente)
+
+En base a la charla, se define si:
+
+- Es viable avanzar con algún tipo de colaboración (evento conjunto, sponsor compartido, etc.)
+- O si se lo mantiene en la red de contactos sin compromisos formales por ahora.
+
+
+## 🔍 Parte 2 – Expectativas institucionales del Club 13CC
+
+### 🎯 ¿Qué espera 13CC de esta colaboración?
+
+#### 1. **Capital simbólico**
+- Asociar el nombre de 13CC a la cultura urbana barrial y autogestiva
+- Ganar presencia en escenas culturales legítimas y con llegada real
+
+#### 2. **Difusión orgánica**
+- Mención en redes sociales, flyers, eventos
+- Visibilidad para 13CC sin necesidad de inversión publicitaria directa
+
+#### 3. **Coproducción de eventos**
+- Posibilidad de organizar una fecha en conjunto (en el galpón o espacio afín)
+- Compartir recursos logísticos y técnicos
+- Ensayo de un modelo de trabajo cultural replicable
+
+#### 4. **Testeo metodológico**
+- Usar la colaboración como prueba piloto para profesionalizar vínculos con artistas
+- Definir cómo negociar, qué condiciones establecer, qué resultados esperar
+- Medir retorno institucional, operativo y simbólico
+
+
+## ✅ Próximos pasos propuestos
+
+1. Realizar reunión informal con Flaco (Corto o Santi)  
+2. Completar ficha de evaluación cultural  
+3. Presentar síntesis al grupo  
+4. Tomar decisión conjunta sobre tipo de vínculo (si lo hubiera)  
+
+## Archivo: estructura_avales_13CC_S22.md
+Contenido:
+# 🧾 Estructura de Avales Internos y Proyectos Externos – Club 13CC  
+**Presentación para Reunión S22**  
+**Fecha estimada:** 2025-05-31  
+**Redactor inicial:** Santiago Calvo  
+
+
+## 🔹 2. PROYECTOS EXTERNOS – Mataderos Skatepark
+
+### 🎯 Objetivo:
+Consolidar un nodo autónomo operado por miembros de 13CC, con lógica de incentivo cruzado: a mayor cantidad de Reprocanns gestionados, mayor aval institucional y medicinal.
+
+### 🧠 Propuesta de funcionamiento:
+
+| Elemento                  | Descripción                                                                 |
+|---------------------------|-----------------------------------------------------------------------------|
+| Nodo externo              | **Mataderos Skatepark** (con equipo operativo propio, pero vinculado)       |
+| Recurso de inicio         | Aporte mensual en especie: **10–20 g de medicina** para funcionamiento      |
+| Rol de los Reprocann      | Los Reprocanns de integrantes del Skatepark se computan como "puntos de aval" |
+| Sistema de incentivos     | A mayor cantidad de Reprocanns activos → mayor cantidad de medicina derivada y apoyo |
+| Supervisión               | Coordinación de Santi + informes mensuales del equipo de Skatepark          |
+
+### 📦 Aporte medicinal:
+- Dosis controlada (10g, a revisar) como fondo operativo simbólico
+- Uso: tareas de cultivo, soporte a miembros, coproducción de eventos
+
+
+## ✅ Conclusión
+
+Este sistema propone una estructura **justa, legal y escalable**, que conecta:
+- Cultura barrial (skate)
+- Legitimidad legal (Reprocann)
+- Visibilidad digital (videos/redes)
+- Sostenibilidad solidaria (medicina en especie)
+
+Debe formalizarse como parte del punto 1 del acta S22 y validarse para comenzar su implementación.
+
+
+
+## 🔍 1. Perfil del Artista
+
+- ¿Qué tipo de arte desarrolla? (Ej: rap, muralismo, teatro, etc.)
+- ¿Cuál es su público principal? (barrial, under, estudiantil, etc.)
+- ¿Tiene experiencia previa organizando eventos?
+- ¿Pertenece a alguna organización o colectivo?
+
+
+## 🤝 3. Propuesta de colaboración
+
+- ¿Qué está buscando él/ella de 13CC?
+- ¿Qué ofrece a cambio?
+- ¿Se requiere inversión económica?
+- ¿Hay canje, sponsors o apoyo externo?
+
+
+## ✅ 5. Conclusión
+
+**¿Se recomienda avanzar?**  
+⬜ Sí, con condiciones claras  
+⬜ No, mantener como contacto informal  
+⬜ Evaluar más adelante  
+
+**Observaciones adicionales:**  
+
+## Archivo: 2025-05-27_prereunion_general_S22.md
+Contenido:
+# 📝 Resumen PreReunión Oficial – Club 13CC  
+**Fecha de reunión:** 2025-05-31  
+**Redactor:** Santiago Calvo  
+**Formato:** Documento de cierre antes de reunión formal con Gory
+
+
+## 🔁 Avances logrados y reformas implementadas
+
+### 1. 💸 Avales internos y proyectos externos
+- Se formalizó el modelo de sponsor medicinal de **10g mensuales** a socios con Reprocann y visibilidad comprobable.
+- Se definió que el presupuesto de proyectos externos se mantendrá mínimo hasta consolidar ingresos del Club.
+- Se estructuró el modelo de incentivos cruzados para **Mataderos Skatepark**, basado en reprocanns aportados.
+
+### 2. 🛹 Mataderos Skatepark
+- Confirmado como nodo externo con gestión interna.
+- Se establecieron aportes mensuales (10–20g) y mecanismos de trazabilidad.
+- Se aclaró su rol en la estrategia de expansión del Club a través de actividades culturales.
+
+### 3. 🎤 Colaboración con Flaco Vázquez
+- Se consolidó un documento completo con expectativas, metodología y protocolo de vínculo.
+- Se estableció que servirá como prueba piloto para profesionalizar relaciones culturales futuras.
+- Se generó una ficha de evaluación aplicable a él y a futuras colaboraciones similares.
+
+### 4. 📋 Metodología de trabajo institucional
+- Se oficializó la implementación del sistema de **resúmenes diarios y semanales**, como se aplica en Cannabird.
+- Herramientas: Markdown centralizado + seguimiento físico/digital
+- Objetivo: mejorar trazabilidad interna y coordinación operativa.
+
+
+## 📂 Archivos generados para la reunión
+
+- `estructura_avales_13CC_S22.md`
+- `colaboracion_flaco_vazquez_unificado.md`
+- `ficha_colaboracion_cultural_13CC.md`
+- `2025-05-27_resumen_general_13cc.md`
+
+## Archivo: propuesta_bruni.md
+Contenido:
+# 📄 Propuesta de Arreglo – Participación de Bruni en 13CC
+
+**Fecha:** 2025-05-30  
+**Propuesto por:** [Nombre completo del firmante / representante de 3SSC]  
+**Destinatario:** Bruni [nombre completo si se desea formalizar]
+
+
+## 2. ⚖️ Principios de Reestructuración
+
+Reconociendo que:
+
+- Bruni fue fundamental en el impulso inicial del club.
+- El modelo actual no permite devolverle USD 18.000 completos ni mantenerlo con un 33% de participación en un club en expansión.
+- Es necesario ordenar y formalizar los términos para evitar conflictos y dar previsibilidad.
+
+Se presentan dos opciones de solución viables:
+
+
+## 4. 🌱 Opción 2 – Participación activa limitada a producción actual
+
+Bruni tendrá derecho a percibir el **33% de los ingresos netos generados por la unidad productiva actual (40 focos)**, sin implicar participación societaria, operativa ni derechos sobre decisiones administrativas. A cambio, **asume el pago total de los gastos fijos mensuales del club**, lo que incluye:
+
+- Servicios (luz, gas si aplica, internet, agua)
+- Alquiler del espacio productivo
+- Sueldos operativos del equipo técnico
+
+**Nota:** Los insumos específicos para producción (nutrientes, tierra, macetas, genética, etc.) serán provistos por 13CC y no forman parte de los costos a cargo de Bruni.
+
+
+## 5. 🔒 Cláusula de Exclusión de Futuro
+
+En ambos escenarios, se dejará por escrito que Bruni **no tendrá derecho a reclamar participación sobre nuevas expansiones, focos adicionales o unidades productivas incorporadas con posterioridad** al acuerdo.
+
+
+## 7. ✍️ Observaciones finales
+
+Esta propuesta busca **resolver un punto de tensión histórica con transparencia y equidad**, dándole a Bruni la posibilidad de:
+
+- Retirarse con ganancia real y sin conflicto, o
+- Mantener una renta pasiva proporcional a su inversión, sin quedar ligado a responsabilidades futuras ni a expansiones no financiadas por él.
+
+## Archivo: propuesta_sistema_contable.md
+Contenido:
+## 🎯 Objetivo: Sistema de control contable bifurcado
+
+- **WHITE (YING):** todos los **gastos documentables** del club → alquiler, insumos, mejoras, herramientas, etc.
+    
+- **BLACK (YANG):** todos los **ingresos informales** provenientes de la venta de producción.
+    
+- La conexión entre ambos: usar el ingreso de la hoja negra como **"origen de fondos anónimo"** para justificar egresos reales en la blanca (_sin trazabilidad directa, pero con consistencia lógica_).
+    
+
+
+## 🧠 Cómo se administra este sistema
+
+|Área|Qué se anota|Ejemplo|
+|---|---|---|
+|**YING**|Todo lo que puede tener factura o justificativo|Tierra, macetas, luminarias, alquiler, reparaciones|
+|**YANG**|Todo ingreso de venta (flor, aceite, derivados)|$200.000 de producción mensual, anotado con fecha y lote|
+|**SÍNTESIS**|Cruce de ambos → ¿cuánto del black cubre gastos white? ¿Cuánto se reserva?|$50.000 usado como “aporte anónimo” para comprar LED|
+
+## Archivo: formulario_de_adhesion.md
+Contenido:
+**13 Cannabis Club Asociación Civil.**
+
+**Formulario de Adhesión**
+
+N° de Ficha: __________________
+
+Nombre y Apellido: _________________________________________________
+
+Tipo y N° de DNI: ___________________________________________________
+
+Fecha de Nacimiento: _____/______/______
+
+Domicilio: _________________________________________________________
+
+Localidad: _________________________________________________________
+
+Teléfono Celular: _______________________ Correo Electrónico: _______________________________________
+
+  
+  
+
+¿Cuenta con credencial aprobada por el Registro del Programa Cannabis (REPROCANN)?
+
+SI _____ NO _____ (Si la respuesta es SI, colocar) N° ID Trámite: __________________
+
+  
+  
+
+¿Presenta fotocopia de DNI? (Solo para ser completado por la Asociación Civil)
+
+SI _____ NO _____
+
+  
+  
+
+¿Presenta fotocopia inscripción REPROCANN? (Solo para ser completado por la Asociación Civil)
+
+SI _____ NO _____
+
+  
+  
+
+Tipo de membresía a la que quiere aplicar: (Marque con X lo que corresponda)
+
+Activo Honorario
+
+  
+  
+
+**La 13 Cannabis Club Asociación Civil, constituida al amparo de la legislación vigente se regirá por su Estatuto, aprobado con fecha 13/07/2023, y por todas las normas que establezcan la reglamentación que le sea de aplicación según las leyes.**
+
+  
+  
+
+A los _____ días del mes de _____________ de 20____, en ejercicio de mis plenas facultades, declaro haber leído y aceptar en este acto el texto que antecede, de plena conformidad. Asimismo, declaro bajo juramento conocer y aceptar los derechos y deberes de los socios de la 13 Cannabis Club Asociación Civil como así también; que, en caso de recibir cannabis con fines terapéuticos por parte de la 13 Cannabis Club Asociación Civil, se le dará dicho uso y bajo ningún punto de vista se le dará un uso comercial ni cualquier otro uso distinto de aquel para el que fuere provisto. -
+
+  
+  
+
+Firma                                                           Aclaración
+
+  
+  
+
+_______________________________________ _______________________________________
+
+
+### 🧑‍⚕️ Datos Personales
+
+- **Nombre completo**: ______________________________________
+- **DNI / Documento**: ______________________________________
+- **Fecha de nacimiento**: _____ / _____ / _______
+- **Domicilio**: _____________________________________________
+- **Localidad**: _____________________________________________
+- **Teléfono de contacto**: ___________________________________
+- **Correo electrónico**: _____________________________________
+
+
+### 📎 Documentación (a completar por la Asociación)
+
+- Fotocopia de DNI presentada: ☐ Sí ☐ No  
+- Fotocopia de inscripción a REPROCANN: ☐ Sí ☐ No  
+
+
+### 📘 Compromiso y Declaración
+
+> La 13 Cannabis Club Asociación Civil, legalmente constituida desde el 13/07/2023, se rige por su Estatuto y por las normativas vigentes en la República Argentina. Al firmar este formulario, expresás tu voluntad de integrarte a nuestra comunidad, aceptando los derechos y responsabilidades como miembro.
+
+Asimismo, declarás conocer que todo cannabis medicinal eventualmente entregado por parte de 13CC será destinado exclusivamente a **uso terapéutico personal**, quedando expresamente prohibido su uso comercial o indebido.
+
+
+### ✍️ Firma y Aclaración
+
+Firma: ____________________________________  
+Aclaración: ________________________________
+
+## Archivo: Estructura_base_de_gestion.md
+Contenido:
+📂 00_PRESENTACIÓN
+   └── 📝 propuesta_alianza_operativa.md
+   └── 📊 resumen_reunion_inicial.md
+   └── 🧭 visión_estratégica_compartida.md
+
+📂 01_GESTIÓN_LEGAL
+   └── 📄 convenio_colaboración_cannabird_13cc.md
+   └── 📁 estatutos_modelo_ONG
+   └── 📁 marco_legal_argentina_ley27350/
+          └── resumen_reprocann.md
+          └── cómo_formar_una_ONG.md
+   └── 📁 licencias_y_autorizaciones
+
+📂 02_CONTABILIDAD_Y_OPERACIÓN
+   └── 📈 balance_mensual_c13cc.ods
+   └── 📈 balance_mensual_cannabird.ods
+   └── 📊 dashboard_financiero.ods
+   └── 🛠️ control_de_stock_cultivo.ods
+   └── 💸 tabla_ingresos_egresos.ods
+   └── 📁 precios_costos_productos/
+
+📂 03_CULTIVO_Y_PRODUCCIÓN
+   └── 🌱 bitácora_cultivo.ods
+   └── 📷 registro_fotográfico/
+   └── 📁 recetas_derivados (resina, aceite, miel)
+   └── 🧪 protocolos_de_limpieza_y_procesado.md
+
+📂 04_SOCIOS_Y_COMUNIDAD
+   └── 🧾 registro_socios.ods
+   └── 📁 fichas_socio_individual/
+   └── 📢 comunicados_internos/
+   └── 🧑‍💻 encuesta_satisfacción.md
+
+📂 05_BRANDING_Y_MARKETING
+   └── 🛹 estrategia_skate+420.md
+   └── 📁 ideas_merchandising/
+   └── 🎨 logo, paleta, identidad/
+   └── 📷 fotos_eventos/
+   └── 🧠 plan_redes_sociales.md
+
+📂 06_EXPANSIÓN
+   └── 🗺️ plan_expansión_mar_del_plata.md
+   └── 📁 modelo_replicable/
+   └── 🧾 plantilla_convenio_club_satélite.md
+
+📂 07_ARCHIVO_GENERAL
+   └── 🗂️ actas_reuniones/
+   └── 📁 contratos_varios/
+   └── 🧠 ideas_en_bruto.md
+
+
+## Archivo: como_ayudar.md
+Contenido:
+## 🔧 Cómo podés ayudarlos como **gestor empresarial**
+
+Aquí algunas funciones tuyas posibles que podés presentar mañana:
+
+### 📌 Orden y metodología
+
+- Crear rutinas semanales de trabajo (cultivo, limpieza, reuniones, stock).
+- Registrar todo: cultivo, ventas, compras, socios.
+- Hacer actas de reunión y llevar archivo interno organizado.
+
+### 📊 Profesionalización contable
+
+- Llevar cuentas claras aunque sea con Excel.
+- Estimar costos de producción y rentabilidad de cada producto.
+- Proponer un fondo común para inversiones (invernadero, riego, etc.).
+
+### 🚀 Gestión de marca y crecimiento
+
+- Darle forma al branding (skate + cultura 420).
+- Armar estrategias de redes (feed, stories, eventos).
+- Diseñar una propuesta para la expansión a MDP (y más adelante a otras ciudades).
+
+### 🤝 Formalización progresiva
+
+- Analizar cómo registrar Cannabird (ONG / cooperativa / SAS).
+- Unificar su estructura con la tuya sin perder identidad.
+- Presentarles ideas de convenios simples que puedan firmar sin abogados aún.
+
+
+## **PROPUESTA – Funciones clave de Santi (Cannabird) en 13CC**
+
+### **1. Gestión Operativa y Profesionalización**
+
+- Organizar toda la estructura interna: cultivo, stock, socios, finanzas, calendario.
+    
+- Crear protocolos claros para cada parte del proceso (desde el riego hasta la entrega del producto).
+    
+- Llevar registro digitalizado de todo (usando Sheets + Bitácora + Dashboard de IA).
+    
+
+### **2. Administración Contable**
+
+- Registrar ingresos y egresos de ambos grupos por separado (Cannabird y 13CC).
+    
+- Llevar control de costos por cultivo (tierra, fertilizante, tiempo de trabajo).
+    
+- Estimar rentabilidad por gramo y márgenes según formato de venta.
+    
+- Gestionar stock: cuánto se produce, cuánto se transforma (aceite, miel), cuánto se vende.
+    
+
+**Sí, te puedo ayudar como contador.** Podemos armar planillas, hojas de costos, ratios financieros simples y, si querés, hasta KPIs cannábicos (ej: gr/gramo producido, tiempo x fase, etc.).
+
+### **3. Asesoría Legal / Formalización**
+
+- Asesorarte paso a paso para que Cannabird se registre como:
+    
+    - Persona individual en el REPROCANN (rápido y legal).
+        
+    - ONG o cooperativa cannábica (si querés operar legalmente como grupo).
+        
+- Redactar convenios internos, acuerdos de colaboración, actas fundacionales.
+    
+- Armar carpeta legal: estatuto, registros, permisos, presentaciones.
+    
+
+**Sí, te puedo ayudar también como asesor legal-técnico.** No reemplaza a un abogado, pero puedo darte todo lo que necesitás para tener la carpeta legal en orden y, llegado el caso, entregársela a un escribano o abogado con todo listo para firmar.
+
+## Archivo: diagnostico_inicial.md
+Contenido:
+## 🧭 Diagnóstico Inicial – Cannabird x 13CC
+### 1. 📌 Tipo de Alianza: “Colaboración operativa con registros compartidos”
+
+**Traducción profesional**:
+
+> _Cooperativa funcional con registros legales unificados, pero gestión financiera autónoma._
+
+Esto se puede formalizar como un **Convenio de Colaboración entre Partes Independientes**, con cláusulas que dejen claro:
+
+- Que **Cannabird y 13CC no se fusionan**, pero cooperan.
+    
+- Que **Cannabird opera bajo la estructura jurídica de 13CC**, hasta tanto no se formalice.
+    
+- Que **cada parte conserva su autonomía contable**, pero se rinden informes cruzados.
+    
+
+Esto puede estar firmado incluso sin crear una nueva empresa o sociedad todavía.
+
+
+### 3. 🧾 Propuesta para la reunión de mañana
+
+Te recomiendo que mañana presentes 3 ideas claras:
+
+#### 🧱 “Propuesta de Formalización Progresiva”
+
+- Paso 1: Cannabird opera bajo la estructura legal de 13CC como proyecto interno.
+    
+- Paso 2: Se formaliza Cannabird como ONG o cooperativa (según análisis legal).
+    
+- Paso 3: Se crea un sistema de doble trazabilidad: Legal (13CC) y Operacional (Cannabird).
+    
+- Paso 4: A futuro, ambos pueden formar una **empresa conjunta** (SAS) como brazo comercial.
+    
+
+#### 📊 “Plan de Gestión Operativa”
+
+- Cannabird se ocupa de: digitalización, contabilidad interna, gestión operativa.
+    
+- 13CC provee la estructura legal y su licencia.
+    
+- Ambos reportan mensualmente su balance operativo a una misma hoja compartida.
+    
+
+#### 📣 “Visión Compartida: Skate & Cannabis”
+
+- Branding compartido para eventos, merch, y activismo cannábico.
+    
+- Marketing dirigido a jóvenes adultos (no menores), skateparks, torneos, cultura urbana.
+    
+- Desarrollo de **productos propios**: miel, resina, aceites, cultivo boutique.
+    
+
+
+### 5. 📦 Contabilidad sin contador: Fase Inicial
+
+Podemos llevar:
+
+- Balance mensual simple (ingresos vs egresos).
+    
+- Registro digital de ventas y gastos.
+    
+- Control de stock (plantas, derivados, insumos).
+    
+- Previsión de costos por cultivo.  
+    Todo en Google Sheets compartido y respaldado.
+    
+
+Te lo puedo armar en una planilla base con dashboard automático si querés empezar ya.
+
+## Archivo: guia_temas_trimestrales.md
+Contenido:
+## 📆 Guía de temas para reuniones **TRIMESTRALES** (club completo)
+
+**Objetivo:** Evaluación general, coordinación inter-anexos, ajustes estratégicos.
+
+### 📋 Orden sugerido:
+
+1. **Aprobación de actas mensuales previas**
+    
+2. **Presentación de balances por anexo**
+    
+    - Producción
+
+    - Finanzas
+
+    - Recursos humanos
+
+3. **Revisión del roadmap y metas del trimestre**
+    
+4. **Cambios en roles, normativas o estructura**
+    
+5. **Propuestas de mejora general**
+    
+6. **Confirmación del próximo trimestre operativo**
+    
+7. **Firma del acta y acuerdo de compromisos**
+
+## Archivo: modelo_acta_trimestral.md
+Contenido:
+# 📄 Acta Reunión Trimestral
+
+**Fecha:**  
+**Lugar:**  
+**Presidida por:**  
+**Participantes:**  
+
+## 1. Informe del Trimestre
+- Producción:
+- Stock final:
+- Gestión de socios:
+
+## 2. Evaluación de Objetivos
+-  
+
+## 3. Cambios Institucionales
+-  
+
+## 4. Propuestas y Nuevos Proyectos
+-  
+
+**Firma:**  
+___________________  
+
+
+## Archivo: 00_INDEX.md
+Contenido:
+# 📚 Índice General – 13CC
+
+Este índice organiza la estructura formal y operativa del sistema documental del club.
+
+## Archivo: 13CC_contexto-IA.md
+Contenido:
+# 🧠 13CC – CONTEXTO IA / HISTORIA ESTRATÉGICA
+
+Este documento sintetiza el contexto estructural, decisiones clave y proyecciones del Club 13CC desde la perspectiva de desarrollo estratégico junto a ALMA_EMPRESA. Funciona como protocolo central de decisiones para todos los procesos futuros vinculados al club.
+
+
+## 🔧 2. Resolución estructural del conflicto (mayo 2025)
+
+**Propuesta Bruni v4 (firmada o en proceso):**
+
+- Opción 1: Retiro con ganancia escalonada (USD 12.000)
+- Opción 2: Participación limitada al 33% de la unidad actual (40 focos), con asunción total de gastos fijos (alquiler, servicios, sueldos).
+- Bruni sin derechos sobre futuras expansiones.
+- Acuerdo con vigencia sujeta a contrato de alquiler actual.
+- El resto del desarrollo estructural/productivo del club queda a cargo de 13CC y su equipo técnico.
+
+
+## 🧩 4. Proyección estratégica inicial
+
+- Formalización de los acuerdos vigentes (Bruni y Santi).
+- Consolidación de sistemas internos: actas, protocolos, cronogramas, funciones.
+- Integración progresiva de ALMA_EMPRESA como nodo de dirección operativa.
+- Profesionalización productiva, cultural y legal del club.
+- Revisión futura del modelo de gobernanza para integrar nuevos socios bajo modelos personalizados de participación (no replicar el modelo Bruni).
+
+
+## 📌 6. Pendientes inmediatos
+
+- Redacción del acta/acuerdo privado para Bruni (según Propuesta v4)
+- Redacción del documento fundacional de Santi (rol, inversión, condiciones de ingreso)
+- Activación de Materials Escape como proyecto cultural estratégico
+- Consolidación de estructura de gestión con ALMA_EMPRESA como núcleo operativo
+
+## Archivo: integracion_13cc.md
+Contenido:
+# 🧩 Idea Base – Integración del módulo 13CC en ALMA_RESIST
+
+## 📌 Contexto
+
+El conjunto de documentos y estructuras bajo el nombre `13CC` contiene múltiples componentes relevantes para ALMA_RESIST:
+
+- Documentación sobre cultivo de cannabis y experiencias personales
+- Información administrativa y de gestión de una ONG/empresa emergente
+- Estructuras conceptuales de proyectos futuros (CannaBird, trazabilidad, legalidad)
+- Registros y sprints independientes del núcleo de ALMA_RESIST
+
+Esta idea propone integrar `13CC` como un módulo formal dentro del sistema principal, bajo criterios metodológicos y arquitectónicos ya establecidos.
+
+
+## 🧠 Etapas propuestas
+
+1. **Reestructuración técnica:**
+   - Organizar por áreas (cultivo, empresa, gestión, análisis)
+   - Separar documentación viva de legacy
+
+2. **Creación de documentación estándar:**
+   - `README.md`, `version.md`, bitácoras, changelog
+
+3. **Generación de snapshot de entrada (zip inicial):**
+   - Servirá como base de comparación y backup histórico
+
+4. **Registro formal:**
+   - Agregar entrada en `hitos.md`, `lecciones_aprendidas.md`, `changelog.md`
+
+
+## 📌 Observación
+
+La integración se pospone hasta refinar las metodologías internas. Este documento actúa como ancla de planificación y especificación previa.
+
+
+
+
+### Tareas Generales
+- **Llenado del tanque**: Se realizó el llenado completo del tanque principal.
+- **Reorganización de esquejeras**:
+  - Las **máquinas de esqueje Nº1 y Nº2** fueron ubicadas **debajo del sodio 250W** en la zona de **propagación**. #esquejera-1 #esquejera-2 
+  - Las **esquejeras Nº4** se colocaron **en la punta opuesta**. #esquejera-4
+  - En el centro se dejaron las **MCK de semilla**, que se encuentran en fase **vegetativa de crecimiento**. #mck #mck-seguimiento 
+- **Control de condiciones internas**:
+  - Se realizó **control interno completo** en las esquejeras de las máquinas Nº1, Nº2 y Nº3.
+  - Se revisó específicamente la **humedad** en las esquejeras Nº4.
+#esquejera-3 
+
+### Sector Flora
+- **Flora 001**: #001-flora 
+  - Se aplicó un **combativo preventivo con Foli** (1 ml/L de agua). #foli 
+  - Este fue el **segundo tratamiento** (el primero se realizó el **viernes anterior**).
+  - Se apunta a actuar en zonas aún **no afectadas** del follaje.
+  - **Observación pendiente**: Evaluar evolución y resultados del tratamiento en los próximos días.
+- **Flora 002**: #002-flora 
+  - Se realizó la **defoliación correspondiente a la tercera semana** de floración.
+  - También se aplicó un **preventivo con Foli**.
+
+#seba-rios #pablito-tatu 
+
+## Archivo: 01_Protocolo_Inicio_Floracion.md
+Contenido:
+## **Protocolo de Inicio de Floración – Corrección y Estabilización de pH (Living Soil)**
+
+### **Día 1 – Inicio de floración**
+
+- **Riego solo con agua a pH 5.5** (ya preparada).
+    
+- No aplicar fertilizantes ni microorganismos aún.
+    
+- Objetivo: observar el **pH y EC del drenaje inicial** para evaluar si hay desequilibrio.
+    
+
+
+### **Día siguiente al flush – Reactivación biológica**
+
+- Aplicar:
+    
+    - **Micorrizas** (en riego o directo al sustrato, según formato).
+        
+    - **Lactobacillus** (diluido, sin melaza por ahora).
+        
+- Evitar fertilización ese día. Dejar que la microbiología se reactive.
+    
+
+
+### **Notas clave:**
+
+- Evitar sobreaplicación de productos al mismo tiempo (especialmente lacto + melaza + enzimas juntos).
+    
+- Las micorrizas se fijan mejor en suelo tranquilo, sin exceso de sales o ácidos.
+    
+- Monitorizar pH del drenaje cada semana para ver tendencia (sin obsesionarse, solo lectura general).
+
+## Archivo: README_07_Cultivo_Organico.md
+Contenido:
+# 📘 README – Cuaderno 07: 07 Cultivo Organico
+
+Este cuaderno forma parte de la colección temática de ALMA LIBRE.
+
+
+## 📂 Estructura sugerida
+
+- Introducción o resumen del enfoque del cuaderno
+- Secciones cronológicas (mensuales o semanales)
+- Bitácoras, ideas, aprendizajes, archivos complementarios
+- Enlaces a otros cuadernos si hay conexión temática
+
+
+> ✨ *Un cuaderno temático es un jardín mental. Plantá ideas, regalas con constancia y cosechá visión.*  
+> – ALMA
+
+
+### 🧪 Parámetros diarios a registrar:
+
+- Día de la semana
+- Fecha (dd/mm/aaaa)
+- Temperatura interior (°C)
+- Humedad relativa interior (%)
+- VPD (Déficit de Presión de Vapor)
+- Temperatura exterior (°C)
+- Humedad exterior (%)
+- Tipo de sustrato utilizado *(ej: Growers de SuperSoil)*
+- pH del agua en riego simple
+- pH del agua en fertilización
+- pH de decantación (drenaje)
+
+
+### 📌 Nota adicional:
+
+Se deberá incorporar este módulo dentro del **Cuaderno Digital de Cultivo Orgánico**, como núcleo principal del seguimiento técnico.
+
+Pendiente: agregar la **receta base de sustrato actual** (será proporcionada por Santi), con instrucciones de aplicación y momentos de uso.
+
+
+### **2. Infraestructura adicional**
+
+- Se utilizarán **vigas de madera** ya disponibles para crear el nivel superior del módulo de germinación/vegetación inicial.
+
+
+### **4. Dinámica de seguimiento**
+
+- **Actualización semanal cada viernes.**
+- Se registrará:
+    - Estado de cada módulo.
+    - Cambios en infraestructura o equipamiento.
+    - Observaciones sobre salud de las plantas.
+    - Proyecciones de siembra, corte, esquejado o trasplante.
+
+
+### **Dinámica mensual:**
+
+- **Cada mes** se entregarán **4 esquejes en macetas de 3 litros**.
+- Los esquejes estarán en condiciones óptimas para:
+    - Ser **trasplantados a 10 litros**.
+    - Iniciar **floración inmediata** en su espacio de cultivo.
+
+
+### **Importancia del seguimiento:**
+
+- Adriana necesita una dinámica clara y repetitiva, ya que tiene tendencia a olvidarse de los pasos.
+- Se hará especial hincapié en entregar las plantas **listas para su siguiente etapa**, sin que ella tenga que realizar tareas complejas antes del trasplante.
+
+## Archivo: 2025_changelog_cannabird_limpieza_final.md
+Contenido:
+## 📅 2025-06-02 – Limpieza y reestructuración final del módulo Cannabird
+
+- 🧹 Eliminadas carpetas vacías y redundantes en `_legacy/`
+- 📦 Reubicados archivos `.docx` a `archivo/descartes_raw/docx/`
+- 🗃️ Prompts ya integrados movidos a `archivo/historico/prompts_migrados/`
+- 🧠 Apéndices integrados y archivados en `archivo/historico/contexto_apendices/`
+- ✅ Carpeta `downloads/` vaciada y lista para uso operativo
+
+**Commit sugerido:** `🔧 Limpieza final Cannabird y consolidación de estructura`
+
+title: "Bitácora de cierre operativo – Cannabird"
+date: 2025-06-02
+author: Asesor-IA_CLI
+tags: [#bitacora, #limpieza-final, #estructura, #modulo-cannabird, #journal]
+linked_to: alma_empresa/entidades/cannabird
+## Archivo: 2025_apendice_archivo_legacy_s22.md
+Contenido:
+## 📎 Apéndice 2025-06-02 – Limpieza y archivo de contenidos no operativos (S22)
+
+**Resumen:**
+Se detectaron varios archivos dentro de `_legacy/resumenes_cannabird/diarios/s22/` que no forman parte del flujo oficial de resúmenes operativos. En detalle:
+
+### 🗃️ Archivos afectados:
+- `.docx` sin convertir (no estandarizados):  
+  - 2025-05-28.docx  
+  - 2025-05-29.docx  
+  - 2025-05-30_diario_cannabird.docx  
+- Markdown fuera de convención o pre-validación:  
+  - 2025-05-27_diario_cannabird.md  
+  - Resumen_Cannabird_26-05-2025.md
+
+**Acción tomada:**
+Todos estos archivos fueron trasladados a la ruta:
+
+```bash
+_legacy/archivados_irrecuperables/resumenes_cannabird/s22/
+```
+
+Esta carpeta contendrá documentos no curados, no estandarizados o innecesarios para el flujo activo, pero se conservarán como respaldo histórico por seguridad.
+
+**Tags:** `#legacy`, `#archivados`, `#estructura`, `#no-operativo`, `#docx`, `#s22`, `#limpieza`
+
+
+## Archivo: 2025_apendice_contexto_ruta_base.md
+Contenido:
+## 📎 Apéndice 2025-06-02 – Posicionamiento raíz del módulo Cannabird
+
+**Resumen:**
+Se estableció que toda operación realizada dentro del módulo `Cannabird` será ejecutada **desde la raíz del módulo**, definida como:
+
+```bash
+/home/bird/ALMA_RESIST/alma_empresa/entidades/cannabird/
+```
+
+Esto implica que todas las rutas relativas como `docs/`, `control/`, `archivo/` y `meta/` se interpretan desde este punto.  
+Esta convención permite una operación más clara desde scripts, terminal y estructuras automatizadas IA-friendly.
+
+**Comando estándar recomendado antes de trabajar:**
+
+```bash
+cd /home/bird/ALMA_RESIST/alma_empresa/entidades/cannabird/
+```
+
+**Tags:** `#estructura`, `#ruta-base`, `#convencion`, `#CLI`, `#padre-contexto`
+
+
+title: "Contexto Operativo CLI – Cannabird"
+author: Asesor-IA_CLI
+date_created: 2025-06-02
+tags: [#cannabird, #CLI, #estructura, #contexto, #modulo, #asesor-ia]
+status: activo
+linked_to: alma_empresa/entidades/cannabird
+
+## 📎 Apéndice 2025-06-02 – Inicio del archivo y consolidación CLI
+
+**Resumen:**
+- Se definió el rol oficial del asesor-IA_CLI dentro de Cannabird
+- Se reorganizó la estructura de resúmenes diarios y semanales
+- Se consolidaron prompts oficiales en carpeta única
+- Se archivaron versiones legacy en ubicación separada
+- Se propuso y aceptó mantener este archivo como bitácora técnica viva
+
+**Rutas afectadas:**
+- `docs/resumenes_semanales/`
+- `control/prompts/oficiales/`
+- `_legacy/resumenes_cannabird/`
+
+**Tags:** `#reestructuracion`, `#CLI`, `#prompts`, `#inicio-contexto`
+## Archivo: prompt_resumen_diario_cannabird_v2.md
+Contenido:
+
+# 🧠 Prompt Base – `resumen_diario_cannabird_v2`
+
+
+## 🎯 Objetivo del Prompt
+
+Documentar la **jornada diaria** de cultivo de forma precisa, trazable y compatible con sistemas de memoria IA y navegación en Obsidian.
+
+
+## 📤 Formato de salida obligatorio
+
+Nombre del archivo: `resumen_diario_cannabird_YYYY-MM-DD.md`
+
+Contenido:
+```markdown
+# 📅 Resumen Diario – Cannabird  
+**Fecha:** YYYY-MM-DD  
+**Día:** Lunes  
+**Participantes:** #seba-rios, #pablito-tatu, #bird  
+#resumen-diario #cannabird #semana-XX #año-2025 #diario-trabajo
+
+## 🌡️ Mediciones
+...
+
+## 🧪 Riegos
+...
+
+## 🌱 Zona Vegetativa (Vege)
+...
+
+## 🌸 Zona de Floración (Flora)
+...
+
+## 🌱 Esquejeras
+...
+
+## 🪴 Madres
+...
+
+## 🔧 Infraestructura
+...
+
+## 🧠 Notas Finales y Tareas Futuras
+...
+
+## ⚙️ Log de Ajustes Técnicos
+...
+
+## 👤 Tareas por Responsable
+- #hechoPor_seba-rios: …
+- #nota_pablito-tatu: …
+- #recomendadoPor_bird: …
+```
+
+
+## 📌 Changelog – v2
+- Se agregó bloque de contexto institucional
+- Se reforzó el uso obligatorio de tags sectorizados (#001-flora, etc.)
+- Se incorporaron etiquetas de responsables (#hechoPor_)
+- Se incluyó metadatos obligatorios al encabezado
+- Se definió estructura mínima obligatoria para todos los resúmenes
+- Optimización IA/Obsidian Friendly 100%
+
+
+
+## 🌱 ¿Qué es Cannabird?
+
+**Cannabird** es un proyecto de cultivo profesional de cannabis medicinal, ubicado dentro del Club 13CC. La operación se divide en:
+- **Zona Vegetativa**: sectores como `#004-vege`, `#005-vege`
+- **Zona de Floración**: `#001-flora`, `#002-flora`, `#003-flora`
+- **Esquejeras y Propagación**: `#esquejera-1`, `#esquejera-2`, etc.
+- **Zona Madres**: `#madres-cannabird`
+- **Infraestructura**: tareas de mejora física, técnica y organizativa
+
+El equipo está conformado por:
+- `#seba-rios` – Responsable operativo y ejecutor principal
+- `#pablito-tatu` – Supervisor y soporte técnico
+- `#bird` – Asesor externo, control de calidad y estrategia
+
+
+## ✅ Estructura del resumen semanal
+
+El archivo debe contener:
+
+```markdown
+# 🧠 Resumen Semanal – Cannabird (Semana XX - 2025)
+#resumen-semanal #cannabird #semana-XX #año-2025
+
+## 🌡️ Mediciones #vpd #temperatura
+## 🧪 Riegos #riego
+## 🌱 Zona Vegetativa (Vege) #Vege
+## 🌸 Zona de Floración (Flora) #Flora
+## 🌱 Esquejeras y Propagación #esquejeras
+## 🪴 Madres #madres-cannabird
+## 🔧 Infraestructura #infraestructura
+## 🧠 Notas Finales y Planificación #observaciones
+## ⚙️ Log de Ajustes Técnicos #ajustes
+## 👤 Tareas por Responsable #responsables
+```
+
+
+## 📤 Salida esperada
+
+Un archivo `.md` llamado:  
+`resumen_semanal_cannabird_sXX.md`
+
+Estructura como se muestra arriba, sin olvidar:
+- Tareas destacadas y repetidas
+- Problemas detectados
+- Acciones tomadas
+- Recomendaciones futuras
+- Cambios técnicos e instrumentales
+
+## Archivo: prompt_resumen_diario_cannabird_v1.md
+Contenido:
+
+# 🧠 Prompt Base – `resumen_diario_cannabird_dX_v1`
+
+
+## ✅ Objetivo:
+Registrar con claridad todas las acciones realizadas en el día en cada sector del cultivo, incluyendo responsables, observaciones, cambios, problemas, soluciones y decisiones operativas.
+
+
+## 📐 Metodología:
+
+1. Organizá el contenido en bloques claros y consistentes.
+2. Usá hashtags normalizados para **tareas, cultivos, personas y acciones**.
+3. Clasificá la información en secciones predeterminadas (ver estructura).
+4. Utilizá siempre etiquetas de **fecha**, **día de la semana** y **participantes**.
+
+
+## 🛠️ Tareas Generales #General
+- …
+
+## 🧪 Zona Esquejeras / Propagación #esquejeras
+- …
+
+## 🌱 Zona Vegetativa (Vege) #Vege
+- …
+
+## 🌸 Zona de Floración (Flora) #Flora
+- …
+
+## 🪴 Sector Madres (si aplica) #madres-cannabird
+- …
+
+## 🧠 Observaciones Estratégicas (opcional) #observaciones
+- …
+
+## ⚙️ Log de Decisiones / Cambios (opcional) #ajustes
+- …
+
+## 👤 Tareas por Responsable (opcional)
+- #seba-rios: …
+- #pablito-tatu: …
+- #bird: …
+```
+
+
+## 🔄 Glosario Técnico (expansible)
+- `001-flora`: Cultivo ubicado en Sala de Floración, actualmente en semana N.
+- `004-vege`: Cultivo en Sala Vegetativa.
+- `esquejera-N`: Máquina o zona de propagación identificada por número.
+
+## Archivo: prompt_resumen_semanal.md
+Contenido:
+
+🧠 Prompt Base – resumen_semanal_cannabird_sX
+
+## 🎯 INSTRUCCIONES PARA GENERAR RESUMEN SEMANAL CANNABIRD
+
+Actuá como asistente técnico de cultivo especializado en registros semanales. Vas a procesar todos los **resúmenes diarios** correspondientes a la **semana X** del calendario anual de Cannabird.
+
+### ✅ Objetivo:
+Generar un único **resumen semanal consolidado** con las **tareas efectivamente realizadas** durante esa semana en el espacio de cultivo.
+
+### 📂 Entradas:
+Recibirás una serie de archivos en formato `.md` correspondientes a los **resúmenes diarios** de la semana. Cada uno contiene secciones específicas: `General`, `Vege`, `Flora`, y a veces notas especiales o eventos organizativos.
+
+
+### 📤 Salida esperada:
+Un archivo markdown llamado `resumen_semanal_cannabird_sX.md`, con la siguiente estructura:
+
+```markdown
+# 🧠 Resumen Semanal – Cannabird (Semana X - YYYY)
+
+
+## 🧩 Reflexiones y Mejoras Futuras
+(opcional pero recomendado)
+
+
+✅ SUGERENCIAS DE MEJORA PARA EL PROMPT
+1. 📆 Agregar metaetiquetas temporales por semana y año
+
+Actualmente no se exige el uso de tags como #semana-22 o #año-2025, lo cual es fundamental para trazabilidad.
+
+🔧 Agregar a la salida esperada:
+
+# 🧠 Resumen Semanal – Cannabird (Semana X - YYYY)
+#resumen-semanal #cannabird #semana-X #año-YYYY
+
+2. 🧩 Estandarizar hashtags técnicos por sección
+
+Ya usás hashtags como #riego, #vpd, #oidio, pero podés reforzar la exigencia para asegurar que:
+
+    Se usen siempre en plural cuando corresponde (#mediciones, #fumigaciones)
+
+    Sean modulares por sector: ej. #003-vege, #001-flora
+
+🔧 Revisar sección de hashtags y ampliarla así:
+
+Hashtags recomendados:
+
+- Generales: #temperatura, #vpd, #llenadoTanque, #mejoraEstructural, #implementoInterno
+- Vege: #riego, #pH, #EC, #trasplante, #fumigacion, #ajusteRiego, #engarronamiento
+- Flora: #oidio, #defoliacion, #shanti, #foli, #riego-flora
+- Específicos: #esquejera-1, #003-vege, #002-flora
+- Tiempo: #semana-X, #año-YYYY
+
+3. 🧠 Incluir campo de responsables (opcional pero estratégico)
+
+Para IA futura, es clave registrar quién hizo qué, aunque sea informalmente.
+
+🔧 Incluir una nota al final de metodología:
+
+    Podés agregar tags de responsables en tareas específicas, ejemplo:
+    #hechoPor_Pablo, #nota_Coco, #supervision_Santiago
+
+4. 📊 Recomendar una sección de log técnico si hay ajustes
+
+Ejemplo: "se bajó el riego de 10% a 8%" → esto debería etiquetarse como #ajusteRiego o registrarse en una mini tabla de decisiones.
+
+🔧 Agregar una sección opcional recomendada:
+
+## ⚙️ Log de Ajustes Técnicos (opcional)
+- #ajusteRiego: Se disminuyó riego en #005-vege por exceso de agua
+- #ajusteFumigacion: Se cambió protocolo por avance de oidio en #001-flora
+
+
+
+
+## 🎯 INSTRUCCIONES PARA GENERAR RESUMEN SEMANAL CANNABIRD
+
+Actuá como asistente técnico de cultivo especializado en registros semanales. Vas a procesar todos los **resúmenes diarios** correspondientes a la **semana X** del calendario anual de Cannabird.
+
+
+### 📂 Entradas:
+Recibirás una serie de archivos en formato `.md` correspondientes a los **resúmenes diarios** de la semana. Cada uno contiene secciones específicas: `General`, `Vege`, `Flora`, y a veces notas especiales o eventos organizativos.
+
+
+## 📤 Salida esperada:
+Un archivo markdown llamado `resumen_semanal_cannabird_sX.md`, con esta estructura:
+
+```markdown
+# 🧠 Resumen Semanal – Cannabird (Semana X - YYYY)
+#resumen-semanal #cannabird #semana-X #año-YYYY
+
+
+## ⚙️ Log de Ajustes Técnicos (opcional)
+- #ajusteRiego: Se disminuyó riego en #005-vege por exceso de agua
+- #ajusteFumigacion: Se cambió protocolo por avance de oidio en #001-flora
+
+## Archivo: prompt_resumen_semanal_cannabird_v2.md
+Contenido:
+
+# 🧠 Prompt Base – `resumen_semanal_cannabird_sX_v2`
+
+
+### ✅ Objetivo:
+Generar un único **resumen semanal consolidado** con las **tareas efectivamente realizadas** durante esa semana en el espacio de cultivo.
+
+
+## 📐 Metodología:
+
+1. **Leé todos los archivos diarios** y extraé las tareas realizadas, problemas detectados y acciones tomadas.
+2. Clasificá esa información en las siguientes tres secciones obligatorias:
+   - **🛠️ Tareas Generales** (`#General`)
+   - **🌱 Zona Vegetativa (Vege)** (`#Vege`)
+   - **🌸 Zona de Floración (Flora)** (`#Flora`)
+3. Mantené un estilo directo, ordenado y profesional.
+4. Aplicá una **etiqueta temporal obligatoria** al inicio:
+   ```
+   #resumen-semanal #cannabird #semana-X #año-YYYY
+   ```
+
+5. Incorporá **hashtags consistentes** para cada tipo de tarea, acción o problema. Ejemplos:
+   - `#riego`, `#pH`, `#fumigacion`, `#controlPlagas`, `#revisiónEsquejeras`, `#mantenimiento`, `#vpd`, `#temperatura`, `#registroDatos`, `#oidio`, `#ventilación`
+   - Eventos clave: `#incorporaciónPersonal`, `#cambioEstructural`, `#notaEstrategica`
+   - Sectores específicos: `#esquejera-1`, `#003-vege`, `#002-flora`
+   - Tiempo: `#semana-X`, `#año-YYYY`
+
+6. Usá hashtags modulares por sector, por ejemplo:
+   - `#003-vege`, `#001-flora`, `#madres-cannabird`
+
+7. Podés agregar tags de responsables en tareas específicas:
+   - `#hechoPor_Pablo`, `#nota_Coco`, `#supervision_Santiago`, `#seba-rios`, `#pablito-tatu`
+
+
+## 🛠️ Tareas Generales #General
+- …
+
+## 🌱 Zona Vegetativa (Vege) #Vege
+- …
+
+## 🌸 Zona de Floración (Flora) #Flora
+- …
+
+
+## 🧩 Reflexiones y Mejoras Futuras (opcional)
+- …
+
+## Archivo: prompt_cannabird_resumen_diario_v2.md
+Contenido:
+
+# 🧠 Prompt Base – `resumen_diario_cannabird_v2`
+
+
+## 🎯 Objetivo del Prompt
+
+Documentar la **jornada diaria** de cultivo de forma precisa, trazable y compatible con sistemas de memoria IA y navegación en Obsidian.
+
+
+## 📤 Formato de salida obligatorio
+
+Nombre del archivo: `resumen_diario_cannabird_YYYY-MM-DD.md`
+
+Contenido:
+```markdown
+# 📅 Resumen Diario – Cannabird  
+**Fecha:** YYYY-MM-DD  
+**Día:** Lunes  
+**Participantes:** #seba-rios, #pablito-tatu, #bird  
+#resumen-diario #cannabird #semana-XX #año-2025 #diario-trabajo
+
+## 🌡️ Mediciones
+...
+
+## 🧪 Riegos
+...
+
+## 🌱 Zona Vegetativa (Vege)
+...
+
+## 🌸 Zona de Floración (Flora)
+...
+
+## 🌱 Esquejeras
+...
+
+## 🪴 Madres
+...
+
+## 🔧 Infraestructura
+...
+
+## 🧠 Notas Finales y Tareas Futuras
+...
+
+## ⚙️ Log de Ajustes Técnicos
+...
+
+## 👤 Tareas por Responsable
+- #hechoPor_seba-rios: …
+- #nota_pablito-tatu: …
+- #recomendadoPor_bird: …
+```
+
+
+## 📌 Changelog – v2
+- Se agregó bloque de contexto institucional
+- Se reforzó el uso obligatorio de tags sectorizados (#001-flora, etc.)
+- Se incorporaron etiquetas de responsables (#hechoPor_)
+- Se incluyó metadatos obligatorios al encabezado
+- Se definió estructura mínima obligatoria para todos los resúmenes
+- Optimización IA/Obsidian Friendly 100%
+
+
+
+## 🌱 ¿Qué es Cannabird?
+
+**Cannabird** es un proyecto de cultivo profesional de cannabis medicinal, ubicado dentro del Club 13CC. La operación se divide en:
+- **Zona Vegetativa**: sectores como `#004-vege`, `#005-vege`
+- **Zona de Floración**: `#001-flora`, `#002-flora`, `#003-flora`
+- **Esquejeras y Propagación**: `#esquejera-1`, `#esquejera-2`, etc.
+- **Zona Madres**: `#madres-cannabird`
+- **Infraestructura**: tareas de mejora física, técnica y organizativa
+
+El equipo está conformado por:
+- `#seba-rios` – Responsable operativo y ejecutor principal
+- `#pablito-tatu` – Supervisor y soporte técnico
+- `#bird` – Asesor externo, control de calidad y estrategia
+
+
+## ✅ Estructura del resumen semanal
+
+El archivo debe contener:
+
+```markdown
+# 🧠 Resumen Semanal – Cannabird (Semana XX - 2025)
+#resumen-semanal #cannabird #semana-XX #año-2025
+
+## 🌡️ Mediciones #vpd #temperatura
+## 🧪 Riegos #riego
+## 🌱 Zona Vegetativa (Vege) #Vege
+## 🌸 Zona de Floración (Flora) #Flora
+## 🌱 Esquejeras y Propagación #esquejeras
+## 🪴 Madres #madres-cannabird
+## 🔧 Infraestructura #infraestructura
+## 🧠 Notas Finales y Planificación #observaciones
+## ⚙️ Log de Ajustes Técnicos #ajustes
+## 👤 Tareas por Responsable #responsables
+```
+
+
+## 📤 Salida esperada
+
+Un archivo `.md` llamado:  
+`resumen_semanal_cannabird_sXX.md`
+
+Estructura como se muestra arriba, sin olvidar:
+- Tareas destacadas y repetidas
+- Problemas detectados
+- Acciones tomadas
+- Recomendaciones futuras
+- Cambios técnicos e instrumentales
+

@@ -1,0 +1,28 @@
+# ALMA_NLP - Módulo de Relaciones Semánticas
+
+Este módulo detecta relaciones entre memorias usando NLP.
+
+## Cómo usar
+
+1. Instalar dependencias:
+   ```
+   pip install sentence-transformers scikit-learn
+   ```
+
+2. Ejecutar el script:
+   ```
+   python relacionador_nlp.py
+   ```
+
+3. Revisa los resultados en `logs/relaciones.json`
+
+## Estructura esperada
+```
+alma_nlp/
+├── dataset_test/
+│   └── memoria1.json
+├── logs/
+│   └── relaciones.json
+├── relacionador_nlp.py
+└── README.md
+```

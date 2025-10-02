@@ -1,0 +1,18 @@
+# 🧪 scripts/ – Primeros Motores de ALMA SYNC
+
+Esta carpeta contiene scripts escritos en Python que interactúan con los archivos del sistema ALMA LIBRE.
+
+### 📌 ¿Qué hace `script_base.py`?
+
+- Lee un archivo `.md` del sistema (ejemplo: un resumen diario o un trade).
+- Detecta el primer título principal (línea que empiece con `#`) y lo muestra.
+- Se usa desde terminal para practicar lectura de archivos y futuras automatizaciones.
+
+### ✅ Cómo usarlo:
+
+1. Copiá este script a una carpeta local dentro del sistema.
+2. Desde terminal: `python3 script_base.py`
+3. Escribí el nombre de un archivo `.md` (ej: `Resumen_Quincenal_S15_S16_2025_COMPLETO.md`)
+4. El script mostrará el primer título del archivo.
+
+> Este es el primer paso para que ALMA SYNC pueda leer, completar, o mover contenido dentro del sistema automáticamente.

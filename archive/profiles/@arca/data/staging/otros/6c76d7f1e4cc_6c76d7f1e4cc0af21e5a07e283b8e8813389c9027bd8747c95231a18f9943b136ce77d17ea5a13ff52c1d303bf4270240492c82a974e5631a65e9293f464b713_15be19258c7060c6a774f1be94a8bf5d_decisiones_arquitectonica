@@ -1,0 +1,134 @@
+---
+module: decisiones_arquitectonicas
+type: core
+status: in_progress
+created: '2025-05-20'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🧱 Decisiones Arquitectónicas – ALMA RESIST
+
+📝 Versión inicial  
+📅 Creado: 2025-05-20  
+👤 Responsable: Usuario + IA
+
+---
+
+## 📌 Objetivo
+
+Registrar y justificar las decisiones técnicas clave que definen la arquitectura, los principios de diseño y los criterios estructurales del sistema ALMA RESIST.
+
+Este documento actúa como **memoria estratégica** para revisiones futuras, auditorías internas o incorporación de nuevos colaboradores o IA.
+
+---
+
+## 📁 Estructura de cada decisión
+
+```markdown
+### 🧩 Decisión: [Título breve]
+
+📅 Fecha: [dd/mm/aaaa]  
+🔍 Contexto:
+[Qué problema o necesidad motivó esta decisión]
+
+🧠 Alternativas consideradas:
+[Qué otras opciones se evaluaron y por qué fueron descartadas]
+
+✅ Decisión final:
+[Qué se eligió, por qué y cómo se implementa]
+
+📂 Impacto estructural:
+[A qué módulos afecta, qué dependencias crea o reduce]
+
+🔗 Relacionado:
+- [hitos.md]
+- [post_mortem_tecnico.md]
+- [idea_base.md]
+```
+
+---
+
+## 📜 Decisiones Iniciales Registradas
+
+### 🧩 Uso de CLI como interfaz principal
+
+📅 Fecha: 2025-05-20  
+🔍 Contexto: El sistema debía operar en entornos offline, bajos recursos o sin GUI.  
+🧠 Alternativas: GUI (Gradio/Web), TUI (Text UI), cliente remoto.  
+✅ Decisión final: CLI con logging enriquecido y comandos activos (`!resumen`, `!estado`).  
+📂 Impacto estructural: Determina scripting base, no requiere entorno gráfico, mayor portabilidad.
+
+---
+
+### 🧩 Motor IA desacoplado del frontend
+
+📅 Fecha: 2025-05-20  
+🔍 Contexto: Se requería escalabilidad y posibilidad de múltiples clientes IA.  
+🧠 Alternativas: GUI acoplada como Oobabooga, cliente-único por script.  
+✅ Decisión final: usar servidor tipo llama.cpp, FastAPI o similar con cliente CLI independiente.  
+📂 Impacto estructural: Permite múltiples entradas (iPhone, SSH, PC), modularidad total.
+
+---
+
+## 🗂️ Ubicación recomendada
+
+Guardar como:
+
+```
+ALMA_RESIST/docs/decisiones_arquitectonicas.md
+```
+
+Agregar decisiones cada vez que se justifique un cambio estructural, filosófico o técnico mayor.
+
+---
+
+## 📎 Historial
+
+- 📅 2025-05-20: Documento creado. Dos decisiones fundacionales registradas.
+
+---
+
+## 📎 Apéndice – Decisiones arquitectónicas recientes
+
+---
+
+### 🧩 Implementación de validadores automáticos en pipeline
+
+- 📅 **Fecha**: 2025-05-23  
+- 🔍 **Contexto**: Necesidad de garantizar consistencia estructural y semántica en todos los documentos del sistema.  
+- 🧠 **Alternativas consideradas**: Validación manual, linters YAML generales, scripts sueltos.  
+- ✅ **Decisión final**: Implementar `validate_docs.py`, `fix_metadata.py` y `force_snake_case_modules.py` como herramientas internas versionadas y con control de backups.  
+- 📂 **Impacto estructural**: Valida todos los `.md` de `docs/`, normaliza nombres y asegura metadatos consistentes. Base para automatización CI futura.  
+- 🔗 **Relacionado**:
+  - `mapeo_sprint_archivos.md`
+  - `log_integracion.md`
+  - `hitos.md`
+
+---
+
+### 🧩 Modularización de comandos útiles
+
+- 📅 **Fecha**: 2025-05-23  
+- 🔍 **Contexto**: Creciente complejidad operativa y necesidad de trazabilidad de comandos repetitivos.  
+- 🧠 **Alternativas**: No documentar, README informal, uso de scripts aislados.  
+- ✅ **Decisión final**: Crear módulo `utilidades/comandos_utiles/` con documentación YAML + alias sugeridos.  
+- 📂 **Impacto estructural**: Mejora mantenibilidad, facilita onboarding y estandariza workflows manuales.  
+- 🔗 **Relacionado**:
+  - `docs/utilidades/comandos_utiles/validacion_documentacion.md`
+  - `hitos.md`
+  - `changelog.md`
+
+---
+
+### 🧩 Validación tolerante a prefijos `_` en módulos
+
+- 📅 **Fecha**: 2025-05-23  
+- 🔍 **Contexto**: La validación estricta impedía registrar convenciones comunes como carpetas `_archivadas` o `_legacy`.  
+- 🧠 **Alternativas**: Reescribir todo el archivo para evitar `_`, eliminar validación estricta.  
+- ✅ **Decisión final**: Se integró una función de comparación tolerante (`normalize_path_for_comparison`) en `validate_docs.py`.  
+- 📂 **Impacto estructural**: Permite carpetas prefijadas sin romper la estructura ni la trazabilidad de módulos.  
+- 🔗 **Relacionado**:
+  - `validate_docs.py`
+  - `changelog.md`
+

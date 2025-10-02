@@ -1,0 +1,16 @@
+# 🗂️ docs/versiones/ – Versiones Congeladas de Documentos
+
+Este directorio contiene copias exactas (congeladas) de documentos críticos del sistema ALMA_RESIST, tomadas al cierre de etapas, auditorías o versiones mayores.
+
+
+## 📌 Convenciones
+
+- Nombre de archivo: `nombre_vX.Y.Z.md`
+  - Ejemplo: `hitos_v0.0.0.1.md`
+- Nunca modificar estos archivos una vez guardados.
+- Agregar comentario al final si fue una copia de respaldo o auditoría.
+
+
+## 👤 Responsable
+
+Archivo generado por IA + verificado por Usuario.

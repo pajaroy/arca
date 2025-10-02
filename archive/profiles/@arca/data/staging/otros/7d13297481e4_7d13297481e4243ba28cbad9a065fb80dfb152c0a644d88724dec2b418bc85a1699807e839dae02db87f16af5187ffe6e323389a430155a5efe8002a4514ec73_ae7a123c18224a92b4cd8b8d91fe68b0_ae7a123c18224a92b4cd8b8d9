@@ -1,0 +1,52 @@
+# 🧠 ALMA LIBRE – v0.3 – Buffer Bot con IA Local (LLaMA/Mistral)
+
+## 🎯 OBJETIVO
+
+Crear un bot de Telegram en Python que:
+
+1. Transcriba audios recibidos en grupos (con Whisper)
+2. Acumule esas transcripciones en un buffer temporal en memoria
+3. Genere resúmenes reales (no mock) al ejecutar `/resumen`, utilizando un modelo local (Mistral/LLaMA) corriendo en `text-generation-webui`
+4. Genere resúmenes diarios automáticos a las 23:50 y los guarde como archivos `.md`
+5. Use `.env` para configuración sensible (`TELEGRAM_TOKEN`, `CHAT_ID`, `LLM_ENDPOINT`)
+6. Sea modular, extensible y limpio
+
+
+## 💻 FUNCIONALIDADES CLAVE
+
+1. **Transcripción de voz**
+    - Con Whisper local (reutilizar lógica de `v0.2`)
+    - Guardar en buffer (con timestamp)
+
+2. **/resumen**
+    - Toma el buffer acumulado
+    - Llama al modelo local con un prompt
+    - Devuelve resumen en formato Markdown
+    - Opcional: guarda resumen como `.md` con hora y tag `manual`
+
+3. **Resumen automático**
+    - Ejecuta todos los días a las 23:50
+    - Mismo flujo que `/resumen`, pero marcado como `auto`
+    - Guarda como `resumenes_diarios/YYYY-MM-DD.md`
+
+4. **Configuración vía `.env`**
+    ```env
+    TELEGRAM_TOKEN=
+    CHAT_ID=
+    LLM_ENDPOINT=http://localhost:5000/v1/completions
+    ```
+
+5. **Estructura modular**
+    - Separar lógica de resumen (`resumen.py`)
+    - Funciones limpias: `extraer_ideas(texto)`, `guardar_resumen(fecha, resumen, tipo)`
+
+
+## 🚫 RESTRICCIONES
+
+- No usar APIs externas como OpenAI
+- No usar frameworks web como Flask
+- Solo librerías locales, `httpx` o `requests` permitido
+- Todo debe funcionar offline
+
+
+Por favor, generá el archivo `buffer_bot.py` completo, usando `requests` para comunicarte con el endpoint LLM local, y dejá listo un archivo `resumen.py` separado para contener la función `extraer_ideas(texto: str) -> str`.

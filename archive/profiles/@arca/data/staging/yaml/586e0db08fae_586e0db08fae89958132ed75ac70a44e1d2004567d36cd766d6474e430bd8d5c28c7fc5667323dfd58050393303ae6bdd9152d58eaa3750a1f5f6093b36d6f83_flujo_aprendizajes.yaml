@@ -1,0 +1,81 @@
+# Archivo de aprendizajes metodológicos
+# Generado automáticamente por add_aprendizaje_flujo.py
+
+- fecha: '2025-06-08T15:22:34.048140+00:00'
+  que_aprendi: La modularidad y trazabilidad son el núcleo del flujo ALMA_RESIST.
+  que_aprendio_sistema: Detectó que necesito documentación clara, plantillas reutilizables
+    y justificación para cada cambio.
+  cambio_metodologico: Se institucionalizó el registro de aprendizajes de método con
+    CLI.
+  consejo_futuro: Nunca cierres un sprint sin registrar el aprendizaje de flujo.
+  error_evitar: 'Dejar el método sin documentar: siempre genera deuda técnica y caos
+    futuro.'
+  observaciones: ''
+  autor: bird
+  chat_id: ''
+- fecha: '2025-06-08T15:48:01.973136+00:00'
+  que_aprendi: Aprendí a consolidar y versionar no solo archivos y decisiones, sino
+    también mi propio método de trabajo. El sistema me empuja a dejar registro de
+    cada ajuste en la arquitectura, documentar la justificación y cerrar cada fase
+    con bitácora y commit.
+  que_aprendio_sistema: El sistema entendió que priorizo la trazabilidad y la modularidad,
+    que necesito explicaciones sin vueltas y que la transparencia sobre cambios es
+    mi “non-negotiable”. Detectó que busco siempre dejar plantillas para que cualquier
+    IA o humano pueda continuar el flujo.
+  cambio_metodologico: Se creó la carpeta y plantilla YAML dedicada a registrar aprendizajes
+    de flujo de trabajo, quedando institucionalizada la práctica de documentar “cómo”
+    y “por qué” se ajusta la metodología en cada sprint.
+  consejo_futuro: No subestimes el valor de documentar el proceso, no solo el resultado.
+    Registrar los aprendizajes de flujo ahorra horas de dudas y evita repetir errores
+    en cada refactor.
+  error_evitar: No documentar los cambios de método, confiar solo en la memoria individual,
+    y dejar plantillas sin aplicar realmente.
+  observaciones: Primer registro institucional. Recomiendo automatizar la carga de
+    estos aprendizajes desde la CLI o al cierre de cada sprint.
+  autor: bird
+  chat_id: '[ID de este chat]'
+- fecha: '2025-06-08T17:03:46.073901+00:00'
+  que_aprendi: Que el orden y la disciplina en la documentación técnica permiten avanzar
+    sin perder contexto ni velocidad, y que los prompts bien ubicados son la base
+    de la eficiencia modular.
+  que_aprendio_sistema: Que Santi/Bird prioriza la trazabilidad y el control, con
+    preferencia por flujos auditables, prompts reutilizables y mínima repetición manual.
+  cambio_metodologico: 'Se formalizó el flujo técnico: toda tarea crítica se registra
+    primero en bitácora (usando prompt), luego commit en git, cerrando el ciclo de
+    aprendizaje con entrada en flujo_aprendizajes.yaml.'
+  consejo_futuro: Nunca arranques una tarea crítica sin definir desde el inicio la
+    estructura de registro y validación. Automatizá hasta el cansancio.
+  error_evitar: 'No subestimar la importancia del housekeeping: cualquier archivo
+    mal ubicado genera deuda técnica, confusión y retrabajo.'
+  observaciones: El ciclo fue exitoso, 100% replicable. Este flujo puede institucionalizarse
+    para todos los agentes y módulos futuros de ALMA_RESIST.
+  autor: bird
+  chat_id: ''
+- fecha: '2025-06-09T10:17:38.799377+00:00'
+  que_aprendi: La importancia de registrar cada acción crítica con bitácora, commit
+    y push antes de avanzar, asegurando trazabilidad total.
+  que_aprendio_sistema: El sistema se vuelve más robusto y auditable cuando cada paso
+    queda documentado antes de cualquier avance técnico.
+  cambio_metodologico: 'Se institucionaliza el flujo: bitácora → commit → push → siguiente
+    paso, como estándar obligatorio en cada ciclo de trabajo técnico.'
+  consejo_futuro: 'Nunca saltear el registro ni avanzar sin commit y push: cualquier
+    salto genera deuda técnica y pérdida de trazabilidad.'
+  error_evitar: Omitir bitácoras, olvidar el commit o dejar pushes pendientes, lo
+    que puede provocar pérdida de información o desincronización.
+  observaciones: ''
+  autor: bird
+  chat_id: ''
+- fecha: '2025-06-09T10:50:08.438353+00:00'
+  que_aprendi: Aprendí la importancia de definir el punto cero de auditoría antes
+    de indexar, y el valor de la limpieza previa.
+  que_aprendio_sistema: El sistema detectó que priorizo el control, la trazabilidad
+    y los respaldos antes de cualquier automatización.
+  cambio_metodologico: Se agregó un proceso de limpieza y checklist antes del indexado,
+    y la documentación YAML de todos los módulos.
+  consejo_futuro: No saltees la documentación ni el control de versiones antes de
+    lanzar módulos nuevos.
+  error_evitar: Indexar basura o correr scripts antes de terminar la limpieza.
+  observaciones: El proceso se vuelve antifrágil cuando se prioriza la auditoría y
+    los pequeños pasos documentados.
+  autor: bird
+  chat_id: ''

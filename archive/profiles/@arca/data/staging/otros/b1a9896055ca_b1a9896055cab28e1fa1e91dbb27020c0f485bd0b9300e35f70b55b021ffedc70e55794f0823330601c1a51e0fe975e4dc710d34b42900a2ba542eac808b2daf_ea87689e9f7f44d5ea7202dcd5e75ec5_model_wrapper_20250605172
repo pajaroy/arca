@@ -1,0 +1,75 @@
+# core/llm_server/model_wrapper/model_wrapper.py
+from llama_cpp import Llama
+import logging
+from typing import Optional, Dict
+import os
+
+class ModelWrapper:
+    def __init__(self, model_path: str, quantization: str = "Q4"):
+        self.model_path = model_path
+        self.quantization = quantization
+        self._model: Optional[Llama] = None
+        self.logger = logging.getLogger("alma_model")
+        self.context_window = 4096  # Puede ajustarse según el modelo
+        self.max_new_tokens = 512
+
+        # Validación inicial de ruta
+        if not os.path.exists(self.model_path):
+            raise FileNotFoundError(f"Modelo no encontrado en: {self.model_path}")
+
+    def load_model(self) -> None:
+        """Carga el modelo GGUF usando llama.cpp con configuraciones optimizadas"""
+        try:
+            self._model = Llama(
+                model_path=self.model_path,
+                n_ctx=self.context_window,
+                n_threads=os.cpu_count() - 1,  # Optimización para multi-core
+                n_batch=512,
+                use_mlock=True,  # Mejor rendimiento en sistemas con suficiente RAM
+                embedding=False
+            )
+            self.logger.info(f"Modelo cargado: {os.path.basename(self.model_path)}")
+            self.logger.debug(f"Configuración: ctx={self.context_window}, threads={os.cpu_count()-1}")
+        except Exception as e:
+            self.logger.error(f"Error cargando modelo: {str(e)}")
+            raise RuntimeError("Fallo en carga del modelo") from e
+
+    def generate(self, prompt: str) -> str:
+        """Genera texto con parámetros optimizados para reflexión crítica"""
+        if not self.is_loaded():
+            raise RuntimeError("Modelo no cargado - Llama a load_model() primero")
+
+        try:
+            output = self._model.create_completion(
+                prompt=prompt,
+                max_tokens=self.max_new_tokens,
+                temperature=0.7,  # Balance entre creatividad y precisión
+                top_p=0.95,
+                repeat_penalty=1.1,  # Evita repeticiones
+                echo=False  # No incluir el prompt en la salida
+            )
+            return output["choices"][0]["text"].strip()
+        except Exception as e:
+            self.logger.error(f"Error en generación: {str(e)}")
+            raise RuntimeError("Fallo en generación de respuesta") from e
+
+    def is_loaded(self) -> bool:
+        """Verifica si el modelo está cargado y listo"""
+        return self._model is not None
+
+    def get_model_info(self) -> Dict:
+        """Devuelve metadatos técnicos del modelo cargado"""
+        if not self.is_loaded():
+            return {"status": "no cargado"}
+
+        return {
+            "nombre": os.path.basename(self.model_path),
+            "cuantización": self.quantization,
+            "contexto": self.context_window,
+            "tokens_maximos": self.max_new_tokens,
+            "parametros": f"{self._model._params.n_params / 1e9:.1f}B",  # type: ignore
+            "versión_llama.cpp": self._model.__llama_version__  # type: ignore
+        }
+
+    def __repr__(self) -> str:
+        return f"ModelWrapper({os.path.basename(self.model_path)}, cargado={self.is_loaded()})"

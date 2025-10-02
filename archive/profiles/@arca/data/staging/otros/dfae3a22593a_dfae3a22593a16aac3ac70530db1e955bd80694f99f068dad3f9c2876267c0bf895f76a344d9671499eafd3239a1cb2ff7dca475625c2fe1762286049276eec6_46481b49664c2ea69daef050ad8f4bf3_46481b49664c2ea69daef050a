@@ -1,0 +1,19 @@
+# 📘 04_Bitacora – Registro Oficial de Operaciones
+
+Esta carpeta contiene la bitácora operativa principal del fondo Alma Mía.  
+Desde aquí se gestiona el seguimiento de trades tomados, no tomados, backtesting, métricas y resultados reales.
+
+## 📁 Contenido:
+
+- `4.0_Bitacora_Oficial.xlsx`:  
+  Archivo central del sistema operativo de trading, en el que se registran:
+
+  - Trades ejecutados (PPP, NYOP, etc.)
+  - Métricas por estrategia
+  - Backtesting estructurado
+  - Resultados netos por trimestre
+
+Esta carpeta sirve como núcleo para los módulos de informes, cálculos y reflexiones técnicas del sistema Alma Mía.
+
+**Versión inicial:** Abril 2025  
+**Responsable:** Santiago

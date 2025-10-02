@@ -1,0 +1,20 @@
+# Changelog – Mejoras Sugeridas Template Agente IA (para v2.1+)
+
+
+```yaml
+changelog:
+  validador_schema: "campos_obligatorios: [version, fecha, cambios]"
+  registros:
+    - version: "2.1"
+      fecha: YYYY-MM-DD
+      cambios: |
+        - Añadir campo responsable_revision en protocolos de revisión y mejora continua.
+        - Especificar campo flujo de revisión, para dejar claro el ciclo: "Reportar hallazgos → Memoria YAML → Changelog".
+        - Agregar ejemplo concreto de firmas SHA-256 en bloque memorias, bitácoras y changelog.
+        - Incluir commit_ref en historial_modificaciones, apuntando al enlace de commit/artefacto.
+        - Mantener compatibilidad con automatización de generación YAML vía script_sincronizacion.sh.
+```
+
+
+_Documento generado y validado como idea base de mejora continua – ALMA_RESIST / Centralesis / 2025-06-10._
+

@@ -1,0 +1,30 @@
+# ALMA_RESIST: Sistema de Integridad de Archivos y Auditoría
+
+ALMA_RESIST es un sistema modular de gestión y auditoría de archivos basado en agentes autónomos. Este proyecto tiene como objetivo asegurar la integridad de los archivos en el ecosistema ALMA, proporcionando trazabilidad completa y generando un historial detallado de las modificaciones realizadas a cada archivo.
+
+## Módulo 1: Generación de Hashes
+
+El primer módulo del sistema ALMA_RESIST se enfoca en la **generación de hashes** para cada archivo procesado en el entorno. Usando el algoritmo SHA-256 (configurable), el sistema calcula un hash único para cada archivo y lo registra en un índice centralizado, garantizando la **trazabilidad** y la **auditoría** de cualquier archivo dentro del sistema.
+
+### Propósito
+
+Este script se encarga de calcular el hash de cada archivo en una ruta específica y registrar estos valores junto con metadatos clave (como fecha, agente ejecutor, tamaño, comentarios, etc.) en un índice centralizado. Este índice se mantiene actualizado y es el punto de referencia para todo el sistema.
+
+### Documentación Técnica
+
+La documentación detallada sobre cómo funciona este script y su implementación técnica se encuentra en el archivo `hashing_multiagente_documentation_v0.1.0.yaml`.
+
+Puedes consultar este archivo para obtener una explicación completa sobre el flujo de trabajo, los parámetros de entrada, los resultados esperados y más detalles técnicos.
+
+### Uso
+
+Para ejecutar el script de generación de hashes, utiliza el siguiente comando:
+
+```bash
+python3 /home/bird/alma_core/control_central/core/scripts/hashing_multiagente_v0.1.0.py \
+  --ruta_objetivo /home/bird/alma_core/control_central \
+  --index /home/bird/alma_core/control_central/index.json \
+  --agente kael \
+  --comentario "Test de hashing v0.1.0" \
+  --logs_por_agente \
+  --output CLI

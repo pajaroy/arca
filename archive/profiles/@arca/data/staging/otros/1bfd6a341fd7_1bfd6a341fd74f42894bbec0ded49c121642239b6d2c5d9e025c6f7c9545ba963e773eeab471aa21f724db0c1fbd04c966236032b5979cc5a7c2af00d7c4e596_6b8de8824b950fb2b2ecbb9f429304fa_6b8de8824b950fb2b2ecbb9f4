@@ -1,0 +1,73 @@
+## 5. Flujos Internos – ALMA LIBRE v0.0.6.2
+
+ALMA LIBRE funciona como un sistema vivo de circulación de información.  
+Su objetivo no es solo almacenar datos, sino **establecer rutas claras, controladas y trazables** que conecten CUADERNOS, MÓDULOS, BITÁCORA y EMPRESAS.
+
+Los flujos internos permiten:
+
+- Evitar duplicación o pérdida de conocimiento.
+- Mantener memoria organizada, accesible y reutilizable.
+- Permitir que IAs operen con contexto y sin interferencias.
+- Establecer ciclos de mejora técnica y evolución estructural.
+
+
+### 🔄 5.2 Flujo de Diagnóstico Técnico y Mejora
+
+```text
+Diagnóstico → Checklist → Corrección → Registro → Versión Nueva
+```
+
+1. Lectura: `diagnostico_*.md`, `changelog.md`, `version.txt`
+2. Identificación de errores o mejoras
+3. Corrección estructural
+4. Registro de cambios en `CHANGELOG.md`
+5. Backup completo (`00_BACKUPS_HISTORICOS/`)
+6. Actualización de versión
+
+Este flujo puede ser manual, asistido por IA o automatizado por scripts.
+
+
+### ⚙️ 5.4 Flujo Modular Estándar (automatización)
+
+```text
+Entrada cruda → MODULO → output + BITACORA_CENTRAL
+```
+
+Ejemplo:
+- `automatizacion_vpd` procesa `.csv` de sensores ambientales
+- Genera alertas o reportes
+- Guarda en `output/` o registra resultados en la Bitácora
+
+Cada módulo debe declarar:
+- `input_path`, `output_path`, formato y esquema
+- Logs operativos internos
+
+
+### 🌱 5.6 Flujo de Formalización de Ideas
+
+```text
+CUADERNOS/*.cu/ → validación → EMPRESAS/*.emp/
+```
+
+1. Una propuesta nace como borrador
+2. Se revisa (humano/IA)
+3. Si se aprueba, se sube como documento formal a `EMPRESAS/`
+4. Opcionalmente se integra al changelog o whitepaper
+
+
+### 🔗 5.8 Diagrama Global
+
+```mermaid
+graph TD
+  A[Usuario/IA] --> B[CUADERNOS]
+  B --> C[BITACORA_CENTRAL]
+  B --> D[MODULOS/Alma_Loader]
+  D --> E[vector_db.json]
+  C --> F[DIAGNOSTICOS]
+  B --> G[EMPRESAS]
+  G --> H[Documentos Formales]
+  E --> I[CLI Assistant]
+  F --> I
+  C --> I
+```
+

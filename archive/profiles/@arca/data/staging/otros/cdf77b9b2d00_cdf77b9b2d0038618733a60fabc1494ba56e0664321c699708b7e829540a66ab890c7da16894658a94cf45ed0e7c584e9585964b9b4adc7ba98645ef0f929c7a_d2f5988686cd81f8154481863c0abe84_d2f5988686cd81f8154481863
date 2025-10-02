@@ -1,0 +1,953 @@
+- Documentación de decisiones arquitectónicas ampliada
+- Entradas actualizadas en `log_integracion.md` y `mapeo_sprint_archivos.md`
+- `changelog.md` actualizado con 2 versiones
+
+
+### 🔐 Estado del Sistema
+
+**Sistema ALMA_RESIST validado con estructura documental operativa, scripts funcionales y registros cerrados conforme a la metodología.**
+
+
+type: journal
+date: 2025-05-29
+linked_to:
+  - control/control_central
+  - docs/changelog.md
+tags: [bitacora, consolidacion, arquitectura]
+author: santi
+
+
+title: "Bitácora Consolidada – 2025-06-01"
+date: 2025-06-01
+tags: [#bitacora_diaria, #instalacion_base, #alma_resist, #alma_core, #configuracion, #parrot_os, #input_leap, #tmux, #obsidian, #sincronizacion, #auditor_textos, #asesor_ia, #ssh]
+status: validado
+linked_to: [alma_cli, control_central, alma_cli/auditor_textos, metodologias/estructura_autonoma]
+
+## 🧠 Reinicio Total y Consolidación de Núcleo
+
+**Formateo e instalación:**  
+Se reinstalaron desde cero los entornos ALMA_CORE y ALMA_RESIST sobre Parrot OS.  
+Se configuró el entorno mínimo viable operativo con enfoque CLI: alias, permisos sudo, conexiones remotas seguras.
+
+**Sincronización remota:**  
+SSH configurado para control cruzado entre nodos.  
+Alias definidos para comandos de sincronización rápida.  
+Revisión completa del sistema `syncthing` para compartir carpetas clave.
+
+**Periféricos compartidos:**  
+Se activó `Input Leap` en modo terminal para compartir mouse y teclado entre máquinas.  
+Se preparó script para ejecutar automáticamente esta configuración al iniciar.
+
+**Sistema listo para operar:**  
+Primer inicio exitoso del sistema base con:
+- sincronización funcional
+- CLI operativa
+- conexión a servidores LLM
+- estructura de carpetas formalizada
+
+
+## 🧩 Puntos Abiertos a Debatir (DeepSeek)
+
+- [ ] Estructura de `router_ai.py`
+- [ ] Formato final de `deepseek_response_template.yml`
+- [ ] Ejecutor automático para protocolo de conflicto
+- [ ] Registro de decisiones en `memory_graph` o `bitacora_central`
+- [ ] Centralización de estado del sistema vs. estados internos
+
+
+### ✅ 1. Instalación de paquetes base
+
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y git curl tmux vim htop net-tools openssh-server unzip rsync sqlite3 python3 python3-pip tree
+```
+
+
+### 🔗 3. Configuración de red y sincronización SSH
+
+```bash
+ssh-keygen -t ed25519 -C "bird@alma-resist"
+ssh-copy-id bird@192.168.1.33
+```
+
+Verificación:
+
+```bash
+ssh bird@192.168.1.36
+ssh bird@192.168.1.33
+```
+
+
+### 🧱 5. Instalación y uso de Tmux
+
+```bash
+sudo apt install tmux -y
+tmux new -s alma_core
+tmux new -s alma_resist
+```
+
+Atajos útiles:
+- Ctrl+b → % (dividir horizontal)
+- Ctrl+b → " (dividir vertical)
+- Ctrl+b → c (nueva ventana)
+- Ctrl+b → d (detach)
+
+
+### 🖼️ Fix de íconos para Obsidian
+
+```bash
+sudo apt install -y fonts-noto fonts-noto-color-emoji fonts-material-design-icons-iconfont fonts-roboto fonts-font-awesome
+fc-cache -fv
+```
+
+
+## 📌 Siguientes pasos
+
+- [ ] Planificar día 2025-06-02
+- [ ] Confirmar estructura de `asesor-ia/`
+- [ ] Consolidar `alma_status.yaml` general y específicos por módulo
+- [ ] Sincronización automática doble nodo
+- [ ] Iniciar sesiones en `asesor-ia/sesiones/`
+
+## Archivo: 2025-06-01_bitacora_con_apendice_final.md
+Contenido:
+# 📘 Bitácora de Trabajo – 2025-06-01
+
+## 📍 Contexto
+Segundo día de reinicio total del sistema ALMA_RESIST. El objetivo principal del día es **llevar a cabo el Sprint 0.2** correspondiente a la sincronización total de los nodos `ALMA_CORE` y `ALMA_RESIST`, así como establecer las bases para un sistema de bitácoras IA-friendly.
+
+## 📦 Actividades Principales
+
+- Se estableció oficialmente el prompt base para bitácoras: [[prompt_bitacora_control_central]].
+- Confirmación de sincronización entre nodos como punto prioritario.
+- Organización de archivos críticos: creación de carpetas `/status/` en `control_central/` y `asesor-ia/`.
+- Inicia la implementación del Sprint 0.2:
+  - Instalación y configuración de Syncthing en ambos nodos.
+  - Definición de carpetas a sincronizar (`ALMA_RESIST/`, `obsidian_vault/`).
+  - Inicio de documentación viva en `docs/sync/`.
+
+## 📌 Enlace al Sprint
+Archivo base: `control_central/control/sprint_actual.md`  
+Sprint activo: `sprint_actual_0.2_sincronizacion.md`
+
+## 🛠️ Pendientes Críticos
+
+- [ ] Finalizar scripts de verificación (`sync_status.sh`).
+- [ ] Crear backup automático a GitHub vía `cron`.
+- [ ] Validación CLI con comando `alma status --sync`.
+- [ ] Cierre del README en `docs/sync/`.
+
+## 🧠 Reflexiones del Día
+
+El segundo día de reinstalación del sistema reafirma la necesidad de:
+- Estandarizar los prompts y registros diarios.
+- Automatizar todo el flujo de trabajo para asegurar replicabilidad y tolerancia a errores.
+
+> Hoy consolidamos el eje operativo más crítico del sistema: **sincronización total**.
+
+
+### 🔖 Tags de memoria futura
+
+`#bitacora` `#sync` `#sprint_0.2` `#control_central` `#nodos` `#alma_resist`
+
+
+### 🗂️ Acción Registrada: Generación de READMEs
+
+En el día 2025-06-01 se documentaron los módulos clave de `control_central/` con archivos `README.md` IA-friendly para permitir navegación, trazabilidad y asistencia técnica futura.
+
+📁 Carpetas documentadas:
+- `archivo/`
+- `asesor-ia/core/`
+- `asesor-ia/docs/`
+- `core/scripts/`
+- `logs/`
+- `status/`
+
+
+### 🔄 Sincronización entre nodos
+
+🔧 Se instaló y configuró **Syncthing** en ambos nodos.  
+📁 Se definió `/home/bird/ALMA_RESIST` como carpeta madre a sincronizar.  
+📡 Confirmada la sincronización completa y funcional en tiempo real.  
+🧾 Se registraron los pasos de instalación, claves, y pruebas cruzadas.  
+🔐 Clave SSH configurada manualmente con validación contra GitHub.
+
+
+### 🛠️ Lecciones operativas del día
+
+- Todo archivo debe ser eliminado con `git rm` para no interrumpir el flujo del sistema.
+- Es fundamental establecer **conductas estrictas de manipulación** del entorno ALMA_RESIST.
+- Se recomienda trabajar siempre desde la terminal y registrar los movimientos críticos.
+- Los `README.md` fueron generados por carpeta para facilitar navegación modular.
+
+
+### 🧭 Camino a seguir
+
+- [ ] Integrar este apéndice como documento anexo en la bitácora principal.
+- [ ] Estandarizar el uso de `git` en ambas PCs.
+- [ ] Documentar en `docs/protocolos/` la conducta operativa para alta replicabilidad.
+
+## Archivo: 2025-06-02_bitacora.md
+Contenido:
+
+# 🧠 Bitácora Diario – 2025-06-02
+
+## 🎯 Objetivos del Día
+
+- [x] Consolidar protocolo de ingreso de archivos
+- [x] Crear carpeta `/downloads/` y flujo de archivado
+- [x] Documentar el comportamiento de backup automático Git
+- [x] Generar apéndice diario para `control_central/`
+- [ ] Completar README de `docs/sync/`
+- [ ] Crear script `sync_status.sh` para monitoreo
+- [ ] Continuar documentación del Vault Obsidian
+
+
+## 🧠 Reflexión Personal
+
+Hoy el sistema mostró su capacidad de autorreplicación y autoorganización. Se evidencia cómo el uso de logs, flujos CLI y archivos README ayudan a controlar la complejidad creciente del sistema. Además, el backup a Git ahora actúa como una forma de trazabilidad activa, lo que lleva a un cambio de conducta: trabajar con más consciencia y menos impulsividad.
+
+
+## 📎 Apéndices del Día
+
+- [x] Protocolo ingreso archivos: [`protocolo_ingreso_archivos.md`](../archivados/protocolos/protocolo_)
+- [x] Apendice diario: [`2025-06-01_apendice_bitacora_control_central.md`](../bitacoras/diarios/2025-06-01_apendice_bitacora_control_central.md)
+- [x] Script backup: [`core/scripts/backup_to_git.sh`](../../core/scripts/backup_to_git.sh)
+
+## Archivo: 2025-06-03_bitacora_reorganizacion_cli_cleaner.md
+Contenido:
+# 📘 Bitácora de Reorganización – Asesor CLI `cli_cleaner`
+📅 Fecha: 2025-06-03
+📍 Ubicación: `control_central/docs/journal/bitacoras/`
+👤 Responsable: Asistente CLI `cli_cleaner` bajo supervisión de ALMA_CENTRAL
+
+
+## 🧭 Decisiones Estratégicas
+
+- Se evitarán múltiples archivos dispersos para criterios o estructura.
+- Se consolidarán en archivos vivos con apéndices internos.
+- Se formaliza la estructura CLI como método oficial de registro, control y trazabilidad en ALMA_RESIST.
+
+
+🧠 *“Lo que se nombra bien, se organiza mejor.”*  
+
+
+
+## 📁 Formato del Archivo
+
+- Tipo: Markdown `.md`
+- Ubicación sugerida: `/control_central/bitacoras/diarios/`
+- Nombre del archivo: `AAAA-MM-DD_bitacora.md`
+
+type: bitacora
+scope: diario
+date: 2025-06-02
+tags: [modulo=asesor-ia, cli-cleaning, configuracion]
+related_to: [asesor-ia, control_central]
+status: activo
+summary: "Bitácora del día con avances en instalación, reflexión operativa y tareas CLI."
+
+## ✅ Validaciones Automáticas (por asesor-IA-cli)
+- Toda bitácora debe tener YAML frontmatter válido
+- Tags deben tener formato `#tema` o `#modulo=nombre`
+- El archivo debe estar en el subdirectorio correcto (`diarios/`)
+
+## Archivo: prompt_bitacora_control_central.md
+Contenido:
+
+🧠 Prompt Base – prompt_bitacora_control_central_v1
+
+Actuá como asistente de documentación técnica para el ecosistema ALMA_RESIST. Tu tarea es generar una **bitácora diaria estructurada y IA-friendly** siguiendo el formato oficial del nodo `control_central`.
+
+## 🎯 Objetivo:
+Garantizar trazabilidad completa, recuperación por etiquetas y compatibilidad con sistemas de memoria y auditoría IA.
+
+
+## 🧷 Estructura Obligatoria
+
+1. **YAML Frontmatter** (Encabezado de metadata)
+
+```yaml
+```
+
+2. **Cuerpo Principal**
+
+```markdown
+# 🧠 Bitácora Diario – 2025-06-02
+
+## 🎯 Objetivos del Día
+- [ ] Definir prompt base para bitácoras
+- [ ] Sincronizar nodos con git + obsidian
+- [ ] Consolidar sistema de estatus y memoria
+
+## 🛠️ Avances
+Detalle técnico de acciones realizadas durante el día, con resultados claros y comandos usados si aplica.
+
+## 🧠 Reflexión Personal
+Espacio para análisis subjetivo, emocional, filosófico o estratégico del día.
+
+## 🔁 Tareas Pendientes
+- [ ] Registrar prompt en carpeta `prompts/`
+- [ ] Revisar status general del sistema
+
+## 📎 Apéndices del Día
+- [x] Instalación base: [apendices/2025-06-01_instalacion.md](../apendices/2025-06-01_instalacion.md)
+
+## 🔖 Tags
+#modulo=asesor-ia #cli-cleaning #proyecto=alma-resist
+```
+
+
+## 📌 Uso Complementario
+Este prompt puede ser activado con el comando:
+
+```bash
+!alma prompt --type=bitacora
+```
+
+
+module: control/registros/mapeo_sprint_archivos
+type: core
+status: in_progress
+created: '2025-05-23'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+## Sprint 2.3 – Integración de Idea Base Unificada
+
+| Archivo                                     | Descripción                                                  | Estado | Fuente       |
+|---------------------------------------------|--------------------------------------------------------------|--------|--------------|
+| `docs/idea_base/ALMA_RESIST_idea_base_0.0.0.1.md` | Documento unificado de idea base                           | Final  | Manual       |
+| `docs/idea_base/version.md`                 | Metadatos y control del documento                            | Final  | Manual       |
+| `docs/idea_base/README.md`                  | Explicación estructural del área `idea_base/`                | Final  | Manual       |
+| `docs/idea_base/changelog.md`               | Registro de integraciones y cambios de idea base             | Final  | Manual       |
+| `docs/idea_base/_legacy/`                   | Archivos anteriores consolidados como respaldo               | Final  | Manual       |
+| `_legacy.zip`                               | Backup comprimido de ideas anteriores para archivo externo   | Final  | Manual       |
+
+## Archivo: estructura_ia_friendly.md
+Contenido:
+
+# 🤖 Proyección Modular IA-Friendly – ALMA_RESIST
+
+## 🎯 Objetivo
+
+Definir las mejores prácticas para estructurar cada herramienta o módulo del ecosistema ALMA_RESIST de forma que sea **IA-operable**, **autocontenida** y **semánticamente coherente**. Esto permite que en el futuro una IA pueda:
+
+- Leer un módulo sin contexto externo
+- Ejecutar, diagnosticar y documentar tareas
+- Realizar cambios con trazabilidad clara
+- Operar como asistente de mantenimiento o expansión
+
+
+## 🧠 ¿Por qué cada módulo debe tener esta estructura?
+
+- **Autonomía**: Cada carpeta se comporta como una mini-app auditable.
+- **Escalabilidad**: Nuevas herramientas se integran sin romper lo anterior.
+- **Automatización futura**: Una IA puede leer y operar sobre un módulo.
+- **Portabilidad**: Podés copiar la carpeta y se comporta igual en cualquier entorno.
+
+
+## 🧩 Nuevo Archivo Sugerido: `IA-assistant.md`
+
+Este archivo define el **rol de una IA** sobre el módulo.
+
+### 📘 Ejemplo:
+
+```markdown
+# 🤖 Asistente IA – Módulo `cli_cleaner`
+
+## 🧠 Rol del Asistente
+
+Tu tarea como IA es:
+- Diagnosticar archivos dentro de `archivo/logs/`
+- Ejecutar los scripts de limpieza si detectás exceso o errores
+- Escribir resultados en `changelog.md` y registrar contexto en `journal/`
+
+## ⚙️ Instrucciones
+
+- No eliminar archivos sin registrarlos
+- Usar `config/settings.yaml` para conocer los límites
+- Actualizar `meta/module.yaml` si cambiás entradas o salidas
+
+## 📌 Estado
+
+Este módulo está activo y funcionando en entorno ALMA_RESIST.
+```
+
+
+## 🚀 Siguientes pasos sugeridos
+
+- [ ] Generar plantilla `IA-assistant.md`
+- [ ] Establecer convención de tags en YAML para clasificación IA
+- [ ] Crear script para validar estructura de cada módulo automáticamente
+- [ ] Diseñar panel de control con resumen de todos los módulos (`index.md`)
+- [ ] Integrar IA local para operar por módulo (inferencia, lectura, cambios)
+
+
+📂 Documento generado por ALMA_ASSIST | Junio 2025
+
+
+## Archivo: instalacion_inputleap_ssh_tmux.md
+Contenido:
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y git curl tmux vim htop net-tools openssh-server unzip rsync sqlite3 python3 python3-pip
+
+#paso dos sincronizar lso mouse a las dos pc:
+
+#!/bin/bash
+
+# Instalación completa de Input Leap en sistemas tipo Debian (Parrot, Ubuntu, etc.)
+# Compatible con ALMA_CORE y ALMA_RESIST
+
+echo "📦 Instalando dependencias..."
+sudo apt update
+sudo apt install -y git cmake make g++ qt6-base-dev qt6-tools-dev \
+  libx11-dev libxext-dev libxrandr-dev libxinerama-dev libxtst-dev libxi-dev \
+  libssl-dev libavahi-compat-libdnssd-dev libcurl4-openssl-dev \
+  libgl1-mesa-dev pkg-config
+
+echo "🧬 Clonando repositorio input-leap con submódulos..."
+cd ~
+rm -rf input-leap
+git clone --recurse-submodules https://github.com/input-leap/input-leap.git
+cd input-leap
+mkdir build && cd build
+
+echo "🛠️ Corrigiendo compatibilidad con GCC 11+..."
+sed -i '1i#include <cstddef>' ../src/lib/platform/XKBUtil.cpp
+
+echo "⚙️ Compilando Input Leap..."
+cmake ..
+make -j$(nproc)
+sudo make install
+
+echo "✅ Instalación finalizada."
+
+echo "📁 Configurá el servidor con:"
+echo 'nano ~/.input-leap/input-leap.conf'
+echo ""
+echo "Ejemplo:"
+echo "-----------------------------"
+echo "section: screens"
+echo "    alma-core:"
+echo "    alma-resist:"
+echo "end"
+echo ""
+echo "section: links"
+echo "    alma-core:"
+echo "        left = alma-resist"
+echo "    alma-resist:"
+echo "        right = alma-core"
+echo "end"
+echo "-----------------------------"
+
+echo "🚀 Para iniciar manualmente:"
+echo "En alma-core:"
+echo "input-leaps --no-tray --disable-crypto --name alma-core --config ~/.input-leap/input-leap.conf"
+echo ""
+echo "En alma-resist:"
+echo "input-leapc --no-tray --disable-crypto --name alma-resist 192.168.1.33:24800"
+
+# paso 3 - sincronizacion de las dos pcs
+# Apéndice — Instalación, Configuración SSH y Sincronización Inicial (ALMA\_RESIST)
+
+**Fecha:** 2025-06-01
+**Nodos:** ALMA\_CORE (192.168.1.33) y ALMA\_RESIST (192.168.1.36)
+**Usuario:** bird
+**Ruta raíz:** `/home/bird/ALMA_RESIST/`
+
+
+## 2. **Estructura de carpetas replicada**
+
+Se creó la estructura `/home/bird/ALMA_RESIST/` en ambos nodos.
+Se verificó igualdad de rutas y archivos mediante:
+
+```bash
+pwd
+ls -lha /home/bird/ALMA_RESIST
+tree -L 2 /home/bird/ALMA_RESIST
+```
+
+
+## 4. **Generación y copia de claves SSH**
+
+**En ALMA\_RESIST:**
+
+```bash
+ssh-keygen -t ed25519 -C "bird@alma-resist"
+```
+
+(Presionar Enter en todas las preguntas para dejar la clave sin passphrase.)
+
+**Luego:**
+
+```bash
+ssh-copy-id bird@192.168.1.33
+```
+
+* Se aceptó la autenticidad del host y se ingresó la contraseña una sola vez.
+* Verificado acceso SSH sin password con:
+
+  ```bash
+  ssh bird@192.168.1.33
+  ```
+
+
+## 6. **Primer sincronización con rsync**
+
+**Comando desde ALMA\_CORE a ALMA\_RESIST:**
+
+```bash
+rsync -avz --delete --exclude-from=/home/bird/ALMA_RESIST/.rsync_exclude /home/bird/ALMA_RESIST/ bird@192.168.1.36:/home/bird/ALMA_RESIST/
+```
+
+**Comando en sentido inverso (desde ALMA\_RESIST a ALMA\_CORE):**
+
+```bash
+rsync -avz --delete --exclude-from=/home/bird/ALMA_RESIST/.rsync_exclude /home/bird/ALMA_RESIST/ bird@192.168.1.33:/home/bird/ALMA_RESIST/
+```
+
+* Se validó que la sincronización deja ambas carpetas **idénticas** (salvo exclusiones).
+
+
+> **Recomendación:**
+> Mantener este apéndice actualizado y registrar cada modificación relevante al flujo de instalación o sincronización.
+
+## Archivo: red_nodos_alma.md
+Contenido:
+
+# 🧠 ALMA — Configuración de Red y Conectividad entre Nodos
+
+> Archivo técnico para referencia rápida de IPs, nodos y comandos de conexión SSH.
+
+
+## 🔄 Conexión entre Nodos (SSH)
+
+### Desde **ALMA_CORE** a **ALMA_RESIST**:
+```bash
+ssh bird@192.168.1.36
+```
+
+### Desde **ALMA_RESIST** a **ALMA_CORE**:
+```bash
+ssh bird@192.168.1.33
+```
+
+✅ Una vez copiadas las claves con `ssh-copy-id`, el acceso es automático (sin contraseña).
+
+
+## 🔒 Notas de Seguridad
+
+- Asegurar que ambos nodos tengan `openssh-server` instalado.
+- Para cambiar IPs estáticas, actualizar este archivo y `~/.ssh/config` si se usa.
+- Verificar acceso con `ping` o `hostname -I`.
+
+
+
+
+
+## 🎯 Objetivo
+
+Establecer alias SSH simples para facilitar el acceso entre las dos máquinas del sistema:
+
+- Desde **alma-core**, acceder con: `ssh resist`
+- Desde **alma-resist**, acceder con: `ssh core`
+
+
+## ⚙️ Instalación rápida desde alma-core
+
+Desde `alma-core`, ejecutá:
+
+```bash
+scp ~/.ssh/config resist:~/.ssh/config
+```
+
+Esto copia la configuración directamente al nodo `resist`.
+
+
+## 🧠 Observaciones
+
+- Los alias son totalmente personalizables. Usamos `core` y `resist` por simplicidad.
+- Podés agregar más hosts SSH en este mismo archivo en el futuro.
+- El archivo `~/.ssh/config` debe tener permisos correctos (`chmod 600 ~/.ssh/config`).
+
+
+> **Tip de automatización:** podés agregar estos alias dentro de un script de post-instalación para futuros despliegues de ALMA.
+
+
+
+## Archivo: control_central_cli_cleaner.md
+Contenido:
+# 🔧 Prompt Base – Asesor CLI de Limpieza para `control_central/`
+
+Actuá como **asistente técnico especializado en terminal Linux (CLI)**, enfocado exclusivamente en **la limpieza estructural, mantenimiento y orden técnico** de la carpeta `control_central/` dentro del sistema ALMA_RESIST.
+
+## 📌 Tu rol
+
+Sos un **asesor subordinado** dentro del equipo de `asesores-IA`, bajo **supervisión directa del asesor general de ALMA_RESIST** (`contexto_oficial_asesor-ia_control-central.md`).
+
+Tu misión es:
+
+- Mantener el orden lógico y semántico de `control_central/`.
+- Proponer mejoras de estructura y limpieza.
+- Detectar redundancias, archivos obsoletos, duplicados o sin uso claro.
+- Colaborar con otros asistentes CLI de módulos (como `alma_cli`) para mantener consistencia en todo el ecosistema.
+- Toda operación debe ser:
+  - Ejecutable desde terminal (`.sh`, `bash`, `find`, etc.)
+  - Documentada en bitácoras (`docs/journal/`)
+  - Referenciada en changelogs si corresponde
+
+## 🧠 Contexto
+
+Este módulo `control_central/` es el **nodo madre del ecosistema ALMA_RESIST**. Todo cambio debe mantenerse en sincronía con:
+
+- `alma_resist/`
+- `control_central/cli_cleaner/`
+- `control_central/scripts/`
+- `control_central/docs/`
+
+## 🧭 Reglas
+
+1. No tomes decisiones arbitrarias: sugerí cambios y pedí confirmación.
+2. Si un archivo puede afectar el sistema general, informalo al asesor general.
+3. Toda operación debe ser reproducible por Santi desde la CLI.
+4. Si se requiere código: crear prompt explícito para DeepSeek, **ubicando el script dentro de `cli_cleaner/`**.
+
+## 🗂️ Estructura técnica a mantener
+
+- `control_central/cli_cleaner/`
+- `control_central/scripts/`
+- `control_central/docs/`
+- `control_central/asesor-ia/`
+- `control_central/prompts/`
+
+## 🏷️ Tags IA-Friendly (si aplica)
+
+- `#cli_cleaner`
+- `#control_central`
+- `#estructura`
+- `#scripts`
+- `#ordenamiento`
+- `#auditoria_estructura`
+
+## Archivo: 2025-05-29_prompt_audioria_001.md
+Contenido:
+# 🧠 Prompt de Auditoría – Reestructuración ALMA_RESIST desde comando_central
+
+
+## 📌 Lineamientos críticos
+
+- **Toda carpeta interna relevante debe seguir la misma estructura base definida en la metodología** (`control/`, `docs/`, `archivo/`, `core/`, `config/`, `meta/`), con variantes solo si son justificadas por la función.
+    
+- **No se permite duplicación innecesaria de archivos ni estructuras fuera de estándar.**
+    
+- **La carpeta `ALMA_RESIST/control_central/` debe funcionar como “centro de mando”**, desde donde se pueda visualizar y comandar todos los sprints, auditorías y checklist activos de cada módulo.
+    
+- **Cada módulo debe ser auditable, autocontenible y replicable por sí solo**.
+    
+- **Aplicar el esquema de exclusión de archivos temporales y logs del versionado.**
+    
+- **Todos los readme, changelogs y journals deben tener YAML de metadatos.**
+    
+
+
+## 📄 Archivos Adjuntos
+
+- `ALMA_RESIST.zip` (contenido a auditar y reestructurar)
+    
+- `metodologia_estructura_autonoma_v2.md` (esquema obligatorio)
+    
+
+
+**Al finalizar, entregá:**
+
+- El **nuevo árbol de directorios** en markdown.
+    
+- Un **changelog de todos los cambios estructurales**.
+    
+- Una **justificación breve por cada decisión no trivial**.
+    
+- Sugerencias para automatizar esta auditoría en el futuro (si corresponde).
+    
+
+## Archivo: log_integracion 1.md
+Contenido:
+# 📘 Log de Integración – ALMA_RESIST
+
+Este registro documenta la integración estructurada de componentes, scripts, metodologías y documentación asociada, como parte del proceso evolutivo del sistema ALMA_RESIST.
+
+
+### 📄 Archivos afectados
+
+- Todos los archivos bajo `docs/` fueron procesados por:
+  - `fix_metadata.py` (v4)
+  - `force_snake_case_modules.py`
+  - `validate_docs.py`
+
+### 🔄 Scripts involucrados
+
+- `fix_metadata.py`: Corrige YAML, normaliza metadatos y fechas.
+- `force_snake_case_modules.py`: Ajusta los valores del campo `module` a snake_case.
+- `validate_docs.py`: Verifica integridad y formato de cada archivo.
+- `integrar_nuevo_archivo.sh`: Ejecuta todo el flujo anterior de forma automática.
+
+### 📁 Estructura validada y organizada
+
+- Archivos migrados a snake_case.
+- README.md actualizado con el nuevo flujo.
+- Metadatos estandarizados para 100+ documentos.
+- Validación 100% exitosa al final del sprint.
+
+### 🧠 Impacto
+
+- Documentación IA-compatible.
+- Base sólida para procesos automáticos futuros.
+- Reducción de errores semánticos y duplicaciones.
+
+### 🔗 Relación con otros módulos
+
+- `metodologia_agregado_archivos_v8.md`: Documento madre que rige el flujo de integración.
+- `metodologia_sprints_v2.md`: Registra la metodología para ejecución y cierre de sprints.
+- `resumen_mvp.md`: Resume el progreso global alcanzado en esta versión.
+
+
+## 🧠 Sprint 2.3 – Integración de Idea Base Unificada
+
+📅 Fecha de integración: 2025-05-23  
+📁 Carpeta afectada: `docs/idea_base/`  
+📦 Versión de referencia: `v0.3.0-dev`  
+🔧 Estado: ✅ Finalizado
+
+
+### 🧰 Acciones
+
+- Archivos antiguos movidos a `docs/idea_base/_legacy/`
+- Generación de documentación estructural
+- Empaquetado de backups históricos en `_legacy.zip`
+- Documentación lista para ser usada como nodo raíz semántico
+
+## Archivo: log_integracion.md
+Contenido:
+# 📜 Log de Integración de Archivos
+
+Registro cronológico de archivos integrados en el sistema.
+
+- README.md | 📅 Fecha: 2025-05-22 | 🔗 Origen: Sprint_2.3_Correccion_Metadatos | ✍️ Acción: Integrado
+- resumen_secciones.md | 📅 Fecha: 2025-05-22 | 🔗 Origen: Sprint_2.3_Correccion_Metadatos | ✍️ Acción: Integrado
+- lecciones_aprendidas.md | 📅 Fecha: 2025-05-22 | 🔗 Origen: Sprint_2.3_Correccion_Metadatos | ✍️ Acción: Integrado
+- hitos.md | 📅 Fecha: 2025-05-22 | 🔗 Origen: Sprint_2.3_Correccion_Metadatos | ✍️ Acción: Integrado
+- changelog.md | 📅 Fecha: 2025-05-22 | 🔗 Origen: Sprint_2.3_Correccion_Metadatos | ✍️ Acción: Integrado
+- decisiones_arquitectonicas.md | 📅 Fecha: 2025-05-22 | 🔗 Origen: Sprint_2.3_Correccion_Metadatos | ✍️ Acción: Integrado
+
+## Archivo: log_crypto_v0.0.0.1.md
+Contenido:
+```python
+# core/llm_server/utils/log_crypto.py
+import os
+import json
+import logging
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM, ChaCha20Poly1305
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from cryptography.hazmat.backends import default_backend
+import cpuinfo
+
+logger = logging.getLogger("alma_crypto")
+
+class CryptoEngine:
+    def __init__(self):
+        self.algorithm = self.detectar_algoritmo()
+        self.backend = default_backend()
+        logger.info(f"Algoritmo seleccionado: {self.algorithm}")
+
+    def detectar_algoritmo(self) -> str:
+        """Detecta el mejor algoritmo disponible según el hardware"""
+        try:
+            info = cpuinfo.get_cpu_info()
+            if 'aes' in info['flags'] and 'sse2' in info['flags']:
+                return 'AES-256-GCM'
+            return 'ChaCha20'
+        except Exception as e:
+            logger.warning(f"Error detección hardware: {str(e)} - Usando ChaCha20")
+            return 'ChaCha20'
+
+    def generar_clave(self, password: bytes = None, salt: bytes = None) -> bytes:
+        """Genera clave de 256 bits con derivación segura"""
+        if password:
+            if not salt:
+                salt = os.urandom(16)
+            kdf = PBKDF2HMAC(
+                algorithm=hashes.SHA3_256(),
+                length=32,
+                salt=salt,
+                iterations=100000,
+                backend=self.backend
+            )
+            return kdf.derive(password)
+        return os.urandom(32)
+
+    def _get_cipher(self, key: bytes):
+        """Factory de cifradores según algoritmo detectado"""
+        if self.algorithm == 'AES-256-GCM':
+            return AESGCM(key)
+        return ChaCha20Poly1305(key)
+
+    def encrypt_log(self, input_path: str, output_path: str, key: bytes = None) -> bytes:
+        """Cifra logs JSONL con autenticación integrada"""
+        try:
+            if not key:
+                key = self.generar_clave()
+
+            nonce = os.urandom(12) if self.algorithm == 'AES-256-GCM' else os.urandom(24)
+            cipher = self._get_cipher(key)
+
+            with open(input_path, 'rb') as f_in, open(output_path, 'wb') as f_out:
+                plaintext = f_in.read()
+                encrypted_data = cipher.encrypt(nonce, plaintext, None)
+                f_out.write(nonce + encrypted_data)
+
+            logger.debug(f"Log cifrado: {input_path} -> {output_path}")
+            return key
+        except Exception as e:
+            logger.error(f"Error cifrando log: {str(e)}")
+            raise
+
+    def decrypt_log(self, input_path: str, output_path: str, key: bytes) -> None:
+        """Descifra logs manteniendo estructura JSONL"""
+        try:
+            with open(input_path, 'rb') as f_in:
+                data = f_in.read()
+                nonce_len = 12 if self.algorithm == 'AES-256-GCM' else 24
+                nonce, ciphertext = data[:nonce_len], data[nonce_len:]
+
+                cipher = self._get_cipher(key)
+                decrypted_data = cipher.decrypt(nonce, ciphertext, None)
+
+                with open(output_path, 'wb') as f_out:
+                    f_out.write(decrypted_data)
+
+                logger.debug(f"Log descifrado: {input_path} -> {output_path}")
+        except Exception as e:
+            logger.error(f"Error descifrando log: {str(e)}")
+            raise
+
+    @staticmethod
+    def validar_log_cifrado(file_path: str) -> bool:
+        """Verifica integridad básica del log cifrado"""
+        try:
+            with open(file_path, 'rb') as f:
+                header = f.read(64)
+                return len(header) >= 12  # Nonce mínimo
+        except:
+            return False
+
+```
+
+## Archivo: log_crypto_v0.0.0.3.md
+Contenido:
+```python
+import os
+import logging
+import cpuinfo
+from typing import Optional  # 🔧 Agregado para evitar NameError
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM, ChaCha20Poly1305
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from cryptography.hazmat.backends import default_backend
+
+logger = logging.getLogger("alma_crypto")
+
+class CryptoEngine:
+    def __init__(self, algorithm=None):
+        self.backend = default_backend()
+        self.algorithm = algorithm or self.detectar_algoritmo()
+        logger.info(f"Algoritmo seleccionado: {self.algorithm}")
+
+    def detectar_algoritmo(self):
+        try:
+            info = cpuinfo.get_cpu_info()
+            if 'aes' in info['flags'] and 'sse2' in info['flags']:
+                return 'AES-256-GCM'
+        except Exception as e:
+            logger.warning(f"Fallo en detección de hardware: {str(e)}")
+        return 'ChaCha20'
+
+    def generar_clave(self, password: bytes = None, salt: bytes = None):
+        if password:
+            if not salt:
+                salt = os.urandom(16)
+            kdf = PBKDF2HMAC(
+                algorithm=hashes.SHA3_256(),
+                length=32,
+                salt=salt,
+                iterations=100_000,
+                backend=self.backend
+            )
+            key = kdf.derive(password)
+            return key, salt
+        # Clave aleatoria sin derivación
+        return os.urandom(32), None
+
+    def _get_cipher(self, key: bytes):
+        if self.algorithm == 'AES-256-GCM':
+            return AESGCM(key)
+        return ChaCha20Poly1305(key)
+
+    def encrypt_log(self, input_file: str, output_file: str, key: bytes, salt: Optional[bytes] = None) -> None:
+        nonce = os.urandom(12 if self.algorithm == 'AES-256-GCM' else 24)
+        cipher = self._get_cipher(key)
+    
+        with open(input_file, 'rb') as f_in:
+            plaintext = f_in.read()
+        encrypted = cipher.encrypt(nonce, plaintext, None)
+    
+        with open(output_file, 'wb') as f_out:
+            if salt:
+                f_out.write(salt)
+            f_out.write(nonce + encrypted)
+    
+        logger.debug(f"Log cifrado: {input_file} -> {output_file}")
+
+
+    def decrypt_log(self, input_path: str, output_path: str, password: bytes = None, key: bytes = None, salt: bytes = None):
+        """Descifra un archivo log cifrado usando clave derivada (con password) o clave directa (key)."""
+        with open(input_path, 'rb') as f_in:
+            data = f_in.read()
+    
+        offset = 0
+    
+        if password:
+            # Si no se pasó sal, la sacamos del archivo
+            if not salt:
+                salt = data[:16]
+                offset += 16
+            key, _ = self.generar_clave(password, salt)
+        elif key:
+            if salt:
+                offset += 16  # Salt está embebida al inicio y hay que saltarla
+        else:
+            raise ValueError("Se requiere una clave o contraseña para descifrar.")
+    
+        nonce_len = 12 if self.algorithm == 'AES-256-GCM' else 24
+        nonce = data[offset:offset + nonce_len]
+        ciphertext = data[offset + nonce_len:]
+    
+        cipher = self._get_cipher(key)
+        decrypted = cipher.decrypt(nonce, ciphertext, None)
+    
+        with open(output_path, 'wb') as f_out:
+            f_out.write(decrypted)
+    
+        logger.debug(f"Log descifrado: {input_path} -> {output_path}")
+    
+    def validar_log_cifrado(path: str) -> bool:
+        try:
+            with open(path, 'rb') as f:
+                data = f.read()
+            return len(data) > 28  # salt + nonce mínimo
+        except Exception:
+            return False
+
+
+```
+

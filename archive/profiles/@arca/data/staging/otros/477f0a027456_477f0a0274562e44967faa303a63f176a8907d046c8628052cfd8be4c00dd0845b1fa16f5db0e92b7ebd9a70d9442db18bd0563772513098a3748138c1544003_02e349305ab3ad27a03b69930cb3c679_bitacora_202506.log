@@ -1,0 +1,8 @@
+2025-06-18T23:57:30Z | INFO | add_bitacora_entry_v0.3.0 | 🚀 Iniciando comando: AGREGAR
+2025-06-18T23:57:30Z | ERROR | add_bitacora_entry_v0.3.0 | 🚨 ERROR CRÍTICO: 'NoneType' object has no attribute 'get'
+2025-06-18T23:59:19Z | INFO | add_bitacora_entry_v0.3.0 | 🚀 Iniciando comando: AGREGAR
+2025-06-18T23:59:19Z | INFO | add_bitacora_entry_v0.3.0 | Backup creado: /home/bird/alma_core/control_central/agentes/bird/bitacoras/docs/journal/backups/bitacora_personal_bird_backup_20250618_235919.yaml
+2025-06-18T23:59:19Z | INFO | add_bitacora_entry_v0.3.0 | Triple formato actualizado: bitacora_personal_bird.yaml
+2025-06-18T23:59:19Z | INFO | add_bitacora_entry_v0.3.0 | Triple formato actualizado: bitacora_personal_bird.yaml
+2025-06-18T23:59:19Z | INFO | add_bitacora_entry_v0.3.0 | Registro changelog: alta | Entrada: 91b13a4b-b08f-408e-b3eb-8d04e2a287e7
+2025-06-18T23:59:19Z | INFO | add_bitacora_entry_v0.3.0 | ✅ Entrada agregada: ID=91b13a4b-b08f-408e-b3eb-8d04e2a287e7

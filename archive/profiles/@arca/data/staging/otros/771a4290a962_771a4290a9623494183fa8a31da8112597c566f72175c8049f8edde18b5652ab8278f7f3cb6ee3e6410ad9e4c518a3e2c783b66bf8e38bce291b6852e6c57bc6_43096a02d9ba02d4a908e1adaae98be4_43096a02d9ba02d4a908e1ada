@@ -1,0 +1,3 @@
+# 📁 models/
+Contendrá los modelos predictivos entrenados, serializados en formato `.pkl` u otro.
+Ej: regresión logística, árboles de decisión, etc.

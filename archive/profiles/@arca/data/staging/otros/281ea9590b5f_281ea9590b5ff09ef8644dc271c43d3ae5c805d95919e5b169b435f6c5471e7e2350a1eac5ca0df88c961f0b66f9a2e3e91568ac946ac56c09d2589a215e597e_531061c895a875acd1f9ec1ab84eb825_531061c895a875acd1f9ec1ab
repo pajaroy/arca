@@ -1,0 +1,13 @@
+# 🧱 estructura_doc/
+
+Carpeta de plantillas estandarizadas utilizadas en el sistema ALMA_RESIST.
+
+## 📑 ¿Para qué sirve?
+
+Contiene formatos base reutilizables para mantener consistencia documental y acelerar el versionado y documentación de módulos, componentes o sprints.
+
+## 📁 Contenido
+
+- `README_template.md` – Guía base para documentación de cualquier módulo.
+- `version_template.md` – Plantilla de control de versiones para zip y releases.
+

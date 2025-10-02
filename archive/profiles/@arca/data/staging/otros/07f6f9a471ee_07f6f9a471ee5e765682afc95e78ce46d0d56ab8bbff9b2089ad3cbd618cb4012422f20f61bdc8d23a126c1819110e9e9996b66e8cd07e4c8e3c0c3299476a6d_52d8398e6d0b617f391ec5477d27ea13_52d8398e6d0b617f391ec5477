@@ -1,0 +1,41 @@
+"""
+📦 reglas_alerta.py – Funciones de detección de alertas semánticas entre memorias ALMA
+Cada función recibe dos memorias y devuelve una lista con alertas detectadas (si corresponde).
+"""
+
+def alerta_riesgo_estres(mem1, mem2):
+    alertas = []
+    tags1, tags2 = set(mem1.get("tags", [])), set(mem2.get("tags", []))
+
+    if "#riesgo" in tags1 and "#estrés" in tags2:
+        alertas.append({
+            "memoria_origen": mem1["id"],
+            "memoria_conflictiva": mem2["id"],
+            "tipo_alerta": "Conflicto Riesgo-Estrés",
+            "descripcion": "Riesgo alto en trading y signos de estrés en salud.",
+            "score": 0.85
+        })
+
+    if "#estrés" in tags1 and "#riesgo" in tags2:
+        alertas.append({
+            "memoria_origen": mem1["id"],
+            "memoria_conflictiva": mem2["id"],
+            "tipo_alerta": "Conflicto Riesgo-Estrés",
+            "descripcion": "Estrés detectado en salud y exposición a riesgo en otra área.",
+            "score": 0.85
+        })
+
+    return alertas
+
+def alerta_contradiccion_ideologica(mem1, mem2):
+    alertas = []
+    if mem1["categoria"] == "REFLEX" and mem2["categoria"] == "REFLEX":
+        if "no creo en el ahorro" in mem1["contenido"].lower() and "el ahorro es libertad" in mem2["contenido"].lower():
+            alertas.append({
+                "memoria_origen": mem1["id"],
+                "memoria_conflictiva": mem2["id"],
+                "tipo_alerta": "Contradicción Filosófica",
+                "descripcion": "Reflexiones opuestas sobre el concepto de ahorro.",
+                "score": 0.9
+            })
+    return alertas

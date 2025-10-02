@@ -1,0 +1,65 @@
+
+# ALMA_RESIST – Idea Base v0.0.2
+
+## 🧠 Resumen Ejecutivo
+
+**ALMA_RESIST** es un entorno de trabajo portátil, autónomo y offline, impulsado por IA local, pensado para operar desde múltiples nodos (PC madre, disco portátil y pendrive de arranque). Integra un servidor LLM, un cliente de terminal inteligente, un sistema de memoria estructurada (ALMA_LOADER) y capacidades de autonomía limitada. Está diseñado para funcionar sin conexión a internet, adaptarse a distintos entornos de hardware y garantizar privacidad y resiliencia.
+
+
+## ⚙️ Componentes Principales
+
+### ALMA_SERVER_LLM
+
+- **Motor base:** `text-generation-webui` con Mistral-7B-Instruct.
+- **Alternativas consideradas:** `llama.cpp`, `vLLM`, `llama-cpp-python`.
+- **Comparativa:** `text-generation-webui` soporta múltiples backends y frontend opcional; `llama.cpp` es más liviano, ideal para CPU.
+- **Gestión de versiones:** `config/llm_model.json` + script `update_model.sh` para migraciones entre modelos.
+
+### Terminal CLI Inteligente
+
+- Conexión vía HTTP al LLM local.
+- Manejo de errores: timeout, fallback local, log de errores (`logs/errors.md`).
+- Encriptación opcional de logs de sesión (`logs/secure_chat_log.md` con GPG).
+
+### ALMA_LOADER
+
+- Proceso ETL con prompts como:
+  ```txt
+  Resume el siguiente texto en JSON con campos: fecha, tema, resumen, etiquetas, estado_emocional.
+  ```
+- Backup automático diario con script cron a `backups/memoria_YYYYMMDD.sqlite`.
+
+### Autonomía Limitada
+
+- Acciones de bajo riesgo: mover archivos temporales, ordenar carpetas.
+- Acciones prohibidas: eliminación, escritura en `system/`, alteración de modelos sin autorización.
+- Auditoría en: `logs/autonomia_audit.md`
+
+
+## 🔄 Flujo de Datos
+
+- Entrada usuario → CLI → Servidor LLM → Respuesta → Log
+- Log → ALMA_LOADER → Memoria estructurada → Backup + análisis
+- Autonomía → Sugerencias → CLI → Acción autorizada
+- Diagrama Mermaid.js pendiente.
+
+
+## 📐 Estándares Técnicos
+
+- Sandboxing de procesos con Firejail.
+- Control de versiones con Git (offline):
+  - `main`: versión estable.
+  - `dev`: experimental.
+- Formatos: Markdown (`.md`), JSON, SQLite.
+- Carpeta `docs/` dividida por módulos (`llm.md`, `cli.md`, etc.)
+
+
+# 📋 Changelog v0.0.2 (Respecto a v0.0.1)
+
+- **Nuevo:** Se agregó resumen ejecutivo y glosario sugerido.
+- **Reescrito:** Arquitectura separada en física y lógica.
+- **Añadido:** Comparativa técnica entre motores LLM.
+- **Seguridad:** Logs encriptables con GPG, política de permisos definida.
+- **Memoria:** ETL documentado, backups automáticos con cron.
+- **Autonomía:** Auditoría, definición de riesgos y límites.
+- **Técnico:** Inclusión de Firejail, estructura Git, separación modular de docs.

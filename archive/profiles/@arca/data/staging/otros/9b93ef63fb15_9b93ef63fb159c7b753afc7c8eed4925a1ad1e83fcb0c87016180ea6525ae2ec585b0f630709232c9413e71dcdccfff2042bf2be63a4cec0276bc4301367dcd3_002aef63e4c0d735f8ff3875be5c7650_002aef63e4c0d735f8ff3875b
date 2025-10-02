@@ -1,0 +1,23 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_b00cb8
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: '  Init  '
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:0ed9a0faf2acff23447dc8ece4293a031fbee82eb4fccb11755feb4c2bb80bd6
+---
+# Init de test suite ALMA_RESIST
+"""
+Paquete de tests para ALMA_RESIST.
+"""
+

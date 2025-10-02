@@ -1,0 +1,29 @@
+# 🧪 test_log_writer.py – Changelog v0.0.0.6
+
+**Estado:** 🟡 Parcialmente aprobado (6 PASSED / 4 FAILED)
+
+## ✅ Tests que pasan:
+- `test_log_event_structure`
+- `test_valid_write`
+- `test_atomic_write`
+- `test_invalid_event`
+- `test_multiple_writes`
+- `test_log_integrity`
+
+## ❌ Tests que fallan (y por qué):
+
+1. **`test_log_rotation`**
+   - ❌ Error: `TypeError` solucionado al convertir `secure_rotation` en método de instancia.
+   - ✅ Se reprobó por cache anterior — ya corregido.
+
+2. **`test_disk_failure`**
+   - ❌ Falla porque `write_log` devuelve `True` aunque haya un fallo de disco simulado.
+   - 🔧 Posible solución: capturar excepción `OSError` y devolver `False`.
+
+3. **`test_type_validation`**
+   - ❌ Falla esperada: se pasa `int` como `message` → error de tipo controlado.
+   - ✅ Este test está correcto; la excepción es deseada.
+
+4. **`test_directory_permissions`**
+   - ❌ Falla porque no se crea el directorio antes de hacer `stat()`.
+   - 🔧 Solución: `log_writer.write_log(...)` debe llamarse antes del `stat`.

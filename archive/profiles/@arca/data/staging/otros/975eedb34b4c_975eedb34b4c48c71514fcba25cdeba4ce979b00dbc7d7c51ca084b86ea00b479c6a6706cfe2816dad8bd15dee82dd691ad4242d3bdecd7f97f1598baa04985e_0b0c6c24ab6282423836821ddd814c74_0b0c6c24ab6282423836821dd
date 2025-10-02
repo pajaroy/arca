@@ -1,0 +1,22 @@
+# 🧪 Script de Auditoría Automática – ALMA_RESIST
+
+Este script permite ejecutar **todo el proceso de auditoría estructural automatizada** para los archivos `.md` del proyecto ALMA_RESIST, en línea con los criterios del Sprint 2.5.
+
+
+## 🧠 ¿Qué hace este script?
+
+- Activa el entorno virtual `.venv`
+- Instala dependencias necesarias (`pyyaml`)
+- Ejecuta los siguientes scripts en orden:
+  1. `force_snake_case_modules.py`: convierte `module:` a snake_case.
+  2. `fix_metadata.py`: completa y corrige el bloque YAML (`module`, `type`, `status`, `created`).
+  3. `add_linked_to_minimo.py`: agrega `linked_to` mínimo si falta en archivos tipo `core`.
+  4. `validate_docs.py`: valida la integridad y consistencia de todos los `.md`.
+
+
+## 🔒 Notas importantes
+
+- Se crean **backups automáticos** antes de modificar los archivos.
+- Este script es **seguro para correr múltiples veces**.
+- Se recomienda revisar el resultado del script `validate_docs.py` al final para actuar sobre errores específicos.
+

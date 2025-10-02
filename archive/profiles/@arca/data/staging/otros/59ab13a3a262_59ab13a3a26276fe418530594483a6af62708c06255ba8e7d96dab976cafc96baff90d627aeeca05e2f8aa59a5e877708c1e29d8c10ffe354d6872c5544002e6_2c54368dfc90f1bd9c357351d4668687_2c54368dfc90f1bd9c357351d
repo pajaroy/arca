@@ -1,0 +1,37 @@
+## 🔄 Diagrama Global de Flujos – ALMA LIBRE v0.0.6.2 (Extendido)
+
+```mermaid
+graph TD
+  A[Usuario/IA] --> B[CUADERNOS]
+  B --> C[BITACORA_CENTRAL]
+  B --> D[MODULOS/Alma_Loader]
+  D --> E[vector_db.json]
+  E -->|versionado| L[historic_vectors/]
+  C --> F[DIAGNOSTICOS]
+  B --> G[EMPRESAS]
+  G --> H[Documentos Formales]
+  E --> I[CLI Assistant]
+  F --> I
+  C --> I
+  D --> J[validador_estructura.py]
+  J --> F
+  I -->|usa| K[RECURSOS_Y_AYUDAS/plantillas/log_template.yaml]
+  M[automatizacion_vpd] --> N[reporte_estado.py]
+  D --> N
+  I --> N
+  N --> O[BITACORA/LOGS_MODULOS/]
+  P[sync_bitacora.py]
+  P --> B
+  P --> C
+  P --> Q[Verificación por hash]
+```
+
+
+## 📌 Recomendaciones para implementación
+
+- **Incluir este diagrama directamente en el Prompt Técnico y el Whitepaper.**
+- **Marcar conexiones críticas con anotaciones o estilos de color cuando sea posible.**
+- **Documentar funciones clave en archivos individuales (`README.md` por módulo).**
+- **Trazabilidad completa en el changelog al aplicar cada uno.**
+
+Este diagrama extendido permite que cualquier asistente de IA o desarrollador humano entienda la arquitectura completa sin leer cada módulo por separado.

@@ -1,0 +1,651 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_0d0fdc
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Fix Metadata V3
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:9276d7f8428a8ab4175fecb9d6a51ca8f52f7bdcc237140a2dcff06acc75e036
+---
+#!/usr/bin/env python3
+# fix_metadata_v3.1.py - Script universal de correcci√≥n de metadatos para ALMA_RESIST
+
+"""
+üìù Script: fix_metadata_v3.1.py
+üîñ ID: SCRIPT_2025-06-05_03
+üõ†Ô∏è Funci√≥n: Validar, corregir y estandarizar metadatos en archivos cr√≠ticos del ecosistema ALMA_RESIST
+üìö Referencia: [IDEA_2025-06-06_01]
+"""
+
+import os
+import sys
+import re
+import hashlib
+import json
+import argparse
+import datetime
+import shutil
+import fnmatch
+import chardet
+import logging
+from pathlib import Path
+from typing import Dict, List, Tuple, Optional, Set, Any
+
+# =====================================================================
+# CONFIGURACI√ìN GLOBAL
+# =====================================================================
+SUPPORTED_EXTENSIONS = {'.md', '.yaml', '.yml', '.json', '.py', '.sh', '.toml'}
+EXCLUDED_EXTENSIONS = {'.jpg', '.png', '.zip', '.db', '.mp4', '.exe', '.tmp', '.bak', '.lock'}
+EXCLUDED_DIRS = {
+    '.git', '.github', '.obsidian', 'venv', 'env', 'virtualenv', '__pycache__',
+    'node_modules', 'datasets', 'data', 'media', 'images', 'img', 'bin',
+    'backup', 'backups', 'logs', 'tmp', 'temp', 'core/scripts/fix_metadata'
+}
+MODULE_MARKER = "ALMA_RESIST"
+SCRIPT_VERSION = "3.1"
+ALMA_VERSION = "Centralesis v2.3"
+IGNORE_FILE = ".fix_metadata_ignore"
+
+# Valores permitidos para ciertos campos
+ALLOWED_STATUS = {"activo", "cerrado", "en_revision", "obsoleto"}
+ALLOWED_TYPES = {"fundacional", "decision", "bitacora", "changelog", "script", "configuracion", "configuracion_json", "documento"}
+
+# Colores para terminal
+COLOR_RED = '\033[91m'
+COLOR_GREEN = '\033[92m'
+COLOR_YELLOW = '\033[93m'
+COLOR_BLUE = '\033[94m'
+COLOR_CYAN = '\033[96m'
+COLOR_RESET = '\033[0m'
+
+# Configuraci√≥n de logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger('metadata_fixer')
+
+# =====================================================================
+# FUNCIONES AUXILIARES
+# =====================================================================
+
+def detect_encoding(file_path: Path) -> str:
+    """Detecta la codificaci√≥n de un archivo usando chardet con muestreo inteligente."""
+    try:
+        # Muestreo del 10% del archivo o primeros 50KB (lo que sea menor)
+        file_size = file_path.stat().st_size
+        sample_size = min(max(4096, file_size // 10), 50000)
+        
+        with open(file_path, 'rb') as f:
+            raw_data = f.read(sample_size)
+        
+        result = chardet.detect(raw_data)
+        encoding = result['encoding'] if result['confidence'] > 0.7 else 'utf-8'
+        return encoding or 'utf-8'
+    except Exception:
+        return 'utf-8'
+
+def read_file(file_path: Path) -> str:
+    """Lee un archivo con detecci√≥n de encoding y manejo robusto de errores."""
+    encoding = detect_encoding(file_path)
+    try:
+        return file_path.read_text(encoding=encoding)
+    except UnicodeDecodeError:
+        try:
+            # Intento alternativo con UTF-8 y manejo de errores
+            return file_path.read_text(encoding='utf-8', errors='replace')
+        except Exception as e:
+            raise IOError(f"No se pudo leer el archivo: {str(e)}")
+    except Exception as e:
+        raise IOError(f"Error al leer el archivo: {str(e)}")
+
+def write_file(file_path: Path, content: str, encoding: str = 'utf-8') -> None:
+    """Escribe un archivo con manejo robusto de errores."""
+    try:
+        file_path.write_text(content, encoding=encoding)
+    except Exception as e:
+        raise IOError(f"Error al escribir el archivo: {str(e)}")
+
+def load_ignore_patterns(root_path: Path) -> Set[str]:
+    """Carga patrones de exclusi√≥n desde archivo .fix_metadata_ignore con sintaxis similar a .gitignore."""
+    ignore_patterns = set()
+    ignore_file = root_path / IGNORE_FILE
+    
+    if ignore_file.exists():
+        try:
+            with open(ignore_file, 'r', encoding='utf-8') as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith('#'):
+                        # Normalizar patrones para Windows/Unix
+                        if os.sep != '/':
+                            line = line.replace('/', os.sep)
+                        ignore_patterns.add(line)
+        except Exception as e:
+            logger.warning(f"No se pudo leer {IGNORE_FILE}: {str(e)}")
+    
+    # Patrones predeterminados
+    ignore_patterns.update([
+        '*/.sync*', '*/.*', '*.sync-conflict-*', '*.bak'
+    ])
+    
+    return ignore_patterns
+
+def is_excluded(path: Path, exclude_dirs: Set[str], ignore_patterns: Set[str]) -> bool:
+    """Determina si una ruta debe ser excluida del procesamiento."""
+    # Exclusi√≥n por nombre de directorio
+    for part in path.parts:
+        if part in exclude_dirs:
+            return True
+    
+    # Exclusi√≥n por extensi√≥n
+    if path.suffix.lower() in EXCLUDED_EXTENSIONS:
+        return True
+    
+    # Exclusi√≥n por patr√≥n
+    rel_path = str(path.relative_to(path.anchor))
+    for pattern in ignore_patterns:
+        if fnmatch.fnmatch(rel_path, pattern) or fnmatch.fnmatch(path.name, pattern):
+            return True
+    
+    return False
+
+def find_module_root(start_path: Path) -> Path:
+    """Busca recursivamente el directorio ra√≠z del m√≥dulo ALMA_RESIST."""
+    current_path = start_path.resolve()
+    while current_path != current_path.parent:
+        if current_path.name == MODULE_MARKER:
+            return current_path
+        current_path = current_path.parent
+    
+    raise FileNotFoundError(f"{COLOR_RED}No se encontr√≥ el directorio ra√≠z del m√≥dulo {MODULE_MARKER}{COLOR_RESET}")
+
+def extract_metadata(content: str, file_extension: str) -> Tuple[Optional[Dict], str, bool]:
+    """Extrae metadatos en m√∫ltiples formatos (YAML, TOML, comentarios)."""
+    # Intento 1: Bloque YAML est√°ndar (---)
+    metadata_pattern = r'^---\s*\n(.*?)\n---\s*\n(.*)$'
+    match = re.match(metadata_pattern, content, re.DOTALL)
+    
+    if match:
+        try:
+            metadata_str = match.group(1)
+            rest_content = match.group(2)
+            return parse_yaml_metadata(metadata_str), rest_content, True
+        except Exception:
+            pass
+    
+    # Intento 2: Frontmatter TOML (+++)
+    toml_pattern = r'^\+\+\+\s*\n(.*?)\n\+\+\+\s*\n(.*)$'
+    match = re.match(toml_pattern, content, re.DOTALL)
+    
+    if match:
+        try:
+            metadata_str = match.group(1)
+            rest_content = match.group(2)
+            return parse_toml_metadata(metadata_str), rest_content, True
+        except Exception:
+            pass
+    
+    # Intento 3: Comentarios especiales en archivos de c√≥digo
+    if file_extension in ['.py', '.sh']:
+        comment_char = '#' if file_extension == '.py' else '#'
+        pattern = rf'^{comment_char}\s*METADATA-START\s*\n{comment_char}(.*?)\n{comment_char}\s*METADATA-END\s*\n(.*)'
+        match = re.match(pattern, content, re.DOTALL | re.MULTILINE)
+        
+        if match:
+            try:
+                metadata_str = match.group(1).replace(f'{comment_char}', '')
+                rest_content = match.group(2)
+                return parse_yaml_metadata(metadata_str), rest_content, True
+            except Exception:
+                pass
+    
+    return {}, content, False
+
+def parse_yaml_metadata(metadata_str: str) -> Dict:
+    """Parsea metadatos en formato YAML."""
+    try:
+        import yaml
+        return yaml.safe_load(metadata_str) if metadata_str else {}
+    except Exception as e:
+        logger.warning(f"Error parsing YAML metadata: {str(e)}")
+        return {}
+
+def parse_toml_metadata(metadata_str: str) -> Dict:
+    """Parsea metadatos en formato TOML."""
+    try:
+        import toml
+        return toml.loads(metadata_str) if metadata_str else {}
+    except ImportError:
+        logger.warning("TOML parsing requires 'toml' package. Install with: pip install toml")
+    except Exception as e:
+        logger.warning(f"Error parsing TOML metadata: {str(e)}")
+    return {}
+
+def calculate_content_hash(metadata: Dict, rest_content: str) -> str:
+    """Calcula el hash SHA256 del contenido excluyendo el campo hash_integridad."""
+    metadata_without_hash = metadata.copy()
+    metadata_without_hash.pop('hash_integridad', None)
+    
+    # Serializaci√≥n inteligente seg√∫n formato detectado
+    if 'formato' in metadata:
+        if metadata['formato'] in ['yaml', 'yml']:
+            metadata_str = yaml.dump(metadata_without_hash, sort_keys=False)
+        elif metadata['formato'] == 'toml':
+            try:
+                import toml
+                metadata_str = toml.dumps(metadata_without_hash)
+            except ImportError:
+                metadata_str = str(metadata_without_hash)
+        else:
+            metadata_str = json.dumps(metadata_without_hash, indent=2)
+    else:
+        metadata_str = yaml.dump(metadata_without_hash, sort_keys=False)
+    
+    reconstructed_content = f"---\n{metadata_str}---\n{rest_content}"
+    
+    sha256 = hashlib.sha256()
+    sha256.update(reconstructed_content.encode('utf-8'))
+    return f"sha256:{sha256.hexdigest()}"
+
+def generate_id(tipo: str, file_path: Path, content_hash: str) -> str:
+    """Genera un ID √∫nico usando tipo, fecha y fragmento de hash."""
+    today = datetime.date.today().isoformat()
+    short_hash = content_hash[:6]
+    return f"{tipo.upper()}_{today}_{short_hash}"
+
+def determine_file_type(file_path: Path, content: str) -> str:
+    """Determina el tipo de archivo basado en m√∫ltiples criterios."""
+    ext = file_path.suffix.lower()
+    filename = file_path.name.lower()
+    content_sample = content[:1000].lower()
+    
+    # Detecci√≥n por nombre de archivo
+    if 'changelog' in filename:
+        return 'changelog'
+    if 'bitacora' in filename or 'log_' in filename:
+        return 'bitacora'
+    if 'decision' in filename or 'acuerdo' in filename:
+        return 'decision'
+    if 'script' in filename or 'util' in filename:
+        return 'script'
+    
+    # Detecci√≥n por contenido
+    if ext == '.md':
+        if 'changelog' in content_sample:
+            return 'changelog'
+        if any(x in content_sample for x in ['bit√°cora', 'registro', 'log:']):
+            return 'bitacora'
+        if any(x in content_sample for x in ['decisi√≥n', 'acuerdo', 'resoluci√≥n']):
+            return 'decision'
+        return 'documento'
+    elif ext in ['.py', '.sh']:
+        if 'main' in filename or 'entrypoint' in filename:
+            return 'script_principal'
+        return 'script'
+    elif ext in ['.yaml', '.yml']:
+        return 'configuracion'
+    elif ext == '.json':
+        return 'configuracion_json'
+    elif ext == '.toml':
+        return 'configuracion_toml'
+    return 'documento'
+
+def validate_metadata_field(field: str, value: Any) -> bool:
+    """Valida campos espec√≠ficos de metadata."""
+    if field == 'status' and value not in ALLOWED_STATUS:
+        return False
+    if field in ['fecha_creacion', 'fecha_actualizacion']:
+        if not re.match(r'^\d{4}-\d{2}-\d{2}$', value):
+            return False
+    if field == 'tags' and not isinstance(value, list):
+        return False
+    if field == 'linked_to' and not isinstance(value, list):
+        return False
+    return True
+
+def normalize_metadata(metadata: Dict, file_path: Path, module_root: Path, content_hash: str) -> Tuple[Dict, Dict]:
+    """Normaliza metadatos preservando valores v√°lidos existentes."""
+    changes = {}
+    today = datetime.date.today().isoformat()
+    rel_path = file_path.relative_to(module_root.parent if module_root.name == MODULE_MARKER else module_root)
+    module_name = rel_path.parts[0] if rel_path.parts else "desconocido"
+    
+    # Determinar tipo de archivo
+    content = read_file(file_path) if not metadata.get('tipo') else ""
+    current_type = metadata.get('tipo', '').lower()
+    if current_type not in ALLOWED_TYPES:
+        new_type = determine_file_type(file_path, content)
+        if current_type != new_type:
+            changes['tipo'] = {'old': current_type, 'new': new_type}
+            metadata['tipo'] = new_type
+    else:
+        new_type = current_type
+    
+    # Generar/actualizar ID si es necesario
+    if not metadata.get('id') or not re.match(r'^[A-Z]+_\d{4}-\d{2}-\d{2}_[a-f0-9]{6}$', metadata['id']):
+        new_id = generate_id(new_type, file_path, content_hash)
+        changes['id'] = {'old': metadata.get('id'), 'new': new_id}
+        metadata['id'] = new_id
+    
+    # Campos con valores por defecto (solo si no existen o son inv√°lidos)
+    defaults = {
+        'version': '1.0',
+        'formato': file_path.suffix[1:],
+        'modulo': module_name,
+        'titulo': file_path.stem.replace('_', ' ').title(),
+        'autor': os.getlogin(),
+        'fecha_creacion': today,
+        'status': 'activo',
+        'version_sistema': ALMA_VERSION,
+        'origen': 'automatico',
+        'tags': [],
+        'linked_to': [],
+        'descripcion': 'Documento procesado autom√°ticamente'
+    }
+    
+    for field, default in defaults.items():
+        current_val = metadata.get(field)
+        
+        # Conservar valores v√°lidos existentes
+        if current_val and validate_metadata_field(field, current_val):
+            continue
+            
+        changes[field] = {'old': current_val, 'new': default}
+        metadata[field] = default
+    
+    # Actualizar fecha de actualizaci√≥n siempre
+    if metadata.get('fecha_actualizacion') != today:
+        changes['fecha_actualizacion'] = {'old': metadata.get('fecha_actualizacion'), 'new': today}
+        metadata['fecha_actualizacion'] = today
+    
+    # Normalizar tags y linked_to
+    for field in ['tags', 'linked_to']:
+        if field in metadata and not isinstance(metadata[field], list):
+            try:
+                new_value = [item.strip() for item in str(metadata[field]).split(',')]
+                changes[field] = {'old': metadata[field], 'new': new_value}
+                metadata[field] = new_value
+            except Exception:
+                metadata[field] = []
+    
+    return metadata, changes
+
+def safe_write_file(file_path: Path, content: str, backup_path: Path) -> bool:
+    """Escribe un archivo de forma segura con rollback autom√°tico."""
+    try:
+        # Crear backup
+        shutil.copy2(file_path, backup_path)
+        
+        # Escribir el nuevo contenido
+        write_file(file_path, content)
+        return True
+    except Exception as e:
+        # Restaurar desde backup en caso de error
+        try:
+            shutil.copy2(backup_path, file_path)
+            os.remove(backup_path)
+        except Exception:
+            pass
+        raise IOError(f"Error durante escritura segura: {str(e)}")
+
+def process_file(file_path: Path, module_root: Path, dry_run: bool, log_file: Path) -> Dict:
+    """Procesa un archivo individual con manejo robusto de errores."""
+    result = {
+        'file': str(file_path),
+        'timestamp': datetime.datetime.now().isoformat(),
+        'action': 'skipped',
+        'changes': {},
+        'backup': None,
+        'error': None
+    }
+    
+    try:
+        # Leer contenido
+        content = read_file(file_path)
+        metadata, rest_content, has_metadata = extract_metadata(content, file_path.suffix)
+        
+        # Calcular hash del contenido actual para generaci√≥n de ID
+        content_hash = hashlib.sha256(content.encode('utf-8')).hexdigest()
+        
+        # Normalizar metadatos
+        new_metadata, changes = normalize_metadata(metadata, file_path, module_root, content_hash)
+        result['changes'] = changes
+        
+        # Calcular hash de integridad
+        new_metadata['hash_integridad'] = calculate_content_hash(new_metadata, rest_content)
+        
+        # Construir nuevo contenido
+        if has_metadata:
+            # Mantener formato original si es posible
+            if 'formato' in new_metadata and new_metadata['formato'] == 'toml':
+                import toml
+                metadata_block = toml.dumps(new_metadata)
+                new_content = f"+++\n{metadata_block}+++\n{rest_content}"
+            else:
+                metadata_block = yaml.dump(new_metadata, sort_keys=False, allow_unicode=True)
+                new_content = f"---\n{metadata_block}---\n{rest_content}"
+        else:
+            # Nuevo bloque de metadatos
+            metadata_block = yaml.dump(new_metadata, sort_keys=False, allow_unicode=True)
+            new_content = f"---\n{metadata_block}---\n{content}"
+        
+        # Verificar si hay cambios
+        if new_content.strip() == content.strip() and has_metadata:
+            result['action'] = 'no_change'
+            return result
+        
+        # Preparar backup
+        backup_time = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+        backup_path = file_path.with_name(f"{file_path.stem}_{backup_time}.bak")
+        result['backup'] = str(backup_path)
+        
+        # Modo dry-run
+        if dry_run:
+            result['action'] = 'simulated_update'
+            return result
+        
+        # Escribir cambios (con rollback autom√°tico)
+        safe_write_file(file_path, new_content, backup_path)
+        result['action'] = 'updated' if has_metadata else 'created'
+        
+    except Exception as e:
+        result['error'] = str(e)
+        result['action'] = 'error'
+        logger.error(f"Error procesando {file_path}: {str(e)}")
+    
+    # Registrar en log
+    if log_file:
+        try:
+            with open(log_file, 'a', encoding='utf-8') as log:
+                log.write(json.dumps(result, ensure_ascii=False) + '\n')
+        except Exception as e:
+            logger.error(f"No se pudo escribir en el log: {str(e)}")
+    
+    return result
+
+def print_status(file_path: Path, action: str, changes: Dict) -> None:
+    """Muestra un estado colorizado para cada archivo procesado."""
+    colors = {
+        'updated': COLOR_GREEN,
+        'created': COLOR_CYAN,
+        'no_change': COLOR_BLUE,
+        'skipped': COLOR_YELLOW,
+        'error': COLOR_RED,
+        'simulated_update': COLOR_CYAN
+    }
+    
+    symbol = {
+        'updated': '‚Üª',
+        'created': '‚úö',
+        'no_change': '‚úì',
+        'skipped': '‚Ü∑',
+        'error': '‚úó',
+        'simulated_update': '‚ü≤'
+    }
+    
+    color = colors.get(action, COLOR_RESET)
+    sym = symbol.get(action, '?')
+    
+    change_count = len(changes)
+    change_info = f" [{change_count} cambios]" if change_count > 0 else ""
+    
+    print(f"{color}{sym} {action}{change_info}{COLOR_RESET} - {file_path}")
+
+def print_summary(stats: Dict) -> None:
+    """Muestra un resumen colorizado del proceso."""
+    processed = stats['processed']
+    modified = stats['modified']
+    errors = stats['errors']
+    skipped = stats['skipped']
+    warnings = stats['warnings']
+    
+    print(f"\n{'='*60}")
+    print(f"{COLOR_BLUE}üìä RESUMEN DEL PROCESO - fix_metadata v{SCRIPT_VERSION}{COLOR_RESET}")
+    print(f"{'='*60}")
+    print(f"‚Ä¢ Archivos procesados: {COLOR_BLUE}{processed}{COLOR_RESET}")
+    print(f"‚Ä¢ Archivos modificados: {COLOR_GREEN}{modified}{COLOR_RESET}")
+    print(f"‚Ä¢ Archivos saltados: {COLOR_YELLOW}{skipped}{COLOR_RESET}")
+    print(f"‚Ä¢ Advertencias: {COLOR_YELLOW}{warnings}{COLOR_RESET}")
+    print(f"‚Ä¢ Errores: {COLOR_RED if errors > 0 else COLOR_BLUE}{errors}{COLOR_RESET}")
+    print(f"{'='*60}")
+    
+    if errors > 0:
+        print(f"\n{COLOR_RED}‚ùå PROCESO FINALIZADO CON ERRORES{COLOR_RESET}")
+        print(f"Revisa el log para detalles: {stats['log_file']}")
+        sys.exit(1)
+    elif warnings > 0 or skipped > 0:
+        print(f"\n{COLOR_YELLOW}‚ö†Ô∏è PROCESO FINALIZADO CON ADVERTENCIAS{COLOR_RESET}")
+        print(f"Algunos archivos no pudieron procesarse autom√°ticamente")
+        print(f"Revisa el log para detalles: {stats['log_file']}")
+    else:
+        print(f"\n{COLOR_GREEN}‚úÖ PROCESO COMPLETADO CORRECTAMENTE{COLOR_RESET}")
+        print(f"Todos los archivos procesados sin errores")
+
+def main():
+    """Funci√≥n principal del script."""
+    parser = argparse.ArgumentParser(
+        description=f'Herramienta de normalizaci√≥n de metadatos ALMA_RESIST v{SCRIPT_VERSION}',
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+        epilog="Ejemplos:\n"
+               "  Modo normal: python fix_metadata_v3.1.py\n"
+               "  Dry run: python fix_metadata_v3.1.py --dry-run\n"
+               "  Directorio espec√≠fico: python fix_metadata_v3.1.py --root-dir ~/ALMA_RESIST"
+    )
+    parser.add_argument('--dry-run', action='store_true', help='Simular cambios sin modificar archivos')
+    parser.add_argument('--log-file', default='fix_metadata.log', help='Ruta del archivo de registro')
+    parser.add_argument('--root-dir', help='Directorio ra√≠z del m√≥dulo (autodetectado por defecto)')
+    parser.add_argument('--exclude', nargs='+', default=[], help='Patrones adicionales de exclusi√≥n')
+    parser.add_argument('--verbose', action='store_true', help='Mostrar informaci√≥n detallada de depuraci√≥n')
+    args = parser.parse_args()
+    
+    # Configurar verbosidad
+    if args.verbose:
+        logger.setLevel(logging.DEBUG)
+    
+    # Configuraci√≥n inicial
+    script_dir = Path(__file__).parent
+    log_path = script_dir / args.log_file
+    
+    # Estad√≠sticas
+    stats = {
+        'processed': 0,
+        'modified': 0,
+        'skipped': 0,
+        'errors': 0,
+        'warnings': 0,
+        'log_file': str(log_path)
+    }
+    
+    try:
+        # Mostrar banner
+        print(f"{COLOR_CYAN}=== ALMA_RESIST Metadata Fixer v{SCRIPT_VERSION} ==={COLOR_RESET}")
+        print(f"Modo: {'DRY RUN' if args.dry_run else 'EJECUCI√ìN REAL'}")
+        
+        # Inicializar log
+        if log_path.exists():
+            backup_log = log_path.with_name(f"{log_path.stem}_backup{log_path.suffix}")
+            shutil.copy2(log_path, backup_log)
+            logger.info(f"Backup de log existente creado en: {backup_log}")
+        
+        # Determinar ra√≠z del m√≥dulo
+        module_root = find_module_root(script_dir) if not args.root_dir else Path(args.root_dir)
+        print(f"{COLOR_BLUE}üìÇ M√≥dulo identificado: {module_root}{COLOR_RESET}")
+        
+        # Cargar patrones de exclusi√≥n
+        exclude_dirs = EXCLUDED_DIRS.copy()
+        ignore_patterns = load_ignore_patterns(module_root)
+        ignore_patterns.update(args.exclude)
+        
+        logger.debug(f"Patrones de exclusi√≥n cargados: {len(ignore_patterns)}")
+        
+        # Recorrer archivos
+        for root, dirs, files in os.walk(module_root, topdown=True):
+            # Excluir directorios
+            dirs[:] = [d for d in dirs if not is_excluded(Path(root) / d, exclude_dirs, ignore_patterns)]
+            
+            for file in files:
+                file_path = Path(root) / file
+                
+                # Verificar si est√° excluido
+                if is_excluded(file_path, exclude_dirs, ignore_patterns):
+                    stats['skipped'] += 1
+                    print_status(file_path, 'skipped', {})
+                    continue
+                
+                # Verificar extensi√≥n soportada
+                if file_path.suffix.lower() not in SUPPORTED_EXTENSIONS:
+                    stats['skipped'] += 1
+                    print_status(file_path, 'skipped', {})
+                    continue
+                
+                # Procesar archivo
+                stats['processed'] += 1
+                result = process_file(file_path, module_root, args.dry_run, log_path)
+                
+                # Actualizar estad√≠sticas
+                if result['action'] in ['updated', 'created']:
+                    stats['modified'] += 1
+                elif result['action'] == 'error':
+                    stats['errors'] += 1
+                elif result['action'] == 'skipped':
+                    stats['skipped'] += 1
+                elif result['changes']:
+                    stats['warnings'] += 1
+                
+                # Mostrar estado
+                print_status(file_path, result['action'], result['changes'])
+        
+        # Mostrar resumen
+        print_summary(stats)
+        
+    except Exception as e:
+        print(f"{COLOR_RED}‚õî ERROR CR√çTICO: {str(e)}{COLOR_RESET}")
+        logger.exception("Error cr√≠tico durante la ejecuci√≥n")
+        sys.exit(1)
+
+# =====================================================================
+# INICIALIZACI√ìN
+# =====================================================================
+if __name__ == "__main__":
+    try:
+        import yaml
+    except ImportError:
+        print(f"{COLOR_RED}‚úã Error: Se requiere PyYAML. Instale con: pip install PyYAML{COLOR_RESET}")
+        sys.exit(1)
+    
+    try:
+        import chardet
+    except ImportError:
+        print(f"{COLOR_YELLOW}‚ö†Ô∏è Advertencia: El paquete 'chardet' no est√° instalado. Usando UTF-8 por defecto.{COLOR_RESET}")
+        # Sobrescribir funci√≥n para no usar chardet
+        def detect_encoding(file_path: Path) -> str:
+            return 'utf-8'
+    
+    main()

@@ -1,0 +1,210 @@
+{
+  "main": {
+    "id": "0aa0739b579d7827",
+    "type": "split",
+    "children": [
+      {
+        "id": "e0e2bcc41b6d3e70",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fe2647137ee93cd7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "alma_empresa/IA_asistente/proyeccion_asistente_empresarial.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "proyeccion_asistente_empresarial"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "294dd77650ba11d1",
+    "type": "split",
+    "children": [
+      {
+        "id": "cdbdb1a8af55fdf3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "165255549fac2a14",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de archivos"
+            }
+          },
+          {
+            "id": "07f75113ff0156a7",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:#hechoPor_seba-rios",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Buscar"
+            }
+          },
+          {
+            "id": "ea8fe06351e5fda9",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 421.5
+  },
+  "right": {
+    "id": "578b292525e7a6bf",
+    "type": "split",
+    "children": [
+      {
+        "id": "7e522fd9bb780659",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a42ae2c1135a7c1e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "control_central/ia_asistente/docs/sistema_asesor-IA.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for sistema_asesor-IA"
+            }
+          },
+          {
+            "id": "a484b78066781146",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "control_central/ia_asistente/docs/sistema_asesor-IA.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from sistema_asesor-IA"
+            }
+          },
+          {
+            "id": "c6336f28af0446bd",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "a77af9bd293f0e6c",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "control_central/ia_asistente/docs/sistema_asesor-IA.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of sistema_asesor-IA"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir selector rápido": false,
+      "graph:Abrir vista gráfica": false,
+      "canvas:Crear nuevo lienzo": false,
+      "daily-notes:Abrir la nota de hoy": false,
+      "templates:Insertar plantilla": false,
+      "command-palette:Abrir paleta de comandos": false
+    }
+  },
+  "active": "fe2647137ee93cd7",
+  "lastOpenFiles": [
+    "control_central/readme.md",
+    "docs/versiones/v0.0.0.3_snapshot_sprint_2.4/v0.0.0.3_snapshot_sprint_2.4.zip",
+    "requirements.txt",
+    "docs/instalacion_linux_alma_resist/estrategia_instalacion_y_sincronizacion",
+    "docs/versiones/v0.0.0.5_LLM_server/idea_base_llm_server_0.0.0.4.0.md",
+    "docs/versiones/v0.0.0.4_sprint_2.5_auditoria/backup_linked_to.zip",
+    "docs/readme.md",
+    "docs/versiones/v0.0.0.2_documentacion/v0.0.0.2_documentacion.zip",
+    "docs/journal/bitacoras/2025-05-23_bitacora.md",
+    "docs/versiones/v0.0.0.4_sprint_2.5_auditoria/archivos/estructura_post_sprint_2.5.txt",
+    "docs/introduccion/readme.md",
+    "docs/versiones/v0.0.0.2_metodologias/VERSION.txt",
+    "docs/versiones/v0.0.0.4_sprint_2.5_auditoria/backup_snakecase.zip",
+    "docs/utilidades/README.md",
+    "docs/versiones/v0.0.0.2_estructura_documental/v0.0.0.2_estructura_documental_.zip",
+    "docs/versiones/ideas_base_legacy/ideas_base_legacy.zip",
+    "docs/versiones/v0.0.0.4_sprint_2.5_auditoria/index_snapshot_v0.0.0.4.md",
+    "docs/utilidades/comandos_utiles/validacion_documentacion.md",
+    "docs/utilidades/scripts/force_snake_case_modules.md",
+    "docs/versiones/v0.0.0.4_sprint_2.5_auditoria/readme.md",
+    "docs/versiones/v0.0.0.4_sprint_2.5_auditoria/version.md",
+    "docs/metodologias/_archivadas/metodologia_estructura_autonoma_v1.md",
+    "docs/utilidades/comandos_utiles/readme.md",
+    "docs/versiones/v0.0.0.3_snapshot_sprint_2.4/version_v0.0.0.3_snapshot_sprint_2.4.md",
+    "docs/utilidades/comandos_utiles.md",
+    "docs/versiones/v0.0.0.3_snapshot_sprint_2.4/README_v0.0.0.3_snapshot_sprint_2.4.md",
+    "docs/versiones/v0.0.0.2_idea_base_unificada/version_v0.0.0.2_idea_base_unificada.md",
+    "docs/utilidades/scripts/fix_metadata.md",
+    "docs/introduccion/changelog.sync-conflict-20250603-065830-EHTW5G7.md",
+    "docs/utilidades/scripts/validate_docs.md",
+    "docs/introduccion/changelog.sync-conflict-20250604-050447-EHTW5G7.md",
+    "alma_empresa/entidades/cannabird/archivo/historico/datasets/readme.md",
+    "docs/arquitectura/estructura_doc/readme.md",
+    "control_central/control/sprints_activos/prompts/prompt_sprint_sync_total_v1.md",
+    "control_central/logs/auditorias/2025-05-29_prompt_audioria_001.md",
+    "control_central/docs/journal/bitacoras/2025-06-02_bitacora.md"
+  ]
+}

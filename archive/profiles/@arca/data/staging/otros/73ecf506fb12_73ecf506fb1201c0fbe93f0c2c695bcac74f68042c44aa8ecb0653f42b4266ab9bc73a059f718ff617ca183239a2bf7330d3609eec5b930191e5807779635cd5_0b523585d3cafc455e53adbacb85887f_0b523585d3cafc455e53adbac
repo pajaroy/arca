@@ -1,0 +1,13 @@
+{
+  "id": "MEMGEN-009",
+  "fecha": "2025-04-30T10:09:40.342274",
+  "titulo": "Memoria Web 009",
+  "categoria": "GEN",
+  "tags": [
+    "memoria-web",
+    "#reflexion"
+  ],
+  "contenido": "El usuario recibió una serie de recomendaciones técnicas avanzadas (de DeepSeek o fuente similar) para mejorar el sistema de memorias ALMA en JSON, incluyendo: validación con JSON Schema, sincronización bidireccional entre MD y JSON, visualización de grafos con Obsidian/D3.js, sistema de alertas inteligentes por tags, integración de NLP para relaciones automáticas, y preparación de una API REST con FastAPI. El usuario busca ayuda para comprender e implementar estas mejoras.",
+  "relacionadas": [],
+  "impacto_en": []
+}

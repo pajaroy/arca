@@ -1,0 +1,17 @@
+# Prompt – Generación de Script: add_bitacora_entry.py (Bitácora Viva ALMA_RESIST)
+
+**Contexto:**  
+Vas a generar un script CLI en Python llamado `add_bitacora_entry.py` para ALMA_RESIST, siguiendo esta idea base:
+
+
+**INSTRUCCIONES para DeepSeek:**
+- Implementá SOLO la función mínima viable (MVP) según los requisitos funcionales.
+- El script debe ejecutarse desde terminal y permitir argumentos CLI (ejemplo: --accion, --descripcion, --motivo, etc.).
+- Validá la estructura YAML antes y después de modificar.
+- Hacé backup automático del archivo antes de escribir.
+- El código debe ser legible, modular y con comentarios claros.
+- Las mejoras “optimizables” déjalas en la sección TODO o comentarios, para iteraciones futuras.
+- Compatible con Python 3.8+, sin dependencias innecesarias.
+
+**SALIDA:**  
+El código fuente completo, listo para guardar como `add_bitacora_entry.py`, siguiendo la estructura y los requisitos definidos arriba.

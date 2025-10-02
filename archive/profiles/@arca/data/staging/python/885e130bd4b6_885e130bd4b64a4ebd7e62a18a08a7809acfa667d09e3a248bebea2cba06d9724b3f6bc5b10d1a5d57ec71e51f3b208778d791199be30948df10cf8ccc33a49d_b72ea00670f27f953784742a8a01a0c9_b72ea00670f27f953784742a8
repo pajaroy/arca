@@ -1,0 +1,105 @@
+#!/usr/bin/env python3
+"""
+sync_bitacora.py - Sincronización segura de bitácoras para ALMA LIBRE
+Versión: 1.0.0
+"""
+
+import argparse
+import hashlib
+from pathlib import Path
+import yaml
+from datetime import datetime
+import sys
+
+DEFAULT_SOURCE = Path("CUADERNOS/")
+DEFAULT_DEST = Path("BITACORA_CENTRAL/RESUMENES/")
+LOG_PATH = Path("MODULOS/sync_bitacora/logs/sync_log.txt")
+
+def configurar_rutas():
+    Path(LOG_PATH.parent).mkdir(parents=True, exist_ok=True)
+    return DEFAULT_SOURCE, DEFAULT_DEST
+
+def calcular_hash(contenido: str) -> str:
+    return hashlib.sha256(contenido.encode('utf-8')).hexdigest()
+
+def extraer_metadatos(contenido: str) -> tuple:
+    partes = contenido.split('---\n')
+    if len(partes) > 2:
+        try:
+            meta = yaml.safe_load(partes[1])
+            return meta.get('hash'), meta
+        except yaml.YAMLError:
+            pass
+    return None, {}
+
+def procesar_archivo(src_path: Path, dest_base: Path) -> bool:
+    contenido = src_path.read_text(encoding='utf-8')
+    hash_existente, meta = extraer_metadatos(contenido)
+    nuevo_hash = calcular_hash(contenido)
+    
+    if not hash_existente or hash_existente != nuevo_hash:
+        if '---' in contenido:
+            nuevo_contenido = contenido.replace(
+                f"hash: {hash_existente}", 
+                f"hash: {nuevo_hash}", 1
+            ) if hash_existente else contenido.replace(
+                '---\n', 
+                f'---\nhash: {nuevo_hash}\n', 1
+            )
+        else:
+            nuevo_contenido = f"---\nhash: {nuevo_hash}\n---\n{contenido}"
+        
+        src_path.write_text(nuevo_contenido, encoding='utf-8')
+    
+    fecha = meta.get('fecha_creacion', datetime.now().strftime('%Y-%m-%d'))
+    semana = f"S{datetime.strptime(fecha, '%Y-%m-%d').isocalendar()[1]:02d}"
+    dest_path = dest_base / semana / src_path.name
+    
+    if dest_path.exists():
+        dest_hash = calcular_hash(dest_path.read_text(encoding='utf-8'))
+        if dest_hash == nuevo_hash:
+            return False
+    
+    dest_path.parent.mkdir(parents=True, exist_ok=True)
+    dest_path.write_text(nuevo_contenido, encoding='utf-8')
+    return True
+
+def registrar_log(operacion: str, src_path: Path, dest_path: Path, file_hash: str):
+    timestamp = datetime.now().strftime('[%Y-%m-%d %H:%M]')
+    log_entry = f"{timestamp} {operacion} {src_path.name} (hash: {file_hash}) -> {dest_path}\n"
+    
+    with LOG_PATH.open('a', encoding='utf-8') as f:
+        f.write(log_entry)
+
+def main():
+    parser = argparse.ArgumentParser(
+        description='Sincronizador de bitácoras ALMA LIBRE',
+        epilog='Documentación técnica: prompt_tecnico_v0.0.6.2.md'
+    )
+    parser.add_argument('--source', type=Path, help='Ruta origen personalizada')
+    parser.add_argument('--dest', type=Path, help='Ruta destino personalizada')
+    
+    args = parser.parse_args()
+    source_dir = args.source or DEFAULT_SOURCE
+    dest_dir = args.dest or DEFAULT_DEST
+
+    if not source_dir.exists():
+        print(f"Error: Directorio origen no encontrado: {source_dir}")
+        sys.exit(1)
+
+    processed = 0
+    for md_file in source_dir.rglob('**/*.md'):
+        if md_file.is_file():
+            try:
+                if procesar_archivo(md_file, dest_dir):
+                    registrar_log("COPIADO", md_file, dest_dir, calcular_hash(md_file.read_text()))
+                    processed += 1
+            except Exception as e:
+                error_msg = f"ERROR procesando {md_file}: {str(e)}"
+                registrar_log(error_msg, md_file, dest_dir, "")
+    
+    print(f"Sincronización completada. Archivos procesados: {processed}")
+    print(f"Detalles en: {LOG_PATH}")
+
+if __name__ == "__main__":
+    main()

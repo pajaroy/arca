@@ -1,0 +1,110 @@
+# 📍 Prompt Técnico – Roadmap Modular de ALMA-CLI v1.0.0
+
+id: roadmap_alma_cli_v1.0.0
+version: 1.0.0-draft
+autor: Santi + KAEL
+estado: desarrollo
+estructura:
+  - modulos:
+      - cli_central
+      - bitacora
+      - changelog
+      - fix_metadata
+      - memorias
+      - utils_comunes
+      - ia_integration
+      - logging_auditoria
+      - config_loader
+      - testing
+      - documentacion
+      - plugins_extensibles
+linked_to:
+  - alma_core/core/notebooks/alma-cli/
+  - prompts/prompt_alma_cli_v0.1.0.yaml
+  - docs/journal/bitacora_viva.yaml
+tags: [cli, modular, auditoria, ia, changelog, metadata, bitacora, versionado, extensibilidad]
+
+# 🧩 Roadmap por módulo
+
+## cli_central
+- [ ] Crear `cli.py` como entrypoint con Typer.
+- [ ] Cargar subcomandos dinámicamente por módulo (`cli.add_typer`).
+- [ ] Incluir `--version`, `--help`, `--config`, `--status`.
+- [ ] Lógica de descubrimiento de plugins.
+
+## bitacora
+- [ ] Crear script CLI para agregar entradas (`add_bitacora_entry.py`).
+- [ ] Soporte para logs desde otros módulos (`--log-bitacora`).
+- [ ] Generar bitácoras Markdown/YAML por fecha.
+- [ ] Incluir `bitacora.md` resumida por día.
+
+## changelog
+- [ ] Agregar entradas con `add_changelog_entry.py`.
+- [ ] Soporte por versión y módulo (`CHANGELOG_YYYY-MM-DD_vX.Y.Z.yaml`).
+- [ ] Exportación a `CHANGELOG.md`.
+- [ ] Historial semántico con validación por schema.
+
+## fix_metadata
+- [ ] Crear versión `v1.0.0/` limpia.
+- [ ] Incluir `validate.py`, `auto_fill.py`, `hash.py`, `patch.py`.
+- [ ] `bin/fix_metadata.py` con `--validate`, `--fix`, `--diff`, `--patch`, `--dry-run`.
+- [ ] Schema actualizado basado en plantilla ALMA_RESIST.
+
+## memorias
+- [ ] Subcomando `memorias cargar`, `memorias sync`, `memorias export`.
+- [ ] Validación por schema y versión.
+- [ ] Registro de `huella_sync` y `hash_verificacion`.
+- [ ] IA: resumen de memoria, propuesta institucional.
+
+## utils_comunes
+- [ ] Parsers YAML/JSON/MD/frontmatter.
+- [ ] Loaders genéricos de archivos.
+- [ ] Funciones de timestamp, autor, hashing.
+- [ ] Librería de paths relativos centralizados.
+
+## ia_integration
+- [ ] Subcomando `ia sugerir`, `ia resumir`, `ia validar`.
+- [ ] Interfaz con Mistral/local o GPT vía API.
+- [ ] `prompts/` por módulo.
+- [ ] Output Markdown legible + YAML compatible.
+
+## logging_auditoria
+- [ ] Logger rotativo por módulo.
+- [ ] Log YAML + consola (`logging_config.yaml`).
+- [ ] `logs/bitacora/YYYY-MM-DD.log` por agente.
+- [ ] Modo `--debug`, `--audit`, `--trace`.
+
+## config_loader
+- [ ] `settings.yaml` global.
+- [ ] `.env` para secretos/API keys.
+- [ ] Config dinámico por entorno (`dev`, `prod`, `test`).
+
+## testing
+- [ ] `tests/` con `pytest` y mocks.
+- [ ] Validación de CLI por comando (`--dry-run`, `--invalid`, etc).
+- [ ] CI local opcional (`test_all.sh`).
+
+## documentacion
+- [ ] `README.md` central con TOC.
+- [ ] `README.md` autogenerado por módulo desde prompts.
+- [ ] Exportador a Obsidian (`md + linked_to + tags`).
+- [ ] Docs IA: resumen automático con `ia_docum`.
+
+## plugins_extensibles
+- [ ] `plugins/` con descubrimiento automático.
+- [ ] `alma plugin install X`, `alma plugin list`.
+- [ ] Plantilla `plugin_template/` para IA/usuarios.
+
+# 🔁 Ciclos iterativos
+
+- v1.0.0-alpha → CLI funcional base (bitacora, changelog, metadata).
+- v1.0.0-beta → IA integrada + logging + config modular.
+- v1.0.0-final → Full auditabilidad + extensibilidad + cobertura total.
+
+# 🔐 Principios
+- Modularidad extrema
+- Hash + huella en cada acción
+- IA integrada nativamente
+- Auto-documentación activa
+- Bitácora + changelog siempre
+- Validación antes de ejecución

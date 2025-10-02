@@ -1,0 +1,19 @@
+version: 0.1.0
+title: README YAML Validador_Metadata v0.3.0
+uuid: 35042307-1c6c-40d3-a5b4-23f25970f5e9
+tipo: ''
+schema: ''
+estado: ''
+descripcion: ''
+estructura:
+- ''
+tags: []
+linked_to: []
+responsable:
+- Bird
+hash_verificacion: sha256:eb42e81e3eea02848d767a60cf2837c4fcfc71a81bfb9c575a52d410467a6c37
+historial:
+- fecha: '2025-07-10T02:01:10Z'
+  descripcion: Creación del archivo
+last_modified: '2025-07-10T02:11:07Z'
+last_modified_by: 'alma'

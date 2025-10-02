@@ -1,0 +1,1072 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# =========================================
+# ALMA_CLI_CLEANER v0.1.4
+# CLI profesional para gestión de metadatos ALMA_RESIST
+# =========================================
+
+import os
+import sys
+import re
+import argparse
+import uuid
+import json
+import csv
+import datetime
+import logging
+import hashlib
+import shutil
+import tempfile
+import io
+import traceback
+from typing import List, Dict, Any, Optional, Tuple, Union
+import ruamel.yaml
+from ruamel.yaml.comments import CommentedMap
+from ruamel.yaml.scalarstring import PreservedScalarString
+
+# =========================================
+# CONSTANTES GLOBALES Y CONFIGURACIÓN BASE
+# =========================================
+
+VERSION = "0.1.4"
+TEMPLATE_VERSION = "0.1.3"
+MIN_COMPATIBLE_VERSION = "0.1.0"
+MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
+SUPPORTED_EXTENSIONS = [".md", ".yaml", ".yml", ".py"]
+DEFAULT_CONFIG = {
+    "logs": {
+        "ruta": "/home/alma/Alma-Cli/Logs/Cleaner.parquet",
+        "nivel": "INFO",
+        "formato": "parquet",
+        "loguear_errores": True
+    },
+    "politica_errores": "strict",
+    "advertencia_tamano": 1048576,  # 1MB
+    "hash_algoritmo": "sha256"
+}
+TEMPLATE_METADATOS = CommentedMap({
+    "version": TEMPLATE_VERSION,
+    "template_version": TEMPLATE_VERSION,
+    "title": "",
+    "uuid": "",
+    "tipo": "",
+    "schema": "",
+    "estado": "",
+    "descripcion": "",
+    "estructura": [],
+    "tags": [],
+    "linked_to": [],
+    "responsable": [],
+    "hash_verificacion": "",
+    "historial": [],
+    "last_modified": "",
+    "last_modified_by": "",
+    "created_at": "",
+    "created_by": "",
+    "proceso_origen": "",
+    "input_data": [],
+    "output_data": [],
+    "comentarios": "",
+    "ia_metadata": {}
+})
+
+# Inicializar ruamel.yaml
+yaml = ruamel.yaml.YAML()
+yaml.preserve_quotes = True
+yaml.indent(mapping=2, sequence=4, offset=2)
+yaml.width = 120
+
+# =========================================
+# ESTRUCTURAS DE DATOS Y VALIDACIONES
+# =========================================
+
+class MetadataValidator:
+    """Validador y normalizador de estructuras de metadatos"""
+    
+    REQUIRED_FIELDS = ["title", "uuid", "created_at", "created_by"]
+    FIELD_TYPES = {
+        "title": str,
+        "uuid": str,
+        "tipo": str,
+        "schema": str,
+        "estado": str,
+        "descripcion": str,
+        "estructura": list,
+        "tags": list,
+        "linked_to": list,
+        "responsable": list,
+        "hash_verificacion": str,
+        "historial": list,
+        "last_modified": str,
+        "last_modified_by": str,
+        "created_at": str,
+        "created_by": str,
+        "proceso_origen": str,
+        "input_data": list,
+        "output_data": list,
+        "comentarios": str,
+        "ia_metadata": dict
+    }
+
+    @staticmethod
+    def validate(metadata: Dict) -> Tuple[bool, List[str]]:
+        """Valida estructura básica y tipos de metadatos"""
+        errors = []
+        
+        # Verificar campos obligatorios
+        for field in MetadataValidator.REQUIRED_FIELDS:
+            if field not in metadata:
+                errors.append(f"Campo obligatorio faltante: {field}")
+        
+        # Validar tipos de datos
+        for field, expected_type in MetadataValidator.FIELD_TYPES.items():
+            if field in metadata:
+                if expected_type is str and isinstance(metadata[field], PreservedScalarString):
+                    continue
+                if not isinstance(metadata[field], expected_type):
+                    errors.append(f"Tipo incorrecto para {field}. Esperado: {expected_type.__name__}")
+        
+        # Verificar compatibilidad de versión
+        template_ver = metadata.get("template_version", "0.0.0")
+        if template_ver < MIN_COMPATIBLE_VERSION:
+            errors.append(f"Versión de template incompatible: {template_ver} < {MIN_COMPATIBLE_VERSION}")
+        
+        return len(errors) == 0, errors
+
+    @staticmethod
+    def normalize(metadata: Dict) -> Dict:
+        """Normaliza y limpia los valores de los metadatos"""
+        normalized = metadata.copy()
+        
+        # Normalizar listas
+        list_fields = ["tags", "linked_to", "responsable", "input_data", "output_data"]
+        for field in list_fields:
+            if field in normalized:
+                if isinstance(normalized[field], str):
+                    normalized[field] = [item.strip() for item in normalized[field].split(",")]
+                normalized[field] = [str(item).strip() for item in normalized[field] if item]
+        
+        # Normalizar strings
+        string_fields = ["title", "tipo", "schema", "estado", "descripcion", "comentarios"]
+        for field in string_fields:
+            if field in normalized:
+                if not isinstance(normalized[field], PreservedScalarString):
+                    normalized[field] = str(normalized[field]).strip()
+                
+        # Asegurar historial correcto
+        if "historial" in normalized and not isinstance(normalized["historial"], list):
+            normalized["historial"] = []
+            
+        return normalized
+
+    @staticmethod
+    def migrate_template(old_metadata: Dict) -> Dict:
+        """Migra metadatos antiguos al template actual"""
+        migrated = old_metadata.copy()
+        
+        # Mapeo de campos antiguos a nuevos
+        field_mappings = {
+            "old_responsible": "responsable",
+            "linked": "linked_to",
+            "description": "descripcion",
+            "creation_date": "created_at",
+            "creator": "created_by"
+        }
+        
+        # Aplicar mapeos
+        for old_field, new_field in field_mappings.items():
+            if old_field in migrated and new_field not in migrated:
+                migrated[new_field] = migrated.pop(old_field)
+        
+        # Eliminar campos obsoletos
+        obsolete_fields = ["obsolete_field1", "deprecated_field"]
+        for field in obsolete_fields:
+            migrated.pop(field, None)
+        
+        # Actualizar versión
+        migrated["template_version"] = TEMPLATE_VERSION
+        return migrated
+
+# =========================================
+# MANEJO DE ARCHIVOS Y METADATOS
+# =========================================
+
+class MetadataHandler:
+    """Manejador de operaciones con metadatos en archivos"""
+    
+    @staticmethod
+    def is_binary_file(file_path: str) -> bool:
+        """Detecta si un archivo es binario"""
+        try:
+            with open(file_path, 'rb') as f:
+                chunk = f.read(1024)
+                return b'\0' in chunk
+        except Exception:
+            return True
+
+    @staticmethod
+    def extract_metadata(file_path: str) -> Tuple[Optional[Dict], str]:
+        """Extrae metadatos de diferentes tipos de archivos"""
+        ext = os.path.splitext(file_path)[1].lower()
+        content = ""
+        
+        # Verificar si es binario
+        if MetadataHandler.is_binary_file(file_path):
+            raise ValueError(f"Archivo binario detectado: {file_path}")
+        
+        # Verificar tamaño
+        file_size = os.path.getsize(file_path)
+        if file_size > MAX_FILE_SIZE:
+            raise ValueError(f"Archivo demasiado grande: {file_size} bytes > {MAX_FILE_SIZE}")
+        
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+        except UnicodeDecodeError:
+            raise ValueError("Archivo no es texto válido (UTF-8)")
+        except Exception as e:
+            raise IOError(f"Error leyendo archivo: {str(e)}")
+        
+        if ext == ".md":
+            return MetadataHandler._extract_from_markdown(content)
+        elif ext in [".yaml", ".yml"]:
+            return MetadataHandler._extract_from_yaml(content)
+        elif ext == ".py":
+            return MetadataHandler._extract_from_python(content)
+        else:
+            raise ValueError(f"Formato no soportado: {ext}")
+
+    @staticmethod
+    def _extract_from_markdown(content: str) -> Tuple[Optional[Dict], str]:
+        """Extrae metadatos YAML de archivos Markdown"""
+        match = re.search(r'^---\n(.+?)\n---\n(.*)', content, re.DOTALL)
+        if match:
+            try:
+                metadata = yaml.load(match.group(1))
+                content_body = match.group(2)
+                return metadata, content_body
+            except Exception as e:
+                raise ValueError(f"Error analizando YAML: {str(e)}")
+        return None, content
+
+    @staticmethod
+    def _extract_from_yaml(content: str) -> Tuple[Optional[Dict], str]:
+        """Carga todo el contenido YAML como metadatos"""
+        try:
+            return yaml.load(content), ""
+        except Exception as e:
+            raise ValueError(f"Error analizando YAML: {str(e)}")
+
+    @staticmethod
+    def _extract_from_python(content: str) -> Tuple[Optional[Dict], str]:
+        """Extrae metadatos de docstrings en Python"""
+        # Busca docstrings con metadatos en cualquier posición
+        match = re.search(r'(\'\'\'|\"\"\")\s*?---\n(.+?)\n---\n(.*?)(\1)', content, re.DOTALL)
+        if match:
+            try:
+                metadata = yaml.load(match.group(2))
+                return metadata, content
+            except Exception as e:
+                raise ValueError(f"Error analizando YAML en docstring: {str(e)}")
+        return None, content
+
+    @staticmethod
+    def calculate_hash(content: str) -> str:
+        """Calcula hash de contenido para verificación"""
+        return hashlib.sha256(content.encode('utf-8')).hexdigest()
+
+    @staticmethod
+    def atomic_write(file_path: str, content: str, dry_run: bool = False) -> None:
+        """Escribe contenido de forma atómica usando archivo temporal"""
+        if dry_run:
+            print(f"[DRY-RUN] Se escribiría en: {file_path}")
+            print(f"Contenido propuesto:\n{'-'*40}\n{content}\n{'-'*40}")
+            return
+            
+        try:
+            # Crear directorio si no existe
+            os.makedirs(os.path.dirname(file_path), exist_ok=True)
+            
+            # Escribir a archivo temporal
+            with tempfile.NamedTemporaryFile(
+                mode='w', 
+                encoding='utf-8', 
+                delete=False,
+                dir=os.path.dirname(file_path)
+            ) as tmp_file:
+                tmp_file.write(content)
+                tmp_path = tmp_file.name
+            
+            # Reemplazar archivo original
+            shutil.move(tmp_path, file_path)
+        except Exception as e:
+            if os.path.exists(tmp_path):
+                os.unlink(tmp_path)
+            raise IOError(f"Error en escritura atómica: {str(e)}")
+
+    @staticmethod
+    def write_metadata(
+        file_path: str, 
+        metadata: Dict, 
+        content_body: str = "", 
+        original_content: str = "",
+        dry_run: bool = False
+    ) -> str:
+        """Escribe metadatos en diferentes formatos de archivo"""
+        ext = os.path.splitext(file_path)[1].lower()
+        content = ""
+        
+        try:
+            if ext == ".md":
+                # Convertir a CommentedMap para preservar orden
+                yaml_metadata = CommentedMap(metadata)
+                stream = io.StringIO()
+                yaml.dump(yaml_metadata, stream)
+                yaml_text = stream.getvalue()
+                content = f"---\n{yaml_text}---\n{content_body}"
+                
+            elif ext in [".yaml", ".yml"]:
+                yaml_metadata = CommentedMap(metadata)
+                yaml_content = ruamel.yaml.comments.CommentedSeq()
+                yaml.dump(yaml_metadata, yaml_content)
+                content = str(yaml_content)
+                
+            elif ext == ".py":
+                if original_content:
+                    # Reemplazar solo el bloque de metadatos
+                    content = re.sub(
+                        r'(\'\'\'|\"\"\")\s*?---\n(.+?)\n---\n(.*?)(\1)',
+                        f'\\1---\n{yaml.dump(metadata)}\n---\\3\\4',
+                        original_content,
+                        flags=re.DOTALL,
+                        count=1
+                    )
+                else:
+                    content = original_content
+            else:
+                raise ValueError(f"Formato no soportado: {ext}")
+            
+            # Calcular y actualizar hash
+            new_hash = MetadataHandler.calculate_hash(content)
+            metadata["hash_verificacion"] = new_hash
+            
+            # Escribir de forma atómica
+            MetadataHandler.atomic_write(file_path, content, dry_run)
+            return new_hash
+                
+        except Exception as e:
+            raise IOError(f"Error escribiendo metadatos: {str(e)}")
+
+    @staticmethod
+    def atomic_write(file_path: str, content: str, dry_run: bool = False) -> None:
+        """Escribe contenido de forma atómica usando archivo temporal"""
+        if dry_run:
+            print(f"[DRY-RUN] Se escribiría en: {file_path}")
+            print(f"Contenido propuesto:\n{'-'*40}\n{content}\n{'-'*40}")
+            return
+
+        try:
+            dir_name = os.path.dirname(file_path)
+            if dir_name:
+                os.makedirs(dir_name, exist_ok=True)
+            # Escribir a archivo temporal
+            with tempfile.NamedTemporaryFile(
+                mode='w',
+                encoding='utf-8',
+                delete=False,
+                dir=dir_name if dir_name else "."
+            ) as tmp_file:
+                tmp_file.write(content)
+                tmp_path = tmp_file.name
+
+            shutil.move(tmp_path, file_path)
+        except Exception as e:
+            if 'tmp_path' in locals() and os.path.exists(tmp_path):
+                os.unlink(tmp_path)
+            raise IOError(f"Error en escritura atómica: {str(e)}")
+
+
+# =========================================
+# GESTIÓN DE LOGS Y AUDITORÍA
+# =========================================
+
+class AuditLogger:
+    """Manejador centralizado de logs y auditoría"""
+    
+    def __init__(self, config: Dict):
+        self.config = config
+        self.log_buffer = []
+        
+    def add_log_entry(
+        self, 
+        action: str, 
+        file_path: str, 
+        status: str, 
+        details: str, 
+        user: str, 
+        metadata_before: Dict = None, 
+        metadata_after: Dict = None,
+        json_output: bool = False
+    ) -> Union[Dict, None]:
+        """Agrega una entrada al buffer de logs"""
+        log_entry = {
+            "timestamp": datetime.datetime.now().isoformat(),
+            "action": action,
+            "file": file_path,
+            "status": status,
+            "details": details,
+            "user": user,
+            "version": VERSION,
+            "metadata_before": metadata_before,
+            "metadata_after": metadata_after
+        }
+        
+        self.log_buffer.append(log_entry)
+        
+        if json_output:
+            return log_entry
+        return None
+        
+    def flush_logs(self) -> None:
+        """Escribe todos los logs en buffer al destino configurado"""
+        if not self.log_buffer:
+            return
+            
+        try:
+            log_path = self.config["logs"]["ruta"]
+            log_format = self.config["logs"]["formato"].lower()
+            os.makedirs(os.path.dirname(log_path), exist_ok=True)
+            
+            if log_format == "json":
+                with open(log_path, 'a', encoding='utf-8') as f:
+                    for entry in self.log_buffer:
+                        f.write(json.dumps(entry) + "\n")
+                        
+            elif log_format == "yaml":
+                with open(log_path, 'a', encoding='utf-8') as f:
+                    yaml.dump_all(self.log_buffer, f)
+                    
+            elif log_format == "parquet":
+                try:
+                    import pyarrow as pa
+                    import pyarrow.parquet as pq
+                    
+                    # Convertir a tabla PyArrow
+                    table = pa.Table.from_pylist(self.log_buffer)
+                    
+                    # Escribir en modo append
+                    if os.path.exists(log_path):
+                        existing = pq.read_table(log_path)
+                        table = pa.concat_tables([existing, table])
+                    
+                    pq.write_table(table, log_path)
+                    
+                except ImportError:
+                    # Fallback a JSON si pyarrow no está disponible
+                    with open(log_path + ".json", 'a', encoding='utf-8') as f:
+                        for entry in self.log_buffer:
+                            f.write(json.dumps(entry) + "\n")
+            
+            self.log_buffer = []
+            
+        except Exception as e:
+            sys.stderr.write(f"ERROR: Fallo al escribir logs: {str(e)}\n")
+
+# =========================================
+# FUNCIONES PRINCIPALES DE SUBCOMANDOS
+# =========================================
+
+def crear_archivo(
+    file_path: str, 
+    title: str, 
+    responsable: str, 
+    linked_to: List[str], 
+    executor: str, 
+    force: bool, 
+    logger: AuditLogger,
+    dry_run: bool,
+    json_output: bool
+) -> Tuple[int, Optional[Dict]]:
+    """Implementa el subcomando 'crear'"""
+    result = {"status": "", "message": "", "file": file_path}
+    
+    if os.path.exists(file_path) and not force:
+        msg = "Archivo ya existe y --force no especificado"
+        log_entry = logger.add_log_entry("crear", file_path, "error", msg, executor, json_output=json_output)
+        result.update({"status": "error", "message": msg})
+        if json_output:
+            return 1, log_entry
+        sys.stderr.write(f"Error: {msg}\n")
+        return 1, result
+        
+    metadata = TEMPLATE_METADATOS.copy()
+    metadata.update({
+        "title": title,
+        "uuid": str(uuid.uuid4()),
+        "created_at": datetime.datetime.now().isoformat(),
+        "created_by": executor,
+        "last_modified": datetime.datetime.now().isoformat(),
+        "last_modified_by": executor,
+        "responsable": [responsable],
+        "linked_to": linked_to,
+        "historial": [{
+            "fecha": datetime.datetime.now().isoformat(),
+            "usuario": executor,
+            "accion": "creacion",
+            "descripcion": f"Archivo creado con ALMA_CLI_CLEANER v{VERSION}"
+        }]
+    })
+    
+    try:
+        # Crear contenido inicial según tipo de archivo
+        ext = os.path.splitext(file_path)[1].lower()
+        content_body = ""
+    
+        if ext == ".md":
+            content_body = f"# {title}\n\nNuevo archivo creado con ALMA CLI Cleaner v{VERSION}"
+        elif ext == ".py":
+            content_body = f'"""---\n{yaml.dump(metadata)}\n---\n"""\n\n# Contenido inicial'
+    
+        # CREA DIRECTORIO SOLO SI HAY
+        dir_name = os.path.dirname(file_path)
+        if dir_name:
+            os.makedirs(dir_name, exist_ok=True)
+    
+        # Escribir metadatos (con atomic write y dry-run)
+        new_hash = MetadataHandler.write_metadata(
+            file_path, 
+            metadata, 
+            content_body, 
+            dry_run=dry_run
+        )
+
+        
+        msg = f"Archivo creado con título: {title}"
+        log_entry = logger.add_log_entry(
+            "crear", file_path, "success", msg, executor, json_output=json_output
+        )
+        
+        if dry_run:
+            result.update({"status": "dry-run", "message": "Operación simulada"})
+        else:
+            result.update({"status": "success", "message": msg, "uuid": metadata["uuid"]})
+            print(f"Archivo creado exitosamente: {file_path}")
+        
+        return (0, log_entry) if json_output else (0, result)
+        
+    except Exception as e:
+        msg = f"Error en creación: {str(e)}"
+        log_entry = logger.add_log_entry("crear", file_path, "error", msg, executor, json_output=json_output)
+        result.update({"status": "error", "message": msg})
+        if json_output:
+            return 1, log_entry
+        sys.stderr.write(f"ERROR: {msg}\n")
+        return 1, result
+
+def validar_archivo(
+    file_path: str, 
+    executor: str, 
+    force: bool, 
+    logger: AuditLogger,
+    dry_run: bool,
+    json_output: bool
+) -> Tuple[int, Optional[Dict]]:
+    """Implementa el subcomando 'validar'"""
+    result = {"status": "", "message": "", "file": file_path, "errors": []}
+    
+    try:
+        metadata, content_body = MetadataHandler.extract_metadata(file_path)
+        if metadata is None:
+            msg = "No se encontraron metadatos válidos"
+            log_entry = logger.add_log_entry("validar", file_path, "error", msg, executor, json_output=json_output)
+            result.update({"status": "error", "message": msg})
+            if json_output:
+                return 1, log_entry
+            sys.stderr.write(f"Error: {msg}\n")
+            return 1, result
+            
+        # Validar estructura básica
+        is_valid, errors = MetadataValidator.validate(metadata)
+        result["errors"] = errors
+        
+        if not is_valid and not force:
+            msg = f"Errores de validación: {len(errors)}"
+            log_entry = logger.add_log_entry(
+                "validar", file_path, "error", msg, executor, 
+                metadata_before=metadata, json_output=json_output
+            )
+            result.update({"status": "error", "message": msg})
+            
+            if json_output:
+                return 1, log_entry
+                
+            sys.stderr.write("Errores de validación encontrados:\n")
+            for error in errors:
+                sys.stderr.write(f"- {error}\n")
+            sys.stderr.write("Use --force para reparar automáticamente\n")
+            return 1, result
+            
+        # Normalizar y reparar metadatos
+        fixed_metadata = MetadataValidator.normalize(metadata)
+        changes = []
+
+        # --- BLOQUE NUEVO: rellenar UUID y otros campos faltantes en modo FORCE ---
+        critical_fields = ["uuid", "created_at", "created_by"]
+        if force:
+            for field in critical_fields:
+                if not fixed_metadata.get(field):
+                    if field == "uuid":
+                        fixed_metadata[field] = str(uuid.uuid4())
+                        changes.append("UUID faltante regenerado")
+                    elif field == "created_at":
+                        fixed_metadata[field] = datetime.datetime.now().isoformat()
+                        changes.append("created_at faltante rellenado")
+                    elif field == "created_by":
+                        fixed_metadata[field] = executor
+                        changes.append("created_by faltante rellenado")
+        # --- FIN BLOQUE NUEVO ---
+
+        # Migrar template si es necesario
+        template_ver = fixed_metadata.get("template_version", "0.1.0")
+        if template_ver < TEMPLATE_VERSION:
+            original_ver = template_ver
+            fixed_metadata = MetadataValidator.migrate_template(fixed_metadata)
+            changes.append(f"Migrado de template v{original_ver} a v{TEMPLATE_VERSION}")
+            
+        # Actualizar versión de template si es necesario
+        if fixed_metadata.get("template_version", "0.1.0") < TEMPLATE_VERSION:
+            fixed_metadata["template_version"] = TEMPLATE_VERSION
+            changes.append(f"Actualizado a template v{TEMPLATE_VERSION}")
+        
+        # Actualizar historial si hubo cambios
+        if fixed_metadata != metadata or changes:
+            fixed_metadata["last_modified"] = datetime.datetime.now().isoformat()
+            fixed_metadata["last_modified_by"] = executor
+            fixed_metadata["historial"].append({
+                "fecha": datetime.datetime.now().isoformat(),
+                "usuario": executor,
+                "accion": "validación_reparación",
+                "descripcion": f"Corregidos {len(errors)} errores. {', '.join(changes)}"
+            })
+            
+            # Escribir cambios
+            with open(file_path, 'r', encoding='utf-8') as f:
+                original_content = f.read()
+                
+            new_hash = MetadataHandler.write_metadata(
+                file_path, fixed_metadata, content_body, original_content, dry_run
+            )
+            
+            msg = f"Corregidos {len(errors)} errores, {len(changes)} actualizaciones"
+            log_entry = logger.add_log_entry(
+                "validar", file_path, "repaired", msg, executor,
+                metadata_before=metadata, metadata_after=fixed_metadata,
+                json_output=json_output
+            )
+            
+            result.update({
+                "status": "repaired" if not dry_run else "dry-run",
+                "message": msg,
+                "changes": changes,
+                "errors_fixed": errors
+            })
+            
+            if json_output:
+                return 0, log_entry
+                
+            if dry_run:
+                print(f"[DRY-RUN] Se repararían {len(errors)} errores")
+            else:
+                print(f"Archivo validado y reparado: {len(errors)} correcciones aplicadas")
+        else:
+            msg = "Metadatos válidos sin cambios"
+            log_entry = logger.add_log_entry(
+                "validar", file_path, "valid", msg, executor,
+                json_output=json_output
+            )
+            result.update({"status": "valid", "message": msg})
+            
+            if json_output:
+                return 0, log_entry
+            print(msg)
+            
+        return 0, result
+        
+    except Exception as e:
+        msg = f"Error en validación: {str(e)}"
+        log_entry = logger.add_log_entry("validar", file_path, "error", msg, executor, json_output=json_output)
+        result.update({"status": "error", "message": msg})
+        if json_output:
+            return 1, log_entry
+        sys.stderr.write(f"ERROR: {msg}\n")
+        return 1, result
+
+def limpiar_archivo(file_path: str, executor: str, logger: AuditLogger) -> int:
+    """Implementa el subcomando 'limpiar'"""
+    try:
+        metadata, content_body = MetadataHandler.extract_metadata(file_path)
+        if metadata is None:
+            logger.add_log_entry("limpiar", file_path, "error", 
+                               "No se encontraron metadatos válidos", executor)
+            sys.stderr.write("Error: No se encontraron metadatos válidos en el archivo.\n")
+            return 1
+            
+        original_metadata = metadata.copy()
+        cleaned_metadata = MetadataValidator.normalize(metadata)
+        
+        # Eliminar campos no estándar
+        standard_fields = set(TEMPLATE_METADATOS.keys())
+        non_standard_fields = [k for k in cleaned_metadata.keys() if k not in standard_fields]
+        for field in non_standard_fields:
+            del cleaned_metadata[field]
+        
+        # Actualizar historial si hubo cambios
+        if cleaned_metadata != original_metadata:
+            cleaned_metadata["historial"].append({
+                "fecha": datetime.datetime.now().isoformat(),
+                "usuario": executor,
+                "accion": "limpieza",
+                "descripcion": "Metadatos normalizados y limpiados"
+            })
+            cleaned_metadata["last_modified"] = datetime.datetime.now().isoformat()
+            cleaned_metadata["last_modified_by"] = executor
+            
+            with open(file_path, 'r', encoding='utf-8') as f:
+                original_content = f.read()
+            MetadataHandler.write_metadata(file_path, cleaned_metadata, 
+                                         content_body, original_content)
+            
+            changes = len(non_standard_fields) + sum(
+                1 for k in original_metadata 
+                if original_metadata[k] != cleaned_metadata.get(k, None)
+            )
+            
+            logger.add_log_entry("limpiar", file_path, "cleaned", 
+                               f"Aplicadas {changes} limpiezas", executor,
+                               metadata_before=original_metadata, 
+                               metadata_after=cleaned_metadata)
+            print(f"Archivo limpiado: {changes} cambios aplicados")
+        else:
+            logger.add_log_entry("limpiar", file_path, "clean", 
+                               "No se requirieron cambios", executor)
+            print("Metadatos ya limpios, no se requirieron cambios")
+            
+        return 0
+        
+    except Exception as e:
+        traceback.print_exc()
+        logger.add_log_entry("limpiar", file_path, "error", str(e), executor)
+        sys.stderr.write(f"ERROR: {str(e)}\n")
+        return 1
+
+def set_responsable(file_path: str, responsable: List[str], 
+                   executor: str, logger: AuditLogger) -> int:
+    """Implementa el subcomando 'set_responsable'"""
+    try:
+        metadata, content_body = MetadataHandler.extract_metadata(file_path)
+        if metadata is None:
+            logger.add_log_entry("set_responsable", file_path, "error", 
+                               "No se encontraron metadatos válidos", executor)
+            sys.stderr.write("Error: No se encontraron metadatos válidos en el archivo.\n")
+            return 1
+            
+        original_metadata = metadata.copy()
+        metadata["responsable"] = responsable
+        metadata["last_modified"] = datetime.datetime.now().isoformat()
+        metadata["last_modified_by"] = executor
+        metadata["historial"].append({
+            "fecha": datetime.datetime.now().isoformat(),
+            "usuario": executor,
+            "accion": "actualización_responsable",
+            "descripcion": f"Responsables actualizados: {', '.join(responsable)}"
+        })
+        
+        with open(file_path, 'r', encoding='utf-8') as f:
+            original_content = f.read()
+        MetadataHandler.write_metadata(file_path, metadata, 
+                                     content_body, original_content)
+        
+        logger.add_log_entry("set_responsable", file_path, "updated", 
+                           f"Responsables actualizados a: {', '.join(responsable)}", 
+                           executor, metadata_before=original_metadata, 
+                           metadata_after=metadata)
+        print(f"Responsables actualizados exitosamente")
+        return 0
+    except Exception as e:
+        traceback.print_exc()
+        logger.add_log_entry("set_responsable", file_path, "error", str(e), executor)
+        sys.stderr.write(f"ERROR: {str(e)}\n")
+        return 1
+
+def set_linked(file_path: str, linked_to: List[str], 
+              executor: str, logger: AuditLogger) -> int:
+    """Implementa el subcomando 'set_linked'"""
+    try:
+        metadata, content_body = MetadataHandler.extract_metadata(file_path)
+        if metadata is None:
+            logger.add_log_entry("set_linked", file_path, "error", 
+                               "No se encontraron metadatos válidos", executor)
+            sys.stderr.write("Error: No se encontraron metadatos válidos en el archivo.\n")
+            return 1
+            
+        original_metadata = metadata.copy()
+        metadata["linked_to"] = linked_to
+        metadata["last_modified"] = datetime.datetime.now().isoformat()
+        metadata["last_modified_by"] = executor
+        metadata["historial"].append({
+            "fecha": datetime.datetime.now().isoformat(),
+            "usuario": executor,
+            "accion": "actualización_linked",
+            "descripcion": f"Archivos vinculados actualizados: {', '.join(linked_to)}"
+        })
+        
+        with open(file_path, 'r', encoding='utf-8') as f:
+            original_content = f.read()
+        MetadataHandler.write_metadata(file_path, metadata, 
+                                     content_body, original_content)
+        
+        logger.add_log_entry("set_linked", file_path, "updated", 
+                           f"Vinculos actualizados a: {', '.join(linked_to)}", 
+                           executor, metadata_before=original_metadata, 
+                           metadata_after=metadata)
+        print(f"Archivos vinculados actualizados exitosamente")
+        return 0
+    except Exception as e:
+        traceback.print_exc()
+        logger.add_log_entry("set_linked", file_path, "error", str(e), executor)
+        sys.stderr.write(f"ERROR: {str(e)}\n")
+        return 1
+
+def mostrar_log(file_path: str, executor: str, logger: AuditLogger) -> int:
+    """Implementa el subcomando 'log'"""
+    try:
+        metadata, _ = MetadataHandler.extract_metadata(file_path)
+        if metadata is None:
+            logger.add_log_entry("log", file_path, "error", 
+                               "No se encontraron metadatos válidos", executor)
+            sys.stderr.write("Error: No se encontraron metadatos válidos en el archivo.\n")
+            return 1
+            
+        if "historial" not in metadata or not metadata["historial"]:
+            print("No hay registros de historial disponibles")
+            return 0
+            
+        print(f"Historial de cambios para: {file_path}")
+        print("=" * 60)
+        for entry in metadata["historial"]:
+            print(f"[{entry.get('fecha', '')}] - {entry.get('usuario', '')}")
+            print(f"Acción: {entry.get('accion', '')}")
+            print(f"Descripción: {entry.get('descripcion', '')}")
+            print("-" * 60)
+            
+        logger.add_log_entry("log", file_path, "viewed",
+                           "Historial consultado", executor)
+        return 0
+        
+    except Exception as e:
+        logger.add_log_entry("log", file_path, "error", str(e), executor)
+        sys.stderr.write(f"ERROR: {str(e)}\n")
+        return 1
+
+# =========================================
+# ENTRYPOINT PRINCIPAL
+# =========================================
+
+def load_config() -> dict:
+    """
+    Carga la configuración desde alma_cleaner_config.yaml si existe,
+    si no, usa DEFAULT_CONFIG. Si hay error en el parseo, lo reporta y sigue.
+    """
+    config_path = "alma_cleaner_config.yaml"
+    config = DEFAULT_CONFIG.copy()
+    if os.path.exists(config_path):
+        try:
+            with open(config_path, 'r', encoding='utf-8') as f:
+                user_config = yaml.load(f) or {}
+            # Actualiza solo claves existentes, no agrega basura
+            for section in config:
+                if section in user_config:
+                    if isinstance(config[section], dict) and isinstance(user_config[section], dict):
+                        config[section].update(user_config[section])
+                    else:
+                        config[section] = user_config[section]
+        except Exception as e:
+            sys.stderr.write(f"ADVERTENCIA: Error cargando configuración: {str(e)}\n")
+    return config
+
+def main():
+    # Configuración inicial
+    config = load_config()
+    logger = AuditLogger(config)
+    executor = os.environ.get("ALMA_EXECUTOR", "humano")
+
+    # --- PARSER PRINCIPAL ---
+    parser = argparse.ArgumentParser(
+        prog="alma_cli_cleaner",
+        description="CLI profesional para gestión de metadatos ALMA_RESIST"
+    )
+    parser.add_argument("--version", action="version", version=f"v{VERSION}")
+
+    # --- PARENT PARSER: FLAGS GLOBALES ---
+    parent_parser = argparse.ArgumentParser(add_help=False)
+    parent_parser.add_argument("--executor", default=executor, help="Tipo de ejecutor (humano, Kael, Centralesis)")
+    parent_parser.add_argument("--force", action="store_true", help="Forzar operaciones potencialmente destructivas")
+    parent_parser.add_argument("--dry-run", action="store_true", help="Simular operaciones sin realizar cambios")
+    parent_parser.add_argument("--json", action="store_true", help="Salida en formato JSON")
+
+    # --- SUBPARSERS ---
+    subparsers = parser.add_subparsers(dest="command", required=True)
+
+    # Subcomando: crear
+    crear_parser = subparsers.add_parser("crear", parents=[parent_parser], help="Crear archivo con metadatos")
+    crear_parser.add_argument("archivo", help="Ruta del archivo a crear")
+    crear_parser.add_argument("--title", required=True, help="Título del archivo")
+    crear_parser.add_argument("--responsable", required=True, help="Responsable(s) del archivo")
+    crear_parser.add_argument("--linked-to", default="", help="Archivos vinculados (separados por comas)")
+
+    # Subcomando: validar
+    validar_parser = subparsers.add_parser("validar", parents=[parent_parser], help="Validar metadatos de archivo")
+    validar_parser.add_argument("archivo", help="Ruta del archivo a validar")
+
+    # Subcomando: limpiar
+    limpiar_parser = subparsers.add_parser("limpiar", parents=[parent_parser], help="Limpiar metadatos de archivo")
+    limpiar_parser.add_argument("archivo", help="Ruta del archivo a limpiar")
+
+    # Subcomando: set_responsable
+    resp_parser = subparsers.add_parser("set_responsable", parents=[parent_parser], help="Establecer responsable(s)")
+    resp_parser.add_argument("archivo", help="Ruta del archivo")
+    resp_parser.add_argument("--responsable", required=True, help="Nuevo(s) responsable(s) (separados por comas)")
+
+    # Subcomando: set_linked
+    linked_parser = subparsers.add_parser("set_linked", parents=[parent_parser], help="Establecer archivos vinculados")
+    linked_parser.add_argument("archivo", help="Ruta del archivo")
+    linked_parser.add_argument("--linked-to", required=True, help="Archivos vinculados (separados por comas)")
+
+    # Subcomando: log
+    log_parser = subparsers.add_parser("log", parents=[parent_parser], help="Mostrar historial de cambios")
+    log_parser.add_argument("archivo", help="Ruta del archivo")
+
+    # ... resto del main igual (parse_args, dispatch, etc)
+
+
+    args = parser.parse_args()
+    json_output = args.json
+
+    # Ejecutar subcomando
+    exit_code = 1
+    json_result = {}
+
+    try:
+        if args.command == "crear":
+            linked_list = [x.strip() for x in args.linked_to.split(",")] if args.linked_to else []
+            exit_code, json_result = crear_archivo(
+                args.archivo, args.title, args.responsable, linked_list,
+                args.executor, args.force, logger, args.dry_run, json_output
+            )
+
+        elif args.command == "validar":
+            exit_code, json_result = validar_archivo(
+                args.archivo, args.executor, args.force, logger, args.dry_run, json_output
+            )
+
+        elif args.command == "limpiar":
+            exit_code = limpiar_archivo(
+                args.archivo, args.executor, logger
+            )
+
+        elif args.command == "set_responsable":
+            responsables_list = [x.strip() for x in args.responsable.split(",")]
+            exit_code = set_responsable(
+                args.archivo, responsables_list, args.executor, logger
+            )
+
+        elif args.command == "set_linked":
+            linked_list = [x.strip() for x in args.linked_to.split(",")]
+            exit_code = set_linked(
+                args.archivo, linked_list, args.executor, logger
+            )
+
+        elif args.command == "log":
+            exit_code = mostrar_log(
+                args.archivo, logger
+            )
+
+        else:
+            sys.stderr.write("Comando no reconocido.\n")
+            exit_code = 1
+
+        if json_output and json_result:
+            print(json.dumps(json_result, indent=2))
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()  # Para debuggear en vivo: elimina esto si no querés tanto detalle
+        error_msg = f"ERROR CRÍTICO: {str(e)}"
+        logger.add_log_entry(
+            getattr(args, "command", "unknown"),
+            getattr(args, "archivo", ""),
+            "error", error_msg, getattr(args, "executor", "humano")
+        )
+        if json_output:
+            print(json.dumps({
+                "status": "error",
+                "message": error_msg,
+                "command": getattr(args, "command", ""),
+                "file": getattr(args, "archivo", "")
+            }, indent=2))
+        else:
+            sys.stderr.write(f"{error_msg}\n")
+        exit_code = 1
+
+    finally:
+        try:
+            logger.flush_logs()
+        except Exception as e:
+            error_msg = f"ERROR AL ESCRIBIR LOGS: {str(e)}"
+            if not json_output:
+                sys.stderr.write(f"{error_msg}\n")
+
+    sys.exit(exit_code)
+
+# =========================================
+# DOCUMENTACIÓN INTERNA
+# =========================================
+
+"""
+README INTERNO: ALMA_CLI_CLEANER v0.1.4
+
+CARACTERÍSTICAS PRINCIPALES:
+1.  Manejo robusto de metadatos con preservación de comentarios y orden
+    usando ruamel.yaml
+2.  Dry-run real: --dry-run muestra diferencias sin modificar archivos
+3.  Escrituras atómicas: Usa archivos temporales + reemplazo para evitar
+    corrupción de datos
+4.  Verificación de hash: Cada modificación actualiza hash_verificacion
+5.  Migración de templates: Convierte campos antiguos a la nueva estructura
+6.  Soporte para JSON: --json produce salida machine-readable
+7.  Protección contra archivos binarios/grandes
+8.  Registro de auditoría en Parquet/JSON/YAML
+
+MEJORAS DE SEGURIDAD:
+-   Validación estricta de tipos y estructura
+-   Rollback automático mediante escritura atómica
+-   Verificación de compatibilidad de versiones
+-   Protección contra corrupción de datos
+
+CHANGELOG:
+v0.1.4 - 2023-11-15
+-   Migrado de PyYAML a ruamel.yaml
+-   Implementado dry-run real
+-   Añadida escritura atómica
+-   Implementado hash de verificación
+-   Añadida migración de templates
+-   Soporte para salida JSON
+-   Validación de archivos binarios/grandes
+-   Mejor manejo de docstrings en Python
+
+v0.1.3 - 2023-11-10
+-   Versión inicial con funcionalidad básica
+"""
+
+if __name__ == "__main__":
+    main()

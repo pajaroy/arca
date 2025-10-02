@@ -1,0 +1,186 @@
+#!/usr/bin/env python3
+# fix_metadata.py – Automatiza corrección de metadatos YAML para ALMA_RESIST
+
+# Aquí debería estar el script completo que el usuario proporcionó. Lo reemplazarías completo aquí.
+#!/usr/bin/env python3
+# fix_metadata.py – Automatiza corrección de metadatos YAML para ALMA_RESIST
+
+import os
+import re
+import argparse
+import yaml
+from datetime import datetime
+from pathlib import Path
+import shutil
+import logging
+import unicodedata
+
+# Configuración base
+DEFAULT_ROOT = "./docs"
+VALID_TYPES = ['core', 'tool', 'external', 'integration', 'draft']
+VALID_STATUSES = ['in_progress', 'stable', 'deprecated']
+BACKUP_DIR = "./backup_metadata"
+DATE_FORMAT = '%Y-%m-%d'
+
+class MetadataFixer:
+    def __init__(self, args):
+        self.args = args
+        self.root_path = Path(args.root).resolve()
+        self.fields = args.fields.split(',')
+        self.changes_summary = {}
+        self.setup_logging()
+
+    def setup_logging(self):
+        logging.basicConfig(
+            format='%(levelname)s: %(message)s',
+            level=logging.DEBUG if self.args.verbose else logging.INFO
+        )
+
+    def run(self):
+        processed_files = 0
+        for md_file in self.root_path.rglob('*.md'):
+            if md_file.is_file():
+                processed_files += 1
+                self.process_file(md_file)
+        self.print_summary(processed_files)
+
+    def process_file(self, file_path):
+        try:
+            relative_path = file_path.relative_to(self.root_path)
+            original_content = file_path.read_text(encoding='utf-8')
+            yaml_block, content = self.extract_yaml(original_content)
+
+            new_yaml = self.generate_metadata(file_path, relative_path, yaml_block)
+            new_content = f"---\n{new_yaml}\n---\n{content}"
+
+            if original_content != new_content:
+                self.handle_modification(file_path, new_content)
+        except Exception as e:
+            logging.error(f"Error procesando {file_path}: {str(e)}")
+
+    def extract_yaml(self, content):
+        if content.startswith('---\n'):
+            parts = content.split('---\n', 2)
+            if len(parts) >= 3:
+                return parts[1].strip(), parts[2].lstrip()
+        return None, content
+
+    def generate_metadata(self, file_path, relative_path, existing_yaml):
+        metadata = {}
+        if existing_yaml:
+            try:
+                metadata = yaml.safe_load(existing_yaml) or {}
+            except yaml.YAMLError:
+                logging.warning(f"YAML inválido en {file_path}, regenerando bloque")
+
+        self.normalize_module(metadata, relative_path, file_path)
+        self.validate_type(metadata)
+        self.validate_status(metadata)
+        self.update_field(metadata, 'created', self.get_file_date(file_path))
+
+        return yaml.dump(metadata, sort_keys=False, allow_unicode=True, default_flow_style=False)
+
+    def normalize_module(self, metadata, relative_path, file_path):
+        # Manejo especial para README.md
+        if file_path.name.lower() == 'readme.md':
+            raw_module = str(relative_path.parent).replace('\\', '/')
+        else:
+            raw_module = str(relative_path).replace('\\', '/').replace('.md', '')
+        
+        normalized = self.slugify(raw_module)
+        self.update_field(metadata, 'module', normalized)
+
+    def slugify(self, value):
+        # Normalización Unicode y conversión a ASCII
+        value = unicodedata.normalize('NFKD', value)
+        value = value.encode('ascii', 'ignore').decode('ascii')
+        
+        # Conversión a snake_case estricto
+        value = re.sub(r'[\s\-\.]', '_', value)    # Reemplazar espacios, guiones y puntos
+        value = re.sub(r'[^a-z0-9_/]', '', value.lower())  # Eliminar caracteres no permitidos
+        value = re.sub(r'_+', '_', value)          # Eliminar múltiples guiones bajos
+        value = re.sub(r'_+/_+', '/', value)       # Limpiar alrededor de slashes
+        value = value.strip('_/')                  # Eliminar guiones al inicio/final
+        
+        # Manejo de estructura de carpetas
+        parts = []
+        for part in value.split('/'):
+            part = part.strip('_')
+            if part: parts.append(part)
+        
+        return '/'.join(parts)
+
+    def validate_type(self, metadata):
+        current_type = metadata.get('type', '')
+        if 'type' in self.fields and (current_type not in VALID_TYPES or not current_type):
+            new_type = 'tool' if 'tool' in metadata.get('tags', []) else 'core'
+            self.update_field(metadata, 'type', new_type)
+
+    def validate_status(self, metadata):
+        current_status = metadata.get('status', '')
+        if 'status' in self.fields and (current_status not in VALID_STATUSES or not current_status):
+            self.update_field(metadata, 'status', 'in_progress')
+
+    def update_field(self, metadata, field, default):
+        if field in self.fields:
+            current_value = metadata.get(field, '')
+            needs_update = (
+                not current_value or 
+                (field == 'type' and current_value not in VALID_TYPES) or 
+                (field == 'status' and current_value not in VALID_STATUSES)
+            )
+            if needs_update:
+                metadata[field] = default
+                self.record_change(field)
+                return True
+        return False
+
+    def get_file_date(self, file_path):
+        timestamp = os.path.getmtime(file_path)
+        return datetime.fromtimestamp(timestamp).strftime(DATE_FORMAT)
+
+    def handle_modification(self, file_path, new_content):
+        if self.args.dry_run:
+            logging.info(f"[DRY RUN] Modificaciones pendientes en {file_path}")
+            return
+        if self.args.backup:
+            self.create_backup(file_path)
+        file_path.write_text(new_content, encoding='utf-8')
+        logging.info(f"Actualizado {file_path}")
+
+    def create_backup(self, file_path):
+        backup_dir = Path(BACKUP_DIR) / datetime.now().strftime('%Y%m%d')
+        backup_dir.mkdir(parents=True, exist_ok=True)
+        backup_file = backup_dir / file_path.relative_to(self.root_path)
+        backup_file.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(file_path, backup_file)
+        logging.debug(f"Creado backup en {backup_file}")
+
+    def record_change(self, field):
+        self.changes_summary[field] = self.changes_summary.get(field, 0) + 1
+
+    def print_summary(self, total_files):
+        print("\n📊 Resumen de operación:")
+        print(f"• Archivos procesados: {total_files}")
+        print(f"• Campos actualizados: {sum(self.changes_summary.values())}")
+        for field, count in self.changes_summary.items():
+            print(f"  - {field}: {count}")
+        if self.args.dry_run:
+            print("\n⚠️ Modo dry-run: No se realizaron cambios reales")
+
+def main():
+    parser = argparse.ArgumentParser(
+        description='Corrector automático de metadatos YAML para ALMA_RESIST',
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
+    parser.add_argument('--root', default=DEFAULT_ROOT, help='Directorio raíz para procesar')
+    parser.add_argument('--dry-run', action='store_true', help='Simular cambios sin modificar archivos')
+    parser.add_argument('--backup', action='store_true', help='Crear copias de seguridad antes de modificar')
+    parser.add_argument('--verbose', action='store_true', help='Mostrar detalles del procesamiento')
+    parser.add_argument('--fields', default='module,type,status,created', help='Campos YAML a verificar (separados por comas)')
+    args = parser.parse_args()
+    fixer = MetadataFixer(args)
+    fixer.run()
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,13 @@
+# 🧠 .project.md – Estado General del Sistema ALMA_RESIST
+
+📅 Fecha: 2025-05-23  
+🔢 Versión actual: v0.0.0.2  
+🔜 Próximo sprint: v0.0.0.3 – Integración IA básica
+
+
+## 🧾 Cambios recientes
+
+- Se estandarizó la estructura documental (`estructura_doc/`)
+- Se generaron plantillas reutilizables para documentación
+- Se preparó el sistema para auditar y escalar con trazabilidad total
+

@@ -1,0 +1,48 @@
+
+metadatos:
+  id_unico: "sch-YAML-002"
+  tipo: "esquema_definicion"
+  nombre: "schema.yaml"
+  version: "0.1.1"
+  estado: "archivado"
+  fecha_creacion: "2025-07-15"
+  autor: "Bird"
+
+# schema.yaml
+
+estructuras:
+  config_base:  # Para validar config.yaml
+    version: "string"
+    project: "string"
+    logging:
+      ruta: "string"
+      formato: "string"
+      retention_dias: "int"
+  
+  log_entry:  # Para validar logs
+    timestamp: "datetime"
+    nivel: "string"
+    modulo: "string"
+    mensaje: "string"
+
+  metadatos_frontmatter:
+    uuid: "string"
+    tipo: "string"
+    nombre: "string"
+    version: "string"
+    estado: "string"
+    fecha_creacion: "string"
+    fecha_modificacion: "string"
+    autor: "string"
+    colaboradores: []
+    descripcion: "string"
+    tags: []
+    dependencia_modulos: []
+    path_fisico: "string"
+    hash_integridad: "string"
+    origen: "string"
+    permisos: "string"
+    confidencialidad: "string"
+    referencias_externas: []
+    historial: []
+

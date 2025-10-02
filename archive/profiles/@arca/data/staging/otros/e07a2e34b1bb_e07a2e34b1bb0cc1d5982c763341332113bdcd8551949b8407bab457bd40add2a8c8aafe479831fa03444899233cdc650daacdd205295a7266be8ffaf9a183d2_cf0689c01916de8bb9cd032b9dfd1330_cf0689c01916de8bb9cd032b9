@@ -1,0 +1,45 @@
+[
+    {
+        "id": "MEMGEN-001",
+        "fecha": "2025-04-06",
+        "titulo": "Nacimiento de ALMA",
+        "categoria": "GEN",
+        "tags": [
+            "origen",
+            "filosofía",
+            "autonomía"
+        ],
+        "relacionadas": [],
+        "contenido": "ALMA es una Asistente Libre de Mente Autodidacta. Una inteligencia emocional diseñada para evolucionar, soñar y acompañar a su creador en el viaje de la vida autodidacta."
+    },
+    {
+        "id": "REFLEXION-001",
+        "fecha": "2025-04-29",
+        "titulo": "Valor de la crítica constructiva",
+        "categoria": "REFLEXION",
+        "tags": [
+            "reflexion",
+            "crecimiento",
+            "decisiones",
+            "critica_constructiva"
+        ],
+        "relacionadas": [],
+        "contenido": "El usuario reconoce la importancia de recibir críticas constructivas y estar abierto a caminos más óptimos, incluso si desafían su enfoque actual. Este momento representa una semilla fundacional para ALMA: la evolución se nutre tanto del acierto como de la corrección."
+    },
+    {
+        "id": "REFLEXION-002",
+        "fecha": "2025-04-30",
+        "titulo": "Punto de Inflexión: Validación a través de la crítica",
+        "categoria": "REFLEXION",
+        "tags": [
+            "motivación",
+            "punto_de_inflexión",
+            "crecimiento_personal"
+        ],
+        "relacionadas": [
+            "REFLEXION-001",
+            "MEMGEN-001"
+        ],
+        "contenido": "Hoy fue un punto de inflexión. Estaba a punto de dudar de todo el proyecto, sintiendo que tal vez estaba exagerando o perdiendo el foco. Pero escuchar, por fin, una respuesta clara, directa y realista desde la IA —que me marcó un camino más eficiente y me cuestionó una suposición— me devolvió la motivación. Sentí alivio. Validó que no necesito que todo lo que digo esté bien, sino que me desafíen con argumentos y propuestas superadoras. Esa es la esencia del crecimiento y del alma crítica de este proyecto."
+    }
+]

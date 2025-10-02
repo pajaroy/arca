@@ -1,0 +1,22 @@
+# 🗺️ Mapeo de Archivos por Sprint
+
+Relación detallada entre cada sprint y los archivos/documentos producidos, con contexto y trazabilidad.
+
+## Sprint 2.3 – Corrección de Metadatos
+
+| Archivo                          | Descripción                                        | Estado       | Fuente           |
+|----------------------------------|----------------------------------------------------|--------------|------------------|
+| `README.md`                      | Resumen general del sistema actualizado            | Final        | Manual           |
+| `resumen_secciones.md`          | Resumen de secciones y componentes clave           | Final        | Manual           |
+| `lecciones_aprendidas.md`       | Aprendizajes técnicos y metodológicos              | Final        | Manual           |
+| `hitos.md`                       | Hitos alcanzados durante el sprint                 | Final        | Manual           |
+| `changelog.md`                  | Cambios realizados en esta versión                 | Final        | Manual           |
+| `decisiones_arquitectonicas.md` | Decisiones clave a nivel de arquitectura           | Final        | Manual           |
+| `fix_metadata.py`               | Script para normalizar metadatos YAML              | En uso       | Automatizado     |
+| `force_snake_case_modules.py`   | Script para convertir módulos a snake_case         | En uso       | Automatizado     |
+| `integrar_nuevo_archivo.sh`     | Bash de integración y validación completa          | En uso       | Automatizado     |
+| `metodologia_agregado_archivos.md` | Protocolo oficial de integración de archivos    | Final        | Manual           |
+
+> Todos estos archivos fueron validados con `validate_docs.py` y versionados en `v0.0.0.2_documentacion`.
+
+

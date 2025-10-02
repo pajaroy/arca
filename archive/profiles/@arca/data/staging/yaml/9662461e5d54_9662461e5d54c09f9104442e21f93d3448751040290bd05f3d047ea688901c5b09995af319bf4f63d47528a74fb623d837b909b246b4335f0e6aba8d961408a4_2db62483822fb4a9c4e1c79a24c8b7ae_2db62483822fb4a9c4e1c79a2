@@ -1,0 +1,21 @@
+id: readme_prompt_yaml2all_v011
+version: "0.1.1"
+tipo: "readme"
+schema: "almaresist.readme_v1"
+ubicacion: core/notebooks/drafts_tecnicos/yaml2all/docs/prompt_yaml2all_v0.1.1/README.yaml
+descripcion: |
+  Prompt actualizado y changelog para YAML2ALL v0.1.1.
+  Documenta el prompt solicitado, mejoras y historial para reproducibilidad exacta del script generado.
+estructura:
+  - prompt_yaml2all_v0.1.1.yaml: Prompt que dio origen a v0.1.1.
+  - changelog/: Cambios y auditoría por versión.
+linked_to:
+  - prompt_yaml2all_v0.1.1.yaml
+  - changelog/changelog_yaml2all.yaml
+responsable: "kael"
+hash_verificacion: "sha256:pending"
+last_modified: "2025-06-17T02:17:00Z"
+last_modified_by: "bird"
+estado: "actual"
+notas:
+  - Aquí debe vincularse todo script generado con este prompt.

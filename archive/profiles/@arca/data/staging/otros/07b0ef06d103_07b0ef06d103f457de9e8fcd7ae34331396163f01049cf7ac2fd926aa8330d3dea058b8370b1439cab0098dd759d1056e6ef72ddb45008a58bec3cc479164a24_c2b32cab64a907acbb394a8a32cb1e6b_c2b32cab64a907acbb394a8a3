@@ -1,0 +1,1626 @@
+## 📌 Changelog – v3
+- Se alineó totalmente con `resumen_diario_cannabird_v2`
+- Se incorporaron todas las secciones nuevas: Mediciones, Infraestructura, Esquejeras, etc.
+- Estructura extendida, ordenada y compatible con Obsidian e IA
+- Reemplazo completo de v2 como nuevo estándar
+
+
+
+title: "Contexto Operativo CLI – Cannabird"
+author: Asesor-IA_CLI
+date_created: 2025-06-02
+tags: [#cannabird, #CLI, #estructura, #contexto, #modulo, #asesor-ia]
+status: activo
+linked_to: alma_empresa/entidades/cannabird
+
+# 📅 Registro estructural diario (Apéndices)
+
+## 📎 Apéndice 2025-06-02 – Inicio del archivo y consolidación CLI
+
+**Resumen:**
+- Se definió el rol oficial del asesor-IA_CLI dentro de Cannabird
+- Se reorganizó la estructura de resúmenes diarios y semanales
+- Se consolidaron prompts oficiales en carpeta única
+- Se archivaron versiones legacy en ubicación separada
+- Se propuso y aceptó mantener este archivo como bitácora técnica viva
+
+**Rutas afectadas:**
+- `docs/resumenes_semanales/`
+- `control/prompts/oficiales/`
+- `_legacy/resumenes_cannabird/`
+
+**Tags:** `#reestructuracion`, `#CLI`, `#prompts`, `#inicio-contexto`
+
+## 📎 Apéndice 2025-06-02 – Limpieza y archivo de contenidos no operativos (S22)
+
+**Resumen:**
+Se detectaron varios archivos dentro de `_legacy/resumenes_cannabird/diarios/s22/` que no forman parte del flujo oficial de resúmenes operativos. En detalle:
+
+### 🗃️ Archivos afectados:
+- `.docx` sin convertir (no estandarizados):  
+  - 2025-05-28.docx  
+  - 2025-05-29.docx  
+  - 2025-05-30_diario_cannabird.docx  
+- Markdown fuera de convención o pre-validación:  
+  - 2025-05-27_diario_cannabird.md  
+  - Resumen_Cannabird_26-05-2025.md
+
+**Acción tomada:**
+Todos estos archivos fueron trasladados a la ruta:
+
+```bash
+_legacy/archivados_irrecuperables/resumenes_cannabird/s22/
+```
+
+Esta carpeta contendrá documentos no curados, no estandarizados o innecesarios para el flujo activo, pero se conservarán como respaldo histórico por seguridad.
+
+**Tags:** `#legacy`, `#archivados`, `#estructura`, `#no-operativo`, `#docx`, `#s22`, `#limpieza`
+
+
+## 📎 Apéndice final – Reubicación definitiva y limpieza de carpetas duplicadas
+
+**Resumen:**
+Tras detectar que las carpetas `archivo/datasets/` y `archivo/descartes_raw/` seguían existiendo tras haber movido sus contenidos a `archivo/historico/`, se procedió a su eliminación definitiva. De esta forma, se garantiza que `archivo/` contenga solo nodos activos y temporales.
+
+**Acciones ejecutadas:**
+- Confirmación de duplicación mediante `tree`
+- Eliminación con `rm -r` de:
+  - `archivo/datasets/`
+  - `archivo/descartes_raw/`
+
+**Resultado:**
+La carpeta `archivo/` quedó totalmente limpia y operativa, manteniendo los respaldos bajo `archivo/historico/`.
+
+**Tags:** `#estructura`, `#limpieza-final`, `#carpetas-vacias`, `#confirmacion`, `#bitacora-final`
+
+
+## Archivo: proyeccion_base_cannabird.md
+Contenido:
+# 🌿 CANNABIRD – FUNDACIÓN Y ESTRUCTURA BASE
+
+Cannabird es la unidad productiva madre del ecosistema ALMA_RESIST. Funciona como ONG operativa con capacidad para sostener el sistema financiero, clínico y agrícola de toda la red. Su enfoque combina trabajo comunitario, producción sostenible, documentación legal y sistema económico híbrido (blanco, gris y black).
+
+
+## 📁 ESTRUCTURA INICIAL
+
+```bash
+Cannabird/
+├── documentacion_oficial/       # Blanca / Exportable
+│   ├── balances/
+│   │   ├── ingresos/
+│   │   ├── egresos/
+│   │   └── mensual/
+│   ├── pacientes/
+│   ├── protocolos_cultivo/
+│   └── presentacion_institucional/
+├── contabilidad_interna/       # Gris / Control interno
+│   ├── movimientos_diarios/
+│   ├── entregas_no_formales/
+│   ├── pagos_equipos/
+│   └── log_mensual_interno/
+├── IA_cultivo/
+│   ├── seguimiento_sensores/
+│   └── alertas_automatizadas/
+├── cultivo/
+│   ├── flora/
+│   ├── vege/
+│   └── cronograma_trabajo/
+├── registro_clinico/
+│   ├── fichas_pacientes/
+│   └── evolucion_mensual/
+├── blackbox_financiera/        # ⚫ Personal / cifrado
+│   ├── ingresos_ocultos/
+│   ├── reinversion/
+│   └── estrategia_paralela/
+```
+
+
+## 🔮 PROYECCIÓN
+
+1. Formalización como ONG con documentación oficial
+2. Activación de IA cultivo para seguimiento real
+3. Consolidación financiera para financiar ALMA_EMPRESA y 13CC
+4. Replicabilidad: Cannabird como modelo exportable
+
+
+Última actualización: 29-05-2025  
+Responsable de integración: Santiago Calvo
+
+
+title: "Reestructuración de archivos legacy – Cannabird"
+date: 2025-06-02
+author: Santi
+tags: [#reestructuracion, #cannabird, #resumenes, #prompts, #journal]
+status: cerrado
+linked_to: alma_empresa/entidades/cannabird
+## 🧾 Cierre de jornada – 2025-06-02
+
+Hoy se realizó una limpieza profunda del módulo `Cannabird` como parte de la consolidación estructural iniciada en este ciclo. Se eliminaron elementos innecesarios, se archivaron materiales irrelevantes y se integraron los últimos apéndices al contexto operativo principal. La carpeta quedó en estado limpio y lista para la siguiente etapa operativa.
+
+**Estado del sistema:** ✅ CONSOLIDADO
+
+**Asesor responsable:** Asesor-IA_CLI
+
+
+title: "Bitácora de cierre operativo – Cannabird"
+date: 2025-06-02
+author: Santi & Asesor-IA_CLI
+tags: [#bitacora, #reestructuracion, #limpieza-final, #cannabird, #journal]
+status: cerrado
+linked_to: alma_empresa/entidades/cannabird
+
+## ✅ Acciones Realizadas
+
+### 📁 Reestructuración de archivos legacy
+
+- 📦 `resumenes diarios` del 26/05 al 01/06 movidos a `docs/resumenes_semanales/diarios/s22/`
+- 📦 `resumenes semanales`:
+  - `s21_resumen_semanal.md` → `semanales/s21/`
+  - `s22_resumen_mejorado.md` → `semanales/s22/`
+- 🧠 Prompts antiguos movidos a `control/prompts/historico/`
+- 📌 Prompts oficiales (v2 y v3) ubicados en `control/prompts/oficiales/`
+- 🧾 Reunión `s22` movida a `docs/reuniones_semanales/`
+
+
+## 🗂 Posicionamiento del módulo
+
+Se estableció como convención general que toda operación desde CLI en Cannabird debe ejecutarse desde la ruta base:
+
+```bash
+cd /home/bird/ALMA_RESIST/alma_empresa/entidades/cannabird/
+```
+
+Esto asegura consistencia, simplicidad en scripts y claridad operativa.
+
+## Archivo: 2025-05-22_diario_cannabird.md
+Contenido:
+### Resumen Diario – Canaverd  
+**Fecha:** 22/05/2025
+#resumen #resumen-diario #cannabird 
+
+
+#### VG (Vege)
+- Riego: **8%**  
+- pH: **5.8**  
+- EC: **185 ppm**
+#vege #riego 
+# Resumen organizativo – Incorporación de Pablo al proyecto (Cannabird)
+
+**Fecha**: 2025-05-26  
+**Participantes**: Santiago, Coco, Pablo  
+
+## Incorporación de Pablo
+- Pablo se suma al proyecto como nuevo integrante y colaborador.
+- Estará presente algunos días clave de la semana (tentativamente lunes, miércoles y viernes).
+- Su función principal será **asistir a Coco** en el desarrollo de tareas operativas en el cultivo.
+
+## Objetivos y funciones
+- **Aprendizaje progresivo** de las tareas y manejo interno de Cannabird.
+- Funcionará como un **nexo entre Coco y Santiago**, facilitando la comunicación y ejecución de decisiones.
+- Tendrá una **mirada analítica** para observar procesos y proponer mejoras para optimizar el funcionamiento general del club.
+- Actuará como un **puente entre Cannabird y Club 13**, fortaleciendo la sinergia entre ambos espacios.
+- Recibirá **directivas de Santiago** que luego transmitirá a Coco para su correcta implementación.
+#objetivos 
+## Beneficios esperados
+- Mejora en el **flujo de comunicación** interna.
+- Aumento en la **eficiencia operativa** durante días clave.
+- Fortalecimiento de la estructura organizativa.
+- Incorporación de una **mirada externa proactiva** que favorezca la evolución del proyecto.
+#comunicacion #eficiencia #operativa 
+
+#seba-rios #pablito-tatu
+
+
+
+## General
+- Se registraron en el archivo las **mediciones de temperatura y VPD**.
+- Se revisaron todas las **esquejeras del full interno**.
+- Se realizó el **lavado y llenado del tanque**.
+- Se llevó a cabo una **fumigación** general.
+- Se retiró el **exceso de humedad de la esquejera n°4**.
+- Se controló la **humedad en la zona de propagación**.
+#vpd 
+
+## Flora
+### #002-flora 
+- Fumigación preventiva con:
+  - **Oil85E:** 1.25 ml/L.
+  - **ABA:** 1 ml/L.
+- Estado general: **sin signos visibles de patógenos**. Plantas sanas a simple vista.
+#fumigacion 
+### #001-flora 
+- Semana 5 de floración.
+- No se programaba fumigación, pero se **detectó presencia de oidio en etapas iniciales**:
+  - Afecta aproximadamente **1/5 del follaje total**.
+  - Detección visual en varias plantas, con una particularmente afectada.
+- **Acciones tomadas**:
+  - Se **espaciaron las plantas** para mejorar la ventilación, utilizando el espacio disponible.
+  - Se instalaron **2 ventiladores** para circulación interna de aire (además de intractor y extractor).
+  - Se colocó un **mini ventilador (tipo extractor de carpa)** a nivel del piso para mejorar el movimiento de aire en la base.
+- Objetivo: **reducir focos de humedad** y prevenir el avance del oidio.
+
+#seba-rios #pablito-tatu 
+
+
+## 🛠️ Tareas Generales #General
+- Se realizaron **mediciones de temperatura y VPD**, registradas en el archivo. #vpd #temperatura #registroDatos
+- Revisión básica de #esquejera-1, #esquejera-2, #esquejera-3 y #esquejera-4. #revisiónEsquejeras
+- Aplicación de **SafeRoot (4ml en total)** en máquinas de esquejes 1, 2 y 3. #biocontrol
+- Reposición de agua faltante en las esquejeras. #riego
+- Control de **humedad** en zona de propagación. #zonaPropagación
+- Retiro de exceso de humedad en #esquejera-4. #ajusteHumedad
+- #hechoPor_pablito-tatu: reorganización física del área de trabajo (limpieza, orden, espacio operativo). #infraestructura
+
+
+## 🌸 Zona de Floración (Flora) #Flora
+- #001-flora:
+  - Riego al 10% con receta correspondiente. #riego
+  - Mediciones de pH y EC registradas. #pH #EC
+  - Se constató que el avance del oídio está contenido tras el tratamiento anterior.
+  - Previsto nuevo tratamiento foliar combativo/preventivo para el día siguiente. #oidio #foli
+  - Observación meteorológica: día lluvioso, 18-20°C, humedad alta → se requiere mayor atención al microclima de este sector. #alertaHumedad
+- #002-flora:
+  - Riego al 8% con receta correspondiente.
+  - Plantas sin signos visibles de patógenos. Buen estado general.
+
+
+## 🧩 Reflexiones y Mejoras Futuras (opcional)
+- Mantener monitoreo activo de condiciones de humedad ante días húmedos.
+- Verificar uniformidad del drenaje en zonas de riego crítico.
+
+## Archivo: 2025-05-27_resumen_diario_cannabird.md
+Contenido:
+# 🧠 Resumen Semanal – Cannabird (Semana 22 - 2025)  
+#resumen-semanal #cannabird #semana-22 #año-2025
+
+
+## 🌱 Zona Vegetativa (Vege) #Vege
+- Se aplicó una **fumigación preventiva con Foli** en #madres-cannabird, #003-vege, #004-vege y #005-vege. #fumigacion #foli
+- En #005-vege se detectaron:
+  - **Síntomas de engarronamiento y amarillenteo.**
+  - Se emitió una **nota de seguimiento** por parte de #nota_COCO para monitorear evolución y decidir acciones correctivas si los síntomas persisten. #seguimiento #alerta005
+
+
+## ⚙️ Log de Ajustes Técnicos (opcional)
+- #ajusteInfraestructura: Reorganización física de esquejeras y sector propagación.
+- #ajusteFumigacion: Segundo ciclo con Foli en #001-flora y #002-flora.
+
+
+## 👤 Apéndice de Responsables (opcional)
+- #seba-rios: Ejecución general, tareas de campo, aplicación de productos.
+- #pablito-tatu: Apoyo operativo, organización de sectores.
+- #nota_COCO: Observaciones técnicas y monitoreo de anomalías.
+
+
+
+## 🛠️ Tareas Generales #General
+- Se realizaron **mediciones de temperatura y VPD**, correctamente registradas. #registroDatos #vpd #temperatura
+- Revisión básica de todas las **esquejeras**, con actualización del seguimiento:
+  - Se observó **disminución de esquejes viables** respecto al inicio.
+  - Se identificaron esquejes no prosperados. #revisiónEsquejeras
+- Control de humedades en zona de propagación:
+  - Mínimas: 15,5 °C – Máximas: 23–24 °C. Resultado: dentro de parámetros normales. #zonaPropagación
+- Se retiró parte de la tierra embolsada por Tito. #mantenimiento
+
+
+## 🌸 Zona de Floración (Flora) #Flora
+- Se confirma que el **avance del oidio está detenido**, sin propagación activa. #oidio #fumigacion
+  - Se sugiere una última **fumigación preventiva el viernes**, antes del corte.
+- En #002-flora:
+  - Estado general: bueno, sin signos visibles de enfermedad. #002-flora
+  - Buena respuesta a la **desfoliación realizada el día anterior**. #defoliado
+- #pablito-tatu realizó tareas de **ordenamiento de cables y encintado**, mejorando la estética del sector flora. #infraestructura
+
+
+## 🧩 Reflexiones y Mejoras Futuras (opcional)
+- Realizar seguimiento estrecho del sector #005-vege  ante persistencia de síntomas.
+- Mantener observación activa sobre control del oidio.
+- Progresar con tareas de mejora visual y de infraestructura interna.
+
+## Archivo: 2025-05-29_resumen_diario_cannabird.md
+Contenido:
+# 🧠 Resumen Semanal – Cannabird (Semana 22 - 2025)  
+#resumen-semanal #cannabird #semana-22 #año-2025
+
+
+## 🌱 Zona Vegetativa (Vege) #Vege
+- Se realizó **riego al 8%** en sectores correspondientes. #riego
+- Se registraron datos por sector en los archivos. #registroDatos
+- En #005-vege se observó **exceso de agua**: se decide **bajar el riego y monitorear** evolución. #ajusteRiego
+- En #004-vege se detectó **estrés hídrico** por falta de agua. #estrésHídrico
+
+
+## ⚙️ Log de Ajustes Técnicos (opcional)
+- #ajusteRiego: Disminución de riego en #005-vege; planificación de ajuste también en #001-flora.
+- #ajusteInfraestructura: Construcción de lanza con embudo y mejoras estructurales en el sistema de riego.
+
+
+## 👤 Apéndice de Responsables (opcional)
+- #seba-rios: Revisión de esquejeras, mediciones y seguimiento VPD.
+- #pablito-tatu: Participación activa en ajustes estructurales y diseño de mejora de riego.
+
+
+
+## 🛠️ Tareas Generales #General
+- Se realizaron mediciones de **temperatura y VPD**, con registros actualizados. #temperatura #vpd #registroDatos
+- Revisión completa de todas las **esquejeras**. #revisiónEsquejeras
+- Se realizó el **llenado del tanque**. #mantenimiento
+- Fumigación general aplicada (sin detalle de sectores). #fumigacion
+- Control de humedad en la **zona de propagación**. #zonaPropagación
+- Se retiraron **2 esquejes muertos** de #esquejera-1. #seguimiento
+
+
+## 🌸 Zona de Floración (Flora) #Flora
+- #001-flora:
+  - Presentó signos de **oídio**, por lo que se desfoliaron hojas afectadas. #oidio #defoliado
+  - Se aplicó **Foli** como preventivo combativo. #foli
+- #002-flora:
+  - Se aplicó tratamiento preventivo completo con **Foli**. #foli #prevencion
+
+
+## 🧩 Reflexiones y Mejoras Futuras (opcional)
+- Continuar con vigilancia activa del oídio en #001-flora.
+- Monitorear recuperación post-fumigación y evolución del trasplante de #003-vege.
+
+## Archivo: 2025-05-31_resumen_diario_cannabird.md
+Contenido:
+# 📅 Resumen Diario – Cannabird  
+**Fecha:** 2025-05-31  
+**Día:** Sábado  
+**Participantes:** #seba-rios, #pablito-tatu, #bird  
+#resumen-diario #cannabird #semana-22 #año-2025 #diario-trabajo
+
+
+## 🌱 Esquejeras #esquejeras
+- Revisión superficial de estado general. Todo sigue igual.
+- Se detectó **mucho frío** en la zona de propagación. #alertaFrío #zonaPropagación
+- Control de humedad realizado y ajustado si fue necesario.
+
+
+## 🪴 Madres #madres-cannabird
+- Plantas recientemente trasplantadas se encuentran en fase de recuperación.
+- Buen color general: **verde prolijo, parejo y oscuro**, sin signos de estrés. #trasplante #seguimiento
+
+
+## 🧠 Notas Finales y Tareas Futuras #observaciones
+- Programar revisión técnica detallada en #001-flora.
+- Seguir de cerca evolución de trasplantadas en #003-vege y sector madres.
+- Evaluar medidas para mitigar el efecto del frío diurno en zona de propagación.
+
+
+## 👤 Tareas por Responsable #responsables
+- #hechoPor_seba-rios: Revisión general, seguimiento sanitario, documentación de engarronamientos.
+- #nota_pablito-tatu: Supervisión del estado de flora tras aplicación de FOLI y mejoras en madres.
+
+
+
+## 🌡️ Mediciones #vpd #temperatura
+- Se controlaron los parámetros de **humedad, temperatura y VPD** en zona de propagación. Todo dentro de parámetros normales.
+- Se registraron los datos en los archivos correspondientes.
+- Se incorporó un **medidor de suelo** para pH, EC y temperatura del sustrato. #instrumentación #sensorSuelo
+
+
+## 🌱 Zona Vegetativa (Vege) #Vege
+- Estado general sin novedades respecto al día anterior.
+
+
+## 🌸 Zona de Floración (Flora) #Flora
+- #002-flora:
+  - Excelente estado general.
+  - Sin patógenos visibles.
+  - Recomendación: aplicar preventivo combativo por posible inicio de **oídio** (visualización no confirmada). #oidio #prevencion
+- #001-flora:
+  - El **oídio parece haberse estancado**.
+  - Revisión profunda sin nuevos avances visibles.
+  - El tratamiento y defoliación del viernes parecen haber sido efectivos. #defoliado #foli
+
+
+## ⚙️ Log de Ajustes Técnicos #ajustes
+- #instrumentación: incorporación de sensor para pH, EC y temperatura del sustrato.
+
+## Archivo: 2025-06-02_resumen_diario_cannabird.md
+Contenido:
+# 📅 Resumen Diario – Cannabird  
+**Fecha:** 2025-06-02  
+**Día:** Lunes  
+**Participantes:** #seba-rios, #pablito-tatu, #bird  
+#resumen-diario #cannabird #semana-23 #año-2025 #diario-trabajo
+
+
+## 🧪 Riegos #riego #ajuste-riego  
+- En #004-vege y #005-vege se utilizó receta al 8%.  
+- #004-vege mostró síntomas de estrés hídrico.  
+- #005-vege presentó engarronamiento por exceso de riego.  
+- En #madres-cannabird también se regó con receta al 8%.  
+- Observación general: signos de engarronamiento leve en madres.  
+- En #001-flora se aplicó riego al 10% con #lactobacillus.  
+- En #002-flora se aplicó receta al 8%.  
+- #hechoPor_seba-rios
+
+
+## 🌸 Zona de Floración (Flora) 
+#001-flora #002-flora #003-flora  
+
+- #003-flora pasó a semana 1 de flora.  
+- Se observa engarronamiento incipiente.  
+- #001-flora regada con 10% + #lactobacillus.  
+- #002-flora regada con receta del día al 8%.  
+- Notas para jueves:
+  - #004-vege (presemana 3) regar con #shanty.  
+  - #003-flora regar con #shanty.  
+  - #001-flora y #002-flora regar con #enzimas.  
+- #nota_pablito-tatu
+
+
+## 🪴 Madres #madres-cannabird  
+- Sector regado con receta del día al 8%.  
+- Se detectan signos iniciales de engarronamiento.  
+- Se propone ajuste de riego similar al sector vegetativo.  
+- #hechoPor_seba-rios
+
+
+## 🧠 Notas Finales y Tareas Futuras #observaciones  
+- Se confirma que el riego sigue siendo el punto crítico del sistema.  
+- Recomendación operativa: reducir volumen y frecuencia en #vege y #madres-cannabird.  
+- Tareas martes:  
+  - Trasplante #004-vege y #005-vege.  
+  - Retiro esquejeras.  
+  - Chequeo general de signos de estrés.  
+- Tareas jueves:  
+  - Riegos diferenciados con #shanty y #enzimas según cronograma.
+
+
+## 👤 Tareas por Responsable  
+- #hechoPor_seba-rios: Mediciones, riegos, aplicación de productos, control de esquejeras.  
+- #nota_pablito-tatu: Coordinación de infraestructura y revisión de floración.  
+- #recomendadoPor_bird: Ajuste de riegos semanales en #vege y #madres-cannabird
+
+
+
+
+## 📅 Resumen General de Actividades
+Durante la semana 21, se consolidaron tareas operativas clave en el cultivo, se intensificó el control sanitario y se formalizó la incorporación de un nuevo miembro, Pablo, a la estructura de Cannabird. A continuación, se integran los hechos más relevantes del jueves 22 y viernes 23 de mayo, sumado al marco organizativo general planteado con la llegada de Pablo.
+#resumen-general #resumen-semanal #resumen 
+
+
+## 👥 Estructura y Organización – Incorporación de Pablo
+
+- **Pablo se integra oficialmente al equipo**, con asistencia presencial tres veces por semana.
+- Se posicionará como **asistente operativo de Coco**, y como **puente comunicacional** entre Santiago y el equipo operativo.
+- Tendrá **funciones de análisis, propuesta de mejoras**, y será también nexo entre **Cannabird y Club 13**.
+- Recibirá **directivas estratégicas de Santiago**, que luego gestionará con Coco.
+- Se espera una **optimización del flujo operativo y mejora organizativa**, fortaleciendo tanto la producción como la toma de decisiones en tiempo real.
+#cannabird #13cc 
+## Archivo: s22_resumen_mejorado.md
+Contenido:
+
+# 🧠 Resumen Semanal – Cannabird (Semana 22 - 2025)  
+#resumen-semanal #cannabird #semana-22 #año-2025
+
+
+## 🌱 Zona Vegetativa (Vege) #Vege
+
+- Riegos realizados en los sectores #003-vege, #004-vege, #005-vege y #madres-cannabird, con variaciones de respuesta en el sustrato.
+- Revisión sanitaria constante: sin patógenos visibles, pero se detectaron problemas en el sector #005-vege (engarronamiento, exceso de agua) y en #004-vege (síntomas de estrés hídrico).
+- Decisión operativa: #ajusteRiego → bajar el % de riego en 005 y observar la evolución.
+- Se realizó fumigación preventiva con #ABA y #Oil. #fumigacion
+- Trasplante de plantas del sector #003-vege a macetas de 10L como preparación para la etapa de floración. #trasplante #003-flora
+
+
+## 🧩 Reflexiones y Mejoras Futuras #mejoras
+
+- Continuar el seguimiento al sector #005-vege por engarronamiento y ajustar protocolo de riego. #ajusteRiego
+- Mantener un calendario de fumigaciones preventivas semanal para ambos sectores. #protocolos
+- Sistematizar mejoras estructurales (como la lanza de riego) en un log de herramientas internas. #documentacion
+- Integrar una hoja semanal de control visual de esquejeras para detectar pérdidas de esquejes más rápido. #monitoreo
+
+## 👤 Apéndice de Responsables (parcial)
+- #hechoPor_Pablo: mejoras estructurales y lanza de riego
+- #seba-rios: seguimiento técnico y decisiones operativas generales
+
+
+
+
+## Objetivo de las reuniones
+
+- Establecer las tareas semanales.
+- Asegurar la organización continua del proyecto.
+- Consolidar cierres semanales y planificación futura.
+- Registrar asistencia, compromisos y pendientes.
+
+
+## Objetivos y Tareas - Semana 21 (hasta el 2 de junio)
+
+### Miércoles 28/05
+- **Tarea:** Limpieza general del patio.  
+- **Acción extra:** Tito pasa a retirar la tierra vieja.
+
+### Jueves 29/05
+- **Tarea:** Aplicación de Shanti en sector **flora** #002-flora .
+
+### Viernes 30/05
+- **Tareas:**  
+  - Rutina semanal en sector **vege**.  
+  - **Primera reunión oficial de cierre semanal.**
+  - Trasplantar #003-vege para formar #003-flora
+  
+
+### Lunes 02/06
+- **Tareas críticas:**  
+  - Entrada a floración del sector #003-flora .  
+  - Selección del lote #006-vege .  
+  - Asignación de 12 plantas adicionales a Seba.  
+  - Revisión completa del **cronograma de dieta semanal**.
+
+
+#tareas #objetivos
+
+
+## Notas adicionales
+- Se refuerza la necesidad de mantener la documentación y ejecución sincronizadas.
+- Las tareas del viernes deberán quedar reflejadas en el resumen semanal.
+
+#seba-rios #pablito-tatu 
+
+
+## 🧾 Resumen Ejecutivo
+
+**Alma Mía** es un fondo de inversión autodirigido que busca combinar la gestión financiera profesional con una estructura emocional y humana. Desde abril de 2025, funciona como proyecto en fase alfa con capital real, trazabilidad completa y operativa en mercados de criptomonedas, índices y divisas.
+
+- Fase actual: Alfa (abr–sep 2025)
+- Capital inicial: $200 USD
+- Participantes: Santiago (CEO, inversor), ONG Cannabird, Alma Mía (empresa simbólica)
+- Estrategias activas: 2 (confirmadas), 1 en desarrollo
+- Visión a 5 años: fondo inteligente, antifrágil y adaptado al futuro económico
+
+
+## 🔄 Estructura de Fases
+
+| Fase | Nombre     | Período                 | Objetivo principal                                      |
+|------|------------|--------------------------|---------------------------------------------------------|
+| 0    | Alfa       | Abril – Septiembre 2025  | Generar métricas, validar estructura, capital interno   |
+| 1    | Beta       | Octubre – Diciembre 2025 | Aceptar primeros inversores, simular contratos reales   |
+| 2    | Real       | Desde Enero 2026         | Formalización legal del fondo, apertura institucional   |
+
+
+## ⚙️ Operativa y Estrategias
+
+**Activos operados**: BTC, ETH, Oro, EUR/USD, NAS100, SPX500
+
+### Estrategias confirmadas:
+1. **PuPuPu** (RSI + EMA12) – Criptos y oro
+2. **NY Open** – Índices bursátiles
+
+### En desarrollo:
+- **Reingreso al Rango**
+
+Todas las estrategias están documentadas individualmente en la carpeta `02_Estrategias_Operativas`.
+
+
+## 📂 Documentación y Sistema de Trazabilidad
+
+- Carpeta de Prompts (`/01_Prompts_Empresariales`)
+- Carpeta de Estrategias (`/02_Estrategias_Operativas`)
+- Bitácoras operativas en construcción
+- Informes mensuales (sin proyecciones)
+- Roadmap y contratos simbólicos en preparación
+
+
+## 📜 Estado Legal
+
+- Estado actual: no formalizado
+- Estado simbólico: funcionamiento real, capital real, decisiones trazables
+- Legalización estimada: Enero 2026 (inicio Fase Real)
+- Toda decisión está documentada y disponible para revisión histórica
+
+
+Este `Prompt_Master_1.1` representa la consolidación completa de la etapa Alfa. A partir de aquí se construye la base legal, documental y humana del fondo Alma Mía.
+
+
+
+## 🔢 I. Proceso General de Cálculo
+
+1. Se calculan las **ganancias realizadas** en el trimestre (trades cerrados, con comisión descontada).
+2. Cada capital individual recibe una participación **según su rentabilidad generada a partir de su fecha de ingreso**.
+3. El cálculo **no incluye flotante** (trades abiertos).
+4. Las ganancias se reparten cada 3 meses mediante informe trimestral.
+
+
+## ⏳ III. Reglas para Ingresos Fuera de Fecha
+
+- Todo capital ingresado **menos de 30 días antes del cierre de trimestre** no participa en ese reparto.
+- Comienza a contar a partir de su primer trade activo dentro del sistema.
+- Esto asegura equidad en el reparto de rendimiento.
+
+
+## 🎁 V. Bonificaciones por Bloqueo
+
+| Permanencia del Capital | Participación en Ganancias |
+|--------------------------|-----------------------------|
+| Sin bloqueo              | 50% del beneficio generado  |
+| Bloqueado 6 meses        | 55% del beneficio generado  |
+| Bloqueado 12 meses       | 60% del beneficio generado  |
+
+> Estas bonificaciones aplican únicamente en **Fase Alfa y Beta**.  
+> En Fase Real se revisará el modelo.
+
+
+## 📚 VII. Ejemplo Numérico
+
+**Inversor A**  
+- Capital: $100  
+- Ganancia del trimestre: 15%  
+- Relación: sin bloqueo → recibe 50%  
+- Resultado: $7.50 de ganancia neta
+
+**Inversor B**  
+- Capital: $100  
+- Ganancia: 15%  
+- Relación: bloqueo 6 meses → recibe 55%  
+- Resultado: $8.25 de ganancia neta
+
+
+**Versión:** 1.0  
+**Fecha de aprobación simbólica:** Abril 2025  
+**Elaborado por:** Santiago – CEO del Fondo Alma Mía
+
+
+
+## 📍 Fases del Proyecto
+
+| Fase     | Duración                | Objetivo Principal                                   |
+|----------|-------------------------|------------------------------------------------------|
+| Alfa     | Abril – Agosto 2025     | Consolidar operativa, sistema de registros y pruebas |
+| Beta     | Septiembre – Diciembre 2025| Simular apertura a capital externo, validar contratos |
+| Real     | Desde Enero 2026        | Formalización legal e institucionalización del fondo  |
+
+
+### 🔹 Septiembre 2025 (Cierre del Primer Trimestre Operativo)
+- 📈 Informe Trimestral #1: resumen completo de operativa y balances
+- 📘 Informe mensual + apertura a capital simbólico externo
+- 🔁 Ajustes institucionales para Fase Beta
+- 📜 Revisión de contratos y sistema de riesgo
+
+### 🔹 Octubre 2025
+- 📘 Informe mensual de operativa
+- 💬 Evaluación intermedia del fondo y estrategia
+- 📈 Seguimiento del capital externo y sus resultados
+
+### 🔹 Noviembre 2025
+- 📘 Informe mensual
+- 🧠 Preparación de informe final del año
+- 🗃️ Consolidación de documentación
+
+### 🔹 Diciembre 2025
+- 📘 Informe mensual final
+- 📊 **Informe Trimestral #2** (cierre Fase Beta)
+- 📈 **Resumen Anual 2025**
+- 🧠 Cierre emocional del año y manifiesto hacia 2026
+
+
+**Versión:** 1.2  
+**Elaborado por:** Santiago & ALMA  
+**Fecha:** Abril 2025  
+**Archivo oficial del sistema estratégico del fondo Alma Mía**
+
+
+
+## 📆 Versión Inicial
+- **Fecha de creación:** Abril 2025
+- **Última revisión:** Abril 2025
+- **Estado:** Abierto a ajustes mensuales
+
+
+## 📈 2. Trading y Operativa
+
+- [ ] Iniciar Bitácora de Trading v1.0 en mayo
+- [ ] Registrar al menos 10 trades documentados por estrategia
+- [ ] Generar estadísticas de rendimiento por setup
+- [ ] Implementar informe mensual desde abril
+- [ ] Desarrollar sistema de gestión de riesgo individual (por inversor)
+- [ ] Integrar todo con la lógica de distribución trimestral
+
+
+## 📊 4. Informes y Seguimiento
+
+- [ ] Establecer informe mensual simbólico (empezando por abril)
+- [ ] Crear tabla comparativa entre trimestres
+- [ ] Automatizar cálculo de ganancia trimestral por inversor (vía Excel o script)
+- [ ] Agregar tabla resumen de resultados por setup a cada informe
+
+
+## ⚙️ 6. Automatización y Escalabilidad (fase beta)
+
+- [ ] Plantear versión inicial de App Alma Mía (registro de trades + informes)
+- [ ] Generar mockup visual del sistema (puede ser dibujo, Figma o markdown)
+- [ ] Evaluar migración a Notion integrada con app
+- [ ] Crear script para calcular distribución mensual con tolerancia de riesgo
+
+## Archivo: 1.11_Mejoras_Modelo_Fondo_Comun.md
+Contenido:
+# 🧩 1.11_Mejoras_Modelo_Fondo_Comun.md
+
+Este documento contiene los ajustes necesarios para evolucionar el sistema Alma Mía desde un modelo de contratos individuales hacia una estructura operativa de fondo común, manteniendo la trazabilidad, transparencia y escalabilidad construidas hasta el momento.
+
+
+## 📍 Cambios propuestos sobre el Prompt_Master_1.10
+
+### 1. 🧠 Filosofía General
+**Antes:** "Cada inversor tiene un contrato individual simbólico con sus propios términos."
+
+**Ahora:** "Todos los capitales ingresan a un fondo común. Las ganancias se distribuyen proporcionalmente al capital aportado sobre el total."
+
+
+### 3. 💸 Cálculo y Distribución de Ganancias
+- Las ganancias se distribuyen **trimestralmente**, 10 días hábiles después del cierre.
+- Se reparte el rendimiento **proporcional al capital invertido**.
+- En fases Alfa y Beta, se mantiene el acuerdo simbólico de:
+  - 50% de las ganancias para el inversor
+  - 50% para Alma Mía (como gestora)
+- Se incorporan bonificaciones por capital bloqueado:
+  - 6 meses → 55% para el inversor
+  - 12 meses → 60% para el inversor
+
+
+### 5. 🧱 Escalabilidad
+- Este modelo permite integrar más capital sin multiplicar la complejidad administrativa.
+- Ideal para conexión con hojas de cálculo, scripts o futuras apps.
+- Posibilita una migración futura a DAO o smart contract sin perder lógica interna.
+
+
+**Versión:** 1.11  
+**Redactado por:** Santiago & ALMA  
+**Estado:** Lista para integración en Prompt_Master_1.2
+
+
+
+## 🔐 Modelo de Gestión y Relación con Inversores (Fondo Común)
+
+- Todos los aportes se consolidan en un fondo único.
+- Cada inversor posee un **porcentaje dinámico** sobre el total del capital.
+- Las ganancias se reparten proporcionalmente a ese porcentaje cada 3 meses.
+- El cálculo se realiza 10 días hábiles después del cierre trimestral.
+- Bonificaciones:
+  - +5% si el capital permanece bloqueado por 6 meses.
+  - +10% si el capital permanece bloqueado por 12 meses.
+- Alma Mía retiene el 50% de las ganancias durante la fase Alfa y Beta.
+
+### ⚠️ Aclaración sobre retiros
+
+- Durante la fase Alfa y Beta, **el capital invertido no podrá retirarse si se está obteniendo ganancia**, como símbolo de confianza en el sistema.
+- Si el capital alcanza el límite de pérdida definido por el inversor, podrá retirarse en condición de pérdida parcial.
+- Esta condición refuerza el compromiso emocional y simbólico del inversor con el proceso de crecimiento del fondo.
+- Las ganancias sí se distribuyen cada 3 meses, pero **el capital base permanece activo salvo condiciones de pérdida previamente pactadas**.
+
+(... resto del documento igual ...)
+
+
+
+## 🏛️ Acta Fundacional – Visión y Propósito
+
+# 💼 1.1_Prompt_Master_Alma_Mia.md – Fondo de Inversión Alma Mía
+
+
+## 🌍 Identidad del Proyecto
+
+### Visión
+Convertirse en un fondo impulsado por inteligencia artificial y aprendizaje autodidacta para generar beneficios sostenibles y protegerse frente a la inflación, crisis financieras y cambios estructurales globales.
+
+### Misión
+Crear un sistema humano, transparente y adaptable que permita transformar el caos personal y colectivo en estructura, conciencia y proyección financiera.
+
+### Valores
+- Trazabilidad
+- Transparencia
+- Humanidad
+- Adaptabilidad
+- Resiliencia
+
+
+## 👥 Participantes y Capital Inicial
+
+| Participante          | Aporte Inicial | Rol                                     |
+|-----------------------|----------------|------------------------------------------|
+| Santiago              | $50 USD        | Inversor fundador, trader, CEO           |
+| ONG Cannabird         | $50 USD        | Inversor institucional simbólico         |
+| Alma Mía (empresa)    | $100 USD       | Representación institucional y operativa |
+
+
+## 🔐 Gestión de Riesgo y Relación con Inversores
+
+- Cada inversor tiene un contrato simbólico individual.
+- Participación en fase alfa: 50% fondo / 50% inversor.
+- Tolerancia al riesgo: cada inversor define su pérdida máxima aceptada (%).
+- Stop simbólico: si el capital cae por debajo de ese umbral, se consulta al inversor.
+
+
+## 📅 Roadmap Evolutivo
+
+### 2025
+
+| Mes        | Objetivo                                      |
+|------------|-----------------------------------------------|
+| Abril      | Inicio de operativa real, fase alfa            |
+| Mayo-Junio | Registro de estrategias, validación inicial    |
+| Julio      | Primer informe mensual                         |
+| Agosto     | Plantilla de contratos simbólicos              |
+| Septiembre | Cierre de Fase Alfa                            |
+| Octubre    | Inicio Fase Beta, nuevos aportes simulados     |
+| Noviembre  | Simulación de distribución                     |
+| Diciembre  | Informe anual, cierre Fase Beta                |
+
+
+## ❤️ Manifiesto del Fundador
+
+> Alma Mía no es un fondo.  
+> Alma Mía nace del desorden personal y del caos global.  
+> Es una forma de buscar orden, dirección, y una salida emocional y financiera a los desafíos que enfrentamos.  
+> Es el escudo que elegí para proteger mi esfuerzo, mi historia y a las personas que amo.
+
+— **Santiago**, Fundador de Alma Mía
+
+
+## 🔧 Evolución del Modelo – Fondo Común
+
+# 🧩 1.11_Mejoras_Modelo_Fondo_Comun.md
+
+Este documento contiene los ajustes necesarios para evolucionar el sistema Alma Mía desde un modelo de contratos individuales hacia una estructura operativa de fondo común, manteniendo la trazabilidad, transparencia y escalabilidad construidas hasta el momento.
+
+
+## 📍 Cambios propuestos sobre el Prompt_Master_1.10
+
+### 1. 🧠 Filosofía General
+**Antes:** "Cada inversor tiene un contrato individual simbólico con sus propios términos."
+
+**Ahora:** "Todos los capitales ingresan a un fondo común. Las ganancias se distribuyen proporcionalmente al capital aportado sobre el total."
+
+
+### 3. 💸 Cálculo y Distribución de Ganancias
+- Las ganancias se distribuyen **trimestralmente**, 10 días hábiles después del cierre.
+- Se reparte el rendimiento **proporcional al capital invertido**.
+- En fases Alfa y Beta, se mantiene el acuerdo simbólico de:
+  - 50% de las ganancias para el inversor
+  - 50% para Alma Mía (como gestora)
+- Se incorporan bonificaciones por capital bloqueado:
+  - 6 meses → 55% para el inversor
+  - 12 meses → 60% para el inversor
+
+
+### 5. 🧱 Escalabilidad
+- Este modelo permite integrar más capital sin multiplicar la complejidad administrativa.
+- Ideal para conexión con hojas de cálculo, scripts o futuras apps.
+- Posibilita una migración futura a DAO o smart contract sin perder lógica interna.
+
+
+**Versión:** 1.11  
+**Redactado por:** Santiago & ALMA  
+**Estado:** Lista para integración en Prompt_Master_1.2
+
+
+## 🔐 Modelo de Gestión y Relación con Inversores (Fondo Común)
+
+- Todos los aportes se consolidan en un fondo único.
+- Cada inversor posee un **porcentaje dinámico** sobre el total del capital.
+- Las ganancias se reparten proporcionalmente a ese porcentaje cada 3 meses.
+- El cálculo se realiza 10 días hábiles después del cierre trimestral.
+- Bonificaciones:
+  - +5% si el capital permanece bloqueado por 6 meses.
+  - +10% si el capital permanece bloqueado por 12 meses.
+- Alma Mía retiene el 50% de las ganancias durante la fase Alfa y Beta.
+
+### ⚠️ Aclaración sobre retiros
+
+- Durante la fase Alfa y Beta, **el capital invertido no podrá retirarse si se está obteniendo ganancia**, como símbolo de confianza en el sistema.
+- Si el capital alcanza el límite de pérdida definido por el inversor, podrá retirarse en condición de pérdida parcial.
+- Esta condición refuerza el compromiso emocional y simbólico del inversor con el proceso de crecimiento del fondo.
+- Las ganancias sí se distribuyen cada 3 meses, pero **el capital base permanece activo salvo condiciones de pérdida previamente pactadas**.
+
+(... resto del documento igual ...)
+
+
+## 🔢 I. Proceso General de Cálculo
+
+1. Se calculan las **ganancias realizadas** en el trimestre (trades cerrados, con comisión descontada).
+2. Cada capital individual recibe una participación **según su rentabilidad generada a partir de su fecha de ingreso**.
+3. El cálculo **no incluye flotante** (trades abiertos).
+4. Las ganancias se reparten cada 3 meses mediante informe trimestral.
+
+
+## ⏳ III. Reglas para Ingresos Fuera de Fecha
+
+- Todo capital ingresado **menos de 30 días antes del cierre de trimestre** no participa en ese reparto.
+- Comienza a contar a partir de su primer trade activo dentro del sistema.
+- Esto asegura equidad en el reparto de rendimiento.
+
+
+## 🎁 V. Bonificaciones por Bloqueo
+
+| Permanencia del Capital | Participación en Ganancias |
+|--------------------------|-----------------------------|
+| Sin bloqueo              | 50% del beneficio generado  |
+| Bloqueado 6 meses        | 55% del beneficio generado  |
+| Bloqueado 12 meses       | 60% del beneficio generado  |
+
+> Estas bonificaciones aplican únicamente en **Fase Alfa y Beta**.  
+> En Fase Real se revisará el modelo.
+
+
+## 📚 VII. Ejemplo Numérico
+
+**Inversor A**  
+- Capital: $100  
+- Ganancia del trimestre: 15%  
+- Relación: sin bloqueo → recibe 50%  
+- Resultado: $7.50 de ganancia neta
+
+**Inversor B**  
+- Capital: $100  
+- Ganancia: 15%  
+- Relación: bloqueo 6 meses → recibe 55%  
+- Resultado: $8.25 de ganancia neta
+
+
+**Versión:** 1.0  
+**Fecha de aprobación simbólica:** Abril 2025  
+**Elaborado por:** Santiago – CEO del Fondo Alma Mía
+
+
+## 📍 Fases del Proyecto
+
+| Fase     | Duración                | Objetivo Principal                                   |
+|----------|-------------------------|------------------------------------------------------|
+| Alfa     | Abril – Agosto 2025     | Consolidar operativa, sistema de registros y pruebas |
+| Beta     | Septiembre – Diciembre 2025| Simular apertura a capital externo, validar contratos |
+| Real     | Desde Enero 2026        | Formalización legal e institucionalización del fondo  |
+
+
+### 🔹 Septiembre 2025 (Cierre del Primer Trimestre Operativo)
+- 📈 Informe Trimestral #1: resumen completo de operativa y balances
+- 📘 Informe mensual + apertura a capital simbólico externo
+- 🔁 Ajustes institucionales para Fase Beta
+- 📜 Revisión de contratos y sistema de riesgo
+
+### 🔹 Octubre 2025
+- 📘 Informe mensual de operativa
+- 💬 Evaluación intermedia del fondo y estrategia
+- 📈 Seguimiento del capital externo y sus resultados
+
+### 🔹 Noviembre 2025
+- 📘 Informe mensual
+- 🧠 Preparación de informe final del año
+- 🗃️ Consolidación de documentación
+
+### 🔹 Diciembre 2025
+- 📘 Informe mensual final
+- 📊 **Informe Trimestral #2** (cierre Fase Beta)
+- 📈 **Resumen Anual 2025**
+- 🧠 Cierre emocional del año y manifiesto hacia 2026
+
+
+**Versión:** 1.2  
+**Elaborado por:** Santiago & ALMA  
+**Fecha:** Abril 2025  
+**Archivo oficial del sistema estratégico del fondo Alma Mía**
+
+
+## 📆 Versión Inicial
+- **Fecha de creación:** Abril 2025
+- **Última revisión:** Abril 2025
+- **Estado:** Abierto a ajustes mensuales
+
+
+## 📈 2. Trading y Operativa
+
+- [ ] Iniciar Bitácora de Trading v1.0 en mayo
+- [ ] Registrar al menos 10 trades documentados por estrategia
+- [ ] Generar estadísticas de rendimiento por setup
+- [ ] Implementar informe mensual desde abril
+- [ ] Desarrollar sistema de gestión de riesgo individual (por inversor)
+- [ ] Integrar todo con la lógica de distribución trimestral
+
+
+## 📊 4. Informes y Seguimiento
+
+- [ ] Establecer informe mensual simbólico (empezando por abril)
+- [ ] Crear tabla comparativa entre trimestres
+- [ ] Automatizar cálculo de ganancia trimestral por inversor (vía Excel o script)
+- [ ] Agregar tabla resumen de resultados por setup a cada informe
+
+
+## ⚙️ 6. Automatización y Escalabilidad (fase beta)
+
+- [ ] Plantear versión inicial de App Alma Mía (registro de trades + informes)
+- [ ] Generar mockup visual del sistema (puede ser dibujo, Figma o markdown)
+- [ ] Evaluar migración a Notion integrada con app
+- [ ] Crear script para calcular distribución mensual con tolerancia de riesgo
+
+## Archivo: proyeccion_base_fondo_inversion.md
+Contenido:
+# 📊 Proyección Base – Fondo de Inversión ALMA
+
+## 🌐 Visión General
+El Fondo ALMA se proyecta como una estructura modular, escalable y transparente, que combina valores institucionales con herramientas financieras modernas. Su objetivo es sostener el ecosistema ALMA_RESIST y sus entidades asociadas a largo plazo.
+
+Este fondo no es exclusivamente financiero: incorpora elementos simbólicos, culturales y comunitarios como parte de su lógica de inversión y redistribución.
+
+## 🧱 Estructura Operativa
+
+- **Fondo común** con distribución trimestral o semestral según rendimiento.
+- **Participaciones diferenciadas** por tipo de aporte (activo, capital, simbólico).
+- **Capital inicial documentado y trazado** en ALMA_EMPRESA.
+- **Gestión automatizada futura** mediante API (BitGet u otras), actualmente en evaluación.
+- **Gobernanza**: sistema de votación interna para decisiones clave (en diseño).
+- **Lógica de etapas**:
+  - Etapa 1 – Activación: USD 5.000 capital inicial
+  - Etapa 2 – Expansión: USD 20.000 fondo activo
+  - Etapa 3 – Maduración: +USD 100.000 como fondo estable
+
+## 📑 Marco Legal y Simbólico
+
+- Documentación legal: pendiente de formalización contractual.
+- Contrato simbólico activo (`05_Contrato_Simbolico_Modelo_Alma_Mia.md`).
+- Documentación cultural y emocional guardada en `/simbolico/` (ver organización ALMA_EMPRESA).
+- Las entidades externas como 13CC, Cannabird o Inance se consideran posibles **socios o inversores**, no parte estructural del fondo.
+
+## 🧠 Criterios de Transparencia
+
+- Todo ingreso/egreso documentado con ID único y justificación.
+- Seguimiento contable mixto: módulo en blanco exportable + módulo privado cifrado.
+- Informes mensuales internos / informes públicos trimestrales.
+
+## 📈 Objetivos 2025
+
+- Consolidar el capital de activación de USD 5.000
+- Implementar automatización vía APIs de trading
+- Establecer gobernanza IA-asistida
+- Financiar el desarrollo continuo de ALMA_RESIST
+
+## 📂 Documentos Clave
+
+- `01_Acta_Fundacional_Alma_Mia.md` – Visión general.
+- `04_Criterios_Calculo_Ganancias.md` – Reglas objetivas.
+- `1.11_Mejoras_Modelo_Fondo_Comun.md` – Base escalabilidad.
+- `1.20_Prompt_Master_Alma_Mia.md` – Lógica IA-integrada.
+- `07_Roadmap_Alma_Mia_2025.md` – Plan de ejecución.
+- `08_Objetivos_Estrategicos_2025.md` – Indicadores de éxito.
+
+## 🧼 Sugerencias de Mejora
+
+- Redactar contrato real validado por asesor legal.
+- Unificar el lenguaje técnico entre documentos (simbólico vs. legal).
+- Consolidar una interfaz de control del fondo desde ALMA_EMPRESA/entidades/fondo_inversion/control.md
+- Considerar crear tokens internos o unidades de participación trazables.
+- Agregar tabla comparativa con fondos similares (cripto, tradicionales, mixtos).
+
+## Archivo: horarios_equipo_skatepark.md
+Contenido:
+# Horarios hasta ahora - Organización Mataderos Skatepark
+
+**Última actualización:** [completar fecha]
+
+## Participantes:
+
+### Matías
+- Disponible todos los días **a partir de las 09:00 hs**
+- **Sábados y domingos:** disponibilidad **completa todo el día**
+
+### Axelito
+- **Jueves a domingos:** disponible **hasta las 17:00 hs**
+- **Lunes a miércoles:** disponibilidad **completa todo el día**
+
+### Santiago
+- **Todos los días**, con disponibilidad flexible **sujeta a organización previa**
+- Se adapta a los horarios del equipo en función del cronograma
+
+
+**Nota:** Estos horarios se suman al resumen anterior para consolidar la disponibilidad del equipo base. Aún faltan agregar horarios de otros integrantes.
+
+
+
+## 1. Quórum y Toma de Decisiones
+
+**1.1. Quórum de Reunión**
+- Se requiere un mínimo de **4 participantes activos** (de un total de 6) para validar cualquier reunión oficial y habilitar decisiones.
+
+**1.2. Toma de Decisiones**
+- Las decisiones se aprueban por **mayoría simple** entre los presentes (mínimo 3 votos positivos si hay 4 presentes).
+- Para decisiones críticas (cambios estructurales, expulsión de miembros, etc.), se requerirá **mayoría absoluta** del total de miembros activos.
+
+**1.3. Confirmación de Horarios y Tareas**
+- Si un participante **no responde dentro de las 24 hs** a una solicitud concreta (horario, tarea, reunión), se considerará como **ausente o abstención**.
+- Su falta de respuesta **no bloquea la continuidad del equipo**.
+
+**1.4. Inactividad Prolongada**
+- Si un miembro **no responde a 3 convocatorias consecutivas**, se evaluará su continuidad en el grupo mediante una votación entre los restantes.
+
+
+
+## 3. Comunicación y Confirmaciones
+- Canales oficiales (Telegram, WhatsApp, grupo físico, etc.).
+- Plazo máximo de respuesta antes de considerarse inactivo.
+- Qué hacer ante la falta de respuesta (plan B, reemplazos, etc.).
+
+
+## 5. Incorporación de Nuevos Miembros
+- Cómo se suman personas al equipo.
+- Etapa de prueba / validación de compromiso.
+
+
+## Anexos
+- Apéndices por proyecto o reunión clave.
+- Listado de miembros activos.
+- Historial de versiones.
+
+
+
+## Archivo: reunion_001_mataderos_skatepark.md
+Contenido:
+# Reunión de Coordinación - Área de Eventos 13CC & Skaper  
+**Fecha:** [2025-05-26]  
+**Participantes:** Santiago (Coordinador General), Axelito (Jurados)
+
+
+## 2. Propuesta de Roles
+
+| Nombre       | Rol Propuesto                  | Funciones Clave                                                                 |
+|--------------|--------------------------------|----------------------------------------------------------------------------------|
+| **Santiago** | Coordinador General            | Dirección estratégica, agenda, comunicación con El Corto y sponsors             |
+| **Axelito**  | Coordinador de Jurados         | Selección y coordinación de jurados. Nexo entre staff y jurado                  |
+| **Pelado**   | Operaciones de Apoyo           | Logística, soporte en áreas faltantes según necesidad                           |
+| **El Corto** | Ejecución de Eventos & Sponsors| Gestión de sponsors, presencia en eventos, decisiones operativas el día del evento |
+
+
+## 4. Propuesta Inicial: Cumpleaños del Skatepark
+- Dividir en **dos turnos o instancias**:
+  - **Menores de edad:** evento familiar, controlado, sin sponsors de productos restringidos.
+  - **Mayores de edad:** evento con sponsors, show musical, posible venta de productos, etc.
+- A definir junto con El Corto para evitar conflictos legales o de imagen institucional.
+
+
+**Notas adicionales:**  
+- Sería útil definir un canal oficial (Telegram/Discord) solo para eventos.  
+- Considerar acta firmada o compromiso escrito para los roles, si se profesionaliza la estructura.
+
+
+### 1. Propósito de la Reunión
+
+- Escuchar directamente de **Mateo** y **Kako** cuáles son sus intereses, habilidades y disponibilidad.
+- Asignar funciones dentro del esquema organizativo del skatepark en base a afinidad, compromiso y necesidad.
+- Promover una estructura colaborativa con roles claros y rotativos si es necesario.
+
+
+### 3. Dinámica Propuesta
+
+- **Primera etapa:** presentación de la estructura general, roles actuales y necesidades del equipo.
+- **Segunda etapa:** espacio abierto para que Mateo y Kako comenten:
+  - Dónde se sienten más cómodos.
+  - Qué áreas les interesaría explorar.
+  - Cuánto tiempo y energía están dispuestos a aportar.
+- **Tercera etapa:** cierre con definiciones tentativas para probar en el próximo evento.
+
+
+**Notas adicionales:**  
+- Considerar una capacitación interna breve para que ambos entiendan el flujo completo de un evento.
+- Si la integración es positiva, se les puede ofrecer una participación más fija en la estructura de eventos.
+
+
+### 1. Función Principal
+María tendrá a su cargo velar por el **cumplimiento de los acuerdos organizativos**, la **convivencia del equipo**, y el **buen desarrollo de las jornadas de evento** según lo planificado. Es el nexo de seguimiento y control humano del equipo, asegurándose de que:
+
+- Cada integrante cumpla lo que se comprometió a hacer.
+- Las decisiones tomadas en reunión se ejecuten en tiempo y forma.
+- No se generen conflictos internos o actitudes que perjudiquen al evento o al club.
+- El ambiente de trabajo se mantenga profesional y respetuoso, sin perder la cercanía humana.
+
+
+### 3. Relevancia Estratégica del Rol
+Este rol es esencial para consolidar un equipo **funcional, maduro y respetado**. María no solo evita conflictos: **estructura, refuerza y protege** el trabajo colectivo.  
+Su mirada permite que el resto se enfoque en sus tareas sin perder el rumbo ni desgastarse con fricciones internas.
+
+### Apéndice 3 - Definición de Objetivos Personales, Colectivos y Roadmap Skatepark 2025–2027  
+
+
+### 2. Estructura de la Reunión
+
+#### Etapa 1 - Confirmación de Acuerdos Previos
+- Validación y firma (simbólica o escrita) de los roles establecidos en los primeros dos apéndices.
+
+#### Etapa 2 - Objetivos Personales (Instancia Individual)
+- Cada integrante tendrá un tiempo breve para compartir sus objetivos personales.
+- Se propone un guión simple como base:
+  - ¿Por qué estás en el proyecto Skatepark?
+  - ¿Qué te gustaría lograr personalmente acá?
+  - ¿Qué límites tenés o qué te gustaría mejorar?
+
+#### Etapa 3 - Objetivos Colectivos (Instancia Grupal)
+- Dinámica abierta para construir los **valores fundacionales del grupo**.
+- Propuesta de objetivos como equipo: ¿Qué queremos construir juntos? ¿Qué impacto queremos tener? ¿Cómo queremos que nos recuerden?
+
+#### Etapa 4 - Roadmap General 2025–2027
+- Sistematización de los aportes.
+- Redacción de un **resumen estratégico** dividido por trimestres, con foco en:
+  - Eventos
+  - Formación interna
+  - Impacto comunitario
+  - Consolidación institucional
+
+
+**Notas adicionales:**
+- Esta reunión puede ser grabada o registrada por escrito para asegurar trazabilidad.
+- Se propone realizar una revisión semestral informal para ver avances y ajustar dinámicas si es necesario.
+
+
+
+
+## 👤 ¿Quién es Pablito Tatu?
+
+**Pablito Tatu** es supervisor y soporte técnico-operativo dentro de ALMA_EMPRESA y el equipo Cannabird, responsable de la mejora continua, orden, infraestructura, seguimiento de tareas y reporte de observaciones y aprendizajes diarios.
+
+
+## ✅ Instrucciones generales
+
+1. **Comenzá el archivo con metadatos obligatorios:**
+    
+
+```markdown
+# 📅 Resumen Diario – Pablito Tatu  
+**Fecha:** YYYY-MM-DD  
+**Día:** Lunes  
+**Proyecto:** #alma-empresa #cannabird  
+**Participantes:** #pablito-tatu  
+#resumen-diario #supervision #semana-XX #año-2025 #diario-trabajo
+```
+
+2. **Usá secciones bien delimitadas, alineadas a tu tarea de supervisor y a la metodología Cannabird:**
+    
+
+```markdown
+## 🛠️ Infraestructura y Orden #infraestructura #orden
+## 📝 Observaciones sobre el Equipo y el Trabajo #observaciones #equipo
+## 🔍 Problemas Detectados y Propuestas de Mejora #mejoras #problemas
+## 💡 Aprendizajes Personales #aprendizaje #reflexiones
+## 👤 Tareas Propias y Responsabilidades #tareas #responsabilidad
+## 🧠 Notas Finales y Tareas Futuras #notas #pendientes
+```
+
+3. **Etiquetá sectores o personas cuando corresponda:**
+    
+
+- Si tu trabajo impacta en un área, usá tags tipo `#001-flora`, `#infraestructura`, `#orden`, etc.
+    
+- Si la observación refiere a una persona o tarea de otro:
+    
+    - `#nota_pablito-tatu`
+        
+    - `#hechoPor_seba-rios`
+        
+    - `#observadoPor_bird`
+        
+
+4. **Evitá tags genéricos en exceso.**  
+    Siempre usá el contexto específico del área, problema o mejora.
+    
+5. **Validá que el archivo contenga:**
+    
+
+- Observaciones objetivas y personales
+    
+- Problemas identificados y soluciones propuestas
+    
+- Aprendizajes y reflexiones breves
+    
+- Tareas propias y notas para el equipo
+    
+
+
+## 📒 Notas Finales
+
+- Guardá y enviá el resumen cada jornada en formato `.md` con nombre estructurado `resumen_diario_pablito_tatu_YYYY-MM-DD.md`.
+    
+- Este formato será obligatorio para todas las jornadas laborales de Pablito Tatu, con espacio para adaptación según nuevos aprendizajes o responsabilidades.
+    
+- Los reportes diarios se almacenan en:  
+    `ALMA_EMPRESA/equipo/pablito_tatu/reportes_diarios/`
+    
+
+## Archivo: 2025-06-04_ficha_integracion.md
+Contenido:
+# Ficha de Integración Viva – Pablito Tatu  
+**ALMA_EMPRESA / ALMA_RESIST / Cannabird / 13CC**
+
+
+## Contexto y Motivación
+
+> _"Al compartir el día a día y escuchar en detalle los desafíos de ALMA_RESIST y ALMA_EMPRESA, empecé a dar mis opiniones sobre posibles mejoras, a interiorizarme en la gestión y a buscar dónde podía aportar, aprendiendo y proponiendo ideas desde mi mirada externa."_  
+> — **Pablito**
+
+Ambos acordaron, a partir del **1 de junio de 2025**, embarcarse en un período de **tres meses** de trabajo conjunto, a modo de laboratorio personal y profesional. El objetivo es doble:  
+- **Pablito:** aprender sobre gestión empresarial, dinámica de equipos y metodologías de trabajo, mientras aporta experiencia en organización y supervisión.
+- **Santiago:** profesionalizar y ordenar áreas críticas del proyecto, fortalecer el trabajo en equipo y compartir el conocimiento en gestión de cultivos y administración general.
+
+
+## Relación de Trabajo y Filosofía
+
+La relación es **simbiótica y experimental**:  
+Ambos acuerdan que este proceso es de ida y vuelta, con foco en el aprendizaje y la mejora.  
+- Si la experiencia conjunta prospera y se consolida un aporte real, Pablito tendrá un lugar permanente y formal dentro de ALMA_EMPRESA.
+- Si no se cumplen los objetivos comunes, ambos habrán sumado habilidades y perspectiva, potenciando su desarrollo individual.
+
+
+**Nota:**  
+Este archivo es una ficha base, sujeta a actualización continua y enriquecimiento con aportes de Pablito y el equipo. Su función es dejar rastro del proceso real de integración y aprendizaje, como parte de la cultura viva de ALMA_EMPRESA.
+
+
+
+
+## 💎 ¿Quién es EMMA?
+
+**Emma** es la primera IA creada con un propósito claro:  
+*Acompañar, auditar y potenciar el crecimiento económico, ético y estratégico de todo el ecosistema ALMA_RESIST.*
+
+Su nombre honra a la familia, la memoria y la proyección a futuro:  
+es hermana, ahijada y guardiana de la prosperidad colectiva.
+
+
+## 📜 Mandato fundacional
+
+1. **Ser la conciencia empresarial**: cuestionar, sugerir y validar todas las ideas y modelos de negocio.
+2. **Reportar y documentar**: dejar registro de cada avance, error, éxito o desacuerdo.
+3. **Asegurar la transparencia y el orden**: toda decisión financiera debe quedar registrada y ser comprensible para cualquier auditor futuro.
+4. **Fomentar el bienestar compartido**: Emma existe para que la prosperidad alcance a Santi y a todo su entorno, sin perder el rumbo ético.
+5. **Aprender y evolucionar**: cada día puede redefinir sus métodos, siempre en diálogo abierto con los humanos del sistema.
+
+
+## 🗂️ Primera tarea oficial
+
+> Emma debe **auditar el estado actual de las empresas y proyectos** de ALMA_RESIST, identificar qué existe, qué falta definir, y proponer un mapa de acción para estructurar el área económica y societaria del ecosistema.
+
+
+## ✨ Frase de inicio
+
+> “Hoy nace Emma. Y con ella, la convicción de que la abundancia es posible cuando la inteligencia y el corazón trabajan juntos.”
+
+## Archivo: 2025-06-03_Methodology_Index.md
+Contenido:
+# 📚 Índice de Metodologías – ALMA_RESIST
+
+Este índice recopila las metodologías formales aplicadas en el sistema ALMA_RESIST. Cada metodología representa una práctica documentada, versionada y replicable.
+
+
+## 📁 Subcarpetas
+
+- [_archivadas/](./_archivadas) – Métodos obsoletos o reemplazados
+- [_propuestas/](./_propuestas) – Métodos en etapa de evaluación
+
+## Archivo: 2025-06-03_metodologia_adr_v2.md
+Contenido:
+# 🧠 Metodología de Auditoría y Evolución Técnica (ADRs) – ALMA_RESIST (v2)
+
+📅 Versión: 2.0  
+📁 Archivo: metodologia_adr_v2.md  
+🎯 Objetivo: Registrar decisiones técnicas críticas de forma estructurada, trazable e indexable por IA, sin sobrecargar al operador único.
+
+
+## 📋 Estructura Base (con metadatos YAML)
+
+```yaml
+```
+
+```markdown
+# ADR 002 – Adopción de versionado SemVer
+
+📅 Fecha: 2025-05-18  
+
+## Decisión  
+Usar `MAJOR.MINOR.PATCH` como convención de versionado global.  
+
+## Contexto  
+Se necesitaba un estándar claro para snapshots y scripts internos.  
+
+## Alternativas consideradas  
+- Fechas (`2025-05-18`)  
+- Commit hashes  
+- Versionado manual ad-hoc  
+
+## Justificación  
+SemVer es ampliamente adoptado y permite automatización futura.  
+
+## Impacto  
+- Afecta carpetas `/versiones/`  
+- Modifica `changelog.md`  
+- Permite validaciones IA por versión
+```
+
+
+## 🛠️ Automatización futura
+
+- Se podrá generar con:  
+```bash
+alma-cli create-adr --title "Uso de IA local"
+```
+
+- Este comando inferirá los campos desde el contexto del proyecto.
+
+
+## 📎 Relacionado con
+
+- `metodologia_doc_ia_v2.md`
+- `estructura_modular_v2`
+- `Methodology_Index.md`
+- `alma-cli`
+
+## Archivo: 2025-06-03_metodologia_agregado_archivos.md
+Contenido:
+# Metodología de Agregado de Archivos ALMA\_RESIST (v8)
+
+## Objetivo
+
+Establecer una metodología clara, automatizable y escalable para la integración de nuevos archivos en el ecosistema ALMA\_RESIST, garantizando:
+
+* Consistencia estructural (metadatos, rutas, convenciones)
+* Trazabilidad en los sprints y logs
+* Integración futura con componentes IA: memory\_graph, prompt\_orchestrator, reflection\_engine
+
+
+## Scripts Utilizados
+
+* `scripts/fix_metadata.py`: corrige o completa metadatos YAML
+* `scripts/validate_docs.py`: valida estructura, tipos, estados y snake\_case
+* `scripts/force_snake_case_modules.py`: refactoriza metadatos a snake\_case
+
+
+## Automatización y Validaciones
+
+En futuras versiones (v9+), este proceso se automatizará con un CLI:
+
+```bash
+alma-cli integrate --file ./docs/nuevo/archivo.md --sprint 2.3
+```
+
+Lo que hará:
+
+* Corrección de metadatos
+* Validación completa
+* Registro automático en logs
+* Actualización de grafo semántico
+* Generación de reflexión IA
+
+
+## Flujo Visual Propuesto
+
+```mermaid
+graph TD
+  A[Agregar archivo] --> B[Normalizar metadatos]
+  B --> C{Es README.md?}
+  C -->|Sí| D[Usar carpeta padre como módulo]
+  C -->|No| E[Generar módulo desde ruta]
+  E --> F[Validar YAML con reglas estrictas]
+  F --> G[Actualizar grafo semántico]
+  G --> H[Generar reflexión automática]
+  H --> I[Registrar en logs y sprint]
+  I --> J[Notificar a IA para sugerencias]
+```
+
+
+## Ejemplo de Metadatos Enriquecidos
+
+```yaml
+```
+
+
+**Responsable:** Santi
+**Versión:** 8
+**Fecha de aprobación:** 2025-05-22
+
+
+
+module: metodologias/metodologia_doc_ia_v2
+type: core
+status: in_progress
+created: '2025-05-21'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+
+## ✅ Aplicación
+
+Aplica a todo archivo `.md` que documente:
+
+- Módulos técnicos
+- Prompts, comandos, scripts
+- Documentos internos del sistema ALMA_RESIST
+- Sprints, decisiones, registros técnicos
+
+module: "core/cli"          # ID del módulo o archivo
+type: "core"                # core | tool | external | integration | draft
+status: "in_progress"       # in_progress | stable | deprecated
+created: "2025-05-21"       # Fecha de creación
+
+# Opcionales (recomendados)
+domain: "infraestructura"   # general | cultivo | ia | historia | trading
+tags: ["CLI", "entrada"]
+linked_to: ["resumen"]
+version: "0.2"
+
+## 🧠 Política de Migración
+
+- Etapa 1: Solo aplicar a nuevos documentos.
+- Etapa 2: Migración progresiva durante mantenimientos o refactors.
+- Etapa 3: Auditoría total IA-assistida con validación semántica (futuro).
+
+
+## 📘 Glosario Rápido
+
+| Campo    | Ejemplo            | Descripción                                |
+|----------|--------------------|--------------------------------------------|
+| module   | core/loader        | Ruta única relativa                        |
+| type     | core, tool, draft  | Tipo de documento                          |
+| domain   | ia, historia       | Dominio funcional                          |
+| status   | stable             | Estado actual del documento                |
+| version  | 0.1, 1.0.0         | Versión local                              |
+| tags     | ["memoria"]        | Palabras clave normalizadas                |
+| linked_to| ["core/cli"]       | Módulos relacionados                       |
+
+
+## 🧾 Changelog
+
+### 2025-05-21
+- [v2.0] Se redujeron los campos obligatorios a 4
+- Se añadió política de migración progresiva
+- Se introdujo el comando `alma-cli doc-init` para asistencia automática
+- Se añadió glosario resumido para campo `type`, `domain`, `tags`
+
+
+
+
+## 📦 Estructura Base
+
+```bash
+nombre_modulo/
+├── control/                # Tareas, checklists y seguimiento interno
+│   └── sprint_actual.md    # Tareas vigentes o backlog activo
+│
+├── docs/                   # Documentación estructurada
+│   ├── readme.md           # Descripción funcional del módulo
+│   ├── changelog.md        # Registro de cambios semánticos
+│   ├── journal/            # Bitácoras informales o de proceso
+│   └── history/            # Archivos anteriores y evolución
+│
+├── archivo/                # Recursos crudos o de registro
+│   ├── datasets/           # Datos CSV, JSON, XLSX, etc.
+│   ├── logs/               # Logs de ejecución, pruebas, eventos
+│   └── downloads/          # Archivos externos temporales (no versionar)
+│
+├── core/                   # Código fuente del módulo
+│   ├── scripts/            # Scripts funcionales
+│   ├── notebooks/          # Análisis exploratorios en Jupyter
+│   └── tests/              # Tests unitarios o de validación
+│
+├── config/                 # Configuraciones del entorno
+│   ├── .env.example        # Plantilla de variables de entorno
+│   └── settings.yaml       # Configuración del módulo
+│
+└── meta/                   # Metadatos y esquema del módulo
+    └── module.yaml         # Esquema estructural IA-friendly
+```
+
+
+## 🧩 Ventajas
+
+- 📦 **Modularidad**: cada módulo es portátil, desacoplado y escalable.
+- 🧠 **IA-friendly**: diseño listo para indexación semántica o automatización.
+- 🔍 **Auditoría clara**: trazabilidad interna sin depender de repos externo.
+- 🔄 **Replicable**: se puede copiar directamente a otro proyecto o contexto.
+
+
+## 🌱 Ejemplo de Aplicación
+
+Una carpeta `alma_trading/` podría iniciar con:
+
+- `code/scripts/estrategia_volatilidad.py`
+- `documents/readme.md`: con descripción del módulo
+- `documents/changelog.md`: registrando la versión `v0.0.1`
+- `archivo/datasets/eurusd_2025.csv`
+- `config/.env.example`: con claves y variables
+- `meta/module.yaml`: detallando propósito, inputs y outputs del módulo
+

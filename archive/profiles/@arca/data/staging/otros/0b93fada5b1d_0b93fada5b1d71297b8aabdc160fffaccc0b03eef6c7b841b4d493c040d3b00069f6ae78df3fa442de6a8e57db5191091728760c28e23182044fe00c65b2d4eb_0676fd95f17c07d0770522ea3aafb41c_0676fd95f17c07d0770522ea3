@@ -1,0 +1,20 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_07f80e
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Test Cli
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:3fab6c9de61124cf38ae0164d124e4abbdf74c4961fe0fa98fb2bd19c42bd481
+---
+# Test básico del CLI
+# TODO: Verificar respuesta ante '!estado'

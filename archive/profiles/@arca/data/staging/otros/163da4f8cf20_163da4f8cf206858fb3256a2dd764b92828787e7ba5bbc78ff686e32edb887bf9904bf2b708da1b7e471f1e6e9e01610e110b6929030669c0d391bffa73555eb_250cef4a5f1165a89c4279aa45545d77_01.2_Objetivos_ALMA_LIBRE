@@ -1,0 +1,57 @@
+# 0.2_Objetivos_ALMA_LIBRE
+
+## 🎯 Objetivos del Proyecto ALMA_LIBRE v0.6
+
+### 📔 Bitácora Central (General)
+
+- Llevar un registro integral semanal con resúmenes diarios, semanales y mensuales siguiendo una estructura estándar.
+- Registrar objetivos generales de mejora continua y nuevas integraciones tecnológicas o personales al sistema.
+- Integrar avances y reflexiones cruzadas entre las áreas técnicas (trading, programación) y personales (ética, salud emocional).
+
+### 💹 Trading Autodidacta
+
+- Realizar y registrar backtesting completo y riguroso de tres estrategias definidas:
+    1. **PPP RSI y EMA-12:**
+        - Riesgo medio: un pico extremo RSI con confirmación EMA-12 (RR 1:1.7).
+        - Riesgo completo: divergencia confirmada con cruce EMA-12.
+    2. **Estructuras Wyckoff:** trades tipo swing basados en análisis estructural Wyckoff.
+    3. **Apertura Wall Street:** estrategia específica para operar aperturas del mercado estadounidense.
+- Mantener control semanal psicológico del trading con sesiones estructuradas de terapia/reflexión.
+- Registrar métricas de rendimiento mensuales, siguiendo plantillas estándar para análisis automático con AlmaSync.
+- Implementar seguimiento detallado del rendimiento mensual global del trading.
+
+### 💻 Programación y Blockchain
+
+- Adquirir habilidades sólidas en programación orientada a blockchain y contratos inteligentes (smart contracts).
+- Desarrollar aplicaciones de escritorio modulares que automaticen tareas y faciliten integraciones internas en el sistema ALMA.
+- Mantener documentación técnica actualizada en base al desarrollo y versiones del software creado.
+
+### 🧘 Ética y Reflexión
+
+- Registrar reflexiones personales y terapéuticas diarias con estructura estándar para facilitar análisis comparativo mensual.
+- Realizar debates semanales IA-humano, documentando aprendizajes y conclusiones cada semana.
+- Mantener registro evolutivo de objetivos con control de versiones (0.1, 0.2, 0.3, etc.) para visualizar claramente el progreso.
+
+### 🌱 Salud y Bienestar (RPL)
+
+- Continuar tratamiento y seguimiento del método RPL, documentando diariamente avances con estructura estándar.
+- Llevar registro detallado de rutinas diarias, salud y alimentación, incluyendo recetas saludables.
+- Analizar comparativamente la evolución mensual en salud física y emocional.
+
+### 🏢 Empresas y Proyectos
+
+- Gestionar profesionalmente el Fondo de Inversión con seguimiento riguroso de inversores y resultados financieros.
+- Desarrollar y administrar la ONG de cannabis, con objetivos definidos para impacto social y crecimiento escalable.
+- Mantener claramente diferenciadas las documentaciones empresariales del fondo y ONG para facilitar auditoría y seguimiento.
+
+### 💰 Finanzas Personales
+
+- Control riguroso de gastos e ingresos personales con análisis mes a mes.
+- Gestionar e integrar seguimiento de inversiones personales en trading y criptomonedas, registrando resultados periódicamente.
+- Documentar decisiones financieras personales para análisis retrospectivo y aprendizaje continuo.
+
+### 📅 Integraciones y Automatización
+
+- Preparar la estructura documental para su lectura automática por AlmaSync (IA) y sincronización eficiente con Obsidian y Notion.
+- Automatizar progresivamente la generación de informes semanales y mensuales en todas las áreas, aprovechando estructuras uniformes.
+

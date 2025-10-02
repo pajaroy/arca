@@ -1,0 +1,21 @@
+# README – logs
+
+Esta carpeta almacena los logs generados por el sistema ALMA_RESIST. Es clave para realizar trazabilidad, diagnóstico y auditoría del comportamiento del sistema.
+
+## 📁 Ruta
+`logs/`
+
+## 📌 Propósito
+
+- Registrar actividad del sistema, ejecuciones de scripts, validaciones automáticas y eventos importantes.
+- Servir como historial para seguimiento de errores, mejoras y auditorías internas.
+
+## 📂 Estructura esperada
+
+- `logs/auditorias/`: contiene registros de procesos de revisión estructural, sprints, validaciones y auditorías.
+- `logs/scripts/` (opcional): podría registrar ejecuciones automatizadas u output de scripts críticos.
+
+## 🧠 Recomendación
+
+Mantener esta carpeta ordenada y rotar logs antiguos si el volumen es alto. Puede automatizarse el archivado con cron o scripts internos.
+

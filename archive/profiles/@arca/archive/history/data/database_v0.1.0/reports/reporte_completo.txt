@@ -1,0 +1,155 @@
+=== REPORTE DE ARCHIVOS ===
+
+=== PALABRAS CLAVE ===
+ 1848 nan
+  613 este
+  356 resumen
+  322 plantilla
+  309 para
+  272 alma
+  261 diario
+  250 futura
+  240 módulo
+  218 tiene
+  217 documentar
+  207 cómo
+  204 mantener
+  172 versión
+  170 json
+  151 scripts
+  149 validar
+  138 archivos
+  137 errores
+  118 esta
+  118 general
+  117 relaciones
+  116 glosario
+  116 logs
+  115 presentación
+  114 todos
+  105 tareas
+  103 técnicos
+  100 como
+   99 pueda
+   96 usando
+   93 contexto
+   93 técnico
+   90 punto
+   89 carpeta
+   88 instancia
+   83 actual
+   82 contiene
+   82 consolidación
+   81 proyecto
+   81 está
+   80 documentación
+   79 índice
+   77 interna
+   77 auditor
+   77 cargar
+   76 estrategia
+   75 alta
+   73 principal
+   73 estructura
+
+=== TÉRMINOS COMUNES ===
+ 4326 archivo
+ 4326 formato
+ 4311 home
+ 4311 arca
+ 2032 markdown
+ 1202 json
+ 1166 yaml
+  786 python
+  653 backups
+  613 este
+  356 resumen
+  322 plantilla
+  311 para
+  280 alma
+  261 diario
+  250 futura
+  240 módulo
+  218 tiene
+  217 documentar
+  207 cómo
+  204 mantener
+  196 scripts
+  172 versión
+  149 logs
+  149 validar
+  138 archivos
+  137 errores
+  127 sync
+  124 conflict
+  118 esta
+  118 general
+  117 relaciones
+  116 glosario
+  115 presentación
+  114 todos
+  105 tareas
+  103 técnicos
+  100 como
+   99 pueda
+   96 usando
+   93 contexto
+   93 técnico
+   90 punto
+   89 carpeta
+   88 instancia
+   87 proyecto
+   86 vows2q7
+   83 actual
+   82 contiene
+   82 consolidación
+
+=== BIGRAMAS FRECUENTES ===
+   44 yaml tiene
+   22 yaml scripts
+   18 yaml robustez
+   17 yaml pueda
+   13 yaml alma
+   12 yaml institucional
+   12 yaml falló
+   10 log suprimir
+    9 txt scripts
+    8 yaml mantener
+    8 yaml metadata
+    8 yaml auditor
+    7 yaml anterior
+    7 yaml alta
+    7 yaml documentar
+    6 yaml opción
+    6 yaml documentación
+    5 yaml estructuradas
+    5 yaml presentación
+    5 yaml logs
+    5 yaml total
+    5 yaml temporal
+    4 alma libre
+    4 proyecto alma
+    4 95b2dc9bbdfb85fad90c77c7cd8478af_95b2dc9bbdfb85fad90c77c7cd8478af_prompt base
+    4 ticas constructivas
+    4 yaml principal
+    4 yaml autorizada
+    4 yaml nuevo
+    4 yaml permitiendo
+
+=== DISTRIBUCIÓN DE TIPOS ===
+ 2028 md
+  710 py
+  616 bak
+  382 yaml
+  344 json
+   45 sh
+   38 txt
+   33 log
+   29 docx
+   27 nix
+   24 xlsx
+   17 pdf
+   10 parquet
+    4 db
+    2 sql
+    2 csv

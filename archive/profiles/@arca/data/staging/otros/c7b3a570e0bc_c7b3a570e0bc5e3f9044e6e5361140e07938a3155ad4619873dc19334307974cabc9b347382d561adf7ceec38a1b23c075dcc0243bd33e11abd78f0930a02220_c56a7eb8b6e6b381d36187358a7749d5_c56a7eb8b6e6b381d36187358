@@ -1,0 +1,19 @@
+# 📦 Prompt – Módulos API para Trading y Cultivo en ALMA_LOADER
+
+"""
+Crear dos archivos separados en `api/v1/`:
+
+1. `trading.py`
+2. `cultivo.py`
+
+✅ Ambos deben contener:
+- Un `APIRouter()` de FastAPI con:
+  - `prefix="/v1/trading"` o `"/v1/cultivo"`
+  - `tags=["trading"]` o `["cultivo"]`
+- Un endpoint base `GET /status` que devuelva JSON:
+  {"modulo": "trading", "estado": "operativo"} o {"modulo": "cultivo", "estado": "operativo"}
+- Comentarios y estructura preparada para ser extendida en el futuro
+- Cada archivo debe ser autónomo, pero listo para ser importado en `main.py`
+
+💡 El objetivo es dejar lista la modularización por área (trading, cultivo, etc.) para que más adelante se puedan registrar, consultar y analizar memorias específicas por dominio.
+"""

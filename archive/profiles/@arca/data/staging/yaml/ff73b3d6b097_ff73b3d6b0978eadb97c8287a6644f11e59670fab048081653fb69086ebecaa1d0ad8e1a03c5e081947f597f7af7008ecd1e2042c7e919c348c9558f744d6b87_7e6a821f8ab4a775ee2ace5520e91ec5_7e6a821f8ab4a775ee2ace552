@@ -1,0 +1,59 @@
+# prompt_alma_cli_cleaner_v0.1.0.yaml
+
+titulo: "ALMA_CLI_CLEANER v0.1.0 - Prompt de Diseño y Especificación"
+descripcion: |
+  Módulo CLI centralizado para limpieza, validación, creación y auditoría de metadatos en el sistema ALMA_RESIST.
+  El objetivo es contar con una herramienta robusta, auditable y fácil de mantener, que permita operar sobre cualquier archivo relevante del sistema desde la terminal.
+  Debe ser usable por humanos y por IAs de soporte (ej: Kael), con una arquitectura lista para crecer.
+
+objetivo_general: |
+  Automatizar y profesionalizar el manejo de metadatos ALMA_RESIST, asegurando trazabilidad, control de cambios y cumplimiento de estándares en todos los archivos clave.
+
+subcomandos:
+  - crear:
+      descripcion: "Crear archivo nuevo con metadatos completos y formato estándar."
+      argumentos:
+        - archivo: "Ruta de archivo a crear."
+        - --title: "Título inicial del archivo."
+        - --responsable: "Responsable(s) inicial(es)."
+      requisitos: "Si el archivo existe, debe abortar salvo que se use --force."
+      resultado: "Archivo creado con metadatos completos: title, uuid, historial, etc."
+  - validar:
+      descripcion: "Validar y/o reparar encabezado de metadatos (campos, tipos, valores)."
+      argumentos:
+        - archivo: "Ruta del archivo a validar."
+      resultado: "Corrige y deja el archivo conforme al template. Reporta cambios y deja log."
+  - limpiar:
+      descripcion: "Normalizar campos, remover espacios, estandarizar tipos y formatos."
+      argumentos:
+        - archivo: "Ruta del archivo a limpiar."
+      resultado: "Archivo con metadatos limpios, sin basura ni valores inválidos."
+  - set_responsable:
+      descripcion: "Asignar o modificar el/los responsable(s) y actualizar auditoría."
+      argumentos:
+        - archivo: "Ruta del archivo."
+        - --responsable: "Nuevo(s) responsable(s)."
+      resultado: "Campo responsable actualizado y log/auditoría de cambio."
+  - log:
+      descripcion: "Mostrar historial/auditoría/log de cambios sobre el archivo."
+      argumentos:
+        - archivo: "Ruta del archivo."
+      resultado: "Listado de operaciones previas, quién y cuándo realizó cambios."
+
+features_extra:
+  - "Soporte para .md, .yaml, .py (bloque YAML en docstring)."
+  - "Logs centralizados y auditables en formato parquet/csv/yaml (según config)."
+  - "Integración futura con CLI multiagente ALMA (Kael, Centralesis, etc)."
+  - "Resiliencia ante errores, dry-run, y opción --force para operaciones críticas."
+  - "Puede crecer modular: desde un solo script hasta un paquete completo."
+
+notas:
+  - "No hace falta implementar lógica compleja todavía, solo la estructura y flujo CLI."
+  - "La documentación interna (docstrings) debe ser clara y profesional."
+  - "Prioridad: trazabilidad, simplicidad y facilidad de extensión."
+  - "El sistema debe ser usable tanto en CLI local como desde terminal remota/SSH."
+
+pendientes:
+  - Definir template de metadatos único y documentado.
+  - Ejemplo de uso para cada subcomando.
+  - Especificar estructura de logs y niveles de detalle.

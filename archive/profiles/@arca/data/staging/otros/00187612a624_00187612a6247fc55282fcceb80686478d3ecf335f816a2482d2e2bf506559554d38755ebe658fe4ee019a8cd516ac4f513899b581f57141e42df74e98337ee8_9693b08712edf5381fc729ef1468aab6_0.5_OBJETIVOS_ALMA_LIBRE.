@@ -1,0 +1,31 @@
+# 🧠 OBJETIVOS DE VERSIÓN – Prompt Base ALMA LIBRE v0.5
+
+📅 Fecha: 2025-04-22
+
+
+## ✅ Mejoras previstas para v0.5
+
+### 🔧 1. Subdivisión modular de cada `MEMORIA.md`
+- Cada memoria incluirá secciones:
+  - Propósito emocional
+  - Uso técnico del módulo
+  - Conexiones con otras memorias (referenciadas)
+  - Evolución histórica del módulo
+  - Siguientes pasos
+- Se generará un archivo `TEMPLATE_MEMORIA_MODULAR.md`
+
+
+### 📚 3. Índice expandido de memorias
+- Archivo `INDICE_DE_MEMORIAS.md` generado desde `metadata_memorias.csv`
+- Mostrará:
+  - Tipo
+  - Ubicación
+  - Prioridad
+  - Relación con otras memorias
+
+
+### 🤖 5. Integración planificada con DeepSeek (o LLM local)
+- Todos los scripts serán compatibles con modelos como DeepSeek u Ollama
+- Instrucciones para usar desde terminal
+- Prompt Base 0.5 será interpretado como esquema de navegación IA
+

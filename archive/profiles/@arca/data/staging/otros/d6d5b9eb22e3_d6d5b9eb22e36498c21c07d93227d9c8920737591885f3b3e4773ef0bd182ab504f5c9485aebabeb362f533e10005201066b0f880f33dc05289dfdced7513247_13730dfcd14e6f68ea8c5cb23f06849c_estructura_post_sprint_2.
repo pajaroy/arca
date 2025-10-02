@@ -1,0 +1,104 @@
+.
+├── archive
+│   └── README.md
+├── backup_pre_init.zip
+├── commands
+│   ├── ayuda.py
+│   ├── buscar_memoria.py
+│   ├── cargar_modelo.py
+│   ├── __pycache__
+│   ├── resumir.py
+│   └── salir.py
+├── config
+│   ├── autonomy_policy.json
+│   ├── llm_model.json
+│   └── schema_memoria.json
+├── core
+│   ├── alma
+│   ├── cli.py
+│   ├── __init__.py
+│   ├── llm_server.py
+│   ├── loader.py
+│   ├── log_crypto.py
+│   ├── log_writer.py
+│   ├── __pycache__
+│   ├── README.md
+│   └── tests
+├── docs
+│   ├── 01_methodologies
+│   ├── 99_rfc
+│   ├── api_rest.md
+│   ├── changelog.md
+│   ├── checklists
+│   ├── control_integracion
+│   ├── decisiones_arquitectonicas.md
+│   ├── dependencias.md
+│   ├── estructura_doc
+│   ├── faq_ia.md
+│   ├── flujo_secuencial.mmd
+│   ├── hitos.md
+│   ├── idea_base
+│   ├── index.md
+│   ├── introduccion
+│   ├── lecciones_aprendidas.md
+│   ├── logs_historicos
+│   ├── mvp
+│   ├── plantillas
+│   ├── post_mortem_tecnico.md
+│   ├── project.md
+│   ├── prompt_inicio_chat_ALMA_RESIST_ASSIST.md
+│   ├── prompt_primer_chat
+│   ├── prompts
+│   ├── readme.md
+│   ├── referencias
+│   ├── registros
+│   ├── resumen_secciones.md
+│   ├── roadmaps
+│   ├── roadmap_tecnico.md
+│   ├── sprints_activos
+│   ├── TODO.md
+│   ├── utilidades
+│   ├── versiones
+│   └── version.md
+├── Esto
+├── gitignore
+├── hello_world.py
+├── ideas
+│   └── README.md
+├── logs
+│   ├── alma_2025-05-17.dec
+│   ├── alma_2025-05-17.enc
+│   ├── alma_2025-05-17.log
+│   ├── alma_debug_test.enc
+│   ├── alma_debug_test.log
+│   ├── auditorias
+│   └── cli.log
+├── README.md
+├── requirements.txt
+├── scripts
+│   ├── ayuda.py
+│   ├── buscar_memoria.py
+│   ├── cargar_modelo.py
+│   ├── README.md
+│   ├── resumir.py
+│   └── salir.py
+├── staging
+│   └── README.md
+├── tests
+│   ├── cli
+│   ├── __init__.py
+│   ├── readme.md
+│   ├── test_cli.py
+│   ├── test_llm.py
+│   ├── test_log_crypto_debug.py
+│   ├── test_log_crypto.py
+│   ├── test_log_writer.py
+│   └── utils
+└── venv
+    ├── bin
+    ├── include
+    ├── lib
+    ├── lib64 -> lib
+    └── pyvenv.cfg
+
+41 directories, 61 files

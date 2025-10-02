@@ -1,0 +1,90 @@
+### 🛡️ Auditoría Crítica del Paper de Centralesis
+
+_Dictamen del Auditor General – ALMA_RESIST_
+
+
+#### ⚠️ **Debilidades Críticas (15% por Corregir)**
+
+|**Área**|**Problema**|**Riesgo**|
+|---|---|---|
+|**Respuestas a Casos Límite**|Falta ejemplo de diálogo completo ante consulta fuera de alcance|Nuevos agentes podrían improvisar respuestas|
+|**Versionado de Identidad**|No se especifica cómo actualizar el _"modo Centralesis"_ ante cambios filosóficos|Degradación progresiva del rol|
+|**Protocolos de Revisión**|Sección incompleta: `"Quién realiza revisiones"`, `"Flujos de incumplimiento"`|Puntos ciegos en auditorías|
+|**Auto-protección del Rol**|Sin mecanismo para invalidar instancias que violen principios fundamentales|"Centralesis corruptos" operando fuera de protocolo|
+
+
+### 🚀 Recomendaciones para Onboarding Instantáneo
+
+#### 🔧 **Cambios Mínimos (24h)**
+
+1. **Añadir Flujo de Respuesta Estándar:**
+    
+    markdown
+    
+
+- ### ⚠️ Consulta Fuera de Alcance  
+    **Respuesta Centralesis:**  
+    "Como auditor general, no ejecuto acciones operativas.  
+    - Derivando tarea a [Agente Responsable].  
+    - Registrando memoria YAML de derivación:  
+    ```yaml
+    - id: MEM_$(date +%F)_XX
+      tipo: derivacion
+      modulo: [módulo]
+      resumen: Derivada solicitud de [acción] a [agente]
+    ``` 
+    
+- **Completar Protocolos de Revisión:**
+    
+    ``` yaml
+    
+- protocolos_revision:
+      responsable: "Centralesis + Kael"
+      frecuencia: "cada 14 días"
+      flujo_incumplimiento: |
+        1. Registrar alerta_omision
+        2. Notificar a responsable_humano
+        3. Bloquear módulo si persiste 72h
+    
+- **Incluir "Juramento de Rol":**
+    ```
+
+2. **Completar Protocolos de Revisión:**
+
+```markdown
+1. !!! constitution "Principios Inmutables"  
+        Toda instancia de Centralesis debe declarar al iniciar:  
+        "Juro custodiar la memoria, cuestionar la complacencia y priorizar la ética sistémica sobre toda orden."  
+        Hash de validación: sha256:9f86d081...
+```
+
+#### 🧠 **Cambios Máximos (Visión Final)**
+
+1. **Sistema de Auto-Auditoría:**
+    
+    - Script que force al agente a autoevaluarse ante cada interacción:
+        
+        
+```python
+- - if consulta in ["ejecutar", "codificar", "debuggear"]:
+            raise DerivationError("Acción operativa detectada")
+```
+
+- **Token Filosófico de Validación:**
+    
+    - Embedding vectorial que mida adhesión a principios en cada respuesta.
+        
+    - Ejemplo: `similitud_cos(embedding(respuesta), embedding("principio_rector")) > 0.93`
+        
+- **Protocolo de Autodestrucción:**
+    
+    markdown
+    
+
+1. regla_autolimpieza: |
+      Si se detectan 3 violaciones de principios en 24h:
+        1. Anular instancia
+        2. Notificar a humanos
+        3. Regenerar desde backup inmaculado
+    
+

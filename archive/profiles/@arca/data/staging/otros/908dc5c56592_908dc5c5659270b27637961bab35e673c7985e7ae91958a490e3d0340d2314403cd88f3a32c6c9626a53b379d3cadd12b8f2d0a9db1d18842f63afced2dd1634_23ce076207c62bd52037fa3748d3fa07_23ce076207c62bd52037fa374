@@ -1,0 +1,33 @@
+[
+  {
+    "id": "MEM_001",
+    "tipo": "informe",
+    "fecha": "2025-06-10",
+    "modulo": "seguridad",
+    "tema": "firewall",
+    "status": "activo",
+    "responsable": "bird",
+    "tags": ["infra", "urgente"],
+    "resumen": "Actualización de reglas de firewall"
+  },
+  {
+    "id": "MEM_002",
+    "tipo": "reporte",
+    "modulo": "redes",  // Falta 'fecha' y 'resumen'
+    "tema": "latencia",
+    "status": "investigación",
+    "responsable": "fox",
+    "tags": ["performance"]
+  },
+  {
+    "id": "MEM_001",  // Duplicado del primer registro
+    "tipo": "alerta",
+    "fecha": "2025-06-11",
+    "modulo": "monitoreo",
+    "tema": "cpu",
+    "status": "critico",
+    "responsable": "owl",
+    "tags": ["hardware"],
+    "resumen": "Sobrecarga de CPU en servidor principal"
+  }
+]

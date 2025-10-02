@@ -1,0 +1,79 @@
+# 🧠 Prompt Base – `resumen_semanal_cannabird_sX_v3`
+
+---
+
+## 🌱 ¿Qué es Cannabird?
+
+**Cannabird** es un proyecto de cultivo profesional de cannabis medicinal, ubicado dentro del Club 13CC. La operación se divide en:
+- **Zona Vegetativa**: sectores como `#004-vege`, `#005-vege`
+- **Zona de Floración**: `#001-flora`, `#002-flora`, `#003-flora`
+- **Esquejeras y Propagación**: `#esquejera-1`, `#esquejera-2`, etc.
+- **Zona Madres**: `#madres-cannabird`
+- **Infraestructura**: tareas de mejora física, técnica y organizativa
+
+El equipo está conformado por:
+- `#seba-rios` – Responsable operativo y ejecutor principal
+- `#pablito-tatu` – Supervisor y soporte técnico
+- `#bird` – Asesor externo, control de calidad y estrategia
+
+---
+
+## 🎯 Objetivo del Prompt
+
+Consolidar en un solo documento semanal todas las tareas efectivamente realizadas durante la semana, siguiendo el formato diario v2 y manteniendo compatibilidad con Obsidian, sistemas IA y seguimiento técnico.
+
+---
+
+## ✅ Estructura del resumen semanal
+
+El archivo debe contener:
+
+```markdown
+# 🧠 Resumen Semanal – Cannabird (Semana XX - 2025)
+#resumen-semanal #cannabird #semana-XX #año-2025
+
+## 🌡️ Mediciones #vpd #temperatura
+## 🧪 Riegos #riego
+## 🌱 Zona Vegetativa (Vege) #Vege
+## 🌸 Zona de Floración (Flora) #Flora
+## 🌱 Esquejeras y Propagación #esquejeras
+## 🪴 Madres #madres-cannabird
+## 🔧 Infraestructura #infraestructura
+## 🧠 Notas Finales y Planificación #observaciones
+## ⚙️ Log de Ajustes Técnicos #ajustes
+## 👤 Tareas por Responsable #responsables
+```
+
+---
+
+## 📐 Metodología
+
+1. Leé todos los archivos `.md` diarios de la semana (lunes a domingo).
+2. Extraé de cada uno los elementos más importantes por sección.
+3. Consolidá la información, eliminando repeticiones pero sin perder trazabilidad.
+4. Usá **hashtags sectorizados y detallados** (`#003-vege`, `#001-flora`, etc.).
+5. Atribuí responsabilidades con los tags: `#hechoPor_seba-rios`, `#nota_pablito-tatu`, `#recomendadoPor_bird`
+6. Aplicá tags consistentes para eventos clave: `#engarronamiento`, `#oidio`, `#trasplante`, `#foli`, `#SafeRoot`, etc.
+
+---
+
+## 📤 Salida esperada
+
+Un archivo `.md` llamado:  
+`resumen_semanal_cannabird_sXX.md`
+
+Estructura como se muestra arriba, sin olvidar:
+- Tareas destacadas y repetidas
+- Problemas detectados
+- Acciones tomadas
+- Recomendaciones futuras
+- Cambios técnicos e instrumentales
+
+---
+
+## 📌 Changelog – v3
+- Se alineó totalmente con `resumen_diario_cannabird_v2`
+- Se incorporaron todas las secciones nuevas: Mediciones, Infraestructura, Esquejeras, etc.
+- Estructura extendida, ordenada y compatible con Obsidian e IA
+- Reemplazo completo de v2 como nuevo estándar
+

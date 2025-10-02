@@ -1,0 +1,21 @@
+---
+tipo: configuracion
+id: CONFIGURACION_2025-06-05_23f808
+version: '1.0'
+formato: yaml
+modulo: ALMA_RESIST
+titulo: Settings
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:4d2c93aee2121c36524db004a8a7ba592bc264965fa419545dd5918c5769f9a3
+---
+configuracion: default
+modo: desarrollo
+version: 1.0.0

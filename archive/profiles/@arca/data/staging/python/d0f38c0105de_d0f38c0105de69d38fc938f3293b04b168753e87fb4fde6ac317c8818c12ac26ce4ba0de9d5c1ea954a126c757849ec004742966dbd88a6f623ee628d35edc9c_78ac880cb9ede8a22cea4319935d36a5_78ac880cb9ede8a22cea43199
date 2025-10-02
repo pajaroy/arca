@@ -1,0 +1,761 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+ALMA_RESIST - Bitácora Institucional v0.4.0
+Sistema CLI antifallos con almacenamiento Parquet y gobernanza documental
+"""
+import os
+import sys
+import json
+import uuid
+import argparse
+import hashlib
+import logging
+import shutil
+import glob
+import re
+from datetime import datetime, timezone, timedelta
+from pathlib import Path
+from typing import List, Dict, Tuple, Optional, Any
+import yaml
+import pandas as pd
+import pyarrow.parquet as pq
+from logging.handlers import RotatingFileHandler
+
+# --- CONFIGURACIÓN GLOBAL ---
+DEFAULT_PARQUET_PATH = "/home/alma/Documents/Journal/Bitacora/bitacora_viva.parquet"
+DEFAULT_METADATA_PATH = "/home/alma/Documents/Journal/Bitacora/bitacora_viva.metadata.yaml"
+BACKUP_DIR = "/home/alma/Documents/Journal/Bitacora/backups"
+LOG_DIR = "/home/alma/Logs"
+RETENCION_BACKUPS = 30  # Días de retención por defecto
+VALID_ESTADOS = ["registrado", "en_progreso", "completado", "cancelado", "revisión"]
+METADATA_FIELDS = [
+    "version", "tipo", "schema", "descripcion", "estructura", "tags", 
+    "linked_to", "responsable", "hash_parquet", "hash_metadata",
+    "historial", "last_modified", "last_modified_by"
+]
+CONFIG_FILE = "bitacora_config.yaml"
+SCHEMA_VERSION = "0.4.0"
+
+# --- CLASES PRINCIPALES ---
+class ParquetManager:
+    """Maneja operaciones con archivos Parquet"""
+    @staticmethod
+    def read_parquet(path: Path) -> pd.DataFrame:
+        """Lee un archivo Parquet con validación de esquema"""
+        if not path.exists():
+            # Crea DataFrame vacío con dtypes correctos
+            return pd.DataFrame({
+                'id': pd.Series(dtype='object'),
+                'fecha': pd.Series(dtype='datetime64[ns, UTC]'),
+                'accion': pd.Series(dtype='object'),
+                'descripcion': pd.Series(dtype='object'),
+                'motivo': pd.Series(dtype='object'),
+                'ejecutado_por': pd.Series(dtype='object'),
+                'estado': pd.Series(dtype='object'),
+                'tags': pd.Series(dtype='object')
+            })
+
+        try:
+            df = pd.read_parquet(path)
+
+            # Forzar conversión de fecha si está como string
+            if 'fecha' in df.columns and df['fecha'].dtype == 'object':
+                df['fecha'] = pd.to_datetime(df['fecha'], errors='coerce')
+
+            return df
+        except Exception as e:
+            raise RuntimeError(f"Error leyendo Parquet: {str(e)}")
+
+
+    @staticmethod
+    def write_parquet(df: pd.DataFrame, path: Path):
+        """Escribe un DataFrame a Parquet con compresión óptima"""
+        try:
+            df.to_parquet(
+                path, 
+                compression='snappy',
+                index=False,
+                allow_truncated_timestamps=True
+            )
+        except Exception as e:
+            raise RuntimeError(f"Error escribiendo Parquet: {str(e)}")
+
+    @staticmethod
+    def validate_schema(df: pd.DataFrame):
+        """Valida que el DataFrame tenga el esquema correcto"""
+        required_columns = {
+            'id': 'object',
+            'fecha': 'datetime64[ns, UTC]',
+            'accion': 'object',
+            'descripcion': 'object',
+            'motivo': 'object',
+            'ejecutado_por': 'object',
+            'estado': 'object',
+            'tags': 'object'
+        }
+        
+        for col, dtype in required_columns.items():
+            if col not in df.columns:
+                raise ValueError(f"Columna faltante: {col}")
+            if df[col].dtype != dtype:
+                raise TypeError(f"Tipo inválido para {col}. Esperado: {dtype}, Actual: {df[col].dtype}")
+
+
+class BitacoraManager:
+    def __init__(self, args):
+        self.args = args
+        self.parquet_path = Path(args.parquet).absolute()
+        self.metadata_path = Path(args.metadata).absolute()
+        self.config = self.cargar_configuracion()
+        self.logger = self.configurar_logging()
+        self.entradas_df = None
+        self.metadata = None
+        self.backup_realizado = False
+
+    def cargar_configuracion(self) -> dict:
+        """Carga configuración con valores por defecto"""
+        config_path = Path(CONFIG_FILE)
+        config = {
+            "retencion_backups": RETENCION_BACKUPS,
+            "max_backups": 100,
+            "log_rotacion": "10MB",
+            "log_copias": 5
+        }
+        
+        if config_path.exists():
+            try:
+                with open(config_path, 'r') as f:
+                    user_config = yaml.safe_load(f) or {}
+                config.update(user_config)
+            except Exception as e:
+                print(f"⚠️ Error cargando configuración: {str(e)}")
+        
+        return config
+
+    def configurar_logging(self):
+        """Configura logging avanzado con rotación"""
+        logger = logging.getLogger('bitacora_antifallos')
+        logger.setLevel(logging.DEBUG if self.args.verbose else logging.INFO)
+        
+        # Formato estándar ALMA_RESIST
+        formato = logging.Formatter(
+            '%(asctime)s | %(levelname)s | %(module)s | %(message)s',
+            datefmt='%Y-%m-%dT%H:%M:%SZ'
+        )
+        formato.converter = lambda *args: datetime.now(timezone.utc).timetuple()
+        
+        # Handler de consola
+        consola = logging.StreamHandler()
+        consola.setFormatter(formato)
+        logger.addHandler(consola)
+        
+        # Handler de archivo rotativo
+        if self.args.log:
+            Path(LOG_DIR).mkdir(parents=True, exist_ok=True)
+            log_file = Path(LOG_DIR) / f"bitacora_{datetime.now(timezone.utc).strftime('%Y%m')}.log"
+            rotacion = RotatingFileHandler(
+                log_file,
+                maxBytes=self._parse_log_size(self.config['log_rotacion']),
+                backupCount=self.config['log_copias']
+            )
+            rotacion.setFormatter(formato)
+            logger.addHandler(rotacion)
+        
+        return logger
+
+    def _parse_log_size(self, size_str: str) -> int:
+        """Convierte tamaño de log en bytes"""
+        unidades = {"KB": 1024, "MB": 1024**2, "GB": 1024**3}
+        match = re.match(r"(\d+)\s*([KMG]B)", size_str.upper())
+        if match:
+            valor, unidad = match.groups()
+            return int(valor) * unidades[unidad]
+        return 10 * 1024**2  # 10MB por defecto
+
+    def validar_entrada(self, entrada: dict):
+        """Validación estricta de estructura y tipos de datos"""
+        campos_obligatorios = {
+            "fecha": str,
+            "accion": str,
+            "descripcion": str,
+            "motivo": str,
+            "ejecutado_por": str
+        }
+        
+        # Verificar campos obligatorios
+        for campo, tipo in campos_obligatorios.items():
+            if campo not in entrada:
+                raise ValueError(f"Campo obligatorio faltante: {campo}")
+            if not isinstance(entrada[campo], tipo):
+                raise TypeError(f"Tipo inválido para {campo}. Esperado: {tipo.__name__}")
+        
+        # Validar estado
+        if entrada.get("estado") and entrada["estado"] not in VALID_ESTADOS:
+            raise ValueError(f"Estado inválido: {entrada['estado']}. Validos: {', '.join(VALID_ESTADOS)}")
+        
+        # Validar tags
+        if "tags" in entrada and not isinstance(entrada["tags"], list):
+            raise TypeError("Tags debe ser una lista")
+        
+        # Validar formato fecha ISO
+        try:
+            datetime.fromisoformat(entrada["fecha"])
+        except ValueError:
+            raise ValueError("Formato de fecha inválido. Debe ser ISO 8601")
+
+    def validar_metadata(self, metadata: dict):
+        """Validación completa de metadatos"""
+        for campo in METADATA_FIELDS:
+            if campo not in metadata:
+                raise ValueError(f"Metadato obligatorio faltante: {campo}")
+        
+        # Validar historial de cambios
+        if not isinstance(metadata["historial"], list):
+            raise TypeError("El historial debe ser una lista de registros")
+        
+        # Validar hashes
+        for hash_field in ["hash_parquet", "hash_metadata"]:
+            if metadata[hash_field] and not metadata[hash_field].startswith("sha256:"):
+                raise ValueError(f"Formato de hash inválido para {hash_field}. Debe ser 'sha256:<hash>'")
+
+    def cargar_metadata(self) -> dict:
+        """Carga los metadatos con validación"""
+        if not self.metadata_path.exists():
+            return self.crear_metadata_vacia()
+        
+        try:
+            with open(self.metadata_path, 'r') as f:
+                metadata = yaml.safe_load(f)
+            
+            self.validar_metadata(metadata)
+            return metadata
+        except (yaml.YAMLError, ValueError, TypeError) as e:
+            self.logger.error(f"ERROR METADATA: {str(e)}")
+            raise RuntimeError(f"Metadata corrupto: {str(e)}")
+
+    def crear_metadata_vacia(self) -> dict:
+        """Crea estructura inicial de metadatos"""
+        return {
+            "version": SCHEMA_VERSION,
+            "tipo": "bitacora",
+            "schema": "almaresist.bitacora_v1",
+            "descripcion": "Bitácora institucional de ALMA_RESIST",
+            "estructura": "parquet + metadata",
+            "tags": ["bitacora", "institucional"],
+            "linked_to": [],
+            "responsable": "Equipo de Operaciones",
+            "hash_parquet": "",
+            "hash_metadata": "",
+            "historial": [],
+            "last_modified": datetime.now(timezone.utc).isoformat(),
+            "last_modified_by": "system"
+        }
+
+    def cargar_entradas(self) -> pd.DataFrame:
+        """Carga las entradas desde Parquet con validación de esquema"""
+        try:
+            df = ParquetManager.read_parquet(self.parquet_path)
+            
+            # Convertir tags a lista si es necesario
+            import numpy as np
+
+            if 'tags' in df.columns and df['tags'].dtype == 'object':
+                def normalize_tags(x):
+                    if isinstance(x, list):
+                        return x
+                    if isinstance(x, np.ndarray):
+                        return x.tolist()
+                    if pd.isna(x):
+                        return []
+                    return [x]
+    
+                df['tags'] = df['tags'].apply(normalize_tags)
+
+            
+            # Validar esquema
+            ParquetManager.validate_schema(df)
+            return df
+        except Exception as e:
+            self.logger.error(f"ERROR PARQUET: {str(e)}")
+            raise RuntimeError(f"Error cargando entradas: {str(e)}")
+
+    def crear_backup(self) -> Tuple[Path, Path]:
+        """Crea backup de ambos archivos con política de retención"""
+        backup_dir = Path(BACKUP_DIR).absolute()
+        backup_dir.mkdir(parents=True, exist_ok=True)
+
+        # Crear Parquet vacío si no existe
+        if not self.parquet_path.exists():
+            empty_df = pd.DataFrame({
+                'id': pd.Series(dtype='object'),
+                'fecha': pd.Series(dtype='datetime64[ns]'),
+                'accion': pd.Series(dtype='object'),
+                'descripcion': pd.Series(dtype='object'),
+                'motivo': pd.Series(dtype='object'),
+                'ejecutado_por': pd.Series(dtype='object'),
+                'estado': pd.Series(dtype='object'),
+                'tags': pd.Series(dtype='object')
+            })
+            ParquetManager.write_parquet(empty_df, self.parquet_path)
+            self.logger.info(f"Archivo Parquet creado vacío: {self.parquet_path}")
+
+        # Crear Metadata vacío si no existe
+        if not self.metadata_path.exists():
+            with open(self.metadata_path, 'w') as f:
+                yaml.dump(self.crear_metadata_vacia(), f, sort_keys=False, allow_unicode=True)
+            self.logger.info(f"Metadata YAML creado vacío: {self.metadata_path}")
+
+
+        
+        # Crear backup con timestamp
+        timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+        parquet_backup = backup_dir / f"bitacora_backup_{timestamp}.parquet"
+        metadata_backup = backup_dir / f"metadata_backup_{timestamp}.yaml"
+        
+        try:
+            # Copiar archivos
+            shutil.copy2(self.parquet_path, parquet_backup)
+            shutil.copy2(self.metadata_path, metadata_backup)
+            self.logger.info(f"Backups creados: {parquet_backup.name}, {metadata_backup.name}")
+            
+            # Aplicar política de retención
+            self.aplicar_retencion_backups(backup_dir)
+            
+            self.backup_realizado = True
+            return parquet_backup, metadata_backup
+        except Exception as e:
+            self.logger.error(f"FALLO EN BACKUP: {str(e)}")
+            raise RuntimeError(f"Error creando backup: {str(e)}")
+
+    def aplicar_retencion_backups(self, backup_dir: Path):
+        parquet_backups = sorted(backup_dir.glob("bitacora_backup_*.parquet"), key=os.path.getmtime)
+        metadata_backups = sorted(backup_dir.glob("metadata_backup_*.yaml"), key=os.path.getmtime)
+
+        all_backups = set(b.name.split('_')[2] for b in parquet_backups + metadata_backups)
+
+        limite_tiempo = datetime.now(timezone.utc) - timedelta(days=self.config['retencion_backups'])
+
+        for ts in all_backups:
+            try:
+                # ✅ Intentar parsear el timestamp
+                try:
+                    backup_time = datetime.strptime(ts, "%Y%m%d_%H%M%S").replace(tzinfo=timezone.utc)
+                except ValueError:
+                    self.logger.warning(f"Timestamp de backup ignorado por formato inválido: {ts}")
+                    continue
+
+                if backup_time < limite_tiempo:
+                    for ext in ['.parquet', '.yaml']:
+                        backup_file = backup_dir / f"bitacora_backup_{ts}{ext}"
+                        if backup_file.exists():
+                            backup_file.unlink()
+                            self.logger.info(f"Backup eliminado (retención): {backup_file.name}")
+
+            except Exception as e:
+                self.logger.error(f"Error eliminando backup: {str(e)}")
+
+        # Control por cantidad máxima
+        if len(all_backups) > self.config['max_backups']:
+            backups_to_keep = sorted(all_backups, reverse=True)[:self.config['max_backups']]
+            for ts in set(all_backups) - set(backups_to_keep):
+                for ext in ['.parquet', '.yaml']:
+                    backup_file = backup_dir / f"bitacora_backup_{ts}{ext}"
+                    if backup_file.exists():
+                        try:
+                            backup_file.unlink()
+                            self.logger.info(f"Backup eliminado (cantidad): {backup_file.name}")
+                        except Exception as e:
+                            self.logger.error(f"Error eliminando backup: {str(e)}")
+
+    def calcular_hash_archivo(self, file_path: Path) -> str:
+        """Calcula hash SHA-256 institucional"""
+        sha256 = hashlib.sha256()
+        try:
+            with open(file_path, 'rb') as f:
+                while chunk := f.read(4096):
+                    sha256.update(chunk)
+            return f"sha256:{sha256.hexdigest()}"
+        except Exception as e:
+            self.logger.error(f"ERROR DE HASH: {str(e)}")
+            raise RuntimeError(f"Error calculando hash: {str(e)}")
+
+    def calcular_hash_metadata(self, metadata_path: Path) -> str:
+        """
+        Calcula hash SHA-256 del metadata YAML
+        ignorando el campo hash_metadata para evitar bucles.
+        """
+        with open(metadata_path, 'r') as f:
+            metadata = yaml.safe_load(f)
+
+        if "hash_metadata" in metadata:
+            metadata.pop("hash_metadata")
+
+        # Serializar nuevamente para asegurar orden consistente
+        serialized = yaml.dump(
+            metadata, sort_keys=True, allow_unicode=True
+        )
+        sha256 = hashlib.sha256(serialized.encode("utf-8")).hexdigest()
+        return f"sha256:{sha256}"
+
+
+    def registrar_cambio(self, accion: str, entrada_id: str = None):
+        """Registra en changelog con trazabilidad completa"""
+        if not self.metadata:
+            return
+            
+        # Guardar hashes previos para auditoría
+        hash_previo_parquet = self.metadata.get("hash_parquet", "")
+        hash_previo_metadata = self.metadata.get("hash_metadata", "")
+        
+        nuevo_registro = {
+            "fecha": datetime.now(timezone.utc).isoformat(),
+            "accion": accion,
+            "ejecutado_por": self.args.ejecutado_por,
+            "hash_previo_parquet": hash_previo_parquet,
+            "hash_previo_metadata": hash_previo_metadata,
+            "entrada_id": entrada_id
+        }
+        self.metadata["historial"].append(nuevo_registro)
+        self.metadata["last_modified"] = nuevo_registro["fecha"]
+        self.metadata["last_modified_by"] = nuevo_registro["ejecutado_por"]
+        
+        self.logger.info(f"Registro changelog: {accion} | Entrada: {entrada_id or 'N/A'}")
+
+    def guardar_todo(self):
+        """Guarda ambos archivos y actualiza hashes"""
+        try:
+            # Guardar entradas Parquet
+            ParquetManager.write_parquet(self.entradas_df, self.parquet_path)
+
+            # Actualizar hash Parquet
+            self.metadata["hash_parquet"] = self.calcular_hash_archivo(self.parquet_path)
+
+            # Guardar metadata sin hash_metadata
+            metadata_copy = self.metadata.copy()
+            metadata_copy.pop("hash_metadata", None)
+
+            with open(self.metadata_path, 'w') as f:
+                yaml.dump(metadata_copy, f, sort_keys=True, allow_unicode=True)
+
+            # Calcular nuevo hash del metadata
+            self.metadata["hash_metadata"] = self.calcular_hash_metadata(self.metadata_path)
+
+            # Ahora volver a guardarlo incluyendo el hash
+            metadata_with_hash = self.metadata.copy()
+            with open(self.metadata_path, 'w') as f:
+                yaml.dump(metadata_with_hash, f, sort_keys=True, allow_unicode=True)
+
+            self.logger.info("Bitácora actualizada con éxito")
+            return True
+
+        except Exception as e:
+            self.logger.error(f"FALLO GUARDADO: {str(e)}")
+            if self.backup_realizado:
+                self.logger.warning("⚠️  Restaurando desde último backup...")
+                self.restaurar_backup()
+            raise RuntimeError(f"Error guardando bitácora: {str(e)}")
+
+    def generar_documentacion(self):
+        """Genera documentos secundarios (JSON y Markdown)"""
+        try:
+            # Crear directorios si no existen
+            docs_dir = self.parquet_path.parent / "documentacion"
+            docs_dir.mkdir(exist_ok=True)
+            
+            # Generar JSON combinado
+            combined_data = {
+                "metadata": self.metadata,
+                "entradas": self.entradas_df.to_dict(orient='records')
+            }
+            json_path = docs_dir / "bitacora_completa.json"
+            with open(json_path, 'w') as f:
+                json.dump(combined_data, f, indent=2, ensure_ascii=False, default=str)
+            
+            # Generar Markdown
+            md_path = docs_dir / "bitacora_resumen.md"
+            self.generar_markdown(md_path)
+            
+            self.logger.info(f"Documentación generada en: {docs_dir}")
+            return True
+        except Exception as e:
+            self.logger.error(f"ERROR GENERANDO DOCS: {str(e)}")
+            return False
+
+    def generar_markdown(self, md_path: Path):
+        """Genera documento Markdown con front matter"""
+        with open(md_path, 'w') as f:
+            # Front matter
+            f.write("---\n")
+            yaml.dump(self.metadata, f, sort_keys=False, allow_unicode=True)
+            f.write("---\n\n")
+            
+            # Cuerpo
+            f.write(f"# Bitácora Institucional: {self.metadata['descripcion']}\n\n")
+            f.write(f"**Última modificación**: {self.metadata['last_modified']} ")
+            f.write(f"por *{self.metadata['last_modified_by']}*\n\n")
+            f.write(f"**Hash Parquet**: `{self.metadata['hash_parquet']}`\n")
+            f.write(f"**Hash Metadata**: `{self.metadata['hash_metadata']}`\n\n")
+            f.write("---\n\n")
+            
+            # Entradas
+            for _, row in self.entradas_df.iterrows():
+                f.write(f"## {row['accion']} ({row['fecha']})\n")
+                f.write(f"**ID**: `{row.get('id', '')}`  \n")
+                f.write(f"**Ejecutado por**: {row['ejecutado_por']}  \n")
+                f.write(f"**Estado**: {row.get('estado', 'registrado')}  \n")
+                f.write(f"**Motivo**: {row['motivo']}\n\n")
+                f.write(f"### Descripción\n{row['descripcion']}\n\n")
+                if row.get('tags') is not None and len(row.get('tags')) > 0:
+                    f.write(f"**Tags**: `{', '.join(row['tags'])}`\n\n")
+                f.write("---\n\n")
+
+    def agregar_entrada(self, entrada: dict, confirmar: bool = True):
+        try:
+            # Validación preliminar
+            self.validar_entrada(entrada)
+
+            # Cargar datos
+            self.metadata = self.cargar_metadata()
+            self.entradas_df = self.cargar_entradas()
+
+            # Vista previa
+            if self.args.preview or confirmar:
+                self.mostrar_previa(entrada)
+                if confirmar and not self.confirmar_accion("¿Agregar entrada?"):
+                    self.logger.info("Operación cancelada por el usuario")
+                    return False
+
+            if not self.args.dry_run:
+                self.crear_backup()
+                entrada["id"] = str(uuid.uuid4())
+
+                # ✅ FIX #3 → convertir fecha a timestamp
+                if isinstance(entrada["fecha"], str):
+                    entrada["fecha"] = pd.to_datetime(entrada["fecha"], utc=True)
+
+                new_row = pd.DataFrame([entrada])
+
+                # Garantizar tipos correctos
+                for col in new_row.columns:
+                    if col in self.entradas_df.columns:
+                        new_row[col] = new_row[col].astype(self.entradas_df[col].dtype)
+
+                self.entradas_df = pd.concat([self.entradas_df, new_row], ignore_index=True)
+
+                self.guardar_todo()
+                self.registrar_cambio("alta", entrada["id"])
+
+                self.logger.info(f"✅ Entrada agregada: ID={entrada['id']}")
+                return True
+            else:
+                self.logger.info("✅ Simulación completada (dry-run)")
+                return True
+
+        except Exception as e:
+            self.logger.error(f"🚨 ERROR CRÍTICO: {str(e)}")
+            if self.backup_realizado:
+                self.logger.warning("Revertiendo cambios...")
+                self.restaurar_backup()
+            return False
+
+
+    def mostrar_previa(self, entrada: dict):
+        """Muestra vista previa de la entrada"""
+        print("\n--- VISTA PREVIA DE ENTRADA ---")
+        print(f"Acción: {entrada['accion']}")
+        print(f"Descripción: {entrada['descripcion'][:100]}...")
+        print(f"Motivo: {entrada['motivo']}")
+        print(f"Ejecutado por: {entrada['ejecutado_por']}")
+        print(f"Estado: {entrada.get('estado', 'registrado')}")
+        tags = entrada.get('tags')
+        if tags is not None and len(tags) > 0:
+            print(f"Tags: {', '.join(tags)}")
+        else:
+            print("Tags: -")
+
+        print("-------------------------------\n")
+
+    def confirmar_accion(self, mensaje: str) -> bool:
+        """Confirmación interactiva con el usuario"""
+        if self.args.yes:
+            return True
+        respuesta = input(f"{mensaje} [s/N] ").strip().lower()
+        return respuesta in ['s', 'y', 'si', 'yes']
+
+    def restaurar_backup(self, backup_timestamp: str = None):
+        """Restaura desde un backup específico"""
+        backup_dir = Path(BACKUP_DIR)
+        
+        if not backup_timestamp:
+            # Encontrar el backup más reciente
+            backups = sorted(
+                [f.name.split('_')[2] for f in backup_dir.glob("bitacora_backup_*.parquet")],
+                reverse=True
+            )
+            if not backups:
+                self.logger.error("No hay backups disponibles")
+                return False
+            backup_timestamp = backups[0]
+        
+        parquet_backup = backup_dir / f"bitacora_backup_{backup_timestamp}.parquet"
+        metadata_backup = backup_dir / f"metadata_backup_{backup_timestamp}.yaml"
+        
+        if not parquet_backup.exists() or not metadata_backup.exists():
+            self.logger.error(f"Backup incompleto para timestamp: {backup_timestamp}")
+            return False
+        
+        try:
+            # Restaurar archivos
+            shutil.copy2(parquet_backup, self.parquet_path)
+            shutil.copy2(metadata_backup, self.metadata_path)
+            self.logger.info(f"✅ Bitácora restaurada desde backup: {backup_timestamp}")
+            return True
+        except Exception as e:
+            self.logger.error(f"FALLO RESTAURACIÓN: {str(e)}")
+            return False
+
+    def validar_bitacora(self) -> bool:
+        try:
+            metadata = self.cargar_metadata()
+
+            # Verificar hash metadata
+            metadata_hash = self.calcular_hash_metadata(self.metadata_path)
+            if metadata_hash != metadata["hash_metadata"]:
+                raise ValueError(f"Hash metadata no coincide. Calculado: {metadata_hash}")
+
+            # Verificar hash Parquet
+            parquet_hash = self.calcular_hash_archivo(self.parquet_path)
+            if parquet_hash != metadata["hash_parquet"]:
+                raise ValueError(f"Hash Parquet no coincide. Calculado: {parquet_hash}")
+
+            df = self.cargar_entradas()
+
+            self.logger.info("✅ Validación exitosa. Integridad confirmada.")
+            return True
+
+        except Exception as e:
+            self.logger.error(f"🚨 VALIDACIÓN FALLIDA: {str(e)}")
+            return False
+
+
+# --- COMANDOS CLI ---
+def comando_agregar(args, manager: BitacoraManager):
+    """Maneja el comando de agregar entrada"""
+    entrada = {
+        "fecha": datetime.now(timezone.utc).isoformat(),
+        "accion": args.accion,
+        "descripcion": args.descripcion,
+        "motivo": args.motivo,
+        "ejecutado_por": args.ejecutado_por,
+        "estado": args.estado,
+        "tags": args.tags.split(",") if args.tags else []
+    }
+    return manager.agregar_entrada(entrada, not args.yes)
+
+def comando_validar(args, manager: BitacoraManager):
+    """Valida integridad de la bitácora"""
+    return manager.validar_bitacora()
+
+def comando_restaurar(args, manager: BitacoraManager):
+    """Restaura desde un backup"""
+    if args.list:
+        backups = sorted(
+            [f.name.split('_')[2] for f in Path(BACKUP_DIR).glob("bitacora_backup_*.parquet")],
+            reverse=True
+        )
+        print("\nBackups disponibles:")
+        for i, ts in enumerate(backups[:5]):
+            print(f"[{i+1}] {ts}")
+        return True
+    
+    return manager.restaurar_backup(args.backup_timestamp)
+
+def comando_generar_docs(args, manager: BitacoraManager):
+    """Genera documentación técnica automática"""
+    try:
+        manager.metadata = manager.cargar_metadata()
+        manager.entradas_df = manager.cargar_entradas()
+        return manager.generar_documentacion()
+    except Exception as e:
+        manager.logger.error(f"ERROR GENERANDO DOCS: {str(e)}")
+        return False
+
+# --- FUNCIÓN PRINCIPAL ---
+def main():
+    parser = argparse.ArgumentParser(
+        description="ALMA_RESIST - Sistema de Bitácoras Institucionales v0.4.0",
+        epilog="Ejemplo completo:\n  python add_bitacora_entry_v0.4.0.py agregar \\\n"
+               "    --accion 'Actualización de seguridad' \\\n"
+               "    --descripcion 'Parche contra vulnerabilidad CVE-2023-1234' \\\n"
+               "    --motivo 'Protección de sistemas críticos' \\\n"
+               "    --ejecutado_por 'admin@dominio.com' \\\n"
+               "    --tags 'seguridad,parche,urgente' \\\n"
+               "    --preview --log",
+        formatter_class=argparse.RawTextHelpFormatter
+    )
+    
+    # Argumentos globales
+    parser.add_argument("--parquet", default=DEFAULT_PARQUET_PATH, 
+                       help="Ruta al archivo Parquet de entradas")
+    parser.add_argument("--metadata", default=DEFAULT_METADATA_PATH, 
+                       help="Ruta al archivo de metadatos")
+    parser.add_argument("--verbose", action="store_true", 
+                       help="Salida detallada del proceso")
+    parser.add_argument("--log", action="store_true", 
+                       help="Registrar en archivo de log")
+    parser.add_argument("--yes", "-y", action="store_true",
+                       help="Confirmar automáticamente todas las acciones")
+    
+    subparsers = parser.add_subparsers(dest='comando', required=True, title="Comandos")
+    
+    # Comando: agregar
+    parser_agregar = subparsers.add_parser('agregar', help='Agregar nueva entrada')
+    parser_agregar.add_argument("--accion", required=True, help="Acción realizada")
+    parser_agregar.add_argument("--descripcion", required=True, help="Descripción detallada")
+    parser_agregar.add_argument("--motivo", required=True, help="Motivo de la acción")
+    parser_agregar.add_argument("--ejecutado_por", required=True, help="Responsable de la acción")
+    parser_agregar.add_argument("--estado", default="registrado", choices=VALID_ESTADOS,
+                               help="Estado actual de la acción")
+    parser_agregar.add_argument("--tags", help="Etiquetas asociadas (separadas por comas)")
+    parser_agregar.add_argument("--dry-run", action="store_true", 
+                               help="Simular sin realizar cambios")
+    parser_agregar.add_argument("--preview", action="store_true",
+                               help="Mostrar vista previa antes de guardar")
+    
+    # Comando: validar
+    parser_validar = subparsers.add_parser('validar', help='Validar integridad de la bitácora')
+    
+    # Comando: restaurar
+    parser_restaurar = subparsers.add_parser('restaurar', help='Restaurar desde backup')
+    parser_restaurar.add_argument("--backup-timestamp", help="Timestamp específico del backup (ej: 20230715_143022)")
+    parser_restaurar.add_argument("--list", action="store_true", help="Listar backups disponibles")
+    
+    # Comando: generar-docs
+    parser_docs = subparsers.add_parser('generar-docs', help='Generar documentación técnica')
+    
+    args = parser.parse_args()
+    
+    try:
+        manager = BitacoraManager(args)
+        manager.logger.info(f"🚀 Iniciando comando: {args.comando.upper()}")
+        
+        if args.comando == "agregar":
+            resultado = comando_agregar(args, manager)
+        elif args.comando == "validar":
+            resultado = comando_validar(args, manager)
+        elif args.comando == "restaurar":
+            resultado = comando_restaurar(args, manager)
+        elif args.comando == "generar-docs":
+            resultado = comando_generar_docs(args, manager)
+        else:
+            parser.print_help()
+            resultado = False
+        
+        sys.exit(0 if resultado else 1)
+    except Exception as e:
+        logging.error(f"FALLO SISTÉMICO: {str(e)}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()

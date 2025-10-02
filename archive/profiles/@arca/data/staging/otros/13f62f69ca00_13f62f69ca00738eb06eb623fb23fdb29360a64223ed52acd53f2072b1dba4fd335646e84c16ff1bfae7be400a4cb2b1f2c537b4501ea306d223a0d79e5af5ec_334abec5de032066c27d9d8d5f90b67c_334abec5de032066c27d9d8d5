@@ -1,0 +1,11 @@
+# add_aprendizaje_flujo
+
+Versión estable del script y prompt para registrar flujos de aprendizaje vivo en cualquier módulo del ecosistema ALMA_RESIST.
+
+Incluye:
+- `add_aprendizaje_flujo.py`: Script CLI para carga estandarizada de aprendizajes.
+- `prompt_add_aprendizaje_flujo.yaml`: Prompt universal para autogenerar comandos compatibles.
+- Uso recomendado en cierre de cada sprint, ciclo técnico o proceso de mejora.
+
+Ubicación: `/core/notebooks/add_aprendizaje_flujo/`
+

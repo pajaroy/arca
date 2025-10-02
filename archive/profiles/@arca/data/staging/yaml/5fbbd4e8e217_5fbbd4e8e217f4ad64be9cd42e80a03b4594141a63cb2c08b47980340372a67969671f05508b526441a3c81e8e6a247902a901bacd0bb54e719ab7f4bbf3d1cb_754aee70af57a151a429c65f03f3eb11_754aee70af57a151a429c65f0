@@ -1,0 +1,27 @@
+id: readme_yaml2all_v0.1.0
+version: "0.1.0"
+tipo: "readme"
+schema: "almaresist.readme_v1"
+ubicacion: core/scripts/yaml2all/v0.1.0/README.yaml
+descripcion: |
+  Script CLI universal para conversión de archivos YAML a formatos JSON y Markdown (con encabezado YAML).
+  Permite mantener siempre sincronizados los archivos .yaml, .json y .md para máxima portabilidad, parseo e integración multiplataforma.
+  Ideal para automatización, workflows de documentación y procesamiento de datos estructurados.
+estructura:
+  - yaml2all.py: Script principal. Convierte archivos .yaml individuales a .json y .md (front matter).
+  - README.yaml: Metadata y documentación de la versión.
+uso_basico: |
+  python yaml2all.py /ruta/al/archivo.yaml
+  # genera archivo.json y archivo.md en la misma carpeta.
+tags: [yaml, json, markdown, conversor, scripts, automatizacion]
+linked_to:
+  - ../../../notebooks/drafts_tecnicos/yaml2all/docs/prompt_yaml2all/prompt_yaml2all.yaml
+  - core/scripts/yaml2all/v0.1.0/yaml2all.py
+responsable: "kael"
+hash_verificacion: "sha256:pending"
+last_modified: "2025-06-17T02:00:00Z"
+last_modified_by: "bird"
+estado: "estable"
+notas:
+  - Esta versión es la inicial, funcional y lista para ser usada desde cualquier carpeta del proyecto.
+  - Para mejoras o reportes, actualizar este README y el changelog global del módulo yaml2all.

@@ -1,0 +1,27 @@
+
+# 🏛️ Proyecto 13CC – Integración Modular en ALMA_RESIST
+
+Bienvenido al módulo `13CC`, unidad organizativa integrada al ecosistema ALMA_RESIST. Esta carpeta representa tanto el funcionamiento interno como la formalización externa de **13 Cannabis Club**, organización enfocada en el cultivo comunitario legal, la gestión productiva autónoma y el desarrollo estratégico en red con otras entidades como Cannabird e Inance.
+
+
+## 🧠 Lógica Modular del Sistema
+
+- Cada carpeta representa un **núcleo operativo autónomo**, pero sincronizado al marco mayor de ALMA_RESIST.
+- `00_CENTRAL/` no almacena contenido: **solo referencia** el estado, evolución y sprint activo de esta unidad.
+- Toda modificación estructural en este módulo debe ser reflejada en:
+  - `Mapa_Modular.md`
+  - `Sprint_Tracker.md`
+
+
+## 🧩 Pendientes inmediatos
+
+- Establecer un `README.md` propio en `13CC.cu/` como bitácora operativa
+- Consolidar `13CC.emp/` como carpeta formal con subniveles
+- Reorganizar archivos actuales hacia `docs/`, `planificacion/` y `legales/`
+- Preparar el primer `sprint_actual.md` interno de 13CC
+- Definir tareas sincronizadas con IA si se activa nodo `IA_13CC/`
+
+
+📍 Coordinador: **Santiago Calvo**  
+📁 Estado: *En Integración Modular – Mayo 2025*  
+🧠 Sistema: **ALMA_RESIST** – Nodo `13CC`

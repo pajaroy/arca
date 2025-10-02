@@ -1,0 +1,60 @@
+---
+module: resumen_secciones
+type: core
+status: in_progress
+created: '2025-05-20'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🧭 Resumen de Secciones – ALMA_RESIST
+
+📅 Última actualización: 2025-05-20  
+👤 Responsable: Usuario + IA (documentación asistida)
+
+---
+
+## 📂 Estructura General del Proyecto
+
+- **core/**  
+  Contiene los módulos principales del sistema. Incluye scripts operativos como `loader.py` y utilitarios.
+
+- **tests/**  
+  Contiene tests unitarios o de integración. Actualmente mínima, requiere expansión.
+
+- **docs/**  
+  Carpeta de documentación principal del sistema. Contiene submódulos como `checklists/`, `auditorias/`, `referencias/` (a crear) y más.
+
+- **archivos/**  
+  Carpeta sin clasificación clara. Se sugiere renombrar o eliminar según relevancia histórica.
+
+- **backups/**  
+  Debe ser trasladada a `config/backups/` o eliminada si es temporal.
+
+---
+
+## 📘 Documentación Clave (esperada)
+
+| Documento                         | Estado     | Observación                                      |
+|----------------------------------|------------|--------------------------------------------------|
+| `docs/index.md`                  | ❌ Faltante | Debe actuar como hub maestro de navegación       |
+| `docs/changelog.md`              | ❌ Faltante | Requiere registro de cambios estructurales       |
+| `docs/post_mortem_tecnico.md`    | ❌ Faltante | Pendiente para análisis por módulo               |
+| `docs/lecciones_aprendidas.md`   | ❌ Faltante | Debe registrar aprendizajes clave por sección    |
+| `docs/decisiones_arquitectonicas.md` | ❌ Faltante | Fundamenta decisiones estructurales              |
+| `docs/hitos.md`                  | ❌ Faltante | Necesario para trazabilidad del desarrollo       |
+| `docs/dependencias.md`           | ❌ Faltante | Importante si se utilizan librerías externas     |
+| `docs/auditorias/`               | ✅ Presente | Carpeta creada, con README y primera auditoría   |
+
+---
+
+## ✅ Siguiente Acción
+
+Completar o crear los documentos faltantes indicados arriba. Este archivo debe mantenerse actualizado a medida que se estructure el sistema.
+
+---
+
+## 🗂 Ruta sugerida
+```
+docs/resumen_secciones.md
+```

@@ -1,0 +1,34 @@
+# 📘 Prompt Base – Protocolo Semiautomático de Bitácora (ALMA_CORE)
+
+protocolo: bitacora_semiautomatica
+descripcion: >
+  Este prompt define el flujo de carga semiautomática de bitácoras institucionales en `control_central`,
+  delegando al asistente la redacción lógica de los campos y devolviendo el comando final listo para ejecutar.
+  El usuario solo debe indicar que desea registrar un evento y pasar este prompt como base.
+
+script: "/home/bird/alma_core/control_central/core/notebooks/cli/bitacora/add_bitacora_entry_v0.1.0.py"
+bitacora: "/home/bird/alma_core/control_central/bitacora/bitacora_viva.yaml"
+
+campos_a_completar:
+  accion: ""
+  descripcion: ""
+  motivo: ""
+  ejecutado_por: "Kael"
+  tags: []
+
+uso:
+  flujo:
+    - El usuario detecta un evento relevante y activa el protocolo diciendo:
+        "Te paso el prompt base para cargar bitacora con este evento."
+    - El asistente completa automáticamente los campos con base en el contexto reciente.
+    - Se devuelve un comando listo para terminal con todos los parámetros rellenados.
+
+ejemplo:
+  comando: |
+    python3 /home/bird/alma_core/core/notebooks/alma-cli/bitacora/add_bitacora_entry_v0.1.0.py \
+      --accion "Carga del script de memorias v0.1.1" \
+      --descripcion "Se cargó la versión refactorizada del script para carga de memorias institucionales, solucionando problemas de parsing JSON." \
+      --motivo "El script anterior generaba estructuras JSON inválidas. Esta versión aplica validación, backups y escritura dual sincronizada." \
+      --ejecutado_por "Kael" \
+      --tags "memorias,cli,fix,v0.1.1" \
+      --bitacora "/home/bird/alma_core/control_central/bitacora/bitacora_viva.yaml"

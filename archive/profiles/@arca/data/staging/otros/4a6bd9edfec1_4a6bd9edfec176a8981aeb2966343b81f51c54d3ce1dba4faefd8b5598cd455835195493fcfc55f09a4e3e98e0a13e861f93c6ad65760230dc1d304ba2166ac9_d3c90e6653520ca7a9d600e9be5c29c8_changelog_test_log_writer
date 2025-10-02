@@ -1,0 +1,6 @@
+# Changelog `test_log_writer.py` v0.0.0.7
+
+- ✅ Corrección de `test_log_rotation` para usar instancia de `LogWriter`.
+- 💣 Mejora en `test_disk_failure`, usando `os.rename` en el mock.
+- 🧪 Validación de tipo automático en `test_type_validation`.
+- 🔐 Ajuste de `test_directory_permissions` para asegurar existencia y permisos mínimos.

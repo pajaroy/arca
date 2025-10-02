@@ -1,0 +1,35 @@
+{
+  "id": "readme_kael_docs_2025-06-08",
+  "nombre": "README docs – Documentación técnica y prompts de KAEL",
+  "ruta": "control_central/agentes/kael/docs/",
+  "version": "0.1.0",
+  "descripcion": "Esta carpeta contiene la documentación técnica, los prompts operativos y las referencias de scripts, configuraciones y archivos históricos de KAEL.\nEs el punto de consulta y backup para todo lo que estructura la operación, memoria y control de este agente.\n",
+  "estructura": [
+    {
+      "prompt_cargar_bitacora_kael.yaml": "Prompt institucional para registrar bitácoras personales de KAEL desde CLI o cualquier interfaz automatizada."
+    },
+    {
+      "prompt_cargar_memorias_kael.yaml": "Prompt para el flujo de carga, validación y sincronización de memorias personales de KAEL."
+    },
+    {
+      "_legacy/": "Subcarpeta donde se almacenan versiones anteriores, deprecated o históricas de configuraciones y auditorías."
+    }
+  ],
+  "criterios_orden": [
+    "Mantener aquí solo prompts y documentación activa; cualquier archivo reemplazado debe migrarse a _legacy.",
+    "README.yaml siempre actualizado para referencia rápida.",
+    "Las configuraciones vigentes van en la carpeta contexto, aquí solo quedan las referencias y plantillas."
+  ],
+  "notas": [
+    "No editar los prompts activos sin dejar constancia en bitácora y actualizar la versión.",
+    "Usar _legacy para archivo histórico y auditoría, no para trabajo diario."
+  ],
+  "tags": [
+    "kael",
+    "docs",
+    "prompts",
+    "institutional",
+    "backup",
+    "orden"
+  ]
+}

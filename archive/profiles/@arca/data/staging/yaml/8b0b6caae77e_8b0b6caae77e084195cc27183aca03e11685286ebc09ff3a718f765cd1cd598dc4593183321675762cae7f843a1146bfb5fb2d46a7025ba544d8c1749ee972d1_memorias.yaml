@@ -1,0 +1,20 @@
+- id: MEM_DOC_002
+  tipo: "documentación"
+  fecha: "2025-06-15"
+  modulo: "sistema"
+  tema: "carga YAML"
+  status: "activo"
+  responsable: "bird"
+  tags: ["manual", "yaml"]
+  resumen: "Cómo cargar memorias desde archivos YAML"
+  contenido: |
+    Ejemplo completo:
+    
+    python3 cargar_memorias_v2.py \\
+      --input /ruta/memorias.yaml \\
+      --dest /ruta/destino.json
+    
+    Ventajas YAML:
+    - Sintaxis más legible
+    - Soporta multi-línea nativo
+    - Menos caracteres especiales

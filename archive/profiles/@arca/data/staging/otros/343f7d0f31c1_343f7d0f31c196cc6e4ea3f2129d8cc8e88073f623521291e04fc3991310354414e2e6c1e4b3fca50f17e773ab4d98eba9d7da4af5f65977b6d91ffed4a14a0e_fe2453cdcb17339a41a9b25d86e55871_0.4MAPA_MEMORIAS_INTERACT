@@ -1,0 +1,34 @@
+# 🗺️ MAPA INTERACTIVO DE MEMORIAS – ALMA LIBRE
+
+Este archivo permite una navegación simplificada por el sistema ALMA, útil para humanos o IAs que requieran visión rápida del proyecto.
+
+
+## 🔬 Áreas temáticas
+
+- [Salud y RPL](03_Salud_y_RPL/)
+  - [Memoria Salud](03_Salud_y_RPL/MEMORIA.md)
+
+- [Medicina Alternativa](06_Cuadernos_Tematicos/Medicina_Alternativa/)
+  - [Memoria Medicina](.../MEMORIA.md)
+
+- [Trading](01_Gestor_de_Trade/)
+  - [Memoria Trading](01_Gestor_de_Trade/MEMORIA.md)
+
+- [Noticias Globales](02_Noticias_Globales/)
+  - [Memoria Geopolítica](02_Noticias_Globales/MEMORIA.md)
+
+- [Finanzas Personales](05_Finanzas_Personales/)
+  - [Memoria Finanzas](05_Finanzas_Personales/MEMORIA.md)
+
+- [Creatividad y Empresa](08_Creatividad_y_Empresa/)
+  - [Memoria Creatividad](08_Creatividad_y_Empresa/MEMORIA.md)
+
+- [Fondo de Inversión](.../)
+  - [Memoria Fondo](.../MEMORIA.md)
+
+- [Cultivo Canavir](04_Cannabird_Cultivo/)
+  - [Memoria Canavir](04_Cannabird_Cultivo/MEMORIA.md)
+
+- [Programación](06_Programacion/)
+  - [Memoria Programación](06_Programacion/MEMORIA.md)
+

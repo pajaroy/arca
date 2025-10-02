@@ -1,0 +1,16 @@
+# Prompt para DeepSeek – Módulo `Alma_Monitor`
+
+Crear un script en Python llamado `monitor.py`, que analice todos los logs generados por los módulos de ALMA LIBRE.
+
+Debe:
+- Leer archivos `.yaml` que siguen la plantilla `log_template.yaml`
+- Agrupar por severidad, módulo, archivo afectado
+- Detectar si hay errores repetidos
+- Generar un archivo de resumen `.yaml` con estadísticas del día
+- Crear también un resumen `.md` legible por humanos
+
+El script debe estar ubicado en: `MODULOS/Alma_Monitor/src/monitor.py`
+Los archivos procesados estarán en: `MODULOS/*/logs/*.yaml`
+El resumen se guarda en: `MODULOS/Alma_Monitor/output/`
+
+No debe sobrescribir logs ni modificar datos. Operación solo lectura. Estandarizado, limpio, extensible.

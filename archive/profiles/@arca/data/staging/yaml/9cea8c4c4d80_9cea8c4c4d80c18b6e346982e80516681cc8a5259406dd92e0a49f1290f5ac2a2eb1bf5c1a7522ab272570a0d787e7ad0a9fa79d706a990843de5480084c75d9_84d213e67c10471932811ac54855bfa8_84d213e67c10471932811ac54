@@ -1,0 +1,64 @@
+id: prompt_upgrade_integration_v0.2
+fecha: 2025-06-11
+autor: centralesis
+version_objetivo: 0.2
+modulo: alma_core/core/notebooks/llm_server_v0.1.0/integration
+objetivo:
+  - Refactorizar los módulos context_tracker.py, memory_graph.py, model_wrapper.py para cumplir con los nuevos estándares ALMA_RESIST v0.2.
+  - Unificar la estructura y el flujo de datos usando los siguientes campos universales: id, agente, timestamp, prompt/input, respuesta/output, tags, hash, metadata extendida, referencia a memoria institucional (memoria_ref).
+  - Garantizar que cada interacción, nodo de grafo o generación de modelo incluya tracking multiagente, control de integridad (hash), y referencia cruzada a la memoria única del sistema.
+  - Exponer interfaces/documentación claras para CLI y futuras integraciones API.
+  - Documentar todos los contratos internos con schemas formales (YAML/JSON Schema).
+  - Eliminar dependencias rotas, basura (`__pycache__`) y mejorar logging/auditoría.
+requerimientos:
+  - Implementar validación estricta de campos universales en cada módulo.
+  - Permitir tracking por agente y consulta de historial/contexto/relaciones por agente, tags o fechas.
+  - Integrar función de export/import de datos compatible con la memoria institucional centralizada.
+  - Preparar para integración futura con CLI multiagente y motores RAG.
+  - Dejar changelog y documentación estructurada (readme.yaml) en cada submódulo.
+  - Toda operación crítica debe dejar trazabilidad para auditoría (log, hash, id, etc.).
+ejemplo_entrada_context_tracker:
+  id: "CTX_2025-06-11_001"
+  agente: "kael"
+  timestamp: "2025-06-11T19:14:33Z"
+  prompt: "¿Qué es memoria institucional?"
+  response: "La memoria institucional es..."
+  tags: ["memoria", "institucional", "ALMA"]
+  hash: "sha256:xxxx..."
+  metadata:
+    model: "Mistral-7B"
+    module: "context_tracker"
+    memoria_ref: ["MEM_2025-06-11_09"]
+ejemplo_nodo_memory_graph:
+  id: "NODE_2025-06-11_002"
+  agente: "centralesis"
+  concepto: "memoria viva"
+  tags: ["concepto", "ALMA"]
+  hash: "sha256:yyyy..."
+  metadata:
+    relaciones: ["memoria institucional", "RAG"]
+    memoria_ref: ["MEM_2025-06-11_09"]
+ejemplo_llamada_model_wrapper:
+  id: "MW_2025-06-11_003"
+  agente: "centralesis"
+  prompt: "Explica el grafo semántico"
+  respuesta: "Un grafo semántico es..."
+  tags: ["grafo", "semántica", "explicación"]
+  hash: "sha256:zzzz..."
+  metadata:
+    modelo: "Mistral-7B"
+    longitud_prompt: 22
+    timestamp: 2025-06-11T19:20:00Z
+    memoria_ref: ["MEM_2025-06-11_10"]
+notas:
+  - Las versiones anteriores quedan como backup (legacy), pero toda integración CLI y multiagente debe operar solo con la nueva versión universal.
+  - Ningún cambio debe dejarse sin documentación ni registro de migración en bitácora crítica.
+linked_to:
+  - changelog_integration_v0.2.yaml
+  - alma_core/control_central/bitacora/bitacora_viva.yaml
+  - alma_core/core/notebooks/llm_server_v0.1.0/memoria_centralizada.yaml
+estado: "EN PROCESO — Versión universal y auditable en desarrollo"
+nota_modularidad:
+  - Cada script (context_tracker.py, memory_graph.py, model_wrapper.py) debe mantenerse como archivo independiente en la raíz de la carpeta integration/.
+  - Todos los módulos deben implementar y validar los mismos campos universales (id, agente, hash, tags, memoria_ref, metadata, etc.) para asegurar interoperabilidad y trazabilidad entre submódulos.
+  - El código y la documentación deben favorecer la extensión modular y el versionado independiente de cada script.

@@ -1,0 +1,573 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+ALMA_RESIST - Gestión de Memorias Institucionales v0.2.0
+Script CLI antifallos con triple formato, backup automático y sincronización multiarchivo
+"""
+import argparse
+import hashlib
+import json
+import os
+import sys
+import uuid
+import yaml
+import datetime
+import fcntl
+import shutil
+from pathlib import Path
+from typing import List, Dict, Any, Optional, Tuple
+from collections import defaultdict
+
+# --- CONFIGURACIÓN GLOBAL ---
+CENTRAL_FILE = "memoria_centralizada.yaml"
+AGENT_FILE_TEMPLATE = "memorias_{agente}.yaml"
+LOCK_FILE = "memoria_centralizada.lock"
+CHANGELOG_FILE = "changelog_memoria_centralizada.yaml"
+AGENT_CHANGELOG_TEMPLATE = "changelog_{agente}.yaml"
+BACKUP_DIR = "backups"
+REQUIRED_FIELDS = ['id', 'fecha', 'agente', 'tipo', 'autor', 'contenido', 'modulo', 'tags']
+CRITICAL_FIELDS = ['id', 'fecha', 'agente', 'tipo', 'autor', 'contenido', 'modulo', 'tags']
+
+# --- ENCABEZADO UNIVERSAL PARA ARCHIVOS ---
+METADATA_TEMPLATE = {
+    "version": "0.2.0",
+    "schema": "almaresist.memoria_v1",
+    "tipo": "memoria_institucional",
+    "descripcion": "Archivo de memorias institucionales ALMA_RESIST",
+    "responsable": "Equipo de Operaciones",
+    "hash_verificacion": "",
+    "last_modified": "",
+    "last_modified_by": "",
+    "entradas": 0
+}
+
+class MemoryIntegrityError(Exception):
+    """Excepción para errores de integridad de memoria"""
+    pass
+
+class MemoryValidationError(Exception):
+    """Excepción para errores de validación de memoria"""
+    pass
+
+# --- FUNCIONES DE VALIDACIÓN ---
+def compute_memory_hash(memory: Dict[str, Any]) -> str:
+    """Calcula SHA256 de los campos críticos de una memoria."""
+    critical_data = {field: memory[field] for field in CRITICAL_FIELDS if field in memory}
+    
+    # Normalización de datos para consistencia de hash
+    if 'tags' in critical_data:
+        critical_data['tags'] = tuple(sorted(critical_data['tags']))
+    
+    serialized = json.dumps(critical_data, sort_keys=True, ensure_ascii=False)
+    return hashlib.sha256(serialized.encode('utf-8')).hexdigest()
+
+def validate_memory_structure(memory: Dict[str, Any]) -> None:
+    """Valida que la memoria tenga todos los campos obligatorios."""
+    missing = [field for field in REQUIRED_FIELDS if field not in memory]
+    if missing:
+        raise MemoryValidationError(f"Campos obligatorios faltantes: {', '.join(missing)}")
+    
+    # Validar formato de fecha ISO 8601
+    try:
+        datetime.datetime.fromisoformat(memory['fecha'].replace('Z', '+00:00'))
+    except ValueError:
+        raise MemoryValidationError("Formato de fecha inválido. Debe ser ISO 8601")
+    
+    # Validar hash si existe
+    if 'hash' in memory:
+        expected_hash = compute_memory_hash(memory)
+        if memory['hash'] != expected_hash:
+            raise MemoryIntegrityError(f"Hash inválido para memoria {memory['id']}")
+
+# --- FUNCIONES DE ARCHIVOS Y BACKUPS ---
+def acquire_file_lock(file_path: Path):
+    """Implementa bloqueo de archivo para concurrencia."""
+    lock_file = file_path.with_suffix('.lock')
+    lock_fd = open(lock_file, 'w')
+    try:
+        fcntl.flock(lock_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        return lock_fd
+    except BlockingIOError:
+        print(f"Error: Archivo bloqueado por otro proceso: {file_path}")
+        sys.exit(1)
+
+def create_backup(file_path: Path) -> Path:
+    """Crea backup con timestamp y hash de integridad."""
+    backup_dir = Path(BACKUP_DIR) / file_path.parent.name
+    backup_dir.mkdir(parents=True, exist_ok=True)
+    
+    with open(file_path, 'r') as f:
+        content = f.read()
+        file_hash = hashlib.sha256(content.encode()).hexdigest()
+    
+    timestamp = datetime.datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
+    backup_name = f"{file_path.stem}_backup_{timestamp}_{file_hash[:8]}{file_path.suffix}"
+    backup_path = backup_dir / backup_name
+    
+    shutil.copy2(file_path, backup_path)
+    return backup_path
+
+def save_triple_format(memories: List[Dict[str, Any]], base_path: Path):
+    """Guarda memorias en triple formato: YAML, JSON, Markdown"""
+    # Guardar YAML
+    with open(base_path.with_suffix('.yaml'), 'w') as f:
+        yaml.dump(memories, f, sort_keys=False, allow_unicode=True)
+    
+    # Guardar JSON
+    with open(base_path.with_suffix('.json'), 'w') as f:
+        json.dump(memories, f, indent=2, ensure_ascii=False)
+    
+    # Guardar Markdown con front-matter
+    with open(base_path.with_suffix('.md'), 'w') as f:
+        f.write("---\n")
+        yaml.dump({
+            "version": "0.2.0",
+            "tipo": "memoria_institucional",
+            "fecha_generacion": datetime.datetime.utcnow().isoformat() + 'Z',
+            "total_memorias": len(memories),
+            "hash_verificacion": hashlib.sha256(
+                json.dumps(memories, ensure_ascii=False).encode()
+            ).hexdigest()
+        }, f, sort_keys=False)
+        f.write("---\n\n")
+        
+        f.write("# Memorias Institucionales\n\n")
+        for mem in memories:
+            f.write(f"## {mem['tipo'].capitalize()}: {mem['id']}\n")
+            f.write(f"**Agente**: {mem['agente']}  \n")
+            f.write(f"**Autor**: {mem['autor']}  \n")
+            f.write(f"**Fecha**: {mem['fecha']}  \n")
+            f.write(f"**Módulo**: {mem['modulo']}  \n")
+            f.write(f"**Tags**: {', '.join(mem['tags'])}\n\n")
+            f.write(f"### Contenido\n{mem['contenido']}\n\n")
+            f.write("---\n\n")
+
+def update_changelog(operation: str, details: Dict[str, Any], changelog_path: Path):
+    """Registra operación en changelog institucional o personal"""
+    entry = {
+        'timestamp': datetime.datetime.utcnow().isoformat() + 'Z',
+        'operation': operation,
+        'details': details
+    }
+    
+    changelog = []
+    if changelog_path.exists():
+        with open(changelog_path, 'r') as f:
+            changelog = yaml.safe_load(f) or []
+    
+    changelog.append(entry)
+    
+    with open(changelog_path, 'w') as f:
+        yaml.dump(changelog, f, sort_keys=False)
+
+# --- FUNCIONES PRINCIPALES ---
+def load_memories(file_path: Path) -> List[Dict[str, Any]]:
+    """Carga memorias desde archivo con validación de integridad"""
+    if not file_path.exists():
+        return []
+    
+    with open(file_path, 'r') as f:
+        memories = yaml.safe_load(f) or []
+    
+    # Validar cada memoria
+    for mem in memories:
+        validate_memory_structure(mem)
+        
+        # Calcular hash si no existe
+        if 'hash' not in mem:
+            mem['hash'] = compute_memory_hash(mem)
+    
+    return memories
+
+def save_memories(memories: List[Dict[str, Any]], file_path: Path, operation: str, agent: str = None):
+    """Guarda memorias con control de integridad y trazabilidad"""
+    lock_fd = acquire_file_lock(file_path)
+    try:
+        # Crear backup pre-operación
+        backup_path = create_backup(file_path)
+        pre_hash = hashlib.sha256(open(file_path, 'rb').read()).hexdigest() if file_path.exists() else None
+        
+        # Actualizar metadatos
+        for mem in memories:
+            if 'hash' not in mem:
+                mem['hash'] = compute_memory_hash(mem)
+        
+        # Guardar en triple formato
+        save_triple_format(memories, file_path)
+        
+        # Calcular hash post-operación
+        post_hash = hashlib.sha256(open(file_path.with_suffix('.yaml'), 'rb').read()).hexdigest()
+        
+        # Registrar en changelog
+        changelog_path = Path(CHANGELOG_FILE) if agent is None else Path(AGENT_CHANGELOG_TEMPLATE.format(agente=agent))
+        update_changelog(operation, {
+            'file': str(file_path),
+            'backup': str(backup_path),
+            'pre_hash': pre_hash,
+            'post_hash': post_hash,
+            'memory_count': len(memories),
+            'agent': agent
+        }, changelog_path)
+    finally:
+        lock_fd.close()
+        file_path.with_suffix('.lock').unlink()
+
+def add_memory(new_memory: Dict[str, Any]):
+    """Añade una nueva memoria con validación y sincronización dual"""
+    # Generar ID único si no existe
+    if 'id' not in new_memory:
+        new_memory['id'] = str(uuid.uuid4())
+    
+    # Calcular hash y fecha de ingreso
+    new_memory['hash'] = compute_memory_hash(new_memory)
+    if 'fecha_ingreso' not in new_memory:
+        new_memory['fecha_ingreso'] = datetime.datetime.utcnow().isoformat() + 'Z'
+    
+    # Validar estructura
+    validate_memory_structure(new_memory)
+    
+    # Obtener rutas de archivos
+    central_path = Path(CENTRAL_FILE)
+    agent_path = Path(AGENT_FILE_TEMPLATE.format(agente=new_memory['agente']))
+    
+    # Cargar memorias existentes
+    central_memories = load_memories(central_path)
+    agent_memories = load_memories(agent_path)
+    
+    # Verificar ID único en ambos archivos
+    all_ids = {mem['id'] for mem in central_memories + agent_memories}
+    if new_memory['id'] in all_ids:
+        raise ValueError(f"ID duplicado: {new_memory['id']}")
+    
+    # Agregar a ambos conjuntos
+    central_memories.append(new_memory)
+    agent_memories.append(new_memory)
+    
+    # Guardar cambios
+    save_memories(central_memories, central_path, "add_memory")
+    save_memories(agent_memories, agent_path, "add_agent_memory", new_memory['agente'])
+    
+    return new_memory['id']
+
+def batch_import(directory: str):
+    """Importa múltiples archivos YAML/JSON desde un directorio"""
+    imported_count = 0
+    agent_memories = defaultdict(list)
+    
+    # Procesar archivos en el directorio
+    for file_path in Path(directory).glob('*'):
+        if file_path.suffix not in ('.yaml', '.yml', '.json'):
+            continue
+        
+        try:
+            with open(file_path, 'r') as f:
+                data = yaml.safe_load(f) or []
+                if isinstance(data, dict):
+                    data = [data]
+                
+                for mem in data:
+                    try:
+                        # Preparar memoria
+                        if 'id' not in mem:
+                            mem['id'] = str(uuid.uuid4())
+                        mem['hash'] = compute_memory_hash(mem)
+                        mem['fecha_ingreso'] = datetime.datetime.utcnow().isoformat() + 'Z'
+                        mem['origen_archivo'] = file_path.name
+                        
+                        validate_memory_structure(mem)
+                        agent_memories[mem['agente']].append(mem)
+                        imported_count += 1
+                    except Exception as e:
+                        print(f"Error en memoria {mem.get('id', '')}: {str(e)}")
+        except Exception as e:
+            print(f"Error procesando {file_path.name}: {str(e)}")
+    
+    # Guardar en archivo central
+    central_path = Path(CENTRAL_FILE)
+    central_memories = load_memories(central_path)
+    central_memories.extend([mem for memories in agent_memories.values() for mem in memories])
+    save_memories(central_memories, central_path, "batch_import")
+    
+    # Guardar en archivos de agentes
+    for agent, memories in agent_memories.items():
+        agent_path = Path(AGENT_FILE_TEMPLATE.format(agente=agent))
+        existing_memories = load_memories(agent_path)
+        existing_memories.extend(memories)
+        save_memories(existing_memories, agent_path, "batch_agent_import", agent)
+    
+    return imported_count
+
+def query_memories(
+    filters: Optional[Dict[str, str]] = None,
+    tags: Optional[List[str]] = None,
+    agent: Optional[str] = None,
+    limit: int = None,
+    offset: int = 0
+) -> List[Dict[str, Any]]:
+    """Consulta memorias con filtros avanzados"""
+    # Determinar archivo fuente
+    file_path = Path(AGENT_FILE_TEMPLATE.format(agente=agent)) if agent else Path(CENTRAL_FILE)
+    memories = load_memories(file_path)
+    
+    # Aplicar filtros
+    filtered = []
+    for mem in memories:
+        match = True
+        
+        # Filtros por campo
+        if filters:
+            for key, value in filters.items():
+                if key not in mem or mem[key] != value:
+                    match = False
+                    break
+        
+        # Filtro por tags
+        if tags and match:
+            if not all(tag in mem.get('tags', []) for tag in tags):
+                match = False
+        
+        if match:
+            filtered.append(mem)
+    
+    # Paginación
+    return filtered[offset:offset+limit] if limit else filtered
+
+def validate_integrity(file_path: Path) -> Tuple[bool, Dict[str, Any]]:
+    """Valida integridad de un archivo de memorias"""
+    results = {
+        'file': str(file_path),
+        'valid': True,
+        'errors': [],
+        'memory_count': 0,
+        'invalid_memories': []
+    }
+    
+    try:
+        memories = load_memories(file_path)
+        results['memory_count'] = len(memories)
+        
+        for mem in memories:
+            try:
+                validate_memory_structure(mem)
+            except Exception as e:
+                results['valid'] = False
+                results['errors'].append(str(e))
+                results['invalid_memories'].append(mem['id'])
+                
+        # Verificar hash del archivo
+        with open(file_path, 'rb') as f:
+            file_hash = hashlib.sha256(f.read()).hexdigest()
+        
+        # El hash debería coincidir con el último registro del changelog
+        changelog_path = Path(CHANGELOG_FILE) if "centralizada" in file_path.name else Path(
+            AGENT_CHANGELOG_TEMPLATE.format(agente=file_path.stem.split('_')[-1])
+        )
+        
+        if changelog_path.exists():
+            with open(changelog_path, 'r') as f:
+                changelog = yaml.safe_load(f) or []
+                if changelog:
+                    last_entry = changelog[-1]['details']
+                    if last_entry.get('post_hash') != file_hash:
+                        results['valid'] = False
+                        results['errors'].append("Hash del archivo no coincide con changelog")
+    
+    except Exception as e:
+        results['valid'] = False
+        results['errors'].append(str(e))
+    
+    return results['valid'], results
+
+def generate_metrics() -> Dict[str, Any]:
+    """Genera métricas institucionales avanzadas"""
+    central_memories = load_memories(Path(CENTRAL_FILE))
+    metrics = {
+        'total_memorias': len(central_memories),
+        'por_agente': defaultdict(int),
+        'por_tipo': defaultdict(int),
+        'por_modulo': defaultdict(int),
+        'tags_populares': defaultdict(int),
+        'frecuencia_diaria': defaultdict(int),
+        'ultima_actualizacion': datetime.datetime.utcnow().isoformat() + 'Z'
+    }
+    
+    for mem in central_memories:
+        metrics['por_agente'][mem['agente']] += 1
+        metrics['por_tipo'][mem['tipo']] += 1
+        metrics['por_modulo'][mem['modulo']] += 1
+        
+        # Fecha sin hora para agregación diaria
+        fecha_dia = mem['fecha'].split('T')[0]
+        metrics['frecuencia_diaria'][fecha_dia] += 1
+        
+        for tag in mem['tags']:
+            metrics['tags_populares'][tag] += 1
+    
+    # Top 5 tags
+    metrics['top_tags'] = sorted(
+        metrics['tags_populares'].items(), 
+        key=lambda x: x[1], 
+        reverse=True
+    )[:5]
+    
+    return metrics
+
+def export_to_sqlite(output_path: Path):
+    """Exporta memorias a base SQLite (esqueleto)"""
+    # Esta función sería implementada completamente en futuras versiones
+    memories = load_memories(Path(CENTRAL_FILE))
+    
+    # Simulación de exportación
+    with open(output_path, 'w') as f:
+        f.write("-- Creación de estructura SQLite\n")
+        f.write("CREATE TABLE memorias (\n")
+        f.write("    id TEXT PRIMARY KEY,\n")
+        f.write("    fecha TEXT,\n")
+        f.write("    agente TEXT,\n")
+        f.write("    tipo TEXT,\n")
+        f.write("    autor TEXT,\n")
+        f.write("    contenido TEXT,\n")
+        f.write("    modulo TEXT,\n")
+        f.write("    tags TEXT\n")
+        f.write(");\n\n")
+        
+        f.write("-- Inserción de datos\n")
+        for mem in memories:
+            tags_str = ','.join(mem['tags'])
+            f.write(f"INSERT INTO memorias VALUES ("
+                    f"'{mem['id']}', "
+                    f"'{mem['fecha']}', "
+                    f"'{mem['agente']}', "
+                    f"'{mem['tipo']}', "
+                    f"'{mem['autor']}', "
+                    f"'{mem['contenido']}', "
+                    f"'{mem['modulo']}', "
+                    f"'{tags_str}'"
+                    ");\n")
+    
+    return len(memories)
+
+# --- INTERFAZ CLI ---
+def main():
+    parser = argparse.ArgumentParser(
+        description="Gestión de Memorias Institucionales ALMA_RESIST v0.2.0",
+        epilog="Ejemplos de uso:\n"
+               "  Agregar memoria: cargar_memorias_v0.2.0.py add --agente kaelsa --tipo aprendizaje ...\n"
+               "  Importar lote: cargar_memorias_v0.2.0.py batch /ruta/memorias\n"
+               "  Consultar: cargar_memorias_v0.2.0.py query --agente kaelsa --tags IA,investigacion\n"
+               "  Validar: cargar_memorias_v0.2.0.py validate",
+        formatter_class=argparse.RawTextHelpFormatter
+    )
+    
+    # Comandos principales
+    subparsers = parser.add_subparsers(dest='command', required=True)
+    
+    # Comando: add
+    add_parser = subparsers.add_parser('add', help='Añadir nueva memoria')
+    for field in REQUIRED_FIELDS:
+        add_parser.add_argument(f'--{field}', required=(field != 'id'))
+    add_parser.add_argument('--origen_archivo')
+    add_parser.add_argument('--commit_ref')
+    add_parser.add_argument('--dry-run', action='store_true')
+    
+    # Comando: batch
+    batch_parser = subparsers.add_parser('batch', help='Importar directorio de memorias')
+    batch_parser.add_argument('directory')
+    batch_parser.add_argument('--dry-run', action='store_true')
+    
+    # Comando: query
+    query_parser = subparsers.add_parser('query', help='Consultar memorias')
+    query_parser.add_argument('--agente')
+    query_parser.add_argument('--filter', action='append', help='Filtro ej: tipo=error')
+    query_parser.add_argument('--tags', help='Tags separados por comas')
+    query_parser.add_argument('--limit', type=int)
+    query_parser.add_argument('--offset', type=int, default=0)
+    query_parser.add_argument('--output', choices=['yaml', 'json'], default='yaml')
+    
+    # Comando: metrics
+    subparsers.add_parser('metrics', help='Mostrar métricas institucionales')
+    
+    # Comando: validate
+    validate_parser = subparsers.add_parser('validate', help='Validar integridad de archivos')
+    validate_parser.add_argument('--agente')
+    validate_parser.add_argument('--full', action='store_true', help='Validación completa')
+    
+    # Comando: export-sqlite
+    export_parser = subparsers.add_parser('export-sqlite', help='Exportar a SQLite')
+    export_parser.add_argument('output_file')
+    
+    args = parser.parse_args()
+    
+    try:
+        if args.command == 'add':
+            # Construir memoria desde CLI
+            memory = {field: getattr(args, field) for field in REQUIRED_FIELDS}
+            for field in ['origen_archivo', 'commit_ref']:
+                if getattr(args, field):
+                    memory[field] = getattr(args, field)
+            
+            if args.dry_run:
+                validate_memory_structure(memory)
+                print("✅ Validación exitosa (dry-run)")
+            else:
+                mem_id = add_memory(memory)
+                print(f"✅ Memoria añadida: ID={mem_id}")
+        
+        elif args.command == 'batch':
+            if args.dry_run:
+                file_count = len(list(Path(args.directory).glob('*')))
+                print(f"📦 Validaría {file_count} archivos (dry-run)")
+            else:
+                count = batch_import(args.directory)
+                print(f"✅ Importadas {count} memorias desde {args.directory}")
+        
+        elif args.command == 'query':
+            filters = {}
+            if args.filter:
+                for f in args.filter:
+                    key, value = f.split('=')
+                    filters[key] = value
+            
+            tags = args.tags.split(',') if args.tags else None
+            results = query_memories(
+                filters=filters,
+                tags=tags,
+                agent=args.agente,
+                limit=args.limit,
+                offset=args.offset
+            )
+            
+            if args.output == 'json':
+                print(json.dumps(results, indent=2, ensure_ascii=False))
+            else:
+                print(yaml.dump(results, allow_unicode=True, sort_keys=False))
+        
+        elif args.command == 'metrics':
+            metrics = generate_metrics()
+            print(yaml.dump(metrics, allow_unicode=True, sort_keys=False))
+        
+        elif args.command == 'validate':
+            if args.agente:
+                file_path = Path(AGENT_FILE_TEMPLATE.format(agente=args.agente))
+            else:
+                file_path = Path(CENTRAL_FILE)
+            
+            valid, results = validate_integrity(file_path)
+            if valid:
+                print(f"✅ Validación exitosa: {results['memory_count']} memorias")
+            else:
+                print(f"❌ Errores encontrados:")
+                for error in results['errors']:
+                    print(f"  - {error}")
+                sys.exit(1)
+        
+        elif args.command == 'export-sqlite':
+            count = export_to_sqlite(Path(args.output_file))
+            print(f"✅ Exportadas {count} memorias a {args.output_file}")
+    
+    except Exception as e:
+        print(f"❌ Error crítico: {str(e)}", file=sys.stderr)
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()

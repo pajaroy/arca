@@ -1,0 +1,76 @@
+
+import copy
+import logging
+from core.validador import validar_esquema
+from core.sqlite_storage import insertar_memoria
+from core.vector_storage import vectorizar_y_guardar
+from core.cifrado import cifrar_contenido
+
+# Configuración básica de logging
+logger = logging.getLogger(__name__)
+
+def guardar_memoria(memoria: dict) -> dict:
+    resultado = {
+        "resultado": "error",
+        "estado": "error",
+        "mensaje": ""
+    }
+
+    # 1. Validación del esquema
+    try:
+        validar_esquema(memoria, 'schema_base.json')
+    except Exception as e:
+        logger.error(f"Error de validación: {str(e)}", extra={"memoria_id": memoria.get('id')})
+        resultado["mensaje"] = f"Error de validación: {str(e)}"
+        return resultado
+
+    # 2. Cifrado de contenido si es privada
+    try:
+        if memoria.get('visibilidad') == 'privada':
+            memoria_para_sql = copy.deepcopy(memoria)
+            contenido_cifrado = cifrar_contenido(memoria_para_sql['contenido'])
+            memoria_para_sql['contenido'] = contenido_cifrado
+        else:
+            memoria_para_sql = copy.deepcopy(memoria)
+    except KeyError as e:
+        logger.error(f"Campo faltante: {str(e)}", extra={"memoria_id": memoria.get('id')})
+        resultado["mensaje"] = "El campo 'contenido' es requerido"
+        return resultado
+    except Exception as e:
+        logger.error(f"Error al cifrar: {str(e)}", extra={"memoria_id": memoria.get('id')})
+        resultado["mensaje"] = f"Error de cifrado: {str(e)}"
+        return resultado
+
+    # 3. Guardado en SQLite
+    try:
+        insertar_memoria(memoria_para_sql)
+    except Exception as e:
+        logger.error(f"Error en SQLite: {str(e)}", extra={"memoria_id": memoria.get('id')})
+        resultado["mensaje"] = f"Error en SQLite: {str(e)}"
+        return resultado
+
+    # 4. Vectorización y guardado en FAISS
+    estado_final = memoria_para_sql.get('estado', 'completado')
+    mensaje = "Guardado exitoso en SQLite y FAISS"
+    try:
+        vectorizar_y_guardar(memoria_para_sql)
+    except Exception as e:
+        logger.error(f"Error en FAISS: {str(e)}", extra={"memoria_id": memoria.get('id')})
+        
+        # Actualizar estado en SQLite
+        try:
+            memoria_actualizada = copy.deepcopy(memoria_para_sql)
+            memoria_actualizada['estado'] = 'pendiente_vectorización'
+            insertar_memoria(memoria_actualizada)
+            estado_final = 'pendiente_vectorización'
+            mensaje = "FAISS falló. Estado actualizado a pendiente_vectorización."
+        except Exception as e2:
+            logger.error(f"Error actualizando estado: {str(e2)}", extra={"memoria_id": memoria.get('id')})
+            mensaje = "FAISS falló. No se pudo actualizar el estado."
+
+    # Preparar respuesta final
+    resultado["resultado"] = "ok"
+    resultado["estado"] = estado_final
+    resultado["mensaje"] = mensaje
+
+    return resultado

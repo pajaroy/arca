@@ -1,0 +1,42 @@
+
+import sqlite3
+import argparse
+from datetime import datetime
+
+def conectar_db(path='memorias.db'):
+    return sqlite3.connect(path)
+
+def registrar_memoria(titulo, tipo, bloque, seccion, contenido, etiquetas, version='0.7.8.0', estado='activa'):
+    conn = conectar_db()
+    cursor = conn.cursor()
+
+    fecha = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+    cursor.execute("""
+        INSERT INTO memorias (titulo, tipo, bloque, seccion, fecha_creacion, ultima_actualizacion, estado, version, etiquetas, contenido)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (titulo, tipo, bloque, seccion, fecha, fecha, estado, version, etiquetas, contenido))
+
+    conn.commit()
+    conn.close()
+    print(f"✅ Memoria '{titulo}' registrada correctamente en el bloque {bloque}, sección {seccion}.")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Registrar una nueva memoria en la base de datos ALMA LIBRE")
+    parser.add_argument("--titulo", required=True, help="Título de la memoria")
+    parser.add_argument("--tipo", required=True, help="Tipo de memoria (emocional, técnica, etc.)")
+    parser.add_argument("--bloque", required=True, help="Bloque del sistema al que pertenece")
+    parser.add_argument("--seccion", required=True, help="Sección de la memoria (ej: 1.1, 3.4)")
+    parser.add_argument("--contenido", required=True, help="Texto o cuerpo de la memoria")
+    parser.add_argument("--etiquetas", default="", help="Etiquetas separadas por comas")
+
+    args = parser.parse_args()
+
+    registrar_memoria(
+        titulo=args.titulo,
+        tipo=args.tipo,
+        bloque=args.bloque,
+        seccion=args.seccion,
+        contenido=args.contenido,
+        etiquetas=args.etiquetas
+    )

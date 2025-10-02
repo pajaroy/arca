@@ -1,0 +1,4 @@
+nombre_memoria,tipo,nivel,conectada_a,ubicacion_carpeta,prioridad_lectura,version,ultima_actualizacion,estado
+Memoria General,General,Madre,Todas,00_ALMA_LIBRE/01_Estructura_Memoria_Alma,Alta,0.7.1,2025-04-23,✅ actualizada
+Memoria Trading,Técnica,Derivada,"Memoria General, Memoria Fondo",05_Modulos/04_Gestor_de_Trades,Alta,0.7.1,2025-04-22,⚠️ desfasada
+Memoria Ética,Estratégica,Derivada,"Memoria General, Memoria Reflexión",03_Etica_y_Reflexion,Media,0.6,2025-04-15,❌ desconectada

@@ -1,0 +1,543 @@
+id: cultivo004_medicion_semanal
+version: "0.1.0"
+tipo: "registro_medicion"
+contexto:
+  proyecto: "Cannabird"
+  cultivo: "004"
+  responsable: "Santi"
+  frecuencia: "semanal"
+  fecha_registro: "2025-06-17"
+  descripcion: "Mediciones semanales con medidor Keep It Fresh 6 en 1"
+
+plantas:
+  - identificacion: "PLT-001"
+    datos_suelo:
+      fertilidad_µs_cm: 38
+      humedad_%: 56
+      ph: 7.5
+      temperatura_°C: 21.9
+    datos_entorno:
+      luz_lux: 38083
+      humedad_ambiental_%: 57
+    observaciones: "Primera medición de la semana 01. Fertilidad baja."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-002"
+    datos_suelo:
+      fertilidad_µs_cm: 265
+      humedad_%: 70
+      ph: 7.5
+      temperatura_°C: 21.9
+    datos_entorno:
+      luz_lux: 8099
+      humedad_ambiental_%: 58
+    observaciones: "Buen nivel de fertilidad y humedad óptima."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-003"
+    datos_suelo:
+      fertilidad_µs_cm: 27
+      humedad_%: 83
+      ph: 6.6
+      temperatura_°C: 22.9
+    datos_entorno:
+      luz_lux: 9810
+      humedad_ambiental_%: 59
+    observaciones: "Alta humedad y baja fertilidad. Atención al pH ligeramente ácido."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-004"
+    datos_suelo:
+      fertilidad_µs_cm: 412
+      humedad_%: 96
+      ph: 7.5
+      temperatura_°C: 22.9
+    datos_entorno:
+      luz_lux: 7360
+      humedad_ambiental_%: 59
+    observaciones: "Alta humedad y fertilidad elevada, ideal verificar drenaje y sales."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-005"
+    datos_suelo:
+      fertilidad_µs_cm: 113
+      humedad_%: 78
+      ph: 7.5
+      temperatura_°C: 21.7
+    datos_entorno:
+      luz_lux: 7820
+      humedad_ambiental_%: 59
+    observaciones: "Fertilidad baja, humedad dentro de rango. Luz adecuada."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-006"
+    datos_suelo:
+      fertilidad_µs_cm: 383
+      humedad_%: 99
+      ph: 7.5
+      temperatura_°C: 22.3
+    datos_entorno:
+      luz_lux: 9572
+      humedad_ambiental_%: 60
+    observaciones: "Humedad muy alta, riesgo de compactación o encharque. Fertilidad elevada."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-007"
+    datos_suelo:
+      fertilidad_µs_cm: 212
+      humedad_%: 80
+      ph: 7.5
+      temperatura_°C: 21.9
+    datos_entorno:
+      luz_lux: 4591
+      humedad_ambiental_%: 58
+    observaciones: "Buena humedad. Luz algo baja en comparación al resto, posible sombreado."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-008"
+    datos_suelo:
+      fertilidad_µs_cm: 120
+      humedad_%: 95
+      ph: 7.5
+      temperatura_°C: 22.2
+    datos_entorno:
+      luz_lux: 1283
+      humedad_ambiental_%: 59
+    observaciones: "Luz muy baja, posible zona sombreada. Fertilidad en rango bajo."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-009"
+    datos_suelo:
+      fertilidad_µs_cm: 368
+      humedad_%: 98
+      ph: 7.5
+      temperatura_°C: 22.2
+    datos_entorno:
+      luz_lux: 2130
+      humedad_ambiental_%: 58
+    observaciones: "Buena fertilidad, exceso de humedad. Luz baja, puede requerir reposicionamiento."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-010"
+    datos_suelo:
+      fertilidad_µs_cm: 319
+      humedad_%: 71
+      ph: 6.5
+      temperatura_°C: 22.0
+    datos_entorno:
+      luz_lux: 798
+      humedad_ambiental_%: 58
+    observaciones: "Luz críticamente baja, posible sombra directa. pH bajo comparado con el resto."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-011"
+    datos_suelo:
+      fertilidad_µs_cm: 306
+      humedad_%: 77
+      ph: 7.5
+      temperatura_°C: 22.0
+    datos_entorno:
+      luz_lux: 1690
+      humedad_ambiental_%: 57
+    observaciones: "Luz baja en relación al promedio, fertilidad elevada, condiciones estables."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-012"
+    datos_suelo:
+      fertilidad_µs_cm: 109
+      humedad_%: 80
+      ph: 7.5
+      temperatura_°C: 22.0
+    datos_entorno:
+      luz_lux: 2950
+      humedad_ambiental_%: 57
+    observaciones: "Fertilidad baja. Luz aceptable, humedad ideal para fase vegetativa o inicio floral."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-013"
+    datos_suelo:
+      fertilidad_µs_cm: 112
+      humedad_%: 74
+      ph: 7.0
+      temperatura_°C: 22.0
+    datos_entorno:
+      luz_lux: 10823
+      humedad_ambiental_%: 58
+    observaciones: "Fertilidad moderadamente baja, buena iluminación y humedad estable."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-014"
+    datos_suelo:
+      fertilidad_µs_cm: 183
+      humedad_%: 85
+      ph: 7.5
+      temperatura_°C: 22.2
+    datos_entorno:
+      luz_lux: 4975
+      humedad_ambiental_%: 58
+    observaciones: "Condiciones bastante equilibradas. Fertilidad aceptable, luz media."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-015"
+    datos_suelo:
+      fertilidad_µs_cm: 164
+      humedad_%: 72
+      ph: 7.5
+      temperatura_°C: 21.9
+    datos_entorno:
+      luz_lux: 10400
+      humedad_ambiental_%: 58
+    observaciones: "Parámetros estables. Luz adecuada, humedad y fertilidad en buen rango."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-016"
+    datos_suelo:
+      fertilidad_µs_cm: 160
+      humedad_%: 62
+      ph: 7.0
+      temperatura_°C: 21.9
+    datos_entorno:
+      luz_lux: 796
+      humedad_ambiental_%: 57
+    observaciones: "Luz críticamente baja. Fertilidad aceptable, humedad algo baja."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-017"
+    datos_suelo:
+      fertilidad_µs_cm: 118
+      humedad_%: 61
+      ph: 7.5
+      temperatura_°C: 21.9
+    datos_entorno:
+      luz_lux: 6325
+      humedad_ambiental_%: 58
+    observaciones: "Humedad algo baja, fertilidad en rango bajo. Luz adecuada."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-018"
+    datos_suelo:
+      fertilidad_µs_cm: 216
+      humedad_%: 77
+      ph: 7.5
+      temperatura_°C: 21.9
+    datos_entorno:
+      luz_lux: 1570
+      humedad_ambiental_%: 58
+    observaciones: "Buena humedad y fertilidad, pero luz baja. Atención a sombreado posible."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-019"
+    datos_suelo:
+      fertilidad_µs_cm: 202
+      humedad_%: 77
+      ph: 7.5
+      temperatura_°C: 21.9
+    datos_entorno:
+      luz_lux: 4641
+      humedad_ambiental_%: 60
+    observaciones: "Parámetros estables. Fertilidad y humedad en rango óptimo, buena luz ambiental."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-020"
+    datos_suelo:
+      fertilidad_µs_cm: 448
+      humedad_%: 83
+      ph: 7.5
+      temperatura_°C: 21.9
+    datos_entorno:
+      luz_lux: 2150
+      humedad_ambiental_%: 60
+    observaciones: "Fertilidad muy alta, luz baja en comparación. Verificar acumulación de sales."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-021"
+    datos_suelo:
+      fertilidad_µs_cm: 127
+      humedad_%: 84
+      ph: 7.0
+      temperatura_°C: 21.9
+    datos_entorno:
+      luz_lux: 7995
+      humedad_ambiental_%: 59
+    observaciones: "Buena humedad y luz. Fertilidad baja, pH apenas ácido. Parámetros estables."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-022"
+    datos_suelo:
+      fertilidad_µs_cm: 231
+      humedad_%: 62
+      ph: 7.0
+      temperatura_°C: 21.9
+    datos_entorno:
+      luz_lux: 1035
+      humedad_ambiental_%: 59
+    observaciones: "Luz muy baja. Humedad y pH aceptables, fertilidad media. Potencial estrés lumínico."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-023"
+    datos_suelo:
+      fertilidad_µs_cm: 337
+      humedad_%: 85
+      ph: 7.5
+      temperatura_°C: 22.9
+    datos_entorno:
+      luz_lux: 7380
+      humedad_ambiental_%: 59
+    observaciones: "Muy buena fertilidad y humedad. Luz óptima. Parámetros ideales para floración."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-024"
+    datos_suelo:
+      fertilidad_µs_cm: 305
+      humedad_%: 95
+      ph: 7.5
+      temperatura_°C: 22.5
+    datos_entorno:
+      luz_lux: 1830
+      humedad_ambiental_%: 59
+    observaciones: "Humedad muy alta, fertilidad elevada. Luz algo baja, revisar drenaje y exposición."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-025"
+    datos_suelo:
+      fertilidad_µs_cm: 307
+      humedad_%: 87
+      ph: 7.5
+      temperatura_°C: 22.5
+    datos_entorno:
+      luz_lux: 1234
+      humedad_ambiental_%: 58
+    observaciones: "Buena fertilidad y humedad elevada. Luz baja, posible sombreado localizado."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-026"
+    datos_suelo:
+      fertilidad_µs_cm: 176
+      humedad_%: 82
+      ph: 7.5
+      temperatura_°C: 22.5
+    datos_entorno:
+      luz_lux: 1276
+      humedad_ambiental_%: 58
+    observaciones: "Parámetros estables, fertilidad media-baja. Luz baja, puede requerir ajuste de posición."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-027"
+    datos_suelo:
+      fertilidad_µs_cm: 216
+      humedad_%: 78
+      ph: 7.5
+      temperatura_°C: 22.5
+    datos_entorno:
+      luz_lux: 1290
+      humedad_ambiental_%: 57
+    observaciones: "Parámetros balanceados, aunque luz baja. Puede requerir control de exposición."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-028"
+    datos_suelo:
+      fertilidad_µs_cm: 160
+      humedad_%: 78
+      ph: 7.5
+      temperatura_°C: 22.5
+    datos_entorno:
+      luz_lux: 1274
+      humedad_ambiental_%: 57
+    observaciones: "Condiciones equilibradas. Luz baja, pero demás parámetros dentro del rango ideal."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-029"
+    datos_suelo:
+      fertilidad_µs_cm: 98
+      humedad_%: 67
+      ph: 7.5
+      temperatura_°C: 22.5
+    datos_entorno:
+      luz_lux: 1409
+      humedad_ambiental_%: 56
+    observaciones: "Fertilidad baja y luz limitada. Humedad en el límite inferior del rango óptimo."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-030"
+    datos_suelo:
+      fertilidad_µs_cm: 304
+      humedad_%: 87
+      ph: 7.5
+      temperatura_°C: 22.5
+    datos_entorno:
+      luz_lux: 1474
+      humedad_ambiental_%: 54
+    observaciones: "Muy buena fertilidad y humedad. Luz algo limitada, pero parámetros estables en general."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-031"
+    datos_suelo:
+      fertilidad_µs_cm: 83
+      humedad_%: 66
+      ph: 7.5
+      temperatura_°C: 22.2
+    datos_entorno:
+      luz_lux: 1464
+      humedad_ambiental_%: 53
+    observaciones: "Fertilidad baja y humedad algo justa. Luz adecuada. Puede requerir refuerzo nutricional."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-032"
+    datos_suelo:
+      fertilidad_µs_cm: 90
+      humedad_%: 73
+      ph: 7.5
+      temperatura_°C: 22.2
+    datos_entorno:
+      luz_lux: 4300
+      humedad_ambiental_%: 52
+    observaciones: "Fertilidad baja, luz adecuada, humedad ambiente algo baja. Atención al desarrollo radicular."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-033"
+    datos_suelo:
+      fertilidad_µs_cm: 174
+      humedad_%: 70
+      ph: 7.5
+      temperatura_°C: 22.2
+    datos_entorno:
+      luz_lux: 1880
+      humedad_ambiental_%: 51
+    observaciones: "Condiciones aceptables. Luz baja y humedad ambiental en el límite. Fertilidad media."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-034"
+    datos_suelo:
+      fertilidad_µs_cm: 203
+      humedad_%: 65
+      ph: 7.5
+      temperatura_°C: 22.2
+    datos_entorno:
+      luz_lux: 1080
+      humedad_ambiental_%: 50
+    observaciones: "Humedad justa y luz escasa. Fertilidad aceptable. Requiere vigilancia en próximos días."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-035"
+    datos_suelo:
+      fertilidad_µs_cm: 348
+      humedad_%: 88
+      ph: 7.5
+      temperatura_°C: 22.2
+    datos_entorno:
+      luz_lux: 8452
+      humedad_ambiental_%: 51
+    observaciones: "Excelente luz y humedad. Fertilidad alta. Condiciones óptimas para desarrollo floral."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-036"
+    datos_suelo:
+      fertilidad_µs_cm: 211
+      humedad_%: 63
+      ph: 7.5
+      temperatura_°C: 22.2
+    datos_entorno:
+      luz_lux: 3490
+      humedad_ambiental_%: 53
+    observaciones: "Fertilidad adecuada, humedad al límite inferior. Luz algo baja. Requiere seguimiento en próximos días."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-037"
+    datos_suelo:
+      fertilidad_µs_cm: 474
+      humedad_%: 89
+      ph: 7.5
+      temperatura_°C: 22.2
+    datos_entorno:
+      luz_lux: 1387
+      humedad_ambiental_%: 53
+    observaciones: "Buena fertilidad, humedad alta y constante. Luz aún algo débil para estándares ideales."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-038"
+    datos_suelo:
+      fertilidad_µs_cm: 327
+      humedad_%: 99
+      ph: 7.5
+      temperatura_°C: 22.1
+    datos_entorno:
+      luz_lux: 6075
+      humedad_ambiental_%: 54
+    observaciones: "Humedad máxima, luz más estable. Fertilidad alta pero dentro de rango."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-039"
+    datos_suelo:
+      fertilidad_µs_cm: 234
+      humedad_%: 85
+      ph: 7.5
+      temperatura_°C: 22.1
+    datos_entorno:
+      luz_lux: 6725
+      humedad_ambiental_%: 54
+    observaciones: "Parámetros bien balanceados. Fertilidad intermedia, buena iluminación."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01"]
+  - identificacion: "PLT-040"
+    datos_suelo:
+      fertilidad_µs_cm: 44
+      humedad_%: 60
+      ph: 7.5
+      temperatura_°C: 23.1
+    datos_entorno:
+      luz_lux: 1186
+      humedad_ambiental_%: 56
+    observaciones: "Fertilidad crítica. Requiere urgente refuerzo nutricional. Luz baja."
+    estado_planta: "flora"
+    tags: ["bloque-A", "semana-01", "alerta"]
+
+analisis_resumen:
+  id: resumen_cultivo004_semana_01
+  version: "0.1.0"
+  tipo: "analisis_resumen"
+  contexto:
+    cultivo: "004"
+    semana: 01
+    responsable: "Santi"
+    archivo_base: "mediciones_cultivo004_semana_01.yaml"
+    fecha_analisis: "2025-06-17"
+
+  resumen_general:
+    promedio_fertilidad_µs_cm: 229
+    promedio_humedad_%: 77.1
+    promedio_ph: 7.4
+    promedio_temp_°C: 22.2
+    promedio_luz_lux: 6167
+    promedio_humedad_ambiental_%: 56.3
+
+  alertas:
+    luz_muy_baja:
+      descripcion: "Menor a 1500 LUX. Puede afectar fotosíntesis y desarrollo floral."
+      plantas_afectadas: ["PLT-008", "PLT-010", "PLT-016", "PLT-022", "PLT-025", "PLT-026", "PLT-027", "PLT-028", "PLT-029", "PLT-034", "PLT-040"]
+
+    fertilidad_baja:
+      descripcion: "Menor a 120 µs/cm. Riesgo de déficit nutricional."
+      plantas_afectadas: ["PLT-001", "PLT-003", "PLT-005", "PLT-012", "PLT-013", "PLT-016", "PLT-017", "PLT-021", "PLT-029", "PLT-031", "PLT-032", "PLT-040"]
+
+    humedad_excesiva:
+      descripcion: "Mayor al 90%. Riesgo de hongos o compactación del sustrato."
+      plantas_afectadas: ["PLT-004", "PLT-006", "PLT-008", "PLT-009", "PLT-024", "PLT-037", "PLT-038"]
+
+    humedad_ambiente_baja:
+      descripcion: "Menor al 54%. Puede ralentizar desarrollo en flora."
+      plantas_afectadas: ["PLT-030", "PLT-031", "PLT-032", "PLT-033", "PLT-034", "PLT-035"]
+
+  conclusiones:
+    - El cultivo presenta buena estabilidad térmica y de pH.
+    - Hay un grupo crítico de plantas con luz muy baja, probablemente por ubicación en sombra.
+    - Se identificaron al menos 12 plantas con fertilidad baja que requieren refuerzo nutricional.
+    - Existen zonas con humedad excesiva que deben ser atendidas por drenaje o manejo de riego.
+    - Se recomienda intervención localizada en nutrición, luz y riego según alertas.
+
+  recomendaciones:
+    - Poda o reubicación de plantas con luz < 1500 LUX.
+    - Monitorear humedad del sustrato por 3 días consecutivos.
+    - Aplicar fertilización de impacto en plantas con fertilidad < 120 µS/cm.
+    - Etiquetar con cinta o QR las plantas críticas para seguimiento semanal.
+
+  tags: ["resumen", "alerta_luz", "fertilidad_baja", "humedad_alta", "semana-01", "cultivo004"]

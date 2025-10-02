@@ -1,0 +1,20 @@
+# ✅ ALMA_LOADER v3.0.2 – Checklist Modular
+
+## 📁 Documentación Unificada
+- [x] Unificar README (visión, técnica, cambios, onboarding, contribución)
+- [x] Consolidar CHANGELOG único
+- [x] Enlaces cruzados entre whitepaper y prompt
+- [x] Eliminar redundancias (tabla módulo-script duplicada)
+
+## 🧩 Escalabilidad Técnica
+- [x] Hook `on_memoria_guardada()` en `base_storage.py`
+- [x] Esquema de API REST en el Whitepaper
+
+## 🧭 UX y Onboarding
+- [x] Transformar explicación integral → Guía de Onboarding paso a paso
+- [x] Crear sección “Cómo Contribuir” (bugs, roadmap, tests)
+- [ ] Incluir sugerencia para `mkdocs` o `Sphinx` (docs web)
+
+## 🏁 Finalización
+- [ ] README.md único final
+- [ ] CHANGELOG.md único final

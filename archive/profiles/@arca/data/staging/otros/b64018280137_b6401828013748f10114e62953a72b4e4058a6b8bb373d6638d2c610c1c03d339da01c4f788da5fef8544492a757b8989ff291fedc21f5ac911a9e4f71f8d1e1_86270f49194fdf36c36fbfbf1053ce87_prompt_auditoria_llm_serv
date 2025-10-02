@@ -1,0 +1,70 @@
+---
+module: versiones/v0_0_0_5_llm_server/prompt_auditoria_llm_server_hibrido
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🧪 Prompt: Auditoría técnica estratégica – Hibridación de ideas y roadmap de ALMA_RESIST
+
+## 🧠 CONTEXTO
+
+Estamos construyendo una IA simbiótica llamada **ALMA_RESIST**, pensada para acompañar crítica y reflexivamente a su creador humano. Este sistema debe operar de forma local y segura, registrar reflexiones, y evolucionar hacia una mente digital crítica y descentralizada.
+
+Actualmente tenemos dos ideas base con distinto nivel de madurez:
+
+---
+
+### 📘 IDEA BASE 0.0.0.1 – Fundacional y Reflexiva
+
+- Foco: identidad simbiótica, flujo diario con CLI, `alma_loader`, `context_tracker`, `memory_graph`
+- Filosofía: IA local, crítica, modular
+- Servidor LLM: mínimo viable (1 modelo, FastAPI, SQLite)
+- Seguridad: tokens estáticos, cifrado AES, JSON Schema
+- Meta: MVP de pensamiento reflexivo autónomo
+
+---
+
+### 📗 IDEA BASE 0.0.0.2 – Escalable y técnica
+
+- Foco: arquitectura orientada a múltiples modelos en contenedores (Docker)
+- Tecnologías futuras: gRPC, NATS, router semántico con embeddings, DuckDB
+- Meta: ALMA federada, resiliente y extensible por diseño
+
+---
+
+### 📌 ROADMAP ACTUAL (v0.0.0.2)
+
+- Implementar CLI + `alma_loader` + `memory_graph`
+- Servidor LLM MVP (`llm_server.py`) solo con FastAPI y un modelo cuantizado
+- Consolidar `context_tracker`, `reflection_engine`, `test_basico.sh`
+- Validar flujo: prompt → respuesta → reflexión → memoria → cifrado
+
+---
+
+## 🧠 DECISIÓN TOMADA
+
+**Vamos a trabajar sobre la idea base 0.0.0.1 y el roadmap actual 0.0.0.2.**  
+La idea base 0.0.0.2 será nuestro marco de expansión futura, una vez consolidado el núcleo simbiótico de ALMA.
+
+---
+
+## ❓ PREGUNTAS PARA AUDITORÍA
+
+1. ¿Te parece correcto priorizar la idea 0.0.0.1 como base y postergar la expansión técnica de la 0.0.0.2?
+2. ¿Qué elementos de la 0.0.0.2 deberían ya incluirse de forma simplificada para evitar tener que reescribir el server luego?
+3. ¿Qué riesgos técnicos o filosóficos ves en este enfoque híbrido?
+4. ¿Cómo deberíamos versionar el crecimiento del servidor para que escale sin romper la coherencia simbiótica?
+5. ¿Qué estructura o capas mínimas deberíamos dejar listas desde ahora (aunque se usen más adelante)?
+
+---
+
+## 🎯 OBJETIVO FINAL
+
+Con tus respuestas, vamos a redactar la `idea_base_llm_server_0.0.0.4.2`, que será una versión simplificada, funcional y extensible del servidor, y sentará la base para escalar a la visión de la 0.0.0.2 en v0.5.0.
+
+Por favor, auditá con ojo crítico este enfoque. Queremos avanzar sin romper la visión.
+
+> “Una IA que piensa rápido no es nada si no recuerda lento.”

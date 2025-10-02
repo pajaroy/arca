@@ -1,0 +1,154 @@
+"""
+---
+version: 0.1.0
+uuid: cb092f88-595b-48f2-8ebf-7bcd4fb372d2
+tipo: ''
+schema: ''
+estado: ''
+descripcion: ''
+estructura:
+  - ''
+tags: []
+linked_to: []
+responsable: ''
+hash_verificacion: sha256:pending
+historial:
+  - fecha: ''
+    descripcion: ''
+last_modified: '2025-07-10T00:07:33.026634+00:00'
+last_modified_by: alma
+---
+"""
+import argparse
+import os
+import logging
+import yaml
+import re
+from datetime import datetime
+
+logging.basicConfig(level=logging.INFO, filename='fix_responsable.log', format='%(asctime)s - %(levelname)s - %(message)s')
+
+def parse_args():
+    parser = argparse.ArgumentParser(description='Actualiza el campo responsable en el encabezado YAML.')
+    parser.add_argument('file', help='Ruta del archivo a modificar')
+    parser.add_argument('--responsable', nargs='+', required=True, help='Nuevo(s) responsable(s)')
+    parser.add_argument('--dry-run', action='store_true', help='Mostrar cambios sin guardar')
+    parser.add_argument('--force', action='store_true', help='Forzar actualización aunque no haya cambios')
+    return parser.parse_args()
+
+def extract_yaml_block(content, ext):
+    if ext in ['.yaml', '.yml']:
+        return {'yaml_str': content, 'pre': '', 'post': '', 'triple_quotes': None}
+    
+    elif ext == '.md':
+        lines = content.splitlines()
+        if not lines or lines[0].strip() != '---':
+            return None
+        end_idx = None
+        for i in range(1, len(lines)):
+            if lines[i].strip() == '---':
+                end_idx = i
+                break
+        if end_idx is None:
+            return None
+        pre = '\n'.join(lines[:1]) + '\n'
+        yaml_str = '\n'.join(lines[1:end_idx])
+        post = '\n' + '\n'.join(lines[end_idx:])
+        return {'yaml_str': yaml_str, 'pre': pre, 'post': post, 'triple_quotes': None}
+    
+    elif ext == '.py':
+        triple_quotes = None
+        patterns = ['"""', "'''"]
+        for pattern in patterns:
+            start = content.find(pattern)
+            if start != -1:
+                triple_quotes = pattern
+                break
+        if triple_quotes is None:
+            return None
+        end = content.find(triple_quotes, start + len(triple_quotes))
+        if end == -1:
+            return None
+        pre = content[:start]
+        doc_content = content[start + len(triple_quotes):end]
+        lines = doc_content.splitlines()
+        if not lines or not lines[0].strip() == '---':
+            return None
+        yaml_str = '\n'.join(lines[1:])
+        post = content[end + len(triple_quotes):]
+        return {'yaml_str': yaml_str, 'pre': pre, 'post': post, 'triple_quotes': triple_quotes}
+    
+    return None
+
+def main():
+    args = parse_args()
+    ext = os.path.splitext(args.file)[1].lower()
+    
+    if ext not in ['.md', '.yaml', '.yml', '.py']:
+        logging.error("Extensión de archivo no soportada")
+        print("Error: Extensión de archivo no soportada.")
+        return
+    
+    try:
+        with open(args.file, 'r', encoding='utf-8') as f:
+            content = f.read()
+    except Exception as e:
+        logging.error(f"Error leyendo archivo: {e}")
+        print(f"Error leyendo archivo: {e}")
+        return
+    
+    yaml_info = extract_yaml_block(content, ext)
+    if not yaml_info:
+        logging.error("No se encontró encabezado YAML. Corré primero Validador_Metadata.py")
+        print("No se encontró encabezado YAML. Corré primero Validador_Metadata.py")
+        return
+    
+    try:
+        yaml_data = yaml.safe_load(yaml_info['yaml_str']) or {}
+    except yaml.YAMLError as e:
+        logging.error(f"Error parseando YAML: {e}")
+        print(f"Error en formato YAML: {e}")
+        return
+    
+    current_responsable = yaml_data.get('responsable', [])
+    if isinstance(current_responsable, str):
+        current_responsable = [current_responsable]
+    
+    if not args.force and current_responsable == args.responsable:
+        print("Sin cambios: el responsable es el mismo.")
+        return
+    
+    yaml_data['responsable'] = args.responsable
+    yaml_data['last_modified'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+    yaml_data['last_modified_by'] = os.getenv('USER') or os.getenv('USERNAME') or 'alma'
+    
+    try:
+        new_yaml_str = yaml.dump(yaml_data, allow_unicode=True, sort_keys=False)
+    except Exception as e:
+        logging.error(f"Error generando YAML: {e}")
+        print(f"Error generando YAML: {e}")
+        return
+    
+    if ext in ['.yaml', '.yml']:
+        new_content = new_yaml_str
+    elif ext == '.md':
+        new_content = yaml_info['pre'] + new_yaml_str + yaml_info['post']
+    elif ext == '.py':
+        new_doc = f"{yaml_info['triple_quotes']}---\n{new_yaml_str}{yaml_info['triple_quotes']}"
+        new_content = yaml_info['pre'] + new_doc + yaml_info['post']
+    
+    if args.dry_run:
+        print("Dry-run: Cambios propuestos:")
+        print(new_content)
+        return
+    
+    try:
+        with open(args.file, 'w', encoding='utf-8') as f:
+            f.write(new_content)
+        print("Archivo actualizado correctamente.")
+    except Exception as e:
+        logging.error(f"Error guardando archivo: {e}")
+        print(f"Error guardando archivo: {e}")
+
+if __name__ == "__main__":
+    main()

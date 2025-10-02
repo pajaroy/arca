@@ -1,0 +1,35 @@
+### 🧩 OPCIÓN 1 – **Enfoque Técnico–Operativo (RBAC clásico + ejecución por terminal)**
+
+Ideal si querés dejar todo listo para que **cualquier IA o humano con permisos definidos pueda operar el sistema**.
+
+🔧 Contenido Clave:
+
+- Tabla de roles y permisos (admin, editor, lector, IA crítica, IA emocional)
+    
+- Ejemplos de ejecución con permisos desde terminal (`alma read`, `alma edit`)
+    
+- Validación de acceso antes de ejecutar scripts
+    
+- Scripts como `alma_access_check.py`
+    
+
+📦 Ventaja: se implementa rápido, útil para testeo de flujos multiusuario.
+
+
+### 🔐 OPCIÓN 3 – **Enfoque de Seguridad y Auditoría (Control total sobre acceso)**
+
+Ideal si querés prepararte para una versión colaborativa del sistema o para compartirlo con terceros (ej: comunidad o testers).
+
+🛡️ Contenido Clave:
+
+- RBAC con verificación por `usuarios.db` o `config_roles.yaml`
+    
+- Bitácora de accesos, edición y cambios por usuario o IA
+    
+- Comandos protegidos y autenticación mínima (ej: clave de sesión)
+    
+- Logs de intentos fallidos o acciones no permitidas
+    
+
+🔍 Ventaja: te prepara para abrir el sistema sin perder control.
+

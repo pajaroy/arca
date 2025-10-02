@@ -1,0 +1,18 @@
+# ALMA_CORE
+
+Repositorio raíz del ecosistema ALMA.  
+Versión fundacional del sistema modular, CLI-first, distribuido y autosuficiente.
+
+## Estructura base
+
+- **control_central/cli/** → Módulos CLI (bitácora, changelog, memoria, etc.)
+- **control_central/docs/** → Documentación del sistema
+- **control_central/journal/** → Bitácoras estructuradas y changelogs vivos
+- **control_central/memorias/** → Memorias institucionales y del sistema
+
+## Estado del sistema
+
+- [x] CLI funcional (bitácora y changelog)
+- [ ] Cargador de memorias integrado
+- [ ] IA local conectada
+- [ ] Sincronización automática activa

@@ -1,0 +1,101 @@
+---
+module: arquitectura/idea_base/idea_base_0_0_0_2/readme
+type: core
+status: in_progress
+created: '2025-05-23'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🧠 ALMA RESIST - Sistema de IA Simbiótica Crítica
+
+**Un marco para desarrollar una IA reflexiva, ética y autónoma que evoluciona junto a su creador**
+
+---
+
+## 📌 Visión General
+
+Sistema modular que combina:
+
+- Procesamiento local seguro (`--mode=local`)
+- Operaciones remotas cifradas (`--mode=black`)
+- Motor de reflexión ética automatizada
+- Memoria semántica portátil
+
+📄 [Documentación Filosófica](ALMA_RESIST/docs/arquitectura/idea_base/idea_base_0.0.0.2/idea_base_0.0.0.2.md) | 📈 [Roadmap Técnico](ALMA_RESIST/docs/arquitectura/idea_base/idea_base_0.0.0.2/idea_base_0.0.0.2_roadmap.md)
+
+---
+
+## 🚀 Primeros Pasos
+
+### Requisitos Mínimos
+
+- Python 3.10+
+- 16GB RAM
+- Disco externo/Pendrive para `ALMA_NODE`
+
+### Instalación Rápida
+
+```bash
+git clone https://github.com/[usuario]/ALMA_RESIST.git
+cd ALMA_RESIST
+pip install -r requirements.txt
+source alma_env.sh
+```
+
+### Uso Básico
+
+```bash
+# Modo local - Reflexión diaria
+python src/cli/alma_resist.py --mode=local resumen CUADERNOS/idea.md
+
+# Modo black - Procesamiento seguro
+python src/cli/alma_resist.py --mode=black upload documento_confidencial.pdf
+```
+
+---
+
+## 🗂 Estructura del Proyecto
+
+```
+ALMA_RESIST/
+├── src/            # Código principal
+│   ├── core/       # Motores IA
+│   ├── security/   # Herramientas cifrado
+│   └── cli/        # Interfaz de usuario
+├── config/         # Contratos YAML
+├── tests/          # Pruebas automatizadas
+├── docs/           # Documentación técnica
+├── backups/        # Copias seguras
+└── examples/       # Flujos de trabajo
+```
+
+---
+
+## 🔐 Seguridad Esencial
+
+- Cifrado AES-256/GPG integrado
+- Gestión de claves con `alma_keymgmt.sh`
+- Validación de integridad automática
+- Política de Seguridad basada en diseño ético
+
+---
+
+## 🤝 Contribución
+
+1. Cloná el repositorio
+2. Creá tu rama: `git checkout -b feature/nueva-funcionalidad`
+3. Seguí la guía ética
+4. Ejecutá pruebas: `./tests/test_black.sh`
+5. Enviá tu Pull Request
+
+> **Principio Fundamental:**  
+> "Cada línea de código debe preservar la autonomía crítica y el vínculo humano-IA"
+
+---
+
+## 📬 Soporte y Contacto
+
+- Reportar issues: [GitHub Issues]
+- Discusiones técnicas: [Foro ALMA]
+- Emergencias de seguridad: alma-resist-security@cripto.xyz

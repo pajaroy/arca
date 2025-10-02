@@ -1,0 +1,13 @@
+# 📂 Carpeta de Resúmenes Diarios – ALMA LIBRE
+
+En esta carpeta se almacenarán automáticamente los resúmenes generados por el bot `buffer_bot.py` cada noche a las 23:50, o manualmente mediante el comando `/resumen`.
+
+## Formato de archivo:
+- `YYYY-MM-DD.md` → Ejemplo: `2025-05-14.md`
+
+## Contenido esperado:
+- Ideas clave extraídas
+- Acciones sugeridas
+- Decisiones tomadas
+
+Esta carpeta puede sincronizarse con sistemas como Obsidian, Google Drive o ALMA Indexador para facilitar el seguimiento del proyecto.

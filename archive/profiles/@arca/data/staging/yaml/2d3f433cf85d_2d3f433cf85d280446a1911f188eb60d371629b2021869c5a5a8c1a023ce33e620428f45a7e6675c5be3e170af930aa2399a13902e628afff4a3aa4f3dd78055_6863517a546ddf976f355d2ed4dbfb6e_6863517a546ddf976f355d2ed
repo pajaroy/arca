@@ -1,0 +1,22 @@
+version: "0.1.0"
+tipo: "README"
+schema: "almaresist.readme_v1"
+descripcion: "Zona de entrada para archivos descargados o adjuntados desde fuentes externas. Buffer temporal sin clasificación ni validación."
+estructura:
+  - ".pdf/.docx/.txt/.zip/.rar/.tar.gz: Documentos y comprimidos entrantes."
+  - ".png/.jpg/.mp4: Medios sin procesar."
+  - ".csv/.json: Datos no validados."
+tags:
+  - downloads
+  - buffer
+  - entrada_externa
+  - adjuntos
+linked_to:
+  - ../README.yaml
+  - ../../docs/README.yaml
+responsable: "Santi + ALMA"
+hash_verificacion: "sha256:pending"
+historial:
+  - "2025-06-17: Adaptado a plantilla universal. Clarificado uso como buffer de entrada."
+last_modified: "2025-06-17T04:00:00Z"
+last_modified_by: "bird"

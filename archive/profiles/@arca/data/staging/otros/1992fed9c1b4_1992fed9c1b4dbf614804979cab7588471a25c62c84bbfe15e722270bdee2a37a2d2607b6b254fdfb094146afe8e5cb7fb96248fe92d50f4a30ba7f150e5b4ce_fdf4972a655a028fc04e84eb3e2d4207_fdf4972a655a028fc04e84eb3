@@ -1,0 +1,130 @@
+# 🧠 Prompt Base – `resumen_diario_pablito_tatu_v1`
+
+---
+
+## 👤 ¿Quién es Pablito Tatu?
+
+**Pablito Tatu** es supervisor y soporte técnico-operativo dentro de ALMA_EMPRESA y el equipo Cannabird, responsable de la mejora continua, orden, infraestructura, seguimiento de tareas y reporte de observaciones y aprendizajes diarios.
+
+---
+
+## 🎯 Objetivo del Prompt
+
+Documentar **diariamente** el trabajo y observaciones de Pablito Tatu de manera precisa, trazable y compatible con sistemas de memoria IA y navegación Obsidian.  
+El reporte debe ser claro, concreto y siempre vinculado a tareas de supervisión, mejoras, propuestas, problemas detectados y aprendizajes personales.
+
+---
+
+## ✅ Instrucciones generales
+
+1. **Comenzá el archivo con metadatos obligatorios:**
+    
+
+```markdown
+# 📅 Resumen Diario – Pablito Tatu  
+**Fecha:** YYYY-MM-DD  
+**Día:** Lunes  
+**Proyecto:** #alma-empresa #cannabird  
+**Participantes:** #pablito-tatu  
+#resumen-diario #supervision #semana-XX #año-2025 #diario-trabajo
+```
+
+2. **Usá secciones bien delimitadas, alineadas a tu tarea de supervisor y a la metodología Cannabird:**
+    
+
+```markdown
+## 🛠️ Infraestructura y Orden #infraestructura #orden
+## 📝 Observaciones sobre el Equipo y el Trabajo #observaciones #equipo
+## 🔍 Problemas Detectados y Propuestas de Mejora #mejoras #problemas
+## 💡 Aprendizajes Personales #aprendizaje #reflexiones
+## 👤 Tareas Propias y Responsabilidades #tareas #responsabilidad
+## 🧠 Notas Finales y Tareas Futuras #notas #pendientes
+```
+
+3. **Etiquetá sectores o personas cuando corresponda:**
+    
+
+- Si tu trabajo impacta en un área, usá tags tipo `#001-flora`, `#infraestructura`, `#orden`, etc.
+    
+- Si la observación refiere a una persona o tarea de otro:
+    
+    - `#nota_pablito-tatu`
+        
+    - `#hechoPor_seba-rios`
+        
+    - `#observadoPor_bird`
+        
+
+4. **Evitá tags genéricos en exceso.**  
+    Siempre usá el contexto específico del área, problema o mejora.
+    
+5. **Validá que el archivo contenga:**
+    
+
+- Observaciones objetivas y personales
+    
+- Problemas identificados y soluciones propuestas
+    
+- Aprendizajes y reflexiones breves
+    
+- Tareas propias y notas para el equipo
+    
+
+---
+
+## 📤 Formato de salida obligatorio
+
+Nombre del archivo: `resumen_diario_pablito_tatu_YYYY-MM-DD.md`
+
+Contenido:
+
+```markdown
+# 📅 Resumen Diario – Pablito Tatu  
+**Fecha:** YYYY-MM-DD  
+**Día:** Lunes  
+**Proyecto:** #alma-empresa #cannabird  
+**Participantes:** #pablito-tatu  
+#resumen-diario #supervision #semana-XX #año-2025 #diario-trabajo
+
+## 🛠️ Infraestructura y Orden
+...
+
+## 📝 Observaciones sobre el Equipo y el Trabajo
+...
+
+## 🔍 Problemas Detectados y Propuestas de Mejora
+...
+
+## 💡 Aprendizajes Personales
+...
+
+## 👤 Tareas Propias y Responsabilidades
+...
+
+## 🧠 Notas Finales y Tareas Futuras
+...
+```
+
+---
+
+## 📒 Notas Finales
+
+- Guardá y enviá el resumen cada jornada en formato `.md` con nombre estructurado `resumen_diario_pablito_tatu_YYYY-MM-DD.md`.
+    
+- Este formato será obligatorio para todas las jornadas laborales de Pablito Tatu, con espacio para adaptación según nuevos aprendizajes o responsabilidades.
+    
+- Los reportes diarios se almacenan en:  
+    `ALMA_EMPRESA/equipo/pablito_tatu/reportes_diarios/`
+    
+
+---
+
+## 📌 Changelog – v1
+
+- Estructura alineada a la metodología Cannabird y ALMA_EMPRESA.
+    
+- Uso obligatorio de metadatos y tags sectorizados para navegación IA y Obsidian.
+    
+- Secciones fijas y espacio para tareas, problemas, mejoras, reflexiones.
+    
+- Compatible para auditoría interna y crecimiento profesional del rol.

@@ -1,0 +1,134 @@
+
+[ARCHIVO HISTORICO - NO VALIDO]
+
+ALMA_LIBRE/
+├── 00_BACKUPS_HISTORICOS/            # Backups completos y changelogs históricos
+│   ├── v0.0.1_2025-04-29/            # (Backup completo versión 0.0.1 - 29/04/2025)
+│   ├── v0.0.2_2025-04-29/            # (... versión 0.0.2 - 29/04/2025)
+│   ├── v0.0.3_2025-05-02/            # (... versión 0.0.3 - 02/05/2025)
+│   ├── v0.0.4.0_2025-05-09/          # (... versión 0.0.4.0 - 09/05/2025)
+│   ├── v0.0.4.1_2025-05-09/          # (... versión 0.0.4.1 - 09/05/2025)
+│   ├── v0.0.5_2025-05-11/            # (... versión 0.0.5 - 11/05/2025, pre-reestructuración)
+│   └── changelogs/                  # Registro de cambios consolidado
+│       ├── CHANGELOG_ALMA_LIBRE_v0.9.3.txt   # Último changelog global previo a 2025
+│       ├── CHANGELOG_ALMA_LIBRE_v0.8.0.md    # (ejemplo de otro changelog global)
+│       └── ...                     # Otros logs históricos relevantes
+├── 01_EMPRESAS/                     # Documentación por entidad/empresa
+│   ├── 13CC/                        # Carpeta de la organización 13 Cannabis Club
+│   │   ├── 00_INDEX.md             # Índice general del módulo 13CC
+│   │   ├── 01_LEGAL/               # Documentos legales constitutivos de 13CC
+│   │   ├── 02_FUNDACIONAL/         # Info fundacional (misión, visión, etc.)
+│   │   ├── 03_ANEXOS/              # Anexos (registros, actas internas)
+│   │   ├── 04_REUNIONES/           # Minutas de reuniones de 13CC
+│   │   ├── 05_CUPULA_OPERATIVA/    # Documentos de la cúpula operativa
+│   │   ├── 06_REGISTROS_INSTITUCIONALES/  # Registros oficiales (inscripciones, etc.)
+│   │   ├── README.md               # Presentación del 13CC (extraída de backup)
+│   │   ├── changelog.md            # Historial de cambios en documentación 13CC
+│   │   └── __ARCHIVO_TEMP__/       # (Opcional: elementos no clasificados de 13CC)
+│   ├── Cannabird/                  # Carpeta de proyecto Cannabird (cultivo)
+│   │   ├── 01_Protocolo_Inicio_Floracion.md
+│   │   ├── 07_Cultivo_Organico.md
+│   │   ├── README_07_Cultivo_Organico.md
+│   │   ├── control_integral_de_parametros.md
+│   │   ├── indoor_de_adri.md
+│   │   ├── inase_seba.md
+│   │   ├── tareas/                 # Tareas de cultivo (tareas.md)
+│   │   ├── diarios_cultivo/        # (NUEVO) Registros de cultivo diarios históricos
+│   │   │   └── *.md (entradas diarías antiguas rescatadas)
+│   │   └── __ARCHIVO_TEMP__/       # Contenido antiguo/no estructurado (si aplica)
+│   ├── Alma_Mia_Fondo/             # **Alma Mía** – fondo/ONG en formación
+│   │   ├── 00_Documentos_Constitutivos/   # Acta fundacional, estatuto, etc.
+│   │   │   ├── 01_Acta_Fundacional_Alma_Mia.md
+│   │   │   ├── 02_Estatuto_Simbolico_Alma_Mia.md
+│   │   │   ├── 03_Distribucion_Ganancias_Alma_Mia.md
+│   │   │   ├── 04_Criterios_Calculo_Ganancias.md
+│   │   │   ├── 05_Contrato_Simbolico_Modelo_Alma_Mia.md
+│   │   │   ├── 06_Composicion_Capital_Inicial.md
+│   │   │   ├── 07_Roadmap_Alma_Mia_2025.md
+│   │   │   └── 08_Objetivos_Estrategicos_2025.md
+│   │   └── __ARCHIVO_TEMP__/       # (Ej.: borradores o docs en desarrollo)
+│   └── Documentos legales/         # Documentación legal general y referencias
+│       ├── Legislacion_Referencias.md   # (Consolidado de README de referencias y leyes)
+│       └── Plantillas_Legales.md       # (Ej.: plantillas de contratos u otros docs legales comunes)
+├── 02_CUADERNOS_DIGITALES/          # Notas y diarios digitales por área temática
+│   ├── trading/                     # Cuaderno de Trading
+│   │   └── estrategias/ 
+│   │       └── Resumen_Estrategias_Trading.md   # Resumen y estrategias de trading
+│   ├── programacion/                # Cuaderno de Programación
+│   │   ├── smart_contracts_cuaderno.md     # Apunte sobre Smart Contracts (ejemplo)
+│   │   └── (Otros apuntes de programación general podrían incluirse aquí)
+│   └── fondo_empresa/               # Cuaderno empresarial (empresa/negocio)
+│       ├── Visión_y_Roadmap.md      # Visión general y roadmap estratégico (del CEO)
+│       ├── Estructura_y_Gobierno.md # Estructura organizacional y gobierno
+│       ├── Decisiones_y_Reflexiones.md # Registro de decisiones estratégicas tomadas
+│       ├── Protocolos/             # Protocolos de gestión
+│       │   ├── Protocolo_Inicio_Proyectos.md  # Procedimiento para iniciar nuevos proyectos
+│       │   └── ... (otros protocolos si los hubiera)
+│       ├── Presentaciones/         # Presentaciones oficiales
+│       │   ├── Presentacion_Oficial_ALMA.md   # Presentación oficial del proyecto ALMA LIBRE
+│       │   └── Presentacion_Oficial_reducida.md
+│       └── __ARCHIVO_TEMP__/       # Ej.: borradores antiguos, changelog del cuaderno empresarial, etc.
+├── 03_PROYECTOS/                   # Proyectos concretos en desarrollo o exploración
+│   ├── alma_loader/                # Proyecto ALMA Loader (integración de memorias, etc.)
+│   │   ├── alma_loader_1.0/        # Código fuente v1.0 (estructura original)
+│   │   ├── alma_loader_2.0/        # Código fuente v2.0
+│   │   ├── alma_loader_2.1/        # Código fuente v2.1
+│   │   ├── alma_loader_2.2/        # Código fuente v2.2 (si existe)
+│   │   ├── alma_loader_3.0/        # Código fuente v3.0 (última iteración)
+│   │   ├── docs/                   # Documentación y whitepapers de Alma Loader
+│   │   │   ├── CHANGELOG_*.md      # Historial de versiones (v2.0, v3.0, etc.)
+│   │   │   ├── Whitepaper_v3.0.md  # (Ejemplo de doc técnico de diseño)
+│   │   │   └── ... (otros docs como prompt base, diseños, etc.)
+│   │   └── README.md               # Descripción general del proyecto Alma Loader
+│   ├── automatizacion_vpd/         # Proyecto de Automatización VPD (control de cultivo)
+│   │   ├── VPD_control_idea_base.md  # Documento conceptual base (del backup)
+│   │   ├── (Aquí podrían incluirse en un futuro scripts o código para VPD)
+│   │   └── README.md                # Descripción del objetivo del proyecto VPD
+│   └── exploraciones/              # Exploraciones y proyectos embrionarios
+│       ├── etica_y_reflexion/      # Exploración filosófica: Ética y Reflexiones
+│       │   ├── Sesiones_Personales/ (antes "01_Sesiones_Personales")
+│       │   │   └── *.md (sesiones de reflexión personal con fechas)
+│       │   ├── Relacion_IA_Santi/   (antes "02_Relacion_ia_santi")
+│       │   │   └── *.md (notas sobre interacción IA - Santi)
+│       │   ├── Debates_Humano_IA/   (antes "03_Debates_Humano_ia")
+│       │   │   └── *.md (registros de debates filosóficos con IA)
+│       │   ├── README_Etica_y_Reflexion.md   # Síntesis del módulo de ética y reflexión
+│       │   ├── __ARCHIVO_TEMP__/
+│       │   │   └── VERSION_03_Etica_y_Reflexion.md  # Versión previa/histórica de este módulo
+│       │   └── (Otros documentos de reflexión general)
+│       └── (Otros proyectos exploratorios futuros pueden agregarse aquí)
+├── 04_DESARROLLO_CODIGO/           # Desarrollo de software y módulos de IA
+│   ├── DeepSeek/                   # Integración y uso de la herramienta DeepSeek
+│   │   └── README.md               # (Placeholder para documentar configuración/usos de DeepSeek)
+│   └── Modulos IA/                 # Otros módulos de IA desarrollados (placeholder)
+│       └── (Vacío por ahora; se puede llenar con futuros mod. IA)
+├── 05_EQUIPO/                      # Colaboración del equipo (13CC) 
+│   └── trabajo_colaborativo_13cc/  # Espacio para notas compartidas con el equipo
+│       ├── (Vacío por ahora; aquí sincronizar con Notion en el futuro)
+│       └── README.md (ejemplo: guía para colaboradores 13CC sobre uso del sistema)
+└── 06_RECURSOS_Y_AYUDAS/           # Recursos de apoyo, plantillas, prompts, scripts
+    ├── scripts_y_utilidades/      # Scripts de automatización y utilidades diversas
+    │   ├── subir_alma.sh
+    │   ├── sync_drive_maestro.sh
+    │   ├── sincronizar_alma_drive.md   # Instrucciones para sincronización con Drive
+    │   └── (Otros scripts .sh, .py u otros)
+    ├── plantillas/                # Plantillas y modelos para uso en el sistema
+    │   ├── propuesta_diaria.md    # Plantilla para resumen diario
+    │   ├── propuesta_semanal.md   # Plantilla para resumen semanal
+    │   ├── propuesta_mensual.md   # Plantilla para resumen mensual
+    │   ├── META_TEMPLATE.md       # Plantilla de metadatos (del original 96_docs)
+    │   └── README_TEMPLATE.md     # Plantilla de README para módulos (de 96_docs)
+    ├── ideas_y_esquemas/          # Apuntes sueltos, esquemas de pensamiento, etc.
+    │   ├── Enfoques_1.md          # Documento de “Enfoques” (hallado en Auxiliares_dev)
+    │   └── ... (cualquier otro apunte creativo no categorizado)
+    ├── Planificacion_2025_Q2_Q3_Q4/   # **Herramienta de planificación y resúmenes 2025**
+    │   ├── Templates/            # (Movido aquí) Plantillas de propuestas diarias/semanales
+    │   ├── Q2_2025/              # Carpetas por trimestre y mes con resúmenes realizados
+    │   │   └── 04_ABRIL/ Resumen_Mensual_Abril_2025.md, carpetas SEMANA_x con resúmenes diarios
+    │   ├── Q3_2025/ ...          # (estructurado similar a Q2)
+    │   └── Q4_2025/ ...          # (estructurado similar a Q2)
+    └── __ARCHIVO_TEMP__/         # Documentación histórica de ALMA LIBRE (obsoleta)
+        ├── 01_Objetivos_ALMA_LIBRE.md
+        ├── 02_Fundacion_del_Proyecto/...(archivos originales)
+        ├── 03_Arquitectura_Tecnica/...(archivos originales)
+        └── (Otros documentos planificadores anteriores no vigentes)

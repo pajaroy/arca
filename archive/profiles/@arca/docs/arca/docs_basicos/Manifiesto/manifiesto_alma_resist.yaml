@@ -1,0 +1,41 @@
+---
+uuid: "GENERAR-UUID-AQUI"
+tipo: manifiesto
+formato: yaml
+nombre: manifiesto_alma_resist
+version: 0.1.0
+estado: activo
+fecha_creacion: "2025-07-16T20:45:00"
+fecha_modificacion: "2025-07-16T20:45:00"
+autor: Bird
+descripcion: |
+  Manifiesto del sistema ALMA_RESIST, definiendo su visión, principios y objetivos técnicos.
+hash_integridad: "CALCULAR-HASH-AQUI"
+
+manifiesto:
+  vision: >
+    ALMA_RESIST es un sistema modular y autónomo diseñado para ser un entorno de trabajo
+    digital resiliente, portátil y energéticamente eficiente. Su propósito es empoderar
+    al usuario a tener control absoluto sobre sus datos, asegurando independencia tecnológica
+    y capacidades avanzadas de inteligencia artificial local.
+
+  principios:
+    - Modularidad estricta para permitir evolución y mantenimiento independiente de cada componente.
+    - Operación offline para máxima independencia.
+    - Transparencia y trazabilidad en todas las acciones y procesos.
+    - Eficiencia energética y bajo consumo de recursos.
+    - Portabilidad entre distintas plataformas y hardware.
+    - Auditable y versionado en cada módulo y operación.
+    - Preparado para integrar tecnologías de IA, RAG y LLM locales o remotos.
+
+  compromisos_tecnicos:
+    - Garantizar la integridad y la trazabilidad de los datos en cada acción.
+    - Diseñar una arquitectura flexible, adaptable a cambios tecnológicos futuros.
+    - Mantener la compatibilidad con modelos de Machine Learning locales.
+    - Crear infraestructura preparada para integración con servidores LLM.
+    - Documentar cada módulo y mantener manifiestos específicos por componente.
+
+  objetivos_futuros:
+    - Implementar RAG (Retrieval-Augmented Generation) para búsquedas contextuales avanzadas.
+    - Integrar servidores LLM para interacciones conversacionales profundas.
+    - Evolucionar hacia un entorno completamente autónomo, con capacidades de autoaprendizaje.

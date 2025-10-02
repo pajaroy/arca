@@ -1,0 +1,39 @@
+{ config, pkgs, ... }:
+
+{
+  imports =
+    [ ./hardware-configuration20250627_0139.nix ];
+
+  # Bootloader EFI
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # Habilitar desbloqueo de LUKS en /dev/sda3
+  boot.initrd.luks.devices."alma_crypt".device = "/dev/sda3";
+
+  networking.hostName = "alma-resist";
+  networking.networkmanager.enable = true;
+
+  i18n.defaultLocale = "en_US.UTF-8";
+  console.keyMap = "la-latin1";
+
+  time.timeZone = "America/Argentina/Buenos_Aires";
+
+  users.users.alma = {
+    isNormalUser = true;
+    home = "/alma";
+    extraGroups = [ "wheel" "networkmanager" ];
+    initialPassword = "umamia";
+  };
+
+  services.openssh.enable = false; # por ahora off
+
+  environment.systemPackages = with pkgs; [
+    vim
+    wget
+    git
+  ];
+
+  system.stateVersion = "23.11";
+}
+

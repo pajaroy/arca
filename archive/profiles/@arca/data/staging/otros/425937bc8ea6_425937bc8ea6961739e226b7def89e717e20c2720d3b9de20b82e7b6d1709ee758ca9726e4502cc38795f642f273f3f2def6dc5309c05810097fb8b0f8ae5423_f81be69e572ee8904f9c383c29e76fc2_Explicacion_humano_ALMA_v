@@ -1,0 +1,42 @@
+# 🧠 ALMA_LOADER v3.0.1 – Explicación de Cambios por Sección
+
+Este documento explica, en lenguaje humano, **qué se modificó**, **por qué** se hizo y **para qué sirve** cada cambio introducido en la versión 3.0.1 del sistema ALMA_LOADER, tanto en el whitepaper como en el prompt técnico.
+
+
+## 🧠 Prompt Técnico
+
+### 1. Tabla de Tecnologías Clave
+**Qué:** Se listaron las librerías y herramientas usadas por cada módulo.  
+**Por qué:** Para dejar claro qué stack usa ALMA.  
+**Para qué:** Permite replicar, mejorar o depurar más fácilmente.
+
+### 2. Reglas Dinámicas (`reglas_dinamicas.json`)
+**Qué:** Se dio un ejemplo concreto de cómo se activa una sugerencia automática.  
+**Por qué:** Para ilustrar la lógica reactiva del sistema.  
+**Para qué:** Hace comprensible el motor de decisiones inteligentes.
+
+### 3. Coexistencia SQLite–FAISS
+**Qué:** Se explicó cómo una memoria se guarda en SQLite y FAISS al mismo tiempo.  
+**Por qué:** Porque permite búsquedas por significado y estructura sin perder sincronía.  
+**Para qué:** Permite escalar a análisis semánticos y dashboards complejos.
+
+### 4. Test Unitario: Validación de Memoria
+**Qué:** Se agregó un test que verifica si una memoria cumple el `schema_base.json`.  
+**Por qué:** Para evitar que entren datos rotos o mal formateados.  
+**Para qué:** Asegura estabilidad y robustez del sistema.
+
+### 5. Test Unitario: Vectorización
+**Qué:** Se agregó un test que verifica que el vector generado sea válido.  
+**Por qué:** Para confirmar que embeddings y FAISS funcionen correctamente.  
+**Para qué:** Detecta errores en el motor semántico antes de producción.
+
+### 6. Relaciones como Grafo
+**Qué:** Se documentó cómo el campo `relaciones` genera un grafo de memorias.  
+**Por qué:** Para visualizar conocimiento y patrones en red.  
+**Para qué:** Permite futuras integraciones con `networkx` o `Neo4j`.
+
+### 7. Convención de IDs
+**Qué:** Se propuso una estructura para los IDs de memorias: `MEM-TRD-2025-05-06-001`.  
+**Por qué:** Para evitar colisiones, mantener orden y facilitar trazabilidad.  
+**Para qué:** Hace que el sistema sea limpio, auditable y expandible.
+

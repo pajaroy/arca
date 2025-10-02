@@ -1,0 +1,17 @@
+## 1. Crear el punto de montaje
+
+```bash
+mkdir -p /mnt/"nombre del directorio"
+```
+
+## 2. Montar el pendrive
+
+```bash
+mount /dev/sdxx /mnt/"nombre del directorio"
+```
+
+## 3. Acceder a su contenido
+
+```bash
+ls /mnt/pendrive
+```

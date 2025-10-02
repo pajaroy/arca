@@ -1,0 +1,70 @@
+# 🧱 Decisiones Arquitectónicas – ALMA RESIST
+
+📝 Versión inicial  
+📅 Creado: 2025-05-20  
+👤 Responsable: Usuario + IA
+
+
+## 📁 Estructura de cada decisión
+
+```markdown
+### 🧩 Decisión: [Título breve]
+
+📅 Fecha: [dd/mm/aaaa]  
+🔍 Contexto:
+[Qué problema o necesidad motivó esta decisión]
+
+🧠 Alternativas consideradas:
+[Qué otras opciones se evaluaron y por qué fueron descartadas]
+
+✅ Decisión final:
+[Qué se eligió, por qué y cómo se implementa]
+
+📂 Impacto estructural:
+[A qué módulos afecta, qué dependencias crea o reduce]
+
+🔗 Relacionado:
+- [hitos.md]
+- [post_mortem_tecnico.md]
+- [idea_base.md]
+```
+
+
+### 🧩 Motor IA desacoplado del frontend
+
+📅 Fecha: 2025-05-20  
+🔍 Contexto: Se requería escalabilidad y posibilidad de múltiples clientes IA.  
+🧠 Alternativas: GUI acoplada como Oobabooga, cliente-único por script.  
+✅ Decisión final: usar servidor tipo llama.cpp, FastAPI o similar con cliente CLI independiente.  
+📂 Impacto estructural: Permite múltiples entradas (iPhone, SSH, PC), modularidad total.
+
+
+## 📎 Historial
+
+- 📅 2025-05-20: Documento creado. Dos decisiones fundacionales registradas.
+
+
+### 🧩 Implementación de validadores automáticos en pipeline
+
+- 📅 **Fecha**: 2025-05-23  
+- 🔍 **Contexto**: Necesidad de garantizar consistencia estructural y semántica en todos los documentos del sistema.  
+- 🧠 **Alternativas consideradas**: Validación manual, linters YAML generales, scripts sueltos.  
+- ✅ **Decisión final**: Implementar `validate_docs.py`, `fix_metadata.py` y `force_snake_case_modules.py` como herramientas internas versionadas y con control de backups.  
+- 📂 **Impacto estructural**: Valida todos los `.md` de `docs/`, normaliza nombres y asegura metadatos consistentes. Base para automatización CI futura.  
+- 🔗 **Relacionado**:
+  - `mapeo_sprint_archivos.md`
+  - `log_integracion.md`
+  - `hitos.md`
+
+
+### 🧩 Validación tolerante a prefijos `_` en módulos
+
+- 📅 **Fecha**: 2025-05-23  
+- 🔍 **Contexto**: La validación estricta impedía registrar convenciones comunes como carpetas `_archivadas` o `_legacy`.  
+- 🧠 **Alternativas**: Reescribir todo el archivo para evitar `_`, eliminar validación estricta.  
+- ✅ **Decisión final**: Se integró una función de comparación tolerante (`normalize_path_for_comparison`) en `validate_docs.py`.  
+- 📂 **Impacto estructural**: Permite carpetas prefijadas sin romper la estructura ni la trazabilidad de módulos.  
+- 🔗 **Relacionado**:
+  - `validate_docs.py`
+  - `changelog.md`
+

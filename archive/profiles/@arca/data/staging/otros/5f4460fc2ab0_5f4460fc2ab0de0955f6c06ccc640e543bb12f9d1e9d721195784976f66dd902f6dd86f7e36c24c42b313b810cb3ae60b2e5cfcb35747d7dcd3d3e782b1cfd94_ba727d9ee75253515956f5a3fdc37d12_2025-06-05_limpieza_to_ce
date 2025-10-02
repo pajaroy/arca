@@ -1,0 +1,40 @@
+## 2025-06-05 – Archivo de contexto históricos centralesis
+
+Se archivó el contexto completo de centralesis (respaldos y configuración) moviéndolo a:
+`/control_central/asesor-ia/archivo/downloads/historico/`  
+Archivos movidos y renombrados:
+
+- 2025-06-05_centralisis_backup_1.yaml
+- 2025-06-05_centralisis.yaml
+- 2025-06-05_centralisis_backup.yaml
+- 2025-06-05_centralisis.yaml.zip
+
+Motivo: consolidar contexto histórico para asegurar trazabilidad, limpieza y facilitar futuras auditorías.  
+Queda solo el README.md como referencia de carpeta.
+
+## 2025-06-05 – Renombrado de carpeta centralisis a centralesis
+
+Se realizó el renombrado formal de la carpeta `centralisis` a `centralesis` dentro del módulo asesor-ia, para:
+- Corregir el naming a la forma validada en todo el sistema (evitando errores de indexado y referencias cruzadas).
+- Consolidar el criterio de nomenclatura única y auditable.
+- Garantizar compatibilidad futura con scripts y enlaces Obsidian.
+
+El cambio fue ejecutado usando `git mv` para mantener la trazabilidad y el historial de versiones.
+
+# 2025-06-06_bitacora_migracion_estructura_base.md
+
+## Acción:
+Replicación de la estructura raíz estándar en Centralesis.
+Carpetas y archivos añadidos: archivo/, config/, control/, core/, docs/history/, docs/journal/, docs/changelog.md, meta/module.yaml
+
+## Motivo:
+Normalización y alineación con el estándar ALMA_RESIST para facilitar modularidad, scripting automático y compatibilidad IA.
+
+## Criterios:
+- No se borra ni sobrescribe ningún archivo existente.
+- Cada carpeta nueva incluye README.md explicativo.
+- Todo movimiento/fusión futura quedará registrada en nuevas bitácoras.
+
+## Estado:
+Estructura actualizada. Listo para validación y uso como entorno modelo.
+

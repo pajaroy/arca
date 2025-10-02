@@ -1,0 +1,14 @@
+{
+  "id": "legacy_prompts_yaml2all",
+  "version": "0.1.0",
+  "tipo": "readme",
+  "descripcion": "Prompts y documentación de versiones anteriores de yaml2all.\nSe mantiene solo para trazabilidad. Usar siempre la versión más reciente.\n",
+  "linked_to": [],
+  "legacy_content": [
+    {
+      "prompt_yaml2all": "Prompt de la versión inicial, ahora reemplazada por prompt_yaml2all_v0.1.1"
+    }
+  ],
+  "last_modified": "2025-06-17T04:00:00Z",
+  "last_modified_by": "bird"
+}

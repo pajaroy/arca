@@ -1,0 +1,26 @@
+version: 0.1.1
+id: changelog_cargar_memorias_v0.1.1
+fecha: 2025-06-08
+autor: Kael & DeepSeek
+tipo: changelog_script
+origen: refactor_v0.1.0
+modulo: control_central/cli/memorias
+archivo_afectado: cargar_memorias_v0.1.1.py
+prompt_asociado: prompt_cargar_memorias_v0.1.1.yaml
+resumen: >
+  Refactor completo del script de carga de memorias institucionales. 
+  Se corrigieron errores de serialización, se agregó validación de fechas 
+  y se mejoró la trazabilidad por terminal. Mantiene compatibilidad con v0.1.0.
+mejoras:
+  - Soporte de fechas en formato `date` mediante `default=str` en JSON.
+  - Validación de campo `fecha` en formato ISO (`YYYY-MM-DD`).
+  - Inclusión de logs detallados, emojis y reportes visuales CLI.
+  - Manejo de dry-run con salida legible y resumen completo.
+  - Reporte de entradas inválidas con IDs afectados.
+  - Soporte de Markdown con frontmatter como entrada alternativa.
+  - Creación automática de archivos si no existen.
+  - Compatibilidad completa con argumentos previos (`--modo`, `--dry-run`, etc.).
+estado: publicado
+ruta: /home/bird/alma_core/control_central/cli/memorias/v0.1.1/
+hash_integridad: pendiente
+tags: [changelog, cli, sincronización, validación, auditoría]

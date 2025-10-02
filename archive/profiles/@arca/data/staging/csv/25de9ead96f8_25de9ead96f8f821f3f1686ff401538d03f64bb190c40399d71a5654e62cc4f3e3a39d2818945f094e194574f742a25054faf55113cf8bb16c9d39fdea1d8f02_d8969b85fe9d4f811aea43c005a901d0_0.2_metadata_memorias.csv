@@ -1,0 +1,7 @@
+Nombre_memoria,Tipo,Nivel,Conectada_a,Ubicacion_carpeta,Prioridad_lectura,Versión,Última_actualización
+Memoria General,General,Madre,Todas,01_Memorias_Fundacionales,Alta,0.2,2025-04-25
+Memoria Central,General,Derivada,Memoria General,00_ALMA_LIBRE/07_Bitacora_Central,Alta,0.2,2025-04-25
+Memoria Salud,Técnica,Derivada,"Memoria Central, Memoria Medicina",03_Salud_y_RPL,Alta,0.1,
+Memoria Trading,Técnica,Derivada,"Memoria Central, Memoria Fondo",01_Gestor_de_Trade,Alta,0.1,
+Memoria Programación,Técnica,Derivada,"Memoria Creatividad, Memoria Finanzas",06_Programacion,Media,0.1,
+Memoria Creatividad,Estratégica,Derivada,"Memoria Finanzas, Memoria Central",08_Creatividad_y_Empresa,Media,0.1,

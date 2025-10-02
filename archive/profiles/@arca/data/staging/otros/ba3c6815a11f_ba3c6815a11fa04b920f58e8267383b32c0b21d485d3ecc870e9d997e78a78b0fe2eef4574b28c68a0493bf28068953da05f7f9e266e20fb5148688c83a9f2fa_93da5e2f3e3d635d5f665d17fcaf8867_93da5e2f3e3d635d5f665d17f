@@ -1,0 +1,52 @@
+
+# 🗂️ Estructura General – ALMA LIBRE v0.0.6
+
+Esta es la estructura oficial posterior a la reorganización de la versión 0.0.6 del sistema ALMA LIBRE. Está diseñada para ser modular, escalable, interpretable por IA y funcional para humanos en tareas personales, empresariales, y de automatización.
+
+## 🌳 Árbol de carpetas principal
+
+```
+ALMA_LIBRE/
+├── 00_BACKUPS_HISTORICOS/           # Versiones antiguas completas (0.0.1 a 0.0.5)
+│   └── changelogs/                  # Historial de cambios acumulado
+├── BITACORA_CENTRAL/                # Memoria cronológica del sistema
+│   ├── RESUMENES/                   # Resúmenes diarios/semanales
+│   └── DESARROLLO/                  # Seguimiento de programación y evolución del sistema
+├── CUADERNOS/                       # Cuadernos digitales temáticos
+│   ├── alma_gral.cu/                # Cuaderno madre (ideas generales, reflexiones, metas)
+│   ├── empresas.cu/                 # Ideas y desarrollo empresarial (Alma Mía, 13CC, etc.)
+│   ├── programacion.cu/             # Notas técnicas y estructuras de código
+│   ├── trading.cu/                  # Estrategias de inversión, bitácoras y análisis de mercado
+│   └── ... (otros cuadernos: cultivo, medicina, geopolítica, etc.)
+├── EMPRESAS/                        # Carpetas legales y operativas formales
+│   ├── Alma_Mia_Fondo/              # Empresa principal
+│   ├── 13_CANNABIS_CLUB/            # ONG/Club 13CC
+│   ├── Cannabird/                   # Proyecto de cultivo medicinal
+│   └── ... (nuevas empresas o anexos futuros)
+├── MODULOS/                         # Proyectos de software, automatización e IA
+│   ├── Alma_Loader/                 # Ejemplo de módulo IA o script automatizado
+│   └── programacion/                # Placeholder a revisar
+├── REESTRUCTURACION_0.0.6/          # Archivos que documentan este proceso de reorganización
+│   ├── prompt_base_reestructuracion_almalibre.md
+│   ├── reestructuracion_0.0.6.md
+│   └── Estructura_de_carpetas.md   # Este mismo archivo
+├── README.md                        # Presentación general del sistema
+└── sync_drive_maestro.sh           # Script auxiliar (puede migrarse a RECURSOS)
+```
+
+## 📍 Ubicación recomendada de este documento
+
+Este archivo (`Estructura_de_carpetas.md`) debe residir en:
+
+```
+ALMA_LIBRE/REESTRUCTURACION_0.0.6/
+```
+
+Opcionalmente se puede hacer una copia en:
+
+```
+ALMA_LIBRE/docs/README_ESTRUCTURA.md
+```
+
+Para facilitar acceso a herramientas externas o IA conectadas a `docs/`.
+

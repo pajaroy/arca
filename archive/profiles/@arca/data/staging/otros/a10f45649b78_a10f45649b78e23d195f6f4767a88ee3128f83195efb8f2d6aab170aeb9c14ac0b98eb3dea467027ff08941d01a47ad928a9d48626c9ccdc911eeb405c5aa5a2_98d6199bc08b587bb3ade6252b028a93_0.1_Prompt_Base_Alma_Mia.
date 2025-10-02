@@ -1,0 +1,44 @@
+# 💼 Prompt Base 0.1 – Fondo de Inversión “Alma Mía”
+
+## 🌱 Contexto General
+Este proyecto busca establecer un fondo de inversión transparente, legal, emocionalmente significativo y escalable llamado **“Alma Mía”**. Su propósito es fondear ideas, proyectos y operaciones financieras (inicialmente en trading de criptomonedas y forex) bajo una lógica profesional, afectiva y sólida.
+
+## 🏗️ Fundación del Fondo
+- Inicio simbólico: Abril 2025
+- Inicio oficial: 1 de enero de 2026
+- Fin de fase premercado: 31 de diciembre de 2026
+- Plataforma operativa: Cuenta BitGet (API conectada)
+- Capital inicial:
+  - $100 USD Santiago
+  - $100 USD Empresa
+  - Total: $200 USD
+
+## 💸 Distribución de Ganancias
+- Durante 2025-2026:
+  - 50% ganancias para capital aportado
+  - 50% para la empresa
+- Desde 2027:
+  - 10–20% ganancias para capital aportado (según rentabilidad y permanencia)
+
+## 🧑‍💼 Roles Iniciales Simulados
+- Santiago: Fundador, inversor y trader
+- Empresa ALMA MÍA: Representación institucional futura
+
+## 🗺️ Roadmap Abril–Diciembre 2025
+
+| Mes       | Objetivo                                       |
+|-----------|------------------------------------------------|
+| Abril     | Estructura, simulación, API y plantillas       |
+| Mayo      | Inicio seguimiento real y bitácora             |
+| Junio     | Análisis de equity, ROI, drawdown              |
+| Julio     | Simulación de nuevos aportes                   |
+| Agosto    | Desarrollo legal base                          |
+| Septiembre| Revisión de sostenibilidad                     |
+| Octubre   | Simulaciones completas                         |
+| Noviembre | Pitch institucional                            |
+| Diciembre | Evaluación final y preparación operativa 2026  |
+
+## 🌐 Integración
+- Con módulo de trading (resultados)
+- Con módulo de creatividad y empresa (visión)
+- Registro en Markdown y Notion

@@ -1,0 +1,61 @@
+---
+module: prompts/test_memory_graph_prompt
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# ✅ Solicitud de Test – `test_memory_graph.py` – ALMA_RESIST Sprint 2.6
+
+Este test debe cubrir el módulo `memory_graph.py`, el cual implementa un grafo semántico orientado con nodos únicos y aristas ponderadas para representar relaciones entre prompts, respuestas y conceptos derivados de interacciones previas.
+
+---
+
+## 📘 Métodos clave a testear
+
+- `add_node(content: str) -> int`
+- `add_edge(from_id: int, to_id: int, weight: float = 1.0) -> None`
+- `get_related(node_id: int, threshold: float = 0.1) -> List[str]`
+- `export(format: str = "json") -> str`
+- `get_node_id(content: str) -> Optional[int]`
+- `clear() -> None`
+
+---
+
+## 🧪 Casos de prueba sugeridos
+
+| Caso                                             | Resultado esperado                                 |
+|--------------------------------------------------|----------------------------------------------------|
+| Inserción de nodos nuevos                        | Devuelve ID único, evita duplicados               |
+| Búsqueda de ID por contenido                     | Devuelve ID correcto o None si no existe          |
+| Creación de aristas con peso                     | Aparecen en exportación con peso correcto         |
+| Recuperación de nodos relacionados               | Devuelve nodos conectados por encima del threshold|
+| Exportación en JSON                              | Formato válido, contiene nodos y edges            |
+| Exportación en GraphML                           | Salida con estructura estándar                    |
+| Borrado del grafo (`clear`)                      | Estado limpio, sin nodos ni relaciones            |
+| Robustez con datos repetidos                     | No rompe relaciones, no duplica nodos             |
+| Validación de errores                            | Lanza excepción si se conecta nodo inexistente    |
+
+---
+
+## 🔧 Consideraciones técnicas
+
+- Usar `pytest`
+- Validar que `add_node()` sea idempotente
+- Validar exportación como string JSON y/o XML
+- Simular un grafo de 3–5 nodos con varias conexiones para cobertura completa
+- Comparar salida con estructuras esperadas
+
+---
+
+## 📂 Archivos relacionados
+
+- `memory_graph.py` (módulo implementado)
+- `context_tracker.py` (integración sugerida)
+- `test_context_tracker.py` (ya implementado)
+
+---
+
+¿Podés generar el archivo `test_memory_graph.py` con todos estos casos, bien estructurado con `pytest`?

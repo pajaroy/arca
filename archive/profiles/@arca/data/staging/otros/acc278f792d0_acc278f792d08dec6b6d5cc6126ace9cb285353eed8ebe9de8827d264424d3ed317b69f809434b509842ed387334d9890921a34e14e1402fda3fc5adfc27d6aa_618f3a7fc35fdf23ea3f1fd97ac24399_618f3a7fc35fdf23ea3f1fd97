@@ -1,0 +1,15 @@
+# 📓 Bitácora diaria – 2025-06-01
+
+## 🧠 Día de Reinicio Total y Consolidación de Núcleo
+
+
+### 🔁 2. Sincronización y control remoto por SSH
+
+- Se configuró **acceso SSH sin contraseña entre ambos nodos**:
+  - Generación de claves `ed25519`.
+  - Alias rápidos `core` y `resist` agregados a `~/.bashrc`.
+  - Validación de acceso remoto funcional desde ambos extremos.
+
+- Confirmado control terminal **completo entre nodos**:
+  - Desde `alma-core` se puede manejar `alma-resist` (y viceversa) sin necesidad de password.
+

@@ -1,0 +1,46 @@
+### 1. **Relación entre ALMA_RESIST y ALMA LIBRE**
+
+- **ALMA_RESIST** es un **sistema técnico modular** enfocado en eficiencia energética, antifragilidad y compatibilidad multiplataforma (detallado en el roadmap técnico).
+    
+- **ALMA LIBRE** es el **ecosistema general** que integra gestión de conocimiento, interacción humano-IA, documentación estructurada y automatizaciones (definido en el whitepaper y el prompt técnico).
+    
+- **Conclusión:** ALMA_RESIST actúa como un **módulo crítico dentro de ALMA LIBRE**, encargado de la infraestructura técnica (logging seguro, monitoreo, políticas energéticas). Los documentos compartidos son complementarios y sirven como base para ambas partes.
+    
+
+
+### 3. **Pasos concretos para integración**
+
+1. **Fusionar estructuras:**
+    
+    - Ubicar ALMA_RESIST como submódulo en `ALMA_LIBRE/MODULOS/Alma_RESIST/`, siguiendo la convención de carpetas del prompt técnico.
+        
+    - Asegurar que las rutas relativas del roadmap técnico se adapten a la jerarquía de ALMA LIBRE (ej: `BITACORA_CENTRAL/LOGS_MODULOS/` para logs de ALMA_RESIST).
+        
+2. **Sincronizar versionado:**
+    
+    - Unificar el esquema de versiones (ej: `ALMA_LIBRE v0.0.7` incluirá `ALMA_RESIST v1.0` como módulo estable).
+        
+3. **Actualizar documentación:**
+    
+    - Añadir ALMA_RESIST al `whitepaper.md` (Sección 3.3) y al `prompt_tecnico.md` (Sección 3.2).
+        
+    - Vincular la checklist de sprints al `CHANGELOG.md` de ALMA LIBRE para trazabilidad.
+        
+4. **Pruebas de integración:**
+    
+    - Validar que los módulos de ALMA_RESIST (ej: `alma_monitor.py`) operen dentro de la estructura de ALMA LIBRE sin conflictos de rutas o permisos.
+        
+
+
+### 5. **Conclusión**
+
+Los documentos compartidos **son una base sólida y coherente** para el proyecto. Se recomienda:
+
+- Usar el **whitepaper** como guía filosófica para decisiones estratégicas.
+    
+- Seguir el **prompt técnico** para estructura operativa y convenciones.
+    
+- Ejecutar el **roadmap/checklist** para desarrollo incremental de ALMA_RESIST.
+    
+
+**Modificaciones menores** (nombres de carpetas, documentación de interdependencias) bastarán para alinearlos con el estado actual del proyecto. ¡El sistema está listo para implementarse! 🚀

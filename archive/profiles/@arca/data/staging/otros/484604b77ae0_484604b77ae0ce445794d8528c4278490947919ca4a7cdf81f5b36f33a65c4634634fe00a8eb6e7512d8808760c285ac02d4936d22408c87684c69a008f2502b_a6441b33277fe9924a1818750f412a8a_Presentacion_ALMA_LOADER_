@@ -1,0 +1,31 @@
+
+# 📘 Presentación Oficial – ALMA_LOADER Individual v2.1.1
+
+## 🎯 Propósito General del Proyecto
+
+ALMA_LOADER es un sistema modular, conversacional e inteligente diseñado para asistir a una persona en la gestión de sus decisiones, experiencias y conocimientos diarios, con énfasis especial en trading, productividad y autoanálisis.
+
+Su enfoque está centrado en ofrecer una experiencia simple y natural de entrada (lenguaje conversacional), combinada con análisis semántico, almacenamiento estructurado, resúmenes automáticos, alertas inteligentes y capacidades futuras de predicción.
+
+
+## ⚙️ Tecnologías y Herramientas Utilizadas
+
+| Componente           | Tecnología / Herramienta                              |
+|----------------------|--------------------------------------------------------|
+| Conversión Natural   | Python + expresiones regulares / NLP (spaCy)          |
+| Validación JSON      | `jsonschema` + reglas dinámicas                        |
+| Almacenamiento       | SQLite (con soporte JSON1 para consultas estructuradas)|
+| Resúmenes Automáticos| Generación Markdown programática                      |
+| Gamificación         | Sistema XP modular codificado en `alma_core.py`        |
+| Machine Learning     | `scikit-learn` + entrenamiento local con features      |
+| Automatización       | Cron + scripts Python + backups con `rclone`           |
+| Interfaz Opcional    | Telegram/WhatsApp Bot vía `python-telegram-bot`        |
+| Panel de Control     | Markdown dinámico para dashboards + alertas            |
+
+
+## 🚀 Fases del Roadmap Técnico
+
+1. **Fase 1 (Core)**: Conversión NL → JSON, validación, SQLite, resumen diario.
+2. **Fase 2 (Analytics)**: Detección de patrones, feature extractor, backup automático.
+3. **Fase 3 (Predictivo + Gamificación)**: Alertas automáticas, puntos de usuario, modelo de predicción.
+

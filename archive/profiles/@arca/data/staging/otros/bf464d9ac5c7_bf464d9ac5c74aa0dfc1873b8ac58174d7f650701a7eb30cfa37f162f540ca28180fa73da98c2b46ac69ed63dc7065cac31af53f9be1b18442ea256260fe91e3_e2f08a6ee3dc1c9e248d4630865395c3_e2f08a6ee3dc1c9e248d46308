@@ -1,0 +1,19 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_d88870
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: '  Init  '
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:12d876a04e37d7f668679e25cd77a0c8e0b90e40f8b0c70162319f7327d03ee8
+---
+# Inicializador del módulo core

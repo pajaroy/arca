@@ -1,0 +1,63 @@
+---
+rfc_id: 1
+title: Metodología de Gobernanza Modular del Sistema ALMA_RESIST
+status: in_progress
+version: '2.0'
+created: '2025-05-21'
+replaces: RFC_0001_metodologia.md
+tags:
+- metodologia
+- estructura
+- gobernanza
+linked_sprints:
+- Sprint_2.2
+linked_to:
+- docs/01_methodologies/
+module: 99_rfc/rfc_0001_metodologia_v2
+type: core
+
+---
+# 🧱 RFC 0001 v2 – Metodología de Gobernanza Modular del Sistema ALMA_RESIST
+
+## 📌 Propósito
+
+Establecer una metodología formal y escalable para la gestión de módulos, carpetas, versiones, decisiones técnicas y documentación integrada con IA. Esta versión reemplaza la propuesta inicial y consolida las decisiones tomadas en el Sprint 2.2.
+
+---
+
+## 📚 Metodologías Formalizadas
+
+Este RFC estructura las siguientes metodologías base, todas definidas y validadas como parte de `v0.0.0.2`:
+
+| Documento                            | Versión | Propósito                                           |
+|-------------------------------------|---------|-----------------------------------------------------|
+| estructura_modular_v2.md            | v2.0    | Organización de carpetas, scripts y documentación   |
+| sprints_v2.md                       | v2.0    | Ciclo de trabajo activo → cerrado → archivado       |
+| versionado_backups_v1.md            | v1.0    | Uso de git tags y snapshots manuales sostenibles    |
+| doc_ia_v2.md                        | v2.0    | Documentación semántica legible por IA              |
+| adr_v2.md                           | v2.0    | Registro estructurado de decisiones técnicas        |
+| interaccion_ia_v2.md               | v2.0    | Protocolo de operación y validación IA              |
+
+---
+
+## 🔄 Diferencias con la versión anterior
+
+- Añadido bloque de metadatos YAML estructurado
+- Se vincula directamente con metodologías versionadas por archivo
+- Define explícitamente cómo interactúan los RFC con Sprints y versiones
+- Integra flujo de archivado y trazabilidad viva (Methodology_Index.md)
+
+---
+
+## 📦 Reglas operativas
+
+- Toda nueva metodología debe derivarse de este RFC y seguir `sprints_v2.md`
+- Toda versión previa se archiva en `/versiones/` con changelog
+- Toda decisión técnica debe generarse como ADR vinculado
+
+---
+
+## 🧠 Conclusión
+
+Este RFC es el eje rector para mantener un sistema gobernable, extensible y automatizable, aún bajo operación individual. Su estructura es IA-friendly y humano-sustentable.
+

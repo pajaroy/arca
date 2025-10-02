@@ -1,0 +1,54 @@
+# Bitácora – 2025-06-04 – Rescate, Backup Físico y Restauración de ALMA_RESIST
+
+
+## Detalle de pasos ejecutados
+
+1. **Detección y diagnóstico de corrupción git**
+    
+    - Identificación de errores fatales (`.git/objects/... está vacío/corrupto`) imposibilitando cualquier push/commit.
+        
+2. **Backup físico**
+    
+    - Selección y formateo seguro de pendrive (`/dev/sdd1`, label: `BKPFISICO`) como almacenamiento de respaldo.
+        
+    - Montaje manual con permisos de usuario para garantizar escritura sin root.
+        
+    - Generación de snapshot total del sistema con:
+        
+        ```bash
+        zip -r /media/bird/BKPFISICO/ALMA_RESIST_2025-06-04_sistema_completo.zip .
+        ```
+        
+3. **Clonación y recuperación del repo**
+    
+    - Clonación limpia usando SSH:
+        
+        ```bash
+        git clone git@github.com:pajaroy/ALMA_RESIST.git ALMA_RESIST_NEW
+        ```
+        
+    - Renombrado de la carpeta corrupta y repositorio nuevo para restaurar la estructura original.
+        
+    - Copia selectiva de archivos y cambios desde el backup manual:
+        
+        ```bash
+        cp -ru /home/bird/ALMA_RESIST_BACKUP_2025-06-04/* /home/bird/ALMA_RESIST/
+        ```
+        
+    - Commit y push final consolidando todos los cambios restaurados.
+        
+4. **Re-sincronización con Syncthing y ajuste de Obsidian**
+    
+    - Remoción segura de la carpeta en Syncthing sin pérdida de datos.
+        
+    - Re-linkeo de la ruta actualizada como carpeta principal y forzado de escaneo/sync.
+        
+    - Configuración de Obsidian para abrir la ruta de vault correcta.
+        
+5. **Notas y recomendaciones**
+    
+    - Evitar siempre manipular `.git` a mano, sincronizaciones en caliente sobre `.git`, o cortes durante operaciones críticas.
+        
+    - Usar siempre backup físico y redundante antes de cualquier operación masiva.
+        
+    - Documentar toda intervención relevante para trazabilidad y recuperación futura.

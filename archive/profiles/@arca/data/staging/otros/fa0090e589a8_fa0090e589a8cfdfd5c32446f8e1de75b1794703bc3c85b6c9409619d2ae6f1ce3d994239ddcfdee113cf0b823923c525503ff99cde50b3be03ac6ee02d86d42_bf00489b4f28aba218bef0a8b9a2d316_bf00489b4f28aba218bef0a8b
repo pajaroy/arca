@@ -1,0 +1,14 @@
+# validar_documentacion.sh
+
+Este script ejecuta los validadores Python en orden adecuado y reporta resultados finales del sistema documental.
+
+## Uso
+
+```bash
+bash scripts/validar_documentacion.sh
+```
+
+Incluye:
+- Validación con `validate_docs.py`
+- Normalización con `force_snake_case_modules.py`
+- Corrección con `fix_metadata.py`

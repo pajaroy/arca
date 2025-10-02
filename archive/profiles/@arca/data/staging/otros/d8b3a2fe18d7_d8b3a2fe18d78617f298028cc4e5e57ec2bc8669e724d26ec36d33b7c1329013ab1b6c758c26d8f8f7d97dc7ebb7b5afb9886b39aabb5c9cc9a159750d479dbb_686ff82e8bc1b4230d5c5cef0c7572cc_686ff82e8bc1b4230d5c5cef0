@@ -1,0 +1,20 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_f6a10b
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: '  Init  '
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:3361dc3f971a58a4bfd6e03fa03c5fc1081943e491626a3cbe817629c1a01778
+---
+# core/llm_server/model_wrapper/__init__.py
+from .model_wrapper import ModelWrapper

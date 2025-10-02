@@ -1,0 +1,36 @@
+---
+### 📎 Apéndice – Bitácora Base y Navegación Interna (2025-06-02)
+
+#### ✅ Integración del Prompt Base para Bitácoras
+
+- Se integró oficialmente el archivo `[[Prompt Bitacora Control Central]]` como **referencia fundacional** para todos los registros internos del sistema ALMA_RESIST.
+- Este prompt define la estructura estándar para:
+  - Bitácoras diarias
+  - Bitácoras semanales
+  - Bitácoras mensuales
+  - Resúmenes de sprint
+  - Registros de instalación
+- El archivo se encuentra en:  
+  `control_central/docs/journal/prompts/Prompt Bitacora Control Central.md`
+
+#### 🔗 Navegación semántica
+
+- Se resolvió un error de enlace relacionado al uso incorrecto de acentos en `[[Prompt Bitacora Control Central]]`.
+- Se renombró el archivo y se ajustó el título en YAML para permitir navegación correcta vía Obsidian.
+
+```yaml
+---
+title: "Prompt Bitacora Control Central"
+---
+```
+
+#### 🔄 Proyección a futuro
+
+- A partir de esta integración se proyecta:
+  - Uso regular de bitácoras con versión estructurada (por día, semana, mes).
+  - Implementación futura de un **prompt técnico automatizado** para generación IA de bitácoras a partir del uso real del sistema.
+  - Consolidación semanal de cambios en `control_central/docs/journal/weekly/` y resúmenes mensuales en `monthly/`.
+
+🧠 *Este paso marca el inicio formal del sistema de trazabilidad documental de ALMA_RESIST. Desde este punto, cada decisión podrá rastrearse, auditarse y reconstruirse de forma asistida por IA.*
+
+---

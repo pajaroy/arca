@@ -1,0 +1,23 @@
+version: "0.1.0"
+title: ""
+uuid: ""
+tipo: ""
+schema: ""
+estado: ""
+descripcion: ""
+estructura: []
+tags: []
+linked_to: []
+responsable: []
+hash_verificacion: ""
+historial:
+  - fecha: ""
+    descripcion: ""
+last_modified: ""
+last_modified_by: ""
+created_at: ""
+created_by: ""
+proceso_origen: ""
+input_data: []
+output_data: []
+comentarios: ""

@@ -1,0 +1,31 @@
+# 🧭 Roadmap Estratégico Final – ALMA MEMORIAS JSON
+
+## 🎯 Objetivo Central  
+Crear un sistema de memorias humano-IA **estructurado, dinámico, semántico y consultable** como grafo y base de conocimiento viva.
+
+
+## 🔁 FASE 2 – Sincronización + Edición GUI (v0.1.1)
+
+| Nº | Implementación | Objetivo | Herramientas | Estado |
+|----|----------------|----------|--------------|--------|
+| 4 | `json_to_md.py` | Renderizar memorias como `.md` para Obsidian | Python | ✅ |
+| 5 | Editor Web GUI | Crear/modificar memorias sin tocar JSON crudo | FastAPI + React | 🔜 |
+| 6 | Sistema de Plantillas | Formularios por categoría (ej: Salud → sueño, suplementos) | Plantillas JSON | 🔜 |
+| 7 | API REST básica | `GET /memorias`, `POST /relacionar` para apps externas | FastAPI | 🧪 |
+
+📌 **Destacado**: Hace el sistema usable para humanos no técnicos.
+
+
+## 🌐 FASE 4 – Visualización y Grafo Vivo (v0.2.0)
+
+| Nº | Implementación | Objetivo | Herramientas | Estado |
+|----|----------------|----------|--------------|--------|
+| 11 | Neo4j + Cypher | Modelar memorias y relaciones como grafo | Neo4j Desktop | 🔄 |
+| 12 | Cytoscape.js / D3.js | Visualizador web interactivo | JS frontend | 🔜 |
+| 13 | Consulta tipo Cypher | 
+```cypher
+MATCH (m1:Memoria)-[r:IMPACTA]->(m2:Memoria)
+WHERE m1.categoria = "GEO" RETURN m1, r, m2
+``` | Cypher | 🧠 |
+
+📌 **Destacado**: Permite consultas semánticas en red.

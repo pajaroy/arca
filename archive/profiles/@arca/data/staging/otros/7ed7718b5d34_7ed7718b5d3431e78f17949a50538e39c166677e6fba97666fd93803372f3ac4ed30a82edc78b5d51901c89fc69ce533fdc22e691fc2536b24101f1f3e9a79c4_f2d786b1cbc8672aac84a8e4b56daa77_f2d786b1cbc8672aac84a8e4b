@@ -1,0 +1,60 @@
+# CHANGELOG - ALMA_RESIST
+
+## Versión 0.0.3 – 2025-06-27
+
+### 🔄 Cambios Generales
+
+- Refactorización total del archivo `configuration.nix`:
+  - Reorganizado en bloques temáticos y modular.
+  - Comentarios explicativos en cada sección.
+  - Preparado para integración con Flakes.
+
+- Shell por defecto:
+  - Cambiado de `bash` a `zsh` como shell principal para el usuario `alma` por mejoras en autocompletado y productividad.
+
+- UUID eliminado en favor de mapeo cifrado:
+  - Se corrigió la configuración de `fileSystems."/"`
+    - **ANTES:** `device = "/dev/disk/by-uuid/…"`
+    - **AHORA:** `device = "/dev/mapper/alma_crypt"`
+  - Garantiza boot correcto en sistemas cifrados con LUKS.
+
+- Opciones de montaje:
+  - Se añadieron opciones `compress=zstd` a Btrfs para mejor compresión y rendimiento.
+  - Conservadas `fmask` y `dmask` en `/boot` para seguridad sobre archivos FAT.
+
+
+### 🔐 Seguridad
+
+- Activado `auditd` para auditoría básica del sistema.
+- Configurado firewall (nftables):
+  - Solo permitido puerto 22 (SSH).
+  - Tailscale preparado pero sin habilitar aún.
+- Placeholder agregados para:
+  - AppArmor o SELinux
+  - Fail2ban
+  - Yubikey integration
+  - DNS over HTTPS/TLS
+  - System auditing adicional
+
+
+### 📂 Estructura del Sistema
+
+- Usuario principal `alma`:
+  - home: `/alma`
+  - shell: `zsh`
+  - grupos: wheel, networkmanager
+  - contraseña inicial: `umamia`
+
+
+## ⚠️ Notas de Migración
+
+- Revisar y corregir UUID en configuración si se mantiene cifrado.
+- Ejecutar:
+  ```bash
+  sudo nixos-rebuild switch
+  ```
+
+después de aplicar cambios.
+
+    Flakes aún no activos en producción: dejar preparados experimental-features.
+  

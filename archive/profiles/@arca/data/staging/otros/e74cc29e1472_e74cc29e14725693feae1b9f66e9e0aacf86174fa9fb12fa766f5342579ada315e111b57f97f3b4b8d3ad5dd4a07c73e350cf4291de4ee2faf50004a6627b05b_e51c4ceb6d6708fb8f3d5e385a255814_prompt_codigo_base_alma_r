@@ -1,0 +1,76 @@
+---
+module: prompts/prompt_codigo_base_alma_resist
+type: core
+status: in_progress
+created: '2025-05-17'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🧠 PROMPT BASE PARA DEEPSEEK – ALMA_RESIST (v0.1)
+
+Este prompt define el marco técnico para solicitar cualquier script dentro de ALMA_RESIST.
+
+---
+
+## 📦 CONTEXTO DEL SISTEMA
+
+- Sistema modular IA offline
+- 100% ejecutable desde terminal
+- Compatible con Debian 12+ (x86 y ARMv8)
+- Sin conexión a internet
+- Priorización: soberanía tecnológica, eficiencia energética, antifragilidad
+- Hardware objetivo mínimo: 1 core + 2GB RAM
+
+---
+
+## 🔐 RESTRICCIONES PARA CADA MÓDULO
+
+- Sin librerías de red (requests, urllib, etc.)
+- Sin frameworks pesados (Flask, Django)
+- Preferencia por Python estándar o Bash puro
+- Scripts con validación defensiva y docstrings estilo Google
+- Compatibilidad: Python 3.10+
+
+---
+
+## 📁 MÓDULOS TIPIFICADOS
+
+| Módulo              | Descripción funcional                                       |
+|---------------------|-------------------------------------------------------------|
+| log_writer.py       | Logging JSONL estructurado con metadatos del sistema       |
+| log_crypto.py       | Cifrado de logs con AES-256 (fallback ChaCha20)            |
+| log_integrity.py    | Verificación SHA3 de logs (SHAKE256)                       |
+| alma_monitor.py     | Daemon de monitoreo de CPU, RAM, temperatura, swap         |
+| alma_auto_eval.py   | Evaluación de rendimiento entre sprints                    |
+| test_arch.sh        | Detección de arquitectura + benchmarks por CPU             |
+| alma_update.sh      | Migración y backup automático de versiones                 |
+
+---
+
+## 🧪 EJEMPLO DE ESTILO DE CÓDIGO
+
+```python
+def log_event(event_type: str, message: str, module: str = "core") -> dict:
+    """
+    Registra un evento estructurado en el log JSONL.
+
+    Args:
+        event_type (str): Nivel (INFO, WARNING, ERROR)
+        message (str): Descripción del evento
+        module (str): Nombre del módulo
+
+    Returns:
+        dict: Evento generado
+    """
+    ...
+```
+
+---
+
+## ✅ QUÉ DEBE DEVOLVER DEEPSEEK
+
+1. Código completo y ejecutable
+2. Comentado y documentado con docstrings
+3. Seguro, portable, modular y sin dependencias externas
+4. Ejemplos de uso simples y prácticos

@@ -1,0 +1,170 @@
+
+# ALMA RESIST - Chat CLI con Memoria Persistente
+
+Este es un sistema de chat CLI con memoria persistente usando SQLite para almacenar el historial de conversaciones y Ollama para generar respuestas mediante modelos como DeepSeek o Mistral. El sistema permite guardar el contexto de las conversaciones entre sesiones, lo que lo convierte en una herramienta ideal para tener interacciones más profundas y continuar conversaciones previas.
+
+## Requisitos
+
+1. **Python 3.7+**: Necesitas tener Python 3.7 o una versión superior.
+2. **Dependencias**:
+    - `ollama`: Para utilizar modelos de lenguaje como DeepSeek.
+    - `sqlite3`: Para almacenar el historial de conversaciones.
+
+## Pasos para instalar y ejecutar
+
+### Paso 1: Instalar dependencias
+
+Ejecuta los siguientes comandos para instalar las dependencias necesarias:
+
+```bash
+pip install ollama sqlite3
+ollama pull deepseek-coder  # Este paso descarga el modelo local
+```
+
+### Paso 2: Guardar el script en un archivo
+
+Guarda el siguiente código en un archivo llamado `alma_chat.py`:
+
+```python
+import sqlite3
+from datetime import datetime
+import ollama  # pip install ollama
+
+# 1. Configuración inicial
+DB_NAME = "alma_memory.db"
+MODEL = "deepseek-coder"  # o "mistral", "llama3"
+
+# 2. Conectar a base de memoria
+conn = sqlite3.connect(DB_NAME)
+cursor = conn.cursor()
+cursor.execute('''CREATE TABLE IF NOT EXISTS chats (
+               id INTEGER PRIMARY KEY,
+               timestamp TEXT,
+               role TEXT,
+               content TEXT)''')
+
+# 3. Cargar historial de contexto
+def load_context(max_messages=20):
+    cursor.execute("SELECT role, content FROM chats ORDER BY id DESC LIMIT ?", (max_messages,))
+    return [{"role": row[0], "content": row[1]} for row in cursor.fetchall()]
+
+# 4. Guardar interacción en DB
+def save_to_db(role, content):
+    timestamp = datetime.now().isoformat()
+    cursor.execute("INSERT INTO chats (timestamp, role, content) VALUES (?, ?, ?)", 
+                  (timestamp, role, content))
+    conn.commit()
+
+# 5. Loop principal del chat CLI
+print("
+ALMA RESIST v1.0 - Modo Reflexivo (CTRL+C para salir)
+")
+while True:
+    try:
+        # Obtener input de usuario
+        user_input = input("Tú: ")
+
+        if user_input.lower() in ["exit", "salir"]:
+            break
+
+        # Guardar pregunta
+        save_to_db("user", user_input)
+
+        # Cargar contexto (últimos 20 mensajes)
+        context_messages = load_context()
+
+        # Generar respuesta con DeepSeek local
+        response = ollama.chat(
+            model=MODEL,
+            messages=[
+                *context_messages,
+                {"role": "user", "content": user_input}
+            ]
+        )
+
+        # Extraer y mostrar respuesta
+        ai_response = response['message']['content']
+        print(f"
+ALMA: {ai_response}
+")
+
+        # Guardar respuesta en contexto
+        save_to_db("assistant", ai_response)
+
+    except KeyboardInterrupt:
+        print("
+
+Guardando contexto... ¡Hasta pronto!")
+        break
+
+conn.close()
+```
+
+### Paso 3: Ejecutar el chat
+
+Una vez que hayas guardado el archivo, ejecuta el chat desde la terminal:
+
+```bash
+python alma_chat.py
+```
+
+### Paso 4: Mejoras y Escalabilidad
+
+#### Persistencia del contexto
+
+Gracias a SQLite, el sistema puede almacenar el historial de las conversaciones de manera indefinida, permitiendo que el chat recuerde las interacciones pasadas.
+
+#### Reflexión Automática
+
+Puedes modificar el código para incluir resúmenes automáticos de las interacciones previas. Por ejemplo, puedes agregar un resumen semanal cada domingo:
+
+```python
+def load_context():
+    # Mensajes recientes
+    cursor.execute("SELECT ... LIMIT 10")
+    recent = [...]
+
+    # Resumen semanal (ejecuta cada domingo)
+    if is_sunday():
+        summary = ollama.generate(
+            model=MODEL, 
+            prompt="Resume los temas clave de esta semana:"
+        )
+        recent.insert(0, {"role": "system", "content": summary})
+
+    return recent
+```
+
+#### Integración con Cuadernos Markdown
+
+Si tienes cuadernos en formato Markdown, puedes cargarlos automáticamente al inicio del programa para usarlos como contexto durante las interacciones:
+
+```python
+import glob
+for note in glob.glob("CUADERNOS/*.md"):
+    content = open(note).read()
+    save_to_db("system", f"Nota de cuaderno: {content}")
+```
+
+#### Modo Crítico
+
+Personaliza el modelo para que sea más crítico en sus respuestas:
+
+```python
+response = ollama.chat(
+    messages=[
+        {"role": "system", "content": "Eres ALMA. Sé crítico y no complaciente."},
+        *context_messages,
+        {"role": "user", "content": user_input}
+    ]
+)
+```
+
+## Escalabilidad
+
+Este sistema es fácilmente escalable. Puedes cambiar el modelo de lenguaje (por ejemplo, Mistral o Llama) modificando la variable `MODEL` en el código. Además, puedes agregar nuevas funcionalidades como una reflexión automática semanal, integración con tus cuadernos Markdown, y más.
+
+## Conclusión
+
+Este script te proporciona un sistema básico pero poderoso de chat CLI con memoria persistente. Es ideal para tener conversaciones continuas, reflexivas y con contexto, sin perder información a lo largo del tiempo.
+

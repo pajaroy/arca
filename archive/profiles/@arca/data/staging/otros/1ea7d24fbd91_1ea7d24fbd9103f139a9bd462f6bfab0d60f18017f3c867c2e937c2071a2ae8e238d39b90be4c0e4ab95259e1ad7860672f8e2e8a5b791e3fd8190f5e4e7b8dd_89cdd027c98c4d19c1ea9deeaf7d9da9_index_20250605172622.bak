@@ -1,0 +1,11 @@
+# Índice de Test Suite – ALMA_RESIST /tests/
+
+| Archivo de Test             | Módulo Evaluado         | Función Principal                              |
+|----------------------------|--------------------------|-------------------------------------------------|
+| test_model_wrapper.py      | model_wrapper.py         | Validación de carga de modelo y generación     |
+| test_api_responder.py      | main.py + FastAPI        | Endpoint `/responder`                          |
+| test_transport_layer.py    | transport_layer.py       | Validación contractual de logs                 |
+| test_context_tracker.py    | context_tracker.py       | Historial de contexto y validación JSONL       |
+| test_log_writer.py         | log_writer.py            | Sistema de logs, rotación, validación          |
+| test_log_crypto.py         | log_crypto.py            | Cifrado y descifrado de logs                   |
+| test_memory_graph.py       | memory_graph.py          | Relaciones semánticas entre ideas              |

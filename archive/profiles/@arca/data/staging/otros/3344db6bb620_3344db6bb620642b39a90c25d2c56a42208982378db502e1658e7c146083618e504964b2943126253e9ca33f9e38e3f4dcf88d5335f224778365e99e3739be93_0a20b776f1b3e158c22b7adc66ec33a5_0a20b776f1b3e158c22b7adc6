@@ -1,0 +1,92 @@
+# 🧠 Prompt Técnico – alma-cli v0.0.0.4 (ALMA_RESIST)
+
+## 📌 Contexto general
+
+Estamos desarrollando un CLI modular en Python para **gestionar, auditar y corregir** documentación técnica en formato Markdown que contiene **metadatos en bloques YAML** al inicio (`---`). Esta documentación pertenece al sistema ALMA_RESIST.
+
+
+## ⚙️ Subcomandos a integrar
+
+| Comando               | Descripción                                                                 |
+|-----------------------|-----------------------------------------------------------------------------|
+| `validate`            | Ejecuta validación completa de YAML en todos los `.md` (basado en `validate_docs.py`) |
+| `fix-metadata`        | Corrige y completa campos YAML (`module`, `type`, `status`, `created`) usando lógica estándar |
+| `enforce-snakecase`   | Normaliza `module:` a snake_case (reusa `force_snake_case_modules.py`)     |
+| `add-linked-minimo`   | Agrega campo `linked_to` cuando el `type` es `core` (usa `add_linked_to_minimo.py`) |
+| `batch-update`        | Modifica campos YAML en lote, con filtros por tipo y condiciones (`missing-only`) |
+| `audit`               | Ejecuta auditoría semántica de campos (`domain`, `linked_to`) con reglas externas |
+| `report`              | Genera informe Markdown/JSON de errores, advertencias y acciones sugeridas |
+| `auto-fix`            | Corre `validate`, `fix-metadata`, `enforce-snakecase` y `add-linked-minimo` en orden automático con backup |
+
+
+## 📄 Campos YAML a validar
+
+Todos los `.md` deben iniciar con un bloque como este:
+
+```yaml
+```
+
+
+## 🛠 Consideraciones técnicas
+
+- Debe usar `argparse`
+- Debe incluir manejo de `--verbose`, `--dry-run`, `--backup`
+- Debe ser compatible con Python 3.8+
+- Modular, cada subcomando es un método separado
+- Manejo de errores limpio y explícito
+- Permitir salida en Markdown o JSON con `--output-format`
+- Generar backups automáticos en `logs/backups/` si se modifica algo
+
+
+
+# 📎 Apéndice – Mejoras Propuestas para `alma-cli v0.0.0.4`
+
+Este documento resume las sugerencias de mejora y su justificación para implementar en la versión `v0.0.0.4` de `alma-cli.py`.
+
+
+## 2. Ampliación de Subcomandos
+
+### ➕ Nuevo Subcomando: `init`
+| Comando | Descripción |
+|---------|-------------|
+| `init`  | Crea la estructura de directorios base (`/docs`, `/scripts`, `/logs`) si no existen |
+
+**Justificación:** Facilita la inicialización del proyecto para nuevos usuarios, evitando errores por falta de directorios.
+
+
+## 3. Manejo de Casos Extremos
+
+### ➕ Nuevo Subcomando: `add-yaml-block`
+| Comando           | Descripción |
+|-------------------|-------------|
+| `add-yaml-block`  | Agrega un bloque YAML básico a archivos Markdown que carecen de él |
+
+**Justificación:** Resuelve casos donde los archivos no tienen metadatos, asegurando compatibilidad con el resto de comandos.
+
+
+## 5. Personalización de Reglas
+
+### ✍️ Mejora en `validate`
+
+Añadir opción `--config <ruta>` para cargar reglas de validación personalizadas desde un archivo YAML/JSON.
+
+```bash
+python alma-cli.py validate --config custom_rules.yaml
+```
+
+**Justificación:** Permite adaptar el CLI a proyectos con requisitos específicos sin modificar el código base.
+
+
+## 7. Manejo de Errores Explícito
+
+### ➕ Sección: 🚨 Errores Comunes
+
+```markdown
+## 🚨 Errores Comunes
+- Si un archivo no tiene bloque YAML: se sugiere usar `add-yaml-block`.
+- Si `--dry-run` está activo: se muestra un resumen de cambios sin aplicarlos.
+- Permisos denegados: se registra el error en `/logs/errors.log`.
+```
+
+**Justificación:** Guía al usuario en la resolución de problemas frecuentes.
+

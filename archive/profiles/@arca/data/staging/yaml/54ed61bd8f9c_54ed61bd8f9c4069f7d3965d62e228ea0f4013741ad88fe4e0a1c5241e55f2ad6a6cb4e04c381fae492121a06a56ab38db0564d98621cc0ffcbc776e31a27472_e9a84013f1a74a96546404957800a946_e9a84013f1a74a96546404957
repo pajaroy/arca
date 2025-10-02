@@ -1,0 +1,48 @@
+---
+# Plantilla universal de metadatos ALMA_RESIST
+version: "0.1.0"
+tipo: prompt
+schema: almaresist.prompt_v1
+descripcion: >
+  Prompt para generar un script Python que valide o establezca el campo 'tipo' en encabezados YAML de archivos de texto, para asegurar la consistencia documental y la correcta clasificación dentro del sistema ALMA_RESIST.
+estructura:
+  - Prompt_Fix_Tipo
+  - fix_tipo.py
+tags: [cli, metadata, fixer, tipo, automatización, yaml, alma_resist]
+linked_to:
+  - ../../Src/Fix_Tipo/fix_tipo.py
+  - ../README.md
+  - /home/alma/Alma-Cli/Logs/fix_metadata.log
+responsable: Bird
+hash_verificacion: "sha256:pending"
+historial:
+  - "2025-07-09T05:00:00Z: Creación inicial del prompt."
+last_modified: "2025-07-09T05:00:00Z"
+last_modified_by: Bird
+
+prompt: |
+  Quiero un script Python llamado `fix_tipo.py` que haga lo siguiente:
+
+  - Tome como argumentos la ruta a un archivo (README.md, .yaml, o script con encabezado YAML).
+  - El archivo tiene un encabezado YAML al principio, delimitado por las primeras dos líneas con `---`.
+  - El script debe buscar el campo `tipo` en ese encabezado y validar que su valor esté en la lista de tipos permitidos:
+      ["README", "script", "prompt", "doc", "index", "changelog", "yaml"]
+  - Si el campo existe y su valor es válido, no debe cambiar nada (solo loguear validación).
+  - Si el campo no existe o su valor es inválido, debe inferir el tipo a partir del nombre, ubicación o extensión del archivo:
+      - Si el archivo se llama 'README.md' → tipo: README
+      - Si termina en '.py' y está en 'Src/' → tipo: script
+      - Si contiene 'prompt' en el nombre o en la carpeta → tipo: prompt
+      - Si termina en '.yaml' → tipo: yaml
+      - Si termina en '.md' y está en 'Documents/' → tipo: doc
+      - Si termina en '.md' y está en una carpeta 'Changelog' → tipo: changelog
+      - Si no puede inferir, usar 'doc' por defecto
+  - Debe actualizar/agregar el campo 'tipo' con el valor correcto si hizo un cambio.
+  - Debe registrar cada acción (archivo modificado, tipo, fecha y hora, acción: validado/cambiado) en el log `/home/alma/Alma-Cli/Logs/fix_metadata.log`, agregando una línea por cada ejecución en formato:
+      [YYYY-MM-DDTHH:MM:SSZ] Archivo:<ruta_absoluta> Tipo:<tipo> Acción:tipo_validado/cambiado
+
+  - Uso por consola:
+      python3 fix_tipo.py <archivo>
+
+  El código debe ser limpio, profesional y funcionar sobre cualquier archivo de texto con encabezado YAML.
+
+  No necesito manejo de errores avanzado ni validación extra.

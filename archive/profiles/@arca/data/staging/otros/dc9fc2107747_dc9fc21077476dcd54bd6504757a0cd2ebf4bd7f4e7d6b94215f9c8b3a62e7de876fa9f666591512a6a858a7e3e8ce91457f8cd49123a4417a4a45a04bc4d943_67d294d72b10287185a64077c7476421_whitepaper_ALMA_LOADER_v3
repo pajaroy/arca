@@ -1,0 +1,302 @@
+# 📘 Whitepaper ALMA_LOADER v3.0
+
+## 1. Prólogo
+
+ALMA_LOADER no es una simple aplicación.
+
+Es una mente digital modular diseñada para pensar con vos, aprender de vos y ayudarte a evolucionar. Su objetivo es transformar el caos de tu día a día en conocimiento estructurado, patrones comprensibles y decisiones más inteligentes.
+
+Inspirado en un asistente que registra memorias, emociones y acciones, ALMA_LOADER es adaptable, entrenable y expandible. Puede ser usado por humanos o por IAs, en contextos personales, técnicos o empresariales.
+
+Crece con vos. No solo guarda lo que decís, sino que analiza por qué lo decís, cómo actuás, y qué podrías mejorar.
+
+Es tu memoria externa, tu bitácora cognitiva y tu asistente reflexivo.
+
+El Whitepaper: **“visión estratégica y emocional”**
+
+> “Una mente clara comienza con una memoria ordenada.”
+
+## 2. ¿Qué es ALMA_LOADER?
+Es un sistema de gestión de memorias que transforma entradas en lenguaje natural en objetos estructurados, los valida, almacena, analiza y resume. Está diseñado para crecer: desde simples registros hasta análisis semánticos con embeddings, pasando por gamificación, automatización y retroalimentación inteligente.
+
+## 3. Casos de Uso
+- Diario de trading inteligente
+- Asistente de reflexión personal
+- Registro emocional y hábitos
+- Dashboard de decisiones + alertas
+- Base de datos para IA contextual
+- Entrenador de hábitos y rutinas
+
+### 🧪 Ejemplo Narrativo
+
+Un usuario escribe:
+
+> *“Hoy operé con 5% de riesgo tras dormir solo 4 horas. Me sentí acelerado y tomé decisiones impulsivas.”*
+
+ALMA_LOADER detecta los tags implícitos `#fatiga`, `#riesgo_elevado`, y `#emocion:impulsividad`.  
+Gracias a su sistema de reglas inteligentes, dispara la siguiente acción:
+
+- Sugiere revisar la memoria `MEMHEALTH-022` que trata sobre riesgos de operar cansado.
+- Recomienda reducir el riesgo operativo al 1%.
+- Etiqueta esta memoria como `#alerta:riesgo` para análisis futuro.
+
+Este tipo de intervención contextual transforma simples registros en decisiones informadas.
+
+
+## 4. Arquitectura Conceptual
+- Núcleo de procesamiento (NL → JSON)
+- Validación semántica (`schema_base.json`)
+- Almacenamiento modular (SQLite / FAISS / futuros motores)
+- Sistema de atención (router)
+- Vectorización semántica (embeddings)
+- Reglas inteligentes y generación de resúmenes
+
+> 💡 ¿Querés entender cómo se implementa cada módulo?  
+> Consultá la [Guía Técnica (Prompt Técnico)](ALMA_LIBRE/MODULOS/Alma_Loader/alma_loader_v3.0.3/docs/archivos_fundamentales/prompt_technical_ALMA_LOADER_v3.0.2.md)
+
+### 🧩 Tabla de Correspondencia: Módulos ↔ Scripts
+
+Para ver el detalle de implementación, consultá la tabla de módulos en el [Prompt Técnico](ALMA_LIBRE/MODULOS/Alma_Loader/alma_loader_v3.0.3/docs/archivos_fundamentales/prompt_technical_ALMA_LOADER_v3.0.2.md#2-módulos-funcionales).
+
+---
+### 4.1 🌐 API REST (Diseño Futuro)
+
+ALMA_LOADER está preparado para exponer una API REST que permita la integración con interfaces externas, aplicaciones móviles, dashboards analíticos, asistentes de voz y automatizaciones.
+
+La API será desarrollada con FastAPI y seguirá estándares modernos (OpenAPI 3.1).
+
+### 🔌 Endpoints planeados (versión inicial)
+
+| Método | Endpoint             | Descripción breve                              |
+|--------|----------------------|-------------------------------------------------|
+| POST   | /memorias            | Registra una nueva memoria                     |
+| GET    | /memorias            | Devuelve todas las memorias                    |
+| GET    | /memorias/{id}       | Busca una memoria por ID                       |
+| GET    | /memorias/search     | Búsqueda semántica por contenido o tags        |
+| POST   | /memorias/relacionar | Enlaza dos memorias existentes                 |
+| GET    | /tags                | Lista todos los tags usados                    |
+| GET    | /memorias/recientes  | Devuelve últimas N memorias registradas        |
+
+### 🧩 Ejemplo de integración futura
+
+```http
+POST /memorias
+Content-Type: application/json
+
+{
+  "id": "MEM-TRD-2025-05-06-001",
+  "categoria": "TRD",
+  "contenido": "Operé ETH/USD con 3% de riesgo tras dormir poco.",
+  "tags": ["#fatiga", "#riesgo", "#trading"]
+}
+```
+
+Este input será validado con `schema_base.json`, almacenado vía `SQLiteStorage`, vectorizado (FAISS) y procesado por `on_memoria_guardada()` si aplica.
+
+> Esta API será lanzada como parte de la versión 3.1.x de ALMA_LOADER.
+## 5. Diagramas del Sistema
+```mermaid
+flowchart TD
+    input["🧑 Usuario o IA"] --> nl["core_nl.py"]
+    nl --> validador["validador.py"]
+    validador --> router["router_atencional.py"]
+    router --> storage["sqlite_storage / vector_storage"]
+    router --> resumenes["resumenes.py"]
+    resumenes --> output["📄 Markdown / Dashboard"]
+    storage --> analytics["alma_analytics.py"]
+    analytics --> output
+```
+
+## 6. Escalabilidad y Visión Futura
+- Vectorización total y enlaces entre memorias (grafos)
+- Reemplazo de SQLite por motores orientados a relaciones (Neo4j)
+- Integración con asistentes personales vía voz, API y web
+- Memorias multiusuario con capas de privacidad
+
+## 7. Recomendaciones de Integración
+- El sistema espera entradas en lenguaje natural o JSON válido
+- Cada módulo puede operar por separado (desacoplamiento limpio)
+- Ideal para integrarlo como backend de un asistente IA
+- DeepSeek, GPT o interfaces custom pueden usarlo como núcleo de memoria conversacional
+## 8. Comandos Útiles – Modo Asistente
+
+ALMA_LOADER puede ser utilizado como un asistente conversacional desde cualquier interfaz (terminal, Telegram, Shortcuts, GPT, etc.). A continuación, algunos ejemplos de uso:
+
+### 📘 Comandos de Registro
+- `/nueva Hoy gané $100 operando BTC con alta ansiedad`
+- `/nueva Me sentí estancado y sin claridad esta semana`
+
+### 📙 Comandos de Acción
+- `/accion Meditar 15 minutos después del mercado`
+- `/accion Ajustar riesgo a 1% esta semana`
+
+### 📗 Comandos de Reflexión
+- `/reflexion Me doy cuenta que opero peor cuando duermo poco`
+- `/reflexion Revisar trades similares a MEM-TRD-2025-04-10`
+
+### 📕 Comandos de Consulta
+- `/resumen semana`
+- `/alertas activas`
+- `/recomendar memoria relacionada con ansiedad y sobreoperación`
+
+> Cada uno de estos comandos será procesado y transformado en memoria, acción o reflexión según el módulo de atención.
+
+---
+> Este whitepaper resume el espíritu, diseño y ambición de ALMA_LOADER desde una perspectiva conceptual y estratégica. Complementa al prompt técnico 3.0 que contiene las definiciones formales del sistema.
+
+## 🔌 Integración con Módulos Externos
+
+ALMA_LOADER está diseñado para operar como núcleo de memoria e inteligencia semántica para múltiples aplicaciones.
+
+Esta versión 3.0.2 introduce una estructura preparada para la futura integración de módulos externos. Cada uno de estos módulos podrá interactuar con el sistema a través de sus interfaces y funciones expuestas.
+
+### Ejemplos de módulos potenciales (en evaluación):
+- 📊 Analizador de Trading Emocional
+- 🌱 Gestor Inteligente de Cultivo
+- 📔 Bitácora Personal Automatizada
+- 🧠 Asistente de Decisiones Estratégicas
+- 💰 Controlador de Fondos y Riesgo
+
+> En futuras versiones, cada módulo tendrá su documentación (`README`) y prompt local, conectado a ALMA_LOADER como backend de memoria.
+
+Esta sección será actualizada a medida que se confirmen las integraciones.
+
+---
+
+## 🧭 Roadmap General Estratégico – ALMA_LOADER Post v3.0.3
+
+### 🎯 Objetivo General
+
+Consolidar un backend modular, seguro y ampliable que actúe como núcleo inteligente de un asistente personal diario. Toda la lógica y estructura se mantiene sintetizada en dos archivos base (`whitepaper` y `prompt técnico`) para máxima claridad e interoperabilidad con modelos de lenguaje. Se prioriza compatibilidad con cuadernos digitales (Obsidian, Shortcuts, Recordatorios).
+
+---
+
+### 🔁 Fase 1 – Consolidación del Núcleo
+- Vectorización real con FAISS (`core/vector_storage.py`)
+- GET `/v1/memorias`: recuperación por texto, ID o tags
+- Refactor de `sqlite_storage` (update, transacciones)
+- Configuración por `.env`
+- Unificación de estados (`Enum`)
+- Actualización del whitepaper: “Core Engine v1”
+
+---
+
+### 🧠 Fase 2 – IA Básica y Consultas
+- Endpoint `/v1/assistant/consultar`
+- Uso de modelo externo para responder con contexto
+- Creación de `core/racionalizador.py`
+- Prompts funcionales en el prompt técnico
+- Nueva sección: “Capas de interacción con IA”
+
+---
+
+### 🧩 Fase 3 – Integración de Módulos Temáticos y Cuadernos
+
+#### 📈 Trading
+- Endpoint `/v1/trading/resumen`
+- Lectura de memorias “trading”
+- Enlace: Obsidian carpeta “Trading”, Recordatorios
+
+#### 🌱 Cultivo
+- Endpoint `/v1/cultivo/registro-datos`
+- Análisis de VPD, EC, alertas
+- Enlace: “001_Flora”, “002_Vege”
+
+#### 💻 Programación
+- Endpoint `/v1/code/consultar-snippet`
+- Cuaderno digital: “Programación”
+
+Todos los módulos escriben y consultan memorias comunes bajo categorías y tags.
+
+---
+
+### 🔐 Fase 4 – Seguridad y Despliegue
+- JWT real y múltiples usuarios
+- Dockerfile + `docker-compose`
+- Endpoint de monitoreo básico
+- Telegram + Shortcuts como interfaz liviana
+
+---
+
+### 🔄 Fase 5 – Sincronización con Cuadernos Digitales
+- Carga automática desde notas Obsidian (por tags)
+- Registro de Recordatorios diarios como memorias
+- Mapa de relaciones con grafo (D3.js o Neo4j)
+- Nueva sección: “Memoria extendida” en whitepaper
+
+---
+
+### 🧩 Notas Finales
+- Toda evolución queda registrada en el `CHANGELOG.md`
+- Se prioriza siempre claridad conceptual antes que escalamiento técnico
+
+## 🧾 Anexo Histórico – Evolución del Sistema
+
+> Registro consolidado de avances funcionales y técnicos por versión (v3.0.0 → v3.0.2).
+
+---
+
+### 🧱 Versión 3.0.0 – Fundacional (Base Estructural)
+
+### ✅ Objetivos principales:
+- Consolidar toda la lógica del sistema en dos archivos núcleo:
+  - `whitepaper_ALMA_LOADER_v3.0.0.md`
+  - `prompt_technical_ALMA_LOADER_v3.0.0.md`
+- Eliminar fragmentación de versiones previas (2.1.1 y 2.2.0)
+- Documentar propósito, módulos funcionales, arquitectura general y comandos.
+
+### 🔧 Avances clave:
+- Establecimiento de una arquitectura modular por secciones (por categorías).
+- Definición de convenciones de IDs, tags y esquemas base.
+- Inicio del lenguaje semántico ALMA (enunciados, relaciones, auto-reflexión).
+- Documentación clara para humanos e IAs, adaptable a cualquier app.
+
+---
+
+#### 🚀 Versión 3.0.1 – Profesionalización Técnica
+
+### ✅ Objetivos:
+- Incluir elementos técnicos reales que permitan operar y testear el sistema.
+- Preparar el motor para trabajar con FAISS, SQLite y validaciones avanzadas.
+
+### 🛠️ Implementaciones:
+- Ejemplo real de test unitario para validación de memorias.
+- Agregado de tabla de tecnologías usadas (spaCy, sentence-transformers, FAISS, SQLite).
+- Caso real de regla dinámica en `reglas_dinamicas.json`.
+- Documentación de la coexistencia entre SQLite y FAISS (con `embedding_id`).
+- Refuerzo de consistencia entre módulos en prompt y whitepaper.
+
+---
+
+#### 🧠 Versión 3.0.2 – Escalabilidad y Preparación para Integración
+
+### ✅ Foco principal:
+- Transformar ALMA_LOADER en un sistema escalable, integrable y colaborativo.
+
+### 🧩 Avances clave:
+
+#### 🧠 Prompt Técnico
+- Implementación del hook `on_memoria_guardada()` con patrón limpio y extensible.
+- Creación de `HookManager` para ejecutar múltiples callbacks desacoplados.
+- Código documentado para `BaseStorage` y `SQLiteStorage`.
+- Secciones nuevas: onboarding paso a paso y guía para contribuyentes.
+- Eliminación de redundancias con el whitepaper.
+
+#### 📘 Whitepaper
+- Sección 4.1: Diseño inicial de la API REST (con endpoints y ejemplo).
+- Inclusión de “Módulos Externos Integrables” como visión de expansión futura.
+- Caso narrativo real con sugerencia dinámica (#fatiga → MEMHEALTH-022).
+- Explicación cruzada con el prompt técnico para mantener coherencia total.
+
+#### 📁 Documentación
+- Unificación del README y CHANGELOG con secciones enlazadas.
+- Preparación para generar docs web (estructura para `mkdocs` o `Sphinx`).
+
+---
+
+### 🔚 Resultado
+
+> ALMA_LOADER hoy es un sistema **modular, documentado, integrable y escalable** que puede:
+- Operar como backend semántico de cualquier app (cultivo, trading, bitácoras).
+- Ser entendido por humanos o IAs con solo 2 archivos centrales.
+- Adaptarse a futuras versiones de forma incremental y trazable.

@@ -1,0 +1,4 @@
+## 1. Abrir LUKS con cryptsetup
+
+```bash
+cryptsetup open /dev/sda3 alma_root

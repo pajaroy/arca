@@ -1,0 +1,62 @@
+
+# ALMA_RESIST – Idea Base v0.0.4
+
+## 🧠 Resumen Ejecutivo
+
+**ALMA_RESIST** es un entorno operativo offline, modular y autónomo impulsado por IA local. Diseñado para funcionar desde nodos físicos independientes (PC madre, disco portátil, pendrive booteable), combina procesamiento natural por LLMs, memoria estructurada, autonomía controlada, y sincronización distribuida. Esta versión establece las bases para la escalabilidad futura del sistema, enfocándose en mantenibilidad, integración, despliegue automatizado y preparación para contribuciones externas.
+
+
+## ⚙️ Especificaciones Técnicas Reforzadas
+
+- **Hardware mínimo:** CPU 4 núcleos, 8 GB RAM, sin GPU requerida (modo básico)
+- **Dependencias exactas:**
+  - Python 3.10+
+  - llama-cpp-python >= 0.2.10
+  - text-generation-webui (commit `xyz`)
+  - SQLite3, FAISS, GPG, Git
+
+
+## 🔄 Mantenimiento y Actualización
+
+- **Versionamiento semántico:** `vMAJOR.MINOR.PATCH` (`0.0.4` actual)
+- **Parches mensuales:** revisión de logs, tokens, fallos del sistema
+- **Política de soporte:** guía de resolución (`docs/soporte.md`) y fallback automático en caso de errores críticos
+
+
+## 🔗 Integración Externa
+
+- **API REST local (FastAPI):** permite conexión con:
+  - Aplicaciones móviles
+  - Scripts externos
+  - Panel web local (`localhost:7861`)
+- **Sincronización con Obsidian/Logseq:**
+  - `user/` montado como vault mediante symlinks
+  - Plugin opcional para sincronización bidireccional
+
+
+## 🌐 Comunidad y Escalabilidad
+
+- **Guía de contribución (`CONTRIBUTING.md`)**:
+  - Reglas de estilo
+  - Flujos de pull request
+  - Etiquetas `enhancement`, `bug`, `architecture`, etc.
+
+- **Sistema de badges:**
+  - `contributor`, `tester`, `curator`
+  - Visibles en commits y documentados en `docs/community.md`
+
+
+## 🗺️ Roadmap Técnico Sugerido
+
+**Objetivo General:** generar un roadmap técnico priorizado, enfocado en escalabilidad, seguridad y usabilidad.
+
+**Entregables esperados:**
+- Cronograma con hitos por trimestre
+- Análisis de riesgos y dependencias
+- Asignación estimada de recursos
+
+**Adjuntos esperados para roadmap AI:**
+- `ALMA_RESIST_idea_base_0.0.4.md`
+- Carpeta `ALMA_LIBRE/` completa
+- Scripts y configuraciones clave
+

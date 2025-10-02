@@ -1,0 +1,31 @@
+
+# 📘 README del Módulo – [NOMBRE_DEL_MÓDULO]
+
+## 📦 Descripción
+Este módulo forma parte del sistema ALMA LIBRE. Contiene funcionalidades, registros o estructuras específicas para el área **[ESPECIFICAR]**.
+
+## 🧠 Objetivo del Módulo
+[Describir brevemente para qué sirve este módulo: control de datos, trazabilidad emocional, automatización, etc.]
+
+## 📂 Estructura Interna
+- `/data/` → [explicación]
+- `/scripts/` → [explicación]
+- `README.md` → Este archivo
+- `META.md` → Metadata operativa
+
+## 🧾 Versión del Módulo
+- **Versión:** 1.0.0
+- **Última actualización:** YYYY-MM-DD
+- **Estado:** Activo / En desarrollo / Archivado
+- **Compatible con:** Prompt_Activo_1.0.0.md
+
+## 🔗 Conexiones
+Este módulo se relaciona con:
+- [ ] `Bitácora Central`
+- [ ] `Gestor de Templates`
+- [ ] [Otros módulos/cuadernos relevantes]
+
+## 🧪 Pendientes / Roadmap
+- [ ] Tarea 1
+- [ ] Tarea 2
+

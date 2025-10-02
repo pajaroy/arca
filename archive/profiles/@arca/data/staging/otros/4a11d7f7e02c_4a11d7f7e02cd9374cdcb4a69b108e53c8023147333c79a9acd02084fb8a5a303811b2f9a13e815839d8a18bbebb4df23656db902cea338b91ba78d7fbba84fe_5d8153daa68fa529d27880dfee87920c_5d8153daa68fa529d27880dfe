@@ -1,0 +1,42 @@
+{
+  "id": "changelog_cargar_memorias_v0.1.2",
+  "version": "0.1.2",
+  "fecha": "2025-06-11",
+  "autor": "santi + centralesis",
+  "linked_to": [
+    "cargar_memorias_v0.1.1.py",
+    "prompt_cargar_memorias_v0.1.2.yaml",
+    "manifest_v0.1.1.yaml",
+    "memoria_centralizada.yaml"
+  ],
+  "resumen": "Versión crítica y robustecida para la gestión centralizada de memorias institucionales, multiagente y auditable en ALMA_RESIST.  Esta versión eleva el estándar de integridad, escalabilidad y gobernanza para la memoria viva y el flujo CLI multiagente.\n",
+  "cambios": [
+    {
+      "Se añaden y validan los campos obligatorios": "id, fecha, agente, tipo, autor, contenido, modulo, tags."
+    },
+    "Inclusión de campo hash SHA256 autogenerado por memoria (campos críticos).",
+    {
+      "Campos opcionales": "origen_archivo, fecha_ingreso, commit_ref."
+    },
+    "Control de concurrencia estricto mediante lockfile para evitar corrupción.",
+    "Backup automático con hash y timestamp antes de cada operación de guardado.",
+    "Logging estructurado y changelog automático tras cada cambio.",
+    "Comandos batch para migración masiva, dry-run en todas las operaciones.",
+    "Soporte de query multi-filtro (agente, tipo, tags, limit, offset) y salida YAML/JSON.",
+    "Métricas institucionales (totales, por agente, por tipo, últimos registros, tamaño).",
+    "Placeholder para exportación directa a SQLite (base para migración futura).",
+    "Preparado para integración con chat CLI multiagente y motores RAG.",
+    "Estructura de changelog y bitácora compatible con auditoría institucional viva."
+  ],
+  "riesgos_pendientes": [
+    "Implementar validador externo de schema (YAML/JSON) para compatibilidad extendida.",
+    "Completar y testear el exportador SQLite para producción a gran escala.",
+    "Ajustar y testear chunking/paginación en archivos >10K registros."
+  ],
+  "recomendaciones_auditoria": [
+    "Registrar cada migración o carga masiva con origen_archivo y commit_ref.",
+    "Monitorear hashes globales tras cada operación y disparar alertas ante cambios inesperados.",
+    "Documentar incidentes o bugs en bitácora y changelog con máxima transparencia."
+  ],
+  "frase_cierre": "La memoria única, íntegra y auditable es la base real de toda inteligencia y resiliencia. Sin changelog, todo avance es olvido.\n"
+}

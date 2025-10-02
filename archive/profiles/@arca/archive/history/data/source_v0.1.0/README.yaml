@@ -1,0 +1,15 @@
+# ~/@arca/.source/readme.yaml
+
+Ubicacion: ~/@arca/.source
+
+Descripcion: 
+ - Esta es la carpeta base para los archivos ".md, .py, .yaml, .csv, .sql".
+ - Usaremos el metodo 'Blake3' para el hash de los archivos y 'fdupes' para evitar duplicados.
+ - La idea es volcar todos los archivos aqui y poder extraer metadatos para poder hacer parseable y extaer datasets de trabajo para un modelo ML.
+
+Estructura:
+ - config: Contrenda la config.yaml de ~/@arca/.source
+ - database: Contendra la database. Ejemplo: 'source.csv'
+ - og: Carpeta raiz donde se volvaran todos los archivos para extaer a travez de 'find' separando los archivos.
+    - formato: Contendra 5 carpetas "markdwon, python, yaml, csv, sql, otros"
+ - scripts: iran los diferentes scripts como el bash para el indexado de los archivos.

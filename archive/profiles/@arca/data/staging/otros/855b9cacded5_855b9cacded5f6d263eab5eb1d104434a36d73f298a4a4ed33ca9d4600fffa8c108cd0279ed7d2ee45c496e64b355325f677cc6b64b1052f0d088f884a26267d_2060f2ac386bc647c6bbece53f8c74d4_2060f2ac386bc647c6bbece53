@@ -1,0 +1,16 @@
+# 📋 Changelog – ALMA_LOADER Whitepaper
+
+## [3.0.1] – 2025-05-06
+
+### ✨ Added
+- Caso de uso narrativo que activa reglas dinámicas
+- Tabla de correspondencia módulo ↔ script
+- Prólogo ampliado con filosofía ALMA
+- Nueva sección de comandos útiles (modo asistente)
+
+### 🔄 Changed
+- Reorganización interna para reflejar arquitectura actualizada
+- Reordenamiento de secciones para mejorar lectura progresiva
+
+### 🧹 Removed
+- N/A

@@ -1,0 +1,10 @@
+# 📁 scripts/ – Scripts Críticos del Sistema
+
+Cada subcarpeta representa un **script principal** del sistema ALMA_RESIST, separado para facilitar su mantenimiento, documentación y pruebas.
+
+- `alma_status/`: Scripts que evalúan el estado general del sistema.
+- `backup_to_git/`: Script y lógica de backup automático.
+- `sync_status/`: Verificación de sincronización entre nodos.
+- `stignore/`: Plantillas de exclusión de archivos para Syncthing.
+
+📌 Cada carpeta contiene su script, README propio y bitácora de validación.

@@ -1,0 +1,41 @@
+import frontmatter
+from .validator import validate_metadata
+from .diff_tool import generate_diff
+from .logger import log_to_bitacora, log_to_changelog
+import yaml
+from pathlib import Path
+from .file_utils import parse_content
+
+
+def process_file(file_path: Path, schema: dict, config: dict) -> dict:
+    """Procesa un archivo individual con detección de formato"""
+    # Detección automática de formato (frontmatter/YAML/JSON)
+    content, metadata = parse_content(file_path)
+    
+    # Validación estructural
+    if not validate_metadata(metadata, schema):
+        raise ValueError(f"Metadata inválida en {file_path.name}")
+    
+    # Aplicar reglas de corrección
+    fixed_metadata = apply_fix_rules(metadata)
+    
+    return {
+        "file": file_path,
+        "original": metadata,
+        "fixed": fixed_metadata,
+        "content": content
+    }
+def apply_changes(results: list):
+    for result in results:
+        if result['content']:  # Archivos con frontmatter
+            new_post = frontmatter.Post(result['content'], **result['fixed'])
+            result['file'].write_text(frontmatter.dumps(new_post))
+        else:
+            # Guardado estándar para YAML/JSON
+            result['file'].write_text(yaml.dump(result['fixed']))
+
+def generate_patch_files(results: list):
+    for result in results:
+        diff_content = generate_diff(result['original'], result['fixed'], result['file'].name)
+        patch_path = result['file'].with_suffix('.patch')
+        patch_path.write_text(diff_content)

@@ -1,0 +1,52 @@
+---
+module: prompts/prompt_add_linked_to_minimo
+type: core
+status: in_progress
+created: '2025-05-23'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+---
+
+# 🧠 Prompt – Generador de Script de Corrección linked_to
+
+Quiero un script en Python llamado `add_linked_to_minimo.py` que recorra todos los archivos `.md` dentro de un directorio (ej: ./docs).
+
+## ✅ El script debe:
+
+1. Leer el bloque YAML de cada archivo.
+2. Verificar si el campo `type` es `"core"`.
+3. Si el documento **no tiene `linked_to`**, debe agregar:
+
+```yaml
+linked_to:
+  - metodologia_doc_ia_v2.md
+```
+
+4. Mantener los campos existentes. No sobreescribir nada útil.
+5. Crear un **backup** del archivo antes de modificarlo (guardar en `./backup_linked_to/FECHA/`).
+6. Mostrar por consola qué archivos fueron modificados.
+7. Ignorar los archivos que ya tienen `linked_to`.
+
+---
+
+## ⚙️ Extras técnicos:
+
+- Debe soportar flags por línea de comando:
+  - `--root` para especificar directorio base (default: ./docs)
+  - `--dry-run` para simular sin escribir archivos
+  - `--verbose` para mostrar información detallada
+
+- Usar:
+  - `PyYAML` para manejar YAML
+  - `pathlib` y `argparse`
+  - `datetime` para la fecha del backup
+
+- **No usar librerías externas fuera del entorno estándar de Python.**
+
+---
+
+## 🎯 Objetivo
+
+Este script ayudará a corregir más de 90 archivos `.md` que fallan la validación por no tener `linked_to`, cuando son `type: core`. El valor `metodologia_doc_ia_v2.md` es un enlace válido y genérico para normalización mínima.

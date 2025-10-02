@@ -1,0 +1,43 @@
+
+
+# Submódulo: Fix_Last_Modified
+
+## Descripción
+
+Este submódulo forma parte del sistema **ALMA_CLI / Cleaner / Fix_Metadata** y está dedicado a actualizar de manera automatizada el campo `last_modified` en archivos de metadatos (YAML o encabezados YAML en .md).
+
+Permite registrar la fecha y hora exacta de la última modificación del archivo, mejorando la trazabilidad y el control de cambios en todos los recursos críticos del sistema ALMA_RESIST.
+
+## Componentes principales
+
+- **Script fuente:** `Fix_Last_Modified.py`
+    
+- **Características y funcionamiento:** `Caracteristicas_y_Funcionamiento.md`
+    
+- **Prompt de generación:** `Prompt_Actualizar_Last_Modified.md`
+    
+
+## Uso
+
+El script puede ejecutarse sobre cualquier archivo de metadatos para actualizar el campo `last_modified`. Se recomienda integrarlo dentro de flujos automáticos (batch) para mantener toda la documentación del sistema al día.
+
+## Ejemplo de ejecución
+
+```bash
+python3 ../../Src/Fix_Last_Modified/Fix_Last_Modified.py README.md santi
+```
+
+## Buenas prácticas
+
+- Usar este submódulo como parte del pipeline de validación y actualización de metadatos.
+    
+- Combinar con otros fixers para mantener la integridad total del sistema.
+    
+- Auditar regularmente el campo `last_modified` para detectar archivos desactualizados.
+    
+
+## Relacionados
+
+- Características: `Caracteristicas_y_Funcionamiento.md`
+    
+- Prompt para generación IA: `Prompt_Actualizar_Last_Modified.md`

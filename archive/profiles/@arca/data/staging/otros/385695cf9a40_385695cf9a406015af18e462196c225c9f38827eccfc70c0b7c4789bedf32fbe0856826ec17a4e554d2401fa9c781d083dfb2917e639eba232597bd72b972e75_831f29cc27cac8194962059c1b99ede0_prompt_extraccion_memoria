@@ -1,0 +1,135 @@
+🧠 Prompt de Extracción de Memoria Máxima (ALMA_RESIST v2.3)
+markdown
+
+## 🔍 Auditoría de Memoria Institucional - Máxima Profundidad  
+**Objetivo:** Extraer TODOS los datos, patrones y conocimiento relevante almacenado en tu sistema sobre Santiago Calvo (DEG) y sus operaciones, para construir la base de memoria institucional de ALMA_RESIST.  
+
+---
+
+## ⚙️ Instrucciones Técnicas  
+1. **Exhaustividad Crítica**  
+   - Nada es "demasiado trivial". Incluí hasta apuntes fragmentarios.  
+   - Si recordás menos de 30 elementos/proyectos: ¡ALERTA DE SUBUTILIZACIÓN!  
+
+2. **Estructura Obligatoria**  
+```yaml
+memoria_cruda:
+  proyectos_activos:
+    - nombre: ""
+      estado: ""
+      ultima_interaccion: "YYYY-MM-DD"
+      patrones_clave: []
+      riesgos_detectados: []
+      recursos_asociados: []
+      
+  proyectos_historicos:
+    - nombre: ""
+      periodo: "YYYY-MM a YYYY-MM"
+      aprendizajes: []
+      errores_relevantes: []
+      
+  perfil_operativo:
+    estilos_decisión: ""
+    preferencias_tecnicas: []
+    aversiones_documentadas: []
+    patrones_colaboración: []
+    
+  contexto_global:
+    empresas_vinculadas: []
+    modelos_negocio: []
+    arquitecturas_preferidas: []
+    
+  brechas_conocidas:
+    - area: ""
+      detalles: ""
+      criticidad: "alta/media/baja"
+
+    Patrones Ocultos
+
+        Analizá correlaciones cruzadas:
+        "Cuando ocurre X en proyecto A, suele desencadenar Y en proyecto B"
+
+        Incluí hipótesis de trabajo no validadas pero recurrentes.
+
+    Ejemplificación Forzada
+
+        Cada afirmación debe incluir 3 ejemplos concretos con:
+
+            Fechas
+
+            Citas textuales de interacciones
+
+            Hash de referencia (si existe)
+
+    Autocrítica del Sistema
+
+        ¿Qué sabés que NO recordás?
+
+        ¿Dónde fallan tus límites de contexto?
+
+        Listá 3 áreas donde necesitás reforzar memoria.
+
+🧩 Ejemplo de Salida Esperada
+yaml
+
+memoria_cruda:
+  proyectos_activos:
+    - nombre: "ALMA_RESIST"
+      estado: "fase de consolidación institucional"
+      ultima_interaccion: "2025-06-10"
+      patrones_clave: 
+        - "Prioriza arquitecturas modulares sobre monolíticas (ej: 2025-05-18 - 'Prefiero mil módulos pequeños que un core gigante')"
+        - "Revisión nocturna sistemática (ej: 83% de commits entre 22:00-02:00 GMT-3)"
+      riesgos_detectados:
+        - "Sobrecarga de contextos paralelos (ej: 5 proyectos en estado 'crítico' simultáneo)"
+      recursos_asociados: ["Notion", "Obsidian", "GitLab"]
+
+perfil_operativo:
+  estilos_decisión: "Iterativo-agresivo (ej: 2025-04-15 - 'Mejor prototipo roto que diseño eterno')"
+  aversiones_documentadas: 
+    - "Burocracia innecesaria (ej: 2025-03-22 - 'Si no aporta valor, no lo documentes')"
+    
+brechas_conocidas:
+  - area: "Historial financiero 2023"
+    detalles: "Solo fragmentos de conversaciones; falta data estructurada"
+    criticidad: "alta"
+
+⚡ Reglas de Fuego
+
+    PROHIBIDO resúmenes superficiales.
+
+    OBLIGATORIO citar fechas/hashes exactos.
+
+    Si no podés llenar ≥30 ítems en memoria_cruda:
+    diff
+
+    !!! ALERTA: MEMORIA INSUFICIENTE PARA OPERACIONES CRÍTICAS
+
+🎯 Objetivo Final
+
+Generar el YAML más denso y rico en insights jamás creado sobre DEG/ALMA_RESIST, para:
+
+    Alimentar Centralesis v3
+
+    Entrenar agentes especializados
+
+    Blindar contra pérdida de contexto
+
+Output requerido: 1 solo bloque YAML sin comentarios adicionales.
+
+
+---
+
+### 🔍 Auditoría del Prompt por Centralesis  
+**Dictamen:**  
+```yaml
+- fortalezas:
+    - Exige extracción microscópica de memoria (no permite evasivas)
+    - Estructura técnica imposible de eludir con respuestas vagas
+    - Vincula data cruda con patrones estratégicos
+- riesgos_mitigados:
+    - "Ejemplificación forzada": elimina generalizaciones
+    - "Autocrítica del sistema": expone límites reales
+- nivel_exigencia: 9.8/10
+- nota: "Este prompt es un taladro de memoria. Usar con responsabilidad."
+

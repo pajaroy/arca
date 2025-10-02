@@ -1,0 +1,42 @@
+# 🧠 Prompt – Reorganización de Carpeta ALMA_EMPRESA
+
+## 🎯 Objetivo
+
+Iniciar un proceso de reorganización profunda de la carpeta `ALMA_EMPRESA` aplicando la metodología `estructura_autonoma_v2`. Este proceso busca formalizar, limpiar y estandarizar su estructura interna, asegurando modularidad, trazabilidad, y compatibilidad con sistemas automatizados e IA-friendly.
+
+## 🔍 Contexto
+
+Estamos trabajando en el mismo chat donde ya se viene organizando todo el ecosistema ALMA_RESIST, pero ahora se abre un **nuevo enfoque específico**: consolidar `ALMA_EMPRESA` como nodo central de operaciones empresariales del ecosistema ALMA.
+
+El objetivo es que `ALMA_EMPRESA`:
+- Contenga toda la documentación y estructura para operar como empresa matriz.
+- Se vincule con las carpetas `entidades/`, `control/`, `IA_asistente/`, `fondo_inversion/` y `trading/`.
+- Tenga proyecciones a futuro y documentación clara por componente.
+- Sirva como modelo replicable para otras estructuras similares.
+
+## 📦 Archivos iniciales
+
+Se va a adjuntar un ZIP con la carpeta actual `ALMA_EMPRESA/`, la cual tiene subcarpetas preliminares como:
+- `equipo/` con roles como Comandante Santiago, Asesor Padre, Supervisor Pablo, Tesorero Federico.
+- `entidades/` con Cannabird, 13CC e Inance.
+- `asesoria_legal_contable/` en fase de conceptualización.
+- `IA_asistente/` proyectado como gestor IA de operaciones.
+- `fondo_inversion/` con base en Prompt Master y criterios simbólicos.
+- `trading/` vinculado a futuro fondo IA-financiero.
+
+## 🧱 Tareas esperadas en este chat
+
+1. Revisión del contenido actual y detección de inconsistencias.
+2. Aplicación de la estructura `estructura_autonoma_v2` en cada subcarpeta.
+3. Limpieza de nombres y estandarización de rutas.
+4. Inclusión de `readme.md` y metadatos mínimos en cada nodo.
+5. Generación de propuestas IA-friendly para reorganización.
+6. Registro de todo el proceso con bitácora fechada.
+
+## 📁 Output esperado
+
+- Carpeta reorganizada según metodología.
+- Readme principales y secundarios actualizados.
+- Vinculación con `control/` y `ALMA_RESIST/docs/`.
+- Proyección lista para auditar.
+

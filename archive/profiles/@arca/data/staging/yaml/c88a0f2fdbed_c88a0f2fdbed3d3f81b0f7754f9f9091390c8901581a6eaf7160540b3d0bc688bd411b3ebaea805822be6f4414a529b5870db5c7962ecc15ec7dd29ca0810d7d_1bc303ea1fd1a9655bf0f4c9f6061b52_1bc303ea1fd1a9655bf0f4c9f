@@ -1,0 +1,55 @@
+id: PROMPT_2025-06-06_cargador_memorias_maestro
+tipo: requerimiento_desarrollo
+fecha: 2025-06-06
+modulo: alma_resist/control_central/memorias/
+status: vigente
+responsable: Santi (humano), Kael (auditor CLI)
+tags: [prompt_maestro, deepseek, cargador_memorias, json, yaml, schema, auditado, eficiencia, gobernanza]
+tema: "Desarrollo de cargador universal de memorias institucionales para ALMA_RESIST"
+
+resumen: >
+  Se solicita el desarrollo de un script CLI robusto para cargar memorias y bitácoras institucionales en los archivos
+  memorias.json/yaml y bitacora_viva.json/yaml, bajo la arquitectura ALMA_RESIST. El sistema debe ser crítico, escalable, IA-friendly, y preparado para auditoría y automatización total.
+
+requerimientos:
+  - Entrada flexible:
+      - Soporte para JSON y YAML (individual o batch/array).
+      - Input por archivo (--input), stdin (--stdin), o modo interactivo (opcional).
+  - Validación estricta:
+      - Validar con JSON/YAML Schema oficial (adjuntar schema).
+      - Campos obligatorios: id, tipo, fecha, modulo, tema, status, responsable, tags, resumen, impacto/recomendaciones.
+      - Rechazo automático de campos faltantes o desconocidos; errores explícitos y sugerencias.
+  - Carga eficiente y robusta:
+      - Evitar duplicados por campo id.
+      - Soporte para carga en lote y reporte resumido post-carga.
+      - Flag --dry-run para validar sin modificar archivos.
+      - Escritura atómica: temp file y swap, backup automático antes de cada cambio.
+      - Manejo seguro de concurrencia (file lock).
+      - Permitir logs estructurados (JSON/YAML), con timestamp, canal y resultado.
+  - Seguridad y trazabilidad:
+      - Hash/checksum opcional por registro.
+      - Registrar origen/canal de carga (cli, ia, api).
+      - Permitir registro de usuario o IA responsable.
+      - Control de versiones del script y del archivo destino.
+  - CLI amigable y futuro-proof:
+      - Ayuda y flags claros (--help, --input, --dest, --dry-run, etc).
+      - Opción de conversión masiva YAML↔JSON.
+      - Reportes por tags, fechas, tipos desde CLI.
+      - Preparado para desacoplar lógica y exponer como API local (futuro).
+      - Mensajes y documentación listos para multi-idioma.
+  - Documentación y pruebas:
+      - README detallado.
+      - Casos de prueba: input válido, campos faltantes, duplicados, tipos erróneos, fechas mal formateadas, edge cases.
+
+recomendaciones_extra:
+  - Mantener y versionar el schema oficial junto al script.
+  - Registrar toda acción relevante como memoria institucional en la base de datos.
+  - Diseñar para integración simple en CI/CD y compatibilidad con otras IA.
+  - Devolver salida legible por humano y por sistema (exit codes claros, logs estructurados).
+  - Permitir extensión a DB real (ej: SQLite) en el futuro.
+
+referencias:
+  - /home/bird/alma_resist/control_central/memorias/memorias.json
+  - /home/bird/alma_resist/control_central/memorias/bitacora_viva.json
+  - /home/bird/alma_resist/control_central/memorias/memorias.yaml
+  - /home/bird/alma_resist/control_central/memorias/bitacora_viva.yaml

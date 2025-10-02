@@ -1,0 +1,23 @@
+version: "0.2.0"
+author: "bird"
+
+root: /arca
+
+paths:
+  archive: /arca/archive
+  backup: /arca/archive/backup
+  history: /arca/logs
+
+meta:
+  supported_extensions:
+    - .yaml
+    - .yml
+    - .md
+    - .json
+    - .py
+    - .csv
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  date_format: "%Y-%m-%d %H:%M:%S"

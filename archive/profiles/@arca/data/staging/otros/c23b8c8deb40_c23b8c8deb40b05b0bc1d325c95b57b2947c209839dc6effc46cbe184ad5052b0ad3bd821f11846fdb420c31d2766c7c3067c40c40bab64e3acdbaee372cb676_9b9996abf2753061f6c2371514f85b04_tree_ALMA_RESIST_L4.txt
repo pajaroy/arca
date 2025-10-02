@@ -1,0 +1,140 @@
+.
+├── ALMA_EMPRESA
+│   ├── asesoria
+│   │   ├── contable
+│   │   ├── institucional
+│   │   └── legal
+│   ├── docs
+│   ├── entidades
+│   │   ├── 13cc
+│   │   │   ├── 13CC.cu
+│   │   │   └── 13CC.emp
+│   │   ├── Cannabird
+│   │   │   ├── archivos
+│   │   │   ├── docs
+│   │   │   ├── resumenes_cannabird
+│   │   │   └── reuniones_semanales
+│   │   ├── fondo_inversion
+│   │   │   ├── ALMA_TRADING
+│   │   │   ├── docs
+│   │   │   ├── _historia
+│   │   │   └── proyeccion_futuro
+│   │   └── mataderos_skatepark_gestion
+│   ├── equipo
+│   └── IA_asistente
+│       ├── docs
+│       │   └── bitacoras
+│       └── tareas_autonomas
+├── archivo
+├── config
+├── control
+│   ├── checklists
+│   ├── control_integracion
+│   ├── logs_historicos
+│   ├── planificacion
+│   │   └── roadmaps
+│   ├── registros
+│   │   └── bitacoras
+│   └── sprints_activos
+├── core
+│   ├── chat_cli
+│   │   └── prompts
+│   ├── cli_cleaner
+│   │   └── modules
+│   │       ├── check_env
+│   │       ├── purge
+│   │       ├── rebuild_index
+│   │       ├── snapshot
+│   │       └── validate_docs
+│   ├── launcher
+│   ├── llm_server
+│   │   ├── contracts
+│   │   ├── docs
+│   │   │   └── contracts
+│   │   ├── integration
+│   │   │   ├── context_tracker
+│   │   │   ├── memory_graph
+│   │   │   └── __pycache__
+│   │   ├── logs
+│   │   ├── models
+│   │   ├── model_wrapper
+│   │   │   └── __pycache__
+│   │   ├── __pycache__
+│   │   ├── transport_data
+│   │   ├── transport_layer
+│   │   │   └── __pycache__
+│   │   └── utils
+│   │       ├── log_crypto
+│   │       ├── log_writer
+│   │       └── __pycache__
+│   ├── __pycache__
+│   └── tests
+├── docs
+│   ├── 99_rfc
+│   ├── arquitectura
+│   │   ├── estructura_doc
+│   │   ├── idea_base
+│   │   │   ├── idea_base_0.0.0.2
+│   │   │   └── v0.0.0.0_legacy
+│   │   ├── prompt_tecnico
+│   │   └── whitepaper
+│   ├── introduccion
+│   ├── metodologias
+│   │   ├── _archivadas
+│   │   └── _propuestas
+│   ├── modules
+│   │   └── alma_loader
+│   ├── mvp
+│   ├── prompts
+│   ├── referencias
+│   │   └── externas
+│   │       ├── ia
+│   │       ├── patrones
+│   │       └── seguridad
+│   ├── roadmaps
+│   ├── utilidades
+│   │   ├── comandos_utiles
+│   │   └── scripts
+│   │       └── _legacy
+│   └── versiones
+│       ├── ideas_base_legacy
+│       ├── v0.0.0.1_auditoria
+│       ├── v0.0.0.2_CLI_FINAL
+│       ├── v0.0.0.2_documentacion
+│       ├── v0.0.0.2_estructura_documental
+│       ├── v0.0.0.2_idea_base_unificada
+│       ├── v0.0.0.2_metodologias
+│       ├── v0.0.0.3_snapshot_sprint_2.4
+│       ├── v0.0.0.4_sprint_2.5_auditoria
+│       │   └── archivos
+│       └── v0.0.0.5_LLM_server
+│           └── descargas
+├── ideas
+├── logs
+│   └── auditorias
+│       └── prompts
+├── staging
+├── tests
+│   ├── cli
+│   ├── context_tracker
+│   │   └── __pycache__
+│   ├── _legacy
+│   ├── memory_graph
+│   │   └── __pycache__
+│   ├── model_wrapper
+│   │   └── __pycache__
+│   ├── __pycache__
+│   ├── transport_layer
+│   │   └── __pycache__
+│   └── utils
+│       └── __pycache__
+└── venv
+    ├── bin
+    ├── include
+    │   └── python3.11
+    ├── lib
+    │   └── python3.11
+    │       └── site-packages
+    └── lib64 -> lib
+
+138 directories

@@ -1,0 +1,38 @@
+# 🧠 ALMA_RESIST – Módulo `utils/`  
+Versión: **v0.0.0.5**  
+Estado: `estable`  
+Fecha: 2025-05-28
+
+Este módulo contiene utilidades críticas para el sistema ALMA_RESIST, organizadas en dos submódulos principales:
+
+## 📁 Estructura de la carpeta
+
+### `log_crypto/`  
+Módulo encargado del registro seguro de eventos con cifrado (en futuras versiones).  
+Incluye versiones históricas y documentación de cambios:
+
+- `log_crypto.py`: implementación principal actual.
+- `log_crypto_v0.0.0.4.py`: versión activa.
+- `_legacy/`: contiene versiones `v0.0.0.1` a `v0.0.0.3` en formato `.py` y `.md`.
+- `log_crypto_changelog.md`: registro de cambios por versión.
+- `README_log_crypto_v0.0.0.4.md`: explicación funcional.
+
+### `log_writer/`  
+Módulo de escritura de logs en formato estructurado JSON.  
+Diseñado para integrarse con todos los sistemas internos de ALMA.  
+
+- `log_writer.py`: versión funcional principal.
+- `log_writer_v0.0.0.7.py`: nueva versión con mejoras en robustez y compatibilidad.
+- `_legacy/`: versiones `v0.0.0.1` a `v0.0.0.6` tanto en `.py` como `.md`.
+- `changelog_log_writer_v0.0.0.7.md`: último changelog formal.
+- `README.md`, `index.md`, `log_writer_md_files.zip`: documentación histórica.
+
+## ✅ Estado de Validación
+
+- Todos los módulos fueron testeados de forma unitaria.
+- Los logs generados siguen estándar Alma JSON.
+- Rotación de archivos y manejo de errores verificados.
+
+## 📌 Notas
+
+Este paquete está congelado como versión estable para **ALMA_RESIST v0.0.0.5**.

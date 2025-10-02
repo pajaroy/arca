@@ -1,0 +1,19 @@
+# 📌 Test CLI Básicos
+
+Manual de pruebas básicas para comandos principales del sistema ALMA_RESIST.
+
+## ▶️ Comandos principales a testear
+
+1. `python main.py --help`  
+2. `python main.py --version`  
+3. `python main.py integrar archivo.txt`  
+4. `python main.py listar bitacoras`
+
+## ✅ Criterios de validación
+
+- La ayuda se muestra correctamente
+- El número de versión es el esperado
+- Se integra un archivo sin errores
+- Se listan las bitácoras registradas
+
+🧠 Agregar más casos con cada expansión del CLI.

@@ -1,0 +1,16 @@
+# README
+
+# 00 – Gestor de Trades
+
+Este módulo centraliza el registro y análisis de todas las operaciones de trading. Su estructura está pensada para combinar datos técnicos, psicológicos y estratégicos.
+
+## 📌 Funciones
+
+- Registrar trades tomados, no tomados y backtesteados.
+- Calcular métricas semanales/mensuales.
+- Evaluar setups, estrategias y gestión emocional.
+- Preparar resúmenes y visualizaciones automáticas.
+
+## 🧩 Relación con IA
+
+Interactúa con AlmaSync para generar resúmenes semanales, comparativas por estrategia, y seguimiento emocional asociado a la operativa.

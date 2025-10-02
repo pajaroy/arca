@@ -1,0 +1,36 @@
+# 游댃 Sistema de Backup Autom치tico a GitHub
+
+Este m칩dulo se encarga de realizar copias de seguridad autom치ticas del repositorio ALMA_RESIST hacia GitHub, usando `git`.
+
+## 游늭 Ubicaci칩n
+El script principal se encuentra en:
+```
+core/scripts/backup_to_git/backup_to_git.sh
+```
+
+## 丘뙖잺 Funcionamiento
+
+El script realiza cada cierto tiempo (ej. cada 15 minutos) las siguientes acciones:
+
+1. Hace `git add` de todos los archivos.
+2. Crea un commit con el mensaje `Backup autom치tico - <fecha y hora>`.
+3. Realiza un `git push` al repositorio remoto en la rama `master`.
+
+Este proceso se lanza desde el script de inicializaci칩n (`init_alma_core.sh`) al inicio del sistema si no est치 corriendo.
+
+## 游눠 Requisitos
+- Tener configurado `git` con el usuario correcto.
+- Tener la clave SSH cargada y autorizada en GitHub.
+- No tener archivos grandes (>100MB) versionados.
+
+## 游빍 Verificaci칩n
+Para verificar que el backup autom치tico est치 funcionando:
+```bash
+ps aux | grep backup_to_git
+tail -f /home/bird/ALMA_RESIST/core/scripts/backup_to_git/backup.log
+```
+
+## 游빞 Recomendaciones
+- Asegurarse de que los archivos temporales o muy pesados est칠n listados en `.gitignore`.
+- Validar el funcionamiento tras cada reinicio del sistema.
+

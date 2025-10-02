@@ -1,0 +1,111 @@
+# core/llm_server/transport_layer.py
+import json
+import os
+import uuid
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, List, Optional
+import jsonschema
+import logging
+
+class TransportLayer:
+    def __init__(self, contracts_dir: str = "docs/contracts/"):
+        self.base_dir = Path("transport_data")
+        self.contracts = self._load_contracts(contracts_dir)
+        self.logger = logging.getLogger("alma_transport")
+        self._setup_infrastructure()
+
+    def _setup_infrastructure(self) -> None:
+        """Crea estructura de directorios y verifica contratos"""
+        try:
+            self.base_dir.mkdir(exist_ok=True)
+            if not self.contracts:
+                raise RuntimeError("Contracts not loaded")
+        except Exception as e:
+            self.logger.error(f"Error inicializando transporte: {str(e)}")
+            raise
+
+    def _load_contracts(self, contracts_dir: str) -> Dict:
+        """Carga los esquemas JSON desde el directorio de contratos"""
+        contracts = {}
+        try:
+            contract_files = {
+                "prompt": "schema_prompt.json",
+                "respuesta": "schema_respuesta.json"
+            }
+
+            for key, filename in contract_files.items():
+                path = Path(contracts_dir) / filename
+                with open(path, 'r') as f:
+                    contracts[key] = json.load(f)
+            return contracts
+        except Exception as e:
+            raise RuntimeError(f"Error cargando contratos: {str(e)}")
+
+    def _validate_data(self, data: Dict, endpoint: str) -> None:
+        """Valida los datos contra el contrato correspondiente"""
+        contract_type = "prompt" if endpoint == "responder" else "respuesta"
+        schema = self.contracts.get(contract_type)
+
+        if not schema:
+            raise ValueError(f"Esquema no encontrado para endpoint: {endpoint}")
+
+        try:
+            jsonschema.validate(instance=data, schema=schema)
+        except jsonschema.ValidationError as e:
+            self.logger.error(f"Validación fallida: {e.message}")
+            raise
+
+    def _generate_filename(self, endpoint: str) -> str:
+        """Genera nombre de archivo único con timestamp y UUID"""
+        timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+        unique_id = uuid.uuid4().hex[:6]
+        return f"{endpoint}_{timestamp}_{unique_id}.json"
+
+    def send(self, data: Dict, endpoint: str) -> None:
+        """Almacena datos validados en formato JSON"""
+        try:
+            self._validate_data(data, endpoint)
+            filename = self._generate_filename(endpoint)
+            filepath = self.base_dir / filename
+
+            with open(filepath, 'w') as f:
+                json.dump(data, f, indent=2)
+
+            self.logger.info(f"Datos almacenados en: {filepath}")
+        except Exception as e:
+            self.logger.error(f"Error en send: {str(e)}")
+            raise
+
+    def receive(self, endpoint: str) -> Optional[Dict]:
+        """Recupera el último archivo válido para el endpoint"""
+        try:
+            entries = self.list_entries(endpoint)
+            if not entries:
+                return None
+
+            latest = sorted(entries)[-1]
+            with open(latest, 'r') as f:
+                return json.load(f)
+        except Exception as e:
+            self.logger.error(f"Error en receive: {str(e)}")
+            return None
+
+    def list_entries(self, endpoint: str) -> List[Path]:
+        """Lista todos los archivos para un endpoint"""
+        try:
+            pattern = f"{endpoint}_*.json"
+            return sorted(self.base_dir.glob(pattern))
+        except Exception as e:
+            self.logger.error(f"Error listando entradas: {str(e)}")
+            return []
+
+    def purge_old_entries(self, endpoint: str, max_files: int = 100) -> None:
+        """Mantiene solo los últimos N archivos para un endpoint"""
+        try:
+            entries = self.list_entries(endpoint)
+            if len(entries) > max_files:
+                for old_file in entries[:-max_files]:
+                    old_file.unlink()
+        except Exception as e:
+            self.logger.error(f"Error purgando entradas: {str(e)}")

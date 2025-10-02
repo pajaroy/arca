@@ -1,0 +1,82 @@
+
+from enum import Enum
+from fastapi import APIRouter, Depends, HTTPException
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel
+from core.memoria_saver import guardar_memoria
+from core.auth import get_current_user
+
+# Definición de Enums y modelos Pydantic
+class VisibilidadEnum(str, Enum):
+    publica = "publica"
+    privada = "privada"
+    solo_sistema = "solo_sistema"
+
+class MemoriaIn(BaseModel):
+    id: str
+    contenido: str
+    categoria: str
+    tags: list[str]
+    visibilidad: VisibilidadEnum
+    owner_id: str
+
+class MemoriaOut(BaseModel):
+    resultado: str
+    estado: str
+    mensaje: str
+
+# Configuración del router
+router = APIRouter(
+    prefix="/v1/memorias",
+    tags=["memorias"]
+)
+
+@router.post(
+    "/",
+    response_model=MemoriaOut,
+    summary="Registrar nueva memoria",
+    description="""
+    Endpoint para ingreso de memorias al sistema ALMA_LOADER.
+    
+    Valida y almacena memorias usando:
+    - Validación de esquema con Pydantic
+    - Guardado robusto con rollback automático
+    - Cifrado de contenido privado
+    - Vectorización en FAISS
+    """,
+    responses={
+        200: {"description": "Memoria almacenada exitosamente"},
+        400: {"description": "Error de validación o guardado"},
+        403: {"description": "owner_id no coincide con usuario autenticado"}
+    }
+)
+async def crear_memoria(memoria: MemoriaIn, user_id: str = Depends(get_current_user)):
+    """Proceso principal de registro de memorias"""
+    try:
+        if memoria.owner_id != user_id:
+            raise HTTPException(
+                status_code=403,
+                detail="El owner_id no coincide con el usuario autenticado"
+            )
+
+        # Convertir modelo a dict y guardar
+        resultado = guardar_memoria(memoria.dict())
+        
+        # Determinar código de estado
+        status_code = 200 if resultado["resultado"] == "ok" else 400
+        
+        return JSONResponse(
+            content=resultado,
+            status_code=status_code
+        )
+        
+    except Exception as e:
+        # Capturar errores inesperados
+        return JSONResponse(
+            status_code=500,
+            content={
+                "resultado": "error",
+                "estado": "error_critico",
+                "mensaje": f"Error interno del servidor: {str(e)}"
+            }
+        )

@@ -1,0 +1,87 @@
+---
+module: metodologias/propuestas/propuesta_v3_doc_ia
+type: core
+status: in_progress
+created: '2025-05-21'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🔭 Propuesta de Implementación Modular – Documentación Humano + IA (v2)
+
+📅 Fecha: 2025-05-21  
+📁 Asociado a: `Sprint_2.2_Metodologias_Base`  
+🎯 Propósito: Integrar progresivamente una estructura documental semántica IA-friendly que sea viable para un único operador, con capacidad de escalar a automatización parcial.
+
+---
+
+## 🎯 Objetivos de esta propuesta
+
+- Simplificar la adopción de documentación semántica mediante YAML
+- Establecer campos mínimos obligatorios realistas
+- Introducir herramientas asistidas por IA para generación automática
+- Establecer políticas claras de migración y retrocompatibilidad
+- Facilitar navegación, clustering y trazabilidad futura
+
+---
+
+## 📋 Cambios Introducidos en `metodologia_doc_ia_v2.md`
+
+| Mejora                      | Descripción técnica clave                                                    |
+|----------------------------|-------------------------------------------------------------------------------|
+| 🔹 Reducción de campos      | De 8 a 4 campos obligatorios (`module`, `type`, `status`, `created`)         |
+| 🔹 Campos opcionales        | `domain`, `tags`, `linked_to`, `version` quedan como sugeridos               |
+| 🔹 Política de migración    | Etapas 1–2–3 para evitar sobrecarga en documentos existentes                  |
+| 🔹 Glosario técnico         | Referencias rápidas para `type`, `domain`, `status`                          |
+| 🔹 Comando `alma-cli`       | Especificación base para autocompletar bloques YAML vía CLI con IA           |
+
+---
+
+## 🚀 Plan de Implementación
+
+### Fase 1: Activación mínima
+
+- Usar `metodologia_doc_ia_v2.md` como nuevo estándar para toda documentación nueva
+- Aplicar en: sprints futuros, módulos nuevos, decisiones técnicas
+
+### Fase 2: Script asistido
+
+- Crear `alma-cli doc-init` para inicializar automáticamente documentos con YAML válido
+- Inferir tipo, tags, status y relaciones con ayuda de NLP o estructura de carpetas
+
+### Fase 3: Migración semiautomática
+
+- Durante auditorías o refactors, aplicar YAML v2 a documentos heredados
+- Validar con herramienta `validate_structure.py`
+
+### Fase 4: Indexación y grafo
+
+- Crear sistema de navegación semántica con tags, domain y linked_to
+- Visualización futura en `docs/navegacion_semantica.md`
+
+---
+
+## 🧠 Beneficios esperados
+
+- Trazabilidad semántica sin burocracia
+- IA como asistente documental real
+- Minimización de deuda técnica
+- Posibilidad de detección de módulos huérfanos, duplicados o sin versionar
+
+---
+
+## 📎 Archivos relacionados
+
+- `metodologia_doc_ia_v2.md`
+- `metodologia_estructura_modular_v2.md`
+- `Methodology_Index.md`
+- `alma-cli` (futuro)
+
+---
+
+## 🔄 Estado actual
+
+✅ Ya se generó y archivó la metodología v2  
+🔜 Pendiente implementación de `alma-cli doc-init`  
+🧩 Listo para ser referenciado en próximas decisiones ADR
+

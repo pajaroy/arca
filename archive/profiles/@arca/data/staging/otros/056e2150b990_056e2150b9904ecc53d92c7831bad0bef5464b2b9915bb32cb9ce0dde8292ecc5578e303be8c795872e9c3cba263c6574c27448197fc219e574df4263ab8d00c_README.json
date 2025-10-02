@@ -1,0 +1,36 @@
+{
+  "version": "0.1.2",
+  "tipo": "readme",
+  "schema": "almaresist.readme_v1",
+  "descripcion": "Tercera versión, último refactor previo a la versión antifallos dual (v0.2.0).",
+  "estructura": [
+    {
+      "cargar_memorias_v0.1.2.py": "Script estable, último previo a migración mayor."
+    },
+    {
+      "prompt_cargar_memorias_v0.1.2.yaml": "Prompt para DeepSeek, versión estable."
+    },
+    {
+      "changelog_cargar_memorias_v0.1.2.yaml": "Changelog institucional, versionado automatizado."
+    }
+  ],
+  "tags": [
+    "memorias",
+    "cli",
+    "legacy",
+    "changelog",
+    "v0.1.2"
+  ],
+  "linked_to": [
+    "cargar_memorias_v0.1.2.py",
+    "prompt_cargar_memorias_v0.1.2.yaml",
+    "changelog_cargar_memorias_v0.1.2.yaml"
+  ],
+  "responsable": "Equipo de Operaciones",
+  "hash_verificacion": "sha256:pending",
+  "historial": [
+    "Migrado a _legacy el 2025-06-18 por Kael"
+  ],
+  "last_modified": "2025-06-18T13:20:00Z",
+  "last_modified_by": "Kael"
+}

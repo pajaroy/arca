@@ -1,0 +1,11 @@
+
+# fix_metadata.py
+
+Este script automatiza la corrección de los campos `module`, `type`, `status` y `created` en todos los archivos `.md` dentro del directorio `docs/`.
+
+## Uso
+
+```bash
+python3 fix_metadata.py --root ./docs --backup --verbose
+```
+

@@ -1,0 +1,17 @@
+version: 0.1.0
+uuid: 22b2e8e9-ceaa-4a1b-96ea-f0e2c60b3569
+tipo: ''
+schema: ''
+estado: ''
+descripcion: ''
+estructura:
+  - ''
+tags: []
+linked_to: []
+responsable: ''
+hash_verificacion: sha256:pending
+historial:
+  - fecha: ''
+    descripcion: ''
+last_modified: '2025-07-09T22:56:53.775420+00:00'
+last_modified_by: alma

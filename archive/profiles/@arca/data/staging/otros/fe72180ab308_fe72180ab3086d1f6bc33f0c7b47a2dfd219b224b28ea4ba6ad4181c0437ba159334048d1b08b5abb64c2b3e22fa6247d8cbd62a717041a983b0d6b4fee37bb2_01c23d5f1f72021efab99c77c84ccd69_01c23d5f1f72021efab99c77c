@@ -1,0 +1,12 @@
+# 📤 ALMA_EXPORT – Consolidación de Memorias
+
+Este módulo permite **exportar todas las memorias individuales del sistema ALMA** (guardadas en `memorias_json/`) y consolidarlas en un solo archivo `.json` o `.jsonl`, útil para:
+
+- Entrenamiento de modelos NLP
+- Análisis global
+- Envío a modelos externos (como DeepSeekCoder)
+
+
+## 🔧 Próximos pasos
+
+Generar el script `exportar_memorias_unificadas.py` usando el prompt y vincularlo al flujo de validación general.

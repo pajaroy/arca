@@ -1,0 +1,43 @@
+# 🧠 Bitácora de Sesión – Consolidación de Sistema ALMA
+
+📅 Fecha: 2025-05-16  
+🖥️ Nodo principal: ALMA_CORE (Kingston SSD)  
+💽 Nodo espejo: ALMA_RESIST (Toshiba 500GB)  
+🔑 Nodo portátil (propuesto): ALMA_PORTABLE (Pendrive 64GB)
+
+
+## 🧪 2. PENDRIVE COMO TERMINAL DE CONTROL
+
+- Se propuso usar un pendrive de 64 GB como llave portátil y terminal remota.
+- Objetivos:
+  - Conectarse a ALMA desde cualquier lugar.
+  - Acceder a archivos, scripts, chat IA vía terminal (SSH, rsync, curl).
+- Estructura sugerida del pendrive:
+  - `iniciar_alma_remoto.sh`
+  - `chat_terminal.py`
+  - `config/alma_nodes.json`
+- Nombre sugerido: `ALMA_PORTABLE`
+
+
+## 🗃️ 4. VERIFICACIÓN Y RECUPERACIÓN DE LA CARPETA ALMA
+
+- Se detectó que la carpeta `~/Alma` (con Obsidian) fue borrada en Kingston.
+- Confirmado backup en:
+  ```
+  /mnt/ALMA_RESIST/@home/bird/Alma
+  ```
+- Se esperó a que finalice `dd` para copiar sin errores.
+- Se copió posteriormente con:
+  ```bash
+  cp -r /mnt/ALMA_RESIST/@home/bird/Alma ~/Backups/Alma_YYYY-MM-DD
+  ```
+
+
+## ✍️ 6. IDEAS FUTURAS CONCRETAS
+
+- Automatización de conexión SSH + cliente + LLM.
+- Terminal como asistente viva desde cualquier máquina.
+- Estructura estandarizada para carpetas ALMA (permisos, markdown, logs).
+- Integración de Obsidian con IA desde terminal.
+- Registro estructurado de todo el sistema en `.md`.
+

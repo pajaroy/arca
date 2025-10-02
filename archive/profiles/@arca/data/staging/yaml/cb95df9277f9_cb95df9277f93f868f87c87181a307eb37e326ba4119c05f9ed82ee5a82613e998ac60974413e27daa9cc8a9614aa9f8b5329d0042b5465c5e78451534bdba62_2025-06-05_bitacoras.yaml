@@ -1,0 +1,142 @@
+- id: MEM_2025-06-06_kael_commit_changelog
+  tipo: commit
+  fecha: 2025-06-06
+  modulo: alma_resist/
+  resumen: >
+    Commit de changelog, changelog_control y bitácora de alta del repo.  
+    Mensaje de commit: "Registro de alta de repo alma_libre y push inicial auditado — changelogs actualizados"
+  impacto: >
+    Estandariza documentación de hitos, garantiza trazabilidad de la transición al nuevo repo.
+  responsable: Santi + Kael
+  tags: [changelog, commit, alta_repo, auditado]
+- id: MEM_2025-06-06_kael_commit_bitacora_viva
+  tipo: commit
+  fecha: 2025-06-06
+  modulo: alma_resist/
+  resumen: >
+    Commit incremental de bitácora viva y changelogs, registrando alta del repo, cambios en la arquitectura y el primer apéndice en control_central/docs/journal/bitacoras.
+  impacto: >
+    Garantiza historia auditable desde el día uno, con cada decisión y registro acompañando el ciclo CLI de ALMA_RESIST.
+  responsable: Santi + Kael
+  tags: [bitacora_viva, commit, changelog, auditado, control_central]
+- id: MEM_2025-06-06_kael_fixmeta_scope
+  tipo: decision
+  fecha: 2025-06-06
+  modulo: alma_resist/control_central/
+  resumen: >
+    Se define que el script fix_metadata_v3.py debe ejecutarse desde la raíz del proyecto, pero delimitando el ámbito de procesamiento con el parámetro --root-dir hacia control_central/.
+    Así se asegura máxima portabilidad, limpieza y trazabilidad sin modificar el core del script.
+  recomendaciones: >
+    - Documentar en README y bitácora el uso del flag --root-dir para tareas selectivas.
+    - Mantener la ejecución desde la raíz para estandarización de logs y comandos.
+    - Revisar el log generado para confirmar que solo se afectan archivos bajo control_central/.
+  responsable: Santi + Kael
+  tags: [fix_metadata, root_dir, cli, scope, auditado]
+- id: MEM_2025-06-06_kael_format_full
+  tipo: corrida_masiva
+  fecha: 2025-06-06
+  modulo: alma_resist/
+  resumen: >
+    Ejecución masiva de fix_metadata_v3.py sobre todo el sistema ALMA_RESIST desde la raíz. Se garantiza que la metadata de archivos críticos quede normalizada y lista para la nueva era de auditoría y gobernanza modular.
+  recomendaciones: >
+    - Revisar el log de salida por si hay errores o archivos ignorados.
+    - Registrar cualquier incidencia/rollback en la bitácora diaria.
+    - Actualizar README del script con este nuevo hito operativo.
+  responsable: Santi (ejecutor humano) + Kael (auditor CLI)
+  tags: [corrida_masiva, fix_metadata, raiz, formateo, auditado]
+- id: MEM_2025-06-06_kael_snapshot_cmd
+  tipo: operacion
+  fecha: 2025-06-06
+  modulo: alma_resist/
+  resumen: >
+    Se ejecutó snapshot de estructura con tree desde la raíz del sistema, excluyendo logs, cachés y .git. Archivo registrado para auditoría y documentación histórica.
+  recomendaciones: >
+    - Mantener snapshot actual en README.
+    - Guardar históricos en docs/contexto/historico/.
+    - Curar manualmente el backup según criterio Kael antes de cada snapshot crítico.
+  responsable: Santi + Kael
+  tags: [snapshot, tree, cli, backup, estructura, auditado]
+- id: MEM_2025-06-06_cfgbase_controlcentral_memoria_unificada
+  tipo: decision
+  fecha: 2025-06-06
+  modulo: alma_resist/control_central/memorias/
+  tema: memoria_unificada
+  status: vigente
+  responsable: Kael
+  tags: [configuracion_base, memoria_unificada, control_central, base_datos, cli, auditado]
+---
+resumen: >
+  Se establece que toda memoria institucional, bitácora viva y snapshot relevante se almacenarán en /control_central/memorias/ como único punto de consulta y búsqueda para todo el sistema ALMA_RESIST. Se promoverá la migración progresiva a formatos JSON/YAML indexados y estructurados para máxima compatibilidad IA.
+---
+- id: MEM_2025-06-06_cfgbase_controlcentral_alta_json
+  tipo: configuracion_base
+  fecha: 2025-06-06
+  modulo: alma_resist/control_central/memorias/
+  tema: alta_json
+  status: completado
+  responsable: Kael
+  tags: [configuracion_base, json, memoria_unificada, control_central, auditado]
+---
+  resumen: >
+    Se crea archivo base memorias.json (y opcionalmente bitacora_viva.json) en la carpeta memorias de control_central para registrar institucionalmente todas las decisiones, hitos y eventos críticos del sistema ALMA_RESIST.
+---
+id: MEM_2025-06-08_cfgbase_controlcentral_changelog_v2.1
+tipo: changelog
+fecha: 2025-06-08
+modulo: alma_resist/
+tema: changelog_v2.1.0_alma_resist
+status: vigente
+responsable: Santi + Kael + DeepSeek
+tags: [changelog, versionado, resiliencia, plugins, cifrado, ia, auditado]
+---
+resumen: >
+  Se registra changelog crítico v2.1.0 con salto de madurez en arquitectura ALMA_RESIST: soporte multi-backend (filesystem/Redis/SQLite),
+  sistema de plugins, validación contextual, plantillas IA, cifrado moderno, firmas digitales y auditoría de seguridad. Roadmap incluye HSM,
+  Zero-Knowledge Proofs y clustering Redis. Marca el inicio de la era “Resiliencia Extrema”.
+impacto: >
+  Eleva el estándar de resiliencia y modularidad. Prepara el sistema para integración CI/CD, scaling multi-nodo, y reparación asistida por IA.
+  Sirve de blueprint para toda actualización institucional futura y migración de backups.
+referencias:
+  - changelog_detallado_v2.1.0.md
+  - memorias/bitacora_viva.yaml
+  - memorias/README.md
+---
+fecha: 2025-06-06
+accion: Test dry-run de fix_metadata_v3.py
+modo: dry-run (sin cambios sobre archivos)
+log: (no subido, solo local, se limpia tras auditoría)
+resultado: Advertencias en 5 archivos, sin errores críticos. Listo para ejecución real.
+responsable: Kael (auditor CLI)
+---
+id: BITACORA_2025-06-06_01
+tipo: auditoria_metadata
+fecha: 2025-06-06
+responsable: Kael (auditor CLI)
+accion: Ejecución real de fix_metadata_v3.py sobre archivos de memorias
+archivos_modificados:
+  - control_central/memorias/README.md
+  - control_central/memorias/memorias.yaml
+  - control_central/memorias/bitacora_viva.yaml
+  - control_central/memorias/memorias.json
+  - control_central/memorias/bitacora_viva.json
+archivos_backup:
+  - control_central/memorias/README_20250605220309.bak
+  - control_central/memorias/memorias_20250605220309.bak
+  - control_central/memorias/bitacora_viva_20250605220309.bak
+motivo: Estandarización y corrección de metadata en archivos críticos, siguiendo protocolo Kael.
+resultado: Cambios aplicados correctamente, sin advertencias ni errores. Backups generados para reversión rápida.
+referencias:
+  - [[2025-06-06_bitacora_fix_metadata.md]]
+  - [[CHANGELOG.md]]
+  - [[README.md]]
+notas:
+  - Log no generado por error de ruta en el script. Requiere mejora futura.
+  - Proceso documentado y auditado, links cruzados en changelog y README.
+tags:
+  - control_central
+  - metadata
+  - auditoria
+  - fix_metadata
+  - backups
+  - trazabilidad
+---

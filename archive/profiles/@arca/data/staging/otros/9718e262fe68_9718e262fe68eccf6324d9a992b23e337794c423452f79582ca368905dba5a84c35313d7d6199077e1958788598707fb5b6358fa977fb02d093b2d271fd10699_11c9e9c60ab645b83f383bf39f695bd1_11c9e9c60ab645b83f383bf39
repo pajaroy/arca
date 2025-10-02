@@ -1,0 +1,24 @@
+# 📅 Resumen Diario – 2025-05-08
+
+## 🧠 Reflexiones Generales
+Hoy me sentí particularmente enfocado durante la mañana, aunque bajó mi energía por la tarde. El foco estuvo puesto en avanzar la estructura de Cannabird y probar la integración con Google Drive.
+
+tags:: #reflexión #gestión_personal #motivación
+
+
+## 🌱 Cultivo
+- Se consolidó la estructura de gestión de Cannabird.
+- Se creó `06_CULTIVO/` y se documentó cronograma futuro.
+- Pendiente: cargar protocolo de riego.
+
+tags:: #cultivo #estructura #riego
+
+
+## 💻 Programación / Automatización
+- Se generaron 2 scripts para sincronización automática con Google Drive:
+  - `subir_alma.sh`
+  - `sync_drive_maestro.sh` (con menú interactivo)
+- Rclone quedó plenamente operativo.
+
+tags:: #automatizacion #rclone #backup
+

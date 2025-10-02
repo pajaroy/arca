@@ -1,0 +1,21 @@
+# Versión del Sistema ALMA_RESIST
+
+**Versión General:** v0.0.0.2  
+**Fecha de Compilación:** 2025-05-22  
+**Responsable:** Equipo de Desarrollo ALMA_RESIST
+
+
+## Estructura Incluida
+
+- `/docs/`: Documentación principal estructurada por versiones, metodologías, plantillas y referencias.
+- `/scripts/`: Scripts automatizados para validación y corrección de metadatos.
+- `/bitacoras/`: Registro de actividades diarias y reflexiones de desarrollo.
+- `/registros/`: Mapeo de sprint, changelogs, hitos, decisiones arquitectónicas y aprendizajes.
+- `/versiones/`: Backups comprimidos por etapa o sprint.
+- `README.md`: Documento principal de orientación del proyecto.
+
+
+## Notas
+
+Este archivo de versión permite auditar la integridad del sistema ALMA_RESIST en cualquier punto del tiempo. Todos los archivos están estructurados y validados para compatibilidad total con los scripts automatizados de normalización y validación semántica.
+

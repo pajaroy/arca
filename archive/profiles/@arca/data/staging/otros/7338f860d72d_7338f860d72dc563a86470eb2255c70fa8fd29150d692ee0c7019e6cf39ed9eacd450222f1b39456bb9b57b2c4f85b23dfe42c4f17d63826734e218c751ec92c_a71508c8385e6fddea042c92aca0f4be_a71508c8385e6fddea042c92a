@@ -1,0 +1,120 @@
+---
+tipo: bitacora
+id: BITACORA_2025-06-05_d47251
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Log Crypto V0.0.0.2
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:83e397d923358e748cb35934e049147b972c0d60434f5e6fcb34882ea568ee3c
+---
+import os
+import json
+import logging
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM, ChaCha20Poly1305
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from cryptography.hazmat.backends import default_backend
+import cpuinfo
+
+logger = logging.getLogger("alma_crypto")
+
+class CryptoEngine:
+    def __init__(self):
+        self.algorithm = self.detect_algorithm()
+        self.backend = default_backend()
+        logger.info(f"Selected algorithm: {self.algorithm}")
+
+    def detect_algorithm(self) -> str:
+        try:
+            info = cpuinfo.get_cpu_info()
+            if 'aes' in info['flags'] and 'sse2' in info['flags']:
+                return 'AES-256-GCM'
+            return 'ChaCha20'
+        except Exception as e:
+            logger.warning(f"Hardware detection error: {str(e)} - Falling back to ChaCha20")
+            return 'ChaCha20'
+
+    def generate_key(self, password: bytes = None, salt: bytes = None, return_salt: bool = False):
+        if password:
+            if not salt:
+                salt = os.urandom(16)
+            kdf = PBKDF2HMAC(
+                algorithm=hashes.SHA3_256(),
+                length=32,
+                salt=salt,
+                iterations=100000,
+                backend=self.backend
+            )
+            key = kdf.derive(password)
+            return (key, salt) if return_salt else key
+        key = os.urandom(32)
+        return (key, None) if return_salt else key
+
+    def _get_cipher(self, key: bytes):
+        return AESGCM(key) if self.algorithm == 'AES-256-GCM' else ChaCha20Poly1305(key)
+
+    def encrypt_log(self, input_path: str, output_path: str, password: bytes = None) -> bytes:
+        try:
+            key, salt = self.generate_key(password, return_salt=True)
+            nonce = os.urandom(12) if self.algorithm == 'AES-256-GCM' else os.urandom(24)
+            cipher = self._get_cipher(key)
+
+            with open(input_path, 'rb') as f_in:
+                plaintext = f_in.read()
+            encrypted_data = cipher.encrypt(nonce, plaintext, None)
+
+            with open(output_path, 'wb') as f_out:
+                if salt:
+                    f_out.write(salt)
+                f_out.write(nonce + encrypted_data)
+
+            logger.debug(f"Log encrypted: {input_path} -> {output_path}")
+            return key
+        except Exception as e:
+            logger.error("Encryption error occurred")
+            raise
+
+    def decrypt_log(self, input_path: str, output_path: str, password: bytes = None, key: bytes = None) -> None:
+        try:
+            with open(input_path, 'rb') as f_in:
+                data = f_in.read()
+
+            offset = 0
+            if password:
+                salt = data[:16]
+                key = self.generate_key(password, salt)
+                offset = 16
+
+            nonce_len = 12 if self.algorithm == 'AES-256-GCM' else 24
+            nonce = data[offset:offset + nonce_len]
+            ciphertext = data[offset + nonce_len:]
+
+            cipher = self._get_cipher(key)
+            decrypted_data = cipher.decrypt(nonce, ciphertext, None)
+
+            with open(output_path, 'wb') as f_out:
+                f_out.write(decrypted_data)
+
+            logger.debug(f"Log decrypted: {input_path} -> {output_path}")
+        except Exception as e:
+            logger.error("Decryption error occurred")
+            raise
+
+    @staticmethod
+    def validate_encrypted_log(file_path: str) -> bool:
+        try:
+            with open(file_path, 'rb') as f:
+                data = f.read()
+                return len(data) >= 28  # 16 salt + 12 nonce (min)
+        except:
+            return False
+

@@ -1,0 +1,11 @@
+entradas:
+- fecha: '2025-06-06T03:53:41.784141'
+  accion: Alta de entrada de prueba desde alma-resist
+  descripcion: Testeo de script funcionalidad CLI tras restaurar archivo
+  motivo: Verificar funcionamiento tras copiar código correcto
+  ejecutado_por: Santi
+  estado: registrado
+  tags:
+  - debug
+  - test
+  - bitacora

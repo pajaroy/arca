@@ -1,0 +1,39 @@
+
+## 🧠 Detalle del Día: Consolidación de Sincronización y Backup
+
+### ✅ Contexto General
+
+En esta jornada se avanzó en la implementación del Sprint 0.2 con foco en:
+- Establecer la **sincronización permanente** entre `ALMA_CORE` y `ALMA_RESIST`.
+- Configurar el sistema de **backups automáticos a GitHub**.
+- Normalizar la **estructura de carpetas** y trazabilidad mediante `README.md`.
+- Preparar la infraestructura para auditorías futuras.
+
+
+## 🧾 Backup automático a GitHub
+
+💡 Se diseñó y ejecutó el script `backup_to_git.sh` con las siguientes características:
+- Monitorización de cambios en `ALMA_RESIST/` usando `inotifywait`.
+- Commits automáticos al detectar modificaciones.
+- Push automático al branch `main`.
+- Log detallado en: `/home/bird/ALMA_RESIST/control_central/logs/backup_git/backup_git.log`
+
+📌 Se solucionaron errores como:
+- Configuración SSH ausente o incorrecta.
+- Claves no autorizadas en GitHub.
+- Conflictos por archivos eliminados sin `git rm`.
+- Multiplicación de procesos por ejecución redundante.
+
+
+## 📁 Carpetas documentadas hoy
+
+- `control_central/status/`
+- `control_central/asesor-ia/core/`
+- `control_central/core/scripts/`
+- `control_central/logs/backup_git/`
+- `control_central/archivo/`
+
+
+### 🧷 Etiquetas de memoria
+
+`#bitacora #sync #sprint_0.2 #backup_git #protocolos #logs #ssh #conducta_terminal`

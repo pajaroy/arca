@@ -1,0 +1,102 @@
+# changelog_v0.1.3.yaml
+version: "0.1.3"
+fecha: "2025-06-08"
+autor: "Equipo ALMA_RESIST DevOps"
+estado: "implementado"
+impacto: "Optimización para integración como módulo CLI central"
+
+cambios:
+  - id: REFACTOR_01
+    tipo: "refactor"
+    descripcion: "Simplificación de funciones principales"
+    detalles: "Eliminación de estructura Args artificial en agregar_entrada_bitacora()"
+    beneficios: "Mayor claridad y menor acoplamiento"
+
+  - id: MEJORA_01
+    tipo: "mejora"
+    descripcion: "Mejora en creación de archivos"
+    detalles: "Creación automática de directorios padre al crear nuevo archivo de bitácora"
+    implementacion: |
+      if not os.path.exists(archivo):
+          directorio = os.path.dirname(archivo)
+          if directorio and not os.path.exists(directorio):
+              os.makedirs(directorio, exist_ok=True)
+
+  - id: MEJORA_02
+    tipo: "optimización"
+    descripcion: "Mejor formato de logging"
+    detalles: "Inclusión de timestamps en mensajes de log"
+    implementacion: |
+      format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+      datefmt='%Y-%m-%d %H:%M:%S'
+
+  - id: MEJORA_03
+    tipo: "mejora"
+    descripcion: "Salida de usuario más limpia"
+    detalles: "Inclusión de símbolo ✓ y mejor formato visual"
+    implementacion: |
+      print("\n✓ ENTRADA REGISTRADA EXITOSAMENTE")
+
+  - id: MEJORA_04
+    tipo: "optimización"
+    descripcion: "Manejo de errores mejorado"
+    detalles: "Uso de logger.critical para errores críticos"
+    implementacion: |
+      logger.critical(f"Error crítico: {str(e)}")
+
+  - id: MEJORA_05
+    tipo: "mejora"
+    descripcion: "Visualización de tags en salida"
+    detalles: "Ahora muestra tags cuando están presentes"
+    implementacion: |
+      if 'tags' in nueva_entrada:
+          print(f"Tags:      {', '.join(nueva_entrada['tags']}")
+
+pruebas:
+  - descripcion: "Prueba de creación de archivo en ruta nueva"
+    comando: |
+      python add_bitacora_entry_v0.1.3.py \
+        --accion "Prueba creación" \
+        --descripcion "Validación creación archivo" \
+        --motivo "Prueba funcionalidad" \
+        --ejecutado_por "Tester" \
+        --bitacora "/tmp/nueva_ruta/bitacora_test.yaml"
+    resultado: "Archivo creado correctamente en /tmp/nueva_ruta"
+
+  - descripcion: "Prueba de dry-run con verbosidad"
+    comando: |
+      python add_bitacora_entry_v0.1.3.py \
+        --accion "Dry-run test" \
+        --descripcion "Validación sin escritura" \
+        --motivo "Prueba modo simulación" \
+        --ejecutado_por "Tester" \
+        --dry-run \
+        --verbose
+    resultado: "Mensajes verbose sin modificación de archivos"
+
+  - descripcion: "Prueba de tags en salida"
+    comando: |
+      python add_bitacora_entry_v0.1.3.py \
+        --accion "Prueba tags" \
+        --descripcion "Validación visualización tags" \
+        --motivo "Prueba funcionalidad" \
+        --ejecutado_por "Tester" \
+        --tags "urgente,prueba,sistema"
+    resultado: "Tags mostrados correctamente en salida final"
+
+compatibilidad:
+  - versiones: "0.1.2 → 0.1.3"
+    cambios_ruptura: "Ninguno"
+    migracion: "Reemplazo directo del script"
+
+integracion:
+  - sistema: "CLI Central ALMA_RESIST"
+    estado: "Preparado para integración"
+    notas: "Usar función agregar_entrada_bitacora() como interfaz"
+
+tags:
+  - bitacora
+  - cli
+  - v0.1.3
+  - alma_resist
+  - logging

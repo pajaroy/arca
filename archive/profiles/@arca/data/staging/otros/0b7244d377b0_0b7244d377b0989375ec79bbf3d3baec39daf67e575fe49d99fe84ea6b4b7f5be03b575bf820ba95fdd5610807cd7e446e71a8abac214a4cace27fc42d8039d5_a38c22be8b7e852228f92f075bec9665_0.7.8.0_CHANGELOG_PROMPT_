@@ -1,0 +1,43 @@
+
+# 📜 CHANGELOG – Prompt Escalable ALMA LIBRE
+
+Este changelog documenta los cambios estructurales y evolutivos del prompt modular desde la versión 0.7.7 en adelante.
+
+
+## 🔮 Próximas versiones previstas
+
+### v0.7.8 (planificada)
+- Índice clickeable interno para navegación Markdown
+- Separación en 4.2: Plantillas y estandarización de módulos
+- Sección 5.2: Roadmap técnico de implementación
+- Apéndice final: ideas en espera, visiones futuras, IA local
+
+
+## 🆕 Versión 0.7.8 (2025-04-23)
+
+### Cambios realizados:
+- Se agregó un índice interactivo Markdown (TOC) al principio del Prompt
+- Se integró un Glosario Interno como Bloque 6 al final del documento
+- Mantención total del contenido original de v0.7.7
+- Nueva versión nombrada: `Prompt_Escalable_ALMA_LIBRE_0.7.8.md`
+
+### Estado actual:
+- Prompt navegable y estructurado de forma jerárquica
+- Preparado para integrar mejoras futuras en modularidad e IA local
+
+
+## 🆕 Versión 0.7.8.0 (2025-04-23)
+
+### Cambios realizados:
+- Comienzo de la Fase 2: Integración Técnica del sistema ALMA LIBRE
+- Se añadió la sección `5.2 – Infraestructura Base: memorias.db` al Prompt
+- Incorporación oficial de la base de datos `memorias.db` para registrar y consultar memorias desde terminal
+- Actualización del README del Prompt para reflejar nueva arquitectura técnica
+- Archivos renombrados:
+  - `0.7.8.0_Prompt_Escalable_ALMA_LIBRE.md`
+  - `0.7.8.0_README_PROMPT.md`
+
+### Estado actual:
+- Sistema preparado para implementar scripts de lectura y escritura en SQLite
+- Prompt y documentación sincronizados con arquitectura ALMA SYNC
+

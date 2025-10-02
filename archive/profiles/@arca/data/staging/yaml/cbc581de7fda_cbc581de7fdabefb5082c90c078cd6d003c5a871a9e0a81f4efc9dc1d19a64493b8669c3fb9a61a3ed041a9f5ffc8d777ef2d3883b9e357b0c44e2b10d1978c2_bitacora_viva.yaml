@@ -1,0 +1,11 @@
+entradas:
+- fecha: '2025-06-07T14:24:17.288457'
+  accion: Inicialización de bitácora CLI
+  descripcion: Primera entrada oficial desde CLI usando el script v0.1.2
+  motivo: Test final de integración, validación de estructura y logging
+  ejecutado_por: Santi
+  estado: registrado
+  tags:
+  - inicio
+  - bitacora
+  - cli

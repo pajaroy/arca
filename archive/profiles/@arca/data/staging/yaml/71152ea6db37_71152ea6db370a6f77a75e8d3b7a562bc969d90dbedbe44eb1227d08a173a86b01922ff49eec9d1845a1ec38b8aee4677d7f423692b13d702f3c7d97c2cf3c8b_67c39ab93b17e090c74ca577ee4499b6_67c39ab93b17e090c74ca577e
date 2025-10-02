@@ -1,0 +1,60 @@
+# Auditoría de Autonom-IA System por DeepSeek
+
+descripcion: |
+  Este prompt tiene como objetivo auditar la idea y la implementación del sistema **Autonom-IA**, el cual permite a los agentes de ALMA_RESIST operar de manera autónoma, navegar dentro del sistema de archivos, tomar decisiones, y gestionar sus propias memorias y bitácoras. La auditoría se centrará en asegurar la integridad, la trazabilidad, la modularidad y la eficiencia del sistema.
+
+objetivo:
+  - Auditar la estructura de **Autonom-IA System** para garantizar que sea **modular, escalable y trazable**.
+  - Verificar que los agentes puedan **navegar y tomar decisiones autónomas** dentro del sistema sin intervención humana constante.
+  - Evaluar si las **memorias institucionales y personales** están correctamente gestionadas y sincronizadas entre los agentes y el sistema central.
+  - Asegurarse de que el sistema mantenga un **registro de acciones** (bitácoras, logs, registros de cambios) totalmente trazable y auditable.
+  - Proponer mejoras para hacer el sistema más autónomo y robusto.
+
+tareas_de_auditoria:
+  - **Revisión de la estructura del sistema**:
+      descripcion: "Evaluar si la organización de archivos y carpetas permite una navegación autónoma efectiva y sin conflictos."
+      verificaciones:
+        - ¿Están las memorias institucionales configuradas como readonly?
+        - ¿Están las memorias personales sincronizadas bidireccionalmente de forma eficiente?
+        - ¿La estructura de carpetas es lo suficientemente clara para permitir navegación autónoma?
+  
+  - **Auditoría de las decisiones autónomas**:
+      descripcion: "Comprobar que los agentes toman decisiones autónomas basadas en las reglas y los datos del sistema."
+      verificaciones:
+        - ¿Los agentes siguen las reglas de permisos?
+        - ¿Tienen las capacidades para tomar decisiones basadas en archivos y metadatos?
+        - ¿Las decisiones de los agentes son registradas correctamente en bitácoras?
+  
+  - **Verificación de la trazabilidad**:
+      descripcion: "Asegurarse de que todas las acciones y cambios realizados por los agentes estén registrados de manera trazable y auditada."
+      verificaciones:
+        - ¿Están los metadatos y los hashes de los archivos correctamente actualizados?
+        - ¿Las bitácoras reflejan todas las acciones y decisiones importantes de los agentes?
+        - ¿Cada acción tomada tiene un **hash único**, **fecha de modificación**, **autor** y **referencia al índice**?
+
+  - **Revisión de las reglas de sincronización**:
+      descripcion: "Evaluar que las memorias personales y las institucionales estén correctamente sincronizadas entre los agentes y el sistema central."
+      verificaciones:
+        - ¿Las memorias institucionales solo son accesibles en modo de consulta?
+        - ¿Los agentes pueden actualizar sus memorias personales sin afectar la memoria institucional?
+        - ¿Se sincronizan automáticamente las actualizaciones entre los agentes y el índice central?
+
+  - **Propuestas de mejora**:
+      descripcion: "Proponer mejoras técnicas, funcionales y de seguridad para lograr una autonomía completa y mejorar el desempeño del sistema."
+      verificaciones:
+        - ¿Cómo se puede optimizar la toma de decisiones autónomas de los agentes?
+        - ¿Qué mejoras podrían implementarse para mejorar la seguridad y la integridad del sistema?
+        - ¿Cómo puede mejorarse el manejo de registros y bitácoras para mayor eficiencia?
+
+# Resultado esperado:
+resultado_esperado: |
+  Un informe detallado que cubra la evaluación de cada aspecto del sistema **Autonom-IA**, con énfasis en las posibles **áreas de mejora** y **riesgos** asociados.
+  El informe debe incluir recomendaciones específicas para mejorar el sistema, destacando puntos como la **seguridad**, **permisos** y **sincronización** entre los agentes, así como la **mejora de la autonomía** y la **gestión de memorias**.
+
+# Instrucciones para el auditor (DeepSeek):
+instrucciones:
+  - Revisar el YAML del sistema **Autonom-IA**.
+  - Validar si el sistema cumple con los estándares de **modularidad** y **escalabilidad**.
+  - Comprobar si los agentes están operando **autónomamente** y siguiendo las reglas de gobernanza.
+  - Verificar que todos los cambios y acciones estén siendo **auditoría** y **trazables** en las bitácoras.
+  - Proponer mejoras para asegurar que el sistema esté **listo para operar de forma completamente autónoma**.

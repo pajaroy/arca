@@ -1,0 +1,20 @@
+# ALIASES PERSONALIZADOS ALMA_RESIST
+
+# Conexión remota entre nodos
+alias resist='ssh bird@192.168.1.36'  # Nodo alma-resist
+alias core='ssh bird@192.168.1.33'    # Nodo alma-core
+
+# Lanzadores gráficos
+alias obsidian="$HOME/apps/obsidian/Obsidian.AppImage &"
+alias code-resist='code ~/ALMA_RESIST &'
+
+# Navegación rápida
+alias cdresist='cd ~/ALMA_RESIST'
+alias cdcore='cd ~/ALMA_RESIST/core'
+alias cdcontrol='cd ~/ALMA_RESIST/control_central'
+alias cdlogs='cd ~/ALMA_RESIST/logs'
+
+# Git
+alias gpush='git add . && git commit -m "Backup $(date +\"%Y-%m-%d %H:%M\")" && git push origin master'
+alias gpull='git pull'
+alias gstatus='git status'

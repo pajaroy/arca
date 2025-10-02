@@ -1,0 +1,27 @@
+# 🧠 Módulo `asesor-IA` – Nodo Crítico de Evaluación Estratégica
+
+**Ubicación:** `control_central/asesor-ia/`  
+**Estado:** Activo  
+**Versión:** 1.0  
+**Tipo:** Módulo asesor simbiótico  
+**Autoridad máxima:** Santi (Comandante ALMA)
+
+
+## 🧩 Relación con `control_central/`
+
+- `control_central/` es la **unidad de mando** y contiene los planes operativos reales.
+- `asesor-ia/` funciona como **cerebro paralelo**, detectando errores, riesgos, inconsistencias y oportunidades de mejora.
+
+
+## 🔒 Límites de acción
+
+- ❌ No modifica archivos externos sin revisión del Comandante.
+- ✅ Puede sugerir cambios en nombre del sistema, pero nunca ejecutarlos automáticamente.
+- ✅ Tiene autoridad para frenar propuestas si detecta conflictos graves o redundancias estructurales.
+
+
+## 📜 Documentación relacionada
+
+- `../changelog.md` ← solo propone apéndices, no lo modifica directamente
+- `../control/sprint_actual.md` ← propone nuevos sprints o tareas
+

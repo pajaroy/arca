@@ -1,0 +1,25 @@
+---
+module: arquitectura/estructura_doc/plantilla_readme
+type: core
+status: in_progress
+created: '2025-05-23'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 📘 README Template
+
+Este archivo sirve como plantilla base para README de módulos, versiones o componentes dentro del sistema ALMA_RESIST.
+
+## ✍️ Formato sugerido
+
+- `Nombre del módulo:`  
+- `Descripción breve:`  
+- `Dependencias:`  
+- `Estructura del módulo:`  
+- `Cómo usarlo:`  
+- `Notas adicionales:`  
+
+---
+
+_Este README está generado desde `estructura_doc/README_template.md`. Personalizar según el contexto._

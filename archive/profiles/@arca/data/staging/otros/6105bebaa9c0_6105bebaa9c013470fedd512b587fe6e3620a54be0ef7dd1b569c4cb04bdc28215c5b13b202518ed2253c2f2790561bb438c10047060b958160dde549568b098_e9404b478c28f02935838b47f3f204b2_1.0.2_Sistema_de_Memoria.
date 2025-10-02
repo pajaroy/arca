@@ -1,0 +1,32 @@
+
+# 🧠 Sistema de Memorias Vivas – ALMA LIBRE v1.0.2 (memoria_ampliada)
+
+Este documento define la estructura actualizada de carpetas para almacenar memorias escritas manualmente en formato `.md`, con encabezado YAML. Estas memorias componen el sistema nervioso del proyecto ALMA LIBRE: su base de conocimiento emocional, técnico, estratégico y ahora también institucional.
+
+
+## 🔗 Relaciones entre Carpetas
+
+- `alma_general` → con todos los cuadernos y `bitacora_central`
+- `reflexion` → con `alma_general`, `psicología_trading`, `medicina_alternativa`
+- `medicina_alternativa` → con `salud_RPL`, `bitacora_central`
+- `geopolítica_actualidad` → con `noticias_globales`, `bitacora_central`
+- `fondo_inversion` → con `gestor_trading`, `finanzas_personales`, `creatividad_y_empresa`, `fondo_alma_mia`
+- `gestor_trading` → con `trading`, `fondo_alma_mia`, `noticias_globales`, `finanzas_personales`
+- `programacion` → con `fondo_inversion`, `gestor_trading`, `finanzas_personales`, `creatividad_y_empresa`, `cannabird`
+- `canavir_cultivo` → con `cannabird`, `medicina_alternativa`, `reflexion`, `programacion`
+- `bitacora_central` → espejo y nodo central del sistema
+
+tipo: memoria
+titulo: "Título descriptivo"
+fecha: 2025-04-24
+conectada_a: ["modulo_x", "cuaderno_y", "empresa_z"]
+prioridad: alta
+estado: activa
+
+## 🚀 Recomendaciones para integración futura
+
+- Automatizar lectura YAML → `metadata_memorias.csv`
+- Visualización tipo red en `MAPA_INTERACTIVO.md`
+- Sincronizar estas carpetas con Obsidian, Notion y terminal
+- Crear validador de integridad de relaciones cruzadas
+

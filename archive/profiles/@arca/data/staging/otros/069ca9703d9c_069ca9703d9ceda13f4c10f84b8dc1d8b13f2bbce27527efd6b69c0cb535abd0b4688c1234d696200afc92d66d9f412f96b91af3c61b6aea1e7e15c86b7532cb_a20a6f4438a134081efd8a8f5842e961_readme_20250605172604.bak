@@ -1,0 +1,105 @@
+# ALMA_RESIST – Sistema Modular de Automatización IA
+
+**ALMA_RESIST** es un sistema modular, portátil y asistido por inteligencia artificial diseñado para gestionar, automatizar y documentar proyectos complejos con trazabilidad total.  
+Combina CLI, IA local, metodologías evolutivas y estructura documental compatible con humanos e IAs.
+
+> Versión actual: `v0.0.0.5`  
+> Estado: `estable`  
+> Sprint: `2.5` – Auditoría Final y Consolidación  
+> Última actualización: `2025-05-28`
+
+---
+
+## 🧱 Estructura Modular
+
+| Carpeta                        | Función principal |
+|-------------------------------|-------------------|
+| `core/`                        | Módulos de ejecución y lógica principal (CLI, integración IA, procesadores) |
+| `config/`                      | Configuraciones por entorno o módulo |
+| `docs/`                        | Documentación estructural, técnica, operativa e histórica |
+| `logs/`                        | Seguimiento de procesos, auditorías y registros automáticos |
+| `docs/arquitectura/`           | Idea base, whitepaper, prompt técnico |
+| `docs/control/`                | Centro de mando: checklists, registros, planeación, sprints activos |
+| `docs/utilidades/scripts/`     | Scripts de validación, automatización y mantenimiento |
+| `docs/versiones/`              | Historial de versiones validadas |
+
+---
+
+## 🔗 Archivos clave
+
+- `docs/version.md` → versión y ciclo de vida actual
+- `docs/changelog.md` → cambios históricos y lecciones aprendidas
+- `docs/control/sprints_activos/sprint_2.5_auditoria_checklist.md` → auditoría estructural
+- `docs/arquitectura/whitepaper/whitepaper_v1.md` → consolidación conceptual
+- `docs/arquitectura/prompt_tecnico/prompt_tecnico_base.md` → entrada técnica para IAs
+- `run_auditoria_automatica.sh` → pipeline de validación automática
+
+---
+
+## ✅ Automatizaciones disponibles
+
+```bash
+chmod +x run_auditoria_automatica.sh
+./run_auditoria_automatica.sh
+```
+
+Esto ejecuta una secuencia completa de:
+
+1. Activación de entorno
+2. Normalización `snake_case`
+3. Corrección de metadatos
+4. Enlace inteligente (`linked_to`)
+5. Validación estructural
+
+---
+
+## 🧪 Metodologías Relevantes
+
+- `docs/control/metodologias/metodologia_agregado_archivos.md`
+- `docs/control/metodologias/metodologia_doc_ia.md`
+- `docs/control/metodologias/metodologia_sprints.md`
+
+---
+
+## 🔄 Flujo de integración documental
+
+```mermaid
+graph TD
+  A[Agregar archivo] --> B[Normalizar metadatos]
+  B --> C[Validar YAML]
+  C --> D[Actualizar relaciones IA]
+  D --> E[Registrar en logs]
+  E --> F[Notificar a IA o sistema externo]
+```
+
+---
+
+## 🤖 IA y Semántica
+
+ALMA_RESIST está optimizado para ser comprendido por modelos IA locales o remotos. Utiliza campos YAML (`module`, `type`, `status`, `created`, `linked_to`, `context_tags`) y estructuras uniformes para facilitar procesamiento automático, indexación y búsqueda semántica.
+
+---
+
+## 📁 Historial de versiones
+
+Ubicado en `docs/versiones/`, contiene los hitos principales del sistema, auditados y documentados para cada entrega.
+
+---
+
+## 📌 Último Sprint Completado: 2.5 – Auditoría Final y Consolidación
+
+- Auditoría semántica completa del repositorio
+- Correcciones aplicadas a más de 100 archivos
+- Revisión profunda de `docs/`, `logs/`, `scripts/`
+- Limpieza de carpetas y mejora en `README.md`
+- Generación de documentación automatizada y validadores
+
+---
+
+## 👤 Autoría
+
+Desarrollado por **Santiago Calvo**, con asistencia técnica de IA (GPT-4 y variantes locales como Mistral).  
+Proyecto ALMA_RESIST – Argentina, 2025
+
+---
+

@@ -1,0 +1,12 @@
+# 🧩 Apéndice Complementario – Sprint 2.5 (Tareas Pendientes Detectadas por Auditoría)
+
+Este apéndice detalla acciones adicionales no contempladas explícitamente en el checklist original, pero detectadas durante la auditoría del Sprint 2.5. Estas tareas no duplican elementos previos, sino que amplían la profundidad de la verificación con mejoras necesarias para la consolidación estructural de ALMA_RESIST.
+
+
+## ✅ Siguientes pasos sugeridos
+
+- Implementar un script `detect_inconsistencias_yaml.py` para validar campos `module`, `type`, `status` versus su contenido y ubicación real.
+- Establecer convención para rutas completas en `module`, incluyendo prefijo de módulo raíz.
+- Generar y versionar snapshot de cierre del sprint con todos los cambios aplicados.
+- Crear script de curaduría automática de documentos obsoletos (`status: archived`).
+

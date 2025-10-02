@@ -1,0 +1,23 @@
+metadatos:
+  id_unico: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"    # UUID único del archivo/registro
+  tipo: "definir_tipo"                                # config | doc | log | model | script | memoria | db | dataset | otro
+  nombre: "nombre_del_archivo"
+  version: "0.1.0"
+  estado: "activo"                                    # activo | borrador | obsoleto | legado | testeando
+  fecha_creacion: "2025-07-14T19:00:00-03:00"
+  fecha_modificacion: "2025-07-14T19:00:00-03:00"
+  autor: "Bird"
+  colaboradores: []
+  descripcion: "Breve descripción del archivo y su propósito."
+  tags: []
+  dependencia_modulos: []
+  path_fisico: "/ruta/completa/al/archivo"
+  hash_integridad: ""                                 # SHA256/MD5 opcional para control de integridad
+  origen: "manual"                                    # manual | autogenerado | importado | IA | migracion
+  permisos: "rw-r--r--"                               # Permisos UNIX, opcional
+  confidencialidad: "pública"                         # pública | interna | privada | confidencial
+  referencias_externas: []
+  historial:
+    - version: "0.1.0"
+      fecha: "2025-07-14"
+      cambios: "Creación inicial del archivo."

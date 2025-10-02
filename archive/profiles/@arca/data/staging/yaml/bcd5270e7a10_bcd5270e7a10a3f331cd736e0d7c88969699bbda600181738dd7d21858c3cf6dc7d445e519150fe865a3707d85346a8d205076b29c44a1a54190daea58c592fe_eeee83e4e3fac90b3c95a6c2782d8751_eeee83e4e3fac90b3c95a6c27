@@ -1,0 +1,66 @@
+id: SCRIPT_HASHING_ALMA_RESIST_v0.1.0
+autor: bird
+fecha: 2025-06-09
+tipo: solicitud_script_cli
+modulo: hashing
+titulo: "Script CLI multi-agente y future-proof para generación y registro auditable de hashes en ALMA_RESIST"
+descripcion: |
+  Desarrollá un script en Python llamado `generate_hashes.py` para calcular el hash (SHA-256 por defecto, configurable) de todos los archivos en una ruta objetivo (carpeta o archivo individual) y registrar la información en un índice centralizado (`index.json` por defecto, configurable).
+
+  El script debe soportar múltiples agentes, permitir registro por identidad, tags, comentarios y logs independientes.  
+  El índice debe ser consultable/filtrable por agente, archivo, tipo de acción o tag.
+  Cada registro debe incluir identificador único, control de permisos (campo estructural), y estar preparado para firmas digitales y hooks/callbacks externos.
+
+argumentos_cli:
+  - --ruta_objetivo (obligatorio, carpeta/archivo objetivo)
+  - --algoritmo (opcional, default sha256)
+  - --index (opcional, default ./index.json)
+  - --excluir (opcional, patrón/lista, ej: "*.tmp,*.bak")
+  - --agente (obligatorio, nombre del agente ejecutor)
+  - --comentario (opcional, tag o comentario libre sobre la acción)
+  - --logs_por_agente (flag, crea log/registro adicional por agente si se activa)
+  - --permisos (opcional, ej: "rw", "ro", lista de agentes/roles autorizados)
+  - --firmar (flag, si está presente, agrega firma digital a cada registro)
+  - --hook (opcional, comando/script externo a ejecutar tras cada registro)
+  - --dry-run (flag)
+  - --validar (flag, compara hashes previos con actuales y reporta divergencias)
+  - --output (opcional, CLI/JSON/YAML)
+campos_indice:
+  - id_registro (hash+timestamp+agente)
+  - ruta
+  - hash
+  - algoritmo
+  - fecha_hora
+  - agente
+  - empresa (opcional)
+  - tipo_accion (default: hashing)
+  - comentario
+  - tamaño
+  - permisos
+  - firma (placeholder/future)
+  - tags (lista)
+  - id_sesion (opcional)
+  - log_path
+  - hook_executed
+  - origen_disparo (manual, watcher, CI, etc)
+requerimientos:
+  - Registro multi-agente, multi-empresa, control de permisos, firmas y hooks preparado.
+  - Modular, extensible, bien comentado, manejo robusto de errores.
+  - Soporta batch, id de sesión/transacción, y auditoría automática.
+  - Si el índice no existe, lo crea; si existe, lo actualiza/expande sin duplicados.
+  - Modo dry-run, validación, output exportable (resumen, JSON, YAML).
+  - Integración sencilla para agentes IA, empresas y sistemas distribuidos.
+  - Preparado para integración en workflows CI/CD y auditoría por batch.
+ejemplo_uso: |
+  python3 generate_hashes.py --ruta_objetivo /home/bird/alma_core \
+    --index /home/bird/alma_core/control_central/core/index.json \
+    --agente kael --comentario "Ciclo inicial hashing" --excluir "*.tmp,*.bak" \
+    --logs_por_agente --permisos "kael:rw,centralesis:r" --firmar --hook "/usr/local/bin/alerta_hash" \
+    --dry-run --output JSON
+output_esperado: |
+  Resumen CLI: "20 archivos hasheados, 2 modificados, 0 errores (agente: kael, firma: dummy, hook ejecutado: sí)"
+  Salida JSON/YAML IA-friendly.
+notas: |
+  El script debe dejar la base para operar en entornos multi-agente, con trazabilidad absoluta, modularidad, permisos y hooks/callbacks.
+  Pensado para expansión futura sin migraciones dolorosas.  
+  La lógica de permisos/firma/hook puede ser dummy, pero el campo y arquitectura deben estar definidos desde v0.1.0.

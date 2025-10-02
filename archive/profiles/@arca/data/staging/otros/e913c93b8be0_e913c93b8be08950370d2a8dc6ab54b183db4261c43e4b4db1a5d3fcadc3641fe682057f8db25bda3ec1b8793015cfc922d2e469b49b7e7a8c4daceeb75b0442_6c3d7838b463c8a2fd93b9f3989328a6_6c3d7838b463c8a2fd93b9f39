@@ -1,0 +1,21 @@
+# 📋 Changelog – ALMA_LOADER v2.2.0
+
+## [2.2.0] – 2025-05-06
+
+### ✨ Added
+- `base_storage.py`: interfaz abstracta para todas las futuras bases de datos.
+- `sqlite_storage.py`: implementación completa del almacenamiento usando SQLite.
+- `vector_storage.py` (borrador): stub para búsqueda semántica mediante embeddings FAISS.
+- `router_atencional.py`: prototipo de enrutador que interpreta y redirige el input según tipo.
+- Documentación extendida en `prompt_master_2.2.0.md`.
+
+### 🔧 Changed
+- Reorganización de arquitectura modular.
+- Preparación explícita para NLP vectorizado.
+- Separación limpia entre validación, procesamiento y almacenamiento.
+
+### 🧹 Deprecated
+- Ninguno.
+
+### ❌ Removed
+- Nada eliminado (compatibilidad total con v2.1.1).

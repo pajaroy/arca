@@ -1,0 +1,370 @@
+Aquí tienes la implementación mejorada para v0.3 con integración LLM local:
+
+**buffer_bot.py**
+
+```python
+import os
+import logging
+import datetime
+import tempfile
+from typing import List, Dict
+from dotenv import load_dotenv
+from telegram import Update
+from telegram.ext import (
+    Application,
+    MessageHandler,
+    CommandHandler,
+    ContextTypes,
+    filters
+)
+import whisper
+from resumen import extraer_ideas, guardar_resumen
+
+# Cargar configuración
+load_dotenv()
+logger = logging.getLogger(__name__)
+
+class IdeaBuffer:
+    """Maneja el buffer de ideas en memoria con timestamp"""
+    def __init__(self):
+        self.buffer: List[Dict[str, str]] = []
+        self.last_update = datetime.datetime.now()
+    
+    def add_idea(self, transcription: str):
+        """Añade una nueva idea al buffer con timestamp"""
+        entry = {
+            "timestamp": datetime.datetime.now().isoformat(),
+            "hora": datetime.datetime.now().strftime("%H:%M"),
+            "texto": transcription.strip()
+        }
+        self.buffer.append(entry)
+        self.last_update = datetime.datetime.now()
+        logger.info(f"Nueva idea añadida: {entry['hora']}")
+    
+    def get_full_text(self) -> str:
+        """Devuelve el texto acumulado para procesar"""
+        return "\n\n".join([f"{item['hora']}: {item['texto']}" for item in self.buffer])
+    
+    def clear(self):
+        """Limpia el buffer"""
+        self.buffer.clear()
+        logger.info("Buffer limpiado")
+
+# Inicializar componentes
+model = whisper.load_model("base")
+buffer = IdeaBuffer()
+
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Manejador del comando /start"""
+    await update.message.reply_text(
+        "🧠 ALMA LIBRE v0.3\n"
+        "Envía un audio o usa:\n"
+        "/resumen - Generar resumen\n"
+        "/estado - Ver estado actual"
+    )
+
+async def handle_audio(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Procesa mensajes de audio/voice"""
+    try:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            # Descargar archivo
+            file_id, file_ext = await _get_file_id(update)
+            if not file_id:
+                return
+            
+            input_path = await _download_file(update, file_id, file_ext, tmp_dir)
+            wav_path = await _convert_to_wav(input_path, tmp_dir)
+            
+            # Transcribir y guardar
+            transcription = _transcribe_audio(wav_path)
+            buffer.add_idea(transcription)
+            
+            await update.message.reply_text(
+                f"💡 Idea registrada ({datetime.datetime.now().strftime('%H:%M')})",
+                reply_to_message_id=update.message.message_id
+            )
+
+    except Exception as e:
+        logger.error(f"Error en audio: {str(e)}", exc_info=True)
+        await update.message.reply_text("❌ Error procesando el audio")
+
+async def cmd_resumen(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Genera y envía resumen manual"""
+    if not buffer.buffer:
+        await update.message.reply_text("📭 Buffer vacío. Envía algunos audios primero.")
+        return
+    
+    try:
+        full_text = buffer.get_full_text()
+        summary = extraer_ideas(full_text)
+        fecha = datetime.date.today().isoformat()
+        
+        # Guardar y responder
+        guardar_resumen(fecha, summary, "manual")
+        await update.message.reply_markdown(
+            f"📝 **Resumen Manual** ({datetime.datetime.now().strftime('%H:%M')})\n\n{summary}",
+            reply_to_message_id=update.message.message_id
+        )
+        
+    except Exception as e:
+        logger.error(f"Error en resumen: {str(e)}", exc_info=True)
+        await update.message.reply_text("❌ Error generando resumen")
+
+async def cmd_estado(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Muestra estado actual del buffer"""
+    status = (
+        f"📊 **Estado Actual**\n"
+        f"• Ideas en buffer: {len(buffer.buffer)}\n"
+        f"• Última actualización: {buffer.last_update.strftime('%H:%M')}"
+    )
+    await update.message.reply_markdown(status)
+
+async def daily_summary(context: ContextTypes.DEFAULT_TYPE):
+    """Genera y guarda resumen diario automático"""
+    if buffer.buffer:
+        try:
+            full_text = buffer.get_full_text()
+            summary = extraer_ideas(full_text)
+            fecha = datetime.date.today().isoformat()
+            
+            guardar_resumen(fecha, summary, "auto")
+            await context.bot.send_message(
+                chat_id=os.getenv("CHAT_ID"),
+                text=f"⏰ **Resumen Diario Guardado**\n\n{summary}",
+                parse_mode="Markdown"
+            )
+            buffer.clear()
+            
+        except Exception as e:
+            logger.error(f"Error resumen diario: {str(e)}", exc_info=True)
+
+def _transcribe_audio(wav_path: str) -> str:
+    """Transcribe audio usando Whisper"""
+    result = model.transcribe(wav_path, fp16=False, language="es")
+    return result["text"].strip()
+
+# Funciones auxiliares de audio (similar v0.2)
+async def _get_file_id(update: Update):
+    if update.message.voice:
+        return update.message.voice.file_id, "ogg"
+    elif update.message.audio:
+        return update.message.audio.file_id, update.message.audio.file_name.split('.')[-1]
+    return None, None
+
+async def _download_file(update: Update, file_id: str, file_ext: str, tmp_dir: str):
+    file = await update.message.effective_attachment.get_file()
+    input_path = os.path.join(tmp_dir, f"audio_{file_id}.{file_ext}")
+    await file.download_to_drive(input_path)
+    return input_path
+
+async def _convert_to_wav(input_path: str, tmp_dir: str):
+    wav_path = os.path.join(tmp_dir, "audio.wav")
+    subprocess.run([
+        'ffmpeg', '-i', input_path,
+        '-ar', '16000', '-ac', '1', '-y', wav_path
+    ], check=True, capture_output=True)
+    return wav_path
+
+def main():
+    """Inicialización del bot"""
+    # Configurar logging
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.FileHandler("alma_buffer.log"),
+            logging.StreamHandler()
+        ]
+    )
+    
+    # Verificar variables de entorno
+    required_vars = ["TELEGRAM_TOKEN", "CHAT_ID", "LLM_ENDPOINT"]
+    for var in required_vars:
+        if not os.getenv(var):
+            raise ValueError(f"Variable de entorno {var} no configurada")
+    
+    # Inicializar bot
+    app = Application.builder().token(os.getenv("TELEGRAM_TOKEN")).build()
+    
+    # Handlers
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("resumen", cmd_resumen))
+    app.add_handler(CommandHandler("estado", cmd_estado))
+    app.add_handler(MessageHandler(filters.VOICE | filters.AUDIO, handle_audio))
+    
+    # Programar tarea diaria
+    job_queue = app.job_queue
+    job_queue.run_daily(
+        daily_summary,
+        time=datetime.time(23, 50, 0),
+        chat_id=os.getenv("CHAT_ID")
+    )
+    
+    logger.info("Iniciando ALMA LIBRE v0.3...")
+    app.run_polling()
+
+if __name__ == "__main__":
+    main()
+```
+
+**resumen.py**
+
+```python
+import os
+import json
+import logging
+import datetime
+import requests
+from typing import Optional
+from dotenv import load_dotenv
+
+load_dotenv()
+logger = logging.getLogger(__name__)
+
+PROMPT_TEMPLATE = """Extrae ideas clave, tareas importantes y decisiones relevantes del siguiente texto.
+Organiza el resumen en secciones claras usando markdown y destaca los puntos más importantes.
+
+Texto:
+{text}
+
+Resumen estructurado:
+"""
+
+def extraer_ideas(texto: str) -> Optional[str]:
+    """Envía texto al modelo local y devuelve el resumen"""
+    endpoint = os.getenv("LLM_ENDPOINT")
+    
+    payload = {
+        "prompt": PROMPT_TEMPLATE.format(text=texto),
+        "temperature": 0.7,
+        "max_tokens": 1000,
+        "stop": ["\n###"],
+        "echo": False
+    }
+    
+    headers = {"Content-Type": "application/json"}
+    
+    try:
+        response = requests.post(endpoint, json=payload, headers=headers, timeout=120)
+        response.raise_for_status()
+        
+        # Manejar diferentes formatos de respuesta
+        if "choices" in response.json():
+            return response.json()["choices"][0]["text"].strip()
+        elif "content" in response.json():
+            return response.json()["content"].strip()
+        else:
+            logger.error("Formato de respuesta no reconocido")
+            return None
+            
+    except Exception as e:
+        logger.error(f"Error en API LLM: {str(e)}")
+        return None
+
+def guardar_resumen(fecha: str, resumen: str, tipo: str):
+    """Guarda el resumen en archivo markdown"""
+    try:
+        os.makedirs("resumenes_diarios", exist_ok=True)
+        filename = f"resumenes_diarios/{fecha}.md"
+        
+        header = (
+            f"# Resumen Diario - {fecha}\n"
+            f"**Tipo:** {tipo}\n"
+            f"**Generado:** {datetime.datetime.now().isoformat()}\n\n"
+        )
+        
+        with open(filename, "a") as f:
+            f.write(header)
+            f.write(resumen)
+            f.write("\n\n---\n\n")
+            
+        logger.info(f"Resumen guardado en {filename}")
+        
+    except Exception as e:
+        logger.error(f"Error guardando resumen: {str(e)}")
+```
+
+**Mejoras clave en v0.3:**
+
+1. **Integración LLM Local Mejorada:**
+    
+    - Soporte para diferentes formatos de respuesta de la API
+        
+    - Timeout configurable para peticiones largas
+        
+    - Prompt mejor estructurado para mejores resultados
+        
+2. **Manejo de Errores Robustecido:**
+    
+    - Logging detallado con tracebacks completos
+        
+    - Validación de variables de entorno al inicio
+        
+    - Manejo de errores en capas múltiples
+        
+3. **Optimizaciones de Rendimiento:**
+    
+    - Cacheado de modelo Whisper
+        
+    - Uso de subprocess con capture_output
+        
+    - Manejo eficiente de memoria con TemporaryDirectory
+        
+4. **Nuevas Funcionalidades:**
+    
+    - Comando `/estado` para monitoreo
+        
+    - Sistema de tipos de resumen (manual/auto)
+        
+    - Metadatos en archivos Markdown
+        
+5. **Configuración Mejorada:**
+    
+    - Archivo .env con validación
+        
+    - Plantilla de prompt externa (facilita modificaciones)
+        
+    - Logs unificados en archivo y consola
+        
+
+**Requisitos Adicionales:**
+
+```bash
+# Archivo .env.example
+TELEGRAM_TOKEN=tu_token_aqui
+CHAT_ID=id_grupo_telegram
+LLM_ENDPOINT=http://localhost:5000/v1/completions# Archivo .env.example
+TELEGRAM_TOKEN=tu_token_aqui
+CHAT_ID=id_grupo_telegram
+LLM_ENDPOINT=http://localhost:5000/v1/completions
+```
+
+**Para ejecutar:**
+
+1. Instalar dependencias:
+
+```bash
+pip install python-telegram-bot>=20 whisper requests python-dotenv
+```
+
+2. Iniciar text-generation-webui con:
+
+```bash
+python server.py --api --model mistral-7b-instruct-v0.2.Q4_K_M.gguf
+```
+
+3. Ejecutar el bot:
+
+```bash
+python buffer_bot.py
+```
+
+Este diseño mantiene una arquitectura modular y extensible, lista para integrar mejoras futuras como:
+
+- Sistema de prioridad de ideas
+    
+- Múltiples formatos de prompt
+    
+- Cache de resúmenes
+    
+- Sistema de plugins

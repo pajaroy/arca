@@ -1,0 +1,23 @@
+# Kael Terminal Cli
+
+## Indice :
+
+
+## 2025-07-10 :Unificación de Prompts y Nueva Arquitectura CLI ALMA
+
+A partir de la versión **Prompt_Kael_v0.1.0** iniciamos el proceso de **unificación y refactorización integral** de los prompts y especificaciones funcionales del sistema CLI ALMA_RESIST.
+
+**Objetivo:**  
+Consolidar todas las funciones, reglas de negocio, y arquitectura modular en un solo prompt YAML de referencia, que sirva como blueprint único para humanos, IA y futuros agentes del sistema. Este proceso incluye:
+
+- Centralización de la lógica CLI en `/home/alma/Alma-Cli/Alma.py` como único entrypoint y terminal principal.
+- Separación clara entre interfaz de usuario (CLI/terminal) y backend de comandos, gestionado por `/home/alma/Alma-Cli/Kael/Kael.py`.
+- Indexado global centralizado (`Alma_index.json`) en la raíz del proyecto.
+- Implementación de subíndices, limpieza automática de archivos no gestionados y logs multi-formato.
+- Preparación explícita para integración futura con módulos ML, RAG y agentes IA autónomos.
+
+Todo movimiento, cambio o mejora será incorporado a este prompt unificado, garantizando coherencia, trazabilidad y compatibilidad total con el ecosistema ALMA.
+
+**Aclaración:**  
+Desde ahora, cualquier modificación estructural o ampliación funcional deberá documentarse y versionarse en el prompt YAML principal antes de implementarse en código.
+

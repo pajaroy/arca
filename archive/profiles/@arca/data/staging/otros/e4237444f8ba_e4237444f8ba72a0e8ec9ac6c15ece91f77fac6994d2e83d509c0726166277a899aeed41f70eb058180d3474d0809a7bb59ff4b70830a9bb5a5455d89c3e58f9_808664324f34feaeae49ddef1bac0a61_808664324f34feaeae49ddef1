@@ -1,0 +1,19 @@
+# README – logs_historicos
+
+Esta carpeta forma parte del sistema modular de ALMA_RESIST y cumple una función clave dentro del entorno de documentación técnica.
+
+## 📁 Ruta
+`docs/control/logs_historicos`
+
+## 📌 Propósito
+
+- **logs_historicos**
+
+
+
+- logs_historicos: Depósito de logs rotados del sistema ALMA. Puede incluir logs de sistema, bitácoras antiguas o seguimiento de eventos.
+
+## 🧠 Notas
+
+Esta carpeta debe mantenerse ordenada y actualizada. Si algún documento cambia de función, debe reubicarse o marcarse con un `status: deprecated` en su metadata YAML.
+

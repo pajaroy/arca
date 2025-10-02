@@ -1,0 +1,61 @@
+{
+  "nombre": "Autonom-IA System",
+  "version": "v0.1.0",
+  "descripcion": "Este es el sistema base de Autonom-IA, que permite a los agentes del ecosistema ALMA_RESIST operar de forma autónoma, tomar decisiones, navegar entre carpetas, interactuar entre ellos y gestionar sus memorias sin intervención humana. Esta versión incluye la documentación, auditoría inicial y la implementación de la estructura modular.",
+  "estructura_de_archivos": [
+    {
+      "nombre": "seed_autonom-ia_system_v0.1.0.yaml",
+      "descripcion": "El archivo base que describe la estructura, reglas y protocolos de Autonom-IA."
+    },
+    {
+      "nombre": "auditoria_seed_autonom-ia_system_v0.1.0.yaml",
+      "descripcion": "Auditoría inicial de la implementación de Autonom-IA."
+    },
+    {
+      "nombre": "prompt_auditoria_seed_autonom-ia_system_v0.1.0.yaml",
+      "descripcion": "Prompt para la auditoría por DeepSeek."
+    },
+    {
+      "nombre": "README.yaml",
+      "descripcion": "Documento de introducción a la versión v0.1.0 del sistema Autonom-IA."
+    }
+  ],
+  "funcionalidades_clave": [
+    "Autonomía: Los agentes pueden tomar decisiones basadas en reglas predefinidas y metadatos, sin intervención humana.",
+    "Sincronización de memorias: Las memorias personales de los agentes se sincronizan bidireccionalmente, mientras que las memorias institucionales son readonly y centralizadas.",
+    "Auditoría continua: Todas las acciones realizadas por los agentes son registradas en las bitácoras y metadatos.",
+    "Navegación autónoma: Los agentes pueden explorar sus carpetas y archivos asignados sin intervención humana, pero con reglas de gobernanza."
+  ],
+  "estructura_del_sistema": [
+    {
+      "nombre": "agentes/",
+      "descripcion": "Contiene las subcarpetas de cada agente (KAEL, CENTRALESIS, EMMA, etc.), con sus archivos y registros."
+    },
+    {
+      "nombre": "bitacora/",
+      "descripcion": "Registros globales de todas las acciones realizadas por los agentes."
+    },
+    {
+      "nombre": "memorias/",
+      "descripcion": "Memorias personales y memorias institucionales."
+    },
+    {
+      "nombre": "index.json",
+      "descripcion": "Índice centralizado de metadatos de todos los archivos y agentes."
+    }
+  ],
+  "protocolo_de_sincronizacion": [
+    "bidireccional: Sincronización entre la memoria personal del agente y su archivo operativo.",
+    "unidireccional: Sincronización de las memorias institucionales desde el archivo central hacia los agentes."
+  ],
+  "protocolo_de_auditoria": [
+    "auditoria_seed_autonom-ia_system_v0.1.0.yaml: Este archivo contiene el protocolo para auditar el sistema, con objetivos, tareas de revisión y verificación de la integridad del sistema Autonom-IA."
+  ],
+  "referencias": {
+    "linked_to": [
+      "seed_autonom-ia_system_v0.1.0.yaml",
+      "prompt_auditoria_seed_autonom-ia_system_v0.1.0.yaml",
+      "auditoria_seed_autonom-ia_system_v0.1.0.yaml"
+    ]
+  }
+}

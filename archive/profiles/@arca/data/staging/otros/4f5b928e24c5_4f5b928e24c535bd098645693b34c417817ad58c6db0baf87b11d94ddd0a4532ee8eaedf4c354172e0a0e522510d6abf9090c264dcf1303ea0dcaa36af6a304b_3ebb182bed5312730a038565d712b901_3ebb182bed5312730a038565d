@@ -1,0 +1,11 @@
+# 🧠 Módulos Core – ALMA_RESIST
+
+Esta carpeta contiene los scripts fundamentales del sistema. Todos son compatibles con terminal y están preparados para correr en entornos offline con CPU limitados.
+
+
+
+
+## 🧩 Siguientes módulos a desarrollar
+
+- `log_crypto.py` → cifrado de logs
+- `log_integrity.py` → validación SHA3

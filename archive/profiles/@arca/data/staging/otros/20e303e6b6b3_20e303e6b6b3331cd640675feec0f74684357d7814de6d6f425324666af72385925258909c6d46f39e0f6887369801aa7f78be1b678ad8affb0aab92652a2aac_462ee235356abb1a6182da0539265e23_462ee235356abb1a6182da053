@@ -1,0 +1,74 @@
+# Prompt detallado para DeepSeek: fix\_tipo.py
+
+## Descripción
+
+Este prompt genera un **script Python** llamado `fix_tipo.py` que automatiza la validación y establecimiento del campo `tipo` en encabezados YAML de archivos de texto utilizados en el sistema ALMA\_RESIST. Esto asegura la clasificación coherente y trazabilidad documental de todos los archivos críticos del sistema.
+
+## Requisitos del script generado
+
+* **Entrada:**
+
+  * Ruta al archivo de destino (puede ser `.md`, `.yaml` o un script con encabezado YAML en docstring).
+
+* **Detección de YAML:**
+
+  * El encabezado YAML está delimitado por las primeras dos líneas que contienen `---`.
+  * El script debe buscar el campo `tipo` dentro de ese bloque YAML y validar que su valor esté en la lista de tipos permitidos:
+    `["README", "script", "prompt", "doc", "index", "changelog", "yaml"]`.
+
+* **Inferencia automática:**
+
+  * Si el campo no existe o es inválido, debe inferir el tipo a partir de:
+
+    * El nombre del archivo (`README.md`, `*.py`, etc.)
+    * Su ubicación en la estructura de carpetas (`Src/`, `Documents/`, `Changelog/`, etc.)
+    * Extensión del archivo (`.md`, `.yaml`, etc.)
+    * Patrones como “prompt” en el nombre o ruta.
+  * Si no puede inferir, debe usar `doc` como valor por defecto.
+
+* **Integridad:**
+
+  * Solo debe modificar/agregar el campo `tipo` en el bloque YAML si hizo un cambio.
+  * No debe alterar otros campos ni el contenido fuera del YAML.
+
+* **Logging:**
+
+  * Toda acción (archivo procesado, tipo asignado, fecha/hora, acción: validado/cambiado) debe registrarse en `/home/alma/Alma-Cli/Logs/fix_metadata.log`.
+  * El formato de cada entrada en el log debe ser:
+
+    \[YYYY-MM-DDTHH\:MM\:SSZ] Archivo:\<ruta\_absoluta> Tipo:<tipo> Acción\:tipo\_validado/cambiado
+
+* **Ejecución por consola:**
+
+  ```bash
+  python3 fix_tipo.py <archivo>
+  ```
+
+* **Estilo y calidad:**
+
+  * El código debe ser **limpio, profesional, legible y eficiente**.
+  * No requiere manejo de errores avanzado ni validación extra.
+  * Debe funcionar sobre cualquier archivo de texto con encabezado YAML.
+
+## Ejemplo de uso
+
+Supongamos que tenés un archivo `README.md` con el siguiente encabezado YAML:
+
+```yaml
+(resto del contenido)
+```
+
+Al ejecutar:
+
+```bash
+python3 fix_tipo.py README.md
+```
+
+Si el campo `tipo` ya es válido, solo se logueará la validación. Si no existe o es inválido, el script lo agregará o corregirá e informará la acción en el log.
+
+## Buenas prácticas
+
+* Validar siempre el campo `tipo` en todos los archivos de metadatos antes de ejecutar otros fixers.
+* Registrar cada acción en el log centralizado para auditoría y trazabilidad.
+* Mantener actualizada la lista de tipos permitidos según evolucione la arquitectura documental del sistema.
+

@@ -1,0 +1,140 @@
+version: "0.1.0"
+uuid: 47dfdaad-e521-403a-a57a-fdb89c1cc372
+tipo: "prompt"
+schema: "almaresist.plantilla_v1"
+estado: ''
+descripcion: >
+  Prompt técnico para DeepSeek destinado a generar un script Python validador_metadata.
+  El script debe revisar archivos .md o .yaml, validar que contengan el encabezado
+  YAML estándar de ALMA_RESIST, completar claves faltantes, y mantener el orden
+  exacto de los campos. Debe permitir ejecución sobre archivos existentes o nuevos
+  y registrar logs en el archivo fix_metadata.log.
+estructura:
+  - prompt
+  - ejemplos_de_input
+  - ejemplos_de_output
+
+tags:
+  - cli
+  - cleaner
+  - fix_metadata
+  - validador
+  - almaresist
+  - deepseek
+
+linked_to:
+  - "/home/alma/Alma-Cli/Cleaner/Fix_Metadata/Src/Validador_Metadata/validador_metadata.py"
+  - "/home/alma/Alma-Cli/Cleaner/Fix_Metadata/Documents/Validador_Metadata/README.yaml"
+  - "/home/alma/Alma-Cli/Cleaner/Fix_Metadata/Documents/Validador_Metadata/README.md"
+  - "/home/alma/Alma-Cli/Logs/fix_metadata.log"
+
+responsable: "Santi"
+hash_verificacion: "sha256:pending"
+historial:
+  - "2025-07-10: Creación inicial del prompt para validador_metadata."
+
+last_modified: "2025-07-10T00:00:00Z"
+last_modified_by: "Santi"
+prompt: |
+  Necesito un script en Python para el módulo ALMA-CLI, dentro del submódulo Cleaner/Fix_Metadata/Validador_Metadata.
+
+  ## Objetivo del script
+  - El script debe leer archivos Markdown (.md) o YAML (.yaml).
+  - Debe buscar el bloque frontmatter YAML (entre líneas "---").
+  - Si el archivo está vacío o no tiene frontmatter:
+      - Debe crearlo desde cero usando la plantilla ALMA_RESIST.
+  - Si el archivo ya tiene frontmatter:
+      - Debe cargarlo como dict.
+      - Validar que todas las claves existan.
+      - Completar valores faltantes con valores por defecto.
+      - Ordenar las claves exactamente en el siguiente orden:
+          - version
+          - uuid
+          - tipo
+          - schema
+          - estado
+          - descripcion
+          - estructura
+          - tags
+          - linked_to
+          - responsable
+          - hash_verificacion
+          - historial
+          - last_modified
+          - last_modified_by
+
+  ## Esquema YAML estándar a respetar
+
+  ---
+  version: "0.1.0"
+  uuid: ""
+  tipo: ""
+  schema: ""
+  estado: ""
+  descripcion: ""
+  estructura:
+    - ""
+  tags: []
+  linked_to: []
+  responsable: ""
+  hash_verificacion: "sha256:pending"
+  historial:
+    - fecha: ""
+      descripcion: ""
+  last_modified: ""
+  last_modified_by: ""
+  ---
+
+  ## Requerimientos técnicos
+  - Lenguaje: Python 3
+  - Librerías permitidas: ruamel.yaml
+  - El script debe manejar:
+      - archivos completamente vacíos
+      - archivos con frontmatter válido
+      - archivos con frontmatter parcial o desordenado
+  - Debe permitir flag --force para forzar actualización.
+  - Debe loggear toda su actividad en el archivo:
+      /home/alma/Alma-Cli/Logs/fix_metadata.log
+  - El script debe exponer una función:
+      def validar_metadata(path: str, force_update: bool = False) -> None
+
+  ## Mensajes esperados en consola y logs:
+  - ✓ Metadata creada en [archivo]
+  - ✓ Metadata actualizada en [archivo]
+  - ✓ Metadata ya completa en [archivo]
+  - ✗ Error leyendo archivo: [mensaje]
+  - ✗ Error procesando YAML: [mensaje]
+
+  ## Ejemplo de input:
+  Archivo README.md sin encabezado YAML.
+
+  ## Ejemplo de output:
+  README.md con el bloque YAML insertado al inicio, conteniendo todos los campos en orden.
+ejemplos_de_input: |
+  # Título del Documento
+
+  Contenido del archivo Markdown...
+ejemplos_de_output: |
+  ---
+  version: "0.1.0"
+  uuid: ""
+  tipo: ""
+  schema: ""
+  estado: ""
+  descripcion: ""
+  estructura:
+    - ""
+  tags: []
+  linked_to: []
+  responsable: ""
+  hash_verificacion: "sha256:pending"
+  historial:
+    - fecha: ""
+      descripcion: ""
+  last_modified: ""
+  last_modified_by: ""
+  ---
+
+  # Título del Documento
+
+  Contenido del archivo Markdown...

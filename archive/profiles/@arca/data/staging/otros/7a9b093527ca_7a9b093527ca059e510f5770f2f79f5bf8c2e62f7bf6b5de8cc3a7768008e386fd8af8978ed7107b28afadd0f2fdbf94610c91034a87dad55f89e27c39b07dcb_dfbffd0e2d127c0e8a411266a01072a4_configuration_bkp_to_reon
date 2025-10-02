@@ -1,0 +1,86 @@
+{ config, pkgs, ... }:
+
+{
+  imports =
+    [ ./hardware-configuration.nix ];
+#============================================================#
+#            Configuracion Base Encriptada v0.0.1            #
+#============================================================#
+
+  # Bootloader EFI
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # Habilitar desbloqueo de LUKS en /dev/sda3
+  boot.initrd.luks.devices."alma_crypt".device = "/dev/sda3";
+
+  networking.hostName = "alma-resist";
+  networking.networkmanager.enable = true;
+  networking.firewall.allowedTCPPorts = [ 22000 ];
+  networking.firewall.allowedUDPPorts = [ 22000 ];
+
+  i18n.defaultLocale = "en_US.UTF-8";
+  console.keyMap = "la-latin1";
+
+  time.timeZone = "America/Argentina/Buenos_Aires";
+
+  users.users.alma = {
+    isNormalUser = true;
+    home = "/alma";
+    extraGroups = [ "wheel" "networkmanager" ];
+    initialPassword = "umamia";
+  };
+
+#===========================================================#
+#             Sincronizacion y Servicios                    #
+#===========================================================#
+
+  services.openssh.enable = false; # por ahora off
+
+  # Syncthing
+
+  services.syncthing = {
+    enable = true;
+    user = "alma";
+    guiAddress = "127.0.0.1:8384";
+    dataDir = "/alma/archivo/externo";
+    configDir = "/alma/.config/syncthing";
+  };  
+
+#==========================================================#
+#                 Aplicaciones                             #
+#==========================================================#
+ 
+  environment.systemPackages = with pkgs; [
+    vim
+    wget
+    git
+    python3
+    tree
+    htop
+    curl
+    btrfs-progs
+    parted
+    zip
+    unzip
+    p7zip
+    gnupg
+    age
+    nano
+    nix-index
+    openssh
+    syncthing
+  ];
+
+#===========================================================#
+  # Version :
+  system.stateVersion = "23.11";
+#===========================================================#
+}
+
+#=====================================================================================================================================================================#
+#                                                              Bitacora De Instalacion                                                                                #
+#=====================================================================================================================================================================#
+# 2025-06-28: v0.0.1 - Instalacion Minima Encriptada
+# 2025-06-28: v0.0.2 - Instalacion Apps minimas (python3, tree, htop, curl, btrfs-progs, parte, zip, unzip, p7zip, gnupg, age, nano, nix-index, openssh)
+# 2025-06-09_06:36 : v0.0.3 - Instalado Synchthing sincronizado con la pc madre.

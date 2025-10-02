@@ -1,0 +1,61 @@
+
+# 🧾 PLAN DE AUDITORÍA DOCUMENTAL – Club 13CC (Q2 2025)
+
+## 🎯 Objetivo General
+
+Revisar, clasificar y optimizar los contenidos de las carpetas `13CC.emp` y `13CC.cu` con el objetivo de integrarlas eficientemente al sistema Alma Resist (IA interna), garantizando trazabilidad, orden, utilidad y escalabilidad futura.
+
+---
+
+## 📁 Áreas de Revisión
+
+- **13CC.emp** – Documentación oficial, contable, legal y societaria (papel)
+- **13CC.cu** – Cuaderno de trabajo operativo real, documentación viva, no oficial
+
+---
+
+## 🧱 Etapas de la Auditoría
+
+### 1. Mapeo y Categorización Inicial
+- Listado de todos los archivos y subcarpetas presentes en `13CC.emp` y `13CC.cu`
+- Clasificación por tipo: ACTA, BALANCE, FORMULARIO, PLAN, BITÁCORA, IA, LEGAL, OTROS
+
+### 2. Revisión y Etiquetado
+- Revisión del contenido y calidad documental
+- Etiquetas asignables:
+  - `✔ ACTIVO` → útil, actualizado, mantener
+  - `⚠ REVISAR` → requiere revisión, corrección, actualización
+  - `✘ OBSOLETO` → archivar como histórico
+  - `🗑 DESCARTAR` → eliminar, no aporta valor
+
+### 3. Evaluación de Integración a IA (Alma)
+- ¿El contenido tiene contexto explícito?
+- ¿Se puede leer y usar como base para tareas automatizadas?
+- ¿Tiene metadatos/versionado claro?
+- ¿Está vinculado a algún módulo institucional o proceso activo?
+
+### 4. Sugerencia de Reorganización
+- Nueva estructura de carpetas sugerida
+- Archivos que deben fusionarse
+- Archivos que deben moverse a históricos
+- Archivos que deben eliminarse
+
+### 5. Checklist final de tareas sugeridas
+- Una vez terminada la auditoría, se generará una checklist `.md` con tareas concretas de optimización, orden y estandarización
+
+---
+
+## 🧠 Criterios de Evaluación
+
+| Criterio                    | Evaluar si...                                                                 |
+|----------------------------|------------------------------------------------------------------------------|
+| Claridad de contenido      | ¿El archivo se entiende por sí solo? ¿Tiene fecha y responsable?            |
+| Relevancia operativa       | ¿Se sigue usando o responde a un proceso activo?                            |
+| Nivel de documentación     | ¿Está completo, firmado, referenciado o es solo un borrador inconexo?       |
+| Potencial para IA          | ¿Una IA podría leerlo, entenderlo y usarlo para tomar decisiones?           |
+
+---
+
+**Estado:** Preparado para ejecución inmediata  
+**Actualización:** 2025-05-21  
+**Responsable:** IA Auditoría + Santiago Calvo (DEG)

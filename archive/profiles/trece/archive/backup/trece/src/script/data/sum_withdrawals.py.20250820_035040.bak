@@ -1,0 +1,27 @@
+# import pandas as pd
+
+# df = pd.read_csv("data/withdrawals.csv")
+# print("Total withdrawals:", df["grams"].sum())
+# print("Total price:", df["total_price"].sum())
+
+import pandas as pd
+from pathlib import Path
+
+DATA_DIR = Path.home() / "trece/data"
+df = pd.read_csv(DATA_DIR / "withdrawals.csv")
+
+# 🔹 Limpiar columnas Unnamed si existen
+df = df.loc[:, ~df.columns.str.contains("^Unnamed")]
+
+# 🔹 Asegurarse que la columna date sea datetime
+df["date"] = pd.to_datetime(df["date"])
+
+# Total general
+print("📌 Total withdrawals (grams):", df["grams"].sum())
+if "price" in df.columns:
+    print("📌 Total price:", df["total_price"].sum())
+
+# 🔹 Agrupar por mes
+monthly = df.groupby(df["date"].dt.to_period("M"))[["grams", "total_price"]].sum()
+print("\n📊 Withdrawals por mes:")
+print(monthly)

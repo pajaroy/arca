@@ -1,0 +1,13 @@
+{
+  "id": "MEMGEN-003",
+  "fecha": "2025-04-30T10:09:40.342274",
+  "titulo": "Memoria Web 003",
+  "categoria": "GEN",
+  "tags": [
+    "memoria-web",
+    "#reflexion"
+  ],
+  "contenido": "El usuario desea que al iniciar un nuevo proyecto, cuando la situación lo amerite, se cree automáticamente una estructura de carpetas base que incluya: carpeta raíz, README, seguimiento tipo resumen para trazabilidad, prompt base y carpeta de prompts históricos. Esta convención se aplicará a todos los módulos y proyectos dentro del sistema ALMA.",
+  "relacionadas": [],
+  "impacto_en": []
+}

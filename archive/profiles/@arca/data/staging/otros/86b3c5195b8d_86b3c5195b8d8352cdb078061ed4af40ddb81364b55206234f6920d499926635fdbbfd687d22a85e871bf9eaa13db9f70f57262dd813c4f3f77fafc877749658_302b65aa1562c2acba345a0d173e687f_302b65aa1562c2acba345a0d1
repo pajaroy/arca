@@ -1,0 +1,32 @@
+# 📘 Metodología de Documentación para Humanos + IA – ALMA_RESIST (v2)
+
+📅 Versión: 2.0  
+📁 Archivo: metodologia_doc_ia_v2.md  
+🎯 Objetivo: Establecer un estándar de documentación que sea legible por humanos, navegable por IA y sostenible para un operador único. Esta versión reduce campos obligatorios, propone asistencia por IA y define políticas de migración.
+
+
+## 📋 Campos YAML Obligatorios
+
+```yaml
+```
+
+
+## 🛠️ Comando sugerido (prototipo futuro)
+
+```bash
+alma-cli doc-init --module core/cli --type core
+```
+
+Generará automáticamente el bloque YAML, inferido desde:
+
+- Nombre del archivo → `module`
+- Carpeta → `type`, `domain`
+- Tags sugeridos vía NLP
+
+
+## 🔄 Relación con otras metodologías
+
+- Requiere integración en: `estructura_modular_v2`
+- Afecta a: `sprints_v2`, `auditoría_adr`, `interacción_ia`
+- Compatible con futuras estructuras de grafo semántico y navegación IA
+

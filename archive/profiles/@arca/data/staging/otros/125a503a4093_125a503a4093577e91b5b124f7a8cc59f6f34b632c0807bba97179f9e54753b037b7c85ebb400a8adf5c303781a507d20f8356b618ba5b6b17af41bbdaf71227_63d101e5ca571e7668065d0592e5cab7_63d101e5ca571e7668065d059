@@ -1,0 +1,23 @@
+# 📁 ALMA LIBRE – Documentación v0.0.6.1
+
+Bienvenido/a a la documentación oficial de la versión **0.0.6.1** del sistema **ALMA LIBRE**.  
+Este directorio contiene los documentos fundacionales, técnicos y operativos necesarios para comprender, mantener y expandir el sistema tanto por humanos como por asistentes de inteligencia artificial.
+
+
+## 🧠 Propósito
+
+Este conjunto de archivos permite:
+
+- Operar dentro del sistema con contexto y seguridad
+- Escalar sin perder trazabilidad
+- Documentar decisiones de forma técnica y semántica
+- Generar confianza en flujos humano–IA
+
+
+## 📎 Enlaces relativos clave
+
+- Bitácora: `../../BITACORA_CENTRAL/`
+- Cuadernos: `../../CUADERNOS/`
+- Módulos: `../../MODULOS/`
+- Backups: `../../00_BACKUPS_HISTORICOS/`
+

@@ -1,0 +1,55 @@
+---
+module: prompts/test_log_writer_prompt
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# ✅ Solicitud de Test – `test_log_writer.py` – ALMA_RESIST Sprint 2.6
+
+Este test debe cubrir el módulo `log_writer.py`, el cual implementa un sistema de escritura de logs en formato JSONL con escritura atómica, validación de estructura y rotación automática.
+
+---
+
+## 📘 Métodos clave a testear
+
+- `write_log(event: dict) -> bool`
+- `log_event(event_type: str, message: str, module: str, metadata: dict) -> dict`
+- `secure_rotation(days: int) -> None`
+
+---
+
+## 🧪 Casos de prueba sugeridos
+
+| Caso                                             | Resultado esperado                                 |
+|--------------------------------------------------|----------------------------------------------------|
+| Escritura válida                                 | Log creado con evento completo                     |
+| Evento mal formado (sin campos requeridos)       | Retorna `False`, no se escribe                     |
+| Escritura atómica (uso de archivo temporal)      | Archivo `.tmp` renombrado a `.log` correctamente   |
+| Múltiples eventos                                | Se agregan en formato JSONL (una línea por evento) |
+| Rotación automática                              | Elimina logs más antiguos que `N` días             |
+| Validación de tipos                              | Cada campo del evento es del tipo esperado         |
+| Fallo en disco (simulado)                        | Manejo de excepción, retorna `False`               |
+| Lectura del log resultante                       | Puede ser deserializado correctamente              |
+
+---
+
+## 🔧 Consideraciones técnicas
+
+- Usar `tmp_path` como directorio de logs
+- Simular errores de disco renombrando o bloqueando archivos
+- Verificar contenido del log generado (campos y tipos)
+- Incluir prueba de eliminación de logs antiguos (modificar timestamps si es necesario)
+
+---
+
+## 📂 Archivos relacionados
+
+- `log_writer.py` (módulo principal)
+- `log_crypto.py` (relacionado pero se testea aparte)
+
+---
+
+¿Podés generar el archivo `test_log_writer.py` con todos estos casos utilizando `pytest` y estructuras temporales?

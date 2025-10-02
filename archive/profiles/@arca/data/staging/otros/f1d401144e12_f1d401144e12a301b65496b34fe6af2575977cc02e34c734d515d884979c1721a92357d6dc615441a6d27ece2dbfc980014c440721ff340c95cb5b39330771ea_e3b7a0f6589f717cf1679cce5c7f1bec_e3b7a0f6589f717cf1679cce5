@@ -1,0 +1,28 @@
+# 🧠 Prompt Base – `exportar_memorias_unificadas.py` (ALMA_EXPORT)
+
+Estoy trabajando en un sistema de memorias personales llamado **ALMA**, donde cada memoria está guardada como un archivo `.json` en la carpeta `memorias_json/`.
+
+Cada archivo sigue esta estructura:
+
+```json
+{
+  "id": "MEMGEN-001",
+  "fecha": "2025-05-02T14:30:00Z",
+  "titulo": "Memoria Web 001",
+  "categoria": "GEN",
+  "tags": ["memoria-web", "#reflexion"],
+  "contenido": "Texto completo de la entrada...",
+  "relacionadas": [],
+  "impacto_en": []
+}
+```
+
+
+## 🧩 Extras técnicos
+
+- Codificación UTF-8
+- Soporte para logs legibles
+- Sort opcional por `fecha` ascendente
+- Compatible con Python 3.8+
+- Puede correr desde la raíz de `alma_loader/`
+

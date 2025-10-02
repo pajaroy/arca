@@ -1,0 +1,51 @@
+# Metodología de Trabajo en Carpetas Autónomas
+
+Esta metodología define la estructura mínima y escalable para trabajar de manera autónoma dentro de una carpeta, útil para proyectos personales, módulos temáticos o pruebas aisladas dentro del entorno ALMA_RESIST.
+
+## 📁 Estructura base sugerida
+
+```bash
+nombre_modulo/
+├── docs/                    # Documentación del módulo (readme, changelog, bitácoras)
+│   ├── readme.md            # Descripción del módulo
+│   ├── version.md           # Versión actual del módulo
+│   └── bitacoras/           # Notas de trabajo fechadas
+├── datasets/                # Datos crudos o procesados (CSV, JSON, etc.)
+├── scripts/                 # Scripts Python o Bash de procesamiento o validación
+├── notebooks/               # Notebooks de análisis o pruebas exploratorias
+├── downloads/               # Archivos externos temporales (nunca en git)
+├── tests/                   # Pruebas unitarias o de integración
+├── logs/                    # Logs de ejecución, errores o auditorías
+└── config/                  # Configuraciones, variables de entorno, APIs
+```
+
+## ✅ Buenas prácticas
+
+- Usar `snake_case` para carpetas y archivos.
+- Los documentos `.md` deben incluir un encabezado YAML con metadatos.
+- Los archivos en `downloads/` y `logs/` deben estar excluidos de versionado (`.gitignore`).
+- Mantener cada carpeta lo más atómica y autocontenida posible.
+- Idealmente cada script tiene su `README.md` asociado en `scripts/`.
+
+## 🧩 Ventajas
+
+- Modularidad completa y portabilidad.
+- Fácil integración con ALMA_RESIST copiando la carpeta dentro de `docs/modules/`.
+- Adaptabilidad para proyectos personales de salud, trading, cannabis, IA, etc.
+
+## 📌 Uso recomendado
+
+1. **Inicializar estructura**
+   ```bash
+   mkdir -p nombre_modulo/{docs/bitacoras,datasets,scripts,notebooks,downloads,tests,logs,config}
+   ```
+
+2. **Crear archivos iniciales**
+   ```bash
+   touch nombre_modulo/docs/{readme.md,version.md}
+   ```
+
+3. **Completar metadatos y empezar documentación.**
+
+4. **Mantener una bitácora de avances en `docs/bitacoras/`.**
+

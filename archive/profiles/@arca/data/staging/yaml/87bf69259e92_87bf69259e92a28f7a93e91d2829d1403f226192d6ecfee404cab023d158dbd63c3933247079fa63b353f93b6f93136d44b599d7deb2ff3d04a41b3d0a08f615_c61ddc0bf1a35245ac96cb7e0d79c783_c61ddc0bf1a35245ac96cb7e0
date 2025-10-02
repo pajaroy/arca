@@ -1,0 +1,14 @@
+# Plantilla de Feedback o Sugerencia para ALMA LIBRE
+
+tipo: mejora | corrección | idea | problema
+prioridad: alta | media | baja
+módulo_afectado: nombre_del_módulo (ej. Alma_Loader)
+descripcion: >
+  Describir brevemente la sugerencia o mejora. Ej: "Agregar validación por fecha en el resumen diario para evitar duplicados".
+
+propuesta: >
+  (Opcional) Propuesta concreta de solución o enfoque técnico.
+
+reportado_por: IA | humano
+fecha: YYYY-MM-DD
+estado: pendiente | aprobado | descartado

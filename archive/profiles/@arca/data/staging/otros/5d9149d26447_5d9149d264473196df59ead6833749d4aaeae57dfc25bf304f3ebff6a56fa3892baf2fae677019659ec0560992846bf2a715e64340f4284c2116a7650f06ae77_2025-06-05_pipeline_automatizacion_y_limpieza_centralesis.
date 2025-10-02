@@ -1,0 +1,44 @@
+## 🧰 Propuesta de **Pipeline de Automatización y Limpieza** para Centralesis
+
+### 1. **Ingreso y registro de archivos**
+
+- **Script 1:** `ingreso_archivo.sh`  
+    Diagnostica todo archivo ingresado a `/archivo/downloads/`.
+    
+    - Verifica encabezado YAML.
+        
+    - Si falta, genera template YAML y propone al usuario completarlo.
+        
+    - Registra entrada en bitácora (`bitacora_ingreso_archivos.md`).
+        
+
+### 2. **Conversión y respaldo**
+
+- **Script 2:** `convertir_md_yaml_json.sh`  
+    Para cada archivo .md validado:
+    
+    - Extrae el YAML y el cuerpo.
+        
+    - Crea copia `.yaml` y `.json` (con el cuerpo de la nota íntegro, preservando saltos de línea).
+        
+    - Propone el cambio, genera log de acción y espera validación.
+        
+
+### 3. **Movimiento a histórico y versionado**
+
+- **Script 3:** `mover_a_historico.sh`
+    
+    - Mueve archivos ya procesados a `/downloads/historico/` con fecha y status en nombre.
+        
+    - Deja evidencia en changelog y en el README de la carpeta.
+        
+    - Registra en apéndice la acción y justificación.
+        
+
+### 4. **Logs y bitácoras**
+
+- **Script 4:** `registrar_log.sh`
+    
+    - Todo cambio queda registrado automáticamente en un log estructurado y en bitácora de acciones (`bitacora_limpieza_centralesis.md`).
+        
+    - Cada log incluye: acción, usuario/IA, fecha, ruta, archivo afectado, motivo, resultado.

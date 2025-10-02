@@ -1,0 +1,11 @@
+# PROMPT – Núcleo de Pensamiento de ALMA LIBRE
+
+Esta carpeta contiene todas las versiones del Prompt Escalable que definen la lógica, estrategia y emociones del sistema ALMA LIBRE.
+
+🧠 El archivo `Prompt_Activo.md` representa la versión activa actualmente en uso por todo el sistema.
+
+Todas las IA (locales o conectadas), scripts de terminal y humanos deben leer este archivo como guía base.
+
+## Contenido
+- `Prompt_Activo.md`: versión vigente en uso.
+- `0.7.8.1_Prompt_Escalable_ALMA_LIBRE.md`: respaldo de la versión actual.

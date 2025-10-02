@@ -1,0 +1,26 @@
+---
+tipo: configuracion_json
+id: CONFIGURACION_JSON_2025-06-05_385418
+version: '1.0'
+formato: json
+modulo: ALMA_RESIST
+titulo: Schema Prompt
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:fa29873efbe005b38115296125efc50d46dcf3a351fe4160fb019bd409374351
+---
+{
+  "type": "object",
+  "properties": {
+    "prompt": {"type": "string"},
+    "context": {"type": "array", "items": {"type": "string"}}
+  },
+  "required": ["prompt"]
+}

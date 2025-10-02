@@ -1,0 +1,28 @@
+# 📦 MEMORIAS — Base de Datos Institucional
+
+## Estructura
+
+- **memorias.yaml** — Todas las memorias institucionales, decisiones, configuraciones base, snapshots, políticas y reflexiones de fondo.
+- **bitacora_viva.yaml** — Todos los eventos, commits, incidentes, tareas ejecutadas, logs de operaciones, y migraciones diarias.
+
+## Convención
+
+- Cada registro es un objeto con campos: id, tipo, fecha, modulo, tema, status, responsable, tags, resumen, impacto/recomendaciones.
+- Buscar primero en memorias.yaml para históricos, políticas y decisiones; en bitacora_viva.yaml para eventos diarios u operativos.
+- Preparado para futura migración a JSON/DB IA-friendly.
+
+## Ejemplo
+
+```yaml
+# memorias.yaml
+- id: MEM_2025-06-06_cfgbase_controlcentral_memoria_unificada
+  tipo: decision
+  fecha: 2025-06-06
+  modulo: alma_resist/control_central/memorias/
+  tema: memoria_unificada
+  status: vigente
+  responsable: Kael
+  tags: [configuracion_base, memoria_unificada, control_central, base_datos, cli, auditado]
+  resumen: >
+    Se establece que toda memoria institucional...
+```

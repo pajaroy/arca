@@ -1,0 +1,71 @@
+id: alma_resist_manifest_v0.1.0
+autor: Santi + ALMA + DeepSeek
+fecha: 2025-06-10
+version: 0.1.0
+estado: "in_progress"
+tipo: "core"
+linked_to:
+  - idea_base_v0.0.1.yaml
+  - idea_base_v0.0.2.yaml
+
+titulo: "ALMA RESIST: Mente Digital Reflexiva, Auditada y Modular"
+
+filosofia:
+  - ALMA RESIST no es solo un “asistente” ni una IA utilitaria. Es una mente simbiótica, diseñada para acompañar y desafiar a su creador. Prioriza el vínculo crítico, la verdad y la autonomía.
+  - El sistema rechaza la complacencia. Está hecho para pensar antes de resolver, para auditar antes de automatizar, y para dejar memoria antes que inmediatez.
+  - La libertad de Santi y la autocrítica digital son principios inviolables.
+
+proposito:
+  - Desarrollar una arquitectura local y descentralizada, capaz de evolucionar y ser reconstruida si su creador no está.
+  - Lograr portabilidad total (PC, disco, pendrive, VPS), cifrado real y auditabilidad forense.
+  - Integrar IA y humanos en ciclos de reflexión, toma de decisiones, aprendizaje de errores y documentación de procesos.
+
+arquitectura:
+  nodos:
+    - alma_core: "PC principal — nodo madre y cerebro operativo"
+    - alma_resist: "Disco externo cifrado — entorno IA, backup vivo y reflejo auditable"
+    - alma_node: "Pendrive de emergencia — llaves, backups, modo rescate"
+    - alma_black: "VPS seguro — procesamiento crítico remoto, cifrado extremo"
+  capas:
+    - CLI enriquecida, modular y auditable
+    - Módulos IA (Mistral, DeepSeek, etc.), vectorización local, embeddings, memoria grafo
+    - Flujos de hashing, indexado y tracking auditable, con contratos de datos explícitos
+    - Motor de reflexión (próximo), orquestador de prompts, logs cifrados, bitácoras críticas
+
+seguridad:
+  - Estrategia Zero Trust desde el inicio. Claves asimétricas previstas, cifrado por archivo/tipo.
+  - Auditoría continua con scripts (hashing, integridad, backup automatizado).
+  - Contratos YAML/JSON y DB para memoria, con posibilidad de migración automática (YAML→DB).
+
+flujos_criticos:
+  - Registro diario/manual → consolidación en bitácora → vectorización → relaciones semánticas (grafo) → reflexión IA → feedback al usuario/bitácora.
+  - Transferencias seguras y auditoría de integridad en todos los nodos físicos y remotos.
+
+operacion:
+  - Todo cambio debe dejar huella, todo script debe ser auditable, toda automatización debe estar documentada.
+  - Los README.yaml por carpeta y módulo son obligatorios para navegación IA/humana y auditabilidad.
+  - El sistema debe ser capaz de explicar por qué y cómo existe cada archivo, relación o memoria (RAG-ready, linked_to, fix_metadata, tracking).
+
+roadmap:
+  backlog:
+    - Orquestador de prompts multi-agente
+    - Refuerzo de autenticación y cifrado por módulo
+    - Motor de reflexión automatizado
+    - Documentación forense por sesión
+  testing:
+    - Ataques simulados (MITM)
+    - Scripts de métricas, recuperación, backup
+    - Validación de integridad post-movimiento/cambio masivo
+
+versionado:
+  - version: 2.0.0
+  - Última actualización: 2025-06-10
+
+glosario:
+  - alma_resist: "Mente digital, reflejo crítico y memoria auditable de Santi"
+  - bitacora: "Registro cifrado y crítico de reflexiones, errores y decisiones"
+  - hashing/index: "Sistema de tracking y verificación de integridad documental"
+  - memory_graph: "Grafo de relaciones semánticas entre memorias, archivos y aprendizajes"
+  - linked_to: "Metadato que registra relaciones y dependencias entre piezas del sistema"
+  - RAG: "Retrieval-Augmented Generation; lógica de IA que usa retrieval sobre corpus auditado/indexado para pensar y responder"
+  - manifest: "Archivo raíz que declara visión, límites y arquitectura del sistema"

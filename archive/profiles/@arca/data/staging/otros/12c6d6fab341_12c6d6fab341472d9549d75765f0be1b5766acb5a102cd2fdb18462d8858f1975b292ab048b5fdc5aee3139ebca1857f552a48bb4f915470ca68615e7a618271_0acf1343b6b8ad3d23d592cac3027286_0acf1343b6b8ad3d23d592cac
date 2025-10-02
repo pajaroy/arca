@@ -1,0 +1,24 @@
+# 🧭 Resumen de Secciones – ALMA_RESIST
+
+📅 Última actualización: 2025-05-20  
+👤 Responsable: Usuario + IA (documentación asistida)
+
+
+## 📘 Documentación Clave (esperada)
+
+| Documento                         | Estado     | Observación                                      |
+|----------------------------------|------------|--------------------------------------------------|
+| `docs/index.md`                  | ❌ Faltante | Debe actuar como hub maestro de navegación       |
+| `docs/changelog.md`              | ❌ Faltante | Requiere registro de cambios estructurales       |
+| `docs/post_mortem_tecnico.md`    | ❌ Faltante | Pendiente para análisis por módulo               |
+| `docs/lecciones_aprendidas.md`   | ❌ Faltante | Debe registrar aprendizajes clave por sección    |
+| `docs/decisiones_arquitectonicas.md` | ❌ Faltante | Fundamenta decisiones estructurales              |
+| `docs/hitos.md`                  | ❌ Faltante | Necesario para trazabilidad del desarrollo       |
+| `docs/dependencias.md`           | ❌ Faltante | Importante si se utilizan librerías externas     |
+| `docs/auditorias/`               | ✅ Presente | Carpeta creada, con README y primera auditoría   |
+
+
+## 🗂 Ruta sugerida
+```
+docs/resumen_secciones.md
+```

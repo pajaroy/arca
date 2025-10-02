@@ -1,0 +1,61 @@
+import json
+import os
+from pathlib import Path
+from datetime import datetime
+
+def validar_memoria(json_data: dict) -> bool:
+    """Valida la estructura básica del JSON"""
+    campos_requeridos = ['id', 'fecha', 'titulo', 'categoria', 'tags', 'contenido']
+    return all(campo in json_data for campo in campos_requeridos)
+
+def generar_front_matter(memoria: dict) -> str:
+    """Genera el bloque YAML front matter"""
+    return f"""---
+id: {memoria['id']}
+fecha: {memoria['fecha']}
+categoria: {memoria['categoria']}
+tags: [{', '.join(memoria['tags'])}]
+---
+
+"""
+
+def convertir_json_a_md(json_path: Path, md_dir: Path, log_file: Path):
+    """Convierte un archivo JSON a Markdown con validación"""
+    try:
+        with open(json_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+
+        if not validar_memoria(data):
+            raise ValueError(f"Estructura inválida en {json_path.name}")
+
+        md_content = f"{generar_front_matter(data)}# {data['titulo']}\n\n{data['contenido']}"
+
+        md_path = md_dir / f"{json_path.stem}.md"
+        with open(md_path, 'w', encoding='utf-8') as f:
+            f.write(md_content)
+
+        with open(log_file, 'a') as log:
+            log.write(f"[{datetime.now().isoformat()}] Convertido: {json_path.name} -> {md_path.name}\n")
+
+    except Exception as e:
+        with open(log_file, 'a') as log:
+            log.write(f"[{datetime.now().isoformat()}] Error en {json_path.name}: {str(e)}\n")
+
+def main():
+    # Configurar paths
+    base_dir = Path(__file__).parent
+    json_dir = base_dir / "memorias_json"
+    md_dir = base_dir / "memorias_md"
+    log_file = base_dir / "log_conversion.txt"
+
+    # Crear directorios si no existen
+    md_dir.mkdir(exist_ok=True)
+
+    # Procesar todos los archivos JSON
+    for json_path in json_dir.glob("*.json"):
+        convertir_json_a_md(json_path, md_dir, log_file)
+
+    print(f"Conversión completa. Revisar {log_file} para detalles.")
+
+if __name__ == "__main__":
+    main()

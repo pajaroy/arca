@@ -1,0 +1,45 @@
+# 🛠️ PROMPT TÉCNICO – ALMA LIBRE v0.0.6.1
+
+## 1. Introducción Técnica
+- Objetivo del documento
+- Requisitos generales para IAs y desarrolladores
+
+## 2. Estructura Operativa del Sistema
+- Convenciones de nombres y rutas
+- Mapa de carpetas con propósito funcional
+- Variables, identificadores y sufijos usados
+
+## 3. Módulos del Sistema
+- Descripción de cada módulo activo (ej. alma_loader)
+- Inputs esperados / Outputs generados
+- Integración con otras secciones
+
+## 4. Sistema de Memorias
+- Ingesta, vectorización, exportación
+- Estándares de IDs y clasificación
+- Esquema actual (sqlite/json) y puntos de mejora
+
+## 5. Flujos Internos
+- BITACORA → CUADERNOS → EMPRESAS
+- MODULOS ↔ Recursos ↔ Memorias
+- Automatizaciones previstas
+
+## 6. Normas de Versionado
+- Versiones, changelogs, backups
+- Carpeta `00_BACKUPS_HISTORICOS/`
+- Cómo escalar de 0.0.6.1 a 0.0.6.2 (y más allá)
+
+## 7. Interfaz con el Usuario y Asistentes
+- Cómo debe responder un asistente IA
+- Parámetros esperados desde NotebookLM, GPT, DeepSeek
+- Validaciones semánticas y de contexto
+
+## 8. Extensiones Futuras
+- Protocolo para sumar nuevos módulos
+- Reglas para testing (`tests/`), documentación (`docs/`)
+- Futuras herramientas IA: agentes, APIs, copilotos
+
+## 9. Apéndices Técnicos
+- Scripts base
+- JSON de estructuras tipo
+- Configuración mínima esperada

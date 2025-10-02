@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# Ruta absoluta base del script (ajusta si cambiás la ubicación)
+BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../../.." && pwd )"
+
+echo "📦 Instalando dependencias del sistema (requiere sudo)..."
+sudo apt update
+sudo apt install -y python3 python3-pip tmux git nano
+
+echo "🗃️ Instalando dependencias Python en entorno global..."
+python3 -m pip install --upgrade pip
+
+echo "🚀 Instalando requirements desde:"
+echo "$BASE_DIR/requirements.txt"
+pip install -r "$BASE_DIR/requirements.txt"
+
+echo ""
+echo "🎉 ALMA_RESIST listo para usar en este sistema."
+echo "   - Python, tmux y dependencias instaladas."
+echo "   - Para ejecutar tu proyecto:"
+echo ""
+echo "     cd $BASE_DIR"
+echo "     source venv/bin/activate  # Si usás entorno virtual"
+echo "     python core/alma.py       # O el script principal que uses"
+echo ""
+echo "   (Recordá montar tu pendrive si lo corrés externo)"
+
+
+como usar:
+
+🏷️ Alias para tu .bashrc o terminal
+
+Agregá esto a tu ~/.bashrc, ~/.zshrc o lo que uses:
+
+alias setup_alma="bash ~/ALMA_RESIST/docs/utilidades/scripts/setup_alma.sh"
+
+    Nota: Cambiá la ruta ~/ALMA_RESIST/docs/utilidades/scripts/setup_alma.sh
+    por la ruta absoluta real donde esté tu ALMA_RESIST.
+    Si lo corrés desde un pendrive montado en /media/tu_usuario/pendrive/ALMA_RESIST/... poné esa ruta.
+
+Ejemplo de uso (desde terminal):
+
+setup_alma
+
+⚡️ Resumen de pasos
+
+    Copiá el script como setup_alma.sh en la carpeta indicada.
+
+    Dale permisos de ejecución:
+
+chmod +x ~/ALMA_RESIST/docs/utilidades/scripts/setup_alma.sh
+
+(Opcional) Agregá el alias como arriba, o corré el script directo:
+
+bash ~/ALMA_RESIST/docs/utilidades/scripts/setup_alma.sh
+

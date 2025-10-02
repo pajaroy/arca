@@ -1,0 +1,91 @@
+# 🔐 Módulo: log_crypto.py
+
+Módulo de cifrado y descifrado de archivos de log dentro del sistema `ALMA_RESIST`. Soporta algoritmos modernos como AES-256-GCM y ChaCha20 para garantizar confidencialidad e integridad de los logs almacenados o transmitidos.
+
+---
+
+## 📚 Funcionalidad
+
+### Clases
+
+#### `CryptoEngine`
+
+Clase principal encargada de la lógica criptográfica.
+
+##### Atributos:
+
+- `algorithm`: Algoritmo criptográfico a utilizar (`AES-256-GCM` o `ChaCha20`)
+- `key_length`: Longitud en bytes de la clave derivada (por defecto: 32)
+
+##### Métodos:
+
+- `generar_clave(password: Optional[str] = None) -> Tuple[bytes, bytes]`  
+  Genera clave y salt. Si se proporciona un `password`, deriva clave usando PBKDF2HMAC.
+
+- `encrypt_log(input_path: str, output_path: str, key: bytes, salt: bytes)`  
+  Cifra un archivo log usando el algoritmo especificado.
+
+- `decrypt_log(input_path: str, output_path: str, key: bytes, salt: bytes)`  
+  Descifra un archivo previamente cifrado.
+
+- `validate_encrypted_log(path: str) -> bool`  
+  Verifica si el archivo tiene cabecera válida para descifrado.
+
+---
+
+## 🔐 Algoritmos soportados
+
+| Nombre         | Módulo usado  | Longitud clave | Requiere salt | Seguridad recomendada |
+|----------------|----------------|----------------|----------------|------------------------|
+| AES-256-GCM    | `cryptography.hazmat.primitives.ciphers.aead.AESGCM` | 32 bytes      | Sí            | Alta                   |
+| ChaCha20-Poly1305 | `cryptography.hazmat.primitives.ciphers.aead.ChaCha20Poly1305` | 32 bytes | Sí            | Muy alta (stream-safe) |
+
+---
+
+## ✅ Ejemplo de uso
+
+```python
+engine = CryptoEngine("AES-256-GCM")
+key, salt = engine.generar_clave("mi_password_segura")
+
+# Cifrado
+engine.encrypt_log("app.log", "app.log.enc", key, salt)
+
+# Descifrado
+engine.decrypt_log("app.log.enc", "app_decrypted.log", key, salt)
+```
+
+---
+
+## 🧪 Testing
+
+El módulo está cubierto con pruebas automáticas `pytest`. Ubicación:  
+`tests/test_log_crypto.py`
+
+Cobertura:
+- Cifrado / Descifrado completo
+- Validación de logs cifrados
+- Manejo de errores
+- Cambio de claves
+- Integridad de datos
+- Compatibilidad de algoritmos
+
+---
+
+## 📎 Dependencias
+
+- `cryptography`
+- `pytest` (solo para testeo)
+- `typing`, `os`, `secrets`, `base64`, `hashlib`, `logging`
+
+---
+
+## 🧠 Notas
+
+- Todos los archivos cifrados tienen una cabecera estándar con identificador del algoritmo (`b'ALG:' + nombre_algoritmo.encode()`).
+- Salt se requiere para derivar la clave si se usa password.
+- Las excepciones están gestionadas con logs para trazabilidad.
+
+---
+
+© ALMA_RESIST · v0.0.0.4

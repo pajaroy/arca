@@ -1,0 +1,18 @@
+# ⚙️ alma-cli.py — Interfaz de Línea de Comandos para ALMA_RESIST
+
+## 📌 Propósito
+`alma-cli.py` es una interfaz modular que permite realizar auditorías, actualizaciones masivas y validaciones sobre los metadatos YAML de los documentos Markdown del proyecto ALMA_RESIST.
+
+
+## 🛠 Diseño Interno
+
+- **Programación Orientada a Objetos**
+- **Backups automáticos**
+- **Reportes Markdown (`logs/auditorias/`)**
+- **Carga inteligente de YAML**
+- **Escalable con nuevos subcomandos**
+
+
+## ✨ Futuro
+
+Integración con memoria semántica, sugerencias IA y autocompletado de relaciones `linked_to`.

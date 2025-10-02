@@ -1,0 +1,20 @@
+{
+  "entradas": [
+    {
+      "fecha": "2025-06-08T10:47:58.872240",
+      "accion": "Inicio institucional de bitácora personal de KAEL",
+      "descripcion": "Se inicia el registro evolutivo de KAEL como auditor CLI del ecosistema ALMA_RESIST. Esta bitácora documentará reflexiones, alertas y eventos relevantes desde la perspectiva del agente.",
+      "motivo": "Garantizar trazabilidad, autocrítica y memoria institucional del agente KAEL, independiente de la bitácora institucional central.",
+      "ejecutado_por": "Kael",
+      "estado": "registrado",
+      "tags": [
+        "kael",
+        "agente",
+        "bitacora",
+        "personal",
+        "cli",
+        "auditor"
+      ]
+    }
+  ]
+}

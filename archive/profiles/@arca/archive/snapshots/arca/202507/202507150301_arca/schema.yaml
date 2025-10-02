@@ -1,0 +1,31 @@
+# schema.yaml
+metadatos:
+  id_unico: "sch-YAML-002"
+  tipo: "esquema_definicion"
+  nombre: "schema.yaml"
+  version: "0.1.1"
+  estado: "activo"  # Cambiado a activo
+  fecha_creacion: "2025-07-15"
+  autor: "Bird"
+
+# Estructuras de validación (sin metadatos redundantes)
+estructuras:
+  config_base:  # Para validar config.yaml
+    version: "string"
+    project: "string"
+    logging:
+      ruta: "string"
+      formato: "string"
+      retention_dias: "int"
+  
+  log_entry:  # Para validar logs
+    timestamp: "datetime"
+    nivel: "string"
+    modulo: "string"
+    mensaje: "string"
+
+  metadatos_archivos:  # Para validar metadatos de otros archivos
+    id_unico: "string"
+    tipo: "string"
+    version: "string"
+    estado: "string"

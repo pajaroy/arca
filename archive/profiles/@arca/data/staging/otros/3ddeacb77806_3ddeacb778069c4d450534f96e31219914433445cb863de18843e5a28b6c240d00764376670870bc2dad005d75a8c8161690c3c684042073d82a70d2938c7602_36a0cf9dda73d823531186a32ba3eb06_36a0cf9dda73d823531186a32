@@ -1,0 +1,25 @@
+{
+  "entradas": [
+    {
+      "fecha": "2025-06-08T03:27:45.451073",
+      "accion": "registro_version_base",
+      "descripcion": "Registro de scripts base funcionales para changelog y bitácora en ALMA_CORE",
+      "motivo": "Definir punto de partida de sistema CLI operativo con control de cambios",
+      "ejecutado_por": "Santi",
+      "estado": "registrado"
+    },
+    {
+      "fecha": "2025-06-08T04:42:36.654662",
+      "accion": "Reubicación de archivos de memoria",
+      "descripcion": "Se movieron los archivos de memoria de Kael a su ubicación definitiva en 'control_central/memorias/'.",
+      "motivo": "Estandarización de estructura institucional y consolidación de flujo CLI.",
+      "ejecutado_por": "Santi y Kael",
+      "estado": "registrado",
+      "tags": [
+        "memorias",
+        "estructura",
+        "archivo"
+      ]
+    }
+  ]
+}

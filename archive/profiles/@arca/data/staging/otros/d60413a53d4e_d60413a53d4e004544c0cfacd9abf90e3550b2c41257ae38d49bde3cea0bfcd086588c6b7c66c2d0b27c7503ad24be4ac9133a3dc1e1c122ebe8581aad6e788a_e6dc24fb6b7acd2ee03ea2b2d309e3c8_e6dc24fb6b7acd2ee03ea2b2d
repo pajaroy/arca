@@ -1,0 +1,39 @@
+# 📤 Prompt Base Avanzado – `exportar_feedback.py` (Fase 5.3 – ALMA_FEEDBACK)
+
+## 🎯 Objetivo
+Desarrollar un script que lea todas las memorias desde `memorias_json_actualizadas/`, extraiga las entradas del campo `retroalimentacion`, y genere archivos consolidados de feedback en JSON y Markdown.
+
+
+## 📤 Salidas esperadas
+
+1. `logs/feedback_consolidado.json`
+   - Contiene todas las entradas de retroalimentación extraídas.
+
+2. `logs/feedback_consolidado.md`
+   - Resumen legible de todos los feedbacks encontrados.
+
+3. `logs/feedback_{categoria}.md`
+   - Un archivo `.md` separado por categoría (ej: `TRD`, `HEALTH`) si se usa la opción `--por-categoria`.
+
+
+## 🧩 Filtros opcionales por línea de comandos
+
+Implementar estos filtros con `argparse`:
+
+| Argumento                | Descripción                                                  |
+|--------------------------|--------------------------------------------------------------|
+| `--min-score 0.7`        | Solo feedback con score igual o superior a 0.7               |
+| `--tipo-alerta XYZ`      | Solo feedback del tipo especificado                          |
+| `--memoria-id MEM-XXX`   | Solo feedback dirigido a esa memoria                         |
+| `--origen MEM-YYY`       | Solo feedback proveniente de una memoria específica          |
+| `--por-categoria`        | Divide la salida Markdown por categoría                      |
+| `--json-only`            | No genera archivos Markdown, solo `.json`                    |
+
+
+## 🛠 Requisitos técnicos
+
+- Python 3.9+
+- Módulos: `pathlib`, `json`, `datetime`, `argparse`, `logging`, `collections`
+- Código limpio, modular, fácil de extender a futuro
+- Buen manejo de errores
+

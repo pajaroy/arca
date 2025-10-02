@@ -1,0 +1,52 @@
+# Arquitectura Base: `Fix_Metadata` (ALMA-CLI)
+
+## Idea general
+
+- **`Fix_Metadata`** es el _módulo maestro_ de gestión, validación y actualización de metadatos YAML (o encabezados YAML en archivos `.md`).
+    
+- Cada **campo/metadato clave** tiene un **submódulo** dedicado, encargado de:
+    
+    - Leer el campo correspondiente,
+        
+    - Validar su formato y consistencia,
+        
+    - Corregirlo o actualizarlo si hace falta,
+        
+    - O bien informar al usuario/IA si hay error.
+        
+
+
+## Funcionalidad de cada submódulo
+
+Cada submódulo debe poder ser llamado:
+
+- De forma independiente (`alma-cli fix-tipo archivo.md nuevo_tipo`)
+    
+- O de forma orquestada (`alma-cli fix-metadata archivo.md --all`)
+    
+
+Cada submódulo debe:
+
+- Tomar como input la ruta al archivo,
+    
+- Analizar y modificar **sólo** su campo asignado,
+    
+- No interferir con los demás,
+    
+- (Opcional) Emitir logs/resultados para auditoría.
+    
+
+
+## Ventajas de este modelo
+
+- **Escalabilidad:** podés agregar/actualizar submódulos sin romper el sistema.
+    
+- **Automatización:** fácil de scriptar, testear, y usar desde IA o humanos.
+    
+- **Modularidad real:** cada función es responsable de un solo campo.
+    
+- **Trazabilidad total:** cada campo tiene historial de cambios y validaciones.
+    
+- **Interfaz limpia para ML o RAG:** cada campo es un nodo independiente, listo para análisis estructural.
+    
+

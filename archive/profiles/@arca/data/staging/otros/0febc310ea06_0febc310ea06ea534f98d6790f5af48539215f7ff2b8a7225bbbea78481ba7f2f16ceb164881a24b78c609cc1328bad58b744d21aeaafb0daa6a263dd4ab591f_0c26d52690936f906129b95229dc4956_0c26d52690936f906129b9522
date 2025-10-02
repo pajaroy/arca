@@ -1,0 +1,20 @@
+
+# Plantilla de Registro de Aprendizaje de Flujo de Trabajo
+
+```yaml
+- fecha: YYYY-MM-DD
+  autor: bird
+  chat_id: [opcional, para referencia cruzada]
+  que_aprendi_del_sistema: |
+    [Respuesta breve y concreta sobre qué aprendiste hoy del sistema, la IA o los flujos propuestos.]
+  que_aprendio_el_sistema_de_mi: |
+    [Qué cambios o preferencias detectó el sistema en tu forma de trabajar, documentar, iterar, etc.]
+  cambio_metodologico: |
+    [¿Qué ajuste concreto se implementó en el flujo de trabajo o la metodología institucional?]
+  consejo_para_futuro: |
+    [¿Qué le dirías a un Santi/agente del futuro para evitar errores, ganar tiempo, o mejorar el flujo?]
+  error_a_evitar: |
+    [¿Qué NO hay que volver a hacer, según lo vivido en esta sesión?]
+  observaciones: |
+    [Espacio libre para aclaraciones, preguntas futuras, notas de auditoría.]
+```

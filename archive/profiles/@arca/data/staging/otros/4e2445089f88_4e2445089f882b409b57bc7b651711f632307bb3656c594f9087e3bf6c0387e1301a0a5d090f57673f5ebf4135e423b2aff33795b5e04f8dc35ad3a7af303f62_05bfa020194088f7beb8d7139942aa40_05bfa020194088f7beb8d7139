@@ -1,0 +1,32 @@
+# 🧩 Sprint 2.3 – Corrección Documental y Metadatos YAML
+
+📅 Fecha de inicio: 2025-05-23  
+🔢 Versión objetivo: v0.0.0.3  
+🎯 Objetivo: Corregir la estructura de metadatos YAML en todos los documentos críticos para garantizar trazabilidad, integración con IA y cumplimiento con la metodología v2.
+
+
+## ✅ Checklist por Fase
+
+### 🔹 Fase 1 – Corrección manual de documentos críticos
+
+- [ ] Corregir `metodologia_estructura_modular_v2.md`
+- [ ] Corregir `metodologia_sprints_v2.md`
+- [ ] Corregir `metodologia_doc_ia_v2.md`
+- [ ] Corregir `metodologia_adr_v2.md`
+- [ ] Corregir `Methodology_Index.md`
+- [ ] Corregir `changelog.md` de v0.0.0.2
+- [ ] Corregir `hitos.md` y `lecciones_aprendidas.md`
+
+
+### 🔹 Fase 3 – Validación completa y snapshot
+
+- [ ] Validar `./docs` con `validate_docs.py`
+- [ ] Validar `./docs/versiones/v0.0.0.2_metodologias/`
+- [ ] Crear nuevo zip snapshot: `v0.0.0.3_doc_yaml_validado.zip`
+- [ ] Archivar documentos obsoletos si corresponde
+
+
+📁 Ubicación sugerida:  
+`/docs/sprints_activos/Sprint_2.3_Correccion_Metadatos.md`
+
+📌 Este sprint sentará las bases para la expansión semántica y automatización futura de ALMA_RESIST.

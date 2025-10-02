@@ -1,0 +1,80 @@
+# 📅 Resumen Diario – 2025-05-14
+
+
+## 🩺 Salud y Bienestar Diario
+
+(No se registraron datos)
+
+tags:: #salud #bienestar #habitos
+
+
+## 📈 Trading
+
+(No se registraron actividades)
+
+tags:: #trading #btc #disciplina
+
+
+## 🏛️ Gestión Empresarial / 13CC
+
+- Se definió la estructura legal-operativa base de 13CC y su anexo Canavir bajo el marco Reprocann.
+    
+- Sectorización obligatoria por paciente, con trazabilidad por lote, planta y responsable legal.
+    
+- Roles legales asignados:
+    
+    - **Ariel Abaca** (cultivo principal 3CC)
+        
+    - **Sebastián “Gori” Calderón** (anexo Canavir)
+        
+    - **Santiago Calvo** (próxima incorporación como solidario)
+        
+- Se elaboró una estructura de archivo por paciente para seguimiento digital en ALMA/Obsidian.
+    
+- Se rediseñó el formulario de adhesión a la asociación civil para hacerlo más humano y legalmente válido.
+    
+- Se convirtió el archivo técnico `champicompost_revision.md` a PDF como parte del módulo de reutilización de sustrato.
+    
+
+tags:: #13cc #gestion #estructura #reprocann #sectorizacion #formularios #legal
+
+
+## 🔎 Revisión del Sistema ALMA
+
+### 🧠 Sistema ALMA – Infraestructura Técnica
+
+- Instalación y configuración exitosa del servidor local de modelos LLM (`~/mistral_server/text-generation-webui`)
+    
+- Activación del entorno virtual `mistral_env` y resolución de dependencias (llama_cpp_binaries, matplotlib, tiktoken)
+    
+- Creación del script `iniciar_mistral.sh` para levantar el servidor con el modelo `mistral-7b-instruct-v0.2.Q4_K_M.gguf`
+    
+- Configuración de inicio automático mediante archivo `.desktop` ubicado en `~/Escritorio/mistral.desktop`
+    
+- Verificación completa del arranque desde sesión
+    
+
+### 🔊 Transcripción y Resúmenes ALMA LIBRE
+
+- Finalización de la **versión 0.3 del bot de transcripción** (`buffer_bot.py`) con:
+    
+    - Integración con modelos LLM locales como Mistral o LLaMA
+        
+    - Generación automática de resúmenes en `.md`
+        
+    - Comandos `/resumen` y `/estado`
+        
+    - Logging, validación `.env`, y compatibilidad con WebUI
+        
+
+### ✅ Logros del Día
+
+- Infraestructura LLM lista y funcional
+    
+- Automatización del inicio del servidor
+    
+- Consolidación de ALMA LIBRE versión 0.3
+    
+
+tags:: #alma #infraestructura #mistral #servidor #resumenes #transcripcion #versionado
+

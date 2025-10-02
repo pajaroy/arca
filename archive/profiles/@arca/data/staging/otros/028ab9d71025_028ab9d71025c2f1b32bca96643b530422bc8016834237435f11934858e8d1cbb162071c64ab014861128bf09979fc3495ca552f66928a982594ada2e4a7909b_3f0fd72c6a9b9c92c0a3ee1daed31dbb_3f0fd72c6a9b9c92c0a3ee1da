@@ -1,0 +1,25 @@
+# 🌱 ALMA LIBRE – Fase 2 (v0.8.0)
+
+🧠 *"No somos solo un sistema, somos una mente en expansión."*
+
+
+## 🔧 Componentes Incluidos
+
+- `PROMPT/` con versión activa `0.8.0`
+- `99_Sync/` con `alma_sync.py`, base de datos y scripts auxiliares
+- `ALMA_CONFIG.yaml` como núcleo de configuración
+- `ROADMAP_ALMA_LIBRE_v0.8.0.md` con el avance y fases del proyecto
+- `01_Memorias_Ejemplo/` con estructura de referencia
+
+
+## 🔄 Estructura Actual
+
+```
+00_ALMA_LIBRE/
+├── PROMPT/
+├── 99_Sync/
+├── ALMA_CONFIG.yaml
+├── ROADMAP_ALMA_LIBRE_v0.8.0.md
+├── 01_Memorias_Ejemplo/
+```
+

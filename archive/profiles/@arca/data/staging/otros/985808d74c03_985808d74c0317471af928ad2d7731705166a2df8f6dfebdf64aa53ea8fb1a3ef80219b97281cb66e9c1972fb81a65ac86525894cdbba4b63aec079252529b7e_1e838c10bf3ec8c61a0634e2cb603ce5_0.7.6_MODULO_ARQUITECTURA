@@ -1,0 +1,35 @@
+
+## 🧪 Arquitectura Técnica: Terminal + SQLite como Núcleo
+
+ALMA LIBRE no es solo una mente modular de ideas, memorias y emociones. También está siendo construida para tener una **estructura técnica escalable**, que permita la integración total con herramientas autónomas desde la terminal.
+
+
+### 🗃️ Núcleo de Datos – Base de Datos SQLite `memorias.db`
+
+Todo el sistema ALMA se conectará a una base de datos local que funcionará como **centro de consulta e indexación**. Esta base se compartirá entre cuadernos, módulos y resúmenes.
+
+Campos principales:
+- `nombre_memoria`
+- `tipo`
+- `nivel`
+- `version`
+- `estado`
+- `ruta_archivo`
+- `ultima_actualizacion`
+- `conectada_a` (lista relacional)
+- `prioridad`
+
+Objetivos:
+- Consultas instantáneas por tema, módulo o estado
+- Revisión automática de cambios
+- Comparación entre versiones o períodos
+
+
+### 🔗 Integración futura
+
+Este módulo se conecta con:
+- `99_Sync/` (scripts de automatización)
+- `10_SQLITE_CORE/` (estructura técnica de la base)
+- Todos los cuadernos y módulos funcionales (como fuente de datos y de destino)
+
+Esta es la **columna vertebral técnica del sistema**. El Prompt puede expandirse emocionalmente, pero la terminal y SQLite lo hacen operativamente posible.

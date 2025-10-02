@@ -1,0 +1,31 @@
+# 👤 Protocolo/Asistente Diario de Trabajo – Pablito Tatu
+
+## Instrucciones de uso
+
+Este documento funciona como **asistente personal** y protocolo de reporte diario.  
+Cada día, completá cada sección con la mayor precisión posible.  
+**Leé las preguntas guía** y usá los tags propuestos para máxima trazabilidad.  
+Al final del día, el sistema (o la IA) puede sugerirte mejoras, detectar patrones o ayudarte a enfocar tu trabajo.
+
+
+## 📝 Instrucción Final
+
+Al finalizar cada día de trabajo:
+
+1. Generá este resumen en **formato `.md`**.
+2. Usá el siguiente nombre de archivo:  
+   `resumen_diario_pablito_tatu_YYYY-MM-DD.md`
+3. Guardalo exclusivamente en:  
+   `ALMA_EMPRESA/equipo/pablito_tatu/reportes_diarios/`
+4. Verificá que todos los campos estén completos antes de cerrar la jornada.
+
+El incumplimiento de esta norma implica pérdida de trazabilidad y dificulta la mejora continua del sistema.
+
+
+## 📌 Notas Futuras
+
+Este protocolo está preparado para integrarse a IA que:
+- Audite los registros automáticamente
+- Sugiera mejoras en base a patrones detectados
+- Permita que Pablito evolucione su perfil y competencias de forma continua
+

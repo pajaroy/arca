@@ -1,0 +1,34 @@
+## 📆 2025-06-03 – Consolidación CLI y Estructura Ejecutable
+
+### 🧠 Auditor CLI General – Kael
+- Se formaliza el asesor `Kael` como **auditor CLI general del sistema ALMA_RESIST**.
+- Se define su archivo de contexto como `[[Kael]]`, con sección viva de reportes.
+- Se estructura su entorno en `control_central/kael/`.
+
+### 🧩 Modularidad Ejecutable
+- Se renombra `core/cli_cleaner/` a `core/run_kael/`, adoptando la convención `run_<asistente>`.
+- Se establece esta convención para todos los módulos IA ejecutables del sistema.
+
+### 🗃️ Limpieza de Descargas y Archivos Vivos
+- Se mueven a `historico/` todos los archivos temporales o no versionados correctamente dentro de:
+  - `control_central/archivo/downloads/`
+  - `control_central/docs/`
+- Se renombran archivos sin fecha según criterio de `[[criterios_ubicacion_vivo.md]]`.
+
+### 🌐 Estandarización de Enlaces Internos
+- Se adopta como convención general el uso de `[[...]]` para referenciar documentos internos desde Obsidian o VS Code.
+- Se actualizan los encabezados de documentos clave con enlaces simbólicos y tags IA-friendly.
+
+### 🧱 Estructuras de Tree y Diagnóstico
+- Se generan los tree completos de las siguientes rutas para revisión:
+  - `ALMA_RESIST/`
+  - `ALMA_RESIST/control_central/`
+  - `ALMA_RESIST/core/`
+- Se registran en `control_central/docs/contexto/`.
+
+---
+🔗 Archivos clave:  
+- `[[Kael]]`  
+- `[[criterios_ubicacion_vivo.md]]`  
+- `[[2025-06-03_apendice_nombres_modulos_ejecutables.md]]`  
+- `[[tree_alma_resist.md]]` – `[[tree_control_central.md]]` – `[[tree_core.md]]`

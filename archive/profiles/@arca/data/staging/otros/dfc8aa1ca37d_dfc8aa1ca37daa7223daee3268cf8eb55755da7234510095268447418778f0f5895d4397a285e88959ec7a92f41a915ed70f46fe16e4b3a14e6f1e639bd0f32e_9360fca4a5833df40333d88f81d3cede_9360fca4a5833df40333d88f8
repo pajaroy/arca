@@ -1,0 +1,107 @@
+# Protocolo ALMA – Expansiones Funcionales v0.4
+
+Complemento al documento v0.3 – Alimentos Funcionales.  
+Aquí se agregan categorías adicionales para mejorar la variedad de recetas, profundidad nutricional y versatilidad del sistema.
+
+
+## 5. GRASAS FUNCIONALES
+
+### ✅ Fuentes clave:
+- Palta
+- Ricota entera
+- Aceite de oliva extra virgen
+- Aceite de coco virgen
+- Almendras, nueces, maní natural sin sal
+- Semillas (chía, sésamo, girasol)
+
+### 🧠 Beneficios:
+- Energía estable y duradera
+- Nutrición cerebral
+- Regulación hormonal y reducción de inflamación
+
+
+## 7. COMPLEMENTOS FUNCIONALES
+
+### ✅ Opcionales que suman:
+- Huevos de campo (si se puede conseguir)
+- Queso tipo feta, cremoso natural (en poca cantidad)
+- Fermentados naturales (chucrut, kimchi casero, kéfir si se tolera)
+- Caldo de hueso (si se hace casero y sin aditivos)
+
+
+Fin del documento – Protocolo ALMA v0.4 – Expansiones Funcionales
+
+
+from pathlib import Path
+
+# Contenido del archivo con el principio de agua con sal marina y limón
+text_content = """# Protocolo ALMA – Agua con Sal Marina y Limón (v0.5)
+
+Implementación funcional dentro del sistema RPL para una hidratación real, remineralización celular y activación metabólica consciente.
+
+
+## FÓRMULA BÁSICA:
+- 1 vaso grande de agua (300–500 ml)
+- 1/4 de cucharadita de sal marina sin refinar (sal del Himalaya, celta, atlántica)
+- Jugo de 1/2 limón
+
+
+## BENEFICIOS:
+
+### 🔬 Mineralización:
+- Reposición de electrolitos esenciales: sodio, potasio, magnesio, calcio
+- Mejora la absorción del agua a nivel celular
+
+### 🧠 Claridad mental:
+- Ayuda a prevenir la niebla mental por ayuno prolongado o cetosis
+- Mantiene activas las funciones neuromusculares
+
+### 💪 Estabilidad energética:
+- Reduce la sensación de fatiga, mareos o debilidad
+- Evita picos y caídas de presión
+
+### 🧽 Detox natural:
+- Estimula el sistema digestivo y biliar
+- El limón aporta efecto alcalinizante suave y vitamina C
+
+
+Fin del documento – Protocolo ALMA v0.5 – Agua con Sal Marina y Limón
+"""
+
+
+from pathlib import Path
+
+# Contenido del texto sobre ayuno prolongado y regeneración celular
+text_content = """# Protocolo ALMA – Ayuno Prolongado y Regeneración Celular (v0.6)
+
+Este documento integra el enfoque del ayuno como herramienta de limpieza profunda, regeneración celular y reescritura biológica dentro del sistema de alimentación RPL.
+
+
+## PREGUNTA INICIAL:
+¿Es viable comer una buena ensalada con carne/proteína y luego no comer durante 36–38 horas para favorecer la regeneración celular?
+
+### ✅ RESPUESTA: SÍ.
+
+
+## ESTRATEGIA PROPUESTA:
+
+### COMIDA BASE:
+- Proteínas reales (carne, huevo, atún)
+- Grasas buenas (palta, ricota, aceite de oliva)
+- Vegetales abundantes (crudos y cocidos)
+- Condimentos naturales (limón, cúrcuma, sal marina)
+
+### AYUNO PROLONGADO:
+- Duración: 36 a 38 horas sin alimentos
+- Solo consumir: agua con sal marina + limón, infusiones funcionales (té de boldo, manzanilla, jengibre)
+
+
+## CONDICIONES A RESPETAR:
+
+- Evitar sobreesfuerzos físicos
+- Dormir profundo durante el proceso
+- No cortar el ayuno con ultraprocesados
+- Cortarlo con una sopa, huevo, vegetales cocidos o palta
+
+
+Fin del documento – Protocolo ALMA v0.6 – Ayuno Prolongado y Regeneración Celular

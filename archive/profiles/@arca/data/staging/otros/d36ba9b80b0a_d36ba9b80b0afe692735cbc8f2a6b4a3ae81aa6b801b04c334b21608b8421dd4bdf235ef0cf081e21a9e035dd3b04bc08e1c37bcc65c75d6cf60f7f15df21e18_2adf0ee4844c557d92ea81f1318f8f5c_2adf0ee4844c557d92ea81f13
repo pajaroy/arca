@@ -1,0 +1,22 @@
+# 🛹 Mataderos Skatepark – Gestión Organizativa
+
+## 📍 Ubicación del nodo
+
+Ruta: `docs/entidades/mataderos_skatepark_gestion/`  
+Dependencia: Proyecto 13CC (Área Cultural y Eventos)
+
+
+## 🧩 Componentes de la entidad
+
+- **Organización de eventos** (cumpleaños del skatepark, torneos, jornadas comunitarias)
+- **Estructura de roles y funciones** (coordinadores, jurados, operaciones, convivencia)
+- **Gestión de sponsors** y presencia institucional
+- **Protocolos de seguridad, convivencia y participación**
+- **Integración comunitaria y formativa** (inclusión de jóvenes como Kako, Mateo, María)
+
+
+## 📌 Notas adicionales
+
+- Este módulo puede escalar en el futuro a una **subentidad educativa** o **instituto barrial de formación** según roadmap comunitario 2025–2027.
+- Requiere seguimiento institucional por parte del equipo de 13CC para mantener coherencia con el resto de las actividades culturales del club.
+

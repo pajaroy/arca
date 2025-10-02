@@ -1,0 +1,30 @@
+
+# 📄 Changelog - Prompt ALMA_LOADER Individual v2.0.5
+
+## ✅ Mejoras Implementadas
+
+### 🔗 Validación de Relaciones
+- Añadida función Python para validar la existencia de IDs relacionados en la base de datos:
+```python
+def validar_relaciones(memoria, conexion_db):
+    for id_rel in memoria["relacionadas"]:
+        if not conexion_db.execute("SELECT id FROM memorias WHERE id = ?", (id_rel,)).fetchone():
+            raise ValueError(f"ID relacionado inválido: {id_rel}")
+```
+
+### 🏷️ Lista de Tags Recomendados
+- Incluida en `schema_base.json` una lista de tags estándar para uniformidad:
+```json
+"tags_recomendados": ["#crítico", "#pendiente", "#revisar", "#éxito"]
+```
+
+### 📘 Documentación para Usuarios No Técnicos
+- Agregada sección breve y clara sobre uso básico de categorías y tags, incluyendo un ejemplo mínimo en formato JSON:
+```json
+{
+  "id": "MEMGEN-001",
+  "categoria": "GEN",
+  "contenido": "Nueva filosofía de trabajo remoto..."
+}
+```
+

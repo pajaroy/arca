@@ -1,0 +1,42 @@
+# 🛹 Mataderos Skatepark – Gestión Organizativa
+
+## 📍 Ubicación del nodo
+
+Ruta: `docs/entidades/mataderos_skatepark_gestion/`  
+Dependencia: Proyecto 13CC (Área Cultural y Eventos)
+
+---
+
+## 🎯 Propósito
+
+Consolidar la estructura organizativa del espacio cultural y recreativo **Mataderos Skatepark** como una **entidad de gestión comunitaria** que colabora con el ecosistema 13CC. Su enfoque es mixto: social, cultural, deportivo y educativo.
+
+---
+
+## 🧩 Componentes de la entidad
+
+- **Organización de eventos** (cumpleaños del skatepark, torneos, jornadas comunitarias)
+- **Estructura de roles y funciones** (coordinadores, jurados, operaciones, convivencia)
+- **Gestión de sponsors** y presencia institucional
+- **Protocolos de seguridad, convivencia y participación**
+- **Integración comunitaria y formativa** (inclusión de jóvenes como Kako, Mateo, María)
+
+---
+
+## 📑 Documentación disponible
+
+- `proyeccion_base_mataderos_skatepark.md` → Proyección fundacional e identidad organizativa
+- Actas y minutas futuras a integrar en `docs/bitacoras/`
+- Estructura en construcción bajo metodología autónoma v2
+
+---
+
+## 📌 Notas adicionales
+
+- Este módulo puede escalar en el futuro a una **subentidad educativa** o **instituto barrial de formación** según roadmap comunitario 2025–2027.
+- Requiere seguimiento institucional por parte del equipo de 13CC para mantener coherencia con el resto de las actividades culturales del club.
+
+---
+
+> 🧠 Esta carpeta respeta la metodología modular ALMA_RESIST – v2.  
+> Puede replicarse como plantilla para otros espacios socioculturales.

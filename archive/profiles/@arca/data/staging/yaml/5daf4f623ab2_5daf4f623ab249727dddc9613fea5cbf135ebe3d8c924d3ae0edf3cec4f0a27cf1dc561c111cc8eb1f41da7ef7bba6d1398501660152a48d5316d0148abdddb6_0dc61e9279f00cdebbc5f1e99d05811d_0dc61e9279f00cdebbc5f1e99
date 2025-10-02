@@ -1,0 +1,32 @@
+---
+tipo: configuracion
+id: CONFIGURACION_2025-06-05_a3e877
+version: '1.0'
+formato: yaml
+modulo: ALMA_RESIST
+titulo: Module
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:14d7c3ddbcd8525e0465445da834f4b5de5a4b6f8954db0c64814bf23d39a26c
+---
+module: control/control_central
+type: core
+status: in_progress
+created: 2025-05-29
+linked_to:
+  - metodologia_estructura_autonoma_v2.md
+  - alma_resist_idea_base_0.0.0.1.md
+context_tags:
+  - role: centro_de_mando
+  - scope: validacion_global
+  - layer: sistema
+  - task: auditoria
+  - domain: infraestructura
+sha256: pendiente_generar

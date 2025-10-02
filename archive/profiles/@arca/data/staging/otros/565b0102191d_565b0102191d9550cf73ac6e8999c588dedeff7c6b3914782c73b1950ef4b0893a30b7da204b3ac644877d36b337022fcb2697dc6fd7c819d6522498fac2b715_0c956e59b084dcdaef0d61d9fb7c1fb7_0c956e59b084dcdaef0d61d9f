@@ -1,0 +1,33 @@
+# 🔐 Módulo: log_crypto.py
+
+Módulo de cifrado y descifrado de archivos de log dentro del sistema `ALMA_RESIST`. Soporta algoritmos modernos como AES-256-GCM y ChaCha20 para garantizar confidencialidad e integridad de los logs almacenados o transmitidos.
+
+
+## 🔐 Algoritmos soportados
+
+| Nombre         | Módulo usado  | Longitud clave | Requiere salt | Seguridad recomendada |
+|----------------|----------------|----------------|----------------|------------------------|
+| AES-256-GCM    | `cryptography.hazmat.primitives.ciphers.aead.AESGCM` | 32 bytes      | Sí            | Alta                   |
+| ChaCha20-Poly1305 | `cryptography.hazmat.primitives.ciphers.aead.ChaCha20Poly1305` | 32 bytes | Sí            | Muy alta (stream-safe) |
+
+
+## 🧪 Testing
+
+El módulo está cubierto con pruebas automáticas `pytest`. Ubicación:  
+`tests/test_log_crypto.py`
+
+Cobertura:
+- Cifrado / Descifrado completo
+- Validación de logs cifrados
+- Manejo de errores
+- Cambio de claves
+- Integridad de datos
+- Compatibilidad de algoritmos
+
+
+## 🧠 Notas
+
+- Todos los archivos cifrados tienen una cabecera estándar con identificador del algoritmo (`b'ALG:' + nombre_algoritmo.encode()`).
+- Salt se requiere para derivar la clave si se usa password.
+- Las excepciones están gestionadas con logs para trazabilidad.
+

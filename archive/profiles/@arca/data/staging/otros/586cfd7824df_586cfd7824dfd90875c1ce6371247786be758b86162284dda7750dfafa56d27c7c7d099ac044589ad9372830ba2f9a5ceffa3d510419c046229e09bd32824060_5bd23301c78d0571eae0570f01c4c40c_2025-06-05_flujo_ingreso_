@@ -1,0 +1,57 @@
+## 1. **Flujo de Ingreso Ideal – Control Central (desde el minuto cero)**
+
+### **Paso 1: Ingreso del archivo original**
+
+- **Siempre en .md**, con bloque YAML bien definido arriba (metadata).
+    
+- **Norma:** Si el archivo entra sin YAML, el sistema lo rechaza o lo manda a una carpeta “pendientes de metadata”.
+    
+- **Naming:** Usa un esquema consistente: `YYYY-MM-DD_nombre_descriptivo.md`
+    
+
+
+### **Paso 3: Conversión a JSON (Jason)**
+
+- De cada `.yaml` se genera un `.json` equivalente.
+    
+- Todos los JSON van a un “índice” único, o uno por archivo, según volumen.
+    
+- Este JSON es la base para IA, búsquedas avanzadas, sincronización, etc.
+    
+
+
+### **Paso 5: Auditoría y Control**
+
+- **Alertas automáticas:**  
+    Si falta metadata, si hay conflicto de versiones, si el archivo no está en todos los formatos, si hay inconsistencias, etc.
+    
+- **Logs de todo:**  
+    Cada acción (creación, actualización, borrado) queda registrada para trazabilidad.
+    
+
+
+## 3. **¿Qué NO hacer?**
+
+- No mezcles versiones intermedias (archivos “en proceso”) con los finales en la misma carpeta.
+    
+- No dejes archivos sin metadata.
+    
+- No permitas cambios “por fuera” del flujo (ej: editar JSON a mano).
+    
+
+
+## 5. **¿Dónde empezar?**
+
+1. **Definí el estándar de archivo .md** (naming, metadata obligatoria).
+    
+2. **Armá el script mínimo viable** que:
+    
+    - Chequee YAML,
+        
+    - Extraiga a YAML puro,
+        
+    - Convierta a JSON.
+        
+3. **Dejá corriendo ese watcher** en `downloads` (o donde definas).
+    
+4. **Probá el flujo completo,** ajustá, y recién ahí extendelo al resto del sistema.

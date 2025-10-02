@@ -1,0 +1,35 @@
+# 🧠 memoria_saver.py – Guardado robusto con rollback y estado
+
+"""
+Este módulo implementa una función `guardar_memoria(memoria: dict)` con control de errores, estado y sincronización entre SQLite y FAISS.
+
+Requisitos:
+1. Validar que el input cumple con `schema_base.json` (usar validador externo).
+2. Intentar guardar primero en SQLite (usando `sqlite_storage.py`)
+3. Luego guardar el vector en FAISS (usando `vector_storage.py`)
+4. Si FAISS falla:
+   - Registrar el error
+   - Actualizar el campo `"estado"` de la memoria a `"pendiente_vectorización"`
+   - Mantener el registro en SQLite
+5. Si SQLite falla:
+   - Cancelar el proceso y no insertar nada
+   - Devolver estado `"error"` y mensaje
+6. Registrar logs estructurados con `logging` o `structlog`.
+7. Aplicar `try/except` por cada capa
+8. El retorno debe ser un diccionario con:
+   - `"resultado"`: "ok" o "error"
+   - `"estado"`: estado final de la memoria
+   - `"mensaje"`: breve explicación
+9. Compatibilidad futura con `on_memoria_guardada()` y `HookManager`.
+
+Dependencias internas:
+- `sqlite_storage.insertar_memoria()`
+- `vector_storage.vectorizar_y_guardar()`
+- `validador.validar_esquema()`
+- `cifrado.cifrar_contenido()`
+"""
+
+# 📌 Función principal: guardar_memoria(memoria: dict) -> dict
+# Validar → Cifrar si es privada → Guardar en SQLite → Guardar vector en FAISS → actualizar estado
+
+# ⚠️ El módulo no debe depender de frameworks externos ni de FastAPI (autónomo para usar en backend o terminal).

@@ -1,0 +1,92 @@
+# core/llm_server/main.py
+import asyncio
+from typing import Optional
+from fastapi import FastAPI, HTTPException, status
+from pydantic import BaseModel, Field
+import logging
+from model_wrapper import ModelWrapper  # Asumiendo que existe en el mismo directorio
+
+# Configuración inicial
+app = FastAPI(title="ALMA_RESIST LLM Server", version="0.0.0.4.1")
+logger = logging.getLogger("alma_server")
+model_wrapper: Optional[ModelWrapper] = None
+model_loaded = False
+
+# Esquema de validación Pydantic
+class PromptRequest(BaseModel):
+    prompt: str = Field(..., min_length=1, max_length=2000,
+                        example="¿Cuál es el sentido de la vida?",
+                        description="Prompt para la IA reflexiva")
+
+class HealthCheck(BaseModel):
+    status: str
+    model_loaded: bool
+    model_info: Optional[dict]
+
+@app.on_event("startup")
+async def load_model():
+    """Carga el modelo al iniciar el servidor"""
+    global model_wrapper, model_loaded
+    try:
+        # Configuración desde variables de entorno o archivo de configuración
+        model_path = "models/mistral-7b-q4.gguf"  # Debería venir de la configuración
+        model_wrapper = ModelWrapper(model_path, quantization="Q4")
+        model_loaded = True
+        logger.info(f"Modelo {model_path} cargado exitosamente")
+    except Exception as e:
+        logger.error(f"Error cargando modelo: {str(e)}")
+        model_loaded = False
+
+@app.post("/responder", response_model=dict,
+          responses={
+              200: {"description": "Respuesta generada exitosamente"},
+              503: {"description": "Modelo no cargado o no disponible"}
+          })
+async def generate_response(request: PromptRequest):
+    """Endpoint principal para generación de respuestas"""
+    if not model_loaded or not model_wrapper:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="El modelo no está cargado"
+        )
+
+    try:
+        # Ejecución asincrónica para no bloquear el event loop
+        response = await asyncio.to_thread(
+            model_wrapper.generate, 
+            request.prompt
+        )
+
+        return {
+            "respuesta": response,
+            "metadata": {
+                "modelo": model_wrapper.model_name,
+                "longitud_prompt": len(request.prompt),
+                "timestamp": asyncio.get_event_loop().time()
+            }
+        }
+    except Exception as e:
+        logger.error(f"Error en generación: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Error interno procesando la solicitud"
+        )
+
+@app.get("/health", response_model=HealthCheck)
+async def health_check():
+    """Endpoint de verificación de salud del servicio"""
+    return {
+        "status": "OK" if model_loaded else "ERROR",
+        "model_loaded": model_loaded,
+        "model_info": model_wrapper.get_model_info() if model_loaded else None
+    }
+
+@app.get("/info")
+async def model_info():
+    """Obtiene información del modelo cargado"""
+    if not model_loaded or not model_wrapper:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="No hay modelo cargado"
+        )
+    return model_wrapper.get_model_info()

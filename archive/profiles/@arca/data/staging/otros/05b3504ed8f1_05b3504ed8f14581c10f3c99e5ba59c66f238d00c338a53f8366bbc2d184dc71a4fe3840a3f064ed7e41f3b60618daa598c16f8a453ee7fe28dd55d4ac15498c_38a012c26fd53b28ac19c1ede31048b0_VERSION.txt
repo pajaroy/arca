@@ -1,0 +1,5 @@
+ALMA_RESIST :: DOCUMENTACION
+Versión: v0.0.0.2_documentacion
+Sprint: 2.3 - Corrección de Metadatos
+Estado: FINALIZADO
+Fecha: 2025-05-22

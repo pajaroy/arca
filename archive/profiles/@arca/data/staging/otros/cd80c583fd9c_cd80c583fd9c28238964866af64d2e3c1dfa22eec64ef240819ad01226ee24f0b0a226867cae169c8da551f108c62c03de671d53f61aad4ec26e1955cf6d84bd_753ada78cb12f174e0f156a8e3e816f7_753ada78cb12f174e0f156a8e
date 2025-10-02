@@ -1,0 +1,79 @@
+---
+tipo: bitacora
+id: BITACORA_2025-06-05_4c6d2b
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Test Log Crypto Debug
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:1317bfed63da5e8050c8050bc1b7078fc032793a75cdb30ca05a785282841fea
+---
+#!/usr/bin/env python3
+
+import os
+from core.log_crypto import encrypt_log, decrypt_log, generar_clave
+
+def debug_print(label, data):
+    print(f"{label}: {len(data)} bytes | {data[:32]}...")
+
+def main():
+    print("🧪 Test DEBUG – log_crypto.py")
+
+    log_original = "logs/alma_debug_test.log"
+    log_cifrado = "logs/alma_debug_test.enc"
+    log_descifrado = "logs/alma_debug_test.dec"
+    clave_path = "clave_debug.bin"
+
+    try:
+        # Crear contenido de prueba
+        os.makedirs("logs", exist_ok=True)
+        with open(log_original, "w", encoding="utf-8") as f:
+            f.write('{"timestamp": "2025-05-17T08:25:13Z", "type": "INFO", "message": "Debug"}\n')
+
+        # Generar clave y guardarla
+        clave = generar_clave()
+        with open(clave_path, "wb") as f:
+            f.write(clave)
+
+        debug_print("Clave generada", clave)
+
+        # Cifrar
+        encrypt_log(log_original, log_cifrado, clave)
+        print("🔐 Log cifrado correctamente.")
+        with open(log_cifrado, "rb") as f:
+            cifrado = f.read()
+        debug_print("Archivo cifrado", cifrado)
+
+        # Recargar clave y descifrar
+        with open(clave_path, "rb") as f:
+            clave_leida = f.read()
+
+        decrypt_log(log_cifrado, log_descifrado, clave_leida)
+        print("🔓 Log descifrado correctamente.")
+
+        # Verificación
+        with open(log_original, "r", encoding="utf-8") as f1, open(log_descifrado, "r", encoding="utf-8") as f2:
+            original = f1.read()
+            descifrado = f2.read()
+            if original == descifrado:
+                print("✅ Test PASADO: El archivo descifrado es igual al original.")
+            else:
+                print("❌ Test FALLADO: El archivo descifrado difiere del original.")
+                print("---- ORIGINAL ----")
+                print(original)
+                print("---- DESCIFRADO ----")
+                print(descifrado)
+
+    except Exception as e:
+        print(f"❌ Excepción durante el test DEBUG: {e}")
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,19 @@
+# ✅ Checklist – ALMA_LOADER v3.0.1
+
+## 📘 Whitepaper
+
+- [x] Agregar ejemplo narrativo en Casos de Uso  
+  _Ej: “Hoy operé con 5% de riesgo tras dormir solo 4 horas...”_
+
+- [x] Incluir tabla de correspondencia Módulo ↔ Script  
+  _Ej: resumenes.py → Generador de resúmenes_
+
+- [x] Expandir Prólogo con filosofía del sistema  
+  _Frase: “ALMA_LOADER no es una app. Es una mente digital modular…”_
+
+- [x] Agregar sección “Comandos útiles”  
+  _Ej: `/nueva`, `/accion`, `/reflexion`_
+
+
+## 🏁 Al terminar:
+- [x] Generar `README` y `CHANGELOG` para versión 3.0.1

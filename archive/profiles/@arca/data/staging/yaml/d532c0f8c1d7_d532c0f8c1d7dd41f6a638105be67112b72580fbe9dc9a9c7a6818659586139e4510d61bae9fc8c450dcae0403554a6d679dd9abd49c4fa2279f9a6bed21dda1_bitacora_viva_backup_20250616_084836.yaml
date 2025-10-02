@@ -1,0 +1,151 @@
+metadata:
+  version: 0.2.0
+  tipo: bitacora
+  schema: almaresist.bitacora_v1
+  descripcion: Bitácora institucional de ALMA_RESIST
+  estructura: metadata + entradas
+  tags:
+  - bitacora
+  - institucional
+  linked_to: []
+  responsable: Equipo de Operaciones
+  hash_verificacion: sha256:a5a117698aea5d828722b4d27110af7e6a5dcf26ec506e86bbf59a33fc3f19cc
+  historial:
+  - fecha: '2025-06-16T07:34:14.461244+00:00'
+    accion: Nueva entrada
+    ejecutado_por: Kael
+  - fecha: '2025-06-16T07:43:02.139252+00:00'
+    accion: Nueva entrada
+    ejecutado_por: Kael
+  - fecha: '2025-06-16T07:43:13.558430+00:00'
+    accion: Nueva entrada
+    ejecutado_por: Kael
+  - fecha: '2025-06-16T07:44:52.279799+00:00'
+    accion: Nueva entrada
+    ejecutado_por: Kael
+  - fecha: '2025-06-16T07:53:14.724308+00:00'
+    accion: Nueva entrada
+    ejecutado_por: Kael
+  - fecha: '2025-06-16T08:05:43.278601+00:00'
+    accion: Nueva entrada
+    ejecutado_por: Kael
+  last_modified: '2025-06-16T08:05:43.278601+00:00'
+  last_modified_by: Kael
+entradas:
+- id: 70a8c659-2988-4644-aad8-3168fee4f30b
+  fecha: '2025-06-16T07:34:14.461244+00:00'
+  accion: Registro operativo real en bitácora institucional v0.2.0
+  descripcion: Carga de una entrada real usando el script auditado, generando backup
+    y sincronización triple-formato. Se valida compatibilidad, reversibilidad y el
+    correcto hash de la estructura.
+  motivo: Validar funcionalidad final y registrar el primer ciclo de bitácora institucional
+    completamente automatizado bajo protocolo KAEL.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - bitacora
+  - operativo
+  - validacion
+  - kael
+  - automatizacion
+  - v0.2.0
+- id: fd275c3e-e799-45ba-bab7-893fc7acc790
+  fecha: '2025-06-16T07:43:02.139252+00:00'
+  accion: Migración y consolidación de bitácoras previas al estándar KAEL v0.2.0
+  descripcion: Se migraron todas las entradas históricas de bitácoras manuales y dispersas
+    al formato universal validado por protocolo KAEL v0.2.0. Se preservó la memoria
+    institucional relevante, eliminando duplicados, y se adaptaron los metadatos y
+    tags a la nueva taxonomía. Todo el proceso quedó documentado y respaldado, garantizando
+    trazabilidad y auditabilidad futura.
+  motivo: Unificar y profesionalizar el registro histórico, asegurando compatibilidad
+    total con el nuevo sistema de gestión de bitácoras.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - migracion
+  - consolidacion
+  - bitacora
+  - kael
+  - protocolo
+  - validacion
+  - historico
+  - v0.2.0
+- id: 2c742876-eb09-4dfc-9388-7210b75792c4
+  fecha: '2025-06-16T07:43:13.558430+00:00'
+  accion: Depuración, backup y normalización de bitácoras institucionales
+  descripcion: Durante el proceso de migración se detectaron errores de indentación,
+    entradas manuales incompletas y archivos corruptos. Se realizó backup automático
+    de todos los archivos afectados, normalizando la estructura y asegurando que cada
+    bitácora cumpla el esquema universal. El sistema quedó libre de inconsistencias
+    y preparado para gestión 100% automatizada.
+  motivo: Corregir errores heredados y garantizar la robustez y reversibilidad del
+    pipeline documental bajo gobernanza KAEL.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - depuracion
+  - backup
+  - normalizacion
+  - correccion
+  - kael
+  - bitacora
+  - v0.2.0
+- id: 0485e0c5-5a70-4178-99ea-b91e6fba7bbc
+  fecha: '2025-06-16T07:44:52.279799+00:00'
+  accion: Formalización y puesta en marcha del sistema autobitácora institucional
+  descripcion: Queda oficialmente inaugurado el sistema autobitácora de ALMA_RESIST
+    bajo protocolo KAEL. Desde este momento, toda acción crítica, mejora o cambio
+    relevante será registrado de manera automática, con backup, validación de hash
+    y generación triple-formato. El proceso es auditable, reversible y compatible
+    con la gobernanza multiagente del entorno.
+  motivo: Dejar constancia institucional del inicio del pipeline autobitácora y garantizar
+    trazabilidad y memoria viva en tiempo real.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - autobitacora
+  - inauguracion
+  - produccion
+  - kael
+  - protocolo
+  - automatizacion
+  - v0.2.0
+- id: 2e9208fc-137e-4666-a640-263a64fbe284
+  fecha: '2025-06-16T07:53:14.724308+00:00'
+  accion: Archivado y documentación de la versión legacy bitácora CLI v0.1.0
+  descripcion: Se archiva la versión 0.1.0 del script add_bitacora_entry en la carpeta
+    _legacy/v0.1.0/, y se documenta su estado y función mediante README.yaml bajo
+    formato universal. Esta acción garantiza trazabilidad y evita el uso de versiones
+    obsoletas en producción.
+  motivo: Preservar la historia evolutiva del sistema de bitácoras y dejar registro
+    formal de la migración a estándares KAEL.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - legacy
+  - bitacora
+  - cli
+  - readme
+  - archivado
+  - v0.1.0
+  - kael
+  - protocolo
+- id: 65843bc6-e2ed-4191-b58c-829e91b2eb97
+  fecha: '2025-06-16T08:05:43.278601+00:00'
+  accion: Pérdida de logs históricos del sistema autobitácora
+  descripcion: Por acción manual, se eliminaron todos los archivos de log generados
+    hasta la fecha en el entorno alma_core. Se reconoce la importancia crítica de
+    los logs para auditoría y debugging. Se deja asentado como aprendizaje la necesidad
+    de implementar rotación y backup automático de logs críticos, y se reforzará el
+    protocolo para evitar futuras pérdidas.
+  motivo: Documentar la pérdida y dejar lección institucional para mejorar resiliencia
+    y trazabilidad a futuro.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - logs
+  - perdida
+  - aprendizaje
+  - protocolo
+  - bitacora
+  - kael

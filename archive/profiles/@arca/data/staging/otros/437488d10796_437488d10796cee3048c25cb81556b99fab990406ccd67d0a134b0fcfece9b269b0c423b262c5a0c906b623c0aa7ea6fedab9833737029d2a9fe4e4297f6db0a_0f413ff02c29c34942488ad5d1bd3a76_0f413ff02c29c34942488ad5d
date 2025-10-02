@@ -1,0 +1,402 @@
+# Memorias Generales 
+
+> **📎 Formato de IDs y Etiquetado de Memorias**
+> 
+> Cada memoria debe incluir un **ID único** siguiendo esta convención:
+> - `MEMGEN-001`, `MEMTRD-002`, `MEMHEALTH-003`, etc.
+> 
+> **Estructura del ID**:
+> - `MEM` = Memoria
+> - `[MODULO]` = Abreviatura del módulo (GEN: General, TRADE: Trading, CAPITAL: Finanzas, etc.)
+> - Número correlativo (comenzando en 001)
+> 
+> **Ejemplo de ID correcto**:
+> ```markdown
+> ## MEMGEN-001 | Reflexión sobre Críticas Constructivas
+> ```
+> 
+> **Consejos**:
+> - Mantener IDs únicos y ordenados.
+> - No repetir IDs aunque se borren memorias viejas.
+> - Si expandís mucho una memoria y la dividís en dos, crear un ID nuevo (no compartir el mismo).
+> 
+> Esto permitirá búsquedas, referencias cruzadas y futuras automatizaciones de las memorias.
+
+## 🗂 Categorías Oficiales de Memorias ALMA
+
+A continuación se detallan las categorías modulares sobre las que se construyen y etiquetan las memorias dentro del ecosistema ALMA LIBRE:
+
+- **General (GEN)**: Reflexiones fundacionales, filosofía de trabajo, principios estratégicos.
+    
+- **Trading (TRD)**: Registros de operaciones, estrategias, aprendizajes y emociones vinculadas al trading.
+    
+- **Capital (CAP)**: Gestión financiera, inversiones, control de gastos y flujo de fondos.
+    
+- **Programación (PROG)**: Scripts, arquitectura de software, decisiones técnicas.
+    
+- **Reflexión (REFLEX)**: Dilemas existenciales, evolución filosófica, decisiones de vida.
+    
+- **Salud (HEALTH)**: Nutrición, rutinas, bienestar físico y mental.
+    
+- **Históricas (HIST)**: Eventos históricos relevantes y su análisis.
+    
+- **Geopolítica (GEO)**: Conflictos, decisiones internacionales, riesgos estratégicos.
+    
+- **Económica (ECO)**: Macro y microeconomía, políticas monetarias, análisis de mercado.
+
+## 📑 Índice de Memorias Generales
+
+- [📚 Memorias Generales](#Memorias-Generales) 
+- [📈 Trading](#trading)
+- [💰 Capital](#capital)
+- [💻 Programacion](#programacion)
+- [🧘 Reflexion](#reflexion)
+- [🏥 Salud](#salud)
+- [📜 Historicas](#historicas)
+- [🌍 Geopolitica](#geopolitica)
+- [📊 Economica](#economica)
+
+## 📚 Introducción al Sistema de Memorias
+
+El ecosistema de memorias de ALMA está diseñado para ser dinámico, evolutivo y transversal.  
+La siguiente estructura muestra cómo se interrelacionan las diferentes áreas de conocimiento y experiencia dentro del sistema:
+
+```mermaid
+flowchart TD
+    A[Resúmenes Semanales] --> B[📚 Memorias Generales]
+    B -->|Base filosófica| C1(💰 Capital)
+    B -->|Base filosófica| C2(💡 Reflexión)
+    B -->|Base filosófica| C3(📜 Históricas)
+    B -->|Base filosófica| C4(🌍 Geopolítica)
+    B -->|Base filosófica| C5(📊 Económica)
+    B -->|Base filosófica| C6(🏥 Salud)
+    B -->|Base filosófica| C7(💻 Programación)
+    B -->|Base filosófica| C8(📈 Trading)
+
+    %% Conexiones bidireccionales entre módulos
+    C1 <-..->|Presupuesto ↔ Bienestar| C6
+    C2 <-..->|Ética ↔ Estrategia| C8
+    C3 <-..->|Patrones ↔ Riesgos| C4
+    C5 <-..->|Macroeconomía ↔ Trading| C8
+    C7 <-..->|Automatización ↔ Análisis| C3
+    C6 <-..->|Energía ↔ Productividad| C7
+
+    %% Retroalimentación global
+    C8 -->|Experiencias| E[🔄 Núcleo de Retroalimentación]
+    E -->|Actualiza principios| B
+    E -->|Optimiza| C1
+    E -->|Reevalúa| C2
+    E -->|Revisa patrones| C3
+    E -->|Ajusta riesgos| C4
+    E -->|Calibra modelos| C5
+    E -->|Sugiere hábitos| C6
+    E -->|Mejora código| C7
+
+    %% Relaciones emergentes
+    C2 -.->|"Ej: MEMREFLEX-005 (ansiedad) → MEMHEALTH-003 (meditación)"| C6
+    C4 -.->|"Ej: MEMGEO-012 (guerra) → MEMECO-007 (commodities)"| C5
+
+```
+
+### 🧬 Explicación del Diagrama Mejorado
+
+Este nuevo diagrama representa un salto cualitativo en la arquitectura de memorias de ALMA. Introduce no solo una red de relaciones entre módulos, sino una **lógica de retroalimentación continua**, conexiones ad-hoc entre memorias individuales, y la posibilidad de escalar hacia sistemas de inferencia y sugerencia automáticas.
+
+### 🔗 Conexiones Bidireccionales por Módulo
+
+Cada módulo está conectado a otros mediante relaciones semánticas explícitas.  
+Ejemplos:
+
+- **Capital ↔ Salud**: El presupuesto afecta la alimentación, y la salud condiciona la productividad económica.
+    
+- **Reflexión ↔ Trading**: Las decisiones estratégicas se cruzan con dilemas éticos y emocionales.
+    
+- **Programación ↔ Historia**: El análisis histórico nutre la automatización de decisiones (modelos, ciclos, patrones).
+    
+
+Estas relaciones son **bidireccionales**, lo que permite que los aprendizajes fluyan en ambas direcciones, actualizando tanto inputs como consecuencias.
+
+
+### 🧠 Relaciones Emergentes entre Memorias
+
+Además de las relaciones estructurales entre módulos, el sistema permite **relaciones emergentes entre memorias individuales**.
+
+Ejemplos:
+
+- Una memoria de ansiedad (MEMREFLEX-005) puede estar conectada con una de meditación (MEMHEALTH-003).
+    
+- Un evento geopolítico (MEMGEO-012) puede afectar el análisis económico (MEMECO-007).
+    
+
+Estas conexiones se definen mediante el campo `impacto_en` en el JSON, y permiten mapear cómo una idea, emoción o evento repercute en múltiples áreas del sistema.
+
+
+### 🌐 Hacia una Inteligencia Memética Dinámica
+
+Este enfoque abre la puerta a una **IA con pensamiento en red**, donde:
+
+- Cada entrada puede modificar y ser modificada por otras.
+    
+- Las decisiones se retroalimentan con base en experiencias previas.
+    
+- El sistema es capaz de detectar contradicciones internas o proponer mejoras automáticas.
+    
+
+En otras palabras: **ALMA no solo registra el pasado, sino que lo metaboliza y actúa sobre sí misma para evolucionar**.
+
+## 🛠 Template para Nuevas Memorias
+
+```yaml
+id: [ID ÚNICO]
+tags: [tema1, tema2, tema3]
+relacionado: [#ID-REL-1, #ID-REL-2]
+```
+
+- **#[ID] | AAAA-MM-DD - Título de la Memoria**: Descripción concisa del evento, reflexión, decisión o aprendizaje.
+
+> Este template debe ser utilizado cada vez que se agregue una nueva memoria, asegurando consistencia y trazabilidad transversal.
+
+
+
+## 📦 Almacenamiento de Memorias
+
+A partir de la versión 0.0.2, todas las memorias serán almacenadas en formato **JSON estructurado**, en archivos externos sincronizados automáticamente con este documento.
+
+Las memorias ya no se registran de forma manual en este `.md`, sino que se visualizan a través de herramientas como:
+
+- Obsidian (mediante vista embebida).
+- Scripts de conversión (`json_to_md.py`, `md_to_json.py`).
+- Bases de datos orientadas a grafos (Neo4j u otras).
+
+El índice y la estructura se mantienen para navegación conceptual, pero los contenidos se separan para escalabilidad y automatización.
+
+## Memorias Generales
+
+Las **Memorias Generales** actúan como la base filosófica, reflexiva y estructural de todo el ecosistema ALMA.
+No están ligadas a un módulo operativo específico, sino que alimentan transversalmente a todos los demás —sirviendo de referencia continua para la toma de decisiones, la evolución del sistema y la coherencia entre áreas.
+
+Aquí se registran ideas fundacionales, principios éticos, aprendizajes que trascienden el contexto, y reflexiones que aportan una visión macro al desarrollo personal, económico y tecnológico.
+Son el sustento de largo plazo del proyecto.
+
+## 🗂 Formato de Almacenamiento y Flujo de Conversión
+
+Desde la versión 0.0.3, el sistema ALMA utiliza un modelo de almacenamiento estructurado y sincronizado entre formatos.
+
+### 📦 Memorias JSON (fuente de verdad)
+
+- Cada memoria se guarda como archivo individual `.json` en la carpeta `memorias_json/`
+    
+- Es el formato central que se valida, analiza, y sobre el cual se generan relaciones semánticas
+    
+- Ejemplo de estructura mínima:
+    
+
+json
+
+CopiarEditar
+
+`{   "id": "MEMTRD-045",   "fecha": "2025-05-01",   "titulo": "Overtrading en sesión NY",   "categoria": "TRD",   "tags": ["#riesgo", "#impulsividad"],   "contenido": "Hoy operé sin respetar el plan..." }`
+
+### 📄 Copias Markdown (visualización en Obsidian)
+
+- Las memorias se convierten automáticamente a `.md` mediante el script `json_to_md.py`
+    
+- Esto permite visualizar, linkear y graficar las memorias en Obsidian u otras herramientas
+    
+- Formato generado:
+    
+
+markdown
+
+CopiarEditar
+
+`--- id: MEMTRD-045 fecha: 2025-05-01 categoria: TRD tags: [#riesgo, #impulsividad] ---  # Overtrading en sesión NY  Hoy operé sin respetar el plan...`
+
+### 🔄 Flujo actual
+
+1. El usuario crea o edita una memoria JSON
+    
+2. Se ejecuta `json_to_md.py`
+    
+3. Se genera/actualiza la versión `.md` en la carpeta `memorias_md/`
+    
+4. Esta copia se usa para lectura y navegación, pero **no debe editarse directamente**
+    
+
+
+
+
+### 🧠 Propósito del Módulo
+
+Detectar relaciones semánticas entre memorias ALMA a través de modelos de NLP, generando estructuras de conexión inteligente entre entradas personales.
+
+
+### ⚙️ Flujo de trabajo
+
+1. Carga de `.json` desde `dataset_test/`
+    
+2. Validación de campos mínimos (`id`, `contenido`)
+    
+3. Embeddings por lotes (batch size 32)
+    
+4. Cálculo de similitud con `cosine_similarity`
+    
+5. Filtro por score > 0.75
+    
+6. Visualización opcional como grafo
+    
+7. Logs escritos en `logs/`
+    
+
+
+### 📂 Estructura Final
+
+bash
+
+CopiarEditar
+
+`alma_nlp/ ├── dataset_test/ ├── embeddings/              # (no utilizado aún) ├── logs/ │   ├── relaciones_sugeridas.json │   └── procesamiento.log ├── modelo/                  # (espacio reservado para modelo offline) ├── relacionador_nlp.py ├── seguimiento.md ├── prompt_base.md └── README.md`
+
+
+## Capital
+Este módulo organiza las memorias sobre gestión financiera, incluyendo flujo de fondos, decisiones de inversión y control de gastos personales y empresariales.
+
+
+### 📜 Memorias
+
+## Programacion
+Aquí se documentan avances técnicos, decisiones de arquitectura, scripts desarrollados y aprendizajes vinculados al desarrollo del sistema ALMA LIBRE.
+
+
+### 📜 Memorias
+
+## Reflexion
+Las memorias de Reflexión contienen pensamientos profundos, dilemas existenciales, decisiones clave y evolución filosófica del creador.
+
+
+### 📜 Memorias
+
+## Salud
+Este apartado guarda memorias sobre bienestar físico y mental: rutinas, alimentación, ayuno, suplementos y decisiones relacionadas.
+
+
+### 📜 Memorias
+
+## Historicas
+Registro de eventos pasados relevantes a nivel global o personal, analizados desde una perspectiva de aprendizaje y proyección futura.
+
+
+### 📜 Memorias
+
+## Geopolitica
+Memorias enfocadas en el análisis de conflictos, decisiones gubernamentales y movimientos estratégicos internacionales.
+
+
+### 📜 Memorias
+
+## Economica
+Memorias que registran análisis macroeconómicos, inflación, políticas monetarias y ciclos de mercado.
+
+
+### 📜 Memorias
+
+
+
+# 🧭 Roadmap Estratégico to 0.0.2 Final – ALMA MEMORIAS JSON
+
+## 🎯 Objetivo Central  
+Crear un sistema de memorias humano-IA **estructurado, dinámico, semántico y consultable** como grafo y base de conocimiento viva.
+
+
+## 🔁 FASE 2 – Sincronización + Edición GUI (v0.1.1)
+
+| Nº | Implementación | Objetivo | Herramientas | Estado |
+|----|----------------|----------|--------------|--------|
+| 4 | `json_to_md.py` | Renderizar memorias como `.md` para Obsidian | Python | ✅ |
+| 5 | Editor Web GUI | Crear/modificar memorias sin tocar JSON crudo | Streamlit (MVP), luego React + FastAPI | 🧪 |
+| 6 | Sistema de Plantillas | Formularios por categoría (ej: Salud → sueño, suplementos) | JSON dinámico | 🔜 |
+| 7 | API REST básica | `GET /memorias`, `POST /relacionar` para apps externas | FastAPI | 🧪 |
+
+📌 **MVP Editor con Streamlit:**
+```python
+import streamlit as st
+memoria = {
+    "id": st.text_input("ID (auto-generado)"),
+    "titulo": st.text_input("Título"),
+    "tags": st.multiselect("Tags", ["#riesgo", "#bienestar"])
+}
+```
+
+
+## 🌐 FASE 4 – Visualización y Grafo Vivo (v0.2.0)
+
+| Nº | Implementación | Objetivo | Herramientas | Estado |
+|----|----------------|----------|--------------|--------|
+| 11 | Neo4j + Cypher | Grafo de conocimiento | Neo4j Desktop + Browser | 🔄 |
+| 12 | Cytoscape.js / D3.js | Visualizador interactivo web | JS | 🔜 |
+
+📌 **Plantilla de consulta útil:**
+```cypher
+MATCH (m:Memoria)-[r]->(m2:Memoria)
+WHERE "#ansiedad" IN m.tags
+RETURN m, r, m2
+```
+
+
+## 🧬 FASE 6 – Escalabilidad y Seguridad (v0.2.2)
+
+| Nº | Implementación | Objetivo | Herramientas | Estado |
+|----|----------------|----------|--------------|--------|
+| 15 | SQLite + JSON1 | Reemplazo anticipado de archivos JSON planos | `sqlite3` | 🔄 |
+| 16 | Backup en tiempo real (WAL) | Tolerancia a fallos y recuperación | Write-Ahead Logging | 🔜 |
+
+📌 Iniciar desde ya con:
+```python
+import sqlite3
+conn = sqlite3.connect("memorias.db")
+conn.execute("CREATE TABLE memorias (data JSON)")
+```
+
+
+# 📌 Checklist de Implementación Inicial
+
+### 🧱 Estructura
+```bash
+mkdir -p alma_memorias/{memorias_json,validadores,frontend,backups}
+```
+
+### ✅ Módulos clave
+- Crear `validadores/reglas.py` con reglas por categoría
+- Deploy MVP Editor en Streamlit (<200 líneas)
+- Dataset de 50 memorias para NLP y grafo test
+
+
+## 🧠 Progreso del Roadmap – Fase 2
+
+- ✅ Script `json_to_md.py` implementado.
+- ✅ Estructura modular de carpetas consolidada.
+- 🔄 Editor Web GUI planificado (no crítico).
+- 📄 Markdown generado automáticamente con front matter compatible con Obsidian.
+
+
+## 📌 Estado Actual
+> "Esta estructura está en evolución controlada bajo el esquema de versionado.  
+> Cada avance futuro deberá registrarse en el changelog."
+## Versión 0.0.2 - 2025-04-30
+- Reemplazo del diagrama por versión mejorada con núcleo de retroalimentación.
+- Eliminación de memorias inline (MEMGEN-001 a MEMGEN-003) del archivo `.md`.
+- Establecimiento de JSON como formato oficial de almacenamiento de memorias.
+- Añadida sección sobre almacenamiento dinámico y sincronización externa.
+### Versión 0.0.4 – 2025-05-01
+
+- ✅ FASE 3 completada: relaciones semánticas entre memorias.
+- Implementado `relacionador_nlp.py`:
+  - Embeddings con modelo en español (`sentence-transformers`)
+  - Análisis por similitud semántica entre contenidos
+  - Log detallado de relaciones en `logs/relaciones_sugeridas.json`
+- Generación de grafo de relaciones con NetworkX
+  - Guardado como imagen (`grafo_relaciones.png`) en logs/
+  - Score visible en cada conexión
+- Dataset de prueba con 20 memorias multitemáticas creado para testing
+- Flujo validado en entorno virtual con entorno aislado (`env_nlp`)
+- Estructura modular lista para escalar a ChromaDB o Neo4j (Fase 4)

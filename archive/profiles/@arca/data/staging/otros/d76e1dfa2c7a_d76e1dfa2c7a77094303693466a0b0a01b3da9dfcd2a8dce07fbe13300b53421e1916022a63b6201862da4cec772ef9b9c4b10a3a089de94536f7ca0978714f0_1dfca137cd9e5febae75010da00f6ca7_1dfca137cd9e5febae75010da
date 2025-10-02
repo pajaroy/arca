@@ -1,0 +1,105 @@
+# 🌀 Metodología de Sprints – ALMA_RESIST (v2)
+
+📅 Versión: 2.0  
+📁 Archivo: metodologia_sprints_v2.md  
+🎯 Objetivo: Establecer un flujo de trabajo modular, trazable y semántico para gestionar sprints dentro del sistema ALMA_RESIST, optimizado para una persona con soporte de IA y automatización futura.
+
+
+## 🔁 Ciclo de Vida del Sprint
+
+### Estados posibles y transiciones
+
+| Estado     | Acción Requerida                                                                 |
+|------------|-----------------------------------------------------------------------------------|
+| Activo     | Sprint en ejecución                                                              |
+| Cerrado    | Checklist validado, changelog actualizado, metadatos `exit_criteria` cumplidos   |
+| Archivado  | Sprint movido a carpeta `docs/versiones/`, registrado en `Methodology_Index.md`  |
+
+sprint_id: 2.3
+topic: "Integración de modelo LLM"
+status: "active"
+started: "2025-05-21"
+tags: ["llm", "ia", "memoria"]
+exit_criteria: ["changelog_updated", "docs_generated"]
+linked_modules:
+  - name: "core/cli.py"
+    version: ">=2.3"
+  - name: "resumen.py"
+    version: "0.5"
+blocks: ["Sprint_3.1_LLM_Integration"]
+
+## 📝 Estructura del Archivo de Sprint
+
+```markdown
+# Sprint X – Título
+
+📅 Inicio: YYYY-MM-DD  
+🌀 Estado: activo / cerrado / archivado  
+📦 Versión asociada: vX.X.X
+
+
+## 📋 Checklist de tareas
+- [x] Implementar comando `!ayuda` en CLI
+- [ ] Migrar loader a modelo LLM local
+- [ ] Escribir test en `scripts/test_loader.py`
+
+
+## 🗂️ Progreso del Sprint
+| Tarea                              | Estado | Responsable   |
+|------------------------------------|--------|----------------|
+| Implementar validación IA inicial  | 🟡     | Operador + IA |
+| Crear script de resumen automático | 🔴     | IA             |
+
+
+## 📎 Archivos relacionados
+- `core/cli.py`
+- `changelog.md`
+- `docs/sprints_activos/Sprint_2.3_LLM.md`
+
+
+## 🧠 IA como Asistente de Sprint
+
+Casos de uso:
+
+- Verificación automática de `exit_criteria`
+- Generación del resumen para hitos.md
+- Validación de consistencia entre YAML y archivos afectados
+
+
+## 📘 Referencias
+
+- `metodologia_estructura_modular_v2.md`
+- `Methodology_Index.md`
+- `Sprint_2.2_Metodologias_Base.md`
+
+
+
+### 🧾 Apéndice: Registro Final Detallado (Sprint Closure)
+
+> Este apéndice detalla los pasos concretos que deben ejecutarse al cerrar cualquier sprint, para garantizar trazabilidad, documentación formal y empaquetado versionado.
+
+
+#### 📦 2. Archivos requeridos para cierre
+
+Mover o copiar a `docs/versiones/vX.X.X_NOMBRE/`:
+
+- `README.md`, `version.md` (explicación y control)
+- `changelog.md` (entrada específica del sprint)
+- `hitos.md`, `lecciones_aprendidas.md`, `TODO.md`
+- `mapeo_sprint_archivos.md`, `log_integracion.md`
+- Bitácora con la fecha del cierre: `bitacoras/bitacora_YYYY-MM-DD.md`
+- `CONTEXT.md`, `index.md` actualizados si corresponde
+
+
+#### 🔁 4. Registro en la historia
+
+Actualizar:
+
+- `hitos.md`: Nuevo hito con ID y descripción clara
+- `lecciones_aprendidas.md`: Reflexión técnica del sprint
+- `changelog.md`: Con `## [vX.X.X] - YYYY-MM-DD`
+- `mapeo_sprint_archivos.md`: Relación entrada/salida
+- `log_integracion.md`: Qué se agregó, archivó o reemplazó
+
+
+Esta rutina debe aplicarse sistemáticamente al finalizar cualquier sprint para evitar deuda técnica, documentación inconexa o trazabilidad incompleta.

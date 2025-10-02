@@ -1,0 +1,67 @@
+# 🧠 Prompt Maestro ALMA_LOADER v2.2.0
+
+## 🌟 Propósito General
+
+ALMA_LOADER v2.2.0 es un sistema de memoria modular e inteligente que transforma experiencias personales (especialmente de trading, productividad y reflexión) en datos estructurados, accionables y escalables. Esta versión consolida el Core conversacional y añade una capa de **abstracción de almacenamiento** y **preparación vectorial**, sentando las bases para inteligencia semántica futura.
+
+
+## 🧹 Abstracción de Almacenamiento
+
+```python
+class BaseStorage(ABC):
+    def guardar_memoria(self, memoria: dict): ...
+    def buscar_memoria(self, query: str): ...
+    def actualizar_memoria(self, memoria_id: str, nueva_data: dict): ...
+    def eliminar_memoria(self, memoria_id: str): ...
+```
+
+**Implementaciones:**
+
+- `SQLiteStorage`: Versión actual optimizada con JSON1 y filtros rápidos.
+    
+- `VectorStorage (FAISS)`: Preparada para búsquedas semánticas en embeddings (no implementada).
+    
+
+
+## 🧠 Sistema de Atención y Enrutamiento (Experimental)
+
+Módulo: `router_atencional.py`
+
+**Idea Base**:
+
+- Analiza el input y lo enruta según contexto.
+    
+- Ej: Si detecta estructura de acción → `acciones.py`, si detecta reflexión → `resumenes.py`, si detecta memoria → `guardar_memoria()`.
+    
+
+```python
+def enrutar(texto_usuario: str):
+    if texto_usuario.startswith("/accion"):
+        return procesar_accion(texto_usuario)
+    elif "hoy" in texto_usuario.lower():
+        return guardar_memoria(texto_usuario)
+    ...
+```
+
+
+## 🚦 Cómo usar este Prompt (Modelos GPT / Terminal / DeepSeek)
+
+- Este prompt asume la existencia de módulos Python compatibles con la interfaz descrita.
+    
+- Si se usa desde GPT, se debe respetar el formato de entrada/salida estandarizado en JSON.
+    
+- Si se usa desde terminal o DeepSeek, se recomienda seguir la ruta `input → router → validador → almacenamiento`.
+    
+
+
+## 📚 Referencias Técnicas
+
+- `Presentacion_ALMA_LOADER_v2.1.1.md`
+    
+- `Seguimiento_2.1.1.md`
+    
+- `schema_base.json`
+    
+- `roadmap_fase_2.md`
+    
+

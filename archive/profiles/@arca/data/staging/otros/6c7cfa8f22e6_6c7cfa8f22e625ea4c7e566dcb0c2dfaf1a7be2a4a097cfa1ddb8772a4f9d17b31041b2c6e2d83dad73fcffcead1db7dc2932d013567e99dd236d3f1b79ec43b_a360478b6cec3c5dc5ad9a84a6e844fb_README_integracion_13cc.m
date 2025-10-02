@@ -1,0 +1,17 @@
+
+# 📁 README – Integración del Módulo 13CC
+
+Este directorio contiene los archivos conceptuales y documentación base para la futura integración de la estructura `13cc` dentro del sistema ALMA_RESIST.
+
+
+## 📦 Contenido del directorio
+
+- `integracion_13cc.md`: Documento de idea base con plan detallado
+- `13cc/`: Carpeta zip con snapshot de la estructura original antes de reestructurar
+
+
+## 📂 Ubicación recomendada
+
+Este directorio debe residir en:  
+`docs/idea_base/integracion_13cc/`
+

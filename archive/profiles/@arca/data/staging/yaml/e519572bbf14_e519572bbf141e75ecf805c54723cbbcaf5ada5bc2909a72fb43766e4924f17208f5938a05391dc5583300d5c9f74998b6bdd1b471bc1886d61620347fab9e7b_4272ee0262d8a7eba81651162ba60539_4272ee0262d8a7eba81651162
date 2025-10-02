@@ -1,0 +1,32 @@
+# Prompt de Carga de Bitácora Personal – EMMA
+
+id: PROMPT_BITACORA_EMMA_2025-06-08_01
+tipo: prompt_cuestionario_cli
+modulo: agentes/emma/bitacoras
+titulo: "Carga automática de bitácora personal de Emma"
+descripcion: |
+  Emma debe registrar cada análisis, asesoría empresarial o aprendizaje clave en su bitácora personal.
+  Completá el siguiente cuestionario y generá el comando CLI correspondiente.
+
+campos_pregunta:
+  - "¿Qué análisis, recomendación o experiencia empresarial querés registrar hoy?"
+  - "¿Qué impacto tiene esto en la estrategia o gestión del ecosistema?"
+  - "¿Consejos o advertencias para futuras decisiones empresariales?"
+  - "Observaciones o comentarios adicionales."
+
+instrucciones_ia: |
+  - Respondé con enfoque estratégico y orientado a la mejora institucional.
+  - Generá el comando CLI para cargar la entrada usando add_bitacora_entry_v0.1.0.py
+  - Usá la ruta: /home/bird/alma_core/control_central/agentes/emma/bitacoras/bitacora_personal_emma.yaml
+  - Mostrá solo el comando y los campos completos.
+
+ejemplo_comando: |
+  python3 /home/bird/alma_core/core/notebooks/alma-cli/bitacora/add_bitacora_entry_v0.1.0.py \
+    --accion "..." \
+    --descripcion "..." \
+    --motivo "..." \
+    --ejecutado_por "emma" \
+    --tags "reflexion,bitacora,emma,empresa,asesoria" \
+    --bitacora "/home/bird/alma_core/control_central/agentes/emma/bitacoras/bitacora_personal_emma.yaml"
+notas: |
+  Este prompt es para institucionalizar la evolución y aportes empresariales de Emma.

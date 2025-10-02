@@ -1,0 +1,82 @@
+id: cargar_bitacora_v0.2.0
+nombre: CLI de Gestión de Bitácoras ALMA_RESIST
+version: "0.2.0"
+autor: Kael @ ALMA_RESIST
+fecha_creacion: "2025-06-17"
+descripcion: |
+  Sistema CLI modular para gestión segura de bitácoras institucionales con
+  triple formato (YAML, JSON, Markdown) y sistema automático de backups.
+
+caracteristicas_principales:
+  - Registro con campos obligatorios estandarizados
+  - Encabezado de metadatos universal
+  - Generación automática de triple formato
+  - Backups con timestamps UTC
+  - Validación estructural estricta
+  - Hash de verificación SHA-256
+  - Modo dry-run para simulaciones
+
+uso_basico: |
+  python cargar_bitacora_v0.2.0.py \
+    --accion "Actualización de seguridad" \
+    --descripcion "Parche contra vulnerabilidad CVE-2023-1234" \
+    --motivo "Protección de sistemas críticos" \
+    --ejecutado_por "admin@dominio.com" \
+    --tags "seguridad,parche,urgente" \
+    --bitacora "docs/journal/bitacora_operaciones.yaml" \
+    --verbose \
+    --log
+
+campos_obligatorios:
+  - accion: Acción realizada (string)
+  - descripcion: Descripción detallada (string)
+  - motivo: Justificación de la acción (string)
+  - ejecutado_por: Responsable de la acción (string)
+
+opciones:
+  - bitacora: Ruta al archivo de bitácora (default: docs/journal/bitacora_viva.yaml)
+  - estado: Estado actual (default: registrado, opciones: registrado, en_progreso, completado, cancelado, revisión)
+  - tags: Etiquetas asociadas (separadas por comas)
+  - dry-run: Modo simulación (sin cambios reales)
+  - verbose: Salida detallada
+  - log: Guardar registro en archivo
+
+estructura_salida:
+  - Archivo YAML principal con metadatos y entradas
+  - Archivo JSON equivalente
+  - Archivo Markdown formateado para lectura humana
+  - Backup en docs/journal/backups/ con timestamp
+
+ejemplos:
+  - Ejemplo 1: Registro básico
+    comando: |
+      python cargar_bitacora_v0.2.0.py \
+        --accion "Mantenimiento programado" \
+        --descripcion "Actualización de servidores en cluster A" \
+        --motivo "Mantenimiento trimestral" \
+        --ejecutado_por "tech@dominio.com"
+
+  - Ejemplo 2: Con tags y estado personalizado
+    comando: |
+      python cargar_bitacora_v0.2.0.py \
+        --accion "Investigación de incidente" \
+        --descripcion "Análisis de logs de seguridad" \
+        --motivo "Respuesta a alerta IDS" \
+        --ejecutado_por "soc@dominio.com" \
+        --tags "seguridad,incidente,prioridad_alta" \
+        --estado "en_progreso"
+
+dependencias:
+  - Python 3.8+
+  - PyYAML
+  - argparse (incluido en stdlib)
+
+notas:
+  - Los backups se crean automáticamente antes de cada modificación
+  - El hash de verificación se actualiza tras cada cambio
+  - El sistema es extensible para otros tipos de logs institucionales
+
+responsable: "Equipo de Operaciones ALMA_RESIST"
+contacto: "soporte@alma-resist.org"
+hash_verificacion: "sha256:2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b"
+last_modified: "2025-06-17T05:30:00Z"

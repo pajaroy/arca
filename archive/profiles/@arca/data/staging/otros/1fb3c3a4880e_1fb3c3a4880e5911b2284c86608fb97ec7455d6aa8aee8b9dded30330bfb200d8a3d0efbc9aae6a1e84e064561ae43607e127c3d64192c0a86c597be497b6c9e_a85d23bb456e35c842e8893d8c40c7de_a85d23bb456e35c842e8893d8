@@ -1,0 +1,149 @@
+---
+tipo: bitacora
+id: BITACORA_2025-06-05_7330aa
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Test Log Writer V0.0.0.3
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:576c0974725e02c22cdf78d299eae22542438926f1a8b8d9226d331680f50239
+---
+import pytest
+import json
+import time
+import os
+from pathlib import Path
+from datetime import datetime, timedelta
+from core.llm_server.utils.log_writer import LogWriter
+import logging
+
+# Fixture principal con directorio temporal
+@pytest.fixture
+def log_writer(tmp_path):
+    return LogWriter(log_dir=str(tmp_path))
+
+# Test de generación de evento
+def test_log_event_structure():
+    event = LogWriter.log_event(
+        event_type="ERROR",
+        message="Test message",
+        module="core",
+        metadata={"key": "value"}
+    )
+
+    assert isinstance(event["timestamp"], str)
+    assert event["type"] == "error"
+    assert event["module"] == "core"
+    assert event["message"] == "Test message"
+    assert isinstance(event["pid"], int)
+    assert "host" in event
+    assert "platform" in event
+
+# Test de escritura válida
+def test_valid_write(log_writer, tmp_path):
+    event = LogWriter.log_event("INFO", "Mensaje de prueba")
+    result = log_writer.write_log(event)
+
+    assert result is True
+    log_file = tmp_path / f"alma_{datetime.utcnow().strftime('%Y-%m-%d')}.log"
+    assert log_file.exists()
+
+    content = log_file.read_text()
+    assert json.loads(content.strip()) == event
+
+# Test de escritura atómica
+def test_atomic_write(log_writer, tmp_path):
+    event = LogWriter.log_event("DEBUG", "Test atómico")
+    temp_file = tmp_path / f"alma_{datetime.utcnow().strftime('%Y-%m-%d')}.tmp"
+
+    with open(temp_file, "w") as f:
+        f.write("partial content")
+
+    log_writer.write_log(event)
+
+    assert not temp_file.exists(), "Archivo temporal no fue eliminado"
+    log_file = tmp_path / f"alma_{datetime.utcnow().strftime('%Y-%m-%d')}.log"
+    assert log_file.read_text().count("\n") == 1
+
+# Test de evento inválido
+def test_invalid_event(log_writer, caplog):
+    invalid_event = {"message": "Faltan campos"}
+    result = log_writer.write_log(invalid_event)
+
+    assert result is False
+    assert "Evento mal formado" in caplog.text
+
+# Test de múltiples eventos
+def test_multiple_writes(log_writer, tmp_path):
+    for i in range(3):
+        event = LogWriter.log_event("INFO", f"Evento {i}")
+        log_writer.write_log(event)
+
+    log_file = tmp_path / f"alma_{datetime.utcnow().strftime('%Y-%m-%d')}.log"
+    assert len(log_file.read_text().splitlines()) == 3
+
+# Test de rotación de logs
+def test_log_rotation(tmp_path):
+    old_date = datetime.utcnow() - timedelta(days=8)
+    old_log = tmp_path / f"alma_{old_date.strftime('%Y-%m-%d')}.log"
+    old_log.touch()
+
+    recent_log = tmp_path / f"alma_{datetime.utcnow().strftime('%Y-%m-%d')}.log"
+    recent_log.touch()
+
+    LogWriter.secure_rotation(days=7)
+
+    assert not old_log.exists()
+    assert recent_log.exists()
+
+# Test de fallo de disco
+def test_disk_failure(log_writer, tmp_path, monkeypatch):
+    def mock_replace(*args, **kwargs):
+        raise OSError("Simulated disk error")
+
+    monkeypatch.setattr(os, "replace", mock_replace)
+
+    event = LogWriter.log_event("ERROR", "Test de fallo")
+    result = log_writer.write_log(event)
+
+    assert result is False
+
+# Test de validación de tipos
+def test_type_validation(log_writer):
+    event = LogWriter.log_event("WARN", 123)
+    assert isinstance(event["message"], str)
+
+    event = LogWriter.log_event("INFO", "OK", metadata="invalid")
+    assert isinstance(event["metadata"], dict)
+
+# Test de lectura inversa
+def test_log_integrity(log_writer, tmp_path):
+    test_data = {"key": "value", "nested": {"a": 1}}
+    event = LogWriter.log_event("DATA", "Test", metadata=test_data)
+    log_writer.write_log(event)
+
+    log_file = tmp_path / f"alma_{datetime.utcnow().strftime('%Y-%m-%d')}.log"
+    loaded = json.loads(log_file.read_text().strip())
+
+    assert loaded["metadata"]["key"] == "value"
+    assert loaded["metadata"]["nested"]["a"] == 1
+
+# Test de permisos de directorio
+def test_directory_permissions(log_writer, tmp_path):
+    log_dir = tmp_path / "logs"
+    assert oct(log_dir.stat().st_mode)[-3:] == "755"
+
+# Limpieza automática
+@pytest.fixture(autouse=True)
+def cleanup(log_writer):
+    yield
+    for f in log_writer.log_dir.glob("*.log"):
+        f.unlink()

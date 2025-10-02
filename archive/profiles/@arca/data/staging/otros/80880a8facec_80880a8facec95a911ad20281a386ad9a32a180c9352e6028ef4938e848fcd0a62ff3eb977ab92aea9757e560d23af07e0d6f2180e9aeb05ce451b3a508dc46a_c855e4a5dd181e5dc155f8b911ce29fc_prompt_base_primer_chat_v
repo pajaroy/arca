@@ -1,0 +1,78 @@
+
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5 (v0.9)
+
+## 🎯 Objetivo General
+
+Desarrollar un sistema modular, antifrágil y completamente offline llamado **ALMA_RESIST**, que funcione como entorno de trabajo con IA local (CLI + memoria + documentación), priorizando:
+
+- Privacidad radical
+- Seguridad criptográfica
+- Operación sin internet
+- Optimización para hardware limitado
+- Auto-documentación y recuperación total ante fallos
+
+
+## ⚙️ Entorno Técnico
+
+- Linux x86_64 (Debian/Ubuntu)
+- Python 3.10.12+
+- RAM mínima: 8 GB
+- CPU: 4 núcleos
+- Sin internet (offline-first)
+- Hardware externo: pendrives y discos como nodos de respaldo
+
+
+## 📁 Archivos Base
+
+- `ALMA_LIBRE/`
+- `idea_base_0.0.9.md`
+- `docs/flujo_secuencial.mmd`
+
+
+## ✅ Checklists Críticos
+
+### Manejo de Errores
+- [ ] Codificación de errores (E-404: DB corrupta)
+- [ ] Sugerencias CLI (ej: `alma --reparar-db`)
+- [ ] `docs/fallos_criticos.md` con pasos para mitigar errores
+
+### Seguridad
+- [ ] Clave derivada con PBKDF2-SHA512
+- [ ] Rotación cada 30 días (`alma --rotate-keys`)
+- [ ] Bloqueo tras 3 intentos fallidos (`alma --unlock` solo desde root)
+
+### Chat Persistente
+- [ ] Paginación en RAM (últimos 100 mensajes)
+- [ ] Cache auto-limpiante (`alma --flush-cache`)
+- [ ] Uso de `mmap` para eficiencia en disco
+
+### Backups Físicos
+- [ ] Comando `alma --backup-physical /dev/sdb1`
+- [ ] SHA-256 y `.manifest` post-escritura
+
+### Gestión de Dependencias Offline
+- [ ] Script `update_local_repo.sh`
+- [ ] Verificación GPG de paquetes
+
+
+## 📚 Documentación Autoexplicativa
+
+- [ ] `docs/guia_emergencia.md` (auto-generada)
+- [ ] `docs/auditoria_auto.md` (reportes diarios de IA)
+- [ ] `docs/ia_suggested_changes.md` (cambios sugeridos por GPT-4.5)
+- [ ] `docs/benchmarks_chat.md` (uso de disco y tiempo respuesta)
+
+
+## 📝 Instrucción Final para GPT-4.5
+
+> Usá `ALMA_LIBRE/`, `idea_base_0.0.9.md` y este prompt como referencia principal.  
+> Como IA Copiloto, tu tarea es:
+
+- Generar un roadmap detallado por sprints
+- Sugerir código robusto con docstrings estilo Google
+- Documentar automáticamente decisiones y errores
+- Automatizar pruebas (pytest, locust)
+- Asegurar compatibilidad 100% offline
+- Validar tiempos y uso de recursos bajo hardware limitado
+- Implementar recuperación parcial, cifrado y rotación de claves
+

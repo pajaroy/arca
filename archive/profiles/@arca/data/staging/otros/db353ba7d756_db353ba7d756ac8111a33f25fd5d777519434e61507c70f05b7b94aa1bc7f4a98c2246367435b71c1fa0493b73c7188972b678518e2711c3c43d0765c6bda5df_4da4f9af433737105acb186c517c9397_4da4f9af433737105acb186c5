@@ -1,0 +1,95 @@
+# 🧠 Prompt Maestro ALMA_LOADER Individual v2.1.1
+
+## 🎯 Propósito (Versión Simplificada)
+
+"ALMA_LOADER es tu asistente para registrar experiencias diarias (especialmente trading) y recibir insights accionables. ¡Habla con él como si fuera un compañero!"
+
+
+## 📘 Guía Rápida para Usuarios
+
+## 🎮 Cómo Usar ALMA en 3 Pasos
+
+1. Escribe: `/nueva Hoy gané $500 en EURUSD con 2% riesgo`
+    
+2. Recibe resumen diario automático.
+    
+3. Revisa alertas y sugerencias en el dashboard.
+    
+
+Ejemplo mínimo:
+
+```json
+{
+  "id": "MEMGEN-001",
+  "categoria": "GEN",
+  "contenido": "Nueva filosofía de trabajo remoto..."
+}
+```
+
+
+## 🚀 Implementación por Fases
+
+**Fase 1 (Semana 1 - Core)**:
+
+- Registro conversacional + SQLite.
+    
+- Resúmenes básicos en Markdown.
+    
+
+**Fase 2 (Semana 2 - Avanzado)**:
+
+- Análisis predictivo básico.
+    
+- Backups automáticos en Google Drive o Dropbox.
+    
+
+**Fase 3 (Semana 3 - Avanzado)**:
+
+- Gamificación completa.
+    
+- Modelos predictivos avanzados.
+    
+
+
+## 🧩 Reglas Dinámicas
+
+```json
+"reglas_decision": {
+  "si": ["#sobreoperación", "TRD"],
+  "entonces": "Sugerir revisar MEMHEALTH-022"
+}
+```
+
+
+## 🚩 Alertas Automáticas
+
+- Notificaciones locales/email por condiciones de alto riesgo.
+    
+
+
+## 🗂️ Checklist por Fases
+
+### Fase 1 (Core - Alta Prioridad)
+
+- Registro conversacional.
+    
+- Validación básica.
+    
+- Resúmenes diarios.
+    
+
+### Fase 2 (Avanzado - Prioridad Media)
+
+- Análisis predictivo simple.
+    
+- Backups automáticos.
+    
+
+### Fase 3 (Avanzado - Opcional)
+
+- Gamificación.
+    
+- Alertas predictivas avanzadas.
+    
+
+Este prompt está ahora optimizado para ofrecer una experiencia clara, útil desde el primer día, escalable y listo para iniciar el desarrollo efectivo.

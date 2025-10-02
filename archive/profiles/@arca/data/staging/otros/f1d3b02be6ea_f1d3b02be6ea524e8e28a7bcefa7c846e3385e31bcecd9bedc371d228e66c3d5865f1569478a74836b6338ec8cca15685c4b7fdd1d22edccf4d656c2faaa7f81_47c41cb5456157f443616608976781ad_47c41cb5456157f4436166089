@@ -1,0 +1,35 @@
+
+# 📄 Changelog - Prompt ALMA_LOADER Individual v2.0.2
+
+## ✅ Mejoras Implementadas
+
+- **Consistencia en Ejemplos JSON**:
+  - Se añadió explícitamente campos `acciones` y `prioridad` en el ejemplo de interacción IA–usuario.
+
+- **Criterios Claros para Corrección Automática**:
+  - Se incluyeron reglas explícitas de corrección en `schema_base.json`:
+    ```json
+    "correcciones": {
+      "fecha": "Usar ISO 8601 si está mal formateada",
+      "tags": "Convertir a minúsculas y añadir # faltante"
+    }
+    ```
+
+- **Optimización del Checklist Prioritario**:
+  - Se reordenaron tareas críticas para evitar inconsistencias en la migración:
+    1. Implementar validador unificado.
+    2. Migrar memorias existentes.
+    3. Configurar NLP local.
+
+- **Documentación de Casos Límite**:
+  - Se agregó guía sobre manejo de referencias inexistentes en memorias relacionadas mediante validación en el esquema.
+
+- **Fórmula para Prioridad Automática**:
+  - Se añadió función básica para asignar automáticamente prioridades en `alma_core.py`:
+    ```python
+    def calcular_prioridad(memoria):
+        return len(memoria["tags"]) + (1 if "#crítico" in memoria["tags"] else 0)
+    ```
+
+- **Integración NLP ↔ Validación**:
+  - Se sugirió procesar contenido con NLP antes de validar, para extraer automáticamente tags y mejorar la precisión del sistema.

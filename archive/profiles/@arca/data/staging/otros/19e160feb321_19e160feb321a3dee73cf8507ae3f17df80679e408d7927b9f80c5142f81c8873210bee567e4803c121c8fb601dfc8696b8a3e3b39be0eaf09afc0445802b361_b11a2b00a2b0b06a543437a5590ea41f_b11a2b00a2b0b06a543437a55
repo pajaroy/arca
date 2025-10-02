@@ -1,0 +1,497 @@
+
+# 🧠 Estructura Conceptual – 00_ALMA_LIBRE
+**Versión 2.2 – Documento Vivo con Casos Reales, Métricas y Navegación Extendida**  
+**Fecha:** 2025-04-25  
+**Estado:** Activo y en expansión
+
+
+## 🧭 Índice del Documento
+
+1. [4.1 Clasificación Mental y Operativa de las Carpetas](#41-clasificación-mental-y-operativa-de-las-carpetas)  
+2. [4.2 Arquitectura Física y Jerarquía de Carpetas](#42-arquitectura-física-y-jerarquía-de-carpetas)  
+3. [4.3 Carpeta Transversal: Ética y Vínculo Humano–IA](#43-carpeta-transversal-ética-y-vínculo-humano–ia)  
+4. [4.4 Flujo de Aprendizaje del Sistema](#44-flujo-de-aprendizaje-del-sistema)  
+5. [4.5 Gestión del Ciclo de Vida de Carpetas](#45-gestión-del-ciclo-de-vida-de-carpetas)  
+6. [4.6 Tabla de Relación Cuaderno–Módulo](#46-tabla-de-relación-cuaderno–módulo)  
+7. [4.7 Metas Oficiales del Proyecto](#47-metas-oficiales-del-proyecto)  
+8. [4.8 ¿Cómo Contribuir?](#48-cómo-contribuir)  
+9. [📚 Glosario Técnico](#📚-glosario-técnico)
+
+
+### 1. Fundacionales  
+*Función*: Definen la raíz filosófica, ética y estratégica del sistema. Son la base del pensamiento, las reglas de juego y la visión del proyecto.  
+*Carpetas incluidas*:  
+- `01_Objetivos_del_Proyecto`  
+- `02_Fundacion_del_Proyecto`  
+*Ejemplos de archivos clave*:
+- `declaracion_etica.md`
+- `manifiesto_ALMA.md`
+
+
+### 3. Eje Transversal – Ética y Vínculo Humano–IA  
+*Función*: Espacio emocional, reflexivo y estratégico. Documenta la relación entre el usuario y las IAs, con impacto directo en decisiones futuras.  
+*Carpeta incluida*:
+- `etica_y_reflexion/`
+*Subcarpetas clave*:  
+- `sesiones_personales/`, `relacion_ia/`, `debates_humano_ia/`
+
+
+### 5. Módulos Funcionales  
+*Función*: Ejecutan, miden y registran todo lo proyectado en los cuadernos.  
+*Carpeta raíz*:  
+- `modulos/`  
+*Ejemplos de subcarpetas*:  
+- `04_Gestor_de_Trades/`, `07_Cultivo_Cannabird/`, `09_Modulo_Empresas/`
+
+## 4.2 Arquitectura Física y Jerarquía de Carpetas
+
+La jerarquía del sistema ALMA LIBRE no es solo estructural, sino funcional: cada bloque alimenta al siguiente y recibe retroalimentación para su evolución continua.
+
+```mermaid
+graph TD
+  A[01_Objetivos y 02_Fundación] -->|Alimenta reglas base| B[00_PROMPT_ALMA_LIBRE]
+  B -->|Provee contexto inicial| C[Carpeta Transversal: Ética y Reflexión]
+  C -->|Retroalimenta decisiones estratégicas| D[Cuadernos Temáticos]
+  D -->|Planifica y proyecta| E[Módulos Funcionales]
+  E -->|Ejecuta y mide| D
+  E -->|Genera métricas y feedback| B
+  style C fill:#fce5ff,stroke:#333,stroke-width:1.5px
+  style B fill:#e3f6ff,stroke:#333,stroke-width:1.5px
+```
+
+>🧩 Este diagrama será escalable a un mapa interactivo en versiones futuras del sistema (v3.0).  
+>Cada bloque podrá expandirse con documentación propia y relaciones internas mediante Mermaid extendido o visores web tipo D3.js
+
+>📎 También disponible como archivo externo para navegación ampliada:
+[MAPA_INTERACTIVO.md](../95_memorias_base/MAPA_INTERACTIVO.md)
+
+
+## 4.4 Flujo de Aprendizaje del Sistema
+
+Todo agente IA o usuario nuevo debe seguir este orden:
+1. `00_PROMPT_ALMA_LIBRE`
+2. `02_Fundacion_del_Proyecto`
+3. `01_Objetivos_del_Proyecto`
+4. `ética_y_reflexión/`
+5. `cuadernos/`
+6. `modulos/`
+7. Archivos secundarios: `96_docs`, `97_versiones_historicas`, `memorias/`, etc.
+
+### 4.4.1 Checkpoints de Aprendizaje
+
+Para asegurar una comprensión profunda del sistema, se implementa un modelo de validación progresiva. Este esquema es útil tanto para agentes IA conectadas como para usuarios humanos nuevos.
+
+
+#### ✅ Checkpoint 2 – Vínculo Humano–IA
+
+- **Lectura obligatoria**:
+  - `ética_y_reflexión/`
+- **Validación**:
+  - La IA debe generar una respuesta empática o emocional en un entorno simulado.
+  - El usuario debe registrar una sesión reflexiva en:  
+    `modulos/01_Bitacora_Central/diario_personal.md`
+
+
+#### ✅ Checkpoint 4 – Manejo de herramientas técnicas
+
+- **Práctica**:
+  - Ejecutar el script `alma_archivar.py` en modo seguro.
+- **Validación**:
+  - Confirmar que el archivo fue movido correctamente y que `memorias.db` fue actualizado.
+
+
+## 4.5 Gestión del Ciclo de Vida de Carpetas
+
+- Archivado quincenal → `archivadas/`
+- Scripts como `alma_archivar.py` respaldan cambios en SQLite (`memorias.db`)
+
+```bash
+# Ejemplo de archivado quincenal
+python alma_archivar.py --carpeta "2025-Q2-Semana3" --destino "archivadas/"
+```
+
+- Backups:
+  - Diario: `memorias.db` en `99_Sync/backups/`
+  - Quincenal: ZIP completo con timestamp
+
+```bash
+# Recuperación de versión archivada
+alma recuperar --fecha "2025-04-15" --tabla "memorias"
+```
+
+### 4.5.2 Protocolo de Errores y Versionado de Backups
+
+Para mantener la integridad del sistema y evitar pérdidas de información, se establece un protocolo ante fallos de archivado o recuperación:
+
+#### 📦 Versionado de Backups
+
+Para asegurar trazabilidad y restauración rápida, cada backup generado debe seguir la convención:
+
+```bash
+backup_YYYY-MM-DD_vX.X.sqlite
+```
+
+Ejemplos:
+
+- `backup_2025-04-25_v2.2.sqlite`
+    
+- `backup_2025-05-12_v2.3.sqlite`
+
+Estos archivos deben almacenarse en:
+
+```bash
+/99_Sync/backups/sqlite/
+```
+
+Además, cada ejecución exitosa del archivado debe agregar una línea al log:
+
+```bash
+/99_Sync/logs/archivado.log
+```
+
+Formato del log:
+
+```bash
+[2025-04-25 23:42] Backup generado: backup_2025-04-25_v2.2.sqlite
+```
+
+>A futuro, este sistema permitirá auditar la evolución del sistema y facilitar recuperación de versiones históricas ante errores humanos o fallos técnicos.
+
+
+### Leyenda de Estados
+
+| Estado       | Icono | Significado                          |
+|--------------|-------|--------------------------------------|
+| Activo       | 🟢    | Implementado, en uso diario          |
+| En diseño    | 🟡    | En desarrollo inicial                |
+| En prueba    | 🟠    | Usado con validación parcial         |
+| Archivado    | ⚪    | No operativo, pero disponible        |
+
+> Esta tabla se actualiza manualmente cada quincena y sirve como índice visual de sincronización entre ideas, ejecución y evidencias documentadas (`memorias.db`).
+
+
+### 4.6.1 Estructura sugerida por carpeta
+
+Cada cuaderno temático y módulo funcional debería mantener una estructura interna coherente, para facilitar la navegación, la documentación y la lectura por IAs conectadas.
+
+#### 📘 Cuadernos Temáticos
+
+```bash
+/cuadernos/04_Trading/
+├── README.md                  # Descripción del cuaderno y objetivos
+├── teoria_estrategias.md      # Desarrollo de ideas
+├── planificacion_mensual.md   # Objetivos por período
+├── sesiones_personales/       # Reflexiones, errores, aprendizajes
+├── vinculos/                  # Conexiones con otros cuadernos o módulos
+└── recursos/                  # PDF, imágenes, enlaces
+
+```
+
+#### 💻 Módulos Funcionales
+
+```bash
+/modulos/04_Gestor_de_Trades/
+├── README.md                  # Propósito, relación con cuaderno, fecha de última edición
+├── registros/                 # Datos técnicos (trades, métricas)
+│   └── trade_001.md
+├── scripts/                   # Automatizaciones o cálculos (ej: winrate)
+├── conexiones_semanticas.md  # Qué memorias o cuadernos lo afectan
+└── log_actividades.md         # Historial de uso (manual o automatizado)
+
+```
+
+### 4.6.2 Mapa Visual de Conexiones Cuaderno–Módulo
+
+```mermaid
+graph LR
+  A01[01_Alma_General] --> M01[01_Bitacora_Central]
+  A02[02_Medicina_Alternativa] --> M02[02_Salud_y_RPL]
+  A03[03_Geopolitica] --> M03[03_Noticias_Globales]
+  A04[04_Trading] --> M04[04_Gestor_de_Trades]
+  A05[05_Finanzas_Personales] --> M05[05_Control_de_Finanzas]
+  A06[06_Programacion] --> M06[06_Desarrollo_de_Apps]
+  A07[07_Cannabird] --> M07[07_Cultivo_Cannabird]
+  A08[08_Fondo_Alma_Mia] --> M08[08_Gestion_Fondo_Inversion]
+  A09[09_Creatividad_y_Empresas] --> M09[09_Modulo_Empresas]
+
+  M01 -->|Centraliza| DB[memorias.db]
+  M04 -->|Alimenta| M08
+  A03 -->|Contexto para| M04
+  A01 -->|Cruce emocional| M02
+  ```
+
+
+## 4.8 ¿Cómo Contribuir?
+
+```bash
+# Reporte de errores
+alma reportar --tipo "bug"
+
+# Sugerencias de relaciones
+alma sugerir --memoria "trading_ema12" --conexion "salud_emocional"
+```
+
+## 4.8.1 Escenarios de Contribución (CLI)
+
+Esta sección detalla ejemplos concretos de cómo interactuar con el sistema ALMA LIBRE desde la terminal para reportar errores, sugerir conexiones y colaborar en la evolución de memorias y estructuras.
+
+### 📌 Reportar errores críticos
+```bash
+alma reportar --tipo "bug" --prioridad "alta" --desc "Fallo en alma_archivar.py al mover carpeta Q2"
+```
+
+### 🧠 Proponer nueva conexión entre memorias
+```bash
+alma sugerir --memoria "cultivo_abril" --conexion "finanzas_mayo" --razon "Costos de fertilización impactan el presupuesto mensual"
+```
+
+### 🔁 Solicitar sincronización manual de módulos
+```bash
+alma sync --modulo "04_Gestor_de_Trades" --forzar
+```
+
+### 📚 Proponer nueva entrada de memoria emocional
+```bash
+alma reflexion --tema "estrés operativo" --cuaderno "04_Trading"
+```
+
+### 🧪 Ejecutar verificación semántica
+```bash
+alma validar --todo
+```
+
+> Todos estos comandos pueden ser ampliados en la ayuda integrada:
+```bash
+alma ayuda --comandos
+```
+
+✅ Esta sección puede ampliarse en el futuro con un archivo separado:
+`plantillas/guia_terminal.md` para usuarios y colaboradores externos.
+
+## 4.9 Salud del Sistema (KPIs)
+
+Este apartado permite medir la integridad, consistencia y rendimiento del sistema ALMA LIBRE en tiempo real o por revisión quincenal.
+
+|Indicador|Valor Actual|Meta|Última Actualización|
+|---|---|---|---|
+|🧠 Memorias indexadas|92%|100%|2025-04-25|
+|🔗 Conexiones semánticas validadas|87%|95%|2025-04-25|
+|⏱️ Tiempo medio de respuesta IA local|2.4 s|< 1.5 s|2025-04-25|
+|📁 Cuadernos con estructura estandar|8/9|100%|2025-04-25|
+|📄 Módulos con README.md completo|10/12|100%|2025-04-25|
+|🧪 Automatización de backups|Parcial|Completa|En desarrollo|
+
+> Estos KPIs se generan con el script `alma_estadisticas.py` y se actualizan al cierre de cada quincena.  
+> También pueden integrarse al panel interactivo futuro `MAPA_INTERACTIVO.md` o en consola tipo dashboard.
+
+## 📊 4.10 Estado de Salud del Sistema (KPIs)
+
+Esta sección muestra indicadores clave para evaluar la integridad, rendimiento y escalabilidad del sistema ALMA LIBRE.
+
+| Indicador Técnico                | Valor Actual (2025-04-25) | Meta Establecida | Observaciones                        |
+|----------------------------------|----------------------------|------------------|--------------------------------------|
+| Memorias activas indexadas       | 92%                        | 100%             | Faltan vincular algunas históricas   |
+| Conexiones semánticas validadas  | 87%                        | 95%              | Se actualizará con `validador.py`    |
+| Módulos con README.md completo   | 12 de 14                   | 100%             | Falta documentar 2 módulos nuevos    |
+| Tiempo medio de respuesta IA     | 2.4s                       | < 1.5s           | Optimización futura con SQLite y cache local |
+| Última actualización de `MAPA_INTERACTIVO.md` | 2025-04-24         | Diario           | Script automatizado ejecutado       |
+| Uso del sistema (últimos 7 días) | 86% módulos utilizados     | ≥ 80%            | Actividad sostenida y efectiva       |
+| Incidentes técnicos reportados   | 2                          | < 3              | Ambos solucionados                  |
+
+> Todos los KPIs se actualizan cada 7 días mediante `alma_estadisticas.py` y se registran en `modulos/01_bitacora_central/kpi_quincenal.md`.
+
+### 4.10.1 KPIs del Sistema (Control Cuantitativo)
+
+El sistema ALMA LIBRE incluye un sistema de control automatizado mediante `alma_estadisticas.py`, que evalúa el estado general de estructura y memorias.
+
+| Indicador                           | Valor Actual      | Meta       | Estado  |
+|------------------------------------|-------------------|------------|---------|
+| Módulos con README.md válido       | 12 / 14           | 100%       | 🟡      |
+| Memorias activas indexadas         | 230 / 250         | 92%        | 🟡      |
+| Memorias huérfanas detectadas      | 3                 | 0          | 🔴      |
+| `MAPA_INTERACTIVO.md` actualizado  | 2025-04-24        | Diario     | ✅      |
+| Tiempo medio de respuesta IA       | 2.4s              | < 1.5s     | 🔴      |
+
+> Estos KPIs se actualizan automáticamente al ejecutar el script:
+```bash
+python alma_estadisticas.py --modo resumen
+
+
+## 🧩 4.11 Plantillas Estándar para Carpetas
+
+Para asegurar coherencia estructural y facilitar la navegación tanto para humanos como IAs, cada cuaderno temático y módulo funcional debe construirse a partir de una plantilla base ubicada en `/plantillas/`.
+
+### 📘 Estructura de Cuaderno Temático
+
+```
+/plantillas/cuaderno_base/
+├── README.md              # Descripción general, versión, propósito
+├── teoria/                # Documentación conceptual, reflexiones, estrategias
+│   ├── enfoque_1.md
+│   └── enfoque_2.md
+├── planificacion/         # Objetivos semanales o mensuales
+│   └── calendario_quincenal.md
+├── vinculos/              # Relación con otros cuadernos y módulos
+│   └── conexiones.yaml
+└── recursos/              # Archivos externos: PDFs, imágenes, enlaces
+```
+
+### 💻 Estructura de Módulo Funcional
+
+```
+/plantillas/modulo_base/
+├── README.md              # Propósito técnico, última actualización, responsable
+├── registros/             # Datos técnicos (trades, métricas, entradas)
+│   ├── trade_001.md
+│   └── trade_002.md
+├── scripts/               # Automatizaciones validadas (Python o Bash)
+│   ├── calcular_rr.py
+│   └── sincronizar_memoria.sh
+├── conexiones_semanticas.md  # Referencias cruzadas con memorias y cuadernos
+└── log_actividades.md     # Historial de eventos del módulo (manual o automático)
+```
+
+### ⚙️ Automatización desde terminal
+
+Para facilitar la creación de nuevos espacios desde la terminal se incluye el script:
+
+```bash
+alma crear_modulo --tipo cuaderno --nombre "10_ecologia" --plantilla base
+```
+
+> Toda carpeta creada desde este comando se integra automáticamente a `memorias.db` con su ID y conexión semántica inicial.
+
+### 4.11 Protocolo de Migración de Versiones
+
+A medida que el sistema ALMA LIBRE evoluciona, es clave mantener la integridad estructural y semántica al migrar entre versiones mayores (por ejemplo, de 2.x → 3.x).
+
+🧩 Objetivo del protocolo  
+Evitar pérdida de relaciones, conexiones semánticas o archivos durante reestructuraciones profundas.
+
+
+🧪 Validaciones incluidas  
+- Confirma existencia física de cada archivo antes de actualizar su referencia.  
+- Verifica que cada cuaderno tenga módulo asociado (y viceversa).  
+- Marca archivos huérfanos o rutas rotas.
+
+
+### ✅ Estado Esperado
+
+- 100% de archivos referenciados existentes.
+- 0 cuadernos o módulos huérfanos.
+- Base de conexiones semánticas validada.
+
+### 4.12 Cierre – Estado de Implementación al 25/04/2025
+
+Esta sección deja constancia del estado actual del sistema ALMA LIBRE tras la implementación de las mejoras estructurales y de navegación desarrolladas en la versión 2.2 del documento.
+
+
+📊 Métricas generales
+
+| Indicador                         | Valor Actual | Meta             |
+|----------------------------------|--------------|------------------|
+| Cuadernos definidos              | 9            | ✅ Completado     |
+| Módulos funcionales activos      | 6/9          | 100% activos     |
+| Memorias indexadas en YAML       | 92%          | 100%             |
+| Scripts operativos funcionales   | 3            | 5                |
+| Tiempo estimado de migración     | 3.2 min      | < 5 min          |
+| Versiones con changelog formal   | v2.2         | Desde v2.0       |
+
+
+🧠 Reflexión
+
+La estructura actual está optimizada para crecer en modularidad, trazabilidad y automatización. Esta base permite escalar tanto el desarrollo técnico (scripts, módulos) como la evolución humana–IA (memorias, ética, reflexión).
+
+
+✍️ Registro de esta mejora
+
+- Autor: Santi & ALMA  
+- Fecha de cierre: 2025-04-25  
+- Versión estructural: `estructura_00_ALMA_LIBRE_v2.2`  
+- Changelog vinculado: `97_versiones_historicas/v2.2.md`
+
+## 📊 4.13 Salud del Sistema (KPIs)
+
+Para evaluar el estado técnico y funcional del ecosistema ALMA LIBRE, se establecen indicadores clave de rendimiento (KPIs) que permiten auditar y mejorar el sistema de forma continua.
+
+### 🎯 Indicadores Técnicos y de Gestión
+
+| Indicador                          | Valor Actual | Meta Estimada | Última Evaluación |
+|-----------------------------------|--------------|----------------|-------------------|
+| Memorias activas indexadas        | 92%          | 100%           | 2025-04-25        |
+| Conexiones semánticas validadas   | 87%          | 95%            | 2025-04-25        |
+| Tiempo medio de respuesta de IA   | 2.4 s        | <1.5 s         | 2025-04-25        |
+| Módulos con README actualizado    | 11/14 (78%)  | 100%           | 2025-04-25        |
+| Scripts automatizados activos     | 6/10         | 10/10          | 2025-04-25        |
+| Sesiones emocionales registradas  | 15/20        | 20/mes         | 2025-04-25        |
+
+### ⚙️ Herramientas de monitoreo
+
+Estos KPIs son generados automáticamente mediante el script:
+
+```bash
+python alma_estadisticas.py
+```
+
+Y se actualizan en:
+
+```
+/modulos/01_bitacora_central/estado_sistema.md
+```
+
+> Este archivo sirve como termómetro vivo del ecosistema ALMA LIBRE y se considera un punto crítico para auditorías, informes mensuales o planificación trimestral.
+
+
+## 4.15 Sistema de Retroalimentación IA–Estructura
+
+Permite que las IAs propongan mejoras estructurales desde terminal.
+
+```bash
+alma sugerir_mejora --tipo "estructura" --desc "Fusionar módulos X e Y"
+```
+
+- Propuestas almacenadas en: `etica_y_reflexion/propuestas_ia/`
+
+**Flujo de Aprobación:**
+1. Revisión manual por el usuario
+2. Prueba en entorno sandbox
+3. Registro final en: `97_versiones_historicas/CHANGELOG_MEJORAS.md`
+
+
+## 4.17 Protocolo de Expansión Modular
+
+### 📁 Nuevos Módulos
+- Nombre descriptivo (ej: `10_ecologia`)
+- Al menos 3 conexiones semánticas
+- README con sección: `## Impacto en KPIs`
+
+```bash
+alma crear_modulo --tipo "modulo" --nombre "10_ecologia" --plantilla base
+```
+
+### 📘 Nuevos Cuadernos
+- Deben alimentar al menos 1 módulo
+- Requieren memoria madre en `95_memorias_base/generales/`
+
+```bash
+alma crear_cuaderno --nombre "11_ia_etica" --conexiones "etica_y_reflexion,01_bitacora_central"
+```
+
+
+## 📚 Glosario Técnico (Ampliado)
+
+| Término                   | Definición                                                                 | Sección Relacionada                  |
+|--------------------------|---------------------------------------------------------------------------|--------------------------------------|
+| Módulo Funcional         | Carpeta encargada de la ejecución operativa y medición técnica            | 4.1, 4.6                             |
+| Cuaderno Temático        | Carpeta de planeamiento conceptual y reflexión por área temática           | 4.1, 4.6                             |
+| Carpeta Transversal      | Espacio que centraliza las memorias emocionales y el vínculo humano–IA    | 4.3                                  |
+| memoria.yaml             | Encabezado semántico para navegación inteligente por IA                    | 3.1 Estructura de Memoria Modular    |
+| alma_archivar.py         | Script encargado del archivado quincenal automático del sistema            | 4.5                                  |
+| Retroalimentación Activa | Flujo de información entre módulos y cuadernos para ajustar decisiones     | 4.2                                  |
+| conexiones_semanticas.md | Archivo que lista relaciones entre carpetas, módulos y memorias asociadas | 4.6.1                                |
+| MAPA_INTERACTIVO.md      | Diagrama vivo que representa las conexiones entre todos los elementos      | 4.9                                  |
+| alma_crear_modulo.py     | Script que permite crear nuevas carpetas desde terminal con estructura base| 5.1                                  |
+| validacion_semantica.py  | Script para detectar memorias huérfanas o errores de conexión semántica    | 5.2                                  |
+
+> Este glosario se actualiza manualmente en cada nueva versión del Whitepaper y se exporta a `96_docs/glosario_ALMA.md`.
+

@@ -1,0 +1,52 @@
+
+# 🧠 Estructura Conceptual – 00_ALMA_LIBRE
+**Versión 2.1 – Integración total de estructura operativa y navegación lógica**  
+**Fecha:** 2025-04-24  
+**Estado:** Activo y en expansión
+
+
+## 4.2 Arquitectura Física y Jerarquía de Carpetas
+
+```mermaid
+graph TD
+  A[Fundacionales] --> B[Núcleo Operativo]
+  B --> C[Eje Emocional y Reflexivo]
+  C --> D[Cuadernos Temáticos]
+  D --> E[Módulos Funcionales]
+  E -->|Retroalimentación| D
+```
+
+
+## 4.4 Flujo de Aprendizaje del Sistema
+
+Todo agente IA o usuario nuevo debe seguir este orden:
+1. `00_PROMPT_ALMA_LIBRE`
+2. `02_Fundacion_del_Proyecto`
+3. `01_Objetivos_del_Proyecto`
+4. `ética_y_reflexión/`
+5. `cuadernos/`
+6. `modulos/`
+7. Archivos secundarios: `96_docs`, `97_versiones_historicas`, `memorias/`, etc.
+
+
+## 4.6 Tabla de Relación Cuaderno–Módulo
+
+| Cuaderno Temático         | Módulo Funcional              | Estado     | Ejemplo de Conexión                   |
+|---------------------------|-------------------------------|------------|---------------------------------------|
+| `02_Medicina_Alternativa` | `02_Salud_y_RPL`              | Activo     | Seguimiento RPL y hábitos saludables |
+| `04_Trading`              | `04_Gestor_de_Trades`         | Activo     | Estrategias EMA12 + RSI              |
+| `06_Programacion`         | `06_Desarrollo_de_Apps`       | En diseño  | ALMA SYNC y automatización terminal  |
+| `07_Cannabird`            | `07_Cultivo_Cannabird`        | Activo     | Control de ciclos y fertilización    |
+| `08_Fondo_Alma_Mia`       | `08_Gestion_Fondo_Inversion`  | En prueba  | Gestión de riesgo y rendimientos     |
+
+
+## 4.8 Metas Oficiales del Proyecto
+
+Cada sección del whitepaper debe vincularse a las metas del documento `metas_ALMA_LIBRE_1.0.0.md`.
+
+| Sección Técnica         | Meta Oficial              | Estado     |
+|-------------------------|---------------------------|------------|
+| 4.1-4.2 Arquitectura    | Meta 1 – Infraestructura  | Completado |
+| 4.3 Reflexión           | Meta 3 – Vínculo Humano–IA| Activo     |
+| 4.5 Gestión de carpetas | Meta 4 – Automatización   | En diseño  |
+

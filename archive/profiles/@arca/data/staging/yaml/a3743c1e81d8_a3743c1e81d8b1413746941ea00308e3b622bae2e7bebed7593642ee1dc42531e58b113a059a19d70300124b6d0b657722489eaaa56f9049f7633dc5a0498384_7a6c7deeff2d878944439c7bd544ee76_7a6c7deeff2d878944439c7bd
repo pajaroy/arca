@@ -1,0 +1,53 @@
+id: README_HASHING_INDEXING_v0.1.0
+nombre: "Módulo de Generación de Hashes y Auditoría de Archivos - v0.1.0"
+descripcion: |
+  Este módulo forma parte del sistema ALMA_RESIST y se encarga de la generación de hashes de archivos
+  y su registro en un índice centralizado para garantizar la trazabilidad e integridad de los datos.
+
+archivos:
+  hashing_multiagente_v0.1.0.py:
+    descripcion: |
+      Script principal para calcular hashes (por defecto SHA-256) de los archivos en la ruta objetivo.
+      Registra los hashes y metadatos en un índice centralizado.
+      Permite auditoría multiagente y genera logs independientes por agente.
+  hashing_multiagente_documentation_v0.1.0.yaml:
+    descripcion: |
+      Documentación técnica detallada sobre el funcionamiento, parámetros, dependencias
+      y ejemplos de uso del script principal.
+  prompt_hashing_multiagente_v0.1.0.yaml:
+    descripcion: |
+      Prompt técnico y requisitos que guiaron el desarrollo del script de hashing multiagente.
+  roadmap_hashing_indexing_v0.1.0.yaml:
+    descripcion: |
+      Roadmap del módulo: pasos, versiones y plan de evolución para la gestión y auditoría de hashes.
+  README.md:
+    descripcion: |
+      Este README explica la estructura y el propósito general del módulo y sus archivos.
+      (Versión extendida disponible en este README.yaml)
+
+ejemplo_uso:
+  comando: |
+    python3 hashing_multiagente_v0.1.0.py \
+      --ruta_objetivo /home/bird/alma_core/control_central \
+      --index /home/bird/alma_core/control_central/index.json \
+      --agente kael \
+      --comentario "Test inicial v0.1.0" \
+      --logs_por_agente \
+      --output CLI
+  descripcion: |
+    Ejecuta el script sobre la carpeta de control central, registra los hashes y genera logs del agente.
+
+parametros_principales:
+  - --ruta_objetivo: Ruta al archivo o carpeta objetivo.
+  - --algoritmo: Algoritmo de hashing (default sha256).
+  - --index: Archivo índice centralizado para registrar los hashes.
+  - --agente: Nombre del agente ejecutor.
+  - --comentario: Comentario sobre la acción.
+  - --logs_por_agente: Si está presente, genera logs específicos por agente.
+  - --output: Formato de salida (CLI, JSON, YAML).
+
+notas: |
+  - Este módulo garantiza la trazabilidad y la integridad de los archivos en el ecosistema ALMA_RESIST.
+  - No edites el índice manualmente, usá siempre los scripts oficiales.
+  - El módulo será ampliado con nuevas funciones en versiones posteriores (automatización, nuevos algoritmos, etc).
+  - Documentación técnica adicional y ejemplos avanzados en el archivo hashing_multiagente_documentation_v0.1.0.yaml.

@@ -1,0 +1,38 @@
+---
+tipo: configuracion_json
+id: CONFIGURACION_JSON_2025-06-05_1bcc7a
+version: '1.0'
+formato: json
+modulo: ALMA_RESIST
+titulo: Memory Graph
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:7f393d76a437bf394cb9c24630f276ef9cebf25887676cd8799db9817782e5ee
+---
+{
+  "filosof\u00eda": {
+    "ciencia": 0.8,
+    "tecnolog\u00eda": 0.44999999999999996
+  },
+  "ciencia": {
+    "filosof\u00eda": 0.24,
+    "tecnolog\u00eda": 1.2
+  },
+  "tecnolog\u00eda": {
+    "ciencia": 0.36,
+    "filosof\u00eda": 1.5
+  },
+  "existencialismo": {
+    "ia": 0.5
+  },
+  "ia": {
+    "existencialismo": 0.15
+  }
+}

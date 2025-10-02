@@ -1,0 +1,176 @@
+import json
+import logging
+import hashlib
+from pathlib import Path
+from datetime import datetime
+from typing import Dict, List, Set
+from concurrent.futures import ThreadPoolExecutor
+from shutil import copy
+from jsonschema import validate
+from time import perf_counter
+
+# Configuración de logging
+logging.basicConfig(
+    filename='logs/registro_feedback.log',
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    encoding='utf-8'
+)
+
+# Esquema de validación JSON
+MEMORIA_SCHEMA = {
+    "type": "object",
+    "required": ["id", "fecha", "categoria", "contenido"],
+    "properties": {
+        "id": {
+            "type": "string",
+            "pattern": "^MEM[A-Z]{3,5}-\\d{3}$"
+        },
+        "fecha": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "categoria": {
+            "enum": ["GEN", "TRD", "CAP", "PROG", "REFLEX", "HEALTH", "HIST", "GEO", "ECO"]
+        },
+        "contenido": {"type": "string"},
+        "tags": {
+            "type": "array",
+            "items": {"type": "string"}
+        },
+        "retroalimentacion": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "tipo": {"type": "string"},
+                    "origen": {"type": "string"},
+                    "score": {"type": "number"},
+                    "descripcion": {"type": "string"},
+                    "fecha_alerta": {"type": "string"},
+                    "version_estructura": {"type": "number"}
+                }
+            }
+        }
+    }
+}
+
+class FeedbackOptimizer:
+    def __init__(self):
+        self.base_dir = Path(__file__).parent.parent
+        self.input_dir = self.base_dir / 'memorias_json'
+        self.output_dir = self.base_dir / 'memorias_json_actualizadas'
+        self.backup_dir = self.base_dir / 'backups'
+        self.alertas_path = self.base_dir / 'logs' / 'alertas.json'
+        
+        # Crear directorios necesarios
+        self.output_dir.mkdir(exist_ok=True)
+        self.backup_dir.mkdir(exist_ok=True)
+        
+        # Métricas y estado
+        self.existing_hashes: Set[str] = set()
+        self.tiempo_procesamiento = 0.0
+        self.memorias_procesadas = 0
+        self.total_alertas = 0
+
+    def _crear_backup(self, json_file: Path):
+        timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+        backup_path = self.backup_dir / f"{json_file.stem}_bak_{timestamp}.json"
+        copy(json_file, backup_path)
+        logging.info(f"Backup creado: {backup_path.name}")
+
+    def _validar_esquema(self, memoria: Dict):
+        validate(instance=memoria, schema=MEMORIA_SCHEMA)
+
+    def _calculate_hash(self, data: Dict) -> str:
+        hash_data = json.dumps(data, sort_keys=True).encode('utf-8')
+        return hashlib.md5(hash_data).hexdigest()
+
+    def cargar_alertas(self) -> List[Dict]:
+        try:
+            with open(self.alertas_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            if not isinstance(data.get('alertas'), list):
+                raise ValueError("Formato de alertas inválido")
+            self.total_alertas = len(data['alertas'])
+            return data['alertas']
+        except Exception as e:
+            logging.error(f"Error cargando alertas: {str(e)}")
+            return []
+
+    def _procesar_archivo(self, json_file: Path, alertas_por_memoria: Dict):
+        try:
+            self._crear_backup(json_file)
+            with open(json_file, 'r', encoding='utf-8') as f:
+                memoria = json.load(f)
+            self._validar_esquema(memoria)
+            if mem_id := memoria.get('id'):
+                if alertas_mem := alertas_por_memoria.get(mem_id):
+                    self._actualizar_memoria(memoria, alertas_mem)
+                    self._guardar_memoria(memoria)
+                    self.memorias_procesadas += 1
+        except Exception as e:
+            logging.error(f"Error procesando {json_file.name}: {str(e)}")
+
+    def procesar_memorias(self, alertas: List[Dict]) -> None:
+        alertas_por_memoria = self._agrupar_alertas(alertas)
+        with ThreadPoolExecutor(max_workers=4) as executor:
+            futures = [
+                executor.submit(self._procesar_archivo, json_file, alertas_por_memoria)
+                for json_file in self.input_dir.glob('*.json')
+            ]
+            for future in futures:
+                future.result()
+
+    def _agrupar_alertas(self, alertas: List[Dict]) -> Dict[str, List]:
+        agrupadas = {}
+        for alerta in alertas:
+            if mem_id := alerta.get('memoria_conflictiva'):
+                agrupadas.setdefault(mem_id, []).append(alerta)
+        return agrupadas
+
+    def _actualizar_memoria(self, memoria: Dict, alertas: List[Dict]) -> None:
+        feedback = memoria.setdefault('retroalimentacion', [])
+        for alerta in alertas:
+            entrada = {
+                'tipo': alerta['tipo_alerta'],
+                'origen': alerta['memoria_origen'],
+                'score': alerta['score'],
+                'descripcion': alerta['descripcion'],
+                'fecha_alerta': datetime.now().isoformat(),
+                'version_estructura': 1.1
+            }
+            entry_hash = self._calculate_hash(entrada)
+            if entry_hash not in self.existing_hashes:
+                feedback.append(entrada)
+                self.existing_hashes.add(entry_hash)
+                logging.info(f"Feedback añadido a {memoria['id']} desde {entrada['origen']}")
+
+    def _guardar_memoria(self, memoria: Dict) -> None:
+        output_path = self.output_dir / f"{memoria['id']}.json"
+        try:
+            with open(output_path, 'w', encoding='utf-8') as f:
+                json.dump(memoria, f, indent=2, ensure_ascii=False)
+        except Exception as e:
+            logging.error(f"Error guardando {memoria['id']}: {str(e)}")
+
+    def ejecutar(self):
+        start_time = perf_counter()
+        if alertas := self.cargar_alertas():
+            self.procesar_memorias(alertas)
+        self.tiempo_procesamiento = perf_counter() - start_time
+        logging.info(
+            f"Resumen| Tiempo: {self.tiempo_procesamiento:.2f}s | "
+            f"Memorias: {self.memorias_procesadas}/{len(list(self.input_dir.glob('*.json')))} | "
+            f"Alertas procesadas: {self.total_alertas}"
+        )
+
+if __name__ == "__main__":
+    optimizer = FeedbackOptimizer()
+    optimizer.ejecutar()
+    print(
+        f"Proceso completado:\n"
+        f"- Tiempo total: {optimizer.tiempo_procesamiento:.2f}s\n"
+        f"- Memorias actualizadas: {optimizer.memorias_procesadas}\n"
+        f"- Logs guardados en: logs/registro_feedback.log"
+    )

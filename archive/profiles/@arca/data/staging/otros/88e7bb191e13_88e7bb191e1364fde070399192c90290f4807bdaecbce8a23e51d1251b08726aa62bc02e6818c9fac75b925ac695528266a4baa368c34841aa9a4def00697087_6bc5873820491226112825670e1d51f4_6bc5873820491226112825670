@@ -1,0 +1,23 @@
+# 📂 Contexto Asesor-IA
+
+Este directorio contiene los archivos centrales que documentan el **contexto fundacional, roles y marco operativo** del sistema de asesoría colaborativa entre Santi (humano), GPT (estructura/narrativa) y DeepSeek (técnica/código).
+
+## 📘 Archivos principales
+
+- `contexto_asesor-ia_v1.md`: Documento maestro con el detalle completo de la arquitectura asesor-IA.
+- `contexto_asesor-ia_v1.yaml`: Versión semántica del contexto para uso IA-friendly y automatización.
+- Otros documentos relacionados incluyen:
+  - Confirmaciones de rol (`confirmacion_de_rol_gpt.md`, `confirmacion_de_rol_deepseek.md`)
+  - Contrato fundacional (`contrato_fundacional_asesor-IA_v2.md`)
+  - Bitácoras vinculadas al inicio del sistema asesor.
+
+## 🧠 Propósito
+
+Centralizar todo el conocimiento y acuerdos fundacionales que regulan el funcionamiento del sistema de asesoría dentro de `ALMA_RESIST`, asegurando trazabilidad, auditoría continua y gobernanza clara.
+
+## 📌 Ubicación sugerida
+
+`/home/bird/ALMA_RESIST/control_central/docs/contexto/`
+
+Este será el punto de entrada para toda IA que deba entender cómo opera el sistema de asesoría a nivel global.
+

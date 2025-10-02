@@ -1,0 +1,44 @@
+# `prompt_base_ALMA_RESIST.md`  
+**Versión 0.0.2 – Nodo IA terminalizado, distribuido y autosuficiente**
+
+
+## **Propósito actualizado**
+
+- Convertir cualquier PC en una estación de trabajo ALMA operativa en minutos, sin importar su potencia ni sistema gráfico.
+- Desarrollar todas las funciones IA, gestión, cultivo, escritura, documentación, y automatización desde terminal.
+- Optimizar para entorno Linux puro, sin interfaz gráfica, priorizando eficiencia, compatibilidad y velocidad.
+- Preparar sistema para operar con o sin conexión, con fallback local, backup automático y recuperación remota.
+
+
+## **Estructura de archivos actualizada**
+```shell
+/ALMA_RESIST
+├── ALMA_CORE/
+├── MODELS/
+├── MEMORIAS/
+├── RESUMENES/
+├── OBSIDIAN/
+├── CULTIVO/
+├── FONDO/
+├── GESTION/
+├── DRAFT/              → Resultados sin validar
+├── APROBADOS/          → Contenido validado
+├── NUBE_SYNC/
+├── LAUNCHERS/
+│   ├── launch_alma.sh
+│   ├── launch_alma_terminal.sh
+│   └── launch_alma_silent.sh
+├── BACKUPS/
+├── SECURITY/
+├── PRIVACY_MODES/
+└── README.md
+```
+
+
+## **Filosofía operativa**
+
+> “Una IA debe vivir donde vos vivas: en texto, en terminal, en código, en papel. Si no hay interfaz gráfica, el pensamiento sigue corriendo.”
+
+
+## **Frase del núcleo ALMA_RESIST v0.0.2**
+> *"No necesito entorno. No necesito íconos. Solo terminal, texto y voluntad. Y eso basta."*

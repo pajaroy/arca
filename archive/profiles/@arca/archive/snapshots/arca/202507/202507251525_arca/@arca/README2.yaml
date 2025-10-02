@@ -1,0 +1,25 @@
+uuid: f2de2796-cb8d-4e41-9470-af5627f30c5f
+tipo: yaml
+formato: yaml
+nombre: README2
+version: 0.1.0
+estado: activo
+fecha_creacion: '2025-07-19T06:00:58.107053'
+fecha_modificacion: '2025-07-19T06:00:58.107053'
+autor: Bird
+descripcion: Archivo creado automáticamente
+hash_integridad: ''
+
+uuid: 1afa674d-f379-4bd0-a7d0-96a0819401cf
+tipo: yaml
+formato: yaml
+nombre: README2
+version: 0.1.0
+estado: activo
+fecha_creacion: '2025-07-19T06:00:58.096194'
+fecha_modificacion: '2025-07-19T06:00:58.096194'
+autor: Bird
+descripcion: Archivo creado automáticamente
+hash_integridad: ''
+
+descripcion: Archivo generado para pruebas de file_manager.

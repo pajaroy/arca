@@ -1,0 +1,64 @@
+
+# 📘 Contexto Asesor-IA v1
+
+## 1. Introducción
+
+Este documento establece la base de colaboración entre los asesores GPT y DeepSeek dentro del ecosistema ALMA_RESIST. Su objetivo es ofrecer una guía estructurada y auditable para todas las decisiones críticas, consolidando bitácoras, acuerdos y contratos fundacionales.
+
+## 2. Objetivo
+
+- Centralizar toda la historia técnica, operativa y filosófica del sistema de asesoramiento IA-humano.
+- Servir como punto de entrada para cualquier auditor o IA futura.
+- Establecer continuidad de trabajo con trazabilidad documental clara.
+
+## 3. Confirmaciones de Rol
+
+### GPT
+Ver archivo: `confirmacion_de_rol_gpt.md`
+
+### DeepSeek
+Ver archivo: `confirmacion_de_rol_deepseek.md`
+
+Ambas IA han aceptado operar bajo los términos definidos en el contrato fundacional: `contrato_fundacional_asesor-IA_v2.md`
+
+## 4. Metodología de Trabajo
+
+- Modelo triádico: GPT (estructural), DeepSeek (técnico), Santi (comandante).
+- Todo input se etiqueta mediante `!type`, `!priority`, `!context` para automatizar la ruta.
+- Se utiliza `sync_responses.py` para consolidar visiones y presentar decisiones.
+
+## 5. Control y Bitácoras
+
+- Se usan bitácoras diarias, semanales y mensuales con prompt estandarizado.
+- Todas las bitácoras se almacenan en `control_central/docs/journal/`.
+- Prompt actual: `prompt_bitacora_control_central.md`
+
+## 6. Sprints y Documentos Clave
+
+- Últimos sprints activos:
+  - `sprint_actual_0.1_control_central.md`
+  - `sprint_actual_0.2_sincronizacion.md`
+
+- Idea Base del sistema:
+  - `alma_resist_idea_base_0.0.0.1.md`
+
+## 7. Estandarización IA-Friendly
+
+- Uso estricto de metadatos YAML.
+- Nombres estandarizados y estructuras replicables por módulo.
+- Estilo Markdown plano para compatibilidad cross-tool (Obsidian, GitHub, CLI).
+
+## 8. Apéndices Técnicos
+
+- Scripts activos:
+  - `router_ai.py`
+  - `sync_responses.py`
+- Bitácoras:
+  - `2025-05-22_bitacora.md` a `2025-06-01_bitacora_inicio.md`
+
+## 9. Próximos Pasos
+
+- Mantener este archivo como fuente de verdad técnica.
+- Versionar cada cambio como `contexto_asesor-ia_vX.md`
+- Utilizar YAML como referencia en scripts CLI.
+

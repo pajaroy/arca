@@ -1,0 +1,32 @@
+# 🌀 Sprint 2.4 – Optimización y Unificación de Metodologías
+
+📅 Inicio: 2025-05-23  
+🌀 Estado: activo  
+📦 Versión asociada: v1.0.0
+
+
+## 📋 Checklist de tareas
+- [x] Estandarizar bloques YAML (4 campos obligatorios)
+- [x] Añadir `linked_to` a documentos `core` sin relaciones
+- [x] Agregar `domain` alineado a tags en metodologías clave
+- [x] Validar con `validate_docs.py` con reglas nuevas
+- [x] Ejecutar `alma-cli audit` para verificar consistencia semántica
+- [ ] Registrar snapshot y actualizar `hitos.md`
+
+
+## 🗂️ Progreso del Sprint
+| Tarea                                  | Estado | Responsable   |
+|----------------------------------------|--------|----------------|
+| Refactor de `validate_docs.py`         | 🟢     | IA + Operador |
+| Normalización masiva con `fix_metadata.py` | 🟢     | IA + Operador |
+| Revisión de `linked_to` manual         | 🟡     | Operador      |
+| Ejecución de `alma-cli audit`          | 🔴     | IA             |
+
+
+## 📎 Archivos relacionados
+- `metodologia_doc_ia_v2.md`
+- `metodologia_agregado_archivos.md`
+- `validate_docs.py`
+- `fix_metadata.py`
+- `Methodology_Index.md`
+

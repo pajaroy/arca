@@ -1,0 +1,36 @@
+whitepaper_arca:
+  version: "0.1.0"
+  autor: Bird
+  secciones:
+    - titulo: Introducción
+      descripcion: Propósito de Arca dentro del ecosistema ALMA_RESIST.
+
+    - titulo: Principios de Diseño
+      descripcion: Reglas técnicas y filosóficas que guían el diseño de Arca.
+
+    - titulo: Funcionalidades
+      descripcion: Listado de capacidades de Arca (creación, borrado, indexado, hashing, logs).
+
+    - titulo: Arquitectura Técnica
+      descripcion: Estructura interna de Arca (scripts, módulos, flujo de datos).
+
+    - titulo: Gestión de Integridad
+      descripcion: Cómo Arca asegura trazabilidad e integridad de la información.
+
+    - titulo: Indexación y Bases de Datos
+      descripcion: Estructura de índices, bases usadas (sqlite, chroma), relaciones entre datos.
+
+    - titulo: Integración con ML
+      descripcion: Cómo Arca prepara datos para ML y cómo se integran modelos predictivos.
+
+    - titulo: Interacción con Otros Módulos
+      descripcion: Interfaces y puntos de integración de Arca con ALMA_RESIST.
+
+    - titulo: Casos de Uso
+      descripcion: Ejemplos prácticos de tareas resueltas por Arca.
+
+    - titulo: Roadmap de Evolución
+      descripcion: Mejoras previstas y nuevas capacidades a futuro.
+
+    - titulo: Anexos
+      descripcion: Diagramas, ejemplos de YAML, glosario específico de Arca.

@@ -1,0 +1,32 @@
+# 🧠 ALMA_FEEDBACK – Módulo de Retroalimentación Inteligente
+
+Este módulo forma parte del ecosistema ALMA y tiene como objetivo detectar **alertas cognitivas y contextuales** entre memorias mediante reglas automatizadas, análisis semántico y visualización estructurada.
+
+
+## 🧩 Componentes Principales
+
+| Script                | Función                                                               |
+|----------------------|-----------------------------------------------------------------------|
+| `monitor_alertas.py` | Ejecuta reglas y genera alertas a partir de memorias JSON.            |
+| `reglas_alerta.py`   | Define funciones tipo regla para aplicar entre pares de memorias.     |
+| `visor_alertas.py`   | Visualiza alertas generadas y exporta un resumen en Markdown.         |
+| `config_alertas.json`| Activa/desactiva reglas cargadas dinámicamente.                       |
+
+
+## ▶️ Cómo Usar
+
+```bash
+# Ejecutar alertas
+cd scripts
+python3 monitor_alertas.py
+
+# Ver resultados
+python3 visor_alertas.py
+```
+
+
+## 📌 Documentación Adicional
+
+- [`README_monitor.md`](ALMA_LIBRE/00_BACKUPS_HISTORICOS/0.0.5_2025-05-11/programacion_dev/Alma_loader_dev/alma_loader_1.0/alma_feedback/scripts/README_monitor.md)
+- [`README_reglas.md`](ALMA_LIBRE/00_BACKUPS_HISTORICOS/0.0.5_2025-05-11/programacion_dev/Alma_loader_dev/alma_loader_1.0/alma_feedback/scripts/README_reglas.md)
+- [`README_visor.md`](ALMA_LIBRE/00_BACKUPS_HISTORICOS/0.0.5_2025-05-11/programacion_dev/Alma_loader_dev/alma_loader_1.0/alma_feedback/scripts/README_visor.md)

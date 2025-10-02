@@ -1,0 +1,27 @@
+
+# 🛠️ Roadmap Técnico–Operativo Optimizado – ALMA_LOADER v2.1.1
+
+Este roadmap integra entregables técnicos, estructura física de trabajo y control de riesgos, con hitos por día y trazabilidad directa al entorno físico y digital.
+
+
+## 📅 Fase 2 – Analytics + Backups (Semana 2)
+
+🎯 Objetivo: Analizar datos históricos y asegurar persistencia externa.
+
+| Tarea                     | Subtareas                                                             | Prioridad | Dependencias | Riesgos / Mitigación                                         | Transferencia Físico → Digital                           |
+|--------------------------|-----------------------------------------------------------------------|-----------|--------------|--------------------------------------------------------------|----------------------------------------------------------|
+| ✅ alma_analytics.py     | Día 1: Score por tag <br> Día 3: correlación #disciplina/#ganancia     | Media     | SQLite       | Etiquetado inconsistente → limpieza previa                   | Cuaderno de Trading: diagramas → `docs/analytics_flow.png` |
+| ✅ Feature Extractor     | Día 2: Transformar JSON en vector para ML                              | Media     | SQLite       | Campos vacíos → usar default y validación schema             | Programación: función en `scripts/features.py`            |
+| ✅ Backups en la Nube    | Día 4-5: Script rclone o API Google Drive                              | Alta      | SQLite       | API rota → fallback local en `/backups_local/`               | Plan en General → `docs/backup_policy.md`                 |
+
+
+## 📓 Cuadernos Vinculados
+
+| Cuaderno                        | Uso Principal                                       |
+|--------------------------------|----------------------------------------------------|
+| ✅ Cuaderno de Tareas Diarias  | Checklist basado en resumen diario                |
+| 💻 Cuaderno de Programación    | Diseño técnico, validaciones, scripts              |
+| 📈 Cuaderno de Trading         | Ideas TRD, esquemas de análisis, resultados        |
+| 🧠 División 1 – General        | Prompt, reglas base, comandos                      |
+| 💰 División 2 – Fondo          | Métricas, rendimiento, aplicación a capital futuro |
+| 💡 Block Espontáneo            | Ideas al vuelo → importar a markdown como base     |

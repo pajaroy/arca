@@ -1,0 +1,74 @@
+---
+uuid: 3c530ea1-f1f7-4010-9b59-85b80e66317e
+tipo: config
+formato: yaml
+nombre: config
+version: 0.1.0
+estado: activo
+fecha_creacion: '2025-07-16T04:30:37.910800'
+fecha_modificacion: '2025-07-16T04:30:37.910862'
+autor: Bird
+descripcion: Configuracion principal de ARCA
+hash_integridad: 70cc7dbbc74dcf8f04f1a4d30c1c97bb51a79593ffe2d52173b612a78b17f06d
+---
+config:
+  version: "0.1.0"
+  project: "ARCA"
+  default_author: "Bird"
+  base_path: "/home/arca/arca"  
+  schema_path: "schema.yaml"
+
+  index_path: "index.yaml"
+  index_estructura:
+    uuid: ""
+    nombre: ""
+    ruta: ""
+    tipo: ""
+    hash_integridad: ""
+    fecha_creacion: ""
+    fecha_modificacion: ""
+    autor: ""
+    descripcion: ""
+
+  hash_algorithm: "sha256"
+  uuid_algorithm: "uuid4"
+
+  tipos_soportados:
+    - readme
+    - docs
+    - prompt
+    - whitepaper
+    - contexto
+    - script
+
+  formatos_soportados:
+    yaml:
+      delimiter: "---\n"
+      end_delimiter: "---\n"
+      frontmatter_type: "yaml"
+    json:
+      delimiter: ""
+      end_delimiter: ""
+      frontmatter_type: "json"
+    csv:
+      delimiter: "#---\n"
+      end_delimiter: "#---\n"
+      frontmatter_type: "yaml"
+    py:
+      delimiter: '"""METADATOS\n'
+      end_delimiter: '\n"""'
+      frontmatter_type: yaml
+
+  comandos:
+    crear:
+      descripcion: "Crea un archivo estructurado con metadatos."
+      modulo: "arca_creator"
+      funcion: "crear_archivo"
+      parametros: ["formato_archivo", "tipo", "nombre", "subdirectorio", "autor", "descripcion"]
+    entrenar_modelo:
+      descripcion: "Entrena un modelo ML, lo guarda y crea metadatos."
+      modulo: "entrenar_modelo"
+      funcion: "save_model_with_metadata"
+      parametros: ["modelo", "model_name", "autor", "descripcion"]
+
+  # Agregá más formatos si querés

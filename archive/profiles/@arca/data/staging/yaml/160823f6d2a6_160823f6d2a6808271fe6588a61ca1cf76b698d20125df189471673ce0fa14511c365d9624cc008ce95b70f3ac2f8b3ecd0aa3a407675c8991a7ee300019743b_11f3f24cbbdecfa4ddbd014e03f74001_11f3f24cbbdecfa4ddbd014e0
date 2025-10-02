@@ -1,0 +1,24 @@
+id: readme_kael_scripts_2025-06-08
+nombre: "README scripts – Utilidades y automatizaciones personales de KAEL"
+ruta: "control_central/agentes/kael/scripts/"
+version: "0.1.0"
+descripcion: |
+  Esta carpeta almacena scripts, utilidades y automatizaciones creadas, adaptadas o gestionadas por KAEL.
+  Aquí se concentran herramientas de control, auditoría, backup o experimentación orientadas a la operación diaria y mejora continua del agente.
+estructura:
+  - [nombre_script].py: Scripts activos para flujos personales de KAEL.
+  - README.yaml: Este archivo descriptivo del propósito y política de la carpeta.
+criterios_uso:
+  - Incluir solo scripts personales o de pruebas no institucionalizadas.
+  - Al institucionalizar una utilidad, migrar la versión estable al área común del sistema.
+  - Documentar cada script o cambio relevante en este README o en la bitácora personal.
+notas:
+  - Evitar acumulación de scripts sin uso real; hacer housekeeping periódico.
+  - Priorizar automatización de tareas críticas para liberar carga manual y evitar errores.
+tags:
+  - kael
+  - scripts
+  - utilidades
+  - automatizacion
+  - pruebas
+  - personal

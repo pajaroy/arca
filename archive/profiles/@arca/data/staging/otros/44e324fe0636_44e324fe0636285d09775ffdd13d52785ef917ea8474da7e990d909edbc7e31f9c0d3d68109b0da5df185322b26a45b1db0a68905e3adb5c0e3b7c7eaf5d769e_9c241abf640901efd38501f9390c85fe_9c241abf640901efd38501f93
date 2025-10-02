@@ -1,0 +1,42 @@
+# ✅ Checklist – Fase 1: Sincronización en Tiempo Real (Syncthing)
+📅 Fecha: 2025-06-01
+
+
+## 📂 Carpetas a sincronizar
+
+- [ ] `~/ALMA_RESIST/obsidian_vault`
+- [ ] `~/ALMA_RESIST/` (incluye `core/`, `docs/`, `config/`, etc.)
+
+
+## 🧾 Paso 2 – Ignorar archivos sensibles
+
+- [ ] Crear archivo `.stignore` con contenido:
+
+```plaintext
+.env
+*.log
+__pycache__/
+*.pyc
+.vscode/
+downloads/
+```
+
+
+## 🧪 Paso 4 – Script de verificación
+
+- [ ] Crear script `sync_status.sh`:
+
+```bash
+#!/bin/bash
+echo "[🛰️ SYNC STATUS] Verificando conexión Syncthing..."
+curl -s http://localhost:8384/rest/system/connections | jq '.connections'
+```
+
+- [ ] Guardar en `ALMA_RESIST/core/scripts/`
+
+
+## ✅ Resultado esperado
+
+- [ ] Cambios reflejados entre nodos en menos de 3 segundos
+- [ ] Reconexión automática en caso de caída
+

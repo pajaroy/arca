@@ -1,0 +1,65 @@
+# 🧩 1.11_Mejoras_Modelo_Fondo_Comun.md
+
+Este documento contiene los ajustes necesarios para evolucionar el sistema Alma Mía desde un modelo de contratos individuales hacia una estructura operativa de fondo común, manteniendo la trazabilidad, transparencia y escalabilidad construidas hasta el momento.
+
+---
+
+## 🔄 ¿Por qué este cambio?
+
+El modelo de contratos individuales funcionó como base para establecer principios de trazabilidad y relación emocional con los inversores. Sin embargo, para escalar, automatizar y simplificar la gestión, se propone migrar hacia un esquema de fondo común simbólico.
+
+---
+
+## 📍 Cambios propuestos sobre el Prompt_Master_1.10
+
+### 1. 🧠 Filosofía General
+**Antes:** "Cada inversor tiene un contrato individual simbólico con sus propios términos."
+
+**Ahora:** "Todos los capitales ingresan a un fondo común. Las ganancias se distribuyen proporcionalmente al capital aportado sobre el total."
+
+---
+
+### 2. 🔐 Relación con Inversores
+- Cada inversor tiene una **relación porcentual** con el fondo total, no con un capital aislado.
+- El contrato simbólico refleja su **participación porcentual dinámica**.
+- Se elimina la idea de “cuenta propia” y se consolida todo bajo la gestión común del fondo.
+
+---
+
+### 3. 💸 Cálculo y Distribución de Ganancias
+- Las ganancias se distribuyen **trimestralmente**, 10 días hábiles después del cierre.
+- Se reparte el rendimiento **proporcional al capital invertido**.
+- En fases Alfa y Beta, se mantiene el acuerdo simbólico de:
+  - 50% de las ganancias para el inversor
+  - 50% para Alma Mía (como gestora)
+- Se incorporan bonificaciones por capital bloqueado:
+  - 6 meses → 55% para el inversor
+  - 12 meses → 60% para el inversor
+
+---
+
+### 4. 📊 Informes y Bitácora
+- Todos los trades se gestionan desde una **bitácora unificada**.
+- No se hace separación entre capitales por inversor.
+- El capital total y la rentabilidad del fondo se calculan desde la Bitácora Oficial.
+- Cada inversor podrá acceder a informes proporcionales si lo requiere.
+
+---
+
+### 5. 🧱 Escalabilidad
+- Este modelo permite integrar más capital sin multiplicar la complejidad administrativa.
+- Ideal para conexión con hojas de cálculo, scripts o futuras apps.
+- Posibilita una migración futura a DAO o smart contract sin perder lógica interna.
+
+---
+
+### 6. 🧾 Documentación a modificar
+- Contratos simbólicos deben reflejar que el capital forma parte de un fondo común.
+- La sección de “roles individuales” del Prompt Master puede simplificarse.
+- El término “cuenta individual” debe eliminarse de todos los archivos constitutivos.
+
+---
+
+**Versión:** 1.11  
+**Redactado por:** Santiago & ALMA  
+**Estado:** Lista para integración en Prompt_Master_1.2

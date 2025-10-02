@@ -1,0 +1,26 @@
+---
+module: arquitectura/estructura_doc/plantilla_version
+type: core
+status: in_progress
+created: '2025-05-23'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🗂️ version.md – Plantilla de versión
+
+- `Versión:` vX.X.X
+- `Fecha:` YYYY-MM-DD
+- `Hash:` [opcional] SHA256 / Git commit
+- `Mantenedor:` Nombre o alias
+- `Descripción:` Cambios clave de esta versión
+
+## 🔄 Changelog
+
+- `+` Agregado:
+- `~` Modificado:
+- `-` Eliminado:
+
+---
+
+_Generado desde `estructura_doc/version_template.md`. Personaliza antes de distribuir._

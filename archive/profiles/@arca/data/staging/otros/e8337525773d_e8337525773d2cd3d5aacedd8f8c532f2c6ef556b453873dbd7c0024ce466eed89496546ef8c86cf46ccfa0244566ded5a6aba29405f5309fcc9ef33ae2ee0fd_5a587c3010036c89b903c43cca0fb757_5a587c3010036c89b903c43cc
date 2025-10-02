@@ -1,0 +1,1428 @@
+
+- Implementado `visor_alertas.py`:
+  - Visualización en consola con emojis y colores por nivel de severidad
+  - Filtro por tipo de alerta
+  - Exportación automática a Markdown (`logs/alertas_resumen.md`)
+
+- Implementado `registrar_feedback.py`:
+  - Integración de alertas como campo `retroalimentacion[]` en cada memoria
+  - Validación por `jsonschema`
+  - Hashing anti-duplicado
+  - Backups automáticos en carpeta `backups/`
+  - Procesamiento multithread para mejorar rendimiento
+
+- Documentación completa del módulo (`README.md`, `prompt_base.md`, `seguimiento.md`)
+- Estructura modular validada para futuras conexiones con interfaz web y Neo4j
+
+## Archivo: seguimiento_2.0.0.md
+Contenido:
+## 📘 Seguimiento Técnico – Proyecto `alma_loader_2.0`
+
+### 🧠 Objetivo General
+
+Reestructurar el sistema ALMA_LOADER para uso individual, simplificando la infraestructura sin perder escalabilidad, y crear un Prompt Maestro que guíe a cualquier IA (GPT-4.5, DeepSeek) a interpretar, gestionar y generar memorias personales de forma autónoma.
+
+## 🧩 Versión 2.2 – (Inicio del Rediseño Modular)
+
+**Fecha:** [inicialización en este chat]  
+**Objetivo:** Separar funciones para uso individual y simplificar el pipeline base.
+
+### Cambios Técnicos:
+
+- Generación del Prompt Individual v2.0.1.
+    
+- Eliminación de dependencias pesadas (Neo4j, Redis).
+    
+- Adopción de SQLite + NLP local como stack mínimo funcional.
+    
+- Validación de memorias unificada vía `schema_base.json`.
+    
+- Primera fórmula de prioridad automática.
+    
+
+
+## 🧩 Versión 2.4 – (Integración Completa de Categorías ALMA y Modularidad Visual)
+
+**Fecha:** [último paso realizado]  
+**Objetivo:** Integrar taxonomía de categorías ALMA, robustecer casos límite y preparar documentación para migración y APIs.
+
+### Cambios Técnicos:
+
+- Sección detallada con **categorías ALMA oficiales** (GEN, TRD, CAP...).
+    
+- Validación obligatoria de la categoría en `schema_base.json`.
+    
+- Guía clara sobre diferencias entre **categorías** y **tags**.
+    
+- Ejemplo de memoria inválida con corrección esperada (tags mal formateados, categoría no válida).
+    
+- Migrador `v1 → v2` propuesto en Python (`migrador_v1_v2.py`).
+    
+- Diagrama de arquitectura modular con flujo completo desde IA hasta exportador.
+    
+- Primer boceto de endpoints REST (`GET /memorias`, `POST /memorias`).
+    
+
+## 🧩 Versión 2.0.5 – (Refinamiento Final del Prompt)
+**Fecha:** [actual]  
+**Objetivo:** Fortalecer validaciones, mejorar accesibilidad para usuarios no técnicos y consolidar estándares.
+
+### Cambios Técnicos:
+- ✅ Se integró validación cruzada de IDs en el campo `relacionadas`.
+- ✅ Se agregó lista de `tags_recomendados` en `schema_base.json` para asegurar uniformidad semántica.
+- ✅ Se añadió una guía rápida para usuarios no técnicos, incluyendo ejemplo mínimo de entrada válida.
+- ✅ Se mantuvo compatibilidad con infraestructura SQLite + NLP local.
+- ✅ Se consolidó la estructura del prompt para lectura clara por cualquier modelo IA o usuario humano.
+
+## 🧩 Versión 2.0.6 – (Inicio de Capacidades Predictivas en Trading)
+**Fecha:** [actual]  
+**Objetivo:** Establecer el puente entre memoria histórica y análisis predictivo para decisiones automatizadas.
+
+### Cambios Técnicos:
+- ✅ Se preparó la estructura para incorporar `alma_analytics.py` como módulo de correlación y análisis de patrones.
+- ✅ Se definió el uso de relaciones entre memorias para modelar causa-efecto en operaciones de trading.
+- ✅ Se incorporó la lógica de generación de insights con modelos predictivos simples (Logistic Regression, Random Forest).
+- ✅ Se propuso sistema de alertas automáticas basado en patrones detectados (#sobreoperación + #fatiga).
+- ✅ Se amplió el checklist de implementación para reflejar la Fase 3 orientada a IA analítica.
+
+
+
+## 🧩 Versión 2.1.0 – (Consolidación de Plataforma Predictiva y Conversacional)
+**Fecha:** [actual]  
+**Objetivo:** Elevar ALMA_LOADER a un sistema completo de gestión cognitiva con capacidades predictivas, resúmenes automáticos, interacción natural y automatización diaria.
+
+### Cambios Técnicos Clave:
+- ✅ Integración de entrada conversacional y transformación automática a JSON.
+- ✅ Generación de resúmenes automáticos diarios.
+- ✅ Sistema gamificado con puntos y niveles según uso y resolución de alertas.
+- ✅ Incorporación estructural del módulo `alma_analytics.py`.
+- ✅ Inclusión de reglas semánticas condicionales (`if-then`) en `schema_base.json`.
+- ✅ Sugerencia de implementación de cronjob para limpieza y validación.
+- ✅ Exportación automática de dashboards HTML/MD.
+- ✅ Propuesta de alertas inteligentes por patrones de riesgo.
+- ✅ Ampliación de uso práctico mediante comandos rápidos y plantillas de acción.
+- ✅ Base técnica para integración futura con Telegram/WhatsApp como interfaz.
+
+## 🧩 Versión 2.1.1 – (Consolidación Final y Preparación para Codificación)
+**Fecha:** [2025-5-2]  
+**Objetivo:** Clarificar el diseño operativo, reducir la carga cognitiva del usuario y estructurar la implementación por etapas funcionales.
+
+### Cambios Técnicos y Operativos Clave:
+- ✅ Reescritura del propósito general para hacerlo más humano y claro.
+- ✅ Separación funcional entre CORE (mínimo viable) y AVANZADO (módulos expansivos).
+- ✅ Inclusión de comandos conversacionales para facilitar la entrada de datos.
+- ✅ Flujo de interacción documentado para usuarios no técnicos (registro → resumen → acción).
+- ✅ Inclusión explícita de un roadmap en fases semanales.
+- ✅ Pronta para comenzar desarrollo incremental basado en este documento como referencia maestra.
+
+## Archivo: Changelog_prompt_2.0.2.md
+Contenido:
+
+# 📄 Changelog - Prompt ALMA_LOADER Individual v2.0.2
+
+## ✅ Mejoras Implementadas
+
+- **Consistencia en Ejemplos JSON**:
+  - Se añadió explícitamente campos `acciones` y `prioridad` en el ejemplo de interacción IA–usuario.
+
+- **Criterios Claros para Corrección Automática**:
+  - Se incluyeron reglas explícitas de corrección en `schema_base.json`:
+    ```json
+    "correcciones": {
+      "fecha": "Usar ISO 8601 si está mal formateada",
+      "tags": "Convertir a minúsculas y añadir # faltante"
+    }
+    ```
+
+- **Optimización del Checklist Prioritario**:
+  - Se reordenaron tareas críticas para evitar inconsistencias en la migración:
+    1. Implementar validador unificado.
+    2. Migrar memorias existentes.
+    3. Configurar NLP local.
+
+- **Documentación de Casos Límite**:
+  - Se agregó guía sobre manejo de referencias inexistentes en memorias relacionadas mediante validación en el esquema.
+
+- **Fórmula para Prioridad Automática**:
+  - Se añadió función básica para asignar automáticamente prioridades en `alma_core.py`:
+    ```python
+    def calcular_prioridad(memoria):
+        return len(memoria["tags"]) + (1 if "#crítico" in memoria["tags"] else 0)
+    ```
+
+- **Integración NLP ↔ Validación**:
+  - Se sugirió procesar contenido con NLP antes de validar, para extraer automáticamente tags y mejorar la precisión del sistema.
+
+
+
+Esta versión afianza el prompt como núcleo robusto para IA, con validaciones semánticas, clasificación explícita y preparación total para uso extensible.
+
+
+
+Estas mejoras continúan fortaleciendo la robustez, claridad y usabilidad del sistema, facilitando tanto la interacción humana como la automatización mediante IA.
+
+
+
+Esta versión transforma al prompt en una plataforma lista para análisis predictivo y toma de decisiones informadas, especialmente aplicable al módulo TRD (trading).
+
+
+## Archivo: Untitled Kanban.md
+Contenido:
+
+
+
+## Archivo: changelog_prompt_2.0.0.md
+Contenido:
+### 📄 `Prompt ALMA_LOADER Individual 2.0.0
+
+- Enfoque: Adaptado para uso de un solo usuario.
+    
+- Infraestructura mínima (SQLite + JSON1, NLP local, sin Redis/API).
+    
+- Diagrama Mermaid, JSON simplificado, instrucciones básicas para la IA.
+    
+- Estado: Versión funcional inicial, reemplazada por v2.0.1.
+
+
+### 📄 `Prompt ALMA_LOADER Individual v2.0.1`
+
+- Cambios:
+    
+    - Añadido nodo de corrección por IA tras error de validación.
+        
+    - Se expandió el JSON con campos `acciones` y `prioridad`.
+        
+    - Se agregaron fragmentos de código Python (`sqlite3`, `spaCy`).
+        
+    - Se incorporó un ejemplo de diálogo humano–IA.
+        
+    - Se especificaron reglas de validación semántica.
+        
+- Estado: VERSIÓN ACTUAL y activa.
+
+
+## 📂 Estructura Modular Simplificada
+
+- **NLP Local**: Procesamiento semántico de memorias con modelos locales (spaCy o transformers ligeros).
+    
+- **Base de Datos (SQLite + JSON)**: Almacenamiento eficiente y consulta rápida mediante SQLite (JSON1).
+    
+- **Validador Unificado (`schema_base.json`)**: Validación única de memorias con JSON Schema.
+    
+- **Sistema Core (`alma_core.py`)**: Centraliza validación, feedback básico y scoring.
+    
+
+
+## 📈 Flujo de Trabajo Diario
+
+```mermaid
+flowchart TD
+    A[Evento o Reflexión] --> B{{IA}}
+    B --> C[Memoria JSON]
+    C --> D[Validación JSON Schema]
+    D --> E[NLP local]
+    E --> F[SQLite JSON1]
+    F --> G[Generar Resumen Diario]
+    G --> H[Guardar como archivo MD]
+```
+
+
+## 🧩 Pautas de Escalabilidad Futura
+
+- **ORM con SQLAlchemy**: Diseñar clases para facilitar migración futura a PostgreSQL o Neo4j.
+    
+- **Prefijo de IDs por Usuario**: `USER-MEMGEN-001` para futura integración multiusuario.
+    
+
+
+## 🗒️ Checklist Inicial
+
+-  Migrar memorias existentes al formato JSON simplificado.
+    
+-  Implementar pipeline básico NLP+SQLite.
+    
+-  Configurar `@lru_cache` para optimizar consultas.
+    
+-  Unificar validación en JSON Schema único.
+    
+-  Preparar estructura en clases para facilitar futuras migraciones.
+    
+
+## Archivo: prompt_master_2.0.1_simplificado.md
+Contenido:
+# 🧠 Prompt Maestro ALMA_LOADER Individual v2.0.1
+
+## 🎯 Propósito
+
+Este prompt guía una IA (como GPT-4.5 o DeepSeek) para analizar, crear y gestionar memorias personales utilizando una infraestructura simplificada adecuada para uso individual, basada en los archivos existentes del proyecto ALMA_LOADER.
+
+
+## 🛠️ Instrucciones Esenciales para la IA
+
+### Lectura y Contexto
+
+- Leer cada memoria utilizando campos: `id`, `fecha`, `tags`, `contenido`, `relacionadas`, `acciones` y `prioridad`.
+    
+- Priorizar memorias mediante:
+    
+    - Número de tags clave.
+        
+    - Impacto histórico detectado.
+        
+
+### Ejemplo de Memoria JSON Simplificado
+
+```json
+{
+  "id": "MEMGEN-099",
+  "fecha": "2025-09-15T14:30:00Z",
+  "tags": ["#productividad", "#salud"],
+  "contenido": "Reducir horas de trading tras detectar [fatiga>salud]",
+  "relacionadas": ["MEMTRD-045"],
+  "acciones": ["ajustar_horario"],
+  "prioridad": 3
+}
+```
+
+### Generación Automática de Memorias
+
+La IA debe generar memorias JSON siguiendo exactamente este formato.
+
+### Manejo de Errores
+
+Si una memoria falla la validación:
+
+- La IA debe intentar corregir la memoria automáticamente.
+    
+- Registrar la memoria corregida nuevamente.
+    
+
+
+## ⚙️ Configuración Técnica Recomendada (Ejemplos Claros)
+
+### SQLite con JSON1
+
+```python
+import sqlite3
+conn = sqlite3.connect("alma.db")
+conn.execute("CREATE TABLE memorias (data JSON)")
+```
+
+### NLP Local con spaCy
+
+```python
+import spacy
+nlp = spacy.load("es_core_news_sm")
+doc = nlp("Reducir horas de trading por fatiga.")
+```
+
+- **Caching**: Usar `@lru_cache` en Python para acelerar consultas frecuentes.
+    
+- **Logging**: Mantener logs simples (.log).
+    
+
+
+## 🚀 Implementar Ahora (Checklist Prioritario)
+
+1. Migrar memorias al nuevo formato JSON simplificado.
+    
+2. Implementar validador unificado en `schema_base.json`.
+    
+3. Configurar NLP local con spaCy.
+    
+4. Implementar pipeline básico NLP + SQLite.
+    
+5. Configurar `@lru_cache` para optimizar consultas.
+    
+6. Preparar estructura en clases para facilitar futuras migraciones.
+    
+
+## Archivo: prompt_master_2.0.2_simplificado.md
+Contenido:
+# 🧠 Prompt Maestro ALMA_LOADER Individual v2.0.2
+
+## 🎯 Propósito
+
+Este prompt guía una IA (como GPT-4.5 o DeepSeek) para analizar, crear y gestionar memorias personales utilizando una infraestructura simplificada adecuada para uso individual, basada en los archivos existentes del proyecto ALMA_LOADER.
+
+
+## 🛠️ Instrucciones Esenciales para la IA
+
+### Lectura y Contexto
+
+- Leer cada memoria utilizando campos: `id`, `fecha`, `tags`, `contenido`, `relacionadas`, `acciones` y `prioridad`.
+    
+- Priorizar memorias mediante:
+    
+    - Número de tags clave.
+        
+    - Impacto histórico detectado.
+        
+
+### Ejemplo de Memoria JSON Simplificado
+
+```json
+{
+  "id": "MEMGEN-099",
+  "fecha": "2025-09-15T14:30:00Z",
+  "tags": ["#productividad", "#salud"],
+  "contenido": "Reducir horas de trading tras detectar [fatiga>salud]",
+  "relacionadas": ["MEMTRD-045"],
+  "acciones": ["ajustar_horario"],
+  "prioridad": 3
+}
+```
+
+### Generación Automática de Memorias
+
+La IA debe generar memorias JSON siguiendo exactamente este formato.
+
+### Manejo de Errores y Correcciones
+
+Si una memoria falla la validación:
+
+- La IA debe corregir automáticamente usando reglas en `schema_base.json`:
+    
+
+```json
+"correcciones": {
+  "fecha": "Usar ISO 8601 si está mal formateada",
+  "tags": "Convertir a minúsculas y añadir # faltante"
+}
+```
+
+- Registrar la memoria corregida nuevamente.
+    
+
+
+## ⚙️ Configuración Técnica Recomendada (Ejemplos Claros)
+
+### SQLite con JSON1
+
+```python
+import sqlite3
+conn = sqlite3.connect("alma.db")
+conn.execute("CREATE TABLE memorias (data JSON)")
+```
+
+### NLP Local con spaCy
+
+```python
+import spacy
+nlp = spacy.load("es_core_news_sm")
+doc = nlp("Reducir horas de trading por fatiga.")
+```
+
+### Asignación Automática de Prioridad
+
+```python
+def calcular_prioridad(memoria):
+    return len(memoria["tags"]) + (1 if "#crítico" in memoria["tags"] else 0)
+```
+
+- **Caching**: Usar `@lru_cache` en Python para acelerar consultas frecuentes.
+    
+- **Logging**: Mantener logs simples (.log).
+    
+
+
+## 🚀 Implementar Ahora (Checklist Priorizado y Optimizado)
+
+1. Implementar validador unificado en `schema_base.json`.
+    
+2. Migrar memorias al nuevo formato JSON simplificado.
+    
+3. Configurar NLP local con spaCy.
+    
+4. Implementar pipeline básico NLP + SQLite.
+    
+5. Configurar `@lru_cache` para optimizar consultas.
+    
+6. Preparar estructura en clases para facilitar futuras migraciones.
+    
+
+## Archivo: prompt_master_2.0.3_simplificado.md
+Contenido:
+# 🧠 Prompt Maestro ALMA_LOADER Individual v2.0.3
+
+## 🎯 Propósito
+
+Este prompt guía una IA (como GPT-4.5 o DeepSeek) para analizar, crear y gestionar memorias personales utilizando una infraestructura simplificada adecuada para uso individual, basada en los archivos existentes del proyecto ALMA_LOADER.
+
+
+## 📌 Categorías ALMA (Módulos de Memoria)
+
+Cada memoria **debe** clasificarse en una categoría usando su abreviatura oficial:
+
+|Abreviatura|Categoría|Descripción|
+|---|---|---|
+|**GEN**|General|Filosofía base, principios estratégicos, reflexiones fundacionales.|
+|**TRD**|Trading|Operaciones, estrategias, emociones en trading.|
+|**CAP**|Capital|Gestión financiera, inversiones, control de gastos.|
+|**PROG**|Programación|Scripts, arquitectura de software, decisiones técnicas.|
+|**REFLEX**|Reflexión|Dilemas existenciales, decisiones de vida, evolución filosófica.|
+|**HEALTH**|Salud|Bienestar físico/mental, nutrición, rutinas.|
+|**HIST**|Históricas|Eventos históricos relevantes y su análisis.|
+|**GEO**|Geopolítica|Conflictos internacionales, decisiones geopolíticas, riesgos estratégicos.|
+|**ECO**|Económica|Análisis macro/microeconómico, políticas monetarias.|
+
+
+## 📈 Flujo de Trabajo Diario Optimizado
+
+```mermaid
+flowchart TD
+    A[Evento o Reflexión] --> B{{IA}}
+    B --> C[Memoria JSON]
+    C --> D[Validación JSON Schema]
+    D -->|Error| E1[Corrección por IA]
+    E1 --> C
+    D -->|Éxito| E[NLP local]
+    E --> F[SQLite JSON1]
+    F --> G[Generar Resumen Diario]
+    G --> H[Guardar como archivo MD]
+```
+
+
+## 🚀 Checklist de Validación antes de Implementación
+
+-  Implementar validador unificado en `schema_base.json` con categorías y tags recomendados.
+    
+-  Migrar memorias existentes al nuevo formato JSON simplificado.
+    
+-  Configurar NLP local con spaCy para extracción automática de tags.
+    
+-  Implementar pipeline básico NLP + SQLite.
+    
+-  Configurar `@lru_cache` para optimizar consultas.
+    
+-  Preparar estructura en clases para facilitar futuras migraciones.
+    
+
+## Archivo: prompt_master_2.0.4_simplificado.md
+Contenido:
+# 🧠 Prompt Maestro ALMA_LOADER Individual v2.0.4
+
+## 🎯 Propósito
+
+Este prompt guía una IA (como GPT-4.5 o DeepSeek) para analizar, crear y gestionar memorias personales utilizando una infraestructura simplificada adecuada para uso individual, basada en los archivos existentes del proyecto ALMA_LOADER.
+
+
+## 📌 Categorías ALMA (Módulos de Memoria)
+
+Cada memoria **debe** clasificarse en una categoría usando su abreviatura oficial:
+
+|Abreviatura|Categoría|Descripción|
+|---|---|---|
+|**GEN**|General|Filosofía base, principios estratégicos, reflexiones fundacionales.|
+|**TRD**|Trading|Operaciones, estrategias, emociones en trading.|
+|**CAP**|Capital|Gestión financiera, inversiones, control de gastos.|
+|**PROG**|Programación|Scripts, arquitectura de software, decisiones técnicas.|
+|**REFLEX**|Reflexión|Dilemas existenciales, decisiones de vida, evolución filosófica.|
+|**HEALTH**|Salud|Bienestar físico/mental, nutrición, rutinas.|
+|**HIST**|Históricas|Eventos históricos relevantes y su análisis.|
+|**GEO**|Geopolítica|Conflictos internacionales, decisiones geopolíticas, riesgos estratégicos.|
+|**ECO**|Económica|Análisis macro/microeconómico, políticas monetarias.|
+
+## 🏷️ Uso de Tags y Categorías
+
+- **Categorías**: Obligatorias, definen el módulo principal.
+    
+- **Tags**: Opcionales, para temas transversales (ej: `#crítico`, `#pendiente`).
+    
+
+
+## 📈 Diagrama de Arquitectura Modular
+
+```mermaid
+flowchart LR
+    IA[IA Generadora] --> Validador
+    Validador --> NLP
+    NLP --> SQLite
+    SQLite --> SistemaCore
+    SistemaCore --> ResumenesMD[Exportador MD]
+```
+
+
+## 🌐 API de Contexto Esbozada (Futura Integración)
+
+- `GET /memorias?categoria=TRD`: Listar memorias de Trading.
+    
+- `POST /memorias`: Crear nueva memoria con validación automática.
+    
+
+## Archivo: prompt_master_2.0.5_simplificado.md
+Contenido:
+# 🧠 Prompt Maestro ALMA_LOADER Individual v2.0.5
+
+## 🎯 Propósito
+
+Este prompt guía una IA (como GPT-4.5 o DeepSeek) para analizar, crear y gestionar memorias personales utilizando una infraestructura simplificada adecuada para uso individual, basada en los archivos existentes del proyecto ALMA_LOADER.
+
+
+## 📌 Categorías ALMA (Módulos de Memoria)
+
+Cada memoria **debe** clasificarse en una categoría usando su abreviatura oficial:
+
+|Abreviatura|Categoría|Descripción|
+|---|---|---|
+|**GEN**|General|Filosofía base, principios estratégicos, reflexiones fundacionales.|
+|**TRD**|Trading|Operaciones, estrategias, emociones en trading.|
+|**CAP**|Capital|Gestión financiera, inversiones, control de gastos.|
+|**PROG**|Programación|Scripts, arquitectura de software, decisiones técnicas.|
+|**REFLEX**|Reflexión|Dilemas existenciales, decisiones de vida, evolución filosófica.|
+|**HEALTH**|Salud|Bienestar físico/mental, nutrición, rutinas.|
+|**HIST**|Históricas|Eventos históricos relevantes y su análisis.|
+|**GEO**|Geopolítica|Conflictos internacionales, decisiones geopolíticas, riesgos estratégicos.|
+|**ECO**|Económica|Análisis macro/microeconómico, políticas monetarias.|
+
+## 🏷️ Uso de Tags y Categorías
+
+- **Categorías**: Obligatorias, definen el módulo principal.
+    
+- **Tags**: Opcionales, para temas transversales (ej: `#crítico`, `#pendiente`).
+    
+- **Tags recomendados**: `#crítico`, `#pendiente`, `#revisar`, `#éxito`
+    
+
+
+## 🛠️ Instrucciones Esenciales para la IA
+
+### Lectura y Contexto
+
+- Leer cada memoria utilizando campos: `id`, `fecha`, `categoria`, `tags`, `contenido`, `relacionadas`, `acciones` y `prioridad`.
+    
+- Validar relaciones existentes:
+    
+
+```python
+def validar_relaciones(memoria, conexion_db):
+    for id_rel in memoria["relacionadas"]:
+        if not conexion_db.execute("SELECT id FROM memorias WHERE id = ?", (id_rel,)).fetchone():
+            raise ValueError(f"ID relacionado inválido: {id_rel}")
+```
+
+- Priorizar memorias mediante:
+    
+    - Número de tags clave.
+        
+    - Impacto histórico detectado.
+        
+
+### Ejemplo de Memoria JSON Completo
+
+```json
+{
+  "id": "MEMGEN-099",
+  "fecha": "2025-09-15T14:30:00Z",
+  "categoria": "GEN",
+  "tags": ["#productividad", "#salud"],
+  "contenido": "Reducir horas de trading tras detectar [fatiga>salud]",
+  "relacionadas": ["MEMTRD-045"],
+  "acciones": ["ajustar_horario"],
+  "prioridad": 3
+}
+```
+
+
+## ⚙️ Configuración Técnica Recomendada
+
+### Script de Migración
+
+```python
+# migrador_v1_v2.py
+def migrar_memoria(memoria_v1):
+    memoria_v2 = {
+        "id": memoria_v1["id"],
+        "categoria": memoria_v1["modulo"].upper(),
+        "tags": [f"#{tag}" for tag in memoria_v1["etiquetas"]]
+    }
+    return memoria_v2
+```
+
+
+## 🚀 Checklist Priorizado para Implementación
+
+1. Implementar validador unificado en `schema_base.json`.
+    
+2. Migrar memorias existentes al nuevo formato JSON simplificado.
+    
+3. Configurar NLP local con spaCy.
+    
+4. Implementar pipeline básico NLP + SQLite.
+    
+5. Configurar `@lru_cache` para optimizar consultas.
+    
+6. Preparar estructura en clases para facilitar futuras migraciones.
+    
+
+Este prompt garantiza simplicidad operativa inmediata, claridad técnica y mantiene puertas abiertas para futura escalabilidad.
+
+
+## 📂 Estructura Modular Simplificada
+
+- **NLP Local**: Procesamiento semántico de memorias con modelos locales (spaCy o transformers ligeros).
+    
+- **Base de Datos (SQLite + JSON)**: Almacenamiento eficiente y consulta rápida mediante SQLite (JSON1).
+    
+- **Validador Unificado (`schema_base.json`)**: Validación única de memorias con JSON Schema, incluyendo detección de conflictos semánticos, reglas de corrección automáticas, validación de categorías y relaciones.
+    
+- **Sistema Core (`alma_core.py`)**: Centraliza validación, feedback básico, scoring, manejo de errores y asignación automática de prioridad.
+    
+
+
+## 📘 Guía Rápida para Usuarios
+
+- Usa **categorías** para clasificar memorias (ej: TRD para Trading).
+    
+- Usa **tags** para temas transversales (ej: #crítico).
+    
+- Ejemplo mínimo:
+    
+
+```json
+{
+  "id": "MEMGEN-001",
+  "categoria": "GEN",
+  "contenido": "Nueva filosofía de trabajo remoto..."
+}
+```
+
+
+## 📈 Diagrama de Arquitectura Modular
+
+```mermaid
+flowchart LR
+    IA[IA Generadora] --> Validador
+    Validador --> NLP
+    NLP --> SQLite
+    SQLite --> SistemaCore
+    SistemaCore --> ResumenesMD[Exportador MD]
+```
+
+
+## 🌐 API de Contexto Esbozada (Futura Integración)
+
+- `GET /memorias?categoria=TRD`: Listar memorias de Trading.
+    
+- `POST /memorias`: Crear nueva memoria con validación automática.
+    
+
+## Archivo: Kanban_Fase_1.md
+Contenido:
+
+## 🔜 Por Hacer
+
+- [ ] - Conversor NL → JSON 🧠  
+	  - Día 1: Script `/nueva` básico  
+	  - Día 3: Soporte para `/accion`  
+	  - 🔗 Block espontáneo → `tests/nl_samples.md`  
+	  - 🏷️ #core #prioridad-alta
+- [ ] - Validación JSON 🧪  
+	  - Día 2: Campos obligatorios  
+	  - Día 4: Validar categoría  
+	  - 🔗 Programación → `docs/errores_validacion.md`  
+	  - 🏷️ #core #dependencia-nl-json
+- [ ] - Almacenamiento SQLite 🗃️  
+	  - Día 5: Crear tabla  
+	  - Día 6: Función guardar_memoria  
+	  - 🔗 Diagrama en papel → `docs/sqlite_estructura.md`  
+	  - 🏷️ #core
+- [ ] - Resumen Diario MD 📆  
+	  - Día 7: Script Markdown por categoría/prioridad  
+	  - 🔗 Tareas Diarias → checklist diario  
+	  - 🏷️ #core
+- [ ] - Plantillas `/accion` ⚡  
+	  - Día 3-4: Diccionario de acciones comunes  
+	  - 🔗 General → `docs/plantillas_comandos.md`  
+	  - 🏷️ #media
+
+
+## 🚧 En Progreso
+
+
+
+## ✅ Hecho
+
+
+
+
+
+%% kanban:settings
+```
+{"kanban-plugin":"board","list-collapse":[false,false,false]}
+```
+%%
+
+
+kanban-plugin: board
+
+## Archivo: Kanban_Fase_3.md
+Contenido:
+
+## 🔜 Por Hacer
+
+- [ ] - Sistema de Puntos 🏆  
+	  - Día 1-2: Puntos por acción y resumen  
+	  - 🔗 General/CEO → `docs/gamificacion.md`  
+	  - 🏷️ #media
+- [ ] - Alertas Automáticas 🚨  
+	  - Día 3-4: Reglas `if-then` automáticas  
+	  - 🔗 Salud/Trading → `schema/reglas.json`  
+	  - 🏷️ #prioridad-alta
+- [ ] - Modelo Predictivo 🧠  
+	  - Día 5-7: Regresión logística con tags/resultados  
+	  - 🔗 Trading Estudios → `models/demo.pkl`  
+	  - 🏷️ #prioridad-alta #ml
+
+
+## 🚧 En Progreso
+
+
+
+## ✅ Hecho
+
+
+
+
+
+%% kanban:settings
+```
+{"kanban-plugin":"board","list-collapse":[false,false,false]}
+```
+%%
+
+
+Esta versión marca el paso de ALMA_LOADER de una bitácora estructurada a una plataforma cognitiva autónoma, gamificada y predictiva.
+
+
+
+Esta versión finaliza la etapa de diseño conceptual y está completamente lista para comenzar la fase de codificación modular y escalable.
+
+
+
+## 📂 Estructura Modular Optimizada
+
+- **NLP Local**: Procesamiento semántico avanzado con modelos locales ligeros.
+    
+- **Base de Datos (SQLite + JSON)**: Consultas rápidas y optimizadas con índices inteligentes.
+    
+- **Caching Inteligente**: Aceleración de consultas frecuentes mediante caching local (`@lru_cache`).
+    
+- **Validador Avanzado (`schema_base.json`)**: Validaciones semánticas, correcciones automáticas y reglas dinámicas.
+    
+- **Sistema Core (`alma_core.py`)**: Centraliza validación, autocorrección NLP, feedback, scoring y alertas automáticas.
+    
+- **Analytics y Predictivo (`alma_analytics.py`)**: Análisis de patrones históricos, correlaciones entre memorias y modelos predictivos básicos.
+    
+
+
+## 📘 Guía Rápida para Usuarios
+
+- Usa **categorías** obligatoriamente (ej: TRD).
+    
+- Usa **tags** para temas transversales (#crítico).
+    
+
+Ejemplo mínimo:
+
+```json
+{
+  "id": "MEMGEN-001",
+  "categoria": "GEN",
+  "contenido": "Nueva filosofía de trabajo remoto..."
+}
+```
+
+
+## 📈 Módulo Predictivo y Analytics
+
+- Entrenamiento de modelos predictivos básicos (Regresión Logística, Random Forest).
+    
+- Almacenamiento estructurado de resultados (features.json).
+    
+- Análisis de patrones entre memorias relacionadas.
+    
+- Informes automáticos sobre tasas de éxito según tags y emociones detectadas.
+    
+
+### Ejemplo Flujo Predictivo
+
+```mermaid
+flowchart TD
+    A[Análisis Pre-Trade] --> B{{IA}}
+    B --> C[Memoria JSON TRD]
+    C --> D[Base de Datos]
+    D --> E[Patrones Históricos]
+    E --> F{¿Resultados positivos?}
+    F -->|Sí| G[Sugerir entrada]
+    F -->|No| H[Sugerir evitar operación]
+```
+
+
+## 📋 Dashboard Simplificado
+
+Generación automática de estadísticas clave (HTML/Markdown):
+
+- Éxito por tags.
+    
+- Emociones vs resultados.
+    
+- Memorias por categoría.
+    
+
+
+## 🚩 Alertas Automáticas
+
+Notificaciones locales o email ante patrones de alto riesgo.
+
+
+## 🚀 Checklist Implementación
+
+1. Optimización SQLite y caching.
+    
+2. Estructura para datos predictivos.
+    
+3. Autocorrección NLP avanzada.
+    
+4. Dashboard simplificado.
+    
+5. Alertas automáticas.
+    
+6. Reglas dinámicas.
+    
+7. Documentación Extendida.
+    
+
+Este prompt define claramente la transición hacia un sistema inteligente y predictivo, optimizado para eficiencia, simplicidad operativa y escalabilidad futura.
+
+
+## 📂 Estructura Modular Optimizada
+
+- **Core (Esencial)**:
+    
+    - **Registro en Lenguaje Natural**: Conversión automática a formato JSON.
+        
+    - **Base de Datos (SQLite)**: Optimizada para consultas rápidas.
+        
+    - **Resúmenes Automáticos**: Diarios y semanales.
+        
+- **Avanzado (Anexo Técnico)**:
+    
+    - **NLP Local**: Procesamiento semántico avanzado.
+        
+    - **Caching Inteligente**: Consultas frecuentes aceleradas (`@lru_cache`).
+        
+    - **Validador Avanzado (`schema_base.json`)**: Validaciones, autocorrecciones y reglas dinámicas.
+        
+    - **Analytics y Predictivo (`alma_analytics.py`)**: Análisis de patrones y modelos predictivos.
+        
+    - **Gamificación**: Puntos, niveles y motivación.
+        
+    - **Integración Calendario y Backups**: Alertas y copias en nube.
+        
+
+
+## 🛠️ Funcionalidades Principales (Destacadas)
+
+1. **Registro en Lenguaje Natural**: Escribe como un mensaje.
+    
+2. **Resúmenes Automáticos**: Diarios y semanales.
+    
+3. **Alertas Inteligentes**: Detecta patrones de riesgo.
+    
+
+### Plantillas de Acciones Rápidas
+
+```
+/accion Ajustar riesgo: "Reducir tamaño a 1%"
+/accion Meditar: "15 min meditación post-trading"
+```
+
+
+## 📋 Dashboard Simplificado (Opcional pero recomendado)
+
+- Exportación automática en HTML/Markdown:
+    
+    - Tasas de éxito por tags.
+        
+    - Emociones detectadas versus resultados.
+        
+    - Número de memorias por categoría/tag.
+        
+
+
+## 🔗 Automatización Workflow Diario
+
+- Resúmenes automáticos.
+    
+- Validaciones diarias y limpieza periódica.
+    
+
+
+## 📚 Documentación Extendida
+
+- `README.md` con instalación y uso básico.
+    
+
+## Archivo: Checklist_Roadmap_ALMA_LOADER.md
+Contenido:
+
+# 📋 Checklist Completa – Roadmap ALMA_LOADER
+
+## ✅ FASE 1 – Core Básico
+
+- [ ] Crear script `/nueva` (entrada conversacional → JSON)
+  - [ ] Procesar entrada de texto simple
+  - [ ] Limpiar y normalizar input
+  - [ ] Identificar comandos `/accion`
+  - [ ] Generar estructura JSON válida
+  - [ ] Validar categoría contra `schema_base.json`
+
+- [ ] Validación de memorias
+  - [ ] Crear `schema_base.json` definitivo
+  - [ ] Implementar validación con `jsonschema`
+  - [ ] Gestionar errores y feedback
+  - [ ] Agregar reglas de corrección automática
+  - [ ] Registrar errores en log
+
+- [ ] Base de datos SQLite
+  - [ ] Diseñar tabla `memorias`
+  - [ ] Agregar soporte JSON1
+  - [ ] Crear función `guardar_memoria()`
+  - [ ] Testear inserción y extracción
+  - [ ] Agregar índice en `fecha` y `categoria`
+
+- [ ] Resumen diario automático
+  - [ ] Filtrar por `fecha_actual`
+  - [ ] Contar memorias por categoría
+  - [ ] Detectar tags críticos (#crítico, #pendiente)
+  - [ ] Generar archivo `.md` de salida
+
+- [ ] Acciones rápidas `/accion`
+  - [ ] Crear diccionario de acciones comunes
+  - [ ] Integrar parser para `/accion nombre`
+  - [ ] Generar memoria automática con contenido predefinido
+
+
+## ✅ FASE 3 – Predictivo + Gamificación
+
+- [ ] Sistema de puntos y niveles
+  - [ ] Asignar puntos por acciones (memoria, resumen, alerta resuelta)
+  - [ ] Registrar progreso en archivo o tabla
+  - [ ] Mostrar nivel actual y umbral de subida
+
+- [ ] Alertas automáticas
+  - [ ] Definir reglas `if-then` en `schema/reglas.json`
+  - [ ] Detectar patrones peligrosos en resumen diario
+  - [ ] Generar sugerencias (ej: revisar MEMHEALTH-022)
+
+- [ ] Modelo predictivo
+  - [ ] Preparar dataset con memorias históricas
+  - [ ] Entrenar regresión logística (features simples)
+  - [ ] Evaluar accuracy
+  - [ ] Guardar modelo en `models/demo.pkl`
+  - [ ] Aplicar modelo a memorias nuevas y emitir alerta
+
+## Archivo: Presentacion_ALMA_LOADER_v2.1.1.md
+Contenido:
+
+# 📘 Presentación Oficial – ALMA_LOADER Individual v2.1.1
+
+## 🎯 Propósito General del Proyecto
+
+ALMA_LOADER es un sistema modular, conversacional e inteligente diseñado para asistir a una persona en la gestión de sus decisiones, experiencias y conocimientos diarios, con énfasis especial en trading, productividad y autoanálisis.
+
+Su enfoque está centrado en ofrecer una experiencia simple y natural de entrada (lenguaje conversacional), combinada con análisis semántico, almacenamiento estructurado, resúmenes automáticos, alertas inteligentes y capacidades futuras de predicción.
+
+
+## ⚙️ Tecnologías y Herramientas Utilizadas
+
+| Componente           | Tecnología / Herramienta                              |
+|----------------------|--------------------------------------------------------|
+| Conversión Natural   | Python + expresiones regulares / NLP (spaCy)          |
+| Validación JSON      | `jsonschema` + reglas dinámicas                        |
+| Almacenamiento       | SQLite (con soporte JSON1 para consultas estructuradas)|
+| Resúmenes Automáticos| Generación Markdown programática                      |
+| Gamificación         | Sistema XP modular codificado en `alma_core.py`        |
+| Machine Learning     | `scikit-learn` + entrenamiento local con features      |
+| Automatización       | Cron + scripts Python + backups con `rclone`           |
+| Interfaz Opcional    | Telegram/WhatsApp Bot vía `python-telegram-bot`        |
+| Panel de Control     | Markdown dinámico para dashboards + alertas            |
+
+
+## 🚀 Fases del Roadmap Técnico
+
+1. **Fase 1 (Core)**: Conversión NL → JSON, validación, SQLite, resumen diario.
+2. **Fase 2 (Analytics)**: Detección de patrones, feature extractor, backup automático.
+3. **Fase 3 (Predictivo + Gamificación)**: Alertas automáticas, puntos de usuario, modelo de predicción.
+
+## Archivo: Roadmap_ALMA_LOADER_v2.1.1_Optimizado.md
+Contenido:
+
+# 🛠️ Roadmap Técnico–Operativo Optimizado – ALMA_LOADER v2.1.1
+
+Este roadmap integra entregables técnicos, estructura física de trabajo y control de riesgos, con hitos por día y trazabilidad directa al entorno físico y digital.
+
+
+## 📅 Fase 2 – Analytics + Backups (Semana 2)
+
+🎯 Objetivo: Analizar datos históricos y asegurar persistencia externa.
+
+| Tarea                     | Subtareas                                                             | Prioridad | Dependencias | Riesgos / Mitigación                                         | Transferencia Físico → Digital                           |
+|--------------------------|-----------------------------------------------------------------------|-----------|--------------|--------------------------------------------------------------|----------------------------------------------------------|
+| ✅ alma_analytics.py     | Día 1: Score por tag <br> Día 3: correlación #disciplina/#ganancia     | Media     | SQLite       | Etiquetado inconsistente → limpieza previa                   | Cuaderno de Trading: diagramas → `docs/analytics_flow.png` |
+| ✅ Feature Extractor     | Día 2: Transformar JSON en vector para ML                              | Media     | SQLite       | Campos vacíos → usar default y validación schema             | Programación: función en `scripts/features.py`            |
+| ✅ Backups en la Nube    | Día 4-5: Script rclone o API Google Drive                              | Alta      | SQLite       | API rota → fallback local en `/backups_local/`               | Plan en General → `docs/backup_policy.md`                 |
+
+
+## 📓 Cuadernos Vinculados
+
+| Cuaderno                        | Uso Principal                                       |
+|--------------------------------|----------------------------------------------------|
+| ✅ Cuaderno de Tareas Diarias  | Checklist basado en resumen diario                |
+| 💻 Cuaderno de Programación    | Diseño técnico, validaciones, scripts              |
+| 📈 Cuaderno de Trading         | Ideas TRD, esquemas de análisis, resultados        |
+| 🧠 División 1 – General        | Prompt, reglas base, comandos                      |
+| 💰 División 2 – Fondo          | Métricas, rendimiento, aplicación a capital futuro |
+| 💡 Block Espontáneo            | Ideas al vuelo → importar a markdown como base     |
+
+
+
+## ✅ Estado Actual del Proyecto
+
+**Versión del Prompt Base:** `2.1.1`  
+**Roadmap Técnico:** Definido y dividido en 3 fases semanales.  
+**Tableros Kanban:** Generados por fase (Fase 1, 2 y 3).  
+**Presentación General:** Documento de propósito, tecnologías y organización creado.  
+**Estructura Física Vinculada:** Integración con cuadernos físicos por módulo.
+
+
+## 📆 Tareas Próximas (Inicio Fase 1)
+
+1. Crear script `/nueva` básico (entrada conversacional → JSON).
+2. Implementar validación de memorias contra `schema_base.json`.
+3. Diseñar tabla `memorias` y función `guardar_memoria()` en SQLite.
+4. Automatizar resúmenes diarios en Markdown.
+5. Registrar acciones rápidas tipo `/accion`.
+
+
+## 🧭 Objetivo de Este Seguimiento
+
+- Mantener continuidad incluso tras pausas largas.
+- Saber siempre en qué fase se encuentra el sistema.
+- Identificar rápidamente qué falta hacer y dónde retomar.
+
+## Archivo: prompt_master_2.1.1_activo.md
+Contenido:
+# 🧠 Prompt Maestro ALMA_LOADER Individual v2.1.1
+
+## 🎯 Propósito (Versión Simplificada)
+
+"ALMA_LOADER es tu asistente para registrar experiencias diarias (especialmente trading) y recibir insights accionables. ¡Habla con él como si fuera un compañero!"
+
+
+## 📘 Guía Rápida para Usuarios
+
+## 🎮 Cómo Usar ALMA en 3 Pasos
+
+1. Escribe: `/nueva Hoy gané $500 en EURUSD con 2% riesgo`
+    
+2. Recibe resumen diario automático.
+    
+3. Revisa alertas y sugerencias en el dashboard.
+    
+
+Ejemplo mínimo:
+
+```json
+{
+  "id": "MEMGEN-001",
+  "categoria": "GEN",
+  "contenido": "Nueva filosofía de trabajo remoto..."
+}
+```
+
+
+## 🚀 Implementación por Fases
+
+**Fase 1 (Semana 1 - Core)**:
+
+- Registro conversacional + SQLite.
+    
+- Resúmenes básicos en Markdown.
+    
+
+**Fase 2 (Semana 2 - Avanzado)**:
+
+- Análisis predictivo básico.
+    
+- Backups automáticos en Google Drive o Dropbox.
+    
+
+**Fase 3 (Semana 3 - Avanzado)**:
+
+- Gamificación completa.
+    
+- Modelos predictivos avanzados.
+    
+
+
+## 🧩 Reglas Dinámicas
+
+```json
+"reglas_decision": {
+  "si": ["#sobreoperación", "TRD"],
+  "entonces": "Sugerir revisar MEMHEALTH-022"
+}
+```
+
+
+## 🚩 Alertas Automáticas
+
+- Notificaciones locales/email por condiciones de alto riesgo.
+    
+
+
+## 🗂️ Checklist por Fases
+
+### Fase 1 (Core - Alta Prioridad)
+
+- Registro conversacional.
+    
+- Validación básica.
+    
+- Resúmenes diarios.
+    
+
+### Fase 2 (Avanzado - Prioridad Media)
+
+- Análisis predictivo simple.
+    
+- Backups automáticos.
+    
+
+### Fase 3 (Avanzado - Opcional)
+
+- Gamificación.
+    
+- Alertas predictivas avanzadas.
+    
+
+Este prompt está ahora optimizado para ofrecer una experiencia clara, útil desde el primer día, escalable y listo para iniciar el desarrollo efectivo.
+
+
+> Este prompt técnico permite que cualquier IA ejecute acciones correctas dentro de ALMA_LOADER sin ambigüedades ni errores de interpretación. Complementa al whitepaper 3.0 (explicativo y estratégico).
+
+
+> Este whitepaper resume el espíritu, diseño y ambición de ALMA_LOADER desde una perspectiva conceptual y estratégica. Complementa al prompt técnico 3.0 que contiene las definiciones formales del sistema.
+
+## Archivo: CHANGELOG_whitepaper_v3.0.0.md
+Contenido:
+# 📋 Changelog – ALMA_LOADER Whitepaper
+
+## [3.0.0] – 2025-05-06
+
+### ✨ Added
+- Visión general explicativa de ALMA_LOADER
+- Descripción detallada de casos de uso
+- Arquitectura conceptual por módulos
+- Diagrama Mermaid de flujo de datos
+- Recomendaciones de integración
+
+### 🔄 Changed
+- Reorganización total respecto a versiones 2.x anteriores
+- Unificación con prompt técnico 3.0 como sistema acoplado
+
+### ❌ Removed
+- Documentación redundante de versiones anteriores
+
+
+
+## 🧠 Prompt Técnico
+
+- [x] Añadir tabla de tecnologías clave por módulo  
+  _Ej: sentence-transformers, spaCy, FAISS_
+
+- [x] Incluir ejemplo real de `reglas_dinamicas.json`  
+  _Ej: #fatiga + #sobreoperación → sugerencia_
+
+- [x] Documentar coexistencia SQLite–FAISS  
+  _Explicar cómo `embedding_id` vincula ambos_
+
+- [x] Agregar test unitario para validación  
+  _Función: `test_validar_memoria()`_
+
+- [x] Agregar test unitario para vectorización  
+  _Función: `test_vectorizacion()`_
+
+- [x] Documentar estructura de relaciones como grafo  
+  _Mención futura a Neo4j / networkx_
+
+- [x] Incluir recomendación de versionado de memorias  
+  _Formato: MEM-TRD-YYYY-MM-DD-XXX_
+
+## Archivo: README_prompt_v3.0.0.md
+Contenido:
+# 🧠 ALMA_LOADER – Prompt Técnico v3.0.0
+
+Este archivo define formalmente la arquitectura funcional, validaciones, módulos, y flujos operativos del sistema ALMA_LOADER. Está diseñado para que cualquier modelo IA, sistema externo o desarrollador humano pueda integrarse con precisión.
+
+
+## Versión
+**v3.0.0 – Primera consolidación funcional del sistema completo.**
+
+## Archivo: README_whitepaper_v3.0.0.md
+Contenido:
+# 📘 ALMA_LOADER – Whitepaper v3.0.0
+
+Este documento es la visión conceptual del sistema ALMA_LOADER: su propósito, arquitectura general, posibles usos e integración a futuro. Está diseñado para que cualquier humano o IA comprenda rápidamente qué es ALMA y cómo puede implementarse en diversos entornos.
+
+
+## Versión
+**v3.0.0 – Primera consolidación completa del enfoque estratégico.**
+
+## Archivo: prompt_technical_ALMA_LOADER_v3.0.md
+Contenido:
+# 🧠 Prompt Técnico ALMA_LOADER v3.0
+
+## 1. Propósito del Sistema
+Este prompt define todas las funciones técnicas, estructuras internas y flujos de interacción del sistema ALMA_LOADER. Su objetivo es que cualquier modelo IA o humano técnico pueda ejecutar, extender o auditar el sistema con claridad total. Consolidado a partir de versiones 2.1.1 y 2.2.0.
+
+## 2. Módulos Funcionales
+- `core_nl.py` – Conversión NL → JSON mediante reglas y patrones
+- `validador.py` – Validación con `schema_base.json` y normalización de campos
+- `sqlite_storage.py` – Almacenamiento actual, optimizado con JSON1 para consultas internas
+- `base_storage.py` – Interfaz abstracta de almacenamiento compatible con múltiples motores
+- `vector_storage.py` – Búsqueda semántica con embeddings vía FAISS (alpha)
+- `router_atencional.py` – Enrutamiento según intención detectada (acción, reflexión, memoria)
+- `resumenes.py` – Generación de resumen en Markdown diario o semanal
+- `alma_analytics.py` – Detección de patrones, correlaciones y disparadores
+- `gamificacion.py` – Sistema de motivación por puntos, niveles y hábitos (fase 3)
+
+## 3. JSON Schema de Memoria
+```json
+{
+  "id": "MEM-TRD-2025-XXXX",
+  "categoria": "TRD",
+  "contenido": "texto plano",
+  "tags": ["#btc", "#reflexión"],
+  "resumen_inferido": "...",
+  "embedding_id": "EMB-abc123",
+  "vector": [0.123, 0.987, ...],
+  "intencion_detectada": "registro",
+  "origen_input": "usuario",
+  "relaciones": [
+    { "tipo": "temporal", "target_id": "MEM-TRD-2025-XXXX", "peso": 0.8 }
+  ]
+}
+```
+
+## 4. Interfaces y Abstracciones
+- `BaseStorage`: permite intercambiar SQLite por FAISS, Neo4j u otros sin modificar el flujo general
+- `router_atencional`: enruta el input al módulo correcto según análisis rápido de intención
+
+## 5. Flujo Conversacional Esperado
+1. Entrada NL del usuario o API
+2. Conversión a JSON con `core_nl.py`
+3. Validación semántica con `validador.py`
+4. Almacenamiento (`sqlite_storage` o `vector_storage` según configuración)
+5. Generación de resumen en `resumenes.py`
+6. Activación de reglas automáticas en `alma_analytics.py`
+
+## 6. Automatizaciones
+- Generación diaria/semanal de resúmenes en Markdown
+- Backups automáticos del `memorias.db` o vector_index
+- Alertas semánticas según `reglas_dinamicas.json`
+
+## 7. Roadmap Técnico (por fases)
+### Fase 1 – Core estable
+- Registro estructurado
+- Validación con JSON Schema
+- Guardado en SQLite
+- Resúmenes diarios
+
+### Fase 2 – Semántico
+- Embeddings de contenido + FAISS
+- Router atencional
+- Análisis predictivo simple
+- Relaciones entre memorias
+
+### Fase 3 – Expansión
+- Gamificación, metas y refuerzos
+- Sistema de reglas con acciones encadenadas
+- Integración con apps externas (API REST, Telegram, Shortcuts, voz)
+
+## 8. Instrucciones de Integración
+- Todo input debe ser procesado con `core_nl.py`
+- Las memorias deben validarse contra `schema_base.json`
+- Toda salida debe ser JSON válido, o Markdown estructurado si es resumen
+- DeepSeek, GPT o terminales pueden interactuar directamente con cada módulo
+
+## Archivo: roadmap_3.0.0_to_3.0.1.md
+Contenido:
+# 🚀 Roadmap de Versión 3.0.1 – ALMA_LOADER
+
+## 📘 Whitepaper v3.0.1
+
+1. **Agregar un ejemplo narrativo real en Casos de Uso**  
+    _"Hoy operé con 5% de riesgo tras dormir solo 4 horas..." → ALMA responde."_
+    
+2. **Incluir tabla de correspondencia módulos ↔ scripts**  
+    Explicita qué archivo hace qué.
+    
+3. **Expandir el Prólogo con la filosofía del sistema**  
+    Frase clave: “ALMA_LOADER no es una app, es una mente digital modular…”
+    
+4. **Agregar sección “Comandos útiles”**  
+    Ejemplos de cómo se puede usar el sistema como asistente diario.
+    
+
+
+### 📌 Cuando termines cada punto:
+
+- Tachalo en tu bitácora o en Obsidian.
+    
+- Cuando completemos todos, generamos:
+    
+    - `README_whitepaper_v3.0.1.md`
+        
+    - `CHANGELOG_whitepaper_v3.0.1.md`
+        
+    - `README_prompt_v3.0.1.md`
+        
+    - `CHANGELOG_prompt_v3.0.1.md`
+
+> Este whitepaper resume el espíritu, diseño y ambición de ALMA_LOADER desde una perspectiva conceptual y estratégica. Complementa al prompt técnico 3.0 que contiene las definiciones formales del sistema.
+
+
+## Archivo: CHANGELOG_whitepaper_ALMA_v3.0.1.md
+Contenido:
+# 📋 Changelog – ALMA_LOADER Whitepaper
+
+## [3.0.1] – 2025-05-06
+
+### ✨ Added
+- Caso de uso narrativo que activa reglas dinámicas
+- Tabla de correspondencia módulo ↔ script
+- Prólogo ampliado con filosofía ALMA
+- Nueva sección de comandos útiles (modo asistente)
+
+### 🔄 Changed
+- Reorganización interna para reflejar arquitectura actualizada
+- Reordenamiento de secciones para mejorar lectura progresiva
+
+### 🧹 Removed
+- N/A
+
+
+## Archivo: Explicacion_Integral_ALMA_v3.0.1.md
+Contenido:
+# 🔄 Interacción entre el Whitepaper y el Prompt Técnico – ALMA_LOADER v3.0.1
+
+El sistema ALMA_LOADER está documentado en dos capas complementarias: el **whitepaper** y el **prompt técnico**. Esta separación está diseñada para que tanto humanos como IAs puedan entender, extender e interactuar con el sistema desde diferentes niveles.
+
+
+## 📘 Whitepaper – Nivel Estratégico y Conceptual
+
+El **whitepaper** está orientado a **transmitir la visión, propósito y lógica funcional del sistema**. Es útil para:
+

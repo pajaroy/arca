@@ -1,0 +1,24 @@
+## 📎 Apéndice 2025-06-02 – Limpieza y archivo de contenidos no operativos (S22)
+
+**Resumen:**
+Se detectaron varios archivos dentro de `_legacy/resumenes_cannabird/diarios/s22/` que no forman parte del flujo oficial de resúmenes operativos. En detalle:
+
+### 🗃️ Archivos afectados:
+- `.docx` sin convertir (no estandarizados):  
+  - 2025-05-28.docx  
+  - 2025-05-29.docx  
+  - 2025-05-30_diario_cannabird.docx  
+- Markdown fuera de convención o pre-validación:  
+  - 2025-05-27_diario_cannabird.md  
+  - Resumen_Cannabird_26-05-2025.md
+
+**Acción tomada:**
+Todos estos archivos fueron trasladados a la ruta:
+
+```bash
+_legacy/archivados_irrecuperables/resumenes_cannabird/s22/
+```
+
+Esta carpeta contendrá documentos no curados, no estandarizados o innecesarios para el flujo activo, pero se conservarán como respaldo histórico por seguridad.
+
+**Tags:** `#legacy`, `#archivados`, `#estructura`, `#no-operativo`, `#docx`, `#s22`, `#limpieza`

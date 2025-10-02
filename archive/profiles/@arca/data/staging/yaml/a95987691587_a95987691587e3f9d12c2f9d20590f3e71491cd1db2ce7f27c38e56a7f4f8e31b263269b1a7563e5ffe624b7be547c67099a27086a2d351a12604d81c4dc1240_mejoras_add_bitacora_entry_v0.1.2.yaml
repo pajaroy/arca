@@ -1,0 +1,44 @@
+id: SUGERENCIAS_SCRIPT_BITACORA_2025-06-07
+script: add_bitacora_entry_v0.1.2.py
+autor: Kael (Auditor CLI)
+estado_actual: funcional_con_limitaciones
+objetivo_mejoras: >
+  Hacer el script más modular, flexible, reutilizable y preparado para integrarse como subcomando CLI
+  en un sistema mayor como ALMA_RESIST, sin romper compatibilidad actual.
+
+sugerencias:
+  - id: SUG_001
+    titulo: "Rutas configurables por CLI"
+    descripcion: >
+      Evitar rutas hardcoded como `BITACORA_FILE` y `BACKUP_DIR`.
+      Pasar ambas como argumentos CLI obligatorios o con default relativo.
+    prioridad: alta
+
+  - id: SUG_002
+    titulo: "Modularización de funciones"
+    descripcion: >
+      Separar funciones utilitarias (validación, backup, inserción) en un módulo reutilizable.
+      Permitir que el script se importe desde otros sin ejecutar `main()`.
+    prioridad: alta
+
+  - id: SUG_003
+    titulo: "Agregar modo silencioso / verbose"
+    descripcion: >
+      Reemplazar `print()` por `logging` y permitir un flag `--verbose` para depurar.
+      Por default debe correr silenciosamente salvo errores.
+    prioridad: media
+
+  - id: SUG_004
+    titulo: "Dry-run (modo simulación)"
+    descripcion: >
+      Permitir correr el script sin escribir el archivo, útil para testing o integraciones externas.
+    prioridad: media
+
+  - id: SUG_005
+    titulo: "Tests unitarios básicos"
+    descripcion: >
+      Incorporar tests unitarios con `pytest` para validar entradas válidas e inválidas.
+    prioridad: baja
+
+apto_para_integracion_directa: no
+condicion: Requiere modularización mínima previa

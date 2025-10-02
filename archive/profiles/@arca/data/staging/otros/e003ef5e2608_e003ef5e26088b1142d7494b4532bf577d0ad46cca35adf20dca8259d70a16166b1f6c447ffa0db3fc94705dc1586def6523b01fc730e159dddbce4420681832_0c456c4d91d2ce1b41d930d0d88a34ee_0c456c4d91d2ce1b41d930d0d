@@ -1,0 +1,59 @@
+# 📚 Índice de Metodologías – ALMA_RESIST
+
+Este documento resume y enlaza todas las metodologías vigentes, archivadas y en propuesta activa del sistema ALMA_RESIST.
+
+
+## 🗂️ Archivadas
+
+| Documento                                     | Motivo de reemplazo o cierre                  |
+|----------------------------------------------|-----------------------------------------------|
+| `metodologia_estructura_modular_v1.md`       | Reemplazada por v2 con metadatos YAML         |
+| `metodologia_doc_ia_v1.md`                   | Superada por mejoras IA-friendly              |
+| `metodologia_sprints_v1.md`                  | Simplificada y vinculada a sistema ADR        |
+| `metodologia_adr_v1.md`                      | Migración a estructura con frontmatter        |
+| `metodologia_interaccion_ia_v1.md`           | Refactor total con flujo CLI + prompts        |
+
+
+## 🧠 Tags recomendados por dominio
+
+| Tag              | Descripción                                 |
+|------------------|---------------------------------------------|
+| `core`           | Módulo estructural base del sistema         |
+| `infraestructura`| Configuración, sistema operativo, entorno   |
+| `documentación`  | Registros, plantillas, guías                |
+| `metodología`    | Procedimientos operativos estandarizados    |
+| `IA`             | Interacción, prompts, entrenamiento, memoria|
+| `automatización` | Scripts, validadores, CLI, workflows        |
+| `seguridad`      | Backups, accesos, protección de datos       |
+| `auditoría`      | Revisión, refactor, decisiones críticas      |
+| `propuesta`      | Documento en evaluación para evolución       |
+
+
+## 🔧 Herramientas complementarias
+
+| Herramienta                       | Función principal                                        | Sprint         |
+|----------------------------------|-----------------------------------------------------------|----------------|
+| `add_linked_to_minimo.py`        | Agrega `linked_to` a documentos `core` sin relaciones     | Sprint 2.4     |
+| `alma-cli.py`                    | CLI para auditorías, actualizaciones masivas y validación| Sprint 2.4     |
+
+
+### 📂 Estructura Autónoma de Carpetas
+
+**Archivo:** `metodologia_estructura_autonoma.md`  
+**Dominio:** `metodología`  
+**Tipo:** `core`  
+**Estado:** `stable`
+
+Esta metodología define una estructura mínima y escalable para crear nuevos módulos de forma autónoma dentro del ecosistema ALMA_RESIST, sin necesidad de integrarlos inmediatamente en el núcleo.  
+Ideal para proyectos personales, pruebas conceptuales o dominios en exploración como salud, trading o IA aplicada.
+
+**Incluye:**
+- Estructura de carpetas recomendada
+- Archivos clave iniciales
+- Buenas prácticas de portabilidad y documentación
+- Flujo de trabajo sugerido
+
+👉 Recomendada para quienes trabajan en entornos locales con visión de integración futura.  
+Compatible con `bitácoras`, `scripts`, `datasets` y `auditorías` personales.
+
+

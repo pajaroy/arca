@@ -1,0 +1,65 @@
+---
+tipo: bitacora
+id: BITACORA_2025-06-05_754958
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Test Log Writer V0.0.0.4
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:15096ae641f6cd06e34c45cd1a317aec8c21323cb7e9f5a5c0c67746893d8c77
+---
+import os
+from datetime import datetime, timedelta
+from core.llm_server.utils.log_writer.log_writer import LogWriter
+import pytest
+from core.llm_server.utils.log_writer.log_writer import LogWriter
+
+@pytest.fixture
+def log_writer(tmp_path):
+    return LogWriter(log_dir=str(tmp_path))
+
+def test_log_rotation(tmp_path):
+    writer = LogWriter(log_dir=str(tmp_path))
+    old_date = datetime.utcnow() - timedelta(days=8)
+    old_log = tmp_path / f"alma_{old_date.strftime('%Y-%m-%d')}.log"
+    old_log.touch()
+
+    recent_log = tmp_path / f"alma_{datetime.utcnow().strftime('%Y-%m-%d')}.log"
+    recent_log.touch()
+
+    writer.secure_rotation(days=7)
+
+    assert not old_log.exists()
+    assert recent_log.exists()
+
+def test_disk_failure(log_writer, tmp_path, monkeypatch):
+    def mock_rename(*args, **kwargs):
+        raise OSError("Simulated disk error")
+
+    monkeypatch.setattr(os, "rename", mock_rename)
+
+    event = LogWriter.log_event("ERROR", "Test de fallo")
+    result = log_writer.write_log(event)
+
+    assert result is False
+
+def test_type_validation():
+    event = LogWriter.log_event("WARN", 123)
+    assert isinstance(event["message"], str)
+    assert event["message"] == "123"
+
+    event = LogWriter.log_event("INFO", "OK", metadata={"key": "value"})
+    assert isinstance(event["metadata"], dict)
+
+def test_directory_permissions(log_writer, tmp_path):
+    log_dir = log_writer.log_dir
+    mode = log_dir.stat().st_mode
+    assert mode & 0o700 == 0o700

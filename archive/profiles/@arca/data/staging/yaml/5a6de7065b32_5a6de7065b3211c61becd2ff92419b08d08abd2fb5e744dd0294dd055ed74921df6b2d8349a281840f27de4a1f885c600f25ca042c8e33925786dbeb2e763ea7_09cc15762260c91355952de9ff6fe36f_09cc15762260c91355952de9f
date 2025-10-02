@@ -1,0 +1,102 @@
+# =========================================================
+# KAEL CLI v0.1.3 (ALMA_RESIST) - ARQUITECTURA SIMPLIFICADA
+# =========================================================
+
+arquitectura_general:
+  descripcion: |
+    CLI modular, seguro y auditable, basado en capas mínimas:
+    - Orquestación: Alma.py (entrypoint y UI/CLI)
+    - Servicios: Kael.py (comandos, lógica, logs)
+    - Infraestructura: handlers para IO, backups, hashing
+    Documentación y testing básico integrados para mantenibilidad real.
+
+entrypoint_cli:
+  ruta: "/home/alma/Alma-Cli/Alma.py"
+  descripcion: |
+    Terminal interactiva y parser CLI.
+    Solo comunica con Kael.py. Valida entrada, muestra logs recientes, y ejecuta comandos seguros.
+
+backend_comandos:
+  ruta: "/home/alma/Alma-Cli/Kael/Kael.py"
+  descripcion: |
+    Orquesta todas las operaciones de archivos, registros, y permisos.
+    Sólo ejecuta lo solicitado por Alma.py. Logs en cada operación.
+
+estructura_directorios:
+  /home/alma/Alma-Cli/
+    - Alma.py
+    - config.yaml
+    - Kael/
+      - Kael.py
+      - commands/        # Un comando = un archivo, fácil de testear
+      - handlers/        # Funciones: IO, backup, hash
+      - validators/      # Schemas y validadores
+      - utils/           # Criptografía y helpers
+      - tests/           # Test unitarios y de integración (pytest)
+    - managed_assets/
+      - quarantined/     # Archivos movidos por integridad dudosa
+      - archived/        # Archivos solo-lectura
+    - Logs/
+      - audit.log        # Todas las acciones relevantes, en JSONL y Parquet
+      - errors.log       # Errores críticos y fallos
+    - templates/         # Ejemplos de config, log y README
+    - README.md
+
+operaciones_soportadas:
+  formatos:
+    - XLSX
+    - JSON
+    - YAML
+    - MD
+    - PDF
+  acciones:
+    - mover (logueado)
+    - copiar (logueado)
+    - borrar (soft-delete, movido a archived/)
+    - archivar (manual)
+    - cuarentena (manual/auto por hash raro)
+    - validar (hash/checksum)
+    - crear_carpeta
+  integridad:
+    hash: "SHA-256 por defecto (opcional: BLAKE3 para archivos grandes)"
+
+politicas_integridad:
+  reglas:
+    - Todo cambio no autorizado → quarantined/
+    - Todo comando deja un registro en audit.log (formato JSONL)
+    - No se borra nada de forma irreversible salvo purge manual
+
+estructura_metadatos:
+  db_primaria: "SQLite"
+  tabla:
+    asset_metadata:
+      - id: UUID (pk)
+      - title: str
+      - path: str
+      - hash: str
+      - estado: int (0=activo,1=archivado,2=cuarentena)
+      - creado: timestamp
+      - modificado: timestamp
+      - owner: str
+      - historial: JSON
+  logs: "Logs/audit.log (JSONL) y Logs/audit.parquet"
+
+logs_auditoria:
+  formatos:
+    - JSONL: humano y fácil de parsear
+    - Parquet: análisis IA/ML
+  ejemplo_entrada: |
+    {"fecha":"2025-07-12T12:00:00Z","usuario":"bird","accion":"mover","archivo":"/ruta/arch","hash":"sha256:ab...","resultado":"ok"}
+
+testing:
+  - tests/ con pytest
+  - comandos críticos cubiertos (mover, borrar, validar, cuarentena)
+  - plantilla README y ejemplos de logs para onboarding
+
+mejoras_futuras:
+  sugerencias:
+    - Soporte simple REST API si se requiere integración
+    - watcher.py para salud y eventos críticos (puede ser opcional)
+    - migración fácil a DB más potente si crece el uso
+
+# FIN DEL PROMPT KAEL CLI v0.1.3 SIMPLIFICADO

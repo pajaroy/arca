@@ -1,0 +1,44 @@
+# 00_Esquema_Modular_ALMA_LIBRE
+
+# 🧩 Esquema Modular – ALMA LIBRE v0.6
+
+Este documento describe los módulos activos del sistema ALMA LIBRE y sus funciones principales. Cada módulo actúa como una unidad funcional interconectada con los cuadernos temáticos y con AlmaSync para su futura automatización.
+
+
+### `01_Noticias_Globales/`
+
+Espacio para el seguimiento diario y semanal de eventos globales relevantes.
+
+- Resúmenes de noticieros, redes y medios.
+- Permite cruzar contexto con emociones, economía o decisiones de trading.
+
+
+### `03_Salud_y_RPL/`
+
+Bitácora integral del tratamiento personal de salud y regeneración.
+
+- Registra ayuno, agua, comidas, suplementos y descanso.
+- Se conecta con recetas, rutinas y evolución física/emocional.
+
+
+### `05_Finanzas_Personales/`
+
+Espacio para controlar ingresos, gastos e inversiones personales.
+
+- Seguimiento mensual y por categoría.
+- Conectado al módulo de fondo e ingresos por actividad.
+
+
+### `07_Bitacora_Emocional/`
+
+Módulo de introspección, autoevaluación y trabajo emocional.
+
+- Registro diario/semanal de estados internos.
+- Conecta con trading, salud y creatividad.
+
+
+> Este esquema modular está sujeto a mejoras evolutivas por versión.
+La conexión entre módulos se detalla en el archivo 01_Interconexion_Modular.md.
+> 
+
+[README](00_Esquema_Modular_ALMA_LIBRE%201d8dcc9f5a8a8071a0e5c4d200c6b565/README%201d8dcc9f5a8a80579803ee1e083bfe89.md)

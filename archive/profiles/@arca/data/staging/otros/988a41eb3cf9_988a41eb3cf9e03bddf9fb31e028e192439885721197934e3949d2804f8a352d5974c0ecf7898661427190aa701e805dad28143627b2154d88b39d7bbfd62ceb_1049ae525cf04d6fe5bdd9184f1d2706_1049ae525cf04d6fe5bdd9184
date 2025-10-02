@@ -1,0 +1,19 @@
+# 📁 docs/auditorias/ – Auditorías Técnicas de ALMA_RESIST
+
+Este directorio contiene todas las **auditorías estructurales, técnicas y funcionales** realizadas sobre el sistema ALMA_RESIST. Cada archivo en esta carpeta documenta una instancia formal de revisión y diagnóstico, incluyendo:
+
+- 📋 Revisión de estructura de carpetas y archivos
+- 🧠 Observaciones sobre consistencia metodológica
+- ⚠️ Detección de errores, omisiones o redundancias
+- ✅ Registro de avances y cumplimiento de checklists
+
+
+## 📚 Auditorías Realizadas
+
+- [[auditoria_estructura_2025-05-20]] – Auditoría estructural inicial
+
+
+## 👤 Responsable
+
+Auditor Técnico: IA  
+Validación: Usuario (Santi)

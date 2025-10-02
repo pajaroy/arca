@@ -1,0 +1,20 @@
+version: "0.1.0"
+author: "bird"
+
+root: /trece
+
+paths:
+  database: /trece/database/trece.db
+  logs: /trece/logs
+
+meta:
+  schema: /trece/meta/schema.sql
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  date_format: "%Y-%m-%d %H:%M:%S"
+
+database:
+  timeout: 30
+  detect_types: 1

@@ -1,0 +1,31 @@
+#!/bin/bash
+# Script: 00_particionado_bios.sh
+# Descripción: Crea tabla de particiones BIOS y reserva espacio para Parrot/Windows al final
+
+set -e
+
+echo "[+] Iniciando particionado básico en modo BIOS (MSDOS)..."
+
+DISK="/dev/sda"  # Cambiar si es otro disco
+
+# Tamaño total del disco en MiB
+DISK_SIZE=$(parted -s "$DISK" unit MiB print | awk '/Disk.*MiB/ {gsub("MiB", "", $3); print int($3)}')
+
+# Reservamos 30 GiB = 30720 MiB
+FINAL_LIMIT=$((DISK_SIZE - 30720))
+
+# Desmontar y cerrar LUKS por las dudas
+umount -R /mnt || true
+cryptsetup close alma_crypt || true
+
+echo "[+] Creando tabla de particiones DOS (BIOS)..."
+parted --script "$DISK" \
+    mklabel msdos \
+    mkpart primary fat32 1MiB 513MiB \
+    set 1 boot on \
+    mkpart primary linux-swap 513MiB 16897MiB \
+    mkpart primary ext4 16897MiB "${FINAL_LIMIT}MiB"
+
+echo "[+] Tabla de particiones creada:"
+parted "$DISK" print
+

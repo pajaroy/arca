@@ -1,0 +1,82 @@
+
+id: MEM_2025-06-08_cfgbase_controlcentral_changelog_v2.1
+tipo: changelog
+fecha: 2025-06-08
+modulo: alma_resist/
+tema: changelog_v2.1.0_alma_resist
+status: vigente
+responsable: Santi + Kael + DeepSeek
+tags: [changelog, versionado, resiliencia, plugins, cifrado, ia, auditado]
+---
+resumen: |
+  Registro institucional del salto arquitectónico en ALMA_RESIST v2.1.0:
+  - Sistema de plugins multi-backend (filesystem, Redis, SQLite experimental)
+  - Motor de validación contextual por tipo y módulo
+  - Plantillas de registro asistidas por IA e integración CLI (`--template`)
+  - Cifrado moderno (XChaCha20-Poly1305), firmas Ed25519 y auditoría SELinux
+  - Optimización extrema en carga masiva (hasta 11k ops/s)
+  - CLI extendido con gestión de plugins, auditoría de seguridad y generación de plantillas
+  - Roadmap para HSM, Zero-Knowledge Proofs, clustering y auto-reparación IA
+impacto: |
+  - Consolida la resiliencia y modularidad institucional.
+  - Prepara la infraestructura para escalabilidad multi-nodo y auditoría avanzada.
+  - Habilita integración CI/CD, backups automáticos y auto-healing asistido por IA.
+  - Marca el inicio de la era “Resiliencia Extrema” en ALMA_RESIST.
+detalles_tecnicos:
+  arquitectura:
+    - storage_engine: [filesystem, redis, sqlite]
+    - autodeteccion_backend: true
+    - plugins: gestion_cli, auditoria, plantillas
+  seguridad:
+    - cifrado: XChaCha20-Poly1305
+    - firmas: Ed25519
+    - auditoria: selinux
+  rendimiento:
+    carga_masiva:
+      v2_0: 12.8s_50k_registros
+      v2_1: 4.2s_50k_registros
+      mejora: 67%
+  cli:
+    nuevos_subcomandos: [plugin, audit, template]
+    nuevos_flags: [--schema-version, --lock-timeout, --no-hash, --lang]
+  integracion_externa:
+    webhooks:
+      - url: https://ci-cd.alma/resist/webhook
+        events: [load_success, validation_failed]
+    api: graphql
+    playgroud_embebido: true
+  roadmap:
+    seguridad:
+      - hsm_integration: 2025-06-15
+      - zk_proofs: 2025-07-05
+    escalabilidad:
+      - clustering_redis: 2025-06-20
+      - balanceo_carga: 2025-07-15
+    ia:
+      - auto_reparacion_llms: 2025-06-25
+      - sintesis_memoria: 2025-08-01
+referencias:
+  - changelogs/changelog_detallado_v2.1.0.md
+  - memorias/README.md
+---
+- id: MEM_2025-06-06_XX
+  fecha: 2025-06-06
+  tipo: fundacional
+  modulo: kael/entorno
+  resumen: Creación de KAEL como agente CLI principal. Estructura, funciones y protocolos auditados por Centralesis.
+  autor: centralesis
+---
+- id: MEM_2025-06-06_XX
+  fecha: 2025-06-06
+  tipo: fundacional
+  modulo: kael/entorno
+  resumen: Creación de KAEL como agente CLI principal. Estructura, funciones y protocolos auditados por Centralesis.
+  autor: centralesis
+---
+- id: MEMKAEL_2025-06-06_01
+  fecha: 2025-06-06
+  tipo: derivacion
+  modulo: kael/operacion
+  resumen: Solicitud fuera de función derivada a Centralesis.
+  autor: kael
+---

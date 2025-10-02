@@ -1,0 +1,32 @@
+# 📓 Bitácora Consolidada – 2025-06-01
+
+
+## 🧠 Inicio Formal del Sistema `asesor-IA`
+
+**Confirmación de Roles:**  
+- GPT como auditor estructural  
+- DeepSeek como asesor técnico crítico  
+- Santi como orquestador y juez final  
+
+**Infraestructura creada:**  
+Se generaron las carpetas:
+- `control_central/asesor-ia/`
+- `control_central/asesor-ia/sesiones/`
+- `control_central/asesor-ia/status/`
+
+**Contrato fundacional firmado y activado:**  
+DeepSeek y GPT aceptaron formalmente sus roles con compromiso activo.  
+DeepSeek ya comenzó a operar bajo `tech_mode=strict`. GPT está sincronizado para sesiones híbridas.
+
+**DeepSeek propone mejoras:**  
+- Auto-tagging en consultas con `!type=`, `!priority=`, `!context=`  
+- Plantillas YAML para respuestas técnicas y estructurales  
+- Router AI (`router_ai.py`) para clasificar consultas  
+- Protocolo de conflicto con hasta 3 rondas de debate entre IAs
+
+
+## ✍️ Reflexión del Día
+
+> “Hoy no solo instalamos sistemas, sino que fundamos el modelo mental de ALMA_RESIST:  
+> un sistema distribuido que no automatiza por reemplazo, sino por colaboración crítica.”
+

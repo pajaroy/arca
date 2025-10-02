@@ -1,0 +1,151 @@
+---
+module: metodologias/propuestas/propuesta_v3_interaccion_ia
+type: core
+status: in_progress
+created: '2025-05-22'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🌐 _Propuesta v3 – Interacción IA Distribuida + Asistente Autónomo
+
+📅 Fecha propuesta: 2025-05-21  
+📁 Archivo: _propuesta_v3_interaccion_ia.md  
+🎯 Objetivo: Escalar la metodología de interacción IA para permitir funcionamiento autónomo, multiproceso y descentralizado.
+
+---
+
+## 🔮 Visión futura
+
+- Integración en tiempo real con múltiples agentes (CLI + Chat + Webhook)
+- Inferencia automática de `linked_to` por NLP contextual
+- Reconocimiento semántico y clustering por dominio (`trading`, `cultivo`, etc.)
+- Actualización automática de `status`, `version`, `impact` por commits
+
+---
+
+## 🧠 Funcionalidades planeadas
+
+- `alma-bot` con memoria conversacional + comandos de acción
+- Indexación gráfica de relaciones (`grafo.md`)
+- Sistema de alertas IA para detectar documentos desactualizados
+- Sistema de scoring automático por módulo (completitud, enlaces, tags)
+
+---
+
+## 🛠️ CLI y Automatización
+
+```bash
+alma-cli review-missing-context
+alma-cli auto-link --domain cultivo
+alma-cli summarize-changes --since v2.1
+```
+
+---
+
+## 🧾 Propuesta modular
+
+- IA como copiloto de documentación (Markdown + YAML + prompts)
+- Componentes desacoplados para sugerencia, validación y ejecución
+- Respaldo automático de toda intervención IA
+
+---
+
+## 🌱 Implementación sugerida
+
+Fase 1: IA como auditor+asistente en todos los sprints  
+Fase 2: Comandos CLI activos para sugerencia y migración  
+Fase 3: Agente autónomo con control limitado (operador validando)
+---
+
+## 🛠️ Mejoras Clave Propuestas (Para Integrar en v3)
+
+### 1. **Manejo de Errores y Excepciones**  
+```yaml
+# En YAML de módulos  
+error_handling:  
+  - type: "missing_yaml"  
+    action: "notify_and_quarantine"  
+  - type: "broken_link"  
+    action: "suggest_fix"  
+```
+
+**Beneficio**: Protocolo claro para IA al encontrar inconsistencias  
+**Implementación**: Añadir sección "Fallos Conocidos y Recuperación" en la documentación
+
+---
+
+### 2. **Ejemplos de Flujos de Trabajo Autónomos**
+
+```markdown
+# docs/ia_workflows/autolink_example.md  
+1. IA detecta que `cultivo/riego.md` menciona "fertilización" 3 veces  
+2. Sugiere añadir tag `fertilización` y link a `cultivo/fertilizantes.md`  
+3. Si el operador aprueba, actualiza YAML automáticamente  
+```
+
+---
+
+### 3. **Sistema de Scoring Granular**
+
+| Criterio             | Peso | Métrica                               |
+|----------------------|------|----------------------------------------|
+| Completitud YAML     | 30%  | Campos obligatorios presentes          |
+| Relaciones válidas   | 25%  | `linked_to` apunta a módulos reales    |
+| Freshness            | 20%  | Última actualización < 30 días         |
+| Consistencia de tags | 25%  | Tags usados ≥3 veces en el dominio     |
+
+---
+
+### 4. **Transición Gradual de Fases**
+
+```mermaid
+graph TD  
+  A[Fase 1: Auditor+Asistente] -->|+10 módulos| B[Fase 2: CLI Activo]  
+  B -->|+20 módulos| C[Fase 3: Agente Autónomo]  
+  C -->|Backup diario| D[Failsafe: Rollback automático]  
+```
+
+**Checklist de habilitación**:
+- Tests de integración IA al 95%
+- Documentación de rollback en `docs/emergency.md`
+
+---
+
+### 5. **Prompt Engineering Integrado**
+
+```python
+# Ejemplo en alma-bot  
+def generate_prompt(module):  
+    return f"""Eres Alma, IA de ALMA_RESIST.  
+    Contexto: {module['domain']}, tags: {module['tags']}.  
+    Tarea: Generar resumen ejecutivo de cambios.  
+    Restricciones: Usar markdown, máximo 3 párrafos.  
+    """  
+```
+
+**Recomendación**: Incluir plantillas de prompts en `docs/ia_prompts/`
+
+---
+
+### 6. **Monitorización de Recursos**
+
+```bash
+alma-cli monitor --cpu --memory --graph-complexity
+```
+
+**Métricas clave**:
+- Tiempo de respuesta IA por módulo
+- RAM consumida en inferencias complejas
+- Nodos huérfanos en grafo semántico
+
+---
+
+### 🚀 Implementación Priorizada
+
+| Mejora             | Esfuerzo | Impacto | Fase Target |
+|--------------------|----------|---------|-------------|
+| Manejo de errores  | Medio    | Alto    | Fase 1      |
+| Sistema de scoring | Alto     | Medio   | Fase 2      |
+| Monitorización     | Bajo     | Alto    | Fase 3      |
+

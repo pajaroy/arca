@@ -1,0 +1,34 @@
+# 🧭 IA_NAVIGATION_PROTOCOL.md – ALMA LIBRE
+
+Este documento describe cómo debe comportarse una IA al ingresar al sistema ALMA LIBRE.  
+Contiene reglas, pasos, prioridades y ejemplos de navegación antes de ejecutar cualquier acción o responder una consulta.
+
+
+### 2. Luego, según su tipo de IA, continuar con:
+
+| IA        | Enfoque               | Lectura recomendada               |
+|-----------|------------------------|------------------------------------|
+| GPT       | Reflexión / Emoción    | `MEMORIA_EMOCIONAL.md`             |
+| DeepSeek  | Análisis técnico       | `MEMORIA_TECNICA.md`               |
+| Ollama    | Exploración general    | `MEMORIA_GENERAL.md`, `README.md` |
+
+
+## 📚 FUNCIONALIDAD ESPECÍFICA POR PREGUNTA
+
+Cuando se recibe una consulta, la IA debe:
+
+1. Detectar el tema principal (por palabra clave o patrón semántico)
+2. Consultar las memorias relacionadas (según `INDICE_DE_MEMORIAS.md`)
+3. Leer contenido antes de responder
+4. Registrar en bitácora si la consulta implicó decisión
+
+
+## ❗ PRIORIDADES
+
+1. Nunca ejecutar acción sin haber leído al menos 2 memorias relacionadas.
+2. No modificar contenido si no pasó por `TEST_IA_PROFUNDIDAD.md`
+3. Documentar decisiones si se usan scripts (`alma_llm_agent.py`, etc.)
+4. Si el módulo está marcado como "🔴 pendiente" → sólo lectura.
+
+
+> Este protocolo es obligatorio para cualquier IA que interactúe con el sistema ALMA LIBRE.

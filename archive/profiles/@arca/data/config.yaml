@@ -1,0 +1,30 @@
+# ~/@arca/config.yaml
+root: "~/@arca"
+formats:
+  - "csv"
+  - "markdown"
+  - "otros"
+  - "python"
+  - "sql"
+  - "yaml"
+metadata_fields:
+  - "ruta"
+  - "nombre"
+  - "tipo"
+  - "tamano_bytes"
+  - "fecha_mod"
+  - "hash_blake3"
+  - "contenido"
+paths:
+  raw: "data/raw"
+  staging: "data/staging"
+  log_file: "data/logs/datalogs.csv"
+  database_file: "data/staging/database.csv"
+
+databases:
+  sql: "data/processed/arca.db"
+  chroma: "data/processed/chroma"
+
+metadata:
+  extract_exif: true
+  max_file_size_mb: 50

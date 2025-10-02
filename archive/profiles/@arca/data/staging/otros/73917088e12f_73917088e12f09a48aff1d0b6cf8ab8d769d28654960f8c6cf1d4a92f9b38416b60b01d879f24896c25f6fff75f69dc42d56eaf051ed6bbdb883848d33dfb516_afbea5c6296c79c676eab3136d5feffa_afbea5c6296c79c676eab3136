@@ -1,0 +1,21 @@
+Características clave
+
+    Sistema robusto: Manejo de bloqueos para evitar corrupción de datos
+
+    Verificación de integridad: Compara ambos archivos al cargar
+
+    Escritura atómica: Usa archivos temporales para evitar corrupción
+
+    Interfaz simple: Métodos fáciles de usar para operaciones CRUD
+
+    Compatibilidad: Funciones legacy para mantener código existente
+
+Recomendaciones adicionales
+
+    Backups automáticos: Implementar un sistema que haga copias periódicas
+
+    Histórico de cambios: Podrías añadir un sistema de versionado
+
+    API REST: Para acceso remoto si es necesario
+
+    Encriptación: Para datos sensibles

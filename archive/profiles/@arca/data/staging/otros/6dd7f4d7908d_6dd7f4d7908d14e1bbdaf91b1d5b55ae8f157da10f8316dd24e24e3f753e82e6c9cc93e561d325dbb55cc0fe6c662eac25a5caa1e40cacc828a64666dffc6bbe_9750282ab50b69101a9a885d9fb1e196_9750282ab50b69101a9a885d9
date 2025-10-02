@@ -1,0 +1,10 @@
+# 🧠 Prompts y Ideas útiles con IA
+
+Espacio para guardar fragmentos útiles de interacción con ChatGPT, NotebookLM, DeepSeek u otros asistentes IA.
+
+## 📌 Ejemplo de prompt útil:
+“Te paso una nota con tareas incompletas de varios módulos. ¿Podés detectar qué acciones están duplicadas o podrían unificarse?”
+
+## 🤖 Ideas espontáneas:
+- IA que lea bitácoras y proponga resúmenes semanales
+- Crear comando `/resumen_diario` para que ChatGPT lea y resuma memoria

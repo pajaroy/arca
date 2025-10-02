@@ -1,0 +1,61 @@
+
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5 (v0.10)
+
+## 🎯 Objetivo General
+
+Diseñar y proyectar un sistema modular, antifrágil y completamente offline llamado **ALMA_RESIST**, que:
+
+- Sea adaptable a futuro y evolutivo
+- Priorice soberanía tecnológica y privacidad radical
+- Funcione incluso en hardware extremo o degradado
+- Se documente a sí mismo
+- Incorpore a la IA como copiloto activo
+
+
+## ⚙️ Entorno Técnico
+
+- SO: Linux x86_64 (Debian/Ubuntu)
+- RAM mínima: 8 GB (meta: 2 GB en modo survival)
+- CPU: 4 núcleos
+- Python 3.10.12+
+- Sin conexión a internet
+- Soporte opcional para dispositivos externos (pendrives, discos)
+
+
+## 📁 Archivos Base
+
+- `ALMA_LIBRE/` (estructura conceptual editable)
+- `idea_base_0.0.9.md`
+- `docs/flujo_secuencial.mmd`
+
+
+## 🔮 Futuros Desarrollos (12+ meses)
+
+```markdown
+| Objetivo               | Tecnologías Potenciales   | Beneficio Esperado                     |
+|------------------------|---------------------------|----------------------------------------|
+| WASM Execution         | WebAssembly, Rust         | Ejecución segura en navegadores        |
+| CLI multiplataforma    | Go, Kotlin/Native         | Soporte Android/IoT                    |
+| IA local con LoRA      | Mistral, GGUF + LoRA      | Personalización offline en tiempo real |
+```
+
+
+## 📚 Documentación Evolutiva
+
+- [ ] `docs/arquitectura_evolutiva.md`
+  - Módulos nuevos y deprecados
+  - Justificaciones de cada cambio estructural
+  - Instrucciones para modernizar sin romper estabilidad
+
+
+## 📝 Instrucción Final para GPT-4.5 (v1.0)
+
+> Como IA Copiloto, tu tarea es:  
+1. Interpretar `ALMA_LIBRE/` como **estructura conceptual** editable.  
+2. Proponer roadmap técnico por fases con tareas ordenadas y dependencias.  
+3. Justificar cada decisión técnica en formato de tabla.  
+4. Incluir visión a 12+ meses con tecnologías emergentes.  
+5. Simular escenarios extremos y validar recuperación.  
+6. Proyectar crecimiento evolutivo sin perder compatibilidad.  
+7. Sugerir código, pruebas automatizadas y documentación crítica.
+

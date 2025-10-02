@@ -1,0 +1,28 @@
+
+# 🧠 ALMA — Configuración de Red y Conectividad entre Nodos
+
+> Archivo técnico para referencia rápida de IPs, nodos y comandos de conexión SSH.
+
+
+## 🔄 Conexión entre Nodos (SSH)
+
+### Desde **ALMA_CORE** a **ALMA_RESIST**:
+```bash
+ssh bird@192.168.1.36
+```
+
+### Desde **ALMA_RESIST** a **ALMA_CORE**:
+```bash
+ssh bird@192.168.1.33
+```
+
+✅ Una vez copiadas las claves con `ssh-copy-id`, el acceso es automático (sin contraseña).
+
+
+## 🔒 Notas de Seguridad
+
+- Asegurar que ambos nodos tengan `openssh-server` instalado.
+- Para cambiar IPs estáticas, actualizar este archivo y `~/.ssh/config` si se usa.
+- Verificar acceso con `ping` o `hostname -I`.
+
+

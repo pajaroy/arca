@@ -1,0 +1,128 @@
+# ====================================================
+# prompt_cleaner_v0.2.1.yaml
+# Documento de arquitectura y requerimientos avanzados
+# ====================================================
+
+proposito_general: |
+  CLI modular, robusto y auditable para gestión, validación,
+  trazabilidad y automatización avanzada de archivos en ALMA_RESIST.
+  Escalable, con soporte extendido (XLSX, JSON, YAML, MD), hash persistente,
+  indexado global/subíndices, terminal interactivo CLI, logs multi-formato y
+  preparado para auditarse con IA/ML/RAG.
+
+modularidad_recomendada:
+  - main.py: "Entry point. Parser CLI, carga config, inicialización handlers."
+  - config.py: "Carga y validación configuración general y específica."
+  - metadata_validator.py: "Valida, normaliza y migra templates de metadatos."
+  - metadata_handler.py: "IO robusto, extracción/escritura atómica, hashing, backups."
+  - audit_logger.py: "Logs estructurados (Parquet, YAML, MD, JSON)."
+  - index_manager.py: "Gestión índices global/subíndices, registro integridad."
+  - file_watcher.py: "Monitoreo periódico movimientos/modificaciones archivos."
+  - archive_manager.py: "Gestiona estado de archivo y migración histórica."
+  - file_operations.py: "Funciones avanzadas: mover, copiar, borrar, renombrar."
+  - cli_terminal.py: "Terminal CLI interactivo para seleccionar archivos y acciones."
+  - commands/: "Cada comando separado modularmente para testing y escalabilidad."
+  - tests/: "Tests unitarios e integración por módulo/función."
+
+requerimientos_funcionales:
+  validacion_y_normalizacion:
+    descripcion: "Validación automática estructura/tipo metadatos. Migración de templates obsoletos."
+  hash_integridad:
+    descripcion: "SHA-256 hash persistente, verificable y actualizado cada cambio."
+  indexado_global_y_subindices:
+    descripcion: "Índice global (Alma-Cli_index.json) y soporte subíndices (por módulo o área)."
+  registro_movimientos:
+    descripcion: "Log estructurado de todos los movimientos (mover, copiar, borrar, renombrar)."
+  monitoreo_periodico:
+    descripcion: "Detección automática periódica de modificaciones externas o desincronizadas."
+  archivado_y_estado:
+    descripcion: "Gestión estados archivo: activo, histórico, archivado con registros completos."
+  soporte_xlsx_json_yaml_md:
+    descripcion: "Capacidad completa para manejar, extraer e indexar archivos XLSX, JSON, YAML y MD."
+  logs_multiformato:
+    descripcion: "Logs auditables en Parquet para IA/ML, YAML/JSON para parsing y MD legible para humanos."
+  operaciones_avanzadas:
+    descripcion: "Comandos avanzados para mover/copiar/borrar archivos con integridad asegurada."
+  terminal_cli_interactivo:
+    descripcion: "Terminal interactiva CLI para selección rápida de archivo y operación simultánea."
+  ejecucion_simultanea_comandos:
+    descripcion: "Capacidad de ejecutar múltiples comandos concurrentemente sin pérdida de integridad."
+  testing_modular:
+    descripcion: "Cobertura test automática por módulo y funcionalidad crítica."
+
+estructura_index_json:
+  path: "Alma-Cli_index.json"
+  descripcion: "Índice global con subíndices opcionales para módulos internos."
+  ejemplo_registro:
+    uuid: "UUID del archivo"
+    title: "documento.xlsx",
+    ruta_actual: "/ruta/actual/documento.xlsx"
+    hash: "sha256:abcdef..."
+    estado: "activo | historico | archivado"
+    last_modified: "timestamp ISO"
+    responsables: ["usuario1", "usuario2"]
+    linked_to: ["/ruta/otro.md", "/ruta/dato.json"]
+    historial:
+      - fecha: "2025-07-12T09:30:00Z"
+        usuario: "bird"
+        accion: "movimiento"
+        descripcion: "Archivo movido desde /vieja/ruta.xlsx a /ruta/actual/documento.xlsx"
+    version_metadata: "0.2.1"
+    comentarios: ""
+
+operaciones_archivos:
+  mover:
+    descripcion: "Mover archivo con hash persistente y registro completo."
+  copiar:
+    descripcion: "Copiar archivo manteniendo integridad/hash e indexado."
+  borrar:
+    descripcion: "Borrar archivo, actualización inmediata de index/logs."
+  renombrar:
+    descripcion: "Renombrar archivo y actualizar todas las referencias/index/logs."
+
+terminal_cli_interactivo:
+  descripcion: "CLI interactivo para navegación, selección visual de archivos y operaciones rápidas."
+  funcionalidades:
+    - Listar archivos por categoría o módulo.
+    - Elegir operaciones (mover/copiar/borrar/renombrar/archivar).
+    - Realizar operaciones simultáneas.
+
+ciclo_monitoreo_periodico:
+  frecuencia_default: "10 minutos (configurable)."
+  acciones:
+    - Verificar integridad/hash de cada archivo.
+    - Detectar movimientos no registrados, alertar y registrar automáticamente.
+
+manejo_archivo_historico:
+  pasos:
+    1. Validación existencia e integridad.
+    2. Actualización estado en metadatos e índice.
+    3. Movimiento físico al directorio histórico.
+    4. Registro completo en logs e historial.
+
+log_multiformato:
+  formatos_soportados:
+    - Parquet: para análisis IA/ML.
+    - JSON/YAML: para ingestión y parsing automático.
+    - Markdown (MD): para revisión humana.
+
+roles_ia_ml_rag:
+  descripcion: |
+    Preparado explícitamente para integración con módulos internos/externalizados
+    de ML, RAG y motores semánticos. Facilita parsing automático y auditable de logs e índices.
+
+cambios_clave_v021_vs_anteriores:
+  - Soporte XLSX/JSON adicional.
+  - Terminal CLI interactiva.
+  - Operaciones avanzadas (copiar, mover, borrar).
+  - Ejecución simultánea comandos.
+  - Subíndices independientes.
+  - Logs auditables multiformato.
+
+pendiente_recomendado:
+  - Integración futura con asistentes inteligentes (Kael, Centralesis).
+  - Documentación API completa.
+  - Detección automática de archivos huérfanos.
+  - Hooks externos (backup remoto, notificaciones).
+
+# Fin de especificación YAML v0.2.1 - Alma_Cli_Cleaner

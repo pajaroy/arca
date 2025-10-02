@@ -1,0 +1,30 @@
+# ✅ Checklist de Implementación – Mejoras Críticas Flujos ALMA LIBRE v0.0.6.2
+
+Este checklist te guía paso a paso por las mejoras propuestas para completar la optimización de la versión actual antes de generar el changelog.
+
+
+## 🔗 2. Interacción Modular y Dependencias
+
+- [x] Crear archivo: `docs/modulos_interdependencias.md`
+- [ ] Añadir pseudocódigo de interacción entre módulos en sección 5.3 o 5.4 del Prompt Técnico
+
+
+## 🚥 4. Promoción de Módulos Experimentales
+
+- [x] Crear checklist: `RECURSOS_Y_AYUDAS/plantillas/checklist_promocion.md`
+- [x] Documentar condiciones de promoción (mínimo 2 flujos, pruebas, diagnóstico)
+
+
+## 🔍 6. Manejo de Errores y Auditoría de Logs
+
+- [x] Crear módulo: `MODULOS/Alma_Monitor/src/monitor.py`
+- [x] Documentar funcionamiento en: `MODULOS/Alma_Monitor/docs/README.md`
+- [ ] Añadir sección 5.10 en el Prompt Técnico para logs y monitoreo
+
+
+## 🧩 Finalización de la Versión
+
+- [ ] Verificar que todos los puntos anteriores están cumplidos
+- [ ] Generar `CHANGELOG_0.0.6.2.md`
+- [ ] Actualizar `version.txt` a `0.0.6.2`
+- [ ] (Opcional) Crear backup `.zip` en `00_BACKUPS_HISTORICOS/`

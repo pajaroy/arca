@@ -1,0 +1,27 @@
+# 🧠 Prompt Técnico – backup_to_git.sh
+
+Actuá como **asistente técnico de ALMA_RESIST**, y generá un script llamado `backup_to_git.sh` que realice respaldo automático al repositorio GitHub del sistema, bajo las siguientes condiciones:
+
+
+## ⚙️ Requisitos del script
+
+1. Utilizar `inotifywait` para detectar cambios en el sistema de archivos (modificaciones, creaciones, borrados) dentro de `/home/bird/ALMA_RESIST`, excluyendo `.git/`.
+
+2. Ante cada cambio, hacer automáticamente:
+   - `git add .`
+   - `git commit -m "Auto backup $(date +'%Y-%m-%d %H:%M:%S')"`
+   - `git push origin main`
+
+3. Validar que no haya conflictos de merge antes del push.
+4. Registrar cada acción (éxito o error) en el archivo de log indicado.
+5. Debe correr en segundo plano (idealmente mediante `tmux` o `systemd` más adelante).
+6. Debe ser idempotente (puede reiniciarse sin duplicar acciones).
+7. Si el repo no está inicializado, debe abortar con mensaje claro.
+
+
+## 🧠 Notas adicionales
+
+- El script puede usar bash, y asumimos que `inotify-tools` está instalado.
+- Se utilizará SSH para acceso Git, no requiere usuario/contraseña.
+- Se ejecutará solo desde `ALMA_CORE`.
+

@@ -1,0 +1,29 @@
+# 🌿 Proyecto – Control Integral de Parámetros Ambientales y Riego (ALMA Cultivo Orgánico)
+
+## 
+
+**Objetivo general:**
+
+Desarrollar un sistema escalable y adaptable para registrar, analizar y trazar la evolución ambiental del cultivo, sus condiciones internas y externas, y los parámetros vinculados al riego, VPD y pH.
+
+
+### 📊 Estructura de trabajo:
+
+### 📅 1. Tabla semanal
+
+- Registro detallado de cada uno de los 7 días.
+- Análisis diario de condiciones climáticas y decisiones de riego.
+- Observaciones de respuesta vegetal, si las hubiera.
+
+### 📈 2. Control trimestral
+
+- Promedios y análisis de tendencia cada 12 semanas.
+- Evaluación del impacto del clima y riegos en la salud y rendimiento del cultivo.
+- Comparación entre ciclos y ajustes estratégicos.
+
+### 🔁 3. Escalabilidad y adaptación
+
+- El sistema debe permitir registrar diferentes recetas de sustrato, comenzando con **Growers de SuperSoil**.
+- Se adaptará en el futuro para otros proyectos como **InonSense**, permitiendo comparar resultados según condiciones y composiciones.
+- La trazabilidad será clave para evaluar el efecto de cada variable sobre la producción y vitalidad de las plantas.
+

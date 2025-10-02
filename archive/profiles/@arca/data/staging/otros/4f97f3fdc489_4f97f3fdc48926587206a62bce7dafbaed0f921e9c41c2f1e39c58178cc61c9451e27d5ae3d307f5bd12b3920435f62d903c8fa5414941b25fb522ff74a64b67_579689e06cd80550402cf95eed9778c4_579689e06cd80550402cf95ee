@@ -1,0 +1,86 @@
+# 🧠 Prompt DeepSeek – Script Universal de Corrección y Estandarización de Metadata (fix_metadata v2) para ALMA_RESIST
+
+
+## **Requisitos funcionales y de seguridad**
+
+### 1. **Recorrido y exclusión**
+- El script debe buscar la raíz del módulo (por arriba) y procesar TODOS los archivos relevantes (.md, .yaml, .json, .py, .sh), pero:
+- **Nunca debe modificar ni recorrer** (incluir lista de exclusión obligada):
+    - `.git`, `.github`, `.obsidian`, `.sync*`, `venv`, `env`, `virtualenv`, `__pycache__`, `node_modules`, `datasets`, `data`, `media`, `images`, `img`, `bin`, `backup`, `backups`, `logs` (salvo logs propios `.md`, `.yaml`), `tmp`, `temp`, `core/scripts/fix_metadata/` (para no auto-editarse), cualquier directorio oculto (`.`), o especificado en `.fix_metadata_ignore`.
+- **No modificar archivos binarios ni temporales**: (extensiones excluidas: `.jpg`, `.png`, `.zip`, `.db`, `.mp4`, `.exe`, `.tmp`, `.bak`, `.lock`, `.sync-conflict-*`).
+- Solo procesar extensiones soportadas: `.md`, `.yaml`, `.yml`, `.json`, `.py`, `.sh`.
+
+### 2. **Exclusión ampliable**
+- Permitir que el usuario agregue exclusiones específicas con un archivo `.fix_metadata_ignore` (sintaxis tipo `.gitignore`).
+
+### 3. **Flujo seguro**
+- **Nunca debe auto-modificarse** ni modificar el propio script/carpeta.
+- Debe siempre crear **backup previo** a modificar cualquier archivo.
+- **Modo dry-run**: simular cambios sin modificar archivos.
+- **Logs estructurados** por acción: cambios, errores, archivos saltados, backups.
+- **No debe borrar ni truncar archivos aunque detecte metadata inválida**: siempre loguear, nunca borrar.
+
+### 4. **Metadata universal a aplicar**
+El bloque YAML debe tener, como mínimo, los siguientes campos (con comentarios y validaciones):
+
+```yaml
+```
+5. Características del script
+
+    Recorrer en profundidad solo las carpetas relevantes (ver exclusiones arriba).
+
+    Verificar y corregir el bloque YAML, completando campos faltantes (con valores razonables por defecto/documentados).
+
+    Calcular y actualizar hash_integridad SHA256 del contenido excluyendo este campo.
+
+    Logs de cambios, backups realizados, errores detectados.
+
+    Reporte resumen al finalizar.
+
+    Fácilmente replicable: al copiar a cualquier módulo, funciona sin cambios salvo rutas.
+
+    Parámetro de carpeta raíz opcional, autodetección de entorno ALMA_RESIST.
+
+    Dejar configuraciones claras y comentarios para personalización.
+
+    Modular, con funciones separadas y comentarios abundantes.
+
+6. Prácticas pro
+
+    El script nunca debe dejar archivos corruptos ni en estado incompleto (rollback automático si hay error en escritura).
+
+    Soporte para ampliar lista de exclusión por parámetro CLI.
+
+    El log puede ser en .jsonl o .yaml para facilitar parsing IA/auditoría.
+
+    Resumen final: archivos procesados, modificados, saltados, errores, backups hechos, dry-run vs real.
+
+Extras
+
+    Programar en Python 3, preferentemente solo usando dependencias estándar (salvo PyYAML).
+
+    Dejar toda la lógica en un solo archivo principal.
+
+    Dejar la referencia a este prompt/IDEA en el header del script generado.
+
+    El script debe estar listo para ejecutarse desde cualquier carpeta core/scripts/fix_metadata/.
+
+Referencia oficial:
+[IDEA_2025-06-06_01] – ALMA_RESIST | Santiago Calvo | Centralesis v2.3
+Instrucciones finales
+
+    Cumplí TODOS los criterios arriba detallados.
+
+    Si no podés hacer algo exactamente igual, aclaralo en comentarios y dejá el punto listo para ajustar manualmente.
+
+    El script debe ser “production ready” para ser usado y adaptado en cualquier otro módulo del sistema ALMA_RESIST.
+    ---
+
+## 🟢 **Archivo descargable**
+
+[Descargar prompt_fix_metadata_v2.md](sandbox:/mnt/data/prompt_fix_metadata_v2.md)
+
+> **Podés copiar el contenido directamente o usar el archivo para cargarlo en DeepSeek o cualquier plataforma de generación IA!**
+
+¿Te gustaría agregar alguna advertencia, nota personal, o link de referencia extra?  
+¿O lo dejamos así, listo para darle play en DeepSeek?

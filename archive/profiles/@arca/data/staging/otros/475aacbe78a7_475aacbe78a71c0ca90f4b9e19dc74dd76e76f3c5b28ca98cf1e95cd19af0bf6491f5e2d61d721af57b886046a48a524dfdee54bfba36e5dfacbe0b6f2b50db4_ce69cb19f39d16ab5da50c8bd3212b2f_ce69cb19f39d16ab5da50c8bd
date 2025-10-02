@@ -1,0 +1,410 @@
+# 🛠️ ALMA LIBRE – Prompt Técnico v0.0.6.1
+
+## 1. Introducción Técnica
+
+Este documento define las **instrucciones operativas, reglas internas y convenciones estructurales** del sistema ALMA LIBRE. Está dirigido a tres tipos de entidades:
+
+- 🧠 Humanos técnicos (desarrolladores, integradores, colaboradores).
+- 🤖 Inteligencias artificiales con funciones operativas (ej. asistentes en NotebookLM, agentes tipo ChatGPT, copilotos).
+- 🧩 Sistemas externos que necesiten integrarse (scripts, APIs, extensiones, automatizaciones).
+
+ALMA LIBRE no es una app tradicional ni un software cerrado: es un **entorno modular autosustentable**, estructurado como carpeta raíz, cuadernos conectados, módulos IA, y memorias documentadas.  
+
+Para que cualquier entidad (humana o artificial) pueda interactuar correctamente con este sistema, debe respetar:
+
+- 📂 La **estructura de carpetas y flujos** definida.
+- 🔠 Las **convenciones de nombres, versiones y rutas**.
+- 💾 El **formato de almacenamiento** de datos, memoria e ideas.
+- 🔄 Los **procesos de actualización, exportación y consolidación**.
+
+Este Prompt Técnico será actualizado con cada nueva versión funcional del sistema. Cada módulo deberá **leer esta versión del prompt antes de operar**, validando la compatibilidad entre flujos, herramientas y memorias.
+
+> ⚙️ Si una IA o humano no entiende este documento, no debe operar dentro del sistema ALMA LIBRE.
+
+El sistema utiliza un esquema versionado y escalable (`0.0.6.X`) para registrar el progreso de desarrollo e integración. Las funciones aún no implementadas pueden estar referenciadas como `EN_DESARROLLO` o `RESERVADO_PARA_FASE_X`.
+
+Este documento puede ser utilizado como:
+- Prompt inicial para modelado de IA especializado.
+- Base para configurar scripts que interactúen con carpetas y datos.
+- Guía técnica viva para mantener orden, integridad y evolución controlada del sistema.
+
+
+### 📂 2.1 Carpetas raíz del sistema
+
+Estas son las carpetas principales que deben existir dentro de `ALMA_LIBRE/`:
+
+- `CUADERNOS/`: Cuadernos digitales por área temática (uso activo y diario).
+- `EMPRESAS/`: Documentación formal/legal de proyectos y organizaciones.
+- `MODULOS/`: Componentes de software, IA o automatización.
+- `BITACORA_CENTRAL/`: Registro cronológico, resúmenes, diagnósticos.
+- `RECURSOS_Y_AYUDAS/`: Plantillas, scripts, prompts, ideas reusables.
+- `00_BACKUPS_HISTORICOS/`: Versiones comprimidas previas. No se debe usar para operaciones activas.
+
+Cada subcarpeta dentro de estas secciones sigue convenciones específicas descritas en el Glosario (`docs/Glosario_ALMA_LIBRE_0.0.6.md`).
+
+
+### 🧠 2.3 Estructura de versionado
+
+- Cada avance significativo se registra como `vX.Y.Z`
+- Cambios estructurales o conceptuales → Z aumenta.
+- Cambios menores en contenido técnico → `.Z+1` (ej. 0.0.6.1 → 0.0.6.2)
+- Backups históricos comprimidos se almacenan en `00_BACKUPS_HISTORICOS/`
+- Diagnósticos asociados a cada versión se guardan en `BITACORA_CENTRAL/DIAGNOSTICOS/`
+
+
+### ⚙️ 2.5 Estructura de módulos (`MODULOS/`)
+
+Cada módulo debe tener su propia carpeta (ej. `Alma_Loader/`) con esta estructura:
+
+- `/src/`: Código fuente y archivos operativos.
+- `/docs/`: Instrucciones, changelogs, diseño técnico.
+- `/tests/`: Pruebas funcionales y validaciones (opcional).
+- `/config/`: Configuraciones específicas del módulo (si aplica).
+
+El módulo no debe asumir rutas absolutas fuera de su estructura: toda integración debe pasar por inputs definidos o configuración.
+
+
+### 📜 2.7 Documentación requerida por carpeta
+
+Toda subcarpeta operativa debe incluir:
+
+- `README.md`: Descripción del propósito y contenido.
+- `CHANGELOG.md`: Si aplica, para módulos o proyectos estructurados.
+- Archivos auxiliares (`version.txt`, `estructura.md`, etc.) si son necesarios para automatización o revisión.
+
+## 3. Módulos del Sistema
+
+Los módulos son unidades funcionales dentro del sistema ALMA LIBRE que permiten automatizar tareas, analizar datos, gestionar memorias o ejecutar flujos. Cada uno debe estar completamente **documentado, versionado y aislado**, de modo que pueda operar sin generar efectos colaterales fuera de su carpeta.
+
+
+### 🔍 3.2 Descripción de módulos activos
+
+#### 🔹 `Alma_Loader`
+- **Función:** Carga, vectoriza, organiza y enlaza memorias semánticas para uso por humanos e IAs.
+- **Estado actual:** Estable (v3.0.3) – Integrado con SQLite + JSON + posibles extensiones con FAISS.
+- **Input esperado:** archivos `.md`, `.json` o bases de datos (`memorias.db`)
+- **Output:** Resúmenes vectorizados, referencias cruzadas, IDs únicos, logs de carga.
+
+#### 🔹 `automatizacion_vpd`
+- **Función:** Recolecta, limpia y analiza datos ambientales de cultivo.
+- **Estado:** En fase inicial – estructura lista para ingestión de datos diarios.
+- **Output:** Archivos `.csv`, reportes semanales, alarmas por condiciones anómalas.
+
+#### 🔹 `exploraciones`
+- **Función:** Espacio de prueba para nuevos scripts, IA o integraciones experimentales.
+- **Nota:** No debe usarse en producción. Su contenido puede migrar a módulos formales si se valida.
+
+
+### 🔄 3.4 Inputs y Outputs esperados
+
+Cada módulo debe definir:
+- Formato exacto de entrada: `.md`, `.json`, `.sqlite`, `.csv`, etc.
+- Esquema de output: nombre de archivo, carpeta destino, log de procesamiento.
+
+Ejemplo – `Alma_Loader`:
+```yaml
+input:
+  - ruta: CUADERNOS/programacion.cu/archivos/
+    tipo: .md
+output:
+  - ruta: MODULOS/Alma_Loader/output/vector_db.json
+    log: MODULOS/Alma_Loader/logs/registro_de_ingesta.txt
+```
+
+
+Este punto garantiza que cualquier nuevo componente incorporado al sistema pueda operar con precisión, sin generar ambigüedades, errores de contexto ni colisiones en nombres o rutas. Cualquier nuevo módulo deberá referenciar este documento y validar su estructura antes de escalar.
+
+
+### 📂 4.1 Ubicación de las memorias
+
+Las memorias se almacenan y organizan dentro de:
+
+- `BITACORA_CENTRAL/RESUMENES/`: estructura cronológica por trimestre, semana y día.
+- `BITACORA_CENTRAL/DIAGNOSTICOS/`: evaluaciones técnicas por versión (`diagnostico_v0.0.6.2.md`)
+- `MODULOS/Alma_Loader/`: sistema encargado de ingesta, vectorización y clasificación de memorias.
+
+Otros cuadernos pueden tener memorias locales (e.g. `trading.cu/resumenes/`), pero toda consolidación se realiza desde BITÁCORA o Alma_Loader.
+
+
+### 🧬 4.3 Vectorización e ingestión
+
+El módulo `Alma_Loader` realiza la vectorización de los documentos de memoria para permitir búsquedas semánticas. Para ello:
+
+- Extrae los textos de los archivos `.md` o `.txt`
+- Los asocia a una ID única (`mem_2025_05_12_diario`)
+- Los clasifica por tipo, carpeta de origen, fecha y palabras clave
+- Opcional: exporta a `.json` o base `.sqlite`
+
+
+### 🔗 4.5 Relaciones entre memorias
+
+Cada memoria puede referenciar otras usando:
+
+- Enlaces relativos: `../diagnosticos/diagnostico_0.0.6.2.md`
+- Menciones semánticas: `#sistema_ia`, `#trading`, `#cultivo`
+- Tags YAML estructurados
+
+Estas relaciones pueden ser procesadas por módulos IA para crear mapas de conocimiento o sugerencias de acción.
+
+
+Este sistema permite que ALMA LIBRE evolucione **con historia, contexto y aprendizaje real**, sin depender exclusivamente de la memoria efímera de un asistente externo. Cada memoria cuenta. Cada entrada moldea el sistema.
+
+
+### 🧠 5.1 Flujo Diario de Registro y Consolidación
+
+```text
+Usuario → CUADERNOS/*.cu/docs/ → BITACORA_CENTRAL/RESUMENES/
+```
+
+- Las ideas o tareas se registran en `CUADERNOS/*/docs/*.md`
+- Se copian o vinculan a `BITACORA_CENTRAL/RESUMENES/SXX/`
+- Alma_Loader puede luego procesarlas para vectorización
+
+> 🛡️ Desde la versión 0.0.6.2, **todos los archivos que se mueven desde CUADERNOS hacia BITACORA deben pasar por una validación previa mediante `sync_bitacora.py`**.
+>
+> Esta validación:
+> - Calcula y registra el hash SHA-256 del contenido
+> - Inserta encabezado YAML si no existe
+> - Verifica duplicados existentes por nombre y contenido
+> - Registra todo en logs estructurados (`MODULOS/sync_bitacora/logs/`)
+
+
+
+### 🔁 5.3 Ingesta y Vectorización de Memorias (Alma_Loader)
+
+```text
+CUADERNOS/*.cu/docs/*.md → MODULOS/Alma_Loader/ → vector_db.json + versión
+```
+
+- Archivos .md son procesados y vectorizados
+- Output contiene `version_modelo`, fecha y estructura clara
+- Vectores antiguos se archivan en `historic_vectors/`
+
+```python
+# Ejemplo: CLI Assistant consulta a Alma_Loader por vector semántico
+
+from Alma_Loader.src.loader import search_vector_db
+
+consulta = "estrategia BTC scalping"
+resultados = search_vector_db(consulta)
+
+for item in resultados:
+    print(f"- {item['titulo']} ({item['fecha']}) → {item['snippet']}")
+
+```
+
+
+### 💬 5.5 CLI Assistant (MVP Experimental)
+
+```text
+Terminal → CLI → Alma_Loader + BITACORA → Respuesta
+```
+
+- Comandos: `alma buscar`, `alma resumir`, `alma diagnosticar`
+- Opera en solo lectura sobre memoria consolidada
+- Logs opcionales en `BITACORA_CENTRAL/LOGS_CLI/`
+
+
+### 🔐 5.7 Acceso a Recursos Compartidos
+
+```text
+MODULOS/ o CUADERNOS/ → RECURSOS_Y_AYUDAS/ (solo lectura)
+```
+
+- Contiene plantillas, scripts base, prompts técnicos
+- No puede ser modificado directamente sin control de versión
+
+
+### 🔗 5.9 🔄 Diagrama Global de Flujos – ALMA LIBRE v0.0.6.2 (Extendido)
+
+```mermaid
+graph TD
+  A[Usuario/IA] --> B[CUADERNOS]
+  B --> C[BITACORA_CENTRAL]
+  B --> D[MODULOS/Alma_Loader]
+  D --> E[vector_db.json]
+  E -->|versionado| L[historic_vectors/]
+  C --> F[DIAGNOSTICOS]
+  B --> G[EMPRESAS]
+  G --> H[Documentos Formales]
+  E --> I[CLI Assistant]
+  F --> I
+  C --> I
+  D --> J[validador_estructura.py]
+  J --> F
+  I -->|usa| K[RECURSOS_Y_AYUDAS/plantillas/log_template.yaml]
+  M[automatizacion_vpd] --> N[reporte_estado.py]
+  D --> N
+  I --> N
+  N --> O[BITACORA/LOGS_MODULOS/]
+  P[sync_bitacora.py]
+  P --> B
+  P --> C
+  P --> Q[Verificación por hash]
+```
+
+
+#### 📌 Recomendaciones para implementación
+
+- **Incluir este diagrama directamente en el Prompt Técnico y el Whitepaper.**
+- **Marcar conexiones críticas con anotaciones o estilos de color cuando sea posible.**
+- **Documentar funciones clave en archivos individuales (`README.md` por módulo).**
+- **Trazabilidad completa en el changelog al aplicar cada uno.**
+
+Este diagrama extendido permite que cualquier asistente de IA o desarrollador humano entienda la arquitectura completa sin leer cada módulo por separado.
+
+
+Este bloque puede ser exportado o reutilizado en los manuales de uso o como referencia en otros prompts inteligentes.
+
+
+### 📌 6.1 Aplicación del esquema
+
+Ejemplos:
+- `v0.0.6.1` → Versión estable con estructura reorganizada, lista para flujos.
+- `v0.0.6.2` → Correcciones a nomenclatura, glosario y estructuras internas.
+- `v0.1.0` → Introducción del sistema IA de memoria vectorizada completo.
+- `v1.0.0` → Primera versión formal funcional de sistema completo.
+
+
+### 📄 6.3 Archivos clave por versión
+
+Dentro del sistema deben mantenerse:
+
+- `README.md`: propósito y uso general de la versión.
+- `CHANGELOG.md`: listado ordenado por fecha y tipo de cambio.
+- `version.txt`: solo número de versión (`0.0.6.1`) y fecha de release (`2025-05-13`).
+- `diagnostico_v0.X.Y.md`: resumen técnico y propuestas de mejora futura.
+
+
+### 🛡️ 6.5 Buenas prácticas
+
+- Cada versión debe poder abrirse por separado y funcionar como unidad.
+- Las rutas y nombres deben seguir las convenciones del glosario correspondiente.
+- Las IAs deben poder leer `README.md`, `CHANGELOG.md` y `glosario_*.md` para operar.
+- No deben eliminarse versiones anteriores. Si hay errores, se corrige con `.Z+1`.
+
+## 7. Interfaz con el Usuario y Asistentes
+
+El sistema ALMA LIBRE fue diseñado para ser operado tanto por humanos como por asistentes de inteligencia artificial. Esta sección define el **comportamiento esperado, los límites operativos y las formas correctas de interacción** para garantizar seguridad, eficiencia y contexto persistente.
+
+
+### 🧭 7.2 Navegación estructural recomendada
+
+Al momento de operar, la IA debe:
+
+- Leer `README.md`, `glosario_ALMA_LIBRE_0.0.6.md` y `prompt_tecnico_0.0.6.1.md` antes de actuar.
+- Consultar `BITACORA_CENTRAL/RESUMENES/` para conocer eventos recientes.
+- Validar versión activa a través de `version.txt`.
+
+No debe navegar hacia carpetas fuera de `ALMA_LIBRE/`. Se prohíbe el acceso a carpetas de backup (`00_BACKUPS_HISTORICOS/`) durante operación activa.
+
+
+### 🔗 7.4 Enlace con usuarios humanos
+
+El usuario debe tener siempre la última palabra. La IA debe:
+
+- Preguntar antes de intervenir sobre estructuras.
+- Confirmar rutas y destinos antes de sugerir movimientos.
+- Pedir confirmación antes de generar scripts.
+
+Además, debe permitir al humano:
+- Guardar toda conversación como archivo `.md`
+- Incorporar enlaces relativos que respeten la arquitectura
+- Solicitar documentación adicional desde el sistema (`docs/`, `glosario/`, etc.)
+
+
+### 🛡️ 7.6 Limitaciones y advertencias
+
+IA no debe:
+- Borrar ni sobrescribir documentos históricos.
+- Reorganizar carpetas sin checklist previa.
+- Hacer supuestos sin base documental.
+- Repetir información innecesariamente (ver sección 4.6 del whitepaper).
+
+## 8. Extensiones Futuras
+
+ALMA LIBRE está diseñado como un sistema modular y escalable. Esta sección anticipa cómo integrar nuevas funciones, módulos o herramientas sin perder coherencia estructural ni trazabilidad.
+
+
+### 🧪 8.2 Carpeta de pruebas y prototipos
+
+Toda función nueva debe pasar por una etapa de exploración:
+
+- Usar `MODULOS/exploraciones/` o `RECURSOS_Y_AYUDAS/ideas_y_esquemas/`
+- Documentar propósito y límites
+- Evaluar su integración con flujos actuales
+
+Solo una vez validado, puede escalarse a módulo oficial.
+
+
+### 🧠 8.4 Agentes IA especializados
+
+Se podrán generar asistentes entrenados en:
+
+- Responder sobre módulos específicos
+- Monitorear cambios y sugerir mejoras
+- Operar como copilotos de ejecución
+
+Cada agente debe tener:
+
+- Prompt base específico
+- Rutas claras de acceso a `docs/`, `glosario/`, `bitácora/`
+- Límite definido de modificación o sugerencia
+
+
+### 🔄 8.6 Automatización de flujos
+
+Se desarrollarán:
+
+- Scripts para consolidación semanal automática
+- Generadores de changelogs
+- Validadores de estructura (`validador_estructura.py`)
+- Sincronización y backup incremental automatizado
+
+Toda función automatizada debe dejar trazabilidad por log y respetar las rutas oficiales.
+
+
+Estas extensiones no deben considerarse futuras promesas: son caminos activos de crecimiento. Cada una puede escalar por fases, y deben ser documentadas, testeadas y versionadas dentro del marco operativo de ALMA LIBRE.
+
+## 9. Apéndices
+
+Esta sección contiene recursos de apoyo técnico, convenciones de formato y utilidades generales que complementan el funcionamiento del sistema ALMA LIBRE.
+
+
+### 📚 9.2 Glosario técnico resumido
+
+| Término        | Definición                                                                 |
+|----------------|---------------------------------------------------------------------------|
+| Cuaderno (.cu) | Carpeta temática que agrupa ideas, pruebas y desarrollos por área activa  |
+| Bitácora       | Registro cronológico del sistema con resúmenes y diagnósticos             |
+| Módulo         | Carpeta funcional con código, configuración y documentación               |
+| Memoria        | Entrada escrita que registra eventos, ideas, datos o decisiones           |
+| Diagnóstico    | Evaluación técnica y conceptual del sistema                               |
+| Prompt         | Instrucción diseñada para IA, humana o automatizada                       |
+| Flujo          | Camino estructurado que conecta acciones, carpetas y decisiones           |
+
+
+### 📅 9.4 Esquema de planificación
+
+```plaintext
+📁 CUADERNOS/
+   ├─ alma_gral.cu/
+   ├─ programacion.cu/
+   └─ fondo_empresa.cu/
+
+📁 MODULOS/
+   ├─ Alma_Loader/
+   └─ exploraciones/
+
+📁 BITACORA_CENTRAL/
+   ├─ RESUMENES/
+   └─ DIAGNOSTICOS/
+
+📁 EMPRESAS/
+📁 RECURSOS_Y_AYUDAS/
+📁 00_BACKUPS_HISTORICOS/
+```
+
+
+Este apéndice asegura una base técnica común que puede consultarse en cualquier etapa para evitar errores, malentendidos o desvíos en la evolución del sistema.
+

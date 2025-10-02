@@ -1,0 +1,49 @@
+---
+module: utilidades/scripts/readme
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# ⚙️ Scripts – ALMA_RESIST
+
+📁 Carpeta: `docs/utilidades/scripts/`  
+📅 Última actualización: 2025-05-26
+
+Esta carpeta contiene scripts técnicos utilizados para auditoría estructural, validación documental, normalización semántica y automatización de tareas dentro del ecosistema **ALMA_RESIST**.
+
+---
+
+## 📌 Propósito
+
+Agrupar de forma coherente los scripts funcionales (.py / .sh) y su documentación técnica asociada (.md), alineados con los principios de modularidad, trazabilidad y control de versiones definidos en la metodología del proyecto.
+
+---
+
+## 📁 Estructura
+
+- `*.py` → Scripts funcionales en Python
+- `*.sh` → Scripts funcionales en Bash
+- `*.md` → Documentación técnica individual de cada script
+- `scripts_index.md` → Índice global técnico de todos los scripts
+
+---
+
+## 🧠 Convenciones
+
+- Cada script debe tener un `.md` explicativo con:
+  - Objetivo
+  - Uso
+  - Parámetros
+  - Ejemplos
+- Los scripts deben ser versionables, ejecutables en CLI, y no depender de rutas absolutas
+- Todos deben validar rutas y generar backups si modifican archivos
+
+---
+
+## 📚 Índice técnico
+
+Ver [`scripts_index.md`](./scripts_index.md) para una descripción completa de cada script.
+

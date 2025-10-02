@@ -1,0 +1,1 @@
+2025-10-02: Hoy traabaje completando los readme del proyectro

@@ -1,0 +1,32 @@
+# 2.0.0_Alma
+
+## 📜 README – Proyecto ALMA LIBRE v2.0.0
+
+
+# 📂 Contenido Inicial
+
+- **Prompt_Base_2.0.0.md**: Documento fundacional que define la identidad, objetivos, estructura y visión inicial del proyecto.
+
+- (En el futuro) **Diagramas de flujo**: Relaciones operativas entre módulos, flujos de navegación, actualización de memorias.
+
+- (En el futuro) **Roadmap de Versiones**: Plan de evolución incremental del proyecto.
+
+- (En el futuro) **Changelogs**: Historial de cambios por versión para trazabilidad total.
+
+
+# 🚀 Normas para esta Carpeta
+
+- Esta carpeta **no se modifica** directamente una vez cerrada la versión.
+- Cualquier mejora o expansión se documenta para la **siguiente versión** (por ejemplo, 2.0.1).
+- El Prompt Base se considera "vivo" sólo mientras se trabaja sobre la misma versión.
+- Finalizada esta fase, **no se reescribe**, solo se evoluciona.
+
+
+# ✍️ Notas Finales
+
+Esta estructura inicial es simple **por diseño**.
+
+El objetivo no es abarrotar de carpetas desde el principio, sino **permitir crecimiento consciente, modular y documentado**.
+
+Toda gran obra empieza con un pequeño paso bien plantado. Esta carpeta **es ese primer paso.**
+

@@ -1,0 +1,32 @@
+version: 0.1.0
+tipo: prompt_desarrollo_script
+id: PROMPT_FIX_METADATA_V0.1.0
+titulo: "Script para validar y estandarizar metadatos en archivos críticos"
+autor: kael
+fecha_creacion: 2025-06-07
+tags: [metadata, validacion, yaml, cli, automatizacion]
+descripcion: >
+  Este prompt solicita la creación de un script CLI que recorra archivos del sistema ALMA
+  (Markdown, YAML, Python, etc.), identifique encabezados de metadatos, los valide contra
+  un esquema y los corrija si es necesario. También debe reportar errores y permitir aplicar fixes automáticamente.
+
+objetivo: >
+  Garantizar que todos los archivos del sistema contengan metadata estandarizada y válida,
+  permitiendo su trazabilidad automática por parte de agentes IA.
+
+archivos_objetivo:
+  - "*.md"
+  - "*.yaml"
+  - "*.py"
+  - "*.sh"
+  - "*.json"
+
+validaciones_requeridas:
+  - Presencia de frontmatter YAML en archivos .md
+  - Validación de campos clave como `version`, `fecha_creacion`, `tags`
+  - Corrección automática si se activa el flag --fix
+
+requisitos_extras:
+  - Modo dry-run
+  - Backup automático antes de modificar archivos
+  - Logging estructurado

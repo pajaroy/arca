@@ -1,0 +1,120 @@
+---
+tipo: bitacora
+id: BITACORA_2025-06-05_b967ae
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Test Log Crypto V0.0.0.3
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:85d772de73fbd8b72020859e7ea3309c968e942e963927038378fe83f047c6fc
+---
+import pytest
+import os
+import json
+from pathlib import Path
+from core.llm_server.utils.log_crypto import CryptoEngine
+
+# --- Fixtures ---
+
+@pytest.fixture(params=['AES-256-GCM', 'ChaCha20'])
+def crypto_engine(request, monkeypatch):
+    engine = CryptoEngine()
+
+    def mock_algo():
+        return request.param
+
+    monkeypatch.setattr(engine, "detectar_algoritmo", mock_algo)
+    return engine
+
+@pytest.fixture
+def sample_log(tmp_path):
+    log_file = tmp_path / "test.log"
+    data = [{"timestamp": "2024-01-01", "event": "test"}]
+    log_file.write_text("\n".join(json.dumps(d) for d in data))
+    return log_file
+
+# --- Tests ---
+
+def test_full_encryption_decryption(crypto_engine, sample_log, tmp_path):
+    encrypted = tmp_path / "encrypted.enc"
+    decrypted = tmp_path / "decrypted.log"
+
+    key, salt = crypto_engine.generar_clave()
+    crypto_engine.encrypt_log(str(sample_log), str(encrypted), key, salt)
+    crypto_engine.decrypt_log(str(encrypted), str(decrypted), key=key, salt=salt)
+
+    assert decrypted.read_text() == sample_log.read_text()
+
+def test_key_generation():
+    engine = CryptoEngine()
+    key, salt = engine.generar_clave()
+    assert len(key) == 32
+    assert salt is None
+
+    pwd = b"secret"
+    key2, salt2 = engine.generar_clave(pwd)
+    key3, _ = engine.generar_clave(pwd, salt2)
+    assert key2 == key3
+
+def test_validate_encrypted_log(crypto_engine, sample_log, tmp_path):
+    encrypted = tmp_path / "valid.enc"
+    key, salt = crypto_engine.generar_clave()
+    crypto_engine.encrypt_log(str(sample_log), str(encrypted), key, salt)
+    assert CryptoEngine.validar_log_cifrado(str(encrypted))
+
+    invalid = tmp_path / "invalid.enc"
+    invalid.write_bytes(b"short")
+    assert not CryptoEngine.validar_log_cifrado(str(invalid))
+
+def test_wrong_key_decryption(crypto_engine, sample_log, tmp_path):
+    encrypted = tmp_path / "wrong.enc"
+    key, salt = crypto_engine.generar_clave()
+    crypto_engine.encrypt_log(str(sample_log), str(encrypted), key, salt)
+
+    wrong_key, _ = crypto_engine.generar_clave()
+
+    with pytest.raises(Exception):
+        crypto_engine.decrypt_log(str(encrypted), str(tmp_path / "fail.log"), wrong_key, salt)
+
+def test_encryption_failure(crypto_engine, tmp_path):
+    invalid_input = tmp_path / "nonexistent.log"
+    with pytest.raises(Exception):
+        crypto_engine.encrypt_log(str(invalid_input), str(tmp_path / "fail.enc"))
+
+def test_algorithm_specifics(crypto_engine):
+    nonce_len = 12 if crypto_engine.algorithm == 'AES-256-GCM' else 24
+    assert len(os.urandom(nonce_len)) == nonce_len
+
+def test_data_integrity(crypto_engine, sample_log, tmp_path):
+    encrypted = tmp_path / "data.enc"
+    decrypted = tmp_path / "data.log"
+    key, salt = crypto_engine.generar_clave()
+
+    crypto_engine.encrypt_log(str(sample_log), str(encrypted), key, salt)
+    crypto_engine.decrypt_log(str(encrypted), str(decrypted), key=key, salt=salt)
+
+    assert sample_log.read_bytes() == decrypted.read_bytes()
+
+def test_encryption_format(crypto_engine, sample_log, tmp_path):
+    encrypted = tmp_path / "format.enc"
+    key, salt = crypto_engine.generar_clave()
+    crypto_engine.encrypt_log(str(sample_log), str(encrypted), key, salt)
+
+    data = encrypted.read_bytes()
+    nonce_len = 12 if crypto_engine.algorithm == 'AES-256-GCM' else 24
+    assert len(data) >= 16 + nonce_len + len(sample_log.read_bytes())
+
+def test_key_rotation():
+    engine = CryptoEngine()
+    key1, _ = engine.generar_clave()
+    key2, _ = engine.generar_clave()
+    assert key1 != key2
+

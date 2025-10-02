@@ -1,0 +1,29 @@
+{
+  "version": "0.3.0",
+  "tipo": "readme",
+  "schema": "almaresist.readme_v1",
+  "descripcion": "Almacén central de archivos README históricos del módulo bitácora, para trazabilidad y auditoría institucional.",
+  "estructura": [
+    "v0.1.0/",
+    "v0.2.0/"
+  ],
+  "tags": [
+    "legacy",
+    "readme",
+    "bitacora",
+    "historial",
+    "institucional"
+  ],
+  "linked_to": [
+    "../v0.1.0/README.yaml",
+    "../v0.2.0/README.yaml",
+    "../../README.yaml"
+  ],
+  "responsable": "Equipo de Operaciones",
+  "hash_verificacion": "sha256:pending",
+  "historial": [
+    "2025-06-17: Creación de carpeta central de README legacy para consolidación institucional."
+  ],
+  "last_modified": "2025-06-17T13:10:00Z",
+  "last_modified_by": "Kael"
+}

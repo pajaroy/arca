@@ -1,0 +1,109 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_c5f360
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Test Memory Graph
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:123d843f57597cde772712bc7edcb44c483efdc6a999419d0103aadb7ddfcce1
+---
+import pytest
+import json
+from xml.etree import ElementTree
+from core.llm_server.integration.memory_graph.memory_graph import MemoryGraph
+from pathlib import Path
+
+# Fixture para grafo preconfigurado
+@pytest.fixture
+def sample_graph(tmp_path):
+    storage_path = tmp_path / "graph.json"
+    graph = MemoryGraph(str(storage_path))
+    graph.add_node("filosofía")
+    graph.add_node("ciencia")
+    graph.add_node("tecnología")
+    graph.create_edge("filosofía", "ciencia", weight=0.8)
+    graph.create_edge("ciencia", "tecnología", weight=1.2)
+    return graph
+
+# Test de inserción de nodos
+def test_add_node_idempotency(sample_graph):
+    initial_id = sample_graph.add_node("filosofía")
+    new_id = sample_graph.add_node("filosofía")
+    assert initial_id == new_id, "Nodos duplicados no permitidos"
+
+# Test de búsqueda de nodos
+def test_get_node_id(sample_graph):
+    assert sample_graph.get_node_id("ciencia") is not None
+    assert sample_graph.get_node_id("arte") is None
+
+# Test de creación de aristas
+def test_edge_creation(sample_graph):
+    filosofia_id = sample_graph.get_node_id("filosofía")
+    ciencia_id = sample_graph.get_node_id("ciencia")
+    related = sample_graph.get_related("filosofía")
+    assert "ciencia" in related
+    assert sample_graph.graph["filosofía"]["ciencia"] == 0.8
+
+# Test de recuperación de nodos relacionados con umbral
+def test_get_related_with_threshold(sample_graph):
+    sample_graph.add_node("arte")
+    sample_graph.create_edge("ciencia", "arte", weight=0.05)
+    related = sample_graph.get_related("ciencia", threshold=0.1)
+    assert "arte" not in related
+
+# Test de exportación JSON
+def test_json_export(sample_graph, tmp_path):
+    export_path = tmp_path / "export.json"
+    sample_graph.export_graph(str(export_path), "json")
+    with open(export_path) as f:
+        data = json.load(f)
+        assert "filosofía" in data
+        assert data["ciencia"]["tecnología"] == 1.2
+
+# Test de exportación GraphML
+def test_graphml_export(sample_graph, tmp_path):
+    export_path = tmp_path / "export.graphml"
+    sample_graph.export_graph(str(export_path), "graphml")
+    tree = ElementTree.parse(export_path)
+    root = tree.getroot()
+    assert len(root.findall(".//node")) == 3
+    assert len(root.findall(".//edge")) == 4  # 2 aristas bidireccionales = 4 direcciones
+
+# Test de borrado completo
+def test_clear_graph(sample_graph):
+    sample_graph.clear()
+    assert len(sample_graph.graph) == 0
+
+# Test de robustez con datos repetidos
+def test_repeated_operations(sample_graph):
+    for _ in range(3):
+        sample_graph.add_node("tecnología")
+        sample_graph.create_edge("tecnología", "filosofía", weight=0.5)
+    related = sample_graph.get_related("tecnología")
+    assert "filosofía" in related
+
+# Test de persistencia en disco
+def test_persistent_storage(tmp_path):
+    storage_path = tmp_path / "graph.json"
+    graph = MemoryGraph(str(storage_path))
+    graph.add_node("test")
+    graph._persist_graph()  # Forzar persistencia inmediata
+    new_graph = MemoryGraph(str(storage_path))
+    assert "test" in new_graph.graph
+
+# Limpieza de archivos temporales
+@pytest.fixture(autouse=True)
+def cleanup(tmp_path):
+    yield
+    for f in tmp_path.glob("*"):
+        if f.is_file():
+            f.unlink()

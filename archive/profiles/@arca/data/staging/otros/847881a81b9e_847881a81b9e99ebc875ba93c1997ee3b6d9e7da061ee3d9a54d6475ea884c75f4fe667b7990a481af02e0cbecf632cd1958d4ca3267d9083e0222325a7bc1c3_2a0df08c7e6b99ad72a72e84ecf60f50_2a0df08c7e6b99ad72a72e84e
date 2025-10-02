@@ -1,0 +1,20 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_2a1410
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: '  Init  '
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:e5fbb9bce0e2bfdd6a609b87931cde09d0c6a8d74448634810b6c81fa844d624
+---
+from .context_tracker import ContextTracker
+

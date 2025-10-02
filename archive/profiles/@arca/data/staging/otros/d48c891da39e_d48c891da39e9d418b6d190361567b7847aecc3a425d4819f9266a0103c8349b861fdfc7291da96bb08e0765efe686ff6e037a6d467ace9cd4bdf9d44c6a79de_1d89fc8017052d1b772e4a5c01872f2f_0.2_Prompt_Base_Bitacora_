@@ -1,0 +1,43 @@
+# 📘 Prompt Base 0.2 – Bitácora Trading Alma Mía
+
+## 🎯 Objetivo del Sistema
+Diseñar una bitácora en Excel para el fondo **Alma Mía**, centrada en las estrategias activas: **PuPuPu** y **NewShortOpen**. El sistema debe contemplar:
+
+- Gestión dinámica hasta TP4
+- Registro de trades reales y de backtesting
+- Cálculos basados en Capital Actual y Capital General
+- Hoja Institucional con control de capital y drawdown
+- Posibilidad de escalar el sistema a futuro
+
+
+### 2. 📘 Registro de Trades – Estrategia PuPuPu  
+**Hoja: `Registro_PuPuPu`**
+
+### 3. 📙 Registro de Trades – Estrategia NY Open  
+**Hoja: `Registro_NY_Open`**
+
+| Campo                    | Descripción                                                                 |
+|--------------------------|-----------------------------------------------------------------------------|
+| Trade #                  | Número de operación                                                         |
+| Fecha                    | Fecha del trade                                                             |
+| Activo                   | BTC / ETH                                                                   |
+| Dirección                | Long / Short                                                                |
+| Entrada                  | Precio de entrada                                                           |
+| Stop Loss (SL)           | Precio de stop                                                              |
+| TP1 – TP4                | Precios objetivo                                                            |
+| % TP1 – % TP4            | Porcentaje cerrado en cada TP (editable manual)                             |
+| Total TP (%)             | Suma de los % de cada parcial (fórmula automática)                          |
+| Resultado Final (%)      | Resultado porcentual sobre el capital actual                               |
+| PnL USD (C.A.)           | Resultado en dólares sobre capital actual                                   |
+| PnL USD (C.G.)           | Resultado en dólares sobre capital general                                  |
+| Comentarios              | Observaciones emocionales / técnicas                                       |
+
+
+## 🧮 Fórmulas Recomendadas
+
+- **Total TP (%)**: `=SUMA(%TP1:%TP4)`
+- **Resultado Final (%)**: `=TP1%*RR1 + TP2%*RR2 + ...`
+- **PnL (C.A.)**: `=CapitalActual * ResultadoFinal(%)`
+- **PnL (C.G.)**: `=CapitalGeneral * ResultadoFinal(%)`
+- **Drawdown Máximo**: `=MAX(PicoCapital - CapitalActual) / PicoCapital`
+

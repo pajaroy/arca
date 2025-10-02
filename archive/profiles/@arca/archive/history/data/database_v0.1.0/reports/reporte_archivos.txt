@@ -1,0 +1,21 @@
+=== REPORTE DE ARCHIVOS POR CARPETA ===
+Fecha: Sun Jul 27 04:30:26 AM -03 2025
+---------------------------------------
+Carpeta: backups | Archivos: 616
+Carpeta: csv | Archivos: 2
+Carpeta: databases | Archivos: 4
+Carpeta: docs | Archivos: 29
+Carpeta: excel | Archivos: 24
+Carpeta: json | Archivos: 344
+Carpeta: logs | Archivos: 33
+Carpeta: markdown | Archivos: 2031
+Carpeta: nix | Archivos: 27
+Carpeta: parquet | Archivos: 10
+Carpeta: pdf | Archivos: 17
+Carpeta: python | Archivos: 710
+Carpeta: scripts | Archivos: 45
+Carpeta: sql | Archivos: 2
+Carpeta: texto | Archivos: 38
+Carpeta: yaml | Archivos: 382
+---------------------------------------
+Total general: 4314

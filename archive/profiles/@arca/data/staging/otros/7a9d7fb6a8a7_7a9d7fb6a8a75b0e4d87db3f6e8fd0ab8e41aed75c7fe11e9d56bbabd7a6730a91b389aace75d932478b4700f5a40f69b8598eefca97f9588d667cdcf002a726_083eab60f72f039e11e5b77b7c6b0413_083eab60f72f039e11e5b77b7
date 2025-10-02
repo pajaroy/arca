@@ -1,0 +1,35 @@
+
+
+# 📁 Metodología – Estructura Autónoma ALMA_RESIST
+
+## 🧠 Propósito
+
+Establecer una estructura base clara, modular y autosuficiente para cualquier carpeta operativa dentro del sistema ALMA_RESIST. Cada carpeta debe poder funcionar de manera aislada, auditable y colaborativa, sin depender del contexto externo.
+
+
+## ✅ Buenas Prácticas
+
+- Nombrar archivos y carpetas en `snake_case`.
+- Incluir `YAML` de metadatos en todos los `.md` principales.
+- Mantener la carpeta autocontenida y auditable.
+- Excluir `downloads/`, `logs/`, y `.env` del versionado (`.gitignore`).
+- Documentar siempre cambios en `changelog.md`.
+- Anotar reflexiones, obstáculos y decisiones en `journal/`.
+
+
+## 📌 Uso Recomendado (plantilla CLI)
+
+```bash
+mkdir -p nombre_modulo/{control,documents/journal,documents/history,archivo/{datasets,logs,downloads},code/{scripts,notebooks,tests},config,meta}
+touch nombre_modulo/documents/{readme.md,changelog.md}
+touch nombre_modulo/control/sprint_actual.md
+touch nombre_modulo/meta/module.yaml
+```
+
+
+## 📁 Versión del Estándar
+
+**ALMA_RESIST – Estructura Autónoma v1.0.0**  
+Fecha de publicación: 2025-05-29  
+Revisado por: Santiago Calvo (Comandante ALMA)
+

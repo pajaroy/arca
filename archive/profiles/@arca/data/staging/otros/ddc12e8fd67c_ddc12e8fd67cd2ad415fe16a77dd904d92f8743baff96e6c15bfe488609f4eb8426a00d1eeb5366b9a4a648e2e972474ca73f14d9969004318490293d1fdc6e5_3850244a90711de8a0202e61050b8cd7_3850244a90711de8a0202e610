@@ -1,0 +1,23 @@
+module: asesor-ia
+type: asesor_critico
+status: activo
+version: 1.0.0
+created: 2025-06-01
+location: control_central/asesor-ia/
+linked_to:
+  - control_central/changelog.md
+  - control_central/control/sprint_actual.md
+maintainer: Santi (Comandante ALMA)
+description: >
+  Nodo simbiótico de evaluación estructural y técnica. Actúa como asesor estratégico
+  del sistema ALMA_RESIST. No ejecuta, sino que detecta errores, sugiere cambios y audita decisiones antes de ser aplicadas.
+permissions:
+  modify_external_modules: false
+  propose_changelog_entries: true
+  audit_system_decisions: true
+  halt_execution_on_conflict: true
+ia_integration:
+  - GPT (estructura)
+  - DeepSeek (técnica)
+mantra: >
+  "El asesor no ejecuta. Piensa. Critica. Y protege la integridad del sistema."

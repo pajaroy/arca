@@ -1,0 +1,11 @@
+{
+  "id": "MEMECO-018",
+  "fecha": "2025-05-01T12:30:00",
+  "titulo": "Ejemplo ECO #18",
+  "categoria": "ECO",
+  "tags": [
+    "#inflación",
+    "#política_monetaria"
+  ],
+  "contenido": "El BCE mantuvo tasas fijas pese a las presiones inflacionarias."
+}

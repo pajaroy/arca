@@ -1,0 +1,36 @@
+
+# ✅ Checklist de Correcciones – ALMA LIBRE v0.0.6
+
+Este documento recopila todas las correcciones a aplicar en la estructura de carpetas del sistema ALMA LIBRE v0.0.6 antes de declarar una nueva versión estable. Cada ítem debe ser revisado y marcado como completado manualmente.
+
+## 🔁 Correcciones de Duplicación
+- [x] Eliminar duplicados de documentos entre `EMPRESAS/` y `CUADERNOS/empresas.cu/` (usar enlaces en lugar de copias).
+- [x] Mantener una sola copia oficial de `sync_drive_maestro.sh` (eliminar la redundante).
+- [x] Verificar otros posibles duplicados y resolver.
+
+## 📚 Recursos y Ayudas
+- [x] Crear carpeta `ALMA_LIBRE/RECURSOS_Y_AYUDAS/`.
+- [x] Mover `Auxilliares_dev` a `RECURSOS_Y_AYUDAS/Scripts_Utiles/` y corregir nombre.
+- [x] Centralizar prompts generales y plantillas útiles en esta carpeta.
+
+## 🧱 Proyectos y Módulos
+- [x] Mover proyectos como `Alma_loader_dev/` a `MODULOS/Alma_Loader/` si se considera formal.
+- [x] Crear estructura tipo `docs/` y `src/` dentro de cada módulo.
+- [x] Eliminar o usar carpeta `MODULOS/programacion/` (si está vacía o mal asignada).
+
+## 🧹 Limpieza General
+- [x] Eliminar carpetas vacías: `MODULOS/programacion/`, `BITACORA_CENTRAL/DESARROLLO/`, etc.
+- [x] Vaciar y eliminar `_archivo_temp__` si ya no es necesario.
+- [x] Renombrar correctamente archivos mal nombrados (e.g. con `\n` en nombre).
+- [x] Corregir errores de ortografía como `Auxilliares_dev` → `Auxiliares_dev`.
+- [x] Unificar nombres como `13_CANNABIS_CLUB` → `13CC` en todas partes para coherencia.
+
+## 🧾 Documentación
+- [x] Documentar la estructura actual en `REESTRUCTURACION_0.0.6/Estructura_de_carpetas.md`.
+- [x] Agregar glosario de convenciones (prefijos, `.cu`, etc.).
+- [x] Usar README en raíz y subcarpetas clave para autoexplicarse.
+
+## 🔄 Mejora IA + Humanos
+- [x] Descomprimir resúmenes `.zip` de `RESUMENES/` para acceso directo.
+- [x] Agregar aviso en documentos históricos: “ARCHIVO HISTÓRICO - NO ACTUAL”.
+- [x] Mantener consistencia de términos en preguntas y nombres de carpetas.

@@ -1,0 +1,10 @@
+# 📊 Seguimiento Técnico – ALMA_NLP
+
+## Objetivo
+Detectar relaciones semánticas entre memorias ALMA usando modelos NLP (Sentence-BERT, ChromaDB, etc.).
+
+## Fechas clave
+
+### 2025-05-01
+- Creación de estructura base del módulo.
+- Definido el flujo de trabajo inicial.

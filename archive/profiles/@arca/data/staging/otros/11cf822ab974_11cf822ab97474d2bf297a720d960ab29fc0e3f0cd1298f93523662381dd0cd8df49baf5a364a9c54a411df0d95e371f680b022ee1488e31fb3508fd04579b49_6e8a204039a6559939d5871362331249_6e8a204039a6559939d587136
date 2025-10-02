@@ -1,0 +1,50 @@
+# 🧠 Prompt Base – `registrar_feedback.py` (Fase 5.2 – ALMA_FEEDBACK)
+
+## 🎯 Objetivo
+Desarrollar un script que lea alertas generadas entre memorias ALMA y las incorpore directamente en los archivos JSON originales, dentro de un campo nuevo llamado `"retroalimentacion"`.
+
+
+## ✅ Requisitos del script
+
+- Nombre: `registrar_feedback.py`
+- Directorio de entrada: `memorias_json/`
+- Directorio de salida: `memorias_json_actualizadas/`
+- Archivo de alertas: `logs/alertas.json`
+
+### 🔄 Comportamiento esperado:
+
+- Leer cada alerta
+- Buscar la memoria cuyo `"id"` sea igual a `"memoria_conflictiva"`
+- Agregar un nuevo campo `"retroalimentacion"` así:
+
+```json
+"retroalimentacion": [
+  {
+    "tipo": "riesgo_estres",
+    "origen": "MEMTRD-045",
+    "score": 0.85,
+    "descripcion": "Posible correlación entre riesgo operativo y estrés personal",
+    "fecha_alerta": "2025-05-02T15:30:00"
+  }
+]
+```
+
+- Si ya existe el campo, **agregar sin sobrescribir**
+- Guardar la memoria modificada en `memorias_json_actualizadas/`
+- Crear log de cambios en `logs/registro_feedback.log`
+
+
+## 📁 Estructura esperada
+
+```
+alma_loader/
+├── memorias_json/
+├── logs/
+│   └── alertas.json
+│   └── registro_feedback.log
+├── memorias_json_actualizadas/
+└── scripts/
+    └── registrar_feedback.py
+```
+
+Este script implementa el mecanismo de retroalimentación contextual dentro de las memorias del sistema ALMA.

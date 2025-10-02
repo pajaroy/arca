@@ -1,0 +1,43 @@
+---
+tipo: configuracion
+id: CONFIGURACION_2025-06-05_4e4cdb
+version: '1.0'
+formato: yaml
+modulo: ALMA_RESIST
+titulo: Alma Status
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:01d8a71269be95c42021828aa3cb7ddc95d09d2e1f6184711f01ca3534c7806e
+---
+# ALMA_RESIST – Estado General del Sistema
+updated: 2025-06-01
+
+control_central:
+  status: activo
+  changelog_integrity: OK
+  sprint_actual: sincronización doble nodo
+  conflictos_activos: 0
+
+asesor-ia:
+  status: activo
+  ia_online:
+    - GPT: true
+    - DeepSeek: true
+  última_sincronización: 2025-06-01
+  conflictos_detectados: 0
+  versión: 1.0
+
+sistema_sync:
+  nodos_conectados:
+    - ALMA_CORE
+    - ALMA_RESIST
+  última_resincronización: 2025-06-01T06:00
+  estado_git: sincronizado
+  auto_backup: habilitado cada 24h

@@ -1,0 +1,21 @@
+# 🧠 Prompt Base – Fase 5: Sistema de Retroalimentación y Alerta Contextual
+
+Objetivo: construir un sistema que pueda analizar las memorias ya cargadas en formato `.json`, identificar relaciones semánticas con potencial de conflicto o tensión, y generar alertas inteligentes.
+
+Requisitos del sistema:
+
+- Leer todas las memorias en `memorias_json/`
+- Identificar si existen conflictos entre memorias (ej: una memoria de trading con #riesgo alto y otra de salud con #estrés)
+- Generar un archivo `alertas.json` con las siguientes claves:
+  - `memoria_origen`
+  - `memoria_conflictiva`
+  - `tipo_alerta`
+  - `descripcion`
+  - `score` (confianza del conflicto)
+- Registrar log en `logs/monitor_alertas.log`
+
+Opcional:
+- Sugerir memorias relacionadas que puedan mitigar el conflicto
+- Clasificar tipo de alerta: salud, estrategia, tiempo, enfoque
+
+Este sistema debe ser ligero, modular y compatible con la estructura ya validada en ALMA_LOADER / ALMA_NLP.

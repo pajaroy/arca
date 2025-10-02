@@ -1,0 +1,43 @@
+---
+id: llm_server_v0.1.0
+modulo: llm_server
+version: 0.2
+standard: ALMA_RESIST_v0.2
+descripcion: |
+  Núcleo institucional del LLM Server ALMA_RESIST.
+  Este entorno implementa los módulos principales para la operación, integración, auditoría, logging, memoria institucional y control multiagente.
+  Todos los componentes siguen los estándares ALMA_RESIST v0.2 y garantizan interoperabilidad, trazabilidad y seguridad institucional.
+carpetas_principales:
+  - config: "Configuración general y settings institucionales."
+  - contracts: "Esquemas legacy y contratos formales históricos."
+  - docs: "Changelog y documentación histórica."
+  - integration: "Módulos de integración críticos: context_tracker, memory_graph, model_wrapper, schemas, logging_config, transport_layer."
+  - logs: "Almacenamiento de logs históricos y de auditoría."
+  - meta: "Metadatos del módulo y documentación institucional."
+  - utils: "Utilidades para logs, cifrado y backend auxiliar."
+  - main.py: "Entrypoint universal del sistema."
+campos_universales:
+  - id
+  - agente
+  - timestamp
+  - tags
+  - hash
+  - metadata
+  - memoria_ref
+linked_to:
+  - alma_core/control_central/bitacora/bitacora_viva.yaml
+  - alma_core/core/notebooks/llm_server_v0.1.0/integration/logging_config.py
+  - alma_core/core/notebooks/llm_server_v0.1.0/integration/context_tracker/context_tracker.py
+  - alma_core/core/notebooks/llm_server_v0.1.0/integration/memory_graph/memory_graph.py
+  - alma_core/core/notebooks/llm_server_v0.1.0/integration/model_wrapper/model_wrapper.py
+  - alma_core/core/notebooks/llm_server_v0.1.0/integration/schemas/schemas.py
+  - alma_core/core/notebooks/llm_server_v0.1.0/integration/transport_layer/transport_layer.py
+  - alma_core/core/notebooks/llm_server_v0.1.0/utils/log_writer/log_writer.py
+  - alma_core/core/notebooks/llm_server_v0.1.0/utils/log_crypto/log_crypto.py
+  - alma_core/core/notebooks/llm_server_v0.1.0/logs/
+estado: "EN USO — bundle auditable, modular y expandible"
+bitacora_link:
+  - alma_core/control_central/bitacora/bitacora_viva.yaml
+
+---
+

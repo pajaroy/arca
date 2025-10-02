@@ -1,0 +1,76 @@
+
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5 (v1.2)
+
+## 🎯 Objetivo General
+
+Diseñar, implementar y evolucionar un sistema offline modular con IA local llamado **ALMA_RESIST**, que sea:
+
+- Antifrágil, resiliente y autoevaluativo
+- Funcional en condiciones extremas
+- Preparado para arquitecturas y hardware emergentes
+- Compatible con documentación contextual, recuperación automática y eficiencia energética
+
+
+## 🧪 Roadmap Técnico con KPIs y Subtareas
+
+```markdown
+**Tarea:** Implementar logging cifrado  
+**Subtareas:**  
+1. Diseñar estructura JSON para logs (2h).  
+2. Integrar AES-256 con rotación de claves (3h).  
+3. Validar hash con SHA3-512 (1.5h).  
+4. Test de restauración desde logs corruptos (2h).  
+```
+
+```markdown
+| Sprint | Hito              | Métrica Clave              | Umbral de Falla            |
+|--------|-------------------|----------------------------|-----------------------------|
+| 1      | Logging + Cifrado | Hash verificado <5s carga  | Falla hash o timeout >8s    |
+| 2      | Chat Persistente  | <50MB por 1000 msg / <1.2s | >2s o RAM >2.5GB            |
+| 3      | Pruebas E2E       | 98% cobertura              | <85% o fallo en CPU 1hilo   |
+| 4      | Survival Mode     | ARM 2GB RAM sin swap       | Swap activo o falla CPU     |
+| 5      | Quant Dinámica    | -40% RAM en modelos LLM    | Precisión <95%              |
+```
+
+
+## 🔄 Transición a Nuevas Tecnologías
+
+```markdown
+**Checklist para ONNX/TensorRT:**  
+- [ ] Wrapper C++ con bindings Python  
+- [ ] Validación en `docs/benchmarks_hw.md`  
+- [ ] Retrocompatibilidad con GGUF  
+```
+
+
+## 📈 Documentación Contextual por Sprint
+
+- `docs/reporte_sprint.md` debe incluir:  
+  - Gráficos RAM/CPU por fase (usá matplotlib o gnuplot)  
+  - Top 3 errores por gravedad  
+  - Fragmentos de código criticados por la IA  
+  - Comparativa vs sprint anterior
+
+
+## 💾 Datos Sintéticos + Escenarios de Estrés
+
+Script: `generate_synthetic_data.py`
+
+- 10.000 mensajes artificiales
+- Fragmentación de disco simulada
+- Logs parcialmente corruptos
+- Modelos incompletos + headers rotos
+
+
+## 📝 Instrucción Final para GPT-4.5
+
+Como IA Copiloto:
+
+1. Generá tareas divididas en subtareas de 2–4h como el ejemplo de logging cifrado.  
+2. Incluí código con errores en cascada y reparaciones automáticas.  
+3. Proponé integración gradual a ONNX, GPU y RISC-V con checklists.  
+4. Generá `reporte_sprint.md` con KPIs, gráficos y comparativas.  
+5. Aplicá condiciones para activar `modo bajo consumo`.  
+6. Validá la compatibilidad cruzada en emulación QEMU y Raspberry Pi.  
+7. Sugerí cambios técnicos y documentá las decisiones en `lecciones_aprendidas.md`.  
+

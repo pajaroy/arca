@@ -1,0 +1,2209 @@
+};
+```
+
+In this case, `TearDown()` is not needed since we don't have to clean up after
+each test, other than what's already done by the destructor.
+
+Now we'll write tests using `TEST_F()` and this fixture.
+
+```c++
+TEST_F(QueueTest, IsEmptyInitially) {
+  EXPECT_EQ(q0_.size(), 0);
+}
+
+TEST_F(QueueTest, DequeueWorks) {
+  int* n = q0_.Dequeue();
+  EXPECT_EQ(n, nullptr);
+
+  n = q1_.Dequeue();
+  ASSERT_NE(n, nullptr);
+  EXPECT_EQ(*n, 1);
+  EXPECT_EQ(q1_.size(), 0);
+  delete n;
+
+  n = q2_.Dequeue();
+  ASSERT_NE(n, nullptr);
+  EXPECT_EQ(*n, 2);
+  EXPECT_EQ(q2_.size(), 1);
+  delete n;
+}
+```
+
+The above uses both `ASSERT_*` and `EXPECT_*` assertions. The rule of thumb is
+to use `EXPECT_*` when you want the test to continue to reveal more errors after
+the assertion failure, and use `ASSERT_*` when continuing after failure doesn't
+make sense. For example, the second assertion in the `Dequeue` test is
+`ASSERT_NE(n, nullptr)`, as we need to dereference the pointer `n` later, which
+would lead to a segfault when `n` is `NULL`.
+
+When these tests run, the following happens:
+
+1.  googletest constructs a `QueueTest` object (let's call it `t1`).
+2.  `t1.SetUp()` initializes `t1`.
+3.  The first test (`IsEmptyInitially`) runs on `t1`.
+4.  `t1.TearDown()` cleans up after the test finishes.
+5.  `t1` is destructed.
+6.  The above steps are repeated on another `QueueTest` object, this time
+    running the `DequeueWorks` test.
+
+**Availability**: Linux, Windows, Mac.
+
+## Invoking the Tests
+
+`TEST()` and `TEST_F()` implicitly register their tests with googletest. So,
+unlike with many other C++ testing frameworks, you don't have to re-list all
+your defined tests in order to run them.
+
+After defining your tests, you can run them with `RUN_ALL_TESTS()`, which
+returns `0` if all the tests are successful, or `1` otherwise. Note that
+`RUN_ALL_TESTS()` runs *all tests* in your link unit--they can be from different
+test suites, or even different source files.
+
+When invoked, the `RUN_ALL_TESTS()` macro:
+
+*   Saves the state of all googletest flags.
+
+*   Creates a test fixture object for the first test.
+
+*   Initializes it via `SetUp()`.
+
+*   Runs the test on the fixture object.
+
+*   Cleans up the fixture via `TearDown()`.
+
+*   Deletes the fixture.
+
+*   Restores the state of all googletest flags.
+
+*   Repeats the above steps for the next test, until all tests have run.
+
+If a fatal failure happens the subsequent steps will be skipped.
+
+{: .callout .important}
+> IMPORTANT: You must **not** ignore the return value of `RUN_ALL_TESTS()`, or
+> you will get a compiler error. The rationale for this design is that the
+> automated testing service determines whether a test has passed based on its
+> exit code, not on its stdout/stderr output; thus your `main()` function must
+> return the value of `RUN_ALL_TESTS()`.
+>
+> Also, you should call `RUN_ALL_TESTS()` only **once**. Calling it more than
+> once conflicts with some advanced googletest features (e.g., thread-safe
+> [death tests](advanced.md#death-tests)) and thus is not supported.
+
+**Availability**: Linux, Windows, Mac.
+
+## Writing the main() Function
+
+Most users should _not_ need to write their own `main` function and instead link
+with `gtest_main` (as opposed to with `gtest`), which defines a suitable entry
+point. See the end of this section for details. The remainder of this section
+should only apply when you need to do something custom before the tests run that
+cannot be expressed within the framework of fixtures and test suites.
+
+If you write your own `main` function, it should return the value of
+`RUN_ALL_TESTS()`.
+
+You can start from this boilerplate:
+
+```c++
+#include "this/package/foo.h"
+
+#include "gtest/gtest.h"
+
+namespace my {
+namespace project {
+namespace {
+
+// The fixture for testing class Foo.
+class FooTest : public ::testing::Test {
+ protected:
+  // You can remove any or all of the following functions if their bodies would
+  // be empty.
+
+  FooTest() {
+     // You can do set-up work for each test here.
+  }
+
+  ~FooTest() override {
+     // You can do clean-up work that doesn't throw exceptions here.
+  }
+
+  // If the constructor and destructor are not enough for setting up
+  // and cleaning up each test, you can define the following methods:
+
+  void SetUp() override {
+     // Code here will be called immediately after the constructor (right
+     // before each test).
+  }
+
+  void TearDown() override {
+     // Code here will be called immediately after each test (right
+     // before the destructor).
+  }
+
+  // Class members declared here can be used by all tests in the test suite
+  // for Foo.
+};
+
+// Tests that the Foo::Bar() method does Abc.
+TEST_F(FooTest, MethodBarDoesAbc) {
+  const std::string input_filepath = "this/package/testdata/myinputfile.dat";
+  const std::string output_filepath = "this/package/testdata/myoutputfile.dat";
+  Foo f;
+  EXPECT_EQ(f.Bar(input_filepath, output_filepath), 0);
+}
+
+// Tests that Foo does Xyz.
+TEST_F(FooTest, DoesXyz) {
+  // Exercises the Xyz feature of Foo.
+}
+
+}  // namespace
+}  // namespace project
+}  // namespace my
+
+int main(int argc, char **argv) {
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
+}
+```
+
+The `::testing::InitGoogleTest()` function parses the command line for
+googletest flags, and removes all recognized flags. This allows the user to
+control a test program's behavior via various flags, which we'll cover in the
+[AdvancedGuide](advanced.md). You **must** call this function before calling
+`RUN_ALL_TESTS()`, or the flags won't be properly initialized.
+
+On Windows, `InitGoogleTest()` also works with wide strings, so it can be used
+in programs compiled in `UNICODE` mode as well.
+
+But maybe you think that writing all those `main` functions is too much work? We
+agree with you completely, and that's why Google Test provides a basic
+implementation of main(). If it fits your needs, then just link your test with
+the `gtest_main` library and you are good to go.
+
+{: .callout .note}
+NOTE: `ParseGUnitFlags()` is deprecated in favor of `InitGoogleTest()`.
+
+## Known Limitations
+
+*   Google Test is designed to be thread-safe. The implementation is thread-safe
+    on systems where the `pthreads` library is available. It is currently
+    _unsafe_ to use Google Test assertions from two threads concurrently on
+    other systems (e.g. Windows). In most tests this is not an issue as usually
+    the assertions are done in the main thread. If you want to help, you can
+    volunteer to implement the necessary synchronization primitives in
+    `gtest-port.h` for your platform.
+
+
+## Archivo: quickstart-cmake.md
+Contenido:
+# Quickstart: Building with CMake
+
+This tutorial aims to get you up and running with GoogleTest using CMake. If
+you're using GoogleTest for the first time or need a refresher, we recommend
+this tutorial as a starting point. If your project uses Bazel, see the
+[Quickstart for Bazel](quickstart-bazel.md) instead.
+
+## Prerequisites
+
+To complete this tutorial, you'll need:
+
+*   A compatible operating system (e.g. Linux, macOS, Windows).
+*   A compatible C++ compiler that supports at least C++11.
+*   [CMake](https://cmake.org/) and a compatible build tool for building the
+    project.
+    *   Compatible build tools include
+        [Make](https://www.gnu.org/software/make/),
+        [Ninja](https://ninja-build.org/), and others - see
+        [CMake Generators](https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html)
+        for more information.
+
+See [Supported Platforms](platforms.md) for more information about platforms
+compatible with GoogleTest.
+
+If you don't already have CMake installed, see the
+[CMake installation guide](https://cmake.org/install).
+
+{: .callout .note}
+Note: The terminal commands in this tutorial show a Unix shell prompt, but the
+commands work on the Windows command line as well.
+
+## Set up a project
+
+CMake uses a file named `CMakeLists.txt` to configure the build system for a
+project. You'll use this file to set up your project and declare a dependency on
+GoogleTest.
+
+First, create a directory for your project:
+
+```
+$ mkdir my_project && cd my_project
+```
+
+Next, you'll create the `CMakeLists.txt` file and declare a dependency on
+GoogleTest. There are many ways to express dependencies in the CMake ecosystem;
+in this quickstart, you'll use the
+[`FetchContent` CMake module](https://cmake.org/cmake/help/latest/module/FetchContent.html).
+To do this, in your project directory (`my_project`), create a file named
+`CMakeLists.txt` with the following contents:
+
+```cmake
+cmake_minimum_required(VERSION 3.14)
+project(my_project)
+
+# GoogleTest requires at least C++11
+set(CMAKE_CXX_STANDARD 11)
+
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
+)
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+```
+
+The above configuration declares a dependency on GoogleTest which is downloaded
+from GitHub. In the above example, `609281088cfefc76f9d0ce82e1ff6c30cc3591e5` is
+the Git commit hash of the GoogleTest version to use; we recommend updating the
+hash often to point to the latest version.
+
+For more information about how to create `CMakeLists.txt` files, see the
+[CMake Tutorial](https://cmake.org/cmake/help/latest/guide/tutorial/index.html).
+
+## Create and run a binary
+
+With GoogleTest declared as a dependency, you can use GoogleTest code within
+your own project.
+
+As an example, create a file named `hello_test.cc` in your `my_project`
+directory with the following contents:
+
+```cpp
+#include <gtest/gtest.h>
+
+// Demonstrate some basic assertions.
+TEST(HelloTest, BasicAssertions) {
+  // Expect two strings not to be equal.
+  EXPECT_STRNE("hello", "world");
+  // Expect equality.
+  EXPECT_EQ(7 * 6, 42);
+}
+```
+
+GoogleTest provides [assertions](primer.md#assertions) that you use to test the
+behavior of your code. The above sample includes the main GoogleTest header file
+and demonstrates some basic assertions.
+
+To build the code, add the following to the end of your `CMakeLists.txt` file:
+
+```cmake
+enable_testing()
+
+add_executable(
+  hello_test
+  hello_test.cc
+)
+target_link_libraries(
+  hello_test
+  gtest_main
+)
+
+include(GoogleTest)
+gtest_discover_tests(hello_test)
+```
+
+The above configuration enables testing in CMake, declares the C++ test binary
+you want to build (`hello_test`), and links it to GoogleTest (`gtest_main`). The
+last two lines enable CMake's test runner to discover the tests included in the
+binary, using the
+[`GoogleTest` CMake module](https://cmake.org/cmake/help/git-stage/module/GoogleTest.html).
+
+Now you can build and run your test:
+
+<pre>
+<strong>my_project$ cmake -S . -B build</strong>
+-- The C compiler identification is GNU 10.2.1
+-- The CXX compiler identification is GNU 10.2.1
+...
+-- Build files have been written to: .../my_project/build
+
+<strong>my_project$ cmake --build build</strong>
+Scanning dependencies of target gtest
+...
+[100%] Built target gmock_main
+
+<strong>my_project$ cd build && ctest</strong>
+Test project .../my_project/build
+    Start 1: HelloTest.BasicAssertions
+1/1 Test #1: HelloTest.BasicAssertions ........   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.01 sec
+</pre>
+
+Congratulations! You've successfully built and run a test binary using
+GoogleTest.
+
+## Next steps
+
+*   [Check out the Primer](primer.md) to start learning how to write simple
+    tests.
+*   [See the code samples](samples.md) for more examples showing how to use a
+    variety of GoogleTest features.
+
+
+## Archivo: CONTRIBUTING.md
+Contenido:
+# Pull requests (for contributors)
+
+- llama.cpp uses the ggml tensor library for model evaluation. If you are unfamiliar with ggml, consider taking a look at the [examples in the ggml repository](https://github.com/ggml-org/ggml/tree/master/examples/). [simple](https://github.com/ggml-org/ggml/tree/master/examples/simple) shows the bare minimum for using ggml. [gpt-2](https://github.com/ggml-org/ggml/tree/master/examples/gpt-2) has minimal implementations for language model inference using GPT-2. [mnist](https://github.com/ggml-org/ggml/tree/master/examples/mnist) demonstrates how to train and evaluate a simple image classifier
+- Test your changes:
+    - Execute [the full CI locally on your machine](ci/README.md) before publishing
+    - Verify that the perplexity and the performance are not affected negatively by your changes (use `llama-perplexity` and `llama-bench`)
+    - If you modified the `ggml` source, run the `test-backend-ops` tool to check whether different backend implementations of the `ggml` operators produce consistent results (this requires access to at least two different `ggml` backends)
+    - If you modified a `ggml` operator or added a new one, add the corresponding test cases to `test-backend-ops`
+- Create separate PRs for each feature or fix. Avoid combining unrelated changes in a single PR
+- Consider allowing write access to your branch for faster reviews, as reviewers can push commits directly
+- If your PR becomes stale, don't hesitate to ping the maintainers in the comments
+
+# Pull requests (for collaborators)
+
+- Squash-merge PRs
+- Use the following format for the squashed commit title: `<module> : <commit title> (#<issue_number>)`. For example: `utils : fix typo in utils.py (#1234)`
+- Optionally pick a `<module>` from here: https://github.com/ggml-org/llama.cpp/wiki/Modules
+- Consider adding yourself to [CODEOWNERS](CODEOWNERS)
+
+# Coding guidelines
+
+- Avoid adding third-party dependencies, extra files, extra headers, etc.
+- Always consider cross-compatibility with other operating systems and architectures
+- Avoid fancy-looking modern STL constructs, use basic `for` loops, avoid templates, keep it simple
+- Vertical alignment makes things more readable and easier to batch edit
+- Clean-up any trailing whitespaces, use 4 spaces for indentation, brackets on the same line, `void * ptr`, `int & a`
+- Use sized integer types such as `int32_t` in the public API, e.g. `size_t` may also be appropriate for allocation sizes or byte offsets
+- Declare structs with `struct foo {}` instead of `typedef struct foo {} foo`
+    - In C++ code omit optional `struct` and `enum` keyword whenever they are not necessary
+    ```cpp
+    // OK
+    llama_context * ctx;
+    const llama_rope_type rope_type;
+
+    // not OK
+    struct llama_context * ctx;
+    const enum llama_rope_type rope_type;
+    ```
+
+    _(NOTE: this guideline is yet to be applied to the `llama.cpp` codebase. New code should follow this guideline.)_
+
+- Try to follow the existing patterns in the code (indentation, spaces, etc.). In case of doubt use `clang-format` (from clang-tools v15+) to format the added code
+- For anything not covered in the current guidelines, refer to the [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)
+- Tensors store data in row-major order. We refer to dimension 0 as columns, 1 as rows, 2 as matrices
+- Matrix multiplication is unconventional: [`C = ggml_mul_mat(ctx, A, B)`](https://github.com/ggml-org/llama.cpp/blob/880e352277fc017df4d5794f0c21c44e1eae2b84/ggml.h#L1058-L1064) means $C^T = A B^T \Leftrightarrow C = B A^T.$
+
+![matmul](media/matmul.png)
+
+# Naming guidelines
+
+- Use `snake_case` for function, variable and type names
+- Naming usually optimizes for longest common prefix (see https://github.com/ggml-org/ggml/pull/302#discussion_r1243240963)
+
+    ```cpp
+    // not OK
+    int small_number;
+    int big_number;
+
+    // OK
+    int number_small;
+    int number_big;
+    ```
+
+- Enum values are always in upper case and prefixed with the enum name
+
+    ```cpp
+    enum llama_vocab_type {
+        LLAMA_VOCAB_TYPE_NONE = 0,
+        LLAMA_VOCAB_TYPE_SPM  = 1,
+        LLAMA_VOCAB_TYPE_BPE  = 2,
+        LLAMA_VOCAB_TYPE_WPM  = 3,
+        LLAMA_VOCAB_TYPE_UGM  = 4,
+        LLAMA_VOCAB_TYPE_RWKV = 5,
+    };
+    ```
+
+- The general naming pattern is `<class>_<method>`, with `<method>` being `<action>_<noun>`
+
+    ```cpp
+    llama_model_init();           // class: "llama_model",         method: "init"
+    llama_sampler_chain_remove(); // class: "llama_sampler_chain", method: "remove"
+    llama_sampler_get_seed();     // class: "llama_sampler",       method: "get_seed"
+    llama_set_embeddings();       // class: "llama_context",       method: "set_embeddings"
+    llama_n_threads();            // class: "llama_context",       method: "n_threads"
+    llama_adapter_lora_free();    // class: "llama_adapter_lora",  method: "free"
+    ```
+
+    - The `get` `<action>` can be omitted
+    - The `<noun>` can be omitted if not necessary
+    - The `_context` suffix of the `<class>` is optional. Use it to disambiguate symbols when needed
+    - Use `init`/`free` for constructor/destructor `<action>`
+
+- Use the `_t` suffix when a type is supposed to be opaque to the user - it's not relevant to them if it is a struct or anything else
+
+    ```cpp
+    typedef struct llama_context * llama_context_t;
+
+    enum llama_pooling_type llama_pooling_type(const llama_context_t ctx);
+    ```
+
+    _(NOTE: this guideline is yet to be applied to the `llama.cpp` codebase. New code should follow this guideline)_
+
+- C/C++ filenames are all lowercase with dashes. Headers use the `.h` extension. Source files use the `.c` or `.cpp` extension
+- Python filenames are all lowercase with underscores
+
+- _(TODO: abbreviations usage)_
+
+# Preprocessor directives
+
+- _(TODO: add guidelines with examples and apply them to the codebase)_
+
+    ```cpp
+    #ifdef FOO
+    #endif // FOO
+    ```
+
+# Documentation
+
+- Documentation is a community effort
+- When you need to look into the source code to figure out how to use an API consider adding a short summary to the header file for future reference
+- When you notice incorrect or outdated documentation, please update it
+
+# Resources
+
+The Github issues, PRs and discussions contain a lot of information that can be useful to get familiar with the codebase. For convenience, some of the more important information is referenced from Github projects:
+
+https://github.com/ggml-org/llama.cpp/projects
+
+
+name: Bug report
+about: Create a report to help us improve
+
+## Archivo: feature_request.md
+Contenido:
+
+**Is your feature request related to a problem? Please describe.**
+A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+
+**Describe the solution you'd like**
+A clear and concise description of what you want to happen.
+
+**Describe alternatives you've considered**
+A clear and concise description of any alternative solutions or features you've considered.
+
+**Additional context**
+Add any other context or screenshots about the feature request here.
+
+
+## Archivo: BLIS.md
+Contenido:
+BLIS Installation Manual
+------------------------
+
+BLIS is a portable software framework for high-performance BLAS-like dense linear algebra libraries. It has received awards and recognition, including the 2023 James H. Wilkinson Prize for Numerical Software and the 2020 SIAM Activity Group on Supercomputing Best Paper Prize. BLIS provides a new BLAS-like API and a compatibility layer for traditional BLAS routine calls. It offers features such as object-based API, typed API, BLAS and CBLAS compatibility layers.
+
+Project URL: https://github.com/flame/blis
+
+### Prepare:
+
+Compile BLIS:
+
+```bash
+git clone https://github.com/flame/blis
+cd blis
+./configure --enable-cblas -t openmp,pthreads auto
+# will install to /usr/local/ by default.
+make -j
+```
+
+Install BLIS:
+
+```bash
+sudo make install
+```
+
+We recommend using openmp since it's easier to modify the cores being used.
+
+### llama.cpp compilation
+
+CMake:
+
+```bash
+mkdir build
+cd build
+cmake -DGGML_BLAS=ON -DGGML_BLAS_VENDOR=FLAME ..
+make -j
+```
+
+### llama.cpp execution
+
+According to the BLIS documentation, we could set the following
+environment variables to modify the behavior of openmp:
+
+```bash
+export GOMP_CPU_AFFINITY="0-19"
+export BLIS_NUM_THREADS=14
+```
+
+And then run the binaries as normal.
+
+
+### Intel specific issue
+
+Some might get the error message saying that `libimf.so` cannot be found.
+Please follow this [stackoverflow page](https://stackoverflow.com/questions/70687930/intel-oneapi-2022-libimf-so-no-such-file-or-directory-during-openmpi-compila).
+
+### Reference:
+
+1. https://github.com/flame/blis#getting-started
+2. https://github.com/flame/blis/blob/master/docs/Multithreading.md
+
+
+## Archivo: CUDA-FEDORA.md
+Contenido:
+# Setting Up CUDA on Fedora
+
+In this guide we setup [Nvidia CUDA](https://docs.nvidia.com/cuda/) in a toolbox container. This guide is applicable for:
+
+- [Fedora Workstation](https://fedoraproject.org/workstation/)
+- [Atomic Desktops for Fedora](https://fedoraproject.org/atomic-desktops/)
+- [Fedora Spins](https://fedoraproject.org/spins)
+- [Other Distributions](https://containertoolbx.org/distros/), including `Red Hat Enterprise Linux >= 8.5`, `Arch Linux`, and `Ubuntu`.
+
+## Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Using the Fedora 41 CUDA Repository](#using-the-fedora-41-cuda-repository)
+- [Creating a Fedora Toolbox Environment](#creating-a-fedora-toolbox-environment)
+- [Installing Essential Development Tools](#installing-essential-development-tools)
+- [Adding the CUDA Repository](#adding-the-cuda-repository)
+- [Installing Nvidia Driver Libraries](#installing-nvidia-driver-libraries)
+- [Installing the CUDA Meta-Package](#installing-the-cuda-meta-package)
+- [Configuring the Environment](#configuring-the-environment)
+- [Verifying the Installation](#verifying-the-installation)
+- [Conclusion](#conclusion)
+- [Troubleshooting](#troubleshooting)
+- [Additional Notes](#additional-notes)
+- [References](#references)
+
+## Prerequisites
+
+- **Toolbox Installed on the Host System** `Fedora Silverblue` and `Fedora Workstation` both have toolbox by default, other distributions may need to install the [toolbox package](https://containertoolbx.org/install/).
+- **NVIDIA Drivers and Graphics Card installed on Host System (recommended)** To run CUDA program, such as `llama.cpp`, the host should be setup to access your NVIDIA hardware. Fedora Hosts can use the [RPM Fusion Repository](https://rpmfusion.org/Howto/NVIDIA).
+- **Internet connectivity** to download packages.
+
+### Using the Fedora 41 CUDA Repository
+
+The latest release is 41.
+
+- [Fedora 41 CUDA Repository](https://developer.download.nvidia.com/compute/cuda/repos/fedora41/x86_64/)
+
+**Note:** We recommend using a toolbox environment to prevent system conflicts.
+
+## Creating a Fedora Toolbox Environment
+
+This guide focuses on Fedora hosts, but with small adjustments, it can work for other hosts. Using the Fedora Toolbox allows us to install the necessary packages without affecting the host system.
+
+**Note:** Toolbox is available for other systems, and even without Toolbox, it is possible to use Podman or Docker.
+
+1. **Create a Fedora 41 Toolbox:**
+
+   ```bash
+   toolbox create --image registry.fedoraproject.org/fedora-toolbox:41 --container fedora-toolbox-41-cuda
+   ```
+
+2. **Enter the Toolbox:**
+
+   ```bash
+   toolbox enter --container fedora-toolbox-41-cuda
+   ```
+
+   Inside the toolbox, you have root privileges and can install packages without affecting the host system.
+
+## Installing Essential Development Tools
+
+1. **Synchronize the DNF Package Manager:**
+
+   ```bash
+   sudo dnf distro-sync
+   ```
+
+2. **Install **Vim** the default text editor (Optional):**
+
+   ```bash
+   sudo dnf install vim-default-editor --allowerasing
+   ```
+
+   The `--allowerasing` flag will allow the removal of the conflicting `nano-default-editor` package.
+
+3. **Install Development Tools and Libraries:**
+
+   ```bash
+   sudo dnf install @c-development @development-tools cmake
+   ```
+
+   This installs essential packages for compiling software, including `gcc`, `make`, and other development headers.
+
+## Adding the CUDA Repository
+
+Add the NVIDIA CUDA repository to your DNF configuration:
+
+```bash
+sudo dnf config-manager addrepo --from-repofile=https://developer.download.nvidia.com/compute/cuda/repos/fedora41/x86_64/cuda-fedora41.repo
+```
+
+After adding the repository, synchronize the package manager again:
+
+```bash
+sudo dnf distro-sync
+```
+
+## Installing Nvidia Driver Libraries
+
+First, we need to detect if the host is supplying the [NVIDIA driver libraries into the toolbox](https://github.com/containers/toolbox/blob/main/src/pkg/nvidia/nvidia.go):
+
+```bash
+ls -la /usr/lib64/libcuda.so.1
+```
+
+### If *`libcuda.so.1`* is missing:
+
+```
+ls: cannot access '/usr/lib64/libcuda.so.1': No such file or directory
+```
+
+**Explanation:**
+The host dose not supply the CUDA drivers, **install them now:**
+
+#### Install the Nvidia Driver Libraries on Guest:
+
+```bash
+sudo dnf install nvidia-driver-cuda nvidia-driver-libs nvidia-driver-cuda-libs nvidia-persistenced
+```
+
+### If *`libcuda.so.1`* exists:
+```
+lrwxrwxrwx. 1 root root 21 Mar 24 11:26 /usr/lib64/libcuda.so.1 -> libcuda.so.570.133.07
+```
+
+**Explanation:**
+The host is supply the CUDA drivers, **we need to update the guest RPM Database accordingly:**
+
+#### Update the Toolbox RPM Database to include the Host-Supplied Libraries:
+
+Note: we do not actually install the libraries, we just update the DB so that the guest system knows they are supplied by the host.
+
+##### 1. Download `nvidia-` parts that are supplied by the host RPM's (with dependencies)
+
+```bash
+sudo dnf download --destdir=/tmp/nvidia-driver-libs --resolve --arch x86_64 nvidia-driver-cuda nvidia-driver-libs nvidia-driver-cuda-libs nvidia-persistenced
+```
+
+##### 2. Update the RPM database to assume the installation of these packages.
+
+```bash
+sudo rpm --install --verbose --hash --justdb /tmp/nvidia-driver-libs/*
+```
+
+**Note:**
+
+- The `--justdb` option only updates the RPM database, without touching the filesystem elsewhere.
+
+##### Check that the RPM Database has been correctly updated:
+
+**Note:** This is the same command as in the *"Install the Nvidia Driver Libraries on Guest"* for if *`libcuda.so.1`* was missing.
+
+
+```bash
+sudo dnf install nvidia-driver-cuda nvidia-driver-libs nvidia-driver-cuda-libs nvidia-persistenced
+```
+
+*(this time it will not install anything, as the database things that these packages are already installed)*
+
+```
+Updating and loading repositories:
+Repositories loaded.
+Package "nvidia-driver-cuda-3:570.124.06-1.fc41.x86_64" is already installed.
+Package "nvidia-driver-libs-3:570.124.06-1.fc41.x86_64" is already installed.
+Package "nvidia-driver-cuda-libs-3:570.124.06-1.fc41.x86_64" is already installed.
+Package "nvidia-persistenced-3:570.124.06-1.fc41.x86_64" is already installed.
+
+Nothing to do.
+```
+
+## Installing the CUDA Meta-Package
+
+Now that the driver libraries are installed, proceed to install CUDA:
+
+```bash
+sudo dnf install cuda
+```
+
+This installs the CUDA toolkit and associated packages.
+
+## Configuring the Environment
+
+To use CUDA, add its binary directory to your system's `PATH`.
+
+1. **Create a Profile Script:**
+
+   ```bash
+   sudo sh -c 'echo "export PATH=\$PATH:/usr/local/cuda/bin" >> /etc/profile.d/cuda.sh'
+   ```
+
+   **Explanation:**
+
+   - We add to `/etc/profile.d/` as the `/etc/` folder is unique to this particular container, and is not shared with other containers or the host system.
+   - The backslash `\` before `$PATH` ensures the variable is correctly written into the script.
+
+2. **Make the Script Executable:**
+
+   ```bash
+   sudo chmod +x /etc/profile.d/cuda.sh
+   ```
+
+3. **Source the Script to Update Your Environment:**
+
+   ```bash
+   source /etc/profile.d/cuda.sh
+   ```
+
+   **Note:** This command updates your current shell session with the new `PATH`. The `/etc/profile.d/cuda.sh` script ensures that the CUDA binaries are available in your `PATH` for all future sessions.
+
+## Verifying the Installation
+
+To confirm that CUDA is correctly installed and configured, check the version of the NVIDIA CUDA Compiler (`nvcc`):
+
+```bash
+nvcc --version
+```
+
+You should see output similar to:
+
+```
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2025 NVIDIA Corporation
+Built on Fri_Feb_21_20:23:50_PST_2025
+Cuda compilation tools, release 12.8, V12.8.93
+Build cuda_12.8.r12.8/compiler.35583870_0
+```
+
+This output confirms that the CUDA compiler is accessible and indicates the installed version.
+
+## Conclusion
+
+You have successfully set up CUDA on Fedora within a toolbox environment using the Fedora 41 CUDA repository. By manually updating the RPM db and configuring the environment, you can develop CUDA applications without affecting your host system.
+
+## Troubleshooting
+
+- **Installation Failures:**
+
+  - If you encounter errors during installation, carefully read the error messages. They often indicate conflicting files or missing dependencies.
+  - You may use the `--excludepath` option with `rpm` to exclude conflicting files during manual RPM installations.
+
+- **Rebooting the Container:**
+
+  - Sometimes there may be a bug in the NVIDIA driver host passthrough (such as missing a shared library). Rebooting the container may solve this issue:
+
+  ```bash
+  # on the host system
+  podman container restart --all
+  ```
+
+- **Environment Variables Not Set:**
+  - If `nvcc` is not found after installation, ensure that `/usr/local/cuda/bin` is in your `PATH`.
+  - Run `echo $PATH` to check if the path is included.
+  - Re-source the profile script or open a new terminal session.
+
+## Additional Notes
+
+- **Updating CUDA in the Future:**
+
+  - Keep an eye on the official NVIDIA repositories for updates to your Fedora version.
+  - When an updated repository becomes available, adjust your `dnf` configuration accordingly.
+
+- **Building `llama.cpp`:**
+
+  - With CUDA installed, you can follow these [build instructions for `llama.cpp`](https://github.com/ggml-org/llama.cpp/blob/master/docs/build.md) to compile it with CUDA support.
+  - Ensure that any CUDA-specific build flags or paths are correctly set in your build configuration.
+
+- **Using the Toolbox Environment:**
+  - The toolbox environment is isolated from your host system, which helps prevent conflicts.
+  - Remember that system files and configurations inside the toolbox are separate from the host. By default the home directory of the user is shared between the host and the toolbox.
+
+
+
+## Archivo: SYCL.md
+Contenido:
+# llama.cpp for SYCL
+
+- [Background](#background)
+- [Recommended Release](#recommended-release)
+- [News](#news)
+- [OS](#os)
+- [Hardware](#hardware)
+- [Docker](#docker)
+- [Linux](#linux)
+- [Windows](#windows)
+- [Environment Variable](#environment-variable)
+- [Known Issue](#known-issues)
+- [Q&A](#qa)
+- [TODO](#todo)
+
+## Background
+
+**SYCL** is a high-level parallel programming model designed to improve developers productivity writing code across various hardware accelerators such as CPUs, GPUs, and FPGAs. It is a single-source language designed for heterogeneous computing and based on standard C++17.
+
+**oneAPI** is an open ecosystem and a standard-based specification, supporting multiple architectures including but not limited to Intel CPUs, GPUs and FPGAs. The key components of the oneAPI ecosystem include:
+
+- **DPCPP** *(Data Parallel C++)*: The primary oneAPI SYCL implementation, which includes the icpx/icx Compilers.
+- **oneAPI Libraries**: A set of highly optimized libraries targeting multiple domains *(e.g. Intel oneMKL, oneMath and oneDNN)*.
+- **oneAPI LevelZero**: A high performance low level interface for fine-grained control over Intel iGPUs and dGPUs.
+- **Nvidia & AMD Plugins**: These are plugins extending oneAPI's DPCPP support to SYCL on Nvidia and AMD GPU targets.
+
+### Llama.cpp + SYCL
+
+The llama.cpp SYCL backend is primarily designed for **Intel GPUs**.
+SYCL cross-platform capabilities enable support for Nvidia GPUs as well, with limited support for AMD.
+
+## Recommended Release
+
+The following releases are verified and recommended:
+
+|Commit ID|Tag|Release|Verified  Platform| Update date|
+|-|-|-|-|-|
+|24e86cae7219b0f3ede1d5abdf5bf3ad515cccb8|b5377 |[llama-b5377-bin-win-sycl-x64.zip](https://github.com/ggml-org/llama.cpp/releases/download/b5377/llama-b5377-bin-win-sycl-x64.zip) |ArcB580/Linux/oneAPI 2025.1<br>LNL Arc GPU/Windows 11/oneAPI 2025.1.1|2025-05-15|
+|3bcd40b3c593d14261fb2abfabad3c0fb5b9e318|b4040 |[llama-b4040-bin-win-sycl-x64.zip](https://github.com/ggml-org/llama.cpp/releases/download/b4040/llama-b4040-bin-win-sycl-x64.zip) |Arc770/Linux/oneAPI 2024.1<br>MTL Arc GPU/Windows 11/oneAPI 2024.1| 2024-11-19|
+|fb76ec31a9914b7761c1727303ab30380fd4f05c|b3038 |[llama-b3038-bin-win-sycl-x64.zip](https://github.com/ggml-org/llama.cpp/releases/download/b3038/llama-b3038-bin-win-sycl-x64.zip) |Arc770/Linux/oneAPI 2024.1<br>MTL Arc GPU/Windows 11/oneAPI 2024.1||
+
+
+## News
+
+- 2025.2
+  - Optimize MUL_MAT Q4_0 on Intel GPU for all dGPUs and built-in GPUs since MTL. Increase the performance of LLM (llama-2-7b.Q4_0.gguf) 21%-87% on Intel GPUs (MTL, ARL-H, Arc, Flex, PVC).
+    |GPU|Base tokens/s|Increased tokens/s|Percent|
+    |-|-|-|-|
+    |PVC 1550|39|73|+87%|
+    |Flex 170|39|50|+28%|
+    |Arc770|42|55|+30%|
+    |MTL|13|16|+23%|
+    |ARL-H|14|17|+21%|
+
+- 2024.11
+  - Use syclcompat to improve the performance on some platforms. This requires to use oneAPI 2025.0 or newer.
+
+- 2024.8
+  - Use oneDNN as the default GEMM library, improve the compatibility for new Intel GPUs.
+
+- 2024.5
+  - Performance is increased: 34 -> 37 tokens/s of llama-2-7b.Q4_0 on Arc770.
+  - Arch Linux is verified successfully.
+
+- 2024.4
+  - Support data types: GGML_TYPE_IQ4_NL, GGML_TYPE_IQ4_XS, GGML_TYPE_IQ3_XXS, GGML_TYPE_IQ3_S, GGML_TYPE_IQ2_XXS, GGML_TYPE_IQ2_XS, GGML_TYPE_IQ2_S, GGML_TYPE_IQ1_S, GGML_TYPE_IQ1_M.
+
+- 2024.3
+  - Release binary files of Windows.
+  - A blog is published: **Run LLM on all Intel GPUs Using llama.cpp**: [intel.com](https://www.intel.com/content/www/us/en/developer/articles/technical/run-llm-on-all-gpus-using-llama-cpp-artical.html) or [medium.com](https://medium.com/@jianyu_neo/run-llm-on-all-intel-gpus-using-llama-cpp-fd2e2dcbd9bd).
+  - New base line is ready: [tag b2437](https://github.com/ggml-org/llama.cpp/tree/b2437).
+  - Support multiple cards: **--split-mode**: [none|layer]; not support [row], it's on developing.
+  - Support to assign main GPU by **--main-gpu**, replace $GGML_SYCL_DEVICE.
+  - Support detecting all GPUs with level-zero and same top **Max compute units**.
+  - Support OPs
+    - hardsigmoid
+    - hardswish
+    - pool2d
+
+- 2024.1
+  - Create SYCL backend for Intel GPU.
+  - Support Windows build
+
+## OS
+
+| OS      | Status  | Verified                                       |
+|---------|---------|------------------------------------------------|
+| Linux   | Support | Ubuntu 22.04, Fedora Silverblue 39, Arch Linux |
+| Windows | Support | Windows 11                                     |
+
+
+## Hardware
+
+### Intel GPU
+
+SYCL backend supports Intel GPU Family:
+
+- Intel Data Center Max Series
+- Intel Flex Series, Arc Series
+- Intel Built-in Arc GPU
+- Intel iGPU in Core CPU (11th Generation Core CPU and newer, refer to [oneAPI supported GPU](https://www.intel.com/content/www/us/en/developer/articles/system-requirements/intel-oneapi-base-toolkit-system-requirements.html#inpage-nav-1-1)).
+
+#### Verified devices
+
+| Intel GPU                     | Status  | Verified Model                        |
+|-------------------------------|---------|---------------------------------------|
+| Intel Data Center Max Series  | Support | Max 1550, 1100                        |
+| Intel Data Center Flex Series | Support | Flex 170                              |
+| Intel Arc Series              | Support | Arc 770, 730M, Arc A750, B580         |
+| Intel built-in Arc GPU        | Support | built-in Arc GPU in Meteor Lake, Arrow Lake, Lunar Lake |
+| Intel iGPU                    | Support | iGPU in 13700k, 13400, i5-1250P, i7-1260P, i7-1165G7  |
+
+*Notes:*
+
+- **Memory**
+  - The device memory is a limitation when running a large model. The loaded model size, *`llm_load_tensors: buffer_size`*, is displayed in the log when running `./bin/llama-cli`.
+  - Please make sure the GPU shared memory from the host is large enough to account for the model's size. For e.g. the *llama-2-7b.Q4_0* requires at least 8.0GB for integrated GPU and 4.0GB for discrete GPU.
+
+- **Execution Unit (EU)**
+  - If the iGPU has less than 80 EUs, the inference speed will likely be too slow for practical use.
+
+### Other Vendor GPU
+
+**Verified devices**
+
+| Nvidia GPU               | Status    | Verified Model |
+|--------------------------|-----------|----------------|
+| Ampere Series            | Supported | A100, A4000    |
+| Ampere Series *(Mobile)* | Supported | RTX 40 Series  |
+
+| AMD GPU                  | Status       | Verified Model |
+|--------------------------|--------------|----------------|
+| Radeon Pro               | Experimental | W6800          |
+| Radeon RX                | Experimental | 6700 XT        |
+
+Note: AMD GPU support is highly experimental and is incompatible with F16.
+Additionally, it only supports GPUs with a sub_group_size (warp size) of 32.
+
+## Docker
+
+The docker build option is currently limited to *Intel GPU* targets.
+
+### Build image
+
+```sh
+# Using FP16
+docker build -t llama-cpp-sycl --build-arg="GGML_SYCL_F16=ON" --target light -f .devops/intel.Dockerfile .
+```
+
+*Notes*:
+
+To build in default FP32 *(Slower than FP16 alternative)*, set `--build-arg="GGML_SYCL_F16=OFF"` in the previous command.
+
+You can also use the `.devops/llama-server-intel.Dockerfile`, which builds the *"server"* alternative.
+Check the [documentation for Docker](../docker.md) to see the available images.
+
+### Run container
+
+```sh
+# First, find all the DRI cards
+ls -la /dev/dri
+# Then, pick the card that you want to use (here for e.g. /dev/dri/card1).
+docker run -it --rm -v "$(pwd):/app:Z" --device /dev/dri/renderD128:/dev/dri/renderD128 --device /dev/dri/card1:/dev/dri/card1 llama-cpp-sycl -m "/app/models/YOUR_MODEL_FILE" -p "Building a website can be done in 10 simple steps:" -n 400 -e -ngl 33
+```
+
+*Notes:*
+- Docker has been tested successfully on native Linux. WSL support has not been verified yet.
+- You may need to install Intel GPU driver on the **host** machine *(Please refer to the [Linux configuration](#linux) for details)*.
+
+## Linux
+
+### I. Setup Environment
+
+1. **Install GPU drivers**
+
+  - **Intel GPU**
+
+Intel data center GPUs drivers installation guide and download page can be found here: [Get intel dGPU Drivers](https://dgpu-docs.intel.com/driver/installation.html#ubuntu-install-steps).
+
+*Note*: for client GPUs *(iGPU & Arc A-Series)*, please refer to the [client iGPU driver installation](https://dgpu-docs.intel.com/driver/client/overview.html).
+
+Once installed, add the user(s) to the `video` and `render` groups.
+
+```sh
+sudo usermod -aG render $USER
+sudo usermod -aG video $USER
+```
+
+*Note*: logout/re-login for the changes to take effect.
+
+Verify installation through `clinfo`:
+
+```sh
+sudo apt install clinfo
+sudo clinfo -l
+```
+
+Sample output:
+
+```sh
+Platform #0: Intel(R) OpenCL Graphics
+ `-- Device #0: Intel(R) Arc(TM) A770 Graphics
+
+Platform #0: Intel(R) OpenCL HD Graphics
+ `-- Device #0: Intel(R) Iris(R) Xe Graphics [0x9a49]
+```
+
+- **Nvidia GPU**
+
+In order to target Nvidia GPUs through SYCL, please make sure the CUDA/CUBLAS native requirements *-found [here](README.md#cuda)-* are installed.
+
+- **AMD GPU**
+
+To target AMD GPUs with SYCL, the ROCm stack must be installed first.
+
+2. **Install Intel® oneAPI Base toolkit**
+
+- **For Intel GPU**
+
+The base toolkit can be obtained from the official [Intel® oneAPI Base Toolkit](https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit.html) page.
+
+Please follow the instructions for downloading and installing the Toolkit for Linux, and preferably keep the default installation values unchanged, notably the installation path *(`/opt/intel/oneapi` by default)*.
+
+Following guidelines/code snippets assume the default installation values. Otherwise, please make sure the necessary changes are reflected where applicable.
+
+Upon a successful installation, SYCL is enabled for the available intel devices, along with relevant libraries such as oneAPI oneDNN for Intel GPUs.
+
+- **Adding support to Nvidia GPUs**
+
+**oneAPI Plugin**: In order to enable SYCL support on Nvidia GPUs, please install the [Codeplay oneAPI Plugin for Nvidia GPUs](https://developer.codeplay.com/products/oneapi/nvidia/download). User should also make sure the plugin version matches the installed base toolkit one *(previous step)* for a seamless "oneAPI on Nvidia GPU" setup.
+
+**oneDNN**: The current oneDNN releases *(shipped with the oneAPI base-toolkit)* do not include the NVIDIA backend. Therefore, oneDNN must be compiled from source to enable the NVIDIA target:
+
+```sh
+git clone https://github.com/oneapi-src/oneDNN.git
+cd oneDNN
+cmake -GNinja -Bbuild-nvidia -DDNNL_CPU_RUNTIME=DPCPP -DDNNL_GPU_RUNTIME=DPCPP -DDNNL_GPU_VENDOR=NVIDIA -DONEDNN_BUILD_GRAPH=OFF -DCMAKE_C_COMPILER=icx -DCMAKE_CXX_COMPILER=icpx
+cmake --build build-nvidia --config Release
+```
+
+- **Adding support to AMD GPUs**
+
+**oneAPI Plugin**: In order to enable SYCL support on AMD GPUs, please install the [Codeplay oneAPI Plugin for AMD GPUs](https://developer.codeplay.com/products/oneapi/amd/download). As with Nvidia GPUs, the user should also make sure the plugin version matches the installed base toolkit.
+
+3. **Verify installation and environment**
+
+In order to check the available SYCL devices on the machine, please use the `sycl-ls` command.
+```sh
+source /opt/intel/oneapi/setvars.sh
+sycl-ls
+```
+
+- **Intel GPU**
+
+When targeting an intel GPU, the user should expect one or more devices among the available SYCL devices. Please make sure that at least one GPU is present via `sycl-ls`, for instance `[level_zero:gpu]` in the sample output below:
+
+```
+[opencl:acc][opencl:0] Intel(R) FPGA Emulation Platform for OpenCL(TM), Intel(R) FPGA Emulation Device OpenCL 1.2  [2023.16.10.0.17_160000]
+[opencl:cpu][opencl:1] Intel(R) OpenCL, 13th Gen Intel(R) Core(TM) i7-13700K OpenCL 3.0 (Build 0) [2023.16.10.0.17_160000]
+[opencl:gpu][opencl:2] Intel(R) OpenCL Graphics, Intel(R) Arc(TM) A770 Graphics OpenCL 3.0 NEO  [23.30.26918.50]
+[level_zero:gpu][level_zero:0] Intel(R) Level-Zero, Intel(R) Arc(TM) A770 Graphics 1.3 [1.3.26918]
+```
+
+- **Nvidia GPU**
+
+Similarly, user targeting Nvidia GPUs should expect at least one SYCL-CUDA device [`cuda:gpu`] as below:
+
+```
+[opencl:acc][opencl:0] Intel(R) FPGA Emulation Platform for OpenCL(TM), Intel(R) FPGA Emulation Device OpenCL 1.2  [2023.16.12.0.12_195853.xmain-hotfix]
+[opencl:cpu][opencl:1] Intel(R) OpenCL, Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz OpenCL 3.0 (Build 0) [2023.16.12.0.12_195853.xmain-hotfix]
+[cuda:gpu][cuda:0] NVIDIA CUDA BACKEND, NVIDIA A100-PCIE-40GB 8.0 [CUDA 12.5]
+```
+
+- **AMD GPU**
+
+For AMD GPUs we should expect at least one SYCL-HIP device [`hip:gpu`]:
+
+```
+[opencl:cpu][opencl:0] Intel(R) OpenCL, 12th Gen Intel(R) Core(TM) i9-12900K OpenCL 3.0 (Build 0) [2024.18.6.0.02_160000]
+[hip:gpu][hip:0] AMD HIP BACKEND, AMD Radeon PRO W6800 gfx1030 [HIP 60140.9]
+```
+
+### II. Build llama.cpp
+
+#### Intel GPU
+
+```sh
+./examples/sycl/build.sh
+```
+
+or
+
+```sh
+# Export relevant ENV variables
+source /opt/intel/oneapi/setvars.sh
+
+# Option 1: Use FP32 (recommended for better performance in most cases)
+cmake -B build -DGGML_SYCL=ON -DCMAKE_C_COMPILER=icx -DCMAKE_CXX_COMPILER=icpx
+
+# Option 2: Use FP16
+cmake -B build -DGGML_SYCL=ON -DCMAKE_C_COMPILER=icx -DCMAKE_CXX_COMPILER=icpx -DGGML_SYCL_F16=ON
+
+# build all binary
+cmake --build build --config Release -j -v
+```
+
+It is possible to come across some precision issues when running tests that stem from using faster
+instructions, which can be circumvented by setting the environment variable `SYCL_PROGRAM_COMPILE_OPTIONS`
+as `-cl-fp32-correctly-rounded-divide-sqrt`
+
+#### Nvidia GPU
+
+The SYCL backend depends on [oneMath](https://github.com/uxlfoundation/oneMath) for Nvidia and AMD devices.
+By default it is automatically built along with the project. A specific build can be provided by setting the CMake flag `-DoneMath_DIR=/path/to/oneMath/install/lib/cmake/oneMath`.
+
+```sh
+# Build LLAMA with Nvidia BLAS acceleration through SYCL
+# Setting GGML_SYCL_DEVICE_ARCH is optional but can improve performance
+GGML_SYCL_DEVICE_ARCH=sm_80 # Example architecture
+
+# Option 1: Use FP32 (recommended for better performance in most cases)
+cmake -B build -DGGML_SYCL=ON -DGGML_SYCL_TARGET=NVIDIA -DGGML_SYCL_DEVICE_ARCH=${GGML_SYCL_DEVICE_ARCH} -DCMAKE_C_COMPILER=icx -DCMAKE_CXX_COMPILER=icpx -DDNNL_DIR=/path/to/oneDNN/build-nvidia/install/lib/cmake/dnnl
+
+# Option 2: Use FP16
+cmake -B build -DGGML_SYCL=ON -DGGML_SYCL_TARGET=NVIDIA -DGGML_SYCL_DEVICE_ARCH=${GGML_SYCL_DEVICE_ARCH} -DCMAKE_C_COMPILER=icx -DCMAKE_CXX_COMPILER=icpx -DGGML_SYCL_F16=ON -DDNNL_DIR=/path/to/oneDNN/build-nvidia/install/lib/cmake/dnnl
+
+# build all binary
+cmake --build build --config Release -j -v
+```
+
+It is possible to come across some precision issues when running tests that stem from using faster
+instructions, which can be circumvented by passing the `-fno-fast-math` flag to the compiler.
+
+#### AMD GPU
+
+The SYCL backend depends on [oneMath](https://github.com/uxlfoundation/oneMath) for Nvidia and AMD devices.
+By default it is automatically built along with the project. A specific build can be provided by setting the CMake flag `-DoneMath_DIR=/path/to/oneMath/install/lib/cmake/oneMath`.
+
+```sh
+# Build LLAMA with rocBLAS acceleration through SYCL
+
+## AMD
+# Use FP32, FP16 is not supported
+# Find your GGML_SYCL_DEVICE_ARCH with rocminfo, under the key 'Name:'
+GGML_SYCL_DEVICE_ARCH=gfx90a # Example architecture
+cmake -B build -DGGML_SYCL=ON -DGGML_SYCL_TARGET=AMD -DGGML_SYCL_DEVICE_ARCH=${GGML_SYCL_DEVICE_ARCH} -DCMAKE_C_COMPILER=icx -DCMAKE_CXX_COMPILER=icpx
+
+# build all binary
+cmake --build build --config Release -j -v
+```
+
+### III. Run the inference
+
+#### Retrieve and prepare model
+
+You can refer to the general [*Prepare and Quantize*](README.md#prepare-and-quantize) guide for model preparation, or download an already quantized model like [llama-2-7b.Q4_0.gguf](https://huggingface.co/TheBloke/Llama-2-7B-GGUF/blob/main/llama-2-7b.Q4_0.gguf) or [Meta-Llama-3-8B-Instruct-Q4_0.gguf](https://huggingface.co/aptha/Meta-Llama-3-8B-Instruct-Q4_0-GGUF/resolve/main/Meta-Llama-3-8B-Instruct-Q4_0.gguf).
+
+##### Check device
+
+1. Enable oneAPI running environment
+
+```sh
+source /opt/intel/oneapi/setvars.sh
+```
+
+2. List devices information
+
+Similar to the native `sycl-ls`, available SYCL devices can be queried as follow:
+
+```sh
+./build/bin/llama-ls-sycl-device
+```
+
+This command will only display the selected backend that is supported by SYCL. The default backend is level_zero. For example, in a system with 2 *intel GPU* it would look like the following:
+```
+found 2 SYCL devices:
+
+|  |                  |                                             |Compute   |Max compute|Max work|Max sub|               |
+|ID|       Device Type|                                         Name|capability|units      |group   |group  |Global mem size|
+|--|------------------|---------------------------------------------|----------|-----------|--------|-------|---------------|
+| 0|[level_zero:gpu:0]|               Intel(R) Arc(TM) A770 Graphics|       1.3|        512|    1024|     32|    16225243136|
+| 1|[level_zero:gpu:1]|                    Intel(R) UHD Graphics 770|       1.3|         32|     512|     32|    53651849216|
+```
+
+#### Choose level-zero devices
+
+|Chosen Device ID|Setting|
+|-|-|
+|0|`export ONEAPI_DEVICE_SELECTOR="level_zero:0"` or no action|
+|1|`export ONEAPI_DEVICE_SELECTOR="level_zero:1"`|
+|0 & 1|`export ONEAPI_DEVICE_SELECTOR="level_zero:0;level_zero:1"`|
+
+#### Execute
+
+Choose one of following methods to run.
+
+1. Script
+
+- Use device 0:
+
+```sh
+./examples/sycl/run-llama2.sh 0
+# OR
+./examples/sycl/run-llama3.sh 0
+```
+- Use multiple devices:
+
+```sh
+./examples/sycl/run-llama2.sh
+# OR
+./examples/sycl/run-llama3.sh
+```
+
+2. Command line
+Launch inference
+
+There are two device selection modes:
+
+- Single device: Use one device assigned by user. Default device id is 0.
+- Multiple devices: Automatically choose the devices with the same backend.
+
+In two device selection modes, the default SYCL backend is level_zero, you can choose other backend supported by SYCL by setting environment variable ONEAPI_DEVICE_SELECTOR.
+
+| Device selection | Parameter                              |
+|------------------|----------------------------------------|
+| Single device    | --split-mode none --main-gpu DEVICE_ID |
+| Multiple devices | --split-mode layer (default)           |
+
+Examples:
+
+- Use device 0:
+
+```sh
+ZES_ENABLE_SYSMAN=1 ./build/bin/llama-cli -no-cnv -m models/llama-2-7b.Q4_0.gguf -p "Building a website can be done in 10 simple steps:" -n 400 -e -ngl 99 -sm none -mg 0
+```
+
+- Use multiple devices:
+
+```sh
+ZES_ENABLE_SYSMAN=1 ./build/bin/llama-cli -no-cnv -m models/llama-2-7b.Q4_0.gguf -p "Building a website can be done in 10 simple steps:" -n 400 -e -ngl 99 -sm layer
+```
+
+*Notes:*
+
+- Upon execution, verify the selected device(s) ID(s) in the output log, which can for instance be displayed as follow:
+
+```sh
+detect 1 SYCL GPUs: [0] with top Max compute units:512
+```
+Or
+```sh
+use 1 SYCL GPUs: [0] with Max compute units:512
+```
+
+## Windows
+
+### I. Setup Environment
+
+1. Install GPU driver
+
+Intel GPU drivers instructions guide and download page can be found here: [Get Intel GPU Drivers](https://www.intel.com/content/www/us/en/products/docs/discrete-gpus/arc/software/drivers.html).
+
+2. Install Visual Studio
+
+If you already have a recent version of Microsoft Visual Studio, you can skip this step. Otherwise, please refer to the official download page for [Microsoft Visual Studio](https://visualstudio.microsoft.com/).
+
+3. Install Intel® oneAPI Base toolkit
+
+The base toolkit can be obtained from the official [Intel® oneAPI Base Toolkit](https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit.html) page.
+
+Please follow the instructions for downloading and installing the Toolkit for Windows, and preferably keep the default installation values unchanged, notably the installation path *(`C:\Program Files (x86)\Intel\oneAPI` by default)*.
+
+Following guidelines/code snippets assume the default installation values. Otherwise, please make sure the necessary changes are reflected where applicable.
+
+b. Enable oneAPI running environment:
+
+- Type "oneAPI" in the search bar, then open the `Intel oneAPI command prompt for Intel 64 for Visual Studio 2022` App.
+
+- On the command prompt, enable the runtime environment with the following:
+```
+"C:\Program Files (x86)\Intel\oneAPI\setvars.bat" intel64
+```
+
+- if you are using Powershell, enable the runtime environment with the following:
+
+```
+cmd.exe "/K" '"C:\Program Files (x86)\Intel\oneAPI\setvars.bat" && powershell'
+```
+
+c. Verify installation
+
+In the oneAPI command line, run the following to print the available SYCL devices:
+
+```
+sycl-ls.exe
+```
+
+There should be one or more *level-zero* GPU devices displayed as **[ext_oneapi_level_zero:gpu]**. Below is example of such output detecting an *intel Iris Xe* GPU as a Level-zero SYCL device:
+
+Output (example):
+```
+[opencl:acc:0] Intel(R) FPGA Emulation Platform for OpenCL(TM), Intel(R) FPGA Emulation Device OpenCL 1.2  [2023.16.10.0.17_160000]
+[opencl:cpu:1] Intel(R) OpenCL, 11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz OpenCL 3.0 (Build 0) [2023.16.10.0.17_160000]
+[opencl:gpu:2] Intel(R) OpenCL Graphics, Intel(R) Iris(R) Xe Graphics OpenCL 3.0 NEO  [31.0.101.5186]
+[ext_oneapi_level_zero:gpu:0] Intel(R) Level-Zero, Intel(R) Iris(R) Xe Graphics 1.3 [1.3.28044]
+```
+
+4. Install build tools
+
+a. Download & install cmake for Windows: https://cmake.org/download/ (CMake can also be installed from Visual Studio Installer)
+b. The new Visual Studio will install Ninja as default. (If not, please install it manually: https://ninja-build.org/)
+
+
+### II. Build llama.cpp
+
+You could download the release package for Windows directly, which including binary files and depended oneAPI dll files.
+
+Choose one of following methods to build from source code.
+
+#### 1. Script
+
+```sh
+.\examples\sycl\win-build-sycl.bat
+```
+
+#### 2. CMake
+
+On the oneAPI command line window, step into the llama.cpp main directory and run the following:
+
+```
+@call "C:\Program Files (x86)\Intel\oneAPI\setvars.bat" intel64 --force
+
+# Option 1: Use FP32 (recommended for better performance in most cases)
+cmake -B build -G "Ninja" -DGGML_SYCL=ON -DCMAKE_C_COMPILER=cl -DCMAKE_CXX_COMPILER=icx  -DCMAKE_BUILD_TYPE=Release
+
+# Option 2: Or FP16
+cmake -B build -G "Ninja" -DGGML_SYCL=ON -DCMAKE_C_COMPILER=cl -DCMAKE_CXX_COMPILER=icx  -DCMAKE_BUILD_TYPE=Release -DGGML_SYCL_F16=ON
+
+cmake --build build --config Release -j
+```
+
+Or, use CMake presets to build:
+
+```sh
+cmake --preset x64-windows-sycl-release
+cmake --build build-x64-windows-sycl-release -j --target llama-cli
+
+cmake -DGGML_SYCL_F16=ON --preset x64-windows-sycl-release
+cmake --build build-x64-windows-sycl-release -j --target llama-cli
+
+cmake --preset x64-windows-sycl-debug
+cmake --build build-x64-windows-sycl-debug -j --target llama-cli
+```
+
+#### 3. Visual Studio
+
+You have two options to use Visual Studio to build llama.cpp:
+- As CMake Project using CMake presets.
+- Creating a Visual Studio solution to handle the project.
+
+**Note**:
+
+All following commands are executed in PowerShell.
+
+##### - Open as a CMake Project
+
+You can use Visual Studio to open the `llama.cpp` folder directly as a CMake project. Before compiling, select one of the SYCL CMake presets:
+
+- `x64-windows-sycl-release`
+
+- `x64-windows-sycl-debug`
+
+*Notes:*
+- For a minimal experimental setup, you can build only the inference executable using:
+
+    ```Powershell
+    cmake --build build --config Release -j --target llama-cli
+    ```
+
+##### - Generating a Visual Studio Solution
+
+You can use Visual Studio solution to build and work on llama.cpp on Windows. You need to convert the CMake Project into a `.sln` file.
+
+If you want to use the Intel C++ Compiler for the entire `llama.cpp` project, run the following command:
+
+```Powershell
+cmake -B build -G "Visual Studio 17 2022" -T "Intel C++ Compiler 2025" -A x64 -DGGML_SYCL=ON -DCMAKE_BUILD_TYPE=Release
+```
+
+If you prefer to use the Intel C++ Compiler only for `ggml-sycl`, ensure that `ggml` and its backend libraries are built as shared libraries ( i.e. `-DBUILD_SHARED_LIBRARIES=ON`, this is default behaviour):
+
+```Powershell
+cmake -B build -G "Visual Studio 17 2022" -A x64 -DGGML_SYCL=ON -DCMAKE_BUILD_TYPE=Release \
+      -DSYCL_INCLUDE_DIR="C:\Program Files (x86)\Intel\oneAPI\compiler\latest\include" \
+      -DSYCL_LIBRARY_DIR="C:\Program Files (x86)\Intel\oneAPI\compiler\latest\lib"
+```
+
+If successful the build files have been written to: *path/to/llama.cpp/build*
+Open the project file **build/llama.cpp.sln** with Visual Studio.
+
+Once the Visual Studio solution is created, follow these steps:
+
+1. Open the solution in Visual Studio.
+
+2. Right-click on `ggml-sycl` and select **Properties**.
+
+3. In the left column, expand **C/C++** and select **DPC++**.
+
+4. In the right panel, find **Enable SYCL Offload** and set it to `Yes`.
+
+5. Apply the changes and save.
+
+
+*Navigation Path:*
+
+```
+Properties -> C/C++ -> DPC++ -> Enable SYCL Offload (Yes)
+```
+
+Now, you can build `llama.cpp` with the SYCL backend as a Visual Studio project.
+To do it from menu: `Build -> Build Solution`.
+Once it is completed, final results will be in **build/Release/bin**
+
+*Additional Note*
+
+- You can avoid specifying `SYCL_INCLUDE_DIR` and `SYCL_LIBRARY_DIR` in the CMake command by setting the environment variables:
+
+    - `SYCL_INCLUDE_DIR_HINT`
+
+    - `SYCL_LIBRARY_DIR_HINT`
+
+- Above instruction has been tested with Visual Studio 17 Community edition and oneAPI 2025.0. We expect them to work also with future version if the instructions are adapted accordingly.
+
+### III. Run the inference
+
+#### Retrieve and prepare model
+
+You can refer to the general [*Prepare and Quantize*](README.md#prepare-and-quantize) guide for model preparation, or download an already quantized model like [llama-2-7b.Q4_0.gguf](https://huggingface.co/TheBloke/Llama-2-7B-GGUF/blob/main/llama-2-7b.Q4_0.gguf) or [Meta-Llama-3-8B-Instruct-Q4_0.gguf](https://huggingface.co/aptha/Meta-Llama-3-8B-Instruct-Q4_0-GGUF/resolve/main/Meta-Llama-3-8B-Instruct-Q4_0.gguf).
+
+##### Check device
+
+1. Enable oneAPI running environment
+
+On the oneAPI command line window, run the following and step into the llama.cpp directory:
+```
+"C:\Program Files (x86)\Intel\oneAPI\setvars.bat" intel64
+```
+
+2. List devices information
+
+Similar to the native `sycl-ls`, available SYCL devices can be queried as follow:
+
+```
+build\bin\llama-ls-sycl-device.exe
+```
+
+This command will only display the selected backend that is supported by SYCL. The default backend is level_zero. For example, in a system with 2 *Intel GPU* it would look like the following:
+```
+found 2 SYCL devices:
+|  |                  |                                             |Compute   |Max compute|Max work|Max sub|               |
+|ID|       Device Type|                                         Name|capability|units      |group   |group  |Global mem size|
+|--|------------------|---------------------------------------------|----------|-----------|--------|-------|---------------|
+| 0|[level_zero:gpu:0]|               Intel(R) Arc(TM) A770 Graphics|       1.3|        512|    1024|     32|    16225243136|
+| 1|[level_zero:gpu:1]|                    Intel(R) UHD Graphics 770|       1.3|         32|     512|     32|    53651849216|
+
+```
+
+#### Choose level-zero devices
+
+|Chosen Device ID|Setting|
+|-|-|
+|0|Default option. You may also want to `set ONEAPI_DEVICE_SELECTOR="level_zero:0"`|
+|1|`set ONEAPI_DEVICE_SELECTOR="level_zero:1"`|
+|0 & 1|`set ONEAPI_DEVICE_SELECTOR="level_zero:0;level_zero:1"` or `set ONEAPI_DEVICE_SELECTOR="level_zero:*"`|
+
+#### Execute
+
+Choose one of following methods to run.
+
+1. Script
+
+```
+examples\sycl\win-run-llama-2.bat
+```
+
+or
+
+```
+examples\sycl\win-run-llama-3.bat
+```
+
+2. Command line
+
+Launch inference
+
+There are two device selection modes:
+
+- Single device: Use one device assigned by user. Default device id is 0.
+- Multiple devices: Automatically choose the devices with the same backend.
+
+In two device selection modes, the default SYCL backend is level_zero, you can choose other backend supported by SYCL by setting environment variable ONEAPI_DEVICE_SELECTOR.
+
+| Device selection | Parameter                              |
+|------------------|----------------------------------------|
+| Single device    | --split-mode none --main-gpu DEVICE_ID |
+| Multiple devices | --split-mode layer (default)           |
+
+Examples:
+
+- Use device 0:
+
+```
+build\bin\llama-cli.exe -no-cnv -m models\llama-2-7b.Q4_0.gguf -p "Building a website can be done in 10 simple steps:\nStep 1:" -n 400 -e -ngl 99 -sm none -mg 0
+```
+
+- Use multiple devices:
+
+```
+build\bin\llama-cli.exe -no-cnv -m models\llama-2-7b.Q4_0.gguf -p "Building a website can be done in 10 simple steps:\nStep 1:" -n 400 -e -ngl 99 -sm layer
+```
+
+
+Note:
+
+- Upon execution, verify the selected device(s) ID(s) in the output log, which can for instance be displayed as follow:
+
+```sh
+detect 1 SYCL GPUs: [0] with top Max compute units:512
+```
+
+Or
+
+```sh
+use 1 SYCL GPUs: [0] with Max compute units:512
+```
+
+
+## Environment Variable
+
+#### Build
+
+| Name               | Value                                 | Function                                    |
+|--------------------|---------------------------------------|---------------------------------------------|
+| GGML_SYCL          | ON (mandatory)                        | Enable build with SYCL code path.           |
+| GGML_SYCL_TARGET   | INTEL *(default)* \| NVIDIA \| AMD    | Set the SYCL target device type.            |
+| GGML_SYCL_DEVICE_ARCH | Optional (except for AMD)             | Set the SYCL device architecture, optional except for AMD. Setting the device architecture can improve the performance. See the table [--offload-arch](https://github.com/intel/llvm/blob/sycl/sycl/doc/design/OffloadDesign.md#--offload-arch) for a list of valid architectures. |
+| GGML_SYCL_F16      | OFF *(default)* \|ON *(optional)*     | Enable FP16 build with SYCL code path. (1.) |
+| GGML_SYCL_GRAPH    | ON *(default)* \|OFF *(Optional)*     | Enable build with [SYCL Graph extension](https://github.com/intel/llvm/blob/sycl/sycl/doc/extensions/experimental/sycl_ext_oneapi_graph.asciidoc). |
+| GGML_SYCL_DNN      | ON *(default)* \|OFF *(Optional)*     | Enable build with oneDNN.                   |
+| CMAKE_C_COMPILER   | `icx` *(Linux)*, `icx/cl` *(Windows)* | Set `icx` compiler for SYCL code path.      |
+| CMAKE_CXX_COMPILER | `icpx` *(Linux)*, `icx` *(Windows)*   | Set `icpx/icx` compiler for SYCL code path. |
+
+1. FP16 is recommended for better prompt processing performance on quantized models. Performance is equivalent in text generation but set `GGML_SYCL_F16=OFF` if you are experiencing issues with FP16 builds.
+
+#### Runtime
+
+| Name              | Value            | Function                                                                                                                  |
+|-------------------|------------------|---------------------------------------------------------------------------------------------------------------------------|
+| GGML_SYCL_DEBUG   | 0 (default) or 1 | Enable log function by macro: GGML_SYCL_DEBUG                                                                             |
+| GGML_SYCL_DISABLE_OPT | 0 (default) or 1 | Disable optimize features for Intel GPUs. (Recommended to 1 for intel devices older than Gen 10) |
+| GGML_SYCL_DISABLE_GRAPH | 0 or 1 (default) | Disable running computations through SYCL Graphs feature. Disabled by default because graph performance isn't yet better than non-graph performance. |
+| GGML_SYCL_DISABLE_DNN | 0 (default) or 1 | Disable running computations through oneDNN and always use oneMKL. |
+| ZES_ENABLE_SYSMAN | 0 (default) or 1 | Support to get free memory of GPU by sycl::aspect::ext_intel_free_memory.<br>Recommended to use when --split-mode = layer |
+
+
+## Known Issues
+
+- `Split-mode:[row]` is not supported.
+
+## Q&A
+
+- Error:  `error while loading shared libraries: libsycl.so: cannot open shared object file: No such file or directory`.
+
+  - Potential cause: Unavailable oneAPI installation or not set ENV variables.
+  - Solution: Install *oneAPI base toolkit* and enable its ENV through: `source /opt/intel/oneapi/setvars.sh`.
+
+- General compiler error:
+
+  - Remove **build** folder or try a clean-build.
+
+- I can **not** see `[ext_oneapi_level_zero:gpu]` afer installing the GPU driver on Linux.
+
+  Please double-check with `sudo sycl-ls`.
+
+  If it's present in the list, please add video/render group to your user then **logout/login** or restart your system:
+
+  ```
+  sudo usermod -aG render $USER
+  sudo usermod -aG video $USER
+  ```
+  Otherwise, please double-check the GPU driver installation steps.
+
+- Can I report Ollama issue on Intel GPU to llama.cpp SYCL backend?
+
+  No. We can't support Ollama issue directly, because we aren't familiar with Ollama.
+
+  Sugguest reproducing on llama.cpp and report similar issue to llama.cpp. We will surpport it.
+
+  It's same for other projects including llama.cpp SYCL backend.
+
+- `Native API failed. Native API returns: 39 (UR_RESULT_ERROR_OUT_OF_DEVICE_MEMORY)`, `ggml_backend_sycl_buffer_type_alloc_buffer: can't allocate 3503030272 Bytes of memory on device`, or `failed to allocate SYCL0 buffer`
+
+  You are running out of Device Memory.
+
+  |Reason|Solution|
+  |-|-|
+  | The default context is too big. It leads to excessive memory usage.|Set `-c 8192` or a smaller value.|
+  | The model is too big and requires more memory than what is available.|Choose a smaller model or change to a smaller quantization, like Q5 -> Q4;<br>Alternatively, use more than one device to load model.|
+
+### **GitHub contribution**:
+Please add the `SYCL :` prefix/tag in issues/PRs titles to help the SYCL contributors to check/address them without delay.
+
+## TODO
+
+- Review ZES_ENABLE_SYSMAN: https://github.com/intel/compute-runtime/blob/master/programmers-guide/SYSMAN.md#support-and-limitations
+
+
+## Archivo: debugging-tests.md
+Contenido:
+# Debugging Tests Tips
+
+## How to run & execute or debug a specific test without anything else to keep the feedback loop short?
+
+There is a script called debug-test.sh in the scripts folder whose parameter takes a REGEX and an optional test number.
+
+For example, running the following command will output an interactive list from which you can select a test. It takes this form:
+
+`debug-test.sh [OPTION]... <test_regex> <test_number>`
+
+It will then build & run in the debugger for you.
+
+To just execute a test and get back a PASS or FAIL message run:
+
+```bash
+./scripts/debug-test.sh test-tokenizer
+```
+
+To test in GDB use the `-g` flag to enable gdb test mode.
+
+```bash
+./scripts/debug-test.sh -g test-tokenizer
+
+# Once in the debugger, i.e. at the chevrons prompt, setting a breakpoint could be as follows:
+>>> b main
+```
+
+To speed up the testing loop, if you know your test number you can just run it similar to below:
+
+```bash
+./scripts/debug-test.sh test 23
+```
+
+For further reference use `debug-test.sh -h` to print help.
+
+&nbsp;
+
+### How does the script work?
+If you want to be able to use the concepts contained in the script separately, the important ones are briefly outlined below.
+
+#### Step 1: Reset and Setup folder context
+
+From base of this repository, let's create `build-ci-debug` as our build context.
+
+```bash
+rm -rf build-ci-debug && mkdir build-ci-debug && cd build-ci-debug
+```
+
+#### Step 2: Setup Build Environment and Compile Test Binaries
+
+Setup and trigger a build under debug mode. You may adapt the arguments as needed, but in this case these are sane defaults.
+
+```bash
+cmake -DCMAKE_BUILD_TYPE=Debug -DLLAMA_CUDA=1 -DLLAMA_FATAL_WARNINGS=ON ..
+make -j
+```
+
+#### Step 3: Find all tests available that matches REGEX
+
+The output of this command will give you the command & arguments needed to run GDB.
+
+* `-R test-tokenizer` : looks for all the test files named `test-tokenizer*` (R=Regex)
+* `-N` : "show-only" disables test execution & shows test commands that you can feed to GDB.
+* `-V` : Verbose Mode
+
+```bash
+ctest -R "test-tokenizer" -V -N
+```
+
+This may return output similar to below (focusing on key lines to pay attention to):
+
+```bash
+...
+1: Test command: ~/llama.cpp/build-ci-debug/bin/test-tokenizer-0 "~/llama.cpp/tests/../models/ggml-vocab-llama-spm.gguf"
+1: Working Directory: .
+Labels: main
+  Test  #1: test-tokenizer-0-llama-spm
+...
+4: Test command: ~/llama.cpp/build-ci-debug/bin/test-tokenizer-0 "~/llama.cpp/tests/../models/ggml-vocab-falcon.gguf"
+4: Working Directory: .
+Labels: main
+  Test  #4: test-tokenizer-0-falcon
+...
+```
+
+#### Step 4: Identify Test Command for Debugging
+
+So for test #1 above we can tell these two pieces of relevant information:
+* Test Binary: `~/llama.cpp/build-ci-debug/bin/test-tokenizer-0`
+* Test GGUF Model: `~/llama.cpp/tests/../models/ggml-vocab-llama-spm.gguf`
+
+#### Step 5: Run GDB on test command
+
+Based on the ctest 'test command' report above we can then run a gdb session via this command below:
+
+```bash
+gdb --args ${Test Binary} ${Test GGUF Model}
+```
+
+Example:
+
+```bash
+gdb --args ~/llama.cpp/build-ci-debug/bin/test-tokenizer-0 "~/llama.cpp/tests/../models/ggml-vocab-llama-spm.gguf"
+```
+
+
+## Archivo: MobileVLM.md
+Contenido:
+# MobileVLM
+
+Currently this implementation supports [MobileVLM-1.7B](https://huggingface.co/mtgv/MobileVLM-1.7B) / [MobileVLM_V2-1.7B](https://huggingface.co/mtgv/MobileVLM_V2-1.7B) variants.
+
+for more information, please go to [Meituan-AutoML/MobileVLM](https://github.com/Meituan-AutoML/MobileVLM)
+
+The implementation is based on llava, and is compatible with llava and mobileVLM. The usage is basically same as llava.
+
+Notice: The overall process of model inference for both **MobileVLM** and **MobileVLM_V2** models is the same, but the process of model conversion is a little different. Therefore, using **MobileVLM-1.7B** as an example, the different conversion step will be shown.
+
+## Usage
+
+Build the `llama-mtmd-cli` binary.
+
+After building, run: `./llama-mtmd-cli` to see the usage. For example:
+
+```sh
+./llama-mtmd-cli -m MobileVLM-1.7B/ggml-model-q4_k.gguf \
+    --mmproj MobileVLM-1.7B/mmproj-model-f16.gguf \
+    --chat-template deepseek
+```
+
+## Model conversion
+
+1. Clone `mobileVLM-1.7B` and `clip-vit-large-patch14-336` locally:
+
+```sh
+git clone https://huggingface.co/mtgv/MobileVLM-1.7B
+
+git clone https://huggingface.co/openai/clip-vit-large-patch14-336
+```
+
+2. Use `llava_surgery.py` to split the LLaVA model to LLaMA and multimodel projector constituents:
+
+```sh
+python ./tools/mtmd/llava_surgery.py -m path/to/MobileVLM-1.7B
+```
+
+3. Use `convert_image_encoder_to_gguf.py` with `--projector-type ldp` (for **V2** please use `--projector-type ldpv2`) to convert the LLaVA image encoder to GGUF:
+
+```sh
+python ./tools/mtmd/convert_image_encoder_to_gguf.py \
+    -m path/to/clip-vit-large-patch14-336 \
+    --llava-projector path/to/MobileVLM-1.7B/llava.projector \
+    --output-dir path/to/MobileVLM-1.7B \
+    --projector-type ldp
+```
+
+```sh
+python ./tools/mtmd/convert_image_encoder_to_gguf.py \
+    -m path/to/clip-vit-large-patch14-336 \
+    --llava-projector path/to/MobileVLM-1.7B_V2/llava.projector \
+    --output-dir path/to/MobileVLM-1.7B_V2 \
+    --projector-type ldpv2
+```
+
+4. Use `examples/convert_legacy_llama.py` to convert the LLaMA part of LLaVA to GGUF:
+
+```sh
+python ./examples/convert_legacy_llama.py path/to/MobileVLM-1.7B --skip-unknown
+```
+
+5. Use `quantize` to convert LLaMA part's DataType from `fp32` to `q4_k`
+```sh
+./llama-quantize path/to/MobileVLM-1.7B/ggml-model-F32.gguf path/to/MobileVLM-1.7B/ggml-model-q4_k.gguf q4_k_s
+```
+
+Now both the LLaMA part and the image encoder is in the `MobileVLM-1.7B` directory.
+
+## Android compile and run
+### compile
+refer to `tools/mtmd/android/build_64.sh`
+```sh
+mkdir tools/mtmd/android/build_64
+cd tools/mtmd/android/build_64
+../build_64.sh
+```
+### run on Android
+refer to `android/adb_run.sh`, modify resources' `name` and `path`
+
+## Some result on Android with `Snapdragon 888` chip
+### case 1
+**input**
+```sh
+/data/local/tmp/llama-mtmd-cli \
+    -m /data/local/tmp/ggml-model-q4_k.gguf \
+    --mmproj /data/local/tmp/mmproj-model-f16.gguf \
+    -t 4 \
+    --image /data/local/tmp/demo.jpg \
+    -p "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER: <image>\nWho is the author of this book? \nAnswer the question using a single word or phrase. ASSISTANT:"
+```
+**output**
+```sh
+encode_image_with_clip: image encoded in 21148.71 ms by CLIP (  146.87 ms per image patch)
+ Susan Wise Bauer
+llama_print_timings:        load time =   23574.72 ms
+llama_print_timings:      sample time =       1.24 ms /     6 runs   (    0.21 ms per token,  4850.44 tokens per second)
+llama_print_timings: prompt eval time =   12460.15 ms /   246 tokens (   50.65 ms per token,    19.74 tokens per second)
+llama_print_timings:        eval time =     424.86 ms /     6 runs   (   70.81 ms per token,    14.12 tokens per second)
+llama_print_timings:       total time =   34731.93 ms
+```
+### case 2
+**input**
+```sh
+/data/local/tmp/llama-mtmd-cli \
+    -m /data/local/tmp/ggml-model-q4_k.gguf \
+    --mmproj /data/local/tmp/mmproj-model-f16.gguf \
+    -t 4 \
+    --image /data/local/tmp/cat.jpeg \
+    -p "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER: <image>\nWhat is in the image? ASSISTANT:"
+```
+**output**
+```sh
+encode_image_with_clip: image encoded in 21149.51 ms by CLIP (  146.87 ms per image patch)
+ The image depicts a cat sitting in the grass near some tall green plants.
+llama_print_timings:        load time =   23257.32 ms
+llama_print_timings:      sample time =       5.25 ms /    18 runs   (    0.29 ms per token,  3430.53 tokens per second)
+llama_print_timings: prompt eval time =   11900.73 ms /   232 tokens (   51.30 ms per token,    19.49 tokens per second)
+llama_print_timings:        eval time =    1279.03 ms /    18 runs   (   71.06 ms per token,    14.07 tokens per second)
+llama_print_timings:       total time =   34570.79 ms
+```
+
+
+## Some result on Android with `Snapdragon 778G` chip
+### MobileVLM-1.7B case
+#### mtmd-cli release-b2005
+**input**
+```sh
+/data/local/tmp/llama-mtmd-cli \
+    -m /data/local/tmp/ggml-model-q4_k.gguf \
+    --mmproj /data/local/tmp/mmproj-model-f16.gguf \
+    -t 4 \
+    --image /data/local/tmp/many_llamas.jpeg \
+    -p "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER: <image>\nWhat's that? ASSISTANT:"
+```
+**output**
+```sh
+encode_image_with_clip: image encoded in 18728.52 ms by CLIP (  130.06 ms per image patch)
+system_prompt: A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER:
+user_prompt: \nWhat's that? ASSISTANT:
+
+ A group of llamas are standing in a green pasture.
+
+llama_print_timings:        load time =   20357.33 ms
+llama_print_timings:      sample time =       2.96 ms /    14 runs   (    0.21 ms per token,  4734.53 tokens per second)
+llama_print_timings: prompt eval time =    8119.49 ms /   191 tokens (   42.51 ms per token,    23.52 tokens per second)
+llama_print_timings:        eval time =    1005.75 ms /    14 runs   (   71.84 ms per token,    13.92 tokens per second)
+llama_print_timings:       total time =   28038.34 ms /   205 tokens
+```
+#### mtmd-cli latest-version
+**input**
+
+Just the same as above.
+
+**output**(seems to be much slower)
+```sh
+encode_image_with_clip: image embedding created: 144 tokens
+
+encode_image_with_clip: image encoded in 288268.88 ms by CLIP ( 2001.87 ms per image patch)
+system_prompt: A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER:
+user_prompt: \nWhat's that? ASSISTANT:
+
+ It is a group of sheep standing together in a grass field.
+
+llama_print_timings:        load time =  818120.91 ms
+llama_print_timings:      sample time =       3.44 ms /    14 runs   (    0.25 ms per token,  4067.40 tokens per second)
+llama_print_timings: prompt eval time =  529274.69 ms /   191 tokens ( 2771.07 ms per token,     0.36 tokens per second)
+llama_print_timings:        eval time =   43894.02 ms /    13 runs   ( 3376.46 ms per token,     0.30 tokens per second)
+llama_print_timings:       total time =  865441.76 ms /   204 tokens
+```
+### MobileVLM_V2-1.7B case
+#### mtmd-cli release-2005b
+**input**
+
+Just the same as above.
+
+**output**
+```sh
+encode_image_with_clip: image encoded in 20609.61 ms by CLIP (  143.12 ms per image patch)
+system_prompt: A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER:
+user_prompt: \nWhat's that? ASSISTANT:
+
+ This image captures a lively scene of 20 llamas in motion on an expansive, grassy field. The llama is scattered across the landscape with some standing and others sitting down as if taking rest or observing their surroundings from different vantage points within this verdant setting.
+
+The background offers glimpses into a picturesque town nestled amidst hills under an overcast sky, adding depth to the scene while also emphasizing that distance between these llama and human-made structures like houses or roads in which they roam freely without any barriers around them. The image is framed by text at both right angles on white backgrounds against a contrasting blue backdrop with green foliage, further drawing attention to the llamas amidst their natural habitat while also inviting viewers into this picturesque landscape within town limits of Alta Llama
+
+llama_print_timings:        load time =   22406.77 ms
+llama_print_timings:      sample time =      49.26 ms /   186 runs   (    0.26 ms per token,  3776.27 tokens per second)
+llama_print_timings: prompt eval time =    9044.54 ms /   191 tokens (   47.35 ms per token,    21.12 tokens per second)
+llama_print_timings:        eval time =   14497.49 ms /   186 runs   (   77.94 ms per token,    12.83 tokens per second)
+llama_print_timings:       total time =   44411.01 ms /   377 tokens
+```
+
+## Orin compile and run
+### compile
+```sh
+make GGML_CUDA=1 CUDA_DOCKER_ARCH=sm_87 GGML_CUDA_F16=1 -j 32
+```
+### run on Orin
+### case 1
+**input**
+```sh
+./llama-mtmd-cli \
+    -m /data/local/tmp/ggml-model-q4_k.gguf \
+    --mmproj /data/local/tmp/mmproj-model-f16.gguf \
+    --image /data/local/tmp/demo.jpeg \
+    -p "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER: <image>\nWho is the author of this book? \nAnswer the question using a single word or phrase. ASSISTANT:" \
+    --n-gpu-layers 999
+```
+**output**
+```sh
+
+encode_image_with_clip: image encoded in   296.62 ms by CLIP (    2.06 ms per image patch)
+
+ Susan Wise Bauer
+
+llama_print_timings:        load time =    1067.64 ms
+llama_print_timings:      sample time =       1.53 ms /     6 runs   (    0.25 ms per token,  3934.43 tokens per second)
+llama_print_timings: prompt eval time =     306.84 ms /   246 tokens (    1.25 ms per token,   801.72 tokens per second)
+llama_print_timings:        eval time =      91.50 ms /     6 runs   (   15.25 ms per token,    65.58 tokens per second)
+llama_print_timings:       total time =    1352.63 ms /   252 tokens
+```
+
+### case 2
+**input**
+```sh
+./llama-mtmd-cli \
+    -m /data/local/tmp/ggml-model-q4_k.gguf \
+    --mmproj /data/local/tmp/mmproj-model-f16.gguf \
+    -p "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER: <image>\nWhat is in the image? ASSISTANT:" \
+    --n-gpu-layers 999
+
+```
+**output**
+```sh
+encode_image_with_clip: image encoded in   302.15 ms by CLIP (    2.10 ms per image patch)
+
+ The image features a cat lying in the grass.
+
+llama_print_timings:        load time =    1057.07 ms
+llama_print_timings:      sample time =       3.27 ms /    11 runs   (    0.30 ms per token,  3360.83 tokens per second)
+llama_print_timings: prompt eval time =     213.60 ms /   232 tokens (    0.92 ms per token,  1086.14 tokens per second)
+llama_print_timings:        eval time =     166.65 ms /    11 runs   (   15.15 ms per token,    66.01 tokens per second)
+llama_print_timings:       total time =    1365.47 ms /   243 tokens
+```
+
+## Running on Intel(R) Core(TM) i7-10750H
+### Operating system
+Ubuntu22.04
+### compile
+```sh
+make -j32
+```
+### MobileVLM-1.7B case
+**input**
+```sh
+-m /path/to/ggml-model-q4_k.gguf \
+    --mmproj /path/to/mmproj-model-f16.gguf \
+    --image /path/to/many_llamas.jpeg
+    -p "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER: <image>\nWhat's that? ASSISTANT:" \
+```
+**output**
+```sh
+encode_image_with_clip: image embedding created: 144 tokens
+
+encode_image_with_clip: image encoded in  2730.94 ms by CLIP (   18.96 ms per image patch)
+system_prompt: A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER:
+user_prompt: \nWhat's that?ASSISTANT:
+
+ A group of llamas are walking together in a field.
+
+llama_print_timings:        load time =    5506.60 ms
+llama_print_timings:      sample time =       0.44 ms /    13 runs   (    0.03 ms per token, 29545.45 tokens per second)
+llama_print_timings: prompt eval time =    2031.58 ms /   190 tokens (   10.69 ms per token,    93.52 tokens per second)
+llama_print_timings:        eval time =     438.92 ms /    12 runs   (   36.58 ms per token,    27.34 tokens per second)
+llama_print_timings:       total time =    5990.25 ms /   202 tokens
+```
+
+### MobileVLM_V2-1.7B case
+**input**
+
+Just the same as above.
+
+**ouput**
+```sh
+encode_image_with_clip: image embedding created: 144 tokens
+
+encode_image_with_clip: image encoded in  3223.89 ms by CLIP (   22.39 ms per image patch)
+system_prompt: A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER:
+user_prompt: \nWhat's that?ASSISTANT:
+
+ The image captures a tranquil scene in a park, where a group of approximately 20 llamas are gathered. The llamas, a mix of white and black, are standing in a line, their black and white patterns contrasting with the lush green grass of the park. The lamas are arranged in a line, suggesting a social order.
+
+The park itself is lush and green, with trees dotting the landscape in the background. A sign reading "Llamas Tico  Ana" is also visible in the image, possibly indicating the location or the breed of the llamas. The image seems to be taken from a distance, providing a wide view of the scene and the surrounding environment.
+
+The llamas' positions relative to each other, the sign, and the trees create a harmonious composition. The image does not contain any discernible text. The overall scene is one of peace and natural beauty, with the llamas in their natural habitat, surrounded by the vibrant colors and lush greenery of the park.
+
+llama_print_timings:        load time =    6642.61 ms
+llama_print_timings:      sample time =       8.15 ms /   223 runs   (    0.04 ms per token, 27358.61 tokens per second)
+llama_print_timings: prompt eval time =    2475.07 ms /   190 tokens (   13.03 ms per token,    76.77 tokens per second)
+llama_print_timings:        eval time =    8760.60 ms /   222 runs   (   39.46 ms per token,    25.34 tokens per second)
+llama_print_timings:       total time =   15513.95 ms /   412 tokens
+```
+
+## Run on Intel(R) Core(TM) Ultra7 115H
+### operation system
+Windows11
+### comiple
+```sh
+make -j32
+```
+### MobileVLM-1.7B case
+**input**
+```sh
+-m /path/to/ggml-model-q4_k.gguf \
+    --mmproj /path/to/tmp/mmproj-model-f16.gguf \
+    -p "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER: <image>\nWhat's that? ASSISTANT:" \
+```
+**output**
+```sh
+encode_image_with_clip: image encoded in  4902.81 ms by CLIP (   34.05 ms per image patch)
+system_prompt: A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER:
+user_prompt: \nWhat's that? ASSISTANT:
+
+ The image features a group of brown and white llamas standing in a grassy field.
+
+llama_print_timings:        load time =    7441.06 ms
+llama_print_timings:      sample time =       0.72 ms /    19 runs   (    0.04 ms per token, 26279.39 tokens per second)
+llama_print_timings: prompt eval time =    2090.71 ms /   191 tokens (   10.95 ms per token,    91.36 tokens per second)
+llama_print_timings:        eval time =     512.35 ms /    18 runs   (   28.46 ms per token,    35.13 tokens per second)
+llama_print_timings:       total time =    7987.23 ms /   209 tokens
+```
+
+### MobileVLM_V2-1.7B case
+**input**
+
+Just the same as above.
+
+**output**
+```sh
+encode_image_with_clip: image encoded in  4682.44 ms by CLIP (   32.52 ms per image patch)
+system_prompt: A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER:
+user_prompt: \nWhat's that? ASSISTANT:
+
+ This image captures a lively scene of a group of 14 llamas in a grassy field. The llamas, with their distinctive black and white coats, are standing and walking in a line, seemingly engaged in a social activity. One
+ of them, possibly the first in the line, has its back turned, perhaps observing something in the distance.
+
+The llama in the front of the line stands out due to its black and white coloring, which is quite unusual for llama patterns. The llama in the front also seems to be more aware of its surroundings, as it faces the camera, giving a sense of engagement with the viewer.
+
+The image is taken from the side of the llama, providing a clear view of the llama in the front and its companions. The lameness in the llama in
+ front is not visible, indicating that it might not be the main focus of the photo.
+
+The background of the image features a grassy field, with a fence and a tree visible in the distance. The tree appears to be bare, suggesting that it might be during a time of year when most trees are dormant or have shed their leaves.
+
+
+llama_print_timings:        load time =    7015.35 ms
+llama_print_timings:      sample time =      10.61 ms /   256 runs   (    0.04 ms per token, 24119.09 tokens per second)
+llama_print_timings: prompt eval time =    2052.45 ms /   191 tokens (   10.75 ms per token,    93.06 tokens per second)
+llama_print_timings:        eval time =    7259.43 ms /   255 runs   (   28.47 ms per token,    35.13 tokens per second)
+llama_print_timings:       total time =   14371.19 ms /   446 tokens
+```
+
+## TODO
+
+- [x] Support non-CPU backend for the new operators, such as `depthwise`, `hardswish`, `hardsigmoid`
+- [ ] Optimize LDP projector performance
+
+      - Optimize the structure definition to avoid unnecessary memory rearrangements, to reduce the use of `ggml_permute_cpy`;
+      - Optimize operator implementation (ARM CPU/NVIDIA GPU): such as depthwise conv, hardswish, hardsigmoid, etc.
+- [x] run MobileVLM on `Jetson Orin`
+- [ ] Support more model variants, such as `MobileVLM-3B`.
+
+
+## contributor
+```sh
+zhangjidong05, yangyang260, huyiming03, chenxiaotao03, ZiangWu-77
+```
+
+
+## Archivo: glmedge.md
+Contenido:
+# GLMV-EDGE
+
+Currently this implementation supports [glm-edge-v-2b](https://huggingface.co/THUDM/glm-edge-v-2b) and [glm-edge-v-5b](https://huggingface.co/THUDM/glm-edge-v-5b).
+
+## Usage
+Build the `llama-mtmd-cli` binary.
+
+After building, run: `./llama-mtmd-cli` to see the usage. For example:
+
+```sh
+./llama-mtmd-cli -m model_path/ggml-model-f16.gguf --mmproj model_path/mmproj-model-f16.gguf
+```
+
+**note**: A lower temperature like 0.1 is recommended for better quality. add `--temp 0.1` to the command to do so.
+**note**: For GPU offloading ensure to use the `-ngl` flag just like usual
+
+## GGUF conversion
+
+1. Clone a GLMV-EDGE model ([2B](https://huggingface.co/THUDM/glm-edge-v-2b) or [5B](https://huggingface.co/THUDM/glm-edge-v-5b)). For example:
+
+```sh
+git clone https://huggingface.co/THUDM/glm-edge-v-5b or https://huggingface.co/THUDM/glm-edge-v-2b
+```
+
+2. Use `glmedge-surgery.py` to split the GLMV-EDGE model to LLM and multimodel projector constituents:
+
+```sh
+python ./tools/mtmd/glmedge-surgery.py -m ../model_path
+```
+
+4. Use `glmedge-convert-image-encoder-to-gguf.py` to convert the GLMV-EDGE image encoder to GGUF:
+
+```sh
+python ./tools/mtmd/glmedge-convert-image-encoder-to-gguf.py -m ../model_path --llava-projector ../model_path/glm.projector --output-dir ../model_path
+```
+
+5. Use `examples/convert_hf_to_gguf.py` to convert the LLM part of GLMV-EDGE to GGUF:
+
+```sh
+python convert_hf_to_gguf.py ../model_path
+```
+
+Now both the LLM part and the image encoder are in the `model_path` directory.
+
+
+## Archivo: llava.md
+Contenido:
+# LLaVA
+
+Currently this implementation supports [llava-v1.5](https://huggingface.co/liuhaotian/llava-v1.5-7b) variants,
+as well as llava-1.6 [llava-v1.6](https://huggingface.co/collections/liuhaotian/llava-16-65b9e40155f60fd046a5ccf2) variants.
+
+The pre-converted [7b](https://huggingface.co/mys/ggml_llava-v1.5-7b)

@@ -1,0 +1,57 @@
+import logging
+import os
+import json
+from pythonjsonlogger import jsonlogger
+from logging.handlers import TimedRotatingFileHandler
+from utils.log_crypto.log_crypto import encrypt_log
+from utils.log_writer.log_writer import encrypted_namer, log_rotator
+
+# Environment variables
+LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
+ENABLE_ENCRYPTION = os.getenv("LOG_ENCRYPTION_ENABLED", "false").lower() == "true"
+LOG_DIR = os.getenv("LOG_DIR", "logs")
+
+class AlmaJSONFormatter(jsonlogger.JsonFormatter):
+    def add_fields(self, log_record, record, message_dict):
+        super().add_fields(log_record, record, message_dict)
+        # Ensure universal fields exist
+        log_record.setdefault('id', "N/A")
+        log_record.setdefault('agente', "unknown")
+        log_record.setdefault('hash', "N/A")
+        log_record.setdefault('memoria_ref', [])
+        log_record.setdefault('tags', [])
+        log_record.setdefault('metadata', {})
+
+def configure_logging(module_name):
+    logger = logging.getLogger(module_name)
+    logger.setLevel(LOG_LEVEL)
+
+    # Create log directory if missing
+    os.makedirs(LOG_DIR, exist_ok=True)
+    log_file = os.path.join(LOG_DIR, f"{module_name}.log")
+
+    # File handler with rotation
+    handler = TimedRotatingFileHandler(
+        log_file,
+        when='midnight',
+        backupCount=7,
+        encoding='utf-8'
+    )
+    handler.setFormatter(AlmaJSONFormatter())
+    
+    # Encryption hook for CRITICAL logs
+    if ENABLE_ENCRYPTION:
+        class EncryptionFilter(logging.Filter):
+            def filter(self, record):
+                if record.levelno >= logging.CRITICAL:
+                    record.msg = log_crypto.encrypt_log(record.msg)
+                return True
+        handler.addFilter(EncryptionFilter())
+    
+    logger.addHandler(handler)
+    
+    # Register rotator for encrypted backups
+    handler.namer = encrypted_namer if ENABLE_ENCRYPTION else None
+    handler.rotator = log_rotator
+    
+    return logger

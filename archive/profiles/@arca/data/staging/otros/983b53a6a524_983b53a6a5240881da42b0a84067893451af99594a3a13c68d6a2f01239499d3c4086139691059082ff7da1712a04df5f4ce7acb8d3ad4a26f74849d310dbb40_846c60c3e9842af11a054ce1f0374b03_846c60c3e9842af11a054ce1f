@@ -1,0 +1,50 @@
+# 💼 Proyección Base – ALMA_EMPRESA
+**Fecha:** 2025-05-29
+
+## 🧠 Idea Base
+
+**ALMA_EMPRESA** nace como la **estructura matriz organizativa, operativa y estratégica** del ecosistema ALMA_RESIST. Su objetivo es funcionar como **holding informal descentralizado**, que gestione y consolide todos los proyectos, ONGs, unidades productivas y nodos IA bajo una misma arquitectura modular.
+
+Su misión es integrar de forma escalable las siguientes áreas:
+- Coordinación general del sistema ALMA_RESIST
+- Formalización de entidades (ONGs, asociaciones civiles, empresas)
+- Automatización de tareas mediante IAs especializadas
+- Supervisión financiera dual (legal/informal)
+- Gestión contable, legal, institucional y estratégica
+- Sede del futuro fondo de inversión ALMA_TRADING
+- Control operativo de cada nodo empresarial
+
+## 🏗 Estructura funcional
+
+```bash
+ALMA_EMPRESA/
+├── equipo/                ← Personas reales con funciones estratégicas
+├── entidades/             ← Cada ONG o empresa subordinada (Cannabird, 13CC, etc.)
+├── asesoria/              ← Legal, contable, técnica, institucional
+├── IA_asistente/          ← IA principal de gestión empresarial
+├── fondo_inversion/       ← Base estructural de ALMA_TRADING
+└── docs/                  ← Planeamiento, actas, proyectos, modelos, visión
+```
+
+## 🔁 Replicabilidad
+
+ALMA_EMPRESA está pensada como **modelo replicable**. Su estructura será usada para gestionar:
+- Otras ONGs cannábicas (actuales o futuras)
+- Proyectos de trading o inversión con modularidad completa
+- Unidades productivas geográficamente descentralizadas
+
+## 🧠 Proyección
+
+- IA asistente con funciones específicas: legal, contable, análisis de riesgo.
+- Integración con Sprints y Checklist de cada entidad.
+- Infraestructura de reporting automatizado al comandante (vos).
+- Sistema de control empresarial desde `00_CENTRAL/`.
+
+## 🚀 Objetivo Final
+
+Construir una arquitectura empresarial orgánica, autoescalable, con nodos operativos descentralizados y auditoría de IA permanente, que permita sostener y escalar el estilo de vida de Santiago y su equipo en múltiples frentes: cultivo, trading, ONG, comunidad y tecnología.
+
+---
+
+📍 Responsable: Santiago Calvo (Comandante ALMA)
+📁 Estado: Proyección Inicial – Listo para ser implementado

@@ -1,0 +1,62 @@
+
+# 🧠 Prompt Base – `resumen_diario_cannabird_v2`
+
+
+## 🎯 Objetivo del Prompt
+
+Documentar la **jornada diaria** de cultivo de forma precisa, trazable y compatible con sistemas de memoria IA y navegación en Obsidian.
+
+
+## 📤 Formato de salida obligatorio
+
+Nombre del archivo: `resumen_diario_cannabird_YYYY-MM-DD.md`
+
+Contenido:
+```markdown
+# 📅 Resumen Diario – Cannabird  
+**Fecha:** YYYY-MM-DD  
+**Día:** Lunes  
+**Participantes:** #seba-rios, #pablito-tatu, #bird  
+#resumen-diario #cannabird #semana-XX #año-2025 #diario-trabajo
+
+## 🌡️ Mediciones
+...
+
+## 🧪 Riegos
+...
+
+## 🌱 Zona Vegetativa (Vege)
+...
+
+## 🌸 Zona de Floración (Flora)
+...
+
+## 🌱 Esquejeras
+...
+
+## 🪴 Madres
+...
+
+## 🔧 Infraestructura
+...
+
+## 🧠 Notas Finales y Tareas Futuras
+...
+
+## ⚙️ Log de Ajustes Técnicos
+...
+
+## 👤 Tareas por Responsable
+- #hechoPor_seba-rios: …
+- #nota_pablito-tatu: …
+- #recomendadoPor_bird: …
+```
+
+
+## 📌 Changelog – v2
+- Se agregó bloque de contexto institucional
+- Se reforzó el uso obligatorio de tags sectorizados (#001-flora, etc.)
+- Se incorporaron etiquetas de responsables (#hechoPor_)
+- Se incluyó metadatos obligatorios al encabezado
+- Se definió estructura mínima obligatoria para todos los resúmenes
+- Optimización IA/Obsidian Friendly 100%

@@ -1,0 +1,38 @@
+---
+module: arquitectura/estructura_doc/plantilla_prompt_tecnico
+type: core
+status: in_progress
+created: '2025-05-20'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🧠 Prompt Técnico – [Nombre del Módulo]
+
+📅 Creado: [dd/mm/aaaa]  
+👤 Responsable: Usuario + IA  
+📁 Ubicación: `prompts/prompt_[nombre_modulo].md`
+
+---
+
+## 🎯 Objetivo
+
+[Describe en una frase qué resuelve este módulo asistido por IA]
+
+---
+
+## 🧩 Contexto de uso
+
+- Entrada esperada:
+- Salida esperada:
+- Dependencias externas:
+- Interacción con otros módulos:
+
+---
+
+## 🧠 Ejemplo de uso
+
+```
+Usuario: !resumen
+IA: Genera un resumen de ideas clave...
+```

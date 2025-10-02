@@ -1,0 +1,24 @@
+# control_central/ – Núcleo de Gobierno y Gestión de ALMA_RESIST
+
+Esta carpeta es el centro de mando, management y evolución institucional de todo el ecosistema ALMA_RESIST.  
+Aquí viven los agentes IA, los módulos empresariales, la gestión personal y cualquier herramienta crítica del “cerebro” del sistema.
+
+## Estructura base:
+
+- `agentes/`           → Cada IA institucional (Kael, Centralesis, Emma, Alma, Nero, etc.)
+- `alma_empresa/`      → Gestión y documentación de la empresa madre, acuerdos, actas, y sus agentes (Emma, etc.)
+- `personal/`          → Espacio personal de estudio, aprendizaje y experimentación (trading, historia, hacking, etc.)
+- `docs/`              → Documentación institucional, plantillas, papers, protocolos.
+- `bitacora/`          → Bitácora institucional y backups automáticos.
+- `changelog/`         → Registro de cambios, milestones y cierres de fase.
+- `cli/`               → Scripts y automatizaciones internas.
+- `memorias/`          → Memorias institucionales y registros de agentes/módulos.
+- `core/`              → Motores internos, scripts avanzados, testbench institucional, recursos comunes.
+
+## Principios de organización:
+
+- Todo lo que sea gobierno, gestión, automatización o personal va **dentro de esta carpeta**.
+- Nada de scripts, gestión o vida personal va en la raíz del repo/producto.
+- Cada módulo/área debe tener su propio README y bitácora personal.
+- La documentación de cambios y actas debe registrarse en changelog y docs.
+

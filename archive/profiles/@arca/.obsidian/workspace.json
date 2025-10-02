@@ -1,0 +1,204 @@
+{
+  "main": {
+    "id": "8224d03137a01681",
+    "type": "split",
+    "children": [
+      {
+        "id": "a6250e05393c28cb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6ea2a94d8f219ce1",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "69b485d0e4e38636",
+    "type": "split",
+    "children": [
+      {
+        "id": "a05b49e1ccd575a7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "69e08ccc59794545",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "49bff3d040f041f1",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "73275d85fff9ca5e",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "right": {
+    "id": "cda2f81d30d49ab7",
+    "type": "split",
+    "children": [
+      {
+        "id": "df70e96e7236500b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e148ecab3b9e87d4",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "bc45be436452c26c",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "110e998d41af9b43",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "af16f0b5585fc0bb",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "6ea2a94d8f219ce1",
+  "lastOpenFiles": [
+    "modules/13cc/core/management/impositive/data/config/concepts.csv",
+    "modules/13cc/core/management/impositive/data/finance/expenses/informal_expenses.csv",
+    "modules/13cc/core/management/impositive/data/finance/expenses/formal_expenses.csv",
+    "modules/13cc/core/management/impositive/data/finance/expenses/formal_expenses.cssv",
+    "modules/13cc/core/management/impositive/data/finance/sales/informal_sales.csv",
+    "modules/13cc/core/management/impositive/data/finance/sales/formal_sales.csv",
+    "modules/13cc/core/management/impositive/data/finance/journal.csv",
+    "modules/13cc/core/management/impositive/data/finance/expenses",
+    "modules/13cc/core/management/impositive/data/finance/sales",
+    "modules/13cc/core/management/impositive/data/finance/transactions.csv",
+    "modules/13cc/core/management/impositive/data/people/productors.csv",
+    "modules/13cc/doc/management/impositive/core_docs/gestion_excel_to_sql.md",
+    "modules/13cc/doc/management/crop/sustrato/consulta_02_productos_para_fertilizacion_sustrato_bird_01.md",
+    "modules/13cc/doc/management/crop/sustrato/consulta_01_productos_para_ferilizacion_sustrato_bird_01.md",
+    "modules/13cc/doc/management/crop/sustrato/composicion_sustrato_bird_01.md",
+    "modules/13cc/doc/management/crop/gestion_conjunta/Ingreso_Club_20250722.md",
+    "modules/13cc/doc/management/crop/gestion_conjunta/Gestion_Conjunta.md",
+    "modules/13cc/doc/management/impositive/flujo_a_pasar/Flujo_Interno/2025/202507/History/README.md",
+    "modules/13cc/doc/management/impositive/flujo_a_pasar/Flujo_Interno/2025/202507/README.md",
+    "modules/13cc/doc/management/impositive/flujo_a_pasar/Flujo_Interno/2025/202506/README.md",
+    "modules/13cc/doc/management/legal/decretos/resumen_decreto_4622025.md",
+    "modules/13cc/doc/management/cultivo/sustrato/consulta_02_productos_para_fertilizacion_sustrato_bird_01.md",
+    "modules/13cc/doc/management/cultivo/sustrato/consulta_01_productos_para_ferilizacion_sustrato_bird_01.md",
+    "modules/13cc/doc/management/cultivo/sustrato/composicion_sustrato_bird_01.md",
+    "modules/13cc/doc/management/cultivo/gestion_conjunta/Ingreso_Club_20250722.md",
+    "modules/13cc/doc/management/cultivo/gestion_conjunta/Gestion_Conjunta.md",
+    "modules/13cc/doc/management/legal/orientacion_para_ong.md",
+    "modules/13cc/doc/management/legal/ejemplos_de_gabi.md",
+    "modules/13cc/doc/management/legal/ejemplo_acta_de_alquiler.md",
+    "modules/13cc/archive/history/README.md",
+    "modules/13cc/archive/README.md",
+    "modules/13cc/core/management/README.md",
+    "modules/13cc/core/management/impositive/gestion_excel_to_sql.md",
+    "modules/13cc/doc/gestion/impositive/flujo_a_pasar/Flujo_Interno/2025/202507/History/README.md",
+    "modules/13cc/doc/gestion/impositive/flujo_a_pasar/Flujo_Interno/2025/202506/README.md",
+    "modules/13cc/doc/gestion/impositive/flujo_a_pasar/Flujo_Interno/2025/202507/README.md"
+  ]
+}

@@ -1,0 +1,46 @@
+---
+module: version
+type: core
+status: in_progress
+created: '2025-05-23'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# Versión: v0.0.0.3_documentacion
+
+## Descripción
+
+Esta versión empaqueta la documentación base y metodológica del proyecto ALMA_RESIST, incluyendo:
+
+- Estructuras de control documental.
+- Guías metodológicas.
+- Puntos de referencia para sprint, planificación y decisiones clave.
+
+## Archivos clave
+
+- `docs/index.md`
+- `docs/01_methodologies/*`
+- `docs/hitos.md`
+- `docs/roadmap_tecnico.md`
+- `docs/changelog.md`
+
+## Fecha
+
+2025-05-23
+
+## Estado
+
+🔒 Cerrada – lista para referencia, respaldo y validación CI/CD.
+
+---
+
+## Snapshot Oficial
+
+- Versión Snapshot: `v0.0.0.2_estructura_documental`
+- Sprint asociado: Sprint_2.1_Profesionalizacion_Estructura
+- Hash SHA: `0f61c8c5f3ab0b08b1c8c189b2e9a6ef3db47d0d4b0f63b246ac9ef8079d3a35`
+- Fecha de cierre: 2025-05-23
+- Responsable del cierre: Santi / pájaro
+
+Este bloque funciona como firma técnica y de auditoría del sprint. Marca el estado consolidado del sistema antes del escalado con IA.

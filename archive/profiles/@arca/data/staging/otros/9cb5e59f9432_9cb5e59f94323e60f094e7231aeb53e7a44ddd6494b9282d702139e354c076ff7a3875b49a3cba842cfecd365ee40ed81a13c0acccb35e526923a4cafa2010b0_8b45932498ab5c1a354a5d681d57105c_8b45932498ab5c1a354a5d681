@@ -1,0 +1,42 @@
+
+# 🧠 Prompt Maestro para Reinicio del Proyecto – `prompt_reinicio_alma_loader`
+
+## 🎯 Propósito
+Este prompt está diseñado para que una IA avanzada (como GPT-4.5 o DeepSeek) **analice en profundidad todo el proyecto `alma_loader`** y genere una propuesta de reestructuración completa. Se solicita una revisión técnica, conceptual y funcional para optimizar el sistema y alinear todos los componentes hacia el objetivo principal: **una IA que pueda leer, procesar y generar memorias de forma autónoma, resumida y contextualizada**.
+
+
+## 🧩 Tareas a Realizar
+
+### 1. 📂 Análisis Estructural
+- Identificar redundancias entre módulos y prompts.
+- Evaluar la coherencia entre scripts y su propósito.
+- Sugerir una estructura de carpetas más eficiente.
+
+### 2. 🧠 Diseño de Prompt Base Unificado
+- Proponer un nuevo `prompt_base_2.0.0.md` que pueda ser leído por cualquier IA de forma clara y automática.
+- Debe incluir:
+  - Instrucciones al modelo.
+  - Ejemplos de memorias.
+  - Formato de IDs.
+  - Campos mínimos requeridos por memoria (fecha, prioridad, tipo, contenido).
+  - Modo de generar resúmenes diarios, semanales y por módulo.
+
+### 3. 📈 Mejora del Flujo de Trabajo
+- Explicar cómo integrar los scripts actuales (por ejemplo, `registrar_feedback.py`, `relacionador_nlp.py`, etc.) en un flujo lógico.
+- Proponer automatizaciones clave que aún no están implementadas (por ejemplo: generación de resumen automático al cierre del día).
+
+### 4. 🧩 Compatibilidad e Interoperabilidad
+- Sugerir cómo adaptar este sistema para integrarlo a una API REST, usarlo con agentes externos, o hacerlo multiplataforma.
+- Proponer esquemas de exportación compatibles con otras IAs o dashboards.
+
+### 5. 🧠 Generar el nuevo Prompt Base
+- El resultado debe ser un nuevo archivo llamado `prompt_base_2.0.0.md` listo para usar como núcleo de interacción del sistema ALMA.
+
+
+## ✅ Output Esperado
+
+- Diagnóstico completo del sistema actual.
+- Propuesta de rediseño técnico.
+- Nuevo prompt base listo para producción.
+- Sugerencias opcionales de escalado (UI, API, integración con Shortcuts, etc.).
+

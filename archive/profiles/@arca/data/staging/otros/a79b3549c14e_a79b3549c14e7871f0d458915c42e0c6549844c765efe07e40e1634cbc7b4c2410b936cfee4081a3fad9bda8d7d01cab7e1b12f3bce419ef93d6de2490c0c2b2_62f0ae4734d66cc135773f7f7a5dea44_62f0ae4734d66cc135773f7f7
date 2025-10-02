@@ -1,0 +1,32 @@
+# 🧠 PROMPT BASE PARA DEEPSEEK – ALMA_RESIST (v0.1)
+
+Este prompt define el marco técnico para solicitar cualquier script dentro de ALMA_RESIST.
+
+
+## 🔐 RESTRICCIONES PARA CADA MÓDULO
+
+- Sin librerías de red (requests, urllib, etc.)
+- Sin frameworks pesados (Flask, Django)
+- Preferencia por Python estándar o Bash puro
+- Scripts con validación defensiva y docstrings estilo Google
+- Compatibilidad: Python 3.10+
+
+
+## 🧪 EJEMPLO DE ESTILO DE CÓDIGO
+
+```python
+def log_event(event_type: str, message: str, module: str = "core") -> dict:
+    """
+    Registra un evento estructurado en el log JSONL.
+
+    Args:
+        event_type (str): Nivel (INFO, WARNING, ERROR)
+        message (str): Descripción del evento
+        module (str): Nombre del módulo
+
+    Returns:
+        dict: Evento generado
+    """
+    ...
+```
+

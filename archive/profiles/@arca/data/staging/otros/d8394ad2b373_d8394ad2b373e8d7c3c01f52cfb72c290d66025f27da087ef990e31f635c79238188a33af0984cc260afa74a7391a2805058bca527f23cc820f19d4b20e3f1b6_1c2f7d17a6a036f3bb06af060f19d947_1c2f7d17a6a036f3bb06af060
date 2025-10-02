@@ -1,0 +1,164 @@
+{
+  "id": "readme_alma_core_v0.1.0",
+  "version": "0.1.0",
+  "fecha_actualizacion": "2025-06-11",
+  "autor": "Bird + ALMA",
+  "estado": "in_progress",
+  "linked_to": [
+    "alma_resist_manifest_v0.1.1.yaml",
+    "control_central/README.yaml",
+    "core/README.yaml",
+    "docs/README.yaml",
+    "meta/module.yaml"
+  ],
+  "proposito": {
+    "descripcion": "Carpeta raíz y núcleo operativo de ALMA_RESIST/ALMA_CORE.\nPunto de entrada para IA y humanos: contiene la estructura, los agentes, la lógica de operación y la documentación que gobierna el sistema.\nAquí se articulan nodos, agentes, memoria y trazabilidad: todo lo que ocurre en el ecosistema deja registro y sentido aquí.\n"
+  },
+  "estructura_general": {
+    "descripcion": "Estructura modular y auditable, cada carpeta cumple una función clara y es referenciable desde los agentes.\nLos README.yaml por subcarpeta explican propósito, relaciones, y lógica de integración. La raíz orquesta y enlaza todos los módulos.\n",
+    "modulos": [
+      {
+        "archivo": {
+          "proposito": "Almacenamiento de datasets, descargas y logs generales. Entrada/salida de datos crudos.",
+          "subcarpetas": [
+            {
+              "datasets": "Datos crudos del sistema o de proyectos. Su ubicación puede revisarse; ideal que solo contenga datasets y README.yaml."
+            },
+            {
+              "downloads": "Archivos descargados de internet, entrada externa al sistema."
+            },
+            {
+              "logs": "Logs históricos o genéricos, si no pertenecen a un módulo/agente específico."
+            }
+          ]
+        }
+      },
+      {
+        "config": {
+          "proposito": "Archivos de configuración global del sistema (settings.yaml, .env, etc).",
+          "notas": "Revisar si .env y settings.yaml son suficientes o si falta parametrización futura."
+        }
+      },
+      {
+        "control": {
+          "proposito": "Seguimiento de sprints activos y futuros. Eje de gestión de ciclos en alma_core.",
+          "notas": "Puede crecer según el uso de sprints; mantener los históricos aquí."
+        }
+      },
+      {
+        "control_central": {
+          "proposito": "Cerebro y memoria estratégica del ecosistema. Aloja todos los agentes principales y su documentación/bitácoras.",
+          "agentes": [
+            {
+              "centralesis": "Auditor General"
+            },
+            {
+              "kael": "Auditor CLI"
+            },
+            {
+              "emma": "Asesor Empresarial"
+            },
+            {
+              "alma": "Agente de Compañía"
+            },
+            {
+              "nero": "Integración Código"
+            },
+            {
+              "bird": "Espacio Personal Santi"
+            }
+          ],
+          "notas": "Todo nuevo agente/documento crítico se integra primero aquí."
+        }
+      },
+      {
+        "core": {
+          "proposito": "CLI, notebooks, scripts y tests base del ecosistema. Núcleo reutilizable y portable.",
+          "notas": "Toda función core que no es de agentes va aquí."
+        }
+      },
+      {
+        "docs": {
+          "proposito": "Documentación, bitácoras raíz y changelog del sistema.",
+          "subcarpetas": [
+            {
+              "history": "Registro de hitos históricos, versiones y decisiones críticas."
+            },
+            {
+              "journal": "Bitácoras y logs raíz; los principales estarán en control_central."
+            }
+          ]
+        }
+      },
+      {
+        "logs": {
+          "proposito": "Logs globales, generalmente de alto nivel o del sistema raíz.",
+          "notas": "Recomendada revisión periódica para evitar redundancia con logs/archivo o logs/agentes."
+        }
+      },
+      {
+        "meta": {
+          "proposito": "Definición y documentación modular del sistema (ej: module.yaml, manifiestos, etc).",
+          "notas": "Esqueleto para futuros módulos."
+        }
+      }
+    ]
+  },
+  "relacion_rag": {
+    "indexado": true,
+    "tipo": "core_manifest",
+    "linked_to": [
+      "manifest.yaml",
+      "idea_base_v0.0.1.yaml",
+      "idea_base_v0.0.2.yaml",
+      "manifest_v0.1.0.yaml",
+      "manifest_v0.1.1.yaml",
+      "README.yaml de cada módulo"
+    ],
+    "fix_metadata": true
+  },
+  "hashing_index": {
+    "descripcion": "Toda carpeta y archivo relevante es registrado en el sistema de hashing e indexación.\nSe audita integridad en cada commit relevante. Logs de hash/index son accesibles por módulo.\n"
+  },
+  "dependencias": [
+    {
+      "agents": "Centralesis, Kael, Emma, Alma, Nero, Bird"
+    },
+    {
+      "archivos críticos": "changelog.yaml, settings.yaml, module.yaml"
+    },
+    {
+      "scripts": "CLI y automatizaciones por módulo"
+    }
+  ],
+  "notas_operativas": {
+    "modularidad": "Cada sección del README puede actualizarse individualmente con fecha/version local.\nAl cambiar una sección, agregar changelog local y actualizar fecha.\n",
+    ".obsidian": "Carpeta de configuración de Obsidian (usada para navegación y enlaces internos).\nNo modificar manualmente salvo para ajustes en la navegación.\n",
+    ".stfolder": "Carpeta interna usada por herramientas de sincronización (como Syncthing).\nNo editar ni mover: su corrupción puede desincronizar nodos.\n",
+    ".gitignore": "Archivo que define qué archivos/carpeta no se suben al control de versiones.\nNo es documentación, pero puede citarse aquí para aclarar exclusiones de datos críticos.\n"
+  },
+  "proyeccion_futura": [
+    "Mantener el README.yaml como punto de entrada y navegación IA/humano.",
+    "Documentar y enlazar cada nuevo agente/módulo apenas se crea.",
+    "Fomentar la trazabilidad y autonomía crítica de agentes (cada IA navega y aprende según su scope).",
+    "Evolucionar la lógica modular para permitir escalabilidad y mantenimiento granular."
+  ],
+  "changelog": [
+    {
+      "fecha": "2025-06-11",
+      "version": "0.1.1",
+      "cambios": "Versión inicial modular, orientada a agentes IA y a auditores externos. Lógica seccionada y con soporte de actualización parcial."
+    },
+    {
+      "fecha": [
+        "próxima actualización"
+      ],
+      "version": [
+        "versión"
+      ],
+      "cambios": [
+        "resumen"
+      ]
+    }
+  ]
+}

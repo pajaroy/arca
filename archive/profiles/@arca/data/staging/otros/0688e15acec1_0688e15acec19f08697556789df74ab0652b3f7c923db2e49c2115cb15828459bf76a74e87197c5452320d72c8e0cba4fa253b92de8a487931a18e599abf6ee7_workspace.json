@@ -1,0 +1,210 @@
+{
+  "main": {
+    "id": "0bd83e905dd506f4",
+    "type": "split",
+    "children": [
+      {
+        "id": "1da8228f3d5c66c0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0b768f10f1770162",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "changelog.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "changelog"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "cc55ca04ae83e83e",
+    "type": "split",
+    "children": [
+      {
+        "id": "3c0752e8392a4594",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1e19b31adff98cf6",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de archivos"
+            }
+          },
+          {
+            "id": "2685cb6b997deac7",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Buscar"
+            }
+          },
+          {
+            "id": "af8ece8640daf1d2",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Marcadores"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 286.5
+  },
+  "right": {
+    "id": "ada514611c5f07b6",
+    "type": "split",
+    "children": [
+      {
+        "id": "46df3fc94ed76140",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f1ae76c8f60daecd",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "control_central/core/notebooks/readme_control_central.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Enlaces entrantes de readme_control_central"
+            }
+          },
+          {
+            "id": "df4773e01e7a7f2d",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "control_central/core/notebooks/readme_control_central.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Enlaces salientes de readme_control_central"
+            }
+          },
+          {
+            "id": "ce54d968ec0916fa",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etiquetas"
+            }
+          },
+          {
+            "id": "346ab4e19af85c40",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "control_central/core/notebooks/readme_control_central.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Esquema de readme_control_central"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir selector rápido": false,
+      "graph:Abrir vista gráfica": false,
+      "canvas:Crear nuevo lienzo": false,
+      "daily-notes:Abrir la nota de hoy": false,
+      "templates:Insertar plantilla": false,
+      "command-palette:Abrir paleta de comandos": false
+    }
+  },
+  "active": "0b768f10f1770162",
+  "lastOpenFiles": [
+    "control_central/core/notebooks/archivo/legacy_tests/kael_v0.0.1.md",
+    "control_central/bitacora/bitacora_viva.yaml",
+    "control_central/asesor-ia/core/notebooks/changelog_script/src/Sin título.md",
+    "control_central/asesor-ia/agentes/kael/core/notebooks/chat_madre_alma-resist_kael.yaml",
+    "control_central/asesor-ia/agentes/kael/core/notebooks/chat_madre_alma-resist_kael.yamla",
+    "control_central/asesor-ia/agentes/kael/core/notebooks/chat_madre_alma-resist_kael",
+    "tree_alma_resist.txt",
+    "control_central/cli/readme.md",
+    "control_central/cli/changelog/add_changelog_entry_v0.1.2.py",
+    "control_central/cli/bitacora/add_bitacora_entry_v0.1.2.py",
+    "control_central/cli/changelog",
+    "control_central/cli/bitacora",
+    "control_central/cli",
+    "control_central/asesor-ia/core/notebooks/bitacora_script/docs/prompt_add_bitacora_entry_v0.1.0.md",
+    "control_central/asesor-ia/core/notebooks/bitacora_script/docs/prompt_add_bitacora_entry_0.1.0.md",
+    "control_central/asesor-ia/core/notebooks/changelog_script/docs/add_changelog_entry_seed.md",
+    "control_central/asesor-ia/core/notebooks/changelog_script/docs/script_changelog_readme_automation.md",
+    "control_central/asesor-ia/core/notebooks/changelog_script/docs/add_changeloger_entry_prompt_2026-06-06.md",
+    "control_central/asesor-ia/core/notebooks/nero_seed_presentacion.md",
+    "control_central/asesor-ia/core/notebooks/copiloto_vs_code_seed_v0.2.md",
+    "control_central/asesor-ia/core/notebooks/copiloto_vs_code_seed_v0.1.md",
+    "control_central/core/notebooks/archivo/legacy_tests/kael_v1.md",
+    "control_central/asesor-ia/agentes/emma/docs/integracion_cristian.md",
+    "control_central/core/notebooks/archivo/legacy_tests/cargar_memorias_changelog_v2.md",
+    "control_central/core/notebooks/archivo/legacy_tests/prompt_maestro_cargador_memorias_v2.md",
+    "control_central/core/notebooks/flujo_de_agentes/idea_base.md",
+    "control_central/core/notebooks/memorias/README.md",
+    "control_central/asesor-ia/core/notebooks/copiloto_vs_code_seed.md",
+    "control_central/core/notebooks/comandos_utiles.md",
+    "control_central/asesor-ia/core/notebooks/bitacora_script/docs/prompt_add_bitacora_entry_01.md",
+    "control_central/asesor-ia/core/notebooks/bitacora_script/docs/prompt_auditoria_debug_add_bitacora_entry.md",
+    "control_central/asesor-ia/core/notebooks/bitacora_script/docs/prompt_auditoria_debug_bitacora_script.md",
+    "control_central/asesor-ia/core/notebooks/bitacora_script/docs/prompt_bitacora_script_01.md",
+    "control_central/asesor-ia/core/notebooks/convert_multiformato/src/README.md",
+    "control_central/asesor-ia/core/notebooks/convert_multiformato/docs/README.md",
+    "control_central/asesor-ia/core/notebooks/convert_multiformato/README.md"
+  ]
+}

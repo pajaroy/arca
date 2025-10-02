@@ -1,0 +1,92 @@
+# 📎 Apéndice Técnico – Instalación de Input Leap (CLI)
+
+**Fecha:** 2025-06-01  
+**Entorno:** Parrot OS (basado en Debian)  
+**Aplicación:** Control compartido de teclado y mouse entre ALMA_CORE y ALMA_RESIST  
+**Modo:** 100% terminal (sin entorno gráfico requerido para configuración)
+
+---
+
+## 📦 Paquetes requeridos
+
+```bash
+sudo apt update
+sudo apt install -y git cmake make g++ qt6-base-dev qt6-tools-dev \
+  libx11-dev libxext-dev libxrandr-dev libxinerama-dev libxtst-dev libxi-dev \
+  libssl-dev libavahi-compat-libdnssd-dev libcurl4-openssl-dev \
+  libgl1-mesa-dev pkg-config
+```
+
+---
+
+## 🧬 Clonado del repositorio
+
+```bash
+cd ~
+rm -rf input-leap
+git clone --recurse-submodules https://github.com/input-leap/input-leap.git
+cd input-leap
+mkdir build && cd build
+```
+
+---
+
+## ⚠️ Fix para compatibilidad con GCC >= 11
+
+```bash
+sed -i '1i#include <cstddef>' ../src/lib/platform/XKBUtil.cpp
+```
+
+---
+
+## ⚙️ Compilación
+
+```bash
+cmake ..
+make -j$(nproc)
+sudo make install
+```
+
+---
+
+## 🧠 Configuración del servidor (`alma-core`)
+
+Archivo: `~/.input-leap/input-leap.conf`
+
+```ini
+section: screens
+    alma-core:
+    alma-resist:
+end
+
+section: links
+    alma-core:
+        left = alma-resist
+    alma-resist:
+        right = alma-core
+end
+```
+
+---
+
+## 🚀 Comandos de ejecución
+
+### En ALMA_CORE (servidor):
+
+```bash
+input-leaps --no-tray --disable-crypto --name alma-core --config ~/.input-leap/input-leap.conf
+```
+
+### En ALMA_RESIST (cliente):
+
+```bash
+input-leapc --no-tray --disable-crypto --name alma-resist 192.168.1.33:24800
+```
+
+---
+
+## 📍 Observaciones
+
+- Requiere entorno X11 en ejecución (`startx`)
+- `--disable-crypto` evita handshake TLS innecesario
+- El nombre de host **debe coincidir** con el de la configuración (`hostname`)

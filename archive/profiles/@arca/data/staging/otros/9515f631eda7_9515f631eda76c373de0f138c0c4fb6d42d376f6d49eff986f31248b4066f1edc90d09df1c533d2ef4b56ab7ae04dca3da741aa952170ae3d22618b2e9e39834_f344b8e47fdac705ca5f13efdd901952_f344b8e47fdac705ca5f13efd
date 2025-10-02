@@ -1,0 +1,81 @@
+---
+module: metodologias/metodologia_interaccion_ia_v2
+type: core
+status: in_progress
+created: '2025-05-22'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🤖 Metodología de Interacción con IA – ALMA_RESIST (v2)
+
+📅 Versión: 2.0  
+📁 Archivo: metodologia_interaccion_ia_v2.md  
+🎯 Objetivo: Establecer una metodología operativa y automatizable para que la IA (Alma) pueda interactuar con el sistema ALMA_RESIST de forma segura, trazable y útil sin sobrecargar al operador humano.
+
+---
+
+## ✅ Cambios en esta versión
+
+- Se añadieron metadatos YAML como estándar obligatorio
+- Se formalizaron los modos de interacción IA
+- Se definieron acciones válidas por rol IA
+- Se incluyó validación progresiva y comandos CLI simulados
+
+---
+
+## 🧩 Metadatos requeridos
+
+```yaml
+---
+module: "core/cli"
+type: "core"
+status: "stable"
+created: "2025-05-21"
+tags: ["entrada", "modularidad"]
+linked_to: ["resumen", "loader"]
+sprint: "Sprint_2.2"
+version: "0.2"
+---
+```
+
+---
+
+## 🤖 Modos de Operación IA
+
+| Modo       | Acción Permitida                        | Interfaz     |
+|------------|------------------------------------------|--------------|
+| `lector`   | Leer y parsear documentos con YAML       | CLI / LLM    |
+| `auditor`  | Verificar formato, relaciones y faltantes| CLI / LLM    |
+| `asistente`| Sugerencias y generación sin escritura   | LLM / Chat   |
+| `operador` | Acciones sobre archivos (⚠ requiere validación) | CLI futura  |
+
+---
+
+## 📎 Acciones y Validación
+
+| Acción                            | Validación Requerida |
+|----------------------------------|-----------------------|
+| Leer documentos                   | ❌                    |
+| Generar resumen, changelog       | ✅                    |
+| Crear ADR                         | ✅                    |
+| Sugerir `linked_to`, `tags`      | ❌                    |
+| Editar documento                 | ✅ (script o humano)  |
+
+---
+
+## 🛠️ Soporte CLI esperado
+
+```bash
+alma-cli validate --module core/cli
+alma-cli suggest --for resumen.md
+alma-cli doc-init --module resumen
+```
+
+---
+
+## 🧾 Changelog
+
+- [v2.0] Incorporación de YAML unificado
+- Formalización de modos y niveles de interacción IA
+- Sugerencias de CLI para automatización futura

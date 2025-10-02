@@ -1,0 +1,101 @@
+```python
+# core/llm_server/utils/log_crypto.py
+import os
+import json
+import logging
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM, ChaCha20Poly1305
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from cryptography.hazmat.backends import default_backend
+import cpuinfo
+
+logger = logging.getLogger("alma_crypto")
+
+class CryptoEngine:
+    def __init__(self):
+        self.algorithm = self.detectar_algoritmo()
+        self.backend = default_backend()
+        logger.info(f"Algoritmo seleccionado: {self.algorithm}")
+
+    def detectar_algoritmo(self) -> str:
+        """Detecta el mejor algoritmo disponible según el hardware"""
+        try:
+            info = cpuinfo.get_cpu_info()
+            if 'aes' in info['flags'] and 'sse2' in info['flags']:
+                return 'AES-256-GCM'
+            return 'ChaCha20'
+        except Exception as e:
+            logger.warning(f"Error detección hardware: {str(e)} - Usando ChaCha20")
+            return 'ChaCha20'
+
+    def generar_clave(self, password: bytes = None, salt: bytes = None) -> bytes:
+        """Genera clave de 256 bits con derivación segura"""
+        if password:
+            if not salt:
+                salt = os.urandom(16)
+            kdf = PBKDF2HMAC(
+                algorithm=hashes.SHA3_256(),
+                length=32,
+                salt=salt,
+                iterations=100000,
+                backend=self.backend
+            )
+            return kdf.derive(password)
+        return os.urandom(32)
+
+    def _get_cipher(self, key: bytes):
+        """Factory de cifradores según algoritmo detectado"""
+        if self.algorithm == 'AES-256-GCM':
+            return AESGCM(key)
+        return ChaCha20Poly1305(key)
+
+    def encrypt_log(self, input_path: str, output_path: str, key: bytes = None) -> bytes:
+        """Cifra logs JSONL con autenticación integrada"""
+        try:
+            if not key:
+                key = self.generar_clave()
+
+            nonce = os.urandom(12) if self.algorithm == 'AES-256-GCM' else os.urandom(24)
+            cipher = self._get_cipher(key)
+
+            with open(input_path, 'rb') as f_in, open(output_path, 'wb') as f_out:
+                plaintext = f_in.read()
+                encrypted_data = cipher.encrypt(nonce, plaintext, None)
+                f_out.write(nonce + encrypted_data)
+
+            logger.debug(f"Log cifrado: {input_path} -> {output_path}")
+            return key
+        except Exception as e:
+            logger.error(f"Error cifrando log: {str(e)}")
+            raise
+
+    def decrypt_log(self, input_path: str, output_path: str, key: bytes) -> None:
+        """Descifra logs manteniendo estructura JSONL"""
+        try:
+            with open(input_path, 'rb') as f_in:
+                data = f_in.read()
+                nonce_len = 12 if self.algorithm == 'AES-256-GCM' else 24
+                nonce, ciphertext = data[:nonce_len], data[nonce_len:]
+
+                cipher = self._get_cipher(key)
+                decrypted_data = cipher.decrypt(nonce, ciphertext, None)
+
+                with open(output_path, 'wb') as f_out:
+                    f_out.write(decrypted_data)
+
+                logger.debug(f"Log descifrado: {input_path} -> {output_path}")
+        except Exception as e:
+            logger.error(f"Error descifrando log: {str(e)}")
+            raise
+
+    @staticmethod
+    def validar_log_cifrado(file_path: str) -> bool:
+        """Verifica integridad básica del log cifrado"""
+        try:
+            with open(file_path, 'rb') as f:
+                header = f.read(64)
+                return len(header) >= 12  # Nonce mínimo
+        except:
+            return False
+
+```

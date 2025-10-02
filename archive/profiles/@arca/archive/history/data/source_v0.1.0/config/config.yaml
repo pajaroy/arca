@@ -1,0 +1,45 @@
+# Configuración Base de Rutas @arca/.source
+
+paths:
+  base: "/home/bird/@arca"  # Ruta absoluta raíz
+  directorios:
+    origen: "${paths.base}/.source/og/archivo"      # Donde se depositan archivos nuevos
+    formato: "${paths.base}/.source/og/formato"     # Estructura organizada
+    history: "${paths.base}/.source/og/history"     # Backups diarios
+    database: "${paths.base}/.source/database"      # Metadatos estructurados
+    scripts: "${paths.base}/.source/scripts"        # Utilidades
+
+formatos:
+  categorias:
+    markdown: [".md", ".markdown"]
+    python: [".py"]
+    yaml: [".yaml", ".yml"]
+    datos: [".csv", ".parquet"]
+    sql: [".sql"]
+    otros: []  # Default para extensiones no listadas
+
+config:
+  log_level: "INFO"  # DEBUG, INFO, WARNING
+  max_backups: 7     # Días a conservar en history
+
+metadata:
+  campos_obligatorios:
+    - ruta
+    - nombre  
+    - tipo
+    - tamano_bytes
+    - fecha_mod
+    - hash_blake3
+  
+  campos_opcionales:
+    - palabras_clave
+    - contenido
+    - palabras_limpias
+  
+  formatos_especiales:
+    texto: [".md", ".txt", ".csv"]
+    binarios: [".pdf", ".docx"]
+    ignorar: [".tmp", ".bak"]
+
+hash:
+  principal: "blake3"

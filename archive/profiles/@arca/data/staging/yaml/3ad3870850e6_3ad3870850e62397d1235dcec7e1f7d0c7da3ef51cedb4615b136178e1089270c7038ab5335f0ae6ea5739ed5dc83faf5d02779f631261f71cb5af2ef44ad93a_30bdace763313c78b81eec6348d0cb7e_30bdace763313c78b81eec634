@@ -1,0 +1,14 @@
+version: 0.1.0
+script: cargar_memorias_v0.1.0.py
+autor: Santi
+fecha_creacion: 2025-06-08
+estado: cerrado
+descripcion: >
+  Script inicial para cargar memorias YAML y JSON sincronizadas dentro de ALMA_RESIST.
+  Esta versión fue la primera en ser usada operativamente para registrar memorias institucionales.
+  Incluye bloqueo de escritura, validación básica y backups automáticos.
+origen: importado como `cargar_memorias_v3.py` y renombrado para trazabilidad.
+ubicacion: control_central/cli/memorias/v0.1.0/
+notas:
+  - Será reemplazado por `v0.1.1` con soporte de validaciones avanzadas y CLI expandida.
+  - Esta versión queda cerrada y archivada como referencia del inicio del sistema.

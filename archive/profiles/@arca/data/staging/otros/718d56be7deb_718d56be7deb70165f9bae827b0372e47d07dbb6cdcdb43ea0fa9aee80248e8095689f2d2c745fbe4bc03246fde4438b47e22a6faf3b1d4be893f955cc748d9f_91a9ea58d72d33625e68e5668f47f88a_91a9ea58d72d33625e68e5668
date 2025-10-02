@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "tipo": "readme",
+  "schema": "almaresist.readme_v1",
+  "descripcion": "Registro de cambios detallado para la versión 0.2.0 del módulo de memorias.",
+  "estructura": [
+    {
+      "changelog.yaml": "Archivo principal con el historial de operaciones y migraciones relevantes."
+    }
+  ],
+  "tags": [
+    "memorias",
+    "changelog",
+    "versionado",
+    "auditoria"
+  ],
+  "linked_to": [
+    "../README.yaml"
+  ],
+  "responsable": "Equipo de Operaciones",
+  "hash_verificacion": "sha256:pending",
+  "historial": [
+    "changelog.yaml creado y actualizado progresivamente en v0.2.0"
+  ],
+  "last_modified": "2025-06-18T13:40:00Z",
+  "last_modified_by": "Kael"
+}

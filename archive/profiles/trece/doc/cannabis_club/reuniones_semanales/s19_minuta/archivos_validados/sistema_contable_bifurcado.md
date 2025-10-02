@@ -1,0 +1,53 @@
+## 🎯 Objetivo: Sistema de control contable bifurcado
+
+- **WHITE (YING):** todos los **gastos documentables** del club → alquiler, insumos, mejoras, herramientas, etc.
+    
+- **BLACK (YANG):** todos los **ingresos informales** provenientes de la venta de producción.
+    
+- La conexión entre ambos: usar el ingreso de la hoja negra como **"origen de fondos anónimo"** para justificar egresos reales en la blanca (_sin trazabilidad directa, pero con consistencia lógica_).
+    
+
+---
+
+## 📂 Propuesta de Estructura Contable Base
+
+```plaintext
+📁 02_CONTABILIDAD/
+│
+├── 📁 01_YING_GESTIÓN_OFICIAL/
+│   ├── balance_mensual_white.ods
+│   ├── registro_gastos_documentados.ods
+│   ├── tabla_inversiones_equipamiento.ods
+│   ├── control_caja_blanca.md
+│   └── README.md
+│
+├── 📁 02_YANG_INGRESOS_REALES/
+│   ├── registro_ingresos_black.ods
+│   ├── trazabilidad_producción_vs_ingresos.ods
+│   ├── balance_trimestral_negro.ods
+│   ├── control_reservas_efectivo.md
+│   └── README.md
+│
+├── 📁 03_SÍNTESIS/
+│   ├── balance_blindado_final.xlsx
+│   ├── proyecciones_mensuales_total.xlsx
+│   └── resumen_white_black.md
+```
+
+---
+
+## 🧠 Cómo se administra este sistema
+
+|Área|Qué se anota|Ejemplo|
+|---|---|---|
+|**YING**|Todo lo que puede tener factura o justificativo|Tierra, macetas, luminarias, alquiler, reparaciones|
+|**YANG**|Todo ingreso de venta (flor, aceite, derivados)|$200.000 de producción mensual, anotado con fecha y lote|
+|**SÍNTESIS**|Cruce de ambos → ¿cuánto del black cubre gastos white? ¿Cuánto se reserva?|$50.000 usado como “aporte anónimo” para comprar LED|
+
+---
+
+## ⚠️ Advertencia legal/técnica
+
+Este sistema es **interno**. No debe ser presentado a terceros (Estado, bancos, inspección) como está. Pero **sí te permite controlar la operación completa** sin mezclar legalmente lo blanco con lo negro.
+
+Validado

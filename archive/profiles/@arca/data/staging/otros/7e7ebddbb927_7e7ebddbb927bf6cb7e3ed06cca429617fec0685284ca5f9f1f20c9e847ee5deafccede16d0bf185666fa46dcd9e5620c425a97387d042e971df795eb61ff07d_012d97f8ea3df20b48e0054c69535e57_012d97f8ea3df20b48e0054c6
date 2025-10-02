@@ -1,0 +1,21 @@
+# 🧱 Plantilla – Registro de Decisión Arquitectónica
+
+### 🧩 Decisión: [Título breve]
+
+📅 Fecha: [dd/mm/aaaa]  
+🔍 Contexto:
+[Qué necesidad, problema o evaluación motivó esta decisión]
+
+🧠 Alternativas consideradas:
+[Qué otras opciones se evaluaron y por qué se descartaron]
+
+✅ Decisión final:
+[Qué se eligió, por qué, y cómo se implementará]
+
+📂 Impacto estructural:
+[A qué módulos afecta, qué dependencias crea o simplifica]
+
+🔗 Relacionado:
+- [idea_base.md]
+- [decisiones_arquitectonicas.md]
+- [changelog.md]

@@ -1,0 +1,7 @@
+este texto es para desarrollar el readme de la carpeta alma_core/contorl_central/ la cual es la encargada de llevar todo el control y el desarrollo del sistema y sus ideas, creadas por bird, auditadas por centralesis.
+la idea de esta carpeta es crear el sistema que seria alma_resist el cual es un sistema que llevaemos a cabo con un asistente con esteroides, la idea es crear una ia copiloto de la vida. y desde aqui desarrollaremos todo eso lo cual estara alojado en otro contexto.
+Esta carpeta cuenta con distintos modulos:
+ - agentes
+ - alma_empresa
+ - archivo
+ - 

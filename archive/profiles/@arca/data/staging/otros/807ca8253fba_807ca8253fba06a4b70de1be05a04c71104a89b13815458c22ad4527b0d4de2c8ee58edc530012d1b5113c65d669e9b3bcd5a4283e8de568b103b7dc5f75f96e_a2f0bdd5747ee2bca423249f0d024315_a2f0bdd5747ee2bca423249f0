@@ -1,0 +1,31 @@
+{
+  "version": "0.1.0",
+  "tipo": "readme",
+  "schema": "almaresist.readme_v1",
+  "descripcion": "Primera versión funcional del módulo de memorias. No incluye antifallos, ni sincronización dual.",
+  "estructura": [
+    {
+      "cargar_memorias_v0.1.0.py": "Script base de carga de memorias institucionales."
+    },
+    {
+      "prompt_cargar_memorias_v0.1.0.yaml": "Prompt original para DeepSeek."
+    }
+  ],
+  "tags": [
+    "memorias",
+    "cli",
+    "legacy",
+    "v0.1.0"
+  ],
+  "linked_to": [
+    "cargar_memorias_v0.1.0.py",
+    "prompt_cargar_memorias_v0.1.0.yaml"
+  ],
+  "responsable": "Equipo de Operaciones",
+  "hash_verificacion": "sha256:pending",
+  "historial": [
+    "Migrado a _legacy el 2025-06-18 por Kael"
+  ],
+  "last_modified": "2025-06-18T13:20:00Z",
+  "last_modified_by": "Kael"
+}

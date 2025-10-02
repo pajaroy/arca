@@ -1,0 +1,59 @@
+import os
+import json
+from datetime import datetime
+from reglas import REGLAS
+
+def validar_memorias():
+    errores_totales = []
+    log_file = "log_validacion.txt"
+    from pathlib import Path
+    memorias_dir = Path(__file__).parent.parent / "memorias_json"
+
+    open(log_file, "w").close()
+
+    for filename in os.listdir(memorias_dir):
+        if not filename.endswith(".json"):
+            continue
+        filepath = os.path.join(memorias_dir, filename)
+        with open(filepath, "r", encoding="utf-8") as f:
+            try:
+                data = json.load(f)
+            except Exception as e:
+                error_msg = f"ERROR JSON: {filename} - {str(e)}"
+                errores_totales.append(error_msg)
+                with open(log_file, "a") as log:
+                    log.write(f"[{datetime.now()}] {error_msg}\n")
+                print(error_msg)
+                continue
+
+        categoria = data.get("categoria")
+        tags = data.get("tags", [])
+
+        if not categoria:
+            error_msg = f"ERROR CAMPO: {filename} - Sin categoría"
+            errores_totales.append(error_msg)
+            with open(log_file, "a") as log:
+                log.write(f"[{datetime.now()}] {error_msg}\n")
+            print(error_msg)
+            continue
+
+        if categoria in REGLAS:
+            for validador in REGLAS[categoria]:
+                errores = validador(data)
+                if errores:
+                    for error in errores:
+                        error_msg = f"ERROR SEMÁNTICO: {filename} - {error}"
+                        errores_totales.append(error_msg)
+                        with open(log_file, "a") as log:
+                            log.write(f"[{datetime.now()}] {error_msg}\n")
+                        print(error_msg)
+    return errores_totales
+
+if __name__ == "__main__":
+    errores = validar_memorias()
+    if errores:
+        print(f"\n❌ Validación fallida con {len(errores)} errores")
+        exit(1)
+    else:
+        print("\n✅ Todas las memorias son válidas")
+        exit(0)

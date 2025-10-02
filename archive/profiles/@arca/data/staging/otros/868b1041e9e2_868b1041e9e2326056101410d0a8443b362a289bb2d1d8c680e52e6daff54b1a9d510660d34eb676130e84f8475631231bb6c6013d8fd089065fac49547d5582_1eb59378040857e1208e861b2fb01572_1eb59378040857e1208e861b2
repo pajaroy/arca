@@ -1,0 +1,20 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_fd1b42
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Loader
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:cf79484a10f3b4f2781eb435582cd67f0b0390baf5095cc5ca04c3a67123183e
+---
+# ALMA_LOADER - Procesamiento de memoria
+# TODO: Guardar output del LLM como memoria estructurada

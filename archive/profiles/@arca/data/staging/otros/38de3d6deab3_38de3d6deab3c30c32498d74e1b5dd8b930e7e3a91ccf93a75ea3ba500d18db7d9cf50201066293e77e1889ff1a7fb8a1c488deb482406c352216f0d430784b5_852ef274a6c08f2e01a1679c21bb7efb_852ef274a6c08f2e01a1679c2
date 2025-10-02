@@ -1,0 +1,33 @@
+
+## 🔜 Por Hacer
+
+- [ ] - alma_analytics.py 📊  
+	  - Día 1: Score por tag  
+	  - Día 3: Correlación #disciplina / #ganancia  
+	  - 🔗 Trading → `docs/analytics_flow.png`  
+	  - 🏷️ #avanzado
+- [ ] - Feature Extractor 🧬  
+	  - Día 2: Transformar JSON en vectores  
+	  - 🔗 `scripts/features.py`  
+	  - 🏷️ #avanzado
+- [ ] - Backups en la Nube ☁️  
+	  - Día 4-5: Script con rclone o Google API  
+	  - 🔗 General → `docs/backup_policy.md`  
+	  - 🏷️ #prioridad-alta
+
+
+## 🚧 En Progreso
+
+
+
+## ✅ Hecho
+
+
+
+
+
+%% kanban:settings
+```
+{"kanban-plugin":"board","list-collapse":[false,false,false]}
+```
+%%

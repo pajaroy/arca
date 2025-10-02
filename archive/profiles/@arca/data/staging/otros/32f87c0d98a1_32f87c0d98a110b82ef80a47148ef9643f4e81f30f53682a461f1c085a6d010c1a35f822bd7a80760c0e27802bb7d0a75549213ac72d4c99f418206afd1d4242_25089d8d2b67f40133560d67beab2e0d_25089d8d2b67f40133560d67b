@@ -1,0 +1,56 @@
+{
+  "id": "[obligatorio, id único, puede ser ruta relativa o slug tipo readme_core_v0.1.1]",
+  "version": "[versión actual, formato semántico o incremental]",
+  "tipo": "[readme, script, doc, manifest, etc]",
+  "schema": "[nombre.schema_v1]",
+  "fecha_creacion": "[YYYY-MM-DD]",
+  "fecha_actualizacion": "[YYYY-MM-DD]",
+  "autor": "[nombre o equipo]",
+  "estado": "[in_progress | stable | legacy | deprecated]",
+  "responsable": "[usuario o agente a cargo]",
+  "last_modified": "[YYYY-MM-DDTHH:MM:SSZ]",
+  "last_modified_by": "[nombre o alias]",
+  "hash_actual": "[sha256:xxxxxxx | pendiente]",
+  "anterior": "[ruta al anterior si aplica]",
+  "linked_to": [
+    "[otras rutas de readmes o manifest relacionados]"
+  ],
+  "tags": [
+    "[palabras_clave, categorías, etc]"
+  ],
+  "descripcion": "Breve resumen del propósito de la carpeta/módulo/script/documento.\nQué función cumple, a qué proyecto/nodo pertenece, y alcance.\nIdealmente, un párrafo o bullet points.\n",
+  "estructura": [
+    "[archivo_o_subcarpeta]: [breve descripcion de cada elemento clave]",
+    {
+      "src/": "Scripts principales"
+    },
+    {
+      "docs/": "Documentación y prompts"
+    },
+    {
+      "changelog/": "Historial de cambios"
+    }
+  ],
+  "uso_basico": "Ejemplo CLI, librería, notebook, etc.  \nEj: python3 script.py --ayuda\n",
+  "proposito": "Explicación larga, proyección futura o visión del módulo.\n",
+  "changelog": [
+    {
+      "fecha": "[YYYY-MM-DD]",
+      "version": "[x.y.z]",
+      "cambios": "- Lista de cambios, fixes, refactorizaciones, etc.\n"
+    }
+  ],
+  "notas_operativas": "Tips internos, links a documentación, advertencias, TODOs, dependencias externas, etc.\n",
+  "relacion_rag": null,
+  "dependencias": {
+    "scripts": [],
+    "archivos_criticos": [],
+    "ultima_revision": "[YYYY-MM-DD]"
+  },
+  "modulos_activos": [],
+  "hashing_index": {
+    "descripcion": "Cada carpeta y archivo relevante es registrado con SHA-256 y auditado en cada commit relevante.\n",
+    "ultima_revision": "[YYYY-MM-DD]"
+  },
+  "proyeccion_futura": []
+}

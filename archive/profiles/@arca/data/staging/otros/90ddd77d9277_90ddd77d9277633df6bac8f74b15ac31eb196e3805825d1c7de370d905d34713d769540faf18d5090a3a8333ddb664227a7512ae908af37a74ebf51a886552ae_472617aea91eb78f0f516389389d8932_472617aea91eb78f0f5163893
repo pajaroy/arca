@@ -1,0 +1,25 @@
+TAGS_REQUERIDOS = {
+    "TRD": {"#riesgo", "#estrategia", "#emociones"},
+    "HEALTH": {"#bienestar", "#rutina", "#suplementos"}
+}
+
+def validar_tags_TRD(data):
+    errores = []
+    tags = set(data["tags"])
+    requeridos = TAGS_REQUERIDOS["TRD"]
+    if not tags & requeridos:
+        errores.append(f"TRD requiere al menos un tag de: {', '.join(requeridos)}")
+    return errores
+
+def validar_tags_HEALTH(data):
+    errores = []
+    tags = set(data["tags"])
+    requeridos = TAGS_REQUERIDOS["HEALTH"]
+    if not tags & requeridos:
+        errores.append(f"HEALTH requiere al menos un tag de: {', '.join(requeridos)}")
+    return errores
+
+REGLAS = {
+    "TRD": [validar_tags_TRD],
+    "HEALTH": [validar_tags_HEALTH]
+}

@@ -1,0 +1,81 @@
+# 🌿 CANNABIRD – FUNDACIÓN Y ESTRUCTURA BASE
+
+Cannabird es la unidad productiva madre del ecosistema ALMA_RESIST. Funciona como ONG operativa con capacidad para sostener el sistema financiero, clínico y agrícola de toda la red. Su enfoque combina trabajo comunitario, producción sostenible, documentación legal y sistema económico híbrido (blanco, gris y black).
+
+---
+
+## 🧱 IDENTIDAD BASE
+
+- **Nombre:** Cannabird ONG (provisional)
+- **Misión:** Cultivo comunitario regenerativo, medicinal y educativo
+- **Rol:** ONG productiva + base empresarial implícita
+- **Diferencial:** Reloj suizo operativo para sostener estilo de vida + IA integrada
+- **Estado Legal:** Parcialmente formalizado (en proceso)
+
+---
+
+## 📁 ESTRUCTURA INICIAL
+
+```bash
+Cannabird/
+├── documentacion_oficial/       # Blanca / Exportable
+│   ├── balances/
+│   │   ├── ingresos/
+│   │   ├── egresos/
+│   │   └── mensual/
+│   ├── pacientes/
+│   ├── protocolos_cultivo/
+│   └── presentacion_institucional/
+├── contabilidad_interna/       # Gris / Control interno
+│   ├── movimientos_diarios/
+│   ├── entregas_no_formales/
+│   ├── pagos_equipos/
+│   └── log_mensual_interno/
+├── IA_cultivo/
+│   ├── seguimiento_sensores/
+│   └── alertas_automatizadas/
+├── cultivo/
+│   ├── flora/
+│   ├── vege/
+│   └── cronograma_trabajo/
+├── registro_clinico/
+│   ├── fichas_pacientes/
+│   └── evolucion_mensual/
+├── blackbox_financiera/        # ⚫ Personal / cifrado
+│   ├── ingresos_ocultos/
+│   ├── reinversion/
+│   └── estrategia_paralela/
+```
+
+---
+
+## 🚧 NECESIDADES CRÍTICAS
+
+| Categoría | Tareas urgentes |
+|----------|-----------------|
+| Legal    | Formalizar ONG, redactar estatuto operativo |
+| Blanca   | Generar balances mensuales PDF exportables |
+| Gris     | Controlar entregas y stock informal |
+| Negra    | Separar y encriptar finanzas paralelas |
+| IA       | Activar monitoreo sensores y alertas |
+| Clínico  | Registrar y documentar pacientes |
+
+---
+
+## 🔮 PROYECCIÓN
+
+1. Formalización como ONG con documentación oficial
+2. Activación de IA cultivo para seguimiento real
+3. Consolidación financiera para financiar ALMA_EMPRESA y 13CC
+4. Replicabilidad: Cannabird como modelo exportable
+
+---
+
+## 📌 UBICACIÓN SUGERIDA
+
+Este archivo debe guardarse como `README.md` dentro de la carpeta raíz de `Cannabird/`, como documento base institucional de la unidad.
+
+---
+
+Última actualización: 29-05-2025  
+Responsable de integración: Santiago Calvo

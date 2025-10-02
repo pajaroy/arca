@@ -1,0 +1,25 @@
+# ALMA_RESIST – Estado General del Sistema
+updated: 2025-06-01
+
+control_central:
+  status: activo
+  changelog_integrity: OK
+  sprint_actual: sincronización doble nodo
+  conflictos_activos: 0
+
+asesor-ia:
+  status: activo
+  ia_online:
+    - GPT: true
+    - DeepSeek: true
+  última_sincronización: 2025-06-01
+  conflictos_detectados: 0
+  versión: 1.0
+
+sistema_sync:
+  nodos_conectados:
+    - ALMA_CORE
+    - ALMA_RESIST
+  última_resincronización: 2025-06-01T06:00
+  estado_git: sincronizado
+  auto_backup: habilitado cada 24h

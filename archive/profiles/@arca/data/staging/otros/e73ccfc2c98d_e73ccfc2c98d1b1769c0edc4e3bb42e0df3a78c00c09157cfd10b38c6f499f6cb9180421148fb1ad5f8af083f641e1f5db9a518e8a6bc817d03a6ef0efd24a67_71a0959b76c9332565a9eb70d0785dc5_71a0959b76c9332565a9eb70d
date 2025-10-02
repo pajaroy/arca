@@ -1,0 +1,47 @@
+{
+    "nombre": "Autonom-IA System",
+    "version": "v0.1.1",
+    "descripcion": "Este es el sistema mejorado de Autonom-IA para el ecosistema ALMA_RESIST. Esta versi\u00f3n incluye optimizaciones en la toma de decisiones aut\u00f3nomas, la verificaci\u00f3n de integridad en tiempo real y mejoras en la sincronizaci\u00f3n y recuperaci\u00f3n ante fallos.",
+    "estructura_de_archivos": [
+        {
+            "nombre": "seed_autonom-ia_system_v0.1.1.yaml",
+            "descripcion": "El archivo base actualizado que describe la estructura, reglas y protocolos de Autonom-IA con mejoras en la autonom\u00eda y trazabilidad."
+        },
+        {
+            "nombre": "auditoria_seed_autonom-ia_system_v0.1.1.yaml",
+            "descripcion": "Auditor\u00eda actualizada del sistema Autonom-IA con recomendaciones implementadas y an\u00e1lisis mejorado."
+        },
+        {
+            "nombre": "README.yaml",
+            "descripcion": "Documento de introducci\u00f3n a la versi\u00f3n v0.1.1 del sistema Autonom-IA."
+        },
+        {
+            "nombre": "index.json",
+            "descripcion": "\u00cdndice centralizado actualizado con los metadatos y los hashes de todos los archivos y agentes."
+        }
+    ],
+    "funcionalidades_clave": [
+        "Autonom\u00eda avanzada: Los agentes pueden tomar decisiones m\u00e1s complejas basadas en metadatos y cambios de archivos, sin intervenci\u00f3n humana.",
+        "Verificaci\u00f3n de integridad: Los agentes validan la integridad de los archivos en tiempo real, asegurando que no haya alteraciones no autorizadas.",
+        "Sincronizaci\u00f3n de memorias mejorada: Las memorias personales de los agentes se sincronizan bidireccionalmente con verificaci\u00f3n de consistencia, mientras que las memorias institucionales son unidireccionales y centralizadas.",
+        "Navegaci\u00f3n aut\u00f3noma: Los agentes pueden explorar y modificar su espacio autorizado dentro de la estructura de carpetas, bajo reglas de gobernanza predefinidas."
+    ],
+    "estructura_del_sistema": [
+        {
+            "nombre": "agentes/",
+            "descripcion": "Contiene las subcarpetas de cada agente (KAEL, CENTRALESIS, EMMA, etc.), con sus archivos y registros."
+        },
+        {
+            "nombre": "bitacora/",
+            "descripcion": "Registros globales de todas las acciones realizadas por los agentes."
+        },
+        {
+            "nombre": "memorias/",
+            "descripcion": "Memorias personales y memorias institucionales."
+        },
+        {
+            "nombre": "index.json",
+            "descripcion": "\u00cdndice centralizado de metadatos de todos los archivos y agentes."
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+
+# ALMA_RESIST – Idea Base v0.0.5
+
+## 🧠 Resumen Ejecutivo
+
+La versión v0.0.5 consolida la evolución del sistema ALMA_RESIST con una estrategia clara de documentación segmentada para escalar colaboraciones humanas y con modelos de IA avanzados. Introduce tres núcleos de referencia: un **Whitepaper Conciso**, un **Prompt Técnico para IA**, y un **Archivo Base** como eje de implementación. Se mejora la arquitectura de carpetas, la mantenibilidad y la capacidad de contribución externa.
+
+
+### 🤖 2. Prompt Técnico para IA
+
+**Archivo:** `docs/PROMPT_TECNICO.md`
+
+**Objetivo:** Interactuar con IAs para tareas específicas bajo criterios precisos.
+
+**Estructura:**
+```markdown
+## Objetivo
+Generar o mejorar [componente X] de ALMA_RESIST bajo estas reglas:
+
+- Requisitos: Python 3.10+, sin conexión a internet.
+- Restricciones: No usar librerías no listadas en `dependencies.txt`.
+
+## Ejemplo de Input/Output
+```json
+{"query": "¿Qué modelo LLM usar para CPU antigua?", "response": "Mistral-7B GGUF 4-bit"}
+```
+
+## Formato esperado
+- Script funcional en Python
+- Documentación asociada en Markdown
+
+## Preguntas orientativas para IA
+- ¿Cómo optimizar inferencia en CPU ARM?
+- ¿Qué políticas de logging mínimo serían resilientes offline?
+
+
+
+## 📌 Beneficios de esta Versión
+
+- **Claridad documental:** Cada audiencia (técnico, IA, externo) tiene su canal claro.
+- **Interoperabilidad IA-humano:** El prompt técnico evita ambigüedades.
+- **Colaboración profesional:** Mecanismo de onboarding, PRs y versionamiento modular.
+- **Roadmap IA-ready:** Ideal para delegar tareas a GPT-4.5+ o automatizar mejoras.
+

@@ -1,0 +1,12 @@
+# Prompt para Feedback Sugerido por IA o Usuario
+
+Completar el archivo `feedback_sugerencia.yaml` con la siguiente estructura:
+
+- tipo: mejora, corrección, problema, idea
+- prioridad: alta, media, baja
+- módulo afectado
+- descripción breve y clara
+- fecha y origen (IA/humano)
+- estado sugerido de la recomendación
+
+Este formato permite recopilar, evaluar y priorizar aportes tanto humanos como de asistentes IA dentro de ALMA LIBRE.

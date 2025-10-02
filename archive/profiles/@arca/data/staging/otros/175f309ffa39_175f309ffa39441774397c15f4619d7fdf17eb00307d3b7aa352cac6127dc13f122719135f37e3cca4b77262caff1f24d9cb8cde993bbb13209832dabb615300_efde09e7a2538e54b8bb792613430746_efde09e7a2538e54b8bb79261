@@ -1,0 +1,49 @@
+# 📘 Whitepaper ALMA_LOADER v3.0
+
+## 1. Prólogo
+ALMA_LOADER nació como un asistente conversacional personal enfocado en el registro de experiencias diarias de trading, pero evolucionó hacia un sistema modular de memoria, autoanálisis y productividad expandida. Su propósito es permitir a humanos e IAs trabajar juntos en la organización, comprensión y mejora de la vida cotidiana mediante el procesamiento de memorias personales.
+
+## 2. ¿Qué es ALMA_LOADER?
+Es un sistema de gestión de memorias que transforma entradas en lenguaje natural en objetos estructurados, los valida, almacena, analiza y resume. Está diseñado para crecer: desde simples registros hasta análisis semánticos con embeddings, pasando por gamificación, automatización y retroalimentación inteligente.
+
+## 3. Casos de Uso
+- Diario de trading inteligente
+- Asistente de reflexión personal
+- Registro emocional y hábitos
+- Dashboard de decisiones + alertas
+- Base de datos para IA contextual
+- Entrenador de hábitos y rutinas
+
+## 4. Arquitectura Conceptual
+- Núcleo de procesamiento (NL → JSON)
+- Validación semántica (`schema_base.json`)
+- Almacenamiento modular (SQLite / FAISS / futuros motores)
+- Sistema de atención (router)
+- Vectorización semántica (embeddings)
+- Reglas inteligentes y generación de resúmenes
+
+## 5. Diagramas del Sistema
+```mermaid
+flowchart TD
+    input["🧑 Usuario o IA"] --> nl["core_nl.py"]
+    nl --> validador["validador.py"]
+    validador --> router["router_atencional.py"]
+    router --> storage["sqlite_storage / vector_storage"]
+    router --> resumenes["resumenes.py"]
+    resumenes --> output["📄 Markdown / Dashboard"]
+    storage --> analytics["alma_analytics.py"]
+    analytics --> output
+```
+
+## 6. Escalabilidad y Visión Futura
+- Vectorización total y enlaces entre memorias (grafos)
+- Reemplazo de SQLite por motores orientados a relaciones (Neo4j)
+- Integración con asistentes personales vía voz, API y web
+- Memorias multiusuario con capas de privacidad
+
+## 7. Recomendaciones de Integración
+- El sistema espera entradas en lenguaje natural o JSON válido
+- Cada módulo puede operar por separado (desacoplamiento limpio)
+- Ideal para integrarlo como backend de un asistente IA
+- DeepSeek, GPT o interfaces custom pueden usarlo como núcleo de memoria conversacional
+

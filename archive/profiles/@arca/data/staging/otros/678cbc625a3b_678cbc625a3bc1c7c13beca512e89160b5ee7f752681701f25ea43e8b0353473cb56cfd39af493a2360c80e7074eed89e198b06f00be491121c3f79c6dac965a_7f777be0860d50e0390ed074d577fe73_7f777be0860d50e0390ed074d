@@ -1,0 +1,19 @@
+
+# Bitácora Institucional: Bitácora personal de bird
+
+**Última modificación**: 2025-06-18T23:58:58Z por *bird*
+
+**Hash verificación**: `sha256:c3b079a641ca8fe9e36a3d7f89b0227be3171fcaa8cf51d95744ba8bf00ef24c`
+
+
+## Prueba post-configuración de log central (2025-06-19T00:37:19.118904+00:00)
+**ID**: `8b63064b-fd02-42d5-9972-65c050b956fb`  
+**Ejecutado por**: bird  
+**Estado**: registrado  
+**Motivo**: Validar configuración definitiva del entorno de logging centralizado
+
+### Descripción
+Bitácora cargada luego de reconfigurar el sistema para que todos los logs se archiven en alma_core/logs/bitacora_*.log
+
+**Tags**: `logging, bitacora, test, centralizacion`
+

@@ -1,0 +1,14 @@
+# 📦 log_crypto.py – Changelog
+
+## v0.0.0.4 – 2025-05-28
+
+### ✅ Cambios aplicados:
+- Fix en lógica de decrypt: validación correcta de `password` vs `key`
+- Unificación de argumentos: eliminación de ambigüedad
+- Tests actualizados para reflejar nueva interfaz (clave y salt correctamente pasados)
+- Todos los tests pasados exitosamente (16/16)
+
+### ⚠️ Pendiente:
+- Cambiar `on_event` de FastAPI por `lifespan`
+- Migrar campos deprecated de Pydantic V2 (sin impacto actual)
+

@@ -1,0 +1,12 @@
+# 游닍 Metodolog칤as Archivadas
+
+Este directorio contiene versiones anteriores de metodolog칤as utilizadas en el sistema ALMA_RESIST.
+
+Estas metodolog칤as han sido **reemplazadas**, **ajustadas** o **fusionadas** en versiones nuevas, pero se conservan para fines de trazabilidad hist칩rica, aprendizaje o documentaci칩n comparativa.
+
+## 游닄 Contenido
+
+- Versiones `v1` de estructuras modulares, interacci칩n IA, documentaci칩n, etc.
+- Pueden contener enfoques superados o parcialmente vigentes.
+- Todas est치n debidamente fechadas y marcadas como `deprecated`.
+

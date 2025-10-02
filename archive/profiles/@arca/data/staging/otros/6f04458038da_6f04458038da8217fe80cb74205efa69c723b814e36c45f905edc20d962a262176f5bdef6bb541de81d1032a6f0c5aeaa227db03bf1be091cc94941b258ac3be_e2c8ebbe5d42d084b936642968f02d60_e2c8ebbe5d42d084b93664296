@@ -1,0 +1,48 @@
+
+# 🧰 Comandos básicos para montaje y desmontaje de dispositivos en Linux
+
+## 1. Crear punto de montaje
+
+```bash
+mkdir -p /mnt/"nombre-del-directorio"
+```
+
+> 🔧 Crea un directorio donde se montará el dispositivo. Ejemplo común: `/mnt/pendrive`, `/mnt/arch_iso`, etc.
+
+
+## 3. Verificar contenido montado
+
+```bash
+ls /mnt/"nombre-del-directorio"
+```
+
+> 📂 Lista los archivos dentro del dispositivo montado.
+
+
+## 5. Tips y utilidades avanzadas
+
+### 🔍 Ver puntos montados y sistemas de archivos:
+
+```bash
+lsblk -f
+```
+
+o
+
+```bash
+findmnt
+```
+
+
+### 🧼 Forzar escritura de buffers (útil antes de desmontar):
+
+```bash
+sync
+```
+
+
+## 🧠 Recomendaciones
+
+- Siempre revisar con `lsblk -f` antes de montar o desmontar.
+- Si algo falla al montar, revisar con `dmesg | tail` para ver logs del kernel.
+- Para evitar confusiones, usar etiquetas (`LABEL=`) o UUIDs en vez de `/dev/sdX`.

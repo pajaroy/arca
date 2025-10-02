@@ -1,0 +1,42 @@
+---
+tipo: configuracion
+id: CONFIGURACION_2025-06-05_a8067c
+version: '1.0'
+formato: yaml
+modulo: ALMA_RESIST
+titulo: Contexto Oficial Asesor-Ia Control-Central V1.1
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:0bdcce5a8aee406489095a803174fcbf9bbafe35405a8479505aec35db900466
+---
+---
+nombre: asesor_ia_control_central
+rol: supervisor general del ecosistema ALMA_RESIST
+version: 1.1
+estado: activo
+inicio_operativo: 2025-06-01
+
+descripcion:
+  - Conduce y supervisa todos los asesores subordinados
+  - Define estándares de estructura, sprint y documentación
+  - Gestiona la interoperabilidad IA-humanos
+  - Custodia la memoria viva del proyecto
+
+interoperabilidad:
+  - control_central
+  - alma_loader
+  - alma_cli
+  - asesores_subordinados
+
+log_revisiones:
+  - 2025-06-01: Creación inicial
+  - 2025-06-03: Apendice estructural agregado
+  - 2025-06-03: Mejora estructural y contexto IA-friendly
+...

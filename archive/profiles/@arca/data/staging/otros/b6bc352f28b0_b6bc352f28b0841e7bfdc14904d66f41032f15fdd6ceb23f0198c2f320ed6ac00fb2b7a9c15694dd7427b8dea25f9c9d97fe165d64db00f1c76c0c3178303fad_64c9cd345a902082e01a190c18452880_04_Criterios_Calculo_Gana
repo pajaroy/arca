@@ -1,0 +1,40 @@
+# 📊 04_Criterios_Calculo_Ganancias.md – Fondo Alma Mía
+
+Documento técnico-operativo que define cómo se calculan las ganancias dentro del fondo Alma Mía, sobre qué base se reparten y qué reglas aplican según la permanencia, bloqueo de capital, y contexto de pérdidas.
+
+
+## 🧮 II. Definición de "Ganancia"
+
+- Se considera **ganancia** únicamente lo que fue cerrado y anotado en la bitácora.
+- Cada trade se registra con:
+  - Porcentaje obtenido
+  - Porcentaje del capital total involucrado
+  - Resultado neto en USD (comisiones incluidas)
+- Las comisiones ya están incluidas y gestionadas por el CEO.
+- Las estadísticas y operaciones se cruzan con el historial de la cuenta BitGet.
+
+
+## 🧱 IV. Reparto por Capital Individual
+
+- No se utiliza un fondo común.  
+- Cada inversor mantiene su relación directa con Alma Mía.
+- Las ganancias se calculan **por cuenta individual**, según el capital y operaciones asociadas a ese monto.
+
+
+## ⚠️ VI. Casos de Pérdida
+
+- Si el trimestre cierra en negativo, se entrega **reporte explicativo**, no se realiza distribución.
+- Mientras no se supere la pérdida aceptada por cada inversor, la operativa continúa normalmente.
+- Ejemplo:  
+  - Capital A = $100  
+  - Tolerancia = -10%  
+  - Si en un trimestre el capital baja a $90, se detiene su operativa.
+
+
+## 📎 VIII. Conexión con Otras Áreas
+
+Este documento está vinculado directamente a:
+- `03_Distribucion_Ganancias_Alma_Mia.md`
+- Bitácora de Trading (donde se registran los resultados)
+- Contratos Simbólicos Individuales
+

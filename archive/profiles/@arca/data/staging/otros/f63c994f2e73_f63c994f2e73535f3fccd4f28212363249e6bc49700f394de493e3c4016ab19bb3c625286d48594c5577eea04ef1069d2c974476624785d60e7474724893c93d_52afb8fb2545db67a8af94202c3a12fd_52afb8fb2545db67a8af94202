@@ -1,0 +1,9 @@
+# 💼 Fondo de Inversión – Alma Mía
+
+Este módulo forma parte del sistema ALMA LIBRE y está dedicado exclusivamente al desarrollo del fondo de inversión personal y colectivo **“Alma Mía”**.
+
+## 📌 Propósito
+Gestionar capital propio y simulado, con posibilidad de escalar a inversiones externas en un futuro. Incluye visión emocional, organizativa y estratégica.
+
+## 📂 Estructura
+- `Prompts_Empresariales/`: Ideas base, estructuras estratégicas y visión fundacional del proyecto.

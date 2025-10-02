@@ -1,0 +1,59 @@
+---
+module: prompts/context_tracker_request
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🧠 Solicitud de Implementación – `context_tracker.py` – Sprint 2.6 – ALMA_RESIST
+
+## 🎯 Objetivo
+
+Implementar el módulo `context_tracker.py`, encargado de registrar y mantener un historial contextual estructurado de interacciones en el servidor ALMA_RESIST. Este historial será clave para futuras reflexiones automáticas, reconstrucción de diálogos y razonamiento semántico.
+
+---
+
+## 📘 Requisitos
+
+- El archivo se ubicará en: `core/llm_server/integration/context_tracker.py`
+
+### Clase: `ContextTracker`
+
+- Métodos requeridos:
+  - `track_interaction(prompt: str, response: str, metadata: dict) -> dict`  
+    Registra una interacción única y devuelve el objeto almacenado.
+  - `get_history(n: int = 10) -> list[dict]`  
+    Recupera las últimas `n` interacciones almacenadas.
+  - `clear_history() -> None`  
+    Elimina todo el historial actual.
+
+### Especificaciones:
+- Almacenar interacciones como objetos `{ prompt, response, metadata, timestamp }`
+- Guardar todo en un archivo local `context_history.jsonl` (un JSON por línea)
+- Validar estructura antes de guardar
+- Agregar timestamps ISO 8601 automáticamente
+- Soportar recuperación eficiente y segura del historial
+- Preparado para extender a almacenamiento cifrado o base de datos más adelante
+
+---
+
+## 🧪 Ejemplo de uso
+
+```python
+from integration.context_tracker import ContextTracker
+
+tracker = ContextTracker()
+tracker.track_interaction("¿Qué es la resiliencia?", "La capacidad de...", {"modelo": "mistral"})
+historial = tracker.get_history(5)
+```
+
+---
+
+## 📎 Contexto
+
+- Sprint: 2.6 – LLM Server
+- Complementa: `log_writer`, `transport_layer`, `memory_graph`
+- Fundacional para el razonamiento a largo plazo en ALMA
+

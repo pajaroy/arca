@@ -1,0 +1,27 @@
+{
+  "metadata": {
+    "version": "0.2.0",
+    "tipo": "readme",
+    "schema": "almaresist.readme_v1",
+    "descripcion": "Scripts fuente del módulo bitácora v0.2.0 para el CLI institucional. Deben usarse únicamente en entornos validados y con respaldo automático.",
+    "estructura": "metadata + contenido",
+    "tags": [
+      "bitacora",
+      "cli",
+      "src",
+      "v0.2.0",
+      "python"
+    ],
+    "linked_to": [],
+    "responsable": "Equipo de Operaciones",
+    "hash_verificacion": "",
+    "historial": [],
+    "last_modified": "2025-06-17T10:20:00Z",
+    "last_modified_by": "Kael"
+  },
+  "contenido": [
+    {
+      "add_bitacora_entry_v0.2.0.py": "Script CLI principal para carga de entradas en la bitácora institucional, con validación, backups y sincronización triple-formato."
+    }
+  ]
+}

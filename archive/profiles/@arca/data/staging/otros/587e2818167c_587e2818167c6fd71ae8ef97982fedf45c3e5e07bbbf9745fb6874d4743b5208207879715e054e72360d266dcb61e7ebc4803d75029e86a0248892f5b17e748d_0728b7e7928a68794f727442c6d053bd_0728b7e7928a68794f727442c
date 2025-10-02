@@ -1,0 +1,39 @@
+# 🧠 ALMA SYNC – Núcleo de Gestión de Memorias
+
+Este módulo contiene todos los scripts de terminal del sistema ALMA LIBRE.  
+Desde aquí se gestionan todas las **memorias**, **resúmenes**, **ediciones** y **backups**.
+
+
+## 🛠 Comandos disponibles
+
+### ✍️ Crear memoria
+```bash
+python alma_sync.py write --titulo "Mi título" --tipo "Emocional" --bloque "1" --seccion "1.1" --contenido "Texto aquí"
+```
+
+### 📖 Leer memorias
+```bash
+python alma_sync.py read --bloque "1" --tipo "Emocional"
+```
+
+### ✏️ Editar memoria
+```bash
+python alma_sync.py edit --id 5 --titulo "Nuevo título" --contenido "Contenido actualizado"
+```
+
+### 🧪 Validar integridad
+```bash
+python alma_sync.py validate
+```
+
+### 💾 Backup
+```bash
+python alma_sync.py backup
+```
+
+
+## 📬 Futuro (Fase 2+)
+- Integración con Ollama (IA local)
+- Procesamiento semántico con DeepSeek
+- Interfaz visual en terminal (TUI)
+- Conexión con Notion u Obsidian

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "MEM_DOC_001",
+    "tipo": "documentación",
+    "fecha": "2025-06-15",
+    "modulo": "sistema",
+    "tema": "carga JSON",
+    "status": "activo",
+    "responsable": "bird",
+    "tags": ["manual", "json"],
+    "resumen": "Cómo cargar memorias desde archivos JSON",
+    "contenido": "Ejemplo completo:\n\npython3 cargar_memorias_v2.py \\\n  --input /ruta/memorias.json \\\n  --dest /ruta/destino.json\n\nRequisitos:\n- Todos los campos obligatorios\n- IDs únicos\n- Formato JSON válido"
+  }
+]

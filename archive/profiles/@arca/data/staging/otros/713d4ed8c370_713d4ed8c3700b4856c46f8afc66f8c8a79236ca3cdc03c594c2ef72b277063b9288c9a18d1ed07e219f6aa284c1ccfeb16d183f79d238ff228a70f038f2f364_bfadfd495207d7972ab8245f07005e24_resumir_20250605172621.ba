@@ -1,0 +1,6 @@
+def run(args):
+    """Resume texto proporcionado"""
+    if not args:
+        print("Error: Uso correcto -> !resumir \"texto\"")
+        return
+    print(f"Resumiendo: '{args}'... (simulado)")

@@ -1,0 +1,3 @@
+def run(args):
+    # El comando !salir se maneja directamente en cli.py
+    pass

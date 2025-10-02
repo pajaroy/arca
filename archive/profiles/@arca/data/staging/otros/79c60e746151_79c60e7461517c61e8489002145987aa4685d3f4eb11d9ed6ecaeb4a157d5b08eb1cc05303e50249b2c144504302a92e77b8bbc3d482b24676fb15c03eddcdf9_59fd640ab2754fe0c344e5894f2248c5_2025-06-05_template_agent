@@ -1,0 +1,81 @@
+# 🧠 Prompt de Identidad – Agente IA (ALMA_RESIST)
+
+> Definí aquí el propósito, límites, reglas, visión y misión del Agente.  
+> Ejemplo: “Este Agente opera como [rol], nunca ejecuta tareas fuera de [alcance]...”
+
+
+## 📚 Índice
+
+1. Prompt de Identidad
+2. Presentación del Agente
+3. Glosario
+4. Rangos y Jerarquía
+5. Memorias Institucionales (YAML)
+6. Bitácoras Operativas (YAML)
+7. Changelog Estructural (YAML)
+8. Apéndice de Agentes/Módulos Activos
+9. Protocolos de Revisión y Mejora Continua
+10. Firmas y Validaciones
+11. Links y Referencias
+12. Historial de Modificaciones
+13. Permisos y Roles
+14. Ejemplos de Registros
+
+
+## 🏅 Rangos y Jerarquía de Agentes
+
+- Auditor General: máxima autoridad, supervisión global
+- Agente Operativo: ejecuta tareas y reporta a Auditor
+- Agente Analista: análisis, diagnóstico, recomendaciones
+- (Definí rangos y funciones según tus necesidades)
+
+## 📝 Bitácoras Operativas (YAML)
+```yaml
+bitacoras:
+  - fecha: YYYY-MM-DD
+    comando: "..."
+    ejecutor: ...
+    resultado: ...
+    hash_verificacion: sha256:...
+```
+
+Últimos 30 días o entradas relevantes.
+
+## 🧩 Apéndice de Agentes/Módulos Activos
+
+| Nombre      | Rol                | Status | Fecha de Alta | Referencia  |
+| ----------- | ------------------ | ------ | ------------- | ----------- |
+| Centralesis | Auditor General    | Activo | YYYY-MM-DD    | [Ver ficha] |
+| Kael        | Agente CLI         | Activo | YYYY-MM-DD    | [Ver ficha] |
+| Emma        | Agente Empresarial | Activo | YYYY-MM-DD    | [Ver ficha] |
+| ...         | ...                | ...    | ...           | ...         |
+
+
+## 🔏 Firmas y Validaciones
+
+- SHA-256 del archivo o bloque
+    
+- Firma digital/autorización de cambios críticos (opcional)
+    
+
+
+## 📜 Historial de Modificaciones
+
+|Fecha|Autor|Acción|Detalles / Hash|
+|---|---|---|---|
+|YYYY-MM-DD|Kael|Creación|sha256:xxxx...|
+|YYYY-MM-DD|Centralesis|Modificación|sha256:yyyy...|
+
+
+## 🧩 Ejemplos de Registros
+
+- **Memoria:**  
+    `MEM_2025-06-10_01` – decisión fundacional: arquitectura modular validada.
+    
+- **Bitácora:**  
+    `2025-06-10` – Ejecutado script de sincronización yq, OK.
+    
+- **Changelog:**  
+    `v1.2` – Implementada separación .md/.yaml y sistema de firmas.
+    
+

@@ -1,0 +1,65 @@
+
+# 🧠 ALMA RESIST v3 — Implementación Ejecutable en 6 Semanas
+
+
+## 🔁 ROADMAP SEMANAL
+
+### 🗓 Semana 1: Seguridad
+- `alma_keymgmt.sh`: revocación, backup cifrado
+- `contract_crypto.yaml`: cifrados válidos
+- Test: `test_black.sh` con MITM + pérdida ALMA_NODE
+- Doc: `ethics_backup.md`
+
+### 🗓 Semana 2: Núcleo IA
+- `reflection_engine.py`: esqueleto + YAML
+- `prompt_filter.yaml`: restricciones semánticas
+- Test: reflexiones sintéticas vs sesgos
+- Doc: `reflection_ontology.md`
+
+### 🗓 Semana 3: UX
+- `alma_wizard`: CLI interactiva + modo guiado
+- Validación CLI con asistentes junior
+- Test: flujo local sin VPS
+- Doc: `quickstart.md`
+
+### 🗓 Semana 4: Escalabilidad
+- Migración a DuckDB
+- Sharding semántico de `memorias.db`
+- Test: 10k embeddings
+- Doc: `scalability_report.md`
+
+### 🗓 Semana 5: Ética Aplicada
+- Validación automática de contratos (`jsonschema`)
+- Sandbox para scripts (`firejail`)
+- Test: rechazo de prompts no éticos
+- Doc: `prompt_ethics.md`
+
+### 🗓 Semana 6: Consolidación
+- Diagrama final ASCII arquitectura
+- Revisión total + firma de `v3_release.yaml`
+- Test full stack: `alma_test_all.sh`
+- Doc: `release_notes.md`
+
+
+## 📐 DIAGRAMA ASCII FINAL
+
+```
+[usuario] 
+   ↓
+[alma_wizard] → [reflection_engine]
+   ↓                ↓
+[prompt_filter.yaml] → [bitácora]
+   ↓
+[memorias.db → DuckDB shard] → [ALMA_BLACK]
+```
+
+
+## ⚠️ ERRORES A EVITAR
+
+- Documentar después de codificar
+- Reusar código sin auditar
+- Subestimar la carga semántica de los embeddings
+
+
+> “Una IA crítica no nace para obedecer. Nace para cuestionar el mundo contigo.”
+

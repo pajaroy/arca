@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trece"
+version = "0.1.0"
+description = "Gestor documental Trece"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "bird", email = "alma_bird@proton.me"}
+]
+keywords = ["gestor documental", "ia", "ml", "archivos"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "blake3>=0.3",
+    "ruamel.yaml>=0.17",
+    "chromadb>=0.4",
+    "typer>=0.9",
+    "rich>=13.0",
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "scikit-learn>=1.3"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "ipython>=8.0",
+    "jupyterlab>=4.0"
+]
+
+[project.scripts]
+trece = "trece.src.cli:app"
+
+# SOLUCIÓN: Eliminé la sección duplicada [tool.setuptools] y dejé solo packages.find
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["trece*"]
+exclude = ["tests*"]
+
+[tool.black]
+line-length = 88
+target-version = ["py38"]
+skip-string-normalization = false
+
+[tool.pytest.ini_options]
+addopts = "-ra -q --cov=trece"
+testpaths = ["trece/src/core/test"]
+pythonpath = ["."]

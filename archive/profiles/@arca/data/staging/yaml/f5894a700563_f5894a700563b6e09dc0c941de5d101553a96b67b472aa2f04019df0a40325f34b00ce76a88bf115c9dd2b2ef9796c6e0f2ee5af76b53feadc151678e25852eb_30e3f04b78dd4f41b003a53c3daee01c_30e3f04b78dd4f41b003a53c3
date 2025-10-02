@@ -1,0 +1,14 @@
+prompt: |
+  Generá un script Python llamado 'add_bitacora_entry.py' para ALMA_RESIST. El objetivo es automatizar el agregado de entradas estructuradas a la bitácora viva (YAML) institucional, bajo los siguientes requisitos:
+
+  - El script agrega una nueva entrada (evento) en la bitácora YAML existente.
+  - Valida la estructura del YAML antes y después de la adición.
+  - Registra campos mínimos: fecha, accion, descripcion, motivo, ejecutado_por, estado.
+  - Soporta argumentos CLI (ejemplo: --accion, --descripcion, --motivo, etc.).
+  - Realiza backup automático del archivo antes de cada modificación.
+  - El código es legible, modular y con comentarios claros.
+  - No requiere dependencias externas innecesarias (sólo PyYAML).
+  - Las mejoras sugeridas (multiformato, templates, rollback, etc.) deben quedar como TODO o comentarios para desarrollo futuro.
+  - Compatible con Python 3.8+.
+
+  Producí el código completo, limpio y profesional, listo para guardar como 'add_bitacora_entry.py'.

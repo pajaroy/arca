@@ -1,0 +1,194 @@
+
+# 99_Sync/alma_chat.py
+import sqlite3
+import os
+import sys
+from datetime import datetime
+
+DB_PATH = os.path.join(os.path.dirname(__file__), "memorias.db")
+BACKUP_DIR = os.path.join(os.path.dirname(__file__), "backups_chat")
+
+# ----------------------------
+# Funciones de base de datos
+# ----------------------------
+
+def crear_tabla_si_no_existe():
+    """Crea la estructura básica de la tabla de memorias"""
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS memorias (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                fecha TEXT DEFAULT CURRENT_TIMESTAMP,
+                titulo TEXT NOT NULL,
+                contenido TEXT NOT NULL,
+                tipo TEXT NOT NULL
+            )
+        ''')
+        
+        conn.commit()
+    except sqlite3.Error as e:
+        print(f"Error de base de datos: {str(e)}")
+    finally:
+        conn.close()
+
+# ----------------------------
+# Funciones de backup
+# ----------------------------
+
+def hacer_backup_diario():
+    """Crea un backup diario en formato SQL"""
+    try:
+        if not os.path.exists(BACKUP_DIR):
+            os.makedirs(BACKUP_DIR)
+        
+        fecha_actual = datetime.now().strftime("%Y-%m-%d")
+        backup_path = os.path.join(BACKUP_DIR, f"chat_memorias_{fecha_actual}.sql")
+        
+        conn = sqlite3.connect(DB_PATH)
+        
+        with open(backup_path, 'w') as f:
+            for line in conn.iterdump():
+                f.write(f"{line}\n")
+                
+        print(f"\n🔒 Backup diario creado: {backup_path}")
+        
+    except Exception as e:
+        print(f"Error en backup: {str(e)}")
+    finally:
+        conn.close()
+
+# ----------------------------
+# Funciones principales
+# ----------------------------
+
+def guardar_memoria(titulo: str, contenido: str, tipo: str):
+    """Guarda una memoria en la base de datos"""
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        
+        cursor.execute('''
+            INSERT INTO memorias (titulo, contenido, tipo)
+            VALUES (?, ?, ?)
+        ''', (titulo, contenido, tipo))
+        
+        conn.commit()
+    except sqlite3.IntegrityError:
+        print("⚠️ Memoria duplicada, no se guardará")
+    finally:
+        conn.close()
+
+def procesar_comando_guardar(mensaje: str):
+    """Procesa el comando /guardar"""
+    try:
+        if '→' not in mensaje:
+            raise ValueError("Formato incorrecto")
+            
+        partes = mensaje.split('→', 1)
+        titulo = partes[0].strip()
+        contenido = partes[1].strip()
+        
+        guardar_memoria(titulo, contenido, "manual")
+        print(f"📥 Memoria guardada: {titulo}")
+        
+    except Exception as e:
+        print(f"Error: {str(e)}. Usa: /guardar [TITULO] → [CONTENIDO]")
+
+def procesar_comando_leer(parametro: str):
+    """Procesa el comando /leer con búsqueda insensible a mayúsculas"""
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        
+        # Determinar si es fecha (YYYY-MM-DD)
+        if len(parametro) == 10 and parametro.count('-') == 2:
+            query = "SELECT * FROM memorias WHERE date(fecha) = ?"
+            params = (parametro,)
+        else:
+            query = '''
+                SELECT * FROM memorias 
+                WHERE LOWER(titulo) LIKE ? OR LOWER(contenido) LIKE ?
+            '''
+            parametro_lower = parametro.lower()
+            params = (f"%{parametro_lower}%", f"%{parametro_lower}%")
+        
+        cursor.execute(query, params)
+        resultados = cursor.fetchall()
+        
+        if not resultados:
+            print("🔍 No se encontraron memorias")
+            return
+            
+        print("
+📚 Memorias encontradas:")
+        for row in resultados:
+            id_ = row[0]
+            fecha = row[1] if row[1] else "Sin fecha"
+            titulo = row[2] if row[2] else "Sin título"
+            contenido = row[3] if row[3] else "Sin contenido"
+            tipo = row[4] if row[4] else "Sin tipo"
+            
+            print(f"
+[{id_}] {titulo} ({tipo})")
+            print(f"📅 {fecha}")
+            print(f"📝 {contenido}")
+            
+    except sqlite3.Error as e:
+        print(f"Error de base de datos: {str(e)}")
+    finally:
+        conn.close()
+
+# ----------------------------
+# Bucle principal del chat
+# ----------------------------
+
+def chat_loop():
+    """Bucle interactivo del chat ALMA"""
+    crear_tabla_si_no_existe()
+    hacer_backup_diario()
+    
+    print("\n=== MODO CHAT ALMA LIBRE ===")
+    print("Escribe tu mensaje (/salir para terminar)\n")
+    
+    ultimo_mensaje = None
+    
+    while True:
+        try:
+            mensaje = input("[YO] ").strip()
+            
+            if mensaje.lower() == "/salir":
+                print("\n💾 Conversación guardada en memorias.db")
+                break
+                
+            if not mensaje:
+                continue
+                
+            # Evitar mensajes repetidos consecutivos
+            if mensaje == ultimo_mensaje:
+                print("⚠️ Mensaje idéntico al anterior, no se guardará")
+                continue
+                
+            ultimo_mensaje = mensaje
+            
+            # Procesar comandos especiales
+            if mensaje.startswith('/guardar'):
+                procesar_comando_guardar(mensaje[8:].strip())
+            elif mensaje.startswith('/leer'):
+                parametro = mensaje[5:].strip()
+                if not parametro:
+                    print("⚠️ Especifica una palabra clave o fecha")
+                else:
+                    procesar_comando_leer(parametro)
+            else:
+                # Guardar mensaje normal del chat
+                guardar_memoria("Chat", mensaje, "chat")
+                
+        except KeyboardInterrupt:
+            print("\n\n🔌 Conexión interrumpida")
+            break
+
+if __name__ == "__main__":
+    chat_loop()

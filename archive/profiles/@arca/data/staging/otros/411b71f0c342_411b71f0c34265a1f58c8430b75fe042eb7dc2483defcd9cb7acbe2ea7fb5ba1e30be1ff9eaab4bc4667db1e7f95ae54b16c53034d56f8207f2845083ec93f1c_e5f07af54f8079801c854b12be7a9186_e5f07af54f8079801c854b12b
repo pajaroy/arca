@@ -1,0 +1,24 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_9ee346
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Resumir
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:99fb4336ddd58e82910cfdcb3009167884023b2e198eca9f94d13cc329330167
+---
+def run(args):
+    """Resume texto proporcionado"""
+    if not args:
+        print("Error: Uso correcto -> !resumir \"texto\"")
+        return
+    print(f"Resumiendo: '{args}'... (simulado)")

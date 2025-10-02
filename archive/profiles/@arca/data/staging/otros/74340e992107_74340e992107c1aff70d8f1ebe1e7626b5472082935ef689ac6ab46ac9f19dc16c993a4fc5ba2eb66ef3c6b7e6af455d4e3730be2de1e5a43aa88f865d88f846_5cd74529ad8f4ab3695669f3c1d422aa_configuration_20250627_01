@@ -1,0 +1,84 @@
+{ config, pkgs, ... }:
+
+{
+  imports =
+    [ 
+      ./hardware-configuration.nix
+    ];
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # Habilitar desbloqueo LUKS en /dev/sda3
+  boot.initrd.luks.devices."alma_crypt".device = "/dev/sda3";
+
+  # Filesystem raíz
+  fileSystems."/" = {
+    device = "/dev/mapper/alma_crypt";
+    fsType = "btrfs";
+  };
+
+  # /boot sin cifrado
+#  fileSystems."/boot" = {
+#    device = "/dev/sda2";
+#    fsType = "vfat";
+#  };
+
+  # Swap si es necesario
+  swapDevices = [{
+    device = "/dev/sda4"; # (podés ajustarlo si lo recreás)
+  }];
+
+  networking.hostName = "alma-resist";
+  networking.networkmanager.enable = true;
+
+  # Idioma y teclado
+  i18n.defaultLocale = "en_US.UTF-8";
+  console.keyMap = "la-latin1";
+
+  # Zona horaria
+  time.timeZone = "America/Argentina/Buenos_Aires";
+
+  # Usuarios
+  users.users.alma = {
+    isNormalUser = true;
+    description = "Usuario ALMA";
+    extraGroups = [ "wheel" "networkmanager" ];
+    shell = pkgs.zsh;
+    password = "umamia"; # solo para debug, cambiar después
+  };
+
+  # Entorno gráfico mínimo (XFCE)
+  services.xserver = {
+    enable = true;
+    desktopManager.xfce.enable = true;
+    displayManager.lightdm.enable = true;
+    xkb = {
+      layout = "latam";
+      variant = "";
+    };
+  };
+
+  # Programas y herramientas
+  environment.systemPackages = with pkgs; [
+    tree
+    p7zip
+    unzip
+    zip
+    firefox
+    vscode
+    obsidian
+    tailscale
+    zsh
+  ];
+  programs.zsh.enable = true;
+  nixpkgs.config.allowUnfree = true;
+
+  # Habilitar sudo
+  security.sudo.enable = true;
+
+  # Permitir sudo sin password (solo para debugging)
+  security.sudo.wheelNeedsPassword = false;
+
+  system.stateVersion = "23.11"; # Ajustar según ISO base
+}

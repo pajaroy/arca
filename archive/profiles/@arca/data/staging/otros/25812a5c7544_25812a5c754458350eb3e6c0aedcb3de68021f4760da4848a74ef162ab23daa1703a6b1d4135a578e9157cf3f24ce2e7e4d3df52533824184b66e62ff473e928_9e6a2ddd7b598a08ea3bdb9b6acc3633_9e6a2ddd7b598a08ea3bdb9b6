@@ -1,0 +1,124 @@
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y git curl tmux vim htop net-tools openssh-server unzip rsync sqlite3 python3 python3-pip
+
+#paso dos sincronizar lso mouse a las dos pc:
+
+#!/bin/bash
+
+# Instalación completa de Input Leap en sistemas tipo Debian (Parrot, Ubuntu, etc.)
+# Compatible con ALMA_CORE y ALMA_RESIST
+
+echo "📦 Instalando dependencias..."
+sudo apt update
+sudo apt install -y git cmake make g++ qt6-base-dev qt6-tools-dev \
+  libx11-dev libxext-dev libxrandr-dev libxinerama-dev libxtst-dev libxi-dev \
+  libssl-dev libavahi-compat-libdnssd-dev libcurl4-openssl-dev \
+  libgl1-mesa-dev pkg-config
+
+echo "🧬 Clonando repositorio input-leap con submódulos..."
+cd ~
+rm -rf input-leap
+git clone --recurse-submodules https://github.com/input-leap/input-leap.git
+cd input-leap
+mkdir build && cd build
+
+echo "🛠️ Corrigiendo compatibilidad con GCC 11+..."
+sed -i '1i#include <cstddef>' ../src/lib/platform/XKBUtil.cpp
+
+echo "⚙️ Compilando Input Leap..."
+cmake ..
+make -j$(nproc)
+sudo make install
+
+echo "✅ Instalación finalizada."
+
+echo "📁 Configurá el servidor con:"
+echo 'nano ~/.input-leap/input-leap.conf'
+echo ""
+echo "Ejemplo:"
+echo "-----------------------------"
+echo "section: screens"
+echo "    alma-core:"
+echo "    alma-resist:"
+echo "end"
+echo ""
+echo "section: links"
+echo "    alma-core:"
+echo "        left = alma-resist"
+echo "    alma-resist:"
+echo "        right = alma-core"
+echo "end"
+echo "-----------------------------"
+
+echo "🚀 Para iniciar manualmente:"
+echo "En alma-core:"
+echo "input-leaps --no-tray --disable-crypto --name alma-core --config ~/.input-leap/input-leap.conf"
+echo ""
+echo "En alma-resist:"
+echo "input-leapc --no-tray --disable-crypto --name alma-resist 192.168.1.33:24800"
+
+# paso 3 - sincronizacion de las dos pcs
+# Apéndice — Instalación, Configuración SSH y Sincronización Inicial (ALMA\_RESIST)
+
+**Fecha:** 2025-06-01
+**Nodos:** ALMA\_CORE (192.168.1.33) y ALMA\_RESIST (192.168.1.36)
+**Usuario:** bird
+**Ruta raíz:** `/home/bird/ALMA_RESIST/`
+
+
+## 2. **Estructura de carpetas replicada**
+
+Se creó la estructura `/home/bird/ALMA_RESIST/` en ambos nodos.
+Se verificó igualdad de rutas y archivos mediante:
+
+```bash
+pwd
+ls -lha /home/bird/ALMA_RESIST
+tree -L 2 /home/bird/ALMA_RESIST
+```
+
+
+## 4. **Generación y copia de claves SSH**
+
+**En ALMA\_RESIST:**
+
+```bash
+ssh-keygen -t ed25519 -C "bird@alma-resist"
+```
+
+(Presionar Enter en todas las preguntas para dejar la clave sin passphrase.)
+
+**Luego:**
+
+```bash
+ssh-copy-id bird@192.168.1.33
+```
+
+* Se aceptó la autenticidad del host y se ingresó la contraseña una sola vez.
+* Verificado acceso SSH sin password con:
+
+  ```bash
+  ssh bird@192.168.1.33
+  ```
+
+
+## 6. **Primer sincronización con rsync**
+
+**Comando desde ALMA\_CORE a ALMA\_RESIST:**
+
+```bash
+rsync -avz --delete --exclude-from=/home/bird/ALMA_RESIST/.rsync_exclude /home/bird/ALMA_RESIST/ bird@192.168.1.36:/home/bird/ALMA_RESIST/
+```
+
+**Comando en sentido inverso (desde ALMA\_RESIST a ALMA\_CORE):**
+
+```bash
+rsync -avz --delete --exclude-from=/home/bird/ALMA_RESIST/.rsync_exclude /home/bird/ALMA_RESIST/ bird@192.168.1.33:/home/bird/ALMA_RESIST/
+```
+
+* Se validó que la sincronización deja ambas carpetas **idénticas** (salvo exclusiones).
+
+
+> **Recomendación:**
+> Mantener este apéndice actualizado y registrar cada modificación relevante al flujo de instalación o sincronización.
+

@@ -1,0 +1,24 @@
+# 🧠 Prompt Base – `resumen_semanal_cannabird_sX_v3`
+
+
+## 🎯 Objetivo del Prompt
+
+Consolidar en un solo documento semanal todas las tareas efectivamente realizadas durante la semana, siguiendo el formato diario v2 y manteniendo compatibilidad con Obsidian, sistemas IA y seguimiento técnico.
+
+
+## 📐 Metodología
+
+1. Leé todos los archivos `.md` diarios de la semana (lunes a domingo).
+2. Extraé de cada uno los elementos más importantes por sección.
+3. Consolidá la información, eliminando repeticiones pero sin perder trazabilidad.
+4. Usá **hashtags sectorizados y detallados** (`#003-vege`, `#001-flora`, etc.).
+5. Atribuí responsabilidades con los tags: `#hechoPor_seba-rios`, `#nota_pablito-tatu`, `#recomendadoPor_bird`
+6. Aplicá tags consistentes para eventos clave: `#engarronamiento`, `#oidio`, `#trasplante`, `#foli`, `#SafeRoot`, etc.
+
+
+## 📌 Changelog – v3
+- Se alineó totalmente con `resumen_diario_cannabird_v2`
+- Se incorporaron todas las secciones nuevas: Mediciones, Infraestructura, Esquejeras, etc.
+- Estructura extendida, ordenada y compatible con Obsidian e IA
+- Reemplazo completo de v2 como nuevo estándar
+

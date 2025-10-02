@@ -1,0 +1,19 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_12438f
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: '  Init  '
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:0a75e39d04f8113cfcc31432f2bfb14c9e66e501a9e254dc92a6521e7cb8ae59
+---
+# Inicializador del paquete utils

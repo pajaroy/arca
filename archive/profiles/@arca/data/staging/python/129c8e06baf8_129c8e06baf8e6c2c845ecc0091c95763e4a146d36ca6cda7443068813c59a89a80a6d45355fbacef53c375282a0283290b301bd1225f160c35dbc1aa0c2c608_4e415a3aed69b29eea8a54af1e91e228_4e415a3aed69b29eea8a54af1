@@ -1,0 +1,305 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+yaml2all.py - Conversor universal de YAML a JSON y Markdown frontalizado
+
+Versión 0.1.1 - Refactorizado para soporte datetime, modo batch y manejo robusto de errores
+
+Características principales:
+1. Convierte archivos YAML a JSON y Markdown con front matter
+2. Soporte completo para objetos datetime en JSON
+3. Modos de operación:
+   - Archivo individual
+   - Búsqueda recursiva de README.yaml
+4. Protección contra errores con continuidad de procesamiento
+5. Mensajes de error detallados y amigables
+6. Estructura modular para fácil mantenimiento
+
+Uso:
+    Modo archivo único: python yaml2all.py [opciones] <ruta_archivo.yaml>
+    Modo recursivo:      python yaml2all.py --recursive [--dir directorio]
+
+Opciones:
+    --recursive  : Busca README.yaml en subcarpetas
+    --dir        : Directorio inicial para búsqueda (default: actual)
+    --file-name  : Nombre de archivo a buscar (default: README.yaml)
+    --force      : Sobrescribe archivos existentes
+    --verbose    : Muestra detalles del proceso
+    --version    : Muestra versión del script
+"""
+
+import os
+import sys
+import argparse
+import json
+import yaml
+import datetime
+from pathlib import Path
+from typing import Any, Dict, List, Tuple, Optional
+
+# Versión del script
+SCRIPT_VERSION = "0.1.1"
+
+# Campos especiales para extraer en Markdown
+CAMPOS_ESPECIALES = ['plantilla_registro', 'ejemplo', 'body', 'contenido']
+
+class DateTimeEncoder(json.JSONEncoder):
+    """Encoder personalizado para manejar objetos datetime en JSON"""
+    def default(self, obj: Any) -> Any:
+        if isinstance(obj, (datetime.date, datetime.datetime)):
+            return obj.isoformat()
+        return super().default(obj)
+
+def cargar_yaml(ruta_archivo: str) -> Tuple[str, Dict[str, Any]]:
+    """Carga y valida un archivo YAML con manejo robusto de errores
+    
+    Args:
+        ruta_archivo: Ruta al archivo YAML
+        
+    Returns:
+        Tupla con (contenido original, datos parseados)
+        
+    Raises:
+        ValueError: Si hay errores en el archivo
+        YAMLError: Si hay errores de sintaxis
+        FileNotFoundError: Si el archivo no existe
+    """
+    try:
+        with open(ruta_archivo, 'r', encoding='utf-8') as f:
+            contenido_original = f.read()
+        
+        datos = yaml.safe_load(contenido_original)
+        return contenido_original, datos or {}
+    
+    except FileNotFoundError:
+        raise FileNotFoundError(f"El archivo no fue encontrado: {ruta_archivo}")
+    except yaml.YAMLError as e:
+        error_msg = f"Error de sintaxis YAML en {ruta_archivo}:\n"
+        if hasattr(e, 'problem_mark'):
+            mark = e.problem_mark
+            error_msg += f"  Línea {mark.line+1}, Columna {mark.column+1}"
+        raise yaml.YAMLError(error_msg) from e
+    except Exception as e:
+        raise RuntimeError(f"Error inesperado al procesar {ruta_archivo}: {str(e)}") from e
+
+def generar_json(data: Dict[str, Any], ruta_salida: str, force: bool, verbose: bool) -> None:
+    """Genera archivo JSON equivalente con soporte para datetime
+    
+    Args:
+        data: Datos parseados del YAML
+        ruta_salida: Ruta de destino
+        force: Sobrescribir si existe
+        verbose: Mostrar mensajes detallados
+    """
+    if Path(ruta_salida).exists() and not force:
+        if verbose:
+            print(f"  Saltando JSON existente: {ruta_salida}")
+        return
+
+    try:
+        with open(ruta_salida, 'w', encoding='utf-8') as f:
+            json.dump(
+                data, 
+                f, 
+                indent=2, 
+                ensure_ascii=False, 
+                cls=DateTimeEncoder
+            )
+        if verbose:
+            print(f"  ✓ JSON generado: {ruta_salida}")
+            
+    except Exception as e:
+        raise RuntimeError(f"Error generando JSON {ruta_salida}: {str(e)}") from e
+
+def generar_md(contenido_yaml: str, data: Dict[str, Any], ruta_salida: str, 
+               force: bool, verbose: bool) -> None:
+    """Genera archivo Markdown con front matter y bloques especiales
+    
+    Args:
+        contenido_yaml: Contenido YAML original
+        data: Datos parseados
+        ruta_salida: Ruta de destino
+        force: Sobrescribir si existe
+        verbose: Mostrar mensajes detallados
+    """
+    if Path(ruta_salida).exists() and not force:
+        if verbose:
+            print(f"  Saltando Markdown existente: {ruta_salida}")
+        return
+
+    try:
+        # Construir contenido Markdown
+        contenido_md = f"---\n{contenido_yaml}\n---\n\n"
+        
+        # Añadir bloques especiales si existen
+        for campo in CAMPOS_ESPECIALES:
+            if campo in data:
+                # Formatear título (snake_case a Title Case)
+                titulo = campo.replace('_', ' ').title()
+                contenido_md += f"## {titulo}\n\n```yaml\n"
+                
+                # Generar bloque YAML para el campo
+                bloque_especial = {campo: data[campo]}
+                contenido_md += yaml.dump(
+                    bloque_especial,
+                    allow_unicode=True,
+                    width=1000,
+                    sort_keys=False
+                )
+                contenido_md += "```\n\n"
+        
+        # Escribir archivo final
+        with open(ruta_salida, 'w', encoding='utf-8') as f:
+            f.write(contenido_md)
+            
+        if verbose:
+            print(f"  ✓ Markdown generado: {ruta_salida}")
+            
+    except Exception as e:
+        raise RuntimeError(f"Error generando Markdown {ruta_salida}: {str(e)}") from e
+
+def procesar_archivo(ruta_archivo: str, force: bool, verbose: bool) -> bool:
+    """Procesa un archivo YAML individual con manejo de errores
+    
+    Args:
+        ruta_archivo: Ruta al archivo YAML
+        force: Sobrescribir archivos existentes
+        verbose: Mostrar detalles
+        
+    Returns:
+        True si tuvo éxito, False si hubo error
+    """
+    try:
+        if verbose:
+            print(f"\nProcesando: {ruta_archivo}")
+        
+        # Validar extensión
+        if not ruta_archivo.lower().endswith(('.yaml', '.yml')):
+            raise ValueError("Extensión de archivo inválida (debe ser .yaml o .yml)")
+        
+        # Cargar y procesar
+        contenido_original, datos = cargar_yaml(ruta_archivo)
+        base_path = Path(ruta_archivo).with_suffix('')
+        
+        # Generar archivos
+        generar_json(datos, f"{base_path}.json", force, verbose)
+        generar_md(contenido_original, datos, f"{base_path}.md", force, verbose)
+        return True
+        
+    except Exception as e:
+        print(f"\n⚠️ Error procesando {ruta_archivo}:")
+        print(f"  {str(e)}")
+        if verbose:
+            import traceback
+            traceback.print_exc()
+        return False
+
+def buscar_archivos_yaml(directorio: str, nombre_archivo: str) -> List[str]:
+    """Busca recursivamente archivos YAML con el nombre especificado
+    
+    Args:
+        directorio: Directorio raíz para búsqueda
+        nombre_archivo: Nombre del archivo a buscar
+        
+    Returns:
+        Lista de rutas completas encontradas
+    """
+    archivos_encontrados = []
+    for raiz, _, archivos in os.walk(directorio):
+        if nombre_archivo in archivos:
+            ruta_completa = os.path.join(raiz, nombre_archivo)
+            archivos_encontrados.append(ruta_completa)
+    return archivos_encontrados
+
+def main():
+    parser = argparse.ArgumentParser(
+        description='Conversor universal YAML a JSON y Markdown frontalizado',
+        formatter_class=argparse.RawTextHelpFormatter
+    )
+    parser.add_argument(
+        'ruta',
+        nargs='?',
+        default=None,
+        help='Ruta a archivo YAML o directorio (modo recursivo)'
+    )
+    parser.add_argument(
+        '-r', '--recursive',
+        action='store_true',
+        help='Buscar recursivamente README.yaml en subcarpetas'
+    )
+    parser.add_argument(
+        '-d', '--dir',
+        default=os.getcwd(),
+        help='Directorio inicial para búsqueda recursiva (default: actual)'
+    )
+    parser.add_argument(
+        '-f', '--file-name',
+        default='README.yaml',
+        help='Nombre de archivo a buscar en modo recursivo (default: README.yaml)'
+    )
+    parser.add_argument(
+        '--force',
+        action='store_true',
+        help='Sobrescribir archivos existentes'
+    )
+    parser.add_argument(
+        '-v', '--verbose',
+        action='store_true',
+        help='Mostrar detalles del proceso'
+    )
+    parser.add_argument(
+        '--version',
+        action='version',
+        version=f'yaml2all.py v{SCRIPT_VERSION}'
+    )
+    
+    args = parser.parse_args()
+    
+    # Mostrar encabezado
+    print(f"yaml2all v{SCRIPT_VERSION} - Conversor universal YAML")
+    print("=" * 60)
+    
+    # Modo de operación: Archivo único
+    if args.ruta and not args.recursive:
+        if os.path.isfile(args.ruta):
+            success = procesar_archivo(args.ruta, args.force, args.verbose)
+            sys.exit(0 if success else 1)
+        else:
+            print(f"Error: La ruta especificada no es un archivo válido\n")
+            parser.print_help()
+            sys.exit(1)
+    
+    # Modo de operación: Recursivo
+    if args.recursive:
+        directorio_base = args.dir if args.dir else os.getcwd()
+        
+        if not os.path.isdir(directorio_base):
+            print(f"Error: Directorio no encontrado - {directorio_base}")
+            sys.exit(1)
+        
+        print(f"Buscando '{args.file_name}' en: {directorio_base} (recursivo)")
+        archivos = buscar_archivos_yaml(directorio_base, args.file_name)
+        
+        if not archivos:
+            print("No se encontraron archivos coincidentes")
+            sys.exit(0)
+            
+        print(f"Encontrados {len(archivos)} archivos para procesar")
+        resultados = [procesar_archivo(arch, args.force, args.verbose) for arch in archivos]
+        exitos = sum(resultados)
+        fallos = len(archivos) - exitos
+        
+        print("\nResumen de procesamiento:")
+        print(f"  ✓ Archivos exitosos: {exitos}")
+        print(f"  ✗ Archivos con errores: {fallos}")
+        print(f"  Total procesados: {len(archivos)}")
+        sys.exit(0 if fallos == 0 else 1)
+    
+    # Si no se especificó modo
+    print("Error: Se debe especificar un archivo o usar modo recursivo\n")
+    parser.print_help()
+    sys.exit(1)
+
+if __name__ == "__main__":
+    main()

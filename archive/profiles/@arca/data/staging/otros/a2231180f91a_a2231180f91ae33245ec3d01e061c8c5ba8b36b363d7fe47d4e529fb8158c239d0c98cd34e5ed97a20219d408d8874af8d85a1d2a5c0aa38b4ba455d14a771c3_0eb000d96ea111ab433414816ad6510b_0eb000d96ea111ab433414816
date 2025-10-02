@@ -1,0 +1,30 @@
+# 🧠 Prompt Base – `cargar_grafo.py` + `setup_neo4j.cql` (ALMA_NEO4J)
+
+
+## 🎯 Objetivo – Script `cargar_grafo.py`
+
+Crear un script que:
+
+1. Se conecte a Neo4j (`bolt://localhost:7687`) usando el driver oficial (`neo4j`).
+2. Lea todos los archivos `.json` en la carpeta `memorias_json/`.
+3. Cree los siguientes nodos:
+   - `:Memoria` con campos `id`, `titulo`, `contenido`, `categoria`
+   - `:Tag` con campo `name`
+   - `:Chat` con campo `id`
+4. Cree las siguientes relaciones:
+   - `(:Memoria)-[:TIENE_TAG]->(:Tag)`
+   - `(:Memoria)-[:USADO_EN]->(:Chat)`
+   - `(:Memoria)-[:IMPACTA {tipo, peso}]->(:Memoria)` (según campo `impacto_en`)
+5. Incluya logging de errores a `logs/neo4j_loader.log`
+6. Agregue barra de progreso con `tqdm` si es posible
+7. Permita configurar usuario, password y URI desde variables o `.env`
+
+
+## 🔧 Requisitos técnicos
+
+- Uso de `neo4j-driver` (Python)
+- Codificación UTF-8
+- Soporte para rutas relativas
+- Manejo de errores robusto
+- Compatible con Neo4j 5+
+

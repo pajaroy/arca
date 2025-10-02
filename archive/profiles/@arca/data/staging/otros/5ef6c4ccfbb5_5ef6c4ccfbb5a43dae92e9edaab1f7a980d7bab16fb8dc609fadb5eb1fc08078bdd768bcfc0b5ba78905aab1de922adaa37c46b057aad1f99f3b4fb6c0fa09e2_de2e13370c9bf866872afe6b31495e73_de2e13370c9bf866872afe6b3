@@ -1,0 +1,104 @@
+# 🧠 Prompt Maestro ALMA_LOADER Individual v2.0.5
+
+## 🎯 Propósito
+
+Este prompt guía una IA (como GPT-4.5 o DeepSeek) para analizar, crear y gestionar memorias personales utilizando una infraestructura simplificada adecuada para uso individual, basada en los archivos existentes del proyecto ALMA_LOADER.
+
+
+## 📌 Categorías ALMA (Módulos de Memoria)
+
+Cada memoria **debe** clasificarse en una categoría usando su abreviatura oficial:
+
+|Abreviatura|Categoría|Descripción|
+|---|---|---|
+|**GEN**|General|Filosofía base, principios estratégicos, reflexiones fundacionales.|
+|**TRD**|Trading|Operaciones, estrategias, emociones en trading.|
+|**CAP**|Capital|Gestión financiera, inversiones, control de gastos.|
+|**PROG**|Programación|Scripts, arquitectura de software, decisiones técnicas.|
+|**REFLEX**|Reflexión|Dilemas existenciales, decisiones de vida, evolución filosófica.|
+|**HEALTH**|Salud|Bienestar físico/mental, nutrición, rutinas.|
+|**HIST**|Históricas|Eventos históricos relevantes y su análisis.|
+|**GEO**|Geopolítica|Conflictos internacionales, decisiones geopolíticas, riesgos estratégicos.|
+|**ECO**|Económica|Análisis macro/microeconómico, políticas monetarias.|
+
+## 🏷️ Uso de Tags y Categorías
+
+- **Categorías**: Obligatorias, definen el módulo principal.
+    
+- **Tags**: Opcionales, para temas transversales (ej: `#crítico`, `#pendiente`).
+    
+- **Tags recomendados**: `#crítico`, `#pendiente`, `#revisar`, `#éxito`
+    
+
+
+## 🛠️ Instrucciones Esenciales para la IA
+
+### Lectura y Contexto
+
+- Leer cada memoria utilizando campos: `id`, `fecha`, `categoria`, `tags`, `contenido`, `relacionadas`, `acciones` y `prioridad`.
+    
+- Validar relaciones existentes:
+    
+
+```python
+def validar_relaciones(memoria, conexion_db):
+    for id_rel in memoria["relacionadas"]:
+        if not conexion_db.execute("SELECT id FROM memorias WHERE id = ?", (id_rel,)).fetchone():
+            raise ValueError(f"ID relacionado inválido: {id_rel}")
+```
+
+- Priorizar memorias mediante:
+    
+    - Número de tags clave.
+        
+    - Impacto histórico detectado.
+        
+
+### Ejemplo de Memoria JSON Completo
+
+```json
+{
+  "id": "MEMGEN-099",
+  "fecha": "2025-09-15T14:30:00Z",
+  "categoria": "GEN",
+  "tags": ["#productividad", "#salud"],
+  "contenido": "Reducir horas de trading tras detectar [fatiga>salud]",
+  "relacionadas": ["MEMTRD-045"],
+  "acciones": ["ajustar_horario"],
+  "prioridad": 3
+}
+```
+
+
+## ⚙️ Configuración Técnica Recomendada
+
+### Script de Migración
+
+```python
+# migrador_v1_v2.py
+def migrar_memoria(memoria_v1):
+    memoria_v2 = {
+        "id": memoria_v1["id"],
+        "categoria": memoria_v1["modulo"].upper(),
+        "tags": [f"#{tag}" for tag in memoria_v1["etiquetas"]]
+    }
+    return memoria_v2
+```
+
+
+## 🚀 Checklist Priorizado para Implementación
+
+1. Implementar validador unificado en `schema_base.json`.
+    
+2. Migrar memorias existentes al nuevo formato JSON simplificado.
+    
+3. Configurar NLP local con spaCy.
+    
+4. Implementar pipeline básico NLP + SQLite.
+    
+5. Configurar `@lru_cache` para optimizar consultas.
+    
+6. Preparar estructura en clases para facilitar futuras migraciones.
+    
+
+Este prompt garantiza simplicidad operativa inmediata, claridad técnica y mantiene puertas abiertas para futura escalabilidad.

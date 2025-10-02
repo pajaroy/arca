@@ -1,0 +1,6 @@
+# Changelog `log_writer.py` v0.0.0.7
+
+- 🔁 Reimplementación completa de `secure_rotation` como método de instancia.
+- ✅ Validación de tipos: conversión automática de `message` a `str`.
+- ⚠️ Mejor manejo de errores en `write_log`, incluyendo uso de `os.rename`.
+- 🧩 Compatibilidad extendida para sistemas Windows/Linux.

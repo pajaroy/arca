@@ -1,0 +1,8 @@
+
+## Ejemplo
+
+```yaml
+ejemplo:
+  comando: "python3 /home/bird/alma_core/core/cli/bitacora/add_bitacora_entry_v0.1.0.py \\\n  --accion \"Carga del script de memorias v0.1.1\" \\\n  --descripcion \"Se cargó la versión refactorizada del script para carga de memorias institucionales, solucionando problemas de parsing JSON.\" \\\n  --motivo \"El script anterior generaba estructuras JSON inválidas. Esta versión aplica validación, backups y escritura dual sincronizada.\" \\\n  --ejecutado_por \"Kael\" \\\n  --tags \"memorias,cli,fix,v0.1.1\" \\\n  --bitacora \"/home/bird/alma_core/docs/journal/bitacora_viva.yaml\"\n"
+```
+

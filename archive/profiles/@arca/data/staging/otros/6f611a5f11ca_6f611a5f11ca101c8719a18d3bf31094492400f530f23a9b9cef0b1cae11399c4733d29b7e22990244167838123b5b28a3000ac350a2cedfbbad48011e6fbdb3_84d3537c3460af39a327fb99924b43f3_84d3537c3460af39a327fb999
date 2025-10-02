@@ -1,0 +1,72 @@
+## 🧠 **Auditoría CLI de la Estructura Actual de Centralesis**
+
+### 📆 Fecha: 2025-06-06
+
+**Auditor:** Kael (IA CLI Auditor)  
+**Modo:** _Full nitpicking / estándar ALMA_RESIST_
+
+
+### **2. **Inconsistencias y puntos a mejorar**
+
+#### **A. Redundancias o potenciales conflictos**
+
+- **logs/** y **archivo/logs/**:  
+    Ambas existen, pero con solo un `README.md` dentro.  
+    **Recomendación:** Consolidar y dejar solo una fuente de logs (preferentemente `archivo/logs/` para centralizar, o bien mover el log de raíz allí).  
+    → Si el log raíz es global, documentarlo explícitamente.
+    
+- **changelog.md**:  
+    Existe en `docs/changelog.md` y en `meta/changelog.md`.  
+    **Recomendación:**
+    
+    - Un solo changelog principal, con alias/symlink o referencia cruzada (`[[changelog.md]]`).
+        
+    - El de `meta/` podría ser un changelog de _auditoría/meta_, pero aclarar la diferencia en el README.
+        
+
+#### **B. Carpeta/archivo fuera de estándar**
+
+- **ubicacion.md**:  
+    Está en la raíz y no en una subcarpeta tipo `docs/` o `meta/`.  
+    **Recomendación:**
+    
+    - Si es un documento de referencia, mover a `docs/` o dejar claro su propósito en README raíz.
+        
+    - Si es solo de testing o transición, registrar en bitácora y mover más adelante.
+        
+
+#### **C. Consistencia en README.md**
+
+- Varias carpetas tienen solo el archivo `README.md` vacío o genérico.  
+    **Recomendación:**
+    
+    - Completar con propósito, fecha, tags y responsable (aunque sea “IA/CLI”).
+        
+    - README debe aclarar el flujo de archivos y función de la carpeta.
+        
+
+#### **D. Nombres de archivos y bitácoras**
+
+- Todo parece estar con buen estándar, pero revisar si hay algún README.txt o archivo `.txt` perdido (no se ve en el listado, pero vale auditar siempre).
+    
+
+#### **E. Uso de “memoria_viva”**
+
+- Hay carpeta, pero solo un README.md.  
+    **Recomendación:**
+    
+    - Definir y documentar propósito: ¿Bitácora de memoria operativa? ¿Resúmenes semanales? ¿Notas IA?
+        
+    - Si es “viva”, podría estar más cerca de `bitacoras/` o “journal”.
+        
+
+#### **F. “tools/”**
+
+- Sólo tiene un README.md.  
+    **Recomendación:**
+    
+    - Si es para scripts utilitarios, dejarlo listo para recibir scripts y documentar en README.
+        
+    - Si no se usará, registrar propósito y dejarlo como placeholder.
+        
+

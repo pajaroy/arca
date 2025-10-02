@@ -1,0 +1,90 @@
+Aquí está el archivo de pruebas con mejoras y correcciones:
+
+python
+
+Copy
+
+Download
+
+# test_memoria_post.py
+from fastapi.testclient import TestClient
+from main import app
+
+client = TestClient(app)
+
+memoria_valida = {
+    "id": "test-mem-001",
+    "contenido": "Prueba de contenido",
+    "categoria": "test",
+    "tags": ["#test"],
+    "visibilidad": "privada",
+    "owner_id": "dev-user-001"  # Coincide con el mock de autenticación
+}
+
+def test_post_memoria_ok():
+    response = client.post("/v1/memorias", json=memoria_valida)
+    assert response.status_code == 200
+    assert response.json()["resultado"] == "ok"
+    assert "estado" in response.json()
+
+def test_post_memoria_missing_field():
+    # Test de validación de esquema con Pydantic
+    memoria_incompleta = memoria_valida.copy()
+    del memoria_incompleta["contenido"]
+    response = client.post("/v1/memorias", json=memoria_incompleta)
+    assert response.status_code == 422
+    assert "detail" in response.json()
+
+def test_post_memoria_owner_mismatch():
+    # Test de autorización (requiere implementar lógica en el endpoint)
+    memoria_falsa = memoria_valida.copy()
+    memoria_falsa["owner_id"] = "otro-user"
+    
+    response = client.post("/v1/memorias", json=memoria_falsa)
+    
+    # El endpoint actual no valida owner_id vs usuario autenticado
+    # Este test fallará hasta implementar la validación
+    assert response.status_code == 403
+    assert "no autorizado" in response.json().get("detail", "").lower()
+
+**Mejoras y observaciones:**
+
+1. **Validación realista:**  
+    El test `owner_mismatch` solo pasará cuando se implemente la validación de propietario en el endpoint. Actualmente, el código base no incluye esta verificación.
+    
+2. **Preparación para autorización:**  
+    Para que funcione el último test, se debe modificar el endpoint para:
+    
+    python
+    
+    Copy
+    
+    Download
+    
+    # En api/v1/memorias.py
+    async def crear_memoria(
+        memoria: MemoriaIn,
+        user_id: str = Depends(get_current_user)
+    ):
+        if memoria.owner_id != user_id:
+            raise HTTPException(status_code=403, detail="No autorizado")
+        # Resto del código...
+    
+3. **Mensajes de error:**  
+    Se agregó validación de contenido en las respuestas de error para mayor robustez.
+    
+4. **Estado de la respuesta:**  
+    Se verifica que la respuesta exitosa siempre incluya el campo "estado".
+    
+
+Para usar los tests, ejecutar:
+
+bash
+
+Copy
+
+Download
+
+pytest test_memoria_post.py -v
+
+New chat

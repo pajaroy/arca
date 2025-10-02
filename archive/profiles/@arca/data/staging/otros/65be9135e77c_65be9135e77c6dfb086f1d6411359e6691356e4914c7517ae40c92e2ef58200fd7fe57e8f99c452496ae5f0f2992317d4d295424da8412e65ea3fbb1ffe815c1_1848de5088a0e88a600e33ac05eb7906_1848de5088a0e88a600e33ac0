@@ -1,0 +1,14 @@
+# 🗂️ version.md – Plantilla de versión
+
+- `Versión:` vX.X.X
+- `Fecha:` YYYY-MM-DD
+- `Hash:` [opcional] SHA256 / Git commit
+- `Mantenedor:` Nombre o alias
+- `Descripción:` Cambios clave de esta versión
+
+## 🔄 Changelog
+
+- `+` Agregado:
+- `~` Modificado:
+- `-` Eliminado:
+

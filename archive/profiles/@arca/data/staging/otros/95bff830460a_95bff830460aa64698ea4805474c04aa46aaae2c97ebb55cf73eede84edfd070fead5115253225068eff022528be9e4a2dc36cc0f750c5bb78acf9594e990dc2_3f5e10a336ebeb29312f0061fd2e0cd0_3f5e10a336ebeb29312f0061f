@@ -1,0 +1,74 @@
+## 🔧 Componentes del MVP
+
+### 1. API básica con FastAPI
+
+- Endpoint `/responder` que recibe un prompt y devuelve la respuesta del modelo
+    
+- Asíncrono, con `asyncio.to_thread()` para ejecutar LLM sin bloquear
+    
+
+### 2. `ModelWrapper`
+
+- Clase base para instanciar cualquier modelo local (inicia con `llama.cpp`)
+    
+- Métodos: `.load_model()`, `.generate()`
+    
+- Cuantización: Q4 (GGUF) para hardware modesto
+    
+
+### 3. `TransportLayer`
+
+- Interfaz abstracta: `.send(data, endpoint)`, `.receive(endpoint)`
+    
+- Implementación MVP: lectura/escritura local con JSON
+    
+
+### 4. Logging seguro
+
+- Cifrado AES-GCM
+    
+- Almacenamiento en SQLite
+    
+- Integrado con `context_tracker` (registro de inputs/salidas)
+    
+
+### 5. `memory_graph`
+
+- Registro semántico post-inferencia
+    
+- Indexación de prompt + respuesta
+    
+
+### 6. Contratos de Datos
+
+- Esquemas JSON en `docs/contracts/`:
+    
+    - `schema_prompt.json`
+        
+    - `schema_respuesta.json`
+        
+
+
+## 🏛 Estructura Recomendada
+
+```
+llm_server/
+├── main.py                # API principal
+├── model_wrapper.py       # Clase base
+├── transport_layer.py     # Abstracción de transporte
+├── contracts/
+│   ├── schema_prompt.json
+│   └── schema_respuesta.json
+├── integration/
+│   ├── context_tracker.py
+│   └── memory_graph.py
+└── utils/
+    └── log_crypto.py      # AES-GCM
+```
+
+
+## 📈 Meta
+
+Establecer una arquitectura sólida, ética y modular que permita a ALMA pensar críticamente con un solo modelo, registrar sus reflexiones y preparar el camino para operar simbólicamente a escala.
+
+> "Una mente no se expande con potencia, sino con coherencia."

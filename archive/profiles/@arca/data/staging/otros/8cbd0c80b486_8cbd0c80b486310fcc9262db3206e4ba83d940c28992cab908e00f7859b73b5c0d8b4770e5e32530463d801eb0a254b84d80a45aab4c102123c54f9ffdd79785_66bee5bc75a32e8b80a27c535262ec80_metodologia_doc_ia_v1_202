@@ -1,0 +1,124 @@
+---
+module: metodologias/archivadas/metodologia_doc_ia_v1
+type: core
+status: in_progress
+created: '2025-05-21'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 📘 Metodología de Documentación para Humanos + IA – ALMA_RESIST (v1)
+
+📅 Versión: 1.0  
+📁 Archivo: metodologia_doc_ia_v1.md  
+🎯 Objetivo: Establecer un estándar de documentación que sea simultáneamente legible para humanos, y navegable, indexable y procesable por sistemas de IA como Alma.
+
+---
+
+## ✅ Aplicación
+
+Esta metodología se aplica a:
+
+- Todo archivo `.md` que describa módulos, prompts, sprints, decisiones, proyectos, sistemas o registros
+- Cualquier estructura documentada que se pretenda interconectar o rastrear semánticamente dentro del ecosistema ALMA
+
+---
+
+## 🧠 Fundamento
+
+La IA funciona mejor cuando la documentación:
+
+- Tiene **estructura explícita**
+- Usa **tags consistentes**
+- Declara **relaciones entre módulos**
+- Se puede leer como una base de datos viva
+
+Por eso se define el uso obligatorio del bloque `frontmatter` YAML.
+
+---
+
+## 📋 Estructura del Frontmatter YAML
+
+```yaml
+---
+module: "core/cli"
+type: "core"          # core | external | tool | integration | draft
+domain: "infraestructura"   # general | cultivo | historia | ia | trading
+tags: ["CLI", "modularidad", "entrada"]
+status: "stable"      # in_progress | stable | deprecated
+linked_to: ["memoria", "resumen"]
+created: "2025-05-21"
+version: "0.2"
+---
+```
+
+---
+
+## 🏷️ Campos requeridos
+
+| Campo       | Descripción técnica                                                        |
+|-------------|-----------------------------------------------------------------------------|
+| `module`    | Identificador único del módulo o documento                                  |
+| `type`      | Tipo de documento: núcleo, externo, herramienta, integración, etc.          |
+| `domain`    | Dominio funcional principal (ej: cultivo, historia, IA, trading)            |
+| `tags`      | Lista de palabras clave normalizadas                                        |
+| `linked_to` | Otros módulos relacionados                                                  |
+| `status`    | Estado del documento                                                        |
+| `version`   | Versión local del documento o módulo                                        |
+| `created`   | Fecha de creación                                                           |
+
+---
+
+## 🧩 Lista de Tags Sugeridos
+
+(Se debe mantener en: `docs/00_overview/tags_lista_oficial.md`)
+
+Ejemplos:  
+`["IA", "memoria", "CLI", "resumen", "seguridad", "script", "cultivo", "evaluación"]`
+
+---
+
+## 📘 Ejemplo completo
+
+```markdown
+---
+module: "core/loader"
+type: "core"
+domain: "ia"
+tags: ["carga", "modelo", "resumen"]
+status: "in_progress"
+linked_to: ["core/cli", "resumen"]
+version: "0.4"
+created: "2025-05-21"
+---
+
+# Loader – Núcleo de Carga de Modelo LLM
+
+Este módulo se encarga de inicializar, cargar y coordinar el modelo IA local utilizado por Alma...
+```
+
+---
+
+## 🚦 Obligatorio desde: Sprint_2.2
+
+- Toda metodología nueva debe usar este esquema
+- Toda documentación nueva debe incluir este bloque en su cabecera
+- Archivos sin este esquema serán considerados no semánticamente indexables
+
+---
+
+## 🔄 Relación con otras metodologías
+
+- Requiere implementación dentro de: `estructura_modular_v2`
+- Afecta directamente a: `sprints_v2`, `auditoría_adr`, `interacción_ia`
+- Será utilizada en: `alma-cli`, `alma-loader`, `grafos_ia`
+
+---
+
+## 🧾 Changelog
+
+### 2025-05-21
+- Creación de la metodología formal de documentación humano + IA
+- Se define estructura YAML como requisito mínimo semántico
+- Se vincula con futuras funciones de navegación automática y relaciones entre módulos
+

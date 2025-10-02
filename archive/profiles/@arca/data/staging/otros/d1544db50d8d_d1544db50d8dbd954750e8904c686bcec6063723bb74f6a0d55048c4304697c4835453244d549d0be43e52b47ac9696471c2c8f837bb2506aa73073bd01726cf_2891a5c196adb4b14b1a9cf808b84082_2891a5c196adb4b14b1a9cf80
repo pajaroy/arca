@@ -1,0 +1,21 @@
+---
+tipo: configuracion_json
+id: CONFIGURACION_JSON_2025-06-05_2c0743
+version: '1.0'
+formato: json
+modulo: ALMA_RESIST
+titulo: Schema Memoria
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:d149e1f18ca21b0acdb84e594c916ea0e06b1455b381d76c8b2cf6c85dbca606
+---
+{
+  "campos": ["fecha", "tema", "resumen", "etiquetas", "estado_emocional"]
+}

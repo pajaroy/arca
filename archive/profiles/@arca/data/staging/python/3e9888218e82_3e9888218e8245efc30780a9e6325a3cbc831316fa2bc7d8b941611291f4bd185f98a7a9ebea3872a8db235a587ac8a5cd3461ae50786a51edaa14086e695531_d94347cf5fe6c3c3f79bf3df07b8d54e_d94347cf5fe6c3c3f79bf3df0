@@ -1,0 +1,324 @@
+#!/usr/bin/env python3
+"""
+SCRIPT_HASHING_ALMA_RESIST_v0.1.0
+Autor: bird
+Fecha: 2025-06-09
+Módulo: hashing
+Descripción: Script CLI multi-agente para generación y registro auditable de hashes en ALMA_RESIST
+"""
+
+import os
+import sys
+import json
+import hashlib
+import argparse
+import logging
+import uuid
+from datetime import datetime
+from pathlib import Path
+from typing import List, Dict, Any, Optional
+import fnmatch
+import subprocess
+
+# Configuración básica de logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger('hash_generator')
+
+DEFAULT_INDEX = "./index.json"
+SUPPORTED_ALGORITHMS = ['sha256', 'sha512', 'md5', 'blake2b']
+DEFAULT_PERMISSIONS = "rw"
+
+class HashGenerator:
+    def __init__(self, args):
+        self.args = args
+        self.session_id = str(uuid.uuid4())
+        self.index_data = {"version": "1.0", "created": self.current_timestamp(), "records": []}
+        self.stats = {
+            "total_files": 0,
+            "processed": 0,
+            "errors": 0,
+            "modified": 0,
+            "new": 0,
+            "hooks_executed": 0,
+            "hooks_failed": 0
+        }
+        
+    @staticmethod
+    def current_timestamp() -> str:
+        return datetime.utcnow().isoformat() + 'Z'
+    
+    def generate_record_id(self, file_path: str) -> str:
+        """Genera ID único para cada registro"""
+        base_string = f"{file_path}{self.current_timestamp()}{self.args.agente}"
+        return hashlib.sha256(base_string.encode()).hexdigest()
+    
+    def calculate_hash(self, file_path: str) -> Optional[str]:
+        """Calcula el hash de un archivo usando el algoritmo especificado"""
+        try:
+            hasher = hashlib.new(self.args.algoritmo)
+            with open(file_path, 'rb') as f:
+                while chunk := f.read(4096):
+                    hasher.update(chunk)
+            return hasher.hexdigest()
+        except Exception as e:
+            logger.error(f"Error calculando hash para {file_path}: {str(e)}")
+            return None
+    
+    def load_existing_index(self):
+        """Carga el índice existente si está disponible"""
+        if os.path.exists(self.args.index):
+            try:
+                with open(self.args.index, 'r') as f:
+                    self.index_data = json.load(f)
+            except Exception as e:
+                logger.warning(f"No se pudo cargar el índice existente: {str(e)}")
+    
+    def save_index(self):
+        """Guarda el índice en el sistema de archivos"""
+        try:
+            with open(self.args.index, 'w') as f:
+                json.dump(self.index_data, f, indent=2)
+            logger.info(f"Índice actualizado en {self.args.index}")
+        except Exception as e:
+            logger.error(f"Error guardando índice: {str(e)}")
+    
+    def should_exclude(self, file_path: str) -> bool:
+        """Determina si un archivo debe ser excluido"""
+        if not self.args.excluir:
+            return False
+            
+        filename = os.path.basename(file_path)
+        for pattern in self.args.excluir.split(','):
+            if fnmatch.fnmatch(filename, pattern.strip()):
+                return True
+        return False
+    
+    def execute_hook(self, record: Dict[str, Any]):
+        """Ejecuta el hook externo si está configurado"""
+        if not self.args.hook:
+            return False
+            
+        try:
+            result = subprocess.run(
+                self.args.hook,
+                input=json.dumps(record),
+                text=True,
+                capture_output=True,
+                timeout=30,
+                shell=True  # importante para hooks como comandos
+            )
+            if result.returncode != 0:
+                logger.warning(f"Hook falló para {record['ruta']}: {result.stderr}")
+                return False
+            return True
+        except Exception as e:
+            logger.error(f"Error ejecutando hook: {str(e)}")
+            return False
+    
+    def create_agent_log(self, record: Dict[str, Any]):
+        """Crea log específico por agente si está habilitado"""
+        if not self.args.logs_por_agente:
+            return
+            
+        log_dir = Path("logs") / self.args.agente
+        log_dir.mkdir(parents=True, exist_ok=True)
+        
+        log_file = log_dir / f"{datetime.now().strftime('%Y%m%d')}.log"
+        try:
+            with open(log_file, 'a') as f:
+                f.write(json.dumps(record) + '\n')
+            record['log_path'] = str(log_file)
+        except Exception as e:
+            logger.error(f"Error creando log de agente: {str(e)}")
+    
+    def validate_existing_hash(self, file_path: str, new_hash: str) -> bool:
+        """Valida contra hashes existentes si está habilitado"""
+        if not self.args.validar:
+            return False
+            
+        for record in self.index_data.get('records', []):
+            if record['ruta'] == file_path and record['hash'] != new_hash:
+                logger.warning(f"¡Hash modificado para {file_path}!")
+                return True
+        return False
+    
+    def is_duplicate(self, file_path: str, file_hash: str) -> bool:
+        """Evita duplicados exactos en el índice"""
+        for record in self.index_data.get('records', []):
+            if record['ruta'] == file_path and record['hash'] == file_hash:
+                return True
+        return False
+
+    def process_file(self, file_path: str):
+        """Procesa un archivo individual"""
+        self.stats['total_files'] += 1
+        
+        if self.should_exclude(file_path):
+            return
+            
+        file_hash = self.calculate_hash(file_path)
+        if not file_hash:
+            self.stats['errors'] += 1
+            return
+            
+        file_stat = os.stat(file_path)
+        is_modified = self.validate_existing_hash(file_path, file_hash)
+        
+        if is_modified:
+            self.stats['modified'] += 1
+        elif not any(r['ruta'] == file_path for r in self.index_data.get('records', [])):
+            self.stats['new'] += 1
+
+        # Evita duplicados en el índice
+        if self.is_duplicate(file_path, file_hash):
+            return
+            
+        record = {
+            "id_registro": self.generate_record_id(file_path),
+            "ruta": file_path,
+            "hash": file_hash,
+            "algoritmo": self.args.algoritmo,
+            "fecha_hora": self.current_timestamp(),
+            "agente": self.args.agente,
+            "entidad": self.args.entidad,
+            "tipo_accion": "hashing",
+            "comentario": self.args.comentario,
+            "tamaño": file_stat.st_size,
+            "permisos": self.args.permisos or DEFAULT_PERMISSIONS,
+            "firma": "dummy_signature" if self.args.firmar else None,
+            "tags": self.args.tags.split(',') if self.args.tags else [],
+            "id_sesion": self.session_id,
+            "log_path": None,
+            "hook_executed": False,
+            "origen_disparo": self.args.origen_disparo
+        }
+        
+        self.create_agent_log(record)
+        
+        if self.args.hook and not self.args.dry_run:
+            hook_success = self.execute_hook(record)
+            record['hook_executed'] = hook_success
+            if hook_success:
+                self.stats['hooks_executed'] += 1
+            else:
+                self.stats['hooks_failed'] += 1
+        
+        if not self.args.dry_run:
+            self.index_data['records'].append(record)
+        
+        self.stats['processed'] += 1
+    
+    def process_path(self):
+        """Procesa la ruta objetivo (archivo o directorio)"""
+        target_path = Path(self.args.ruta_objetivo)
+        
+        if target_path.is_file():
+            self.process_file(str(target_path))
+        elif target_path.is_dir():
+            for root, _, files in os.walk(target_path):
+                for file in files:
+                    self.process_file(os.path.join(root, file))
+        else:
+            logger.error(f"Ruta inválida: {self.args.ruta_objetivo}")
+            sys.exit(1)
+    
+    def generate_report(self) -> Dict[str, Any]:
+        """Genera el reporte de resumen"""
+        return {
+            "agente": self.args.agente,
+            "sesion": self.session_id,
+            "ruta_objetivo": self.args.ruta_objetivo,
+            "archivos_totales": self.stats['total_files'],
+            "archivos_procesados": self.stats['processed'],
+            "archivos_nuevos": self.stats['new'],
+            "archivos_modificados": self.stats['modified'],
+            "errores": self.stats['errors'],
+            "firma_utilizada": self.args.firmar,
+            "hooks_ejecutados": self.stats['hooks_executed'],
+            "hooks_fallidos": self.stats['hooks_failed'],
+            "dry_run": self.args.dry_run,
+            "origen_disparo": self.args.origen_disparo
+        }
+    
+    def run(self):
+        """Ejecuta el flujo principal"""
+        self.load_existing_index()
+        self.process_path()
+        
+        if not self.args.dry_run:
+            self.save_index()
+        
+        report = self.generate_report()
+        
+        if self.args.output == 'JSON':
+            print(json.dumps(report, indent=2))
+        elif self.args.output == 'YAML':
+            try:
+                import yaml
+                print(yaml.dump(report, allow_unicode=True))
+            except ImportError:
+                logger.warning("PyYAML no instalado. Usando JSON como fallback.")
+                print(json.dumps(report, indent=2))
+        else:
+            summary = (
+                f"{report['archivos_procesados']} archivos hasheados, "
+                f"{report['archivos_modificados']} modificados, "
+                f"{report['errores']} errores "
+                f"(agente: {report['agente']}, "
+                f"firma: {'sí' if report['firma_utilizada'] else 'no'}, "
+                f"hooks: {report['hooks_ejecutados']} ejecutados, "
+                f"origen: {report['origen_disparo']})"
+            )
+            print(summary)
+
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="Generador de hashes multi-agente para ALMA_RESIST"
+    )
+    
+    # Argumentos principales
+    parser.add_argument('--ruta_objetivo', required=True, help="Ruta a archivo o directorio")
+    parser.add_argument('--algoritmo', default='sha256', choices=SUPPORTED_ALGORITHMS, 
+                       help="Algoritmo de hashing a utilizar")
+    parser.add_argument('--index', default=DEFAULT_INDEX, help="Ruta al archivo índice")
+    parser.add_argument('--excluir', help="Patrones de exclusión (separados por comas)")
+    
+    # Metadatos y trazabilidad
+    parser.add_argument('--agente', required=True, help="Nombre del agente ejecutor")
+    parser.add_argument('--entidad', help="Entidad asociada (opcional)")
+    parser.add_argument('--comentario', help="Comentario o tag descriptivo")
+    parser.add_argument('--tags', help="Tags adicionales (separados por comas)")
+    parser.add_argument('--permisos', help="Permisos de acceso (ej: 'rw', 'ro')")
+    parser.add_argument('--origen_disparo', default='manual', help="Origen del disparo del script (manual, watcher, agente, CI, etc)")
+    
+    # Características avanzadas
+    parser.add_argument('--logs_por_agente', action='store_true', 
+                       help="Genera logs específicos por agente")
+    parser.add_argument('--firmar', action='store_true', 
+                       help="Habilita firma digital (placeholder)")
+    parser.add_argument('--hook', help="Comando/script hook a ejecutar post-procesamiento")
+    parser.add_argument('--dry_run', action='store_true', 
+                       help="Ejecuta sin realizar cambios permanentes")
+    parser.add_argument('--validar', action='store_true', 
+                       help="Valida contra hashes existentes")
+    
+    # Opciones de salida
+    parser.add_argument('--output', choices=['CLI', 'JSON', 'YAML'], default='CLI',
+                       help="Formato de salida del reporte")
+    
+    return parser.parse_args()
+
+def main():
+    args = parse_args()
+    
+    # Verificar ruta objetivo
+    if not os.path.exists(args.ruta_objetivo):
+        logger.error(f"La ruta objetivo no existe: {args.ruta_objetivo}")
+        sys.exit(1)
+    
+    # Iniciar procesamiento
+    generator = HashGenerator(args)
+    generator.run()
+
+if __name__ == "__main__":
+    main()

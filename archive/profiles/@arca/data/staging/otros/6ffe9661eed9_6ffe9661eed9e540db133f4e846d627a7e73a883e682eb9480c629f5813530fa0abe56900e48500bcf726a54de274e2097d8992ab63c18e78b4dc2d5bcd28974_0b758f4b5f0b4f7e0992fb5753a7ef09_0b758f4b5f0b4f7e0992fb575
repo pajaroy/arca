@@ -1,0 +1,25 @@
+{
+  "protocolo": "bitacora_semiautomatica",
+  "descripcion": "Este prompt define el flujo de carga semiautomática de bitácoras institucionales en `control_central`, delegando al asistente la redacción lógica de los campos y devolviendo el comando final listo para ejecutar. El usuario solo debe indicar que desea registrar un evento y pasar este prompt como base.\n",
+  "script": "/home/bird/alma_core/core/notebooks/cli/bitacora/add_bitacora_entry_v0.1.0.py",
+  "bitacora": "/home/bird/alma_core/docs/journal/bitacora_viva.yaml",
+  "campos_a_completar": {
+    "accion": "",
+    "descripcion": "",
+    "motivo": "",
+    "ejecutado_por": "Kael",
+    "tags": []
+  },
+  "uso": {
+    "flujo": [
+      {
+        "El usuario detecta un evento relevante y activa el protocolo diciendo": "Te paso el prompt base para cargar bitacora con este evento."
+      },
+      "El asistente completa automáticamente los campos con base en el contexto reciente.",
+      "Se devuelve un comando listo para terminal con todos los parámetros rellenados."
+    ]
+  },
+  "ejemplo": {
+    "comando": "python3 /home/bird/alma_core/core/cli/bitacora/add_bitacora_entry_v0.1.0.py \\\n  --accion \"Carga del script de memorias v0.1.1\" \\\n  --descripcion \"Se cargó la versión refactorizada del script para carga de memorias institucionales, solucionando problemas de parsing JSON.\" \\\n  --motivo \"El script anterior generaba estructuras JSON inválidas. Esta versión aplica validación, backups y escritura dual sincronizada.\" \\\n  --ejecutado_por \"Kael\" \\\n  --tags \"memorias,cli,fix,v0.1.1\" \\\n  --bitacora \"/home/bird/alma_core/docs/journal/bitacora_viva.yaml\"\n"
+  }
+}

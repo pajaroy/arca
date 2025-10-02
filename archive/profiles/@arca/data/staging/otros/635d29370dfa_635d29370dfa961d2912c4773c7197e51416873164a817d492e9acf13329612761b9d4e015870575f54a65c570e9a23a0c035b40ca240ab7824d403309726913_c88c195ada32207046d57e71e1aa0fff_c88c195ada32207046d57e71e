@@ -1,0 +1,33 @@
+{
+  "changelog": [
+    {
+      "version": "0.1.1",
+      "fecha": "2025-06-08",
+      "autor": "Santi & Kael",
+      "cambios": [
+        "Validación funcional del script cargar_memorias_v0.1.1",
+        "Reubicación definitiva de memorias institucionales",
+        "Ejecución CLI con verificación de duplicados"
+      ],
+      "impacto": "Establece el primer flujo completo operativo de carga + trazabilidad institucional.",
+      "tags": [
+        "memorias",
+        "cli",
+        "estructura",
+        "bitacora"
+      ]
+    },
+    {
+      "version": "0.1.0",
+      "fecha": "2025-06-08",
+      "autor": "Santi",
+      "cambios": [
+        "Implementación de CLI para bitácora viva",
+        "Implementación de CLI para changelog",
+        "Validación semántica de versiones",
+        "Soporte para dry-run y backups automáticos"
+      ],
+      "impacto": "Primer versión estable del núcleo de control de cambios para ALMA_RESIST. Permite trazabilidad clara desde terminal"
+    }
+  ]
+}

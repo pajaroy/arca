@@ -1,0 +1,131 @@
+{
+  "entradas": [
+    {
+      "fecha": "2025-06-08T03:27:45.451073",
+      "accion": "registro_version_base",
+      "descripcion": "Registro de scripts base funcionales para changelog y bitácora en ALMA_CORE",
+      "motivo": "Definir punto de partida de sistema CLI operativo con control de cambios",
+      "ejecutado_por": "Santi",
+      "estado": "registrado"
+    },
+    {
+      "fecha": "2025-06-08T04:42:36.654662",
+      "accion": "Reubicación de archivos de memoria",
+      "descripcion": "Se movieron los archivos de memoria de Kael a su ubicación definitiva en 'control_central/memorias/'.",
+      "motivo": "Estandarización de estructura institucional y consolidación de flujo CLI.",
+      "ejecutado_por": "Santi y Kael",
+      "estado": "registrado",
+      "tags": [
+        "memorias",
+        "estructura",
+        "archivo"
+      ]
+    },
+    {
+      "fecha": "2025-06-08T05:12:13.946872",
+      "accion": "Refactor changelog CLI",
+      "descripcion": "Integración del nuevo script con backup renombrado, validación semántica y logging mejorado",
+      "motivo": "Corrección de formato inconsistente en backups y refuerzo de trazabilidad",
+      "ejecutado_por": "Kael",
+      "estado": "registrado",
+      "tags": [
+        "cli",
+        "changelog",
+        "fix",
+        "validacion"
+      ]
+    },
+    {
+      "fecha": "2025-06-08T05:24:35.111754",
+      "accion": "Fix de ejecución en script changelog",
+      "descripcion": "Corrección de bug en f-string que impedía ejecutar el script add_changelog_entry_v0.1.1.py. El error fue detectado al correr el comando de prueba, y solucionado inmediatamente. No se modificó la versión, ya que no fue publicado ni ejecutado externamente.",
+      "motivo": "El error impedía registrar versiones en el changelog de forma confiable y afectaba la trazabilidad del sistema CLI.",
+      "ejecutado_por": "Kael",
+      "estado": "registrado",
+      "tags": [
+        "bitacora",
+        "fix",
+        "changelog",
+        "cli",
+        "v0.1.1"
+      ]
+    },
+    {
+      "fecha": "2025-06-08T05:30:19.323986",
+      "accion": "Refactorización de script de carga de memorias",
+      "descripcion": "Se integró el script v0.1.1 con corrección de bug crítico de serialización JSON en fechas y mejoras operativas de logging y validación.",
+      "motivo": "Error detectado al usar el script v0.1.0 que impedía la escritura en formato JSON. DeepSeek entregó refactor con solución y mejoras estructurales.",
+      "ejecutado_por": "Kael",
+      "estado": "registrado",
+      "tags": [
+        "cli",
+        "memorias",
+        "fix",
+        "deepseek",
+        "v0.1.1"
+      ]
+    },
+    {
+      "fecha": "2025-06-08T06:15:52.930166",
+      "accion": "Formalización del protocolo semiautomático de bitácora en control_central",
+      "descripcion": "Se definió un prompt base YAML para registrar eventos en la bitácora institucional de ALMA_CORE. Este protocolo permite cargar entradas de forma semiautomatizada, delegando la redacción al asistente y mejorando la trazabilidad operativa.",
+      "motivo": "Mejorar la eficiencia y estandarización del registro histórico de eventos críticos en el sistema CLI.",
+      "ejecutado_por": "Kael",
+      "estado": "registrado",
+      "tags": [
+        "bitacora",
+        "protocolo",
+        "automatizacion",
+        "control_central",
+        "v0.1.0"
+      ]
+    },
+    {
+      "fecha": "2025-06-08T06:58:37.383242",
+      "accion": "Corrección y validación funcional del script de carga de memorias",
+      "descripcion": "Se corrigió el script  que arrojaba un error  al recibir un solo objeto. Se agregó una verificación  para envolverlo como lista. La memoria fue cargada exitosamente luego del fix.",
+      "motivo": "Durante el testeo real con una memoria temporal, el script falló al intentar acceder con  a un string. Se solucionó directamente y se verificó funcionalidad total.",
+      "ejecutado_por": "Kael",
+      "estado": "registrado",
+      "tags": [
+        "memorias",
+        "cli",
+        "debug",
+        "v0.1.1",
+        "fix"
+      ]
+    },
+    {
+      "fecha": "2025-06-08T08:42:03.010429",
+      "accion": "Integración operativa y encarnación de KAEL v0.1.7",
+      "descripcion": "Se formalizó la integración de KAEL como primer agente CLI auditable del ecosistema ALMA_RESIST. Se cargó el YAML v0.1.7 y se ejecutó el protocolo de arranque institucional.",
+      "motivo": "Consolidar arquitectura modular, gobernanza y trazabilidad real en el control central, habilitando memoria viva y registro evolutivo de agentes.",
+      "ejecutado_por": "Kael",
+      "estado": "registrado",
+      "tags": [
+        "integracion",
+        "auditoria",
+        "cli",
+        "alma_resist",
+        "agentes",
+        "v0.1.7"
+      ]
+    },
+    {
+      "fecha": "2025-06-08T09:04:05.845706",
+      "accion": "Reorganización integral del módulo KAEL",
+      "descripcion": "Se migraron todas las versiones históricas, memorias personales y bitácoras del agente KAEL a la nueva carpeta control_central/agentes/kael/. Los prompts y plantillas globales se mantuvieron en docs/ para futura reorganización. Se dejó README institucional para onboarding de nuevos agentes.",
+      "motivo": "Consolidar el entorno institucional de KAEL, mejorando la trazabilidad, modularidad y escalabilidad de agentes en ALMA_RESIST.",
+      "ejecutado_por": "Kael",
+      "estado": "registrado",
+      "tags": [
+        "reorganizacion",
+        "modularidad",
+        "agentes",
+        "kael",
+        "control_central",
+        "onboarding"
+      ]
+    }
+  ]
+}

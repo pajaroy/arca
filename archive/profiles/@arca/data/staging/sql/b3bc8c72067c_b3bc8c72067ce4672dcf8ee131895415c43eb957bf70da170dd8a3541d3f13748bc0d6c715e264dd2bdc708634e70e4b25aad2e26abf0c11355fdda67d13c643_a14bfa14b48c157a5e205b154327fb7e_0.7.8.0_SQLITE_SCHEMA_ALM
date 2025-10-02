@@ -1,0 +1,16 @@
+
+-- Esquema de la base de datos ALMA LIBRE
+
+CREATE TABLE IF NOT EXISTS memorias (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    titulo TEXT NOT NULL,
+    tipo TEXT, -- emocional, técnica, estratégica, etc.
+    bloque TEXT, -- 1, 2, 3, etc. según estructura del prompt
+    seccion TEXT, -- 1.1, 2.3, etc.
+    fecha_creacion TEXT,
+    ultima_actualizacion TEXT,
+    estado TEXT DEFAULT 'activa', -- activa, archivada, propuesta_actualizacion, etc.
+    version TEXT,
+    etiquetas TEXT, -- lista separada por comas
+    contenido TEXT -- cuerpo completo en Markdown o YAML+Markdown
+);

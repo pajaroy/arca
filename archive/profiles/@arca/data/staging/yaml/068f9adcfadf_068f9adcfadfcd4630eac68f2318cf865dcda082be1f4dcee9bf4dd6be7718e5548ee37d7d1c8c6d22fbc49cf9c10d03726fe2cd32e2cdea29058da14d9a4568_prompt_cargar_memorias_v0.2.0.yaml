@@ -1,0 +1,64 @@
+id: prompt_cargar_memorias_v0.2.0
+version: "0.2.0"
+tipo: "prompt"
+schema: "almaresist.prompt_script_v1"
+descripcion: |
+  Solicitud de script CLI avanzado para la carga y gestión antifallos de memorias institucionales en el ecosistema ALMA_RESIST.
+  El script debe cumplir los estándares de encabezado, validación, backup automático, changelog, y sincronización triple-formato (YAML, JSON, Markdown).
+  **NOVEDAD:** Cada memoria debe guardarse tanto en la base centralizada (institucional) como en el archivo/contexto personal del agente/autor correspondiente, ambos con lógica de triplicado y backups.
+  Arquitectura preparada para migración a SQLite en futuras versiones.
+requerimientos:
+  - Permitir agregar una nueva memoria institucional con los siguientes campos obligatorios:
+      - id (UUID o hash único)
+      - fecha (ISO-8601 UTC)
+      - agente (nombre del agente o usuario)
+      - tipo (tipo de memoria: aprendizaje, error, decisión, insight, etc.)
+      - autor (nombre/correo o identificador del autor)
+      - contenido (texto libre, sin límite)
+      - modulo (módulo de origen, ej: trading, cultivo, cli, etc.)
+      - tags (lista de strings)
+  - Al registrar una memoria:
+      - Guardar en el archivo central (ej: memoria_centralizada.yaml)
+      - Guardar en el archivo personal del agente (ej: memorias_{agente}.yaml)
+      - Triplicar ambos archivos a .json y .md con encabezado YAML como front-matter
+      - Generar backup antes de cualquier modificación (en `backups/`, con timestamp y hash)
+      - Actualizar hash de integridad tras cada cambio (campo `hash` por memoria y hash institucional del archivo)
+      - Registrar la operación en changelog institucional (changelog_memoria_centralizada.yaml) y, opcional, en el changelog personal del agente
+      - Validar unicidad de `id` en ambos archivos antes de agregar
+  - Permitir importar batch de memorias desde directorios externos, aplicando la misma lógica
+  - Implementar sistema de lockfile para concurrencia
+  - Proveer comandos adicionales:
+      - add: Agrega una nueva memoria
+      - batch: Importa memorias desde un directorio
+      - query: Consulta avanzada (por agente, tipo, tags, etc.)
+      - metrics: Métricas institucionales (por agente, tipo, tags, recuentos)
+      - export-sqlite: Exporta todas las memorias a una base SQLite (preparar esqueleto)
+      - validate: Valida integridad de todos los archivos y hashes
+  - Triplicado automático (YAML, JSON, Markdown) en cada operación (add, batch, update)
+  - Opcional: Soporte de versiónado git para archivos críticos
+  - Debe ser auditable, extensible y preparado para escalar a sistemas multiagente o cloud
+
+estandares_tecnicos:
+  - Python 3.8+ (preferente 3.10+)
+  - Librerías: pyyaml, json, argparse, fcntl, uuid, hashlib, pathlib, collections, datetime
+  - Seguir plantillas universales ALMA_RESIST para metadatos y changelogs
+  - Encabezado YAML/documentación como bloque inicial en los scripts
+  - Código modular, funciones desacopladas, alta claridad de logs y errores
+
+flujos_criticos:
+  - Toda operación que modifique archivos debe crear backup y registrar en changelog
+  - Si se detecta inconsistencia, el sistema debe restaurar desde el último backup válido y dejar constancia en logs
+  - Cada memoria debe poder rastrearse (hash, fecha, agente, fuente, commit)
+
+campos_personalizables:
+  - Permitir rutas custom de archivos y backups por parámetros CLI
+  - Permitir dry-run y verbose
+
+out:
+  - Script principal: cargar_memorias_v0.2.0.py (listo para modularizar más adelante)
+  - README técnico con ejemplos de uso, estructura, comandos y casos de error
+  - Ejemplos de memoria, changelog y backup
+  - Documentación en encabezado y en README
+
+responsable: "Equipo de Operaciones ALMA_RESIST"
+last_modified: "2025-06-18T08:00:00Z"

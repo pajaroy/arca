@@ -1,0 +1,112 @@
+## 1. **Flujo de Ingreso Ideal – Control Central (desde el minuto cero)**
+
+### **Paso 1: Ingreso del archivo original**
+
+- **Siempre en .md**, con bloque YAML bien definido arriba (metadata).
+    
+- **Norma:** Si el archivo entra sin YAML, el sistema lo rechaza o lo manda a una carpeta “pendientes de metadata”.
+    
+- **Naming:** Usa un esquema consistente: `YYYY-MM-DD_nombre_descriptivo.md`
+    
+
+---
+
+### **Paso 2: Extracción/Actualización automática de YAML (Jamal)**
+
+- **Script o proceso** que detecta nuevos `.md` en la carpeta `downloads` o donde corresponda.
+    
+- **Extrae el bloque YAML** y lo agrega a un archivo `.yaml` maestro, o genera uno individual por nota (según escala).
+    
+- **Si el YAML cambia en el `.md`, se actualiza en el YAML global automáticamente**.
+    
+
+---
+
+### **Paso 3: Conversión a JSON (Jason)**
+
+- De cada `.yaml` se genera un `.json` equivalente.
+    
+- Todos los JSON van a un “índice” único, o uno por archivo, según volumen.
+    
+- Este JSON es la base para IA, búsquedas avanzadas, sincronización, etc.
+    
+
+---
+
+### **Paso 4: Versionado automático**
+
+- Cada vez que entra, se actualiza, o se borra un archivo, se hace commit a git (o sistema de versiones que uses).
+    
+- Así, podés auditar, revertir, comparar y ver la evolución de cada nota y cada metadato.
+    
+
+---
+
+### **Paso 5: Auditoría y Control**
+
+- **Alertas automáticas:**  
+    Si falta metadata, si hay conflicto de versiones, si el archivo no está en todos los formatos, si hay inconsistencias, etc.
+    
+- **Logs de todo:**  
+    Cada acción (creación, actualización, borrado) queda registrada para trazabilidad.
+    
+
+---
+
+## 2. **Tips críticos para no crear deuda técnica:**
+
+- **Scripts simples, sin magia negra.**  
+    Lo que no entiendas vos, no lo uses. Mejor 3 scripts chicos que un monstruo que no puedas mantener.
+    
+- **Automatizá la mínima unidad de trabajo:**  
+    Cada archivo que entra pasa por el mismo pipeline. Nada de procesos “a mano”.
+    
+- **Todo el sistema debe ser auditable y exportable.**  
+    Nada de formatos raros, ni estructuras que solo una herramienta pueda leer.
+    
+
+---
+
+## 3. **¿Qué NO hacer?**
+
+- No mezcles versiones intermedias (archivos “en proceso”) con los finales en la misma carpeta.
+    
+- No dejes archivos sin metadata.
+    
+- No permitas cambios “por fuera” del flujo (ej: editar JSON a mano).
+    
+
+---
+
+## 4. **Resumen del pipeline ideal inicial (en pseudocódigo):**
+
+```pseudocode
+watch /control_central/downloads/*.md
+    if new_md_file:
+        if no_yaml:
+            move to /pendientes_de_metadata/
+            alert("Falta metadata")
+        else:
+            extract_yaml(md) → /yaml/
+            convert_yaml_to_json(yaml) → /json/
+            commit_all_changes_to_git()
+            log("Archivo procesado correctamente")
+```
+
+---
+
+## 5. **¿Dónde empezar?**
+
+1. **Definí el estándar de archivo .md** (naming, metadata obligatoria).
+    
+2. **Armá el script mínimo viable** que:
+    
+    - Chequee YAML,
+        
+    - Extraiga a YAML puro,
+        
+    - Convierta a JSON.
+        
+3. **Dejá corriendo ese watcher** en `downloads` (o donde definas).
+    
+4. **Probá el flujo completo,** ajustá, y recién ahí extendelo al resto del sistema.

@@ -1,0 +1,92 @@
+
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5 (v0.5)
+
+## 🎯 Objetivo General
+
+Desarrollar un roadmap técnico ejecutable y robusto para **ALMA_RESIST**, un sistema IA modular offline con:
+
+- Soberanía tecnológica total (sin nubes).
+- Privacidad radical (logs cifrados, backups offline).
+- Resiliencia en entornos de hardware limitado.
+- Mantenibilidad individual + IA como copiloto (10hs/día).
+
+
+## ⚙️ Especificaciones del Entorno
+
+**Requisitos Técnicos Base:**
+- SO: Linux x86_64 (Debian/Ubuntu)
+- RAM: 8GB (soporte low-memory)
+- CPU: 4 núcleos
+- Python: 3.10.12+ (venv)
+- Sin conexión a internet
+
+
+## 📁 Archivos de Referencia
+
+- `ALMA_LIBRE/`
+- `idea_base_0.0.9.md`
+- `docs/flujo_secuencial.mmd`
+
+
+### 2. Checklists por Módulo
+
+#### Validación Cross-Hardware
+```markdown
+- [ ] Script `stress_test.py` simula carga por núcleos (2/4/8)
+- [ ] Reporte en `docs/benchmarks.md` por configuración
+- [ ] Verificación de tiempo medio de respuesta <3s
+```
+
+#### ALMA_LOADER
+```markdown
+- [ ] Verifica SHA-256 de backups antes de restaurar
+- [ ] Restauración parcial posible (logs OK, DB fallida)
+- [ ] Retención máxima de 30 días
+- [ ] Eliminación segura: `shred -u` + overwrite (3 pasadas)
+```
+
+#### Dependencias Offline
+```markdown
+- [ ] `install_offline.sh` instala todas las dependencias necesarias
+- [ ] `update_deps.sh` permite sincronizar desde USB o red local
+- [ ] Firma GPG de los paquetes en cache
+```
+
+
+### 4. Código de Referencia con Fallos Controlados
+
+```python
+def cargar_modelo(ruta: str, quant: int) -> bool:
+    """Carga modelo GGUF con validación y logging."""
+    try:
+        if not os.path.exists(ruta):
+            raise FileNotFoundError("E-201: Archivo no encontrado")
+        if quant not in {3, 4, 8}:
+            raise ValueError("E-202: Quant inválido")
+        # Simular carga con llama.cpp aquí
+        return True
+    except Exception as e:
+        logger.error(f"[E-999] Error en carga de modelo: {e}")
+        return False
+```
+
+
+## 🧠 Política de Datos y Recuperación
+
+### Retención y Eliminación Segura
+```markdown
+- Logs se mantienen máximo 30 días
+- Eliminación:
+  - Overwrite: 0x00, 0xFF, aleatorio
+  - Comando `shred -u` para logs en sistemas UNIX
+```
+
+
+# 📋 Changelog v0.5
+
+- ✅ Checklist detallado para validación cross-hardware
+- ✅ Scripts de backup y restauración con SHA-256 y restauración parcial
+- ✅ Eliminación segura por sobrescritura y `shred -u`
+- ✅ `update_deps.sh` para sincronización offline y GPG de paquetes
+- ✅ Columnas cuantificables en roadmap (criterios + esfuerzo + prioridad)
+- ✅ Reglas para integrar respuestas a preguntas críticas en diseño

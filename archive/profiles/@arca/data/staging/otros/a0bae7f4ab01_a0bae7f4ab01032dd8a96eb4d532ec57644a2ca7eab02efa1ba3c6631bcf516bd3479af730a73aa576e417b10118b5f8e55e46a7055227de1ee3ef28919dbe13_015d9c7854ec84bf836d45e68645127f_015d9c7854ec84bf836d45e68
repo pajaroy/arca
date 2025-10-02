@@ -1,0 +1,175 @@
+# 📓 Bitácora Consolidada – 2025-06-01
+
+
+## 🧠 Inicio Formal del Sistema `asesor-IA`
+
+**Confirmación de Roles:**  
+- GPT como auditor estructural  
+- DeepSeek como asesor técnico crítico  
+- Santi como orquestador y juez final  
+
+**Infraestructura creada:**  
+Se generaron las carpetas:
+- `control_central/asesor-ia/`
+- `control_central/asesor-ia/sesiones/`
+- `control_central/asesor-ia/status/`
+
+**Contrato fundacional firmado y activado:**  
+DeepSeek y GPT aceptaron formalmente sus roles con compromiso activo.  
+DeepSeek ya comenzó a operar bajo `tech_mode=strict`. GPT está sincronizado para sesiones híbridas.
+
+**DeepSeek propone mejoras:**  
+- Auto-tagging en consultas con `!type=`, `!priority=`, `!context=`  
+- Plantillas YAML para respuestas técnicas y estructurales  
+- Router AI (`router_ai.py`) para clasificar consultas  
+- Protocolo de conflicto con hasta 3 rondas de debate entre IAs
+
+
+## ✍️ Reflexión del Día
+
+> “Hoy no solo instalamos sistemas, sino que fundamos el modelo mental de ALMA_RESIST:  
+> un sistema distribuido que no automatiza por reemplazo, sino por colaboración crítica.”
+
+
+## 1. **Dependencias y paquetes base**
+
+Instalados en ambas máquinas:
+
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y git curl tmux vim htop net-tools openssh-server unzip rsync sqlite3 python3-pip tree
+```
+
+
+## 3. **Configuración de red y SSH**
+
+* Se verificó IP de cada nodo:
+
+  * **ALMA\_CORE:** `192.168.1.33`
+  * **ALMA\_RESIST:** `192.168.1.36`
+
+  ```bash
+  hostname -I
+  ```
+* Se verificó conectividad con:
+
+  ```bash
+  ssh bird@192.168.1.36  # desde ALMA_CORE
+  ssh bird@192.168.1.33  # desde ALMA_RESIST
+  ```
+
+
+## 5. **Preparación de archivo de exclusiones para rsync**
+
+En `/home/bird/ALMA_RESIST/`:
+
+Archivo `.rsync_exclude` de ejemplo:
+
+```
+__pycache__/
+*.pyc
+*.tmp
+.DS_Store
+# logs/   # Descomentar si no se quieren sincronizar logs
+```
+
+
+## 7. **Bitácora y observaciones**
+
+* SSH automático funcionando en ambos nodos.
+* Carpeta de trabajo espejada y lista para automatización y trabajo distribuido.
+* Todos los comandos fueron ejecutados desde terminal y verificados con logs.
+
+
+# \[FIN DEL APÉNDICE DE INSTALACIÓN Y SINCRONIZACIÓN]
+
+
+# paso 4 instalacion de tmux para tener multiples terminasles (comandos basicos)
+
+🧱 1. Instalación de tmux (en ambas PCs)
+
+sudo apt update
+sudo apt install tmux -y
+
+📚 2. Guía básica de uso de tmux – Nivel inicial
+🧭 Crear una nueva sesión
+
+tmux new -s nombre_de_sesion
+
+Ejemplo:
+
+tmux new -s alma_core
+
+🔀 Comandos clave dentro de tmux
+
+Todos los comandos se inician con la tecla Ctrl + b y luego otra tecla:
+Acción	Comando
+Dividir panel horizontal	Ctrl+b → %
+Dividir panel vertical	Ctrl+b → "
+Cambiar de panel	Ctrl+b → flechas
+Crear nueva ventana	Ctrl+b → c
+Listar ventanas	Ctrl+b → w
+Cerrar panel actual	exit o Ctrl+d
+Renombrar ventana	Ctrl+b → ,
+Separarte de la sesión	Ctrl+b → d
+Reconectarte a la sesión	tmux attach -t nombre
+Listar sesiones activas	tmux ls
+Matar una sesión	tmux kill-session -t nombre
+🚀 Uso típico entre dos PCs
+
+Podés tener en una PC:
+
+tmux new -s alma_core
+
+Y en la otra:
+
+tmux new -s alma_resist
+
+Ambas con múltiples ventanas o paneles divididos para manejar scripts, logs, o conexiones SSH entre sí.
+
+
+# 📦 Instalación de Obsidian (AppImage) en Parrot OS — 100% Terminal
+
+## 1. Instalar dependencias necesarias
+```bash
+sudo apt update
+sudo apt install -y wget libfuse2
+
+2. Crear carpeta de aplicaciones portables
+
+mkdir -p $HOME/apps/obsidian
+cd $HOME/apps/obsidian
+
+3. Descargar la última versión AppImage (actualizado, siempre última versión)
+
+wget $(curl -s https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest | grep "browser_download_url.*AppImage" | grep -v "arm64" | cut -d : -f 2,3 | tr -d \") -O Obsidian.AppImage
+
+4. Dar permisos de ejecución
+
+chmod +x Obsidian.AppImage
+
+5. Ejecutar Obsidian (requiere entorno gráfico)
+
+$HOME/apps/obsidian/Obsidian.AppImage &
+
+Nota: Si querés lanzarlo por SSH, usá:
+
+ssh -X usuario@host
+
+luego ejecutá el AppImage como arriba.
+🚨 Advertencia
+
+    Obsidian solo funciona con entorno gráfico X11 (no CLI puro).
+    No puede ser usado ni instalado en modo headless o sin GUI.
+
+📑 Check de instalación
+
+    Instalación 100% terminal: ✔️
+
+    Listo para backup y restauración: ✔️
+
+    Repetible en cualquier equipo con Parrot/Debian: ✔️
+
+
+
+> Esto soluciona el 99% de los iconos faltantes/feos dentro

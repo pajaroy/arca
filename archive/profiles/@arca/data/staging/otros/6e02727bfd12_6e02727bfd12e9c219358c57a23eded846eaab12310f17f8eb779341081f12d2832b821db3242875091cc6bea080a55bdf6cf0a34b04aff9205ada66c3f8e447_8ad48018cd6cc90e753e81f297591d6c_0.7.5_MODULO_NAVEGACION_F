@@ -1,0 +1,47 @@
+
+## 🧭 Navegación funcional: Cuadernos, Módulos, Bitácora y Resúmenes
+
+El sistema ALMA LIBRE se estructura a través de **cuadernos temáticos** y **módulos funcionales** que trabajan en conjunto para articular pensamiento, ejecución y evolución.
+
+
+### 🔗 Relación entre Cuadernos y Módulos
+
+- **01 – Bitácora Central** ↔️ **01 – Alma General**
+- **02 – Reflexión (psicotrading, introspección)** ↔️ **Psicología del Trading / Salud**
+- **03 – Medicina Alternativa** ↔️ **Salud y RPL**
+- **04 – Geopolítica y Actualidad** ↔️ **Noticias Globales**
+- **05 – Trading** ↔️ **Gestor de Trades**
+- **06 – Finanzas Personales** ↔️ **Control de Finanzas**
+- **07 – Creatividad y Empresas** ↔️ **Fondo de Inversión / Cultivo Cannavir**
+- **08 – Programación** ↔️ **Desarrollo de Apps Internas**
+
+
+### 📑 Memorias por tema
+
+Cada área principal tiene su propia memoria, y cuantas más conexiones entre memorias, mejor.  
+El sistema ALMA está pensado para operar sobre 4 grandes líneas temáticas:
+
+1. **Trading e Inversiones**
+2. **Historia y Geopolítica**
+3. **Cultivo y Salud**
+4. **Programación**
+
+Estas áreas se cruzan constantemente. Ej:
+- Noticias globales afectan decisiones de trading.
+- Resultados en cultivo pueden influir en decisiones financieras.
+- La programación construye los módulos que permiten gestionar todo.
+
+
+### 🗂️ Estandarización de módulos
+
+Cada módulo tendrá su propio `README.md` con:
+
+- Nombre del módulo
+- Versión
+- Objetivo
+- Relación con cuaderno asociado
+- Estructura de archivos
+- Estado del módulo
+
+Además, se planea crear una plantilla base para que todos los README se actualicen de forma coherente y automática en el futuro.
+

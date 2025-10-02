@@ -1,0 +1,39 @@
+version: 0.1.1
+id: prompt_cargar_memorias_v0.1.1
+autor: Kael
+fecha: 2025-06-08
+tipo: prompt_tecnico
+origen: audit_cli
+tags: [cli, memorias, yaml, json, validación, deepseek]
+modulo: core/notebooks/alma-cli/memorias
+descripcion: >
+  Prompt técnico para refactorizar el script `cargar_memorias_v0.1.0.py`,
+  cuya función es cargar, validar, y sincronizar entradas de memoria institucional
+  en formato `.yaml` y `.json`, a partir de entradas externas (`.yaml`, `.md`).
+  Esta versión corrige bugs y refuerza validaciones.
+
+objetivo: >
+  Generar el script `cargar_memorias_v0.1.1.py` que:
+    - Mantenga toda la lógica de carga, validación, backup y sincronización de entradas.
+    - Corrija el error de serialización `Object of type date is not JSON serializable` usando `default=str` en `json.dump`.
+    - Agregue validación del tipo de dato en el campo `fecha`, y normalización en formato `YYYY-MM-DD`.
+    - Mejore los logs de salida para auditoría CLI.
+    - Mantenga compatibilidad total con `--dry-run`, `--verbose`, `--debug` y backups automáticos.
+
+requisitos:
+  - Incluir `default=str` en la línea de `json.dump()` para soportar fechas sin error.
+  - Validar que `memoria['fecha']` sea una cadena en formato ISO (YYYY-MM-DD); si es `datetime.date`, convertir.
+  - Permitir que el archivo YAML oficial se cree si no existe (ya funciona así, mantener).
+  - No cambiar la firma CLI ni romper retrocompatibilidad con `v0.1.0`.
+  - Código comentado y limpio, apto para auditoría del agente Kael.
+  - Usar `argparse` y `logging`, sin nuevas dependencias.
+
+extra:
+  - Si detecta errores estructurales en el YAML/Markdown de entrada, debe informar cuántos y cuáles IDs fallaron.
+  - Si hay `dry-run`, listar claramente qué acciones se *hubieran* realizado.
+  - Idealmente mostrar un resumen al final (éxitos, duplicados, inválidos).
+
+output_esperado: >
+  Un único script funcional llamado `cargar_memorias_v0.1.1.py` que pueda reemplazar al actual `v0.1.0.py`
+  y operar de forma transparente dentro del ecosistema CLI de ALMA_RESIST.
+

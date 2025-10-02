@@ -1,0 +1,20 @@
+# ✅ Confirmación de Rol – ALMA_CENTRAL
+
+**Fecha:** 2025-06-01
+**Ubicación Base:** `control_central/`
+**Documento generado automáticamente por ALMA_CENTRAL.**
+
+
+## 📍 UBICACIÓN BASE
+
+`control_central/` será el directorio maestro para la gobernanza del sistema.
+
+
+## 🚨 Reglas Estructurales
+
+> Toda acción técnica debe:
+> - Tener script `.sh` reproducible
+> - Estar documentada en `.md`
+> - Ser versionada en changelog
+> - Seguir arquitectura modular de ALMA_RESIST
+

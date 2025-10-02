@@ -1,0 +1,14 @@
+module: control/control_central
+type: core
+status: in_progress
+created: 2025-05-29
+linked_to:
+  - metodologia_estructura_autonoma_v2.md
+  - alma_resist_idea_base_0.0.0.1.md
+context_tags:
+  - role: centro_de_mando
+  - scope: validacion_global
+  - layer: sistema
+  - task: auditoria
+  - domain: infraestructura
+sha256: pendiente_generar

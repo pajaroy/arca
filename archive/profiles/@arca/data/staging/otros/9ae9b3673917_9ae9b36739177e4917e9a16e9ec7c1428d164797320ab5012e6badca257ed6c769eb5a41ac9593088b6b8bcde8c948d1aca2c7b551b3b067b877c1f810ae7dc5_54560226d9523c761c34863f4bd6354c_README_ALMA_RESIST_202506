@@ -1,0 +1,59 @@
+---
+module: versiones/v0_0_0_4_sprint_2_5_auditoria/archivos/readme_alma_resist
+type: core
+status: in_progress
+created: '2025-05-28'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# ALMA_RESIST
+
+**ALMA_RESIST** es un sistema modular, portátil y asistido por inteligencia artificial diseñado para gestionar, automatizar y documentar proyectos complejos con trazabilidad total.
+
+> Versión actual: `v0.0.0.5`  
+> Estado: `estable`  
+> Sprint: `2.5` – Auditoría Final y Consolidación  
+> Última actualización: `2025-05-28`
+
+---
+
+## 🧱 Estructura Modular
+
+| Carpeta                  | Función principal |
+|--------------------------|-------------------|
+| `core/`                  | Módulos de ejecución y lógica principal (CLI, procesamiento, integración IA) |
+| `config/`                | Configuraciones por entorno o módulo |
+| `docs/`                  | Documentación técnica, estructural y operativa del sistema |
+| `logs/`                  | Seguimiento de procesos, auditorías y registros automáticos |
+| `docs/arquitectura/`     | Idea base, whitepaper, prompt técnico, estructura documental |
+| `docs/control/`          | Centro de mando: checklists, registros, planeación, sprints activos |
+| `docs/utilidades/scripts/` | Scripts de mantenimiento, validación y automatización interna |
+
+---
+
+## 🔗 Archivos clave
+
+- `docs/version.md` → versión y ciclo de vida actual
+- `docs/changelog.md` → cambios históricos y lecciones aprendidas
+- `docs/control/sprints_activos/sprint_2.5_auditoria_checklist.md` → auditoría estructural
+- `docs/arquitectura/whitepaper/whitepaper_v1.md` → consolidación conceptual
+- `docs/arquitectura/prompt_tecnico/prompt_tecnico_base.md` → entrada técnica para IAs
+
+---
+
+## 🤖 Optimizado para IA
+
+Este sistema está estructurado para ser leído y comprendido tanto por humanos como por asistentes IA locales o remotos.
+
+Todos los archivos relevantes contienen metadatos YAML para facilitar búsqueda, trazabilidad y generación automatizada de resúmenes o respuestas.
+
+---
+
+## 👤 Autoría
+
+Desarrollado por **Santiago Calvo**, con asistencia técnica de IA (GPT-4 y variantes locales como Mistral)  
+Contacto / Proyecto: `ALMA_RESIST`, Argentina – 2025
+
+---
+

@@ -1,0 +1,81 @@
+## 🔍 Informe de Auditoría: Módulo `log_crypto.py`
+
+### 🛠️ Diagnóstico por Componente
+
+#### 1. **Generación de Claves y Manejo de Salt (Crítico)**
+- **Problema**:  
+  Cuando se usa una contraseña (`password`), el `salt` generado no se almacena con los datos cifrados. Esto imposibilita la recreación de la clave durante el descifrado, invalidando la funcionalidad de cifrado basado en contraseña.
+- **Recomendación**:  
+  - Modificar `encrypt_log` para incluir el `salt` en el archivo cifrado (formato: `salt + nonce + ciphertext`).  
+  - Actualizar `decrypt_log` para extraer el `salt` antes del descifrado.  
+  - Ejemplo de corrección en `encrypt_log`:  
+    ```python
+    # En encrypt_log:
+    if not key:
+        key, salt = self.generar_clave(return_salt=True)  # Nueva lógica para retornar salt
+    ...
+    f_out.write(salt + nonce + encrypted_data)  # Almacenar salt
+    ```
+
+#### 2. **Validación de Logs Cifrados (Alto)**
+- **Problema**:  
+  `validar_log_cifrado` solo verifica la presencia del nonce, pero no valida la integridad del tag de autenticación (16 bytes) ni el tamaño total del archivo.  
+- **Recomendación**:  
+  - Verificar que el archivo tenga al menos `nonce_len + 16 bytes` (tamaño mínimo del tag).  
+  - Implementar una validación parcial del tag (ej., intentar descifrar los primeros bytes).  
+
+#### 3. **Cobertura de Tests (Medio)**
+- **Problema**:  
+  Falta probar el flujo completo con contraseña/salt y casos extremos (archivos vacíos, datos grandes).  
+- **Recomendación**:  
+  - Añadir tests para:  
+    - Cifrado/descifrado usando contraseña y salt almacenado.  
+    - Archivos vacíos y no JSONL.  
+    - Validación de archivos con nonce válido pero datos corruptos.  
+
+#### 4. **Estilo y Convenciones (Bajo)**
+- **Problema**:  
+  Nombres en español (ej. `generar_clave`) inconsistentes con convenciones de Python.  
+- **Recomendación**:  
+  - Refactorizar a inglés (ej. `generate_key`, `validate_encrypted_log`).  
+  - Mantener comentarios en español si el equipo lo prefiere, pero unificar criterios.  
+
+#### 5. **Manejo de Errores (Medio)**
+- **Problema**:  
+  Los mensajes de error podrían exponer detalles sensibles (ej. trazas completas).  
+- **Recomendación**:  
+  - Limitar logs a información no crítica (ej. `logger.error("Error al cifrar: [DESCRIPTIVO SIN DETALLES TÉCNICOS]")`).  
+
+
+### 📝 Mejoras Propuestas (Código)
+
+#### 1. **Corrección de Generación de Clave con Salt**
+```python
+# En CryptoEngine:
+def generar_clave(self, password: bytes = None, salt: bytes = None) -> tuple[bytes, bytes]:
+    """Retorna (clave, salt) para facilitar el almacenamiento"""
+    if password:
+        if not salt:
+            salt = os.urandom(16)
+        kdf = PBKDF2HMAC(...)
+        return (kdf.derive(password), salt)
+    return (os.urandom(32), None)  # Salt no aplica
+```
+
+#### 2. **Modificación de `encrypt_log` y `decrypt_log`**
+```python
+# En encrypt_log:
+key, salt = self.generar_clave(password)  # Asume password proporcionada
+...
+f_out.write(salt + nonce + encrypted_data)
+
+# En decrypt_log:
+salt = data[:16]  # Asume salt de 16 bytes
+nonce = data[16:nonce_len+16]
+ciphertext = data[nonce_len+16:]
+```
+
+
+### 🏁 Conclusión
+
+El módulo tiene una base sólida pero requiere correcciones críticas en el manejo de `salt` para ser funcional con contraseñas. Se recomienda priorizar las modificaciones en la generación de claves y mejorar la cobertura de tests. La seguridad general es adecuada tras las correcciones propuestas, pero se sugiere una auditoría externa post-implementación.

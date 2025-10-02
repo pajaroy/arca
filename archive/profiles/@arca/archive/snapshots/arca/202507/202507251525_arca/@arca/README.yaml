@@ -1,0 +1,13 @@
+uuid: 6765e70c-7397-43b3-9dd6-ba62e3ac499f
+tipo: yaml
+formato: yaml
+nombre: README
+version: 0.1.0
+estado: activo
+fecha_creacion: '2025-07-17T07:40:50.023575'
+fecha_modificacion: '2025-07-17T07:40:50.023575'
+autor: Bird
+descripcion: Archivo creado automáticamente
+hash_integridad: ''
+
+descripcion: Archivo generado para pruebas de file_manager.

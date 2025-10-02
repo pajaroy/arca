@@ -1,0 +1,36 @@
+# 📄 RFC – Metodología de Trabajo de ALMA_RESIST
+
+📅 Fecha: 2025-05-20  
+🔢 RFC-ID: RFC-0001  
+👤 Responsable: Usuario + IA
+
+
+## 📋 Flujo de trabajo establecido
+
+1. **Planificación previa obligatoria**
+   - Crear checklist (`docs/checklists/`)
+   - Identificar tipo de bloque: Táctico / Estratégico / Experimental
+   - Determinar si se actualizarán: `changelog`, `hitos`, `resumen_mvp`, `lecciones_aprendidas`
+
+2. **Ejecución modular**
+   - Crear carpeta `core/[nombre_modulo]/`
+   - Agregar test: `tests/test_[nombre_modulo].py`
+   - Crear prompt: `prompts/prompt_[nombre_modulo].md`
+   - Registrar cambios en `changelog.md`
+
+3. **Documentación asociada**
+   - Actualizar `metodologia_de_trabajo.md` si cambia el enfoque
+   - Agregar lecciones a `lecciones_aprendidas.md` si corresponde
+   - Registrar estructura con `tree` en `auditorias/`
+
+4. **Versionamiento**
+   - Congelar versiones estables como `versiones/`
+   - Dejar solo una versión activa por documento estratégico
+
+
+## 🔄 Cambios esperados a futuro
+
+- Automatización de generación de carpetas + plantillas vía CLI
+- RFCs colaborativos entre humanos + IA (modelo tipo ALMA_PROPOSALS)
+- Checklists autocontenidas con validación por script
+

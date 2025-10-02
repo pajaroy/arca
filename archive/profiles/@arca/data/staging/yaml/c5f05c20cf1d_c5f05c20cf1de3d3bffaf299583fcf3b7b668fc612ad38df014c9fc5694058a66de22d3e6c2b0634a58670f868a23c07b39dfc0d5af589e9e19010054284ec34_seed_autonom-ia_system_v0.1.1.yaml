@@ -1,0 +1,36 @@
+descripcion: |
+  Sistema mejorado para autonomía avanzada dentro de ALMA_RESIST, incluyendo mejoras en la toma de decisiones, verificación de integridad, y un sistema de recuperación ante fallos.
+
+objetivo: |
+  Mejorar la autonomía de los agentes, optimizar la trazabilidad, y garantizar la seguridad mediante la integración de verificación en tiempo real y un sistema de reglas automatizadas.
+
+estructura:
+  - **agentes:** Directorios y archivos de cada agente con metadatos.
+  - **bitacora:** Registro comprimido con retención inteligente.
+  - **memorias_institucionales:** Acceso solo lectura, con propuesta de cambios.
+  - **memorias_personales:** Memorias sincronizadas bidireccionalmente con validación de integridad.
+  - **index.json:** Índice centralizado actualizado con hashes y metadatos.
+  - **navegacion_map.yaml:** Mapa de navegación que define las relaciones entre los agentes y componentes del sistema.
+
+acciones_autonomas:
+  - **navegar:** Los agentes navegan autónomamente por su directorio asignado.
+  - **decisiones:** Los agentes toman decisiones basadas en metadatos, con un motor de reglas basado en cambios de archivos.
+  - **sincronizacion:** Sincronización bidireccional de memorias personales con verificación de consistencia.
+
+protocolo_navegacion:
+  reglas:
+    - **Lectura**: Permiso de lectura total dentro del directorio del agente.
+    - **Escritura**: Permiso de escritura en sus propias memorias y bitácoras.
+    - **Propuestas de cambio**: Los agentes pueden proponer cambios a las memorias institucionales, pero estos deben ser validados por Centralesis.
+
+protocolo_integridad:
+  descripcion: >
+    Los agentes serán responsables de validar la integridad de sus archivos y memorias utilizando un agente auditor independiente. Esto permitirá detectar alteraciones no autorizadas de forma inmediata.
+
+protocolo_de_sincronizacion:
+  bidireccional: "Sincronización en tiempo real de memorias personales."
+  unidireccional: "Sincronización de memorias institucionales hacia los agentes."
+
+protocolo_auditoria:
+  auditoria: "Auditoría continua con un sistema de verificación automática cada 5 minutos."
+  logs_comprimidos: "Bitácoras estructuradas y comprimidas para eficiencia en almacenamiento."

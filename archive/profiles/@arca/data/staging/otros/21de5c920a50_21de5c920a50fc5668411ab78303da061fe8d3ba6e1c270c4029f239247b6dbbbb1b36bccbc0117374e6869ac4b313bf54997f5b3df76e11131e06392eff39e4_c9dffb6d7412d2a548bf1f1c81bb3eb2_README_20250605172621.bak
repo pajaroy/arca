@@ -1,0 +1,37 @@
+---
+module: versiones/v0_0_0_2_metodologias/readme
+type: core
+status: in_progress
+created: '2025-05-22'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# Versión v0.0.0.2_documentacion
+
+Esta versión contiene el paquete documentado del **Sprint 2.3 - Corrección de Metadatos** del proyecto ALMA_RESIST.
+
+### 📦 Contenido principal:
+- Automatización de validación y corrección de metadatos (`fix_metadata.py`, `force_snake_case_modules.py`)
+- Integración de la metodología `metodologia_agregado_archivos.md` (v8)
+- Script bash de automatización `integrar_nuevo_archivo.sh`
+- Carpetas de respaldo y validación (`backup_metadata`, `backup_snakecase`)
+- Estructura validada 100% con `validate_docs.py`
+
+### 🧩 Estructura del ZIP
+```
+v0.0.0.2_documentacion/
+├── README.md
+├── VERSION.txt
+├── integrar_nuevo_archivo.sh
+├── fix_metadata.py
+├── force_snake_case_modules.py
+├── metodologia_agregado_archivos.md
+└── ...
+```
+
+---
+
+**Estado**: Finalizado  
+**Sprint**: 2.3  
+**Fecha de cierre**: 2025-05-22

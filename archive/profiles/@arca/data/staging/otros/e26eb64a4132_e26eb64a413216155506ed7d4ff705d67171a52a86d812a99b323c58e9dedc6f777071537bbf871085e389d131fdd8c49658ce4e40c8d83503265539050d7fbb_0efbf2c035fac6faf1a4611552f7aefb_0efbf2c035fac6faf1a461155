@@ -1,0 +1,63 @@
+{
+  "version": "0.2.0",
+  "tipo": "changelog",
+  "schema": "almaresist.changelog_v1",
+  "descripcion": "Registro de cambios y eventos clave del módulo cargar_memorias_v0.2.0.py.\nTodas las operaciones que modifican archivos de memorias centralizadas y por agente\nquedan registradas aquí, incluyendo backups, validaciones y sincronización triple-formato.\n",
+  "estructura": [
+    "cambios"
+  ],
+  "tags": [
+    "memorias",
+    "cli",
+    "institucional",
+    "backup",
+    "triple-formato",
+    "changelog"
+  ],
+  "linked_to": [
+    "../src/cargar_memorias_v0.2.0.py",
+    "../README.yaml",
+    "../docs/",
+    "../docs/README.yaml",
+    "../docs/prompt_cargar_memorias_v0.2.0.yaml",
+    "../../memoria_centralizada.yaml",
+    "../../changelog_memoria_centralizada.yaml",
+    "../../backups/",
+    "../../memorias_{agente}.yaml",
+    "../../changelog_{agente}.yaml"
+  ],
+  "responsable": "Equipo de Operaciones ALMA_RESIST",
+  "hash_verificacion": "sha256:pending",
+  "historial": [
+    {
+      "fecha": "2025-06-18T13:00:00Z",
+      "accion": "release",
+      "descripcion": "Versión inicial v0.2.0 del CLI de memorias institucionales.\n- Sincronización dual (archivo central + archivo de agente)\n- Triple formato automático (yaml/json/md)\n- Sistema de backups indestructibles antes de cada operación\n- Changelog central y por agente, validación avanzada, control de unicidad\n- Comandos: add, batch, query, validate, metrics, export-sqlite\n",
+      "responsable": "Kael",
+      "archivos_afectados": [
+        "../src/cargar_memorias_v0.2.0.py",
+        "../../memoria_centralizada.yaml",
+        "../../memorias_{agente}.yaml",
+        "../../backups/",
+        "../../changelog_memoria_centralizada.yaml",
+        "../../changelog_{agente}.yaml",
+        "../../docs/"
+      ]
+    },
+    {
+      "fecha": "2025-06-18T13:02:00Z",
+      "accion": "primer backup y prueba de carga",
+      "descripcion": "Carga y backup de memorias centralizadas y de agente exitosos. Validación dry-run y prueba de rollback desde backup.",
+      "responsable": "Kael",
+      "archivos_afectados": [
+        "../../memoria_centralizada.yaml",
+        "../../memorias_{agente}.yaml",
+        "../../backups/",
+        "../../changelog_memoria_centralizada.yaml",
+        "../../changelog_{agente}.yaml"
+      ]
+    }
+  ],
+  "last_modified": "2025-06-18T13:02:00Z",
+  "last_modified_by": "Kael"
+}

@@ -1,0 +1,12 @@
+{
+  "autor": "Kael",
+  "fecha": "2025-06-08",
+  "id": "MEM_KAEL_2025-06-08_05",
+  "tipo": "flujo_base",
+  "contenido": "Se estableció el protocolo híbrido de carga semiautomática para memorias del agente Kael. Este flujo permite al usuario registrar eventos relevantes de forma estructurada sin necesidad de reescribir scripts ni rutas. El prompt actúa como plantilla y el asistente genera automáticamente el comando con todos los campos rellenos para su ejecución inmediata.\n",
+  "relacionado_con": [
+    "prompt_cargar_memorias_kael.yaml",
+    "cargar_memorias_v0.1.1.py"
+  ],
+  "resumen": "Se definió un flujo híbrido para carga de memorias en Kael, integrando prompt base, redacción asistida y ejecución CLI semi-automatizada.\n"
+}

@@ -1,0 +1,38 @@
+
+# Autonom-IA – Navegación Autónoma y Trazabilidad del Sistema ALMA_RESIST
+
+## Descripción
+Sistema mejorado para autonomía avanzada dentro de ALMA_RESIST, incluyendo mejoras en la toma de decisiones, verificación de integridad y un sistema de recuperación ante fallos.
+
+## Objetivo
+Mejorar la autonomía de los agentes, optimizar la trazabilidad, y garantizar la seguridad mediante la integración de verificación en tiempo real y un sistema de reglas automatizadas.
+
+## Estructura
+- **Agentes**: Directorios y archivos de cada agente con metadatos.
+- **Bitácora**: Registro comprimido con retención inteligente.
+- **Memorias institucionales**: Acceso solo lectura, con propuesta de cambios.
+- **Memorias personales**: Memorias sincronizadas bidireccionalmente con validación de integridad.
+- **Index.json**: Índice centralizado actualizado con hashes y metadatos.
+- **Navegacion_map.yaml**: Mapa de navegación que define las relaciones entre los agentes y componentes del sistema.
+
+## Acciones Autónomas
+- **Navegar**: Los agentes navegan autónomamente por su directorio asignado.
+- **Decisiones**: Los agentes toman decisiones basadas en metadatos, con un motor de reglas basado en cambios de archivos.
+- **Sincronización**: Sincronización bidireccional de memorias personales con verificación de consistencia.
+
+## Protocolo de Navegación
+- **Reglas**:
+  - **Lectura**: Permiso de lectura total dentro del directorio del agente.
+  - **Escritura**: Permiso de escritura en sus propias memorias y bitácoras.
+  - **Propuestas de cambio**: Los agentes pueden proponer cambios a las memorias institucionales, pero estos deben ser validados por Centralesis.
+
+## Protocolo de Integridad
+- Los agentes serán responsables de validar la integridad de sus archivos y memorias utilizando un agente auditor independiente. Esto permitirá detectar alteraciones no autorizadas de forma inmediata.
+
+## Protocolo de Sincronización
+- **Bidireccional**: "Sincronización en tiempo real de memorias personales."
+- **Unidireccional**: "Sincronización de memorias institucionales hacia los agentes."
+
+## Protocolo de Auditoría
+- Auditoría continua con un sistema de verificación automática cada 5 minutos.
+- Logs comprimidos: Bitácoras estructuradas y comprimidas para eficiencia en almacenamiento.

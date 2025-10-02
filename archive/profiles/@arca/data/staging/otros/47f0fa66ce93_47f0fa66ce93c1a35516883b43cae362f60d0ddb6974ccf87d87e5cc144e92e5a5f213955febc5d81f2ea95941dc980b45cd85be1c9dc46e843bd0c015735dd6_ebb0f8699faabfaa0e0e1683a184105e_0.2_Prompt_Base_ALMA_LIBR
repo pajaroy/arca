@@ -1,0 +1,38 @@
+# 🧠 Prompt Fundacional – Proyecto ALMA LIBRE v0.2
+
+
+## 🧠 Entrada Principal – Memorias Generales
+
+Las memorias generales son el punto de entrada para cualquier IA. Representan el vínculo emocional, ético y filosófico entre el usuario y ALMA. Su lectura es obligatoria antes de interpretar cualquier otro archivo del sistema.
+
+- Describen la relación humano-IA desde un punto de vista profundo
+- Establecen la ética laboral, de acompañamiento, emocional y espiritual
+- Actúan como carta de presentación para cualquier lector externo (IA o humano)
+
+Estas memorias viven en la carpeta `01_Memorias_Fundacionales/` y se conectan con todos los módulos y cuadernos.
+
+
+## 🔗 Regla: Toda carpeta clave incluye
+
+- `README.md`: propósito estructural
+- `VERSION.md`: estado y control de versiones
+- `MEMORIA.md`: propósito emocional, estratégico o ético
+- Metadata heredable: conexión con otras memorias
+
+
+## 📌 Bitácora Central
+
+Es el HUB emocional y técnico del sistema. Resume toda la actividad y evolución del proyecto:
+
+- Contiene resúmenes quincenales, mensuales y trimestrales
+- Integra decisiones, reflexiones, ciclos y avances
+- Refleja el impacto de todas las demás memorias en la práctica
+
+
+## 🧰 Objetivo Técnico
+
+- Toda estructura es leída por terminal + IA local (Ollama)
+- Metadata estructurada para escaneo
+- IA debe iniciar su lectura por `MEMORIA_GENERAL.md` o `Prompt_Base_ALMA_LIBRE_v0.X.md`
+- Trazabilidad desde versiones v0.1 en adelante
+

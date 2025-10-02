@@ -1,0 +1,50 @@
+# 🧠 Arquitectura de IA Contextual para ALMA_RESIST
+
+> Reflexión y diseño estratégico sobre cómo construir una IA local consciente, modular y evolutiva.
+
+## 🔧 Módulos Fundamentales
+
+| Módulo | Propósito | Estado actual | ¿Necesario? |
+|--------|-----------|----------------|--------------|
+| **1. `doc_parser`** | Procesar archivos y extraer metadatos y resumen | Sprint 2.4 pendiente | ✅ |
+| **2. `alma_loader`** | Unificador y selector inteligente de contexto | Prototipo previo hecho | ✅ |
+| **3. `context_tracker`** | Monitorea el contexto conversacional (chats, tareas, decisiones) | ❌ Falta | ✅ |
+| **4. `memory_graph`** | Grafo semántico vivo entre módulos, decisiones y aprendizajes | ❌ Falta | ✅ |
+| **5. `reflection_engine`** | Sistema de reflexión: qué aprendió, qué errores detectó, qué mejoró | ❌ Falta | ⚠️ Recomendado |
+| **6. `intent_router`** | Detecta intenciones del usuario y redirige a la acción correspondiente | ❌ Falta | ⚠️ Recomendado |
+| **7. `chat_logger`** | Registro de sesiones, comandos, emociones, tareas | ✅ Implementado básico | ✅ |
+| **8. `prompt_orchestrator`** | Arma prompts inteligentes adaptativos para distintos modelos | Parcialmente hecho | ✅ |
+
+
+### 2. 🧩 Memory Graph
+Red semántica entre módulos, decisiones, sprints y documentos:
+
+```json
+{
+  "nodes": [{ "id": "metodologia_doc_ia_v2", "type": "methodology" }],
+  "edges": [{ "from": "Sprint_2.2", "to": "metodologia_doc_ia_v2", "type": "defines" }]
+}
+```
+
+
+### 4. 🔁 Prompt Orchestrator
+Sistema que decide la mejor plantilla de prompt en base a:
+
+- Tarea actual
+- Dominio activo
+- Estado emocional/contextual del operador
+- Sesión en curso
+
+
+## 🧠 ¿Esto reemplaza GPT o LM Notebooks?
+
+No. **Lo complementa y lo supera.**
+
+- GPT-4 → capacidad bruta
+- ALMA_RESIST → identidad, continuidad y dirección
+
+
+## 🗃️ Ubicación sugerida
+
+Guardar en: `docs/idea_base/idea_base_conciencia_ia.md`
+

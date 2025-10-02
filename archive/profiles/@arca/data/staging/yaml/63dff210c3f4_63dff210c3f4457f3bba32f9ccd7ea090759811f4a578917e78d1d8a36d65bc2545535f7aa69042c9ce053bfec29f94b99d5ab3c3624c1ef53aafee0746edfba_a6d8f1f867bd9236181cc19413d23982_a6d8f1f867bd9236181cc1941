@@ -1,0 +1,45 @@
+---
+version: 0.1.1
+autor: Santi + GPT
+id: PROMPT_FIX_METADATA_2025-06-08_01
+tipo: prompt_tecnico
+descripcion: >
+  Prompt técnico para refactorizar y profesionalizar el script `fix_metadata` de ALMA_RESIST.
+  Se busca modularizar, validar con JSON Schema, soportar parsing avanzado y conectarlo al sistema vivo.
+tags: [metadata, fix, refactor, cli, arquitectura, alma_resist]
+---
+
+💡 OBJETIVO:
+Profesionalizar el script `fix_metadata` actual, volviéndolo modular, seguro, auditable, integrable al sistema CLI central y extensible a futuro.
+
+---
+
+🎯 MEJORAS SOLICITADAS:
+
+1. Modularizar el script: separar funciones en `utils/metadata_utils.py`.
+2. Validar metadatos contra un `metadata.schema.json` (usar `jsonschema`).
+3. Soporte real de frontmatter con `python-frontmatter` (opcional).
+4. Crear opción `--diff` o `--preview` para mostrar diferencias antes de aplicar cambios.
+5. Generar entrada automática en `bitacora.md` y `changelog.yaml` si se indica `--log-bitacora`.
+6. Agregar compatibilidad con carpetas externas (`--target`), rutas relativas, y sistemas montados.
+7. Mejorar rendimiento: `--parallel` con múltiples hilos (`ThreadPoolExecutor`).
+8. Opcional: soporte para `--dry-run` visual exportando `.patch` con cambios.
+
+---
+
+🧠 REFERENCIAS:
+
+- Script original: `fix_metadata_v3.1.py`
+- Prompt anterior: `prompt_fix_metadata_v3.md`
+- Validadores: `jsonschema`, `chardet`, `pyyaml`
+- Archivos destino: `.md`, `.yaml`, `.json`, `.py`, `.sh`
+
+---
+
+🧪 CRITERIO DE ÉXITO:
+
+- Código refactorizado en módulos.
+- Ejecución estable en sistema ALMA_RESIST.
+- Validación de metadata estructural.
+- Bitácora y changelog actualizados automáticamente.
+- Opciones `--dry-run`, `--diff`, `--log-bitacora` funcionando.

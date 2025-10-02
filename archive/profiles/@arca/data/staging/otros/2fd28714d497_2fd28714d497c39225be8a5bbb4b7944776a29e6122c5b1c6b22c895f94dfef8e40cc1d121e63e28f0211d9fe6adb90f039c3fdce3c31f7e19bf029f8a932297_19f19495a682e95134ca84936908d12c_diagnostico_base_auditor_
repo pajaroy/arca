@@ -1,0 +1,100 @@
+# 🧠 Diagnóstico Base – Auditoría de Limpieza Semántica en ALMA_RESIST
+
+**Fecha:** 2025-06-01  
+**Responsable IA:** auditor_textos_ALMA  
+**Responsable humano:** Santi / pájaro  
+**Módulo propuesto:** alma-cli/auditor_textos/
+
+---
+
+## 🎯 Objetivo del módulo
+
+Establecer un sistema profesional, automatizable y escalable de auditoría textual y limpieza semántica que garantice:
+
+- Coherencia estructural en los archivos `.md`, `.py`, `.sh`, etc.
+- Metadatos YAML normalizados para todos los módulos y sprints
+- Trazabilidad histórica clara con uso de `tags`, `linked_to`, `versiones`
+- Compatibilidad futura con agentes IA (indexación semántica)
+- Evitar deuda técnica y duplicaciones documentales
+
+---
+
+## 🔍 Diagnóstico Inicial
+
+### ✔️ Fortalezas
+
+- Uso consistente de metodologías con buena documentación (`estructura_modular`, `snapshots_formales`, `sprints_v2`, etc.)
+- Arquitectura modular clara hasta L4
+- Cultura fuerte de versionado (`versionado_backups`, `metadatos YAML`)
+- Ciclo de trabajo trazado con sprints y ADR
+
+### ❌ Debilidades
+
+- Aún no hay un sistema automatizado de validación semántica
+- Algunas carpetas/módulos carecen de `README.md`, `metadatos.yaml` o `dev_journal.md`
+- No se especifica aún una política de nomenclatura universal de tags
+- No hay todavía un validador semántico que alerte sobre errores de frontmatter, etiquetas repetidas o links rotos
+
+---
+
+## 🛠️ Requerimientos para proyectar `alma-cli/auditor_textos`
+
+### Estructura inicial sugerida:
+
+```
+alma-cli/
+└── auditor_textos/
+    ├── README.md
+    ├── changelog.md
+    ├── meta_textos_ALMA_RESIST.md
+    ├── scripts/
+    │   ├── validate_yaml.py
+    │   ├── tag_normalizer.py
+    │   └── suggest_tags.py
+    └── lib/
+        └── reglas.json
+```
+
+### Archivos clave a auditar:
+
+- `docs/**/*.md`
+- `metodologias/*.md`
+- `sprints_*/*.md`
+- Todo `.md` sin metadatos YAML
+
+---
+
+## 📎 Reglas mínimas por archivo
+
+- YAML válido, con `module`, `type`, `status`, `tags`, `linked_to`, etc.
+- Sin encabezados duplicados
+- Etiquetas bien declaradas en YAML
+- Títulos únicos por documento (solo un `#`)
+- Documentación cruzada (`linked_to`)
+
+---
+
+## 🧩 Taxonomía mínima de tags IA-friendly
+
+| Tipo de Tag        | Ejemplo                  | Descripción breve                          |
+|--------------------|--------------------------|--------------------------------------------|
+| Dominio            | `cultivo`, `trading`, `memoria` | Área funcional dentro del sistema          |
+| Estructural        | `adr`, `sprint`, `metodologia` | Tipo documental                            |
+| Acción/Progreso    | `bugfix`, `refactor`, `research`, `in_progress` | Estado o tipo de trabajo                   |
+| Rol / Interacción  | `IA`, `humano`, `validador`, `cli` | Quien o qué actúa en ese documento         |
+| Relacional         | `linked_to: [X, Y]`       | Relación cruzada semántica o funcional     |
+
+---
+
+## ✅ Recomendaciones de avance
+
+1. Crear módulo `alma-cli/auditor_textos`
+2. Definir `reglas.json` con criterios de validación
+3. Cargar taxonomía oficial de tags
+4. Crear script `validate_yaml.py`
+5. Comenzar auditoría progresiva por `metodologias/` y `docs/`
+6. Proyectar IA futura para `alma optimize file.md`
+
+---
+
+🚀 Este módulo será el núcleo del orden semántico y estructural de ALMA_RESIST.

@@ -1,0 +1,205 @@
+---
+title: "Bitácora Consolidada – 2025-06-01"
+date: 2025-06-01
+tags: [#bitacora_diaria, #instalacion_base, #alma_resist, #alma_core, #configuracion, #parrot_os, #input_leap, #tmux, #obsidian, #sincronizacion, #auditor_textos, #asesor_ia, #ssh]
+status: validado
+linked_to: [alma_cli, control_central, alma_cli/auditor_textos, metodologias/estructura_autonoma]
+---
+
+# 📓 Bitácora Consolidada – 2025-06-01
+
+---
+
+## 🧠 Reinicio Total y Consolidación de Núcleo
+
+**Formateo e instalación:**  
+Se reinstalaron desde cero los entornos ALMA_CORE y ALMA_RESIST sobre Parrot OS.  
+Se configuró el entorno mínimo viable operativo con enfoque CLI: alias, permisos sudo, conexiones remotas seguras.
+
+**Sincronización remota:**  
+SSH configurado para control cruzado entre nodos.  
+Alias definidos para comandos de sincronización rápida.  
+Revisión completa del sistema `syncthing` para compartir carpetas clave.
+
+**Periféricos compartidos:**  
+Se activó `Input Leap` en modo terminal para compartir mouse y teclado entre máquinas.  
+Se preparó script para ejecutar automáticamente esta configuración al iniciar.
+
+**Sistema listo para operar:**  
+Primer inicio exitoso del sistema base con:
+- sincronización funcional
+- CLI operativa
+- conexión a servidores LLM
+- estructura de carpetas formalizada
+
+---
+
+## 🧠 Inicio Formal del Sistema `asesor-IA`
+
+**Confirmación de Roles:**  
+- GPT como auditor estructural  
+- DeepSeek como asesor técnico crítico  
+- Santi como orquestador y juez final  
+
+**Infraestructura creada:**  
+Se generaron las carpetas:
+- `control_central/asesor-ia/`
+- `control_central/asesor-ia/sesiones/`
+- `control_central/asesor-ia/status/`
+
+**Contrato fundacional firmado y activado:**  
+DeepSeek y GPT aceptaron formalmente sus roles con compromiso activo.  
+DeepSeek ya comenzó a operar bajo `tech_mode=strict`. GPT está sincronizado para sesiones híbridas.
+
+**DeepSeek propone mejoras:**  
+- Auto-tagging en consultas con `!type=`, `!priority=`, `!context=`  
+- Plantillas YAML para respuestas técnicas y estructurales  
+- Router AI (`router_ai.py`) para clasificar consultas  
+- Protocolo de conflicto con hasta 3 rondas de debate entre IAs
+
+---
+
+## 🧩 Puntos Abiertos a Debatir (DeepSeek)
+
+- [ ] Estructura de `router_ai.py`
+- [ ] Formato final de `deepseek_response_template.yml`
+- [ ] Ejecutor automático para protocolo de conflicto
+- [ ] Registro de decisiones en `memory_graph` o `bitacora_central`
+- [ ] Centralización de estado del sistema vs. estados internos
+
+---
+
+## 🛠️ Bitácora de Instalación desde 0 – ALMA_RESIST
+
+---
+
+### ✅ 1. Instalación de paquetes base
+
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y git curl tmux vim htop net-tools openssh-server unzip rsync sqlite3 python3 python3-pip tree
+```
+
+---
+
+### 🖱️ 2. Sincronización de mouse entre PCs con Input Leap
+
+```bash
+# Clonar y compilar Input Leap
+sudo apt install -y git cmake make g++ qt6-base-dev qt6-tools-dev libx11-dev libxext-dev libxrandr-dev libxinerama-dev libxtst-dev libxi-dev libssl-dev libavahi-compat-libdnssd-dev libcurl4-openssl-dev libgl1-mesa-dev pkg-config
+git clone --recurse-submodules https://github.com/input-leap/input-leap.git
+cd input-leap && mkdir build && cd build
+sed -i '1i#include <cstddef>' ../src/lib/platform/XKBUtil.cpp
+cmake ..
+make -j$(nproc)
+sudo make install
+```
+
+Archivo de configuración (`~/.input-leap/input-leap.conf`):
+
+```
+section: screens
+    alma-core:
+    alma-resist:
+end
+
+section: links
+    alma-core:
+        left = alma-resist
+    alma-resist:
+        right = alma-core
+end
+```
+
+---
+
+### 🔗 3. Configuración de red y sincronización SSH
+
+```bash
+ssh-keygen -t ed25519 -C "bird@alma-resist"
+ssh-copy-id bird@192.168.1.33
+```
+
+Verificación:
+
+```bash
+ssh bird@192.168.1.36
+ssh bird@192.168.1.33
+```
+
+---
+
+### 🗂️ 4. Sincronización de carpetas con rsync
+
+Contenido sugerido `.rsync_exclude`:
+
+```
+__pycache__/
+*.pyc
+*.tmp
+.DS_Store
+```
+
+Comando:
+
+```bash
+rsync -avz --delete --exclude-from=.rsync_exclude /home/bird/ALMA_RESIST/ bird@192.168.1.36:/home/bird/ALMA_RESIST/
+```
+
+---
+
+### 🧱 5. Instalación y uso de Tmux
+
+```bash
+sudo apt install tmux -y
+tmux new -s alma_core
+tmux new -s alma_resist
+```
+
+Atajos útiles:
+- Ctrl+b → % (dividir horizontal)
+- Ctrl+b → " (dividir vertical)
+- Ctrl+b → c (nueva ventana)
+- Ctrl+b → d (detach)
+
+---
+
+### 🧠 6. Instalación de Obsidian
+
+```bash
+sudo apt install -y wget libfuse2
+mkdir -p $HOME/apps/obsidian && cd $_
+wget $(curl -s https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest | grep "browser_download_url.*AppImage" | grep -v "arm64" | cut -d : -f 2,3 | tr -d ") -O Obsidian.AppImage
+chmod +x Obsidian.AppImage
+./Obsidian.AppImage &
+```
+
+---
+
+### 🖼️ Fix de íconos para Obsidian
+
+```bash
+sudo apt install -y fonts-noto fonts-noto-color-emoji fonts-material-design-icons-iconfont fonts-roboto fonts-font-awesome
+fc-cache -fv
+```
+
+---
+
+## ✍️ Reflexión del Día
+
+> “Hoy no solo instalamos sistemas, sino que fundamos el modelo mental de ALMA_RESIST:  
+> un sistema distribuido que no automatiza por reemplazo, sino por colaboración crítica.”
+
+---
+
+## 📌 Siguientes pasos
+
+- [ ] Planificar día 2025-06-02
+- [ ] Confirmar estructura de `asesor-ia/`
+- [ ] Consolidar `alma_status.yaml` general y específicos por módulo
+- [ ] Sincronización automática doble nodo
+- [ ] Iniciar sesiones en `asesor-ia/sesiones/`
+
+---
+
+# [FIN DEL DOCUMENTO]

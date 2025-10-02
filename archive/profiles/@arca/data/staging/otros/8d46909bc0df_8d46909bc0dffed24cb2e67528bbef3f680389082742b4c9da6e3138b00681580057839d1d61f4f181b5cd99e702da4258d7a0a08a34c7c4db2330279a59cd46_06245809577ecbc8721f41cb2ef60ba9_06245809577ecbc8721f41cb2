@@ -1,0 +1,51 @@
+# 🗃️ Metodología de Versionado y Backups – ALMA_RESIST (v1)
+
+📅 Versión: 1.0  
+📁 Archivo: metodologia_versionado_backups_v1.md  
+🎯 Objetivo: Establecer una política clara, profesional y sostenible para versionar y respaldar el sistema ALMA_RESIST, manteniendo trazabilidad incluso para un único operador con asistencia de IA.
+
+
+## 🔢 Esquema de Versionado
+
+**Convención:** `MAJOR.MINOR.PATCH`
+
+| Nivel   | Significado                                  |
+|---------|----------------------------------------------|
+| MAJOR   | Cambios que rompen compatibilidad o arquitectura |
+| MINOR   | Nuevas capacidades sin ruptura               |
+| PATCH   | Correcciones o ajustes internos              |
+
+**Ejemplos:**
+- `v0.0.1` – Primer snapshot del CLI
+- `v0.1.0` – Se añade IA
+- `v1.0.0` – Primera versión estable de producción
+
+
+## 📦 Snapshots Manuales
+
+Al cerrar un sprint o lograr una milestone, creá un snapshot:
+
+```
+docs/versiones/
+├── v0.2.0_CLI_FINAL/
+│   ├── core/
+│   ├── README.md
+│   ├── sprint_2.1.md
+```
+
+**Opcional:** Sufijos `_FINAL`, `_SNAP`, `_LEGACY`, etc.
+
+
+## 🧠 Asistencia de IA
+
+La IA puede:
+
+- Sugerir número de versión apropiado
+- Verificar que el `changelog.md` está alineado
+- Identificar si un cambio es retrocompatible
+
+
+## 📎 Referencias
+
+- `Sprint_2.2_Metodologias_Base.md`
+- `metodologia_estructura_modular_v2.md`

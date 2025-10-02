@@ -1,0 +1,29 @@
+### 📎 Apéndice – Buenas prácticas de limpieza y orden estructural (junio 2025)
+
+Como parte del aprendizaje obtenido durante la reestructuración completa del módulo `Cannabird`, se establecen las siguientes recomendaciones para todos los módulos futuros de ALMA_RESIST:
+
+#### 🧼 Estandarización de Limpieza
+
+- **Toda carpeta `archivo/` debe minimizar su complejidad**: los submódulos como `datasets/`, `descartes_raw/`, `downloads/` deben migrarse a `archivo/historico/` una vez estabilizados.
+- **Evitar carpetas vacías o redundantes** (e.g., subcarpetas con nombre del módulo dentro de su propio módulo).
+- **Incluir siempre un `readme.md` por carpeta técnica** para asegurar trazabilidad de uso futuro.
+
+#### 📚 Prompts y versiones
+
+- Los prompts activos deben estar en `control/prompts/`, y los obsoletos o anteriores en `control/prompts/historico/`.
+- Se recomienda **nombrar los prompts por versión**, como `prompt_resumen_diario_cannabird_v2.md`, para facilitar el tracking histórico.
+
+#### 📝 Bitácoras y contexto
+
+- Toda operación estructural debe reflejarse en un archivo tipo `bitacora_YYYY-MM-DD.md` bajo `docs/journal/`.
+- Si el archivo queda obsoleto o resumido, debe moverse a `archivo/historico/contexto_apendices/` para referencia posterior.
+- Las tareas pendientes se colocan **al final del archivo de contexto vivo** (ej. `contexto_operativo_cli_*`) para seguir un flujo natural de trabajo CLI.
+
+#### 🧠 Metodología de trabajo por asistente
+
+- Todo asistente CLI por entidad debe contar con un archivo `contexto_operativo_cli_<modulo>.md`, ubicado en `archivo/historico/contexto_versiones/`.
+- Este archivo actúa como memoria interna viva del trabajo conjunto entre Santiago y el asesor IA de ese módulo.
+- El asistente debe dejar recomendaciones constantes, feedback crítico, y mantener el módulo en estado funcional continuo.
+
+> Estas prácticas buscan reforzar la lógica modular, documentada, replicable y auditable que define a ALMA_RESIST.  
+> **No son sugerencias blandas: son estándares de calidad.**

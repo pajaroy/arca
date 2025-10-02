@@ -1,0 +1,88 @@
+.
+├── backups
+├── clave_debug.bin
+├── clave_test.bin
+├── config
+│   ├── autonomy_policy.json
+│   ├── llm_model.json
+│   └── schema_memoria.json
+├── CONTEXT.md
+├── core
+│   ├── cli.py
+│   ├── __init__.py
+│   ├── llm_server.py
+│   ├── loader.py
+│   ├── log_crypto.py
+│   ├── log_writer.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-311.pyc
+│   │   ├── log_crypto.cpython-311.pyc
+│   │   ├── log_integrity.cpython-311.pyc
+│   │   └── log_writer.cpython-311.pyc
+│   └── README.md
+├── docs
+│   ├── api_rest.md
+│   ├── auditorias
+│   │   ├── auditoria_estructura.md
+│   │   └── README.md
+│   ├── changelog.md
+│   ├── cheklists
+│   │   └── checklist_auditoria_inicial.md
+│   ├── decisiones_arquitectonicas.md
+│   ├── dependencias.md
+│   ├── faq_ia.md
+│   ├── flujo_secuencial.mmd
+│   ├── hitos.md
+│   ├── idea_base
+│   │   ├── idea_base.md
+│   │   └── idea_base_origen.zip
+│   ├── index.md
+│   ├── lecciones_aprendidas.md
+│   ├── logs_históricos
+│   │   ├── log_cifrado_funcional.log
+│   │   └── primer_log_funcional.log
+│   ├── metodologia
+│   │   └── metodologia_de_trabajo.md
+│   ├── mvp
+│   │   └── resumen_mvp.md
+│   ├── plantillas
+│   │   ├── plantilla_checklist.md
+│   │   ├── plantilla_decision_arquitectonica.md
+│   │   ├── plantilla_post_mortem.md
+│   │   └── plantilla_prompt_tecnico.md
+│   ├── post_mortem_tecnico.md
+│   ├── prompt_inicio_chat_ALMA_RESIST_ASSIST.md
+│   ├── prompt_primer_chat
+│   │   ├── prompt_chat_0.0.1.md
+│   │   └── prompt_primer_chat.zip
+│   ├── prompts
+│   │   ├── prompt_codigo_base_ALMA_RESIST.md
+│   │   ├── solicitud_log_crypto.md
+│   │   └── solicitud_log_writer.md
+│   ├── referencias_externas
+│   │   ├── ia
+│   │   ├── patrones
+│   │   └── seguridad
+│   ├── resumen_secciones.md
+│   ├── sprints
+│   │   └── Sprint_1_Logging.md
+│   └── versiones
+│       ├── ideas_base_legacy
+│       └── README.md
+├── hello_world.py
+├── logs
+│   ├── alma_2025-05-17.dec
+│   ├── alma_2025-05-17.enc
+│   ├── alma_2025-05-17.log
+│   ├── alma_debug_test.enc
+│   └── alma_debug_test.log
+├── README.md
+├── templates
+└── tests
+    ├── test_cli.py
+    ├── test_llm.py
+    ├── test_log_crypto_debug.py
+    ├── test_log_crypto.py
+    └── test_log_writer.py
+
+25 directories, 61 files

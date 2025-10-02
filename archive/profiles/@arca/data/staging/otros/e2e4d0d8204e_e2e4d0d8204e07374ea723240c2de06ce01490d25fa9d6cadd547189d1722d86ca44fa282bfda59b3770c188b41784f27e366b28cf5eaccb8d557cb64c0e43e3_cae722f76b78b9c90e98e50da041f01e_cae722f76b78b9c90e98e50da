@@ -1,0 +1,27 @@
+# 🧠 Ideas Claves Pendientes – 2025-05-16
+
+## 🌐 Sistema ALMA_RESIST – Ideas surgidas pero no implementadas aún
+
+
+### 🧠 IA Local y Modular
+
+- [ ] Integrar DeepSeek como motor alternativo a Mistral en el entorno local.
+- [ ] Unificar múltiples modelos locales (Mistral + DeepSeek) en el servidor ya funcional.
+- [ ] Agregar selector de motor IA desde el propio CLI (modo `--ia mistral` o `--ia deepseek`).
+
+
+### 🤖 Nodo distribuido y bots
+
+- [ ] Reutilizar viejas PCs o Raspberry Pi para crear nodos secundarios de ALMA_RESIST.
+- [ ] Enviar tareas automáticas de IA o compresión a nodos conectados vía red LAN.
+- [ ] Diseñar estructura de bots para tareas específicas (revisión changelogs, backups, etc).
+
+
+### 🗂️ Organización y gestión
+
+- [ ] Autoformateo de disco desde terminal (con script seguro y confirmaciones).
+- [ ] Generación automática de carpetas base de ALMA cada vez que se conecta el disco.
+- [ ] Interfaz básica tipo `setup_alma.sh` para nuevos nodos.
+
+
+tags:: #ideas #pendientes #ia_local #nodos #alma_resist #deepseek #seguridad #criptomoneda

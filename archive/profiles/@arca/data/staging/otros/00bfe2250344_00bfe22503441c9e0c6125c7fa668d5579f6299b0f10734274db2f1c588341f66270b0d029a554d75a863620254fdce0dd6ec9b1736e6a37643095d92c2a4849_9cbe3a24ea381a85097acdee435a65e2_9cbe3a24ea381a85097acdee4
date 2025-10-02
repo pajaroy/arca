@@ -1,0 +1,24 @@
+
+# 📝 Bitácora – Creación de Carpetas y Limpieza de Archivos de Prueba
+
+## Acciones Realizadas
+
+- Se crearon las carpetas modulares bajo `/core/notebooks/`:
+  - flujo_de_agentes/
+  - cargar_memorias/
+  - memorias/
+  - proyecto_kael/
+  - proyecto_emma/
+  - proyecto_alma/
+- Se agregó un README.md con encabezado YAML y enlaces IA-friendly en cada carpeta.
+- Se analizaron y limpiaron archivos conflictivos de Obsidian (`sync-conflict`), manteniendo sólo la versión válida.
+- Se movieron archivos de test y versiones viejas de scripts a `archivo/legacy_tests/`, con README contextual.
+- Se realizó commit segmentado: uno para la creación de carpetas, otro para la limpieza.
+- Se actualizó changelog y se registró esta bitácora.
+
+## Justificación
+
+Acción orientada a modularizar el espacio de trabajo de los agentes, asegurar trazabilidad, y reducir deuda técnica por archivos de prueba y conflictos no resueltos.
+
+[[changelog_2025-06-06_creacion_carpetas_y_limpieza.yaml]]
+[[criterios_ubicacion_vivo.md]]

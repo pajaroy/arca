@@ -1,0 +1,14 @@
+{
+    "version": "0.1.1",
+    "fecha": "2025-06-08",
+    "cambios": [
+        "Mejoras en la toma de decisiones aut\u00f3nomas: Incorporaci\u00f3n de un motor de reglas basado en metadatos para decisiones m\u00e1s complejas.",
+        "Verificaci\u00f3n de integridad en tiempo real: Se a\u00f1ade un agente auditor que verifica los hashes de los archivos cada 5 minutos.",
+        "Sincronizaci\u00f3n de memorias: Mejoras en la sincronizaci\u00f3n de memorias personales bidireccionales y memorias institucionales unidireccionales.",
+        "Optimizaci\u00f3n en el almacenamiento de logs: Se implementa un sistema de logs comprimidos con retenci\u00f3n inteligente para reducir espacio y facilitar la gesti\u00f3n de registros.",
+        "Mejoras en la recuperaci\u00f3n ante fallos: Protocolo de recuperaci\u00f3n mejorado con soporte para reintentos autom\u00e1ticos y sincronizaci\u00f3n de eventos usando inotify.",
+        "Sincronizaci\u00f3n autom\u00e1tica de hashes: Los hashes ahora son generados e integrados directamente en el n\u00facleo del sistema, eliminando dependencias de scripts externos.",
+        "Estandarizaci\u00f3n de la bit\u00e1cora: Se unifica el formato de registros de las acciones realizadas por los agentes, siguiendo el esquema JSON con campos clave como agente, acci\u00f3n, objetivo y timestamp.",
+        "Mejoras en la trazabilidad: Implementaci\u00f3n de un transaction_id global para vincular operaciones relacionadas y asegurar la coherencia entre acciones de diferentes agentes."
+    ]
+}

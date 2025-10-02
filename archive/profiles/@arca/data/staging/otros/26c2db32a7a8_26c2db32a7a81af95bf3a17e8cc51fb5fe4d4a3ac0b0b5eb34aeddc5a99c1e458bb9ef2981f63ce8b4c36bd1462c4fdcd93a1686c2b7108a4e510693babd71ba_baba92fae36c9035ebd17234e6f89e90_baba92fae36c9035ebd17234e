@@ -1,0 +1,20 @@
+## 📁 Archivos movidos
+
+### 🟢 Resúmenes diarios corregidos
+- Moved: `archivo/downloads/2025-05-26` → `2025-06-01` → `docs/resumenes_semanales/diarios/s22/`
+
+### 🟢 Resúmenes semanales
+- `s21_resumen_semanal.md` → `semanales/s21/`
+- `s22_resumen_mejorado.md` → `semanales/s22/`
+
+### 🟢 Prompts
+- Todos los `.md` desde `_legacy/prompts/` → `control/prompts/resumenes_cannabird/`
+
+### 🟢 Reuniones semanales
+- Reunión `s22` → `docs/reuniones_semanales/`
+
+## 🧹 Acción posterior
+- Confirmar limpieza de `_legacy/`
+- Validar consistencia de formato `.md`
+- Hacer commit Git con mensaje estructurado
+

@@ -1,0 +1,129 @@
+# 🧠 Prompt Técnico ALMA_LOADER v3.0
+## A. Roadmap Técnico (por fases)
+### Fase 1 – Core estable
+- Registro estructurado
+- Validación con JSON Schema
+- Guardado en SQLite
+- Resúmenes diarios
+
+### Fase 2 – Semántico
+- Embeddings de contenido + FAISS
+- Router atencional
+- Análisis predictivo simple
+- Relaciones entre memorias
+
+### Fase 3 – Expansión
+- Gamificación, metas y refuerzos
+- Sistema de reglas con acciones encadenadas
+- Integración con apps externas (API REST, Telegram, Shortcuts, voz)
+
+## 1. Propósito del Sistema
+Este prompt define todas las funciones técnicas, estructuras internas y flujos de interacción del sistema ALMA_LOADER. Su objetivo es que cualquier modelo IA o humano técnico pueda ejecutar, extender o auditar el sistema con claridad total. Consolidado a partir de versiones 2.1.1 y 2.2.0.
+
+## 2. Módulos Funcionales
+- `core_nl.py` – Conversión NL → JSON mediante reglas y patrones
+- `validador.py` – Validación con `schema_base.json` y normalización de campos
+- `sqlite_storage.py` – Almacenamiento actual, optimizado con JSON1 para consultas internas
+- `base_storage.py` – Interfaz abstracta de almacenamiento compatible con múltiples motores
+- `vector_storage.py` – Búsqueda semántica con embeddings vía FAISS (alpha)
+- `router_atencional.py` – Enrutamiento según intención detectada (acción, reflexión, memoria)
+- `resumenes.py` – Generación de resumen en Markdown diario o semanal
+- `alma_analytics.py` – Detección de patrones, correlaciones y disparadores
+- `gamificacion.py` – Sistema de motivación por puntos, niveles y hábitos (fase 3)
+
+Los módulos de ALMA_LOADER están diseñados para ser independientes y fácilmente intercambiables. A continuación, se indican las principales tecnologías asociadas a cada uno:
+
+### 🛠️ Tecnologías Utilizadas por Módulo
+
+| Módulo                   | Tecnología / Herramienta              |
+|--------------------------|--------------------------------------|
+| NLP / Parsing            | `regex`, `spaCy` (plan futuro)       |
+| Vectorización semántica | `sentence-transformers`, `FAISS`     |
+| Almacenamiento           | `SQLite` (con JSON1), `FAISS` (alpha)|
+| Visualización / Testing  | `pytest`, `Mermaid` (para diagramas) |
+| Relaciones semánticas    | `dict`, relaciones cruzadas (`Neo4j`, `networkx` – futuro) |
+
+
+## 3. JSON Schema de Memoria
+```json
+{
+  "id": "MEM-TRD-2025-XXXX",
+  "categoria": "TRD",
+  "contenido": "texto plano",
+  "tags": ["#btc", "#reflexión"],
+  "resumen_inferido": "...",
+  "embedding_id": "EMB-abc123",
+  "vector": [0.123, 0.987, ...],
+  "intencion_detectada": "registro",
+  "origen_input": "usuario",
+  "relaciones": [
+    { "tipo": "temporal", "target_id": "MEM-TRD-2025-XXXX", "peso": 0.8 }
+  ]
+}
+```
+
+> Este prompt técnico permite que cualquier IA ejecute acciones correctas dentro de ALMA_LOADER sin ambigüedades ni errores de interpretación. Complementa al whitepaper 3.0 (explicativo y estratégico).
+
+## 9. Testing y Validaciones
+
+### 🧪 Test Unitario – Validación de Memoria
+
+Este test permite verificar que el esquema base JSON acepte estructuras válidas y rechace incorrectas. Se usa como prueba mínima para `validador.py`.
+
+```python
+def test_validar_memoria():
+    memoria_valida = {
+        "id": "MEM-TRD-2025-05-06-001",
+        "categoria": "TRD",
+        "contenido": "Hoy operé en BTC y me sentí confiado",
+        "tags": ["#btc", "#emoción:confianza"]
+    }
+    assert validar_esquema(memoria_valida) == True
+```
+
+Este tipo de test puede ejecutarse con `pytest`, `unittest`, o integrarse en un pipeline de verificación previa al guardado.
+
+### 🧪 Test Unitario – Vectorización Semántica
+
+Este test valida que la función de embeddings esté operativa y produzca un vector válido (usualmente de 384 o 768 dimensiones, según modelo).
+
+```python
+def test_vectorizacion():
+    texto = "Hoy operé bajo presión y me sentí impulsivo."
+    vector = generar_embedding(texto)
+    
+    assert isinstance(vector, list)
+    assert len(vector) >= 128
+    assert all(isinstance(x, float) for x in vector)
+```
+
+> Este test puede servir tanto para debug local como para verificar integridad del motor FAISS en producción.
+
+## 10. Relaciones entre Memorias – Grafo Dirigido
+
+ALMA_LOADER permite establecer vínculos explícitos entre memorias usando el campo `relaciones`. Esto habilita un grafo dirigido de conocimiento interno.
+
+Cada relación incluye:
+- `tipo`: naturaleza de la relación (ej: `temporal`, `causal`, `emocional`, `refuerzo`)
+- `target_id`: ID de la memoria relacionada
+- `peso`: valor entre 0 y 1 que indica la fuerza del vínculo
+
+### 📄 Ejemplo:
+```json
+"relaciones": [
+  { "tipo": "causal", "target_id": "MEM-TRD-2025-05-04-002", "peso": 0.85 },
+  { "tipo": "temporal", "target_id": "MEM-TRD-2025-05-03-001", "peso": 0.6 }
+]
+```
+
+Este grafo puede analizarse para:
+- Descubrir patrones encadenados (causas → consecuencias)
+- Medir recurrencia o acumulación emocional
+- Visualizar el recorrido mental de un tema
+
+### 🛠️ Futuras integraciones:
+- `networkx` (Python) para análisis de grafos
+- `Neo4j` para persistencia de relaciones complejas
+- Mermaid o D3.js para visualización gráfica
+
+> El objetivo es pasar de registros aislados a una red dinámica de aprendizaje personal.

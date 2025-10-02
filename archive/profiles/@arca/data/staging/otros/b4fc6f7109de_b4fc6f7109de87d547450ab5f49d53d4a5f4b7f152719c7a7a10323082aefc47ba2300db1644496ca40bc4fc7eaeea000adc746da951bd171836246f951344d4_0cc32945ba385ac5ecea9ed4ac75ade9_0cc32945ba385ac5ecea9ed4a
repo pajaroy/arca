@@ -1,0 +1,1534 @@
+
+- ¿Cómo garantizar compatibilidad entre módulos nuevos y `ALMA_LIBRE/`?
+- ¿Qué estrategia de fallback usar si falla el monitoreo?
+- ¿Cómo optimizar la inferencia sin GPU en CPUs ARMv8?
+
+
+¡Este prompt está listo para iniciar la primera conversación con GPT-4.5!  
+Adjuntá:  
+- `prompt_base_primer_chat_v1.4.md`  
+- `ALMA_LIBRE/`  
+- `idea_base_0.0.9.md`
+
+
+module: prompts/prompt_codigo_base_alma_resist
+type: core
+status: in_progress
+created: '2025-05-17'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+
+## 📦 CONTEXTO DEL SISTEMA
+
+- Sistema modular IA offline
+- 100% ejecutable desde terminal
+- Compatible con Debian 12+ (x86 y ARMv8)
+- Sin conexión a internet
+- Priorización: soberanía tecnológica, eficiencia energética, antifragilidad
+- Hardware objetivo mínimo: 1 core + 2GB RAM
+
+
+## 📁 MÓDULOS TIPIFICADOS
+
+| Módulo              | Descripción funcional                                       |
+|---------------------|-------------------------------------------------------------|
+| log_writer.py       | Logging JSONL estructurado con metadatos del sistema       |
+| log_crypto.py       | Cifrado de logs con AES-256 (fallback ChaCha20)            |
+| log_integrity.py    | Verificación SHA3 de logs (SHAKE256)                       |
+| alma_monitor.py     | Daemon de monitoreo de CPU, RAM, temperatura, swap         |
+| alma_auto_eval.py   | Evaluación de rendimiento entre sprints                    |
+| test_arch.sh        | Detección de arquitectura + benchmarks por CPU             |
+| alma_update.sh      | Migración y backup automático de versiones                 |
+
+
+## ✅ QUÉ DEBE DEVOLVER DEEPSEEK
+
+1. Código completo y ejecutable
+2. Comentado y documentado con docstrings
+3. Seguro, portable, modular y sin dependencias externas
+4. Ejemplos de uso simples y prácticos
+
+
+module: prompts/prompt_llm_server_init
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+## Archivo: solicitud_log_crypto.md
+Contenido:
+# 🧠 Solicitud de Módulo: `log_crypto.py` – ALMA_RESIST
+
+## 🎯 Objetivo
+Implementar un módulo Python llamado `log_crypto.py` dentro del sistema ALMA_RESIST. Este módulo debe poder:
+
+1. Cifrar archivos `.log` con AES-256 si la CPU es x86 y soporta AES-NI.
+2. Usar ChaCha20 como alternativa en ARM o CPUs sin AES-NI.
+3. Validar automáticamente qué algoritmo usar en función del entorno.
+4. Aceptar claves personalizadas o generarlas de forma segura si no se proveen.
+5. Guardar archivo cifrado como `.enc` y poder descifrarlo de forma segura.
+6. Operar 100% offline y desde terminal.
+
+
+## 🧪 Entradas esperadas
+
+```python
+encrypt_log(input_path="logs/alma_2025-05-17.log", output_path="logs/alma_2025-05-17.enc", key=b"clave_segura")
+decrypt_log(input_path="logs/alma_2025-05-17.enc", output_path="logs/alma_2025-05-17.log", key=b"clave_segura")
+```
+
+
+## 📘 Archivos relacionados
+
+- `core/log_writer.py` – Genera los logs
+- `tests/test_log_writer.py` – Verifica escritura funcional
+- `docs/changelog.md`, `docs/lecciones_aprendidas.md`
+
+
+📦 Este módulo es crítico para garantizar privacidad radical en ALMA_RESIST.
+
+
+module: prompts/solicitud_log_writer
+type: core
+status: in_progress
+created: '2025-05-19'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+
+## ⚙️ Requisitos Generales
+
+- Debe funcionar 100% **offline**, sin dependencias externas.
+- Compatible con sistemas **Debian 12+**, CPU de 1 núcleo y 2GB de RAM.
+- El log debe escribirse en formato **JSONL**, con una entrada por línea.
+- Toda escritura debe ser **atómica y segura ante fallos**.
+- El sistema debe **detectar errores no críticos** y recuperarse.
+
+
+## ✅ Criterios de calidad
+
+- Compatible con caracteres internacionales (`ensure_ascii=False`)
+- No debe depender de librerías externas (solo `os`, `json`, `warnings`, `datetime`, `socket`)
+- Código modular, con docstrings tipo `>>> doctest`
+- Defensivo: cualquier error previsible debe estar manejado
+
+
+## 📂 Estructura de archivos relacionada
+- `core/log_writer.py` → módulo fuente
+- `tests/test_log_writer.py` → test funcional (pasa ✅)
+- `logs/` → carpeta generada automáticamente
+- `prompts/prompt_log_writer_v1.0.md` → este archivo
+
+
+## 📌 Contexto ALMA_RESIST
+Este módulo es el primer componente estable del `Sprint 1 – Logging cifrado antifrágil`. Fue validado manualmente y será base de auditoría para los módulos `log_crypto.py` y `log_integrity.py`.
+
+
+module: prompts/test_api_responder_prompt
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+
+## 🎯 Objetivo
+
+Desarrollar el archivo `tests/test_api_responder.py` usando `pytest` y `TestClient` de FastAPI para verificar el correcto funcionamiento de la API LLM, su manejo de errores, estructura de respuesta y validación semántica.
+
+
+## 🔧 Consideraciones técnicas
+
+- Usar `from fastapi.testclient import TestClient`
+- Mockear `ModelWrapper.generate()` si fuera necesario para evitar carga real
+- Usar fixtures de `pytest` si es posible para levantar la app (`client = TestClient(app)`)
+- Verificar tipos, claves presentes y que no devuelva estructuras inválidas
+- Verificar integración con `TransportLayer` y `ContextTracker` si se desea ampliar la prueba
+
+
+## 📂 Archivos disponibles
+
+- `main.py` (servidor FastAPI)
+- `model_wrapper.py`
+- `transport_layer.py`
+- `context_tracker.py`
+- `schema_prompt.json`
+- `schema_respuesta.json`
+- `test_model_wrapper.py` (ya implementado)
+
+## Archivo: test_context_tracker_prompt.md
+Contenido:
+# ✅ Solicitud de Test – `test_context_tracker.py` – ALMA_RESIST Sprint 2.6
+
+Este test debe cubrir el módulo `context_tracker.py`, que se encarga de registrar interacciones (prompt/respuesta/metadata), recuperarlas y borrarlas de forma segura.
+
+
+## 🧪 Casos de prueba sugeridos
+
+| Caso                                           | Resultado esperado                                     |
+|------------------------------------------------|--------------------------------------------------------|
+| Registro válido con prompt, respuesta y metadata | Se guarda correctamente, archivo `.jsonl` actualizado |
+| Recuperación de historial con `get_history(n)` | Devuelve los últimos `n` registros                     |
+| Borrado del historial                          | Archivo eliminado, nuevo archivo creado vacío         |
+| Manejo de líneas corruptas                     | Se salta la línea, logging indica el error            |
+| Validación contra schema (falta campo)         | No registra interacción inválida                      |
+| Verificación de longitud con `len(tracker)`    | Coincide con número real de líneas en archivo         |
+
+
+## 📂 Archivos relacionados
+
+- `context_tracker.py` (módulo principal)
+- `schema_prompt.json` y `schema_respuesta.json` (validados indirectamente)
+
+## Archivo: test_log_crypto_prompt.md
+Contenido:
+# ✅ Solicitud de Test – `test_log_crypto.py` – ALMA_RESIST Sprint 2.6
+
+Este test debe cubrir el módulo `log_crypto.py`, el cual implementa cifrado y descifrado de archivos de log usando algoritmos AES-GCM y ChaCha20-Poly1305, con generación segura de claves y validación de integridad.
+
+
+## 🧪 Casos de prueba sugeridos
+
+| Caso                                            | Resultado esperado                                |
+|-------------------------------------------------|---------------------------------------------------|
+| Cifrado de archivo JSON válido                  | Archivo `.enc` creado, contenido cifrado          |
+| Descifrado correcto                             | Archivo JSON recuperado igual al original         |
+| Validación de log cifrado                       | `True` si es válido, `False` si no                |
+| Generación de clave sin password (random)       | Devuelve clave de 32 bytes                        |
+| Generación de clave con password/salt           | Devuelve clave reproducible con los mismos datos  |
+| Descifrado con clave incorrecta                 | Lanza excepción o contenido inválido              |
+| Manejo de errores de lectura/escritura          | Logging de error y control de excepciones         |
+
+
+## 📂 Archivos relacionados
+
+- `log_crypto.py` (módulo a testear)
+- `log_writer.py` (compatible como entrada)
+
+## Archivo: test_log_writer_prompt.md
+Contenido:
+# ✅ Solicitud de Test – `test_log_writer.py` – ALMA_RESIST Sprint 2.6
+
+Este test debe cubrir el módulo `log_writer.py`, el cual implementa un sistema de escritura de logs en formato JSONL con escritura atómica, validación de estructura y rotación automática.
+
+
+## 🧪 Casos de prueba sugeridos
+
+| Caso                                             | Resultado esperado                                 |
+|--------------------------------------------------|----------------------------------------------------|
+| Escritura válida                                 | Log creado con evento completo                     |
+| Evento mal formado (sin campos requeridos)       | Retorna `False`, no se escribe                     |
+| Escritura atómica (uso de archivo temporal)      | Archivo `.tmp` renombrado a `.log` correctamente   |
+| Múltiples eventos                                | Se agregan en formato JSONL (una línea por evento) |
+| Rotación automática                              | Elimina logs más antiguos que `N` días             |
+| Validación de tipos                              | Cada campo del evento es del tipo esperado         |
+| Fallo en disco (simulado)                        | Manejo de excepción, retorna `False`               |
+| Lectura del log resultante                       | Puede ser deserializado correctamente              |
+
+
+## 📂 Archivos relacionados
+
+- `log_writer.py` (módulo principal)
+- `log_crypto.py` (relacionado pero se testea aparte)
+
+## Archivo: test_memory_graph_prompt.md
+Contenido:
+# ✅ Solicitud de Test – `test_memory_graph.py` – ALMA_RESIST Sprint 2.6
+
+Este test debe cubrir el módulo `memory_graph.py`, el cual implementa un grafo semántico orientado con nodos únicos y aristas ponderadas para representar relaciones entre prompts, respuestas y conceptos derivados de interacciones previas.
+
+
+## 🧪 Casos de prueba sugeridos
+
+| Caso                                             | Resultado esperado                                 |
+|--------------------------------------------------|----------------------------------------------------|
+| Inserción de nodos nuevos                        | Devuelve ID único, evita duplicados               |
+| Búsqueda de ID por contenido                     | Devuelve ID correcto o None si no existe          |
+| Creación de aristas con peso                     | Aparecen en exportación con peso correcto         |
+| Recuperación de nodos relacionados               | Devuelve nodos conectados por encima del threshold|
+| Exportación en JSON                              | Formato válido, contiene nodos y edges            |
+| Exportación en GraphML                           | Salida con estructura estándar                    |
+| Borrado del grafo (`clear`)                      | Estado limpio, sin nodos ni relaciones            |
+| Robustez con datos repetidos                     | No rompe relaciones, no duplica nodos             |
+| Validación de errores                            | Lanza excepción si se conecta nodo inexistente    |
+
+
+## 📂 Archivos relacionados
+
+- `memory_graph.py` (módulo implementado)
+- `context_tracker.py` (integración sugerida)
+- `test_context_tracker.py` (ya implementado)
+
+## Archivo: test_transport_layer_prompt.md
+Contenido:
+# ✅ Solicitud de Test – `test_transport_layer.py` – ALMA_RESIST Sprint 2.6
+
+Este test debe validar el correcto funcionamiento del módulo `transport_layer.py`, el cual se encarga de:
+
+- Validar datos contra contratos JSON Schema
+- Guardar prompts y respuestas en disco como `.json`
+- Recuperar entradas previas
+- Mantener una rotación de archivos máxima
+
+
+## 🧪 Casos de prueba sugeridos
+
+| Caso                                               | Resultado esperado                        |
+|----------------------------------------------------|-------------------------------------------|
+| Envío de prompt válido                             | Archivo `.json` creado correctamente      |
+| Envío de respuesta válida                          | Archivo `.json` creado y validado         |
+| Envío de prompt malformado (sin campo requerido)   | Lanza `jsonschema.ValidationError`        |
+| Recuperación de última entrada                     | `receive()` devuelve JSON esperado        |
+| Listado de entradas                                | `list_entries()` devuelve lista ordenada  |
+| Rotación de archivos (`purge_old_entries`)         | Borra archivos antiguos, mantiene máximo  |
+| Directorio inexistente                             | Se crea automáticamente                   |
+| Contratos corruptos o ausentes                     | Lanza `RuntimeError`                      |
+
+
+## 📂 Archivos relacionados
+
+- `transport_layer.py` (módulo a testear)
+- `schema_prompt.json`
+- `schema_respuesta.json`
+- `test_model_wrapper.py`, `test_api_responder.py` (ya implementados)
+
+## Archivo: testing_sprint_2_6_prompt.md
+Contenido:
+# ✅ Contexto Técnico – Proyecto ALMA_RESIST – Sprint 2.6
+
+Este es un nuevo hilo exclusivamente dedicado a crear una suite de tests automatizados que valide el funcionamiento de todos los módulos del servidor LLM desarrollado en el Sprint 2.6.
+
+## 📂 Módulos disponibles
+
+Ya contamos con los siguientes archivos .py completamente desarrollados e integrados:
+
+- `main.py` (FastAPI) – endpoint `/responder`
+- `model_wrapper.py` – gestión de modelo llama.cpp y generación
+- `transport_layer.py` – persistencia de prompts/respuestas validadas
+- `context_tracker.py` – historial contextual de interacciones
+- `log_writer.py` – logger estructurado en JSONL
+- `log_crypto.py` – cifrado con AES-256-GCM / ChaCha20
+
+Además, contamos con contratos JSON Schema validados: `schema_prompt.json` y `schema_respuesta.json`.
+
+
+## 🧪 Tareas de testeo por archivo
+
+### `test_model_wrapper.py`
+- Probar carga de modelo correcta
+- Generación de texto funcional
+- Manejo de errores al pasar rutas incorrectas
+- Tiempo de respuesta y longitud mínima
+
+### `test_api_responder.py`
+- Status 200 con prompt válido
+- Status 422 con prompt vacío
+- Status 503 si no hay modelo cargado
+- Validación de estructura de respuesta
+
+### `test_transport_layer.py`
+- Envío de datos válidos → archivo creado
+- Envío de datos inválidos → error controlado
+- Recuperación correcta del último dato
+- Validación contra contratos JSON
+
+### `test_context_tracker.py`
+- Registro de interacción correcto
+- Recuperación del historial
+- Manejo de líneas corruptas
+- Borrado de historial
+
+### `test_log_writer.py`
+- Escritura atómica
+- Validación de campos requeridos
+- Manejo de errores de disco simulado
+- Prueba de rotación de logs
+
+### `test_log_crypto.py`
+- Cifrado y descifrado funcional
+- Validación del contenido cifrado
+- Detección de algoritmo por hardware
+
+
+## 🔐 Objetivo final
+
+Completar la Fase 3 del Sprint 2.6 validando que todo el sistema está operativo, seguro y trazable, antes de pasar al empaquetado y documentación final.
+
+**¿Podés comenzar creando `test_model_wrapper.py` como primer test optimizado y luego avanzar uno por uno con los demás módulos?**
+
+
+module: prompts/transport_layer_request
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+
+## 📘 Requisitos
+
+### Clase: `TransportLayer`
+
+- Métodos esperados:
+  - `send(data: dict, endpoint: str) -> None`  
+    Guarda localmente un archivo JSON nombrado con `endpoint` y un timestamp.
+  - `receive(endpoint: str) -> dict`  
+    Recupera el último archivo JSON guardado para un endpoint determinado.
+  - `list_entries(endpoint: str) -> list`  
+    Lista todos los archivos almacenados para ese endpoint.
+
+### Condiciones:
+
+- Guardar los datos en una carpeta local llamada `transport_data/`
+- Los archivos deben tener nombre: `{endpoint}_{timestamp}.json`
+- Usar `uuid` o timestamp para unicidad de nombres
+- Manejar errores si no existe el archivo o el endpoint
+- Los datos deben validarse contra:
+  - `schema_prompt.json` al guardar entradas
+  - `schema_respuesta.json` al guardar salidas
+
+> Los archivos `schema_prompt.json` y `schema_respuesta.json` ya están definidos y documentados en la carpeta `docs/contracts/`. Deben usarse como referencia para validar la estructura antes de guardar o recuperar información.
+
+
+## 📎 Contexto
+
+- Sprint: 2.6 – LLM Server
+- Conectado con: `main.py`, `model_wrapper.py`, `docs/contracts/schema_*.json`
+- Función clave en el MVP para soportar reflexiones y trazabilidad
+
+
+## Archivo: manual_instalacion.md
+Contenido:
+# 🛠️ Manual de Instalación de Sincronización
+
+Instrucciones paso a paso para configurar Syncthing, Git, cron o systemd.timer.
+
+## Archivo: generar_tree.md
+Contenido:
+### ✅ Comando desde `/home/bird/Alma/ALMA_RESIST`
+
+#### Nivel 3:
+```bash
+tree -L 3 -d . > ../tree_ALMA_RESIST_L3.txt
+```
+
+#### Nivel 4:
+```bash
+tree -L 4 -d . > ../tree_ALMA_RESIST_L4.txt
+```
+
+
+## Archivo: validacion_documentacion.md
+Contenido:
+# ✅ Validación completa de documentación
+
+Ejecuta el script de validación que inspecciona toda la estructura documental (`docs/`).
+
+## 🔧 Comando
+
+```bash
+bash scripts/validar_documentacion.sh
+```
+
+## 🧪 Alias recomendado
+
+```bash
+alias alma_valida='bash ~/Alma/ALMA_RESIST/scripts/validar_documentacion.sh'
+```
+
+Agregalo en tu archivo `~/.bashrc` o `~/.zshrc` para usarlo fácilmente:
+
+```bash
+source ~/.bashrc
+# o
+source ~/.zshrc
+```
+
+## 📌 Detalles
+
+Este script realiza:
+
+- Validación sintáctica de los metadatos YAML
+- Normalización de nombres de módulos a `snake_case`
+- Corrección automática de campos requeridos
+
+
+module: utilidades/scripts/alma_cli
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+
+## 🧪 Subcomandos disponibles
+
+### 1. Audit
+Audita inconsistencias semánticas como:
+- `domain` no presente en `tags`
+- `core` sin campo `linked_to`
+
+```bash
+python3 scripts/alma-cli.py audit UnificacionMetadatos --rules docs/01_methodologies/metodologia_interaccion_ia_v2.md
+```
+
+### 2. Batch-update
+Actualiza campos YAML en lote:
+
+```bash
+python3 scripts/alma-cli.py batch-update --field domain --value IA --type core
+```
+
+Opcionales:
+- `--missing-only`: Solo modifica si el campo no existe
+- `--dry-run`: No guarda cambios, solo simula
+- `--verbose`: Detalles de ejecución
+
+
+## 📁 Estructura de logs generados
+
+```
+logs/
+└── auditorias/
+    └── auditoria_YYYYMMDD_HHMM_SPRINT.md
+```
+
+## Archivo: compress_alma_resist.md
+Contenido:
+#!/bin/bash
+
+# Ruta del zip final
+OUTPUT="/home/bird/Alma/ALMA_RESIST/alma_resist_compressed.zip"
+
+# Nos movemos al root del proyecto
+cd /home/bird/Alma/ALMA_RESIST || exit 1
+
+# Creamos el zip solamente con los archivos que no estén ignorados por Git
+git ls-files > /tmp/files_to_zip.txt
+
+# Comprimimos
+zip -r "$OUTPUT" -@ < /tmp/files_to_zip.txt
+
+echo "✅ Proyecto comprimido correctamente en: $OUTPUT"
+
+
+
+title: Fix Metadata
+author: ALMA_RESIST
+module: utilidades/scripts/fix_metadata
+created: 2025-05-23
+type: tool
+status: stable
+
+## Archivo: force_snake_case_modules.md
+Contenido:
+# force_snake_case_modules.py
+
+Fuerza el campo `module` en cada archivo Markdown a seguir la convención `snake_case`.
+
+## Uso
+
+```bash
+python3 force_snake_case_modules.py --root ./docs --backup --verbose
+```
+
+
+module: utilidades/scripts/run_auditoria_automatica
+type: core
+status: in_progress
+created: '2025-05-27'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+
+## 📂 Archivo: `run_auditoria_automatica.sh`
+
+```bash
+#!/bin/bash
+
+# ALMA_RESIST – Script de auditoría automatizada Sprint 2.5
+# Ejecuta: entorno, instalación, normalización y validación
+
+echo "🚀 Iniciando entorno ALMA_RESIST..."
+
+# 1. Activar entorno virtual
+echo "🔧 Activando entorno virtual..."
+source .venv/bin/activate
+
+# 2. Instalar dependencias necesarias
+echo "📦 Instalando dependencias requeridas..."
+pip install -q pyyaml
+
+# 3. Ejecutar force_snake_case_modules.py
+echo "🐍 Normalizando campo 'module' a snake_case..."
+python3 docs/utilidades/scripts/force_snake_case_modules.py --verbose
+
+# 4. Ejecutar fix_metadata.py
+echo "🛠️ Corrigiendo metadatos YAML..."
+python3 docs/utilidades/scripts/fix_metadata.py --verbose --backup
+
+# 5. Ejecutar add_linked_to_minimo.py
+echo "🔗 Agregando 'linked_to' mínimo a documentos tipo 'core'..."
+python3 docs/utilidades/scripts/add_linked_to_minimo.py --verbose
+
+# 6. Ejecutar validate_docs.py
+echo "✅ Validando estructura de metadatos YAML..."
+python3 docs/utilidades/scripts/validate_docs.py --verbose
+
+echo "🎉 Auditoría automática finalizada."
+```
+
+
+## ▶️ Cómo usarlo (paso a paso)
+
+1. **Abrí tu terminal** en la raíz del proyecto ALMA_RESIST.
+2. Asegurate de tener el entorno `.venv` creado.
+
+source .venv/bin/activate
+
+🧪 Tip adicional:
+
+Si el entorno no existe aún, podés crearlo así:
+
+python3 -m venv .venv
+
+3. Dale permisos de ejecución al script:
+
+```bash
+chmod +x run_auditoria_automatica.sh
+```
+
+4. Ejecutalo:
+
+bash docs/utilidades/scripts/run_auditoria_automatica.sh
+
+
+5. Esperá a que termine. Al finalizar vas a ver un resumen de validación.
+
+
+Este script forma parte del **proceso oficial de control de calidad documental** para cerrar cada Sprint en ALMA_RESIST.
+
+
+module: versiones/v0_0_0_4_sprint_2_5_auditoria/archivos/scripts_index
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+
+## 🗂️ Tabla General
+
+| Script                        | Tipo   | Función principal                                     | Estado       | Notas                 |
+|------------------------------|--------|------------------------------------------------------|--------------|------------------------|
+| add_linked_to_minimo.py      | Python | Agrega 'linked_to' mínimo a documentos type: core    | activo     |  |
+| alma-cli.py                  | Python | Interfaz CLI para auditar y hacer batch-update de YAML | activo     | Requiere archivo de reglas |
+| ayuda.py                     | Python | Muestra mensaje de ayuda o comandos disponibles      | borrador   | Script CLI auxiliar |
+| buscar_memoria.py            | Python | Busqueda interna en registros/memoria del sistema    | borrador   | Posible integración futura con LLM |
+| cargar_modelo.py             | Python | Carga o inicializa modelo IA local                   | borrador   | No validado en sprint |
+| fix_metadata.py              | Python | Corrige y normaliza metadatos YAML (`module`, `type`, etc.) | activo     | Usar con `--backup` |
+| force_snake_case_modules.py  | Python | Fuerza snake_case en campo 'module'                  | activo     | Recomendado en fase de cierre |
+| resumir.py                   | Python | Generador de resumen automático desde archivos markdown | pendiente  | No usado en auditoría |
+| salir.py                     | Python | Script de salida del CLI o apagado                   | borrador   | Auxiliar de CLI |
+| validar_documentacion.sh     | Bash   | Script shell para lanzar validaciones sobre markdowns | activo     | Wrapper manual |
+| validate_docs.py             | Python | Valida consistencia del YAML según reglas ALMA_RESIST | activo     | Script oficial de validación |
+| README.md                    | Markdown | Explicación general de la carpeta scripts            | activo     | Debe mantenerse actualizado |
+
+## Archivo: start_server.md
+Contenido:
+#!/bin/bash
+
+# ================================
+# ALMA_RESIST - Iniciar Servidor LLM
+# ================================
+
+# Activar entorno virtual
+echo "🔧 Activando entorno virtual..."
+source .venv/bin/activate || { echo "❌ No se pudo activar el entorno virtual"; exit 1; }
+
+# Establecer puerto y host (personalizable)
+HOST="0.0.0.0"
+PORT="8000"
+APP_PATH="core.llm_server.main:app"
+
+# Verificar modelo cargado
+MODEL_PATH="core/llm_server/models/mistral-7b-q4.gguf"
+if [ ! -f "$MODEL_PATH" ]; then
+  echo "❌ Modelo no encontrado en $MODEL_PATH"
+  exit 1
+fi
+
+# Iniciar servidor FastAPI con Uvicorn
+echo "🚀 Iniciando servidor en http://$HOST:$PORT ..."
+uvicorn "$APP_PATH" --reload --host "$HOST" --port "$PORT"
+
+
+title: Validador Documental
+author: ALMA_RESIST
+module: utilidades/scripts/validate_docs
+created: 2025-05-23
+type: tool
+status: stable
+
+## Archivo: comandos_utiles.md
+Contenido:
+# 🧰 Comandos útiles del sistema ALMA_RESIST
+
+Este documento reúne comandos Bash y alias recomendados para el uso y mantenimiento del sistema.
+
+
+## 🔁 Actualización de metadatos
+
+```bash
+python3 scripts/fix_metadata.py --backup
+```
+
+
+## 🔍 Validación avanzada (estructura, tipo, estado, fechas)
+
+```bash
+python3 scripts/validate_docs.py --path ./docs --verbose
+```
+
+
+## 📁 Ubicación de scripts clave
+
+| Script                        | Propósito                                |
+|------------------------------|-------------------------------------------|
+| `scripts/validate_docs.py`   | Validación integral de metadatos          |
+| `scripts/fix_metadata.py`    | Corrección automática de metadatos        |
+| `scripts/force_snake_case_modules.py` | Normalización de nombres de módulos |
+| `scripts/validar_documentacion.sh` | Orquestador de validaciones y limpieza |
+
+
+
+## 🚀 Paso 2: Iniciar el servidor
+
+```bash
+uvicorn core.llm_server.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+
+### 2. Verificar salud del sistema (GET /health)
+
+```bash
+curl http://localhost:8000/health
+```
+
+Respuesta esperada:
+```json
+{
+  "status": "OK",
+  "model_loaded": true,
+  "model_info": {
+    "nombre": "mistral-7b-q4.gguf",
+    "cuantización": "Q4",
+    "contexto": 4096,
+    "tokens_maximos": 512,
+    "parametros": "7.0B",
+    "versión_llama.cpp": "0.1.0"
+  },
+  "context_entries": 5,
+  "graph_nodes": 42
+}
+```
+
+
+### 4. Exportar grafo de memoria (POST /memory/export)
+
+```bash
+curl -X POST "http://localhost:8000/memory/export?format=json"
+```
+
+
+## ⚙️ Configuración del modelo
+
+- **Ubicación del modelo**: `core/llm_server/models/`
+- **Ejemplo de variable en `main.py`**:
+```python
+model_path = "models/tu-modelo.gguf"
+```
+
+
+## 🧬 Variables de entorno
+
+Crear archivo `.env`:
+```
+MODEL_PATH=models/mistral-7b-q4.gguf
+QUANTIZATION=Q4
+```
+
+
+## ❗ Problemas comunes
+
+- El modelo no carga:
+  - Asegúrate de que el archivo del modelo existe.
+  - Verifica permisos de lectura.
+  - Proba con un modelo más liviano si tenés poca RAM.
+
+## Archivo: tags_recomendados.md
+Contenido:
+# 🎯 Tags Recomendados por Dominio (Base ALMA_RESIST)
+
+## 🌐 Dominio: infraestructura
+- backups
+- CLI
+- versiones
+- logs
+- snapshot
+
+## 🤖 Dominio: IA
+- prompt_engineering
+- interaccion_ia
+- memoria
+- sugerencias
+
+## 📄 Dominio: documentación
+- estructura
+- validacion
+- plantilla
+- indexado
+
+## 🔁 Dominio: metodología
+- sprint
+- versionado
+- auditoria
+- decisiones
+
+## ⚙️ Dominio: automatización
+- scripts
+- batch_update
+- metadata_tools
+- alma-cli
+
+
+module: versiones/v0_0_0_1_auditoria/readme_v0_0_0_1_auditoria
+type: core
+status: in_progress
+created: '2025-05-22'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+## Archivo: README_v0.0.0.2_documentacion.md
+Contenido:
+# 📦 v0.0.0.2_documentacion – Sprint de Normalización de Documentación ALMA_RESIST
+
+## 🔍 Objetivo del Sprint
+
+Este paquete contiene los resultados del **Sprint 2.3 - Corrección de Metadatos y Documentación** del proyecto ALMA_RESIST. El objetivo principal fue estandarizar y validar todos los archivos Markdown (`.md`) del repositorio bajo una metodología automatizada, asegurando:
+
+- Metadatos YAML completos, válidos y en formato correcto.
+- Nombres de módulos en `snake_case`.
+- Respaldo y trazabilidad de los archivos modificados.
+- Validación automática de la estructura documental.
+- Preparación para integración semántica con IA.
+
+
+## 🧠 Scripts Clave
+
+- `fix_metadata.py`: Corrige campos YAML (`module`, `type`, `status`, `created`).
+- `force_snake_case_modules.py`: Normaliza el campo `module` a formato `snake_case`.
+- `validate_docs.py`: Verifica que todos los documentos tengan estructura y metadatos válidos.
+- `integrar_nuevo_archivo.sh`: Ejecuta todo el proceso completo para nuevos archivos (integración oficial v8).
+
+
+## 🧾 Logs de Sprint
+
+Los archivos `log_integracion.md` y `mapeo_sprint_archivos.md` documentan cada agregado, su origen y su vinculación con tareas y sprints.
+
+
+## 🤖 Futuras Integraciones
+
+La estructura está preparada para futuras automatizaciones con los módulos:
+
+- `memory_graph_builder`
+- `context_tracker`
+- `reflection_engine`
+
+## Archivo: README_v0.0.0.2_idea_base_unificada.md
+Contenido:
+# 🧠 ALMA_RESIST – Snapshot: v0.0.0.2_idea_base_unificada
+
+Este snapshot corresponde al cierre del Sprint 2.3, enfocado en la consolidación de la **idea base unificada** del sistema ALMA_RESIST.
+
+Incluye:
+
+- Integración del documento `ALMA_RESIST_idea_base_0.0.0.1.md`
+- Archivos legacy correctamente archivados en `_legacy/`
+- Registro histórico, decisiones, changelogs y bitácoras asociadas
+- Conformidad con la metodología `metodologia_agregado_archivos.md`
+
+Este hito representa el cierre conceptual del diseño ideológico del sistema y prepara la base para futuras implementaciones técnicas automatizadas.
+
+
+
+title: v0.0.0.2_idea_base_unificada
+author: ALMA_RESIST
+date: 2025-05-23
+version: 0.0.0.2
+type: integration
+module: versiones/v0_0_0_2_idea_base_unificada/version_v0_0_0_2_idea_base_unificada
+status: in_progress
+created: '2025-05-23'
+
+## Archivo: README_v0.0.0.3_snapshot_sprint_2.4.md
+Contenido:
+# 📦 Snapshot v0.0.0.3 – Post Sprint 2.4
+
+Este snapshot representa el estado consolidado del sistema documental y de scripts luego del Sprint 2.4.
+
+## 📋 Contenido Clave
+
+- Scripts actualizados:
+  - `validate_docs.py` (v0.3)
+  - `add_linked_to_minimo.py`
+  - `alma-cli.py` (CLI modular)
+  - `alma_valida_v2.sh`
+- Documentos fundamentales:
+  - `README.md` raíz
+  - `Methodology_Index.md`
+  - `tags_recomendados.md`
+  - `utilidades/scripts/README.md`
+- Reporte de auditoría generado por IA (`alma-cli audit`)
+- Metadatos corregidos en 100% de archivos `core`
+
+## 📌 Propósito
+
+Este snapshot permite:
+- Validar evolución del sistema
+- Facilitar rollback en caso de error
+- Auditar coherencia semántica e IA
+
+
+
+module: versiones/v0_0_0_3_snapshot_sprint_2_4/version_v0_0_0_3_snapshot_sprint_2_4
+type: core
+status: stable
+created: 2025-05-23
+linked_to:
+- README_v0.0.0.3_snapshot_sprint_2.4.md
+
+## Archivo: README_ALMA_RESIST.md
+Contenido:
+# ALMA_RESIST
+
+**ALMA_RESIST** es un sistema modular, portátil y asistido por inteligencia artificial diseñado para gestionar, automatizar y documentar proyectos complejos con trazabilidad total.
+
+> Versión actual: `v0.0.0.5`  
+> Estado: `estable`  
+> Sprint: `2.5` – Auditoría Final y Consolidación  
+> Última actualización: `2025-05-28`
+
+
+## 🔗 Archivos clave
+
+- `docs/version.md` → versión y ciclo de vida actual
+- `docs/changelog.md` → cambios históricos y lecciones aprendidas
+- `docs/control/sprints_activos/sprint_2.5_auditoria_checklist.md` → auditoría estructural
+- `docs/arquitectura/whitepaper/whitepaper_v1.md` → consolidación conceptual
+- `docs/arquitectura/prompt_tecnico/prompt_tecnico_base.md` → entrada técnica para IAs
+
+
+## 👤 Autoría
+
+Desarrollado por **Santiago Calvo**, con asistencia técnica de IA (GPT-4 y variantes locales como Mistral)  
+Contacto / Proyecto: `ALMA_RESIST`, Argentina – 2025
+
+## Archivo: checklist_auditoria_inicial.md
+Contenido:
+# ✅ Checklist de Tareas Pendientes – Auditoría y Regularización Inicial
+
+Fecha de generación: 2025-05-20
+
+
+## 🧹 Limpieza y Reorganización
+
+- [x] Revisar carpeta `backups/` → mover a `config/backups/` o eliminar si es temporal
+- [x] Revisar carpeta `archivos/` → renombrar con sentido o eliminar
+- [x] Mover cualquier script no vinculado a `core/` o `tests/` o eliminar
+
+
+## 🛡️ Gobernanza y Automatización
+
+- [x] Crear `docs/RFC_metodologia.md` para futuras propuestas de cambio
+- [x] Agregar `docs/dependencias.md` si se van a listar módulos o librerías externas
+- [x] Activar `docs/plantillas/` para prompts, scripts, tests y changelogs
+
+## Archivo: readme1.md
+Contenido:
+# ALMA_RESIST - README General
+
+Este repositorio contiene la arquitectura y documentación completa de **ALMA_RESIST**, una iniciativa modular y evolutiva que integra IA, automatización y análisis contextual para desarrollo de sistemas complejos.
+
+
+## 🧠 Funcionalidades de Integración
+
+La metodología actual incluye:
+
+- Validación de estructura y metadatos YAML.
+- Normalización automática a snake_case.
+- Corrección de campos `module`, `type`, `status`, `created`.
+- Ejecución automatizada con `integrar_nuevo_archivo.sh`.
+
+
+## 🧪 Metodologías Relevantes
+
+- `docs/01_methodologies/metodologia_agregado_archivos.md`: Define el flujo completo para incorporar un archivo nuevo en el sistema.
+- `docs/01_methodologies/metodologia_sprints_v2.md`: Guía de ejecución y cierre de sprints.
+- `docs/01_methodologies/metodologia_doc_ia_v2.md`: Reglas para estructuración documental semántica IA-compatible.
+
+
+## 📌 Última Versión
+
+Sprint actual: `Sprint_2.3_Correccion_Metadatos`  
+Metodología vigente: `metodologia_agregado_archivos_v8`  
+Estado: ✅ Cerrado y validado
+
+
+## 🤖 Futuras Integraciones
+
+- `alma-cli`: Utilidad para automatizar la integración desde línea de comandos.
+- `memory_graph_builder.py`: Vinculación semántica automática de documentos.
+- `reflection_engine`: Generación automática de análisis de impacto IA.
+- Soporte para campos inteligentes como `linked_to`, `context_tags`, `sha256`.
+
+
+## 📎 Apéndice – Validación y herramientas integradas (2025-05-23)
+
+
+## 🛠 Uso recomendado
+
+```bash
+bash scripts/validar_documentacion.sh
+```
+
+Alias sugerido para agilizar su ejecución:
+
+```bash
+alias alma_valida='bash ~/Alma/ALMA_RESIST/scripts/validar_documentacion.sh'
+```
+
+Agregalo a tu archivo `~/.bashrc` o `~/.zshrc` para uso persistente.
+
+
+## Archivo: apendice_complementario_sprint_2_5.md
+Contenido:
+# 🧩 Apéndice Complementario – Sprint 2.5 (Tareas Pendientes Detectadas por Auditoría)
+
+Este apéndice detalla acciones adicionales no contempladas explícitamente en el checklist original, pero detectadas durante la auditoría del Sprint 2.5. Estas tareas no duplican elementos previos, sino que amplían la profundidad de la verificación con mejoras necesarias para la consolidación estructural de ALMA_RESIST.
+
+
+## ✅ Siguientes pasos sugeridos
+
+- Implementar un script `detect_inconsistencias_yaml.py` para validar campos `module`, `type`, `status` versus su contenido y ubicación real.
+- Establecer convención para rutas completas en `module`, incluyendo prefijo de módulo raíz.
+- Generar y versionar snapshot de cierre del sprint con todos los cambios aplicados.
+- Crear script de curaduría automática de documentos obsoletos (`status: archived`).
+
+## Archivo: index_snapshot_v0.0.0.4.md
+Contenido:
+# 📚 Índice de Archivos – Snapshot v0.0.0.4
+
+Este archivo resume el contenido incluido en la versión `v0.0.0.4_sprint_2.5_auditoria`, facilitando la navegación tanto para humanos como para sistemas automatizados (IA).
+
+## Archivo: sprint_2.5_auditoria_checklist.md
+Contenido:
+# Sprint 2.5: Auditoría estructural ALMA_RESIST
+
+## Objetivo
+Reorganizar, limpiar y optimizar la estructura documental del proyecto ALMA_RESIST, asegurando el cumplimiento total de convenciones internas.
+
+## Fase 1: Preparación
+- [x] Crear branch o copia local (`sprint_2.5_auditoria`)
+- [x] Realizar backup completo (`zip` o similar)
+- [x] Leer y repasar metodología de sprints (`metodologia_sprints_v2.md`)
+
+## Fase 2: Eliminación de redundancias
+- [x] Eliminar carpetas vacías o innecesarias:
+  - [x] `backup_metadata/`
+  - [x] `backup_linked_to/`
+  - [x] `backup_snakecase/`
+  - [x] `commands/`
+  - [x] `venv/`
+- [x] Consolidar pruebas:
+  - [x] Mover contenido útil de `testing/` a `tests/`
+  - [x] Eliminar `testing/` y `test_kits/`
+- [x] Unificar auditorías:
+  - [x] Trasladar contenido de `docs/auditorias/` a `logs/auditorias/`
+  - [x] Eliminar carpeta vacía (`docs/auditorias/`)
+
+## Fase 3: Corrección de estructura documental
+- [x] Corregir nombres incorrectos:
+  - [x] Renombrar `docs/resgistros/` a `docs/registros/`
+  - [x] Renombrar `logs_histo╠üricos/` a `logs_historicos/`
+- [x] Aplicar `snake_case` uniforme en todos los archivos
+- [x] Verificar y corregir prefijo de versionado (`ideas_base_legacy` → `v0.0.0.0_legacy`)
+- [x] Reubicar archivos clave:
+  - [x] `CONTEXT.md` → `docs/introduccion/context.md`
+  - [x] `version.md` → `docs/introduccion/version.md`
+- [ ] Crear o actualizar `README.md` en cada carpeta principal
+
+## Fase 4: Validación de metadatos YAML
+- [x] Añadir o corregir bloque YAML `frontmatter` en todos los `.md` importantes
+  - Campos obligatorios:
+    - [x] `module`
+    - [x] `type`
+    - [x] `status`
+    - [x] `created`
+- [x] Ejecutar script de validación YAML (si aplica)
+
+## Fase 5: Organización modular de carpetas
+- [x] Organizar documentación dentro de `docs/` por módulos claros:
+  - [x] `introduccion/`
+  - [x] `arquitectura/`
+  - [x] `metodologias/`
+  - [x] `control/` (auditorías, bitácoras)
+  - [x] `utilidades/`
+- [x] Consolidar y ordenar carpetas cronológicamente dentro de `versiones/`
+- [x] Trasladar respaldos relevantes a `archive/`
+
+## Fase 6: Automatización y Scripts
+- [x] Centralizar scripts y herramientas:
+  - [x] Mover automatizaciones de otras carpetas a `scripts/`
+  - [x] Actualizar `README.md` en `scripts/`
+
+## Fase 7: Control de calidad y revisión final
+- [x] Ejecutar revisión cruzada:
+  - [x] Verificación manual de estructura
+  - [x] Validar checklist con script automático (si aplica)
+- [x] Generar árbol visual actualizado (`tree`)
+- [x] Realizar commit detallado describiendo cambios realizados
+- [x] Actualizar `CHANGELOG.md` con acciones del Sprint 2.5
+
+## Fase 8: Cierre del Sprint
+- [x] Solicitar revisión técnica interna o externa
+- [x] Documentar aprendizajes o ajustes metodológicos
+- [x] Integrar cambios definitivos a rama principal
+- [x] Comunicar cierre del Sprint 2.5 al equipo
+
+
+
+## 📌 Principios rectores
+
+- **Minimalismo estructural:** menos carpetas, más significado. Toda redundancia debe eliminarse o fusionarse.
+- **Modularidad estricta:** cada carpeta/documento debe responder a una función, no a una ocurrencia caótica.
+- **Nombrado determinista:** los nombres deben permitir inferir su función y nivel jerárquico sin abrir los archivos.
+- **Versionado semántico:** ningún archivo o carpeta sin una razón de versión clara debe sobrevivir.
+- **YAML como contrato semántico:** todo archivo Markdown relevante debe iniciar con metadatos YAML claros, válidos y coherentes.
+- **Separación de contextos:** documentación no es código, código no es bitácora, bitácora no es auditoría. Cada tipo de contenido tiene su lugar y reglas.
+
+
+## 🧭 Criterios de éxito
+
+- Estructura final reduce el número total de carpetas innecesarias sin pérdida de significado.
+- Todos los `.md` clave tienen un bloque YAML válido con al menos los campos: `module`, `type`, `status`, `created`.
+- Los `README.md` existen en todas las carpetas de primer y segundo nivel con explicación funcional del contenido.
+- El árbol de carpetas puede visualizarse de forma clara en una sola pantalla (máximo 3 niveles).
+- Se puede ejecutar un script y validar que no hay archivos mal ubicados, sin prefijos, ni carpetas vacías.
+
+
+## ⚠️ Errores a evitar
+
+- Reorganizar sin respaldo previo.
+- Borrar contenido sin verificar si es redundante o sólo mal ubicado.
+- No dejar trazabilidad de los cambios: todo cambio debe ser registrado en `CHANGELOG.md` y el commit debe ser descriptivo.
+- Romper rutas relativas usadas en scripts, si aún no fueron modularizadas.
+
+
+# 🧩 Apéndice para Auditoría Técnica Futura – Sprint 2.6 o superior (2025-05-25)
+
+Este apéndice documenta ideas de mejora y expansión para futuras auditorías estructurales o técnicas dentro de ALMA_RESIST, basadas en la experiencia del Sprint 2.5.
+
+## 🔧 Propuestas de mejora para `validate_docs.py`
+
+- **Autocompletado de YAML faltante:** Opción `--fix-missing` para insertar un bloque mínimo si no existe.
+    
+- **Validación de nombre de archivo:** Comprobar que el nombre del archivo `.md` siga `snake_case`.
+    
+- **Salida estructurada JSON:** Agregar opción `--json` para integración con CI/CD o IA.
+    
+- **Generación de reporte Markdown:** Crear `docs/reportes/validacion_sprint_X.md` al finalizar la validación.
+    
+- **Validación cruzada de ubicación real del archivo con su campo** `**module**`**.**
+    
+
+## 🧠 Oportunidades para extensión IA
+
+- **Análisis semántico del frontmatter**: Sugerir automáticamente cambios si el módulo, tipo o estado no coinciden con el contenido.
+    
+- **Clasificación automática de archivos nuevos sin YAML.**
+    
+- **Sugerencias de mejora estilística para documentos `.md` incompletos o con errores.
+  
+
+## 🔁 Tareas complementarias sugeridas
+
+1. **Normalización profunda del campo `module` en YAML**  
+   Detectar y corregir rutas incompletas o inconsistentes dentro del campo `module` del frontmatter. Muchos archivos sólo declaran un subnivel (ej. `estructura_doc/plantilla_documento`) sin incluir el módulo raíz (`arquitectura/estructura_doc/...`).
+
+2. **Revisión cruzada de campos `linked_to`**  
+   Varios archivos YAML no incluyen el campo `linked_to`, o hacen referencia a rutas obsoletas. Debería implementarse validación semántica cruzada para alinear cada documento con su versión, bitácora o checklist correspondiente.
+
+3. **Detección de archivos huérfanos fuera de módulos**  
+   Se encontraron archivos en la raíz de `docs/` y en `ideas/` que no encajan en ningún módulo ni están registrados en `scripts_index.md` o README. Deberían reubicarse o archivarse si no cumplen con funciones activas.
+
+4. **Autoetiquetado de documentos históricos**  
+   Proponer una política para marcar automáticamente los documentos obsoletos o legacies con `status: archived` o similar, y separarlos del flujo operativo actual. Podría automatizarse en el futuro con un script de `curado_archivos.py`.
+
+5. **Validación de consistencia semántica entre YAML y contenido real**  
+   Varios documentos declaran en su frontmatter `type: core` pero no contienen contenido central, sino propuestas, pruebas o plantillas. Se recomienda implementar análisis IA para detectar esta inconsistencia y sugerir reclasificación.
+
+6. **Control de duplicidad de scripts entre `scripts/` y `core/`**  
+   Algunos scripts antiguos aún están presentes en `core/` o `commands/` pese a haber sido migrados a `docs/utilidades/scripts/`. Se recomienda forzar verificación de duplicados por hash y eliminar los residuales.
+
+7. **Versión snapshot Sprint 2.5 faltante en `docs/versiones/`**  
+   El snapshot correspondiente a este sprint aún no se encuentra registrado formalmente. Se sugiere generar la carpeta `v0.0.0.5_snapshot_sprint_2.5` y documentar su estructura resultante.
+
+
+Este apéndice complementa el checklist de Sprint 2.5 como insumo técnico para el Sprint 2.6.
+
+
+## ✅ Diagnóstico de Orden General
+
+### 🧱 Estructura principal
+
+- ✅ `docs/introduccion/` está bien organizada: contiene `context.md`, `version.md`, y `changelog.md` (si seguís con esta lógica, va perfecta para uso IA directo).
+    
+- ✅ `docs/control/` funciona como **centro de mando** operativo. Está alineado con tu visión (sprints, bitácoras, checklists, logs).
+    
+- ✅ `docs/arquitectura/` aparece bien dividida (aunque puede refinarse más con las tres secciones que hablamos: `idea_base/`, `whitepaper/`, `prompt_tecnico/`).
+    
+- ✅ `docs/utilidades/scripts/` está consolidado, y tiene README e índice.
+    
+- ⚠️ `backup_*` tiene mucha redundancia y peso muerto semántico (ver sugerencia).
+    
+
+
+## ✅ Recomendaciones finales para dejar el sistema robusto
+
+### 🔧 Paso 1: Reordenar y fusionar la arquitectura
+
+```bash
+docs/arquitectura/
+├── idea_base/
+│   └── idea_base_0.0.1.md
+├── whitepaper/
+│   └── whitepaper_v1.md
+├── prompt_tecnico/
+│   └── prompt_tecnico_base.md
+└── README.md  ← explica la relación entre los 3
+```
+
+### 🔧 Paso 2: Mantener `CHANGELOG.md`, `version.md`, `context.md` en `introduccion/`
+
+Es correcto y útil para IA externas.
+
+### 🔧 Paso 3: Eliminar (o archivar comprimido) todo `backup_snakecase`, `backup_metadata`, `backup_linked_to`
+
+Dejá solo un zip por backup si realmente querés conservarlos.
+
+### 🔧 Paso 4: Crear README.md en cada subcarpeta importante de `control/`, `sprints_activos/`, `registros/`, `logs/`, `planificacion/`
+
+### 🔧 Paso 5: Etiquetar todos los archivos con campos YAML válidos (`module`, `type`, `status`, `created`) si aún no se hizo tras `fix_metadata.py`
+
+----
+### ✅ **Checklist para el Snapshot v0.0.0.5**
+
+1. 📁 Crear carpeta: `docs/versiones/v0.0.0.5/`
+    
+2. 📄 Copiar dentro:
+    
+    - `README.md` raíz
+        
+    - `docs/introduccion/version.md`
+        
+    - `docs/introduccion/changelog.md`
+        
+    - `docs/introduccion/context.md`
+        
+3. 📦 Comprimir `ALMA_RESIST/` completo como `snapshot_v0.0.0.5.zip`
+    
+4. 📄 Guardar changelog resumen dentro del zip
+    
+5. 🔖 Dejar registro en `docs/versiones/index.md` si usás índice de versiones
+    
+6. 🧠 Probarlo en GPT local con: “¿Qué es ALMA_RESIST y cómo funciona?”
+
+module: versiones/v0_0_0_5_llm_server/appendix_sprint_2_6_deepseek
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+
+## 🔧 Ajustes a Tareas Existentes
+
+### ✅ Fase 1 – Servidor LLM MVP
+
+- [ ] Añadir manejo de errores en `/responder`:
+  - Validar si el modelo está cargado
+  - Detectar prompts inválidos
+
+### ✅ Fase 2 – Logging y Seguridad
+
+- [ ] Conectar `memory_graph` para indexar embeddings de respuestas
+- [ ] Integrar `context_tracker` al registrar actividad/logs
+
+### ✅ Fase 3 – Pruebas
+
+- [ ] Reemplazar `test_llm.py` con prueba **end-to-end**:
+  - Validar flujo `CLI → servidor → memoria` directamente
+  - Evitar mocks innecesarios
+
+### ✅ Fase 4 – Documentación
+
+- [ ] Incluir requisitos de hardware mínimo:
+  - Mistral 7B Q4 (~6GB RAM)
+  - Alternativa: TinyLlama 1.1B (~2GB RAM)
+- [ ] Esquematizar `decisiones_arquitectonicas.md` sin detalle excesivo
+
+
+## 📆 Plan Semanal Ajustado
+
+### Semana 1-2:
+- FastAPI + `/responder`
+- `ModelWrapper`
+- Manejo de errores
+
+### Semana 2-3:
+- Logging cifrado
+- `memory_graph`
+- `context_tracker`
+
+### Semana 3:
+- Test end-to-end
+- Validación de logs
+
+### Semana 4:
+- README.md + requisitos
+- Congelar versión + lecciones aprendidas
+
+## Archivo: idea_base_llm_server_0.0.0.4.0.md
+Contenido:
+# 🧠 ALMA_RESIST: Idea Base para el Servidor LLM Local (v0.0.0.4.0)
+
+## 🌟 Objetivo General
+Construir un **servidor local de modelos IA** que sea modular, seguro, escalable y portable. Este servidor servira como puente entre los prompts generados desde la CLI/ALMA y la ejecución de modelos como Mistral 7B, TinyLlama o DeepSeek, permitiendo carga paralela, enrutamiento semántico y logging cifrado.
+
+
+## 🚀 Criterios Clave
+- Ejecutable en PC local o desde disco externo (modo ALMA_RESIST)
+- Bajo consumo en modo cuantizado (ej: GGUF Q4)
+- Modular: cada modelo es intercambiable
+- Preparado para escalar a gRPC y NATS en v0.5+
+- Validación semántica de prompts
+- Logging seguro y rastreable
+
+
+## 🔒 Consideraciones de Seguridad
+- Capa de sandbox por contenedor
+- Validación y limpieza de prompt (anti-injection)
+- Logging cifrado y segmentado por modelo
+
+
+## 💡 Conclusión
+Este servidor se convertirá en el **cerebro computacional** de ALMA_RESIST. Su diseño modular, cifrado y colaborativo permite que múltiples modelos IA trabajen en paralelo sin interferencia. Esta es la piedra angular para la mente simbiótica reflexiva que estamos construyendo.
+
+> "No se trata de velocidad, sino de claridad y continuidad. ALMA debe pensar como una red, no como un cañón."
+
+
+module: versiones/v0_0_0_5_llm_server/idea_base_llm_server_0_0_0_4_0_feedback
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+
+### **1. Priorización: Roadmap vs. Escalabilidad del Servidor**
+
+**Decisión:**  
+**Completar primero los módulos críticos del roadmap** (`context_tracker`, `reflection_engine`, y tests automatizados), pero **implementar el servidor LLM en su versión mínima viable (MVP)**.
+
+- **Razones:**
+    
+    - Sin `context_tracker` y `reflection_engine`, el servidor carece de contexto para operar de forma simbiótica.
+        
+    - Un servidor MVP (FastAPI + 1 modelo local) permite validar el flujo `CLI → servidor → memoria` sin sobre-ingeniería.
+        
+    - **Evitar deuda técnica:** Diseñar el servidor para que sea modular, facilitando futuras mejoras (ej: migrar a Docker/gRPC cuando los otros módulos estén estables).
+        
+
+
+### **3. Escalabilidad Futura**
+
+**Fortalezas y mejoras:**
+
+- **ModelWrapper + Router** son una base sólida, pero requieren:
+    
+    - **Abstracción de transporte:** Implementar una capa `TransportLayer` para soportar gRPC, REST, o sockets sin cambiar el core.
+        
+    - **Contratos estrictos:** Definir schemas con Protobuf/JSON Schema para inputs/salidas.
+        
+- **Federación de ALMAs:** La arquitectura podría escalar si:
+    
+    - Se usa NATS/JetStream para mensajería distribuida.
+        
+    - Se implementa autenticación mTLS entre nodos.
+        
+
+
+### **5. SQLite vs. DuckDB**
+
+**Recomendación:**
+
+- **Mantener SQLite en MVP:** Es portable, requiere cero configuración, y funciona en disco externo.
+    
+- **Planificar migración a DuckDB:** Cuando:
+    
+    - El volumen de logs supere 1GB.
+        
+    - Se necesiten consultas analíticas complejas (ej: joins entre embeddings y bitácora).
+        
+
+## Archivo: idea_base_llm_server_0.0.0.4.1.md
+Contenido:
+## 🔧 Componentes del MVP
+
+### 1. API básica con FastAPI
+
+- Endpoint `/responder` que recibe un prompt y devuelve la respuesta del modelo
+    
+- Asíncrono, con `asyncio.to_thread()` para ejecutar LLM sin bloquear
+    
+
+### 2. `ModelWrapper`
+
+- Clase base para instanciar cualquier modelo local (inicia con `llama.cpp`)
+    
+- Métodos: `.load_model()`, `.generate()`
+    
+- Cuantización: Q4 (GGUF) para hardware modesto
+    
+
+### 3. `TransportLayer`
+
+- Interfaz abstracta: `.send(data, endpoint)`, `.receive(endpoint)`
+    
+- Implementación MVP: lectura/escritura local con JSON
+    
+
+### 4. Logging seguro
+
+- Cifrado AES-GCM
+    
+- Almacenamiento en SQLite
+    
+- Integrado con `context_tracker` (registro de inputs/salidas)
+    
+
+### 5. `memory_graph`
+
+- Registro semántico post-inferencia
+    
+- Indexación de prompt + respuesta
+    
+
+### 6. Contratos de Datos
+
+- Esquemas JSON en `docs/contracts/`:
+    
+    - `schema_prompt.json`
+        
+    - `schema_respuesta.json`
+        
+
+
+## 🏛 Estructura Recomendada
+
+```
+llm_server/
+├── main.py                # API principal
+├── model_wrapper.py       # Clase base
+├── transport_layer.py     # Abstracción de transporte
+├── contracts/
+│   ├── schema_prompt.json
+│   └── schema_respuesta.json
+├── integration/
+│   ├── context_tracker.py
+│   └── memory_graph.py
+└── utils/
+    └── log_crypto.py      # AES-GCM
+```
+
+
+## 📈 Meta
+
+Establecer una arquitectura sólida, ética y modular que permita a ALMA pensar críticamente con un solo modelo, registrar sus reflexiones y preparar el camino para operar simbólicamente a escala.
+
+> "Una mente no se expande con potencia, sino con coherencia."
+
+module: versiones/v0_0_0_5_llm_server/prompt_auditoria_llm_server_hibrido
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+
+### 📘 IDEA BASE 0.0.0.1 – Fundacional y Reflexiva
+
+- Foco: identidad simbiótica, flujo diario con CLI, `alma_loader`, `context_tracker`, `memory_graph`
+- Filosofía: IA local, crítica, modular
+- Servidor LLM: mínimo viable (1 modelo, FastAPI, SQLite)
+- Seguridad: tokens estáticos, cifrado AES, JSON Schema
+- Meta: MVP de pensamiento reflexivo autónomo
+
+
+### 📌 ROADMAP ACTUAL (v0.0.0.2)
+
+- Implementar CLI + `alma_loader` + `memory_graph`
+- Servidor LLM MVP (`llm_server.py`) solo con FastAPI y un modelo cuantizado
+- Consolidar `context_tracker`, `reflection_engine`, `test_basico.sh`
+- Validar flujo: prompt → respuesta → reflexión → memoria → cifrado
+
+
+## ❓ PREGUNTAS PARA AUDITORÍA
+
+1. ¿Te parece correcto priorizar la idea 0.0.0.1 como base y postergar la expansión técnica de la 0.0.0.2?
+2. ¿Qué elementos de la 0.0.0.2 deberían ya incluirse de forma simplificada para evitar tener que reescribir el server luego?
+3. ¿Qué riesgos técnicos o filosóficos ves en este enfoque híbrido?
+4. ¿Cómo deberíamos versionar el crecimiento del servidor para que escale sin romper la coherencia simbiótica?
+5. ¿Qué estructura o capas mínimas deberíamos dejar listas desde ahora (aunque se usen más adelante)?
+
+## Archivo: TODO.md
+Contenido:
+# ✅ TODO.md – Seguimiento de Tareas (Sprint 2.1 → 2.5)
+
+📅 Última actualización: 2025-05-28  
+🔁 Formato tipo Kanban para seguimiento de tareas y pendientes técnicos en ALMA_RESIST.
+
+## Archivo: api_rest.md
+Contenido:
+# API REST (Propuesta Inicial)
+- /generate [POST]: genera texto desde prompt
+- /status [GET]: retorna estado del modelo
+
+
+module: decisiones_arquitectonicas
+type: core
+status: in_progress
+created: '2025-05-20'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+
+## 📌 Objetivo
+
+Registrar y justificar las decisiones técnicas clave que definen la arquitectura, los principios de diseño y los criterios estructurales del sistema ALMA RESIST.
+
+Este documento actúa como **memoria estratégica** para revisiones futuras, auditorías internas o incorporación de nuevos colaboradores o IA.
+

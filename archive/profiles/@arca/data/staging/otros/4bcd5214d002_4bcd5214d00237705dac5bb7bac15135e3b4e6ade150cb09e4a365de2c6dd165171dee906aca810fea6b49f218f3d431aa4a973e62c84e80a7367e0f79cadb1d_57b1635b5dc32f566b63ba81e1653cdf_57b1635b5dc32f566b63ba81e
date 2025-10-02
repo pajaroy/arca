@@ -1,0 +1,16 @@
+# 📘 docs/idea_base/ – Idea Base de ALMA_RESIST
+
+Esta carpeta contiene la visión conceptual y fundacional del sistema ALMA_RESIST.
+
+## 📄 Archivos principales
+
+- `ALMA_RESIST_idea_base_0.0.0.1.md`: Documento unificado de idea base post Sprint 2.3
+- `changelog.md`: Registro de cambios e integraciones conceptuales
+- `version.md`: Metadatos técnicos del estado de esta carpeta
+- `_legacy/`: Archivo de ideas base anteriores
+
+## 📦 Contexto
+
+Este repositorio conceptual fue consolidado durante el Sprint 2.3, integrando la idea base original y las reflexiones sobre conciencia IA.
+
+Toda evolución estratégica futura parte desde este documento base.

@@ -1,0 +1,99 @@
+---
+module: metodologias/archivadas/metodologia_estructura_modular_v1
+type: core
+status: in_progress
+created: '2025-05-21'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🧱 Metodología de Estructura Modular y Carpetas
+
+📅 Versión: 1.0  
+🎯 Objetivo: Establecer un estándar profesional y escalable para construir cualquier carpeta, módulo o dominio que desee ser parte del sistema ALMA_RESIST.
+
+---
+
+## ✅ Aplicación
+
+Esta metodología se aplica a:
+
+- Dominios funcionales (trading, cultivo, historia, etc.)
+- Módulos técnicos (CLI, LLM, memoria, loader)
+- Proyectos externos integrables (13CC, Cannabird, Fondo Alma Mía)
+
+---
+
+## 📦 Estructura Mínima por Módulo
+
+```
+[módulo]/
+├── README.md               # Descripción general y propósito
+├── bitacora.md             # Registro libre de avances, reflexiones, decisiones
+├── changelog.md            # Cambios por versión
+├── estructura/             # Diagramas, esquemas, arquitectura visual (opcional)
+├── docs/                   # Documentación técnica y contextual
+│   └── metodologia_local.md   # Cómo funciona este módulo internamente
+├── scripts/                # Automatizaciones o utilidades específicas
+├── data/                   # Archivos relevantes de entrada/salida
+├── versionado/            # Copias congeladas (snapshots o entregas)
+│   └── v0.0.0.1/...
+```
+
+---
+
+## 🔐 Estándares Mínimos Obligatorios
+
+| Archivo             | Propósito                                            |
+|---------------------|------------------------------------------------------|
+| `README.md`         | ¿Qué es, para qué sirve, cómo se usa?               |
+| `bitacora.md`       | Avances diarios, dudas, decisiones personales       |
+| `changelog.md`      | Cambios estructurados por fecha/version             |
+| `docs/metodologia_local.md` | Explicación técnica interna del módulo        |
+
+---
+
+## 📘 Convenciones
+
+- Nombres de carpetas y archivos en `snake_case`, sin espacios ni tildes.
+- `scripts/` debe contener nombres funcionales: `gen_`, `load_`, `test_`.
+- Markdown en estilo semántico (con secciones y sintaxis IA-legible).
+
+---
+
+## 🧠 Integración con IA
+
+Toda carpeta integrable debe contener en su `README.md` el siguiente bloque:
+
+```markdown
+---
+module: "nombre_modulo"
+type: "internal" | "external_domain" | "technical"
+version: "0.1"
+status: "in_progress"
+tags: ["dominio", "tecnico", "legal"]
+linked_to: ["ALMA_CORE", "cultivo", "loader"]
+---
+```
+
+Esto permite indexar, navegar, y relacionar automáticamente contenido desde un sistema de IA, búsqueda o documentación estructurada.
+
+---
+
+## 🔁 Relación con otros protocolos
+
+Esta metodología es invocada desde:
+
+- `Sprint_2.2_Metodologias_Base.md`
+- `docs/01_methodologies/Methodology_Index.md`
+- Cualquier auditoría futura o proceso de integración
+
+---
+
+## 🔄 Versionado
+
+Este documento se versionará como:
+
+- `metodologia_estructura_modular_v1.md`
+- `metodologia_estructura_modular_v2.md` si hay cambios estructurales mayores
+

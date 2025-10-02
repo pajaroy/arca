@@ -1,0 +1,99 @@
+---
+module: metodologias/metodologia_doc_ia_v2
+type: core
+status: in_progress
+created: '2025-05-21'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 📘 Metodología de Documentación para Humanos + IA – ALMA_RESIST (v2)
+
+📅 Versión: 2.0  
+📁 Archivo: metodologia_doc_ia_v2.md  
+🎯 Objetivo: Establecer un estándar de documentación que sea legible por humanos, navegable por IA y sostenible para un operador único. Esta versión reduce campos obligatorios, propone asistencia por IA y define políticas de migración.
+
+---
+
+## ✅ Aplicación
+
+Aplica a todo archivo `.md` que documente:
+
+- Módulos técnicos
+- Prompts, comandos, scripts
+- Documentos internos del sistema ALMA_RESIST
+- Sprints, decisiones, registros técnicos
+
+---
+
+## 📋 Campos YAML Obligatorios
+
+```yaml
+---
+module: "core/cli"          # ID del módulo o archivo
+type: "core"                # core | tool | external | integration | draft
+status: "in_progress"       # in_progress | stable | deprecated
+created: "2025-05-21"       # Fecha de creación
+
+# Opcionales (recomendados)
+domain: "infraestructura"   # general | cultivo | ia | historia | trading
+tags: ["CLI", "entrada"]
+linked_to: ["resumen"]
+version: "0.2"
+---
+```
+
+---
+
+## 🧠 Política de Migración
+
+- Etapa 1: Solo aplicar a nuevos documentos.
+- Etapa 2: Migración progresiva durante mantenimientos o refactors.
+- Etapa 3: Auditoría total IA-assistida con validación semántica (futuro).
+
+---
+
+## 🛠️ Comando sugerido (prototipo futuro)
+
+```bash
+alma-cli doc-init --module core/cli --type core
+```
+
+Generará automáticamente el bloque YAML, inferido desde:
+
+- Nombre del archivo → `module`
+- Carpeta → `type`, `domain`
+- Tags sugeridos vía NLP
+
+---
+
+## 📘 Glosario Rápido
+
+| Campo    | Ejemplo            | Descripción                                |
+|----------|--------------------|--------------------------------------------|
+| module   | core/loader        | Ruta única relativa                        |
+| type     | core, tool, draft  | Tipo de documento                          |
+| domain   | ia, historia       | Dominio funcional                          |
+| status   | stable             | Estado actual del documento                |
+| version  | 0.1, 1.0.0         | Versión local                              |
+| tags     | ["memoria"]        | Palabras clave normalizadas                |
+| linked_to| ["core/cli"]       | Módulos relacionados                       |
+
+---
+
+## 🔄 Relación con otras metodologías
+
+- Requiere integración en: `estructura_modular_v2`
+- Afecta a: `sprints_v2`, `auditoría_adr`, `interacción_ia`
+- Compatible con futuras estructuras de grafo semántico y navegación IA
+
+---
+
+## 🧾 Changelog
+
+### 2025-05-21
+- [v2.0] Se redujeron los campos obligatorios a 4
+- Se añadió política de migración progresiva
+- Se introdujo el comando `alma-cli doc-init` para asistencia automática
+- Se añadió glosario resumido para campo `type`, `domain`, `tags`
+

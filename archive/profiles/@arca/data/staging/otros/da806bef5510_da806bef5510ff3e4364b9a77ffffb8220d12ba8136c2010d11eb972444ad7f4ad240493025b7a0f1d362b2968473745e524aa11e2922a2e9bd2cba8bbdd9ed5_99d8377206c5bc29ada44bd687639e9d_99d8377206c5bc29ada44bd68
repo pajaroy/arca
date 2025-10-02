@@ -1,0 +1,2551 @@
+*   You can change the order of the arguments, e.g. `WithArgs<3, 2, 1>(...)`.
+*   The types of the selected arguments do *not* have to match the signature of
+    the inner action exactly. It works as long as they can be implicitly
+    converted to the corresponding arguments of the inner action. For example,
+    if the 4-th argument of the mock function is an `int` and `my_action` takes
+    a `double`, `WithArg<4>(my_action)` will work.
+
+### Ignoring Arguments in Action Functions
+
+The [selecting-an-action's-arguments](#SelectingArgs) recipe showed us one way
+to make a mock function and an action with incompatible argument lists fit
+together. The downside is that wrapping the action in `WithArgs<...>()` can get
+tedious for people writing the tests.
+
+If you are defining a function (or method, functor, lambda, callback) to be used
+with `Invoke*()`, and you are not interested in some of its arguments, an
+alternative to `WithArgs` is to declare the uninteresting arguments as `Unused`.
+This makes the definition less cluttered and less fragile in case the types of
+the uninteresting arguments change. It could also increase the chance the action
+function can be reused. For example, given
+
+```cpp
+ public:
+  MOCK_METHOD(double, Foo, double(const string& label, double x, double y),
+              (override));
+  MOCK_METHOD(double, Bar, (int index, double x, double y), (override));
+```
+
+instead of
+
+```cpp
+using ::testing::_;
+using ::testing::Invoke;
+
+double DistanceToOriginWithLabel(const string& label, double x, double y) {
+  return sqrt(x*x + y*y);
+}
+double DistanceToOriginWithIndex(int index, double x, double y) {
+  return sqrt(x*x + y*y);
+}
+...
+  EXPECT_CALL(mock, Foo("abc", _, _))
+      .WillOnce(Invoke(DistanceToOriginWithLabel));
+  EXPECT_CALL(mock, Bar(5, _, _))
+      .WillOnce(Invoke(DistanceToOriginWithIndex));
+```
+
+you could write
+
+```cpp
+using ::testing::_;
+using ::testing::Invoke;
+using ::testing::Unused;
+
+double DistanceToOrigin(Unused, double x, double y) {
+  return sqrt(x*x + y*y);
+}
+...
+  EXPECT_CALL(mock, Foo("abc", _, _))
+      .WillOnce(Invoke(DistanceToOrigin));
+  EXPECT_CALL(mock, Bar(5, _, _))
+      .WillOnce(Invoke(DistanceToOrigin));
+```
+
+### Sharing Actions
+
+Just like matchers, a gMock action object consists of a pointer to a ref-counted
+implementation object. Therefore copying actions is also allowed and very
+efficient. When the last action that references the implementation object dies,
+the implementation object will be deleted.
+
+If you have some complex action that you want to use again and again, you may
+not have to build it from scratch every time. If the action doesn't have an
+internal state (i.e. if it always does the same thing no matter how many times
+it has been called), you can assign it to an action variable and use that
+variable repeatedly. For example:
+
+```cpp
+using ::testing::Action;
+using ::testing::DoAll;
+using ::testing::Return;
+using ::testing::SetArgPointee;
+...
+  Action<bool(int*)> set_flag = DoAll(SetArgPointee<0>(5),
+                                      Return(true));
+  ... use set_flag in .WillOnce() and .WillRepeatedly() ...
+```
+
+However, if the action has its own state, you may be surprised if you share the
+action object. Suppose you have an action factory `IncrementCounter(init)` which
+creates an action that increments and returns a counter whose initial value is
+`init`, using two actions created from the same expression and using a shared
+action will exhibit different behaviors. Example:
+
+```cpp
+  EXPECT_CALL(foo, DoThis())
+      .WillRepeatedly(IncrementCounter(0));
+  EXPECT_CALL(foo, DoThat())
+      .WillRepeatedly(IncrementCounter(0));
+  foo.DoThis();  // Returns 1.
+  foo.DoThis();  // Returns 2.
+  foo.DoThat();  // Returns 1 - Blah() uses a different
+                 // counter than Bar()'s.
+```
+
+versus
+
+```cpp
+using ::testing::Action;
+...
+  Action<int()> increment = IncrementCounter(0);
+  EXPECT_CALL(foo, DoThis())
+      .WillRepeatedly(increment);
+  EXPECT_CALL(foo, DoThat())
+      .WillRepeatedly(increment);
+  foo.DoThis();  // Returns 1.
+  foo.DoThis();  // Returns 2.
+  foo.DoThat();  // Returns 3 - the counter is shared.
+```
+
+### Testing Asynchronous Behavior
+
+One oft-encountered problem with gMock is that it can be hard to test
+asynchronous behavior. Suppose you had a `EventQueue` class that you wanted to
+test, and you created a separate `EventDispatcher` interface so that you could
+easily mock it out. However, the implementation of the class fired all the
+events on a background thread, which made test timings difficult. You could just
+insert `sleep()` statements and hope for the best, but that makes your test
+behavior nondeterministic. A better way is to use gMock actions and
+`Notification` objects to force your asynchronous test to behave synchronously.
+
+```cpp
+class MockEventDispatcher : public EventDispatcher {
+  MOCK_METHOD(bool, DispatchEvent, (int32), (override));
+};
+
+TEST(EventQueueTest, EnqueueEventTest) {
+  MockEventDispatcher mock_event_dispatcher;
+  EventQueue event_queue(&mock_event_dispatcher);
+
+  const int32 kEventId = 321;
+  absl::Notification done;
+  EXPECT_CALL(mock_event_dispatcher, DispatchEvent(kEventId))
+      .WillOnce([&done] { done.Notify(); });
+
+  event_queue.EnqueueEvent(kEventId);
+  done.WaitForNotification();
+}
+```
+
+In the example above, we set our normal gMock expectations, but then add an
+additional action to notify the `Notification` object. Now we can just call
+`Notification::WaitForNotification()` in the main thread to wait for the
+asynchronous call to finish. After that, our test suite is complete and we can
+safely exit.
+
+{: .callout .note}
+Note: this example has a downside: namely, if the expectation is not satisfied,
+our test will run forever. It will eventually time-out and fail, but it will
+take longer and be slightly harder to debug. To alleviate this problem, you can
+use `WaitForNotificationWithTimeout(ms)` instead of `WaitForNotification()`.
+
+## Misc Recipes on Using gMock
+
+### Mocking Methods That Use Move-Only Types
+
+C++11 introduced *move-only types*. A move-only-typed value can be moved from
+one object to another, but cannot be copied. `std::unique_ptr<T>` is probably
+the most commonly used move-only type.
+
+Mocking a method that takes and/or returns move-only types presents some
+challenges, but nothing insurmountable. This recipe shows you how you can do it.
+Note that the support for move-only method arguments was only introduced to
+gMock in April 2017; in older code, you may find more complex
+[workarounds](#LegacyMoveOnly) for lack of this feature.
+
+Let’s say we are working on a fictional project that lets one post and share
+snippets called “buzzes”. Your code uses these types:
+
+```cpp
+enum class AccessLevel { kInternal, kPublic };
+
+class Buzz {
+ public:
+  explicit Buzz(AccessLevel access) { ... }
+  ...
+};
+
+class Buzzer {
+ public:
+  virtual ~Buzzer() {}
+  virtual std::unique_ptr<Buzz> MakeBuzz(StringPiece text) = 0;
+  virtual bool ShareBuzz(std::unique_ptr<Buzz> buzz, int64_t timestamp) = 0;
+  ...
+};
+```
+
+A `Buzz` object represents a snippet being posted. A class that implements the
+`Buzzer` interface is capable of creating and sharing `Buzz`es. Methods in
+`Buzzer` may return a `unique_ptr<Buzz>` or take a `unique_ptr<Buzz>`. Now we
+need to mock `Buzzer` in our tests.
+
+To mock a method that accepts or returns move-only types, you just use the
+familiar `MOCK_METHOD` syntax as usual:
+
+```cpp
+class MockBuzzer : public Buzzer {
+ public:
+  MOCK_METHOD(std::unique_ptr<Buzz>, MakeBuzz, (StringPiece text), (override));
+  MOCK_METHOD(bool, ShareBuzz, (std::unique_ptr<Buzz> buzz, int64_t timestamp),
+              (override));
+};
+```
+
+Now that we have the mock class defined, we can use it in tests. In the
+following code examples, we assume that we have defined a `MockBuzzer` object
+named `mock_buzzer_`:
+
+```cpp
+  MockBuzzer mock_buzzer_;
+```
+
+First let’s see how we can set expectations on the `MakeBuzz()` method, which
+returns a `unique_ptr<Buzz>`.
+
+As usual, if you set an expectation without an action (i.e. the `.WillOnce()` or
+`.WillRepeatedly()` clause), when that expectation fires, the default action for
+that method will be taken. Since `unique_ptr<>` has a default constructor that
+returns a null `unique_ptr`, that’s what you’ll get if you don’t specify an
+action:
+
+```cpp
+  // Use the default action.
+  EXPECT_CALL(mock_buzzer_, MakeBuzz("hello"));
+
+  // Triggers the previous EXPECT_CALL.
+  EXPECT_EQ(nullptr, mock_buzzer_.MakeBuzz("hello"));
+```
+
+If you are not happy with the default action, you can tweak it as usual; see
+[Setting Default Actions](#OnCall).
+
+If you just need to return a pre-defined move-only value, you can use the
+`Return(ByMove(...))` action:
+
+```cpp
+  // When this fires, the unique_ptr<> specified by ByMove(...) will
+  // be returned.
+  EXPECT_CALL(mock_buzzer_, MakeBuzz("world"))
+      .WillOnce(Return(ByMove(MakeUnique<Buzz>(AccessLevel::kInternal))));
+
+  EXPECT_NE(nullptr, mock_buzzer_.MakeBuzz("world"));
+```
+
+Note that `ByMove()` is essential here - if you drop it, the code won’t compile.
+
+Quiz time! What do you think will happen if a `Return(ByMove(...))` action is
+performed more than once (e.g. you write `...
+.WillRepeatedly(Return(ByMove(...)));`)? Come think of it, after the first time
+the action runs, the source value will be consumed (since it’s a move-only
+value), so the next time around, there’s no value to move from -- you’ll get a
+run-time error that `Return(ByMove(...))` can only be run once.
+
+If you need your mock method to do more than just moving a pre-defined value,
+remember that you can always use a lambda or a callable object, which can do
+pretty much anything you want:
+
+```cpp
+  EXPECT_CALL(mock_buzzer_, MakeBuzz("x"))
+      .WillRepeatedly([](StringPiece text) {
+        return MakeUnique<Buzz>(AccessLevel::kInternal);
+      });
+
+  EXPECT_NE(nullptr, mock_buzzer_.MakeBuzz("x"));
+  EXPECT_NE(nullptr, mock_buzzer_.MakeBuzz("x"));
+```
+
+Every time this `EXPECT_CALL` fires, a new `unique_ptr<Buzz>` will be created
+and returned. You cannot do this with `Return(ByMove(...))`.
+
+That covers returning move-only values; but how do we work with methods
+accepting move-only arguments? The answer is that they work normally, although
+some actions will not compile when any of method's arguments are move-only. You
+can always use `Return`, or a [lambda or functor](#FunctionsAsActions):
+
+```cpp
+  using ::testing::Unused;
+
+  EXPECT_CALL(mock_buzzer_, ShareBuzz(NotNull(), _)).WillOnce(Return(true));
+  EXPECT_TRUE(mock_buzzer_.ShareBuzz(MakeUnique<Buzz>(AccessLevel::kInternal)),
+              0);
+
+  EXPECT_CALL(mock_buzzer_, ShareBuzz(_, _)).WillOnce(
+      [](std::unique_ptr<Buzz> buzz, Unused) { return buzz != nullptr; });
+  EXPECT_FALSE(mock_buzzer_.ShareBuzz(nullptr, 0));
+```
+
+Many built-in actions (`WithArgs`, `WithoutArgs`,`DeleteArg`, `SaveArg`, ...)
+could in principle support move-only arguments, but the support for this is not
+implemented yet. If this is blocking you, please file a bug.
+
+A few actions (e.g. `DoAll`) copy their arguments internally, so they can never
+work with non-copyable objects; you'll have to use functors instead.
+
+#### Legacy workarounds for move-only types {#LegacyMoveOnly}
+
+Support for move-only function arguments was only introduced to gMock in April
+of 2017. In older code, you may encounter the following workaround for the lack
+of this feature (it is no longer necessary - we're including it just for
+reference):
+
+```cpp
+class MockBuzzer : public Buzzer {
+ public:
+  MOCK_METHOD(bool, DoShareBuzz, (Buzz* buzz, Time timestamp));
+  bool ShareBuzz(std::unique_ptr<Buzz> buzz, Time timestamp) override {
+    return DoShareBuzz(buzz.get(), timestamp);
+  }
+};
+```
+
+The trick is to delegate the `ShareBuzz()` method to a mock method (let’s call
+it `DoShareBuzz()`) that does not take move-only parameters. Then, instead of
+setting expectations on `ShareBuzz()`, you set them on the `DoShareBuzz()` mock
+method:
+
+```cpp
+  MockBuzzer mock_buzzer_;
+  EXPECT_CALL(mock_buzzer_, DoShareBuzz(NotNull(), _));
+
+  // When one calls ShareBuzz() on the MockBuzzer like this, the call is
+  // forwarded to DoShareBuzz(), which is mocked.  Therefore this statement
+  // will trigger the above EXPECT_CALL.
+  mock_buzzer_.ShareBuzz(MakeUnique<Buzz>(AccessLevel::kInternal), 0);
+```
+
+### Making the Compilation Faster
+
+Believe it or not, the *vast majority* of the time spent on compiling a mock
+class is in generating its constructor and destructor, as they perform
+non-trivial tasks (e.g. verification of the expectations). What's more, mock
+methods with different signatures have different types and thus their
+constructors/destructors need to be generated by the compiler separately. As a
+result, if you mock many different types of methods, compiling your mock class
+can get really slow.
+
+If you are experiencing slow compilation, you can move the definition of your
+mock class' constructor and destructor out of the class body and into a `.cc`
+file. This way, even if you `#include` your mock class in N files, the compiler
+only needs to generate its constructor and destructor once, resulting in a much
+faster compilation.
+
+Let's illustrate the idea using an example. Here's the definition of a mock
+class before applying this recipe:
+
+```cpp
+// File mock_foo.h.
+...
+class MockFoo : public Foo {
+ public:
+  // Since we don't declare the constructor or the destructor,
+  // the compiler will generate them in every translation unit
+  // where this mock class is used.
+
+  MOCK_METHOD(int, DoThis, (), (override));
+  MOCK_METHOD(bool, DoThat, (const char* str), (override));
+  ... more mock methods ...
+};
+```
+
+After the change, it would look like:
+
+```cpp
+// File mock_foo.h.
+...
+class MockFoo : public Foo {
+ public:
+  // The constructor and destructor are declared, but not defined, here.
+  MockFoo();
+  virtual ~MockFoo();
+
+  MOCK_METHOD(int, DoThis, (), (override));
+  MOCK_METHOD(bool, DoThat, (const char* str), (override));
+  ... more mock methods ...
+};
+```
+
+and
+
+```cpp
+// File mock_foo.cc.
+#include "path/to/mock_foo.h"
+
+// The definitions may appear trivial, but the functions actually do a
+// lot of things through the constructors/destructors of the member
+// variables used to implement the mock methods.
+MockFoo::MockFoo() {}
+MockFoo::~MockFoo() {}
+```
+
+### Forcing a Verification
+
+When it's being destroyed, your friendly mock object will automatically verify
+that all expectations on it have been satisfied, and will generate googletest
+failures if not. This is convenient as it leaves you with one less thing to
+worry about. That is, unless you are not sure if your mock object will be
+destroyed.
+
+How could it be that your mock object won't eventually be destroyed? Well, it
+might be created on the heap and owned by the code you are testing. Suppose
+there's a bug in that code and it doesn't delete the mock object properly - you
+could end up with a passing test when there's actually a bug.
+
+Using a heap checker is a good idea and can alleviate the concern, but its
+implementation is not 100% reliable. So, sometimes you do want to *force* gMock
+to verify a mock object before it is (hopefully) destructed. You can do this
+with `Mock::VerifyAndClearExpectations(&mock_object)`:
+
+```cpp
+TEST(MyServerTest, ProcessesRequest) {
+  using ::testing::Mock;
+
+  MockFoo* const foo = new MockFoo;
+  EXPECT_CALL(*foo, ...)...;
+  // ... other expectations ...
+
+  // server now owns foo.
+  MyServer server(foo);
+  server.ProcessRequest(...);
+
+  // In case that server's destructor will forget to delete foo,
+  // this will verify the expectations anyway.
+  Mock::VerifyAndClearExpectations(foo);
+}  // server is destroyed when it goes out of scope here.
+```
+
+{: .callout .tip}
+**Tip:** The `Mock::VerifyAndClearExpectations()` function returns a `bool` to
+indicate whether the verification was successful (`true` for yes), so you can
+wrap that function call inside a `ASSERT_TRUE()` if there is no point going
+further when the verification has failed.
+
+Do not set new expectations after verifying and clearing a mock after its use.
+Setting expectations after code that exercises the mock has undefined behavior.
+See [Using Mocks in Tests](gmock_for_dummies.md#using-mocks-in-tests) for more
+information.
+
+### Using Checkpoints {#UsingCheckPoints}
+
+Sometimes you might want to test a mock object's behavior in phases whose sizes
+are each manageable, or you might want to set more detailed expectations about
+which API calls invoke which mock functions.
+
+A technique you can use is to put the expectations in a sequence and insert
+calls to a dummy "checkpoint" function at specific places. Then you can verify
+that the mock function calls do happen at the right time. For example, if you
+are exercising the code:
+
+```cpp
+  Foo(1);
+  Foo(2);
+  Foo(3);
+```
+
+and want to verify that `Foo(1)` and `Foo(3)` both invoke `mock.Bar("a")`, but
+`Foo(2)` doesn't invoke anything, you can write:
+
+```cpp
+using ::testing::MockFunction;
+
+TEST(FooTest, InvokesBarCorrectly) {
+  MyMock mock;
+  // Class MockFunction<F> has exactly one mock method.  It is named
+  // Call() and has type F.
+  MockFunction<void(string check_point_name)> check;
+  {
+    InSequence s;
+
+    EXPECT_CALL(mock, Bar("a"));
+    EXPECT_CALL(check, Call("1"));
+    EXPECT_CALL(check, Call("2"));
+    EXPECT_CALL(mock, Bar("a"));
+  }
+  Foo(1);
+  check.Call("1");
+  Foo(2);
+  check.Call("2");
+  Foo(3);
+}
+```
+
+The expectation spec says that the first `Bar("a")` call must happen before
+checkpoint "1", the second `Bar("a")` call must happen after checkpoint "2", and
+nothing should happen between the two checkpoints. The explicit checkpoints make
+it clear which `Bar("a")` is called by which call to `Foo()`.
+
+### Mocking Destructors
+
+Sometimes you want to make sure a mock object is destructed at the right time,
+e.g. after `bar->A()` is called but before `bar->B()` is called. We already know
+that you can specify constraints on the [order](#OrderedCalls) of mock function
+calls, so all we need to do is to mock the destructor of the mock function.
+
+This sounds simple, except for one problem: a destructor is a special function
+with special syntax and special semantics, and the `MOCK_METHOD` macro doesn't
+work for it:
+
+```cpp
+MOCK_METHOD(void, ~MockFoo, ());  // Won't compile!
+```
+
+The good news is that you can use a simple pattern to achieve the same effect.
+First, add a mock function `Die()` to your mock class and call it in the
+destructor, like this:
+
+```cpp
+class MockFoo : public Foo {
+  ...
+  // Add the following two lines to the mock class.
+  MOCK_METHOD(void, Die, ());
+  ~MockFoo() override { Die(); }
+};
+```
+
+(If the name `Die()` clashes with an existing symbol, choose another name.) Now,
+we have translated the problem of testing when a `MockFoo` object dies to
+testing when its `Die()` method is called:
+
+```cpp
+  MockFoo* foo = new MockFoo;
+  MockBar* bar = new MockBar;
+  ...
+  {
+    InSequence s;
+
+    // Expects *foo to die after bar->A() and before bar->B().
+    EXPECT_CALL(*bar, A());
+    EXPECT_CALL(*foo, Die());
+    EXPECT_CALL(*bar, B());
+  }
+```
+
+And that's that.
+
+### Using gMock and Threads {#UsingThreads}
+
+In a **unit** test, it's best if you could isolate and test a piece of code in a
+single-threaded context. That avoids race conditions and dead locks, and makes
+debugging your test much easier.
+
+Yet most programs are multi-threaded, and sometimes to test something we need to
+pound on it from more than one thread. gMock works for this purpose too.
+
+Remember the steps for using a mock:
+
+1.  Create a mock object `foo`.
+2.  Set its default actions and expectations using `ON_CALL()` and
+    `EXPECT_CALL()`.
+3.  The code under test calls methods of `foo`.
+4.  Optionally, verify and reset the mock.
+5.  Destroy the mock yourself, or let the code under test destroy it. The
+    destructor will automatically verify it.
+
+If you follow the following simple rules, your mocks and threads can live
+happily together:
+
+*   Execute your *test code* (as opposed to the code being tested) in *one*
+    thread. This makes your test easy to follow.
+*   Obviously, you can do step #1 without locking.
+*   When doing step #2 and #5, make sure no other thread is accessing `foo`.
+    Obvious too, huh?
+*   #3 and #4 can be done either in one thread or in multiple threads - anyway
+    you want. gMock takes care of the locking, so you don't have to do any -
+    unless required by your test logic.
+
+If you violate the rules (for example, if you set expectations on a mock while
+another thread is calling its methods), you get undefined behavior. That's not
+fun, so don't do it.
+
+gMock guarantees that the action for a mock function is done in the same thread
+that called the mock function. For example, in
+
+```cpp
+  EXPECT_CALL(mock, Foo(1))
+      .WillOnce(action1);
+  EXPECT_CALL(mock, Foo(2))
+      .WillOnce(action2);
+```
+
+if `Foo(1)` is called in thread 1 and `Foo(2)` is called in thread 2, gMock will
+execute `action1` in thread 1 and `action2` in thread 2.
+
+gMock does *not* impose a sequence on actions performed in different threads
+(doing so may create deadlocks as the actions may need to cooperate). This means
+that the execution of `action1` and `action2` in the above example *may*
+interleave. If this is a problem, you should add proper synchronization logic to
+`action1` and `action2` to make the test thread-safe.
+
+Also, remember that `DefaultValue<T>` is a global resource that potentially
+affects *all* living mock objects in your program. Naturally, you won't want to
+mess with it from multiple threads or when there still are mocks in action.
+
+### Controlling How Much Information gMock Prints
+
+When gMock sees something that has the potential of being an error (e.g. a mock
+function with no expectation is called, a.k.a. an uninteresting call, which is
+allowed but perhaps you forgot to explicitly ban the call), it prints some
+warning messages, including the arguments of the function, the return value, and
+the stack trace. Hopefully this will remind you to take a look and see if there
+is indeed a problem.
+
+Sometimes you are confident that your tests are correct and may not appreciate
+such friendly messages. Some other times, you are debugging your tests or
+learning about the behavior of the code you are testing, and wish you could
+observe every mock call that happens (including argument values, the return
+value, and the stack trace). Clearly, one size doesn't fit all.
+
+You can control how much gMock tells you using the `--gmock_verbose=LEVEL`
+command-line flag, where `LEVEL` is a string with three possible values:
+
+*   `info`: gMock will print all informational messages, warnings, and errors
+    (most verbose). At this setting, gMock will also log any calls to the
+    `ON_CALL/EXPECT_CALL` macros. It will include a stack trace in
+    "uninteresting call" warnings.
+*   `warning`: gMock will print both warnings and errors (less verbose); it will
+    omit the stack traces in "uninteresting call" warnings. This is the default.
+*   `error`: gMock will print errors only (least verbose).
+
+Alternatively, you can adjust the value of that flag from within your tests like
+so:
+
+```cpp
+  ::testing::FLAGS_gmock_verbose = "error";
+```
+
+If you find gMock printing too many stack frames with its informational or
+warning messages, remember that you can control their amount with the
+`--gtest_stack_trace_depth=max_depth` flag.
+
+Now, judiciously use the right flag to enable gMock serve you better!
+
+### Gaining Super Vision into Mock Calls
+
+You have a test using gMock. It fails: gMock tells you some expectations aren't
+satisfied. However, you aren't sure why: Is there a typo somewhere in the
+matchers? Did you mess up the order of the `EXPECT_CALL`s? Or is the code under
+test doing something wrong? How can you find out the cause?
+
+Won't it be nice if you have X-ray vision and can actually see the trace of all
+`EXPECT_CALL`s and mock method calls as they are made? For each call, would you
+like to see its actual argument values and which `EXPECT_CALL` gMock thinks it
+matches? If you still need some help to figure out who made these calls, how
+about being able to see the complete stack trace at each mock call?
+
+You can unlock this power by running your test with the `--gmock_verbose=info`
+flag. For example, given the test program:
+
+```cpp
+#include "gmock/gmock.h"
+
+using testing::_;
+using testing::HasSubstr;
+using testing::Return;
+
+class MockFoo {
+ public:
+  MOCK_METHOD(void, F, (const string& x, const string& y));
+};
+
+TEST(Foo, Bar) {
+  MockFoo mock;
+  EXPECT_CALL(mock, F(_, _)).WillRepeatedly(Return());
+  EXPECT_CALL(mock, F("a", "b"));
+  EXPECT_CALL(mock, F("c", HasSubstr("d")));
+
+  mock.F("a", "good");
+  mock.F("a", "b");
+}
+```
+
+if you run it with `--gmock_verbose=info`, you will see this output:
+
+```shell
+[ RUN       ] Foo.Bar
+
+foo_test.cc:14: EXPECT_CALL(mock, F(_, _)) invoked
+Stack trace: ...
+
+foo_test.cc:15: EXPECT_CALL(mock, F("a", "b")) invoked
+Stack trace: ...
+
+foo_test.cc:16: EXPECT_CALL(mock, F("c", HasSubstr("d"))) invoked
+Stack trace: ...
+
+foo_test.cc:14: Mock function call matches EXPECT_CALL(mock, F(_, _))...
+    Function call: F(@0x7fff7c8dad40"a",@0x7fff7c8dad10"good")
+Stack trace: ...
+
+foo_test.cc:15: Mock function call matches EXPECT_CALL(mock, F("a", "b"))...
+    Function call: F(@0x7fff7c8dada0"a",@0x7fff7c8dad70"b")
+Stack trace: ...
+
+foo_test.cc:16: Failure
+Actual function call count doesn't match EXPECT_CALL(mock, F("c", HasSubstr("d")))...
+         Expected: to be called once
+           Actual: never called - unsatisfied and active
+[  FAILED  ] Foo.Bar
+```
+
+Suppose the bug is that the `"c"` in the third `EXPECT_CALL` is a typo and
+should actually be `"a"`. With the above message, you should see that the actual
+`F("a", "good")` call is matched by the first `EXPECT_CALL`, not the third as
+you thought. From that it should be obvious that the third `EXPECT_CALL` is
+written wrong. Case solved.
+
+If you are interested in the mock call trace but not the stack traces, you can
+combine `--gmock_verbose=info` with `--gtest_stack_trace_depth=0` on the test
+command line.
+
+### Running Tests in Emacs
+
+If you build and run your tests in Emacs using the `M-x google-compile` command
+(as many googletest users do), the source file locations of gMock and googletest
+errors will be highlighted. Just press `<Enter>` on one of them and you'll be
+taken to the offending line. Or, you can just type `C-x`` to jump to the next
+error.
+
+To make it even easier, you can add the following lines to your `~/.emacs` file:
+
+```text
+(global-set-key "\M-m"  'google-compile)  ; m is for make
+(global-set-key [M-down] 'next-error)
+(global-set-key [M-up]  '(lambda () (interactive) (next-error -1)))
+```
+
+Then you can type `M-m` to start a build (if you want to run the test as well,
+just make sure `foo_test.run` or `runtests` is in the build command you supply
+after typing `M-m`), or `M-up`/`M-down` to move back and forth between errors.
+
+## Extending gMock
+
+### Writing New Matchers Quickly {#NewMatchers}
+
+{: .callout .warning}
+WARNING: gMock does not guarantee when or how many times a matcher will be
+invoked. Therefore, all matchers must be functionally pure. See
+[this section](#PureMatchers) for more details.
+
+The `MATCHER*` family of macros can be used to define custom matchers easily.
+The syntax:
+
+```cpp
+MATCHER(name, description_string_expression) { statements; }
+```
+
+will define a matcher with the given name that executes the statements, which
+must return a `bool` to indicate if the match succeeds. Inside the statements,
+you can refer to the value being matched by `arg`, and refer to its type by
+`arg_type`.
+
+The *description string* is a `string`-typed expression that documents what the
+matcher does, and is used to generate the failure message when the match fails.
+It can (and should) reference the special `bool` variable `negation`, and should
+evaluate to the description of the matcher when `negation` is `false`, or that
+of the matcher's negation when `negation` is `true`.
+
+For convenience, we allow the description string to be empty (`""`), in which
+case gMock will use the sequence of words in the matcher name as the
+description.
+
+For example:
+
+```cpp
+MATCHER(IsDivisibleBy7, "") { return (arg % 7) == 0; }
+```
+
+allows you to write
+
+```cpp
+  // Expects mock_foo.Bar(n) to be called where n is divisible by 7.
+  EXPECT_CALL(mock_foo, Bar(IsDivisibleBy7()));
+```
+
+or,
+
+```cpp
+  using ::testing::Not;
+  ...
+  // Verifies that a value is divisible by 7 and the other is not.
+  EXPECT_THAT(some_expression, IsDivisibleBy7());
+  EXPECT_THAT(some_other_expression, Not(IsDivisibleBy7()));
+```
+
+If the above assertions fail, they will print something like:
+
+```shell
+  Value of: some_expression
+  Expected: is divisible by 7
+    Actual: 27
+  ...
+  Value of: some_other_expression
+  Expected: not (is divisible by 7)
+    Actual: 21
+```
+
+where the descriptions `"is divisible by 7"` and `"not (is divisible by 7)"` are
+automatically calculated from the matcher name `IsDivisibleBy7`.
+
+As you may have noticed, the auto-generated descriptions (especially those for
+the negation) may not be so great. You can always override them with a `string`
+expression of your own:
+
+```cpp
+MATCHER(IsDivisibleBy7,
+        absl::StrCat(negation ? "isn't" : "is", " divisible by 7")) {
+  return (arg % 7) == 0;
+}
+```
+
+Optionally, you can stream additional information to a hidden argument named
+`result_listener` to explain the match result. For example, a better definition
+of `IsDivisibleBy7` is:
+
+```cpp
+MATCHER(IsDivisibleBy7, "") {
+  if ((arg % 7) == 0)
+    return true;
+
+  *result_listener << "the remainder is " << (arg % 7);
+  return false;
+}
+```
+
+With this definition, the above assertion will give a better message:
+
+```shell
+  Value of: some_expression
+  Expected: is divisible by 7
+    Actual: 27 (the remainder is 6)
+```
+
+You should let `MatchAndExplain()` print *any additional information* that can
+help a user understand the match result. Note that it should explain why the
+match succeeds in case of a success (unless it's obvious) - this is useful when
+the matcher is used inside `Not()`. There is no need to print the argument value
+itself, as gMock already prints it for you.
+
+{: .callout .note}
+NOTE: The type of the value being matched (`arg_type`) is determined by the
+context in which you use the matcher and is supplied to you by the compiler, so
+you don't need to worry about declaring it (nor can you). This allows the
+matcher to be polymorphic. For example, `IsDivisibleBy7()` can be used to match
+any type where the value of `(arg % 7) == 0` can be implicitly converted to a
+`bool`. In the `Bar(IsDivisibleBy7())` example above, if method `Bar()` takes an
+`int`, `arg_type` will be `int`; if it takes an `unsigned long`, `arg_type` will
+be `unsigned long`; and so on.
+
+### Writing New Parameterized Matchers Quickly
+
+Sometimes you'll want to define a matcher that has parameters. For that you can
+use the macro:
+
+```cpp
+MATCHER_P(name, param_name, description_string) { statements; }
+```
+
+where the description string can be either `""` or a `string` expression that
+references `negation` and `param_name`.
+
+For example:
+
+```cpp
+MATCHER_P(HasAbsoluteValue, value, "") { return abs(arg) == value; }
+```
+
+will allow you to write:
+
+```cpp
+  EXPECT_THAT(Blah("a"), HasAbsoluteValue(n));
+```
+
+which may lead to this message (assuming `n` is 10):
+
+```shell
+  Value of: Blah("a")
+  Expected: has absolute value 10
+    Actual: -9
+```
+
+Note that both the matcher description and its parameter are printed, making the
+message human-friendly.
+
+In the matcher definition body, you can write `foo_type` to reference the type
+of a parameter named `foo`. For example, in the body of
+`MATCHER_P(HasAbsoluteValue, value)` above, you can write `value_type` to refer
+to the type of `value`.
+
+gMock also provides `MATCHER_P2`, `MATCHER_P3`, ..., up to `MATCHER_P10` to
+support multi-parameter matchers:
+
+```cpp
+MATCHER_Pk(name, param_1, ..., param_k, description_string) { statements; }
+```
+
+Please note that the custom description string is for a particular *instance* of
+the matcher, where the parameters have been bound to actual values. Therefore
+usually you'll want the parameter values to be part of the description. gMock
+lets you do that by referencing the matcher parameters in the description string
+expression.
+
+For example,
+
+```cpp
+using ::testing::PrintToString;
+MATCHER_P2(InClosedRange, low, hi,
+           absl::StrFormat("%s in range [%s, %s]", negation ? "isn't" : "is",
+                           PrintToString(low), PrintToString(hi))) {
+  return low <= arg && arg <= hi;
+}
+...
+EXPECT_THAT(3, InClosedRange(4, 6));
+```
+
+would generate a failure that contains the message:
+
+```shell
+  Expected: is in range [4, 6]
+```
+
+If you specify `""` as the description, the failure message will contain the
+sequence of words in the matcher name followed by the parameter values printed
+as a tuple. For example,
+
+```cpp
+  MATCHER_P2(InClosedRange, low, hi, "") { ... }
+  ...
+  EXPECT_THAT(3, InClosedRange(4, 6));
+```
+
+would generate a failure that contains the text:
+
+```shell
+  Expected: in closed range (4, 6)
+```
+
+For the purpose of typing, you can view
+
+```cpp
+MATCHER_Pk(Foo, p1, ..., pk, description_string) { ... }
+```
+
+as shorthand for
+
+```cpp
+template <typename p1_type, ..., typename pk_type>
+FooMatcherPk<p1_type, ..., pk_type>
+Foo(p1_type p1, ..., pk_type pk) { ... }
+```
+
+When you write `Foo(v1, ..., vk)`, the compiler infers the types of the
+parameters `v1`, ..., and `vk` for you. If you are not happy with the result of
+the type inference, you can specify the types by explicitly instantiating the
+template, as in `Foo<long, bool>(5, false)`. As said earlier, you don't get to
+(or need to) specify `arg_type` as that's determined by the context in which the
+matcher is used.
+
+You can assign the result of expression `Foo(p1, ..., pk)` to a variable of type
+`FooMatcherPk<p1_type, ..., pk_type>`. This can be useful when composing
+matchers. Matchers that don't have a parameter or have only one parameter have
+special types: you can assign `Foo()` to a `FooMatcher`-typed variable, and
+assign `Foo(p)` to a `FooMatcherP<p_type>`-typed variable.
+
+While you can instantiate a matcher template with reference types, passing the
+parameters by pointer usually makes your code more readable. If, however, you
+still want to pass a parameter by reference, be aware that in the failure
+message generated by the matcher you will see the value of the referenced object
+but not its address.
+
+You can overload matchers with different numbers of parameters:
+
+```cpp
+MATCHER_P(Blah, a, description_string_1) { ... }
+MATCHER_P2(Blah, a, b, description_string_2) { ... }
+```
+
+While it's tempting to always use the `MATCHER*` macros when defining a new
+matcher, you should also consider implementing the matcher interface directly
+instead (see the recipes that follow), especially if you need to use the matcher
+a lot. While these approaches require more work, they give you more control on
+the types of the value being matched and the matcher parameters, which in
+general leads to better compiler error messages that pay off in the long run.
+They also allow overloading matchers based on parameter types (as opposed to
+just based on the number of parameters).
+
+### Writing New Monomorphic Matchers
+
+A matcher of argument type `T` implements the matcher interface for `T` and does
+two things: it tests whether a value of type `T` matches the matcher, and can
+describe what kind of values it matches. The latter ability is used for
+generating readable error messages when expectations are violated.
+
+A matcher of `T` must declare a typedef like:
+
+```cpp
+using is_gtest_matcher = void;
+```
+
+and supports the following operations:
+
+```cpp
+// Match a value and optionally explain into an ostream.
+bool matched = matcher.MatchAndExplain(value, maybe_os);
+// where `value` is of type `T` and
+// `maybe_os` is of type `std::ostream*`, where it can be null if the caller
+// is not interested in there textual explanation.
+
+matcher.DescribeTo(os);
+matcher.DescribeNegationTo(os);
+// where `os` is of type `std::ostream*`.
+```
+
+If you need a custom matcher but `Truly()` is not a good option (for example,
+you may not be happy with the way `Truly(predicate)` describes itself, or you
+may want your matcher to be polymorphic as `Eq(value)` is), you can define a
+matcher to do whatever you want in two steps: first implement the matcher
+interface, and then define a factory function to create a matcher instance. The
+second step is not strictly needed but it makes the syntax of using the matcher
+nicer.
+
+For example, you can define a matcher to test whether an `int` is divisible by 7
+and then use it like this:
+
+```cpp
+using ::testing::Matcher;
+
+class DivisibleBy7Matcher {
+ public:
+  using is_gtest_matcher = void;
+
+  bool MatchAndExplain(int n, std::ostream*) const {
+    return (n % 7) == 0;
+  }
+
+  void DescribeTo(std::ostream* os) const {
+    *os << "is divisible by 7";
+  }
+
+  void DescribeNegationTo(std::ostream* os) const {
+    *os << "is not divisible by 7";
+  }
+};
+
+Matcher<int> DivisibleBy7() {
+  return DivisibleBy7Matcher();
+}
+
+...
+  EXPECT_CALL(foo, Bar(DivisibleBy7()));
+```
+
+You may improve the matcher message by streaming additional information to the
+`os` argument in `MatchAndExplain()`:
+
+```cpp
+class DivisibleBy7Matcher {
+ public:
+  bool MatchAndExplain(int n, std::ostream* os) const {
+    const int remainder = n % 7;
+    if (remainder != 0 && os != nullptr) {
+      *os << "the remainder is " << remainder;
+    }
+    return remainder == 0;
+  }
+  ...
+};
+```
+
+Then, `EXPECT_THAT(x, DivisibleBy7());` may generate a message like this:
+
+```shell
+Value of: x
+Expected: is divisible by 7
+  Actual: 23 (the remainder is 2)
+```
+
+{: .callout .tip}
+Tip: for convenience, `MatchAndExplain()` can take a `MatchResultListener*`
+instead of `std::ostream*`.
+
+### Writing New Polymorphic Matchers
+
+Expanding what we learned above to *polymorphic* matchers is now just as simple
+as adding templates in the right place.
+
+```cpp
+
+class NotNullMatcher {
+ public:
+  using is_gtest_matcher = void;
+
+  // To implement a polymorphic matcher, we just need to make MatchAndExplain a
+  // template on its first argument.
+
+  // In this example, we want to use NotNull() with any pointer, so
+  // MatchAndExplain() accepts a pointer of any type as its first argument.
+  // In general, you can define MatchAndExplain() as an ordinary method or
+  // a method template, or even overload it.
+  template <typename T>
+  bool MatchAndExplain(T* p, std::ostream*) const {
+    return p != nullptr;
+  }
+
+  // Describes the property of a value matching this matcher.
+  void DescribeTo(std::ostream* os) const { *os << "is not NULL"; }
+
+  // Describes the property of a value NOT matching this matcher.
+  void DescribeNegationTo(std::ostream* os) const { *os << "is NULL"; }
+};
+
+NotNullMatcher NotNull() {
+  return NotNullMatcher();
+}
+
+...
+
+  EXPECT_CALL(foo, Bar(NotNull()));  // The argument must be a non-NULL pointer.
+```
+
+### Legacy Matcher Implementation
+
+Defining matchers used to be somewhat more complicated, in which it required
+several supporting classes and virtual functions. To implement a matcher for
+type `T` using the legacy API you have to derive from `MatcherInterface<T>` and
+call `MakeMatcher` to construct the object.
+
+The interface looks like this:
+
+```cpp
+class MatchResultListener {
+ public:
+  ...
+  // Streams x to the underlying ostream; does nothing if the ostream
+  // is NULL.
+  template <typename T>
+  MatchResultListener& operator<<(const T& x);
+
+  // Returns the underlying ostream.
+  std::ostream* stream();
+};
+
+template <typename T>
+class MatcherInterface {
+ public:
+  virtual ~MatcherInterface();
+
+  // Returns true if and only if the matcher matches x; also explains the match
+  // result to 'listener'.
+  virtual bool MatchAndExplain(T x, MatchResultListener* listener) const = 0;
+
+  // Describes this matcher to an ostream.
+  virtual void DescribeTo(std::ostream* os) const = 0;
+
+  // Describes the negation of this matcher to an ostream.
+  virtual void DescribeNegationTo(std::ostream* os) const;
+};
+```
+
+Fortunately, most of the time you can define a polymorphic matcher easily with
+the help of `MakePolymorphicMatcher()`. Here's how you can define `NotNull()` as
+an example:
+
+```cpp
+using ::testing::MakePolymorphicMatcher;
+using ::testing::MatchResultListener;
+using ::testing::PolymorphicMatcher;
+
+class NotNullMatcher {
+ public:
+  // To implement a polymorphic matcher, first define a COPYABLE class
+  // that has three members MatchAndExplain(), DescribeTo(), and
+  // DescribeNegationTo(), like the following.
+
+  // In this example, we want to use NotNull() with any pointer, so
+  // MatchAndExplain() accepts a pointer of any type as its first argument.
+  // In general, you can define MatchAndExplain() as an ordinary method or
+  // a method template, or even overload it.
+  template <typename T>
+  bool MatchAndExplain(T* p,
+                       MatchResultListener* /* listener */) const {
+    return p != NULL;
+  }
+
+  // Describes the property of a value matching this matcher.
+  void DescribeTo(std::ostream* os) const { *os << "is not NULL"; }
+
+  // Describes the property of a value NOT matching this matcher.
+  void DescribeNegationTo(std::ostream* os) const { *os << "is NULL"; }
+};
+
+// To construct a polymorphic matcher, pass an instance of the class
+// to MakePolymorphicMatcher().  Note the return type.
+PolymorphicMatcher<NotNullMatcher> NotNull() {
+  return MakePolymorphicMatcher(NotNullMatcher());
+}
+
+...
+
+  EXPECT_CALL(foo, Bar(NotNull()));  // The argument must be a non-NULL pointer.
+```
+
+{: .callout .note}
+**Note:** Your polymorphic matcher class does **not** need to inherit from
+`MatcherInterface` or any other class, and its methods do **not** need to be
+virtual.
+
+Like in a monomorphic matcher, you may explain the match result by streaming
+additional information to the `listener` argument in `MatchAndExplain()`.
+
+### Writing New Cardinalities
+
+A cardinality is used in `Times()` to tell gMock how many times you expect a
+call to occur. It doesn't have to be exact. For example, you can say
+`AtLeast(5)` or `Between(2, 4)`.
+
+If the [built-in set](gmock_cheat_sheet.md#CardinalityList) of cardinalities
+doesn't suit you, you are free to define your own by implementing the following
+interface (in namespace `testing`):
+
+```cpp
+class CardinalityInterface {
+ public:
+  virtual ~CardinalityInterface();
+
+  // Returns true if and only if call_count calls will satisfy this cardinality.
+  virtual bool IsSatisfiedByCallCount(int call_count) const = 0;
+
+  // Returns true if and only if call_count calls will saturate this
+  // cardinality.
+  virtual bool IsSaturatedByCallCount(int call_count) const = 0;
+
+  // Describes self to an ostream.
+  virtual void DescribeTo(std::ostream* os) const = 0;
+};
+```
+
+For example, to specify that a call must occur even number of times, you can
+write
+
+```cpp
+using ::testing::Cardinality;
+using ::testing::CardinalityInterface;
+using ::testing::MakeCardinality;
+
+class EvenNumberCardinality : public CardinalityInterface {
+ public:
+  bool IsSatisfiedByCallCount(int call_count) const override {
+    return (call_count % 2) == 0;
+  }
+
+  bool IsSaturatedByCallCount(int call_count) const override {
+    return false;
+  }
+
+  void DescribeTo(std::ostream* os) const {
+    *os << "called even number of times";
+  }
+};
+
+Cardinality EvenNumber() {
+  return MakeCardinality(new EvenNumberCardinality);
+}
+
+...
+  EXPECT_CALL(foo, Bar(3))
+      .Times(EvenNumber());
+```
+
+### Writing New Actions {#QuickNewActions}
+
+If the built-in actions don't work for you, you can easily define your own one.
+All you need is a call operator with a signature compatible with the mocked
+function. So you can use a lambda:
+
+```
+MockFunction<int(int)> mock;
+EXPECT_CALL(mock, Call).WillOnce([](const int input) { return input * 7; });
+EXPECT_EQ(14, mock.AsStdFunction()(2));
+```
+
+Or a struct with a call operator (even a templated one):
+
+```
+struct MultiplyBy {
+  template <typename T>
+  T operator()(T arg) { return arg * multiplier; }
+
+  int multiplier;
+};
+
+// Then use:
+// EXPECT_CALL(...).WillOnce(MultiplyBy{7});
+```
+
+It's also fine for the callable to take no arguments, ignoring the arguments
+supplied to the mock function:
+
+```
+MockFunction<int(int)> mock;
+EXPECT_CALL(mock, Call).WillOnce([] { return 17; });
+EXPECT_EQ(17, mock.AsStdFunction()(0));
+```
+
+When used with `WillOnce`, the callable can assume it will be called at most
+once and is allowed to be a move-only type:
+
+```
+// An action that contains move-only types and has an &&-qualified operator,
+// demanding in the type system that it be called at most once. This can be
+// used with WillOnce, but the compiler will reject it if handed to
+// WillRepeatedly.
+struct MoveOnlyAction {
+  std::unique_ptr<int> move_only_state;
+  std::unique_ptr<int> operator()() && { return std::move(move_only_state); }
+};
+
+MockFunction<std::unique_ptr<int>()> mock;
+EXPECT_CALL(mock, Call).WillOnce(MoveOnlyAction{std::make_unique<int>(17)});
+EXPECT_THAT(mock.AsStdFunction()(), Pointee(Eq(17)));
+```
+
+More generally, to use with a mock function whose signature is `R(Args...)` the
+object can be anything convertible to `OnceAction<R(Args...)>` or
+`Action<R(Args...)`>. The difference between the two is that `OnceAction` has
+weaker requirements (`Action` requires a copy-constructible input that can be
+called repeatedly whereas `OnceAction` requires only move-constructible and
+supports `&&`-qualified call operators), but can be used only with `WillOnce`.
+`OnceAction` is typically relevant only when supporting move-only types or
+actions that want a type-system guarantee that they will be called at most once.
+
+Typically the `OnceAction` and `Action` templates need not be referenced
+directly in your actions: a struct or class with a call operator is sufficient,
+as in the examples above. But fancier polymorphic actions that need to know the
+specific return type of the mock function can define templated conversion
+operators to make that possible. See `gmock-actions.h` for examples.
+
+#### Legacy macro-based Actions
+
+Before C++11, the functor-based actions were not supported; the old way of
+writing actions was through a set of `ACTION*` macros. We suggest to avoid them
+in new code; they hide a lot of logic behind the macro, potentially leading to
+harder-to-understand compiler errors. Nevertheless, we cover them here for
+completeness.
+
+By writing
+
+```cpp
+ACTION(name) { statements; }
+```
+
+in a namespace scope (i.e. not inside a class or function), you will define an
+action with the given name that executes the statements. The value returned by
+`statements` will be used as the return value of the action. Inside the
+statements, you can refer to the K-th (0-based) argument of the mock function as
+`argK`. For example:
+
+```cpp
+ACTION(IncrementArg1) { return ++(*arg1); }
+```
+
+allows you to write
+
+```cpp
+... WillOnce(IncrementArg1());
+```
+
+Note that you don't need to specify the types of the mock function arguments.
+Rest assured that your code is type-safe though: you'll get a compiler error if
+`*arg1` doesn't support the `++` operator, or if the type of `++(*arg1)` isn't
+compatible with the mock function's return type.
+
+Another example:
+
+```cpp
+ACTION(Foo) {
+  (*arg2)(5);
+  Blah();
+  *arg1 = 0;
+  return arg0;
+}
+```
+
+defines an action `Foo()` that invokes argument #2 (a function pointer) with 5,
+calls function `Blah()`, sets the value pointed to by argument #1 to 0, and
+returns argument #0.
+
+For more convenience and flexibility, you can also use the following pre-defined
+symbols in the body of `ACTION`:
+
+`argK_type`     | The type of the K-th (0-based) argument of the mock function
+:-------------- | :-----------------------------------------------------------
+`args`          | All arguments of the mock function as a tuple
+`args_type`     | The type of all arguments of the mock function as a tuple
+`return_type`   | The return type of the mock function
+`function_type` | The type of the mock function
+
+For example, when using an `ACTION` as a stub action for mock function:
+
+```cpp
+int DoSomething(bool flag, int* ptr);
+```
+
+we have:
+
+Pre-defined Symbol | Is Bound To
+------------------ | ---------------------------------
+`arg0`             | the value of `flag`
+`arg0_type`        | the type `bool`
+`arg1`             | the value of `ptr`
+`arg1_type`        | the type `int*`
+`args`             | the tuple `(flag, ptr)`
+`args_type`        | the type `std::tuple<bool, int*>`
+`return_type`      | the type `int`
+`function_type`    | the type `int(bool, int*)`
+
+#### Legacy macro-based parameterized Actions
+
+Sometimes you'll want to parameterize an action you define. For that we have
+another macro
+
+```cpp
+ACTION_P(name, param) { statements; }
+```
+
+For example,
+
+```cpp
+ACTION_P(Add, n) { return arg0 + n; }
+```
+
+will allow you to write
+
+```cpp
+// Returns argument #0 + 5.
+... WillOnce(Add(5));
+```
+
+For convenience, we use the term *arguments* for the values used to invoke the
+mock function, and the term *parameters* for the values used to instantiate an
+action.
+
+Note that you don't need to provide the type of the parameter either. Suppose
+the parameter is named `param`, you can also use the gMock-defined symbol
+`param_type` to refer to the type of the parameter as inferred by the compiler.
+For example, in the body of `ACTION_P(Add, n)` above, you can write `n_type` for
+the type of `n`.
+
+gMock also provides `ACTION_P2`, `ACTION_P3`, and etc to support multi-parameter
+actions. For example,
+
+```cpp
+ACTION_P2(ReturnDistanceTo, x, y) {
+  double dx = arg0 - x;
+  double dy = arg1 - y;
+  return sqrt(dx*dx + dy*dy);
+}
+```
+
+lets you write
+
+```cpp
+... WillOnce(ReturnDistanceTo(5.0, 26.5));
+```
+
+You can view `ACTION` as a degenerated parameterized action where the number of
+parameters is 0.
+
+You can also easily define actions overloaded on the number of parameters:
+
+```cpp
+ACTION_P(Plus, a) { ... }
+ACTION_P2(Plus, a, b) { ... }
+```
+
+### Restricting the Type of an Argument or Parameter in an ACTION
+
+For maximum brevity and reusability, the `ACTION*` macros don't ask you to
+provide the types of the mock function arguments and the action parameters.
+Instead, we let the compiler infer the types for us.
+
+Sometimes, however, we may want to be more explicit about the types. There are
+several tricks to do that. For example:
+
+```cpp
+ACTION(Foo) {
+  // Makes sure arg0 can be converted to int.
+  int n = arg0;
+  ... use n instead of arg0 here ...
+}
+
+ACTION_P(Bar, param) {
+  // Makes sure the type of arg1 is const char*.
+  ::testing::StaticAssertTypeEq<const char*, arg1_type>();
+
+  // Makes sure param can be converted to bool.
+  bool flag = param;
+}
+```
+
+where `StaticAssertTypeEq` is a compile-time assertion in googletest that
+verifies two types are the same.
+
+### Writing New Action Templates Quickly
+
+Sometimes you want to give an action explicit template parameters that cannot be
+inferred from its value parameters. `ACTION_TEMPLATE()` supports that and can be
+viewed as an extension to `ACTION()` and `ACTION_P*()`.
+
+The syntax:
+
+```cpp
+ACTION_TEMPLATE(ActionName,
+                HAS_m_TEMPLATE_PARAMS(kind1, name1, ..., kind_m, name_m),
+                AND_n_VALUE_PARAMS(p1, ..., p_n)) { statements; }
+```
+
+defines an action template that takes *m* explicit template parameters and *n*
+value parameters, where *m* is in [1, 10] and *n* is in [0, 10]. `name_i` is the
+name of the *i*-th template parameter, and `kind_i` specifies whether it's a
+`typename`, an integral constant, or a template. `p_i` is the name of the *i*-th
+value parameter.
+
+Example:
+
+```cpp
+// DuplicateArg<k, T>(output) converts the k-th argument of the mock
+// function to type T and copies it to *output.
+ACTION_TEMPLATE(DuplicateArg,
+                // Note the comma between int and k:
+                HAS_2_TEMPLATE_PARAMS(int, k, typename, T),
+                AND_1_VALUE_PARAMS(output)) {
+  *output = T(std::get<k>(args));
+}
+```
+
+To create an instance of an action template, write:
+
+```cpp
+ActionName<t1, ..., t_m>(v1, ..., v_n)
+```
+
+where the `t`s are the template arguments and the `v`s are the value arguments.
+The value argument types are inferred by the compiler. For example:
+
+```cpp
+using ::testing::_;
+...
+  int n;
+  EXPECT_CALL(mock, Foo).WillOnce(DuplicateArg<1, unsigned char>(&n));
+```
+
+If you want to explicitly specify the value argument types, you can provide
+additional template arguments:
+
+```cpp
+ActionName<t1, ..., t_m, u1, ..., u_k>(v1, ..., v_n)
+```
+
+where `u_i` is the desired type of `v_i`.
+
+`ACTION_TEMPLATE` and `ACTION`/`ACTION_P*` can be overloaded on the number of
+value parameters, but not on the number of template parameters. Without the
+restriction, the meaning of the following is unclear:
+
+```cpp
+  OverloadedAction<int, bool>(x);
+```
+
+Are we using a single-template-parameter action where `bool` refers to the type
+of `x`, or a two-template-parameter action where the compiler is asked to infer
+the type of `x`?
+
+### Using the ACTION Object's Type
+
+If you are writing a function that returns an `ACTION` object, you'll need to
+know its type. The type depends on the macro used to define the action and the
+parameter types. The rule is relatively simple:
+
+
+| Given Definition              | Expression          | Has Type              |
+| ----------------------------- | ------------------- | --------------------- |
+| `ACTION(Foo)`                 | `Foo()`             | `FooAction`           |
+| `ACTION_TEMPLATE(Foo, HAS_m_TEMPLATE_PARAMS(...), AND_0_VALUE_PARAMS())` | `Foo<t1, ..., t_m>()` | `FooAction<t1, ..., t_m>` |
+| `ACTION_P(Bar, param)`        | `Bar(int_value)`    | `BarActionP<int>`     |
+| `ACTION_TEMPLATE(Bar, HAS_m_TEMPLATE_PARAMS(...), AND_1_VALUE_PARAMS(p1))` | `Bar<t1, ..., t_m>(int_value)` | `BarActionP<t1, ..., t_m, int>` |
+| `ACTION_P2(Baz, p1, p2)`      | `Baz(bool_value, int_value)` | `BazActionP2<bool, int>` |
+| `ACTION_TEMPLATE(Baz, HAS_m_TEMPLATE_PARAMS(...), AND_2_VALUE_PARAMS(p1, p2))` | `Baz<t1, ..., t_m>(bool_value, int_value)` | `BazActionP2<t1, ..., t_m, bool, int>` |
+| ...                           | ...                 | ...                   |
+
+
+Note that we have to pick different suffixes (`Action`, `ActionP`, `ActionP2`,
+and etc) for actions with different numbers of value parameters, or the action
+definitions cannot be overloaded on the number of them.
+
+### Writing New Monomorphic Actions {#NewMonoActions}
+
+While the `ACTION*` macros are very convenient, sometimes they are
+inappropriate. For example, despite the tricks shown in the previous recipes,
+they don't let you directly specify the types of the mock function arguments and
+the action parameters, which in general leads to unoptimized compiler error
+messages that can baffle unfamiliar users. They also don't allow overloading
+actions based on parameter types without jumping through some hoops.
+
+An alternative to the `ACTION*` macros is to implement
+`::testing::ActionInterface<F>`, where `F` is the type of the mock function in
+which the action will be used. For example:
+
+```cpp
+template <typename F>
+class ActionInterface {
+ public:
+  virtual ~ActionInterface();
+
+  // Performs the action.  Result is the return type of function type
+  // F, and ArgumentTuple is the tuple of arguments of F.
+  //
+
+  // For example, if F is int(bool, const string&), then Result would
+  // be int, and ArgumentTuple would be std::tuple<bool, const string&>.
+  virtual Result Perform(const ArgumentTuple& args) = 0;
+};
+```
+
+```cpp
+using ::testing::_;
+using ::testing::Action;
+using ::testing::ActionInterface;
+using ::testing::MakeAction;
+
+typedef int IncrementMethod(int*);
+
+class IncrementArgumentAction : public ActionInterface<IncrementMethod> {
+ public:
+  int Perform(const std::tuple<int*>& args) override {
+    int* p = std::get<0>(args);  // Grabs the first argument.
+    return *p++;
+  }
+};
+
+Action<IncrementMethod> IncrementArgument() {
+  return MakeAction(new IncrementArgumentAction);
+}
+
+...
+  EXPECT_CALL(foo, Baz(_))
+      .WillOnce(IncrementArgument());
+
+  int n = 5;
+  foo.Baz(&n);  // Should return 5 and change n to 6.
+```
+
+### Writing New Polymorphic Actions {#NewPolyActions}
+
+The previous recipe showed you how to define your own action. This is all good,
+except that you need to know the type of the function in which the action will
+be used. Sometimes that can be a problem. For example, if you want to use the
+action in functions with *different* types (e.g. like `Return()` and
+`SetArgPointee()`).
+
+If an action can be used in several types of mock functions, we say it's
+*polymorphic*. The `MakePolymorphicAction()` function template makes it easy to
+define such an action:
+
+```cpp
+namespace testing {
+template <typename Impl>
+PolymorphicAction<Impl> MakePolymorphicAction(const Impl& impl);
+}  // namespace testing
+```
+
+As an example, let's define an action that returns the second argument in the
+mock function's argument list. The first step is to define an implementation
+class:
+
+```cpp
+class ReturnSecondArgumentAction {
+ public:
+  template <typename Result, typename ArgumentTuple>
+  Result Perform(const ArgumentTuple& args) const {
+    // To get the i-th (0-based) argument, use std::get(args).
+    return std::get<1>(args);
+  }
+};
+```
+
+This implementation class does *not* need to inherit from any particular class.
+What matters is that it must have a `Perform()` method template. This method
+template takes the mock function's arguments as a tuple in a **single**
+argument, and returns the result of the action. It can be either `const` or not,
+but must be invocable with exactly one template argument, which is the result
+type. In other words, you must be able to call `Perform<R>(args)` where `R` is
+the mock function's return type and `args` is its arguments in a tuple.
+
+Next, we use `MakePolymorphicAction()` to turn an instance of the implementation
+class into the polymorphic action we need. It will be convenient to have a
+wrapper for this:
+
+```cpp
+using ::testing::MakePolymorphicAction;
+using ::testing::PolymorphicAction;
+
+PolymorphicAction<ReturnSecondArgumentAction> ReturnSecondArgument() {
+  return MakePolymorphicAction(ReturnSecondArgumentAction());
+}
+```
+
+Now, you can use this polymorphic action the same way you use the built-in ones:
+
+```cpp
+using ::testing::_;
+
+class MockFoo : public Foo {
+ public:
+  MOCK_METHOD(int, DoThis, (bool flag, int n), (override));
+  MOCK_METHOD(string, DoThat, (int x, const char* str1, const char* str2),
+              (override));
+};
+
+  ...
+  MockFoo foo;
+  EXPECT_CALL(foo, DoThis).WillOnce(ReturnSecondArgument());
+  EXPECT_CALL(foo, DoThat).WillOnce(ReturnSecondArgument());
+  ...
+  foo.DoThis(true, 5);  // Will return 5.
+  foo.DoThat(1, "Hi", "Bye");  // Will return "Hi".
+```
+
+### Teaching gMock How to Print Your Values
+
+When an uninteresting or unexpected call occurs, gMock prints the argument
+values and the stack trace to help you debug. Assertion macros like
+`EXPECT_THAT` and `EXPECT_EQ` also print the values in question when the
+assertion fails. gMock and googletest do this using googletest's user-extensible
+value printer.
+
+This printer knows how to print built-in C++ types, native arrays, STL
+containers, and any type that supports the `<<` operator. For other types, it
+prints the raw bytes in the value and hopes that you the user can figure it out.
+[The GoogleTest advanced guide](advanced.md#teaching-googletest-how-to-print-your-values)
+explains how to extend the printer to do a better job at printing your
+particular type than to dump the bytes.
+
+## Useful Mocks Created Using gMock
+
+<!--#include file="includes/g3_testing_LOGs.md"-->
+<!--#include file="includes/g3_mock_callbacks.md"-->
+
+### Mock std::function {#MockFunction}
+
+`std::function` is a general function type introduced in C++11. It is a
+preferred way of passing callbacks to new interfaces. Functions are copiable,
+and are not usually passed around by pointer, which makes them tricky to mock.
+But fear not - `MockFunction` can help you with that.
+
+`MockFunction<R(T1, ..., Tn)>` has a mock method `Call()` with the signature:
+
+```cpp
+  R Call(T1, ..., Tn);
+```
+
+It also has a `AsStdFunction()` method, which creates a `std::function` proxy
+forwarding to Call:
+
+```cpp
+  std::function<R(T1, ..., Tn)> AsStdFunction();
+```
+
+To use `MockFunction`, first create `MockFunction` object and set up
+expectations on its `Call` method. Then pass proxy obtained from
+`AsStdFunction()` to the code you are testing. For example:
+
+```cpp
+TEST(FooTest, RunsCallbackWithBarArgument) {
+  // 1. Create a mock object.
+  MockFunction<int(string)> mock_function;
+
+  // 2. Set expectations on Call() method.
+  EXPECT_CALL(mock_function, Call("bar")).WillOnce(Return(1));
+
+  // 3. Exercise code that uses std::function.
+  Foo(mock_function.AsStdFunction());
+  // Foo's signature can be either of:
+  // void Foo(const std::function<int(string)>& fun);
+  // void Foo(std::function<int(string)> fun);
+
+  // 4. All expectations will be verified when mock_function
+  //     goes out of scope and is destroyed.
+}
+```
+
+Remember that function objects created with `AsStdFunction()` are just
+forwarders. If you create multiple of them, they will share the same set of
+expectations.
+
+Although `std::function` supports unlimited number of arguments, `MockFunction`
+implementation is limited to ten. If you ever hit that limit... well, your
+callback has bigger problems than being mockable. :-)
+
+
+## Archivo: gmock_for_dummies.md
+Contenido:
+# gMock for Dummies
+
+## What Is gMock?
+
+When you write a prototype or test, often it's not feasible or wise to rely on
+real objects entirely. A **mock object** implements the same interface as a real
+object (so it can be used as one), but lets you specify at run time how it will
+be used and what it should do (which methods will be called? in which order? how
+many times? with what arguments? what will they return? etc).
+
+It is easy to confuse the term *fake objects* with mock objects. Fakes and mocks
+actually mean very different things in the Test-Driven Development (TDD)
+community:
+
+*   **Fake** objects have working implementations, but usually take some
+    shortcut (perhaps to make the operations less expensive), which makes them
+    not suitable for production. An in-memory file system would be an example of
+    a fake.
+*   **Mocks** are objects pre-programmed with *expectations*, which form a
+    specification of the calls they are expected to receive.
+
+If all this seems too abstract for you, don't worry - the most important thing
+to remember is that a mock allows you to check the *interaction* between itself
+and code that uses it. The difference between fakes and mocks shall become much
+clearer once you start to use mocks.
+
+**gMock** is a library (sometimes we also call it a "framework" to make it sound
+cool) for creating mock classes and using them. It does to C++ what
+jMock/EasyMock does to Java (well, more or less).
+
+When using gMock,
+
+1.  first, you use some simple macros to describe the interface you want to
+    mock, and they will expand to the implementation of your mock class;
+2.  next, you create some mock objects and specify its expectations and behavior
+    using an intuitive syntax;
+3.  then you exercise code that uses the mock objects. gMock will catch any
+    violation to the expectations as soon as it arises.
+
+## Why gMock?
+
+While mock objects help you remove unnecessary dependencies in tests and make
+them fast and reliable, using mocks manually in C++ is *hard*:
+
+*   Someone has to implement the mocks. The job is usually tedious and
+    error-prone. No wonder people go great distance to avoid it.
+*   The quality of those manually written mocks is a bit, uh, unpredictable. You
+    may see some really polished ones, but you may also see some that were
+    hacked up in a hurry and have all sorts of ad hoc restrictions.
+*   The knowledge you gained from using one mock doesn't transfer to the next
+    one.
+
+In contrast, Java and Python programmers have some fine mock frameworks (jMock,
+EasyMock, etc), which automate the creation of mocks. As a result, mocking is a
+proven effective technique and widely adopted practice in those communities.
+Having the right tool absolutely makes the difference.
+
+gMock was built to help C++ programmers. It was inspired by jMock and EasyMock,
+but designed with C++'s specifics in mind. It is your friend if any of the
+following problems is bothering you:
+
+*   You are stuck with a sub-optimal design and wish you had done more
+    prototyping before it was too late, but prototyping in C++ is by no means
+    "rapid".
+*   Your tests are slow as they depend on too many libraries or use expensive
+    resources (e.g. a database).
+*   Your tests are brittle as some resources they use are unreliable (e.g. the
+    network).
+*   You want to test how your code handles a failure (e.g. a file checksum
+    error), but it's not easy to cause one.
+*   You need to make sure that your module interacts with other modules in the
+    right way, but it's hard to observe the interaction; therefore you resort to
+    observing the side effects at the end of the action, but it's awkward at
+    best.
+*   You want to "mock out" your dependencies, except that they don't have mock
+    implementations yet; and, frankly, you aren't thrilled by some of those
+    hand-written mocks.
+
+We encourage you to use gMock as
+
+*   a *design* tool, for it lets you experiment with your interface design early
+    and often. More iterations lead to better designs!
+*   a *testing* tool to cut your tests' outbound dependencies and probe the
+    interaction between your module and its collaborators.
+
+## Getting Started
+
+gMock is bundled with googletest.
+
+## A Case for Mock Turtles
+
+Let's look at an example. Suppose you are developing a graphics program that
+relies on a [LOGO](http://en.wikipedia.org/wiki/Logo_programming_language)-like
+API for drawing. How would you test that it does the right thing? Well, you can
+run it and compare the screen with a golden screen snapshot, but let's admit it:
+tests like this are expensive to run and fragile (What if you just upgraded to a
+shiny new graphics card that has better anti-aliasing? Suddenly you have to
+update all your golden images.). It would be too painful if all your tests are
+like this. Fortunately, you learned about
+[Dependency Injection](http://en.wikipedia.org/wiki/Dependency_injection) and know the right thing
+to do: instead of having your application talk to the system API directly, wrap
+the API in an interface (say, `Turtle`) and code to that interface:
+
+```cpp
+class Turtle {
+  ...
+  virtual ~Turtle() {}
+  virtual void PenUp() = 0;
+  virtual void PenDown() = 0;
+  virtual void Forward(int distance) = 0;
+  virtual void Turn(int degrees) = 0;
+  virtual void GoTo(int x, int y) = 0;
+  virtual int GetX() const = 0;
+  virtual int GetY() const = 0;
+};
+```
+
+(Note that the destructor of `Turtle` **must** be virtual, as is the case for
+**all** classes you intend to inherit from - otherwise the destructor of the
+derived class will not be called when you delete an object through a base
+pointer, and you'll get corrupted program states like memory leaks.)
+
+You can control whether the turtle's movement will leave a trace using `PenUp()`
+and `PenDown()`, and control its movement using `Forward()`, `Turn()`, and
+`GoTo()`. Finally, `GetX()` and `GetY()` tell you the current position of the
+turtle.
+
+Your program will normally use a real implementation of this interface. In
+tests, you can use a mock implementation instead. This allows you to easily
+check what drawing primitives your program is calling, with what arguments, and
+in which order. Tests written this way are much more robust (they won't break
+because your new machine does anti-aliasing differently), easier to read and
+maintain (the intent of a test is expressed in the code, not in some binary
+images), and run *much, much faster*.
+
+## Writing the Mock Class
+
+If you are lucky, the mocks you need to use have already been implemented by
+some nice people. If, however, you find yourself in the position to write a mock
+class, relax - gMock turns this task into a fun game! (Well, almost.)
+
+### How to Define It
+
+Using the `Turtle` interface as example, here are the simple steps you need to
+follow:
+
+*   Derive a class `MockTurtle` from `Turtle`.
+*   Take a *virtual* function of `Turtle` (while it's possible to
+    [mock non-virtual methods using templates](gmock_cook_book.md#MockingNonVirtualMethods),
+    it's much more involved).
+*   In the `public:` section of the child class, write `MOCK_METHOD();`
+*   Now comes the fun part: you take the function signature, cut-and-paste it
+    into the macro, and add two commas - one between the return type and the
+    name, another between the name and the argument list.
+*   If you're mocking a const method, add a 4th parameter containing `(const)`
+    (the parentheses are required).
+*   Since you're overriding a virtual method, we suggest adding the `override`
+    keyword. For const methods the 4th parameter becomes `(const, override)`,
+    for non-const methods just `(override)`. This isn't mandatory.
+*   Repeat until all virtual functions you want to mock are done. (It goes
+    without saying that *all* pure virtual methods in your abstract class must
+    be either mocked or overridden.)
+
+After the process, you should have something like:
+
+```cpp
+#include "gmock/gmock.h"  // Brings in gMock.
+
+class MockTurtle : public Turtle {
+ public:
+  ...
+  MOCK_METHOD(void, PenUp, (), (override));
+  MOCK_METHOD(void, PenDown, (), (override));
+  MOCK_METHOD(void, Forward, (int distance), (override));
+  MOCK_METHOD(void, Turn, (int degrees), (override));
+  MOCK_METHOD(void, GoTo, (int x, int y), (override));
+  MOCK_METHOD(int, GetX, (), (const, override));
+  MOCK_METHOD(int, GetY, (), (const, override));
+};
+```
+
+You don't need to define these mock methods somewhere else - the `MOCK_METHOD`
+macro will generate the definitions for you. It's that simple!
+
+### Where to Put It
+
+When you define a mock class, you need to decide where to put its definition.
+Some people put it in a `_test.cc`. This is fine when the interface being mocked
+(say, `Foo`) is owned by the same person or team. Otherwise, when the owner of
+`Foo` changes it, your test could break. (You can't really expect `Foo`'s
+maintainer to fix every test that uses `Foo`, can you?)
+
+Generally, you should not mock classes you don't own. If you must mock such a
+class owned by others, define the mock class in `Foo`'s Bazel package (usually
+the same directory or a `testing` sub-directory), and put it in a `.h` and a
+`cc_library` with `testonly=True`. Then everyone can reference them from their
+tests. If `Foo` ever changes, there is only one copy of `MockFoo` to change, and
+only tests that depend on the changed methods need to be fixed.
+
+Another way to do it: you can introduce a thin layer `FooAdaptor` on top of
+`Foo` and code to this new interface. Since you own `FooAdaptor`, you can absorb
+changes in `Foo` much more easily. While this is more work initially, carefully
+choosing the adaptor interface can make your code easier to write and more
+readable (a net win in the long run), as you can choose `FooAdaptor` to fit your
+specific domain much better than `Foo` does.
+
+## Using Mocks in Tests
+
+Once you have a mock class, using it is easy. The typical work flow is:
+
+1.  Import the gMock names from the `testing` namespace such that you can use
+    them unqualified (You only have to do it once per file). Remember that
+    namespaces are a good idea.
+2.  Create some mock objects.
+3.  Specify your expectations on them (How many times will a method be called?
+    With what arguments? What should it do? etc.).
+4.  Exercise some code that uses the mocks; optionally, check the result using
+    googletest assertions. If a mock method is called more than expected or with
+    wrong arguments, you'll get an error immediately.
+5.  When a mock is destructed, gMock will automatically check whether all
+    expectations on it have been satisfied.
+
+Here's an example:
+
+```cpp
+#include "path/to/mock-turtle.h"
+#include "gmock/gmock.h"
+#include "gtest/gtest.h"
+
+using ::testing::AtLeast;                         // #1
+
+TEST(PainterTest, CanDrawSomething) {
+  MockTurtle turtle;                              // #2
+  EXPECT_CALL(turtle, PenDown())                  // #3
+      .Times(AtLeast(1));
+
+  Painter painter(&turtle);                       // #4
+
+  EXPECT_TRUE(painter.DrawCircle(0, 0, 10));      // #5
+}
+```
+
+As you might have guessed, this test checks that `PenDown()` is called at least
+once. If the `painter` object didn't call this method, your test will fail with
+a message like this:
+
+```text
+path/to/my_test.cc:119: Failure
+Actual function call count doesn't match this expectation:
+Actually: never called;
+Expected: called at least once.
+Stack trace:
+...
+```
+
+**Tip 1:** If you run the test from an Emacs buffer, you can hit `<Enter>` on
+the line number to jump right to the failed expectation.
+
+**Tip 2:** If your mock objects are never deleted, the final verification won't
+happen. Therefore it's a good idea to turn on the heap checker in your tests
+when you allocate mocks on the heap. You get that automatically if you use the
+`gtest_main` library already.
+
+**Important note:** gMock requires expectations to be set **before** the mock
+functions are called, otherwise the behavior is **undefined**. Do not alternate
+between calls to `EXPECT_CALL()` and calls to the mock functions, and do not set
+any expectations on a mock after passing the mock to an API.
+
+This means `EXPECT_CALL()` should be read as expecting that a call will occur
+*in the future*, not that a call has occurred. Why does gMock work like that?
+Well, specifying the expectation beforehand allows gMock to report a violation
+as soon as it rises, when the context (stack trace, etc) is still available.
+This makes debugging much easier.
+
+Admittedly, this test is contrived and doesn't do much. You can easily achieve
+the same effect without using gMock. However, as we shall reveal soon, gMock
+allows you to do *so much more* with the mocks.
+
+## Setting Expectations
+
+The key to using a mock object successfully is to set the *right expectations*
+on it. If you set the expectations too strict, your test will fail as the result
+of unrelated changes. If you set them too loose, bugs can slip through. You want
+to do it just right such that your test can catch exactly the kind of bugs you
+intend it to catch. gMock provides the necessary means for you to do it "just
+right."
+
+### General Syntax
+
+In gMock we use the `EXPECT_CALL()` macro to set an expectation on a mock
+method. The general syntax is:
+
+```cpp
+EXPECT_CALL(mock_object, method(matchers))
+    .Times(cardinality)
+    .WillOnce(action)
+    .WillRepeatedly(action);
+```
+
+The macro has two arguments: first the mock object, and then the method and its
+arguments. Note that the two are separated by a comma (`,`), not a period (`.`).
+(Why using a comma? The answer is that it was necessary for technical reasons.)
+If the method is not overloaded, the macro can also be called without matchers:
+
+```cpp
+EXPECT_CALL(mock_object, non-overloaded-method)
+    .Times(cardinality)
+    .WillOnce(action)
+    .WillRepeatedly(action);
+```
+
+This syntax allows the test writer to specify "called with any arguments"
+without explicitly specifying the number or types of arguments. To avoid
+unintended ambiguity, this syntax may only be used for methods that are not
+overloaded.
+
+Either form of the macro can be followed by some optional *clauses* that provide
+more information about the expectation. We'll discuss how each clause works in
+the coming sections.
+
+This syntax is designed to make an expectation read like English. For example,
+you can probably guess that
+
+```cpp
+using ::testing::Return;
+...
+EXPECT_CALL(turtle, GetX())
+    .Times(5)
+    .WillOnce(Return(100))
+    .WillOnce(Return(150))
+    .WillRepeatedly(Return(200));
+```
+
+says that the `turtle` object's `GetX()` method will be called five times, it
+will return 100 the first time, 150 the second time, and then 200 every time.
+Some people like to call this style of syntax a Domain-Specific Language (DSL).
+
+{: .callout .note}
+**Note:** Why do we use a macro to do this? Well it serves two purposes: first
+it makes expectations easily identifiable (either by `grep` or by a human
+reader), and second it allows gMock to include the source file location of a
+failed expectation in messages, making debugging easier.
+
+### Matchers: What Arguments Do We Expect?
+
+When a mock function takes arguments, we may specify what arguments we are
+expecting, for example:
+
+```cpp
+// Expects the turtle to move forward by 100 units.
+EXPECT_CALL(turtle, Forward(100));
+```
+
+Oftentimes you do not want to be too specific. Remember that talk about tests
+being too rigid? Over specification leads to brittle tests and obscures the
+intent of tests. Therefore we encourage you to specify only what's necessary—no
+more, no less. If you aren't interested in the value of an argument, write `_`
+as the argument, which means "anything goes":
+
+```cpp
+using ::testing::_;
+...
+// Expects that the turtle jumps to somewhere on the x=50 line.
+EXPECT_CALL(turtle, GoTo(50, _));
+```
+
+`_` is an instance of what we call **matchers**. A matcher is like a predicate
+and can test whether an argument is what we'd expect. You can use a matcher
+inside `EXPECT_CALL()` wherever a function argument is expected. `_` is a
+convenient way of saying "any value".
+
+In the above examples, `100` and `50` are also matchers; implicitly, they are
+the same as `Eq(100)` and `Eq(50)`, which specify that the argument must be
+equal (using `operator==`) to the matcher argument. There are many
+[built-in matchers](reference/matchers.md) for common types (as well as
+[custom matchers](gmock_cook_book.md#NewMatchers)); for example:
+
+```cpp
+using ::testing::Ge;
+...
+// Expects the turtle moves forward by at least 100.
+EXPECT_CALL(turtle, Forward(Ge(100)));
+```
+
+If you don't care about *any* arguments, rather than specify `_` for each of
+them you may instead omit the parameter list:
+
+```cpp
+// Expects the turtle to move forward.
+EXPECT_CALL(turtle, Forward);
+// Expects the turtle to jump somewhere.
+EXPECT_CALL(turtle, GoTo);
+```
+
+This works for all non-overloaded methods; if a method is overloaded, you need
+to help gMock resolve which overload is expected by specifying the number of
+arguments and possibly also the
+[types of the arguments](gmock_cook_book.md#SelectOverload).
+
+### Cardinalities: How Many Times Will It Be Called?
+
+The first clause we can specify following an `EXPECT_CALL()` is `Times()`. We
+call its argument a **cardinality** as it tells *how many times* the call should
+occur. It allows us to repeat an expectation many times without actually writing
+it as many times. More importantly, a cardinality can be "fuzzy", just like a
+matcher can be. This allows a user to express the intent of a test exactly.
+
+An interesting special case is when we say `Times(0)`. You may have guessed - it
+means that the function shouldn't be called with the given arguments at all, and
+gMock will report a googletest failure whenever the function is (wrongfully)
+called.
+
+We've seen `AtLeast(n)` as an example of fuzzy cardinalities earlier. For the
+list of built-in cardinalities you can use, see
+[here](gmock_cheat_sheet.md#CardinalityList).
+
+The `Times()` clause can be omitted. **If you omit `Times()`, gMock will infer
+the cardinality for you.** The rules are easy to remember:
+
+*   If **neither** `WillOnce()` **nor** `WillRepeatedly()` is in the
+    `EXPECT_CALL()`, the inferred cardinality is `Times(1)`.
+*   If there are *n* `WillOnce()`'s but **no** `WillRepeatedly()`, where *n* >=
+    1, the cardinality is `Times(n)`.
+*   If there are *n* `WillOnce()`'s and **one** `WillRepeatedly()`, where *n* >=
+    0, the cardinality is `Times(AtLeast(n))`.
+
+**Quick quiz:** what do you think will happen if a function is expected to be
+called twice but actually called four times?
+
+### Actions: What Should It Do?
+
+Remember that a mock object doesn't really have a working implementation? We as
+users have to tell it what to do when a method is invoked. This is easy in
+gMock.
+
+First, if the return type of a mock function is a built-in type or a pointer,
+the function has a **default action** (a `void` function will just return, a
+`bool` function will return `false`, and other functions will return 0). In
+addition, in C++ 11 and above, a mock function whose return type is
+default-constructible (i.e. has a default constructor) has a default action of
+returning a default-constructed value. If you don't say anything, this behavior
+will be used.
+
+Second, if a mock function doesn't have a default action, or the default action
+doesn't suit you, you can specify the action to be taken each time the
+expectation matches using a series of `WillOnce()` clauses followed by an
+optional `WillRepeatedly()`. For example,
+
+```cpp
+using ::testing::Return;
+...
+EXPECT_CALL(turtle, GetX())
+     .WillOnce(Return(100))
+     .WillOnce(Return(200))
+     .WillOnce(Return(300));
+```
+
+says that `turtle.GetX()` will be called *exactly three times* (gMock inferred
+this from how many `WillOnce()` clauses we've written, since we didn't
+explicitly write `Times()`), and will return 100, 200, and 300 respectively.
+
+```cpp
+using ::testing::Return;
+...
+EXPECT_CALL(turtle, GetY())
+     .WillOnce(Return(100))
+     .WillOnce(Return(200))
+     .WillRepeatedly(Return(300));
+```
+
+says that `turtle.GetY()` will be called *at least twice* (gMock knows this as
+we've written two `WillOnce()` clauses and a `WillRepeatedly()` while having no
+explicit `Times()`), will return 100 and 200 respectively the first two times,
+and 300 from the third time on.
+
+Of course, if you explicitly write a `Times()`, gMock will not try to infer the
+cardinality itself. What if the number you specified is larger than there are
+`WillOnce()` clauses? Well, after all `WillOnce()`s are used up, gMock will do
+the *default* action for the function every time (unless, of course, you have a
+`WillRepeatedly()`.).
+
+What can we do inside `WillOnce()` besides `Return()`? You can return a
+reference using `ReturnRef(`*`variable`*`)`, or invoke a pre-defined function,
+among [others](gmock_cook_book.md#using-actions).
+
+**Important note:** The `EXPECT_CALL()` statement evaluates the action clause
+only once, even though the action may be performed many times. Therefore you
+must be careful about side effects. The following may not do what you want:
+
+```cpp
+using ::testing::Return;
+...
+int n = 100;
+EXPECT_CALL(turtle, GetX())
+    .Times(4)
+    .WillRepeatedly(Return(n++));
+```
+
+Instead of returning 100, 101, 102, ..., consecutively, this mock function will
+always return 100 as `n++` is only evaluated once. Similarly, `Return(new Foo)`
+will create a new `Foo` object when the `EXPECT_CALL()` is executed, and will
+return the same pointer every time. If you want the side effect to happen every
+time, you need to define a custom action, which we'll teach in the
+[cook book](gmock_cook_book.md).
+
+Time for another quiz! What do you think the following means?
+
+```cpp
+using ::testing::Return;
+...
+EXPECT_CALL(turtle, GetY())
+    .Times(4)
+    .WillOnce(Return(100));
+```
+
+Obviously `turtle.GetY()` is expected to be called four times. But if you think
+it will return 100 every time, think twice! Remember that one `WillOnce()`
+clause will be consumed each time the function is invoked and the default action
+will be taken afterwards. So the right answer is that `turtle.GetY()` will
+return 100 the first time, but **return 0 from the second time on**, as
+returning 0 is the default action for `int` functions.
+
+### Using Multiple Expectations {#MultiExpectations}
+
+So far we've only shown examples where you have a single expectation. More
+realistically, you'll specify expectations on multiple mock methods which may be
+from multiple mock objects.
+
+By default, when a mock method is invoked, gMock will search the expectations in
+the **reverse order** they are defined, and stop when an active expectation that
+matches the arguments is found (you can think of it as "newer rules override
+older ones."). If the matching expectation cannot take any more calls, you will
+get an upper-bound-violated failure. Here's an example:
+
+```cpp
+using ::testing::_;
+...
+EXPECT_CALL(turtle, Forward(_));  // #1
+EXPECT_CALL(turtle, Forward(10))  // #2
+    .Times(2);
+```
+
+If `Forward(10)` is called three times in a row, the third time it will be an
+error, as the last matching expectation (#2) has been saturated. If, however,
+the third `Forward(10)` call is replaced by `Forward(20)`, then it would be OK,
+as now #1 will be the matching expectation.
+
+{: .callout .note}
+**Note:** Why does gMock search for a match in the *reverse* order of the
+expectations? The reason is that this allows a user to set up the default
+expectations in a mock object's constructor or the test fixture's set-up phase
+and then customize the mock by writing more specific expectations in the test
+body. So, if you have two expectations on the same method, you want to put the
+one with more specific matchers **after** the other, or the more specific rule
+would be shadowed by the more general one that comes after it.
+
+{: .callout .tip}
+**Tip:** It is very common to start with a catch-all expectation for a method
+and `Times(AnyNumber())` (omitting arguments, or with `_` for all arguments, if
+overloaded). This makes any calls to the method expected. This is not necessary
+for methods that are not mentioned at all (these are "uninteresting"), but is
+useful for methods that have some expectations, but for which other calls are
+ok. See
+[Understanding Uninteresting vs Unexpected Calls](gmock_cook_book.md#uninteresting-vs-unexpected).
+
+### Ordered vs Unordered Calls {#OrderedCalls}
+
+By default, an expectation can match a call even though an earlier expectation
+hasn't been satisfied. In other words, the calls don't have to occur in the
+order the expectations are specified.
+
+Sometimes, you may want all the expected calls to occur in a strict order. To
+say this in gMock is easy:
+
+```cpp
+using ::testing::InSequence;
+...
+TEST(FooTest, DrawsLineSegment) {
+  ...
+  {
+    InSequence seq;
+
+    EXPECT_CALL(turtle, PenDown());
+    EXPECT_CALL(turtle, Forward(100));
+    EXPECT_CALL(turtle, PenUp());
+  }
+  Foo();
+}
+```
+
+By creating an object of type `InSequence`, all expectations in its scope are
+put into a *sequence* and have to occur *sequentially*. Since we are just
+relying on the constructor and destructor of this object to do the actual work,
+its name is really irrelevant.
+
+In this example, we test that `Foo()` calls the three expected functions in the
+order as written. If a call is made out-of-order, it will be an error.
+
+(What if you care about the relative order of some of the calls, but not all of
+them? Can you specify an arbitrary partial order? The answer is ... yes! The
+details can be found [here](gmock_cook_book.md#OrderedCalls).)
+
+### All Expectations Are Sticky (Unless Said Otherwise) {#StickyExpectations}
+
+Now let's do a quick quiz to see how well you can use this mock stuff already.
+How would you test that the turtle is asked to go to the origin *exactly twice*
+(you want to ignore any other instructions it receives)?
+
+After you've come up with your answer, take a look at ours and compare notes
+(solve it yourself first - don't cheat!):
+
+```cpp
+using ::testing::_;
+using ::testing::AnyNumber;
+...
+EXPECT_CALL(turtle, GoTo(_, _))  // #1
+     .Times(AnyNumber());
+EXPECT_CALL(turtle, GoTo(0, 0))  // #2
+     .Times(2);
+```
+
+Suppose `turtle.GoTo(0, 0)` is called three times. In the third time, gMock will
+see that the arguments match expectation #2 (remember that we always pick the
+last matching expectation). Now, since we said that there should be only two
+such calls, gMock will report an error immediately. This is basically what we've
+told you in the [Using Multiple Expectations](#MultiExpectations) section above.
+
+This example shows that **expectations in gMock are "sticky" by default**, in
+the sense that they remain active even after we have reached their invocation
+upper bounds. This is an important rule to remember, as it affects the meaning
+of the spec, and is **different** to how it's done in many other mocking
+frameworks (Why'd we do that? Because we think our rule makes the common cases
+easier to express and understand.).
+
+Simple? Let's see if you've really understood it: what does the following code
+say?
+
+```cpp
+using ::testing::Return;
+...
+for (int i = n; i > 0; i--) {
+  EXPECT_CALL(turtle, GetX())
+      .WillOnce(Return(10*i));
+}
+```
+
+If you think it says that `turtle.GetX()` will be called `n` times and will
+return 10, 20, 30, ..., consecutively, think twice! The problem is that, as we
+said, expectations are sticky. So, the second time `turtle.GetX()` is called,
+the last (latest) `EXPECT_CALL()` statement will match, and will immediately
+lead to an "upper bound violated" error - this piece of code is not very useful!
+
+One correct way of saying that `turtle.GetX()` will return 10, 20, 30, ..., is
+to explicitly say that the expectations are *not* sticky. In other words, they
+should *retire* as soon as they are saturated:
+
+```cpp
+using ::testing::Return;
+...
+for (int i = n; i > 0; i--) {
+  EXPECT_CALL(turtle, GetX())
+      .WillOnce(Return(10*i))
+      .RetiresOnSaturation();
+}
+```
+
+And, there's a better way to do it: in this case, we expect the calls to occur
+in a specific order, and we line up the actions to match the order. Since the
+order is important here, we should make it explicit using a sequence:
+
+```cpp
+using ::testing::InSequence;
+using ::testing::Return;
+...
+{
+  InSequence s;
+
+  for (int i = 1; i <= n; i++) {
+    EXPECT_CALL(turtle, GetX())
+        .WillOnce(Return(10*i))
+        .RetiresOnSaturation();
+  }
+}
+```
+
+By the way, the other situation where an expectation may *not* be sticky is when
+it's in a sequence - as soon as another expectation that comes after it in the
+sequence has been used, it automatically retires (and will never be used to
+match any call).
+
+### Uninteresting Calls
+
+A mock object may have many methods, and not all of them are that interesting.
+For example, in some tests we may not care about how many times `GetX()` and
+`GetY()` get called.
+
+In gMock, if you are not interested in a method, just don't say anything about
+it. If a call to this method occurs, you'll see a warning in the test output,
+but it won't be a failure. This is called "naggy" behavior; to change, see
+[The Nice, the Strict, and the Naggy](gmock_cook_book.md#NiceStrictNaggy).
+
+
+## Archivo: platforms.md
+Contenido:
+# Supported Platforms
+
+GoogleTest requires a codebase and compiler compliant with the C++11 standard or
+newer.
+
+The GoogleTest code is officially supported on the following platforms.
+Operating systems or tools not listed below are community-supported. For
+community-supported platforms, patches that do not complicate the code may be
+considered.
+
+If you notice any problems on your platform, please file an issue on the
+[GoogleTest GitHub Issue Tracker](https://github.com/google/googletest/issues).
+Pull requests containing fixes are welcome!
+
+### Operating systems
+
+*   Linux
+*   macOS
+*   Windows
+
+### Compilers
+
+*   gcc 5.0+
+*   clang 5.0+
+*   MSVC 2015+
+
+**macOS users:** Xcode 9.3+ provides clang 5.0+.
+
+### Build systems
+
+*   [Bazel](https://bazel.build/)
+*   [CMake](https://cmake.org/)
+
+Bazel is the build system used by the team internally and in tests. CMake is
+supported on a best-effort basis and by the community.
+
+

@@ -1,0 +1,15 @@
+# 🧪 ALMA_RESIST – Suite de Tests LLM Server
+
+Esta carpeta contiene la suite de pruebas unitarias y funcionales correspondiente al **Sprint 2.6**, validando todos los módulos críticos del servidor LLM de ALMA_RESIST.
+
+## Contenido
+
+- `test_model_wrapper.py` → Cubre la clase de modelo y generación de texto.
+- `test_api_responder.py` → Testea el endpoint `/responder` del servidor FastAPI.
+- `test_transport_layer.py` → Valida almacenamiento contractual de datos.
+- `test_context_tracker.py` → Prueba el historial contextual y su caché.
+- `test_log_writer.py` → Verifica el sistema de logs con rotación y validación.
+- `test_log_crypto.py` → Testea el cifrado/descifrado de logs con AES/ChaCha20.
+- `test_memory_graph.py` → Evalúa inserción, relaciones y exportación del grafo semántico.
+
+Todos los tests utilizan `pytest` y están diseñados para aislarse mediante `tmp_path` y `fixtures`.

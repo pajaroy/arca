@@ -1,0 +1,122 @@
+---
+tipo: bitacora
+id: BITACORA_2025-06-05_dbd7c6
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Log Writer V0.0.0.1
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:e059282069cf0c9280464a8cb0feb1e73fa7ef8d64dd8dbcfaee48d5ec07678d
+---
+# core/llm_server/utils/log_writer.py
+import os
+import json
+import time
+import platform
+from datetime import datetime
+from typing import Dict, Optional
+import logging
+from pathlib import Path
+
+logger = logging.getLogger("alma_logger")
+
+class LogWriter:
+    def __init__(self, log_dir: str = "logs"):
+        self.log_dir = Path(log_dir)
+        self.hostname = platform.node()
+        self.platform = platform.platform()
+        self._setup_log_dir()
+
+    def _setup_log_dir(self) -> None:
+        """Crea directorio de logs con verificación de permisos"""
+        try:
+            self.log_dir.mkdir(exist_ok=True, mode=0o755)
+            logger.debug(f"Directorio de logs listo: {self.log_dir}")
+        except PermissionError as e:
+            logger.critical(f"Error de permisos en logs: {str(e)}")
+            raise
+        except Exception as e:
+            logger.error(f"Error configurando logs: {str(e)}")
+            raise
+
+    @staticmethod
+    def log_event(event_type: str, 
+                 message: str, 
+                 module: str = "core",
+                 metadata: Optional[Dict] = None) -> Dict:
+        """Genera evento estructurado con metadatos del sistema"""
+        timestamp = datetime.utcnow().isoformat() + "Z"
+
+        return {
+            "timestamp": timestamp,
+            "type": event_type.lower(),
+            "module": module,
+            "message": message,
+            "pid": os.getpid(),
+            "host": platform.node(),
+            "platform": platform.platform(),
+            "metadata": metadata or {}
+        }
+
+    def _get_log_path(self) -> Path:
+        """Genera ruta del archivo de log diario"""
+        date_str = datetime.utcnow().strftime("%Y-%m-%d")
+        return self.log_dir / f"alma_{date_str}.log"
+
+    def write_log(self, event: Dict) -> bool:
+        """Escribe evento en log diario con escritura atómica"""
+        log_path = self._get_log_path()
+        temp_path = log_path.with_suffix(".tmp")
+
+        try:
+            # Validación básica del evento
+            if not all(key in event for key in ("timestamp", "type", "message")):
+                raise ValueError("Evento mal formado")
+
+            line = json.dumps(event, ensure_ascii=False) + "\n"
+
+            # Escritura atómica
+            with open(temp_path, "a", encoding="utf-8") as f:
+                f.write(line)
+
+            # Renombrar para commit seguro
+            os.replace(temp_path, log_path)
+            logger.debug(f"Evento registrado: {event['type']} ({event['module']})")
+            return True
+
+        except (IOError, OSError) as e:
+            logger.error(f"Error escribiendo log: {str(e)}")
+            try:
+                if temp_path.exists():
+                    temp_path.unlink()
+            except:
+                pass
+            return False
+
+        except json.JSONEncodeError:
+            logger.error("Error serializando evento")
+            return False
+
+        except Exception as e:
+            logger.error(f"Error no controlado: {str(e)}")
+            return False
+
+    @classmethod
+    def secure_rotation(cls, days: int = 7) -> None:
+        """Elimina logs antiguos (ejecutar periódicamente)"""
+        try:
+            cutoff = time.time() - (days * 86400)
+            for log_file in Path("logs").glob("alma_*.log"):
+                if log_file.stat().st_mtime < cutoff:
+                    log_file.unlink()
+                    logger.info(f"Rotado: {log_file.name}")
+        except Exception as e:
+            logger.error(f"Error en rotación: {str(e)}")

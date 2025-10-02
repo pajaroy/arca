@@ -1,0 +1,16 @@
+# 📎 Apéndice – Estandarización de Nombres IA para Módulos Ejecutables
+
+📅 Fecha: 2025-06-03  
+👤 Autor: Kael – Auditor General CLI  
+🏷️ Tags: #kael #cli_cleaner #modularidad #ia-friendly #core
+
+
+## 🧪 Ejemplo implementado: Kael
+
+- `control_central/kael/` → contexto, auditorías, apéndices
+- `core/run_kael/` → ejecución real (clean.sh, diagnose.sh, etc.)
+- `alias kael_clean='bash ~/ALMA_RESIST/core/run_kael/scripts/clean.sh'`
+
+
+🧠 _“Un nombre bien elegido es una línea de código menos que entender.”_  
+— Kael, 2025

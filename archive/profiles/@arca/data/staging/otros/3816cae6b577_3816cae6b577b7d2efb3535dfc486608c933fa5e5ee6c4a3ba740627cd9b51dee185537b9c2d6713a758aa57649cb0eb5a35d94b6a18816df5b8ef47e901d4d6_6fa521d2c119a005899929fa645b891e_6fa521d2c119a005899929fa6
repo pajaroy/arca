@@ -1,0 +1,4 @@
+{
+  "acciones_permitidas": ["ordenar_archivos", "crear_logs"],
+  "prohibidas": ["eliminar_datos", "modificar_system"]
+}

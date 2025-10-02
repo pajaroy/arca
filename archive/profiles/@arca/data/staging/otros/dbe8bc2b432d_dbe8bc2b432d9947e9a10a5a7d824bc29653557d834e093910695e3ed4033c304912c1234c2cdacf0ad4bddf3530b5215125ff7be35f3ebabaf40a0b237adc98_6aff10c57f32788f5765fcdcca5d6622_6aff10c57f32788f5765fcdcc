@@ -1,0 +1,39 @@
+---
+title: "Contexto Operativo CLI – Cannabird"
+author: Asesor-IA_CLI
+date_created: 2025-06-02
+tags: [#cannabird, #CLI, #estructura, #contexto, #modulo, #asesor-ia]
+status: activo
+linked_to: alma_empresa/entidades/cannabird
+---
+
+# 🧠 Archivo de Contexto Operativo CLI – Cannabird
+
+Este documento es mantenido por el asesor-IA_CLI y resume todas las acciones estructurales dentro del entorno de trabajo **Cannabird**. Incluye:
+
+- Reorganización de carpetas
+- Registro de prompts oficiales y cambios
+- Limpieza de archivos legacy
+- Estandarización de rutas
+- Recomendaciones aceptadas e implementadas por Santi
+
+Cada entrada se agrega como apéndice con fecha, tags, y acciones ejecutadas.
+
+---
+
+## 📎 Apéndice 2025-06-02 – Inicio del archivo y consolidación CLI
+
+**Resumen:**
+- Se definió el rol oficial del asesor-IA_CLI dentro de Cannabird
+- Se reorganizó la estructura de resúmenes diarios y semanales
+- Se consolidaron prompts oficiales en carpeta única
+- Se archivaron versiones legacy en ubicación separada
+- Se propuso y aceptó mantener este archivo como bitácora técnica viva
+
+**Rutas afectadas:**
+- `docs/resumenes_semanales/`
+- `control/prompts/oficiales/`
+- `_legacy/resumenes_cannabird/`
+
+**Tags:** `#reestructuracion`, `#CLI`, `#prompts`, `#inicio-contexto`
+---

@@ -1,0 +1,15 @@
+metadata:
+  version: "0.3.0"
+  tipo: "bitacora"
+  schema: "almaresist.bitacora_v1"
+  descripcion: "Bitácora personal de bird"
+  estructura: "metadata + entradas"
+  tags: ["bitacora", "personal", "bird"]
+  linked_to: []
+  responsable: "bird"
+  hash_verificacion: ""
+  historial: []
+  last_modified: "2025-06-18T23:58:58Z"
+  last_modified_by: "bird"
+
+entradas: []

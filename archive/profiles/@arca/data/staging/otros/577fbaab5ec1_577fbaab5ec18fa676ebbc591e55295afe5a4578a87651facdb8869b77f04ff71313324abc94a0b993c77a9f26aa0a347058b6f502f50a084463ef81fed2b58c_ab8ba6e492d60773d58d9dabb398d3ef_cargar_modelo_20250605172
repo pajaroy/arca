@@ -1,0 +1,3 @@
+def run(args):
+    """Carga un modelo IA (simulado)"""
+    print("Cargando modelo... (simulado)")

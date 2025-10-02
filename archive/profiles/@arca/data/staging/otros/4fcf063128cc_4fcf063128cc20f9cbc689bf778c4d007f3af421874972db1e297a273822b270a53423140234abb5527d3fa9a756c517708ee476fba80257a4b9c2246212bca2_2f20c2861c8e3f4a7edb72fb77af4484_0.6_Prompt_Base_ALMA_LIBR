@@ -1,0 +1,77 @@
+# 🧠 Prompt Fundacional – Proyecto ALMA LIBRE v0.6
+
+📅 Fecha: 2025-04-23
+
+
+## 🧬 Estructura Modular Estándar
+
+Cada carpeta principal del sistema debe contener al menos:
+
+```
+📁 Nombre_Del_Módulo/
+├── README.md
+├── VERSION.md
+├── CHANGELOG.md
+├── MEMORIA_GENERAL.md
+├── MEMORIA_EMOCIONAL.md
+├── MEMORIA_TECNICA.md
+├── MEMORIA_ESTRATEGICA.md
+```
+
+### 📑 Si el módulo es muy amplio:
+Crear submemorias temáticas:
+- `MEMORIA_TRADING_BTC.md`
+- `MEMORIA_SALUD_RPL_ALIMENTACION.md`
+
+
+## 🔗 Reglas de Navegación IA
+
+### 1. Todas las IAs deben comenzar por:
+- `README.md` del módulo
+- `MEMORIA_GENERAL.md` correspondiente
+
+### 2. Dependiendo del propósito, continuar con:
+
+| IA        | Rol                   | Lectura Prioritaria              |
+|-----------|------------------------|----------------------------------|
+| GPT       | Emocional / Reflexiva  | MEMORIA_EMOCIONAL.md             |
+| DeepSeek  | Técnica / Analítica    | MEMORIA_TECNICA.md               |
+| Ollama    | Generalista / Exploradora | MEMORIA_GENERAL.md, README.md |
+
+### 3. Antes de operar:
+Leer el archivo `TEST_IA_PROFUNDIDAD.md`  
+Y verificar `metadata_memorias.csv` para conocer el estado y conexiones del módulo.
+
+
+## 📚 Infraestructura IA integrada
+
+**Carpeta activa:** `09_Infraestructura_Python/`
+
+Contendrá:
+
+- `alma_launcher.py` → Menú de navegación
+- `alma_llm_agent.py` → Motor de consulta IA + archivos
+- `alma_metadata_sync.py` → Sincronización automática
+- `config.json` → Parámetros del sistema y rutas priorizadas
+
+
+## 📘 Estándares de calidad por memoria
+
+Cada `MEMORIA.md` debe incluir:
+- Objetivo emocional
+- Uso técnico
+- Historia evolutiva
+- Conexiones reales
+- Estado actual (🟢 activo, ⚠️ en revisión, 🔴 pendiente)
+
+
+## 🔐 Validación de agentes IA
+
+Antes de actuar, toda IA debe pasar el test en `TEST_IA_PROFUNDIDAD.md`
+
+Este test incluye:
+- Validación semántica
+- Comprensión de vínculos
+- Conocimiento de scripts activos
+- Evaluación de impacto emocional y técnico
+

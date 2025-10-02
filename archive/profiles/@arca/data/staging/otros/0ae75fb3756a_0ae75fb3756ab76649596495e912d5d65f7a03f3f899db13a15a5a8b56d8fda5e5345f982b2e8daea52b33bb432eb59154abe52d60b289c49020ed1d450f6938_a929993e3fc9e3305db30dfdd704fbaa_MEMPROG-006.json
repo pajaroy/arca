@@ -1,0 +1,11 @@
+{
+  "id": "MEMPROG-006",
+  "fecha": "2025-05-01T12:30:00",
+  "titulo": "Ejemplo PROG #6",
+  "categoria": "PROG",
+  "tags": [
+    "#automatización",
+    "#script"
+  ],
+  "contenido": "Automatizar la validación de memorias me ahorró varios errores manuales."
+}

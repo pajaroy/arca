@@ -1,0 +1,18 @@
+{
+  "id": "PROMPT_FLUJO_APRENDIZAJE_2025-06-08_01",
+  "tipo": "prompt_cuestionario_cli",
+  "modulo": "flujo_de_trabajo",
+  "titulo": "Carga automática de flujos de aprendizaje vivo",
+  "descripcion": "Al finalizar cada sesión, completá el siguiente cuestionario para registrar el aprendizaje metodológico.\nLa IA debe responder y generar el comando CLI listo para el script de carga en el YAML objetivo.\n\nEsto institucionaliza la mejora continua, auditable y replicable en cualquier módulo o agente del ecosistema ALMA_RESIST.\n",
+  "campos_pregunta": [
+    "¿Qué aprendiste hoy del sistema, la IA o los flujos propuestos?",
+    "¿Qué aprendió el sistema de tu forma de trabajar, tus preferencias o bloqueos?",
+    "¿Qué ajuste concreto se implementó en la metodología?",
+    "¿Qué consejo le darías a un Santi/agente del futuro para mejorar el flujo?",
+    "¿Qué NO hay que volver a hacer?",
+    "Observaciones o reflexiones extra."
+  ],
+  "instrucciones_ia": "- Responde a cada pregunta de forma breve y auditable.\n- Generá el comando CLI para cargar la entrada usando el script:\n    add_aprendizaje_flujo.py\n- La ruta por defecto es /home/bird/alma_core/control_central/flujo_de_trabajo/flujo_aprendizajes.yaml,\n  pero debe poder ser modificada si otro módulo o agente lo requiere.\n- Imprimí solo el comando y la estructura de campos, nada más.\n",
+  "ejemplo_comando": "python3 /home/bird/alma_core/control_central/core/notebooks/add_aprendizaje_flujo/add_aprendizaje_flujo.py \\\n  --que_aprendi \"...\" \\\n  --que_aprendio_sistema \"...\" \\\n  --cambio_metodologico \"...\" \\\n  --consejo_futuro \"...\" \\\n  --error_evitar \"...\" \\\n  --observaciones \"...\" \\\n  --flujo_aprendizajes \"/home/bird/alma_core/control_central/flujo_de_trabajo/flujo_aprendizajes.yaml\"\n",
+  "notas": "Usá siempre esta plantilla para institucionalizar el cierre reflexivo y auditable de cada sesión o sprint.\nEste flujo es compatible y escalable para cualquier agente, área o módulo, solo cambiando la ruta de destino del YAML.\n"
+}

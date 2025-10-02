@@ -1,0 +1,6 @@
+2025-04-30 05:10:09,116 - INFO - Use pytorch device_name: cpu
+2025-04-30 05:10:09,116 - INFO - Load pretrained SentenceTransformer: hiiamsid/sentence_similarity_spanish_es
+2025-04-30 05:10:35,651 - INFO - Failed to extract font properties from /usr/share/fonts/truetype/noto/NotoColorEmoji.ttf: Can not load face (unknown file format; error code 0x2)
+2025-04-30 05:10:36,271 - INFO - generated new fontManager
+2025-04-30 05:20:33,720 - INFO - Use pytorch device_name: cpu
+2025-04-30 05:20:33,720 - INFO - Load pretrained SentenceTransformer: hiiamsid/sentence_similarity_spanish_es

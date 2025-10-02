@@ -1,0 +1,109 @@
+# ================================================
+# ALMA_CLI_CLEANER_v0.2.0.yaml
+# Documento de arquitectura y requerimientos críticos
+# ================================================
+
+proposito_general: |
+  CLI profesional, modular y auditable para gestión, validación,
+  trazabilidad y automatización de archivos con metadatos en ALMA_RESIST.
+  Escalable, con hash persistente, índice global y logs robustos de movimientos.
+  Preparado para ser gestionado y auditado por IAs o humanos.
+
+modularidad_recomendada:
+  - main.py: "Entry point. Orquestador de argumentos, carga config y despacha subcomandos."
+  - config.py: "Carga, validación y helpers de configuración (incluye paths críticos, defaults y settings avanzados)."
+  - metadata_validator.py: "Validación, normalización y migración de metadatos."
+  - metadata_handler.py: "Extracción, escritura atómica, backups, cálculo de hash, verificación de integridad."
+  - audit_logger.py: "Gestión de logs y auditoría (buffer, flush, multi-formato, eventos)."
+  - index_manager.py: "Gestión del índice global Alma-Cli_index.json: altas, bajas, modificaciones, verificación de consistencia."
+  - file_watcher.py: "Monitoreo periódico de archivos: detecta movimientos, cambios, desincronizaciones."
+  - archive_manager.py: "Manejo de estado, archivado automático y movimiento a histórico (archivos y metadatos)."
+  - commands/: "Un módulo por subcomando principal para escalabilidad y testing independiente."
+  - tests/: "Test unitarios y de integración, uno por módulo/función crítica."
+
+requerimientos_funcionales:
+  - validacion_y_normalizacion:
+      descripcion: "Validar estructura y tipos de metadatos en todos los archivos gestionados. Reparar o migrar según template vigente."
+  - hash_integridad:
+      descripcion: "Calcular hash SHA-256 de cada archivo tras operaciones. Mantener hash y validar integridad en cada movimiento."
+  - indexado_global:
+      descripcion: "Actualizar y mantener un índice centralizado (Alma-Cli_index.json) con metadatos clave, hash y ubicaciones actuales de cada archivo."
+  - registro_movimientos:
+      descripcion: "Registrar TODO movimiento, cambio de estado, escritura, renombrado o migración en logs internos y en el índice."
+  - monitoreo_periodico:
+      descripcion: "Recorrer periódicamente todos los archivos gestionados. Detectar cambios no registrados, movimientos fuera de protocolo o ediciones externas."
+  - archivado_y_estado:
+      descripcion: "Función para cambiar estado de archivos ('activo', 'histórico', 'archivado', etc.), mover físicamente y actualizar metadatos/historial."
+  - logs_auditoria:
+      descripcion: "Logs estructurados de todas las operaciones, eventos críticos, errores y movimientos. Soporte Parquet/YAML/JSON."
+  - dry_run_force:
+      descripcion: "Permitir simulaciones (dry-run) y reparaciones forzadas (--force), siempre con logs diferenciados."
+  - cli_extensible:
+      descripcion: "CLI con subcomandos independientes, fácil de extender y automatizar."
+  - testing_modular:
+      descripcion: "Test unitarios y de integración por módulo y función. Scripts automáticos para validación de integridad y funcionalidad."
+
+estructura_index_json:
+  path: "Alma-Cli_index.json"
+  descripcion: "Archivo centralizado con metadatos esenciales, hash, estado y ruta actual de cada archivo gestionado."
+  ejemplo_registro:
+    uuid: "UUID del archivo"
+    ruta_actual: "/path/actual/algo.md"
+    hash: "sha256:abcdef..."
+    estado: "activo | historico | archivado"
+    last_modified: "timestamp ISO"
+    responsables: ["nombre1", "nombre2"]
+    linked_to: ["/path/relacionado1.md", "/path/relacionado2.md"]
+    historial: 
+      - fecha: "2025-07-11T19:00:00Z"
+        usuario: "bird"
+        accion: "movimiento"
+        descripcion: "Archivo movido de /old/path.md a /path/actual/algo.md"
+    version_metadata: "0.2.0"
+    comentarios: ""
+
+ciclo_monitoreo_periodico:
+  descripcion: "Script/coroutine independiente que recorre todos los archivos conocidos según index. Si detecta cambios de hash, ruta o estado, registra evento, actualiza index y genera alerta si hay desincronización."
+  frecuencia: "configurable, default cada 10 minutos"
+  acciones: 
+    - Recalcula hash.
+    - Compara con index.
+    - Si cambió ruta sin registrar, lo actualiza y loguea como movimiento externo.
+    - Si cambió hash, alerta posible corrupción/edición fuera de protocolo.
+
+manejo_de_archivo_a_historico:
+  descripcion: "Función o script para mover archivo de 'activo' a 'historico' o 'archivado'. Cambia ruta física y actualiza metadatos e index.json. Debe dejar historial y loguear todo el flujo."
+  pasos:
+    1. Validar que archivo existe y no está corrupto.
+    2. Cambiar estado en metadatos a 'historico'/'archivado'.
+    3. Mover archivo a carpeta destino (por ejemplo, /historico/).
+    4. Actualizar ruta en Alma-Cli_index.json.
+    5. Agregar entrada en historial de ambos (archivo y index).
+    6. Registrar operación en logs de auditoría.
+
+logica_hash_integridad:
+  descripcion: "Cualquier movimiento o edición recalcula hash. El índice y los metadatos de cada archivo deben reflejar el nuevo hash. Si hay mismatch, marcar como alerta de integridad."
+
+testeo_modular:
+  descripcion: "Cada módulo y función crítica debe tener test automático, validando flujos normales y casos borde. Tests deben poder correr en CI o por CLI manual."
+
+roles_ia_y_autonomia:
+  - El sistema está preparado para ser auditado o gestionado por agentes IA autónomos.
+  - Toda operación deja rastros, historial y logs estructurados para interpretación automática.
+  - Index y logs preparados para ser ingeridos por RAG, motores de búsqueda semántica o pipelines de monitoreo.
+
+cambios_clave_v020_vs_anteriores:
+  - Integración de indexado global Alma-Cli_index.json.
+  - Hash persistente y verificación después de cada movimiento o edición.
+  - Funciones explícitas para archivar, migrar, monitorear y revertir cambios.
+  - Auditoría completa de movimientos internos y externos.
+  - Modularidad estricta: ningún módulo debe mezclar responsabilidades.
+  - Testeo automatizado y validación por módulo.
+
+pendiente_o_recomendado:
+  - Planificar integración futura con agentes (Kael, Centralesis).
+  - Documentación tipo API por función/módulo.
+  - Soporte para detección de “archivos huérfanos” (fuera del index).
+  - Hooks o triggers para integración con sistemas externos (ej: notificaciones o backups remotos).
+
+# Fin de especificación YAML v0.2.0 - Alma_Cli_Cleaner

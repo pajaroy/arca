@@ -1,0 +1,59 @@
+# 🧠 Metodología – Estructura CLI + IA para Módulos ALMA_RESIST
+
+📅 Fecha de publicación: 2025-06-03  
+👤 Autor: ALMA_CENTRAL (Auditor CLI General)  
+🏷️ Tags: #metodologia #estructura_cli #ia_friendly #modular #alma_resist #control_central #trazabilidad #asistentes_ia
+
+
+## 🧱 Estructura Base
+
+Todo entorno CLI debe organizarse bajo la siguiente arquitectura base:
+
+```bash
+modulo/
+├── archivo/
+│   ├── datasets/
+│   ├── downloads/
+│   │   ├── prompts/
+│   │   ├── historico/
+│   │   └── archivados/
+│   ├── logs/
+│   └── README.md
+├── asesor-ia/
+│   ├── prompts/
+│   ├── status/
+│   ├── scripts/
+│   └── README.md
+├── core/
+│   ├── notebooks/
+│   ├── scripts/
+│   ├── tests/
+│   └── README.md
+├── control/
+│   ├── sprint_actual.md
+│   ├── roadmap.md
+│   └── checklist.md
+├── docs/
+│   ├── contexto/
+│   ├── journal/
+│   ├── changelog.md
+│   └── README.md
+├── logs/
+└── README.md
+```
+
+
+## ✅ Checklist CLI + IA Friendly
+
+- [x] Toda carpeta principal debe tener su `README.md`.
+- [x] Archivos deben nombrarse con prefijos fechados: `AAAA-MM-DD_nombre.md`.
+- [x] Descargas temporales van a `/archivo/downloads/`, luego se archivan.
+- [x] Asistentes IA tienen su propia subcarpeta: `/asesor-ia/`.
+- [x] Bitácoras, prompts y changelogs deben estar etiquetados (#) para trazabilidad por Obsidian y LLMs.
+
+
+## 🧩 Integración con otros módulos
+
+La misma estructura se replica en todos los módulos: `control_central`, `cli_cleaner`, `llm_server`, etc.  
+Cada uno mantiene independencia funcional pero comparte la misma semántica, metodología y herramientas.
+

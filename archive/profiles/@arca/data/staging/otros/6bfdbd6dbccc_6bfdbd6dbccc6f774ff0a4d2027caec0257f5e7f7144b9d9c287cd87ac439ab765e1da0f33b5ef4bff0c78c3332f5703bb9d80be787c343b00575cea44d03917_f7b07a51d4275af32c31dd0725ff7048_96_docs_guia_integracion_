@@ -1,0 +1,37 @@
+### 📘 Guía de Integración de Herramientas Externas – `/96_docs/guia_integracion_herramientas.md`
+
+Esta guía documenta cómo integrar herramientas externas que amplían la funcionalidad de ALMA LIBRE, tales como bases de datos distribuidas (CockroachDB/PostgreSQL), dashboards (Grafana), y servicios de visualización.
+
+
+## 🐓 2. Integración con CockroachDB (modo local)
+
+### 📦 Comando básico
+
+```bash
+docker run -d --name=cockroachdb -p 26257:26257 -p 8080:8080 cockroachdb/cockroach:v23.1 start-single-node --insecure
+```
+
+### 📘 Configuración en `.env`
+
+```
+DB_ENGINE=cockroachdb
+DB_HOST=localhost
+DB_PORT=26257
+```
+
+
+## 📦 4. Scripts de conexión sugeridos
+
+```python
+# scripts/db/conexion_cockroach.py
+import psycopg2
+from os import getenv
+
+conn = psycopg2.connect(
+    host=getenv("DB_HOST"),
+    port=getenv("DB_PORT"),
+    user="root",
+    dbname="alma_memorias"
+)
+```
+

@@ -1,0 +1,32 @@
+{
+  "version": "0.2.0",
+  "tipo": "readme",
+  "schema": "almaresist.readme_v1",
+  "descripcion": "Documentación, prompts y manuales técnicos del módulo bitácora v0.2.0 para CLI ALMA_RESIST. Cada recurso documental está aislado en subcarpetas para máxima trazabilidad y versionado independiente.",
+  "estructura": [
+    "prompt_add_bitacora/: Prompt YAML para requerimientos institucionales.",
+    "readme_tecnico/: Manual técnico-operativo del módulo CLI."
+  ],
+  "tags": [
+    "docs",
+    "bitacora",
+    "cli",
+    "prompts",
+    "tecnico",
+    "versionado",
+    "v0.2.0"
+  ],
+  "linked_to": [
+    "./prompt_add_bitacora/README.yaml",
+    "./readme_tecnico/README.yaml",
+    "../src/README.yaml",
+    "../README.yaml"
+  ],
+  "responsable": "Equipo de Operaciones ALMA_RESIST",
+  "hash_verificacion": "sha256:pending",
+  "historial": [
+    "2025-06-17: Separación documental en subcarpetas, vinculación entre manuales y prompts, y normalización según estándar ALMA_RESIST."
+  ],
+  "last_modified": "2025-06-17T11:21:00Z",
+  "last_modified_by": "Kael"
+}

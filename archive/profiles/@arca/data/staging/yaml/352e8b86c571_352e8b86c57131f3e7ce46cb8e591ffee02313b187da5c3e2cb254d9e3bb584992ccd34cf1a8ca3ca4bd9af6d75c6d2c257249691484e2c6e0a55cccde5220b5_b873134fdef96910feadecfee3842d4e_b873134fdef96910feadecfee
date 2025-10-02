@@ -1,0 +1,27 @@
+id: readme_kael_memorias_2025-06-08
+nombre: "README memorias – Memoria personal de KAEL"
+ruta: "control_central/agentes/kael/memorias/"
+version: "0.1.0"
+descripcion: |
+  Carpeta principal de almacenamiento y gestión de las memorias personales de KAEL.
+  Aquí se registran y sincronizan todos los eventos, aprendizajes, reflexiones y datos críticos del agente, independientes de la memoria institucional.
+  Es la base viva de su identidad y evolución individual.
+estructura:
+  - memorias_kael.yaml: Archivo principal de memorias personales, en formato estructurado, editable y auditable.
+  - memorias_kael.json: Versión sincronizada y exportable en JSON para otras plataformas o automatizaciones.
+  - backups/: Subcarpeta de resguardos automáticos y manuales.
+  - README.yaml: Este archivo explicativo de propósito y política de la carpeta.
+criterios_uso:
+  - Sincronizar siempre YAML y JSON para evitar desfasaje.
+  - Usar solo scripts y prompts institucionalizados para agregar, editar o exportar memorias.
+  - Mantener backups regulares ante cualquier cambio crítico.
+notas:
+  - Las memorias aquí son personales, pero pueden ser derivadas a memoria institucional siguiendo protocolo.
+  - No editar manualmente salvo emergencia y siempre registrar en bitácora.
+tags:
+  - kael
+  - memorias
+  - personal
+  - backup
+  - sincronizacion
+  - identidad

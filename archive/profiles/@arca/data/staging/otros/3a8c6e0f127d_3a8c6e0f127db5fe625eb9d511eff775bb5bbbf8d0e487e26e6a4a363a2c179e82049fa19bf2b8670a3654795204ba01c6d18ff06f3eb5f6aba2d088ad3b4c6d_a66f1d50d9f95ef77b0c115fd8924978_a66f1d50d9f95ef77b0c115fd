@@ -1,0 +1,47 @@
+from integration.schemas.schemas import AlmaBaseModel
+import logging
+from typing import List, Optional
+import json
+import os
+
+
+HIST_PATH = "context_history.json"
+
+class InteractionRecord(AlmaBaseModel):
+    prompt: str
+    response: str
+
+class ContextTracker:
+    def __init__(self):
+        self.history: List[InteractionRecord] = self._load_history()
+        self.logger = logging.getLogger('context_tracker')
+
+    def _load_history(self):
+        if os.path.exists(HIST_PATH):
+            with open(HIST_PATH, "r") as f:
+                data = json.load(f)
+                return [InteractionRecord(**r) for r in data]
+        return []
+
+    def _save_history(self):
+        with open(HIST_PATH, "w") as f:
+            json.dump([r.model_dump() for r in self.history], f, indent=2, default=str)
+
+    def add_interaction(self, **kwargs):
+        record = InteractionRecord(**kwargs)
+        self.history.append(record)
+        self._save_history()
+        self._audit("ADD", record)
+        return record.id
+
+    def query(self, agent: Optional[str] = None, tags: Optional[List[str]] = None):
+        results = self.history
+        if agent: results = [r for r in results if r.agente == agent]
+        if tags: results = [r for r in results if any(t in r.tags for t in tags)]
+        # Convertir los objetos a dict para que el CLI los pueda serializar a JSON
+        return [r.model_dump() for r in results]
+
+    def _audit(self, action: str, record: InteractionRecord):
+        log_msg = f"{action} | ID:{record.id} | Agente:{record.agente} | Hash:{record.hash[:8]}"
+        self.logger.info(log_msg)
+

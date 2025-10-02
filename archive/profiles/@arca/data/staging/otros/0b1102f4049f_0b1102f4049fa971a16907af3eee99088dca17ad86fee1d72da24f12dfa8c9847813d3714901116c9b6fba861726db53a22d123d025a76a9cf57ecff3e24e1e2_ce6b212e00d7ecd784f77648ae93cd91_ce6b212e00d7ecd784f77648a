@@ -1,0 +1,26 @@
+# Módulo `llm_server/` – ALMA_RESIST
+
+Este módulo representa el núcleo del servidor de lenguaje natural (LLM) dentro del sistema ALMA_RESIST. Se encarga de la carga de modelos, gestión de contexto, cifrado de logs y transporte de mensajes con IA local o remota.
+
+
+## 🧠 Funcionalidad principal
+
+- **Carga de modelos LLM locales** (ej. Mistral vía `llama.cpp`)
+- **Seguimiento de contexto conversacional**
+- **Encriptado/descifrado seguro de logs**
+- **Logging estructurado con firma**
+- **Orquestación de respuestas IA vía `transport_layer`**
+
+
+## 🧪 Cómo correr los tests
+
+```bash
+PYTHONPATH=. pytest tests/
+```
+
+
+## 📦 Estado del módulo
+
+Versión: `0.0.0.4.1`  
+Mantenimiento: activo  
+Auditoría pendiente: sí (DeepSeek)

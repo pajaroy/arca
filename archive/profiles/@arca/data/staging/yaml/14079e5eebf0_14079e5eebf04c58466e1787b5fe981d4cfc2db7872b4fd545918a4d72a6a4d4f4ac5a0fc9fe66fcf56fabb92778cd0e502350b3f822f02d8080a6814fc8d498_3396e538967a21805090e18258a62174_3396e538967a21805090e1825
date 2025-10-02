@@ -1,0 +1,20 @@
+id: MEM_AUD_2025-06-08_02
+fecha: 2025-06-08
+tipo: auditoria
+modulo: control_central/kael
+resumen: >
+  Auditoría funcional del YAML de KAEL v0.1.4 para encarnación operativa.
+  Hallazgos: hashes no automatizados, falta de timestamp/commit_ref y riesgo de bypass en onboarding.
+impacto: >
+  Trazabilidad comprometida si no se implementan hashes reales. Onboarding inseguro permite desvíos de protocolo.
+recomendaciones:
+  - Implementar generación automática de hashes con sha256sum.
+  - Añadir campos timestamp y commit_ref en todas las plantillas.
+  - Incluir verificación de hash inicial en checklist_operacion.
+  - Establecer plazo máximo de 24h para respuestas de Centralesis en derivaciones.
+  - Registrar alerta_omision si no hay respuesta en plazo.
+autor: Centralesis
+tags: [auditoria, kael, onboarding, gobernanza]
+hash_verificacion: sha256:  # Debe generarse al implementar
+timestamp: "2025-06-08T14:30:00Z"
+commit_ref: "git:xxxx"

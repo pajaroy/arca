@@ -1,0 +1,52 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_9829de
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: '  Init  '
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:865694427bc217f0d125adfd1603bd8ea68e73d396a1621db2f75eb7cfbcbc83
+---
+# Módulo principal del servidor LLM - ALMA_RESIST
+# Exporta los componentes clave para integración y testing.
+
+# Módulos principales
+from . import model_wrapper
+from . import transport_layer
+from . import main
+
+# Submódulos de integración
+from .integration import context_tracker
+from .integration import memory_graph
+
+# Utilidades
+from .utils import log_crypto
+from .utils import log_writer
+
+__all__ = [
+    # Módulos base
+    "model_wrapper",
+    "transport_layer",
+    "main",
+
+    # Integraciones
+    "context_tracker",
+    "memory_graph",
+
+    # Utilidades
+    "log_crypto",
+    "log_writer"
+]
+
+# Metadatos del paquete
+__version__ = "0.0.0.4.1"
+__author__ = "Equipo ALMA_RESIST"

@@ -1,0 +1,17 @@
+# 📋 Changelog – ALMA_LOADER Whitepaper
+
+## [3.0.0] – 2025-05-06
+
+### ✨ Added
+- Visión general explicativa de ALMA_LOADER
+- Descripción detallada de casos de uso
+- Arquitectura conceptual por módulos
+- Diagrama Mermaid de flujo de datos
+- Recomendaciones de integración
+
+### 🔄 Changed
+- Reorganización total respecto a versiones 2.x anteriores
+- Unificación con prompt técnico 3.0 como sistema acoplado
+
+### ❌ Removed
+- Documentación redundante de versiones anteriores

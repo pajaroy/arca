@@ -1,0 +1,36 @@
+id: changelog_yaml2all
+modulo: yaml2all
+ubicacion: core/scripts/yaml2all/changelog/changelog.yaml
+version_actual: 0.1.1
+actualizado: 2025-06-17T02:40:00Z
+author: Santi + ALMA
+estado: "activo"
+linked_to:
+  - core/scripts/yaml2all/yaml2all.py
+  - core/scripts/yaml2all/README.yaml
+  - core/scripts/yaml2all/docs/prompt_yaml2all_v0.1.1/prompt_yaml2all_v0.1.1.yaml
+
+changelog:
+  - version: 0.1.0
+    fecha: 2025-06-16
+    cambios: |
+      - Creación inicial del script `yaml2all.py` para conversión de archivos YAML a JSON y Markdown.
+      - Soporte para batch CLI y front matter en MD.
+      - Validación básica de errores y protección contra sobrescritura accidental.
+
+  - version: 0.1.1
+    fecha: 2025-06-17
+    cambios: |
+      - Refactor completo para soporte de objetos `date` y `datetime` (serialización ISO en JSON).
+      - Agregado modo recursivo para procesar todos los README.yaml de la estructura.
+      - Manejo robusto de errores: el script no se detiene si falla un archivo, sigue con el resto.
+      - Mejoras en verbose y mensajes de ayuda.
+      - Estructura modular, separación clara de funciones.
+      - Uso recomendado: conversión “triplicada” (yaml + json + md) en la misma carpeta.
+      - Actualización de la documentación y ejemplo de uso en README.yaml.
+      - Incluye prompt de refactor en docs/prompt_yaml2all_v0.1.1/.
+
+  - version: proxima
+    fecha: [proxima_actualizacion]
+    cambios: |
+      - [Reservado para próximas mejoras: logging avanzado, búsqueda por patrones, validación schema, etc.]

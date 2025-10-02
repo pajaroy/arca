@@ -1,0 +1,24 @@
+# 2. ROADMAP.md
+"""
+# 🛤 Roadmap de Desarrollo - Memoria Loader CLI
+
+## Versiones
+
+### v0.1.0 - Carga básica de memorias
+- [ ] Crear formulario CLI para ingresar memoria.
+- [ ] Generar archivo `.md` en carpeta Obsidian.
+- [ ] Actualizar/crear archivo `memorias.json`.
+
+### v0.1.1 - Validaciones
+- [ ] Validar ID único.
+- [ ] Validar formato de fecha.
+- [ ] Validar campos obligatorios.
+
+### v0.2.0 - Sincronización y backups
+- [ ] Commit automático en Git.
+- [ ] Push a repositorio (opcional).
+
+### v1.0.0 - UI Minimal
+- [ ] Crear menú CLI para selección de categoría.
+- [ ] Mejorar experiencia de usuario.
+

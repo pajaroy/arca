@@ -1,0 +1,112 @@
+import os
+import json
+import logging
+from pathlib import Path
+from tqdm import tqdm
+from neo4j import GraphDatabase, exceptions
+from dotenv import load_dotenv
+
+# Configuración inicial
+load_dotenv()
+MEMORIAS_DIR = Path("memorias_json")
+LOG_FILE = Path("logs/neo4j_loader.log")
+
+class Neo4jLoader:
+    def __init__(self):
+        self.uri = os.getenv("NEO4J_URI", "bolt://localhost:7687")
+        self.user = os.getenv("NEO4J_USER", "neo4j")
+        self.password = os.getenv("NEO4J_PASSWORD", "password")
+        self.driver = None
+        
+        # Configurar logging
+        logging.basicConfig(
+            filename=LOG_FILE,
+            level=logging.INFO,
+            format='%(asctime)s - %(levelname)s - %(message)s'
+        )
+        
+    def connect(self):
+        try:
+            self.driver = GraphDatabase.driver(
+                self.uri,
+                auth=(self.user, self.password),
+                connection_timeout=15
+            )
+            self.driver.verify_connectivity()
+            logging.info("Conexión exitosa a Neo4j")
+            return True
+        except exceptions.Neo4jError as e:
+            logging.error(f"Error de conexión: {str(e)}")
+            return False
+
+    def load_memory(self, tx, memory_data):
+        tx.run("""
+        MERGE (m:Memoria {id: $id})
+        SET m.titulo = $titulo,
+            m.contenido = $contenido,
+            m.categoria = $categoria
+        """, memory_data)
+        
+        for tag in memory_data.get("tags", []):
+            tx.run("""
+            MERGE (t:Tag {name: $tag})
+            WITH t
+            MATCH (m:Memoria {id: $id})
+            MERGE (m)-[:TIENE_TAG]->(t)
+            """, {"tag": tag, "id": memory_data["id"]})
+        
+        for chat in memory_data.get("chats_asociados", []):
+            tx.run("""
+            MERGE (c:Chat {id: $chat_id})
+            WITH c
+            MATCH (m:Memoria {id: $mem_id})
+            MERGE (m)-[:USADO_EN]->(c)
+            """, {"chat_id": chat, "mem_id": memory_data["id"]})
+        
+        for impacto in memory_data.get("impacto_en", []):
+            tx.run("""
+            MATCH (m1:Memoria {id: $origen}), (m2:Memoria {id: $destino})
+            MERGE (m1)-[r:IMPACTA]->(m2)
+            SET r.tipo = $tipo,
+                r.peso = $peso
+            """, {
+                "origen": memory_data["id"],
+                "destino": impacto["id_memoria"],
+                "tipo": impacto["tipo_impacto"],
+                "peso": impacto["peso"]
+            })
+            
+    def process_files(self):
+        json_files = list(MEMORIAS_DIR.glob("*.json"))
+        
+        with self.driver.session() as session:
+            for json_file in tqdm(json_files, desc="Cargando memorias"):
+                try:
+                    with open(json_file, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+                        
+                    if not all(key in data for key in ["id", "titulo", "contenido", "categoria"]):
+                        raise ValueError("Campos requeridos faltantes")
+                        
+                    session.execute_write(self.load_memory, data)
+                    logging.info(f"Memoria {data['id']} cargada exitosamente")
+                    
+                except Exception as e:
+                    logging.error(f"Error procesando {json_file.name}: {str(e)}")
+                    continue
+                    
+    def close(self):
+        if self.driver:
+            self.driver.close()
+            logging.info("Conexión cerrada")
+
+if __name__ == "__main__":
+    loader = Neo4jLoader()
+    
+    if loader.connect():
+        try:
+            loader.process_files()
+        finally:
+            loader.close()
+            
+    print("\nProceso completado. Ver logs en", LOG_FILE)

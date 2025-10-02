@@ -1,0 +1,39 @@
+# 🧠 PROMPT DEEPSEEK – buffer_bot.py (ALMA LIBRE v0.2)
+
+## 🧠 CONTEXTO DEL PROYECTO
+
+Estoy desarrollando un asistente modular llamado **ALMA LIBRE**, el cual incluye un bot de Telegram que ya transcribe audios correctamente usando Whisper.  
+Ahora quiero evolucionarlo para que acumule ideas durante el día y permita generar **resúmenes bajo demanda** o **automáticos una vez por día**.
+
+
+## ⚙️ FUNCIONALIDADES REQUERIDAS
+
+### 🔁 Transcripción de audio
+- Igual al sistema actual, usando `whisper` + `ffmpeg`
+
+### 🧠 Acumulación en buffer
+- Guardar cada transcripción en:
+  ```python
+  buffer_ideas.append({
+      "hora": datetime.now().strftime("%H:%M"),
+      "texto": transcription
+  })
+  ```
+
+### ✋ Comando `/resumen`
+- Devuelve un resumen generado a partir del contenido actual de `buffer_ideas`
+- Usa función `extraer_ideas_local(texto: str) -> str` (podés dejarla mockeada o preparada para API local)
+
+### 🕛 Tarea automática diaria
+- A las `23:50`, generar resumen de todo el día
+- Guardar resultado como archivo `.md` en carpeta `resumenes_diarios/` con nombre `YYYY-MM-DD.md`
+
+
+## 🛡️ RESTRICCIONES
+
+- No usar APIs externas (solo local o mock)
+- Usar `python-telegram-bot >= v20`
+- Código limpio, documentado y desacoplado
+- Listo para correr con `python buffer_bot.py`
+- Soporte para ejecución como servicio (`__main__`)
+

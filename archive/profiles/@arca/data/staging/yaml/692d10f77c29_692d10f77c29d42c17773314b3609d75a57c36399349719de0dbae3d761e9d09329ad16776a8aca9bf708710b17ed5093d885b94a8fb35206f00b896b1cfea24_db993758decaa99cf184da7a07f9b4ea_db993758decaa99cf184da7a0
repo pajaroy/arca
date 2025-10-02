@@ -1,0 +1,25 @@
+id: readme_kael_bitacoras_2025-06-08
+nombre: "README bitácoras – Registro personal de KAEL"
+ruta: "control_central/agentes/kael/bitacoras/"
+version: "0.1.0"
+descripcion: |
+  Este directorio contiene la bitácora personal de KAEL, donde se registran reflexiones, auditorías, aprendizajes y todo evento relevante para el agente desde su propia perspectiva.
+  Funciona como diario técnico, registro histórico y espacio de autocrítica y mejora continua, separado de la bitácora institucional del sistema.
+estructura:
+  - bitacora_personal_kael.yaml: Archivo principal donde se almacena cada entrada de bitácora personal en formato estructurado y auditable.
+  - README.yaml: Este archivo, que explica el criterio y uso de la carpeta.
+criterios_uso:
+  - Usar siempre los prompts oficiales para registrar nuevas entradas, asegurando formato y trazabilidad.
+  - No mezclar eventos personales con institucionales: esta carpeta es solo para la memoria de KAEL como agente individual.
+  - Actualizar este README si cambia el formato o se agregan otros registros personales.
+notas:
+  - Las bitácoras aquí son independientes de la memoria institucional, pero deben referenciarse cuando un aprendizaje personal derive en mejora sistémica.
+  - Auditorías periódicas pueden tomar muestras de esta carpeta para validar la salud del proceso de autocrítica.
+tags:
+  - kael
+  - bitacora
+  - personal
+  - reflexion
+  - auditoria
+  - diario
+  - automejora

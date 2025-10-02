@@ -1,0 +1,18 @@
+# 📋 CHANGELOG – ALMA_LOADER
+
+## [3.0.2] – 2025-05-07
+
+Versión enfocada en consolidar documentación, diseño modular y expansión futura.
+
+
+### 📘 Whitepaper
+
+#### ✨ Added
+- Sección 4.1: Diseño inicial de la API REST futura (FastAPI + endpoints)
+- Sección de módulos externos integrables
+- Ejemplo narrativo de caso de uso con ALMA_LOADER
+
+#### 🔄 Changed
+- Derivación de arquitectura al Prompt Técnico
+- Consolidación de tabla de módulos en un solo archivo (Prompt)
+

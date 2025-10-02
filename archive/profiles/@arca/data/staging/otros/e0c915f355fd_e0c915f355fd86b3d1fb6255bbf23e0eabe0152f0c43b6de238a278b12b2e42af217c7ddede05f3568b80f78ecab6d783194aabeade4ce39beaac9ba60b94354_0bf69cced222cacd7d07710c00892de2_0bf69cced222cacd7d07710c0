@@ -1,0 +1,63 @@
+
+# core/metrics.py
+import logging
+import time
+from functools import wraps
+from datetime import datetime
+from typing import Optional, Dict, Any
+
+_metrics_logger = logging.getLogger("metrics")
+
+def registrar_evento(nombre: str, metadata: Optional[Dict[str, Any]] = None) -> None:
+    """Registra un evento estructurado para monitoreo"""
+    evento_data = {
+        "evento": nombre,
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "tipo": "operacional",
+        **({"metadata": metadata} if metadata else {})
+    }
+    
+    # Campos adicionales desde el contexto de ejecución
+    contexto_extra = {
+        k: v for k, v in {
+            "usuario": _get_current_user_context(),
+            "endpoint": _get_current_endpoint_context()
+        }.items() if v is not None
+    }
+    
+    _metrics_logger.info(
+        nombre,
+        extra={
+            **evento_data,
+            **contexto_extra
+        }
+    )
+
+def medir_latencia(nombre_evento: str):
+    """Decorador para medir latencia de ejecución en milisegundos"""
+    def decorador(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            inicio = time.perf_counter()
+            resultado = func(*args, **kwargs)
+            latencia_ms = (time.perf_counter() - inicio) * 1000
+            
+            registrar_evento(
+                nombre_evento,
+                {
+                    "latencia_ms": round(latencia_ms, 3),
+                    "funcion": func.__name__,
+                    "module": func.__module__
+                }
+            )
+            return resultado
+        return wrapper
+    return decorador
+
+def _get_current_user_context() -> Optional[str]:
+    """Obtiene contexto de usuario de implementación externa"""
+    return None
+
+def _get_current_endpoint_context() -> Optional[str]:
+    """Obtiene endpoint desde el contexto de ejecución"""
+    return None

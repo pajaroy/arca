@@ -1,0 +1,17 @@
+# 📦 ALMA LIBRE – Versión 0.0.6.1
+
+Esta versión marca la consolidación definitiva de la fase de reestructuración iniciada en v0.0.6. Todos los elementos del sistema han sido unificados, limpiados, documentados y organizados para permitir el trabajo diario humano-IA sin duplicación ni ambigüedad.
+
+## 📚 Estructura destacada:
+- **EMPRESAS/**: Documentación formal, legal y estratégica de los proyectos.
+- **CUADERNOS/**: Registro informal, creativo y técnico por área temática.
+- **MODULOS/**: Proyectos automatizados o codificados listos para integración.
+- **BITACORA_CENTRAL/**: Resúmenes, memoria diaria y evolución técnica.
+- **RECURSOS_Y_AYUDAS/**: Prompts, plantillas, utilitarios de trabajo y estructura.
+- **REESTRUCTURACION_0.0.6/**: Documentos de transición estructural.
+
+## 🧭 Estado actual:
+- Versión: `v0.0.6.1`
+- Estable, operativo y legible para sistemas IA y humanos.
+- Documentación completa, seguimiento técnico semanal iniciado.
+

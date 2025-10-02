@@ -1,0 +1,54 @@
+# ALMA_RESIST – Checklist Técnica por Sprint
+
+
+## Sprint 2: Persistencia de sesión – Datos offline seguros  
+- [ ] Habilitar historial persistente en SQLite cifrado (SQLCipher).  
+- [ ] Implementar paginación de consultas para grandes datasets.  
+- [ ] Agregar comando CLI `--clear-chat` para borrar datos sensibles.  
+- [ ] Test de rendimiento con 1k mensajes almacenados.  
+**Métrica**: Tiempo de respuesta < 2 segundos por consulta.  
+**Éxito**: Uso de RAM < 1.8 GB con 1k mensajes.  
+
+
+## Sprint 4: Monitoreo en tiempo real – Alertas proactivas  
+- [ ] Implementar `alma_monitor.py` como daemon.  
+- [ ] Monitorear RAM, CPU, temperatura, swap en tiempo real.  
+- [ ] Definir umbrales de alerta (CPU >80°C, RAM <15%, swap >20%).  
+- [ ] Simular envío de notificaciones (log + consola).  
+**Métrica**: Latencia de alerta <5 segundos.  
+**Éxito**: 100% eventos críticos disparan alertas bajo carga.  
+
+
+## Sprint 6: Autoevaluación y aprendizaje  
+- [ ] Desarrollar `alma_auto_eval.py` para analizar métricas históricas.  
+- [ ] Generar reporte de regresiones/mejoras por sprint (gráficas Plotly).  
+- [ ] Prototipar IA asistente para sugerir optimizaciones.  
+**Métrica**: Detección de regresiones con ±5% precisión.  
+**Éxito**: Sugerencias validadas por desarrolladores.  
+
+
+## Sprint 8: Optimización ML – Quantización y NPU  
+- [ ] Aplicar quantización dinámica (FP32 → INT8).  
+- [ ] Probar OpenVINO/NPU en CPU/GPU Intel.  
+- [ ] Medir impacto en tamaño de modelo y latencia.  
+**Métrica**: Latencia inferencia reducida en 50%.  
+**Éxito**: Pérdida de precisión <5% en modelos INT8.  
+
+
+## Sprint 10: Documentación inteligente – CLI & HTML offline  
+- [ ] Compilar `docs/reporte_sprint.md` con KPIs y gráficos.  
+- [ ] Actualizar `docs/lecciones_aprendidas.md`.  
+- [ ] Documentar arquitectura evolutiva en `docs/arquitectura_evolutiva.md`.  
+- [ ] Implementar comandos `almadocs` para CLI/HTML.  
+**Métrica**: Cobertura de docs >90%.  
+**Éxito**: Documentación accesible offline en ambos formatos.  
+
+
+## Sprint 12: Evaluación final – Benchmarks & tuning  
+- [ ] Re-ejecutar `test_arch.sh` y comparar con Sprint 3.  
+- [ ] Evaluar DuckDB vs SQLite para análisis de logs.  
+- [ ] Ajustar umbrales de alertas basados en datos históricos.  
+- [ ] Revisión final de seguridad (buffers, permisos, cifrado).  
+**Métrica**: +X% rendimiento global vs inicio.  
+**Éxito**: Sistema cumple objetivos de soberanía, eficiencia y resiliencia.  
+

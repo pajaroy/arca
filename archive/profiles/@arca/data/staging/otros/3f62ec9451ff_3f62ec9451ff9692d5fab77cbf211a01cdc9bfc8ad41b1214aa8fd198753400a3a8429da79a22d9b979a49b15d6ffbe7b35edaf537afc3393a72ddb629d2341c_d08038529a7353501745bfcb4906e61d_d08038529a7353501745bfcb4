@@ -1,0 +1,42 @@
+## 📘 1. **Whitepaper ALMA LIBRE v0.0.6.1**
+
+**Objetivo general:**  
+Establecer una **base conceptual, humana e institucional** del sistema ALMA LIBRE, accesible para cualquier persona o inteligencia artificial que necesite comprender rápidamente el propósito, la lógica y la visión del proyecto.
+
+### 🎯 Objetivos específicos:
+
+- Exponer **el propósito central del sistema**: qué problema resuelve y para quién.
+    
+- Presentar la **fundación ética y filosófica** de ALMA (visión de IA colaborativa y consciente).
+    
+- Explicar **la estructura organizativa** y la distribución modular de carpetas y flujos.
+    
+- Mostrar cómo se espera que interactúen **los usuarios humanos y las IA asistentes** dentro del ecosistema.
+    
+- Actuar como **puerta de entrada** a todo el sistema, orientando tanto al lector nuevo como a colaboradores.
+    
+- Servir de referencia permanente e institucional para:
+    
+    - Nuevos miembros del equipo
+        
+    - Inversores o socios
+        
+    - Modelos IA externos (ChatGPT, NotebookLM, agentes)
+        
+
+
+## 🔗 ¿Cómo se conectan?
+
+Ambos documentos se diseñan como un **sistema dual escalable**, donde:
+
+|Concepto|Whitepaper 📘|Prompt Técnico 🛠️|
+|---|---|---|
+|Enfoque|Humano–institucional|Técnico–operacional|
+|Audiencia|Lectores nuevos, IA generalistas|IA de desarrollo, programadores|
+|Función|Introducción, marco general|Implementación precisa, modularización|
+|Escalabilidad|Secciones temáticas por evolución|Secciones por módulos/versiones|
+|Punto de anclaje común|Carpeta `ALMA_LIBRE/`|Carpeta `ALMA_LIBRE/MODULOS/`|
+|Actualización conjunta|Versiones parejas: 0.0.6.1.X|Versiones parejas: 0.0.6.1.X|
+
+Ambos estarán **versionados de forma sincronizada** (ej. `whitepaper_0.0.6.1.1.md` y `prompt_tecnico_0.0.6.1.1.md`) para garantizar trazabilidad y facilitar integración futura con memorias inteligentes.
+

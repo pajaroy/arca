@@ -1,0 +1,308 @@
+# 🧠 Prompt Técnico ALMA_LOADER v3.0
+
+## 🧭 Roadmap Técnico ALMA_LOADER – Versión Expandida
+
+---
+
+### 🔷 A. Roadmap Técnico por Capas (visión macro)
+
+> Este esquema resume el camino del desarrollo de ALMA_LOADER en tres fases amplias, centradas en capacidades progresivas.
+
+#### Fase 1 – Núcleo estable (Core)
+- Registro estructurado y validado (JSON Schema)
+- Almacenamiento seguro en SQLite
+- Cifrado de contenido sensible
+- Generación de resúmenes y bitácoras
+
+#### Fase 2 – IA Semántica
+- Vectorización de contenido (FAISS + Embeddings)
+- Router atencional para respuestas contextuales
+- Análisis predictivo básico
+- Creación de relaciones entre memorias
+
+#### Fase 3 – Expansión e Integración
+- Gamificación y metas personales
+- Sistema de reglas encadenadas (tipo "si X → hacer Y")
+- Conexión con aplicaciones externas: Telegram, Shortcuts, control por voz
+
+---
+
+### 🔷 B. Roadmap Operativo Detallado (vinculado al desarrollo actual)
+
+> Esta sección detalla las tareas concretas, módulos activos y enlaces con los cuadernos digitales. Se actualiza por versión (actual: 3.0.3+).
+
+#### 🎯 Objetivo General
+
+Consolidar un backend modular, seguro y ampliable que actúe como núcleo inteligente de un asistente personal diario. Toda la lógica y estructura se mantiene sintetizada en dos archivos base (`whitepaper` y `prompt técnico`) para máxima claridad e interoperabilidad con modelos de lenguaje. Se prioriza compatibilidad con cuadernos digitales (Obsidian, Shortcuts, Recordatorios).
+
+---
+
+#### 🔁 Fase 1 – Consolidación del Núcleo
+- Vectorización real con FAISS (`core/vector_storage.py`)
+- GET `/v1/memorias`: recuperación por texto, ID o tags
+- Refactor de `sqlite_storage` (update, transacciones)
+- Configuración por `.env`
+- Unificación de estados (`Enum`)
+- Actualización del whitepaper: “Core Engine v1”
+
+---
+
+#### 🧠 Fase 2 – IA Básica y Consultas
+- Endpoint `/v1/assistant/consultar`
+- Uso de modelo externo para responder con contexto
+- Creación de `core/racionalizador.py`
+- Prompts funcionales en el prompt técnico
+- Nueva sección: “Capas de interacción con IA”
+
+---
+
+#### 🧩 Fase 3 – Integración de Módulos Temáticos y Cuadernos
+
+##### 📈 Trading
+- Endpoint `/v1/trading/resumen`
+- Lectura de memorias “trading”
+- Enlace: Obsidian carpeta “Trading”, Recordatorios
+
+##### 🌱 Cultivo
+- Endpoint `/v1/cultivo/registro-datos`
+- Análisis de VPD, EC, alertas
+- Enlace: “001_Flora”, “002_Vege”
+
+##### 💻 Programación
+- Endpoint `/v1/code/consultar-snippet`
+- Cuaderno digital: “Programación”
+
+> Todos los módulos escriben y consultan memorias comunes bajo categorías y tags.
+
+---
+
+#### 🔐 Fase 4 – Seguridad y Despliegue
+- JWT real y múltiples usuarios
+- Dockerfile + `docker-compose`
+- Endpoint de monitoreo básico
+- Telegram + Shortcuts como interfaz liviana
+
+---
+
+#### 🔄 Fase 5 – Sincronización con Cuadernos Digitales
+- Carga automática desde notas Obsidian (por tags)
+- Registro de Recordatorios diarios como memorias
+- Mapa de relaciones con grafo (D3.js o Neo4j)
+- Nueva sección: “Memoria extendida” en whitepaper
+
+---
+
+#### 📘 Notas Finales
+- Toda evolución queda registrada en el `CHANGELOG.md`
+- Se prioriza siempre claridad conceptual antes que escalamiento técnico
+## 1. Propósito del Sistema
+Este prompt define todas las funciones técnicas, estructuras internas y flujos de interacción del sistema ALMA_LOADER. Su objetivo es que cualquier modelo IA o humano técnico pueda ejecutar, extender o auditar el sistema con claridad total. Consolidado a partir de versiones 2.1.1 y 2.2.0.
+El Prompt Técnico: **“enfoque técnico y operacional”**
+Para la perspectiva emocional y filosófica del sistema, ver el Prólogo del Whitepaper.”
+> 📘 Para entender el propósito humano, los casos de uso y la visión general del sistema,  
+> consultá el [Whitepaper de ALMA_LOADER](ALMA_LIBRE/MODULOS/Alma_Loader/alma_loader_v3.0.3/docs/archivos_fundamentales/whitepaper_ALMA_LOADER_v3.0.2.md)
+
+## 2. Módulos Funcionales
+- `core_nl.py` – Conversión NL → JSON mediante reglas y patrones
+- `validador.py` – Validación con `schema_base.json` y normalización de campos
+- `sqlite_storage.py` – Almacenamiento actual, optimizado con JSON1 para consultas internas
+- `base_storage.py` – Interfaz abstracta de almacenamiento compatible con múltiples motores
+- `vector_storage.py` – Búsqueda semántica con embeddings vía FAISS (alpha)
+- `router_atencional.py` – Enrutamiento según intención detectada (acción, reflexión, memoria)
+- `resumenes.py` – Generación de resumen en Markdown diario o semanal
+- `alma_analytics.py` – Detección de patrones, correlaciones y disparadores
+- `gamificacion.py` – Sistema de motivación por puntos, niveles y hábitos (fase 3)
+
+Los módulos de ALMA_LOADER están diseñados para ser independientes y fácilmente intercambiables. A continuación, se indican las principales tecnologías asociadas a cada uno:
+
+### 🛠️ Tecnologías Utilizadas por Módulo
+
+| Módulo                   | Tecnología / Herramienta              |
+|--------------------------|--------------------------------------|
+| NLP / Parsing            | `regex`, `spaCy` (plan futuro)       |
+| Vectorización semántica | `sentence-transformers`, `FAISS`     |
+| Almacenamiento           | `SQLite` (con JSON1), `FAISS` (alpha)|
+| Visualización / Testing  | `pytest`, `Mermaid` (para diagramas) |
+| Relaciones semánticas    | `dict`, relaciones cruzadas (`Neo4j`, `networkx` – futuro) |
+
+
+## 3. JSON Schema de Memoria
+```json
+{
+  "id": "MEM-TRD-2025-XXXX",
+  "categoria": "TRD",
+  "contenido": "texto plano",
+  "tags": ["#btc", "#reflexión"],
+  "resumen_inferido": "...",
+  "embedding_id": "EMB-abc123",
+  "vector": [0.123, 0.987, ...],
+  "intencion_detectada": "registro",
+  "origen_input": "usuario",
+  "relaciones": [
+    { "tipo": "temporal", "target_id": "MEM-TRD-2025-XXXX", "peso": 0.8 }
+  ]
+}
+```
+
+---
+### 3.1 Convención de IDs y Versionado de Memorias
+
+Cada memoria debe contar con un `id` único, que permita trazabilidad, orden temporal, y segmentación por tipo. Recomendamos el siguiente formato:
+
+```
+MEM-[TIPO]-[YYYY]-[MM]-[DD]-[NNN]
+```
+
+### 📄 Ejemplo:
+```
+MEM-TRD-2025-05-06-001
+```
+
+- `TRD` → categoría o módulo (ej: TRD, EMO, SYS)
+- `2025-05-06` → fecha
+- `001` → número incremental del día (o sesión)
+
+Esta convención permite:
+- Identificar rápidamente tipo y fecha
+- Ordenar cronológicamente sin DB externa
+- Evitar colisiones entre memorias en sistemas distribuidos
+- Agrupar y filtrar eficientemente
+
+> Puede extenderse a subtipos si es necesario: `MEM-TRD-BTC-2025-05-06-001`
+## 4. Interfaces y Abstracciones
+- `BaseStorage`: permite intercambiar SQLite por FAISS, Neo4j u otros sin modificar el flujo general
+- `router_atencional`: enruta el input al módulo correcto según análisis rápido de intención
+
+## 5. Flujo Conversacional Esperado
+El flujo completo del sistema está ilustrado conceptualmente en el Whitepaper, Sección 4.
+## 6. Automatizaciones
+- Generación diaria/semanal de resúmenes en Markdown
+- Backups automáticos del `memorias.db` o vector_index
+- Alertas semánticas según `reglas_dinamicas.json`
+
+ALMA_LOADER puede aplicar reglas condicionales para responder a patrones en las memorias registradas. Estas reglas se definen en `reglas_dinamicas.json`.
+
+### 📄 Ejemplo real:
+
+```json
+{
+  "si": ["#sobreoperación", "#fatiga"],
+  "entonces": "Sugerir MEMHEALTH-022 y reducir riesgo al 1%"
+}
+```
+
+Este tipo de lógica permite que el sistema detecte condiciones problemáticas combinadas y actúe en consecuencia, ya sea sugiriendo contenidos previos, modificando recomendaciones, o generando alertas.
+
+> Estas reglas son interpretadas por `alma_analytics.py` y se pueden expandir dinámicamente.
+
+## 7. Coexistencia entre SQLite y FAISS
+
+ALMA_LOADER permite almacenar una misma memoria en dos lugares distintos con funciones complementarias:
+
+- **SQLite** → estructura completa legible, campos validados y utilizables para resúmenes, etiquetas, temporalidad.
+- **FAISS** → vector numérico del contenido, usado para búsquedas semánticas (por similitud de significado).
+
+Para mantener la sincronización entre ambas capas, se utiliza un campo común: `embedding_id`.
+
+### 🔗 Ejemplo de vínculo:
+```json
+{
+  "id": "MEM-TRD-2025-05-06-001",
+  "embedding_id": "EMB-65fabc9271c1",
+  ...
+}
+```
+
+- Ese `embedding_id` actúa como **clave externa lógica**: permite que, al hacer una búsqueda en FAISS, se pueda recuperar el ID original de SQLite.
+- Esto permite mantener bajo control los metadatos (`tags`, `intención`, `resumen`, etc.) y los vectores (`vector`) por separado, pero relacionados.
+
+> ⚠️ Toda memoria que se vectorice debe tener su `embedding_id` registrado en ambos lados. Esto garantiza trazabilidad completa en búsquedas semánticas, análisis y visualizaciones futuras.
+## 8. Instrucciones de Integración
+- Todo input debe ser procesado con `core_nl.py`
+- Las memorias deben validarse contra `schema_base.json`
+- Toda salida debe ser JSON válido, o Markdown estructurado si es resumen
+- DeepSeek, GPT o terminales pueden interactuar directamente con cada módulo
+
+---
+> Este prompt técnico permite que cualquier IA ejecute acciones correctas dentro de ALMA_LOADER sin ambigüedades ni errores de interpretación. Complementa al whitepaper 3.0 (explicativo y estratégico).
+
+## 9. Testing y Validaciones
+
+### 🧪 Test Unitario – Validación de Memoria
+
+Este test permite verificar que el esquema base JSON acepte estructuras válidas y rechace incorrectas. Se usa como prueba mínima para `validador.py`.
+
+```python
+def test_validar_memoria():
+    memoria_valida = {
+        "id": "MEM-TRD-2025-05-06-001",
+        "categoria": "TRD",
+        "contenido": "Hoy operé en BTC y me sentí confiado",
+        "tags": ["#btc", "#emoción:confianza"]
+    }
+    assert validar_esquema(memoria_valida) == True
+```
+
+Este tipo de test puede ejecutarse con `pytest`, `unittest`, o integrarse en un pipeline de verificación previa al guardado.
+
+### 🧪 Test Unitario – Vectorización Semántica
+
+Este test valida que la función de embeddings esté operativa y produzca un vector válido (usualmente de 384 o 768 dimensiones, según modelo).
+
+```python
+def test_vectorizacion():
+    texto = "Hoy operé bajo presión y me sentí impulsivo."
+    vector = generar_embedding(texto)
+    
+    assert isinstance(vector, list)
+    assert len(vector) >= 128
+    assert all(isinstance(x, float) for x in vector)
+```
+
+> Este test puede servir tanto para debug local como para verificar integridad del motor FAISS en producción.
+
+## 10. Relaciones entre Memorias – Grafo Dirigido
+
+ALMA_LOADER permite establecer vínculos explícitos entre memorias usando el campo `relaciones`. Esto habilita un grafo dirigido de conocimiento interno.
+
+Cada relación incluye:
+- `tipo`: naturaleza de la relación (ej: `temporal`, `causal`, `emocional`, `refuerzo`)
+- `target_id`: ID de la memoria relacionada
+- `peso`: valor entre 0 y 1 que indica la fuerza del vínculo
+
+### 📄 Ejemplo:
+```json
+"relaciones": [
+  { "tipo": "causal", "target_id": "MEM-TRD-2025-05-04-002", "peso": 0.85 },
+  { "tipo": "temporal", "target_id": "MEM-TRD-2025-05-03-001", "peso": 0.6 }
+]
+```
+
+Este grafo puede analizarse para:
+- Descubrir patrones encadenados (causas → consecuencias)
+- Medir recurrencia o acumulación emocional
+- Visualizar el recorrido mental de un tema
+
+### 🛠️ Futuras integraciones:
+- `networkx` (Python) para análisis de grafos
+- `Neo4j` para persistencia de relaciones complejas
+- Mermaid o D3.js para visualización gráfica
+
+> El objetivo es pasar de registros aislados a una red dinámica de aprendizaje personal.
+
+## 🔌 Integración con Módulos Externos
+
+ALMA_LOADER está diseñado para operar como núcleo de memoria e inteligencia semántica para múltiples aplicaciones.
+
+Esta versión 3.0.2 introduce una estructura preparada para la futura integración de módulos externos. Cada uno de estos módulos podrá interactuar con el sistema a través de sus interfaces y funciones expuestas.
+
+### Ejemplos de módulos potenciales (en evaluación):
+- 📊 Analizador de Trading Emocional
+- 🌱 Gestor Inteligente de Cultivo
+- 📔 Bitácora Personal Automatizada
+- 🧠 Asistente de Decisiones Estratégicas
+- 💰 Controlador de Fondos y Riesgo
+
+> En futuras versiones, cada módulo tendrá su documentación (`README`) y prompt local, conectado a ALMA_LOADER como backend de memoria.
+
+Esta sección será actualizada a medida que se confirmen las integraciones.

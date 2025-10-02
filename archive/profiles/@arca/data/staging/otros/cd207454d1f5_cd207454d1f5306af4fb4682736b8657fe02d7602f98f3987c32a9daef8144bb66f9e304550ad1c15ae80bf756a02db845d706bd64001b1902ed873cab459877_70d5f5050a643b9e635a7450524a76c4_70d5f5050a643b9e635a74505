@@ -1,0 +1,134 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_a7e6bb
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Memory Graph
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:f139252a2a36826f84a0403971b7333bf006918e05a37aabe9a028b2350e169b
+---
+import json
+from pathlib import Path
+from typing import Dict, List, Optional
+import logging
+from collections import defaultdict
+from xml.etree.ElementTree import Element, SubElement, tostring
+from xml.dom import minidom
+
+logger = logging.getLogger("alma_memory")
+
+class MemoryGraph:
+    def __init__(self, storage_path: str = "memory_graph.json"):
+        self.storage_path = Path(storage_path)
+        self.graph: Dict[str, Dict[str, float]] = defaultdict(lambda: defaultdict(float))
+        self._load_existing_graph()
+
+    def _load_existing_graph(self) -> None:
+        try:
+            if self.storage_path.exists():
+                with open(self.storage_path, 'r') as f:
+                    raw_graph = json.load(f)
+                    for node, edges in raw_graph.items():
+                        self.graph[node] = defaultdict(float, edges)
+                logger.info(f"Grafo cargado: {len(self.graph)} nodos")
+        except Exception as e:
+            logger.error(f"Error cargando grafo: {str(e)}")
+            self.graph = defaultdict(lambda: defaultdict(float))
+
+    def _persist_graph(self) -> None:
+        try:
+            with open(self.storage_path, 'w') as f:
+                serializable = {
+                    node: dict(edges)
+                    for node, edges in self.graph.items()
+                }
+                json.dump(serializable, f, indent=2)
+        except Exception as e:
+            logger.error(f"Error guardando grafo: {str(e)}")
+
+    def add_node(self, concept: str) -> str:
+        cleaned_concept = concept.strip().lower()
+        if cleaned_concept not in self.graph:
+            self.graph[cleaned_concept] = defaultdict(float)
+            logger.debug(f"Nodo añadido: {cleaned_concept}")
+        return cleaned_concept
+
+    def create_edge(self, from_concept: str, to_concept: str, weight: float = 1.0) -> None:
+        origin = self.add_node(from_concept)
+        target = self.add_node(to_concept)
+        self.graph[origin][target] += weight
+        self.graph[target][origin] += weight * 0.3
+        self._persist_graph()
+        logger.debug(f"Edge: {origin} ↔ {target} ({weight:.1f})")
+
+    def get_related(self, concept: str, top_k: int = 5, threshold: Optional[float] = None) -> List[str]:
+        cleaned_concept = concept.strip().lower()
+        if cleaned_concept not in self.graph:
+            return []
+        
+        # Filtrar por threshold si está presente
+        related_items = list(self.graph[cleaned_concept].items())
+        if threshold is not None:
+            related_items = [item for item in related_items if item[1] >= threshold]
+        
+        # Ordenar por peso (descendente) y luego por concepto (ascendente)
+        sorted_related = sorted(
+            related_items,
+            key=lambda x: (-x[1], x[0])
+        )
+        return [concept for concept, _ in sorted_related[:top_k]]
+
+    def export_graph(self, file_path: str, format: str = "json") -> None:
+        try:
+            export_path = Path(file_path)
+            if format == "json":
+                with open(export_path, 'w') as f:
+                    json.dump(dict(self.graph), f, indent=2)
+            elif format == "graphml":
+                self._export_graphml(export_path)
+            logger.info(f"Grafo exportado: {export_path}")
+        except Exception as e:
+            logger.error(f"Error exportando grafo: {str(e)}")
+
+    def _export_graphml(self, path: Path) -> None:
+        root = Element("graphml")
+        graph = SubElement(root, "graph", id="G", edgedefault="directed")
+        nodes = {concept: i for i, concept in enumerate(self.graph.keys())}
+        for concept, idx in nodes.items():
+            node = SubElement(graph, "node", id=str(idx))
+            SubElement(node, "data", key="label").text = concept
+        
+        edge_id = 0
+        for src, edges in self.graph.items():
+            for dst, weight in edges.items():
+                edge = SubElement(graph, "edge", source=str(nodes[src]), target=str(nodes[dst]), id=f"e{edge_id}")
+                SubElement(edge, "data", key="weight").text = str(weight)
+                edge_id += 1
+        
+        xml_str = minidom.parseString(tostring(root)).toprettyxml()
+        with open(path, 'w') as f:
+            f.write(xml_str)
+
+    def merge_from_context(self, context_tracker) -> None:
+        for interaction in context_tracker.get_history():
+            self.add_node(interaction["prompt"])
+            self.add_node(interaction["response"])
+            self.create_edge(interaction["prompt"], interaction["response"], weight=0.8)
+
+    def clear(self) -> None:
+        self.graph.clear()
+        self._persist_graph()
+        logger.info("Grafo limpiado completamente")
+
+    def get_node_id(self, concept: str) -> Optional[str]:
+        cleaned_concept = concept.strip().lower()
+        return cleaned_concept if cleaned_concept in self.graph else None

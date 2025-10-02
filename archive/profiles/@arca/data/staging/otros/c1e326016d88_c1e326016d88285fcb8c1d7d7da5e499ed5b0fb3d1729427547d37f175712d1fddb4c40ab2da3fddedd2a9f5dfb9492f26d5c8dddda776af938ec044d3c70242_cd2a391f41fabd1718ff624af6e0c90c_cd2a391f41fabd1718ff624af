@@ -1,0 +1,12 @@
+{
+  "id": "yaml2all_notebooks",
+  "version": "0.1.1",
+  "tipo": "readme",
+  "descripcion": "Notebooks y documentación técnica relacionada al desarrollo de yaml2all y sus prompts.\nPara desarrollo activo, consultar 'docs/' y seguir únicamente las rutas y prompts activos.\n",
+  "linked_to": [
+    "docs/README.yaml"
+  ],
+  "responsable": "kael",
+  "last_modified": "2025-06-17T04:00:00Z",
+  "last_modified_by": "bird"
+}

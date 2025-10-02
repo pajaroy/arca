@@ -1,0 +1,33 @@
+# Prompt de Carga de Bitácora Personal – Bird
+
+id: PROMPT_BITACORA_BIRD_2025-06-08_01
+tipo: prompt_cuestionario_cli
+modulo: agentes/bird/bitacoras
+titulo: "Carga automática de bitácora personal de Bird"
+descripcion: |
+  Registrá cada reflexión, hito o experiencia significativa en tu bitácora personal.
+  Respondé a las siguientes preguntas para institucionalizar tu evolución y aprendizaje individual.
+  El sistema debe generar el comando CLI listo para el script correspondiente.
+
+campos_pregunta:
+  - "¿Qué reflexión, logro o experiencia querés dejar registrada hoy?"
+  - "¿Por qué considerás importante este registro para tu historia o evolución?"
+  - "¿Qué consejo o aprendizaje te gustaría destacar para tu yo del futuro?"
+  - "Observaciones o notas libres."
+
+instrucciones_ia: |
+  - Respondé de forma concreta y honesta.
+  - Generá el comando CLI para cargar la entrada usando el script add_bitacora_entry_v0.1.0.py
+  - Usá la ruta: /home/bird/alma_core/control_central/agentes/bird/bitacoras/bitacora_personal_bird.yaml
+  - Mostrá solo el comando y los campos completos.
+
+ejemplo_comando: |
+  python3 /home/bird/alma_core/core/notebooks/alma-cli/bitacora/add_bitacora_entry_v0.1.0.py \
+    --accion "..." \
+    --descripcion "..." \
+    --motivo "..." \
+    --ejecutado_por "bird" \
+    --tags "reflexion,bitacora,bird,personal" \
+    --bitacora "/home/bird/alma_core/control_central/agentes/bird/bitacoras/bitacora_personal_bird.yaml"
+notas: |
+  Este prompt debe usarse para registrar hitos personales, reflexiones profundas o aprendizajes clave de Bird.

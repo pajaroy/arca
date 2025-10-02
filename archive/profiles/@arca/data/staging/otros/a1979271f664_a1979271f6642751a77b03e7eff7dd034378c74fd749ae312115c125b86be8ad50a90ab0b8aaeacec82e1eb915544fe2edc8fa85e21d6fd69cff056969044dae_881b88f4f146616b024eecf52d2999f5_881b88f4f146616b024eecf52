@@ -1,0 +1,21 @@
+---
+
+## 📌 Apéndice – Unificación de Archivos Procesados en `downloads/historico/` (2025-06-03)
+
+- A partir de junio 2025, se establece que todo archivo descargado y ya integrado al sistema será renombrado con fecha y movido a un único directorio:
+
+  ```
+  control_central/archivo/downloads/historico/
+  ```
+
+- Formato recomendado: `YYYY-MM-DD_nombre-del-archivo.md`
+- Esto reemplaza prácticas anteriores como `archivados/YYYY-MM-DD/`
+- Beneficios:
+  - ✅ Mayor simplicidad para acceso por scripts e IA
+  - ✅ Compatible con `find`, `grep`, `fzf`, etc.
+  - ✅ No requiere recorrer subdirectorios
+- Esta política aplica a todos los módulos de ALMA_RESIST desde `control_central/` hacia abajo, y se recomienda replicarla progresivamente.
+
+🧠 *"Un solo histórico plano, muchas IAs felices."*
+
+---

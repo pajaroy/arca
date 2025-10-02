@@ -1,0 +1,15 @@
+[
+  {
+    "id": "test03",
+    "agente": "bird",
+    "timestamp": "2025-07-07 03:52:16.186075",
+    "tags": [
+      "test"
+    ],
+    "hash": "sha256:14bd795d73a4a649f548d0bfdc6cb7686c0a602d2349e7dba09f1e81e9aaec4e",
+    "metadata": {},
+    "memoria_ref": [],
+    "prompt": "\u00bfMe guard\u00e1s esta memoria?",
+    "response": ""
+  }
+]

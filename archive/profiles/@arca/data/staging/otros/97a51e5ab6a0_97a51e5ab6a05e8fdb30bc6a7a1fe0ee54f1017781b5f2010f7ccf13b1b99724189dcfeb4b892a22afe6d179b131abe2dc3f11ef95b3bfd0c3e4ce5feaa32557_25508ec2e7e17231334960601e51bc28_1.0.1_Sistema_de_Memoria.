@@ -1,0 +1,30 @@
+
+# 🧠 Sistema de Memorias Vivas – ALMA LIBRE v1.0.1 (memoria_mejorada)
+
+Este documento define la estructura propuesta de carpetas para almacenar memorias escritas manualmente en formato `.md`, con encabezado YAML. Estas memorias integran la base semántica y operativa del sistema ALMA LIBRE, funcionando como núcleo documental emocional, técnico y estratégico.
+
+
+## 🔗 Relaciones entre Carpetas
+
+- `alma_general` → Se conecta con todos los cuadernos y con `bitacora_central`
+- `reflexion` → Relacionada con `alma_general`, `psicología_trading`, y `medicina_alternativa`
+- `medicina_alternativa` → Conecta con `salud_RPL` y `bitacora_central`
+- `geopolítica_actualidad` → Se nutre de `noticias_globales` y aporta a `bitacora_central`
+- `fondo_inversion` → Relacionado con `gestor_trading`, `finanzas_personales` y `creatividad_y_empresa`
+- `programacion` → Conecta con `fondo_inversion`, `gestor_trading`, `finanzas_personales`
+- `bitacora_central` → Funciona como espejo y nodo central de todas las áreas
+
+tipo: memoria
+titulo: "Título descriptivo"
+fecha: 2025-04-24
+conectada_a: ["modulo_x", "cuaderno_y"]
+prioridad: alta
+estado: activa
+
+## 🚀 Recomendaciones para integración futura
+
+- Automatizar lectura YAML → `metadata_memorias.csv`
+- Usar estas memorias como fuente para `alma_chat.py` o `alma_sync.py`
+- Permitir filtros por `tipo`, `prioridad`, `estado`, `fecha`, etc.
+- Sincronizar estas carpetas como origen oficial del sistema ALMA LIBRE
+

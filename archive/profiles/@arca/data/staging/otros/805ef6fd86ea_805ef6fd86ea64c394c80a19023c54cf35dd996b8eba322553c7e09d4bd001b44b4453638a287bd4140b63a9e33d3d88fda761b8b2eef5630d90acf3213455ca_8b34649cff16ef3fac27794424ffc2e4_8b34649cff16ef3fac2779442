@@ -1,0 +1,36 @@
+
+# 🧭 Caminos de Desarrollo – ALMA LIBRE v1.0.0
+
+Este documento establece los **4 caminos estratégicos** de desarrollo operativo, emocional, técnico y documental de ALMA LIBRE a partir de la versión 1.0.0.
+
+
+## 🧠 CAMINO 2 – Memorias & Conexiones
+
+### Corto plazo (1 semana)
+- [ ] Confirmar estructura base desde `0.8.1_Alma_Memoria_Base.zip`
+- [ ] Crear 3 memorias madre activas:
+  - Memoria Fundacional
+  - Memoria Técnica
+  - Bitácora Central Semana 1.0.0
+
+### Medio plazo (1 mes)
+- [ ] Integrar `metadata_memorias.csv` para trazabilidad
+- [ ] Crear `MAPA_INTERACTIVO.md` de conexiones
+- [ ] Iniciar registro diario con memorias tipo chat
+- [ ] Automatizar versiones YAML por fecha
+
+
+## 📚 CAMINO 4 – Documentación & Navegación
+
+### Corto plazo (1 semana)
+- [ ] Generar `README.md` madre de ALMA LIBRE v1.0.0
+- [ ] Escribir `CHANGELOG.md` con historia de versión
+- [ ] Crear plantilla `README_módulo_base.md`
+
+### Medio plazo (1 mes)
+- [ ] Unificar estructura documental auto-generable
+- [ ] Añadir comando `alma generar_readme nombre_modulo`
+- [ ] Establecer estructura de versiones (1.1.0, 1.2.0, etc.)
+
+
+**Documento generado el 24 de abril de 2025 – Inicio oficial de la versión ALMA LIBRE 1.0.0**

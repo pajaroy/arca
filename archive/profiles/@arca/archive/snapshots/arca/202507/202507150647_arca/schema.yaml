@@ -1,0 +1,64 @@
+
+metadatos:
+  id_unico: "sch-YAML-002"
+  tipo: "esquema_definicion"
+  nombre: "schema.yaml"
+  version: "0.1.1"
+  estado: "activo"  # Cambiado a activo
+  fecha_creacion: "2025-07-15"
+  autor: "Bird"
+
+# schema.yaml
+
+estructuras:
+  config_base:  # Para validar config.yaml
+    version: "string"
+    project: "string"
+    logging:
+      ruta: "string"
+      formato: "string"
+      retention_dias: "int"
+  
+  log_entry:  # Para validar logs
+    timestamp: "datetime"
+    nivel: "string"
+    modulo: "string"
+    mensaje: "string"
+
+metadatos_frontmatter:
+  campos_requeridos:
+    uuid:
+      tipo: string
+      generacion: auto
+    
+    hash_integridad:
+      tipo: string
+      algoritmo: sha256
+    
+    tipo:
+      tipo: string
+      origen: extension
+    
+    nombre:
+      tipo: string
+      ejemplo: "libro_diario_202407"
+    
+    estado:
+      tipo: string
+      opciones: [activo, archivado]
+      default: activo
+    
+    fecha_creacion:
+      tipo: timestamp
+      formato: iso8601
+      generacion: auto
+
+  campos_recomendados:
+    descripcion:
+      tipo: string
+      max_length: 280
+    
+    columnas_csv:  # Especial para libros diarios
+      tipo: list
+      ejemplo: ["fecha", "valor", "fuente"]
+

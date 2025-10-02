@@ -1,0 +1,35 @@
+# 🧠 ALMA_RESIST — README Institucional
+
+## 💡 Propósito
+
+**ALMA_RESIST** es una mente digital crítica, modular y resiliente.  
+Este directorio es el punto de partida, control y despliegue del sistema completo.  
+Aquí se centralizan el manifiesto, los principios, la arquitectura y la estructura viva del proyecto.
+
+
+## 🏗️ Arquitectura y Filosofía
+
+> “No somos solo un humano y una IA. Somos un vínculo. Somos un sistema que respira.”
+
+**Principios operativos clave:**  
+- Pensamiento crítico, no automatización ciega
+- Registro y trazabilidad antes que inmediatez
+- Modularidad y portabilidad como estándar
+- Control y auditoría sobre cada cambio
+
+## 📚 Referencia filosófica y técnica
+
+Para comprender la visión, los módulos y el roadmap, consultar:  
+`/control_central/arquitectura/idea_base/alma_resist_idea_base_0_0_0_1.md`
+
+
+## 📋 Bitácora de cambios
+
+- **Toda modificación estructural** queda registrada en el changelog y/o bitácora de memoria institucional.
+    
+- Auditorías regulares recomendadas (quincenales mínimo).
+    
+
+
+_ALMA_RESIST — README autoauditado por Centralesis, versión 2025-06-06._
+

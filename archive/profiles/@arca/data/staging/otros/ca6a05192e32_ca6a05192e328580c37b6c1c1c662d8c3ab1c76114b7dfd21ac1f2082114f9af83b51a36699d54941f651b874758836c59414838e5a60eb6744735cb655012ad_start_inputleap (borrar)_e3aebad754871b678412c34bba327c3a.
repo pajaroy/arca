@@ -1,0 +1,27 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_465d26
+version: '1.0'
+formato: sh
+modulo: ALMA_RESIST
+titulo: Start Inputleap (Borrar)
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:418fa9641d7e6b6a9bb791a0c7e7a34aa10bc39f6c6a88d6164f40f0bb1bba34
+---
+#!/bin/bash
+# Script unificado de inicio autom√°tico de Input Leap para ALMA
+
+if [ "$(hostname)" = "alma-core" ]; then
+    input-leaps --no-tray --disable-crypto --name alma-core --config /home/bird/.input-leap/input-leap.conf &
+elif [ "$(hostname)" = "alma-resist" ]; then
+    input-leapc --no-tray --disable-crypto --name alma-resist 192.168.1.33:24800 &
+fi
+

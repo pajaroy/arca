@@ -1,0 +1,47 @@
+
+# Script: Fix_Last_Modified.py
+
+## Descripción
+
+`Fix_Last_Modified.py` es el script principal del submódulo **Fix_Last_Modified** de ALMA_CLI. Su función es localizar y actualizar el campo `last_modified` en archivos de metadatos YAML o encabezados YAML en `.md`.
+
+Permite mantener el registro preciso de la última edición sobre cualquier recurso crítico del sistema.
+
+## Uso básico
+
+```bash
+python3 Fix_Last_Modified.py <ruta_al_archivo> <nombre_usuario>
+```
+
+- `<ruta_al_archivo>`: Ruta relativa o absoluta al archivo de metadatos o README.md.
+    
+- `<nombre_usuario>`: Identificador de quien realiza la modificación.
+    
+
+## Ejemplo
+
+```bash
+python3 Fix_Last_Modified.py ../../Documents/Fix_Last_Modified/README.md santi
+```
+
+## Detalles técnicos
+
+- El script busca el campo `last_modified` en el encabezado YAML y lo reemplaza por la fecha/hora actual en formato ISO-8601 (UTC).
+    
+- Modifica también el campo `last_modified_by` si corresponde.
+    
+- Puede ser usado sobre cualquier archivo `.md` o `.yaml` que cumpla con el formato esperado.
+    
+- Está diseñado para integrarse en procesos batch y pipelines automáticos.
+    
+
+## Buenas prácticas
+
+- Usar siempre como parte de la rutina de commit/documentación para mantener la trazabilidad.
+    
+- Ejecutar después de editar archivos clave o al finalizar scripts automáticos de actualización masiva.
+    
+
+## Archivos relacionados
+
+- Documentación y prompts en: `../../Documents/Fix_Last_Modified/`

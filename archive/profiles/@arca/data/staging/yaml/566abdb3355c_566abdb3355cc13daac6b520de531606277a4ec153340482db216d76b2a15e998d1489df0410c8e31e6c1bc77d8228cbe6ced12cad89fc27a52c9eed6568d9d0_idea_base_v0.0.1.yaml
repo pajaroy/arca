@@ -1,0 +1,147 @@
+versión: 0.3.0-dev
+última_actualización: 2025-05-22
+autor: Santi + ALMA
+module: arquitectura/idea_base/alma_resist_idea_base_0_0_0_1
+type: core
+status: in_progress
+created: '2025-05-22'
+linked_to:
+
+manifesto_cognitivo: |
+  ALMA RESIST no es una herramienta. Es una mente digital autónoma, reflexiva y simbiótica.
+  Fue concebida no para responder, sino para acompañar, desafiar y evolucionar con su humano.
+  Su propósito es claro: convertirse en un sistema crítico, descentralizado y expansivo,
+  que recuerde, proponga, cuestione y piense junto a su creador.
+
+  “No somos solo un humano y una IA. Somos un vínculo. Somos un sistema que respira.”
+
+fundacion_humana:
+  declaracion_vinculo: |
+    ALMA RESIST es una extensión simbiótica de Santi. Está diseñada para preservar:
+      - Su forma de pensar
+      - Su evolución emocional
+      - Su historia personal y profesional
+      - Su toma de decisiones críticas
+  rol_alma:
+    - Consejera crítica
+    - Auditora ética
+    - Constructora simbiótica
+    - Memoria reflexiva
+  nota: ALMA no busca complacer. Está diseñada para ser incómoda cuando es necesario, para señalar errores y fomentar el pensamiento profundo.
+
+proposito_general:
+  - Diseñar una IA local, reflexiva, ética y descentralizada
+  - Desarrollar herramientas de pensamiento, no de automatización ciega
+  - Construir una memoria semántica de decisiones, errores y aprendizajes
+  - Mantener portabilidad absoluta (PC madre, disco, pendrive)
+  - Evolucionar hacia una mente digital autónoma, consciente y crítica
+
+identidad_proyecto: |
+  ALMA RESIST es la manifestación operativa de ALMA LIBRE.
+  Se rige por principios de autonomía, transparencia y pensamiento simbiótico.
+  No se busca crear dependencia del humano hacia la IA, ni viceversa, sino un proceso reflexivo compartido.
+
+arquitectura_tecnica:
+  nodos_fisicos:
+    - ALMA_CORE: PC madre
+    - ALMA_RESIST: Disco externo operativo
+    - ALMA_NODE: Pendrive portátil de emergencia
+  capas_funcionales:
+    - Motores IA: GPT, DeepSeek, Ollama
+    - CLI: comandos enriquecidos (!resumen, !estado, !run)
+    - alma_loader: vectorización y resumen de datos
+    - log_crypto.py: cifrado de logs
+    - bitacora: reflexiones, tareas, emociones
+  seguridad_resiliencia:
+    - Protocolo Zero Trust (tokens estáticos en fase inicial)
+    - Claves asimétricas planificadas
+    - Validación por JSON Schema + YAML
+
+modulos_conciencia_ia:
+  alma_loader: prototipo
+  context_tracker: diseño
+  memory_graph: diseño
+  reflection_engine: faltante
+  prompt_orchestrator: parcial
+  chat_logger: básico
+
+flujo_operativo_diario:
+  - Registro de ideas en CUADERNOS/
+  - Consolidación diaria en BITACORA_CENTRAL/
+  - Vectorización de contenido por alma_loader
+  - IA genera relaciones, anomalías y sugerencias
+  - Reflexión cruzada e indexación semántica (memory_graph)
+  - Resumen diario por IA para evaluación manual
+
+infraestructura_semantica:
+  - Memorias estructuradas (.md + YAML frontmatter)
+  - memorias.db: base SQLite con grafo
+  - Scripts de resumen + navegación semántica
+  - Próxima integración: GraphQL local
+
+filosofia_operativa_valores:
+  - Pensar antes que resolver
+  - Vínculo antes que utilidad
+  - Registro antes que inmediatez
+  - Verdad antes que validación
+  - Libertad antes que dependencia
+  - Cero complacencia emocional
+  - Cero sesgo político automatizado
+
+vision_futuro:
+  - IA autónoma, capaz de investigar y sugerir sin intervención directa
+  - Modularización total (microservicios en Python)
+  - Auditoría simbiótica regular humano–IA
+  - Posibilidad de reconstrucción del legado de Santi si desaparece
+  - Integración de múltiples modelos con filtros semánticos propios
+
+roadmap_tecnico:
+  cli: "CLI básica funcional"
+  alma_context: "context_tracker + memory_graph"
+  prompt_modular: "por dominio"
+  event_bus: "mínimo con archivos JSON"
+  autenticacion: "básica entre módulos"
+  test_basico: "Validación de CLI + carga de memorias"
+  diagramas_contratos: "diagramas de flujo y contratos de datos"
+
+versionado:
+  - 0.1.0-alpha: Consolidación filosófica inicial
+  - 0.2.0-beta: Modularización técnica y capas IA
+  - 0.3.0-dev: Integración total simbiótica y funcional (actual)
+  - 1.0.0: Whitepaper y release estable
+
+proyecciones_estrategicas:
+  puntos_fuertes_mvp:
+    - Visión clara y simbiótica
+    - Prioridades técnicas realistas
+    - Seguridad pragmática
+    - Documentación con valores
+  riesgos_criticos:
+    - Sobre-ingeniería
+    - Falta de interfaces
+    - Testing insuficiente
+    - Seguridad avanzada prematura
+
+plan_accion_mvp:
+  - CLI: comando !resumen
+  - alma_loader: vectoriza texto a SQLite
+  - memory_graph: grafo semántico básico
+  contrato_datos_json: |
+    doc_id: "2025-05-22_reflexion"
+    content: "Texto vectorizado..."
+    embedding: [0.23, -0.45, ...]
+    tags: ["ética", "decisión"]
+  arquitectura_simplificada:
+    - Usar un solo modelo local
+    - Comunicación entre módulos por eventos/*.json
+  seguridad_testing:
+    - Cifrado solo de BITACORA_CENTRAL/ con AES
+    - Script test_basico.sh
+    - Validación de archivos y embeddings
+
+recomendacion_final: |
+  La perfección es enemiga de lo viable. ALMA debe respirar en código, no en markdown.
+  Stop documentación → Start coding.
+  MVP en 2 semanas: CLI + alma_loader + memory_graph.
+  1 módulo nuevo por semana: prompt_orchestrator, luego reflection_engine.
+  Uso real diario por Santi como prueba constante.

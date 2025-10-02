@@ -1,0 +1,13 @@
+{
+  "id": "MEMGEN-008",
+  "fecha": "2025-04-30T10:09:40.342274",
+  "titulo": "Memoria Web 008",
+  "categoria": "GEN",
+  "tags": [
+    "memoria-web",
+    "#reflexion"
+  ],
+  "contenido": "El usuario desea que en todos los proyectos se mantenga la estructura editable por su parte. Prefiere que las modificaciones a archivos se realicen paso a paso y de forma controlada, sin cambiar títulos ni desordenar estructuras, ya que él mismo editará los archivos. Desea trabajar cada módulo y sección de forma progresiva y meticulosa.",
+  "relacionadas": [],
+  "impacto_en": []
+}

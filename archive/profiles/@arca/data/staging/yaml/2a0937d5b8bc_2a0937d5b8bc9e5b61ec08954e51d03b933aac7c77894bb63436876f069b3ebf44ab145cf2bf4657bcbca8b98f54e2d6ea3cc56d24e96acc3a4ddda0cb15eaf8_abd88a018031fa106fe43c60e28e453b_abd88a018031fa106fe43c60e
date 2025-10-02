@@ -1,0 +1,16 @@
+id: yaml2all_docs
+version: "0.1.1"
+tipo: "readme"
+descripcion: |
+  Documentación, prompts y changelogs relacionados al desarrollo de yaml2all.
+  Usar únicamente los prompts y referencias bajo 'prompt_yaml2all_v0.1.1' y siguientes.
+  El resto es legacy y solo se mantiene por trazabilidad.
+estructura:
+  - prompt_yaml2all_v0.1.1/: "Prompt y changelog vigentes"
+  - _legacy/: "Prompts y documentos de versiones antiguas"
+linked_to:
+  - prompt_yaml2all_v0.1.1/README.yaml
+  - _legacy/README.yaml
+responsable: "kael"
+last_modified: "2025-06-17T04:00:00Z"
+last_modified_by: "bird"

@@ -1,0 +1,49 @@
+
+# 🛹 Proyección Base – Mataderos Skatepark Organización
+
+## 🧭 Visión
+Consolidar Mataderos Skatepark como una organización cultural comunitaria, capaz de planificar, ejecutar y sostener eventos deportivos, artísticos y educativos con impacto real en la juventud y el tejido social del barrio, en articulación directa con el club 13CC.
+
+## 🎯 Objetivos Estratégicos
+
+- Generar una **estructura operativa sostenible** con roles definidos y capacidad de autogestión.
+- Desarrollar un **programa anual de eventos** dividido por edades, géneros y perfiles socioculturales.
+- Profesionalizar la coordinación de jurados, logística, sponsors y comunicación institucional.
+- Implementar **módulos formativos internos** que permitan crecer al equipo humano.
+- Crear un **modelo replicable** para otros parques o espacios barriales.
+
+## 🧱 Estructura Base Propuesta
+
+```
+mataderos_skatepark_organizacion/
+├── docs/
+│   ├── readme.md
+│   ├── roadmap_2025_2027.md
+│   ├── roles_organizacion.md
+│   ├── protocolos_eventos.md
+│   └── bitacoras/
+├── eventos/
+│   ├── calendario_2025.md
+│   ├── cumpleaños_skatepark.md
+│   └── eventos_avalados_13cc.md
+├── formacion/
+│   ├── capacitacion_interna.md
+│   └── onboarding_roles.md
+└── comunidad/
+    ├── objetivos_personales.md
+    └── valores_grupales.md
+```
+
+## 🔄 Integración con ALMA_RESIST
+
+- La carpeta puede ser tratada como un **módulo autónomo** dentro de `ALMA_RESIST/docs/entidades/mataderos_skatepark_organizacion/`.
+- La información será fácilmente indexable, editable y trazable.
+- Permite enlazar tareas a `core/checklist/` y resúmenes a `core/logs/`.
+
+## 🔮 Próximos Pasos Sugeridos
+
+1. Formalizar esta **proyección base** como README del módulo.
+2. Completar los documentos pendientes (`roles`, `roadmap`, `valores`).
+3. Crear una carpeta `checklist/` con tareas internas de organización y eventos.
+4. Integrar al ciclo de reuniones de 13CC como entidad con voz propia.
+5. Explorar financiamiento cultural o cooperativo según impacto demostrado.

@@ -1,0 +1,37 @@
+# Versión del Sistema ALMA_RESIST
+
+**Versión General:** v0.0.0.2  
+**Fecha de Compilación:** 2025-05-22  
+**Responsable:** Equipo de Desarrollo ALMA_RESIST
+
+
+## Estructura Incluida
+
+- `/docs/`: Documentación principal estructurada por versiones, metodologías, plantillas y referencias.
+- `/scripts/`: Scripts automatizados para validación y corrección de metadatos.
+- `/bitacoras/`: Registro de actividades diarias y reflexiones de desarrollo.
+- `/registros/`: Mapeo de sprint, changelogs, hitos, decisiones arquitectónicas y aprendizajes.
+- `/versiones/`: Backups comprimidos por etapa o sprint.
+- `README.md`: Documento principal de orientación del proyecto.
+
+
+## Notas
+
+Este archivo de versión permite auditar la integridad del sistema ALMA_RESIST en cualquier punto del tiempo. Todos los archivos están estructurados y validados para compatibilidad total con los scripts automatizados de normalización y validación semántica.
+
+
+## 📎 Apéndice Sprint 2.3 – Integración de Idea Base Unificada
+
+📅 Fecha: 2025-05-23  
+🔖 Versión: v0.3.0-dev  
+👤 Responsable: Santi / pájaro
+
+Este sprint consolidó múltiples documentos conceptuales en una única idea base (`ALMA_RESIST_idea_base_0.0.0.1.md`) y reorganizó la carpeta `docs/idea_base/`.
+
+- 🧠 Nueva estructura: `idea_base/`, `changelog.md`, `version.md`, `_legacy/`
+- 📦 Archivos archivados: `idea_base.md`, `idea_base_conciencia_ia.md`, `idea_base_origen.zip`
+- 🗂 Versionado y registro en: `log_integracion.md`, `mapeo_sprint_archivos.md`, `hitos.md`
+- 🔄 Próximo paso: sincronización con nube segura y planificación de Sprint 2.4
+
+📌 Este apéndice actúa como marcador de snapshot interno para herramientas futuras y scripts de automatización (`alma-cli snapshot-log`).
+

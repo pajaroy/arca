@@ -1,0 +1,16 @@
+# README
+
+# 02 – Fondo de Inversión
+
+Este módulo lleva el registro y control del fondo propio/externo del proyecto.
+
+## 📌 Funciones
+
+- Seguimiento de capital inicial y entradas mensuales.
+- Cálculo de ganancias y distribución.
+- Registro por inversor.
+- Conexión con módulo de trading para analizar performance.
+
+## 💡 Extra
+
+Puede incluir objetivos mensuales, decisiones estratégicas y proyecciones anuales.

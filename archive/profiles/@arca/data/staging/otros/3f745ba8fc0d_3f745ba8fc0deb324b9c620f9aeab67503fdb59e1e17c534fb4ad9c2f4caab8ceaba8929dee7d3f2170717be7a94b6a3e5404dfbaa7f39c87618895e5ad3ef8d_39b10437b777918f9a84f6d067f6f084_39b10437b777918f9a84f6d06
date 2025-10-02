@@ -1,0 +1,29 @@
+# 📁 Introducción – ALMA_RESIST
+
+Esta carpeta contiene los documentos fundacionales del proyecto ALMA_RESIST. Define el contexto, la visión general, las versiones y la estructura conceptual base que guía el desarrollo modular y documental del sistema.
+
+## 📄 Contenido principal
+
+- `context.md`: Documento que establece el propósito, visión, motivaciones y marco filosófico del sistema ALMA_RESIST.
+- `version.md`: Detalla la versión actual del sistema documental, los cambios más relevantes y el historial técnico de evolución.
+
+## 🎯 Objetivo de esta carpeta
+
+Servir como punto de partida informativo y estratégico para cualquier colaborador humano o sistema de IA que interactúe con ALMA_RESIST.
+
+Incluye:
+
+- Narrativa fundacional
+- Versión activa del sistema documental
+- Lógica de integración modular inicial
+
+## ✅ Reglas y convenciones
+
+- Todos los archivos aquí deben tener bloques YAML `frontmatter` con los campos:
+  - `module: introduccion`
+  - `type: documentation`
+  - `status: stable|draft`
+  - `created: YYYY-MM-DD`
+
+- Cualquier cambio en `context.md` o `version.md` debe registrarse en el `CHANGELOG.md` global y reflejarse en el archivo `docs/roadmap_tecnico.md`.
+

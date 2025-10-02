@@ -1,0 +1,52 @@
+# Autonom-IA System - v0.1.0
+
+## Descripción
+
+El sistema **Autonom-IA** permite a los agentes del ecosistema ALMA_RESIST operar de manera autónoma, tomar decisiones, navegar entre carpetas, interactuar entre ellos y gestionar sus memorias sin intervención humana. Esta versión incluye la documentación, auditoría inicial y la implementación de la estructura modular.
+
+El sistema está diseñado para ser modular y escalable, permitiendo agregar nuevos agentes con facilidad y sincronizar sus memorias, bitácoras y registros de manera trazable y auditable.
+
+## Estructura de Archivos
+
+- **`seed_autonom-ia_system_v0.1.0.yaml`**: El archivo base que describe la estructura, reglas y protocolos de Autonom-IA.
+- **`auditoria_seed_autonom-ia_system_v0.1.0.yaml`**: Auditoría inicial de la implementación de Autonom-IA.
+- **`prompt_auditoria_seed_autonom-ia_system_v0.1.0.yaml`**: Prompt para la auditoría por DeepSeek.
+- **`README.md`**: Documento de introducción a la versión v0.1.0 del sistema Autonom-IA.
+
+## Funcionalidades Clave
+
+- **Autonomía**: Los agentes pueden tomar decisiones basadas en reglas predefinidas y metadatos, sin intervención humana.
+- **Sincronización de Memorias**: Las memorias personales de los agentes se sincronizan bidireccionalmente, mientras que las memorias institucionales son **readonly** y centralizadas.
+- **Auditoría Continua**: Todas las acciones realizadas por los agentes son registradas en las bitácoras y metadatos.
+- **Navegación Autónoma**: Los agentes pueden explorar sus carpetas y archivos asignados sin intervención humana, pero con reglas de gobernanza.
+
+## Estructura del Sistema
+
+- **`agentes/`**: Contiene las subcarpetas de cada agente (KAEL, CENTRALESIS, EMMA, etc.), con sus archivos y registros.
+- **`bitacora/`**: Registros globales de todas las acciones realizadas por los agentes.
+- **`memorias/`**: Memorias personales y memorias institucionales.
+- **`index.json`**: Índice centralizado de metadatos de todos los archivos y agentes.
+
+## Protocolo de Sincronización
+
+- **Bidireccional**: Sincronización entre la memoria personal del agente y su archivo operativo.
+- **Unidireccional**: Sincronización de las memorias institucionales desde el archivo central hacia los agentes.
+
+## Protocolo de Auditoría
+
+- **`auditoria_seed_autonom-ia_system_v0.1.0.yaml`**: Este archivo contiene el protocolo para auditar el sistema, con objetivos, tareas de revisión y verificación de la integridad del sistema Autonom-IA.
+
+## Referencias
+
+- **`linked_to`**:
+  - `seed_autonom-ia_system_v0.1.0.yaml`
+  - `prompt_auditoria_seed_autonom-ia_system_v0.1.0.yaml`
+  - `auditoria_seed_autonom-ia_system_v0.1.0.yaml`
+
+## Notas
+
+Este sistema es la base para la creación de **agentes autónomos** dentro de ALMA_RESIST. En el futuro, los agentes podrán tomar decisiones basadas en **reglas predefinidas** y **metadatos** almacenados en un **índice centralizado**. Toda acción será trazable y auditable, manteniendo la gobernanza central.
+
+**Versión actual**: v0.1.0  
+**Fecha de Creación**: 2025-06-08  
+**Creado por**: KAEL

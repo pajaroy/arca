@@ -1,0 +1,31 @@
+
+from fastapi import APIRouter
+
+router = APIRouter(
+    prefix="/v1/trading",
+    tags=["trading"]
+)
+
+@router.get(
+    "/status",
+    summary="Estado del módulo de Trading",
+    description="Verifica el estado operativo del subsistema de trading"
+)
+async def obtener_estado_trading():
+    """Endpoint de verificación de estado"""
+    return {
+        "modulo": "trading",
+        "estado": "operativo",
+        "detalles": {
+            "versión": "1.0.0",
+            "caracteristicas": [
+                "Base para análisis de memorias de trading",
+                "Estructura lista para extensión"
+            ]
+        }
+    }
+
+# 🚀 Espacio para futuros endpoints:
+# - /analisis-mercado
+# - /estrategias
+# - /operaciones

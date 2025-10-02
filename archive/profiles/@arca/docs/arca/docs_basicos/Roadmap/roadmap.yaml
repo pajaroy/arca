@@ -1,0 +1,70 @@
+---
+uuid: 9c78e7e3-d720-4bc1-84db-002ae7df3fc6
+tipo: yaml
+nombre: roadmap
+version: ''
+estado: ''
+fecha_creacion: '2025-07-16T03:31:32.299065'
+fecha_modificacion: '2025-07-16T03:31:32.299131'
+autor: Bird
+descripcion: Roadmap General de ARCA v0.1.0
+hash_integridad: 11f21de57c8c8bae46347b25b240ceae838665b11341771265f86c45ba8774bc
+---
+roadmap:
+  version: "0.1.0"
+  autor: "Bird"
+
+  fases:
+    - nombre: "Arquitectura Files Manager (sin ML)"
+      objetivos:
+        - "Cargar archivo config.yaml con rutas y parámetros generales."
+        - "Cargar schemas.yaml que define la estructura esperada de archivos/metadatos."
+        - "Crear directorios si no existen."
+        - "Crear archivos con frontmatter (YAML header) según schema."
+        - "Calcular hash de cada archivo para integridad."
+        - "Indexar archivos/directorios en un índice central (ej.: índice.yaml o base SQLite)."
+        - "Registrar logs de cada operación (crear, borrar, modificar)."
+      entregables:
+        - "config_loader.py"
+        - "schema_loader.py"
+        - "file_creator.py"
+        - "hash_calculator.py"
+        - "indexer.py"
+        - "logger.py"
+      nota:
+        - "Hasta acá no hay Machine Learning, sólo lógica documental."
+
+    - nombre: "Preparación para ML"
+      objetivos:
+        - "Definir qué datos de uso o contenido se guardarán para análisis ML."
+        - "Diseñar logs ricos: timestamp, usuario, acción, ruta, tipo de archivo."
+        - "Definir estructura de datasets para ML (CSV, parquet, sqlite)."
+      entregables:
+        - "logging_schema.yaml"
+        - "dataset_schema.yaml"
+
+    - nombre: "Primeros Pasos en ML"
+      objetivos:
+        - "Cargar datos históricos (ej.: logs)."
+        - "Entrenar modelos sencillos con scikit-learn:"
+          - "Clasificación → detectar tipo de archivo más probable a crear."
+          - "Predicción → predecir próximo archivo/directorio a crear."
+          - "Anomaly detection → detectar acciones inusuales (borrados raros, archivos repetidos)."
+        - "Guardar modelos entrenados (.joblib o .pkl)."
+        - "Integrar una función predictiva al Files Manager (opcional)."
+      entregables:
+        - "ml_trainer.py"
+        - "ml_predictor.py"
+        - "modelos_guardados/"
+      nota:
+        - "No entrenar ML en cada paso del Files Manager. Se hace offline o en batches."
+
+    - nombre: "Iteración y mejora"
+      objetivos:
+        - "Reentrenar modelos periódicamente con nuevos logs."
+        - "Agregar nuevas features al dataset (hash, tiempos, tamaño archivo)."
+        - "Crear pipeline automatizado: lectura → entrenamiento → predicción."
+      entregables:
+        - "pipeline.py"
+        - "retraining_scheduler.py"
+

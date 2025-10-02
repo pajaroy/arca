@@ -1,0 +1,38 @@
+---
+tipo: configuracion
+id: CONFIGURACION_2025-06-05_5a84b7
+version: '1.0'
+formato: yaml
+modulo: ALMA_RESIST
+titulo: Version
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:04a92b1ae6641390cd462d6ec5a4e582aa2ccffd3a87c5de089499635e5374bd
+---
+suite: tests_llm_server
+version: 0.2.6
+sprint: '2.6'
+estado: completo
+fecha_validacion: '2025-05-26'
+cobertura:
+- test_model_wrapper.py
+- test_api_responder.py
+- test_transport_layer.py
+- test_context_tracker.py
+- test_log_writer.py
+- test_log_crypto.py
+- test_memory_graph.py
+dependencias:
+- pytest
+- fastapi
+- llama_cpp
+- cryptography
+- jsonschema
+- networkx

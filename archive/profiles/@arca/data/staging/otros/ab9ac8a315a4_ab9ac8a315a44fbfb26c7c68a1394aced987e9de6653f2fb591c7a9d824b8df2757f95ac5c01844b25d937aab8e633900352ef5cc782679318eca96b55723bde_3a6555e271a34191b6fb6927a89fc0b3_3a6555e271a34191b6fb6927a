@@ -1,0 +1,18 @@
+[ARCHIVO HISTORICO - NO ACTUAL]
+# 📦 ALMA LIBRE – Versión 0.0.6 (Estructura Reorganizada)
+
+Bienvenido al sistema ALMA LIBRE versión 0.0.6. Esta es la primera versión con estructura unificada, modular y orientada a IA.
+
+## 🧭 ¿Qué contiene esta versión?
+
+- Consolidación de todas las versiones anteriores (0.0.1 a 0.0.5) en un solo árbol de carpetas.
+- Cuadernos organizados por temática.
+- Empresas con documentación legal e institucional formal.
+- Bitácora central para control del tiempo y memoria.
+- Módulos preparados para código, IA y scripts auxiliares.
+- Backups históricos organizados en una sección aislada.
+- Estructura diseñada para interoperar con IAs tipo Notebook LM, Obsidian o Google AI Studio.
+
+## 🛠️ Próximos pasos
+
+Aplicar la checklist de correcciones 0.0.6 para preparar la versión 0.0.7, que será la primera versión estable y sin duplicados.

@@ -1,0 +1,44 @@
+# 📎 Apéndice – Diagnóstico Estructural del Nodo `control_central`
+
+📅 Fecha: 2025-06-04  
+🔍 Evaluador: Auditor CLI General – ALMA_RESIST  
+🔖 Tags: #estructura #control_central #arquitectura #duplicación_estructural #nodo_central #ia_friendly
+
+---
+
+## ✅ Diagnóstico sobre el archivo `contexto_asesor-ia_control-central_cli.md`
+
+Este archivo funciona como contrato funcional, estableciendo:
+
+- Rol del asistente CLI (`auditor-limpieza-orden`)
+- Políticas de ejecución y naming
+- Reglas IA-friendly (enlaces, encabezados, contexto operativo)
+- Criterios de trazabilidad (bitácoras, versionado, archivado)
+
+🔐 **Recomendación**: utilizar este archivo como modelo para cualquier nuevo nodo que requiera asistencia CLI autónoma.
+
+---
+
+## 📁 Sobre la duplicación de carpetas entre `/ALMA_RESIST/` y `/control_central/`
+
+Si bien en apariencia puede parecer redundante tener estructuras similares, esta decisión responde a una lógica de **escalabilidad distribuida**:
+
+- `/ALMA_RESIST/` contiene el sistema completo.
+- `/control_central/` funciona como *nodo madre*, con estándares, interfaces IA y coordinación estructural.
+- La duplicación permite **modularidad futura**, replicación de nodos y autonomía relativa por módulo.
+
+🧠 Recomendación: mantener esta duplicación. A futuro permitirá:
+
+- Implementar nodos independientes (con sus propias IAs y CLI)
+- Ejecutar mantenimientos específicos sin alterar la raíz
+- Replicar el comportamiento del nodo madre como plantilla de expansión
+
+---
+
+## 📌 Observación IA-Friendly
+
+Toda metodología, asistente o protocolo debería poder:
+
+- Reconocer rutas desde raíz (`/ALMA_RESIST/`) y desde módulo (`/control_central/`) según contexto
+- Acceder a bitácoras y changelogs según nodo
+- Mantener trazabilidad mediante enlaces y nombres fechados

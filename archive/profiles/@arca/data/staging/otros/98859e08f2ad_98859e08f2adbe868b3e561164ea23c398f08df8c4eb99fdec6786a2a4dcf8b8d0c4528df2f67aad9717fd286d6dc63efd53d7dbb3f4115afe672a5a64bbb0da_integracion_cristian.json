@@ -1,0 +1,86 @@
+{
+  "id": "ANALISIS_2025-06-06_01",
+  "fecha": "2025-06-06",
+  "autor_ia": "Emma",
+  "version_analisis": "1.0",
+  "referencia_humana": [
+    "Pablito-Tatu",
+    "Santiago Calvo (DEG)"
+  ],
+  "proyecto": "Integración de Cristian a ALMA_EMPRESA – Cultivo Interno",
+  "tipo": "analisis-viabilidad",
+  "tags": ["cultivo", "integración", "alianzas", "protocolo", "piloto", "bitácora"],
+  "diagnostico_base": {
+    "fortalezas": [
+      "Cristian tiene infraestructura propia, experiencia operativa y contactos.",
+      "Posee dominio y proyectos asociados (programación, mariguanita.com, acceso a quinta en Canning, red de relaciones de alto valor).",
+      "Pacientes y reprocan activos, experiencia real en el rubro (con aciertos y errores, pero conocimiento del territorio).",
+      "Potencial para escalar rápido, tanto en cultivo como en otros módulos (digital, comercial, tecnológico).",
+      "Validación personal y de confianza tanto por Pablito como por Santiago (historial, responsabilidad, código de barrio y respeto de palabra)."
+    ],
+    "riesgos": [
+      "Falta de formalización y estructura previa (es un desastre hasta ahora, palabras textuales).",
+      "Riesgos de internas barriales y reputacionales: cualquier conflicto externo puede salpicar al módulo y, por rebote, a toda ALMA_EMPRESA si no se gestiona bien la marca/independencia.",
+      "Diversidad de intereses: Cristian tiene varias puntas abiertas (vino, web, socios, etc). El riesgo es que divida foco y que lo urgente le gane a lo importante.",
+      "Dependencia inicial de sus recursos (lámparas, espacio, contactos): importante dejar claros los límites y propiedad de activos.",
+      "Necesidad de seguimiento: No va a funcionar sin agenda, reporting y protocolo; todo debe quedar por escrito, trazable y revisable.",
+      "Falta de claridad legal (titularidad de los cultivos, compliance, acuerdos de reparto, seguridad sanitaria, trazabilidad de la producción)."
+    ]
+  },
+  "impacto_estrategico": {
+    "ALMA_EMPRESA": [
+      "Bien integrado, suma capacidad productiva, diversificación, acceso a nuevas redes y posibilidad de usar sus skills digitales (programación/web) para el crecimiento.",
+      "Si se desborda, puede generar ruido, reclamos o desorden en el resto del sistema.",
+      "Clave: blindar la relación contractual, definir canales de reporte y control, y usar modelo “Anexo” (unidad productiva descentralizada, con reglas propias pero bajo paraguas ALMA)."
+    ],
+    "Cannabird": [
+      "Puede ser un hermano menor de Cannabird, aprendiendo del modelo, compartiendo insumos y know-how, pero no debe confundirse ni mezclarse financieramente hasta no pasar una etapa de validación y pruebas.",
+      "A futuro, se puede abrir cooperación, pero nunca mezclar cuentas sin control."
+    ],
+    "13CC": [
+      "Si escala, puede fortalecer la red 13CC como federación de cultivos legales e independientes, sumando músculo y reputación.",
+      "Riesgo: si surgen conflictos personales, hay que tener opción de cortar lazos sin comprometer el resto del sistema."
+    ]
+  },
+  "recomendaciones": {
+    "integracion": {
+      "protocolo_black_white": {
+        "white": [
+          "Contrato mínimo firmado.",
+          "Acta de integración.",
+          "Reparto claro 50/50 (definir quién pone qué, límites de cada parte, derechos sobre infraestructura y producto).",
+          "Uso de la marca ALMA_EMPRESA sólo si cumple protocolo mínimo de calidad y reporting."
+        ],
+        "black": [
+          "Bitácora interna.",
+          "Actas informales de avance.",
+          "Todo lo off the record queda registrado como anexo."
+        ]
+      },
+      "prueba_piloto": [
+        "Arrancar con un piloto chico (2 meses, máx 8 lámparas, 1 ciclo de cultivo).",
+        "Evaluar agenda, reporting semanal, cumplimiento sanitario y reparto según lo pactado.",
+        "Si funciona, se escala. Si hay problemas, salida rápida y limpia."
+      ],
+      "reporting_trazabilidad": [
+        "Reporte semanal de avances, incidentes, rendimientos y estado de pacientes.",
+        "Agenda fija y reuniones mensuales formales (Emma y humanos presentes).",
+        "Documentar todo: fotos, inventario, registros de compra/venta, compliance Reprocan."
+      ],
+      "blindaje_legal_reputacional": [
+        "Si surgen conflictos, la marca y activos de ALMA_EMPRESA quedan a salvo; el “Anexo Cristian” debe poder separarse en minutos.",
+        "Recomiendo “marca blanca” para el anexo hasta consolidar confianza."
+      ],
+      "integracion_digital": [
+        "Integrar skills y dominio digital sólo tras demostrar compromiso.",
+        "Mariguanita.com puede ser plataforma estratégica a mediano plazo, pero primero profesionalizar la operación y cumplir."
+      ]
+    }
+  },
+  "siguiente_paso_formal": [
+    "Redactar acta de integración piloto: roles, recursos, cronograma, objetivos mínimos, formas de reporte y causas de rescisión. Derecho a terminar el acuerdo en cualquier momento si hay incumplimiento.",
+    "Bitácora de avance: cada reunión registrada con fecha, puntos tratados y próximos pasos.",
+    "Checklist de onboarding: requisitos mínimos antes de iniciar (infraestructura, compliance, acceso a agenda, firma de acuerdo, inventario inicial)."
+  ],
+  "opinion_emma": "Sí, conviene integrarlo, pero sólo si se acepta profesionalizar y someterse al control operativo/documental de ALMA_EMPRESA. Si no, es mejor que opere de forma independiente y sólo como aliado ocasional."
+}

@@ -1,0 +1,15 @@
+# Plantilla universal de metadatos ALMA_RESIST
+version: "0.1.0"
+tipo: ""                 # (README, plantilla, prompt, changelog, script, doc, index, etc.)
+schema: ""               # (opcional: nombre de esquema, ej: almaresist.plantilla_v1)
+descripcion: ""          # Breve propósito y alcance del archivo
+estructura:              # Listado de subarchivos, claves internas o componentes principales
+  - ""
+tags: []                 # Lista de palabras clave, tema o función (ej: [cli, institucional, flujo, aprendizaje])
+linked_to: []            # Rutas relativas/absolutas, IDs, URLs, o referencias a otros archivos/módulos
+responsable: ""          # Quién mantiene o creó este archivo (usuario, agente, área)
+hash_verificacion: "sha256:pending"  # Hash real SHA-256 (pending hasta automatizar)
+historial:
+  - ""                   # Cambios, eventos clave o migraciones relevantes
+last_modified: ""        # Fecha de última modificación, preferentemente ISO-8601 (YYYY-MM-DDTHH:MM:SSZ)
+last_modified_by: ""     # Usuario/agente que realizó el último cambio

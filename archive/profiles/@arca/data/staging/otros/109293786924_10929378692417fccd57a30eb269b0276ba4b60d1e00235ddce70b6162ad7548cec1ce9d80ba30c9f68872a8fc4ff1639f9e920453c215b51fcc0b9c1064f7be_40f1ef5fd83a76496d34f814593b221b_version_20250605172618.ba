@@ -1,0 +1,27 @@
+---
+module: arquitectura/idea_base/version
+type: core
+status: in_progress
+created: '2025-05-23'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🗂 version.md – Idea Base Consolidada
+
+- Versión: v0.0.0.1
+- Documento principal: ALMA_RESIST_idea_base_0.0.0.1.md
+- Fecha de consolidación: 2025-05-23
+- Responsable: Santi / pájaro
+- Estado: Activo
+- Sprint de integración: Sprint 2.3
+
+## 🔄 Estructura
+
+Este documento es el nodo raíz desde el cual se proyecta la arquitectura modular, semántica y operativa de ALMA_RESIST.
+
+## 🔐 Notas técnicas
+
+- Formato: Markdown (.md) con compatibilidad Obsidian
+- Origen: integración de múltiples fuentes conceptuales
+- Validación: Manual, bajo metodología v8

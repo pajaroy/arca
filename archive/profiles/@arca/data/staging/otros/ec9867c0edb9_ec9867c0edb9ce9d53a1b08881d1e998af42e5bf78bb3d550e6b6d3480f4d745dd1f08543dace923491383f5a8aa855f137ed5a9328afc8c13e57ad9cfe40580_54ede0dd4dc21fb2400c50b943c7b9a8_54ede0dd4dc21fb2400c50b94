@@ -1,0 +1,56 @@
+# 📊 Proyección Base – Fondo de Inversión ALMA
+
+## 🌐 Visión General
+El Fondo ALMA se proyecta como una estructura modular, escalable y transparente, que combina valores institucionales con herramientas financieras modernas. Su objetivo es sostener el ecosistema ALMA_RESIST y sus entidades asociadas a largo plazo.
+
+Este fondo no es exclusivamente financiero: incorpora elementos simbólicos, culturales y comunitarios como parte de su lógica de inversión y redistribución.
+
+## 🧱 Estructura Operativa
+
+- **Fondo común** con distribución trimestral o semestral según rendimiento.
+- **Participaciones diferenciadas** por tipo de aporte (activo, capital, simbólico).
+- **Capital inicial documentado y trazado** en ALMA_EMPRESA.
+- **Gestión automatizada futura** mediante API (BitGet u otras), actualmente en evaluación.
+- **Gobernanza**: sistema de votación interna para decisiones clave (en diseño).
+- **Lógica de etapas**:
+  - Etapa 1 – Activación: USD 5.000 capital inicial
+  - Etapa 2 – Expansión: USD 20.000 fondo activo
+  - Etapa 3 – Maduración: +USD 100.000 como fondo estable
+
+## 📑 Marco Legal y Simbólico
+
+- Documentación legal: pendiente de formalización contractual.
+- Contrato simbólico activo (`05_Contrato_Simbolico_Modelo_Alma_Mia.md`).
+- Documentación cultural y emocional guardada en `/simbolico/` (ver organización ALMA_EMPRESA).
+- Las entidades externas como 13CC, Cannabird o Inance se consideran posibles **socios o inversores**, no parte estructural del fondo.
+
+## 🧠 Criterios de Transparencia
+
+- Todo ingreso/egreso documentado con ID único y justificación.
+- Seguimiento contable mixto: módulo en blanco exportable + módulo privado cifrado.
+- Informes mensuales internos / informes públicos trimestrales.
+
+## 📈 Objetivos 2025
+
+- Consolidar el capital de activación de USD 5.000
+- Implementar automatización vía APIs de trading
+- Establecer gobernanza IA-asistida
+- Financiar el desarrollo continuo de ALMA_RESIST
+
+## 📂 Documentos Clave
+
+- `01_Acta_Fundacional_Alma_Mia.md` – Visión general.
+- `04_Criterios_Calculo_Ganancias.md` – Reglas objetivas.
+- `1.11_Mejoras_Modelo_Fondo_Comun.md` – Base escalabilidad.
+- `1.20_Prompt_Master_Alma_Mia.md` – Lógica IA-integrada.
+- `07_Roadmap_Alma_Mia_2025.md` – Plan de ejecución.
+- `08_Objetivos_Estrategicos_2025.md` – Indicadores de éxito.
+
+## 🧼 Sugerencias de Mejora
+
+- Redactar contrato real validado por asesor legal.
+- Unificar el lenguaje técnico entre documentos (simbólico vs. legal).
+- Consolidar una interfaz de control del fondo desde ALMA_EMPRESA/entidades/fondo_inversion/control.md
+- Considerar crear tokens internos o unidades de participación trazables.
+- Agregar tabla comparativa con fondos similares (cripto, tradicionales, mixtos).
+

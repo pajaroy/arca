@@ -1,0 +1,35 @@
+{
+  "id": "readme_alma_core_docs_v0.1.1",
+  "version": "0.1.1",
+  "fecha_actualizacion": "2025-06-16T00:00:00+00:00",
+  "autor": "Santi + ALMA",
+  "estado": "activo",
+  "anterior": null,
+  "hash_actual": "sha256:pending",
+  "proposito": {
+    "descripcion": "Documentación, changelogs, bitácoras y recursos de referencia del sistema.\nAquí se centraliza todo lo necesario para la comprensión y auditoría del proyecto.\n",
+    "ultima_revision": "2025-06-16"
+  },
+  "linked_to": [
+    "archivo/README.yaml",
+    "config/README.yaml",
+    "control/README.yaml",
+    "control_central/README.yaml",
+    "core/README.yaml",
+    "docs/README.yaml",
+    "logs/README.yaml",
+    "meta/README.yaml"
+  ],
+  "estructura": {
+    "changelog/": "Historial de cambios del sistema.",
+    "history/": "Bitácora y registro histórico.",
+    "journal/": "Diarios y bitácoras diarias."
+  },
+  "changelog": [
+    {
+      "fecha": "2025-06-16",
+      "version": "0.1.1",
+      "cambios": "README modularizado, links cruzados y lógica documental alineada a ALMA_CORE."
+    }
+  ]
+}

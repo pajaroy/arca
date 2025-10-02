@@ -1,0 +1,1523 @@
+## Archivo: CHANGELOG_ALMA_LIBRE_0.0.6.md
+Contenido:
+
+# 📝 CHANGELOG – ALMA LIBRE 0.0.6-corregido
+
+## 📅 Fecha: 2025-05-11
+
+### ✅ Correcciones aplicadas:
+- Eliminación de duplicados internos entre CUADERNOS y EMPRESAS.
+- Eliminación o verificación de `sync_drive_maestro.sh` duplicado (confirmado único).
+- Creación de glosario oficial y documentación estructural (`Estructura_de_carpetas.md`).
+- Limpieza de nombres mal formateados (`\n` en nombres) y ortografía en carpetas.
+- Reorganización de proyectos dentro de MODULOS.
+- Preparación de carpetas `RECURSOS_Y_AYUDAS/` y estandarización de rutas.
+- Agregado de `README.md` por cada carpeta principal del sistema.
+- Establecimiento de `version.txt` como indicador de release viva.
+- Revisión final de checklist aplicada paso a paso.
+
+### 🧠 Orientado a:
+- Interoperabilidad con modelos IA (Google AI Studio, Notebook LM, Obsidian).
+- Escalabilidad futura de proyectos empresariales, cuadernos, automatizaciones y memorias.
+- Claridad total en navegación, trazabilidad y documentación viva.
+
+
+
+## Archivo: diagnostico_v0.0.6.1.md
+Contenido:
+# 🩺 Diagnóstico Profundo – ALMA LIBRE v0.0.6.1
+
+## 1. Limpieza de Duplicados y Estructura de Carpetas
+
+✅ No hay duplicados visibles, errores de estructura ni restos de versiones anteriores.
+- Se eliminaron duplicados entre CUADERNOS y EMPRESAS.
+- `sync_drive_maestro.sh` quedó con una sola copia válida.
+- Carpetas vacías o temporales eliminadas.
+✅ Estructura actualizada sin conflictos activos entre carpetas temáticas.
+
+## 2. Actualización de Contenido y Documentación de Versión
+
+✅ Todo está actualizado, versionado y claramente documentado.
+- `README.md`, `version.txt`, `CHANGELOG.md`, glosario y estructura reflejan fielmente el estado del sistema.
+- El checklist de correcciones fue ejecutado y marcado correctamente.
+
+## 3. Fluidez en Módulos Interconectados y Memorias Digitales
+
+✅ Proyectos y módulos reorganizados lógicamente en `MODULOS/`.
+✅ Flujo entre CUADERNOS, EMPRESAS y BITÁCORA bien definido.
+✅ Cuadernos referencian documentación oficial en vez de duplicarla.
+✅ Prompts, scripts y utilitarios centralizados en `RECURSOS_Y_AYUDAS`.
+
+## 4. Legibilidad para Asistentes IA y Humanos
+
+✅ Nombres consistentes, ortografía corregida, sin caracteres problemáticos.
+✅ Glosario de convenciones accesible.
+✅ Estructura legible y autoexplicativa con `README.md` en carpetas clave.
+
+## 5. Mejoras Mínimas Propuestas (sin subir a 0.0.7)
+
+- [ ] Verificar referencias internas antiguas en documentos (ej. “13_CANNABIS_CLUB” vs “13CC”).
+- [ ] Uniformizar guiones bajos vs. espacios en nombres.
+- [x] Mover `sync_drive_maestro.sh` a `RECURSOS_Y_AYUDAS/Scripts_Utiles/` si corresponde.
+- [x] Confirmar eliminación final de carpetas vacías o residuales.
+- [x] Añadir indicación clara de "corregida" en `CHANGELOG.md` y/o `version.txt`.
+- [x] Decidir si `REESTRUCTURACION_0.0.6/` queda activa o se migra a RECURSOS.
+
+## 6. Plantilla de Seguimiento Semanal
+
+```markdown
+# 🗓️ Seguimiento Semanal – Semana X (AAAA-MM-DD al AAAA-MM-DD)
+
+## 📈 Progreso del Sistema  
+- **Tareas completadas:** ...
+- **Hitos alcanzados:** ...
+- **Pendiente para próxima semana:** ...
+
+## 💡 Propuestas de Mejora  
+- **Nuevas ideas/sugerencias:** ...
+- **Evaluación rápida:** ...
+
+## ⚙️ Estado del Sistema  
+- **Técnico:** ...
+- **Organizativo:** ...
+- **Operativo:** ...
+
+## 🔗 Flujo de Conexión entre Componentes  
+- **Integración de carpetas/módulos:** ...
+- **Decisiones tomadas:** ...
+- **Próximos pasos de integración:** ...
+```
+
+## Archivo: diagnostico_v0.0.6.2_completo.md
+Contenido:
+# Diagnóstico Técnico – ALMA LIBRE v0.0.6.2
+  
+## Estructura General y Limpieza del Sistema
+
+La estructura de **ALMA LIBRE v0.0.6.1** se encuentra **mayormente depurada y coherente**, con la mayoría de las correcciones de reorganización aplicadas. Se han eliminado duplicados importantes y organizado carpetas según lo planificadofile-bpismyeg8bbsyzgpdkdexffile-bpismyeg8bbsyzgpdkdexf. En particular:
+
+- **Duplicados eliminados:** No se observan copias redundantes recientes de documentos entre `EMPRESAS/` y `CUADERNOS/empresas.cu/` en la versión consolidada (antes se había indicado un duplicado de contenidos empresariales)file-bpismyeg8bbsyzgpdkdexf. Ahora los documentos empresariales formales residen en `EMPRESAS/` (por ejemplo, estatutos, contratos en 13CC.emp), mientras que en `CUADERNOS/empresas.cu/` quedan las notas operativas e ideas en desarrollo (por ejemplo, `13CC.cu/cupula_operativa/…`). Esto evita información duplicada en dos lugares; donde es necesario, se podrían incorporar **enlaces o referencias cruzadas** en lugar de copias físicas, cumpliendo la recomendación original.
+    
+- **Carpetas vacías o temporales eliminadas:** No se encontraron carpetas claramente vacías como `_archivo_temp__` ni restos en `BITACORA_CENTRAL/DESARROLLO` más allá de un archivo README informativo (por lo tanto, **no hay ruido de directorios vacíos**)file-bpismyeg8bbsyzgpdkdexf. La carpeta `MODULOS/programacion/` ya **no está vacía**, pues ahora contiene el módulo Alma Loader (ver más adelante), cumpliendo así con su uso o eliminación según el planfile-bpismyeg8bbsyzgpdkdexf.
+    
+- **Integridad de la jerarquía:** La jerarquía principal sigue la lógica esperada: `ALMA_LIBRE/` agrupa las principales áreas (`BITACORA_CENTRAL`, `CUADERNOS`, `EMPRESAS`, `MODULOS`, `RECURSOS_Y_AYUDAS`, etc.), y dentro de cada una se observa una subdivisión consistente. Por ejemplo, la bitácora central distingue **RESÚMENES** y **DESARROLLO** claramente, y los **Cuadernos Digitales** (`CUADERNOS/`) están separados por temática (p. ej. `alma_gral.cu`, `programacion.cu`, `empresas.cu`, `trading.cu`, etc.), lo que concuerda con el esquema deseado. Cada cuaderno (`*.cu/`) tiene sus propias subcarpetas y archivos, manteniendo la modularidad.
+    
+- **Backups históricos incorporados:** Existe la carpeta `00_BACKUPS_HISTORICOS/` con subcarpetas para respaldos completos de versiones anteriores (por ejemplo, `0.0.6_corregido` dentro de `0.0.6_2025-05-11/`). Esto demuestra trazabilidad de versiones pasadas. **Importante:** Dentro de estos backups se encuentran copias de la estructura previa (incluyendo duplicados ya eliminados en la versión actual). Esto **no afecta la estructura activa**, pero se debe tener presente que búsquedas o scripts podrían encontrar archivos duplicados dentro de `00_BACKUPS_HISTORICOS`. Se recomienda aislar o señalar claramente estos backups (p. ej. con un archivo README indicando que son históricos) para evitar confusiones. _(Nota: Ya se marcó contenido histórico con avisos de “ARCHIVO HISTÓRICO - NO ACTUAL” según las recomendaciones)file-astz2pxelstkrzadoy1jdz._
+    
+
+En general, no se hallan **inconsistencias de jerarquía graves**. Cada sección parece cumplir su propósito. Un único detalle encontrado es una **pequeña errata en el nombre de una carpeta**: `BITACORA_CENTRAL/DIGNOSTICOS/` debería ser `BITACORA_CENTRAL/DIAGNOSTICOS/` (falta la letra "A"). Es un error menor de ortografía que convendría corregir por prolijidad y para evitar confusión al buscar dicha carpeta en el futuro. Afortunadamente, esto no quiebra ninguna funcionalidad, pero conviene unificar la nomenclatura.
+
+**Archivos sobrantes:** No se identificaron _archivos basura_ o temporales sueltos en la raíz del sistema activo. Anteriormente existía el script `sync_drive_maestro.sh` duplicado; ahora la versión activa de ese script está ubicada en `RECURSOS_Y_AYUDAS/scripts_utiles/` y se eliminó de otras ubicaciones activas, cumpliendo la directriz de mantener una sola copia oficialfile-bpismyeg8bbsyzgpdkdexf. **Sin embargo**, aún persiste la carpeta `Auxiliares_dev/` dentro de `RECURSOS_Y_AYUDAS/` con algunos archivos (`subir_alma.sh`, `sync_drive_maestro.sh`, `Enfoques_1.md`, `sincroinizar_alma_drive.md`). Esta carpeta parece ser un remanente de la estructura anterior: según la lista de correcciones, su contenido debía moverse a `RECURSOS_Y_AYUDAS/Scripts_Utiles/` y luego eliminarlafile-bpismyeg8bbsyzgpdkdexf. De hecho, el script `sync_drive_maestro.sh` está presente tanto en `scripts_utiles/` (nuevo) como duplicado en `Auxiliares_dev/` (viejo). **Recomendación:** Fusionar completamente `Auxiliares_dev` en `scripts_utiles` (ya renombrada correctamente de “Auxilliares_dev” a “Auxiliares_dev”file-bpismyeg8bbsyzgpdkdexf) y luego borrar la carpeta antigua para eliminar duplicidad. Los demás archivos útiles de `Auxiliares_dev` (como `subir_alma.sh` o documentación de sincronización) deberían reubicarse bajo `scripts_utiles/` u otra subcarpeta apropiada en **Recursos y Ayudas**, asegurando que no queden dos copias de nada en el entorno activo.
+
+En resumen, la limpieza estructural está **casi completa**. Tras atender esos pocos rezagos (renombrar `DIGNOSTICOS` y eliminar `Auxiliares_dev` duplicada), la estructura estará totalmente depurada, sin archivos sobrantes ni duplicados en el sistema activo.
+
+## Nomenclatura de Carpetas, Rutas y Documentación
+
+En términos generales, los **nombres de directorios y archivos** siguen convenciones consistentes, pensadas para un flujo claro tanto para usuarios humanos como para asistentes de IA:
+
+- **Uso de prefijos y sufijos semánticos:** Se adoptó la convención de sufijo `.cu` para denotar **“cuadernos”** (notas y documentos dinámicos). Ejemplos: `alma_gral.cu`, `programacion.cu`, `Geopolitica_y_Actualidad.cu`. Esto es útil para que tanto el usuario como un asistente de IA identifiquen rápidamente que esas carpetas contienen contenido tipo notebook (ideas, apuntes, contenidos en desarrollo). Del mismo modo, para empresas se emplea `.emp` en al menos un caso (`13CC.emp`), indicando que se trata de una **carpeta de empresa con documentación formal**. Esta convención es muy valiosa siempre que se aplique uniformemente y se documente su significado en un glosario (lo cual ya se ha comenzado a hacer)file-astz2pxelstkrzadoy1jdz.
+    
+    - **Consistencia de `.emp`:** Nótese que no todas las empresas usan el sufijo `.emp` en su carpeta. Por ejemplo, `13CC.emp` lo tiene, pero `Alma_Mia_Fondo` y `Cannabird` no. Podría justificarse porque 13CC es una ONG formal separada, mientras que Alma Mía Fondo es la empresa madre del sistema y Cannabird un proyecto interno; sin embargo, sería conveniente aclarar esta distinción. Para mantener consistencia, se podría optar por agregar `.emp` a todas las carpetas de entidades formales (ej.: `Alma_Mia_Fondo.emp/`, `Cannabird.emp/`) **o** removerlo y usar solo el nombre limpio para todas (pues el contexto de estar dentro de `EMPRESAS/` ya indica que son empresas/proyectos). Cualquiera de las dos opciones es válida, pero documentarla en el glosario de convenciones es clave para que un colaborador o IA entienda la lógica sin ambigüedad.
+        
+- **Nombres descriptivos y separación por guiones bajos:** Las carpetas de nivel superior utilizan nombres en MAYÚSCULAS con guiones bajos para separar palabras (e.g. `BITACORA_CENTRAL`, `RECURSOS_Y_AYUDAS`). Esto les da visibilidad y distingue módulos principales. Dentro de ellas, los nombres de subcarpetas combinan mayúsculas y minúsculas de forma legible (p. ej. `Auxiliares_dev`, `scripts_utiles`, `REESTRUCTURACION_0.0.6`). Existe alguna inconsistencia menor en el uso de mayúsculas (por ejemplo, `scripts_utiles` está todo en minúsculas mientras otras subcarpetas de `RECURSOS_Y_AYUDAS` comienzan con mayúscula como `Auxiliares_dev`). Se sugiere unificar criterios de capitalización para estética y orden (por ejemplo, que **todas las subcarpetas de RECURSOS_Y_AYUDAS** sigan un mismo estilo: o bien Title_Case como `Auxiliares_Dev/ Scripts_Utiles/`, o bien todo minúscula `auxiliares_dev/ scripts_utiles/`). Esto no afecta la funcionalidad, pero sí la **coherencia visual** del sistema al escanearlo.
+    
+- **Eliminación de nombres obsoletos:** Se logró reemplazar denominaciones antiguas por abreviaturas oficiales. Por ejemplo, el término `13_CANNABIS_CLUB` ya no aparece como nombre de carpeta, y en su lugar se usa “13CC” (siglas de la organización) en casi todo el sistema, tal como se indicó en el checklistfile-bpismyeg8bbsyzgpdkdexf. **Hallazgo:** persiste un archivo `13_CANNABIS_CLUB.zip` dentro de la carpeta de `EMPRESAS/13CC.emp/`. Este archivo ZIP parece ser un compendio antiguo (posiblemente un respaldo de documentación cuando la organización se llamaba así). Para mantener la coherencia total, conviene renombrarlo a `13CC.zip` o integrarlo de otra manera (quizá descomprimirlo en una subcarpeta histórica) y eliminar el archivo con el nombre viejo. Dejar ese nombre antiguo podría generar confusión o contradecir la unificación de términos, especialmente de cara a asistentes de IA que lean los nombres. Aparte de ese caso, el resto de la nomenclatura referida a 13CC está consistente con la abreviatura (incluyendo dentro de documentos y rutas).
+    
+- **Readme explicativos y documentación interna:** Se ha avanzado bastante en la documentación interna del sistema:
+    
+    - Existe un **README** para la carpeta `EMPRESAS/` (`EMPRESAS_README.md` al final de la lista de esa carpeta) que presumiblemente explica la organización de documentación legal y operativa empresarial.
+        
+    - Hay archivos `README.md` en muchas subcarpetas clave, por ejemplo en los módulos de empresa (`01_LEGAL/README.md`, etc.), en `BITACORA_CENTRAL/RESUMENES/` y `DESARROLLO/`, en secciones de cuadernos (muchos cuadernos tienen un README inicial), etc. Esto cumple con la recomendación de **“usar README en raíz y subcarpetas clave para autoexplicarse”**file-astz2pxelstkrzadoy1jdz. Cada README actúa como guía local para entender el propósito del folder y su contenido, lo cual es muy útil para cualquier desarrollador o IA que navegue la estructura.
+        
+    - Se documentó la nueva estructura en el archivo `REESTRUCTURACION_0.0.6/docs/Estructura_de_carpetas.md`, con un árbol de directorios comentado. Este documento es valioso porque describe la intención de cada carpeta (contiene anotaciones con `#` indicando el propósito, e.j. “# Memoria cronológica del sistema” para BITACORA_CENTRAL) y sirve como referencia general. En él se sugiere también la ubicación de archivos como README general y glosario.
+        
+    - Existe un **Glosario** (`Glosario_ALMA_LIBRE_0.0.6.md`) que define convenciones (prefijos `.cu`, siglas, etc.)file-astz2pxelstkrzadoy1jdz. Esto es fundamental para nuevos usuarios/herramientas: por ejemplo, clarificar qué significa `.cu`, `.emp`, los prefijos numéricos en nombres de carpeta, etc. Asegúrese de mantener este glosario actualizado conforme se introduzcan nuevas convenciones en versiones futuras.
+        
+    
+    Un punto a considerar: actualmente el **README principal del sistema** (presentación general de ALMA LIBRE) parece haberse ubicado en la carpeta externa `docs/README.md` en lugar de dentro de `ALMA_LIBRE/` en sí. Si bien tener un `docs/` fuera de la estructura principal facilita que herramientas externas o repositorios lean la documentación sin navegar todos los subdirectorios, podría ser útil **colocar una copia o al menos un enlace** de ese README dentro de `ALMA_LIBRE/` mismo. Así, cualquier persona abriendo la carpeta principal verá inmediatamente el README con la introducción al sistema. Alternativamente, renombrar `docs/README.md` a algo como `docs/PRESENTACION.md` y copiarlo dentro de `ALMA_LIBRE/README.md` brindaría lo mejor de ambos mundos (una versión interna y otra externa para GitHub o similar). En esta versión 0.0.6.1, la ausencia de `ALMA_LIBRE/README.md` interno es el único detalle que podría mejorar la **autodocumentación en la raíz**. Por lo demás, la documentación está bien encaminada.
+    
+- **Estructura de numeración en carpetas principales:** Se observa que solo `00_BACKUPS_HISTORICOS/` usa un prefijo numérico “00”. En la planificación original se mencionaban prefijos para ordenar las secciones (00_, 01_, 02_, etc. para Backups, Empresas, Cuadernos, Proyectos, etc.)file-mihdekdpym6x27pgufjhrffile-mihdekdpym6x27pgufjhrf. Finalmente, en la implementación actual no se aplicaron números en todos los nombres principales, sino solo en Backups. Esto no es problemático en sí (el orden alfabético también es lógico: BITACORA, CUADERNOS, EMPRESAS, etc.), pero **conviene decidir un criterio uniforme**. Si se busca ordenar manualmente ciertas carpetas al inicio, podría considerarse anteponer “01_”, “02_”... a las demás grandes divisiones. Sin embargo, dado que `BITACORA_CENTRAL`, `CUADERNOS`, `EMPRESAS`, `MODULOS`, `RECURSOS_Y_AYUDAS` ya están en un orden que puede funcionar alfabeticamente, quizás lo más sencillo es **quitar el “00_”** de Backups Históricos y nombrarla simplemente `BACKUPS_HISTORICOS/` para seguir el mismo estilo descriptivo. En cualquier caso, este es un detalle estético/organizativo; lo importante es que la documentación aclare el significado y contenido de cada carpeta (lo cual ya se hace en **Estructura_de_carpetas.md**).
+    
+
+En conclusión, los **nombres y rutas actuales son compatibles con un flujo operativo estable**. Un usuario humano puede navegar y entender dónde está cada cosa gracias a nombres claros y README explicativos. Para un asistente de IA, la estructura jerárquica y las convenciones (.cu, .emp, etc.) también facilitan interpretación, siempre y cuando esté “entrenado” con el glosario. Es recomendable que cualquier agente digital que use el sistema consulte el glosario y la documentación para entender el significado de las siglas y convenciones. Tras implementar las leves correcciones sugeridas (unificar sufijos .emp, corregir nombres residuales), la nomenclatura estará completamente alineada con las mejores prácticas.
+
+## Módulo **alma_loader v3.0.3**: Compatibilidad e Integración
+
+El módulo `alma_loader v3.0.3` es uno de los componentes clave de ALMA LIBRE, encargado de la carga/gestión de memorias e interconexión de datos entre distintas partes (según se deduce de su nombre y estructura). Actualmente, su código fuente reside en la ruta `ALMA_LIBRE/MODULOS/programacion/alma_loader_v3.0.3/src/…`. También existen referencias a versiones anteriores de este módulo en los cuadernos de programación (por ejemplo, `CUADERNOS/programacion.cu/Alma_loader_dev/` con documentación de la versión 3.0.2). Evaluemos su situación:
+
+- **Ubicación en la estructura:** Originalmente se propuso ubicar proyectos formales en `MODULOS/NombreModulo/` con subcarpetas `docs/` y `src/` separadasfile-bpismyeg8bbsyzgpdkdexf. En la implementación actual, `alma_loader_v3.0.3` está dentro de `MODULOS/programacion/` en vez de directamente bajo `MODULOS/` con su nombre propio. Esto sugiere que quizás se consideró a Alma Loader como algo todavía ligado al área de "programación" más que un módulo autónomo. Sin embargo, dado que Alma Loader **ya es un módulo funcional de IA** (versión 3.0.3, con su propio código), sería conveniente **rediseñar su ubicación para reflejar su importancia** e independizarlo conceptualmente:
+    
+    - Se recomienda **mover `alma_loader_v3.0.3` a `ALMA_LIBRE/MODULOS/Alma_Loader/`** (nombre en PascalCase sin la versión en el nombre de carpeta). Dentro, organizar como `Alma_Loader/src/` (código) y `Alma_Loader/docs/` (documentación, changelogs, instrucciones de uso). De esa manera, `MODULOS/` contendría cada proyecto de software como una subcarpeta propia (p. ej. en el futuro podrían agregarse `MODULOS/Automatizacion_VPD/`, `MODULOS/DeepSeek_Tool/`, etc., cada uno aislado).
+        
+    - Mantener la versión en el nombre de carpeta no es necesario; en lugar de eso, la versión 3.0.3 puede indicarse en un changelog o en el README del módulo. Si en un futuro se actualiza a v3.0.4, no querríamos renombrar la carpeta (eso complicaría referencias), sino actualizar internamente. Así que **Alma_Loader** fijo como contenedor, y dentro quizás un archivo `CHANGELOG.md` o similar detallando subversiones.
+        
+- **Compatibilidad con la estructura de carpetas actual:** Por lo analizado en el código fuente (estructura de archivos), `alma_loader` guarda sus propios datos en subdirectorios como `src/memorias/` (con subcarpetas `importaciones`, `exportadas`, `vectorizadas`, etc.) y maneja su lógica interna. No parece referenciar rutas absolutas del sistema ALMA LIBRE; es decir, no hay indicios de que espere encontrar archivos en, por ejemplo, `CUADERNOS/` o `EMPRESAS/` de forma fija. Más bien, actúa como **servicio de manejo de memoria** independiente (posiblemente usando JSON, vectores, o una base de datos interna SQLite según vemos archivos como `sqlite_storage.py`). Esto significa que **es compatible con cualquier estructura** siempre que se alimente con los datos apropiados. No hay conflictos evidentes entre la forma en que Alma Loader organiza sus datos internos y la estructura reorganizada de ALMA LIBRE, ya que opera en su propio espacio (`MODULOS/programacion/alma_loader_v3.0.3/src/...`).
+    
+- **Integración de memorias entre módulos y cuadernos:** Si bien el módulo es funcional en sí mismo, habría que evaluar **cómo interactúa con el resto del sistema**. Actualmente, no hay evidencia de que esté “conectado” a las fuentes de datos de ALMA LIBRE (por ejemplo, no parece haber un proceso automático que lea los resúmenes de BITÁCORA o los documentos de EMPRESAS y los introduzca a Alma Loader). Si el objetivo es que Alma Loader centralice memorias de distintos sub-sistemas, habrá que implementar esa integración:
+    
+    - **Inputs potenciales:** resúmenes diarios/semanales de `BITACORA_CENTRAL/RESUMENES`, conclusiones o notas clave de `CUADERNOS/*.cu`, datos relevantes de proyectos en `EMPRESAS/` (ej. decisiones estratégicas) podrían alimentarse al módulo.
+        
+    - **Outputs potenciales:** Alma Loader podría proveer a los cuadernos o a otros módulos respuestas contextualizadas, recuerdos históricos, o dataset unificado para el _Whitepaper_ u otros análisis.
+        
+    
+    Actualmente, **no hay contradicción técnica** que impida esta integración; solo falta diseñar el flujo. Por ejemplo, se podría decidir que Alma Loader consuma archivos Markdown de resúmenes (ya están estructurados y descomprimidosfile-astz2pxelstkrzadoy1jdz) para construir una base de conocimiento. Esto implicaría quizás escribir scripts o funciones dentro de `alma_loader` para leer esas rutas. **Compatibilidad**: La estructura organizada (resúmenes por trimestre, por semana, etc.) facilita que un código recorra esas carpetas e importe contenido. Alma Loader v3.0.3 debería ser capaz de adaptarse a esto, pero tal vez requiera agregar módulos de ingesta de datos de archivos Markdown si aún no los tiene.
+    
+- **Necesidad de rediseño:** No parece necesario _rediseñar desde cero_ el módulo por razones de estructura; más bien, **refactorizarlo** para mejorar su integración. Algunas sugerencias técnicas:
+    
+    - Implementar en `alma_loader` un **mapeo de rutas del sistema ALMA LIBRE** (quizás vía un archivo de configuración en `configuracion/` o dentro del módulo) que le indique dónde están las fuentes de datos pertinentes. Por ejemplo, un JSON o YAML con rutas a `BITACORA_CENTRAL/RESUMENES/RESUMENES_2025_Q2_Q3_Q4` etc., de modo que el módulo pueda indexar automáticamente nuevos resúmenes.
+        
+    - Asegurarse de que el módulo **no dependa de rutas obsoletas**. Dado que hubo cambios (por ejemplo, antes quizás existía `CUADERNOS/Alma_Libre/` o estructuras distintas), confirmar que v3.0.3 está actualizado para la nueva disposición. Si fue desarrollado en paralelo con la reorganización, podría aún tener referencias antiguas. Revisar los archivos de configuración o constantes en el código del módulo para validar esto.
+        
+    - Separar la documentación del módulo: actualmente parte de la documentación de Alma Loader (v3.0.2) está en `CUADERNOS/programacion.cu/Alma_loader_dev/` y no dentro de `MODULOS`. Sería conveniente trasladar esos documentos relevantes al `docs/` del módulo formal, para que todo lo referente a Alma Loader quede concentrado. Esto también **facilita el flujo intermodular**, porque otros módulos o cuadernos podrían referenciar directamente la documentación del módulo (por ejemplo, un cuaderno de programación que explica cómo usar Alma Loader podría linkear a `MODULOS/Alma_Loader/docs/uso.md` en vez de a un cuaderno dev).
+        
+
+En resumen, **alma_loader v3.0.3 es compatible con la nueva estructura**, pero aún está en un estado de integración inicial. No necesita un rediseño radical, sino **realineación y refactorización menor** para encajar perfectamente:
+
+- Reubicarlo como módulo independiente (fuera de la subcarpeta `programacion`).
+    
+- Asegurar que su diseño de carpetas internas tenga `src` y `docs` separados, según estándares del resto del sistema.
+    
+- Implementar mecanismos para alimentarlo con los datos reales de ALMA LIBRE (memorias históricas, notas intermodulares), ya que la estructura actual ordenada facilita esa tarea.
+    
+
+Con esos ajustes, Alma Loader podrá actuar realmente como el **conector de memorias y flujos** dentro de ALMA LIBRE, absorbiendo información de distintos rincones del sistema y proporcionándola a quien la necesite, sea humano o IA.
+
+## Preparación para Flujos de Datos Internos y _Whitepaper Consciente_
+
+Dado que la reorganización de la estructura está prácticamente terminada en v0.0.6.1, es válido preguntar: **¿Está el sistema listo para comenzar a trabajar en los flujos de datos internos y en la fase de diseño del “Whitepaper Consciente”?** Por lo analizado, la respuesta es **sí, con consideraciones menores**:
+
+- **Base sólida para flujos internos:** La separación clara en módulos y temáticas significa que ahora podemos definir **entradas y salidas de información entre secciones** de forma ordenada. Por ejemplo:
+    
+    - Los **resúmenes de BITÁCORA_CENTRAL** (que concentran la actividad cronológica) pueden servir de **entrada** para los módulos de IA (Alma Loader u otros) que necesiten “saber” qué ha ocurrido y qué se ha decidido en determinados periodos. La estructura de resúmenes históricos (por año, trimestre, semana) está lista para ser consumida secuencialmente.
+        
+    - Las **conclusiones de los CUADERNOS** temáticos (p. ej., decisiones en `trading.cu`, planes en `empresas.cu/13CC.cu`) pueden alimentar a los **documentos formales de EMPRESAS**. Ahora que estos ámbitos están separados, se puede diseñar un flujo donde, por ejemplo, una idea desarrollada en el cuaderno de `empresas.cu` sea revisada y, si madura, se convierta en un documento en `EMPRESAS/13CC.emp/03_ANEXOS/...`. La estructura facilita esa promoción de información de “borrador” a “formal”.
+        
+    - **Integración IA-humanos:** Con `RECURSOS_Y_AYUDAS/` centralizando plantillas y prompts, tanto humanos como IA pueden recurrir a esas mismas fuentes. Esto promueve un flujo unificado: las mismas plantillas de prompt utilizadas por el equipo humano (por ejemplo, en Notion u Obsidian) están accesibles a la IA en esa carpeta. El sistema de carpetas ya no duplica estos recursos, por lo que todos trabajan con **una única versión de la verdad**.
+        
+- **Estado de preparación de cada componente:**
+    
+    - **Bitácora y Cuadernos:** Listos y organizados. Cada uno tiene su contexto específico, lo que es ideal para delinear flujos. Por ejemplo, se puede establecer que cierto script lea de `CUADERNOS/trading.cu/` las conclusiones semanales de trading y las inserte en un informe mensual en `BITACORA_CENTRAL/RESUMENES/mensual/`. Las piezas están ordenadas, solo resta programar ese flujo.
+        
+    - **Empresas:** La documentación legal y estratégica (Alma Mía, 13CC, Cannabird) está separada de las ideas crudas (que residen en cuadernos). Esto permitirá que en el _Whitepaper Consciente_ se referencien por un lado las **políticas y estructuras formales** (directamente sacadas de `EMPRESAS/`), y por otro las **justificaciones y contextos** (obtenidas de `CUADERNOS/` y `BITÁCORA_CENTRAL`). La claridad actual evita mezclar ambos niveles.
+        
+    - **Módulos de software (IA):** Aún están integrándose, pero al menos Alma Loader ya está posicionado. Probablemente en próximas versiones se incorporen más módulos. El _Whitepaper Consciente_ seguramente incluirá cómo interactúan estos módulos con la información. Por ahora, hay un único módulo IA principal, lo cual simplifica iniciar el diseño de flujos (menos piezas móviles iniciales).
+        
+- **Whitepaper Consciente – inicio de la fase de diseño:** Con la estructura ya casi estable, es un momento adecuado para comenzar a bosquejar el **Whitepaper Consciente**. Este documento se imagina como un compendio que describe el sistema ALMA LIBRE, sus flujos de datos internos, principios de funcionamiento consciente/IA, etc. ¿Por qué ahora?:
+    
+    - Porque el Whitepaper podrá referenciar secciones concretas de la estructura actual como ejemplos. Ya es posible decir “los datos de X fluyen hacia Y (ver carpeta tal)”. Sin la estructura definida, ese documento habría sido muy teórico; ahora puede ser **específico y respaldado por la implementación**.
+        
+    - La mayor parte de las incertidumbres estructurales han sido resueltas. Quedan detalles menores (que estamos listando en mejoras pendientes), pero nada que invalide la topología general del sistema. Es improbable que haya que reestructurar masivamente otra vez en el corto plazo, así que es seguro documentar el diseño sin riesgo de que quede obsoleto inmediatamente.
+        
+    - Además, contar con un Whitepaper en esta etapa ayudará a **orientar el desarrollo de los flujos faltantes**. Por ejemplo, si en el Whitepaper se define un flujo “Memoria histórica -> Módulo IA -> Informe trimestral”, los desarrolladores sabrán qué implementar exactamente (quizás un script automático de generación de informes). Es decir, el Whitepaper servirá de **hoja de ruta consciente** para la siguiente fase.
+        
+- **Verificación final antes de iniciar flujos:** Vale la pena hacer un **chequeo técnico** de ciertas cosas para asegurar que no haya obstáculos:
+    
+    - **Permisos y enlaces:** Si se van a crear flujos automáticos, verificar que no se necesiten enlaces simbólicos o referencias especiales. Ya que se decidió eliminar duplicados en favor de enlaces, considerar si algún flujo requerirá crear atajos (por ejemplo, un enlace desde `CUADERNOS/empresas.cu/13CC.cu` hacia alguna parte de `EMPRESAS/13CC.emp`). En este momento no parece necesario, pero es bueno tenerlo en mente cuando se implementen.
+        
+    - **Formato de archivos:** Casi todo son Markdown (`.md`) u otros texto plano (`.sh`, `.json` en memorias). Esto es excelente para la interoperabilidad. Un asistente de IA puede leer Markdown fácilmente. Asegurarse de mantener ese estándar en nuevas incorporaciones (evitar formatos binarios cerrados cuando sea posible, para que la IA pueda seguir accediendo al contenido).
+        
+    - **Coordinación con herramientas externas:** Dado que se mencionó uso de Obsidian, Notion, etc., y la posibilidad de sincronización, conviene verificar que la **estructura de carpetas no imponga problemas de sincronización** (nombres demasiado largos, caracteres especiales, etc.). Hasta donde se ve, los nombres están limpios (sin espacios ni caracteres prohibidos), así que debería ser compatible con drives en la nube y con herramientas de notas. Esto significa que los flujos de datos podrán también extenderse fuera de este sistema local, integrándose con las herramientas del equipo (por ejemplo, Notion podría apuntar a la carpeta `EMPRESAS/13CC.emp` pública para que todos vean los mismos documentos).
+        
+
+En conclusión, el sistema **sí está en condiciones de empezar con los flujos de datos internos** y de encarar el diseño del Whitepaper Consciente. La estructura depurada brinda confianza para implementar intercambios de información entre módulos, cuadernos y empresas sin que nada “se pierda en el camino”. Se recomienda aprovechar la documentación ya creada para mapear esos flujos en el Whitepaper: cada sección del Whitepaper puede referirse a partes específicas del sistema (incluso citando rutas o incluyendo diagramas de flujo entre carpetas). Esto asegurará que la teoría (Whitepaper) y la práctica (estructura ALMA LIBRE) estén alineadas. Cualquier pequeño ajuste pendiente en la estructura (p.ej. mover Alma Loader) se puede realizar en paralelo a la redacción del Whitepaper, coordinando ambos procesos.
+
+## Observaciones Técnicas y Mejora de Detalles (v0.0.6.2)
+
+Además de los puntos ya mencionados, se han identificado algunas **oportunidades de mejora menor** que podrían abordarse en una versión **v0.0.6.2** para pulir completamente el sistema. Estas observaciones se hacen a modo de **crítica constructiva**, pues abordan detalles finos ahora que lo grueso está resuelto:
+
+- **Corrección de nombres y erratas:**
+    
+    - Renombrar `BITACORA_CENTRAL/DIGNOSTICOS/` a `DIAGNOSTICOS/` (incluir la "A"). Asegurarse de actualizar cualquier referencia interna a ese nombre (p.ej. en índices o links de otros documentos, aunque es probable que no haya muchos aún).
+        
+    - Corregir el nombre de archivo `sincroinizar_alma_drive.md` a `sincronizar_alma_drive.md` (dentro de Auxiliares_dev) para enmendar el error ortográfico.
+        
+- **Eliminación de duplicados restantes:**
+    
+    - Finalizar la migración de `RECURSOS_Y_AYUDAS/Auxiliares_dev/` a `scripts_utiles/`. Mover `subir_alma.sh`, `Enfoques_1.md` y el resto de archivos útiles a `scripts_utiles/` (u otra subcarpeta más adecuada si corresponde) y luego borrar `Auxiliares_dev/` completamente. Con esto también se elimina el duplicado de `sync_drive_maestro.sh`file-bpismyeg8bbsyzgpdkdexf, quedando solo la copia en `scripts_utiles/` como **fuente oficial única**.
+        
+- **Unificación de sufijos para empresas:**
+    
+    - Decidir y aplicar consistentemente el uso del sufijo `.emp` en las carpetas de `EMPRESAS/`. Si 13CC lleva `.emp`, podría añadirse a `Alma_Mia_Fondo` y `Cannabird` por simetría, o alternativamente quitar `.emp` de 13CC. Cualquiera sea la elección, actualizar nombres de carpetas y documentación asociada en consecuencia. _(Si se opta por cambios de nombre, hacerlo antes de que haya muchos enlaces o referencias creados para minimizar correcciones posteriores.)_
+        
+- **Remover residuos de nombres antiguos:**
+    
+    - Eliminar o renombrar `13_CANNABIS_CLUB.zip` a `13CC.zip` dentro de `13CC.emp`. Idealmente, descomprimir ese zip en una subcarpeta (por ejemplo `03_ANEXOS/Anexo_historico_13CANNABISCLUB/`) y luego eliminar el archivo. De ese modo, la info histórica queda accesible sin mantener el nombre en desuso.
+        
+    - Similarmente, verificar si `CUADERNOS/empresas.cu/13CC.cu/Validacion/validaciones.zip` es necesario como zip o debería también incorporarse descomprimido en la estructura (seguimos la misma lógica aplicada a los resúmenes, que se descomprimieron para acceso directofile-astz2pxelstkrzadoy1jdz). Si no es un fichero crítico, conviene expandirlo o documentar su contenido.
+        
+- **Consistencia de formato en nombres de archivos y carpetas:**
+    
+    - Revisar el uso de mayúsculas/minúsculas: por ejemplo `scripts_utiles` vs `Auxiliares_dev`. Para una presentación más ordenada, usar una convención uniforme (todo minúscula con guiones bajos, o cada palabra capitalizada con guiones bajos). Actualmente prevalece minúscula en muchas subcarpetas, por lo que renombrar `Auxiliares_dev` a `auxiliares_dev` sería una opción (aunque si se elimina como se sugirió, esto queda resuelto eliminándola). Asegurarse que `RECURSOS_Y_AYUDAS` contenga nombres homogéneos (`scripts_utiles`, `REESTRUCTURACION_0.0.6` – este último está en mayúsculas, pero es un nombre propio/versionado, aceptable). Este punto es principalmente estético.
+        
+    - Del mismo modo, verificar que todos los README sigan un formato consistente de nombre. En `EMPRESAS` se usó `EMPRESAS_README.md`. Sería más estándar `README.md` dentro de la carpeta EMPRESAS (como sí se hace en otras carpetas). Se podría renombrar a simplemente `README.md` y aprovechar el título interno del archivo para indicar que es de EMPRESAS. Mantener el patrón `README.md` facilita que herramientas de documentación lo detecten automáticamente.
+        
+- **Reubicación del módulo Alma Loader:**
+    
+    - Como se detalló, mover `alma_loader_v3.0.3` fuera de `programacion/` hacia su propia carpeta `Alma_Loader/` en `MODULOS`. Crear allí `docs/` y migrar la documentación relevante (notas de desarrollo v3.0.2, etc.) desde `CUADERNOS/programacion.cu/Alma_loader_dev/` hacia `MODULOS/Alma_Loader/docs/`. Actualizar cualquier referencia en cuadernos que apunte a la ruta vieja.
+        
+    - Revisar dentro del código del módulo si hay rutas dependientes de la ubicación anterior (poco probable, pero confirmarlo).
+        
+- **Integración de documentación “externa” con la interna:**
+    
+    - Decidir el papel de las carpetas externas `docs/`, `configuracion/`, `instalacion/`, `logs/` que aparecen en el ZIP. Estas parecen estar pensadas como parte de un posible repositorio o entorno de despliegue (por ejemplo, `instalacion/README.md` seguramente contendrá instrucciones para instalar o iniciar ALMA LIBRE; `configuracion/` para archivos de config global; `logs/` para salidas del sistema). Es bueno tenerlas, pero actualmente están **vacías o en borrador**. Para v0.0.6.2, sería útil llenar al menos con contenido básico esos archivos:
+        
+        - En `instalacion/README.md`, detallar requisitos o pasos para montar el sistema (por ejemplo, estructura de carpetas, dependencias de software para usar Alma Loader, etc.).
+            
+        - En `configuracion/README.md`, mencionar si hay algún archivo de configuración (por ahora quizás no haya ninguno concreto; se podría pensar en centralizar configuraciones aquí en el futuro, por ejemplo API keys, opciones de módulos, etc.).
+            
+        - En `logs/README.md`, especificar cómo se manejarán logs. Si aún no hay un mecanismo, el README puede indicar “Carpeta reservada para logs del sistema en operación”.
+            
+    - Con respecto a la duplicación del glosario: se observa que `Glosario_ALMA_LIBRE_0.0.6.md` está presente en `docs/` y también (según backup) en la estructura previa. Decidir cuál será la fuente principal (lo lógico es usar `docs/Glosario_...md` como master). Asegurarse de enlazar este glosario desde el README principal y/o desde `RECURSOS_Y_AYUDAS/REESTRUCTURACION_0.0.6` para que no quede olvidado.
+        
+
+La siguiente es una **checklist resumida de mejoras pendientes** propuestas para la versión **v0.0.6.2**, para fácil seguimiento:
+
+-  **Renombrar carpetas/archivos con errores:** `DIGNOSTICOS` → `DIAGNOSTICOS`; corregir “sincroinizar” → “sincronizar”.
+    
+-  **Eliminar `Auxiliares_dev/`** tras mover su contenido a `scripts_utiles/` (unificar copia de `sync_drive_maestro.sh` y otros utilitarios)file-bpismyeg8bbsyzgpdkdexf.
+    
+-  **Unificar sufijo `.emp` en nombres de empresas** (añadir a faltantes o remover de 13CC) y aplicar el cambio globalmente.
+    
+-  **Renombrar/eliminar archivos con nombres obsoletos:** descomprimir `13_CANNABIS_CLUB.zip` y quitar el archivo; evaluar `validaciones.zip` en cuadernos.
+    
+-  **Homogeneizar capitalización en nombres** de carpetas dentro de secciones (uso consistente de minúsculas o mayúsculas según convención elegida).
+    
+-  **Estandarizar archivos README:** usar `README.md` en lugar de nombres custom (p. ej. `EMPRESAS_README.md` → `README.md` dentro de EMPRESAS/).
+    
+-  **Reubicar módulo Alma Loader:** mover a `MODULOS/Alma_Loader/` con subcarpeta `src/` (código) y `docs/` (documentación); migrar contenidos de dev correspondientesfile-bpismyeg8bbsyzgpdkdexf.
+    
+-  **Completar info en carpetas `configuracion/`, `instalacion/`, `logs/`:** agregar descripciones o guías básicas en sus README.md para definir su uso futuro.
+    
+-  **Conectar glosario y documentación:** enlazar `docs/Glosario_ALMA_LIBRE_0.0.6.md` desde README principal; asegurar que cualquier duplicado previo del glosario sea eliminado o marcado como histórico.
+    
+
+Atendiendo estos puntos en v0.0.6.2, el sistema **quedará impecable en su organización**. Ninguno de ellos representa un gran cambio estructural, sino ajustes menores pero importantes para la prolijidad, mantenibilidad y facilidad de uso colaborativo.
+
+## Plantilla Base – Diagnóstico Técnico de ALMA LIBRE
+
+_Para futuros diagnósticos técnicos del sistema, se sugiere utilizar la siguiente plantilla base, de modo de asegurar una cobertura exhaustiva y consistente de los aspectos clave. Esta plantilla puede guardarse y reutilizarse en la carpeta `DIAGNOSTICOS/`._
+
+
+
+Este diagnóstico provee una evaluación integral del sistema ALMA LIBRE, asegurando que esté listo para avanzar en la implementación efectiva de flujos internos y documentación consciente.
+
+
+## Archivo: 2025-04-01_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-04-01
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-04-03_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-04-03
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-04-05_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-04-05
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: resumen_semanal_14.md
+Contenido:
+# 📆 Resumen Semanal – Semana 14
+
+_Usar plantilla propuesta semanal._
+
+## Archivo: 2025-04-08_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-04-08
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-04-10_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-04-10
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-04-12_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-04-12
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: resumen_semanal_15.md
+Contenido:
+# 📆 Resumen Semanal – Semana 15
+
+# 📆 Resumen Semanal – Semana 15 (2025-04-09 al 2025-04-11)
+
+## 🩺 Salud y Bienestar
+- **Patrón general de sueño y energía:** Se inició el proceso de mejora en el descanso con ayuno nocturno.
+- **Consistencia alimentaria e hidratación:** Implementación de una dieta de omelette con atún y agua funcional.
+- **Actividades físicas realizadas:** Ejercicios de running y bicicleta para activar el cuerpo.
+- **Observaciones recurrentes:** Se priorizó el descanso y la nutrición consciente.
+
+tags:: #salud #bienestar #habitos
+
+## 📈 Trading
+- **Activos más trabajados:** Se registraron 3 trades reales y se reflexionó sobre un trade no realizado.
+- **Operaciones destacadas:** Evaluación de emociones y resultados de los trades.
+- **Patrones emocionales y técnicos observados:** Reflexión sobre el control emocional y la importancia de la planificación.
+
+tags:: #trading #bitacora #semana
+
+## 🏛️ Gestión Empresarial / 13CC
+- **Avances en estructura o gestión:** Se planteó el uso de Notion como base para el sistema de gestión del proyecto.
+- **Documentos nuevos o modificados:** Se estableció el formato de las hojas Notion como base para los resúmenes semanales.
+- **Reuniones y decisiones clave:** Se acordó la creación de nuevas secciones en ALMA.
+
+tags:: #empresa #13cc #reuniones
+
+## 🔎 ALMA – Sistema de Memorias
+- **Ajustes de estructura y resumen:** Se consolidaron las estructuras de los módulos ALMA Launcher y ALMA Sync.
+- **Notas sobre comportamientos de IA:** Reflexión sobre cómo ALMA está ayudando en la toma de decisiones estratégicas.
+- **Memorias creadas / corregidas:** No se mencionaron cambios importantes en las memorias.
+
+tags:: #alma #memorias #sistema
+
+## Archivo: 2025-04-14_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-04-14
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-04-16_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-04-16
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-04-18_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-04-18
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-04-20_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-04-20
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## 🧠 Síntesis Ejecutiva Semanal
+Resumen breve de lo más importante de la semana.
+- **Logros principales:** Se avanzó en la consolidación de la dieta funcional, se implementaron nuevos hábitos.
+- **Obstáculos enfrentados:** Sobrecarga digestiva por la cantidad de comida.
+- **Decisiones tomadas:** Ajustar las cantidades de comida y considerar ayunos cortos.
+
+tags:: #sintesis #semanal #ejecutivo
+
+## 🧘 Reflexión Terapéutica de la Semana
+- **¿Qué aprendizaje personal dejó esta semana?:** La importancia de ajustar la cantidad de comida para permitir al cuerpo descansar.
+- **¿Qué aspectos emocionales se repitieron?:** Reflexión sobre la autocrítica y el cuidado de los hábitos alimenticios.
+- **¿Qué se desea ajustar para la próxima?:** Ajustar las cantidades de comida y mantener el equilibrio entre disfrute y sobrecarga.
+
+tags:: #terapia #reflexion #mental
+
+## 🌱 Cultivo / Cannabird
+- **Acciones realizadas por sector:** No se mencionan acciones específicas esta semana.
+- **Ciclos o condiciones especiales:** No se registraron cambios significativos.
+- **Mejoras propuestas:** Considerar seguimiento del cultivo en las próximas semanas.
+
+tags:: #cultivo #riego #produccion #balance
+
+## 💻 Programación / Automatización
+- **Scripts implementados:** No se mencionan nuevos scripts esta semana.
+- **Backups realizados:** No se mencionaron acciones de backup específicas esta semana.
+- **Shortcuts o automatizaciones aplicadas:** No se mencionaron nuevas automatizaciones esta semana.
+
+tags:: #automatizacion #programacion #rclone
+
+## 📌 Tareas Críticas a Derivar
+- [ ] Tarea 1 → Ajustar las cantidades de comida y el enfoque en descanso digestivo.
+- [ ] Tarea 2 → Continuar con los avances en ALMA Sync y Notion.
+
+tags:: #tareas #pendientes #transicion
+
+
+## Archivo: 2025-04-22_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-04-22
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-04-24_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-04-24
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-04-26_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-04-26
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: resumen_semanal_17.md
+Contenido:
+# 📆 Resumen Semanal – Semana 17
+
+# 📆 Resumen Semanal – Semana 17 (2025-04-21 al 2025-04-25)
+
+## 🩺 Salud y Bienestar
+- **Patrón general de sueño y energía:** No se mencionaron detalles de sueño, pero hubo un enfoque en la comida consciente.
+- **Consistencia alimentaria e hidratación:** Dieta balanceada con énfasis en alimentos funcionales y sin procesados.
+- **Actividades físicas realizadas:** No se mencionaron actividades físicas específicas esta semana.
+- **Observaciones recurrentes:** Se destacó la importancia de equilibrar la cantidad de comida y evitar la sobrecarga digestiva.
+
+tags:: #salud #bienestar #habitos
+
+## 📈 Trading
+- **Activos más trabajados:** No se mencionan activos específicos esta semana.
+- **Operaciones destacadas:** No se mencionaron operaciones específicas.
+- **Patrones emocionales y técnicos observados:** Enfoque en la planificación y control emocional en el trading.
+
+tags:: #trading #bitacora #semana
+
+## 🏛️ Gestión Empresarial / 13CC
+- **Avances en estructura o gestión:** No se mencionaron avances específicos esta semana.
+- **Documentos nuevos o modificados:** No se mencionaron nuevos documentos esta semana.
+- **Reuniones y decisiones clave:** No se mencionaron reuniones específicas esta semana.
+
+tags:: #empresa #13cc #reuniones
+
+## 🔎 ALMA – Sistema de Memorias
+- **Ajustes de estructura y resumen:** Se trabajó en la integración de un sistema de migración y validación semántica.
+- **Notas sobre comportamientos de IA:** ALMA sigue evolucionando para integrar tareas automáticas y mejorar la eficiencia.
+- **Memorias creadas / corregidas:** No se mencionaron nuevas memorias esta semana.
+
+tags:: #alma #memorias #sistema
+
+## Archivo: Resumen_Mensual_Abril_2025.md
+Contenido:
+# 📆 Resumen Mensual – MES 2025-04
+
+## 🩺 Salud y Bienestar
+- **Evaluación general del mes:** Se mantuvo un equilibrio entre la dieta y las actividades físicas, aunque con algunas fluctuaciones en el descanso.
+- **Ritmos, hábitos estables o inconstantes:** Se implementaron hábitos de descanso y ayuno nocturno, con enfoque en la alimentación consciente.
+- **Observaciones críticas:** Hubo algunos desajustes en la alimentación, lo que generó cansancio y sobrecarga digestiva en ciertos momentos.
+
+tags:: #salud #mes #habitos
+
+## 📈 Trading
+- **Resultados globales del mes:** Reflexión sobre las operaciones no realizadas y el análisis emocional en el trading.
+- **Comportamientos psicológicos frecuentes:** Enfoque constante en el control emocional, aunque se registraron momentos de duda y ansiedad.
+- **Conclusiones de aprendizaje técnico:** Aprendimos sobre la importancia de la planificación y el control emocional en las operaciones.
+
+tags:: #trading #resumen #mensual
+
+## 🏛️ Gestión Empresarial / 13CC
+- **Avances administrativos y legales:** Avances en la estructura organizacional de 13CC, incluyendo la definición de la organización interna y el establecimiento de reuniones clave.
+- **Reuniones formales y balances:** Se registraron reuniones operativas y de planificación para continuar con los objetivos.
+- **Organización general del club:** Se consolidó la estructura de carpetas y se organizó la documentación de la empresa.
+
+tags:: #empresa #gestion #balance_mensual
+
+## 🔎 ALMA – Sistema de Memorias
+- **Cambios de diseño y flujo de almacenamiento:** Se implementaron mejoras en la estructura de memorias y la integración con Obsidian.
+- **Nuevos módulos integrados:** Se avanzó en la incorporación de nuevos módulos en ALMA, como la integración de trading y geopolítica.
+- **Sugerencias para escalar la IA:** Se propuso una mejora en la capacidad de procesamiento y la eficiencia del sistema.
+
+tags:: #alma #resumen #estructural
+
+## Archivo: 2025-04-28_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-04-28
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-04-30_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-04-30
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-05-02_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-05-02
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-05-04_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-05-04
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## 🧠 Síntesis Ejecutiva Semanal
+Resumen breve de lo más importante de la semana.
+- **Logros principales:** Avances en la reestructuración de ALMA LIBRE, mejora en la organización de los cuadernos y protocolos de proyectos.
+- **Obstáculos enfrentados:** Falta de automatización para ciertas áreas y sobrecarga de tareas pendientes.
+- **Decisiones tomadas:** Priorización de la consolidación de proyectos y ajustes estructurales antes de nuevas fases.
+
+tags:: #sintesis #semanal #ejecutivo
+
+## 🧘 Reflexión Terapéutica de la Semana
+- **¿Qué aprendizaje personal dejó esta semana?:** La importancia de no sobrecargar el cuerpo con demasiada comida o tareas.
+- **¿Qué aspectos emocionales se repitieron?:** La necesidad de encontrar el equilibrio entre trabajo, descanso y reflexión.
+- **¿Qué se desea ajustar para la próxima?:** Controlar la sobrecarga mental y física, y establecer nuevas rutinas de descanso.
+
+tags:: #terapia #reflexion #mental
+
+## 🌱 Cultivo / Cannabird
+- **Acciones realizadas por sector:** Inicio del **Proyecto 333** y ajuste en el pH para mejorar las condiciones del cultivo.
+- **Ciclos o condiciones especiales:** El cultivo presenta fluctuaciones en la temperatura, pero se están tomando medidas correctivas.
+- **Mejoras propuestas:** Continuar con la estabilización del pH y mantener un enfoque en el equilibrio ambiental.
+
+tags:: #cultivo #riego #produccion #balance
+
+## 💻 Programación / Automatización
+- **Scripts implementados:** Avances importantes en la optimización del sistema de memorias ALMA.
+- **Backups realizados:** No se mencionaron acciones de backup específicas esta semana.
+- **Shortcuts o automatizaciones aplicadas:** Se trabajó en la migración de datos y mejoras en la automatización del flujo de trabajo.
+
+tags:: #automatizacion #programacion #rclone
+
+## 📌 Tareas Críticas a Derivar
+- [ ] Tarea 1 → Seguir con el avance del Proyecto 333 y asegurar condiciones estables para el cultivo.
+- [ ] Tarea 2 → Continuar con la optimización de ALMA y el sistema de memorias.
+
+tags:: #tareas #pendientes #transicion
+
+
+## Archivo: 2025-05-09_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-05-09
+
+
+### Archivos Generados:
+
+- Resúmenes Semanales (Semana 15, 16, 17, 18 y 19)
+    
+- Resumen Mensual de Abril
+    
+- Resumen Diario de 2025-05-09
+
+
+### Nuevo protocolo de mediciones
+al hacer las mediciones agarrar 4 plantas (1 2 3 4) el ueves tomar la medicion en (5 6 7 8) el lunes tomar en (9, 10, 11, 12) el jueves siguiente en (13, 14, 15, 16) y ahi volver a empezar el ciclo
+
+## Archivo: resumen_semanal_19_final.md
+Contenido:
+
+# 📆 Resumen Semanal – Semana 19 (2025-05-05 al 2025-05-11)
+
+
+## 🩺 Salud y Bienestar
+- Energía equilibrada, aunque con algunas noches irregulares.
+- Dieta saludable y consciente.
+- No se detallaron actividades físicas.
+- Se reafirma la necesidad de balancear tareas con autocuidado.
+
+tags:: #salud #bienestar #habitos
+
+
+## 📈 Trading
+- Seguimiento de BTC, ETH y EURUSD.
+- Ajustes en análisis técnico sin operaciones destacadas.
+- Reflexión sobre la disciplina emocional como eje de mejora.
+
+tags:: #trading #bitacora #semana
+
+
+## 🏛️ Gestión Empresarial / 13CC
+- Sincronización de carpetas y estructuras entre 13CC y ALMA.
+- Separación formal/informal de documentación: PDF para externos, cuadernos internos en Obsidian.
+- Fortalecimiento de roles y tareas dentro del equipo.
+- Definición de nuevas estrategias operativas.
+
+tags:: #empresa #13cc #reuniones
+
+
+## 🔎 ALMA – Sistema de Memorias
+- Reorganización y limpieza profunda de carpetas de versiones previas.
+- Unificación de estructura en Obsidian + Google Drive.
+- Preparación de resúmenes, changelogs y documentación viva.
+- Consolidación del sistema como eje organizativo.
+
+tags:: #alma #memorias #sistema
+
+## Archivo: 2025-05-12_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-05-12
+
+
+## 🩺 Salud y Bienestar Diario
+
+Estuve bardeando hoy pero bueno, de a poco vamos bardeando cada vez menos.
+
+tags:: #salud #bienestar #reflex
+
+
+## 📈 Trading
+
+Fundimos la cuenta. Habrá que volver a empezar con más calma. La intención era lanzar el fondo en serio, pero hubo desvíos emocionales.  
+Aprendizaje: controlar impulso y no forzar la operativa.
+
+tags:: #trading #disciplina #reflex #btc
+
+
+## 🏛️ Gestión Empresarial / 13CC
+
+(No se registraron acciones)
+
+tags:: #empresa #13cc
+
+
+## 🔎 Revisión del Sistema ALMA
+
+### ⚙️ Actividades Técnicas
+
+- Finalización de todas las secciones del Whitepaper y Prompt Técnico v0.0.6.1
+    
+- Generación de README y documentación base en `docs_0.0.6.1/`
+    
+- Definición conceptual sobre el rol de NotebookLM como herramienta auxiliar, no reemplazo
+    
+
+### 📚 Documentos Clave
+
+- Whitepaper v0.0.6.1 (8 secciones)
+    
+- Prompt Técnico v0.0.6.1 (9 secciones)
+    
+- Glosario, Changelog, README, Diagnóstico, version.txt
+    
+
+### 💡 Ideas Clave
+
+- NotebookLM como lector de memorias, pero no operativamente capaz como ALMA
+    
+- Estrategia combinada: ALMA como base estructural + IA puntual para consultas
+    
+- Diseño modular con foco en trazabilidad
+    
+
+### 🔗 Flujo entre Componentes
+
+- Interconexión sólida entre `CUADERNOS/`, `BITACORA_CENTRAL/` y `MODULOS/`
+    
+- Estandarización total para ingesta por Alma_Loader
+    
+- Flujo listo para diagnóstico automático
+    
+
+### ✅ Estado Final
+
+- Versión: **v0.0.6.2 cerrada**
+    
+- Documentación: completa y organizada
+    
+- Flujo IA-humanos: preparado para integración
+    
+
+tags:: #alma #documentacion #flujos #versionado #ia #modularidad
+
+
+## 📘 Documentación Completada
+
+- `prompt_tecnico_v0.0.6.2.md`: flujos, reglas, multiusuario
+    
+- `whitepaper_v0.0.6.2.md`: sección de casos reales
+    
+- `casos_uso_reales.md`: flujos de trading, cultivo y diagnóstico
+    
+- `roadmap_0.0.6.3.md`: integración CLI, feedback, métricas
+    
+
+tags:: #docs #casos_uso #roadmap
+
+
+## 🧩 Decisiones Importantes
+
+- DeepSeek será motor oficial de todos los futuros scripts
+    
+- Se consolidan dos documentos principales: prompt técnico + whitepaper
+    
+- Se usarán `CHANGELOG` y `README` por versión
+    
+- Se introducen casos de uso como puente entre humanos y IAs
+    
+
+tags:: #decisiones #deepseek #estrategia
+
+
+✍️ _"Versión cerrada con todos los módulos en su lugar. Hoy ALMA realmente cobró vida como sistema técnico vivo y trazable."_
+
+
+## 🧠 Reflexiones Personales
+
+Me quedé bardeando, pero vamos mejorando. A pesar de todo, se mantuvo el foco general del sistema. Persistencia y continuidad como eje.
+
+tags:: #reflexion #gestion_personal #emociones
+
+
+## 🧘‍♂️ Sesión de Cierre Terapéutico
+
+(No se registró)
+
+tags:: #terapia #autoobservacion #introspeccion
+
+
+## 🌱 Cultivo / Cannabird
+
+(No se registraron tareas)
+
+tags:: #cultivo #cannabird
+
+
+## 💻 Programación / Automatización
+
+(No se registraron tareas)
+
+tags:: #programacion #automatizacion
+
+
+## 🧠 Tareas y Pendientes Clave
+
+-  Volver a organizar plan de trading con calma
+    
+-  Registrar cambios pendientes en cultivo
+    
+-  Retomar foco en módulo CLI para ALMA v0.0.6.3
+    
+
+tags:: #tareas #foco #pendientes #trading
+
+
+## 🧠 Reflexiones Personales
+
+- Se consolidó el entendimiento profundo del sistema de sincronización de Obsidian en un entorno hostil como Parrot OS.
+- Quedó claro que la resiliencia del sistema ALMA depende de tener backups, logs técnicos y sincronización clara entre nodos.
+
+
+## ☁️ Obsidian Sync – Evento Crítico
+
+- Se identificó una mala vinculación inicial entre el Vault local `~/Alma` y el Remote Vault `ALMA_CORE`.
+- Se crearon y ejecutaron scripts personalizados:
+  - `fix_obsidian_permissions.sh`
+  - `reset_obsidian_sync.sh`
+  - `verificar_vault_alma.sh`
+- Se logró finalmente vincular el Vault remoto de forma estable.
+- Se descargó todo el historial del Remote Vault, activando por completo el sistema de sincronización.
+
+
+## 🔧 Scripts Incorporados
+
+- `verificar_vault_alma.sh`: Diagnóstico estructural del Vault.
+- `fix_obsidian_permissions.sh`: Reparación de permisos en Parrot.
+- `reset_obsidian_sync.sh`: Reset completo de configuración de Obsidian.
+- Se estableció carpeta `~/Scripts/` como contenedor oficial de herramientas internas ALMA.
+
+
+## 🧪 Pendientes y Seguimiento
+
+- Confirmar integridad de los archivos descargados.
+- Limpiar conflictos, duplicados y carpetas vacías detectadas por verificador.
+- Documentar el protocolo de recuperación como plantilla fija.
+
+
+### 🧭 Proceso general
+
+- Se planteó un escenario de trabajo sin Internet o post-apocalíptico para definir una infraestructura autosuficiente.
+- Se decidió usar un disco externo como nodo portátil con sistema operativo propio.
+- Se analizó compatibilidad y rendimiento de dos discos (Toshiba 500GB HDD vs Kingston 240GB SSD).
+- Se eligió instalar **Parrot OS Security Edition** como sistema base hacker-portátil.
+
+
+### ✅ Estado final
+Parrot OS funcionando como sistema operativo portable desde el disco Toshiba.  
+Base sólida para configurar ALMA_RESIST con enfoque CLI + IA + privacidad total.
+
+## Archivo: resumen_semanal_20.md
+Contenido:
+# 📆 Resumen Semanal – Semana 20
+
+_Usar plantilla propuesta semanal._
+
+## Archivo: resumen_mensual_mayo.md
+Contenido:
+# 📆 Resumen Mensual – MES YYYY
+
+
+## 🩺 Salud y Bienestar
+
+- Evaluación general del mes (energía, salud física)
+- Ritmos, hábitos estables o inconstantes
+- Observaciones críticas
+
+tags:: #salud #mes #habitos
+
+
+## 📈 Trading
+
+- Resultados globales del mes (ganancia/perdida, calidad)
+- Comportamientos psicológicos frecuentes
+- Conclusiones de aprendizaje técnico
+
+tags:: #trading #resumen #mensual
+
+
+## 🏛️ Gestión Empresarial / 13CC
+
+- Avances administrativos y legales
+- Reuniones formales y balances
+- Organización general del club
+
+tags:: #empresa #gestion #balance_mensual
+
+
+## 🔎 ALMA – Sistema de Memorias
+
+- Cambios de diseño y flujo de almacenamiento
+- Nuevos módulos integrados
+- Sugerencias para escalar la IA
+
+tags:: #alma #resumen #estructural
+
+## Archivo: 2025-05-28_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-05-28
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-05-30_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-05-30
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-06-01_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-06-01
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-06-02_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-06-02
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-06-04_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-06-04
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-06-06_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-06-06
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-06-08_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-06-08
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-06-09_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-06-09
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-06-11_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-06-11
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-06-13_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-06-13
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-06-15_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-06-15
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-06-16_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-06-16
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-06-18_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-06-18
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-06-20_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-06-20
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-06-22_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-06-22
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: resumen_mensual_junio.md
+Contenido:
+# 📆 Resumen Mensual – JUNIO 2025
+
+_Usar plantilla propuesta mensual._
+
+## Archivo: 2025-06-24_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-06-24
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-06-26_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-06-26
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-06-28_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-06-28
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: resumen_semanal_26.md
+Contenido:
+# 📆 Resumen Semanal – Semana 26
+
+_Usar plantilla propuesta semanal._
+
+## Archivo: 2025-07-01_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-07-01
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-07-03_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-07-03
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-07-05_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-07-05
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: resumen_semanal_27.md
+Contenido:
+# 📆 Resumen Semanal – Semana 27
+
+_Usar plantilla propuesta semanal._
+
+## Archivo: 2025-07-08_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-07-08
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-07-10_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-07-10
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-07-12_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-07-12
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: resumen_semanal_28.md
+Contenido:
+# 📆 Resumen Semanal – Semana 28
+
+_Usar plantilla propuesta semanal._
+
+## Archivo: 2025-07-15_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-07-15
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-07-17_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-07-17
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-07-19_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-07-19
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: resumen_semanal_29.md
+Contenido:
+# 📆 Resumen Semanal – Semana 29
+
+_Usar plantilla propuesta semanal._
+
+## Archivo: 2025-07-21_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-07-21
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-07-23_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-07-23
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-07-25_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-07-25
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-07-27_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-07-27
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-07-28_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-07-28
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-07-30_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-07-30
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-08-01_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-08-01
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-08-03_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-08-03
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-08-04_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-08-04
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-08-06_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-08-06
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-08-08_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-08-08
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-08-10_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-08-10
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-08-11_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-08-11
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-08-13_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-08-13
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-08-15_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-08-15
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-08-17_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-08-17
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: resumen_mensual_agosto.md
+Contenido:
+# 📆 Resumen Mensual – AGOSTO 2025
+
+_Usar plantilla propuesta mensual._
+
+## Archivo: 2025-08-19_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-08-19
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-08-21_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-08-21
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-08-23_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-08-23
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: resumen_semanal_34.md
+Contenido:
+# 📆 Resumen Semanal – Semana 34
+
+_Usar plantilla propuesta semanal._
+
+## Archivo: 2025-08-26_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-08-26
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-08-28_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-08-28
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-08-30_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-08-30
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: resumen_semanal_35.md
+Contenido:
+# 📆 Resumen Semanal – Semana 35
+
+_Usar plantilla propuesta semanal._
+
+## Archivo: 2025-09-02_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-09-02
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-09-04_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-09-04
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-09-06_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-09-06
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: resumen_semanal_36.md
+Contenido:
+# 📆 Resumen Semanal – Semana 36
+
+_Usar plantilla propuesta semanal._
+
+## Archivo: 2025-09-09_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-09-09
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-09-11_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-09-11
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-09-13_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-09-13
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: resumen_semanal_37.md
+Contenido:
+# 📆 Resumen Semanal – Semana 37
+
+_Usar plantilla propuesta semanal._
+
+## Archivo: 2025-11-10_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-11-10
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-11-12_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-11-12
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-11-14_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-11-14
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-11-16_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-11-16
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-11-17_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-11-17
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-11-19_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-11-19
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-11-21_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-11-21
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-11-23_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-11-23
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-11-24_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-11-24
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-11-26_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-11-26
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-11-28_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-11-28
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-11-30_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-11-30
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-12-01_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-12-01
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-12-03_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-12-03
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-12-05_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-12-05
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-12-07_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-12-07
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: resumen_mensual_diciembre.md
+Contenido:
+# 📆 Resumen Mensual – DICIEMBRE 2025
+
+_Usar plantilla propuesta mensual._
+
+## Archivo: 2025-10-14_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-10-14
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-10-16_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-10-16
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-10-18_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-10-18
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: resumen_semanal_42.md
+Contenido:
+# 📆 Resumen Semanal – Semana 42
+
+_Usar plantilla propuesta semanal._
+
+## Archivo: 2025-10-21_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-10-21
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-10-23_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-10-23
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-10-25_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-10-25
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: resumen_semanal_43.md
+Contenido:
+# 📆 Resumen Semanal – Semana 43
+
+_Usar plantilla propuesta semanal._
+
+## Archivo: 2025-10-28_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-10-28
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-10-30_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-10-30
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-11-01_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-11-01
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: resumen_semanal_44.md
+Contenido:
+# 📆 Resumen Semanal – Semana 44
+
+_Usar plantilla propuesta semanal._
+
+## Archivo: 2025-11-04_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-11-04
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-11-06_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-11-06
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-11-08_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-11-08
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: resumen_semanal_45.md
+Contenido:
+# 📆 Resumen Semanal – Semana 45
+
+_Usar plantilla propuesta semanal._
+
+## Archivo: 2025-09-15_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-09-15
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-09-17_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-09-17
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-09-19_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-09-19
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-09-21_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-09-21
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-09-22_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-09-22
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-09-24_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-09-24
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-09-26_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-09-26
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-09-28_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-09-28
+
+_Usar plantilla propuesta_3 para este resumen._
+
+## Archivo: 2025-09-29_diario.md
+Contenido:
+# 📅 Resumen Diario – 2025-09-29
+
+_Usar plantilla propuesta_3 para este resumen._
+

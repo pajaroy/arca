@@ -1,0 +1,21 @@
+
+🧠 ALMA LIBRE – META INFORME DE VERSIÓN 1.0.0
+────────────────────────────────────────────
+
+📦 Versión:           1.0.0
+📅 Fecha de creación: 2025-04-24
+🧑 Autor:             Santi
+🧠 Estado:            Lanzamiento Oficial del Sistema Personal ALMA LIBRE
+
+🌱 Esta versión se basa en:
+- Estructura técnica de alma_0.9.4
+- Prompt funcional y whitepaper de 0.8.0.2
+
+📘 Reglas de trabajo a partir de esta versión:
+1. Ningún archivo crítico (Prompt Activo, README, alma_sync.py, memoria.db) puede ser modificado sin validación previa.
+2. Todo cambio debe:
+    - Ser respaldado con copia anterior
+    - Estar reflejado en el CHANGELOG correspondiente
+    - Confirmarse con una nueva subversión (1.0.1, 1.0.2...)
+
+🚀 Esta versión marca el comienzo del sistema ALMA como núcleo operativo estable y fundacional.

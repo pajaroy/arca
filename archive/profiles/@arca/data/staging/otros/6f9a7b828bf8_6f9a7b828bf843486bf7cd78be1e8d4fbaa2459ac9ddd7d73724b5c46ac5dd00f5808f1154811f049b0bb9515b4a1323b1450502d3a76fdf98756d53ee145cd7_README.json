@@ -1,0 +1,28 @@
+{
+  "version": "0.2.0",
+  "tipo": "readme",
+  "schema": "almaresist.readme_v1",
+  "descripcion": "Manual técnico-operativo del módulo bitácora v0.2.0 para CLI ALMA_RESIST. Instrucciones de uso, ejemplos y dependencias.",
+  "estructura": [
+    "readme_tecnico.yaml"
+  ],
+  "tags": [
+    "tecnico",
+    "bitacora",
+    "cli",
+    "docs",
+    "manual",
+    "v0.2.0"
+  ],
+  "linked_to": [
+    "../README.yaml",
+    "../../src/README.yaml"
+  ],
+  "responsable": "Equipo de Operaciones ALMA_RESIST",
+  "hash_verificacion": "sha256:pending",
+  "historial": [
+    "2025-06-17: Migración y documentación de manual técnico bajo estándar modular."
+  ],
+  "last_modified": "2025-06-17T11:23:00Z",
+  "last_modified_by": "Kael"
+}

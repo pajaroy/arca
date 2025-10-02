@@ -1,0 +1,31 @@
+
+from fastapi import APIRouter
+
+router = APIRouter(
+    prefix="/v1/cultivo",
+    tags=["cultivo"]
+)
+
+@router.get(
+    "/status",
+    summary="Estado del módulo de Cultivo",
+    description="Verifica el estado operativo del subsistema de agricultura"
+)
+async def obtener_estado_cultivo():
+    """Endpoint de monitoreo de salud del módulo"""
+    return {
+        "modulo": "cultivo",
+        "estado": "operativo",
+        "detalles": {
+            "versión": "1.0.0",
+            "metricas": {
+                "sectores": ["hidroponia", "permacultura"],
+                "parametros": ["ph", "humedad"]
+            }
+        }
+    }
+
+# 🌱 Espacio para futuros endpoints:
+# - /parametros-cultivo
+# - /alertas-riego
+# - /calendario-siembra

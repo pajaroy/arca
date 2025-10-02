@@ -1,0 +1,20 @@
+# 🧭 ESQUEMA DE PLANIFICACIÓN – 13 Cannabis Club
+
+Este documento organiza el sistema completo de planificación, objetivos y tareas de 13CC y del Director Ejecutivo de Gestión (DEG).  
+Divide los documentos por nivel de planificación, frecuencia y responsable.
+
+
+## 📁 Tabla de archivos por nivel
+
+| Archivo                                 | Nivel       | Responsable | Frecuencia revisión | Ubicación sugerida                                              |
+|----------------------------------------|-------------|-------------|----------------------|------------------------------------------------------------------|
+| roadmap_general_13CC.md                | Estratégico | DEG         | Trimestral           | `02_DOCUMENTOS/`                                                |
+| metas_trimestrales_2025_Q2.md          | Táctico     | DEG         | Mensual              | `02_DOCUMENTOS/`                                                |
+| tareas_coordinacion_general.md         | Operativo   | DEG + equipo| Semanal              | `03_COORDINACION/`                                              |
+| checklist_corto_plazo.md               | Operativo   | DEG         | Diario               | `01_PERSONAL/tareas_personales/`                                |
+| checklist_medio_plazo.md               | Operativo   | DEG         | Semanal              | `01_PERSONAL/tareas_personales/`                                |
+| checklist_largo_plazo.md               | Operativo   | DEG         | Mensual              | `01_PERSONAL/tareas_personales/`                                |
+
+
+**Última revisión:** 2025-05-08  
+**Autor:** Santiago Calvo (DEG)

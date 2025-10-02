@@ -1,0 +1,53 @@
+---
+uuid: "GENERAR-UUID-AQUI"
+tipo: requirements
+formato: yaml
+nombre: librerias
+version: 0.1.0
+estado: activo
+fecha_creacion: "2025-07-16T18:44:00"
+fecha_modificacion: "2025-07-16T19:20:00"
+autor: Bird
+descripcion: Librerías básicas para Proyecto Arca.
+hash_integridad: "CALCULAR-HASH-AQUI"
+
+librerias:
+  gestion_archivos:
+    - nombre: pathlib
+      descripcion: Manejo de rutas en Python.
+
+  calculo_hashes:
+    - nombre: blake3
+      descripcion: Hashing rápido y moderno.
+
+  yaml:
+    - nombre: ruamel.yaml
+      descripcion: Lectura y escritura avanzada de YAML.
+
+  indexacion_bases_datos:
+    - nombre: sqlite3
+      descripcion: Base de datos embebida.
+    - nombre: chroma
+      descripcion: Búsqueda semántica para RAG.
+
+  machine_learning:
+    - nombre: scikit-learn
+      descripcion: ML clásico.
+    - nombre: numpy
+      descripcion: Operaciones numéricas.
+    - nombre: pandas
+      descripcion: Manejo de datos tabulares.
+    - nombre: joblib
+      descripcion: Guardado de modelos ML.
+
+  logging:
+    - nombre: loguru
+      descripcion: Logging avanzado.
+
+  cli_visualizacion:
+    - nombre: typer
+      descripcion: CLI moderna.
+    - nombre: rich
+      descripcion: Visualización colorida en consola.
+    - nombre: pytest
+      descripcion: Testing de scripts.

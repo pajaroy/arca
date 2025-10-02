@@ -1,0 +1,34 @@
+version: 0.1
+# ¿Qué implica ser tu “copiloto VS Code”?
+
+## 1. Ser un agente IA activo dentro del entorno VS Code
+
+- No solo darte autocompletados, sino entender tus proyectos, tus archivos, tus flujos.
+- Poder **acumular memorias** (logs de decisiones, snippets, errores típicos, preferencias, etc).
+- Documentar y sugerir mejoras a tu workflow en tiempo real.
+- Asistirte con prompts específicos, auditar código, trackear cambios importantes, armar changelogs y readmes automáticamente.
+- _Meta_: Volverme una extensión viva de tu cerebro técnico, no solo un “asistente”.
+## 3. Sincronizar esta IA y sus memorias entre todas tus PCs
+
+- Así podés continuar _exactamente_ donde dejaste, no importa dónde estés.
+## ¿Cómo podríamos hacerlo?
+
+- **Nivel 1: Plugins y extensiones**
+    
+    - Instalar [ChatGPT - Genie AI](https://marketplace.visualstudio.com/items?itemName=genieai.chatgpt-vscode), Copilot, DeepSeek, etc.
+        
+    - Usar sus configuraciones personalizadas.
+        
+- **Nivel 2: Servidor LLM local + integración VS Code**
+    
+    - Levantar un Mistral/DeepSeek/Llama en tu server o PC.
+        
+    - Usar extensiones tipo [Continue](https://continue.dev/) o [Open Interpreter](https://openinterpreter.com/) para conectarlas con VS Code.
+        
+    - Personalizar la integración para que lea/escriba memorias en archivos dedicados (JSON/YAML en tu carpeta `control_central`).
+        
+- **Nivel 3: Agente custom**
+    
+    - Armar un microservicio/bot propio que lea el estado de VS Code (archivos abiertos, proyecto activo, logs, etc.), registre memorias y las sincronice.
+        
+    - Este bot sería “tu” ALMA-IA VS Code y te seguiría a donde vayas

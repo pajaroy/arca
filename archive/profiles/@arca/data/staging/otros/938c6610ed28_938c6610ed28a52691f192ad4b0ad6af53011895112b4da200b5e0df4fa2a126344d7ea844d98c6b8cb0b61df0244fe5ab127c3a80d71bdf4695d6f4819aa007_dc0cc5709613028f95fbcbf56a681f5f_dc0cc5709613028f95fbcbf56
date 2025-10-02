@@ -1,0 +1,13 @@
+sudo parted /dev/sda -- mklabel gpt
+sudo parted /dev/sda -- mkpart primary 1MiB 3MiB
+sudo parted /dev/sda -- set 1 bios_grub on
+
+sudo parted /dev/sda -- mkpart ESP fat32 3MiB 515MiB
+sudo parted /dev/sda -- set 2 esp on
+
+sudo parted /dev/sda -- mkpart primary ext4 515MiB 16.5GiB
+sudo parted /dev/sda -- mkpart primary linux-swap 16.5GiB 32.5GiB
+
+# Las extendidas o futuras luks:
+sudo parted /dev/sda -- mkpart primary 32.5GiB 127.5GiB
+sudo parted /dev/sda -- mkpart primary 127.5GiB 100%

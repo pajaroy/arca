@@ -1,0 +1,165 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_7b638c
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Test Api Responder
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:1a25c82db80f46fc1cfa1f07cab0e8c29cc50d43a640e6c16f9d666854e8cd02
+---
+import pytest
+from fastapi.testclient import TestClient
+from unittest.mock import Mock, patch, MagicMock
+from main import app, model_wrapper, model_loaded
+import json
+import logging
+
+# Fixture principal para el cliente de prueba
+@pytest.fixture(scope="module")
+def client():
+    with TestClient(app) as client:
+        yield client
+
+# Fixture para mockear todas las dependencias
+@pytest.fixture(autouse=True)
+def mock_dependencies():
+    # Mock del ModelWrapper
+    with patch("main.ModelWrapper") as mock_model:
+        # Mock del TransportLayer
+        with patch("main.TransportLayer") as mock_transport:
+            # Mock del ContextTracker
+            with patch("main.ContextTracker") as mock_context:
+                # Configurar mocks
+                mock_model_instance = MagicMock()
+                mock_model_instance.generate.return_value = "Respuesta generada"
+                mock_model_instance.get_model_info.return_value = {
+                    "nombre": "mock-model",
+                    "cuantización": "Q4"
+                }
+
+                mock_transport_instance = MagicMock()
+                mock_context_instance = MagicMock()
+
+                mock_model.return_value = mock_model_instance
+                mock_transport.return_value = mock_transport_instance
+                mock_context.return_value = mock_context_instance
+
+                # Inyectar mocks en la app
+                app.dependency_overrides = {}
+                yield {
+                    "model": mock_model_instance,
+                    "transport": mock_transport_instance,
+                    "context": mock_context_instance
+                }
+
+# Helper para resetear estado global
+def reset_global_state():
+    global model_loaded, model_wrapper
+    model_loaded = False
+    model_wrapper = None
+
+# Tests principales
+def test_successful_response(client, mock_dependencies):
+    reset_global_state()
+    # Forzar modelo cargado
+    global model_loaded
+    model_loaded = True
+
+    test_prompt = "¿Cuál es el sentido de la vida?"
+    response = client.post("/responder", json={"prompt": test_prompt})
+
+    assert response.status_code == 200
+    data = response.json()
+
+    # Validar estructura básica
+    assert "respuesta" in data
+    assert "metadata" in data
+    assert isinstance(data["respuesta"], str)
+
+    # Validar metadata
+    metadata = data["metadata"]
+    assert metadata["modelo"] == "mock-model"
+    assert metadata["longitud_prompt"] == len(test_prompt)
+    assert isinstance(metadata["timestamp"], float)
+
+    # Verificar integraciones
+    mock_dependencies["transport"].send.assert_called_once()
+    mock_dependencies["context"].track_interaction.assert_called_once()
+
+def test_empty_prompt_validation(client):
+    response = client.post("/responder", json={"prompt": ""})
+    assert response.status_code == 422
+    errors = response.json()["detail"]
+    assert any(e["loc"] == ["body", "prompt"] for e in errors)
+
+def test_model_not_loaded(client, mock_dependencies):
+    reset_global_state()
+    response = client.post("/responder", json={"prompt": "test"})
+    assert response.status_code == 503
+    assert "modelo no está cargado" in response.json()["detail"]
+
+def test_internal_error(client, mock_dependencies, caplog):
+    reset_global_state()
+    model_loaded = True
+
+    # Forzar error en generación
+    mock_dependencies["model"].generate.side_effect = RuntimeError("Simulated error")
+
+    response = client.post("/responder", json={"prompt": "test"})
+    assert response.status_code == 500
+    assert "Error interno" in response.json()["detail"]
+
+    # Verificar logging
+    assert "Error en generación" in caplog.text
+
+def test_response_structure_integrity(client, mock_dependencies):
+    reset_global_state()
+    model_loaded = True
+
+    response = client.post("/responder", json={"prompt": "test"})
+    data = response.json()
+
+    # Validación de schema respuesta
+    assert "respuesta" in data
+    assert "metadata" in data
+    assert all(key in data["metadata"] for key in ["modelo", "longitud_prompt", "timestamp"])
+
+    # Validar tipos de datos
+    assert isinstance(data["metadata"]["modelo"], str)
+    assert isinstance(data["metadata"]["longitud_prompt"], int)
+    assert isinstance(data["metadata"]["timestamp"], float)
+
+def test_response_does_not_include_prompt(client, mock_dependencies):
+    reset_global_state()
+    model_loaded = True
+
+    response = client.post("/responder", json={"prompt": "secreto"})
+    data = response.json()
+    assert "secreto" not in data["respuesta"]
+    assert "secreto" not in json.dumps(data)
+
+def test_model_loading_at_startup(client, mock_dependencies):
+    reset_global_state()
+
+    # Simular carga exitosa
+    mock_dependencies["model"].load_model.return_value = None
+
+    # Ejecutar startup event
+    client.app.router.on_startup[0]()
+
+    assert model_loaded is True
+    assert model_wrapper is not None
+
+@pytest.fixture(autouse=True)
+def cleanup():
+    yield
+    reset_global_state()

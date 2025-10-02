@@ -1,0 +1,143 @@
+Aquí está la implementación completa y corregida del validador utilizando `pathlib`:
+
+python
+
+Copy
+
+Download
+
+# core/validador.py
+import json
+from pathlib import Path
+from json.decoder import JSONDecodeError
+import jsonschema
+from jsonschema import ValidationError
+from jsonschema.validators import Draft7Validator
+
+def validar_esquema(data: dict, nombre_esquema: str) -> None:
+    """
+    Valida un diccionario contra un esquema JSON Schema Draft 7.
+    
+    Args:
+        data: Diccionario con los datos a validar
+        nombre_esquema: Nombre del archivo en la carpeta schemas (ej: 'schema_base.json')
+    
+    Raises:
+        FileNotFoundError: Si el archivo de esquema no existe
+        JSONDecodeError: Si el esquema no es JSON válido
+        ValidationError: Si la validación falla
+    """
+    # Construir ruta absoluta al esquema
+    base_path = Path(__file__).parent.parent
+    schemas_dir = base_path / "schemas"
+    schema_path = schemas_dir / nombre_esquema
+
+    # Verificar existencia del archivo
+    if not schema_path.exists():
+        raise FileNotFoundError(f"Esquema no encontrado: {schema_path}")
+
+    # Cargar y validar esquema
+    try:
+        schema_content = schema_path.read_text(encoding="utf-8")
+        schema = json.loads(schema_content)
+    except JSONDecodeError as e:
+        raise JSONDecodeError(
+            msg=f"Esquema inválido en {nombre_esquema}: {e.msg}",
+            doc=e.doc,
+            pos=e.pos
+        ) from e
+
+    # Validar contra Draft 7
+    try:
+        Draft7Validator(schema=schema, format_checker=Draft7Validator.FORMAT_CHECKER).validate(data)
+    except ValidationError as e:
+        e.message = f"Error de validación en '{nombre_esquema}': {e.message}"
+        raise
+
+**Mejoras respecto a la versión anterior:**
+
+1. ✅ **Manejo moderno de rutas con `pathlib`:**
+    
+    python
+    
+    Copy
+    
+    Download
+    
+    base_path = Path(__file__).parent.parent
+    schemas_dir = base_path / "schemas"
+    
+2. ✅ **Validación estricta con Draft 7:**
+    
+    python
+    
+    Copy
+    
+    Download
+    
+    Draft7Validator(schema=schema, format_checker=Draft7Validator.FORMAT_CHECKER).validate(data)
+    
+3. ✅ **Mensajes de error detallados:**
+    
+    - Ruta completa en FileNotFoundError
+        
+    - Contexto del esquema en JSONDecodeError
+        
+    - Prefijo descriptivo en ValidationError
+        
+4. ✅ **Codificación explícita UTF-8:**
+    
+    python
+    
+    Copy
+    
+    Download
+    
+    schema_content = schema_path.read_text(encoding="utf-8")
+    
+5. ✅ **Preservación del stack trace original:**
+    
+    - Uso de `raise ... from e` para mantener contexto de errores
+        
+
+**Ejemplo de uso con manejo de errores:**
+
+python
+
+Copy
+
+Download
+
+try:
+    validar_esquema(memoria, "schema_base.json")
+except FileNotFoundError as e:
+    print(f"Error crítico: {str(e)}")
+except JSONDecodeError as e:
+    print(f"Esquema corrupto: {str(e)}")
+except ValidationError as e:
+    print(f"Datos inválidos: {str(e)}")
+
+**Estructura de directorios requerida:**
+
+Copy
+
+Download
+
+.
+├── core/
+│   └── validador.py
+└── schemas/
+    ├── schema_base.json
+    └── otros_esquemas/
+
+Esta implementación es:
+
+- 🔍 100% compatible con FastAPI
+    
+- 🐍 Optimizada para Python 3.12
+    
+- 📦 Lista para integración en `memoria_saver.py`
+    
+- 🛡️ Robusta en manejo de errores
+    
+- 📍 Independiente del sistema operativo

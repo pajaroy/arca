@@ -1,0 +1,16 @@
+version: "0.2.0"
+tipo: "readme"
+schema: "almaresist.readme_v1"
+descripcion: "Código fuente principal del script cargar_memorias_v0.2.0.py para la gestión antifallos y sincronización institucional."
+estructura:
+  - cargar_memorias_v0.2.0.py: "Script CLI antifallos con triple formato y backup automático."
+tags: [memorias, cli, src, python]
+linked_to:
+  - ../README.yaml
+  - cargar_memorias_v0.2.0.py
+responsable: "Equipo de Operaciones"
+hash_verificacion: "sha256:pending"
+historial:
+  - "Script consolidado y auditado en la versión 0.2.0"
+last_modified: "2025-06-18T13:40:00Z"
+last_modified_by: "Kael"

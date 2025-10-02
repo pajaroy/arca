@@ -1,0 +1,19 @@
+id: README_CONVERT_MULTIFORMATO_2025-06-06_01
+modulo: control_central/asesor-ia/core/notebooks/convert_multiformato
+tipo: script
+nombre: convert_multiformato
+autor: Kael
+fecha: 2025-06-06
+version: 1.0
+status: inicial
+tags: [conversor, formatos, yaml, json, markdown, automatizacion, scripts]
+descripcion: |
+  Script para convertir bitácoras y changelogs vivos de YAML a otros formatos (Markdown y JSON), facilitando su uso por humanos, IA y sistemas externos.
+  Permite mantener sincronizados los distintos formatos documentales de ALMA_RESIST.
+  Incluye soporte para pruebas, ejemplos y documentación en src/ y docs/.
+objetivo: Garantizar la portabilidad, accesibilidad y compatibilidad documental de los registros institucionales.
+estructura:
+  - README.md
+  - README.yaml
+  - src/
+  - docs/

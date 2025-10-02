@@ -1,0 +1,31 @@
+# 🚀 Roadmap de Versión 3.0.1 – ALMA_LOADER
+
+## 📘 Whitepaper v3.0.1
+
+1. **Agregar un ejemplo narrativo real en Casos de Uso**  
+    _"Hoy operé con 5% de riesgo tras dormir solo 4 horas..." → ALMA responde."_
+    
+2. **Incluir tabla de correspondencia módulos ↔ scripts**  
+    Explicita qué archivo hace qué.
+    
+3. **Expandir el Prólogo con la filosofía del sistema**  
+    Frase clave: “ALMA_LOADER no es una app, es una mente digital modular…”
+    
+4. **Agregar sección “Comandos útiles”**  
+    Ejemplos de cómo se puede usar el sistema como asistente diario.
+    
+
+
+### 📌 Cuando termines cada punto:
+
+- Tachalo en tu bitácora o en Obsidian.
+    
+- Cuando completemos todos, generamos:
+    
+    - `README_whitepaper_v3.0.1.md`
+        
+    - `CHANGELOG_whitepaper_v3.0.1.md`
+        
+    - `README_prompt_v3.0.1.md`
+        
+    - `CHANGELOG_prompt_v3.0.1.md`

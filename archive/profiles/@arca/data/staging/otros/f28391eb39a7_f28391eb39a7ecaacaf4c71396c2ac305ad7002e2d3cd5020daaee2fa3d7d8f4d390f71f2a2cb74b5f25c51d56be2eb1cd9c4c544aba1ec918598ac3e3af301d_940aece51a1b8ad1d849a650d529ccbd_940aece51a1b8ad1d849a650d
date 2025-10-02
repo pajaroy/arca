@@ -1,0 +1,30 @@
+# 👁️ visor_alertas.py
+
+Este script visualiza y exporta las alertas detectadas en el sistema ALMA_FEEDBACK.
+
+## 📂 Ubicación esperada
+`alma_loader/alma_feedback/scripts/visor_alertas.py`
+
+## 🎯 Funcionalidad
+- Lee `logs/alertas.json`
+- Muestra alertas ordenadas por score en consola
+- Exporta resumen a Markdown (`logs/alertas_resumen.md`)
+
+## 📦 Requisitos
+```bash
+pip install colorama
+```
+
+## 🖥️ Consola
+Visualiza con colores y símbolos de severidad:
+
+- 🔴 Score >= 0.8
+- 🟡 0.6 <= Score < 0.8
+- 🟢 Score < 0.6
+
+## 📝 Markdown generado
+```markdown
+# 🔔 Resumen de Alertas – ALMA_FEEDBACK
+📅 Fecha: YYYY-MM-DD
+**Total de alertas:** X
+

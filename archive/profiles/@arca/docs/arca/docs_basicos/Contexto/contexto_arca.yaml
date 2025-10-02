@@ -1,0 +1,15 @@
+---
+uuid: ""
+tipo: contexto
+formato: yaml
+nombre: contexto_arca
+version: 0.1.0
+estado: activo
+fecha_creacion: "2025-07-16T20:04:00"
+fecha_modificacion: "2025-07-16T20:04:00"
+autor: Bird
+descripcion: |
+  Arca es el gestor documental modular dentro de ALMA_RESIST.
+  Administra archivos, metadatos, índices y logs.
+  Garantiza integridad y trazabilidad, y sirve como base para integrar Machine Learning y búsqueda semántica.
+hash_integridad: ""

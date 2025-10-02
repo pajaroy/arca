@@ -1,0 +1,17 @@
+# ---
+# version: 0.1.0
+# date: 2025-08-23
+# description: "Script inicial para registrar entradas de bitácora en YAML"
+# ---
+prompt: |
+  Necesito un script en Python que me permita registrar entradas diarias de una
+  bitácora. Quiero que:
+  
+  - Use argparse para pedir argumentos desde CLI.
+  - Acepte un `--resumen` (texto obligatorio).
+  - Acepte una lista de `--tags` opcional.
+  - Guarde los datos en un archivo YAML dentro de la carpeta `data/bitacora/`.
+  - El nombre del archivo sea la fecha del día en formato YYYY-MM-DD.yaml.
+  - Los campos mínimos sean: fecha, autor, resumen, tags.
+  - Tome el autor y la ruta base desde una clase `Config` central.
+  - Muestre en consola dónde se guardó la entrada.

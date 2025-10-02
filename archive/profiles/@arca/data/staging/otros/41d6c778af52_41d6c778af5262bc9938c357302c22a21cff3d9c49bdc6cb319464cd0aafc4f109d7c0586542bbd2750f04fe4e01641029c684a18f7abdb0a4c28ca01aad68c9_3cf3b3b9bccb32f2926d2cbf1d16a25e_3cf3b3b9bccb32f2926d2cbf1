@@ -1,0 +1,44 @@
+# 🧱 Decisiones Arquitectónicas – ALMA RESIST
+
+📝 Versión inicial  
+📅 Creado: 2025-05-20  
+👤 Responsable: Usuario + IA
+
+
+## 📁 Estructura de cada decisión
+
+```markdown
+### 🧩 Decisión: [Título breve]
+
+📅 Fecha: [dd/mm/aaaa]  
+🔍 Contexto:
+[Qué problema o necesidad motivó esta decisión]
+
+🧠 Alternativas consideradas:
+[Qué otras opciones se evaluaron y por qué fueron descartadas]
+
+✅ Decisión final:
+[Qué se eligió, por qué y cómo se implementa]
+
+📂 Impacto estructural:
+[A qué módulos afecta, qué dependencias crea o reduce]
+
+🔗 Relacionado:
+- [hitos.md]
+- [post_mortem_tecnico.md]
+- [idea_base.md]
+```
+
+
+### 🧩 Motor IA desacoplado del frontend
+
+📅 Fecha: 2025-05-20  
+🔍 Contexto: Se requería escalabilidad y posibilidad de múltiples clientes IA.  
+🧠 Alternativas: GUI acoplada como Oobabooga, cliente-único por script.  
+✅ Decisión final: usar servidor tipo llama.cpp, FastAPI o similar con cliente CLI independiente.  
+📂 Impacto estructural: Permite múltiples entradas (iPhone, SSH, PC), modularidad total.
+
+
+## 📎 Historial
+
+- 📅 2025-05-20: Documento creado. Dos decisiones fundacionales registradas.

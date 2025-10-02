@@ -1,0 +1,43 @@
+
+# 📄 Prompt Maestro – Creación de memoria_loader
+
+
+# 🌍 Stack Tecnológico Requerido
+- **Lenguaje**: Python 3.11+
+- **Base de datos**: Archivo JSON local (`memorias.json`)
+- **Interfaz**: CLI usando `Click`
+- **Filesystem**: `os`, `pathlib`
+- **Sincronización**: Escritura en Markdown para carpeta Obsidian
+
+
+# 👥 Roles funcionales
+
+- `add_memoria`: Agregar nueva memoria
+- `edit_memoria`: Editar memoria existente
+- `search_memoria`: Buscar memorias
+- `export_memorias_md`: Exportar todas las memorias a Markdown
+- `backup_json`: Crear un backup del archivo JSON previo a cada modificación
+
+
+# 🔎 Flujo de Trabajo Esperado
+
+1. Ejecutar `memoria_loader` desde terminal.
+2. Elegir acción (`add`, `edit`, `search`, `export`).
+3. Al agregar, completar campos requeridos.
+4. Validar input -> guardar en `memorias.json`.
+5. Regenerar archivos `.md` en carpeta Obsidian.
+6. Actualizar changelog.
+
+
+# 🎯 Resultado Esperado (v0.1 MVP)
+
+- Archivo `memorias.json` en orden.
+- Carpeta `/obsidian_exports/` con Markdown actualizado.
+- `CHANGELOG.md` reflejando las modificaciones.
+
+
+# ⚡️ Instrucciones finales para DeepSeek:
+- Priorizar claridad y extensibilidad.
+- No mezclar lógicas de validación con la de IO.
+- Usar tipado estático (`typing`) donde sea posible.
+- Documentar cada función brevemente.

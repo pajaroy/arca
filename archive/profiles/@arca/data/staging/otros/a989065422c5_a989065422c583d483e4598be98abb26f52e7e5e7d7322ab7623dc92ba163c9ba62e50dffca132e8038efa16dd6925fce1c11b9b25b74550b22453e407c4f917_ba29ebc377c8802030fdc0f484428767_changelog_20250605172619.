@@ -1,0 +1,217 @@
+---
+module: introduccion/changelog
+type: core
+status: in_progress
+created: '2025-05-22'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+## 🧾 Changelog – ALMA_RESIST
+
+---
+
+### ✅ v0.1 – 2025-05-17 – Inicio Operativo
+
+- ✅ Implementado `log_writer.py` con validación de eventos
+- ✅ Escritos metadatos extendidos (PID, host, plataforma)
+- ✅ Carpeta `logs/` con permisos 700 y escritura atómica
+- ✅ Documentación inicial en `core/README.md`
+- ✅ Prompt base de desarrollo para DeepSeek guardado
+
+🏁 **Hito 001**: Primer evento registrado (`log_writer.py`)  
+🧠 Inicia la trazabilidad operativa del sistema
+
+---
+
+### ✅ v0.2 – 2025-05-17 – Cifrado Funcional
+
+- ✅ Implementado `log_crypto.py` con soporte AES-256-GCM y ChaCha20
+- ✅ Validación automática de arquitectura y fallback en ARM
+- ✅ Escritura binaria con encabezado identificador (`b"AES\x00"`)
+- ✅ Test funcional `test_log_crypto.py` verificado
+
+🏁 **Hito 002**: Módulo de cifrado funcional operativo  
+🔐 Inicio de trazabilidad antifrágil
+
+---
+
+### 🛠 v0.0.0.1 – 2025-05-20 – Auditoría Base y Estructura Inicial
+
+- ✅ Ejecutada auditoría técnica estructural completa
+- ✅ Generado archivo `auditoria_estructura.md` con árbol de carpetas y observaciones
+- ✅ Creado `README.md` en `docs/auditorias/` con estándar de versión
+- ✅ Redactado `resumen_secciones.md` con estado actual del sistema
+- ✅ Generado `hitos.md` unificado con versión 0.0.0.1
+- ✅ Establecida carpeta `docs/versiones/` con README explicativo
+- ✅ Definido protocolo de control de versiones congeladas
+- ✅ Se creó prompt anti-complaciente para auditoría crítica
+- ✅ Estructura base `index.md` planificada para Obsidian
+
+🏁 **Hito 003**: Auditoría de estructura completada  
+📍 Base establecida para escalar documentación técnica, trazabilidad y gobernanza futura
+
+---
+
+### ✅ v0.0.0.2 – 2025-05-20 – CLI Modular Finalizada
+
+- ✅ Reescrito `core/cli.py` con arquitectura CLI modular sin `cmd.Cmd`
+- ✅ Comandos cargados dinámicamente desde `commands/` (formato `run(args)`)
+- ✅ Manejo de errores completo y mensajes personalizados
+- ✅ `!ayuda` funcional y generada automáticamente desde los comandos cargados
+- ✅ Comandos válidos: `!ayuda`, `!salir`, `!resumir`, `!buscar_memoria`
+- ✅ Eliminadas versiones anteriores obsoletas
+- ✅ Estructura preparada para futura integración con LLM local, logging y memoria dinámica
+
+📁 Estructura Nueva:
+
+```
+core/
+└── cli.py
+
+commands/
+├── ayuda.py
+├── salir.py
+├── resumir.py
+└── buscar_memoria.py
+```
+
+🏁 **Hito 004**: CLI Modular funcional y operativo
+🧠 Punto de partida para integrar módulos de IA locales
+
+
+## 🧾 v0.0.0.1 – Auditoría Técnica Finalizada
+
+📅 Fecha: 2025-05-20  
+🎯 Descripción: Consolidación de la base estructural, documental y operativa del sistema ALMA_RESIST.
+
+---
+
+### 📂 Estructura y Organización
+
+- Creación y normalización de:
+  - `docs/post_mortem_tecnico.md`
+  - `docs/decisiones_arquitectonicas.md`
+  - `docs/dependencias.md`
+  - `docs/plantillas/`
+  - `docs/referencias/externas/{seguridad, ia, patrones}`
+- Corrección de `metodologia_de_trabajo.md` con integración del paso 0 (checklist previa)
+- Estandarización de navegación semántica Obsidian vía `docs/index.md`
+
+---
+
+### 🔍 Auditoría
+
+- Ejecución real de `tree -L 3` y registro en `docs/auditorias/auditoria_estructura.md`
+- Verificación y limpieza de archivos redundantes
+- Consolidación de `idea_base.md` oficial y archivo `idea_base_legacy.zip`
+
+---
+
+### 📁 Gobernanza Técnica
+
+- Implementación de plantillas reutilizables para:
+  - Checklist
+  - Prompt técnico
+  - Decisión arquitectónica
+  - Post-mortem técnico
+- Formalización de flujos de documentación y actualizaciones
+
+---
+
+### 🧠 Estado
+
+Este changelog marca el **cierre funcional de la versión v0.0.0.1**, y habilita el inicio del **sprint técnico v0.0.0.2** bajo condiciones de trazabilidad completa.
+
+---
+## 2025-05-21
+
+- 📘 Se establece oficialmente la `metodologia_estructura_modular_v2.md` como guía vigente.
+- 📄 Se reemplaza la `v1`, que queda archivada.
+- 📁 Se crea `_propuesta_v3_estructura_modular.md` con plan de escalabilidad futura.
+
+---
+## 🌀 2025-05-21 – Cierre del Sprint 2.2: Metodologías Base
+
+🔢 Versión: v0.0.0.2  
+📂 Sprint: Sprint_2.2_Metodologias_Base  
+🧱 Descripción: Se definieron y validaron todas las metodologías clave del sistema ALMA_RESIST.
+
+- ✅ metodologia_estructura_modular_v2.md
+- ✅ metodologia_sprints_v2.md
+- ✅ metodologia_versionado_backups_v1.md
+- ✅ metodologia_doc_ia_v2.md
+- ✅ metodologia_adr_v2.md
+- ✅ metodologia_interaccion_ia_v2.md
+
+---
+
+## Sprint 2.3 – Corrección de Metadatos
+
+**Fecha:** 2025-05-22  
+**Tipo:** Mejora estructural  
+**Descripción:**
+
+- Refactorización completa de `fix_metadata.py` para validación avanzada y normalización YAML.
+- Implementación del script `force_snake_case_modules.py` para transformación masiva de módulos a snake_case.
+- Creación del script automatizado `integrar_nuevo_archivo.sh` como paso base del flujo de integración.
+- Corrección de más de 100 documentos .md y validación completa del directorio `./docs`.
+- Validación continua con `validate_docs.py` integrada en la automatización.
+---
+
+### 🔄 Sprint 2.1 – Estructura Documental (2025-05-23)
+
+- 🆕 Creada carpeta `estructura_doc/` con plantillas reutilizables
+- ✅ Implementado sistema de testing base (`testing/cli/`, `utils/`)
+- 📝 Consolidación de documentos vivos: `TODO.md`, `.project.md`, `version.md`
+- 🧠 Preparación de entorno para integración de IA
+- 📦 Snapshot generado: `v0.0.0.2_estructura_documental`
+- 🔑 Hash: `0f61c8c5f3ab0b08b1c8c189b2e9a6ef3db47d0d4b0f63b246ac9ef8079d3a35`
+
+---
+
+## [2025-05-23] - Modularización de comandos útiles
+
+- Agregada carpeta `docs/utilidades/comandos_utiles/`
+- Incorporado comando `validacion_documentacion.md` con alias sugerido
+- Preparado README modular para integración de futuros comandos
+
+---
+
+## [2025-05-23] Finalización Sprint 2.4 - Optimización de Metodologías
+
+- Se estandarizaron 105 documentos Markdown bajo el esquema YAML unificado.
+- Se corrigieron todos los documentos `type: core` sin `linked_to`.
+- Se validó semánticamente el campo `domain` vs `tags`.
+- Se implementó y ejecutó `alma-cli audit` con generación automática de reportes.
+- Se añadieron backups automáticos y validación incremental.
+
+---
+
+## 🔄 Apéndice – Sprint 2.5 (Mayo 2025)
+
+- Auditoría completa de estructura hasta L4
+- Validación automática con `validate_docs.py`, `fix_metadata.py`, `force_snake_case_modules.py`, `add_linked_to_minimo.py`
+- Generación y normalización de `README.md` en todas las carpetas críticas
+- Limpieza profunda de carpetas vacías, redundantes y archivos huérfanos
+- Consolidación de la lógica modular: `idea_base`, `whitepaper`, `prompt_tecnico`
+- Implementación de `run_auditoria_automatica.sh` como pipeline único de verificación
+- Generación de documentación IA-friendly en Markdown con YAML frontmatter
+- Revisión semántica y mejoras de compatibilidad entre humano ↔ IA
+
+> Estado general al cierre: **estructurado, legible, auditable, modular**
+
+---
+## [0.0.0.5] - 2025-05-28
+### Cambios en `log_crypto`
+- Refactor completo basado en auditoría.
+- Soporte para cifrado basado en contraseña con `salt` embebido.
+- Mejoras en validación de logs cifrados.
+- Renombrado de funciones para seguir convenciones en inglés.
+---
+
+2025-05-29
+🔁 Se archivó metodología antigua de estructuras autónomas como versión v0.1.
+📘 Nueva versión mejorada registrada en: docs/metodologia_estructura_autonoma_v2.md
+
+---

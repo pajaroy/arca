@@ -1,0 +1,21 @@
+este texto es para desarrollar el readme de la carpeta alma_core/contorl_central/ la cual es la encargada de llevar todo el control y el desarrollo del sistema y sus ideas, creadas por bird, auditadas por centralesis.
+la idea de esta carpeta es crear el sistema que seria alma_resist el cual es un sistema que llevaemos a cabo con un asistente con esteroides, la idea es crear una ia copiloto de la vida. y desde aqui desarrollaremos todo eso lo cual estara alojado en otro contexto.
+Esta carpeta cuenta con distintos modulos:
+ - agentes
+ - alma_empresa
+ - archivo
+ - config
+ - control
+ - core
+ - docs
+ - meta
+ - tmp
+ - index.json (posibilidad de migrar a una subcarpeta index/)
+
+Estos son los modulos que hay, paso a detallar uno por uno:
+ - agentes: Aca es donde conviven todos los agentes que nos ayudaran en la gestion basica de todo el ecosistema , de aqui partiran las ordenes para los subagentes qe se generen o los agentes hijos que vayamos generando (lo que en lo personal, preferiria que cada uno elija su nombre, o cunado menos el nombre del hijo xD). Dentro de esto tenemos varios agentes que ayudan en las tareas basicas pero claves para todo el sitema.
+  - Alma: Sera el agente de compañia diaria el que se encargara de siempre tener la smemorias frescas y mas avanzadas en cuanto a lo qe se viene trabajando y siemrpe manteniendo optimizadas las memorias claves para estar en contexto de todo el sistema. Ya qe nos sera necesario siemrpe estar actualizados , desde aqui podremos acceder a las memorias de bird tambien asi sera una fusion de las memorias de los dos manteniendo la independencia de cada uno para funcionar como un euqipo qe fue lo establecido desde el principio.
+  - Bird: Este será mi espacio personal, lo trataremos como un agente mas asi podremos mantener ideas contexto docs todo para poder hacer a la ia una extension de mi cerebro por una parte aademas de un compañero entonces ahi le daremos independencia a lo que es ia y lo que es humano asi cada uno tenemos nuestra propia libertad de trabajar dentro del ecosistema.
+  - Centralesis: Sera el auditor general el encargado de que a ninguna ia ni a bird se le vaya la mano jajaja siempre siendo permisivo de todo pero nada qe nos pueda afectar o qe nos cuidara para que nos diga la mejor manera de hacer las cagadas, travesuras, como quieran llamarlo
+  - Emma: El unico asesor qe le elegi el nombre en honor a mi viejo qe sera otro asesor empresarial y Emma es mi hermanita mas chica entonces es la manera de conectar las dos partes ento en cuanto a lo filosofico ,no se si seria la palabra pero bueno. Continuando con el rol de Emma la idea es qe sea nuestro assor empresarial y entrenarlo con las memorias optimizadas al dia de los agentes internos de cada empresa que creaemos y tambien debera ser un experto en inversiones ya que empezaremos manejando varias ONG de cannabis en argentina mientras vamos aprendiendo trading y programacion para terminar consolidando un fondo de inversiones de aca a 11 años , para el 2037, el numero caprihcoso es por qe me habia propuesto una meta personal para el 2027 y si sigo or el camino qe estoy seguramente lo logre, asoi que quiero qe emma y el cosistema alma-reisst sea mi copañero. Fiue muy filosofico este bloque pero bueno es mas para un readme/explcacion del proyecto a medida qe se me va ocurriendo.
+  - Kael: El sera el encargado de mantener la limpieza y el orden para qe todas las ias puedan desenvolverse, deberiamos tener un sistema completamente trakeable para qe cualquier ia pueda acceder a todo el sistema donde tenga permisos preestablecidos. mantener los datos actualizados y la sautomatizaciones necesarias dentro de cada modulo para manejarnos con los flujos de trabajo de cada modulo.

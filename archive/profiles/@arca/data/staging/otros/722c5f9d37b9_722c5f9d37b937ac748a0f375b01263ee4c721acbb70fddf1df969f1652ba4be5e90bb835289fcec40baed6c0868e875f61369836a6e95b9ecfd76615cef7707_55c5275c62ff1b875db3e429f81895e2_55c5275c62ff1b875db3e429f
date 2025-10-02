@@ -1,0 +1,26 @@
+---
+tipo: configuracion_json
+id: CONFIGURACION_JSON_2025-06-05_93708c
+version: '1.0'
+formato: json
+modulo: ALMA_RESIST
+titulo: Schema Respuesta
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:b5316eef3ee8a31ee8ad038776a5f406e01073ee9758e9e3dd7cdca5eb210ea3
+---
+{
+  "type": "object",
+  "properties": {
+    "respuesta": {"type": "string"},
+    "metadata": {"type": "object"}
+  },
+  "required": ["respuesta"]
+}

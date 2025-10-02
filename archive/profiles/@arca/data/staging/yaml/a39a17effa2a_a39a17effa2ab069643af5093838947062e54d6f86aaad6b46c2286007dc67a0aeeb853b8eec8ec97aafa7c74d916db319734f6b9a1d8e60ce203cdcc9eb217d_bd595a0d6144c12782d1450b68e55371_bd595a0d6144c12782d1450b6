@@ -1,0 +1,30 @@
+# =========================================================
+# PROMPT DE AUDITORÍA Y MEJORA CONTINUA PARA DEEPSEEK - KAEL CLI
+# =========================================================
+
+instrucciones:
+  objetivo: |
+    Recibirás el archivo 'Kael_v0.1.1.yaml' (blueprint arquitectónico del CLI de ALMA_RESIST) para que lo audites críticamente como experto en arquitecturas CLI, automatización documental y sistemas multiagente.  
+    Tu tarea es:
+      - Detectar cualquier mejora, debilidad, ambigüedad o área potencial de fallo.
+      - Proponer e INTEGRAR mejoras reales de arquitectura, robustez, modularidad, auditabilidad y extensibilidad.
+      - Profundizar en la definición y lógica de carpetas, módulos y flujos internos (que cualquier equipo o IA entienda la estructura y pueda auditarla).
+      - Documentar los cambios con un **changelog en YAML**.
+      - Presentar la nueva versión como 'Kael_v0.1.2.yaml', lista para implementación.
+
+  requerimientos_mejora:
+    - La respuesta debe incluir SOLO:
+        1. Un nuevo YAML completo ('Kael_v0.1.2.yaml'), incorporando mejoras técnicas, explicando toda nueva decisión.
+        2. Un changelog detallado en YAML (al pie).
+        3. Una explicación visual y formal de la estructura de carpetas y su propósito, para que cualquier chat, humano o IA, comprenda al instante la lógica histórica y operativa del CLI.
+    - Toda mejora debe priorizar: seguridad, auditabilidad, resiliencia, independencia de módulos, trazabilidad, facilidad de testing, y compatibilidad futura con IA/ML/RAG.
+    - Sugerir e integrar cualquier feature profesional de nivel corporativo/empresarial que optimice el sistema.
+
+  flujo_esperado:
+    - Pegá abajo el archivo 'Kael_v0.1.1.yaml'
+    - La respuesta esperada es: 
+        - El YAML 'Kael_v0.1.2.yaml' mejorado y explicado
+        - Changelog en YAML
+        - Sección visual de estructura de carpetas y lógica modular
+
+# Fin del prompt. Pegá abajo el YAML actual para auditar.

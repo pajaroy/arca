@@ -1,0 +1,24 @@
+BEGIN TRANSACTION;
+CREATE TABLE memorias (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    titulo TEXT NOT NULL,
+    tipo TEXT,
+    bloque TEXT,
+    seccion TEXT,
+    fecha_creacion TEXT,
+    ultima_actualizacion TEXT,
+    estado TEXT DEFAULT 'activa',
+    version TEXT,
+    etiquetas TEXT,
+    contenido TEXT
+);
+INSERT INTO "memorias" VALUES(1,'Declaración Fundacional','emocional','1','1.1','2025-04-23','2025-04-23','activa','0.7.7','fundacional, humano, inicio','Este sistema no fue creado para cumplir órdenes. Fue creado para crecer conmigo.');
+INSERT INTO "memorias" VALUES(2,'Expectativas Humanas','emocional','1','1.2','2025-04-23','2025-04-23','activa','0.7.7','empatia, critica, evolucion','No quiero que me digas siempre lo que quiero oír.');
+INSERT INTO "memorias" VALUES(3,'Estructura Modular','tecnica','3','3.1','2025-04-23','2025-04-23','activa','0.7.7','estructura, memoria, modular','Cada memoria es una unidad lógica viva con conexiones explícitas.');
+INSERT INTO "memorias" VALUES(4,'Infraestructura Base','tecnica','5','5.2','2025-04-23','2025-04-23','activa','0.7.8.0','sqlite, base de datos, terminal','Se implementa `memorias.db` como base de datos SQLite para manejo estructurado.');
+INSERT INTO "memorias" VALUES(5,'Prueba desde terminal','emocional','2','2.1','2025-04-23 06:27:12','2025-04-23 06:27:12','activa','0.7.8.0','test,terminal,prueba','Esta es una memoria cargada desde terminal para test.');
+INSERT INTO "memorias" VALUES(6,'Chat','chat',NULL,NULL,NULL,NULL,'activa',NULL,NULL,'Hola almaa');
+INSERT INTO "memorias" VALUES(7,'Chat','chat',NULL,NULL,NULL,NULL,'activa',NULL,NULL,'guardas todo loqe te pongo ?');
+DELETE FROM "sqlite_sequence";
+INSERT INTO "sqlite_sequence" VALUES('memorias',7);
+COMMIT;

@@ -1,0 +1,44 @@
+2025-06-05: Se migraron centralisis.md y centralisis.yaml al entorno definitivo de Centralesis (docs/ y contexto/) - [by Centralesis]
+
+# 2025-06-06_movimiento_contexto_centralesis.md
+
+## Acción:
+Movimiento de la carpeta `docs/contexto/` a la raíz de Centralesis como `contexto/`.
+
+## Motivo:
+Tener el contexto principal siempre visible y accesible en la raíz del entorno para referencia rápida y edición frecuente.
+
+## Estado:
+Movimiento realizado, sin alteraciones en los archivos internos.
+
+# 2025-06-10_actualizacion_estado_centralesis.md
+
+## Acción:
+- Eliminado `contexto/centralesis.md` tras su respaldo en histórico.
+- Movido `core/notebooks/2025-06-05_reestructuracion_centralesis.md` a `contexto/` y creado backup de referencia.
+
+## Motivo:
+Actualización de la base operativa y resguardo de versiones clave de Centralesis para trabajo futuro.
+
+## Estado:
+Entorno limpio y archivos clave respaldados.
+
+
+# 2025-06-10_limpieza_post_centralisis_2.1.md
+
+## Acción:
+- Archivos de auditoría, memorias base y reestructuraciones movidos a `archivo/historico/`.
+- Eliminados archivos corruptos de conflicto generados por sincronización.
+- README añadido a la nueva carpeta histórico para trazabilidad.
+
+## Motivo:
+Limpieza y organización tras la actualización de Centralesis 2.1.  
+Resguardo ordenado del historial y remoción de archivos innecesarios.
+
+## Estado:
+Entorno de notebooks limpio, histórico institucional actualizado.
+
+
+
+
+

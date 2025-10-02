@@ -1,0 +1,19 @@
+# 🧠 Solicitud de Implementación – `memory_graph.py` – Sprint 2.6 – ALMA_RESIST
+
+## 🎯 Objetivo
+
+Implementar el módulo `memory_graph.py`, responsable de construir un grafo semántico de interacciones basado en los prompts y respuestas registradas por el servidor ALMA_RESIST. Este módulo servirá como base para el razonamiento reflexivo y búsqueda de memoria contextual.
+
+
+## 🧪 Ejemplo de uso
+
+```python
+from integration.memory_graph import MemoryGraph
+
+mg = MemoryGraph()
+mg.add_node("inteligencia")
+mg.add_node("adaptación")
+mg.create_edge("inteligencia", "adaptación", weight=0.9)
+mg.get_related("inteligencia")
+```
+

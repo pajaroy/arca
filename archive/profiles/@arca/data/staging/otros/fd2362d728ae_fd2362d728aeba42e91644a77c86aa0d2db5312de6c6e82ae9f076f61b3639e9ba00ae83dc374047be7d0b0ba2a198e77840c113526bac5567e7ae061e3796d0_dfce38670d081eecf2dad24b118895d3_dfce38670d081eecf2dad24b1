@@ -1,0 +1,2 @@
+# Exposición directa del motor de cifrado
+from .log_crypto import CryptoEngine

@@ -1,0 +1,13 @@
+{
+  "id": "MEMGEN-004",
+  "fecha": "2025-04-30T10:09:40.342274",
+  "titulo": "Memoria Web 004",
+  "categoria": "GEN",
+  "tags": [
+    "memoria-web",
+    "#reflexion"
+  ],
+  "contenido": "El usuario desea que, cuando haya pequeños pasos o detalles a implementar, siempre se sugiera su inclusión directa en el flujo de desarrollo si su integración es sencilla. Esto es para evitar que se pierdan detalles entre tareas más grandes. El sistema debe priorizar la incorporación temprana de componentes menores si su esfuerzo es bajo y su valor potencial es alto.",
+  "relacionadas": [],
+  "impacto_en": []
+}

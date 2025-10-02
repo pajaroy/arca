@@ -1,0 +1,11 @@
+# README
+
+01_Interconexion_Modular
+
+Este documento explica cómo los diferentes módulos de ALMA LIBRE se comunican entre sí, creando una red eficiente para optimizar el flujo de trabajo.
+
+## Funciones principales:
+
+- Definición de las relaciones entre módulos.
+- Cómo cada módulo aporta al sistema general.
+- Estrategias de sincronización y automatización.

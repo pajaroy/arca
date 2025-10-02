@@ -1,0 +1,14 @@
+
+## 🏷️ Tags IA-Friendly:
+```yaml
+tags:
+  - raiz_operativa
+  - cli_global
+  - estandarizacion
+  - control_central
+  - ubicacion
+  - comandos
+```
+
+Esta convención deberá ser replicada en todos los módulos IA, y utilizada como criterio base para entrenar futuros asistentes técnicos CLI.
+

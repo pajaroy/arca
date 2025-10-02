@@ -1,0 +1,70 @@
+version: "0.2.0"
+tipo: "prompt"
+schema: "almaresist.prompt_registro_aprendizaje_v1"
+descripcion: "Prompt DeepSeek para el script CLI de registro de aprendizajes metodológicos en YAML bajo el estándar ALMA_RESIST."
+estructura:
+  - version
+  - id
+  - autor
+  - fecha
+  - tipo
+  - modulo
+  - titulo
+  - descripcion
+  - campos_requeridos
+  - requerimientos
+  - ejemplo_uso
+  - output_esperado
+  - notas
+tags: [cli, prompt, flujo_trabajo, institucional]
+linked_to:
+  - ../../scripts/add_aprendizaje_flujo/add_aprendizaje_flujo.py
+  - ../plantilla_aprendizaje_flujo.yaml
+  - ../README.yaml
+responsable: "bird"
+hash_verificacion: "sha256:pending"
+historial:
+  - "2025-06-16: Adaptación total al formato universal y mejora de metadatos"
+last_modified: "2025-06-16T23:59:00Z"
+last_modified_by: "bird"
+
+id: FLUJO_TRABAJO_SCRIPT_2025-06-08_01
+autor: bird
+fecha: 2025-06-08
+tipo: solicitud_script_cli
+modulo: flujo_de_trabajo
+titulo: "Script CLI genérico para registro de aprendizajes de flujo de trabajo en YAML"
+descripcion: >
+  Desarrolla un script CLI en Python llamado `add_aprendizaje_flujo.py` para registrar aprendizajes metodológicos
+  como nuevas entradas en cualquier archivo YAML de flujos de trabajo, compatible con la estructura institucional ALMA_RESIST.
+campos_requeridos:
+  - que_aprendi
+  - que_aprendio_sistema
+  - cambio_metodologico
+  - consejo_futuro
+  - error_evitar
+  - observaciones (opcional)
+  - autor (default: "bird")
+  - chat_id (opcional)
+  - flujo_aprendizajes (ruta YAML destino, requerido)
+requerimientos:
+  - El script debe tomar la fecha actual (UTC) automáticamente.
+  - Si el archivo YAML no existe, debe crearlo con lista vacía y encabezado comentado.
+  - El registro se agrega como nuevo ítem en la lista YAML.
+  - Validar encoding UTF-8 y evitar errores por concurrencia.
+  - Output: mostrar resumen de la entrada, fecha, autor y ruta.
+  - Código limpio, modular, bien comentado.
+ejemplo_uso: |
+  python3 /home/bird/alma_core/control_central/core/notebooks/add_aprendizaje_flujo/add_aprendizaje_flujo.py \
+    --que_aprendi "Implementé la plantilla de flujos de trabajo y lo integré con un script automático." \
+    --que_aprendio_sistema "Prefiero registrar aprendizajes al cierre de cada sesión." \
+    --cambio_metodologico "Ahora cada sprint cierra con una entrada YAML de aprendizaje vivo." \
+    --consejo_futuro "No omitir la reflexión de cierre por apuro: siempre aporta valor." \
+    --error_evitar "Dejar el archivo sin versionar o olvidar registrar aprendizajes críticos." \
+    --autor "bird" \
+    --flujo_aprendizajes "/ruta/al/flujo_aprendizajes.yaml"
+output_esperado: |
+  Mensaje de confirmación, mostrando la entrada agregada, fecha, autor y ruta del archivo.
+notas: >
+  El script debe ser reutilizable por cualquier módulo o agente del ecosistema, simplemente cambiando la ruta destino del archivo YAML.
+  Mantener el prompt y el script bajo control de versiones.

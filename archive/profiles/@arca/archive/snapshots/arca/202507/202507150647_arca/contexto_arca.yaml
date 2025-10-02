@@ -1,0 +1,40 @@
+# Contexto vivo del proyecto ARCA (últimas 4-5 horas de desarrollo)
+metadatos:
+  id_unico: "contexto-YAML-001"
+  tipo: "contexto"
+  nombre: "contexto_arca.yaml"
+  version: "0.1.0"
+  estado: "activo"
+  fecha_creacion: "2025-07-14"
+  fecha_modificacion: "2025-07-14"
+
+ubicacion: /home/arca/arca
+estado: "Desarrollo inicial - Carga básica de configs"
+ultimos_cambios:
+  - "Script load_config.py: Carga config.yaml y schemas básicos"
+  - "Script validate_schemas.py: Valida existencia de schemas"
+  - "Schemas mínimos creados: schema.{json,sql,yaml}"
+
+archivos_activos:
+  - config.yaml: |
+      config:
+        version: "0.1.0"
+        project: "ARCA"
+        base_path: "/home/arca/arca"  
+        schemas:
+          json: "schema.json"  # {} (vacío pero válido)
+          sql: "schema.sql"    # "-- Schema placeholder"  
+          yaml: "schema.yaml"  # {} (vacío pero válido)
+
+  - load_config.py: "Carga CONFIG global desde config.yaml"
+  - validate_schemas.py: "Verifica schemas (solo existencia/contenido básico)"
+
+próximos_pasos:
+  - "Implementar logger básico"
+  - "Definir estructura real de schemas"
+  - "Crear módulo de auto-generación"
+
+# Nota para otros chats: 
+# - Usamos rutas absolutas por simplicidad
+# - Schemas son placeholders (se expandirán luego)
+# - Estado actual: Validación básica funcionando

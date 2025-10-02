@@ -1,0 +1,18 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_e3b0c4
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Start
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:359273a0cc62cb72f740f5c1c81463280b8ca768a6c8c6f65f963ed4be97c0d6
+---

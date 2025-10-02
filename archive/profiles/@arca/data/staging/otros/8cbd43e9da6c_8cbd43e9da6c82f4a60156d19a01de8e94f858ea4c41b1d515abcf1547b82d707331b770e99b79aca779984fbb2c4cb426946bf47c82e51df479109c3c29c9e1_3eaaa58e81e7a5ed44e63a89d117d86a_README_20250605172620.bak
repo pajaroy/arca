@@ -1,0 +1,45 @@
+---
+module: referencias/readme
+type: core
+status: in_progress
+created: '2025-05-22'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 📁 README – Referencias
+
+📅 Creado: 2025-05-20  
+📁 Ruta: docs/referencias/  
+👤 Responsable: Usuario + IA
+
+---
+
+## 🎯 Propósito
+
+Esta carpeta contiene todos los materiales de referencia utilizados durante el desarrollo de ALMA_RESIST.  
+Su función principal es actuar como puente entre el conocimiento técnico externo y las decisiones estructurales internas del sistema.
+
+---
+
+## 🗂 Subcarpetas principales
+
+- `externas/` → Material técnico externo, papers, estándares, model cards
+
+---
+
+## 📌 Reglas de uso
+
+- No almacenar documentación personal o notas de desarrollo diario
+- Toda referencia aquí debe haber sido **citada o utilizada** en un RFC, decisión arquitectónica o `idea_base.md`
+- Esta carpeta debe mantenerse organizada y auditada
+
+---
+
+## 🔗 Relacionado con
+
+- [[ALMA_RESIST/docs/decisiones_arquitectonicas]]
+- [[RFC_0001_metodologia]]
+- [[docs/idea_base/idea_base.md]]
+
+---

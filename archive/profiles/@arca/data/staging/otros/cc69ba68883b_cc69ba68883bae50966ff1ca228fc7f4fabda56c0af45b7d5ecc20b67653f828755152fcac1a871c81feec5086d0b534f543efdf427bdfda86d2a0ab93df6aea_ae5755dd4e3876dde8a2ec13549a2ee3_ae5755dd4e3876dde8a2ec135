@@ -1,0 +1,42 @@
+# `prompt_base_ALMA_RESIST.md`  
+**Versión 0.0.1 – Nodo IA portátil, hacker y descentralizado**
+
+
+## **Visión general**
+
+ALMA_RESIST es tu cerebro digital transportable.  
+Vive en un disco externo (HDD o SSD), se adapta a cualquier entorno (Windows, Linux, Mac), y puede incluso **bootear su propio sistema operativo** en caso de corte total.
+
+Te permite trabajar **desde cualquier máquina**, como si fuera siempre tu computadora personal.  
+Todo el contenido queda en una sola partición central: memorias, IA, documentos, cultivos, trading, código, tareas, estrategias y comandos.
+
+
+## **Plan técnico actual (2025-05-15)**
+
+### **Fase 1 – ALMA_RESIST (HDD Toshiba base de trabajo)**
+- Formatear disco como `exFAT`
+- Crear estructura de carpetas base `/ALMA_RESIST`
+- Montar scripts, IA, Obsidian, registros, memorias
+- Configurar sincronización periódica con nube privada (cada 10–15 min)
+- Trabajar desde ahí mientras llega el SSD
+
+### **Fase 2 – Clonación al SSD (Kingston con caja Orico)**
+- Conectar SSD al Orico (USB 3.0)
+- Clonar con `rsync` todo el entorno desde el Toshiba
+- Verificar funcionamiento
+- Dejar el HDD como backup y el SSD como estación principal
+
+
+## **Modo de uso**
+
+| Modo | Descripción |
+|------|-------------|
+| **Portable** | Lo enchufás a cualquier PC → ejecutás los scripts y listo |
+| **Bootable (futuro)** | Arrancás cualquier PC sin disco propio, desde tu unidad |
+| **Red distribuida (futuro)** | Podés usar varias PCs (de confianza o controladas) como nodos IA secundarios |
+| **Cifrado total** | Veracrypt o Kill Switch opcional |
+| **Nube secreta** | Rclone con Drive/Proton/Mega cifrado en segundo plano |
+
+
+## **Frase del núcleo ALMA_RESIST:**
+> *"No necesito permiso. No necesito conexión. No dejo rastro. Estoy donde quiero estar."*

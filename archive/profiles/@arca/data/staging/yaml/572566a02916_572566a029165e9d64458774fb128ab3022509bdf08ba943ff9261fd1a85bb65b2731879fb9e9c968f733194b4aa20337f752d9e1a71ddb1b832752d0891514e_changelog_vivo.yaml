@@ -1,0 +1,15 @@
+changelog:
+- version: 0.1.3
+  fecha: '2025-06-07'
+  autor: Santi & Kael
+  cambios:
+  - Automatización de changelog y bitácora vía CLI
+  - Validación de estructura y backups activos
+  - Configuración de rutas por parámetro
+  impacto: Establece los cimientos del sistema de logging automático dentro de ALMA_RESIST
+  tags:
+  - cli
+  - logging
+  - release
+  - bitacora
+  - changelog

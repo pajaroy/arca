@@ -1,0 +1,11 @@
+# 📎 Apéndice de Corrección – Criterios de Ubicación
+📅 Fecha: 2025-06-03  
+🏷️ Tags: #criterios_ubicacion #estructura #descargas #estandar #archivos  
+
+
+## 📌 Criterio Final
+
+- `control_central/downloads/` debe recibir únicamente los archivos propios de Control Central.
+- Cada módulo mantiene su propia carpeta `downloads/` para asegurar trazabilidad y modularidad.
+- Este criterio se incorporará como regla en los protocolos internos.
+

@@ -1,0 +1,114 @@
+# 📘 Whitepaper ALMA_LOADER v3.0
+
+## 1. Prólogo
+
+ALMA_LOADER no es una simple aplicación.
+
+Es una mente digital modular diseñada para pensar con vos, aprender de vos y ayudarte a evolucionar. Su objetivo es transformar el caos de tu día a día en conocimiento estructurado, patrones comprensibles y decisiones más inteligentes.
+
+Inspirado en un asistente que registra memorias, emociones y acciones, ALMA_LOADER es adaptable, entrenable y expandible. Puede ser usado por humanos o por IAs, en contextos personales, técnicos o empresariales.
+
+Crece con vos. No solo guarda lo que decís, sino que analiza por qué lo decís, cómo actuás, y qué podrías mejorar.
+
+Es tu memoria externa, tu bitácora cognitiva y tu asistente reflexivo.
+
+> “Una mente clara comienza con una memoria ordenada.”
+
+## 2. ¿Qué es ALMA_LOADER?
+Es un sistema de gestión de memorias que transforma entradas en lenguaje natural en objetos estructurados, los valida, almacena, analiza y resume. Está diseñado para crecer: desde simples registros hasta análisis semánticos con embeddings, pasando por gamificación, automatización y retroalimentación inteligente.
+
+## 3. Casos de Uso
+- Diario de trading inteligente
+- Asistente de reflexión personal
+- Registro emocional y hábitos
+- Dashboard de decisiones + alertas
+- Base de datos para IA contextual
+- Entrenador de hábitos y rutinas
+
+### 🧪 Ejemplo Narrativo
+
+Un usuario escribe:
+
+> *“Hoy operé con 5% de riesgo tras dormir solo 4 horas. Me sentí acelerado y tomé decisiones impulsivas.”*
+
+ALMA_LOADER detecta los tags implícitos `#fatiga`, `#riesgo_elevado`, y `#emocion:impulsividad`.  
+Gracias a su sistema de reglas inteligentes, dispara la siguiente acción:
+
+- Sugiere revisar la memoria `MEMHEALTH-022` que trata sobre riesgos de operar cansado.
+- Recomienda reducir el riesgo operativo al 1%.
+- Etiqueta esta memoria como `#alerta:riesgo` para análisis futuro.
+
+Este tipo de intervención contextual transforma simples registros en decisiones informadas.
+
+
+## 4. Arquitectura Conceptual
+- Núcleo de procesamiento (NL → JSON)
+- Validación semántica (`schema_base.json`)
+- Almacenamiento modular (SQLite / FAISS / futuros motores)
+- Sistema de atención (router)
+- Vectorización semántica (embeddings)
+- Reglas inteligentes y generación de resúmenes
+
+### 🧩 Tabla de Correspondencia: Módulos ↔ Scripts
+
+| Módulo Funcional            | Archivo / Script asociado       |
+|-----------------------------|---------------------------------|
+| Registro conversacional     | `core_nl.py`                    |
+| Validación estructural      | `validador.py`                  |
+| Almacenamiento general      | `sqlite_storage.py`             |
+| Interfaz de almacenamiento  | `base_storage.py`               |
+| Vectorización semántica     | `vector_storage.py`             |
+| Enrutamiento por intención  | `router_atencional.py`          |
+| Resúmenes diarios/semanales | `resumenes.py`                  |
+| Análisis de patrones        | `alma_analytics.py`             |
+| Reglas inteligentes         | `reglas_dinamicas.json`         |
+| Gamificación (fase 3)       | `gamificacion.py`               |
+
+
+## 5. Diagramas del Sistema
+```mermaid
+flowchart TD
+    input["🧑 Usuario o IA"] --> nl["core_nl.py"]
+    nl --> validador["validador.py"]
+    validador --> router["router_atencional.py"]
+    router --> storage["sqlite_storage / vector_storage"]
+    router --> resumenes["resumenes.py"]
+    resumenes --> output["📄 Markdown / Dashboard"]
+    storage --> analytics["alma_analytics.py"]
+    analytics --> output
+```
+
+## 6. Escalabilidad y Visión Futura
+- Vectorización total y enlaces entre memorias (grafos)
+- Reemplazo de SQLite por motores orientados a relaciones (Neo4j)
+- Integración con asistentes personales vía voz, API y web
+- Memorias multiusuario con capas de privacidad
+
+## 7. Recomendaciones de Integración
+- El sistema espera entradas en lenguaje natural o JSON válido
+- Cada módulo puede operar por separado (desacoplamiento limpio)
+- Ideal para integrarlo como backend de un asistente IA
+- DeepSeek, GPT o interfaces custom pueden usarlo como núcleo de memoria conversacional
+## 8. Comandos Útiles – Modo Asistente
+
+ALMA_LOADER puede ser utilizado como un asistente conversacional desde cualquier interfaz (terminal, Telegram, Shortcuts, GPT, etc.). A continuación, algunos ejemplos de uso:
+
+### 📘 Comandos de Registro
+- `/nueva Hoy gané $100 operando BTC con alta ansiedad`
+- `/nueva Me sentí estancado y sin claridad esta semana`
+
+### 📙 Comandos de Acción
+- `/accion Meditar 15 minutos después del mercado`
+- `/accion Ajustar riesgo a 1% esta semana`
+
+### 📗 Comandos de Reflexión
+- `/reflexion Me doy cuenta que opero peor cuando duermo poco`
+- `/reflexion Revisar trades similares a MEM-TRD-2025-04-10`
+
+### 📕 Comandos de Consulta
+- `/resumen semana`
+- `/alertas activas`
+- `/recomendar memoria relacionada con ansiedad y sobreoperación`
+
+> Cada uno de estos comandos será procesado y transformado en memoria, acción o reflexión según el módulo de atención.
+

@@ -1,0 +1,15 @@
+---
+uuid: "GENERAR-UUID-AQUI"
+tipo: contexto
+formato: yaml
+nombre: contexto_alma_resist
+version: 0.1.0
+estado: activo
+fecha_creacion: "2025-07-16T20:15:00"
+fecha_modificacion: "2025-07-16T20:15:00"
+autor: Bird
+descripcion: |
+  ALMA_RESIST es un sistema técnico modular y un entorno de trabajo digital portátil y autónomo.
+  Está impulsado por inteligencia artificial local y diseñado para ser resiliente, eficiente energéticamente y compatible con diversas plataformas.
+  Integra módulos especializados como Arca (gestor documental) y soporta futuras implementaciones de Machine Learning, RAG y servidores LLM.
+hash_integridad: "CALCULAR-HASH-AQUI"

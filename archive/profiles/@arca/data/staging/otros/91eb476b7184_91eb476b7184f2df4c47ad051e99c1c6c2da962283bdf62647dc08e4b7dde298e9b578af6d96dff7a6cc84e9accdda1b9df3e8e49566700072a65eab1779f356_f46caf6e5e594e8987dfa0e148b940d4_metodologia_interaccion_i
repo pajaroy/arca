@@ -1,0 +1,113 @@
+---
+module: metodologias/archivadas/metodologia_interaccion_ia_v1
+type: core
+status: in_progress
+created: '2025-05-22'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🤖 Metodología de Interacción con IA – ALMA_RESIST (v1)
+
+📅 Versión: 1.0  
+📁 Archivo: metodologia_interaccion_ia_v1.md  
+🎯 Objetivo: Establecer cómo los sistemas de IA (como Alma) deben interactuar con la documentación, estructura y decisiones del sistema ALMA_RESIST de forma segura, trazable y eficiente.
+
+---
+
+## ✅ Aplicación
+
+Esta metodología se aplica a:
+
+- Todos los módulos del sistema que serán navegados, auditados o asistidos por IA
+- Sistemas de CLI, bots, asistentes o interfaces de Alma
+- Procesos de lectura, generación, modificación o inferencia de contenido
+
+---
+
+## 🧭 Principios Rectores
+
+1. **Lectura Semántica, No Libre**  
+   La IA debe operar sobre documentos que contengan frontmatter YAML válido.
+
+2. **Contexto explícito**  
+   La IA debe navegar a través de campos como `linked_to`, `tags`, `type` para entender relaciones.
+
+3. **No modificar sin validación**  
+   Toda acción de escritura debe estar aprobada por el operador humano o IA validadora.
+
+4. **Indexación progresiva**  
+   Los documentos se indexan como nodos con atributos (tipo, dominio, versión).
+
+---
+
+## 🧩 Campos Clave para la IA
+
+```yaml
+---
+module: "core/cli"
+type: "core"
+domain: "infraestructura"
+status: "stable"
+tags: ["entrada", "modularidad"]
+linked_to: ["resumen", "loader"]
+created: "2025-05-21"
+version: "0.2"
+---
+```
+
+Estos campos permiten:
+
+- Construir un grafo de conocimiento
+- Aplicar filtros (ej: todo lo vinculado a "memoria")
+- Detectar nodos huérfanos o duplicados
+
+---
+
+## 🧠 Modos de Interacción
+
+| Modo         | Descripción                                                      |
+|--------------|------------------------------------------------------------------|
+| `lector`     | Solo lectura de archivos con YAML válido                         |
+| `asistente`  | Sugiere cambios, genera texto, resume, enlaza documentos         |
+| `auditor`    | Verifica cumplimiento de estándares y relaciones semánticas      |
+| `operador`   | Puede ejecutar acciones, generar ADRs, changelogs, etc. (futuro) |
+
+---
+
+## 🛠️ Comandos previstos (alma-cli)
+
+```bash
+alma-cli scan --domain cultivo        # Indexa todos los archivos de un dominio
+alma-cli suggest --for resumen.md     # Sugiere módulos relacionados y tags faltantes
+alma-cli validate --module core/cli   # Verifica formato, YAML, enlaces, tipo
+```
+
+---
+
+## 🔄 Relación con otras metodologías
+
+- `metodologia_doc_ia_v2.md`: Define estructura mínima para ser legible por IA
+- `metodologia_adr_v2.md`: Relaciona decisiones estructurales con módulos IA-indexables
+- `estructura_modular_v2`: Define dónde debe ir cada documento
+
+---
+
+## 📎 Reglas para integración de IA
+
+| Acción                            | Requiere Validación Humana |
+|----------------------------------|-----------------------------|
+| Leer archivo YAML                | ❌                          |
+| Sugerir tags, relaciones         | ❌                          |
+| Generar changelog o resumen      | ✅ (confirmación final)     |
+| Crear ADR desde issue o script   | ✅                          |
+| Modificar archivo existente      | ✅                          |
+
+---
+
+## 🧾 Changelog
+
+### 2025-05-21
+- [v1.0] Creación de protocolo base para interacción IA semántica
+- Definición de 4 modos de operación
+- Reglas de validación y acciones permitidas

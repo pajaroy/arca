@@ -1,0 +1,20 @@
+suite: tests_llm_server
+version: 0.2.6
+sprint: '2.6'
+estado: completo
+fecha_validacion: '2025-05-26'
+cobertura:
+- test_model_wrapper.py
+- test_api_responder.py
+- test_transport_layer.py
+- test_context_tracker.py
+- test_log_writer.py
+- test_log_crypto.py
+- test_memory_graph.py
+dependencias:
+- pytest
+- fastapi
+- llama_cpp
+- cryptography
+- jsonschema
+- networkx

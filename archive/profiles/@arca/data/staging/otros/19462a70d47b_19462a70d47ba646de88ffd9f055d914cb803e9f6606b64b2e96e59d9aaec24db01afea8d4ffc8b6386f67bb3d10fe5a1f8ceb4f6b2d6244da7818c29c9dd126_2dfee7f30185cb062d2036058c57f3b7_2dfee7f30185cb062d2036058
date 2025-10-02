@@ -1,0 +1,37 @@
+# ☠️ Post-Mortem Técnico – ALMA RESIST
+
+📝 Versión inicial  
+📅 Creado: 2025-05-20  
+👤 Responsable: Usuario + IA
+
+
+## 📁 Estructura del Análisis
+
+Por cada entrada se debe completar el siguiente formato:
+
+```markdown
+### 🧩 Módulo: [Nombre del módulo o sección afectada]
+
+📅 Fecha del incidente: [dd/mm/aaaa]  
+🧠 Descripción del error:  
+[Qué ocurrió exactamente, cómo se detectó]
+
+⚙️ Causa raíz:  
+[Explicación técnica del problema]
+
+🛠️ Solución aplicada:  
+[Qué se hizo para resolverlo y por qué se eligió ese camino]
+
+🔁 Lección aprendida:  
+[Cómo evitar que vuelva a ocurrir, impacto en otros módulos]
+
+🗃️ Archivos relacionados:  
+- [logs/…]
+- [tests/…]
+- [changelog.md#fecha]
+```
+
+
+## 📜 Historial
+
+- 📅 2025-05-20: Estructura creada, sin incidentes registrados aún.

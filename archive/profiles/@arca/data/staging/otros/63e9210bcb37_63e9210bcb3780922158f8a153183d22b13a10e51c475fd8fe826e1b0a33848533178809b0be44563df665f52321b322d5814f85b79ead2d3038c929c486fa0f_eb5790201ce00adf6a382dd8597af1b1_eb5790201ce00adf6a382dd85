@@ -1,0 +1,51 @@
+# 📚 Índice General – 13CC
+
+Este índice organiza la estructura formal y operativa del sistema documental del club.
+
+---
+
+## 🔐 01_LEGAL
+Documentación legal general del club (estatuto, actas fundacionales).
+
+## 🧱 02_FUNDACIONAL
+Misión, visión, organigrama y responsables por área.
+
+## 🧑‍🤝‍🧑 03_SOCIOS
+Registro general de socios, control de membresía, fichas individuales.
+
+## 🌿 04_ANEXOS
+Estructuras productivas operativas bajo 13CC.
+- Anexo_1_CANNABIRD
+  - 01_LEGAL
+  - 02_FUNDACIONAL
+  - 03_SOCIOS
+  - 04_REGISTROS_INSTITUCIONALES
+
+## 🗓️ 05_REUNIONES
+Sistema institucional de seguimiento interno.
+- SEMANALES
+- MENSUALES
+- TRIMESTRALES
+- FORMULARIOS (plantillas de actas)
+
+## 🧠 06_CÚPULA_OPERATIVA
+Dirección estratégica. Carpetas individuales de cada miembro clave.
+- DEG_BIRD (Santiago Calvo)
+  - 01_PERSONAL
+  - 02_DOCUMENTOS
+  - 03_COORDINACIÓN
+  - 04_BORRADORES_Y_VALIDACIÓN
+- SEBASTIAN_GORY_CULTIVO
+- ARIEL_ABACA_MARKETING
+
+## 📜 07_REGISTROS_INSTITUCIONALES
+Actas oficiales, estatutos, reglamentos, acuerdos y socios (club madre).
+- 01_ACTAS
+- 02_ESTATUTOS_Y_REGLAMENTOS
+- 03_RESOLUCIONES_Y_ACUERDOS
+- 04_REGISTRO_DE_SOCIOS
+
+## 🗂️ Archivos base
+- `README.md` – Guía general del sistema
+- `changelog.md` – Registro de cambios y actualizaciones
+- `00_INDEX.md` – Este índice

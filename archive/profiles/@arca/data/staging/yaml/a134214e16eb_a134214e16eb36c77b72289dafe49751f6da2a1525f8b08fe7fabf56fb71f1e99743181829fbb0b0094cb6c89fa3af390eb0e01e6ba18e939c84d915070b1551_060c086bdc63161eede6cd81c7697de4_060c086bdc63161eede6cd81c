@@ -1,0 +1,159 @@
+version: 0.1.0
+uuid: 8a24c23b-3360-4fbd-9cbd-1fcf3dcb6aa2
+tipo: ''
+schema: ''
+estado: ''
+descripcion: ''
+estructura:
+  - ''
+tags: []
+linked_to: []
+responsable: ''
+hash_verificacion: sha256:pending
+historial:
+  - fecha: ''
+    descripcion: ''
+last_modified: '2025-07-09T22:54:32.452408+00:00'
+last_modified_by: alma
+prompt: |
+  Necesito refactorizar un script Python que valida y repara bloques YAML de metadatos (frontmatter) en archivos Markdown (.md) o YAML (.yaml), según el estándar ALMA_RESIST.
+
+  ### Objetivo de la versión v0.2.0
+
+  1. Mantener todos los datos existentes en el frontmatter si están presentes y válidos.
+  2. Completar sólo los campos faltantes, usando valores por defecto de la plantilla ALMA_RESIST.
+  3. Reordenar las claves según el orden definido en la plantilla ALMA_RESIST.
+  4. No eliminar ni sobrescribir datos existentes, excepto campos dinámicos que puedan actualizarse si se usa --force.
+  5. Incorporar una opción --dry-run para permitir:
+      - Visualizar en consola el YAML resultante.
+      - No escribir ningún cambio en disco si se usa esta opción.
+  6. Integrar mensajes claros en consola y en el log fix_metadata.log.
+  7. Mantener compatibilidad con ruamel.yaml para preservar comentarios y formato.
+
+  ### Funcionalidad deseada
+
+  - Debe existir una función principal:
+      def validar_metadata(path: str, force_update: bool = False, dry_run: bool = False) -> None
+  - Si el archivo está vacío, debe crear el frontmatter desde cero.
+  - Si el archivo tiene frontmatter válido:
+      - Mantener todos los valores existentes.
+      - Añadir solo las claves que falten.
+      - Reordenar las claves según la plantilla.
+  - Si el YAML es inválido o hay errores:
+      - Reemplazar el frontmatter entero por la plantilla.
+      - Conservar el contenido textual del archivo si es Markdown.
+  - En dry-run:
+      - No debe escribirse el archivo en disco.
+      - Debe imprimirse en consola el YAML resultante.
+      - Debe informarse en el log que fue dry-run.
+  - Campos dinámicos (last_modified, last_modified_by, uuid) deben generarse o actualizarse solo si:
+      - El campo está vacío.
+      - O se usa --force.
+
+  ### Reglas para arrays y objetos
+
+  - Si arrays como `tags`, `linked_to`, `estructura` ya existen:
+      - Conservar su contenido.
+      - No sobrescribirlos salvo en --force.
+  - Si el objeto `historial` ya existe:
+      - Conservarlo si no está vacío.
+      - Generar uno nuevo sólo si no existe o está vacío.
+
+  ### Información del script actual
+
+  Actualmente, el script:
+  - Reemplaza por completo el frontmatter en caso de force.
+  - No hace merge profundo campo por campo.
+  - No implementa dry-run.
+  - No reordena claves en YAML existente.
+
+  ### Plantilla ALMA_RESIST
+
+  version: "0.1.0"
+  uuid: ""
+  tipo: ""
+  schema: ""
+  estado: ""
+  descripcion: ""
+  estructura:
+    - ""
+  tags: []
+  linked_to: []
+  responsable: ""
+  hash_verificacion: "sha256:pending"
+  historial:
+    - fecha: ""
+      descripcion: ""
+  last_modified: ""
+  last_modified_by: ""
+
+  ### Ejemplo de uso
+
+  Comando CLI:
+    python validador_metadata.py /ruta/al/archivo.md --force --dry-run
+
+  ### Ejemplo de dry-run output (con YAML resultante impreso):
+
+  ---
+  version: "0.1.0"
+  uuid: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  tipo: ""
+  schema: ""
+  estado: ""
+  descripcion: ""
+  estructura:
+    - ""
+  tags: []
+  linked_to: []
+  responsable: ""
+  hash_verificacion: "sha256:pending"
+  historial:
+    - fecha: ""
+      descripcion: ""
+  last_modified: "2025-07-10T14:20:00+00:00"
+  last_modified_by: "alma"
+  ---
+
+  ### Requerimientos técnicos
+
+  - Python 3.8+
+  - ruamel.yaml
+  - Compatible con archivos:
+      - Markdown con frontmatter YAML.
+      - Archivos YAML puros (.yaml / .yml).
+  - Logs en /home/alma/Alma-Cli/Logs/fix_metadata.log.
+  - Debe funcionar tanto en sistemas Linux como en ambientes POSIX.
+
+  ### Resultado esperado
+
+  Generar el script Python completo, limpio, modular y comentado, listo para usar en producción como Validador_Metadata_v0.2.0.
+ejemplos_de_input: |
+  Archivo Markdown sin encabezado YAML:
+
+  # Título
+
+  Contenido...
+ejemplos_de_output: |
+  ---
+  version: "0.1.0"
+  uuid: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  tipo: ""
+  schema: ""
+  estado: ""
+  descripcion: ""
+  estructura:
+    - ""
+  tags: []
+  linked_to: []
+  responsable: ""
+  hash_verificacion: "sha256:pending"
+  historial:
+    - fecha: ""
+      descripcion: ""
+  last_modified: "2025-07-10T14:20:00+00:00"
+  last_modified_by: "alma"
+  ---
+
+  # Título
+
+  Contenido...

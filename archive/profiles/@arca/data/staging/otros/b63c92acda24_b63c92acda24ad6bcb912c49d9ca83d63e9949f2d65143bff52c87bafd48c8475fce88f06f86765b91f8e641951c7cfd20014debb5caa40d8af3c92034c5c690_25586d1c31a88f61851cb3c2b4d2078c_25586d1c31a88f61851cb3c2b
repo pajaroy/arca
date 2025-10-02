@@ -1,0 +1,33 @@
+
+# 📝 Bitácora Viva – Agentes
+
+Bitácora viva y evolutiva de todas las acciones, decisiones, reflexiones y eventos relevantes relacionados a la arquitectura y gestión de agentes en `asesor-ia/agentes`.
+
+## Entradas
+
+### [2025-06-06] Centralización de agentes bajo subcarpeta `agentes/`
+- Acción: Se movieron las carpetas `alma`, `centralesis`, `kael`, `emma` a `agentes/` para maximizar modularidad.
+- Motivo: Escalabilidad, orden, trazabilidad y claridad arquitectónica.
+- Ejecutado por: Kael (auditor CLI)
+- Estado: Finalizado, documentado en changelog y bitácora central.
+
+
+# 🗑️ Bitácora Viva – Limpieza de Duplicado Centralesis
+
+## [2025-06-06] Eliminación de carpeta duplicada
+
+- Acción: Se eliminó la carpeta duplicada `/control_central/asesor-ia/centralesis/` tras verificar migración total a `/control_central/asesor-ia/agentes/centralesis/`.
+- Motivo: Unicidad documental, evitar confusión y reducir deuda técnica.
+- Estado: Ejecutado y registrado.
+- Ejecutado por: Kael (auditor CLI)
+
+
+# 🗂️ Bitácora Viva – Movimiento de archivo histórico
+
+## [2025-06-06] Movimiento de archivo a histórico
+
+- Acción: Se movió `prompt_base.md` de `asesor-ia/` a `archivo/downloads/historico/` para archivo definitivo y trazabilidad.
+- Motivo: Limpieza, preservación de versiones antiguas y orden documental.
+- Estado: Ejecutado, registrado en changelog y bitácora.
+- Ejecutado por: Kael (auditor CLI)
+

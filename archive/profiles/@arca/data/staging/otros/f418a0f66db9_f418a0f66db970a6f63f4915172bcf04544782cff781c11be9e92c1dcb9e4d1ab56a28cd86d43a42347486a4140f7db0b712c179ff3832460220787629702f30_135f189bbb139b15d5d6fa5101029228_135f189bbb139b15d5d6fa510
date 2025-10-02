@@ -1,0 +1,21 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_420aad
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Salir
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:795d9769902d71c09d19f60edccbaccd79d3ab8deb7cde36f8e40ff346d91c34
+---
+def run(args):
+    # El comando !salir se maneja directamente en cli.py
+    pass

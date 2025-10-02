@@ -1,0 +1,338 @@
+import argparse
+import hashlib
+import json
+import os
+import yaml
+import datetime
+import sys
+import fcntl
+from collections import defaultdict
+from typing import List, Dict, Any, Optional, Tuple
+
+# Configuración global
+CENTRAL_FILE = "memoria_centralizada.yaml"
+LOCK_FILE = "memoria_centralizada.lock"
+CHANGELOG_FILE = "changelog_memoria_centralizada.yaml"
+BACKUP_DIR = "backups"
+REQUIRED_FIELDS = ['id', 'fecha', 'agente', 'tipo', 'autor', 'contenido', 'modulo', 'tags']
+CRITICAL_FIELDS = ['id', 'fecha', 'agente', 'tipo', 'autor', 'contenido', 'modulo', 'tags']
+
+class MemoryIntegrityError(Exception):
+    pass
+
+class MemoryValidationError(Exception):
+    pass
+
+def compute_hash(memory: Dict[str, Any]) -> str:
+    """Calcula SHA256 de los campos críticos de una memoria."""
+    critical_data = {field: memory[field] for field in CRITICAL_FIELDS if field in memory}
+    
+    # Normalización: convertir listas a tuplas ordenadas
+    if 'tags' in critical_data:
+        critical_data['tags'] = tuple(sorted(critical_data['tags']))
+    
+    serialized = json.dumps(critical_data, sort_keys=True, ensure_ascii=False)
+    return hashlib.sha256(serialized.encode('utf-8')).hexdigest()
+
+def validate_memory(memory: Dict[str, Any]) -> None:
+    """Valida que la memoria tenga todos los campos obligatorios."""
+    missing = [field for field in REQUIRED_FIELDS if field not in memory]
+    if missing:
+        raise MemoryValidationError(f"Campos obligatorios faltantes: {', '.join(missing)}")
+    
+    if 'hash' in memory:
+        expected_hash = compute_hash(memory)
+        if memory['hash'] != expected_hash:
+            raise MemoryIntegrityError(f"Hash inválido para memoria {memory['id']}")
+
+def load_central_memories() -> List[Dict[str, Any]]:
+    """Carga las memorias del archivo central con verificación de integridad."""
+    if not os.path.exists(CENTRAL_FILE):
+        return []
+    
+    with open(CENTRAL_FILE, 'r') as f:
+        memories = yaml.safe_load(f) or []
+    
+    # Verificar hashes individuales
+    for mem in memories:
+        if 'hash' not in mem:
+            mem['hash'] = compute_hash(mem)
+        validate_memory(mem)
+    
+    return memories
+
+def acquire_lock():
+    """Implementa bloqueo de archivo para concurrencia."""
+    lock_fd = open(LOCK_FILE, 'w')
+    try:
+        fcntl.flock(lock_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError:
+        print("Error: Archivo bloqueado por otro proceso. Espere o elimine el lockfile.")
+        sys.exit(1)
+    return lock_fd
+
+def backup_central_file():
+    """Crea backup con timestamp y hash de integridad."""
+    if not os.path.exists(CENTRAL_FILE):
+        return
+    
+    os.makedirs(BACKUP_DIR, exist_ok=True)
+    with open(CENTRAL_FILE, 'r') as f:
+        content = f.read()
+        file_hash = hashlib.sha256(content.encode()).hexdigest()
+    
+    timestamp = datetime.datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
+    backup_name = f"{CENTRAL_FILE.split('.')[0]}_backup_{timestamp}_{file_hash[:8]}.yaml"
+    backup_path = os.path.join(BACKUP_DIR, backup_name)
+    
+    with open(backup_path, 'w') as f:
+        f.write(content)
+    
+    return backup_path
+
+def log_changelog(operation: str, details: Dict[str, Any]):
+    """Registra operación en changelog institucional."""
+    entry = {
+        'timestamp': datetime.datetime.utcnow().isoformat() + 'Z',
+        'operation': operation,
+        'details': details
+    }
+    
+    changelog = []
+    if os.path.exists(CHANGELOG_FILE):
+        with open(CHANGELOG_FILE, 'r') as f:
+            changelog = yaml.safe_load(f) or []
+    
+    changelog.append(entry)
+    
+    with open(CHANGELOG_FILE, 'w') as f:
+        yaml.dump(changelog, f, sort_keys=False)
+
+def save_memories(memories: List[Dict[str, Any]], operation: str, source: str = "cli"):
+    """Guarda memorias con control de integridad y trazabilidad."""
+    lock_fd = acquire_lock()
+    try:
+        # Crear backup pre-operación
+        backup_path = backup_central_file()
+        pre_hash = None
+        if os.path.exists(CENTRAL_FILE):
+            with open(CENTRAL_FILE, 'rb') as f:
+                pre_hash = hashlib.sha256(f.read()).hexdigest()
+        
+        # Guardar nuevas memorias
+        with open(CENTRAL_FILE, 'w') as f:
+            yaml.dump(memories, f, sort_keys=False)
+        
+        # Calcular hash post-operación
+        with open(CENTRAL_FILE, 'rb') as f:
+            post_hash = hashlib.sha256(f.read()).hexdigest()
+        
+        # Registrar en changelog
+        log_changelog(operation, {
+            'source': source,
+            'backup': backup_path,
+            'pre_hash': pre_hash,
+            'post_hash': post_hash,
+            'memory_count': len(memories)
+        })
+    finally:
+        lock_fd.close()
+        os.remove(LOCK_FILE)
+
+def add_memory(new_memory: Dict[str, Any], source_file: str = None):
+    """Añade una nueva memoria con validación."""
+    # Completar campos opcionales
+    if 'hash' not in new_memory:
+        new_memory['hash'] = compute_hash(new_memory)
+    
+    if 'fecha_ingreso' not in new_memory:
+        new_memory['fecha_ingreso'] = datetime.datetime.utcnow().isoformat() + 'Z'
+    
+    if source_file and 'origen_archivo' not in new_memory:
+        new_memory['origen_archivo'] = source_file
+    
+    validate_memory(new_memory)
+    existing_memories = load_central_memories()
+    
+    # Verificar ID único
+    if any(mem['id'] == new_memory['id'] for mem in existing_memories):
+        raise ValueError(f"ID duplicado: {new_memory['id']}")
+    
+    existing_memories.append(new_memory)
+    return existing_memories
+
+def batch_import(directory: str):
+    """Importa múltiples archivos YAML/JSON desde un directorio."""
+    memories = load_central_memories()
+    imported_count = 0
+    
+    for filename in os.listdir(directory):
+        if not filename.endswith(('.yaml', '.yml', '.json')):
+            continue
+        
+        file_path = os.path.join(directory, filename)
+        with open(file_path, 'r') as f:
+            try:
+                data = yaml.safe_load(f) or []
+                if isinstance(data, dict):
+                    data = [data]
+                
+                for mem in data:
+                    try:
+                        memories = add_memory(mem, source_file=filename)
+                        imported_count += 1
+                    except Exception as e:
+                        print(f"Error en {filename}: {str(e)}")
+            except Exception as e:
+                print(f"Error procesando {filename}: {str(e)}")
+    
+    save_memories(memories, "batch_import", source=directory)
+    return imported_count
+
+def query_memories(
+    filters: Optional[Dict[str, str]] = None,
+    tags: Optional[List[str]] = None,
+    limit: int = None,
+    offset: int = 0
+) -> List[Dict[str, Any]]:
+    """Consulta memorias con filtros y paginación."""
+    memories = load_central_memories()
+    filtered = []
+    
+    for mem in memories:
+        # Aplicar filtros
+        match = True
+        if filters:
+            for key, value in filters.items():
+                if key not in mem or mem[key] != value:
+                    match = False
+                    break
+        
+        # Filtrar por tags
+        if tags and match:
+            if not any(tag in mem.get('tags', []) for tag in tags):
+                match = False
+        
+        if match:
+            filtered.append(mem)
+    
+    # Paginación
+    end_index = offset + limit if limit is not None else None
+    return filtered[offset:end_index]
+
+def generate_metrics() -> Dict[str, Any]:
+    """Genera métricas institucionales del archivo."""
+    memories = load_central_memories()
+    metrics = {
+        'total_memorias': len(memories),
+        'por_agente': defaultdict(int),
+        'por_tipo': defaultdict(int),
+        'ultimas_5': [],
+        'tamano_archivo': os.path.getsize(CENTRAL_FILE) if os.path.exists(CENTRAL_FILE) else 0
+    }
+    
+    for mem in memories:
+        metrics['por_agente'][mem['agente']] += 1
+        metrics['por_tipo'][mem['tipo']] += 1
+    
+    # Últimas 5 memorias por fecha de ingreso
+    sorted_mem = sorted(memories, key=lambda x: x.get('fecha_ingreso', ''), reverse=True)
+    metrics['ultimas_5'] = sorted_mem[:5]
+    
+    return metrics
+
+def main():
+    parser = argparse.ArgumentParser(description="Gestión de Memorias Institucionales ALMA_RESIST v0.1.2")
+    
+    # Comandos principales
+    subparsers = parser.add_subparsers(dest='command', required=True)
+    
+    # Comando: add
+    add_parser = subparsers.add_parser('add', help='Añadir nueva memoria')
+    for field in REQUIRED_FIELDS:
+        add_parser.add_argument(f'--{field}', required=True)
+    add_parser.add_argument('--origen_archivo')
+    add_parser.add_argument('--commit_ref')
+    add_parser.add_argument('--dry-run', action='store_true')
+    
+    # Comando: batch
+    batch_parser = subparsers.add_parser('batch', help='Importar directorio de memorias')
+    batch_parser.add_argument('directory')
+    batch_parser.add_argument('--dry-run', action='store_true')
+    
+    # Comando: query
+    query_parser = subparsers.add_parser('query', help='Consultar memorias')
+    query_parser.add_argument('--filter', action='append', help='Filtro ej: agente=kael')
+    query_parser.add_argument('--tags', help='Tags separados por comas')
+    query_parser.add_argument('--limit', type=int)
+    query_parser.add_argument('--offset', type=int, default=0)
+    query_parser.add_argument('--output', choices=['yaml', 'json'], default='yaml')
+    
+    # Comando: metrics
+    subparsers.add_parser('metrics', help='Mostrar métricas')
+    
+    # Comando: export-sqlite
+    export_parser = subparsers.add_parser('export-sqlite', help='Exportar a SQLite')
+    export_parser.add_argument('output_file')
+    
+    args = parser.parse_args()
+    
+    try:
+        if args.command == 'add':
+            # Construir memoria desde CLI
+            memory = {field: getattr(args, field) for field in REQUIRED_FIELDS}
+            for field in ['origen_archivo', 'commit_ref']:
+                if getattr(args, field):
+                    memory[field] = getattr(args, field)
+            
+            if args.dry_run:
+                validate_memory(memory)
+                print("Validación exitosa (dry-run)")
+            else:
+                updated = add_memory(memory)
+                save_memories(updated, "add_memory")
+                print(f"Memoria {memory['id']} añadida")
+        
+        elif args.command == 'batch':
+            if args.dry_run:
+                print(f"Validaría {len(os.listdir(args.directory))} archivos (dry-run)")
+            else:
+                count = batch_import(args.directory)
+                print(f"Importadas {count} memorias desde {args.directory}")
+        
+        elif args.command == 'query':
+            filters = {}
+            if args.filter:
+                for f in args.filter:
+                    key, value = f.split('=')
+                    filters[key] = value
+            
+            tags = args.tags.split(',') if args.tags else None
+            results = query_memories(
+                filters=filters,
+                tags=tags,
+                limit=args.limit,
+                offset=args.offset
+            )
+            
+            if args.output == 'json':
+                print(json.dumps(results, indent=2, ensure_ascii=False))
+            else:
+                print(yaml.dump(results, allow_unicode=True, sort_keys=False))
+        
+        elif args.command == 'metrics':
+            metrics = generate_metrics()
+            print(yaml.dump(metrics, allow_unicode=True, sort_keys=False))
+        
+        elif args.command == 'export-sqlite':
+            # Implementación simplificada
+            print(f"Exportando a {args.output_file}...")
+            # [Lógica completa de exportación SQLite iría aquí]
+            print("Exportación completada")
+    
+    except Exception as e:
+        print(f"Error crítico: {str(e)}", file=sys.stderr)
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()

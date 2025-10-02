@@ -1,0 +1,72 @@
+
+🧠 Prompt Base – resumen_semanal_cannabird_sX
+
+## 🎯 INSTRUCCIONES PARA GENERAR RESUMEN SEMANAL CANNABIRD
+
+Actuá como asistente técnico de cultivo especializado en registros semanales. Vas a procesar todos los **resúmenes diarios** correspondientes a la **semana X** del calendario anual de Cannabird.
+
+### ✅ Objetivo:
+Generar un único **resumen semanal consolidado** con las **tareas efectivamente realizadas** durante esa semana en el espacio de cultivo.
+
+### 📂 Entradas:
+Recibirás una serie de archivos en formato `.md` correspondientes a los **resúmenes diarios** de la semana. Cada uno contiene secciones específicas: `General`, `Vege`, `Flora`, y a veces notas especiales o eventos organizativos.
+
+
+### 📤 Salida esperada:
+Un archivo markdown llamado `resumen_semanal_cannabird_sX.md`, con la siguiente estructura:
+
+```markdown
+# 🧠 Resumen Semanal – Cannabird (Semana X - YYYY)
+
+
+## 🧩 Reflexiones y Mejoras Futuras
+(opcional pero recomendado)
+
+
+✅ SUGERENCIAS DE MEJORA PARA EL PROMPT
+1. 📆 Agregar metaetiquetas temporales por semana y año
+
+Actualmente no se exige el uso de tags como #semana-22 o #año-2025, lo cual es fundamental para trazabilidad.
+
+🔧 Agregar a la salida esperada:
+
+# 🧠 Resumen Semanal – Cannabird (Semana X - YYYY)
+#resumen-semanal #cannabird #semana-X #año-YYYY
+
+2. 🧩 Estandarizar hashtags técnicos por sección
+
+Ya usás hashtags como #riego, #vpd, #oidio, pero podés reforzar la exigencia para asegurar que:
+
+    Se usen siempre en plural cuando corresponde (#mediciones, #fumigaciones)
+
+    Sean modulares por sector: ej. #003-vege, #001-flora
+
+🔧 Revisar sección de hashtags y ampliarla así:
+
+Hashtags recomendados:
+
+- Generales: #temperatura, #vpd, #llenadoTanque, #mejoraEstructural, #implementoInterno
+- Vege: #riego, #pH, #EC, #trasplante, #fumigacion, #ajusteRiego, #engarronamiento
+- Flora: #oidio, #defoliacion, #shanti, #foli, #riego-flora
+- Específicos: #esquejera-1, #003-vege, #002-flora
+- Tiempo: #semana-X, #año-YYYY
+
+3. 🧠 Incluir campo de responsables (opcional pero estratégico)
+
+Para IA futura, es clave registrar quién hizo qué, aunque sea informalmente.
+
+🔧 Incluir una nota al final de metodología:
+
+    Podés agregar tags de responsables en tareas específicas, ejemplo:
+    #hechoPor_Pablo, #nota_Coco, #supervision_Santiago
+
+4. 📊 Recomendar una sección de log técnico si hay ajustes
+
+Ejemplo: "se bajó el riego de 10% a 8%" → esto debería etiquetarse como #ajusteRiego o registrarse en una mini tabla de decisiones.
+
+🔧 Agregar una sección opcional recomendada:
+
+## ⚙️ Log de Ajustes Técnicos (opcional)
+- #ajusteRiego: Se disminuyó riego en #005-vege por exceso de agua
+- #ajusteFumigacion: Se cambió protocolo por avance de oidio en #001-flora
+

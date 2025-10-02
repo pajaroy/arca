@@ -1,0 +1,11 @@
+# README
+
+03_Mapa_de_Carpetas
+
+Este documento describe la organización de carpetas y la estructura general del sistema ALMA LIBRE.
+
+## Funciones principales:
+
+- Descripción general de la estructura de carpetas.
+- Relación de carpetas con cada módulo.
+- Organización para facilitar la automatización y lectura de AlmaSync.

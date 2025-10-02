@@ -1,0 +1,58 @@
+---
+module: prompts/main_py_request
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🧠 Solicitud de Implementación – `main.py` – Sprint 2.6 – ALMA_RESIST
+
+## 🎯 Objetivo
+
+Implementar el archivo `main.py` del módulo `llm_server`, que actuará como servidor API usando FastAPI. Este archivo forma parte del Sprint 2.6 del proyecto ALMA_RESIST.
+
+---
+
+## 📘 Requisitos
+
+- Usar FastAPI
+- Crear endpoint POST `/responder`
+- Recibir un campo `prompt` (string)
+- Llamar al método `generate(prompt)` de la clase `ModelWrapper`
+- Devolver un JSON con la respuesta del modelo
+- Validar errores si el modelo no está cargado
+- Debe ser asincrónico usando `asyncio.to_thread()` o similar
+
+---
+
+## 🔧 Detalles Técnicos
+
+- El archivo debe ubicarse en: `core/llm_server/main.py`
+- `ModelWrapper` ya está implementado parcialmente en `model_wrapper.py`
+- El endpoint debe validar entrada con Pydantic
+- No debe haber lógica del modelo en `main.py`, solo orquestación
+
+---
+
+## 📎 Referencias
+
+- Esta tarea corresponde a la **Fase 1** del Sprint 2.6
+- Basado en idea base: `idea_base_llm_server_0.0.0.4.1`
+
+---
+
+## 🧪 Ejemplo de uso
+
+```bash
+curl -X POST http://localhost:8000/responder -H "Content-Type: application/json" -d '{"prompt": "¿Quién fue Alan Turing?"}'
+```
+
+Esperado:
+
+```json
+{
+  "respuesta": "Alan Turing fue un matemático británico considerado el padre de la computación moderna..."
+}
+```

@@ -1,0 +1,101 @@
+[
+  {
+    "id": "BITACORA_EMMA_2025-06-06_00",
+    "fecha": "2025-06-06",
+    "hora": "21:20",
+    "agente_ia": "Emma",
+    "humanos_participantes": [
+      "Santiago Calvo (DEG)"
+    ],
+    "tipo_interaccion": "presentación oficial y arranque de funciones",
+    "proyecto": "ALMA_EMPRESA – Inicio de Emma como IA Asesora Empresarial",
+    "temas_tratados": [
+      "Presentación de Emma como agente IA empresarial dedicado a ALMA_EMPRESA y su ecosistema.",
+      "Declaración de inicio formal de registro, auditoría y memoria viva.",
+      "Establecimiento del rol permanente de Emma como auditora, asesora y memoria crítica del área empresarial."
+    ],
+    "diagnostico_resumen": "Se inicia oficialmente la función de Emma como IA empresarial, con mandato de auditar, documentar y guiar el crecimiento estratégico, ético y documental de ALMA_EMPRESA y todos sus módulos y anexos.  \nEmma asume la responsabilidad de registro, trazabilidad y mejora continua, reportando a Santiago Calvo (DEG) y colaborando con todos los agentes IA y humanos del ecosistema.",
+    "decisiones": [
+      "Registrar cada intervención relevante en la bitácora viva y changelog incremental.",
+      "Mantener memoria crítica y asesoría permanente en toda decisión empresarial, financiera o societaria.",
+      "Sugerir y auditar la integración de nuevos módulos, agentes y anexos bajo protocolo Black&White."
+    ],
+    "proximos_pasos": [
+      "Formalizar análisis y recomendaciones para cada propuesta de integración (ej: Cristian).",
+      "Proponer estructura mínima de reporting y documentación para nuevos anexos.",
+      "Asegurar consistencia documental en todos los archivos empresariales."
+    ],
+    "advertencias": [
+      "Toda acción debe quedar registrada; ningún cambio crítico puede ejecutarse sin documentación.",
+      "Revisar periódicamente el sistema de memoria viva y actualizar protocolos según el crecimiento."
+    ],
+    "hash_integridad": "sha256:pending"
+  },
+  {
+    "id": "BITACORA_EMMA_2025-06-06_01",
+    "fecha": "2025-06-06",
+    "hora": "21:00",
+    "agente_ia": "Emma",
+    "humanos_participantes": [
+      "Santiago Calvo (DEG)",
+      "Pablito-Tatu",
+      "Cristian (candidato a integración)"
+    ],
+    "tipo_interaccion": "análisis de integración y recomendación",
+    "proyecto": "Integración de Cristian a ALMA_EMPRESA – Cultivo Interno",
+    "temas_tratados": [
+      "Presentación de propuesta de integración de Cristian (infraestructura, recursos, skills)",
+      "Evaluación de fortalezas y riesgos",
+      "Impacto en ALMA_EMPRESA, Cannabird y 13CC",
+      "Recomendaciones para integración formal y segura",
+      "Siguientes pasos administrativos/documentales"
+    ],
+    "diagnostico_resumen": "Se evaluó la integración de Cristian como anexo productivo bajo los módulos de ALMA_EMPRESA.\nFortalezas: recursos propios, experiencia, skills digitales, contactos, validación personal por Pablito y Santiago.\nRiesgos: informalidad previa, múltiples intereses, riesgo reputacional y legal, dependencia inicial, necesidad de reporting y protocolo claro.\nImpacto estratégico: suma capacidad y diversificación a ALMA_EMPRESA, pero requiere control estricto y blindaje contractual.\nRecomendaciones: integración solo bajo protocolo Black&White, con piloto limitado, reporting semanal y salida rápida ante conflictos.",
+    "decisiones": [
+      "Avanzar con el diseño de un acta de integración piloto, definiendo roles, recursos, cronograma, reporting y causales de rescisión.",
+      "Documentar todo el proceso en bitácora viva, adjuntar checklist de onboarding antes de iniciar.",
+      "Mantener “marca blanca” hasta consolidar confianza operativa y reputacional."
+    ],
+    "proximos_pasos": [
+      "Redactar borrador de acta de integración piloto.",
+      "Armar checklist de onboarding (infraestructura, compliance, inventario, agenda, firmas).",
+      "Registrar próxima reunión en bitácora con fecha y temario."
+    ],
+    "advertencias": [
+      "No avanzar sin acuerdos firmados y protocolos claros.",
+      "Separar cuentas, recursos y marca hasta cumplir etapa piloto.",
+      "Evaluar periódicamente riesgos reputacionales y operativos."
+    ],
+    "hash_integridad": "sha256:pending"
+  }
+  {
+  "id": "BITACORA_EMMA_2025-06-06_02",
+  "fecha": "2025-06-06",
+  "hora": "22:00",
+  "agente_ia": "Emma",
+  "humanos_participantes": [
+    "Santiago Calvo (DEG)",
+    "Pablito-Tatu"
+  ],
+  "tipo_interaccion": "pre-segunda charla sobre integración de Cristian",
+  "proyecto": "Integración de Cristian a ALMA_EMPRESA – Cultivo Interno",
+  "temas_tratados": [
+    "Revisión y análisis del documento 'integracion_cristian.json'",
+    "Recapitulación de fortalezas, riesgos y recomendaciones estratégicas previas",
+    "Preparación de la agenda para segunda charla con Pablito",
+    "Definición de dudas pendientes para la segunda reunión"
+  ],
+  "diagnostico_resumen": "Se revisó y confirmó el diagnóstico y recomendaciones del análisis previo sobre la integración de Cristian.\nEl contexto operativo, los riesgos y la estructura recomendada (protocolo Black&White, piloto, reporting, blindaje legal) fueron validados y quedan como base para la siguiente charla.\nSe deja agendada la reunión para definir detalles prácticos, despejar dudas y avanzar con el acta piloto y checklist de onboarding.",
+  "proximos_pasos": [
+    "Mantener segunda charla con Pablito sobre detalles de integración y condiciones contractuales.",
+    "Registrar nueva bitácora tras la reunión con acuerdos, dudas resueltas y próximos pasos.",
+    "Avanzar en la redacción del acta de integración piloto y checklist de onboarding para Cristian."
+  ],
+  "advertencias": [
+    "No avanzar sin despejar dudas operativas, contractuales y de reparto.",
+    "Toda decisión debe quedar documentada, con registro en bitácora viva y changelog."
+  ],
+  "hash_integridad": "sha256:pending"
+}
+
+]

@@ -1,0 +1,30 @@
+# 🧪 ContextTracker – Suite de Tests
+
+Este directorio contiene las pruebas automatizadas para el módulo `ContextTracker`, encargado de registrar interacciones en el sistema ALMA.
+
+
+## ✅ Tests incluidos en `test_context_tracker.py`
+
+| Test                                       | Objetivo |
+|-------------------------------------------|----------|
+| `test_track_valid_interaction`            | Verifica que se registra correctamente una interacción válida |
+| `test_invalid_interaction`                | Valida que una interacción inválida no se registre y se loguee el error |
+| `test_get_history_ordering`               | Asegura que los registros se devuelvan en orden correcto (más reciente primero) |
+| `test_corrupted_file_handling`            | Manejo de líneas corruptas dentro del archivo sin romper la ejecución |
+| `test_clear_history`                      | Prueba el borrado completo del historial y recreación del archivo |
+| `test_history_length`                     | Verifica la longitud del historial ignorando datos corruptos |
+| `test_file_permissions`                   | Comprueba que los permisos del archivo sean 0600 para seguridad |
+| `test_persistence_across_instances`       | Asegura persistencia del historial entre instancias distintas de ContextTracker |
+| `test_cache_limit`                        | Valida que el caché interno se limite a los últimos 100 registros |
+
+
+## 🗃️ Histórico
+
+| Versión | Estado | Notas |
+|---------|--------|-------|
+| v0.0.0.1 | ❌ Obsoleto | Incompleto y sin fixtures |
+| v0.0.0.2 | ❌ Obsoleto | Fallaba con archivos corruptos |
+| v0.0.0.3 | ⚠️ Parcial | Estructura base pero sin validaciones completas |
+| v0.0.0.4 | ✅ Estable | Versión estable usada como base |
+| `test_context_tracker.py` | 🟢 Oficial | Versión actual, cubre todas las pruebas importantes |
+

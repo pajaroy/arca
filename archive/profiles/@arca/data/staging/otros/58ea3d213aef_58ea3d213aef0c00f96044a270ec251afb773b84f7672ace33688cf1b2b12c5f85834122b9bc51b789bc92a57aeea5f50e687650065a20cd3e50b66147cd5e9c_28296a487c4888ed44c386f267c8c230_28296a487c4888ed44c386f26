@@ -1,0 +1,60 @@
+# 📥 registrar_feedback.py – Integración de Feedback en Memorias ALMA
+
+**Versión:** 1.1  
+**Módulo:** `alma_feedback/scripts/`  
+**Última actualización:** 2025-05-03
+
+
+## 🧠 Características Clave
+
+- ✅ **Validación estricta** de cada memoria con `jsonschema`
+- 🔐 **Backups automáticos** antes de modificar cualquier archivo (`backups/`)
+- ⚙️ **Procesamiento paralelo** con `ThreadPoolExecutor`
+- 🔁 **Sistema de hash** para evitar duplicados de feedback
+- 🧾 **Métricas detalladas** al final del proceso
+- 📈 **Versión de feedback** establecida (`version_estructura = 1.1`)
+
+
+## 📌 Campo añadido a cada memoria
+
+```json
+"retroalimentacion": [
+  {
+    "tipo": "riesgo_estres",
+    "origen": "MEMTRD-045",
+    "score": 0.87,
+    "descripcion": "Riesgo alto detectado relacionado con estrés",
+    "fecha_alerta": "2025-05-03T14:23:00",
+    "version_estructura": 1.1
+  }
+]
+```
+
+
+## 📊 Log del proceso
+
+Se genera en: `logs/registro_feedback.log`
+
+Incluye:
+
+- Tiempo de ejecución
+- Total de memorias actualizadas
+- Total de alertas procesadas
+- Errores individuales por archivo (si los hubiera)
+
+
+## 🔄 Versión y extensibilidad
+
+- Cada feedback incorpora una versión (`1.1`)
+- Se puede extender fácilmente para agregar nuevos campos como:
+  - `comentarios_IA`
+  - `acciones_sugeridas`
+  - `resumen_respuesta`
+
+
+## 🧪 Consejos
+
+- Ejecutar este script **después** de correr `monitor_alertas.py`
+- Revisar `memorias_json_actualizadas/` antes de reemplazar originales
+- Verificar `backups/` en caso de rollback necesario
+

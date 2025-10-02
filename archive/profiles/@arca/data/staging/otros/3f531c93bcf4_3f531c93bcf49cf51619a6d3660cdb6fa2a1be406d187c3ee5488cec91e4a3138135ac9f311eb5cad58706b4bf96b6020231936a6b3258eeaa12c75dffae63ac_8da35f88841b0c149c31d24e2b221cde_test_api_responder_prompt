@@ -1,0 +1,77 @@
+---
+module: prompts/test_api_responder_prompt
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# ✅ Solicitud de Test – `test_api_responder.py` – ALMA_RESIST Sprint 2.6
+
+Este test debe validar completamente el endpoint `/responder` expuesto por `main.py` (FastAPI), el cual está integrado con los siguientes módulos:
+
+- `model_wrapper.py` → Generación con llama.cpp
+- `transport_layer.py` → Validación contra `schema_prompt.json` y persistencia
+- `context_tracker.py` → Registro de interacciones
+- `log_writer.py` (opcional) → Logging estructurado
+
+---
+
+## 🎯 Objetivo
+
+Desarrollar el archivo `tests/test_api_responder.py` usando `pytest` y `TestClient` de FastAPI para verificar el correcto funcionamiento de la API LLM, su manejo de errores, estructura de respuesta y validación semántica.
+
+---
+
+## 📘 Requisitos funcionales
+
+### Endpoint: `POST /responder`
+
+- ✅ Devuelve 200 OK con prompt válido
+- ✅ Devuelve un `dict` con:
+  - `"respuesta"`: `str`
+  - `"metadata"`: `{ modelo: str, longitud_prompt: int, timestamp: float }`
+
+### Validaciones esperadas:
+- ❌ Prompt vacío → `422 Unprocessable Entity` (por validación Pydantic)
+- ❌ Modelo no cargado → `503 Service Unavailable`
+- ❌ Error interno (simulado) → `500 Internal Server Error`
+
+---
+
+## 🔧 Consideraciones técnicas
+
+- Usar `from fastapi.testclient import TestClient`
+- Mockear `ModelWrapper.generate()` si fuera necesario para evitar carga real
+- Usar fixtures de `pytest` si es posible para levantar la app (`client = TestClient(app)`)
+- Verificar tipos, claves presentes y que no devuelva estructuras inválidas
+- Verificar integración con `TransportLayer` y `ContextTracker` si se desea ampliar la prueba
+
+---
+
+## 🧪 Casos de prueba sugeridos
+
+| Caso                                 | Esperado                        |
+|--------------------------------------|----------------------------------|
+| `POST /responder` con prompt válido  | 200 OK, estructura válida        |
+| Prompt vacío                         | 422 (Pydantic)                   |
+| Modelo no cargado                    | 503, mensaje: "modelo no cargado"|
+| Respuesta sin metadata               | ❌ (debe incluirla siempre)      |
+| Errores internos simulados           | 500 con mensaje de error         |
+
+---
+
+## 📂 Archivos disponibles
+
+- `main.py` (servidor FastAPI)
+- `model_wrapper.py`
+- `transport_layer.py`
+- `context_tracker.py`
+- `schema_prompt.json`
+- `schema_respuesta.json`
+- `test_model_wrapper.py` (ya implementado)
+
+---
+
+¿Podés generar el archivo `test_api_responder.py` siguiendo esta estructura y cubriendo todos los casos mencionados con `pytest` + `TestClient`?

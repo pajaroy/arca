@@ -1,0 +1,31 @@
+---
+id: transport_layer_llm_server_v0.2
+modulo: transport_layer
+version: 0.2
+standard: ALMA_RESIST_v0.2
+descripcion: |
+  Capa universal de validación y transporte de mensajes bajo contratos institucionales.
+  Valida cada mensaje según los campos universales ALMA_RESIST, audita el proceso y registra todos los movimientos vía logging estructurado.
+  Listo para integrarse como microservicio o backend de APIs.
+campos_universales:
+  - id
+  - agente
+  - timestamp
+  - tags
+  - hash
+  - memoria_ref
+  - metadata
+scripts_principales:
+  - transport_layer.py: "Procesa, valida y audita cada mensaje de entrada/salida"
+dependencias:
+  - pydantic
+  - logging_config
+ejemplo_uso: |
+  from transport_layer import UniversalSchema, validate_message
+  valid = validate_message({...})
+linked_to:
+  - alma_core/control_central/bitacora/bitacora_viva.yaml
+estado: "EN USO — listo para expansión API/servicio"
+
+---
+

@@ -1,0 +1,63 @@
+---
+module: versiones/readme
+type: core
+status: in_progress
+created: '2025-05-20'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🗂️ docs/versiones/ – Versiones Congeladas de Documentos
+
+Este directorio contiene copias exactas (congeladas) de documentos críticos del sistema ALMA_RESIST, tomadas al cierre de etapas, auditorías o versiones mayores.
+
+---
+
+## 🧠 ¿Qué se guarda aquí?
+
+- Versiones históricas de `hitos.md`, `resumen_secciones.md`, `changelog.md`, etc.
+- Cada archivo refleja el estado completo de un documento en un momento clave del desarrollo.
+
+---
+
+## 📌 Convenciones
+
+- Nombre de archivo: `nombre_vX.Y.Z.md`
+  - Ejemplo: `hitos_v0.0.0.1.md`
+- Nunca modificar estos archivos una vez guardados.
+- Agregar comentario al final si fue una copia de respaldo o auditoría.
+
+---
+
+## 📋 Checklist para Freezear una Versión
+
+1. Guardar una copia del `.md` actual en esta carpeta con versión correcta.
+2. Actualizar el documento vivo (`docs/hitos.md`, etc.) si corresponde.
+3. Enlazar la versión desde `index.md` si es relevante.
+
+---
+
+## 👤 Responsable
+
+Archivo generado por IA + verificado por Usuario.
+
+## Versiones del sistema ALMA_RESIST
+
+### v0.0.0.3 – Snapshot Sprint 2.4
+- 📆 Fecha: 2025-05-23
+- 🎯 Objetivo: Consolidación de metodologías y validadores.
+- 📌 Incluye:
+  - Scripts `alma-cli.py`, `add_linked_to_minimo.py` y `validate_docs_flexible_v0.3.py`
+  - Actualización completa de metadatos
+  - Automatización de auditorías
+  - Registro de hito #11
+- 📂 Carpeta: `docs/versiones/v0.0.0.3_snapshot_sprint_2.4/`
+- 🔗 Referencias clave:
+  - `Sprint_2.4_Optimizacion_Metodologias.md`
+  - `metodologia_interaccion_ia_v2.md`
+
+---
+
+> Para versiones anteriores, consultar las carpetas `docs/versiones/v0.0.0.2_...` y `v0.0.0.1_...`
+
+

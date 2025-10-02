@@ -1,0 +1,407 @@
+
+/home/bird/ALMA_RESIST
+├── alma_empresa
+│   ├── archivo
+│   │   ├── datasets
+│   │   ├── downloads
+│   │   ├── logs
+│   │   └── readme.md
+│   ├── asesor-ia
+│   │   ├── contable
+│   │   ├── institucional
+│   │   ├── legal
+│   │   └── README.md
+│   ├── asesoria
+│   │   ├── contable
+│   │   ├── institucional
+│   │   ├── legal
+│   │   └── README.md
+│   ├── config
+│   │   ├── readme.md
+│   │   └── settings.yaml
+│   ├── control
+│   │   ├── readme.md
+│   │   └── sprint_actual.md
+│   ├── core
+│   │   ├── notebooks
+│   │   ├── readme.md
+│   │   ├── scripts
+│   │   └── tests
+│   ├── docs
+│   │   ├── changelog.md
+│   │   ├── history
+│   │   ├── journal
+│   │   ├── prompt_reorganizar_alma_empresa.md
+│   │   ├── prompt_reorganizar_alma_empresa_v2.md
+│   │   ├── proyeccion_base_ALMA_EMPRESA.md
+│   │   └── readme.md
+│   ├── entidades
+│   │   ├── 13cc
+│   │   ├── cannabird
+│   │   ├── fondo_inversion
+│   │   ├── mataderos_skatepark_gestion
+│   │   └── readme.md
+│   ├── equipo
+│   │   ├── asesor_padre.md
+│   │   ├── comandante_santiago.md
+│   │   ├── supervisor_pablo.md
+│   │   └── tesorero_federico.md
+│   ├── IA_asistente
+│   │   ├── docs
+│   │   ├── proyeccion_asistente_empresarial.md
+│   │   └── tareas_autonomas
+│   ├── _legacy
+│   ├── meta
+│   │   ├── module.yaml
+│   │   └── readme.md
+│   └── readme.md
+├── archivo
+│   ├── datasets
+│   ├── downloads
+│   │   ├── docs
+│   │   ├── docs_sync.zip
+│   │   ├── historico
+│   │   ├── init.sh
+│   │   └── revision_contexto_asesor-ia_cli_cleaner.md
+│   ├── logs
+│   └── README.md
+├── config
+│   ├── aliases.sh
+│   ├── autonomy_policy.json
+│   ├── llm_model.json
+│   ├── readme.md
+│   └── schema_memoria.json
+├── context_history.jsonl
+├── contexto
+│   └── tree_alma_resist.md
+├── control
+│   ├── prompts
+│   │   └── oficiales
+│   ├── readme.md
+│   └── sprints_activos
+│       ├── diagnostico_sprint_2_6.md
+│       ├── README.md
+│       └── sprint_2.6_LLM_server.md
+├── control_central
+│   ├── archivo
+│   │   ├── datasets
+│   │   ├── downloads
+│   │   ├── logs
+│   │   └── README.md
+│   ├── asesor-ia
+│   │   ├── archivo
+│   │   ├── comandos.md
+│   │   ├── config
+│   │   ├── control
+│   │   ├── core
+│   │   ├── docs
+│   │   ├── interacciones
+│   │   ├── meta
+│   │   ├── metadata.yaml.md
+│   │   ├── prompt_base.md
+│   │   ├── README.md
+│   │   ├── scripts
+│   │   ├── sessions
+│   │   ├── status
+│   │   ├── status.md
+│   │   └── templates
+│   ├── cli_cleaner
+│   │   └── control_central_cli_cleaner.md
+│   ├── config
+│   │   └── readme.md
+│   ├── control
+│   │   ├── checklists
+│   │   ├── sprint_historicos
+│   │   └── sprints_activos
+│   ├── core
+│   │   ├── notebooks
+│   │   ├── README.md
+│   │   ├── scripts
+│   │   └── tests
+│   ├── docs
+│   │   ├── changelog.md
+│   │   ├── contexto
+│   │   ├── history
+│   │   ├── journal
+│   │   ├── planificacion
+│   │   ├── readme.md
+│   │   ├── ssh_aliases.md
+│   │   ├── sync
+│   │   └── utilidades
+│   ├── logs
+│   │   ├── auditorias
+│   │   ├── log_integracion 1.md
+│   │   ├── log_integracion.md
+│   │   ├── logs_historicos
+│   │   └── README.md
+│   ├── meta
+│   │   ├── module.yaml
+│   │   └── readme.md
+│   ├── readme.md
+│   └── status
+│       ├── alma_status.yaml
+│       └── readme.md
+├── core
+│   ├── chat_cli
+│   │   ├── archivo
+│   │   ├── asesor-ia
+│   │   ├── chat.py
+│   │   ├── config
+│   │   ├── control
+│   │   ├── core
+│   │   ├── docs
+│   │   ├── meta
+│   │   ├── prompts
+│   │   └── README.md
+│   ├── cli_cleaner
+│   │   ├── archivo
+│   │   ├── asesor-ia
+│   │   ├── cli.py
+│   │   ├── config
+│   │   ├── control
+│   │   ├── core
+│   │   ├── docs
+│   │   ├── meta
+│   │   ├── modules
+│   │   └── README.md
+│   ├── __init__.py
+│   ├── launcher
+│   │   ├── README.md
+│   │   └── start.py
+│   ├── llm_server
+│   │   ├── archivo
+│   │   ├── config
+│   │   ├── context_history.jsonl
+│   │   ├── contracts
+│   │   ├── control
+│   │   ├── core
+│   │   ├── docs
+│   │   ├── __init__.py
+│   │   ├── integration
+│   │   ├── _legacy
+│   │   ├── logs
+│   │   ├── main.py
+│   │   ├── main_v0.0.0.1.py
+│   │   ├── main_v0.0.0.2.py
+│   │   ├── meta
+│   │   ├── model_wrapper
+│   │   ├── __pycache__
+│   │   ├── readme.md
+│   │   ├── transport_data
+│   │   ├── transport_layer
+│   │   └── utils
+│   ├── loader.py
+│   ├── notebooks
+│   ├── __pycache__
+│   │   ├── cli.cpython-311.pyc
+│   │   ├── __init__.cpython-311.pyc
+│   │   ├── llm_server.cpython-311.pyc
+│   │   ├── log_crypto.cpython-311.pyc
+│   │   ├── log_integrity.cpython-311.pyc
+│   │   └── log_writer.cpython-311.pyc
+│   ├── README.md
+│   ├── scripts
+│   │   ├── alma_autostart_tmux.md
+│   │   ├── alma_autostart_tmux.sh
+│   │   ├── alma_status
+│   │   ├── backup_to_git
+│   │   ├── init_system
+│   │   ├── README.md
+│   │   ├── ssh_setup
+│   │   ├── start_inputleap
+│   │   ├── stignore
+│   │   └── sync_status
+│   └── tests
+│       └── test_cli.py
+├── docs
+│   ├── 99_rfc
+│   │   ├── RFC_0001_metodologia_v2.md
+│   │   └── rfc_index.md
+│   ├── api_rest.md
+│   ├── arquitectura
+│   │   ├── estructura_doc
+│   │   ├── idea_base
+│   │   ├── prompt_tecnico
+│   │   └── whitepaper
+│   ├── decisiones_arquitectonicas.md
+│   ├── dependencias.md
+│   ├── faq_ia.md
+│   ├── flujo_secuencial.mmd
+│   ├── hitos.md
+│   ├── index.md
+│   ├── instalacion_linux_alma_resist
+│   │   ├── appendice_input_leap.md
+│   │   ├── estrategia_instalacion_y_sincronizacion
+│   │   ├── input_leap_instalacion_base.sh
+│   │   ├── instalacion_de_0.md
+│   │   └── paso_2_sincronizacion_bidireccional
+│   ├── introduccion
+│   │   ├── changelog.md
+│   │   ├── context.md
+│   │   ├── readme.md
+│   │   └── version.md
+│   ├── journal
+│   │   └── bitacoras
+│   ├── lecciones_aprendidas.md
+│   ├── metodologias
+│   │   ├── 2025-06-03_metodologia_estructura_cli_ia_v1.md
+│   │   ├── _archivadas
+│   │   ├── _propuestas
+│   │   └── readme.md
+│   ├── modules
+│   │   └── alma_loader
+│   ├── mvp
+│   │   └── resumen_mvp.md
+│   ├── planificacion
+│   │   ├── readme.md
+│   │   ├── roadmap_tecnico_detallado.pdf
+│   │   └── roadmap_tecnico.md
+│   ├── post_mortem_tecnico.md
+│   ├── project.md
+│   ├── prompt_inicio_chat_alma_resist_assist.md
+│   ├── prompts
+│   │   ├── context_tracker_request.md
+│   │   ├── log_writer_request.md
+│   │   ├── main_py_request.md
+│   │   ├── memory_graph_request.md
+│   │   ├── model_wrapper_request.md
+│   │   ├── prompt_add_linked_to_minimo.md
+│   │   ├── prompt_alma_cli_v0.0.0.4.md
+│   │   ├── prompt_base_cli_modular_v2.md
+│   │   ├── prompt_chat_0.0.1.md
+│   │   ├── prompt_codigo_base_alma_resist.md
+│   │   ├── prompt_llm_server_init.md
+│   │   ├── readme.md
+│   │   ├── solicitud_log_crypto.md
+│   │   ├── solicitud_log_writer.md
+│   │   ├── test_api_responder_prompt.md
+│   │   ├── test_context_tracker_prompt.md
+│   │   ├── testing_sprint_2_6_prompt.md
+│   │   ├── test_log_crypto_prompt.md
+│   │   ├── test_log_writer_prompt.md
+│   │   ├── test_memory_graph_prompt.md
+│   │   ├── test_transport_layer_prompt.md
+│   │   └── transport_layer_request.md
+│   ├── readme.md
+│   ├── referencias
+│   │   ├── externas
+│   │   └── README.md
+│   ├── resumen_secciones.md
+│   ├── sync
+│   │   ├── errores_comunes.md
+│   │   ├── manual_instalacion.md
+│   │   ├── README.md
+│   │   └── rutas_y_flujos.md
+│   ├── TODO.md
+│   ├── utilidades
+│   │   ├── comandos_utiles
+│   │   ├── comandos_utiles.md
+│   │   ├── guia_servidor_ALMA_RESIST.md
+│   │   ├── readme.md
+│   │   ├── README.md
+│   │   ├── scripts
+│   │   └── tags_recomendados.md
+│   ├── versiones
+│   │   ├── ideas_base_legacy
+│   │   ├── README.md
+│   │   ├── v0.0.0.1_auditoria
+│   │   ├── v0.0.0.2_CLI_FINAL
+│   │   ├── v0.0.0.2_documentacion
+│   │   ├── v0.0.0.2_estructura_documental
+│   │   ├── v0.0.0.2_idea_base_unificada
+│   │   ├── v0.0.0.2_metodologias
+│   │   ├── v0.0.0.3_snapshot_sprint_2.4
+│   │   ├── v0.0.0.4_sprint_2.5_auditoria
+│   │   └── v0.0.0.5_LLM_server
+│   └── version.md
+├── git
+├── hello_world.py
+├── ideas
+│   ├── alma_chat_instructions.md
+│   ├── README.md
+│   └── sincronizacion_automatica.md
+├── logs
+│   ├── alma_2025-05-17.dec
+│   ├── alma_2025-05-17.enc
+│   ├── alma_debug_test.enc
+│   ├── auditorias
+│   │   ├── 2025-05-28_auditoria_final_sprint_2.5.pdf
+│   │   ├── auditoria_20250523_0953_UnificacionMetadatos.md
+│   │   ├── auditoria_2025-05-23_UnificacionMetadatos.md
+│   │   ├── auditoria_estructura.md
+│   │   ├── auditoria_profunda_2025-05-20.md
+│   │   ├── auditoria_profunda_prompt.md
+│   │   ├── prompts
+│   │   └── README.md
+│   ├── backup_git
+│   │   ├── backup_git.log
+│   │   └── backup_git.sync-conflict-20250602-005854-EHTW5G7.log
+│   ├── cli.log
+│   ├── logs.zip
+│   ├── readme.md
+│   ├── status_alma
+│   │   └── status_alma.log
+│   └── status_sync
+│       └── status_sync.log
+├── memory_graph.json
+├── metodologias
+│   └── 2025-06-03_metodologia_estructura_cli_ia_v1.md
+├── readme.md
+├── requirements.txt
+├── staging
+│   └── README.md
+└── tests
+    ├── changelog_test_log_writer_v0.0.0.4.md
+    ├── cli
+    │   └── test_cli_basics.md
+    ├── context_tracker
+    │   ├── __pycache__
+    │   ├── readme.md
+    │   └── test_context_tracker.py
+    ├── index.md
+    ├── __init__.py
+    ├── _legacy
+    │   ├── changelog_test_log_writer_v0.0.0.3.md
+    │   ├── test_log_crypto_v0.0.0.1.py
+    │   ├── test_log_crypto_v0.0.0.2.py
+    │   ├── test_log_crypto_v0.0.0.3.py
+    │   ├── test_log_writer_v0.0.0.1.py
+    │   ├── test_log_writer_v0.0.0.2.py
+    │   └── test_log_writer_v0.0.0.3.py
+    ├── memory_graph
+    │   ├── __pycache__
+    │   ├── test_memory_graph.py
+    │   ├── test_memory_graph_v0.0.0.1.py
+    │   └── test_memory_graph_v0.0.0.2.py
+    ├── model_wrapper
+    │   ├── __pycache__
+    │   └── test_model_wrapper.py
+    ├── __pycache__
+    │   ├── __init__.cpython-311.pyc
+    │   ├── test_api_responder.cpython-311-pytest-8.3.5.pyc
+    │   ├── test_cli.cpython-311-pytest-8.3.5.pyc
+    │   ├── test_context_tracker.cpython-311-pytest-8.3.5.pyc
+    │   ├── test_llm.cpython-311-pytest-8.3.5.pyc
+    │   ├── test_log_crypto.cpython-311-pytest-8.3.5.pyc
+    │   ├── test_log_crypto_debug.cpython-311-pytest-8.3.5.pyc
+    │   ├── test_log_writer.cpython-311-pytest-8.3.5.pyc
+    │   ├── test_memory_graph.cpython-311-pytest-8.3.5.pyc
+    │   ├── test_model_wrapper.cpython-311-pytest-8.3.5.pyc
+    │   └── test_transport_layer.cpython-311-pytest-8.3.5.pyc
+    ├── readme.md
+    ├── test_api_responder.py
+    ├── test_cli.py
+    ├── test_llm.py
+    ├── test_log_crypto_debug.py
+    ├── test_log_crypto.py
+    ├── test_log_writer.py
+    ├── test_log_writer_v0.0.0.4.py
+    ├── transport_layer
+    │   ├── __pycache__
+    │   └── test_transport_layer.py
+    ├── utils
+    │   ├── __pycache__
+    │   └── test_metadata.py
+    └── version.yaml
+
+191 directories, 213 files

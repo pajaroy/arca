@@ -1,0 +1,15 @@
+---
+module: control/sprints_activos/readme
+type: core
+status: in_progress
+created: '2025-05-20'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 📂 Sprints Activos
+
+Esta carpeta contiene los sprints en curso.  
+Cuando un sprint se completa, se archiva dentro de su versión correspondiente en `docs/versiones/`.
+
+- Sprint 3 → LLM Server (pendiente)

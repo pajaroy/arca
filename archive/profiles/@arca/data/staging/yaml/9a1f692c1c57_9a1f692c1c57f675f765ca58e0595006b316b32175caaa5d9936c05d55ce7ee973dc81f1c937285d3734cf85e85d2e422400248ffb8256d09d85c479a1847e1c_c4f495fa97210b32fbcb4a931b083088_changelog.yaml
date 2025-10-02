@@ -1,0 +1,67 @@
+---
+tipo: changelog
+id: CHANGELOG_2025-06-05_d502f3
+version: '1.0'
+formato: yaml
+modulo: ALMA_RESIST
+titulo: Changelog
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:7758181869d4ff617f94a1e5a439a32dc8909caf9f4245315702fc1116644ca8
+---
+changelog:
+  validador_schema:
+    campos_obligatorios: [version, fecha, cambios]
+  registros:
+    - version: "1.0"
+      fecha: 2025-06-04
+      cambios: >
+        Creación inicial de la carpeta centralesis/ como entorno operativo institucional.
+        Estructuración base de carpetas, definición de roles y permisos.
+        Integración de manual técnico (.md) y YAML institucional como referencia obligatoria.
+
+    - version: "1.1"
+      fecha: 2025-06-04
+      cambios: >
+        Inicio de formalización institucional, creación de Centralesis como auditor general y separación ALMA/Centralesis.
+        Documentación de la identidad, alcance y prompt de rol.
+        Primer protocolo de revisión, bitácora y changelog básicos.
+
+    - version: "1.2"
+      fecha: 2025-06-04
+      cambios: >
+        Implementada separación .md/.yaml para facilitar automatización y parsing por IA.
+        Integración de sistema de firmas digitales para memorias y bitácoras.
+        Validación de memorias institucionales bajo schema estándar.
+
+    - version: "1.2.1"
+      fecha: 2025-06-04
+      cambios: 
+        - Integración de bitácora y changelog en formato YAML.
+        - Normalización de glosario, jerarquía de carpetas y reglas de operación.
+        - Estandarización de tipos de memorias institucionales.
+        - Consolidación de encabezado y estructura modular en todos los agentes.
+
+    - version: "2.0"
+      fecha: 2025-06-05
+      cambios: >
+        Despliegue inicial del entorno Centralesis con estructura modular definitiva.
+        Formalización total del control central y establecimiento de residencia operativa.
+        Inclusión de README y referencia cruzada con paper y YAML.
+
+    - version: "2.1"
+      fecha: 2025-06-06
+      cambios: >
+        Cierre de ciclo fundacional: auditoría final y validación completa de Centralesis como agente institucional.
+        Corrección de errores de indentación y sintaxis YAML.
+        Formalización del procedimiento de backup y referencia cruzada entre README, paper y YAML.
+        Aclaración de roles, permisos y estructura de agentes en la tabla de apéndices.
+        Inclusión del prompt de arranque y recomendaciones para onboarding en nuevos chats.
+        Habilitación para scripts de automatización de ingreso, versionado y logging.

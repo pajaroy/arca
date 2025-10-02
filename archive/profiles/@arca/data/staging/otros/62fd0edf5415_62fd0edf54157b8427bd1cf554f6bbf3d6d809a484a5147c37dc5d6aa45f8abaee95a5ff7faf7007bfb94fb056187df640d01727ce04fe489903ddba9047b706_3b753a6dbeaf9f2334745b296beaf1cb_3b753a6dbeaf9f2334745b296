@@ -1,0 +1,171 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_e48998
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Validate Docs
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:7e1a173caf34884f044dc7873bf5ae156e140100af20634c84a9677b49b65a2d
+---
+#!/usr/bin/env python3
+# validate_docs_flexible_v0.3.py – Valida metadatos YAML con nuevas reglas de validación
+
+import os
+import re
+import sys
+import argparse
+from datetime import datetime, date
+import yaml
+
+REQUIRED_FIELDS = ['module', 'type', 'status', 'created']
+VALID_TYPES = ['core', 'tool', 'external', 'integration', 'draft']
+VALID_STATUSES = ['in_progress', 'stable', 'deprecated']
+DATE_FORMAT = '%Y-%m-%d'
+
+class ValidationError(Exception):
+    def __init__(self, message, path, field=None):
+        super().__init__(message)
+        self.path = path
+        self.field = field
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(
+        description='Valida documentos según metodología ALMA_RESIST v2 (validación mejorada)',
+        epilog='Campos requeridos: ' + ', '.join(REQUIRED_FIELDS)
+    )
+    parser.add_argument('--path', default='./docs', help='Ruta a validar (default: ./docs)')
+    parser.add_argument('--verbose', '-v', action='store_true', help='Muestra detalles de la validación')
+    return parser.parse_args()
+
+def extract_yaml_metadata(content, file_path):
+    match = re.search(r'^---\s*\n(.*?)\n---', content, re.DOTALL)
+    if not match:
+        raise ValidationError("Falta bloque YAML", file_path)
+    try:
+        metadata = yaml.safe_load(match.group(1)) or {}
+        if 'created' in metadata:
+            if isinstance(metadata['created'], (date, datetime)):
+                metadata['created'] = metadata['created'].strftime(DATE_FORMAT)
+        return metadata
+    except yaml.YAMLError as e:
+        raise ValidationError(f"YAML inválido: {str(e)}", file_path)
+
+def normalize_path_for_comparison(path_str):
+    return path_str.replace('_', '')
+
+def convert_to_module(file_path, base_path):
+    relative_path = os.path.relpath(file_path, base_path)
+    if relative_path.endswith('.md'):
+        relative_path = relative_path[:-3]
+    normalized = relative_path.replace(os.path.sep, '/')
+    snake_case = re.sub(r'[- ]', '_', normalized).lower()
+    return re.sub(r'[^a-z0-9_/]', '_', snake_case)
+
+def validate_metadata(metadata, file_path, base_path):
+    errors = []
+    warnings = []
+
+    for field in REQUIRED_FIELDS:
+        if field not in metadata:
+            errors.append(f"Campo requerido faltante: '{field}'")
+
+    if 'type' in metadata:
+        if metadata['type'] not in VALID_TYPES:
+            errors.append(f"Tipo inválido: '{metadata['type']}'. Valores permitidos: {', '.join(VALID_TYPES)}")
+        if metadata['type'] == 'core' and 'linked_to' not in metadata:
+            errors.append("Para type 'core' se requiere el campo 'linked_to'")
+
+    if 'status' in metadata and metadata['status'] not in VALID_STATUSES:
+        errors.append(f"Estado inválido: '{metadata['status']}'. Valores permitidos: {', '.join(VALID_STATUSES)}")
+
+    if 'created' in metadata:
+        if isinstance(metadata['created'], str):
+            try:
+                datetime.strptime(metadata['created'], DATE_FORMAT)
+            except ValueError:
+                errors.append(f"Formato de fecha inválido en 'created'. Debe ser {DATE_FORMAT}")
+        else:
+            errors.append("'created' debe ser una cadena de texto")
+
+    if 'module' in metadata:
+        if not re.match(r'^[a-z0-9_/]+$', metadata['module']):
+            errors.append("Formato de módulo inválido. Debe usar snake_case y solo caracteres alfanuméricos")
+        expected_module = convert_to_module(file_path, base_path)
+        normalized_expected = normalize_path_for_comparison(expected_module)
+        normalized_actual = normalize_path_for_comparison(metadata['module'])
+        if normalized_actual != normalized_expected:
+            errors.append(
+                f"Módulo incorrecto. Esperado: '{expected_module}' (normalizado: '{normalized_expected}'), "
+                f"obtenido: '{metadata['module']}' (normalizado: '{normalized_actual}')"
+            )
+
+    if 'domain' in metadata:
+        domain_value = metadata['domain']
+        tags = metadata.get('tags', [])
+        if domain_value not in tags:
+            warnings.append(f"'domain' '{domain_value}' no está presente en 'tags'")
+
+    if errors:
+        raise ValidationError("\n  • " + "\n  • ".join(errors), file_path)
+
+    return warnings
+
+def process_file(file_path, base_path, verbose=False):
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+    except Exception as e:
+        print(f"❌ {file_path} - Error al leer el archivo: {str(e)}")
+        return False
+
+    try:
+        metadata = extract_yaml_metadata(content, file_path)
+        warnings = validate_metadata(metadata, file_path, base_path)
+
+        if verbose:
+            print(f"✅ {file_path} - Válido")
+            for warning in warnings:
+                print(f"  ⚠️ Advertencia: {warning}")
+
+        return True
+    except ValidationError as e:
+        print(f"\n❌ {file_path}")
+        print(f"  Error: {str(e)}")
+        return False
+
+def main():
+    args = parse_arguments()
+    valid_count = 0
+    error_count = 0
+
+    print(f"🔍 Validando documentos en: {os.path.abspath(args.path)}")
+
+    for root, dirs, files in os.walk(args.path):
+        if 'archived' in dirs:
+            dirs.remove('archived')
+        for file in files:
+            if file.endswith('.md'):
+                file_path = os.path.join(root, file)
+                if process_file(file_path, args.path, args.verbose):
+                    valid_count += 1
+                else:
+                    error_count += 1
+
+    print(f"\n📊 Resultados:")
+    print(f"  • Documentos válidos: {valid_count}")
+    print(f"  • Documentos con errores: {error_count}")
+
+    if error_count > 0:
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()

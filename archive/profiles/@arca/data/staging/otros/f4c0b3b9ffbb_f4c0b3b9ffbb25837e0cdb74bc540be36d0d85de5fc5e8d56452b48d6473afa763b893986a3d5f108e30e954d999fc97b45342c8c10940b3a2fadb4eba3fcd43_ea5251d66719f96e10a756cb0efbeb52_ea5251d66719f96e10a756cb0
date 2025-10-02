@@ -1,0 +1,6 @@
+{
+  "modelo": "Mistral-7B-Instruct.Q4_K_M",
+  "motor": "llama.cpp",
+  "ruta_modelo": "models/mistral.gguf",
+  "threads": 6
+}

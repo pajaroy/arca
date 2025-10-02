@@ -1,0 +1,76 @@
+import json
+import logging
+from pathlib import Path
+from datetime import datetime
+
+def validar_memoria(memoria: dict) -> bool:
+    campos_requeridos = ['id', 'titulo', 'contenido']
+    return all(campo in memoria for campo in campos_requeridos)
+
+def parsear_fecha(fecha_str: str) -> datetime:
+    try:
+        return datetime.fromisoformat(fecha_str.replace('Z', '+00:00'))
+    except (ValueError, TypeError):
+        return datetime.min
+
+def main(sort_by_date: bool = True):
+    base_dir = Path(__file__).parent
+    input_dir = base_dir / "memorias_json"
+    output_dir = base_dir / "exportaciones"
+    
+    output_dir.mkdir(exist_ok=True)
+    
+    memorias_validas = []
+    memorias_invalidas = []
+    errores = []
+
+    for json_file in input_dir.glob("*.json"):
+        try:
+            with open(json_file, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            
+            if not validar_memoria(data):
+                raise ValueError(f"Faltan campos requeridos en {json_file.name}")
+                
+            data['fecha_parsed'] = parsear_fecha(data.get('fecha', ''))
+            memorias_validas.append(data)
+        except Exception as e:
+            memorias_invalidas.append(json_file.name)
+            errores.append(str(e))
+            continue
+
+    if sort_by_date:
+        memorias_validas.sort(key=lambda x: x['fecha_parsed'])
+
+    try:
+        with open(output_dir / "memorias_completas.json", 'w', encoding='utf-8') as f:
+            json.dump(
+                [{k: v for k, v in m.items() if k != 'fecha_parsed'} for m in memorias_validas],
+                f,
+                indent=2,
+                ensure_ascii=False
+            )
+
+        with open(output_dir / "memorias_completas.jsonl", 'w', encoding='utf-8') as f:
+            for memoria in memorias_validas:
+                cleaned = {k: v for k, v in memoria.items() if k != 'fecha_parsed'}
+                f.write(json.dumps(cleaned, ensure_ascii=False) + '\n')
+
+    except Exception as e:
+        errores.append(f"Error al escribir archivos: {str(e)}")
+
+    log_content = [
+        f"Fecha exportación: {datetime.now().isoformat()}",
+        f"Total memorias procesadas: {len(memorias_validas) + len(memorias_invalidas)}",
+        f"Memorias exportadas: {len(memorias_validas)}",
+        f"Memorias ignoradas: {len(memorias_invalidas)}",
+        "\nErrores detectados:"
+    ] + errores + [
+        "\nArchivos ignorados:"
+    ] + memorias_invalidas
+
+    with open(output_dir / "log_exportacion.txt", 'w', encoding='utf-8') as f:
+        f.write('\n'.join(log_content))
+
+if __name__ == "__main__":
+    main()

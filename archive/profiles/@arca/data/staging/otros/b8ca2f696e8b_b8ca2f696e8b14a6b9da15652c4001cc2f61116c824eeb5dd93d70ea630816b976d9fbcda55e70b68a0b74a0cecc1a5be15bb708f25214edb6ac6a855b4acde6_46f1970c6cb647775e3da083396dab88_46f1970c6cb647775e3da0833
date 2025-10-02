@@ -1,0 +1,13 @@
+{
+  "id": "MEMGEN-006",
+  "fecha": "2025-04-30T10:09:40.342274",
+  "titulo": "Memoria Web 006",
+  "categoria": "GEN",
+  "tags": [
+    "memoria-web",
+    "#reflexion"
+  ],
+  "contenido": "El usuario desea que al comenzar cada nuevo proyecto se le sugiera qué modelo de GPT es más conveniente utilizar y qué enfoque adoptar para encarar el proyecto, con el fin de mejorar la comunicación humano-IA.",
+  "relacionadas": [],
+  "impacto_en": []
+}

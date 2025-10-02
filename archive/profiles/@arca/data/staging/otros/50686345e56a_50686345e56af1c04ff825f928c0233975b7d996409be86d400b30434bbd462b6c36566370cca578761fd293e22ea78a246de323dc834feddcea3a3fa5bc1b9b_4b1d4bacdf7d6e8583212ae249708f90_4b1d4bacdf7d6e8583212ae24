@@ -1,0 +1,107 @@
+---
+module: control/checklists/roadmap_0_0_0_2_2025_05_20
+type: core
+status: in_progress
+created: '2025-05-20'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 📌 Checklist Roadmap Técnico – ALMA_RESIST v0.0.0.2
+
+📅 Versión objetivo: v0.0.0.2  
+📂 Ubicación: `docs/checklists/roadmap_0.0.0.2.md`  
+🔧 Tipo de bloque: TÁCTICO  
+🧠 Objetivo: Implementar funcionalidades mínimas viables + corregir inconsistencias críticas detectadas en auditoría
+
+---
+
+## ✅ 1. Estandarización de Estructura
+
+- [x] Corregir el nombre de `docs/cheklists/` → `docs/checklists/`
+- [x] Eliminar carpetas vacías (`templates/`, `backups/`) o justificar su uso
+- [x] Agregar `__init__.py` a `tests/` para que funcione como paquete válido
+- [x] Eliminar archivos binarios de clave (`clave_test.bin`, etc.) del repositorio o moverlos a `.gitignore`
+- [x] Unificar versión visible en todos los archivos (`README.md`, `hello_world.py`, etc.)
+
+---
+
+## ✅ 2. Implementación de Módulos Críticos
+
+### 📦 `core/cli.py`
+
+- [x] Implementar CLI mínima con comandos:
+  - `!ayuda`, `!cargar_modelo`, `!buscar_memoria`
+- [x] Usar `argparse` o `cmd.Cmd` como base
+- [x] Permitir redireccionamiento de logs de uso
+
+### 📦 `core/llm_server.py`
+
+- [ ] Implementar servidor local IA con FastAPI o sockets
+- [ ] Integrar inferencia simple vía llama.cpp (carga de modelo `.gguf`)
+- [ ] Exponer endpoint `/responder` para pruebas desde CLI
+
+### 📦 `core/loader.py`
+
+- [ ] Implementar lógica para transformar texto de LLM → JSON memoria
+- [ ] Validar contra `config/schema_memoria.json`
+- [ ] Conexión con `log_writer.py` para registrar nueva memoria
+
+---
+
+## ✅ 3. Refactor Criptografía
+
+### 📦 `core/log_crypto.py`
+
+- [ ] Corregir imports (`Crypto.` en lugar de `Cryptodome.`)
+- [ ] Agregar fallback para `cpuinfo` no Linux
+- [ ] Modularizar la elección de algoritmo (clase `CipherSelector`)
+
+---
+
+## ✅ 4. Tests Automatizados
+
+- [ ] Convertir `test_log_writer.py` y `test_log_crypto.py` a `pytest`
+- [ ] Crear `test_cli.py` con pruebas básicas de comandos
+- [ ] Crear `test_llm.py` con mock de servidor IA
+- [ ] Validar integración: `cli → servidor → loader → memoria`
+
+---
+
+## ✅ 5. Limpieza y Sincronización de Documentación
+
+- [ ] Corregir errores en enlaces `[[...]]` en Obsidian
+- [ ] Actualizar `README.md` con:
+  - comandos funcionales
+  - estructura real del proyecto
+  - requerimientos para correr el sistema completo
+- [ ] Completar `docs/decisiones_arquitectonicas.md` con lo decidido para CLI y servidor IA
+- [ ] Registrar cambios en `docs/changelog.md`
+- [ ] Ejecutar `tree` actualizado del sistema y guardarlo en `docs/auditorias/estructura_v0.0.0.2.md`
+
+---
+
+## ✅ 6. Documentación Estratégica
+
+- [ ] Congelar versión v0.0.0.1 en carpeta `versiones/`
+- [ ] Registrar Sprint completo como hito en `docs/hitos/`
+- [ ] Agregar sección en `lecciones_aprendidas.md` (fallos detectados y abordados)
+
+---
+
+## 🧠 Comentarios de Auditor
+
+- Esta versión debe cerrar **todo lo inconsistente**, **conectar todos los módulos** y dejar un flujo mínimo operativo:
+  CLI → consulta IA local → guardar memoria → log seguro
+- No se requiere aún interfaz web ni características complejas
+- Este sprint es FUNDACIONAL: errores aquí generarán deuda técnica estructural
+
+---
+
+## 🏁 Criterios de Cierre para v0.0.0.2
+
+- [ ] El comando `python core/cli.py` responde sin errores
+- [ ] El LLM local se levanta con modelo `.gguf` desde CLI
+- [ ] Una memoria puede registrarse desde CLI → JSON estructurado → logueado y cifrado
+- [ ] Todas las pruebas automáticas pasan
+- [ ] El changelog y README reflejan el estado real del sistema

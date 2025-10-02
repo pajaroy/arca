@@ -1,0 +1,51 @@
+## 📅 [2025-05-08] – Actualización Estructural Integral
+
+### ✅ Estructura nueva incorporada:
+- Creación del módulo `06_CÚPULA_OPERATIVA/` con carpetas para:
+  - `DEG_BIRD/` (Santiago Calvo)
+  - `SEBASTIAN_GORY_CULTIVO/`
+  - `ARIEL_ABACA_MARKETING/`
+- Consolidación de roles, funciones y bitácoras personales por cabecilla.
+- Incorporación del sistema de trabajo diario y documentación de coordinación.
+- Creación del módulo `07_REGISTROS_INSTITUCIONALES/` para la ONG madre:
+  - Subcarpetas para actas, estatutos, resoluciones y socios.
+- Replicación de `04_REGISTROS_INSTITUCIONALES/` en Anexo_1_CANNABIRD.
+- Inclusión de sistema de validación para roles y estructura de reuniones.
+- Integración de carpetas auxiliares para borradores e ideas en revisión.
+- Corrección y orden de estructura ZIP y compatibilidad con sincronización.
+
+### 🛠 Archivos claves creados o modificados:
+- `roles_funciones_cupula_validacion.md`
+- `TEMA_VALIDAR_drive_y_calendar.md`
+- `checklist_coordinacion_general_13CC.md`
+- `README.md` general del sistema (nuevo)
+
+
+## 📅 [2025-05-08] – Consolidación Operativa y Estratégica
+
+### ✅ Documentos creados:
+- `contexto_general_13CC.md` → resumen técnico para integración IA
+- `PROYECTO_13CC_OVERVIEW.md` → presentación institucional del club
+- `checklist_personal.md` → tareas DEG por categoría
+- `guia_temas_reuniones.md` → pauta base de reuniones mensuales y trimestrales
+
+### 📁 Estructura:
+- Se crea carpeta `REUNIONES_SEMANALES/` dentro de `06_CÚPULA_OPERATIVA/`
+- Se corrige lógica: reuniones informales quedan en cúpula, las legales en `05_REUNIONES/`
+- Se validan funciones por unidad y modelo de anexos operativo
+
+### 🛠️ Mejoras de sistema:
+- Separación clara de formularios y carpetas oficiales
+- Unificación semántica de roles, visión, roadmap y metas
+- Eliminación de mención explícita a sistema YING/YANG en overview público
+
+### 🔁 Ajustes estructurales menores:
+- Eliminada la carpeta `03_SOCIOS` por redundancia
+- Registro de socios unificado dentro de `07_REGISTROS_INSTITUCIONALES/04_REGISTRO_DE_SOCIOS/`
+- Cada anexo mantiene su propio registro en su módulo correspondiente
+- Actualizado `README.md` para reflejar este cambio
+
+
+# Registro de Cambios
+
+Este archivo documenta la evolución administrativa y legal de la ONG y sus anexos.

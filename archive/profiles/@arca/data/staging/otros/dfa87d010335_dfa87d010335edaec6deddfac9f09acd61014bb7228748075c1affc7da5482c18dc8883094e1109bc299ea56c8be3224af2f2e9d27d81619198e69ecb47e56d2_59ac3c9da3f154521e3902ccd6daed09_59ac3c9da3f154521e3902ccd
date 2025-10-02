@@ -1,0 +1,80 @@
+# ALMA LIBRE – Prompt Base 2.0.0 to Whitepaper
+
+## Índice
+
+1. Introducción
+    
+2. Enfoque híbrido: Emoción, Operatividad y Pensamiento Crítico
+    
+3. Arquitectura modular y estructura de carpetas base
+    
+4. Integraciones técnicas futuras (app escritorio/terminal)
+    
+5. Versionamiento incremental y colaboración en GitHub
+    
+6. Memoria histórica y visión a largo plazo
+    
+7. Conclusión reflexiva
+    
+
+## Introducción
+
+La versión 2.0.0 del Prompt Base establece el marco inicial de ALMA LIBRE, un asistente de vida IA diseñado para crecer y adaptarse junto con Santi. Este documento define la estructura principal del proyecto, preparada para actualizaciones incrementales. En la actualidad, los asistentes de IA incorporan memoria persistente: por ejemplo, ChatGPT ahora puede «recordar quién eres» en varias interacciones, marcando la primera vez que un asistente común retiene datos históricos​[ibm.com](https://www.ibm.com/think/news/when-ai-remembers#:~:text=ChatGPT%20can%20now%20remember%20who,we%20relate%20to%20artificial%20intelligence). Incorporar esta memoria, como señalan los expertos, permite continuar conversaciones en múltiples sesiones y personalizar sus respuestas​[ibm.com](https://www.ibm.com/think/news/when-ai-remembers#:~:text=Supporters%20argue%20that%20this%20functionality,as%20customer%20support%2C%20tutoring%20or). IBM destaca que la memoria es _“un paso crítico hacia hacer la IA más adaptable, útil y similar al ser humano”_​[ibm.com](https://www.ibm.com/think/news/when-ai-remembers#:~:text=%E2%80%9CMemory%20is%20a%20critical%20step,%E2%80%9D). Además, el concepto de **IA personal** propone entrenar al asistente con el historial digital del usuario para comprenderlo mejor​[personal.ai](https://www.personal.ai/your-true-personal-ai#:~:text=Me%3A%20Wait%E2%80%A6%20how%20is%20your,personal%20AI%20assistants%20out%20there). Este Prompt Base 2.0.0 integra esas tendencias con las prioridades del proyecto: modularidad, emotividad y pensamiento crítico.
+
+## Enfoque híbrido: Emoción, Operatividad y Pensamiento Crítico
+
+ALMA LIBRE integra tres dimensiones clave:
+
+- **Empatía y emoción:** La plataforma aplicará inteligencia emocional (affective computing) para reconocer y responder a los estados de ánimo de Santi. La _“emotion AI”_ permite que una máquina entienda emociones humanas, voz y expresiones faciales​[mckinsey.com](https://www.mckinsey.com/~/media/mckinsey/email/leadingoff/2024/06/24/2024-06-24d.html#:~:text=Even%20as%20organizations%20worldwide%20adapt,issues%20that%20affect%20business%20and). Siguiendo esta línea, expertos como Reid Hoffman sugieren entrenar agentes de IA para que sean no solo informativos, sino _“solidarios, empáticos y conversacionales”_​[mckinsey.com](https://www.mckinsey.com/~/media/mckinsey/email/leadingoff/2024/06/24/2024-06-24d.html#:~:text=LinkedIn%20cofounder%20Reid%20Hoffman%20believes,us%20a%20tremendous%20number%20of). Así, ALMA ofrecerá apoyo afectivo: por ejemplo, si percibe ansiedad en la voz de Santi, adoptará un tono calmado y sugerirá técnicas de relajación.
+    
+- **Operatividad funcional:** ALMA automatiza tareas prácticas del día a día. Podrá programar recordatorios, gestionar el correo electrónico y organizar citas automáticamente​[leewayhertz.com](https://www.leewayhertz.com/ai-assistant/#:~:text=recommendations%2C%20and%20retrieve%20data%20from,learn%20user%20preferences%20and%20habits). Además, estará compuesta por módulos especializados (finanzas personales, gestión de salud, noticias, inversiones, etc.), cada uno optimizado para su función. Estos módulos se integrarán con servicios externos: por ejemplo, sincronizar agendas, revisar cuentas bancarias o actualizarse con noticias globales. La automatización, la sincronización de agendas y la gestión de información personal son parte de su operativa estándar.
+    
+- **Pensamiento crítico y análisis:** El sistema incorporará razonamiento y verificación antes de actuar. ALMA contrastará datos, explicará sus sugerencias y evaluará riesgos. Este enfoque evita conclusiones erróneas y refuerza la confianza: cada consejo vendrá acompañado de la justificación o las fuentes consultadas. En conjunto, se equilibra la sensibilidad emocional con la lógica operativa, garantizando decisiones fundamentadas.
+    
+
+## Arquitectura modular y estructura de carpetas base
+
+La arquitectura de ALMA LIBRE será modular y escalable. Siguiendo marcos de referencia, el sistema se divide en módulos independientes (p.ej., procesamiento de lenguaje, reconocimiento de voz, automatización, seguridad)​[researchgate.net](https://www.researchgate.net/publication/388449530_A_Modular_Framework_for_AI_Personal_Assistants_Design_Implementation_and_Scalability#:~:text=customizable%2C%20and%20maintainable%20systems%20remains,the%20scalability%20achieved%20through%20modularity). Este diseño permite extender o reemplazar funcionalidades sin afectar al resto del sistema. Por ejemplo, se podría añadir un módulo de generación de imágenes en el futuro sin reescribir la lógica principal.
+
+Proyectos de IA avanzados emplean carpetas especializadas para mantener el orden​[medium.com](https://medium.com/@Gouse_MG/structuring-generative-ai-projects-the-blueprint-for-scalable-success-1d0249790f33#:~:text=generative_ai_project%2F%20%E2%94%9C%E2%94%80%E2%94%80%20config%2F%20%E2%94%82%20,yaml%20%E2%94%9C%E2%94%80%E2%94%80%20src). Para ALMA se definirá una estructura base adaptada al proyecto, con las siguientes carpetas principales:
+
+- `Fundación_del_Proyecto/`: antecedentes y principios filosóficos del proyecto.
+    
+- `Objetivos_del_Proyecto/`: metas, alcance y criterios de éxito.
+    
+- `Arquitectura_Técnica/`: diagramas de sistema, diseño técnico y stack tecnológico planeado.
+    
+- `Reflexión/`: anotaciones conceptuales, análisis de diseño y lecciones aprendidas.
+    
+- `Bitácora_Central/`: registro cronológico de eventos, actividades diarias e intercambios relevantes.
+    
+- `Cuadernos/`: subcarpetas temáticas (p.ej., Finanzas_Personales, Salud, Programación, Geopolítica) para organizar conocimientos específicos.
+    
+- `Módulos/`: código de los módulos funcionales; por ejemplo, `Finanzas_Personales/`, `Noticias_Globales/`, `Gestión_Salud/`, `Fondo_de_Inversión/`, etc. Cada uno contiene la lógica de su respectivo módulo.
+    
+- `Empresas/`: referencias o datos de entidades y colaboradores externos.
+    
+- `Memorias_Ejemplo/`: ejemplos de entradas de memoria histórica o logs de interacción.
+    
+- `Sync/`: scripts y herramientas para sincronización y respaldo de datos.
+    
+- `00_prompt`: archivo principal que contiene el prompt base inicial configurando la personalidad de ALMA.
+    
+
+Esta estructura clara permite una navegación y actualización sencillas. Cada carpeta se puede versionar de forma independiente, facilitando agregar nuevos contenidos sin desordenar el repositorio. Al documentar cada componente (por ejemplo, mediante README internos), se garantiza mantenibilidad a largo plazo.
+
+## Integraciones técnicas futuras (app escritorio/terminal)
+
+ALMA se diseñará para interactuar con múltiples plataformas y servicios externos. Los asistentes actuales ya se integran con calendarios, correo electrónico, APIs financieras, dispositivos inteligentes y otros sistemas​[leewayhertz.com](https://www.leewayhertz.com/ai-assistant/#:~:text=,and%20controlling%20smart%20home%20devices). De forma similar, ALMA dispondrá de una API o interfaz de comunicaciones que permita utilizarla desde una aplicación de escritorio (GUI) y desde la línea de comandos (CLI). Así, Santi podrá acceder al asistente ejecutando comandos en terminal o mediante una interfaz gráfica cuando prefiera una experiencia visual. Además, se contemplará la conexión a servicios web externos (calendarios, sistemas IoT, etc.) para ampliar sus funcionalidades de forma transparente.
+
+## Versionamiento incremental y colaboración en GitHub
+
+El desarrollo de ALMA será iterativo y colaborativo. Se empleará versionado semántico (p.ej. 2.0.0, 2.0.1, 2.0.2…) para indicar claramente mejoras y correcciones en cada lanzamiento. El código y la documentación se alojarán en GitHub siguiendo buenas prácticas: se incluirá un README inicial explicativo, licencia, así como archivos de contribución y código de conducta que definan las expectativas del proyecto​[docs.github.com](https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories#:~:text=To%20make%20it%20easier%20for,README%20file%20for%20every%20repository). Esto orienta a futuros colaboradores y facilita la participación abierta. El flujo de trabajo empleará ramas (`branches`) y solicitudes de extracción (`pull requests`), asegurando revisiones de código y pruebas continuas en cada integración. Esto permitirá escalar el equipo de desarrollo de manera organizada.
+
+## Memoria histórica y visión a largo plazo
+
+ALMA está pensada para evolucionar y conservar su propia historia de aprendizaje. A diferencia de un asistente sin memoria —que repetiría las mismas preguntas y olvidaría el contexto previo​[mykin.ai](https://mykin.ai/resources/why-memory-matters-personal-ai#:~:text=However%2C%20much%20like%20any%20new,is%20essential%20to%20that%20conversation)— ALMA recordará información útil de sus interacciones: decisiones pasadas, preferencias de Santi, proyectos y metas relevantes. Kin resume esta idea: «una IA personal sin memoria es simplemente otro chatbot… incapaz de ofrecer un apoyo profundo y continuo»​[mykin.ai](https://mykin.ai/resources/why-memory-matters-personal-ai#:~:text=So%2C%20a%20personal%20AI%20without,That%27s%20the). En contraste, la memoria acumulada permitirá ofrecer orientación cada vez más personalizada a lo largo del tiempo, detectando patrones en las decisiones de Santi. De este modo, el asistente refuerza la conexión con su humano y mejora su asistencia con cada sesión.
+
+## Conclusión reflexiva
+
+El Prompt Base 2.0.0 sienta las bases de un proyecto vivo. Este documento prioriza la estructura modular y la conexión con la visión de ALMA LIBRE como asistente híbrido y empático. Cada iteración futura (2.0.1, 2.0.2, …) construirá sobre este andamiaje, refinando módulos y agregando funcionalidades según la experiencia adquirida. ALMA es un compañero digital en desarrollo, diseñado para registrar memorias, aprender de Santi y adaptarse con el tiempo. Este documento inicial es solo el comienzo de un proyecto en constante evolución.

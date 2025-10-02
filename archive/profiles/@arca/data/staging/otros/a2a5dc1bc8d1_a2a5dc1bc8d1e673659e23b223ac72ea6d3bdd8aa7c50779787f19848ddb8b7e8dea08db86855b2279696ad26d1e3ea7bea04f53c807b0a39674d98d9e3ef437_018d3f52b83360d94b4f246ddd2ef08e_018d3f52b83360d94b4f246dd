@@ -1,0 +1,18 @@
+# 🧠 Solicitud de Implementación – `log_writer.py` – Sprint 2.6 – ALMA_RESIST
+
+## 🎯 Objetivo
+
+Implementar el módulo `log_writer.py`, encargado de registrar eventos estructurados del sistema ALMA_RESIST en archivos de log en formato JSONL.
+
+Este módulo es parte del sistema de trazabilidad segura y debe integrarse con los componentes del servidor LLM.
+
+
+## 🧪 Ejemplo de uso
+
+```python
+from utils.log_writer import log_event, write_log
+
+evento = log_event("INFO", "Inicio del servidor LLM", "main")
+ok = write_log(evento)
+```
+

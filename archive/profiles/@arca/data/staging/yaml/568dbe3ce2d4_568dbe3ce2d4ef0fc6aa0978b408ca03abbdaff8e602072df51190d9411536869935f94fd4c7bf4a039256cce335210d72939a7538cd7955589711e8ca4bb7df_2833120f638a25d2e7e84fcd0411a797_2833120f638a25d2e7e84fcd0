@@ -1,0 +1,29 @@
+changelog:
+  version: "0.1.2"
+  fecha: "2025-07-11"
+  cambios:
+    - seguridad:
+        - Added: RBAC con ACL granular
+        - Added: Encriptación E2E (AES-GCM)
+        - Added: Hashing BLAKE3 (post-quantum ready)
+        - Removed: SHA-256 como único hash
+    - arquitectura:
+        - Changed: Estructura hexagonal (core/infra/domain)
+        - Added: Capa de adaptadores para infraestructura
+        - Added: Modelos de dominio inmutables
+    - operaciones:
+        - Changed: "invalidos/" → "managed_assets/" con políticas WORM
+        - Added: Transacciones ACID para operaciones críticas
+        - Added: Auto-reparación de integridad
+    - auditoria:
+        - Added: Bitácora inmutable (append-only)
+        - Added: Schemas OpenTelemetry/JSON-LD
+        - Added: Blockchain interna para logs
+    - escalabilidad:
+        - Added: Soporte vector embeddings (RAG/ML)
+        - Added: Integración multi-nube
+        - Added: Circuit-breaker para resiliencia
+    - mantenibilidad:
+        - Added: Módulos autocontenidos (commands/)
+        - Added: Error handling estandarizado
+        - Added: Tests de integración (90%+ cobertura)

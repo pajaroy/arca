@@ -1,0 +1,31 @@
+## 📌 Apéndice Técnico – Plan de Tests Automatizados (Fase 3)
+
+Este apéndice detalla la suite de tests necesaria para cubrir funcionalmente todos los módulos desarrollados en el Sprint 2.6 bajo el nuevo modelo modular de ALMA_RESIST. Todos los tests deben migrarse o crearse bajo la nueva arquitectura.
+
+
+### 🧪 Nuevos tests a implementar
+
+| Archivo sugerido            | Módulo testeado             | Casos clave                                                                 |
+|-----------------------------|-----------------------------|------------------------------------------------------------------------------|
+| `test_model_wrapper.py`     | `model_wrapper.py`          | Carga del modelo, errores por ruta inválida, generación con prompt válido   |
+| `test_api_responder.py`     | `main.py` (FastAPI)         | Status 200, 422 input inválido, 503 modelo no cargado, estructura de salida |
+| `test_transport_layer.py`   | `transport_layer.py`        | Envío y recuperación, validación con schema, escritura/lectura de archivos  |
+| `test_context_tracker.py`   | `context_tracker.py`        | Registro de interacción, validación JSON Schema, recuperación, limpieza     |
+| `test_log_writer.py`        | `log_writer.py`             | Escritura atómica, validación básica, simulación de error de disco          |
+| `test_log_crypto.py`        | `log_crypto.py`             | Cifrado, descifrado, detección de algoritmo, verificación de nonce          |
+| `test_memory_graph.py`      | `memory_graph.py`           | (Pendiente) Inserción de nodos, relaciones, exportación, búsqueda por peso  |
+
+
+### 📂 Ubicación sugerida
+
+```plaintext
+tests/
+├── test_model_wrapper.py
+├── test_api_responder.py
+├── test_transport_layer.py
+├── test_context_tracker.py
+├── test_log_writer.py
+├── test_log_crypto.py
+└── test_memory_graph.py
+```
+

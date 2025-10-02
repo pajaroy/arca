@@ -1,0 +1,47 @@
+
+# 🧠 Prompt Base – `resumen_semanal_cannabird_sX`
+
+
+### ✅ Objetivo:
+Generar un único **resumen semanal consolidado** con las **tareas efectivamente realizadas** durante esa semana en el espacio de cultivo.
+
+
+## 📐 Metodología:
+
+1. **Leé todos los archivos diarios** y extraé las tareas realizadas, problemas detectados y acciones tomadas.
+2. Clasificá y organizá esa información en las siguientes tres secciones obligatorias:
+   - **🛠️ Tareas Generales** (`#General`)
+   - **🌱 Zona Vegetativa (Vege)** (`#Vege`)
+   - **🌸 Zona de Floración (Flora)** (`#Flora`)
+3. Mantené un estilo directo, ordenado y profesional.
+4. Aplicá una **etiqueta temporal obligatoria** al inicio:
+   ```
+   #resumen-semanal #cannabird #semana-X #año-YYYY
+   ```
+
+5. Incorporá **hashtags consistentes** para cada tipo de tarea, acción o problema. Ejemplos:
+   - `#riego`, `#pH`, `#fumigacion`, `#controlPlagas`, `#revisiónEsquejeras`, `#mantenimiento`, `#vpd`, `#temperatura`, `#registroDatos`, `#oidio`, `#ventilación`
+   - Eventos clave: `#incorporaciónPersonal`, `#cambioEstructural`, `#notaEstrategica`
+   - Sectores específicos: `#esquejera-1`, `#003-vege`, `#002-flora`
+   - Tiempo: `#semana-X`, `#año-YYYY`
+
+6. Usá hashtags modulares por sector, por ejemplo:
+   - `#003-vege`, `#001-flora`, `#madres-cannabird`
+
+7. Podés agregar tags de responsables en tareas específicas:
+   - `#hechoPor_Pablo`, `#nota_Coco`, `#supervision_Santiago`
+
+
+## 🛠️ Tareas Generales #General
+- …
+
+## 🌱 Zona Vegetativa (Vege) #Vege
+- …
+
+## 🌸 Zona de Floración (Flora) #Flora
+- …
+
+
+## 🧩 Reflexiones y Mejoras Futuras (opcional)
+- …
+```

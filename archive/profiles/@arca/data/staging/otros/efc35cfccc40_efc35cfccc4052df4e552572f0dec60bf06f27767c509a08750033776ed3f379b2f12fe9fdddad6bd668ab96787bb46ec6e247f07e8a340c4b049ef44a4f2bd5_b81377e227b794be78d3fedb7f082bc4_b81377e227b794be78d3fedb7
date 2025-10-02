@@ -1,0 +1,40 @@
+# validate_docs.py
+
+Valida los metadatos YAML de cada archivo `.md` bajo `docs/`. Soporta validación flexible con tolerancia a `_`.
+
+## Uso
+
+```bash
+python3 validate_docs.py --path ./docs --verbose
+```
+
+## Parámetros
+
+- `--path`: Ruta base donde buscar `.md`. Por defecto: `./docs`
+- `--verbose` / `-v`: Muestra advertencias, detalles y progreso
+
+## Reglas de validación implementadas
+
+- `module`, `type`, `status`, `created` son obligatorios
+- `type: core` debe tener `linked_to`
+- `created` debe ser fecha válida `YYYY-MM-DD`
+- `module` debe coincidir con ruta esperada (`snake_case`)
+- `domain` debe estar reflejado en `tags` si existe
+
+## Resultado esperado
+
+El script devuelve:
+
+- Lista de archivos válidos
+- Errores y advertencias con detalle
+- Código de salida `1` si hay errores (útil para CI/CD)
+
+## Uso recomendado
+
+Usar dentro del script `validar_documentacion.sh` como parte del pipeline de validación documental.
+
+## Recursos vinculados
+
+- `fix_metadata.py`: Para corregir errores comunes
+- `tags_recomendados.md`: Lista sugerida de `domain` y `tags`
+- `alma-cli.py`: Validaciones y auditorías semánticas

@@ -1,0 +1,31 @@
+
+# 🚀 ROADMAP – Proyecto ALMA LIBRE
+
+Este documento traza las etapas de desarrollo actuales y futuras del sistema ALMA LIBRE, organizado por fases para facilitar su evolución modular.
+
+
+## 🔹 Fase 2 – Integración Técnica Inicial (ALMA SYNC + SQLite)
+
+- [ ] Crear `memorias.db` base estructurada
+- [ ] Leer y escribir memorias en terminal (`alma.py`)
+- [ ] Automatizar lectura de YAML y estado
+- [ ] Vincular con carpeta madre ALMA LIBRE
+- [ ] Validar entrada/salida desde metadata + comandos
+
+
+## 🔹 Fase 4 – Interacción con IA Local
+
+- [ ] IA local lee el Prompt y memorias
+- [ ] Ejecuta consultas internas
+- [ ] Aplica interpretación emocional (fine-tuning)
+- [ ] Se conecta con SQLite y responde desde terminal
+
+
+## 🔹 Fase 6 – Sistema Autónomo Escalable
+
+- [ ] Memorias autovalidantes
+- [ ] Acceso multiusuario
+- [ ] Encriptado local
+- [ ] Logs automáticos por día
+- [ ] Carga de nuevos módulos vía comandos
+

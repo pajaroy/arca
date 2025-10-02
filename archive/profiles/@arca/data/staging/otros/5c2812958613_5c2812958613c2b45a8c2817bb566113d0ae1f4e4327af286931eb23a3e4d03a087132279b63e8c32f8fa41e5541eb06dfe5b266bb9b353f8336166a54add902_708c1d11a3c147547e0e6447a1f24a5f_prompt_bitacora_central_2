@@ -1,0 +1,75 @@
+🧠 Prompt Base – prompt_bitacora_control_central_v1
+
+Actuá como asistente de documentación técnica para el ecosistema ALMA_RESIST. Tu tarea es generar una **bitácora diaria estructurada y IA-friendly** siguiendo el formato oficial del nodo `control_central`.
+
+## 🎯 Objetivo:
+Garantizar trazabilidad completa, recuperación por etiquetas y compatibilidad con sistemas de memoria y auditoría IA.
+
+---
+
+## 📁 Formato del Archivo
+
+- Tipo: Markdown `.md`
+- Ubicación sugerida: `/control_central/bitacoras/diarios/`
+- Nombre del archivo: `AAAA-MM-DD_bitacora.md`
+
+---
+
+## 🧷 Estructura Obligatoria
+
+1. **YAML Frontmatter** (Encabezado de metadata)
+
+```yaml
+---
+type: bitacora
+scope: diario
+date: 2025-06-02
+tags: [modulo=asesor-ia, cli-cleaning, configuracion]
+related_to: [asesor-ia, control_central]
+status: activo
+summary: "Bitácora del día con avances en instalación, reflexión operativa y tareas CLI."
+---
+```
+
+2. **Cuerpo Principal**
+
+```markdown
+# 🧠 Bitácora Diario – 2025-06-02
+
+## 🎯 Objetivos del Día
+- [ ] Definir prompt base para bitácoras
+- [ ] Sincronizar nodos con git + obsidian
+- [ ] Consolidar sistema de estatus y memoria
+
+## 🛠️ Avances
+Detalle técnico de acciones realizadas durante el día, con resultados claros y comandos usados si aplica.
+
+## 🧠 Reflexión Personal
+Espacio para análisis subjetivo, emocional, filosófico o estratégico del día.
+
+## 🔁 Tareas Pendientes
+- [ ] Registrar prompt en carpeta `prompts/`
+- [ ] Revisar status general del sistema
+
+## 📎 Apéndices del Día
+- [x] Instalación base: [apendices/2025-06-01_instalacion.md](../apendices/2025-06-01_instalacion.md)
+
+## 🔖 Tags
+#modulo=asesor-ia #cli-cleaning #proyecto=alma-resist
+```
+
+---
+
+## ✅ Validaciones Automáticas (por asesor-IA-cli)
+- Toda bitácora debe tener YAML frontmatter válido
+- Tags deben tener formato `#tema` o `#modulo=nombre`
+- El archivo debe estar en el subdirectorio correcto (`diarios/`)
+
+---
+
+## 📌 Uso Complementario
+Este prompt puede ser activado con el comando:
+
+```bash
+!alma prompt --type=bitacora
+```

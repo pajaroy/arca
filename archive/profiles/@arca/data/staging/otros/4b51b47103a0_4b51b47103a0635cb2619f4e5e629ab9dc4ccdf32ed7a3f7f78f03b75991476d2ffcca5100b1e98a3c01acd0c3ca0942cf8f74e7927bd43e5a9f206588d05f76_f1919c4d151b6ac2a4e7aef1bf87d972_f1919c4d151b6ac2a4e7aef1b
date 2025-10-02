@@ -1,0 +1,20 @@
+# 🔐 core/auth.py – Módulo base de autenticación para ALMA_LOADER
+
+"""
+Este módulo define una función `get_current_user()` que simula la autenticación de usuario.
+
+✅ Requisitos:
+- Usar FastAPI y Depends
+- No usar JWT aún, pero dejar preparado para eso
+- Devuelve un user_id de prueba (ej: "dev-user-001")
+- Comentarios que indiquen cómo migrar a OAuth2 / JWT real
+
+📎 Este módulo será usado en endpoints que requieran autenticación
+"""
+
+# Ejemplo de uso en endpoint:
+# from fastapi import Depends
+# from core.auth import get_current_user
+#
+# async def crear_memoria(..., user_id: str = Depends(get_current_user)):
+#     ...

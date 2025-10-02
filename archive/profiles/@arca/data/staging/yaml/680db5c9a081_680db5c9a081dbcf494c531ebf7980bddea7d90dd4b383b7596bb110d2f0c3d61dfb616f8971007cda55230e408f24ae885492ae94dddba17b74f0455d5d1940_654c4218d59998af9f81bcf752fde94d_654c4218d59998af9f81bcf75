@@ -1,0 +1,47 @@
+version: 0.1.0
+uuid: 268f269d-a071-47ed-877f-4215a4957946
+tipo: ''
+schema: ''
+estado: ''
+descripcion: ''
+estructura:
+  - ''
+tags: []
+linked_to: []
+responsable: ''
+hash_verificacion: sha256:pending
+historial:
+  - fecha: ''
+    descripcion: ''
+last_modified: '2025-07-09T23:48:46.775293+00:00'
+last_modified_by: alma
+prompt: |
+  Necesito un script Python optimizado para mi sistema ALMA-CLI.
+  El objetivo es modificar exclusivamente el campo `responsable` del encabezado YAML de un archivo `.md`, `.yaml`, `.yml` o `.py`.
+
+  Requerimientos principales:
+    - Input: ruta de archivo (`.md`, `.yaml`, `.yml` o `.py`) y lista de responsables (uno o más strings).
+    - El campo `responsable` debe ser una lista de strings en el YAML, incluso si es solo un nombre.
+    - Si el archivo es `.md`, el encabezado YAML siempre va entre líneas `---` al inicio del archivo.
+    - Si el archivo es `.yaml` o `.yml`, el YAML es todo el archivo.
+    - Si el archivo es `.py`, el YAML está dentro de un bloque docstring triple-comilla al inicio del archivo, inmediatamente después de la línea `---`.
+    - El script debe buscar y parsear el bloque YAML. Si no hay encabezado YAML, debe abortar y mostrar: 
+      "No se encontró encabezado YAML. Corré primero Validador_Metadata.py"
+    - No debe crear encabezado YAML si no existe.
+    - Al modificar el campo `responsable`, debe actualizar automáticamente:
+        - `last_modified` con la fecha y hora actual en ISO UTC
+        - `last_modified_by` con el usuario del sistema (`USER`/`USERNAME`, o "alma" si no existe)
+    - El script debe soportar:
+        - `--responsable` (uno o más nombres, como lista)
+        - `--dry-run` (mostrar los cambios por consola, sin guardar archivo)
+        - `--force` (forzar actualización aunque el responsable ya sea igual)
+    - No debe borrar ni modificar otros campos del YAML.
+    - Si el YAML es inválido debe abortar y mostrar error legible.
+    - Logging mínimo (info/error), escritura en log file si es posible.
+    - Output claro: éxito, error, dry-run, sin cambios.
+    - Código Python limpio, profesional y modular. No hace falta comentarios, solo el código completo y listo para usar.
+
+  Ejemplo de uso esperado:
+    python Fix_Responsable.py archivo.md --responsable Bird Kael --dry-run
+
+  Dame solo el código completo, listo para usar, sin comentarios ni explicaciones.

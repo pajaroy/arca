@@ -1,0 +1,51 @@
+id: readme_alma_core_control_v0.1.0
+version: 0.1.0
+fecha_actualizacion: 2025-06-11T03:20:00Z
+autor: Santi + ALMA
+estado: "activo"
+hash_actual: sha256:pending
+
+proposito:
+  descripcion: |
+    Carpeta de seguimiento de planificación activa e histórica del ecosistema ALMA_CORE.
+    Centraliza los sprints, objetivos operativos y flujo de control del sistema madre.
+    Sirve como referencia rápida para el estado actual del proyecto a nivel raíz (no de agentes).
+
+contenido_esperado:
+  tipos_de_archivo:
+    - .md, .yaml
+  ejemplos:
+    - `sprint_actual.md`: Documento vivo del sprint en curso.
+    - `sprint_*.yaml`: Archivos históricos o estructurados de sprints anteriores (si se adoptan).
+
+relacion_rag:
+  indexado: true
+  tipo: gestion_operativa
+  linked_to:
+    - alma_core/config/README.yaml
+    - control_central/flujo_aprendizajes.yaml
+    - control_central/bitacora_viva.yaml
+  fix_metadata: true
+
+hashing_index:
+  descripcion: |
+    El archivo `sprint_actual.md` puede ser hasheado en cada cierre de sprint para auditoría.
+    Si se utiliza versión `.yaml` estructurada, se recomienda incluir ID, fechas y etiquetas por módulo.
+
+notas_operativas:
+  - Esta carpeta está pensada como eje de gestión operativa del sistema raíz.
+  - Cada módulo/agente puede tener su propio `control/`, pero debe declarar su dependencia con esta carpeta si se sincroniza.
+  - La bitácora viva y los aprendizajes se almacenan a nivel `control_central/`; esta carpeta resume el estado operativo desde alma_core.
+
+proyeccion_futura:
+  - Reemplazar `sprint_actual.md` por `sprint_actual.yaml` con estructura de control formal (ID, fechas, objetivos, bloqueados).
+  - Automatizar rotación de sprints cerrados a `sprints_historicos/`.
+  - Vincular aprendizajes de cada sprint a `flujo_aprendizajes.yaml` por ID.
+
+changelog:
+  - fecha: 2025-06-11T03:20:00Z
+    version: 0.1.0
+    cambios: |
+      - Se establece carpeta `control/` como núcleo de seguimiento operativo.
+      - Documentada conexión con `bitácora viva`, `flujo de trabajo` y `settings.yaml`.
+      - Definido camino futuro hacia estructura YAML de sprints y trazabilidad por ID.

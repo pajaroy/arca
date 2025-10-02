@@ -1,0 +1,28 @@
+{
+  "version": "0.2.0",
+  "tipo": "readme",
+  "schema": "almaresist.readme_v1",
+  "descripcion": "Contiene los prompts técnicos para generación, refactor y auditoría de scripts del módulo memorias v0.2.0.",
+  "estructura": [
+    {
+      "prompt_cargar_memorias_v0.2.0.yaml": "Prompt principal para DeepSeek o GPT."
+    }
+  ],
+  "tags": [
+    "memorias",
+    "prompts",
+    "ingenieria",
+    "cli"
+  ],
+  "linked_to": [
+    "../README.yaml",
+    "prompt_cargar_memorias_v0.2.0.yaml"
+  ],
+  "responsable": "Equipo de Operaciones",
+  "hash_verificacion": "sha256:pending",
+  "historial": [
+    "Prompts revisados y aprobados para uso institucional."
+  ],
+  "last_modified": "2025-06-18T13:40:00Z",
+  "last_modified_by": "Kael"
+}

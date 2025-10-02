@@ -1,0 +1,5 @@
+# 📁 scripts/
+Contiene scripts ejecutables del sistema ALMA_LOADER.
+
+- `nueva.py`: Convierte entradas en lenguaje natural a JSON estructurado.
+- `resumen_diario.py`: Genera resúmenes automáticos en formato Markdown.

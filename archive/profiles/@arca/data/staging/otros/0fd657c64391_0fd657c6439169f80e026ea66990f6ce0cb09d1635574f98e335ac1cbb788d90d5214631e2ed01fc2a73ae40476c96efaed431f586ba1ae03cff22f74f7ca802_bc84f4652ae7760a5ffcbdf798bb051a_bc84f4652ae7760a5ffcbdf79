@@ -1,0 +1,69 @@
+# 💡 Idea Base – Flujo Interno de Agentes en ALMA_RESIST
+
+## Contexto
+
+Actualmente, los agentes de ALMA_RESIST tienen bien definido su **rol** y **funciones**, pero no siempre conocen con precisión el **entorno operativo** donde deben actuar. Esta carencia genera confusiones, archivos mal ubicados, pérdidas de contexto y dificultad para auditar o automatizar tareas a futuro.
+
+Para resolver esto, surge la necesidad de un **módulo de contexto operativo**: cada agente debe conocer desde el minuto cero *dónde* está parado, *cómo* debe actuar en su entorno, y *qué reglas* debe cumplir.
+
+
+## Motivación
+
+- **Trazabilidad:** Saber quién, cómo y dónde hizo cada cosa.
+- **Escalabilidad:** A medida que crecen los agentes, la arquitectura no colapsa.
+- **Auditoría:** Permite revisiones automáticas y humanas sobre operaciones.
+- **Automatización futura:** Con la metadata YAML, cualquier script o IA puede buscar, migrar, auditar o versionar fácilmente.
+
+modulo: arquitectura/estructura_doc/flujo_interno_agente
+type: core
+status: in_progress
+created: 2025-06-04
+version: 0.1
+autor: Centralesis
+linked_to: metodologia_doc_ia_v2
+descripcion: >
+  Plantilla y metodología para definir y auditar el flujo interno operativo de cada agente dentro del sistema ALMA_RESIST.
+  Incluye estructura base, checklist de operación y convenciones YAML para trazabilidad y automatización futura.
+estructura_base_validada: |
+  .
+  ├── asesor-archivo-downloads/
+  │   ├── idea_flujo_interno_agente_v0.1.yaml
+  ├── docs/
+  │   └── arquitectura/estructura_doc/plantilla_checklist
+campos_estandar:
+  - module
+  - type
+  - status
+  - created
+  - version
+  - autor
+  - linked_to
+  - descripcion
+  - checklist
+  - logs
+  - dependencias
+reglas_operativas:
+  - Todo archivo relevante debe tener encabezado YAML auditable.
+  - El campo 'module' debe reflejar la ruta lógica del agente.
+  - Mantener status actualizado (in_progress, review, stable, deprecated).
+  - Checklist debe actualizarse en cada cambio mayor.
+  - Los cambios se documentan en 'logs'.
+checklist_ejemplo:
+  - item: Validar entorno operativo (ruta, permisos, archivos requeridos)
+    estado: pendiente
+  - item: Revisar estructura base de carpetas/archivos
+    estado: pendiente
+  - item: Completar propiedades YAML del archivo
+    estado: pendiente
+  - item: Auditar cambios y dejar registro en logs
+    estado: pendiente
+logs:
+  - fecha: 2025-06-04
+    autor: Centralesis
+    accion: Creación de la idea base y estructura inicial validada.
+    detalle: Primer versión alineada a la plantilla_checklist de docs.
+dependencias: []
+observaciones: >
+  Esta idea base será extendida para cada agente, permitiendo una arquitectura trazable y escalable de operaciones internas.
+```
+

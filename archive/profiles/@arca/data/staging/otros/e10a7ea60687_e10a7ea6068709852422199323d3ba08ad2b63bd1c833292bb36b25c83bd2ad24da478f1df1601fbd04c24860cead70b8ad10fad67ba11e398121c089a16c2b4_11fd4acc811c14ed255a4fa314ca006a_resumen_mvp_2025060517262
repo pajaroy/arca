@@ -1,0 +1,247 @@
+---
+module: mvp/resumen_mvp
+type: core
+status: in_progress
+created: '2025-05-22'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# ✅ Resumen MVP – ALMA_RESIST v0.0.0.1
+
+📝 Versión: 0.0.0.1  
+📅 Última actualización: 2025-05-20  
+👤 Responsable: Usuario + IA
+
+---
+
+## 🧠 ¿Qué es ALMA_RESIST?
+
+ALMA_RESIST es un entorno operativo portable, antifrágil y orientado a terminal, diseñado para ser la base técnica de un sistema de IA distribuido, resiliente y autónomo. Su propósito es servir como núcleo funcional de trabajo local con IA, memoria extendida y sincronización con entornos espejo.
+
+---
+
+## 🎯 Objetivo del MVP v0.0.0.1
+
+Establecer una **estructura mínima funcional y auditable** que permita:
+- Registro de logs estructurados (`log_writer.py`)
+- Logs cifrados funcionales (`log_crypto.py`)
+- Documentación trazable de hitos y auditoría técnica
+- Base Obsidian-compatible para navegación semántica
+- Control de cambios (changelog, hitos, versión viva)
+
+---
+
+## ⚙️ Componentes Implementados
+
+| Componente               | Estado   | Observaciones                                       |
+|--------------------------|----------|-----------------------------------------------------|
+| `log_writer.py`          | ✅        | Log funcional, con metadatos completos              |
+| `log_crypto.py`          | ✅        | Log cifrado AES/ChaCha funcional                    |
+| `hitos.md`               | ✅        | Estructura con versión 0.0.0.1                      |
+| `changelog.md`           | ✅        | Control de cambios detallado                        |
+| `auditoria_estructura.md`| ✅        | Evaluación crítica de la estructura del sistema     |
+| `resumen_secciones.md`   | ✅        | Estado actual por módulo                            |
+| `docs/versiones/README.md`| ✅       | Estandarización de versiones congeladas             |
+
+---
+
+## ❌ Pendientes Críticos para MVP
+
+- [ ] `index.md` (navegación Obsidian central)
+- [ ] `test_loader.py` u otro test funcional real
+- [ ] Script CLI de monitoreo o ejecución mínima (`main.py`)
+- [ ] Declaración de dependencias (`docs/dependencias.md`)
+- [ ] Documentación general de instalación
+
+---
+
+## 🚧 Consideraciones
+
+El MVP no busca ser utilizable por terceros aún. Su propósito es **sentar las bases técnicas**, validar estructura y establecer estándares. Todo lo construido está orientado a escalarse, no a entregarse.
+
+---
+
+## 📂 Ubicación recomendada
+
+Guardar este archivo como:
+
+```
+docs/mvp/resumen_mvp_v0.0.0.1.md
+```
+
+Cuando se alcance una nueva versión funcional significativa, se congelará y se creará una nueva versión:  
+`resumen_mvp_v0.0.0.2.md`, etc.
+
+---
+
+## 🔗 Relacionado
+
+- [[13cc/registros/hitos]]
+- [[13cc/dev/changelog]]
+- [[ALMA_RESIST/logs/auditorias/auditoria_estructura]]
+- [[ALMA_RESIST/docs/resumen_secciones]]
+  
+---
+# ✅ Resumen MVP – ALMA_RESIST v0.0.0.2
+
+📝 Versión: 0.0.0.2  
+📅 Última actualización: 2025-05-21  
+👤 Responsable: Usuario + IA
+
+---
+
+## 🧠 Qué incluye esta versión
+
+Sprint de consolidación metodológica:
+- Implementación de CLI funcional (core/cli.py)
+- Modularización de comandos y validación por test
+- Sistema de logging estructurado y logs IA-trazables
+- Definición y registro de 6 metodologías operativas
+- Organización estandarizada de `/docs/` para navegación IA
+---
+
+## ⚙️ Componentes Nuevos
+
+| Componente               | Estado   | Notas                                                  |
+|--------------------------|----------|----------------------------------------------------------|
+| `core/cli.py`            | ✅        | CLI modular funcional y probado                         |
+| `commands/`              | ✅        | Comandos por archivo con autoload dinámico              |
+| `logs/cli.log`           | ✅        | Logging IA-trazable implementado                        |
+| `tests/test_cli.py`      | ✅        | Test básico funcional de CLI                            |
+| `01_methodologies/`      | ✅        | Metodologías base organizadas y activas                 |
+| `Methodology_Index.md`   | ✅        | Índice navegable para IA                                |
+
+---
+
+## 🔗 Relación con componentes anteriores
+
+- Continúa la línea base establecida en `v0.0.0.1`
+- Todos los módulos actuales siguen la metodología modular definida
+- La arquitectura es ahora indexable y trazable por IA local
+---
+
+## ❌ Pendientes Relevantes para v0.0.0.3
+
+- [ ] Implementar `alma_loader.py` con memoria real
+- [ ] Validación de módulos con IA local
+- [ ] Script de extracción de ideas desde buffer (resumen inteligente)
+- [ ] Integración inicial con `Mistral` o LLM local
+
+---
+
+📂 Ubicación recomendada:
+`docs/mvp/resumen_mvp_v0.0.0.2.md`
+  
+---
+## 🧾 Resumen Sprint 2.2 – Metodologías Base
+
+📅 Fecha de cierre: 2025-05-21  
+🔢 Versión asociada: v0.0.0.2_CLI_FINAL  
+📁 Sprint: Sprint_2.2_Metodologias_Base  
+
+---
+
+### ✅ Alcance logrado
+
+- Se definieron y documentaron 6 metodologías oficiales:
+  - Estructura modular
+  - Ciclos de sprint
+  - Versionado y backups
+  - Documentación legible por IA
+  - Registro de decisiones (ADR)
+  - Interacción estructurada con sistemas IA
+
+- Todas las metodologías quedaron reflejadas en:
+  - `/docs/01_methodologies/` (activas)
+  - `_archivadas/` (anteriores)
+  - `_propuestas/` (evoluciones futuras)
+
+---
+
+### 🧠 Valor estratégico
+
+Este sprint estableció el marco operativo que permite que:
+
+- La IA navegue semánticamente el sistema
+- Los módulos sean trazables, versionables e integrables
+- Se puedan escalar componentes de forma modular sin perder el control estructural
+
+---
+
+### 🧩 Impacto en el sistema
+
+- Nueva organización del índice de metodologías (`Methodology_Index.md`)
+- Actualización del `README.md` general
+- Preparación completa para automatización futura
+
+---
+
+✅ Sprint cerrado formalmente. Listo para archivarse.
+
+---
+## Resumen MVP – Sprint 2.3
+
+**Objetivo alcanzado:** Consolidación y automatización del sistema de metadatos
+
+**Componentes clave:**
+- `fix_metadata.py v4`: Generación y validación automática de YAML en documentos
+- `force_snake_case_modules.py`: Normalización de estructura semántica para compatibilidad IA
+- `validate_docs.py`: Validación estricta de integridad documental
+- `integrar_nuevo_archivo.sh`: Automatización unificada del flujo de integración
+
+**Resultado:**
+El sistema de documentación cuenta ahora con una base robusta, consistente y lista para escalar con módulos de IA y procesos colaborativos.
+
+---
+## 🧾 Resumen Sprint 2.1 – Estructura Documental
+
+📅 Fecha de cierre: 2025-05-23  
+🔢 Versión asociada: v0.0.0.2_estructura_documental  
+📁 Sprint: Sprint_2.1_Profesionalizacion_Estructura
+
+---
+
+### ✅ Alcance logrado
+
+- Creación y estandarización de plantillas en YAML (`docs/estructura_doc`)
+- Implementación de testing base: CLI y validador de metadatos
+- Consolidación de documentación viva (`TODO.md`, `.project.md`)
+- Registro del snapshot con hash SHA y firma técnica
+- Organización profesional del sistema documental para escalar con IA
+
+---
+
+### 🧠 Valor estratégico
+
+Esta versión convierte a ALMA_RESIST en un sistema trazable, modular y documentado para ser expandido por IA.
+
+- Mejora en la interoperabilidad documental
+- Preparación para reflexión semántica
+- Consolidación como entorno de desarrollo técnico-vivo
+
+---
+
+✅ Sprint cerrado formalmente. Documentación preparada para expansión futura.
+
+---
+
+### ✅ Avance MVP - Sprint 2.4
+
+- Consolidación de infraestructura documental con metadatos unificados.
+- Primer auditoría ejecutada con motor CLI (`alma-cli`) sobre 105 documentos.
+- Backups estructurados, validación YAML estandarizada y reglas semánticas activas.
+- Se establece base técnica para el futuro módulo de memoria semántica y sugerencias IA.
+
+---
+
+## 🏁 Consolidación del MVP – Sprint 2.5
+
+- 📦 Estructura modular mínima completada
+- 📄 Documentación semántica funcional
+- 🧠 Compatibilidad verificada con modelos IA
+- 🛠️ Validación automatizada mediante scripts integrados
+- 📚 Entrada técnica unificada (`prompt_tecnico_base.md`)
+- 🧭 El sistema puede funcionar autónomamente desde CLI, con IA o como repositorio auditable
+
+> Estado: **MVP estable** – listo para evolución

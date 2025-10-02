@@ -1,0 +1,83 @@
+# 👤 Protocolo/Asistente Diario de Trabajo – Pablito Tatu
+
+## Instrucciones de uso
+
+Este documento funciona como **asistente personal** y protocolo de reporte diario.  
+Cada día, completá cada sección con la mayor precisión posible.  
+**Leé las preguntas guía** y usá los tags propuestos para máxima trazabilidad.  
+Al final del día, el sistema (o la IA) puede sugerirte mejoras, detectar patrones o ayudarte a enfocar tu trabajo.
+
+---
+
+# 📅 Resumen Diario – Pablito Tatu  
+**Fecha:** YYYY-MM-DD  
+**Día:** Lunes  
+**Proyecto:** #alma-empresa #cannabird  
+**Participantes:** #pablito-tatu  
+#resumen-diario #supervision #semana-XX #año-2025 #diario-trabajo
+
+## 🛠️ Infraestructura y Orden #infraestructura #orden
+- ¿Qué mejoraste hoy en el área física?  
+- ¿Detectaste problemas de orden, limpieza, seguridad, cableríos, espacios comunes?
+- ¿Qué sugerencias dejás para mañana?
+
+## 📝 Observaciones sobre el Equipo y el Trabajo #observaciones #equipo
+- ¿Cómo fue la interacción con el equipo?
+- ¿Hubo problemas de comunicación o coordinación?
+- ¿Viste algo que se pueda mejorar en la dinámica grupal?
+
+## 🔍 Problemas Detectados y Propuestas de Mejora #mejoras #problemas
+- ¿Qué fallas encontraste hoy?
+- ¿Qué solución proponés (aunque sea tentativa)?
+- ¿Qué te gustaría discutir con el equipo o tu superior?
+
+## 💡 Aprendizajes Personales #aprendizaje #reflexiones
+- ¿Qué aprendiste hoy?
+- ¿Cómo podrías aplicar ese aprendizaje mañana?
+
+## 👤 Tareas Propias y Responsabilidades #tareas #responsabilidad
+- Lista las tareas que completaste y las que quedan pendientes.
+- ¿En qué sector sentiste mayor avance?
+- ¿Algo que debas priorizar mañana?
+
+## 🧠 Notas Finales y Tareas Futuras #notas #pendientes
+- ¿Qué temas quedan abiertos para mañana?
+- ¿Qué meta personal te proponés para el próximo día?
+- ¿Hay algo que quisieras preguntar o pedir ayuda?
+
+## 🧪 Autoevaluación del Día #autoevaluacion
+- ¿Cómo calificarías tu desempeño hoy? (1-10 y breve justificación)
+- ¿Algo que debas mejorar personalmente?
+- ¿Qué esperás que la IA (o tu supervisor) te sugiera para mañana?
+
+---
+
+## 📝 Instrucción Final
+
+Al finalizar cada día de trabajo:
+
+1. Generá este resumen en **formato `.md`**.
+2. Usá el siguiente nombre de archivo:  
+   `resumen_diario_pablito_tatu_YYYY-MM-DD.md`
+3. Guardalo exclusivamente en:  
+   `ALMA_EMPRESA/equipo/pablito_tatu/reportes_diarios/`
+4. Verificá que todos los campos estén completos antes de cerrar la jornada.
+
+El incumplimiento de esta norma implica pérdida de trazabilidad y dificulta la mejora continua del sistema.
+
+---
+
+**Este archivo debe guardarse cada jornada en:**  
+`ALMA_EMPRESA/equipo/pablito_tatu/reportes_diarios/`
+
+---
+
+## 📌 Notas Futuras
+
+Este protocolo está preparado para integrarse a IA que:
+- Audite los registros automáticamente
+- Sugiera mejoras en base a patrones detectados
+- Permita que Pablito evolucione su perfil y competencias de forma continua
+
+---
+

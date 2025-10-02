@@ -1,0 +1,95 @@
+- id: CHANGELOG_2025-06-06_02
+  tipo: movimiento_archivos
+  modulo: control_central/core/notebooks/cargar_memorias
+  autor: Kael
+  fecha: 2025-06-06
+  status: publicado
+  tags:
+    - limpieza
+    - modularidad
+    - cargar_memorias
+    - ia-friendly
+    - auditoria
+  resumen: >
+    Consolidación de todos los archivos funcionales y documentación de “cargar_memorias” bajo la carpeta notebooks/cargar_memorias/, mejorando trazabilidad y limpieza estructural.
+  detalles:
+    - Archivos afectados:
+      - cargar_memorias_changelog_v3.md
+      - cargar_memorias.md
+      - cargar_memorias.py
+      - cargar_memorias_v3.py
+      - prompt_maestro_cargador_memorias.md
+      - prompt_maestro_cargador_memorias_v3.md
+      - prompt_maestro_cargador_memorias_v4.md
+      - prompt_maestro_cargador_memorias.yaml
+    - Se realizó movimiento desde la raíz de notebooks/ a cargar_memorias/
+    - Se documentó en bitácora y changelog correspondiente.
+  protocolo:
+    - Movimiento ejecutado desde la raíz de ALMA_RESIST.
+    - Se actualizó README y enlaces internos si fuera necesario.
+- id: CHANGELOG_2025-06-06_03
+  tipo: movimiento_archivos
+  modulo: control_central/asesor-ia/core/notebooks
+  autor: Kael
+  fecha: 2025-06-06
+  status: publicado
+  tags:
+    - movimiento
+    - sectorizacion
+    - agentes
+    - asesor-ia
+    - modularidad
+    - auditoria
+  resumen: >
+    Movimiento de las carpetas de agentes/proyectos desde core/notebooks a asesor-ia/core/notebooks, sectorizando la arquitectura para mejorar trazabilidad y auditoría modular.
+  detalles:
+    - Carpetas afectadas:
+      - proyecto_alma
+      - proyecto_emma
+      - proyecto_kael
+      - flujo_de_agentes
+    - Se creó la carpeta asesor-ia/core/notebooks/ si no existía.
+    - Se actualizaron referencias y documentación interna según corresponda.
+  protocolo:
+    - Movimiento ejecutado desde la raíz de ALMA_RESIST.
+    - Acción documentada en bitácora y changelog.
+- id: CHANGELOG_2025-06-06_04
+  tipo: movimiento_archivo
+  modulo: control_central/asesor-ia/kael/contexto
+  autor: Kael
+  fecha: 2025-06-06
+  status: publicado
+  tags:
+    - movimiento
+    - kael
+    - auditoria
+    - git_mv
+  resumen: >
+    Movimiento de `kael.md` de docs/contexto/ a asesor-ia/kael/contexto/ usando git mv, asegurando trazabilidad y preservación del historial.
+  detalles:
+    - Archivo movido: kael.md
+    - Origen: control_central/docs/contexto/
+    - Destino: control_central/asesor-ia/kael/contexto/
+    - Comando usado: git mv
+  protocolo:
+    - Movimiento ejecutado desde raíz del sistema
+    - Acción documentada en bitácora y changelog
+- id: CHANGELOG_2025-06-06_05
+  tipo: replicacion_estructura
+  modulo: control_central/asesor-ia
+  autor: Kael
+  fecha: 2025-06-06
+  status: publicado
+  tags:
+    - estructura
+    - agentes
+    - modularidad
+    - auditoria
+  resumen: >
+    Se replicó la estructura modelo de centralesis para emma y se completaron las de kael y alma bajo asesor-ia, asegurando coherencia y modularidad.
+  detalles:
+    - Creación de carpetas y README.md en emma
+    - Complemento de carpetas faltantes en kael y alma
+    - Acción ejecutada con rsync
+  protocolo:
+    - Estructura revisada, registrada en bitácora y changelog

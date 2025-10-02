@@ -1,0 +1,49 @@
+# README_Arquitectura_Tecnica
+
+# 🧠 Arquitectura Técnica de ALMA LIBRE
+
+Esta carpeta documenta la estructura lógica, modular y técnica del Proyecto ALMA LIBRE.
+
+## 🎯 Propósito
+
+- Definir la estructura general del sistema.
+- Describir cómo se conectan módulos, cuadernos y plantillas.
+- Establecer las reglas de organización para una evolución ordenada y automatizable.
+- Facilitar el trabajo conjunto entre humano e IA (como ALMA, DeepSeek u Oyama).
+
+## 📁 Contenido de esta carpeta
+
+- **01_Esquema_Modular.md**
+    
+    Lista de todos los módulos funcionales del sistema ALMA LIBRE.
+    
+- **02_Flujo_de_Datos.md**
+    
+    Cómo circula la información entre módulos, cuadernos y plantillas.
+    
+- **03_Mapa_de_Carpeta.md**
+    
+    Explicación de la estructura de carpetas del sistema.
+    
+- **04_Sincronizacion.md**
+    
+    Estrategia de conexión y sincronización con Obsidian, Notion, AlmaSync y otros entornos.
+    
+- **05_Templates.md**
+    
+    Estándares para plantillas reutilizables por módulo/cuaderno.
+    
+- **06_Integracion_IA.md**
+    
+    Detalles técnicos sobre cómo interactúan GPT, DeepSeek, Oyama y otros con la estructura del proyecto.
+    
+
+## 🧠 Filosofía técnica
+
+> ALMA LIBRE no es una app, es un sistema de pensamiento estructurado.
+> 
+> 
+> Cada carpeta es una neurona, cada módulo es un lóbulo, y cada template una sinapsis.
+> 
+
+Esta carpeta es el plano cerebral de todo el proyecto.

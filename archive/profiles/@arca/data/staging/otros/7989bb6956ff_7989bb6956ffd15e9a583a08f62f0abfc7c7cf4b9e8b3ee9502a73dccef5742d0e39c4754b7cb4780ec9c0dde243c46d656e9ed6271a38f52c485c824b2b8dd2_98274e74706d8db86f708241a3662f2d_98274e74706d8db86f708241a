@@ -1,0 +1,78 @@
+[
+  {
+    "id": "BITACORA_VIVA_2025-06-06_01",
+    "tipo": "bitacora_viva",
+    "modulo": "control_central/asesor-ia/agentes",
+    "autor": "Kael",
+    "fecha": "2025-06-06",
+    "status": "abierto",
+    "tags": [
+      "agentes",
+      "bitacora_viva",
+      "modularidad",
+      "ia-friendly",
+      "auditoria"
+    ],
+    "linked_to": [],
+    "entradas": [
+      {
+        "fecha": "2025-06-06",
+        "accion": "Centralización de agentes bajo subcarpeta agentes/",
+        "descripcion": "Se movieron las carpetas alma, centralesis, kael y emma a agentes/ para maximizar modularidad.",
+        "motivo": "Escalabilidad, orden, trazabilidad y claridad arquitectónica.",
+        "ejecutado_por": "Kael (auditor CLI)",
+        "estado": "Finalizado, documentado en changelog y bitácora central"
+      }
+    ]
+  },
+  {
+    "id": "BITACORA_VIVA_2025-06-05_02",
+    "tipo": "bitacora_viva",
+    "modulo": "control_central/asesor-ia/agentes",
+    "autor": "Kael",
+    "fecha": "2025-06-06",
+    "status": "registrado",
+    "tags": [
+      "limpieza",
+      "duplicados",
+      "centralesis",
+      "agentes",
+      "auditoria"
+    ],
+    "entradas": [
+      {
+        "fecha": "2025-06-06",
+        "accion": "Eliminación de carpeta duplicada",
+        "descripcion": "Se eliminó la carpeta duplicada /control_central/asesor-ia/centralesis/ tras verificar migración total a /control_central/asesor-ia/agentes/centralesis/.",
+        "motivo": "Unicidad documental, evitar confusión y reducir deuda técnica.",
+        "ejecutado_por": "Kael (auditor CLI)",
+        "estado": "Ejecutado y registrado"
+      }
+    ]
+  },
+  {
+    "id": "BITACORA_VIVA_2025-06-06_08",
+    "tipo": "bitacora_viva",
+    "modulo": "control_central/asesor-ia/archivo/downloads/historico",
+    "autor": "Kael",
+    "fecha": "2025-06-06",
+    "status": "registrado",
+    "tags": [
+      "movimiento",
+      "historico",
+      "prompt",
+      "limpieza",
+      "auditoria"
+    ],
+    "entradas": [
+      {
+        "fecha": "2025-06-06",
+        "accion": "Movimiento de archivo a histórico",
+        "descripcion": "Se movió prompt_base.md de asesor-ia/ a archivo/downloads/historico/ para archivo definitivo y trazabilidad.",
+        "motivo": "Limpieza, preservación de versiones antiguas y orden documental.",
+        "ejecutado_por": "Kael (auditor CLI)",
+        "estado": "Ejecutado, registrado en changelog y bitácora."
+      }
+    ]
+  }
+]

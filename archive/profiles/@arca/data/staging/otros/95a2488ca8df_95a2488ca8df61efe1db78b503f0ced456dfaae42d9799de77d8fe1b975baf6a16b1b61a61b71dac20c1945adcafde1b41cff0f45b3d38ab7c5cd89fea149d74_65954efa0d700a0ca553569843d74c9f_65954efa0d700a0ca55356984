@@ -1,0 +1,49 @@
+
+# 🧠 Prompt Base – `resumen_diario_cannabird_dX_v1`
+
+
+## ✅ Objetivo:
+Registrar con claridad todas las acciones realizadas en el día en cada sector del cultivo, incluyendo responsables, observaciones, cambios, problemas, soluciones y decisiones operativas.
+
+
+## 📐 Metodología:
+
+1. Organizá el contenido en bloques claros y consistentes.
+2. Usá hashtags normalizados para **tareas, cultivos, personas y acciones**.
+3. Clasificá la información en secciones predeterminadas (ver estructura).
+4. Utilizá siempre etiquetas de **fecha**, **día de la semana** y **participantes**.
+
+
+## 🛠️ Tareas Generales #General
+- …
+
+## 🧪 Zona Esquejeras / Propagación #esquejeras
+- …
+
+## 🌱 Zona Vegetativa (Vege) #Vege
+- …
+
+## 🌸 Zona de Floración (Flora) #Flora
+- …
+
+## 🪴 Sector Madres (si aplica) #madres-cannabird
+- …
+
+## 🧠 Observaciones Estratégicas (opcional) #observaciones
+- …
+
+## ⚙️ Log de Decisiones / Cambios (opcional) #ajustes
+- …
+
+## 👤 Tareas por Responsable (opcional)
+- #seba-rios: …
+- #pablito-tatu: …
+- #bird: …
+```
+
+
+## 🔄 Glosario Técnico (expansible)
+- `001-flora`: Cultivo ubicado en Sala de Floración, actualmente en semana N.
+- `004-vege`: Cultivo en Sala Vegetativa.
+- `esquejera-N`: Máquina o zona de propagación identificada por número.
+

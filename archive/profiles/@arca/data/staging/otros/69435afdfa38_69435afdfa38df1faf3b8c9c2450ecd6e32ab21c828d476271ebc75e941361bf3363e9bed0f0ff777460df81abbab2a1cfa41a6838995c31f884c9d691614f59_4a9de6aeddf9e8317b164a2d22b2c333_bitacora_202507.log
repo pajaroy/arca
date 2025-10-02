@@ -1,0 +1,96 @@
+2025-07-07T07:48:59Z | INFO | Cargar_Bitacoras | 🚀 Iniciando comando: AGREGAR
+2025-07-07T07:48:59Z | ERROR | Cargar_Bitacoras | ERROR PARQUET: Tipo inválido para fecha. Esperado: datetime64[ns], Actual: object
+2025-07-07T07:48:59Z | ERROR | Cargar_Bitacoras | 🚨 ERROR CRÍTICO: Error cargando entradas: Tipo inválido para fecha. Esperado: datetime64[ns], Actual: object
+2025-07-07T07:56:03Z | INFO | Cargar_Bitacoras | 🚀 Iniciando comando: AGREGAR
+2025-07-07T07:56:12Z | ERROR | Cargar_Bitacoras | FALLO EN BACKUP: [Errno 2] No such file or directory: '/home/alma/Documents/Journal/Bitacora/bitacora_viva.parquet'
+2025-07-07T07:56:12Z | ERROR | Cargar_Bitacoras | 🚨 ERROR CRÍTICO: Error creando backup: [Errno 2] No such file or directory: '/home/alma/Documents/Journal/Bitacora/bitacora_viva.parquet'
+2025-07-07T08:01:13Z | INFO | Cargar_Bitacoras | 🚀 Iniciando comando: AGREGAR
+2025-07-07T08:01:18Z | ERROR | Cargar_Bitacoras | 🚨 ERROR CRÍTICO: Error leyendo Parquet: Could not open Parquet input source '<Buffer>': Parquet file size is 0 bytes
+/build/apache-arrow-16.0.0/cpp/src/arrow/dataset/file_parquet.cc:796  parquet_format_.GetReader(source_, scan_options)
+/build/apache-arrow-16.0.0/cpp/src/arrow/dataset/file_parquet.h:196  EnsureCompleteMetadata()
+/build/apache-arrow-16.0.0/cpp/src/arrow/dataset/dataset.cc:64  ReadPhysicalSchemaImpl()
+2025-07-07T08:09:57Z | INFO | Cargar_Bitacoras | 🚀 Iniciando comando: AGREGAR
+2025-07-07T08:09:59Z | INFO | Cargar_Bitacoras | Archivo Parquet creado vacío: /home/alma/Documents/Journal/Bitacora/bitacora_viva.parquet
+2025-07-07T08:09:59Z | INFO | Cargar_Bitacoras | Metadata YAML creado vacío: /home/alma/Documents/Journal/Bitacora/bitacora_viva.metadata.yaml
+2025-07-07T08:09:59Z | INFO | Cargar_Bitacoras | Backups creados: bitacora_backup_20250707_080959.parquet, metadata_backup_20250707_080959.yaml
+2025-07-07T08:09:59Z | ERROR | Cargar_Bitacoras | Error eliminando backup: time data '20250707' does not match format '%Y%m%d_%H%M%S'
+2025-07-07T08:10:00Z | INFO | Cargar_Bitacoras | Bitácora actualizada con éxito
+2025-07-07T08:10:00Z | INFO | Cargar_Bitacoras | Registro changelog: alta | Entrada: 3e4d9052-7b44-485f-8aab-a7fe15e93c9b
+2025-07-07T08:10:00Z | INFO | Cargar_Bitacoras | ✅ Entrada agregada: ID=3e4d9052-7b44-485f-8aab-a7fe15e93c9b
+2025-07-07T08:17:52Z | INFO | Cargar_Bitacoras | 🚀 Iniciando comando: AGREGAR
+2025-07-07T08:17:52Z | ERROR | Cargar_Bitacoras | ERROR PARQUET: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+2025-07-07T08:17:52Z | ERROR | Cargar_Bitacoras | 🚨 ERROR CRÍTICO: Error cargando entradas: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+2025-07-07T08:24:35Z | INFO | Cargar_Bitacoras | 🚀 Iniciando comando: AGREGAR
+2025-07-07T08:24:35Z | ERROR | Cargar_Bitacoras | ERROR PARQUET: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+2025-07-07T08:24:35Z | ERROR | Cargar_Bitacoras | 🚨 ERROR CRÍTICO: Error cargando entradas: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+2025-07-07T08:24:51Z | INFO | Cargar_Bitacoras | 🚀 Iniciando comando: AGREGAR
+2025-07-07T08:24:51Z | ERROR | Cargar_Bitacoras | ERROR PARQUET: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+2025-07-07T08:24:51Z | ERROR | Cargar_Bitacoras | 🚨 ERROR CRÍTICO: Error cargando entradas: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+2025-07-07T08:27:01Z | INFO | Cargar_Bitacoras | 🚀 Iniciando comando: AGREGAR
+2025-07-07T08:27:01Z | ERROR | Cargar_Bitacoras | ERROR PARQUET: Tipo inválido para fecha. Esperado: datetime64[ns], Actual: datetime64[ns, UTC]
+2025-07-07T08:27:01Z | ERROR | Cargar_Bitacoras | 🚨 ERROR CRÍTICO: Error cargando entradas: Tipo inválido para fecha. Esperado: datetime64[ns], Actual: datetime64[ns, UTC]
+2025-07-07T08:28:46Z | INFO | Cargar_Bitacoras | 🚀 Iniciando comando: AGREGAR
+2025-07-07T08:28:48Z | INFO | Cargar_Bitacoras | Backups creados: bitacora_backup_20250707_082848.parquet, metadata_backup_20250707_082848.yaml
+2025-07-07T08:28:48Z | WARNING | Cargar_Bitacoras | Timestamp de backup ignorado por formato inválido: 20250707
+2025-07-07T08:28:48Z | ERROR | Cargar_Bitacoras | Error eliminando backup: cannot access local variable 'backup_time' where it is not associated with a value
+2025-07-07T08:28:48Z | ERROR | Cargar_Bitacoras | FALLO GUARDADO: Error escribiendo Parquet: ("object of type <class 'str'> cannot be converted to int", 'Conversion failed for column fecha with type object')
+2025-07-07T08:28:48Z | WARNING | Cargar_Bitacoras | ⚠️  Restaurando desde último backup...
+2025-07-07T08:28:48Z | ERROR | Cargar_Bitacoras | Backup incompleto para timestamp: 20250707
+2025-07-07T08:28:48Z | ERROR | Cargar_Bitacoras | 🚨 ERROR CRÍTICO: Error guardando bitácora: Error escribiendo Parquet: ("object of type <class 'str'> cannot be converted to int", 'Conversion failed for column fecha with type object')
+2025-07-07T08:28:48Z | WARNING | Cargar_Bitacoras | Revertiendo cambios...
+2025-07-07T08:28:48Z | ERROR | Cargar_Bitacoras | Backup incompleto para timestamp: 20250707
+2025-07-07T08:34:11Z | INFO | Cargar_Bitacoras | 🚀 Iniciando comando: AGREGAR
+2025-07-07T08:34:11Z | ERROR | Cargar_Bitacoras | 🚨 ERROR CRÍTICO: Tipo inválido para fecha. Esperado: str
+2025-07-07T08:36:42Z | INFO | Cargar_Bitacoras | 🚀 Iniciando comando: AGREGAR
+2025-07-07T08:36:44Z | INFO | Cargar_Bitacoras | Backups creados: bitacora_backup_20250707_083644.parquet, metadata_backup_20250707_083644.yaml
+2025-07-07T08:36:44Z | WARNING | Cargar_Bitacoras | Timestamp de backup ignorado por formato inválido: 20250707
+2025-07-07T08:36:44Z | ERROR | Cargar_Bitacoras | Error eliminando backup: cannot access local variable 'backup_time' where it is not associated with a value
+2025-07-07T08:36:44Z | ERROR | Cargar_Bitacoras | FALLO GUARDADO: Error escribiendo Parquet: ("object of type <class 'str'> cannot be converted to int", 'Conversion failed for column fecha with type object')
+2025-07-07T08:36:44Z | WARNING | Cargar_Bitacoras | ⚠️  Restaurando desde último backup...
+2025-07-07T08:36:44Z | ERROR | Cargar_Bitacoras | Backup incompleto para timestamp: 20250707
+2025-07-07T08:36:44Z | ERROR | Cargar_Bitacoras | 🚨 ERROR CRÍTICO: Error guardando bitácora: Error escribiendo Parquet: ("object of type <class 'str'> cannot be converted to int", 'Conversion failed for column fecha with type object')
+2025-07-07T08:36:44Z | WARNING | Cargar_Bitacoras | Revertiendo cambios...
+2025-07-07T08:36:44Z | ERROR | Cargar_Bitacoras | Backup incompleto para timestamp: 20250707
+2025-07-07T08:58:14Z | INFO | Cargar_Bitacoras | 🚀 Iniciando comando: AGREGAR
+2025-07-07T08:58:16Z | INFO | Cargar_Bitacoras | Backups creados: bitacora_backup_20250707_085816.parquet, metadata_backup_20250707_085816.yaml
+2025-07-07T08:58:16Z | WARNING | Cargar_Bitacoras | Timestamp de backup ignorado por formato inválido: 20250707
+2025-07-07T08:58:16Z | INFO | Cargar_Bitacoras | Bitácora actualizada con éxito
+2025-07-07T08:58:16Z | INFO | Cargar_Bitacoras | Registro changelog: alta | Entrada: e04e99aa-3d79-4621-aeee-2d48260daec8
+2025-07-07T08:58:16Z | INFO | Cargar_Bitacoras | ✅ Entrada agregada: ID=e04e99aa-3d79-4621-aeee-2d48260daec8
+2025-07-07T09:05:22Z | INFO | Cargar_Bitacoras | 🚀 Iniciando comando: AGREGAR
+2025-07-07T09:05:23Z | INFO | Cargar_Bitacoras | Backups creados: bitacora_backup_20250707_090523.parquet, metadata_backup_20250707_090523.yaml
+2025-07-07T09:05:23Z | WARNING | Cargar_Bitacoras | Timestamp de backup ignorado por formato inválido: 20250707
+2025-07-07T09:05:23Z | INFO | Cargar_Bitacoras | Bitácora actualizada con éxito
+2025-07-07T09:05:23Z | INFO | Cargar_Bitacoras | Registro changelog: alta | Entrada: df95a097-64ec-4c99-b4cb-4d05d5bdcef5
+2025-07-07T09:05:23Z | INFO | Cargar_Bitacoras | ✅ Entrada agregada: ID=df95a097-64ec-4c99-b4cb-4d05d5bdcef5
+2025-07-07T09:14:31Z | INFO | Cargar_Bitacoras | 🚀 Iniciando comando: AGREGAR
+2025-07-07T09:14:32Z | INFO | Cargar_Bitacoras | Operación cancelada por el usuario
+2025-07-07T09:14:39Z | INFO | Cargar_Bitacoras | 🚀 Iniciando comando: AGREGAR
+2025-07-07T09:14:40Z | INFO | Cargar_Bitacoras | Backups creados: bitacora_backup_20250707_091440.parquet, metadata_backup_20250707_091440.yaml
+2025-07-07T09:14:40Z | WARNING | Cargar_Bitacoras | Timestamp de backup ignorado por formato inválido: 20250707
+2025-07-07T09:14:40Z | INFO | Cargar_Bitacoras | Bitácora actualizada con éxito
+2025-07-07T09:14:40Z | INFO | Cargar_Bitacoras | Registro changelog: alta | Entrada: 2438e917-35f1-4f02-969b-4374f2aa3235
+2025-07-07T09:14:40Z | INFO | Cargar_Bitacoras | ✅ Entrada agregada: ID=2438e917-35f1-4f02-969b-4374f2aa3235
+2025-07-07T18:05:16Z | INFO | Cargar_Bitacoras | 🚀 Iniciando comando: AGREGAR
+2025-07-07T18:05:16Z | INFO | Cargar_Bitacoras | Operación cancelada por el usuario
+2025-07-07T18:05:27Z | INFO | Cargar_Bitacoras | 🚀 Iniciando comando: AGREGAR
+2025-07-07T18:05:28Z | INFO | Cargar_Bitacoras | Backups creados: bitacora_backup_20250707_180528.parquet, metadata_backup_20250707_180528.yaml
+2025-07-07T18:05:28Z | WARNING | Cargar_Bitacoras | Timestamp de backup ignorado por formato inválido: 20250707
+2025-07-07T18:05:29Z | ERROR | Cargar_Bitacoras | FALLO GUARDADO: 'BitacoraManager' object has no attribute 'calcular_hash_metadata'
+2025-07-07T18:05:29Z | WARNING | Cargar_Bitacoras | ⚠️  Restaurando desde último backup...
+2025-07-07T18:05:29Z | ERROR | Cargar_Bitacoras | Backup incompleto para timestamp: 20250707
+2025-07-07T18:05:29Z | ERROR | Cargar_Bitacoras | 🚨 ERROR CRÍTICO: Error guardando bitácora: 'BitacoraManager' object has no attribute 'calcular_hash_metadata'
+2025-07-07T18:05:29Z | WARNING | Cargar_Bitacoras | Revertiendo cambios...
+2025-07-07T18:05:29Z | ERROR | Cargar_Bitacoras | Backup incompleto para timestamp: 20250707
+2025-07-07T18:06:10Z | INFO | Cargar_Bitacoras | 🚀 Iniciando comando: AGREGAR
+2025-07-07T18:06:10Z | ERROR | Cargar_Bitacoras | ERROR METADATA: Metadato obligatorio faltante: hash_metadata
+2025-07-07T18:06:10Z | ERROR | Cargar_Bitacoras | 🚨 ERROR CRÍTICO: Metadata corrupto: Metadato obligatorio faltante: hash_metadata
+2025-07-07T18:11:09Z | INFO | Cargar_Bitacoras | 🚀 Iniciando comando: AGREGAR
+2025-07-07T18:11:11Z | INFO | Cargar_Bitacoras | Metadata YAML creado vacío: /home/alma/Documents/Journal/Bitacora/bitacora_viva.metadata.yaml
+2025-07-07T18:11:11Z | INFO | Cargar_Bitacoras | Backups creados: bitacora_backup_20250707_181111.parquet, metadata_backup_20250707_181111.yaml
+2025-07-07T18:11:11Z | WARNING | Cargar_Bitacoras | Timestamp de backup ignorado por formato inválido: 20250707
+2025-07-07T18:11:11Z | INFO | Cargar_Bitacoras | Bitácora actualizada con éxito
+2025-07-07T18:11:11Z | INFO | Cargar_Bitacoras | Registro changelog: alta | Entrada: b621197b-c63d-4520-9fbb-2ad8c151a5eb
+2025-07-07T18:11:11Z | INFO | Cargar_Bitacoras | ✅ Entrada agregada: ID=b621197b-c63d-4520-9fbb-2ad8c151a5eb
+2025-07-07T18:15:00Z | INFO | Cargar_Bitacoras | 🚀 Iniciando comando: VALIDAR
+2025-07-07T18:15:00Z | INFO | Cargar_Bitacoras | ✅ Validación exitosa. Integridad confirmada.

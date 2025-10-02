@@ -1,0 +1,72 @@
+import sys
+import os
+import importlib
+from pathlib import Path
+import logging
+
+# Setup logging
+log_dir = Path(__file__).parent.parent / "logs"
+log_dir.mkdir(exist_ok=True)
+logging.basicConfig(
+    filename=log_dir / "cli.log",
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s"
+)
+
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
+
+class AlmaCLI:
+    def __init__(self):
+        self.commands = {}
+        self._load_commands()
+
+    def _load_commands(self):
+        commands_dir = project_root / "commands"
+        for file in commands_dir.glob("*.py"):
+            if file.name == "__init__.py":
+                continue
+            module_name = file.stem
+            try:
+                module = importlib.import_module(f"commands.{module_name}")
+                if hasattr(module, "run"):
+                    self.commands[f"!{module_name}"] = module.run
+            except Exception as e:
+                logging.error(f"Error cargando comando '{module_name}': {str(e)}")
+                print(f"Error cargando comando '{module_name}': {str(e)}")
+
+    def _parse_input(self, user_input):
+        parts = user_input.strip().split(maxsplit=1)
+        if not parts:
+            return None, ""
+        cmd = parts[0]
+        args = parts[1].strip('"') if len(parts) > 1 else ""
+        return cmd, args
+
+    def start(self):
+        print("CLI ALMA_RESIST (v2) - Escribe !ayuda para comandos\n")
+        while True:
+            try:
+                user_input = input("alma> ").strip()
+                if not user_input:
+                    continue
+                cmd, args = self._parse_input(user_input)
+                if cmd == "!salir":
+                    print("Hasta luego.")
+                    break
+                if cmd in self.commands:
+                    logging.info(f"Ejecutado: {cmd} | Args: {args}")
+                    self.commands[cmd](args)
+                else:
+                    logging.warning(f"Comando desconocido: {cmd}")
+                    print(f"Error: Comando '{cmd}' no reconocido. Usa !ayuda")
+            except KeyboardInterrupt:
+                print("\nHasta luego.")
+                break
+            except Exception as e:
+                logging.error(f"Excepción ejecutando comando: {str(e)}")
+                print(f"Error: {str(e)}")
+
+if __name__ == "__main__":
+    cli = AlmaCLI()
+    cli.start()

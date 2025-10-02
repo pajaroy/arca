@@ -1,0 +1,18 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_e3b0c4
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Cli
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:789188576ba85f1416078e4eb1495f2eba047d4df34cbc7663f31ef628b8e25c
+---

@@ -1,0 +1,9 @@
+# Plantilla base de agente IA – ALMA_RESIST
+
+Esta carpeta define la estructura mínima y obligatoria para cualquier agente institucional del ecosistema ALMA_RESIST.
+
+- **contexto/**: Archivos YAML de contexto oficial y temporales del agente.
+- **memorias/**: Memorias personales del agente, backups, archivos de sincronización.
+- **bitacoras/**: Bitácora personal, logs de eventos relevantes, revisiones, hitos.
+- **docs/**: Auditorías, papers, protocolos, documentación histórica.
+- **scripts/**: (Opcional) Scripts propios del agente para automatizaciones o diagnósticos.

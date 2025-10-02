@@ -1,0 +1,74 @@
+---
+version: 1.0
+id: IDEA_2025-06-06_01
+tipo: idea_base_script
+formato: yaml
+modulo: centralesis/core/notebooks
+titulo: "Script universal para corrección y estandarización de metadata en archivos críticos"
+autor: centralesis
+fecha_creacion: 2025-06-06
+fecha_actualizacion: 2025-06-06
+status: en_desarrollo
+version_sistema: 2.3
+origen: manual
+tags: [metadata, fix, script, auditoria, estandarizacion]
+hash_integridad: sha256:pending
+linked_to: []
+descripcion: >
+  Documento de idea base y requisitos para el desarrollo del script "fix_metadata", encargado de validar, corregir y estandarizar los bloques de metadata en todos los archivos críticos de Centralesis y ecosistema ALMA_RESIST. Servirá como referencia oficial para implementación, auditoría y evolución futura.
+---
+
+# 🧠 IDEA BASE — Script `fix_metadata`
+
+## Objetivo
+
+Desarrollar un script auditable y modular que recorra todos los archivos relevantes de un directorio (y subdirectorios), valide la existencia y formato del bloque de metadata, complete campos faltantes, corrija inconsistencias y agregue el hash de integridad.
+
+## Alcance
+
+- Archivos objetivo: `.md`, `.yaml`, `.py`, `.sh`, `.json` dentro de Centralesis y, a futuro, cualquier módulo de ALMA_RESIST.
+- Compatible con estructuras de metadata en YAML frontmatter (delimitadas por `---`).
+- Debe ser portable y fácil de adaptar para otros formatos si se requiere.
+
+## Requerimientos Mínimos
+
+- Detectar y validar la presencia de bloque metadata universal.
+- Agregar campos obligatorios si faltan (`version`, `id`, `tipo`, `formato`, `modulo`, `titulo`, `autor`, `fecha_creacion`, `fecha_actualizacion`, `status`, `version_sistema`, `origen`, `tags`, `hash_integridad`, `linked_to`, `descripcion`).
+- Verificar unicidad y consistencia de `id`.
+- Actualizar `fecha_actualizacion` automáticamente.
+- Calcular y escribir el hash SHA-256 de integridad después de cada cambio.
+- Loggear acciones y mantener backup automático del archivo original.
+- Permitir modo “dry run” para diagnósticos sin escritura.
+- Reportar por consola/archivo los archivos no corregibles.
+- Soportar configuración modular para inclusión/exclusión de carpetas o tipos de archivo.
+
+## Flujo Propuesto
+
+1. Recorrer recursivamente el directorio objetivo.
+2. Para cada archivo relevante:
+   - Leer y parsear metadata (YAML frontmatter).
+   - Validar todos los campos obligatorios.
+   - Completar/corregir según plantilla.
+   - Calcular y escribir hash.
+   - Loggear acción y mantener backup.
+3. Generar reporte resumen (éxitos, fallos, archivos omitidos).
+
+## Futuras Extensiones
+
+- Validación con JSON Schema externo.
+- Firma digital y control de versiones automático.
+- Interfaz CLI con opciones avanzadas.
+- Modo integración CI/CD para pipelines de validación.
+- Compatibilidad con otros tipos de frontmatter (TOML, JSON).
+
+## Referencias
+
+- Plantilla de metadata oficial Centralesis/ALMA_RESIST.
+- Protocolo de migración y rotación de memorias institucionales.
+- Manual técnico y glosario actualizado.
+
+---
+
+> “Sin metadata, no hay auditoría. Sin auditoría, no hay confianza.”  
+> — Centralesis
+

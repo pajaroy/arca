@@ -1,0 +1,22 @@
+---
+tipo: configuracion_json
+id: CONFIGURACION_JSON_2025-06-05_48cf03
+version: '1.0'
+formato: json
+modulo: ALMA_RESIST
+titulo: Autonomy Policy
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:bfcb29f5c3dd3452be6d9e5b3835e66aa6bb461149e2c9258d8b47c83c98db5d
+---
+{
+  "acciones_permitidas": ["ordenar_archivos", "crear_logs"],
+  "prohibidas": ["eliminar_datos", "modificar_system"]
+}

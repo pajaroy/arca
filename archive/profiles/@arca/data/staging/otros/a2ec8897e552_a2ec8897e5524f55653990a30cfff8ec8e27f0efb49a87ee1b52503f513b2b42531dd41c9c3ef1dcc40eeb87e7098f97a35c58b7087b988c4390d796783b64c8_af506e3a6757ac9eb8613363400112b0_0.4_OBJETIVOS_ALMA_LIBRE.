@@ -1,0 +1,35 @@
+# 🧠 OBJETIVOS DE VERSIÓN – Prompt Base ALMA LIBRE v0.4
+
+📅 Fecha: 2025-04-22
+
+
+## ✅ Mejoras previstas para v0.4
+
+1. **Creación de plantilla base para Memoria Sintética**
+   - Plantilla tipo `MEMORIA_SINTETICA_BASE.md`
+   - Incluir:
+     - Estado emocional predominante del período
+     - Eventos clave en cada módulo
+     - Aprendizajes e integraciones
+     - Cambios estructurales
+
+2. **Mapa Interactivo de Memorias**
+   - Crear archivo `MAPA_MEMORIAS_INTERACTIVO.md`
+   - Visualización simplificada estilo árbol
+   - Puntos clicables o referencias anidadas por sección
+
+3. **Inclusión de Test de Lectura para IA**
+   - Archivo `TEST_IA_COMPRENSION_ALMA.md`
+   - Preguntas clave para IA conectadas que verifiquen:
+     - Comprensión del sistema
+     - Conexión entre módulos
+     - Interpretación emocional correcta
+
+4. **Preparación para ejecución desde terminal**
+   - Diseñar estructura para lanzar todo desde `alma_launcher.py`
+   - Conexión con `metadata_memorias.csv` y otras utilidades de navegación
+
+5. **Refinamiento del Prompt Base**
+   - Incluir ejemplos concretos de aplicación IA-human@ en escenarios reales
+   - Agregar secciones de interpretación semántica entre memorias y datos
+

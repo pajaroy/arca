@@ -1,0 +1,38 @@
+prompt: |
+  Necesito un script Python para ALMA-CLI, versión Fix_Last_Modified v0.2.0, con el siguiente comportamiento profesional y auditable:
+
+  1. **Funcionalidad:**
+      - Input: ruta de archivo (`.md`, `.yaml`, `.yml` o `.py`) y nombre de usuario.
+      - El script debe localizar el bloque de metadatos YAML (encabezado `---` en `.md` y en el docstring inicial en `.py`; archivo completo en `.yaml`/`.yml`).
+      - Debe modificar exclusivamente los campos:
+          - `last_modified`: fecha y hora actual en UTC ISO (`YYYY-MM-DDTHH:MM:SSZ`)
+          - `last_modified_by`: nombre de usuario pasado por argumento.
+      - Si el bloque YAML no existe, debe abortar y mostrar el mensaje:  
+        `"No se encontró encabezado YAML. Corré primero Validador_Metadata.py"`
+      - No debe modificar ningún otro campo. No debe crear encabezado YAML si no existe.
+      - Si el YAML es inválido, aborta y muestra error.
+
+  2. **Logging estructurado:**
+      - Cada vez que se modifica un archivo, debe registrar una entrada en un único archivo Parquet:  
+        `/home/alma/Alma-Cli/Logs/Cleaner.parquet`
+      - Cada entrada del log debe incluir al menos:
+          - ruta_archivo (string)
+          - usuario (string)
+          - fecha_modificacion (datetime en UTC ISO)
+          - accion ("update_last_modified")
+          - resultado ("ok", "error", etc.)
+          - mensaje (mensaje de error o "ok")
+      - Si no existe el archivo Parquet, debe crearlo automáticamente con el esquema adecuado.
+      - El script debe ser eficiente: debe abrir, agregar y cerrar el Parquet, nunca dejarlo bloqueado.
+      - Si hay algún error, debe loguearlo igual en Parquet como "error", nunca dejar de registrar la acción.
+
+  3. **Código y librerías:**
+      - Usar `ruamel.yaml` para procesar YAML, siempre manteniendo orden y formato.
+      - Usar `pandas` y/o `pyarrow` para loguear en Parquet.
+      - Código profesional, robusto, sin comentarios ni prints innecesarios.
+      - Sólo el código completo, listo para usar. No necesito explicación, solo el script.
+
+  4. **Ejemplo de ejecución:**
+      python Fix_Last_Modified.py archivo.md usuario
+
+  **Dame sólo el código, sin explicación.**

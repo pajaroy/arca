@@ -1,0 +1,39 @@
+---
+file: contexto_asesor-ia_v1.md
+version: '0.1'
+tags:
+- asesor-IA
+- auditor√≠a
+- GPT
+- DeepSeek
+- ALMA_RESIST
+linked_files:
+- confirmacion_de_rol_gpt.md
+- confirmacion_de_rol_deepseek.md
+- contrato_fundacional_asesor-IA_v2.md
+- prompt_bitacora_control_central.md
+- sprint_actual_0.1_control_central.md
+- sprint_actual_0.2_sincronizacion.md
+- alma_resist_idea_base_0.0.0.1.md
+bitacoras:
+- 2025-05-22_bitacora.md
+- 2025-05-23_bitacora.md
+- 2025-05-29_bitacora_consolidacion.md
+- 2025-05-30_bitacora_central_reinstalacion.md
+- 2025-06-01_bitacora_inicio.md
+status: activo
+last_update: '2025-06-01'
+tipo: configuracion
+id: CONFIGURACION_2025-06-05_dfe099
+formato: yaml
+modulo: ALMA_RESIST
+titulo: Contexto Asesor-Ia V1
+autor: bird
+fecha_creacion: '2025-06-05'
+version_sistema: Centralesis v2.3
+origen: automatico
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:546c617f151e12cc210f18902f6c0d5e239201c1d40ecaa82c8fe0bf716fd68a
+---

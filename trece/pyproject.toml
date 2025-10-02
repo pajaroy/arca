@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trece"
+version = "0.1.0"
+description = "Sistema contable y de gestión de 13 Cannabis Club"
+authors = [{ name = "Club 13CC", email = "contacto@13cc.org" }]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "blake3", "ruamel.yaml", "chromadb", "scikit-learn", "numpy", 
+    "pandas", "joblib", "loguru", "typer", "rich"
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+trece = "src.core.impositive.impositive:app"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]

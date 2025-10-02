@@ -1,0 +1,29 @@
+# 🔐 cifrado.py – Fernet para contenido privado en ALMA_LOADER
+
+"""
+Este módulo debe incluir funciones de cifrado y descifrado para proteger memorias con visibilidad "privada".
+
+Requisitos:
+- Usar la clave almacenada en un archivo externo `fernet.key`.
+- Si la visibilidad no es "privada", el contenido no debe alterarse.
+- El cifrado y descifrado deben mantener compatibilidad con strings JSON.
+- Toda excepción debe ser logueada de forma clara.
+- Pensar en extensión futura: múltiples claves, rotación, variables de entorno.
+"""
+
+from cryptography.fernet import Fernet
+
+# 📌 Función: cargar_clave()
+# Lee la clave desde archivo local y devuelve un objeto Fernet
+
+# 📌 Función: cifrar_contenido(memoria: dict) -> dict
+# Si memoria["visibilidad"] == "privada", cifra el campo "contenido"
+
+# 📌 Función: descifrar_contenido(memoria: dict) -> dict
+# Si el campo "contenido" parece cifrado, intenta descifrarlo
+
+# 📌 Bonus opcional:
+# - Función para generar una nueva clave
+# - Función para validar si un texto está cifrado (hint: base64 + try/except)
+
+# ⚠️ Debe mantenerse desacoplado del sistema principal (solo cifrado/descifrado)

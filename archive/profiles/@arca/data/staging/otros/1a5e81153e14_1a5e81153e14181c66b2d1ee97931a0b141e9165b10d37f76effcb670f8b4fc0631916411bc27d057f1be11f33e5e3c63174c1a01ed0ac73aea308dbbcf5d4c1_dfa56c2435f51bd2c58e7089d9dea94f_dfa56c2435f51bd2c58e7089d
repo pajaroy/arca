@@ -1,0 +1,11 @@
+# Carpeta `notebooks` – Ideas, Research y Primeros Borradores
+
+Este espacio está dedicado a:
+
+- Primeros textos y experimentos de cualquier módulo, agente o proceso.
+- Research personal, ideas sueltas, exploraciones y documentación experimental.
+- Pruebas de scripts, prompts, plantillas, antes de institucionalizarlas.
+
+**IMPORTANTE:**  
+Nada de aquí se considera versión final o aprobada hasta que sea migrado y documentado en una subcarpeta propia dentro de `core/` o en la raíz correspondiente.
+

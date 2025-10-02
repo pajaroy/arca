@@ -1,0 +1,31 @@
+# 🔄 Interacción entre el Whitepaper y el Prompt Técnico – ALMA_LOADER v3.0.1
+
+El sistema ALMA_LOADER está documentado en dos capas complementarias: el **whitepaper** y el **prompt técnico**. Esta separación está diseñada para que tanto humanos como IAs puedan entender, extender e interactuar con el sistema desde diferentes niveles.
+
+
+## 📘 Whitepaper – Nivel Estratégico y Conceptual
+
+El **whitepaper** está orientado a **transmitir la visión, propósito y lógica funcional del sistema**. Es útil para:
+
+- Usuarios humanos que quieran entender el “por qué” del sistema
+- Equipos técnicos nuevos que deban integrarse al proyecto
+- Documentación externa (fundraising, presentación, licenciamiento)
+
+Contiene:
+- Filosofía del sistema: ALMA como mente digital modular
+- Casos de uso narrativos
+- Arquitectura conceptual con diagrama Mermaid
+- Tabla módulo ↔ script
+- Comandos útiles estilo asistente
+
+### Ejemplo de impacto:
+Un nuevo colaborador puede leer el whitepaper y entender en 5 minutos cómo usar ALMA para registrar experiencias, reflexionar y activar reglas automáticas con lenguaje natural.
+
+
+## 🧩 Conclusión
+
+- El **prompt técnico** permite operar y extender el sistema.
+- El **whitepaper** permite entender y confiar en el sistema.
+- Juntos, hacen que ALMA_LOADER sea ejecutable, explicable y escalable.
+
+> Toda IA debería leer el prompt. Todo humano debería empezar por el whitepaper.

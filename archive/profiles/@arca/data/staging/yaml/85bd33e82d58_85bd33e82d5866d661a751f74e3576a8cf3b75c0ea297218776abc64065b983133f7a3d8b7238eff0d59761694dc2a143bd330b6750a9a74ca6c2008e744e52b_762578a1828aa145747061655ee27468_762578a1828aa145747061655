@@ -1,0 +1,21 @@
+id: readme_notebooks_2025-06-08
+nombre: "README notebooks – ideas y research"
+ruta: "control_central/core/notebooks/"
+version: "0.1.0"
+descripcion: |
+  Espacio para experimentación, ideas, research y primeros borradores del ecosistema.
+  Todo lo que no esté validado, institucionalizado o aprobado como versión final debe pasar primero por aquí.
+  Es la sandbox del sistema: usala para probar, documentar y explorar antes de oficializar cualquier desarrollo.
+proposito:
+  - Almacenar ideas, experimentos y research personal de cualquier módulo o agente.
+  - Documentar pruebas de scripts, prompts y plantillas previas a su institucionalización.
+  - Mantener un espacio seguro para equivocarse y mejorar antes de pasar a la estructura final.
+importante: |
+  Nada de lo aquí alojado debe considerarse versión final hasta ser migrado, documentado y validado en su carpeta definitiva.
+tags:
+  - notebooks
+  - ideas
+  - research
+  - sandbox
+  - borradores
+  - laboratorio

@@ -1,0 +1,23 @@
+# README – config
+
+Esta carpeta está destinada a contener la configuración estructural y de entorno del sistema ALMA_RESIST.
+
+## 📁 Ruta
+`config/`
+
+## 📌 Propósito
+
+- Centralizar archivos de configuración de módulos, entornos virtuales, credenciales simuladas o ajustes por entorno.
+- Servir como punto de referencia para la parametrización del sistema (ej: `.env`, YAML de configuración, etc).
+
+## 📂 Ejemplos de contenido futuro
+
+- `config/env/`: variables de entorno simuladas o protegidas
+- `config/modules/`: configuraciones específicas por módulo
+- `config/templates/`: configuraciones por defecto o plantillas base
+
+## ⚠️ Nota
+
+Actualmente esta carpeta puede estar vacía. Su uso se expandirá conforme se definan configuraciones estructurales más avanzadas.
+
+---

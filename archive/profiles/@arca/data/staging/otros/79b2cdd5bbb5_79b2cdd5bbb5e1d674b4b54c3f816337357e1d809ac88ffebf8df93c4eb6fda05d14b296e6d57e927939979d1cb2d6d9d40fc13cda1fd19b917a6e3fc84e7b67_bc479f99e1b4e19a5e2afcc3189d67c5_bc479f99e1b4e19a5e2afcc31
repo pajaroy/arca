@@ -1,0 +1,17 @@
+#!/bin/bash
+# Script unificado de arranque automático para Input Leap
+# Detecta si se ejecuta en alma-core o alma-resist y lanza el modo correspondiente
+
+sleep 10  # Espera para asegurar que el entorno gráfico esté levantado
+
+HOSTNAME=$(hostname)
+
+if [[ "$HOSTNAME" == "alma-core" ]]; then
+  echo "🔌 Iniciando Input Leap como SERVIDOR (alma-core)"
+  nohup input-leaps --no-tray --disable-crypto --name alma-core --config ~/.input-leap/input-leap.conf >/dev/null 2>&1 &
+elif [[ "$HOSTNAME" == "alma-resist" ]]; then
+  echo "🔌 Iniciando Input Leap como CLIENTE (alma-resist)"
+  nohup input-leapc --no-tray --disable-crypto --name alma-resist 192.168.1.33:24800 >/dev/null 2>&1 &
+else
+  echo "⚠️ Hostname no reconocido. Abortando inicio automático de Input Leap."
+fi

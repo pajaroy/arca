@@ -1,0 +1,7 @@
+# Prompt para desarrollo del módulo `validador_duplicados.py`
+
+Crear un script en Python llamado `validador_duplicados.py`, que detecte archivos similares entre `CUADERNOS/*/docs/` y `BITACORA_CENTRAL/RESUMENES/`, usando hash SHA-256 y similitud textual (>90%).
+
+Debe generar un reporte en YAML con sugerencias como: `fusionar`, `descartar`, `revisar`. Operar solo lectura, sin modificar archivos. Extraer metadatos YAML si existen. Compatible con ALMA LIBRE.
+
+... (ver historial para descripción extendida)

@@ -1,0 +1,29 @@
+id: logging_config_llm_server_v0.2
+modulo: logging_config
+version: 0.2
+standard: ALMA_RESIST_v0.2
+descripcion: |
+  Módulo centralizado de configuración de logging para todo el ecosistema LLM Server.
+  Permite logging estructurado (JSON), rotación automática, integración con log_writer, y cifrado automático de logs críticos vía log_crypto.
+  Todo evento importante, auditoría o error es registrado de forma trazable y auditable.
+campos_universales:
+  - id: "Identificador universal (string)"
+  - agente: "Agente responsable (string)"
+  - timestamp: "Marca temporal UTC ISO8601"
+  - tags: "Lista de etiquetas"
+  - hash: "Hash SHA-256"
+  - memoria_ref: "Referencias cruzadas"
+  - metadata: "Datos extendidos"
+scripts_principales:
+  - logging_config.py: "Inicializa logging global, gestiona rotación y hook de cifrado"
+dependencias:
+  - python-json-logger>=2.0
+  - log_writer
+  - log_crypto
+ejemplo_uso: |
+  from logging_config import configure_logging
+  logger = configure_logging("modulo_x")
+  logger.info("Evento registrado", extra={"id": "...", "agente": "...", ...})
+linked_to:
+  - alma_core/control_central/bitacora/bitacora_viva.yaml
+estado: "EN USO — versión auditable y cifrable"

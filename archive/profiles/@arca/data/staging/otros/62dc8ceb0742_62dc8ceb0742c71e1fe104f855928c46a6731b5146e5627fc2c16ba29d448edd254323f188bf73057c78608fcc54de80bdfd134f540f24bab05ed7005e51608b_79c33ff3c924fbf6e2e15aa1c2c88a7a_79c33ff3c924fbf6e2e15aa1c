@@ -1,0 +1,13 @@
+# script_base.py
+# Este script lee un archivo Markdown (.md), busca el primer título (nivel #) y lo imprime.
+# Objetivo: Comenzar a interactuar con tus archivos de ALMA desde la terminal.
+
+archivo = input("📁 Ingresá el nombre del archivo .md que querés leer (con extensión): ")
+
+try:
+    with open(archivo, "r", encoding="utf-8") as f:
+        lineas = f.readlines()
+        titulo = next((l for l in lineas if l.strip().startswith("#")), "Sin título encontrado")
+        print(f"✅ Título detectado: {titulo.strip()}")
+except FileNotFoundError:
+    print("❌ Archivo no encontrado. Verificá el nombre o la ruta.")

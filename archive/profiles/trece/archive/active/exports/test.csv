@@ -1,0 +1,4 @@
+id,harvest_date,module_id,harvest_id,genetic_id,quantity,description,notes,
+1,2025-08-13,5,1,1,100,corte 1,x,
+2,2025-08-13,5,1,2,200,corte 1,x,
+3,2025-08-13,5,1,3,300,corte 1,x,

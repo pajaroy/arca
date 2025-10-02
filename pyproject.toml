@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "arca"
+version = "0.1.0"
+description = "Gestor documental Arca"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [
+    {name = "bird", email = "alma_bird@proton.me"}
+]
+keywords = ["gestor documental", "ia", "ml", "archivos"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "blake3>=0.3",
+    "ruamel.yaml>=0.17",
+    "chromadb>=0.4",
+    "typer>=0.9",
+    "rich>=13.0",
+    "numpy>=1.24",
+    "pandas>=2.0",  
+    "scikit-learn>=1.3"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "ipython>=8.0",
+    "jupyterlab>=4.0"
+]
+
+[project.scripts]
+arca = "arca.main:main"
+alma = "alma.main:main"
+trece = "trece.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src", "alma/src", "trece/src"]
+include = ["arca*", "alma*", "trece*"]
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+skip-string-normalization = false
+
+[tool.pytest.ini_options]
+addopts = "-ra -q --cov=arca --cov=alma --cov=trece"
+testpaths = ["./src/test", "./alma/src/test", "./trece/src/test"]
+pythonpath = ["./src", "./alma/src", "./trece/src"]

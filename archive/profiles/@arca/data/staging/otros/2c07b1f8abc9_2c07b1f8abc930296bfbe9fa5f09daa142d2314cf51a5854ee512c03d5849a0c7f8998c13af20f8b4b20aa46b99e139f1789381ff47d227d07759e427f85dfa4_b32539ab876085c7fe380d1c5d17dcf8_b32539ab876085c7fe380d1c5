@@ -1,0 +1,31 @@
+# ✅ Checklist de Promoción de Módulos – ALMA LIBRE
+
+Esta plantilla debe utilizarse cuando un módulo del sistema se evalúa para pasar de `exploraciones/` o `_STAGING/` a `MODULOS/` de producción.
+
+
+## 🔁 Integración con el sistema
+
+- [ ] Integra al menos **2 flujos documentados**
+- [ ] No sobrescribe archivos en otras carpetas sin autorización
+- [ ] Opera en modo solo lectura salvo donde se indique
+- [ ] Sigue el formato estándar de entrada/salida (JSON/YAML/MD)
+
+
+## 🔄 Control de versiones
+
+- [ ] Se añadió al `CHANGELOG.md`
+- [ ] Su integración fue registrada en `modulos_interdependencias.md`
+- [ ] Fue evaluado en `DIAGNOSTICO_X.Y.Z.md`
+
+
+## 📌 Criterios mínimos de promoción oficial
+
+Un módulo puede ser promovido desde `exploraciones/` o `_STAGING/` a producción solo si cumple:
+
+- Integra al menos **2 flujos documentados** del sistema
+- Superó una prueba funcional real (manual o automática)
+- Fue mencionado o evaluado en un `DIAGNOSTICO_X.Y.Z.md`
+- Su existencia y relaciones están reflejadas en `modulos_interdependencias.md`
+
+> Esta validación puede ser realizada por un humano responsable o sugerida por una IA, pero debe quedar registrada en el changelog de la versión correspondiente.
+

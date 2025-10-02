@@ -1,0 +1,8 @@
+
+
+# changelog.yaml - Historial de cambios de ARCA
+
+changelog:
+  - version: "0.1.0"
+    fecha: "2025-07-14"
+    cambios: "Creación de ARCA, definición de misión, estructura y manifiesto inicial."

@@ -1,0 +1,174 @@
+## **2. Lenguajes de Programación para Blockchain**
+
+### **a) Para Smart Contracts (Ethereum y similares)**
+
+- **Solidity** (el más usado, similar a JavaScript).
+- **Vyper** (alternativa más segura y simple, basada en Python).
+- **Rust** (usado en Solana, Polkadot y Near Protocol).
+
+## **4. Ruta de Aprendizaje Recomendada**
+
+### **Si quieres ser desarrollador Blockchain en 2024:**
+
+1️⃣ **Aprende los fundamentos** (cómo funciona Bitcoin/Ethereum).
+
+2️⃣ **Domina Solidity y Vyper** (para Smart Contracts).
+
+3️⃣ **Practica con Hardhat/Truffle** (despliega contratos en testnets).
+
+4️⃣ **Aprende Web3.js/Ethers.js** (conecta frontend con blockchain).
+
+5️⃣ **Explora otras blockchains** (Solana, Polkadot, BSC).
+
+6️⃣ **Contribuye a proyectos open-source** (GitHub, Gitcoin).
+
+### **🌍 Fundamentos de Bitcoin (Base de todo)**
+
+### **1. Qué resuelve**
+
+- **Problema del doble gasto**: Sin bancos, ¿cómo evitar que alguien gaste dos veces el mismo dinero?
+- **Solución**: Blockchain + Consenso (PoW).
+
+### **2. Conceptos clave**
+
+- **Blockchain**: Cadena de bloques inmutables (hash → bloque anterior).
+- **Minado**: Resolver problemas matemáticos para validar transacciones (SHA-256).
+- **Descentralización**: Ninguna entidad controla la red (nodos distribuidos).
+
+### **3. Ejemplo práctico**
+
+python
+
+Copy
+
+```
+# Pseudocódigo de una transacción Bitcoin
+transacción = {
+   "input": "dirección_A",
+   "output": "dirección_B",
+   "amount": 0.01 BTC,
+   "firma": "firma_digital_A"
+}
+```
+
+**Recurso**: [Libro Blanco de Bitcoin (págs. 1-8)](https://bitcoin.org/bitcoin.pdf).
+
+### **💡 Fundamentos de Ethereum (Plataforma para smart contracts)**
+
+### **1. Diferencias clave vs Bitcoin**
+
+- **Propósito**: Bitcoin = Dinero digital; Ethereum = Computadora descentralizada.
+- **Lenguajes**: Solidity/Vyper (programables) vs Script (limitado).
+- **Consenso**: De PoW a PoS (menos energía).
+
+hoja 2
+
+### **2. Conceptos clave**
+
+- **EVM (Máquina Virtual Ethereum)**: Ejecuta contratos en todos los nodos.
+- **Gas**: Coste de ejecución (evita spam). Medido en **Gwei**.
+- **Tokens**: ERC-20 (fungibles), ERC-721 (NFTs).
+
+### **3. Ejemplo práctico**
+
+solidity
+
+Copy
+
+```
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract HolaMundo {
+   string public mensaje = "¡Hola, Ethereum!";
+}
+```
+
+**Recurso**: [Ethereum.org/learn](https://ethereum.org/es/learn/).
+
+## **1. Tecnologías Clave para Desarrollar Blockchain**
+
+### **a) Conceptos Fundamentales**
+
+Antes de programar, debes entender cómo funciona una blockchain:
+
+- **Estructura de bloques y cadena** (hash, nonce, Merkle tree).
+- **Consenso**: Proof of Work (PoW), Proof of Stake (PoS), Delegated Proof of Stake (DPoS).
+- **Smart Contracts** (contratos autoejecutables en blockchain).
+- **Descentralización y nodos P2P**.
+- **Criptografía**: Hashing (SHA-256, Keccak), firmas digitales (ECDSA).
+
+### **🔗 1. Estructura de Bloques y Cadena**
+
+### **Qué es:**
+
+Cada bloque es un "eslabón" que contiene:
+
+- **Transacciones** (datos).
+- **Hash propio**: Identificador único (como huella digital).
+- **Hash del bloque anterior**: Para formar la cadena.
+
+### **Ejemplo visual:**
+
+Copy
+
+```
+Bloque 1: [Hash: ABC, PrevHash: 000] → Bloque 2: [Hash: XYZ, PrevHash: ABC]
+```
+
+**Key Point**: Si alguien modifica un bloque, su hash cambia → Rompe la cadena.
+
+### **Componentes clave:**
+
+- **Nonce**: Número aleatorio que mineros ajustan para encontrar el hash válido.
+- **Merkle Tree**: Estructura que resume todas las transacciones del bloque en un solo hash (raíz Merkle).
+
+
+### **📜 3. Smart Contracts**
+
+### **Qué son:**
+
+Programas autoejecutables almacenados en blockchain. Ejecutan acciones cuando se cumplen condiciones (ej: transferir tokens si se recibe ETH).
+
+### **Ejemplo en Vyper:**
+
+python
+
+Copy
+
+```
+# Contrato simple que almacena un mensaje
+@external
+def update_message(new_message: String[100]):
+    self.stored_message = new_message
+```
+
+
+### **🔐 5. Criptografía Aplicada**
+
+### **Hashing (SHA-256, Keccak):**
+
+- Convierte cualquier dato en un string único de longitud fija.
+    
+- **Ejemplo**:
+    
+    Copy
+    
+    ```
+    SHA-256("Hola") = 2CF24DBA5FB0A3...
+    ```
+    
+
+### **Firmas Digitales (ECDSA):**
+
+- **Cómo funciona**:
+    
+    1. Usuario A firma una transacción con su clave privada.
+    2. La red verifica con la clave pública de A.
+- **Ejemplo en Bitcoin**:
+    
+    Copy
+    
+    ```
+    Firma = ecdsa_sign(clave_privada_A, "Transacción 1 BTC a B")
+    ```

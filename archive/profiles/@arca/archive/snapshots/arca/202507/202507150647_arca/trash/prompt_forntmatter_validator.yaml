@@ -1,0 +1,40 @@
+metadatos:
+  id_unico: "prompt-YAML-002"
+  tipo: "prompt"
+  nombre: "prompt_frontmatter_validator.yaml"
+  version: "0.1.0"
+  estado: "archivado"
+  fecha_creacion: "2025-07-15"
+  fecha_modificacion: "2025-07-15"
+
+  prompt:
+  objetivo: |
+    Crear un script llamado `frontmatter_validator.py` que recorra los archivos especificados (o todos los relevantes en el ecosistema) y valide, agregue o complete el bloque de metadatos (frontmatter) según el esquema oficial definido en config.yaml/schema.yaml.
+    El script debe soportar archivos .yaml, .yml, .md, .json, .py (con bloque YAML o JSON inicial), y .sql (comentarios encabezados).
+    El formato del frontmatter debe adaptarse al tipo de archivo: YAML para .yaml/.yml/.md/.py, JSON para .json/.py, comentario SQL para .sql.
+
+  requisitos:
+    - Cargar rutas y configuración desde `from load_config import CONFIG`.
+    - Validar la estructura usando `from validate_schemas import validar_schemas` y el schema de `metadatos_frontmatter` cargado desde config.
+    - Loggear cada validación y modificación con `from logger import logger`, incluyendo archivo, tipo de cambio (nuevo, corregido, incompleto), y hash_integridad si corresponde.
+    - Si falta el frontmatter, agregarlo; si está incompleto, completarlo; si está mal formado, corregirlo según el schema.
+    - Documentar el script y cada función de manera breve pero clara.
+    - Permitir ejecución como CLI y como función importable (puede recibir lista de archivos o recorrer automáticamente los soportados).
+    - Sugerir mejoras mínimas en schema.yaml si faltan campos clave para la validación del frontmatter.
+    - Para archivos .sql, el encabezado debe ir como bloque de comentarios SQL (/* ... */) al inicio.
+    - Para archivos .py que no tengan bloque YAML/JSON, insertar el bloque YAML entre triples comillas al inicio.
+
+  formatos_soportados:
+    - yaml
+    - yml
+    - md
+    - json
+    - py
+    - sql
+
+  extensiones_excluidas:
+    - binarios (.parquet, .jpg, .png, .pdf, .db, etc)
+    - cualquier archivo sin texto legible
+
+  salida_esperada: |
+    Un script funcional y robusto que pueda validar y corregir el frontmatter de los archivos del ecosistema ARCA, adaptando el formato al tipo de archivo, loggeando todos los cambios, y alineado con los esquemas y configuración del sistema.

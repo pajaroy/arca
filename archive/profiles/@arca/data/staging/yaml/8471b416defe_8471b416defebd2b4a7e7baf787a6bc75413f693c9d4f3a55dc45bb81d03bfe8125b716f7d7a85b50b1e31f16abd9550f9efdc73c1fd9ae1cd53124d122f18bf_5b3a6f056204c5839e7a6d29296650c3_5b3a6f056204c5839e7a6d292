@@ -1,0 +1,19 @@
+id: README_CHANGELOG_SCRIPT_2025-06-06_01
+modulo: control_central/asesor-ia/core/notebooks/changelog_script
+tipo: script
+nombre: changelog_script
+autor: Kael
+fecha: 2025-06-06
+version: 1.0
+status: inicial
+tags: [changelog, automatizacion, scripts, yaml, cli, modularidad]
+descripcion: |
+  Script modular para agregar entradas estructuradas al changelog vivo de ALMA_RESIST en formato YAML.
+  Documenta cambios técnicos, refactors, releases y eventos estructurales de manera trazable y automatizada.
+  Incluye documentación y ejemplos prácticos en src/ y docs/.
+objetivo: Llevar un control exhaustivo y automatizado de todos los cambios estructurales relevantes en el sistema.
+estructura:
+  - README.md
+  - README.yaml
+  - src/
+  - docs/

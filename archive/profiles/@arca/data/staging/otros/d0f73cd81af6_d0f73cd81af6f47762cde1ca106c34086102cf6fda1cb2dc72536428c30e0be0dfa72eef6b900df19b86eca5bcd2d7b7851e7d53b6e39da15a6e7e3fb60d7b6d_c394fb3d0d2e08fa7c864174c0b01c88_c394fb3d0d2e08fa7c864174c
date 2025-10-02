@@ -1,0 +1,30 @@
+{
+  "id": "readme_prompt_yaml2all",
+  "version": "0.1.0",
+  "tipo": "readme",
+  "schema": "almaresist.readme_v1",
+  "ubicacion": "core/notebooks/drafts_tecnicos/yaml2all/docs/prompt_yaml2all/README.yaml",
+  "descripcion": "Prompt base para YAML2ALL. Ejemplo de cómo pedir a la IA un conversor universal YAML->JSON/MD.\n",
+  "estructura": [
+    {
+      "prompt_yaml2all.yaml": "Prompt base para generación del script."
+    },
+    {
+      "prompt_yaml2all.json/.md": "Copias de referencia, utilitarias para comparación y compatibilidad."
+    }
+  ],
+  "linked_to": [
+    "prompt_yaml2all.yaml",
+    "prompt_yaml2all.json",
+    "prompt_yaml2all.md"
+  ],
+  "responsable": "kael",
+  "hash_verificacion": "sha256:pending",
+  "last_modified": "2025-06-17T02:16:00Z",
+  "last_modified_by": "bird",
+  "estado": "legacy",
+  "notas": [
+    "Prompt utilizado para versiones iniciales.",
+    "Migrar a v0.1.1 para mejoras."
+  ]
+}

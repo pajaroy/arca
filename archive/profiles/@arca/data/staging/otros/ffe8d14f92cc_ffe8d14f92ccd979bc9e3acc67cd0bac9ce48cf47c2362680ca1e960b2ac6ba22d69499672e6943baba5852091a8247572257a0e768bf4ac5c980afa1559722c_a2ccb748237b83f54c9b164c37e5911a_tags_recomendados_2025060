@@ -1,0 +1,41 @@
+---
+module: utilidades/tags_recomendados
+type: core
+status: in_progress
+created: '2025-05-23'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🎯 Tags Recomendados por Dominio (Base ALMA_RESIST)
+
+## 🌐 Dominio: infraestructura
+- backups
+- CLI
+- versiones
+- logs
+- snapshot
+
+## 🤖 Dominio: IA
+- prompt_engineering
+- interaccion_ia
+- memoria
+- sugerencias
+
+## 📄 Dominio: documentación
+- estructura
+- validacion
+- plantilla
+- indexado
+
+## 🔁 Dominio: metodología
+- sprint
+- versionado
+- auditoria
+- decisiones
+
+## ⚙️ Dominio: automatización
+- scripts
+- batch_update
+- metadata_tools
+- alma-cli

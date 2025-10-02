@@ -1,0 +1,34 @@
+import argparse
+from lib.metadata.core import process_file
+from lib.utils.concurrency import parallel_process
+
+def main():
+    parser = argparse.ArgumentParser(prog="fix-metadata")
+    parser.add_argument("--target", nargs='+', help="Rutas a procesar")
+    parser.add_argument("--diff", action="store_true", help="Mostrar preview")
+    parser.add_argument("--parallel", type=int, default=4)
+    parser.add_argument("--log-bitacora", action="store_true")
+    parser.add_argument("--dry-run", action="store_true")
+    
+    args = parser.parse_args()
+    
+    # Cargar esquema
+    schema = json.load(SCHEMA_PATH)
+    
+    # Procesamiento paralelo
+    results = parallel_process(
+        files=discover_files(args.target),
+        process_func=process_file,
+        max_workers=args.parallel,
+        schema=schema
+    )
+    
+    if args.diff:
+        for result in results:
+            print(generate_diff(result['original'], result['fixed']))
+    
+    if not args.dry_run:
+        apply_changes(results)
+        
+        if args.log_bitacora:
+            generate_logs(results)

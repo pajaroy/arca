@@ -1,0 +1,79 @@
+{
+  "id": "prompt_cargar_bitacora_v0.2.0",
+  "version": "0.2.0",
+  "tipo": "prompt",
+  "schema": "almaresist.prompt_script_v1",
+  "descripcion": "Solicitud de script CLI universal para la carga y gestión de bitácoras en el ecosistema ALMA_RESIST.\nEl script debe cumplir los estándares de encabezado, backup automático, y sincronización triple-formato (.yaml, .json, .md).\nDebe ser seguro, modular y preparado para extensión futura a changelog, memorias y otros logs institucionales.\n",
+  "requerimientos": [
+    {
+      "Permitir agregar una nueva entrada a la bitácora institucional, siempre con estos campos obligatorios": [
+        "fecha (ISO-8601 UTC)",
+        "accion",
+        "descripcion",
+        "motivo",
+        "ejecutado_por",
+        {
+          "estado (default": "registrado)"
+        },
+        "tags (lista de strings)"
+      ]
+    },
+    "Mantener un encabezado de metadatos YAML universal arriba de todas las entradas (version, tipo, schema, descripcion, estructura, tags, linked_to, responsable, hash_verificacion, historial, last_modified, last_modified_by)",
+    {
+      "Generar automáticamente": [
+        ".yaml (bitacora viva)",
+        ".json (estructura equivalente, serializando bien los datetime)",
+        ".md (front matter yaml + cuerpo formateado, legible en Obsidian)"
+      ]
+    },
+    "Hacer backup automático del archivo antes de modificarlo, en `docs/journal/backups/`, nombrado con timestamp UTC",
+    {
+      "Validar sintaxis y formato antes de guardar": "si hay error, no escribir ni sobrescribir nada"
+    },
+    {
+      "Logging básico en stdout (opcional": "archivo logs/)"
+    },
+    "Debe poder ejecutarse desde cualquier ruta (paths relativos y absolutos)",
+    "Soporte --help, ejemplo de uso y modularidad para extensión futura",
+    "Código seguro, limpio y con comentarios claros"
+  ],
+  "ejemplo_comando": "python cargar_bitacora_v0.2.0.py \\\n  --accion \"Refactorización de sistema de bitácoras\" \\\n  --descripcion \"Migración al formato triple, backup y validación avanzada\" \\\n  --motivo \"Preparar el sistema para integración multiplataforma\" \\\n  --ejecutado_por \"Kael\" \\\n  --tags \"bitacora,cli,backup,refactor,v0.2.0\" \\\n  --bitacora \"docs/journal/bitacora_viva.yaml\"\n",
+  "output_esperado": [
+    "docs/journal/bitacora_viva.yaml",
+    "docs/journal/bitacora_viva.json",
+    "docs/journal/bitacora_viva.md",
+    "docs/journal/backups/",
+    "README.yaml del script con instrucciones y ejemplos"
+  ],
+  "consideraciones_extra": [
+    {
+      "Validación estricta de campos": "error si falta algún campo obligatorio"
+    },
+    "Los backups no deben sobrescribir nunca archivos previos",
+    "Los scripts futuros deben poder importar las funciones principales de este script (modularidad)",
+    "El sistema debe ser extensible para logs de cambios y memorias vivas"
+  ],
+  "responsable": "Kael",
+  "hash_verificacion": "sha256:pending",
+  "last_modified": "2025-06-17T04:42:00Z",
+  "last_modified_by": "Kael",
+  "tags": [
+    "bitacora",
+    "cli",
+    "backup",
+    "yaml2all",
+    "triple_formato",
+    "validacion",
+    "automatizacion",
+    "alma_resist"
+  ],
+  "linked_to": [
+    "docs/journal/bitacora_viva.yaml",
+    "docs/journal/bitacora_viva.json",
+    "docs/journal/bitacora_viva.md",
+    "docs/journal/backups/",
+    "logs/",
+    "meta/readme_template/README_template.yaml",
+    "core/scripts/yaml2all/"
+  ]
+}

@@ -1,0 +1,43 @@
+# 📊 Auditoría Profunda – ALMA_RESIST
+
+📅 Fecha: 2025-05-20  
+👤 Auditor: GPT-4.5 (IA) + Usuario  
+🎯 Objetivo: Evaluar críticamente el estado completo del sistema ALMA_RESIST
+
+
+## 🔍 Alcance de la auditoría
+
+- 📁 Validación de estructura de carpetas
+- 🧱 Coherencia entre módulos técnicos (`core/`, `tests/`, `prompts/`)
+- 📄 Consistencia y presencia de documentación clave (`README`, `CONTEXT`, `index.md`)
+- 🔗 Enlazado interno y navegación semántica (Obsidian)
+- 🧠 Trazabilidad de decisiones arquitectónicas
+- 🚫 Detección de archivos muertos, sueltos, duplicados o sin relación
+- 📎 Validación de naming conventions, separaciones lógicas, y posibles puntos de deuda técnica
+- 🔒 Evaluación básica de portabilidad, seguridad estructural y mantenibilidad
+
+
+## 📘 Formato de respuesta esperado
+
+```markdown
+# ✅ Informe de Auditoría Profunda – ALMA_RESIST
+
+## 1. Estado General
+
+## 2. Estructura de Carpetas
+
+## 3. Módulos Técnicos (core/)
+
+## 4. Pruebas y Tests
+
+## 5. Documentación
+
+## 6. Referencias y Navegación
+
+## 7. Inconsistencias Detectadas
+
+## 8. Recomendaciones Críticas
+
+## 9. Propuesta de Siguientes Pasos
+```
+

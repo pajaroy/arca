@@ -1,0 +1,51 @@
+---
+module: arquitectura/estructura_doc/plantilla_documento
+type: core
+status: in_progress
+created: '2025-05-23'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 📝 Plantilla de Documento Estándar – ALMA_RESIST
+
+Este archivo sirve como formato base para cualquier documento técnico o de planificación dentro del sistema.
+
+## 🧾 Encabezado
+
+- `Título:` 
+- `Autor:` 
+- `Fecha:` 
+- `Versión:` 
+- `Ubicación en el sistema:` 
+- `Tipo:` [planificación / bitácora / metodología / implementación / documento auxiliar]
+
+---
+
+## 🎯 Objetivo
+
+Describe brevemente el propósito del documento y su contexto dentro del sistema ALMA_RESIST.
+
+---
+
+## 🗂 Contenido
+
+Enumera las secciones clave que se desarrollarán. Ejemplo:
+
+1. Introducción  
+2. Metodología / Desarrollo  
+3. Resultados / Avances  
+4. Observaciones  
+5. Conclusiones  
+6. Anexos  
+
+---
+
+## 📌 Notas finales
+
+- Incluir referencias si aplica.
+- Firmar o vincular a autoría responsable.
+
+---
+
+_Esta plantilla forma parte de `estructura_doc/` y está diseñada para normalizar la redacción técnica en ALMA_RESIST._

@@ -1,0 +1,60 @@
+# Estrategia de Pendrives y Seguridad – ALMA_RESIST
+
+
+## 2. Estrategias de Seguridad
+
+- Trabajá siempre que puedas directo desde el disco externo cifrado (ALMA_RESIST):
+    
+    - Todo tu entorno y datos quedan portables y seguros, siempre que no copies nada a la PC anfitriona.
+        
+- Para máxima seguridad:
+    
+    - Booteá desde un LiveUSB (Parrot, Tails, etc.),
+        
+    - Montá el disco externo solo en ese entorno,
+        
+    - Trabajá y desmontá todo antes de apagar.
+        
+- Nunca uses tus pendrives críticos (BKPFISICO, ALMA_CRYPT) para bootear, formatear, o “jugar” en PCs públicas/desconocidas.
+    
+
+
+## 4. Flujos recomendados
+
+- **Día a día:**
+    
+    - Usá tu disco externo cifrado.
+        
+    - Trabajá desde ahí, no desde el disco local.
+        
+    - Desmontá y guardá el disco al terminar.
+        
+- **Ambientes hostiles o PCs públicas:**
+    
+    - Boot LiveUSB.
+        
+    - Montá y trabajá solo desde el entorno seguro.
+        
+- **Transferencias y “basura”:**
+    
+    - Usá ALMA_SWAP como papelera y para movimientos temporales.
+        
+- **Backups:**
+    
+    - Usá scripts por label (ejemplo: `mount -L BKPFISICO /mnt/backup`).
+        
+    - Hacé backups regulares cifrados, idealmente a dos destinos.
+        
+
+
+## 6. Extras útiles
+
+- Scripts automáticos de backup por label.
+    
+- “Panic button” para desmontar todo y apagar el disco rápido.
+    
+- Estructura de carpetas sugerida en cada pendrive según rol.
+    
+- Nunca trabajes con datos críticos desde la partición local del host.
+    
+

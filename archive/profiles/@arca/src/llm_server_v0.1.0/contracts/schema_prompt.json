@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PromptRequest",
+  "description": "Contrato para entrada del endpoint /responder ALMA_RESIST v0.2",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Identificador único de la petición (opcional)"
+    },
+    "agente": {
+      "type": "string",
+      "description": "Nombre del agente humano/IA que origina el prompt"
+    },
+    "prompt": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000,
+      "description": "Texto del prompt enviado al modelo LLM"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Temas, módulos o etiquetas asociadas al prompt"
+    },
+    "contexto": {
+      "type": "string",
+      "description": "Contexto adicional o memoria relevante para el prompt"
+    },
+    "hash": {
+      "type": "string",
+      "description": "Hash de integridad del prompt"
+    }
+  },
+  "required": ["prompt", "agente"],
+  "additionalProperties": false
+}

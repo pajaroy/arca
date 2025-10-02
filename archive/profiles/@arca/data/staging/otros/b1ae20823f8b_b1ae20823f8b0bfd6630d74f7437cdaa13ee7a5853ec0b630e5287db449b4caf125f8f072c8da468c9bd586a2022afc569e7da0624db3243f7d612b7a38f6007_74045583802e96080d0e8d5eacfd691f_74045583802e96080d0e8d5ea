@@ -1,0 +1,36 @@
+---
+tipo: configuracion_json
+id: CONFIGURACION_JSON_2025-06-05_e41df2
+version: '1.0'
+formato: json
+modulo: ALMA_RESIST
+titulo: Version V0.0.0.1 Auditoria
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:58b7236c955680e0868fd5827e6b1052e44289b370d49e21562390291131a3a9
+---
+{
+  "version": "v0.0.0.1",
+  "nombre": "Auditoría Inicial",
+  "fecha": "2025-05-22",
+  "estado": "completo",
+  "descripcion": "Contiene los documentos y decisiones del primer proceso de auditoría del sistema ALMA_RESIST, incluyendo estructura, arquitectura y lecciones aprendidas.",
+  "archivos": [
+    "README.md",
+    "Sprint_1_Logging.md",
+    "auditoria_estructura.md",
+    "changelog.md",
+    "decisiones_arquitectonicas.md",
+    "hello_world.py",
+    "index.md",
+    "lecciones_aprendidas.md",
+    "version.json"
+  ]
+}

@@ -1,0 +1,90 @@
+# 🏁 Hitos Fundacionales – ALMA_RESIST
+
+📝 Versión del documento: 0.0.0.1  
+🗓 Última actualización: 2025-05-20  
+👤 Responsable: Usuario + IA (documentación asistida)
+
+
+## 🎯 Hito 002 – Cifrado Funcional Activado
+
+📅 Fecha: 2025-05-17  
+🧠 Módulo: `log_crypto.py`  
+📍 Log: `docs/logs_históricos/log_cifrado_funcional.log`
+
+### Evento registrado:
+```json
+{
+  "timestamp": "2025-05-17TXX:XX:XXZ",
+  "type": "INFO",
+  "module": "crypto",
+  "message": "Módulo de cifrado funcional log_crypto.py verificado"
+}
+```
+
+🎯 El sistema inicia su trazabilidad antifrágil y asegura un log cifrado en tiempo real.
+
+
+## 🧱 Hito 004 – Auditoría Técnica v0.0.0.1 Finalizada
+
+📅 Fecha: 2025-05-20  
+🎯 Objetivo: Consolidar la base documental y estructural del sistema ALMA_RESIST.
+
+### 📌 Acciones realizadas
+
+- Creación de los documentos críticos:
+  - `post_mortem_tecnico.md`
+  - `decisiones_arquitectonicas.md`
+  - `dependencias.md`
+  - `plantillas/`
+- Registro y limpieza de estructura real
+- Validación semántica de navegación en Obsidian
+- Aclaración de metodología de trabajo con paso 0 (checklist previa obligatoria)
+- Preparación de referencias externas (`seguridad/`, `ia/`, `patrones/`)
+
+🧠 Este hito marca el cierre formal de la versión documental v0.0.0.1 y habilita el inicio del sprint técnico 0.0.0.2
+
+
+## 🧱 Hito 005 – CLI Modular Operativo (v0.0.0.2)
+
+📅 Fecha: 2025-05-20  
+🧠 Módulo: `core/cli.py` + `commands/`  
+📦 Versión: `v0.0.0.2`
+
+### 📌 Descripción
+
+Se completó la implementación funcional del CLI interno de ALMA_RESIST, incluyendo:
+
+- Reescritura total sin `cmd.Cmd`, con arquitectura extensible
+- Comandos implementados: `!ayuda`, `!resumir`, `!buscar_memoria`, `!cargar_modelo`, `!salir`
+- Logs automáticos de uso (`logs/cli.log`)
+- Modularización por archivo (`commands/*.py`)
+- Validación de argumentos, errores controlados, y testeo manual completo
+
+### 📁 Estructura Consolidada
+
+```
+core/
+└── cli.py
+
+commands/
+├── ayuda.py
+├── buscar_memoria.py
+├── cargar_modelo.py
+├── resumir.py
+└── salir.py
+
+logs/
+└── cli.log
+```
+
+🎯 Este hito deja una interfaz CLI viva, auditable y lista para integrarse al sistema de IA local, loader de memoria y módulos internos futuros.
+
+## Hito: Cierre Sprint 2.3 – Corrección de Metadatos
+
+**Fecha de cierre:** 2025-05-22  
+**Sprint relacionado:** Sprint_2.3_Correccion_Metadatos  
+**Impacto:**
+- Se logró estandarizar todos los metadatos YAML del sistema.
+- Se estabilizó la base documental para el funcionamiento de los módulos IA (memoria, reflexión y navegación).
+- Primer paso hacia la automatización antifrágil del flujo documental.
+- Se validó la escalabilidad del sistema documental con herramientas internas.

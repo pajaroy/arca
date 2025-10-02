@@ -1,0 +1,26 @@
+# 📆 Resumen Diario – 2025-04-30
+
+## 🧩 Consolidación de Estructura Física
+- Se finalizó y validó el archivo `estructura_fisica_de_trabajo.md`, que define todos los cuadernos físicos en uso, su función, y su integración con ALMA.
+- Se modificó la Sección 4 del cuaderno transversal: de cultivo a **programación**, por su mayor frecuencia de uso.
+- Se incorporó un sistema de etiquetas físicas de colores (azul, amarillo, verde, naranja) para secciones del cuaderno del CEO.
+
+## 📘 Libro del CEO
+- Se completó la estructura digital en Obsidian (`libro_del_CEO/`) con 3 archivos principales: `Vision_y_Roadmap`, `Estructura_y_Gobierno`, y `Decisiones_y_Reflexiones`.
+- Se definió la estructura del **cuaderno físico** del CEO con 4 secciones organizadas por color y propósito: Bitácora mensual, Decisiones críticas, Notas estratégicas y Modelos mentales.
+- Se generó una hoja índice imprimible (`Indice_Libro_CEO_Santi.docx`) para pegar en la tapa del cuaderno.
+
+## 🚀 Protocolo de Inicio de Proyectos
+- Se estableció un protocolo profesional para lanzar cualquier nuevo proyecto en ALMA, incluyendo:
+  - Estructura de carpetas digitales (README, seguimiento, changelog, etc.).
+  - Registro inicial en cuadernos físicos según temática.
+  - Checklist de inicio estandarizada.
+
+## 🧠 Aclaración societaria y rol
+- Se corrigió la memoria: el **Fondo Alma Mía es 100% propiedad de Santi**.
+- Cannabird es una ONG participada por el fondo (51%) y no al revés.
+- Se definió el orden lógico de consolidación:
+  1. Formalizar Cannabird como entidad operativa.
+  2. Establecer legalmente el fondo como vehículo inversor.
+  3. Consolidar el sistema ALMA como sistema de gestión y expansión estratégica.
+

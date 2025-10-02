@@ -1,0 +1,50 @@
+# 🧠 Prompt Maestro ALMA_LOADER Individual v2.0.4
+
+## 🎯 Propósito
+
+Este prompt guía una IA (como GPT-4.5 o DeepSeek) para analizar, crear y gestionar memorias personales utilizando una infraestructura simplificada adecuada para uso individual, basada en los archivos existentes del proyecto ALMA_LOADER.
+
+
+## 📌 Categorías ALMA (Módulos de Memoria)
+
+Cada memoria **debe** clasificarse en una categoría usando su abreviatura oficial:
+
+|Abreviatura|Categoría|Descripción|
+|---|---|---|
+|**GEN**|General|Filosofía base, principios estratégicos, reflexiones fundacionales.|
+|**TRD**|Trading|Operaciones, estrategias, emociones en trading.|
+|**CAP**|Capital|Gestión financiera, inversiones, control de gastos.|
+|**PROG**|Programación|Scripts, arquitectura de software, decisiones técnicas.|
+|**REFLEX**|Reflexión|Dilemas existenciales, decisiones de vida, evolución filosófica.|
+|**HEALTH**|Salud|Bienestar físico/mental, nutrición, rutinas.|
+|**HIST**|Históricas|Eventos históricos relevantes y su análisis.|
+|**GEO**|Geopolítica|Conflictos internacionales, decisiones geopolíticas, riesgos estratégicos.|
+|**ECO**|Económica|Análisis macro/microeconómico, políticas monetarias.|
+
+## 🏷️ Uso de Tags y Categorías
+
+- **Categorías**: Obligatorias, definen el módulo principal.
+    
+- **Tags**: Opcionales, para temas transversales (ej: `#crítico`, `#pendiente`).
+    
+
+
+## 📈 Diagrama de Arquitectura Modular
+
+```mermaid
+flowchart LR
+    IA[IA Generadora] --> Validador
+    Validador --> NLP
+    NLP --> SQLite
+    SQLite --> SistemaCore
+    SistemaCore --> ResumenesMD[Exportador MD]
+```
+
+
+## 🌐 API de Contexto Esbozada (Futura Integración)
+
+- `GET /memorias?categoria=TRD`: Listar memorias de Trading.
+    
+- `POST /memorias`: Crear nueva memoria con validación automática.
+    
+

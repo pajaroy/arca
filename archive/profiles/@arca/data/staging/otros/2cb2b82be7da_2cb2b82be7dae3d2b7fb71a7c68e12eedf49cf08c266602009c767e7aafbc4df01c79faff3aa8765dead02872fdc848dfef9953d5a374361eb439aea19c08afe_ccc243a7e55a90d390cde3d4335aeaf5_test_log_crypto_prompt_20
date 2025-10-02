@@ -1,0 +1,56 @@
+---
+module: prompts/test_log_crypto_prompt
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# ✅ Solicitud de Test – `test_log_crypto.py` – ALMA_RESIST Sprint 2.6
+
+Este test debe cubrir el módulo `log_crypto.py`, el cual implementa cifrado y descifrado de archivos de log usando algoritmos AES-GCM y ChaCha20-Poly1305, con generación segura de claves y validación de integridad.
+
+---
+
+## 📘 Métodos clave a testear
+
+- `encrypt_log(input_path: str, output_path: str, key: bytes) -> bytes`
+- `decrypt_log(input_path: str, output_path: str, key: bytes) -> None`
+- `generar_clave(password: bytes, salt: bytes) -> bytes`
+- `validar_log_cifrado(file_path: str) -> bool`
+
+---
+
+## 🧪 Casos de prueba sugeridos
+
+| Caso                                            | Resultado esperado                                |
+|-------------------------------------------------|---------------------------------------------------|
+| Cifrado de archivo JSON válido                  | Archivo `.enc` creado, contenido cifrado          |
+| Descifrado correcto                             | Archivo JSON recuperado igual al original         |
+| Validación de log cifrado                       | `True` si es válido, `False` si no                |
+| Generación de clave sin password (random)       | Devuelve clave de 32 bytes                        |
+| Generación de clave con password/salt           | Devuelve clave reproducible con los mismos datos  |
+| Descifrado con clave incorrecta                 | Lanza excepción o contenido inválido              |
+| Manejo de errores de lectura/escritura          | Logging de error y control de excepciones         |
+
+---
+
+## 🔧 Consideraciones técnicas
+
+- Usar archivos temporales (`tmp_path`) para pruebas
+- Comparar el archivo original y el descifrado byte a byte
+- Testear ambos algoritmos: AES-GCM y ChaCha20
+- Verificar tamaño de nonce: 12 bytes para AES, 24 para ChaCha20
+- Simular fallos con claves corruptas o datos truncados
+
+---
+
+## 📂 Archivos relacionados
+
+- `log_crypto.py` (módulo a testear)
+- `log_writer.py` (compatible como entrada)
+
+---
+
+¿Podés generar el archivo `test_log_crypto.py` con cobertura completa y buenas prácticas usando `pytest`?

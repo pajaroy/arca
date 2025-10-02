@@ -1,0 +1,25 @@
+
+# 🧾 Bitácora de Jornada – 2025-06-02
+
+Hoy se llevó a cabo una jornada completa de reestructuración y limpieza profunda del módulo `Cannabird`, dentro del sistema ALMA_RESIST.  
+El objetivo fue consolidar la arquitectura de carpetas, validar los archivos operativos y archivar o eliminar todo lo innecesario.
+
+
+### 🧹 Limpieza final
+
+- Eliminadas carpetas obsoletas en `_legacy/resumenes_cannabird/`
+- `.docx` no utilizados archivados en `archivo/descartes_raw/docx/`
+- `prompts` redundantes movidos a `archivo/historico/prompts_migrados/`
+- Apéndices integrados reubicados en `archivo/historico/contexto_apendices/`
+- Se dejó `archivo/downloads/` completamente limpia
+
+
+## 📌 Estado del módulo
+
+**Estatus final del sistema:** ✅ 100% CONSOLIDADO  
+**Asesor responsable:** Asesor-IA_CLI  
+**Usuario supervisor:** Santi
+
+Este archivo funciona como cierre formal de la jornada y puede integrarse al journal general de `docs/`.
+
+**Tags globales:** `#reestructuracion`, `#limpieza`, `#estructura`, `#journal`, `#modulo-cannabird`

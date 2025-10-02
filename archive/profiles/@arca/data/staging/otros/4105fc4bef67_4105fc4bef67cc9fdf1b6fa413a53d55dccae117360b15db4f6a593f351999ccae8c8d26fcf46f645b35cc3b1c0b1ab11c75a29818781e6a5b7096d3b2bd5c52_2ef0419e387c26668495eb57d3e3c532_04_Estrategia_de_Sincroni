@@ -1,0 +1,40 @@
+# 04_Estrategia_de_Sincronizacion
+
+# 🔄 Estrategia de Sincronización – ALMA LIBRE v0.6
+
+Este documento define cómo se sincroniza y actualiza el sistema de archivos ALMA LIBRE con plataformas externas (Obsidian, Notion, Google Drive) y con módulos internos como AlmaSync. Establece también el ciclo de trabajo diario, semanal y mensual para mantener el sistema ordenado y actualizado.
+
+
+## ⚙️ Procesos de sincronización (AlmaSync)
+
+### 🗓️ Diaria
+
+- Se generan nuevas entradas desde templates (diario emocional, rutina salud, registros cultivo, etc.)
+- AlmaSync detecta la fecha actual y ofrece la plantilla correspondiente.
+- Se actualiza bitácora central, emocional, trading, salud y cultivo.
+
+### 📒 Semanal
+
+- Generación de resúmenes automáticos si se completan los templates.
+- Copia de seguridad de toda la semana.
+- Actualización de `Cronologia/` con resumen de semana.
+
+### 📦 Mensual
+
+- Consolidación de datos financieros, salud, producción.
+- Copia de seguridad total.
+- Cierre del mes en Bitácora Central.
+
+
+## 🧠 Convenciones clave para lectura automática
+
+- **Formato uniforme de fechas**: `YYYY-MM-DD` en archivos diarios, `Semana_XX_YYYY` en carpetas semanales.
+- **Prefijo `Template_`** en todos los archivos modelo.
+- **Ubicación fija de los templates**: todos dentro de `08_Gestor_de_Templates/`.
+- **Encabezados en Markdown**: `#` para el título principal, `##` para secciones (para facilitar el parseo).
+
+
+> “Sincronizar es mantener el sistema con vida. AlmaSync es tu reloj biológico
+> 
+
+[README](04_Estrategia_de_Sincronizacion%201d8dcc9f5a8a80e3b30fe6cbefe43cc9/README%201d8dcc9f5a8a8031bdb1f4c3b1e3778d.md)

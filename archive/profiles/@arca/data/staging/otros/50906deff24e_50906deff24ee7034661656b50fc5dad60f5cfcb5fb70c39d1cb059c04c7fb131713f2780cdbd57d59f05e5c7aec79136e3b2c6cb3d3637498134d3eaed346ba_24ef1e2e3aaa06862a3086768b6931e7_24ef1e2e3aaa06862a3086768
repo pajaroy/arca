@@ -1,0 +1,99 @@
+## 📘 Seguimiento Técnico – Proyecto `alma_loader_2.0`
+
+### 🧠 Objetivo General
+
+Reestructurar el sistema ALMA_LOADER para uso individual, simplificando la infraestructura sin perder escalabilidad, y crear un Prompt Maestro que guíe a cualquier IA (GPT-4.5, DeepSeek) a interpretar, gestionar y generar memorias personales de forma autónoma.
+
+## 🧩 Versión 2.2 – (Inicio del Rediseño Modular)
+
+**Fecha:** [inicialización en este chat]  
+**Objetivo:** Separar funciones para uso individual y simplificar el pipeline base.
+
+### Cambios Técnicos:
+
+- Generación del Prompt Individual v2.0.1.
+    
+- Eliminación de dependencias pesadas (Neo4j, Redis).
+    
+- Adopción de SQLite + NLP local como stack mínimo funcional.
+    
+- Validación de memorias unificada vía `schema_base.json`.
+    
+- Primera fórmula de prioridad automática.
+    
+
+
+## 🧩 Versión 2.4 – (Integración Completa de Categorías ALMA y Modularidad Visual)
+
+**Fecha:** [último paso realizado]  
+**Objetivo:** Integrar taxonomía de categorías ALMA, robustecer casos límite y preparar documentación para migración y APIs.
+
+### Cambios Técnicos:
+
+- Sección detallada con **categorías ALMA oficiales** (GEN, TRD, CAP...).
+    
+- Validación obligatoria de la categoría en `schema_base.json`.
+    
+- Guía clara sobre diferencias entre **categorías** y **tags**.
+    
+- Ejemplo de memoria inválida con corrección esperada (tags mal formateados, categoría no válida).
+    
+- Migrador `v1 → v2` propuesto en Python (`migrador_v1_v2.py`).
+    
+- Diagrama de arquitectura modular con flujo completo desde IA hasta exportador.
+    
+- Primer boceto de endpoints REST (`GET /memorias`, `POST /memorias`).
+    
+
+## 🧩 Versión 2.0.5 – (Refinamiento Final del Prompt)
+**Fecha:** [actual]  
+**Objetivo:** Fortalecer validaciones, mejorar accesibilidad para usuarios no técnicos y consolidar estándares.
+
+### Cambios Técnicos:
+- ✅ Se integró validación cruzada de IDs en el campo `relacionadas`.
+- ✅ Se agregó lista de `tags_recomendados` en `schema_base.json` para asegurar uniformidad semántica.
+- ✅ Se añadió una guía rápida para usuarios no técnicos, incluyendo ejemplo mínimo de entrada válida.
+- ✅ Se mantuvo compatibilidad con infraestructura SQLite + NLP local.
+- ✅ Se consolidó la estructura del prompt para lectura clara por cualquier modelo IA o usuario humano.
+
+## 🧩 Versión 2.0.6 – (Inicio de Capacidades Predictivas en Trading)
+**Fecha:** [actual]  
+**Objetivo:** Establecer el puente entre memoria histórica y análisis predictivo para decisiones automatizadas.
+
+### Cambios Técnicos:
+- ✅ Se preparó la estructura para incorporar `alma_analytics.py` como módulo de correlación y análisis de patrones.
+- ✅ Se definió el uso de relaciones entre memorias para modelar causa-efecto en operaciones de trading.
+- ✅ Se incorporó la lógica de generación de insights con modelos predictivos simples (Logistic Regression, Random Forest).
+- ✅ Se propuso sistema de alertas automáticas basado en patrones detectados (#sobreoperación + #fatiga).
+- ✅ Se amplió el checklist de implementación para reflejar la Fase 3 orientada a IA analítica.
+
+
+
+## 🧩 Versión 2.1.0 – (Consolidación de Plataforma Predictiva y Conversacional)
+**Fecha:** [actual]  
+**Objetivo:** Elevar ALMA_LOADER a un sistema completo de gestión cognitiva con capacidades predictivas, resúmenes automáticos, interacción natural y automatización diaria.
+
+### Cambios Técnicos Clave:
+- ✅ Integración de entrada conversacional y transformación automática a JSON.
+- ✅ Generación de resúmenes automáticos diarios.
+- ✅ Sistema gamificado con puntos y niveles según uso y resolución de alertas.
+- ✅ Incorporación estructural del módulo `alma_analytics.py`.
+- ✅ Inclusión de reglas semánticas condicionales (`if-then`) en `schema_base.json`.
+- ✅ Sugerencia de implementación de cronjob para limpieza y validación.
+- ✅ Exportación automática de dashboards HTML/MD.
+- ✅ Propuesta de alertas inteligentes por patrones de riesgo.
+- ✅ Ampliación de uso práctico mediante comandos rápidos y plantillas de acción.
+- ✅ Base técnica para integración futura con Telegram/WhatsApp como interfaz.
+
+## 🧩 Versión 2.1.1 – (Consolidación Final y Preparación para Codificación)
+**Fecha:** [2025-5-2]  
+**Objetivo:** Clarificar el diseño operativo, reducir la carga cognitiva del usuario y estructurar la implementación por etapas funcionales.
+
+### Cambios Técnicos y Operativos Clave:
+- ✅ Reescritura del propósito general para hacerlo más humano y claro.
+- ✅ Separación funcional entre CORE (mínimo viable) y AVANZADO (módulos expansivos).
+- ✅ Inclusión de comandos conversacionales para facilitar la entrada de datos.
+- ✅ Flujo de interacción documentado para usuarios no técnicos (registro → resumen → acción).
+- ✅ Inclusión explícita de un roadmap en fases semanales.
+- ✅ Pronta para comenzar desarrollo incremental basado en este documento como referencia maestra.
+

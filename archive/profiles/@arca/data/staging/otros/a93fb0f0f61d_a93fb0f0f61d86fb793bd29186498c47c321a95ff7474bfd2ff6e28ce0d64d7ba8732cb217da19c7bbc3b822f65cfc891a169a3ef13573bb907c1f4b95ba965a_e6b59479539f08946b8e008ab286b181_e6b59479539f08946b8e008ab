@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "yzhang.markdown-all-in-one",
+    "ms-python.python",
+    "esbenp.prettier-vscode",
+    "ms-vscode.cpptools",
+    "streetsidesoftware.code-spell-checker"
+  ]
+}

@@ -1,0 +1,57 @@
+---
+module: prompts/model_wrapper_request
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🧠 Solicitud de Implementación – `ModelWrapper` – Sprint 2.6 – ALMA_RESIST
+
+## 🎯 Objetivo
+
+Implementar el archivo `model_wrapper.py` que defina la clase `ModelWrapper`, utilizada por el servidor LLM (`main.py`) del proyecto ALMA_RESIST. Esta clase es responsable de cargar un modelo `.gguf` usando `llama.cpp` y generar respuestas a partir de un prompt de texto.
+
+---
+
+## 📘 Requisitos
+
+### Clase: `ModelWrapper`
+
+- Métodos requeridos:
+  - `__init__(self, model_path: str, quantization: str = "Q4")`  
+    Inicializa el wrapper y prepara configuración del modelo.
+  - `load_model(self)`  
+    Carga el modelo desde el archivo `.gguf` utilizando `llama_cpp.Llama`.
+  - `generate(self, prompt: str) -> str`  
+    Genera texto a partir de un prompt usando el modelo cargado.
+  - `is_loaded(self) -> bool`  
+    Devuelve `True` si el modelo está cargado correctamente.
+  - `get_model_info(self) -> dict`  
+    Devuelve un resumen con nombre del modelo, tamaño del contexto, tokens usados, etc.
+
+### Condiciones:
+- Usar la librería `llama-cpp-python` (`pip install llama-cpp-python`)
+- Soportar modelos cuantizados `.gguf`, preferentemente Q4
+- Manejar errores si el modelo no está cargado
+- Ser compatible con FastAPI y asincronía de `main.py` (aunque esta clase puede ser sin `async`)
+- Preparar para trabajar con modelos como Mistral 7B o TinyLlama
+
+---
+
+## 🧪 Ejemplo de uso
+
+```python
+wrapper = ModelWrapper("models/mistral-7b-q4.gguf")
+wrapper.load_model()
+respuesta = wrapper.generate("¿Qué es la termodinámica?")
+```
+
+---
+
+## 📎 Contexto
+
+- Este wrapper será invocado desde el endpoint `/responder` del archivo `main.py`
+- Sprint: 2.6 – LLM Server
+- Arquitectura basada en idea base `0.0.0.4.1`

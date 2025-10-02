@@ -1,0 +1,68 @@
+---
+module: post_mortem_tecnico
+type: core
+status: in_progress
+created: '2025-05-20'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# ☠️ Post-Mortem Técnico – ALMA RESIST
+
+📝 Versión inicial  
+📅 Creado: 2025-05-20  
+👤 Responsable: Usuario + IA
+
+---
+
+## 📌 Objetivo
+
+Este documento tiene como finalidad registrar errores, decisiones técnicas erróneas, cuellos de botella, fallos de diseño o cualquier otro incidente relevante a nivel técnico que haya requerido rediseño, corrección o replanteo.
+
+> "Un buen sistema no es el que no falla, sino el que aprende de sus fallas sin romperse."
+
+---
+
+## 📁 Estructura del Análisis
+
+Por cada entrada se debe completar el siguiente formato:
+
+```markdown
+### 🧩 Módulo: [Nombre del módulo o sección afectada]
+
+📅 Fecha del incidente: [dd/mm/aaaa]  
+🧠 Descripción del error:  
+[Qué ocurrió exactamente, cómo se detectó]
+
+⚙️ Causa raíz:  
+[Explicación técnica del problema]
+
+🛠️ Solución aplicada:  
+[Qué se hizo para resolverlo y por qué se eligió ese camino]
+
+🔁 Lección aprendida:  
+[Cómo evitar que vuelva a ocurrir, impacto en otros módulos]
+
+🗃️ Archivos relacionados:  
+- [logs/…]
+- [tests/…]
+- [changelog.md#fecha]
+```
+
+---
+
+## 📍 Ubicación sugerida
+
+Guardar este archivo como:
+
+```
+ALMA_RESIST/docs/post_mortem_tecnico.md
+```
+
+Este archivo no se edita constantemente, sino cuando ocurre una falla real con implicancia técnica.
+
+---
+
+## 📜 Historial
+
+- 📅 2025-05-20: Estructura creada, sin incidentes registrados aún.

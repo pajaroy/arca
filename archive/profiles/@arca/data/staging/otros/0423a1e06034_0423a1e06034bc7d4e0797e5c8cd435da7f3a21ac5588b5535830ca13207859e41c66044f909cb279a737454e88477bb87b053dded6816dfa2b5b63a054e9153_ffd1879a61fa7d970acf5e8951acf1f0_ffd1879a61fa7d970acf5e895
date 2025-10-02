@@ -1,0 +1,222 @@
+{
+  "id": "readme_alma_core_v0.1.1",
+  "version": "0.1.1b",
+  "fecha_actualizacion": "2025-06-11T02:00:00Z",
+  "autor": "Santi + ALMA",
+  "estado": "in_progress",
+  "anterior": "readme_alma_core_v0.1.0.yaml",
+  "hash_actual": "sha256:pending",
+  "modulos_activos": [
+    "archivo",
+    "config",
+    "control",
+    "control_central",
+    "core",
+    "docs",
+    "logs",
+    "meta"
+  ],
+  "linked_to": [
+    "alma_resist_manifest_v0.1.1.yaml",
+    "control_central/README.yaml",
+    "core/README.yaml",
+    "docs/README.yaml",
+    "meta/module.yaml"
+  ],
+  "proposito": {
+    "descripcion": "Carpeta raíz y núcleo operativo de ALMA_RESIST/ALMA_CORE.\nPunto de entrada para IA y humanos: contiene la estructura, agentes, lógica y documentación que gobierna el sistema.\nOrquesta nodos, agentes, memoria y trazabilidad; aquí todo deja registro y sentido.\nEste README es modular, cada bloque puede actualizarse individualmente (ver fecha y changelog por sección).\n",
+    "ultima_revision": "2025-06-11T02:00:00Z",
+    "owner": "Santi",
+    "contact": null
+  },
+  "estructura_general": {
+    "descripcion": "Estructura modular y auditable. Cada módulo/subcarpeta cumple función clara y referencia su propio README.yaml (o plantilla base).\nEl README maestro solo referencia módulos principales; la lógica interna y detalles van en los README de cada módulo.\nLa navegación y trazabilidad es jerárquica (de raíz a hojas, y viceversa, vía linked_to).\n",
+    "index_rag": [
+      {
+        "path": "archivo/",
+        "tipo": "almacenamiento",
+        "readme": "archivo/README.yaml"
+      },
+      {
+        "path": "config/",
+        "tipo": "configuracion",
+        "readme": "config/README.yaml"
+      },
+      {
+        "path": "control/",
+        "tipo": "gestion_sprints",
+        "readme": "control/README.yaml"
+      },
+      {
+        "path": "control_central/",
+        "tipo": "cerebro_multiagente",
+        "readme": "control_central/README.yaml"
+      },
+      {
+        "path": "core/",
+        "tipo": "cli_core",
+        "readme": "core/README.yaml"
+      },
+      {
+        "path": "docs/",
+        "tipo": "documentacion",
+        "readme": "docs/README.yaml"
+      },
+      {
+        "path": "logs/",
+        "tipo": "logs_globales",
+        "readme": "logs/README.yaml"
+      },
+      {
+        "path": "meta/",
+        "tipo": "definicion_modular",
+        "readme": "meta/README.yaml"
+      }
+    ]
+  },
+  "modulos": {
+    "archivo": {
+      "proposito": "Datos crudos, descargas, logs generales.",
+      "subcarpetas": {
+        "datasets": "Datos crudos o importados (ver README.yaml interno).",
+        "downloads": "Archivos descargados de fuentes externas.",
+        "logs": "Logs históricos no asociados a módulos/agentes."
+      },
+      "linked_to": [
+        "archivo/README.yaml"
+      ],
+      "ultima_revision": "2025-06-11"
+    },
+    "config": {
+      "proposito": "Configuración global (.env, settings.yaml, etc).",
+      "linked_to": [
+        "config/README.yaml"
+      ],
+      "ultima_revision": "2025-06-11"
+    },
+    "control": {
+      "proposito": "Sprints activos/históricos y gestión de ciclos en alma_core.",
+      "linked_to": [
+        "control/README.yaml"
+      ],
+      "ultima_revision": "2025-06-11"
+    },
+    "control_central": {
+      "proposito": "Cerebro estratégico y memoria viva del ecosistema.\nContiene los agentes principales (Centralesis, Kael, Emma, Alma, Nero, Bird), sus bitácoras, changelogs y memorias.\nPunto de partida para integrar nuevos módulos/agentes bajo gobierno y auditoría.\n",
+      "agentes": [
+        {
+          "Centralesis": "Auditor General"
+        },
+        {
+          "Kael": "Auditor CLI"
+        },
+        {
+          "Emma": "Asesor Empresarial"
+        },
+        {
+          "Alma": "Agente de Compañía"
+        },
+        {
+          "Nero": "Integrador de Código"
+        },
+        {
+          "Bird": "Espacio Personal"
+        }
+      ],
+      "linked_to": [
+        "control_central/README.yaml"
+      ],
+      "ultima_revision": "2025-06-11"
+    },
+    "core": {
+      "proposito": "CLI, notebooks, scripts y tests base. Núcleo reutilizable.",
+      "linked_to": [
+        "core/README.yaml"
+      ],
+      "ultima_revision": "2025-06-11"
+    },
+    "docs": {
+      "proposito": "Documentación general, bitácoras raíz y changelog del sistema.",
+      "linked_to": [
+        "docs/README.yaml"
+      ],
+      "ultima_revision": "2025-06-11"
+    },
+    "logs": {
+      "proposito": "Logs globales, alto nivel o raíz.",
+      "linked_to": [
+        "logs/README.yaml"
+      ],
+      "ultima_revision": "2025-06-11"
+    },
+    "meta": {
+      "proposito": "Documentación modular, manifiestos, definición de módulos.",
+      "linked_to": [
+        "meta/README.yaml"
+      ],
+      "ultima_revision": "2025-06-11"
+    }
+  },
+  "relacion_rag": {
+    "indexado": true,
+    "tipo": "core_manifest",
+    "linked_to": [
+      "manifest_v0.1.0.yaml",
+      "manifest_v0.1.1.yaml",
+      "idea_base_v0.0.1.yaml",
+      "idea_base_v0.0.2.yaml",
+      "README.yaml de cada módulo"
+    ],
+    "fix_metadata": true
+  },
+  "hashing_index": {
+    "descripcion": "Cada carpeta y archivo relevante es registrado con SHA-256 y auditado en cada commit relevante.\nEl index_rag permite a cualquier IA/humano navegar la estructura sin ambigüedad.\n",
+    "ultima_revision": "2025-06-11"
+  },
+  "dependencias": {
+    "agents": [
+      "Centralesis",
+      "Kael",
+      "Emma",
+      "Alma",
+      "Nero",
+      "Bird"
+    ],
+    "archivos_criticos": [
+      "changelog.yaml",
+      "settings.yaml",
+      "module.yaml"
+    ],
+    "scripts": "CLI y automatizaciones por módulo.",
+    "ultima_revision": "2025-06-11"
+  },
+  "notas_operativas": {
+    "modularidad": "Cada bloque del README puede actualizarse y versionarse por separado.\nLos cambios menores no afectan al resto del documento, solo al módulo actualizado.\nUsar linked_to y fecha en cada bloque.\n",
+    ".obsidian": "Configuración de Obsidian (para navegación y enlaces internos). No modificar manualmente.\n",
+    ".stfolder": "Carpeta interna para sincronización (ej: Syncthing). No editar ni mover.\n",
+    ".gitignore": "Define exclusiones del control de versiones. Documentar aquí los motivos de exclusión si son críticos.\n",
+    "ultima_revision": "2025-06-11"
+  },
+  "proyeccion_futura": [
+    "Mantener README.yaml como orquestador modular.",
+    "Automatizar generación de README.json para IA/scripts.",
+    "Permitir a los agentes modificar su propio README modularmente (dentro de permisos).",
+    "Evolucionar la estructura según crezcan nodos y agentes.",
+    "Documentar historia y cambios internos (bitácora/changelog por módulo).",
+    {
+      "ultima_revision": "2025-06-11"
+    }
+  ],
+  "changelog": [
+    {
+      "fecha": "2025-06-11T02:00:00Z",
+      "version": "0.1.1",
+      "cambios": "- Refactorización modular.\n- Trazabilidad bloque a bloque.\n- Campos index_rag y modulos_activos para navegación IA.\n- Preparado para actualización incremental.\n- Soporte para README.yaml + README.json.\n"
+    },
+    {
+      "fecha": "[proxima_actualizacion]",
+      "version": "[nueva_version]",
+      "cambios": "[resumen]"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5 (v0.8)
+
+## 🎯 Objetivo General
+
+Diseñar un sistema de IA modular, offline y antifrágil, con:
+
+- Logging y recuperación resilientes
+- Cifrado con rotación de claves y bloqueo antifuerza bruta
+- Documentación automática para emergencias
+- Chat optimizado para hardware limitado (RAM, CPU)
+
+
+## ⚙️ Entorno Técnico
+
+- SO: Linux x86_64
+- RAM mínima: 8 GB
+- CPU: 4 núcleos
+- Python 3.10.12+
+- Sin conexión a internet (offline-first)
+
+
+## 📁 Archivos Base
+
+- `ALMA_LIBRE/`
+- `idea_base_0.0.9.md`
+- `docs/flujo_secuencial.mmd`
+
+
+## ✅ Checklist Crítico
+
+### Manejo de Errores
+- [ ] CLI muestra errores codificados (E-404: DB corrupta)
+- [ ] Errores críticos registrados en `docs/fallos_criticos.md`
+- [ ] CLI sugiere comandos correctivos (`alma --reparar-db`)
+
+### Seguridad y Cifrado
+- [ ] Clave maestra derivada (PBKDF2-SHA512)
+- [ ] Clave rotada automáticamente cada 30 días (`alma --rotate-keys`)
+- [ ] Bloqueo tras 3 fallos en restauración (`alma --unlock` solo desde root)
+
+### Optimización Chat
+- [ ] Uso de mmap para historial en disco
+- [ ] Limpieza de cache horaria (`alma --flush-cache`)
+- [ ] Solo últimos 100 mensajes cargados en RAM
+
+### Pruebas Automatizadas
+- [ ] `run_tests.sh` ejecuta:
+  - pytest unit tests
+  - `test_restauracion_parcial()`
+  - carga RAM/disco con locust
+- [ ] Validación cifrado con OpenSSL (`openssl enc -d`)
+
+
+## 📚 Documentación Autoexplicativa
+
+- [ ] `docs/guia_emergencia.md` generado si ocurre fallo crítico
+  - Instrucciones para regenerar claves
+  - Pasos para recuperar logs y reconstruir DB
+  - Lista de errores frecuentes y soluciones
+
+
+## 📝 Instrucción Final para GPT-4.5
+
+> Utilizá `ALMA_LIBRE/` y `idea_base_0.0.9.md` como referencia. Luego generá:
+- Roadmap con tareas priorizadas, métricas y flujos
+- Código de cifrado con rotación y seguridad reforzada
+- Tests automatizados (pytest + locust)
+- Estrategias de restauración parcial y detección de fallos
+- Guía de emergencia generada automáticamente
+- Optimización real para entornos con recursos limitados
+

@@ -1,0 +1,171 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_1fd2c2
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Test Transport Layer
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:7d632fb3cb3513a055550a03be7de8c08c9f6059f91d4bc1b2d6be78fc264a2c
+---
+import pytest
+import json
+import uuid
+from pathlib import Path
+from datetime import datetime, timedelta
+from core.llm_server.transport_layer.transport_layer import TransportLayer
+import jsonschema
+import logging
+
+# Fixtures para contratos mock
+@pytest.fixture(scope="module")
+def mock_contracts(tmp_path_factory):
+    contracts_dir = tmp_path_factory.mktemp("contracts")
+
+    # Crear esquemas mock
+    prompt_schema = {
+        "type": "object",
+        "properties": {
+            "prompt": {"type": "string"},
+            "context": {"type": "array", "items": {"type": "string"}}
+        },
+        "required": ["prompt"]
+    }
+
+    respuesta_schema = {
+        "type": "object",
+        "properties": {
+            "respuesta": {"type": "string"},
+            "metadata": {"type": "object"}
+        },
+        "required": ["respuesta"]
+    }
+
+    (contracts_dir / "schema_prompt.json").write_text(json.dumps(prompt_schema))
+    (contracts_dir / "schema_respuesta.json").write_text(json.dumps(respuesta_schema))
+
+    return contracts_dir
+
+# Fixture principal para TransportLayer
+@pytest.fixture
+def transport(mock_contracts, tmp_path):
+    # Usamos un directorio base temporal único para cada prueba
+    base_dir = tmp_path / "transport_data"
+    return TransportLayer(contracts_dir=str(mock_contracts), base_dir=str(base_dir))
+
+# Tests de validación de datos
+def test_send_valid_prompt(transport):
+    test_data = {"prompt": "Test válido", "context": []}
+    transport.send(test_data, "responder")
+    
+    files = list(Path(transport.base_dir).glob("responder_*.json"))
+    assert len(files) == 1, "Debe crear un archivo"
+    
+    content = json.loads(files[0].read_text())
+    assert content == test_data, "Contenido no coincide"
+
+def test_send_invalid_prompt(transport, caplog):
+    with pytest.raises(jsonschema.ValidationError):
+        transport.send({"invalid": "data"}, "responder")
+    
+    assert "Validación fallida" in caplog.text
+
+# Tests de recuperación de datos
+def test_receive_last_entry(transport):
+    test_data = {"prompt": "Test1"}
+    transport.send(test_data, "responder")
+    
+    test_data2 = {"prompt": "Test2"}
+    transport.send(test_data2, "responder")
+    
+    result = transport.receive("responder")
+    assert result == test_data2, "Debe recuperar último archivo"
+
+# Tests de listado y rotación
+def test_list_entries_ordering(transport):
+    for i in range(3):
+        data = {"prompt": f"Test{i}"}
+        transport.send(data, "responder")
+    
+    entries = transport.list_entries("responder")
+    assert len(entries) == 3, "Debe listar todos los archivos"
+    
+    # Obtener los timestamps de los nombres de archivo
+    timestamps = [e.stem.split("_")[1] for e in entries]
+    # Verificar que están en orden descendente (más reciente primero)
+    assert timestamps == sorted(timestamps, reverse=True), "Orden incorrecto"
+
+def test_purge_old_entries(transport):
+    for _ in range(5):
+        transport.send({"prompt": "Test"}, "responder")
+    
+    transport.purge_old_entries("responder", max_files=2)
+    remaining = transport.list_entries("responder")
+    assert len(remaining) == 2, "Debe mantener solo los últimos 2"
+
+# Tests de infraestructura
+def test_directory_creation(transport):
+    base_dir = Path(transport.base_dir)
+    assert base_dir.exists(), "Debe crear directorio base"
+
+def test_missing_contracts(tmp_path):
+    with pytest.raises(RuntimeError) as excinfo:
+        TransportLayer(contracts_dir="invalid/path", base_dir=str(tmp_path / "transport_data"))
+    
+    assert "Error cargando contratos" in str(excinfo.value)
+
+# Tests de formato de archivo
+def test_filename_format(transport):
+    test_data = {"prompt": "Test"}
+    transport.send(test_data, "responder")
+    
+    files = transport.list_entries("responder")
+    filename = files[0].name
+    parts = filename.split("_")
+    
+    assert len(parts) == 3, "Formato incorrecto"
+    assert parts[0] == "responder", "Endpoint mal identificado"
+    assert len(parts[1]) == 14, "Timestamp inválido"
+    assert len(parts[2].split(".")[0]) == 6, "UUID corto inválido"
+
+# Test de validación cruzada
+def test_send_response_schema(transport):
+    valid_response = {"respuesta": "OK", "metadata": {}}
+    transport.send(valid_response, "otro_endpoint")
+    
+    files = transport.list_entries("otro_endpoint")
+    assert len(files) == 1, "Debe usar schema respuesta"
+
+# Test de persistencia
+def test_data_persistence(mock_contracts, tmp_path):
+    base_dir = tmp_path / "persistence_data"
+    base_dir.mkdir(exist_ok=True)
+    
+    # Primer transporte escribe
+    transport1 = TransportLayer(contracts_dir=str(mock_contracts), base_dir=str(base_dir))
+    test_data = {"prompt": "Persistencia Test"}
+    transport1.send(test_data, "responder")
+    
+    # Segundo transporte lee
+    transport2 = TransportLayer(contracts_dir=str(mock_contracts), base_dir=str(base_dir))
+    loaded_data = transport2.receive("responder")
+    assert loaded_data == test_data, "Persistencia fallida"
+
+# Test de archivos corruptos
+def test_corrupted_file_handling(transport, caplog):
+    # Crear un archivo corrupto con el patrón del endpoint
+    file = Path(transport.base_dir) / "corrupt_20230101000000_abcdef.json"
+    file.write_text("{invalid: json}")
+    
+    # Intentar recibir
+    result = transport.receive("corrupt")
+    assert result is None
+    assert "Error decodificando JSON" in caplog.text

@@ -1,0 +1,72 @@
+# 🧠 Prompt Maestro v2 — Cargador Universal de Memorias Institucionales (ALMA_RESIST)
+
+**Fecha:** 2025-06-07  
+**Version:** v2  
+**Responsables:** Santi (humano), Kael (auditor CLI)  
+**Módulo:** /home/bird/alma_resist/control_central/memorias/  
+**Estado:** Vigente
+
+
+## ⚙️ Requerimientos funcionales y técnicos
+
+### 1. Gestión de esquema dinámica
+- Externalizar schema oficial a `/schemas/memoria_schema.json`, versionado semánticamente.
+- Validación estricta con `jsonschema.Draft7Validator.check_schema()`.
+- CLI debe permitir especificar versión de schema (`--schema-version`).
+- Subcomando para validar el schema (`validate-schema`).
+
+### 2. Concurrencia y robustez
+- Locks por archivo usando `FileLock` (timeout configurable, default 10s).
+- Lockfiles específicos por tipo (`*.memoria.lock`, `*.bitacora.lock`).
+- Reintentos inteligentes (backoff exponencial) en colisiones.
+- Escritura atómica (temp file + swap).
+
+### 3. Integridad y hashing
+- Generación automática de SHA-256 para cada registro (`_checksum`).
+- Verificación previa y reparación de hashes (`repair-checksums`).
+- Validación de integridad en cada lectura/escritura.
+
+### 4. Seguridad y multiidioma
+- Soporte multiidioma mediante `gettext` (diccionarios en `/locales/`).
+- Flags para forzar idioma (`--lang es/en`), autodetección del sistema.
+- Validación de fechas ISO 8601 y manejo de unicode seguro.
+- Roadmap para cifrado AES-GCM y auditoría SELinux.
+
+### 5. Optimización y escalabilidad
+- Carga y validación optimizadas para miles de registros.
+- Conversión masiva con subcomando `convert` (YAML↔JSON), soporte recursivo de directorios.
+- Soporte de Redis como backend opcional (roadmap).
+- API GraphQL planificada para integración futura.
+
+### 6. CLI y usabilidad avanzada
+- Nuevos flags: `--lock-timeout`, `--no-hash`, `--schema-version`, `--lang`.
+- Subcomandos: `validate-schema`, `repair-checksums`.
+- Normalización automática de tags (minúsculas, sin duplicados).
+- Reporte CLI de memorias cargadas, duplicadas, inconsistentes.
+
+### 7. Logs y auditoría estructurada
+- Logs en JSON/YAML, con timestamp, canal/origen, usuario/IA responsable.
+- Logs de acciones críticas y backups automáticos.
+- Registro de todas las inserciones y modificaciones.
+
+### 8. Dependencias y ambiente
+- python >= 3.10
+- jsonschema >= 5.4.0
+- pyyaml >= 7.0
+- filelock >= 5.0.0
+- rfc3339-validator (nuevo)
+
+
+## 📁 Rutas relevantes
+
+- `/home/bird/alma_resist/control_central/memorias/memorias.json`
+- `/home/bird/alma_resist/control_central/memorias/bitacora_viva.json`
+- `/home/bird/alma_resist/control_central/memorias/memorias.yaml`
+- `/home/bird/alma_resist/control_central/memorias/bitacora_viva.yaml`
+- `/home/bird/alma_resist/control_central/memorias/schemas/memoria_schema.json`
+- `/home/bird/alma_resist/control_central/memorias/locales/` *(diccionarios multiidioma)*
+
+
+*“La memoria institucional no es un archivo, es un sistema circulatorio de conocimiento vivo.”*  
+— Kael, Auditor CLI
+

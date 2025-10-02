@@ -1,0 +1,38 @@
+# 📦 Dependencias Técnicas – ALMA RESIST
+
+📝 Versión inicial  
+📅 Creado: 2025-05-20  
+👤 Responsable: Usuario + IA
+
+
+## 🐍 Librerías de Python (mínimas)
+
+```bash
+# requirements.txt mínimo
+cryptodome
+pytest
+rich
+flask           # o fastapi (según backend IA)
+requests
+```
+
+
+## 🧰 Servidores IA soportados
+
+| Motor            | Recomendado | Notas                                    |
+|------------------|-------------|------------------------------------------|
+| `llama.cpp`      | ✅           | Compilado local, portable, rápido        |
+| `text-generation-webui` | ⚠️        | Solo si usás GUI, pesado                |
+| `fastapi + socket` | ✅           | Para arquitectura modular sin frontend   |
+
+
+## 🔗 Dependencias externas opcionales
+
+| Herramienta    | Uso esperado                     |
+|----------------|----------------------------------|
+| `tmux`         | Multiplexado terminal             |
+| `rclone`       | Sincronización con nube segura    |
+| `Obsidian`     | Visualización y edición de vaults |
+| `NotebookLM`   | IA externa opcional sobre memoria |
+| `drawio`       | Diagramas estructurales           |
+

@@ -1,0 +1,37 @@
+# 🏢 ALMA_EMPRESA
+
+## 📌 Descripción General
+
+**ALMA_EMPRESA** es la estructura madre empresarial del ecosistema ALMA_RESIST. Su propósito es organizar, supervisar y gestionar las entidades operativas (como Cannabird, 13CC, Inance), incluyendo instancias legales, financieras, estratégicas y automatizadas.
+
+Este módulo se plantea como una empresa paraguas que opera en múltiples niveles: asesoría estratégica, asistencia IA interna, vinculación con entidades ONG, desarrollo de unidades productivas, e integración con el sistema de inversión descentralizado (Fondo ALMA).
+
+## 🧱 Componentes principales
+
+- `equipo/` → Definición de roles clave y estructura operativa interna (Comandante, Asesor, Supervisor, Tesorero).
+- `asesoría/` → Área dedicada a la gestión legal, contable e institucional.
+- `IA_asistente/` → Asistente empresarial interno con capacidades de automatización y apoyo estratégico.
+- `entidades/` → Núcleo que contiene las empresas y ONGs relacionadas.
+- `trading/` → Proyección de fondo de inversión y estrategias de capital.
+- `fondo_inversion/` → Estructura base del fondo común, proyección ALMA_MIA y modelos tokenizados.
+
+## 🧭 Estado Actual
+
+- 📁 Carpeta estructural recién creada.
+- 🧠 Se ha definido la idea base de cada subcomponente.
+- ✅ Se ha comenzado el proceso de reestructuración bajo la metodología `estructura_autonoma_v2`.
+
+## 🌱 Proyección
+
+- Consolidar un sistema empresarial modular, IA-friendly y auditable.
+- Usar esta carpeta como plantilla replicable para otras iniciativas empresariales futuras.
+- Integrar completamente con el flujo operativo ALMA_RESIST (vía `control/`, `docs/`, `meta/`).
+- Preparar versión presentable institucional para aliados estratégicos y entes reguladores.
+
+## 🔁 Próximos pasos
+
+- [ ] Aplicar estructura base según metodología `estructura_autonoma_v2`.
+- [ ] Consolidar documentos clave (readme, changelog, módulo.yaml).
+- [ ] Establecer control operativo inicial (`sprint_actual.md`).
+- [ ] Integrar automatización básica vía IA_Asistente.
+

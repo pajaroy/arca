@@ -1,0 +1,55 @@
+
+# ALMA_RESIST – Idea Base v0.0.8
+
+## 🧠 Resumen Ejecutivo
+
+La versión 0.0.8 representa el paso de la fase conceptual a la implementación real del sistema. Se incorporan archivos esqueleto, comentarios orientativos y configuraciones mínimas necesarias para que tanto humanos como IAs (como GPT-4.5) puedan desarrollar componentes de forma coherente, segura y autónoma.
+
+
+### 🧪 Hello World Funcional
+
+```python
+# hello_world.py
+def main():
+    print("Bienvenido a ALMA_RESIST v0.0.8")
+    print("Este módulo se conecta al modelo LLM y responde a tu consulta.")
+    # TODO: conectar con LLM cuando esté disponible
+```
+
+
+### 📚 Enriquecimiento del Prompt Técnico
+
+- Nuevos ejemplos:
+
+```markdown
+## Ejemplo: Crear script de carga de modelo
+**Input:**
+```json
+{"task": "Cargar modelo Mistral-7B en GGUF desde disco", "hardware": "CPU"}
+```
+**Output esperado:**
+- Script en Python usando llama.cpp
+- Configuración de threads y quantización 4-bit
+```
+
+- Nuevas secciones:
+  - Requisitos mínimos por módulo
+  - Errores comunes esperados
+  - Flujos de ejecución por orden (diagrama Mermaid.js)
+
+
+## 📋 Changelog v0.0.8 (Respecto a v0.0.7)
+
+### 📁 Estructura:
+- Se creó la carpeta `ALMA_LIBRE/` como esqueleto funcional inicial
+- Archivos vacíos con comentarios listos para implementación
+
+### 💡 Implementación:
+- Se añadió `hello_world.py` como demo mínima
+- Comentarios orientativos en todos los scripts para GPT-4.5 y humanos
+
+### 📚 Documentación:
+- Se enriqueció `PROMPT_TECNICO.md` con ejemplos estructurados
+- Se añadieron archivos JSON de configuración realistas
+- Se agregó `flujo_secuencial.mmd` para mostrar el camino completo del sistema
+

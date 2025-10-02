@@ -1,0 +1,28 @@
+# 📘 Seguimiento – Funcionalidades Nuevas ALMA_LOADER v2.2.0
+
+## 🧩 1. Interfaz Abstracta de Almacenamiento
+
+**Archivo:** `base_storage.py`
+
+Define 4 funciones universales (`guardar`, `buscar`, `actualizar`, `eliminar`) que garantizan compatibilidad futura con otros motores (FAISS, Neo4j, Postgres).
+
+👉 Impacto: desacopla la lógica del backend de almacenamiento. Posibilita testeo, mantenimiento y escalado con bajo riesgo técnico.
+
+
+## 🧠 3. Stub para Vectorización (FAISS Ready)
+
+**Archivo:** `vector_storage.py`
+
+Estructura inicial para almacenamiento de embeddings. Permite insertar y consultar vectores con ID vinculado al SQLite tradicional.
+
+👉 Impacto: separa semántica de contenido. Listo para integrar `sentence-transformers`.
+
+
+## 📚 Estado Actual
+
+| Módulo                 | Estado      | Observaciones                       |
+|------------------------|-------------|-------------------------------------|
+| BaseStorage            | ✅ Finalizado | Funciona como interfaz universal    |
+| SQLiteStorage          | ✅ Finalizado | Compatible y operativo              |
+| VectorStorage (FAISS)  | 🧪 En curso   | Requiere embeddings y entrenamiento |
+| Router Atencional      | 🧪 En curso   | Funcionalidad básica implementada   |

@@ -1,0 +1,1 @@
+mkdir -p arca/{config,src/{core,script,test},test,docs,logs,archive/{history,backup},templates,data} && touch arca/pyproject.toml && touch arca/Dockerfile && touch arca/config/config.py

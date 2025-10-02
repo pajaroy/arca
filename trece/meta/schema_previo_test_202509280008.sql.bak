@@ -1,0 +1,145 @@
+-- meta/schema.sql
+PRAGMA foreign_keys = ON;
+
+-- Tipos de entidad (socio, proveedor, empleado, inversor, etc.)
+CREATE TABLE entity_types (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  code TEXT NOT NULL UNIQUE,
+  name TEXT NOT NULL,
+  notes TEXT
+);
+
+-- Entidades: socios, proveedores, empleados, etc.
+CREATE TABLE entities (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  entity_type_id INTEGER NOT NULL REFERENCES entity_types(id) ON DELETE RESTRICT,
+  tel TEXT,
+  mail TEXT,
+  notes TEXT,
+  created_at TEXT DEFAULT (datetime('now'))
+);
+
+-- Genetics (genéticas / variedades)
+CREATE TABLE genetics (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL UNIQUE,
+  description TEXT,
+  tag TEXT
+);
+
+-- Módulos o lugares de corte / almacén
+CREATE TABLE modules (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL UNIQUE,
+  description TEXT
+);
+
+-- Harvest: registro de una cosecha (batch)
+CREATE TABLE harvests (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  harvest_code TEXT UNIQUE,         -- identificador legible
+  harvest_date TEXT NOT NULL,       -- fecha principal de la cosecha
+  module_id INTEGER REFERENCES modules(id) ON DELETE SET NULL,
+  notes TEXT,
+  created_at TEXT DEFAULT (datetime('now'))
+);
+
+-- Detalle de cortes / metadatos de la cosecha (fechas por corte)
+CREATE TABLE harvest_details (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  harvest_id INTEGER NOT NULL REFERENCES harvests(id) ON DELETE CASCADE,
+  cut_date TEXT NOT NULL,
+  module_id INTEGER REFERENCES modules(id) ON DELETE SET NULL,
+  description TEXT,
+  notes TEXT
+);
+
+-- Stock/producción por harvest & genetic: cantidad en gramos disponibles (seed)
+CREATE TABLE harvest_items (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  harvest_id INTEGER NOT NULL REFERENCES harvests(id) ON DELETE CASCADE,
+  genetic_id INTEGER NOT NULL REFERENCES genetics(id) ON DELETE RESTRICT,
+  grams INTEGER NOT NULL DEFAULT 0,     -- total producido en ese item
+  created_at TEXT DEFAULT (datetime('now'))
+);
+
+-- Precios históricos (por unidad o por gramo)
+CREATE TABLE prices (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  concept TEXT,                         -- ej. "venta", "retirada"
+  price_per_gram REAL,
+  start_date TEXT,
+  end_date TEXT,
+  notes TEXT
+);
+
+-- Cajas / fondos (opcional): para registrar dónde se guarda el dinero
+CREATE TABLE cajas (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL UNIQUE,
+  description TEXT
+);
+
+-- Métodos de pago
+CREATE TABLE paymethods (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL UNIQUE,
+  notes TEXT
+);
+
+-- Conceptos contables (gasto/ingreso/retirada)
+CREATE TABLE concepts (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  code TEXT NOT NULL UNIQUE,
+  name TEXT NOT NULL,
+  notes TEXT
+);
+
+-- Gastos
+CREATE TABLE expenses (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  date TEXT NOT NULL,
+  amount REAL NOT NULL,
+  concept_id INTEGER REFERENCES concepts(id) ON DELETE SET NULL,
+  entity_id INTEGER REFERENCES entities(id) ON DELETE SET NULL, -- proveedor
+  caja_id INTEGER REFERENCES cajas(id) ON DELETE SET NULL,
+  folio TEXT,
+  description TEXT,
+  notes TEXT,
+  created_at TEXT DEFAULT (datetime('now'))
+);
+
+-- Retiros: cuando un socio retira gramos de una genética
+CREATE TABLE withdrawals (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  date TEXT NOT NULL,
+  entity_id INTEGER NOT NULL REFERENCES entities(id) ON DELETE RESTRICT, -- quién retira (socio)
+  genetic_id INTEGER NOT NULL REFERENCES genetics(id) ON DELETE RESTRICT,
+  harvest_item_id INTEGER REFERENCES harvest_items(id) ON DELETE SET NULL, -- opcional vínculo al harvest
+  grams INTEGER NOT NULL,
+  price_id INTEGER REFERENCES prices(id) ON DELETE SET NULL,
+  status TEXT DEFAULT 'completed', -- pending, canceled, completed
+  paymethod_id INTEGER REFERENCES paymethods(id) ON DELETE SET NULL,
+  concept_id INTEGER REFERENCES concepts(id) ON DELETE SET NULL,
+  notes TEXT,
+  created_at TEXT DEFAULT (datetime('now'))
+);
+
+-- Auditoría mínima de movimientos de stock (in/out)
+CREATE TABLE stock_movements (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  related_table TEXT,        -- 'harvest','withdrawal','expense', etc.
+  related_id INTEGER,
+  genetic_id INTEGER REFERENCES genetics(id) ON DELETE SET NULL,
+  grams INTEGER NOT NULL,    -- positivo para entrada, negativo para salida
+  movement_date TEXT NOT NULL,
+  notes TEXT,
+  created_at TEXT DEFAULT (datetime('now'))
+);
+
+-- Índices para consultas frecuentes
+CREATE INDEX idx_withdrawals_entity_date ON withdrawals(entity_id, date);
+CREATE INDEX idx_expenses_date ON expenses(date);
+CREATE INDEX idx_harvest_items_genetic ON harvest_items(genetic_id);
+CREATE INDEX idx_stock_movements_genetic_date ON stock_movements(genetic_id, movement_date);

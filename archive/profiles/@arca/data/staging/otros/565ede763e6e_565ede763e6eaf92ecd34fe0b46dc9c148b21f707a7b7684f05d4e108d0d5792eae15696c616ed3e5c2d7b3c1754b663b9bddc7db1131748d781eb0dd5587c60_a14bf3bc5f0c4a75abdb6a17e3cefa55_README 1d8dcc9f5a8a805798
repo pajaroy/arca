@@ -1,0 +1,11 @@
+# README
+
+00_Esquema_Modular_ALMA_LIBRE
+
+Este documento define la estructura modular de ALMA LIBRE, describiendo cómo cada módulo interactúa dentro del sistema.
+
+## Funciones principales:
+
+- Descripción detallada de cada módulo.
+- Cómo se interconectan los módulos dentro del sistema.
+- Esquema modular flexible y escalable para futuras expansiones.

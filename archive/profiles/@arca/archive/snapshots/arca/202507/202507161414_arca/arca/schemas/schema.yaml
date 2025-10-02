@@ -1,0 +1,26 @@
+---
+uuid: 612a5d2d-f662-4452-9464-484ca2d54414
+tipo: schema
+formato: yaml
+nombre: schema
+version: 0.1.0
+estado: activo
+fecha_creacion: '2025-07-16T04:32:00.349211'
+fecha_modificacion: '2025-07-16T04:32:00.349261'
+autor: Bird
+descripcion: Schema YAML principal de ARCA
+hash_integridad: c07f8037bcc6f4f0ad1f0b6ffa8a3d97ef3bff041660f4581a071745844f9332
+---
+metadatos_frontmatter:
+  uuid: ""
+  tipo: ""
+  formato: ""
+  nombre: ""
+  version: "0.1.0"
+  estado: "activo"
+  fecha_creacion: ""
+  fecha_modificacion: ""
+  autor: ""
+  descripcion: ""
+  hash_integridad: ""
+

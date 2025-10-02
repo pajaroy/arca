@@ -1,0 +1,88 @@
+---
+module: prompts/solicitud_log_writer
+type: core
+status: in_progress
+created: '2025-05-19'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🧠 Prompt Técnico – `log_writer.py` v1.0 – ALMA_RESIST
+
+Este módulo forma parte de `Sprint 1` del roadmap técnico de ALMA_RESIST.
+Su propósito es implementar un sistema de logging antifrágil, seguro, y compatible con sistemas offline y de bajos recursos.
+
+---
+
+## ⚙️ Requisitos Generales
+
+- Debe funcionar 100% **offline**, sin dependencias externas.
+- Compatible con sistemas **Debian 12+**, CPU de 1 núcleo y 2GB de RAM.
+- El log debe escribirse en formato **JSONL**, con una entrada por línea.
+- Toda escritura debe ser **atómica y segura ante fallos**.
+- El sistema debe **detectar errores no críticos** y recuperarse.
+
+---
+
+## 📄 Detalles Funcionales
+
+### 1. `log_event(event_type, message, module="core")`
+- Valida los parámetros:
+  - `event_type` debe ser `INFO`, `WARNING`, o `ERROR`
+  - Si es inválido, debe **forzarse a "ERROR"** y emitir un `warnings.warn()`
+  - Lanza `TypeError` si se pasan tipos incorrectos
+
+- Agrega metadatos automáticos:
+  - `timestamp` en formato ISO UTC
+  - `pid`, `host`, `platform`, `module`
+  
+
+### 2. `write_log(event: dict)`
+- Escribe el evento en el archivo diario `logs/alma_<fecha>.log`
+- Usa **escritura atómica**:
+  - Crea archivo `.tmp`, escribe, y luego renombra con `os.replace()`
+- Crea el directorio `logs/` si no existe, con permisos `0700`
+- Maneja errores:
+  - `JSONEncodeError`, `PermissionError` → Warning + return False
+  - `OSError: errno 28` (sin espacio) → Lanza `SystemError`
+
+---
+
+## ✅ Criterios de calidad
+
+- Compatible con caracteres internacionales (`ensure_ascii=False`)
+- No debe depender de librerías externas (solo `os`, `json`, `warnings`, `datetime`, `socket`)
+- Código modular, con docstrings tipo `>>> doctest`
+- Defensivo: cualquier error previsible debe estar manejado
+
+---
+
+## 🧪 Ejemplo de uso:
+
+```python
+from core.log_writer import log_event, write_log
+
+entry = log_event("WARNING", "Umbral de CPU excedido", "monitor")
+write_log(entry)
+```
+
+---
+
+## 📂 Estructura de archivos relacionada
+- `core/log_writer.py` → módulo fuente
+- `tests/test_log_writer.py` → test funcional (pasa ✅)
+- `logs/` → carpeta generada automáticamente
+- `prompts/prompt_log_writer_v1.0.md` → este archivo
+
+---
+
+## 🧱 Dependencias del sistema operativo
+
+- Python 3.10+
+- Soporte POSIX (`os.replace`, `os.makedirs`, permisos octales)
+- No se requiere sistema gráfico ni librerías adicionales
+
+---
+
+## 📌 Contexto ALMA_RESIST
+Este módulo es el primer componente estable del `Sprint 1 – Logging cifrado antifrágil`. Fue validado manualmente y será base de auditoría para los módulos `log_crypto.py` y `log_integrity.py`.

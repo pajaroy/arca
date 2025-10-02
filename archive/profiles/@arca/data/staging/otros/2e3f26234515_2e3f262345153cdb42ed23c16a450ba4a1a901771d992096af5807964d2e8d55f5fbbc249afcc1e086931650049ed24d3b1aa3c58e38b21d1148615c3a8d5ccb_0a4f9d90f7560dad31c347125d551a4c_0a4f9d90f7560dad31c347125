@@ -1,0 +1,154 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_514d1e
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Test Context Tracker
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:573c59c62aeaf20f7e64b9837aa0826ec01f62a50151ce4df3bfd6168ec095e4
+---
+import pytest
+import json
+from pathlib import Path
+from datetime import datetime
+from core.llm_server.integration.context_tracker.context_tracker import ContextTracker
+import logging
+import os
+import stat
+import time
+
+# Fixture principal con archivo temporal
+@pytest.fixture
+def tracker(tmp_path):
+    storage_path = tmp_path / "test_context.jsonl"
+    return ContextTracker(storage_path=str(storage_path))
+
+# Test de registro básico
+def test_track_valid_interaction(tracker):
+    test_data = {
+        "prompt": "Test válido",
+        "response": "Respuesta OK",
+        "metadata": {"model": "test"}
+    }
+
+    result = tracker.track_interaction(**test_data)
+    assert result is not None, "Debe registrar interacción válida"
+
+    with open(tracker.storage_path, "r", encoding="utf-8") as f:
+        line = json.loads(f.readline())
+        assert line["prompt"] == test_data["prompt"]
+        assert line["response"] == test_data["response"]
+
+# Test de validación de esquema
+def test_invalid_interaction(tracker, caplog):
+    invalid_data = {"prompt": "Test inválido", "response": 123}
+    result = tracker.track_interaction(**invalid_data)
+
+    assert result is None, "No debe registrar interacción inválida"
+    assert "Contexto inválido" in caplog.text
+
+# Test de recuperación de historial
+def test_get_history_ordering(tracker):
+    for i in range(5):
+        tracker.track_interaction(
+            prompt=f"Prompt {i}",
+            response=f"Response {i}",
+            metadata={"order": i}
+        )
+
+    history = tracker.get_history(3)
+    assert len(history) == 3, "Debe devolver los últimos 3 registros"
+    # get_history devuelve en orden cronológico (más antiguo → más reciente)
+    assert history[0]["metadata"]["order"] == 2, "Primer registro debe ser el más antiguo del slice"
+    assert history[-1]["metadata"]["order"] == 4, "Último registro debe ser el más reciente"
+
+
+# Test de manejo de archivo corrupto
+def test_corrupted_file_handling(tracker, caplog):
+    # Primero crear una interacción válida
+    tracker.track_interaction(prompt="Original", response="OK")
+    
+    with open(tracker.storage_path, "a", encoding="utf-8") as f:
+        f.write("{invalid_json}\n")
+
+    # Añadir nueva interacción
+    tracker.track_interaction(prompt="New", response="OK")
+
+    history = tracker.get_history()
+    # Debe tener 2 interacciones válidas
+    assert len(history) == 2, "Debe mantener las interacciones válidas e ignorar corruptas"
+    assert "Línea corrupta" in caplog.text
+
+# Test de borrado de historial
+def test_clear_history(tracker):
+    tracker.track_interaction(prompt="Test", response="OK")
+    tracker.clear_history()
+
+    assert len(tracker) == 0, "Historial debe estar vacío"
+    assert tracker.storage_path.exists(), "Archivo debe recrearse"
+
+    with open(tracker.storage_path, "r", encoding="utf-8") as f:
+        assert f.read() == "", "Archivo debe quedar vacío"
+
+# Test de longitud del historial
+def test_history_length(tracker):
+    for _ in range(5):
+        tracker.track_interaction(prompt="Test", response="OK")
+
+    assert len(tracker) == 5, "Longitud incorrecta"
+
+    # Añadir línea corrupta
+    with open(tracker.storage_path, "a", encoding="utf-8") as f:
+        f.write("corrupt_data\n")
+
+    # Forzar recarga del caché
+    tracker._history_cache = []
+    history = tracker.get_history()
+    
+    assert len(history) == 5, "Debe ignorar líneas corruptas"
+
+# Test de permisos de archivo
+def test_file_permissions(tracker):
+    tracker.track_interaction(prompt="Test", response="OK")
+    mode = tracker.storage_path.stat().st_mode
+    # Verificar que el usuario tiene permisos de lectura y escritura
+    assert mode & 0o600 == 0o600, "Permisos incorrectos"
+
+# Test de persistencia entre instancias
+def test_persistence_across_instances(tmp_path):
+    storage_path = tmp_path / "persistence_test.jsonl"
+
+    tracker1 = ContextTracker(storage_path=str(storage_path))
+    tracker1.track_interaction(prompt="Test1", response="OK")
+
+    # Dar tiempo para que se escriba en disco
+    time.sleep(0.1)
+    
+    tracker2 = ContextTracker(storage_path=str(storage_path))
+    history = tracker2.get_history()
+
+    assert len(history) == 1, "Debe persistir entre instancias"
+    assert history[0]["prompt"] == "Test1"
+
+# Test de límite de caché
+def test_cache_limit(tracker):
+    for _ in range(150):
+        tracker.track_interaction(prompt="Test", response="OK")
+
+    assert len(tracker._history_cache) == 100, "Caché debe rotar"
+
+# Limpieza de registros
+@pytest.fixture(autouse=True)
+def cleanup(tracker):
+    yield
+    if tracker.storage_path.exists():
+        tracker.storage_path.unlink()

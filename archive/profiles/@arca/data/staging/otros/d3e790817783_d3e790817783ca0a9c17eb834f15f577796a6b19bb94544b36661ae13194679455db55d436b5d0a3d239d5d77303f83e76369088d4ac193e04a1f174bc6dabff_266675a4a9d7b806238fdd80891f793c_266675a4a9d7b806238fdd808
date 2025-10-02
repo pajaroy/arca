@@ -1,0 +1,648 @@
+# ALMA_RESIST_idea_base.md
+
+# ALMA_RESIST – Diseño Arquitectónico y Plan de Implementación
+
+# ALMA_RESIST – Diseño Arquitectónico y Plan de Implementación
+
+**ALMA_RESIST** es un entorno de trabajo autónomo, local, offline y portátil basado en IA. Combina las ideas de **ALMA_LIBRE** con una infraestructura física distribuida en tres nodos: una computadora madre (entorno fijo), un disco portátil de respaldo, y un pendrive/llave de arranque para modo móvil o infiltración. A continuación se presenta la propuesta técnica definitiva, detallando la arquitectura modular, los componentes clave, prioridades de desarrollo y recomendaciones futuras, con un enfoque crítico para simplificar sin perder potencia.
+
+## Arquitectura General del Sistema
+
+En el núcleo de ALMA_RESIST se integran un servidor local de lenguaje (LLM), una interfaz de terminal inteligente, un gestor de memoria conversacional y mecanismos de autonomía limitada. Todo está diseñado para operar sin conexión a internet y con **portabilidad absoluta**, permitiendo ejecutar el sistema desde cualquier PC sin dejar huellas en el equipo anfitrión[es.wikipedia.org](https://es.wikipedia.org/wiki/Tails_\(sistema_operativo\)#:~:text=dise%C3%B1ada%20para%20preservar%20la%20privacidad,menos%20que%20se%20indique%20expl%C3%ADcitamente). La arquitectura se distribuye entre los tres nodos físicos, pero mantiene una lógica unificada:
+
+- **Computadora Madre (ALMA_CORE):** Entorno fijo principal, con el sistema operativo anfitrión (Linux) y opcionalmente GPU para acelerar el LLM. Aquí puede residir una copia completa de ALMA_RESIST para uso cotidiano.
+    
+- **Disco Portátil:** Contiene el entorno ALMA_RESIST completo (sistema operativo, modelos, datos y herramientas) de forma **autónoma y cifrada**. Sirve tanto de respaldo como de entorno ejecutable al conectarlo en otros equipos.
+    
+- **Pendrive de Arranque:** Unidad booteable con un Linux ligero (p. ej. Tails o Parrot OS) configurado para cargar el entorno del disco portátil. Permite modo “infiltración”, arrancando una sesión ALMA_RESIST en cualquier PC sin tocar el disco local del anfitrión[es.wikipedia.org](https://es.wikipedia.org/wiki/Tails_\(sistema_operativo\)#:~:text=dise%C3%B1ada%20para%20preservar%20la%20privacidad,menos%20que%20se%20indique%20expl%C3%ADcitamente). Alternativamente, el pendrive por sí solo incluye una versión mínima del entorno (con modelos ligeros) para emergencias, garantizando que **cada nodo pueda funcionar por sí mismo**.
+    
+
+Esta separación garantiza **modularidad total**: se puede iniciar ALMA_RESIST en contexto fijo (PC madre) o móvil (pendrive + disco o solo pendrive), siempre utilizando los mismos datos y configuraciones centralizadas.
+
+## Componentes Principales de ALMA_RESIST
+
+### 1. Servidor LLM Local (ALMA_SERVER_LLM)
+
+Este componente es el corazón de la IA del sistema: un servidor local que hospeda modelos de lenguaje grandes para generar respuestas y asistir al usuario. Sus características técnicas son:
+
+- **Motor de inferencia:** Inicialmente se propone usar `text-generation-webui` (Oobabooga) como backend para ejecutar modelos en local. Este proporciona una API local a la cual conectarse desde la CLI. A futuro, para entornos más livianos o sin GPU, se podrá migrar a librerías en C++ como `llama.cpp` (o su variante `koboldcpp`) que permiten correr modelos en CPU de forma eficiente[github.com](https://github.com/ggml-org/llama.cpp#:~:text=ggml,locally%20and%20in%20the). La idea es soportar ambos motores de forma intercambiable, manteniendo la compatibilidad.
+    
+- **Modelos soportados:** El formato estándar será GGUF/GGML (cuantizado) para facilitar correr en hardware limitado. Se iniciará con **Mistral-7B-Instruct**, un modelo 7B relativamente compacto pero competente, y se prepara el terreno para un modelo personalizado llamado **DeepSeek-7B-Instruct** en el futuro. Este último podría ser un modelo fine-tune entrenado con datos del usuario para mejor rendimiento contextual.
+    
+- **Ejecución automática:** El servidor LLM debe arrancar junto con el sistema de forma autónoma. Para ello se emplearán scripts de inicio (`start_llm_server.sh`) y configuraciones de autoarranque del entorno (por ejemplo archivos `.desktop` en `~/.config/autostart` o un servicio `systemd`). Al encender la computadora madre o arrancar desde el pendrive, el servicio LLM inicia en segundo plano sin necesidad de intervención ni interfaz gráfica.
+    
+- **Interfaz de comunicación:** El servidor expone una API REST local (provista por text-generation-webui o equivalente) para recibir consultas y devolver respuestas generadas. Esto lo hace **reemplazable**: en el futuro podría cambiarse el motor o el modelo sin que las capas superiores (CLI, etc.) se vean afectadas, siempre y cuando se mantenga el mismo protocolo de comunicación.
+    
+
+> _Decisión crítica:_ Evaluar la necesidad real de `text-generation-webui` (que incluye una interfaz web Gradio) vs. una solución más ligera. Dado que el uso primario será vía terminal y scripts, podría simplificarse empleando directamente `llama.cpp` con una pequeña API Flask o simplemente llamadas CLI. Sin embargo, en primera instancia se mantiene Oobabooga por rapidez de implementación, migrando a alternativas más simples una vez que todo funcione. Lo importante es aislar la lógica de inferencia tras una interfaz estable (por ejemplo, un cliente HTTP local) para poder iterar en el motor sin reescribir el resto del sistema.
+
+### Decisión Crítica: Abstracción del Motor de Inferencia
+
+Para garantizar la independencia funcional del sistema `alma_resist` respecto al motor de lenguaje utilizado, se define la implementación de una interfaz estándar local de inferencia (API o CLI) que permita el reemplazo modular de herramientas como `text-generation-webui` por alternativas más ligeras como `llama.cpp`, sin afectar el resto de los módulos del sistema.
+
+
+### 2. Terminal CLI Inteligente (Cliente)
+
+La interacción primaria del usuario con ALMA_RESIST será a través de una **interfaz de línea de comandos (CLI)** enriquecida con IA. Este componente actúa como cliente del servidor LLM y como orquestador de las sesiones:
+
+- **Interfaz de usuario:** Un script (ej. `start_llm_chat.sh`) escrito en Python que corre en la terminal. El usuario ingresa preguntas o comandos en lenguaje natural; el script las envía mediante POST a la API local del Servidor LLM y muestra la respuesta en consola de forma formateada. Esto permite operar totalmente en modo texto (ideal para entornos sin GUI o acceso SSH).
+    
+- **Memoria de sesión:** El cliente CLI administra un contexto de conversación. Puede enviar no solo la última pregunta sino también un **resumen o historial** de lo previo, para mantener coherencia en las respuestas (ventana de contexto limitada por el modelo). Opcionalmente, se implementarán comandos especiales en la CLI para manejar el contexto (por ejemplo, resetear, resumir, cargar memoria relevante, etc.).
+    
+- **Registro de logs:** Cada interacción en la CLI se almacena en registros detallados. Por defecto, el cliente crea/actualiza un archivo de log en `ALMA_SERVER_LLM/logs/chat_log.md` (o subdividido por sesión/fecha) con formato Markdown. En estos logs se guarda la fecha, las entradas del usuario, las respuestas del LLM y meta-información relevante (tokens usados, tiempo de respuesta, etc.). Estos registros sirven luego para análisis y también como **memoria permanente** de lo conversado.
+    
+- **Comandos inteligentes:** Más allá de simplemente relanzar preguntas al LLM, la CLI podría ofrecer comandos utilitarios. Por ejemplo: `!resumir` para pedir al LLM un resumen de la conversación hasta ahora, `!buscar <texto>` para consultar en la base de memorias (via ALMA_LOADER), o `!ejecutar <orden>` para acciones específicas. Estos comandos serían interpretados por la CLI y traducidos a las llamadas apropiadas (al LLM o a otros módulos), dando al usuario un control más fino del entorno.
+    
+
+Integrar la CLI como parte del módulo LLM hace que **el nodo sea autónomo**: incluso sin el resto de componentes, un usuario con solo el Servidor LLM y la CLI podría tener conversaciones con la IA. Además, la CLI es el punto ideal para integrar futuras mejoras de UI (por ejemplo, una interfaz web ligera o TUI - Text-based UI) si se desea, sin cambiar la lógica subyacente.
+
+### 3. ALMA_LOADER – Gestor de Memoria y Aprendizaje
+
+ALMA_LOADER es el subsistema encargado de **gestionar la memoria de conversaciones y conocimientos** que el usuario y la IA generan día a día. Toma las entradas de los logs de la CLI y otras fuentes (notas del usuario, diarios, etc.), las estructura en formatos utilizables, y permite su posterior aprovechamiento. En esencia, funciona como la "memoria a largo plazo" de ALMA_RESIST:
+
+- **Procesamiento de entradas (ETL):** Cada vez que hay nuevas interacciones (por ejemplo al final de una sesión, o diariamente), ALMA_LOADER extrae esas entradas de lenguaje natural desde los logs y las transforma a un objeto estructurado (por ejemplo JSON o YAML). Por medio de _prompts_ especializados o reglas programadas, identifica metadatos clave: fechas, temas, etiquetas/categorías, tono emocional, acciones mencionadas, etc.. Por ejemplo, del mensaje "_Hoy operé con 5% de riesgo tras dormir 4 horas..._" ALMA_LOADER podría extraer tags `#fatiga`, `#riesgo_elevado`, `#emocion:impulsividad` automáticamente según las reglas definidas.
+    
+- **Validación y normalización:** Los datos estructurados pasan por esquemas de validación (ej. `schema_base.json`) para asegurar consistencia. Esto impone un formato estándar para todos los "recuerdos" almacenados (campos como fecha, tipo de entrada, etiquetas, contenido resumido, referencia al origen en el log, etc.). Cualquier dato fuera de esquema puede descartarse o marcarse para revisión, manteniendo la **calidad de la base de conocimiento**.
+    
+- **Almacenamiento modular:** ALMA_LOADER almacena las memorias procesadas en una **base de datos local**. Inicialmente puede ser un simple archivo SQLite (texto estructurado y metadatos) complementado con un índice vectorial FAISS para embeddings. El contenido textual importante (p. ej. resúmenes de cada conversación o entrada de diario) puede transformarse en embeddings numéricos mediante un modelo pequeño de embeddings local, y esos vectores se indexan para habilitar búsquedas semánticas rápidas. La arquitectura contempla poder cambiar el backend de almacenamiento en el futuro (por ejemplo, migrar a ChromaDB, Weaviate offline, o incluso archivos markdown simples) sin afectar al resto, gracias a una capa de abstracción. **Escalabilidad:** SQLite soporta cientos de miles de registros fácilmente en local, y FAISS permite manejar grandes volúmenes de vectores, de modo que el sistema podrá crecer en cantidad de memorias sin degradación notable.
+    
+- **Recuperación y suministro de contexto:** ALMA_LOADER expone interfaces para **consultar la memoria**. Por ejemplo, la CLI puede solicitar: "dame los puntos clave de conversaciones previas sobre X tema" o automáticamente adjuntar a cada pregunta del usuario algún contexto relevante. ALMA_LOADER entonces buscará en su base de datos conversaciones pasadas o notas relacionadas (mediante keywords o búsqueda semántica) y devolverá un resumen o listado de información útil. Esta información puede integrarse al prompt del LLM (implementando un **RAG** simple – Retrieval Augmented Generation), de forma que la IA tenga “recuerdos” de lo ocurrido previamente sin sobrecargar todo el histórico en cada llamada.
+    
+- **Aprendizaje continuo:** Con el tiempo, ALMA_LOADER puede alimentar procesos de fine-tuning o ajuste del modelo (de forma offline). Por ejemplo, acumulando suficientes datos, se podría re-entrenar (offline) un modelo como Mistral para acercarlo al estilo y dominio del usuario (**DeepSeek** sería posiblemente este modelo ajustado). Si bien esto es un objetivo a mediano plazo (ya que fine-tuning completo en hardware limitado es complejo), sí es factible aplicar técnicas más ligeras como **LoRA** o sesiones de entrenamiento incremental en pequeñas dosis, siempre respetando la capacidad de cómputo disponible.
+    
+
+En resumen, ALMA_LOADER actúa como memoria externa y _bitácora cognitiva_ del sistema, transformando el caos de datos diarios en conocimiento estructurado. Lo clave es mantenerlo **modular y opcional**: si por alguna razón ALMA_LOADER no está activo, el resto del sistema sigue funcionando (solo que sin memoria histórica avanzada). Esto sigue el principio de que cada módulo pueda _ejecutarse por sí mismo_.
+
+### 4. Módulo de Autonomía Limitada
+
+Uno de los objetivos distintivos de ALMA_RESIST es lograr cierta **autonomía proactiva**: el sistema no solo responde al usuario, sino que puede sugerir mejoras, reorganizar información y optimizar flujos de trabajo de forma automática. Sin embargo, esto se hará con precaución y límites claros para no comprometer la integridad ni la intención del usuario. Las características de este módulo son:
+
+- **Monitor de eventos y patrones:** Un proceso (posiblemente implementado como parte de ALMA_LOADER o un demonio separado) revisa periódicamente la actividad registrada. Por ejemplo, al final del día, podría activarse un análisis automático de los logs y nuevas memorias creadas. Usando reglas predefinidas o incluso el propio LLM en modo análisis, identificará _patrones_ o _alertas_: tareas prometidas no realizadas, errores repetitivos, sentimientos negativos crecientes, ineficiencias en el flujo de trabajo, etc. Esto se inspira en funciones de “coach” personal o de mantenimiento de sistemas.
+    
+- **Sugerencias y acciones propuestas:** Cuando el monitor detecta algo relevante, el sistema genera sugerencias. Por ejemplo: reorganizar archivos de proyecto si detecta muchos documentos sueltos en la carpeta, recomendar tomar descansos si nota jornadas muy largas en los logs, proponer un ajuste en la configuración de un script que falló repetidamente, etc. Estas sugerencias se presentan al usuario en forma de notificaciones o mensajes (posiblemente cuando el usuario inicia la siguiente sesión en la CLI, aparezca un resumen de sugerencias pendientes). **Importante:** Por defecto, **no se ejecutará ninguna acción irreversible sin aprobación**. La autonomía estará limitada a proponer, o a lo sumo, ejecutar acciones en áreas de bajo riesgo.
+    
+- **Áreas de solo lectura protegidas:** Se define claramente qué partes del sistema son **intocables** por la AI de forma autónoma. Por ejemplo, la carpeta `system/` que contiene archivos de arranque, configuración crítica o servicios, estará protegida. El módulo autónomo no puede modificar scripts de arranque, ni la configuración de modelos, a menos que el usuario explícitamente lo autorice. Estas protecciones pueden implementarse tanto por **política de software** (checks en el código para rechazar acciones fuera de ciertos directorios) como a nivel del OS (permisos de archivos, por ejemplo marcando ciertos directorios como propiedad de root o inmutables). Así se previene que una sugerencia mal calibrada corrompa el núcleo del sistema.
+    
+- **Ejecución controlada:** Para las acciones que el sistema sí esté autorizado a hacer automáticamente, se seguirá el principio de _reversibilidad_ y _log de auditoría_. Es decir, si el agente autónomo reestructura una carpeta de usuario, en los logs quedará registrado qué movió y por qué, y idealmente se podría deshacer fácilmente si el usuario lo desea. Adicionalmente, todas las modificaciones automáticas deberán ocurrir en el _espacio de usuario_ (`user/`, proyectos, datos personales). En ningún caso se tocará sistema operativo o configuraciones globales sin intervención humana.
+    
+- **Interfaz de configuración:** Dado que cada usuario puede tener distinto apetito de autonomía, habría un archivo de configuración (por ejemplo `system/autonomy.conf` o similar) donde se ajuste el nivel de proactividad. Desde modo completamente manual (el sistema solo actúa cuando se le indica) hasta un modo más autónomo (el sistema organiza ciertas cosas por sí mismo regularmente). Siempre con la capacidad de pausar o limitar ese comportamiento fácilmente.
+    
+
+En conjunto, este módulo pretende mejorar la **eficiencia y evolución** del entorno con el tiempo, pero manteniendo siempre al usuario en control final. Las sugerencias automatizadas se convierten así en una especie de "asistente proactivo" que _propone pero no dispone_.
+
+### 5. Sistema Operativo y Entorno de Ejecución
+
+Si bien no es un módulo de software independiente, vale la pena describir el **entorno base** donde corre ALMA_RESIST, dado que impacta directamente en sus capacidades de portabilidad y seguridad:
+
+- **Distribución Linux portable:** Se recomienda usar una distro Linux que facilite la ejecución desde USB y en modo persistente. Opciones posibles son **Tails OS** (enfoque en no dejar rastro y alta privacidad) o una distro ligera como **Parrot Security OS** en modo "live persistence". Tails tiene la ventaja de estar diseñado para _no escribir en el disco local_ y operar totalmente en RAM, lo cual alinea con el requisito de no dejar huellas[es.wikipedia.org](https://es.wikipedia.org/wiki/Tails_\(sistema_operativo\)#:~:text=dise%C3%B1ada%20para%20preservar%20la%20privacidad,menos%20que%20se%20indique%20expl%C3%ADcitamente). Sin embargo, Tails viene con muchas configuraciones de anonimato que podrían complicar el acceso a la GPU u otros recursos; Parrot en modo Live USB podría ser más flexible. En cualquier caso, el pendrive contendrá esta distro con persistencia cifrada habilitada, de modo que se puedan guardar en él configuraciones y quizás una parte del entorno ALMA_RESIST (si no se usa el disco aparte).
+    
+- **Montaje del disco de datos:** Al arrancar desde el pendrive, el sistema montará automáticamente el disco portátil (por ejemplo en `/mnt/ALMA_RESIST`). Ese disco contendrá la estructura de carpetas completa (como se describió en la pregunta). La idea es que **el disco portable sea el portador principal de los datos** (modelos, logs, memorias, etc.), mientras que el pendrive lleva el OS. De este modo, si el pendrive solo se usa sin el disco, aún se podría tener una versión limitada (quizás con un modelo más pequeño almacenado en el pendrive y subset de datos críticos sincronizados). Por su parte, en la computadora madre, el disco portátil puede actuar como unidad externa para acceder a los datos, o alternativamente sincronizar su contenido con una copia local en la PC fija.
+    
+- **Estructura de archivos unificada:** La jerarquía de directorios propuesta es la siguiente, válida tanto en el disco portátil como en la instalación fija (y replicada parcialmente en el pendrive si aplica):
+
+
+ALMA_RESIST/                 # Directorio raíz del sistema AI portátil
+├── ALMA_SERVER_LLM/         # Servidor de lenguaje (modelos, scripts de LLM, CLI)
+├── ALMA_LOADER/             # Módulo de memoria y entrenamiento
+├── system/                  # Archivos de sistema (arranque, configs globales, servicios)
+├── docs/                    # Documentación técnica, changelogs, whitepapers
+├── logs/                    # Registros de sesiones y análisis diarios
+└── user/                    # Espacio del usuario (herramientas personales, proyectos, datos)
+
+
+Cada subdirectorio es un **módulo autónomo**. Por ejemplo, `ALMA_SERVER_LLM` contendrá posiblemente su propio `config/`, `scripts/`, `models/` (si se guardan allí los pesos LLM), etc. Esto encapsula la funcionalidad de forma ordenada. La carpeta `user/` es donde el usuario puede crear subcarpetas para proyectos, almacenar scripts personales, datos brutos, etc., sin mezclar con los componentes del sistema. La carpeta `docs/` almacena todos los documentos de especificación, planes, versiones (manteniendo la práctica de documentación de ALMA_LIBRE pero de forma más sintética y organizada).
+
+- **Seguridad y cifrado:** Dado el carácter nómada/offline, es crucial proteger los datos en caso de pérdida o acceso físico no autorizado. Se recomienda cifrar completamente el disco portátil (LUKS encryption, por ejemplo) y también la partición persistente del pendrive. Así, si ALMA_RESIST es robado o extraviado, la información sensible (logs, memorias, modelos propietarios) no será legible. Adicionalmente, aplicar buenas prácticas de seguridad en el OS: usuario estándar sin permisos de root para ejecutar ALMA_RESIST (de modo que si alguien ejecuta código malicioso en la sesión AI, no comprometa el sistema anfitrión), firewall estricto que impida conexiones salientes inesperadas (aunque el sistema es offline, podría haber conexiones locales; se aseguran de no exponer el API del LLM más allá de lo necesario).
+    
+- **Rastros en máquinas anfitrionas:** Al usar el pendrive/disco en PCs ajenas, además de no tocar el disco local, debemos cuidar la **limpieza post-sesión**. Esto implica que al apagar, se borre de la RAM cualquier resto (Tails lo hace automáticamente al ser amnésico). Si se usa otra distro, se puede incluir un script de _cleanup_ que al desmontar el entorno limpie caches, historiales de shell, etc. El objetivo es que ninguna credencial o dato quede en la máquina anfitriona una vez retirado el dispositivo.
+    
+
+Con este entorno base asegurado, ALMA_RESIST podrá verdaderamente **“correr desde cualquier PC sin dejar rastro”**, cumpliendo su promesa de portabilidad absoluta.
+
+## Flujo de Datos y Comunicación entre Componentes
+
+A continuación se describe de forma resumida cómo interactúan los componentes entre sí durante el uso típico de ALMA_RESIST:
+
+1. **Inicio del sistema:** Al encender la computadora (o bootear desde USB), el _script de arranque_ carga el Servidor LLM local automáticamente. En pocos segundos, el modelo de lenguaje queda escuchando en un puerto local (ej. `http://localhost:5000`). Simultáneamente, puede iniciarse la terminal CLI en auto-login o el usuario puede abrirla manualmente.
+    
+2. **Interacción usuario-IA:** El usuario ingresa una pregunta o comando en la CLI inteligente. El cliente CLI envía la consulta, junto con un contexto inicial (por ejemplo instrucciones del sistema o resumen de la sesión actual) al Servidor LLM mediante la API REST. El Servidor LLM procesa la entrada con el modelo (Mistral u otro) y genera una respuesta en lenguaje natural, que devuelve al cliente.
+    
+3. **Presentación de la respuesta:** La CLI imprime la respuesta de la IA en la terminal para el usuario. Puede aplicar formato (markdown, colores) según el contenido. En este punto, el usuario puede seguir la conversación haciendo nuevas preguntas (volviendo al paso 2) o usar comandos especiales de la CLI.
+    
+4. **Logging y memoria:** Cada turno de la conversación se añade al log en `logs/` (ej. `logs/2025-05-16.md` con todas las interacciones de ese día). Eventualmente, o en segundo plano, ALMA_LOADER detecta que el log ha crecido o que la sesión terminó, y extrae las nuevas entradas para procesarlas. Convierte las interacciones en memorias estructuradas (con tags, resúmenes) y las inserta en la base de datos de conocimiento.
+    
+5. **Consulta de memoria (RAG):** Si el usuario formula preguntas sobre temas ya discutidos previamente ("¿Qué conclusiones saqué la última vez sobre X?"), la CLI puede invocar a ALMA_LOADER para buscar en la base de memorias pertinentes a "X". ALMA_LOADER recupera, por ejemplo, dos fragmentos relevantes y los devuelve al cliente, que a su vez los incluye en la próxima query al LLM (p. ej. pre-pendiendo un resumen de _Notas previas:_ antes de la pregunta). El LLM así responde con contexto ampliado, citando o recordando efectivamente conocimiento pasado.
+    
+6. **Autonomía en acción:** Supongamos que en los registros de la última semana ALMA_LOADER detectó repetidas menciones de "_falta de organización en proyecto Y_". El módulo autónomo, al correr su tarea diaria de análisis, arma una sugerencia: _"He notado que el proyecto Y tiene archivos desordenados. ¿Deseas que los organice en subcarpetas por fecha y tipo?"_. Esta sugerencia queda almacenada en un lugar (posiblemente en un log de sugerencias o en la propia base de memoria marcada con una etiqueta especial). Cuando el usuario inicia sesión al día siguiente, la CLI le notifica de la sugerencia pendiente. El usuario puede entonces decidir aceptarla (`!aceptar sugerencia 1`) o rechazarla. Si se acepta, el módulo autónomo procede a ejecutar el script de reorganización correspondiente, moviendo archivos dentro de `user/proyectoY/` según la lógica definida. Todo ello quedará registrado en logs de acciones.
+    
+7. **Mantenimiento y actualización:** Eventualmente, el usuario puede actualizar componentes: por ejemplo, descargar un nuevo modelo (DeepSeek) y actualizar la config `ALMA_SERVER_LLM/config/llm_model.json` para que el servidor use el nuevo modelo, o actualizar las reglas de ALMA_LOADER (como un nuevo esquema de datos). Gracias a la modularidad, estos cambios no rompen el sistema: cada módulo sigue las convenciones establecidas. También se prevé que el sistema pueda **actualizarse a sí mismo** en cierta medida: por ejemplo, el módulo autónomo podría sugerir _"Hay una nueva versión de Mistral-7B disponible con mejoras, ¿deseas que la descargue?"_ si conectado a Internet en algún momento, aunque esto sería bajo control manual para mantener el entorno offline seguro.
+    
+
+Este flujo cubre desde la interacción básica hasta los casos de uso de memoria y autonomía. El **diagrama** siguiente ilustra estas interacciones de forma esquemática, mostrando cómo la CLI, el servidor LLM, la base de memorias (ALMA_LOADER) y el agente autónomo se relacionan:
+
+[es.wikipedia.org](https://es.wikipedia.org/wiki/Tails_\(sistema_operativo\)#:~:text=dise%C3%B1ada%20para%20preservar%20la%20privacidad,menos%20que%20se%20indique%20expl%C3%ADcitamente)
+
+_(En el diagrama: el Usuario se comunica con la Terminal CLI, que a su vez envía consultas al Servidor LLM local y devuelve respuestas. La CLI registra todo en los logs, que ALMA_LOADER extrae para almacenarlos en la base de datos de memoria. El agente autónomo analiza esa base y puede enviar sugerencias al usuario o ejecutar acciones limitadas en el sistema de archivos. Las flechas discontinuas indican flujo opcional de datos, como contexto relevante que ALMA_LOADER puede proporcionar al LLM, o sugerencias del agente autónomo al usuario.)_
+
+## Priorización de Implementación
+
+Para desarrollar ALMA_RESIST de forma efectiva, conviene abordarlo en fases, priorizando primero lo esencial y luego incorporando las capacidades avanzadas. A continuación se detalla un posible orden de implementación:
+
+1. **Configuración del Entorno Base:** Preparar el sistema operativo en el hardware disponible. Instalar una distribución Linux adecuada en la PC madre. Configurar el pendrive booteable con la distro elegida y habilitar la persistencia cifrada. Asegurar que el disco portátil es accesible y con el formato deseado (ext4 cifrado, por ejemplo). Esta etapa incluye estructurar las carpetas iniciales (`ALMA_RESIST/` con sus subdirs) en el disco y clonar esa estructura en la PC madre. Es fundamental dejar lista la base sobre la que se montarán los componentes.
+    
+2. **Servidor LLM Local mínimo:** Instalar las dependencias de `text-generation-webui`[steamcommunity.com](https://steamcommunity.com/sharedfiles/filedetails/?id=3021153145#:~:text=Guide%20%3A%3A%20How%20to%20use,Enable%20openai) o directamente preparar `llama.cpp`. Conseguir el modelo **Mistral-7B-Instruct** en formato compatible (GGUF cuantizado, 4-bit si es necesario para caber en RAM). Probar manualmente que se pueda cargar el modelo y generar texto offline. Luego desarrollar el script `start_llm_server.sh` para lanzar el servidor al inicio (en modo headless, sin interfaz gráfica). Validar que el servicio queda atendiendo por API. En esta fase, se puede usar un sencillo _curl_ para probar que dada una frase devuelve una respuesta coherente. Integrar también un mecanismo de logging básico en el servidor (por ejemplo, que imprima o guarde cuando se inicia, qué modelo carga, etc.).
+    
+3. **Cliente CLI básico:** Desarrollar la primera versión de la interfaz de terminal (`start_llm_chat.sh` o mejor un script Python para flexibilidad). En su forma más simple, debe leer línea por línea del stdin del usuario y enviar la pregunta al servidor LLM, luego mostrar la respuesta. Implementar el guardado de esa conversación en un archivo de log de texto. En este punto, ya se tendría un ciclo completo _Usuario -> CLI -> LLM -> CLI -> Usuario_ funcional. Priorizar aquí la **usabilidad**: que el texto se vea bien, quizá con colores; que se puedan enviar preguntas largas (manejo de multiline input si es útil); y que si el servidor tarda, la CLI informe que está “pensando” para no confundir al usuario.
+    
+4. **Documentación y Control de Versiones:** Antes de continuar añadiendo complejidad, aprovechar a documentar la instalación y versiones alcanzadas. Por ejemplo, redactar en `docs/README.md` los pasos para poner en marcha el sistema hasta este punto, anotar versiones de software (versión del modelo Mistral, commit del webui, etc.). Esto ayudará a depurar y a que cualquier reinstalación sea repetible. También configurar un repositorio (aunque sea local offline, o en GitHub si se puede abrir parte del código) para ir versionando los scripts y cambios. Un control de versiones es parte de la modularidad y facilita deshacer cambios si algo rompe el sistema.
+    
+5. **Integración de ALMA_LOADER (versión inicial):** Comenzar con una versión simplificada del gestor de memorias. Por ejemplo, un script que al final del día lee el log markdown y saca un resumen simple usando el propio LLM (metaprompt: "resume el día de hoy"). Guardar ese resumen en `logs/` o en `user/` como "analisis_diario_YYYY-MM-DD.md". Esta sería la funcionalidad mínima: _análisis diario_. Sobre esa base, iterar para estructurar más los datos: diseñar un esquema JSON para las entradas (fecha, resumen, tags), e implementar la transformación NL->JSON ya sea con reglas (buscar patrones con regex, etc.) o con el LLM mediante un prompt que devuelva JSON (controlando que cumpla el formato). Insertar los objetos en una base de datos SQLite. Esto se puede hacer incrementalmente: primero almacenar solo los resúmenes diarios en una tabla, luego añadir más campos. La prioridad es que el sistema empiece a **recordar** aunque sea de forma rudimentaria. Más adelante se conectará la búsqueda semántica; de momento, con poder filtrar por fecha o palabra clave en la BD sería suficiente.
+    
+6. **Funciones de Consulta de Memoria:** Una vez que hay datos en la base de memorias, implementar en la CLI comandos para consultarlos. Por ejemplo `!memoria hoy` podría mostrar el resumen del día actual (si ya existe) o invocar su generación en ese momento. `!buscar "temaX"` que internamente busque en SQLite entradas cuyo texto coincida o contenga "temaX". Más avanzado: integrar una librería de embeddings (ej. SentenceTransformers) para generar vectores de los resúmenes o entradas importantes, y usar FAISS para similitud. Esto habilitará el comando `!buscar_semantico "temaY"` que encuentra memorias relacionadas aunque no contengan literalmente las palabras. Esta fase cimenta la utilidad práctica de ALMA_LOADER: el usuario debe notar que puede preguntar cosas del pasado y obtener respuestas útiles, reforzando la experiencia de continuidad.
+    
+7. **Autonomía (fase inicial - monitoreo):** Introducir el módulo autónomo de forma pasiva primero. Por ejemplo, crear un script `auto_monitor.py` que corre una vez al día (se puede programar con cron o al terminar el día en la CLI) y que lee los nuevos datos de la memoria buscando ciertas condiciones. Al inicio, esto puede ser sencillo: no hace cambios, solo produce una lista de recomendaciones en texto. Podría apoyarse en el LLM para analizar: _"Revisa el resumen de la semana y sugiere una mejora."_ y formatear la respuesta como recomendación. Guardar estas sugerencias en un archivo (ej. `logs/sugerencias.md`) con marca temporal. Esto sienta la base para que el usuario las vea y dé feedback.
+    
+8. **Interfaz para Sugerencias:** Ampliar la CLI para que al iniciar o al ejecutar un comando especial, muestre las sugerencias generadas automáticamente. Por ejemplo, cada vez que se abre una nueva sesión de chat, la CLI podría chequear `logs/sugerencias.md` y si hay entradas nuevas desde la última vista, mostrarlas al usuario. Implementar comandos para manejarlas: `!listar sugerencias`, `!aceptar sugerencia <id>`, `!rechazar sugerencia <id>`. Aún, las acciones de las sugerencias pueden no estar automatizadas; si usuario acepta, quizá simplemente marcarla como aceptada y luego manualmente él mismo la ejecuta. Pero este es el paso previo a la automatización total.
+    
+9. **Autonomía (fase avanzada - acciones automáticas):** Una vez afinada la generación y utilidad de las sugerencias, se puede automatizar la ejecución de aquellas triviales y seguras. Por ejemplo, "ordenar archivos temporales" o "eliminar duplicados en la base de memoria" podrían hacerse automáticamente. Para esto, desarrollar funciones específicas en el agente autónomo y ligarlas a ciertos tipos de sugerencia. También incluir **protecciones** aquí: por ejemplo, si una sugerencia va a afectar más de N archivos, que siempre requiera aprobación manual, etc. Probar estas acciones en un entorno de prueba antes de usarlas con datos reales.
+    
+10. **Pulido, Optimización y DeepSeek:** Con todas las piezas funcionando, dedicar tiempo a refinar. Optimizar el consumo de recursos: por ejemplo, cargar el modelo LLM en 4-bit si no se hizo, tunear los parámetros de generación para equilibrio entre coherencia y rendimiento. Mejorar los prompts del sistema (instrucciones que se envían siempre al LLM para enmarcar su rol). Evaluar los límites: ¿cuántas entradas maneja ALMA_LOADER antes de volverse lento? ¿Se necesita archivar memorias antiguas? etc. Paralelamente, iniciar el entrenamiento o afinado del modelo **DeepSeek** con los datos recopilados (si se cuenta con los medios). Incluso si no se entrena un modelo completo, se puede simular a DeepSeek como un conjunto de prompts especializados dentro de Mistral que encaminen a cierto estilo. Documentar los resultados de rendimiento y, muy importante, hacer **pruebas de portabilidad**: conectar el disco y pendrive a distintos PCs (con diferentes especificaciones, incluso sin GPU) y verificar que ALMA_RESIST arranca y funciona correctamente en todos. Ajustar cosas como detección de GPU vs CPU (quizá tener dos configuraciones de modelo: uno de mayor tamaño para cuando hay GPU, y uno reducido para CPU puro).
+    
+
+Durante este proceso iterativo, es recomendable mantener una **lista de pendientes y mejoras** (por ejemplo en `docs/roadmap.md`) e ir priorizándolas según el valor que aporten. La implementación debe ser modular, de forma que en cada fase el sistema esté **usable** aunque le falten funciones. Esto garantiza que siempre se puede parar en una fase y aún tener un sistema funcional (ej: tras fase 5, ya hay chat + logs; tras fase 6, ya hay memoria consultable; etc.).
+
+## Estándares de Modularidad, Autonomía y Protección
+
+Desde el diseño, ALMA_RESIST adopta varios principios para asegurar su modularidad, un correcto grado de autonomía y la protección de su integridad:
+
+- **Modularidad Estricta:** Cada carpeta/módulo del sistema tiene una responsabilidad clara y mínimas dependencias con otros módulos. Esto se refuerza definiendo **interfaces bien documentadas**:
+    
+    - Por ejemplo, la CLI se comunica con el LLM vía HTTP (API estable) en lugar de invocar funciones internas del modelo. ALMA_LOADER interactúa con la CLI mediante archivos (logs) o llamadas definidas (APIs/CLI commands), no mediante acceso directo a estructuras de la CLI.
+        
+    - Si un módulo debe ser reemplazado o actualizado, mientras conserve la interfaz, el resto del sistema sigue funcionando. Un caso concreto: si mañana se decide que ALMA_LOADER use un servicio de base de datos distinto, se realiza internamente en ALMA_LOADER, pero hacia afuera sigue ofreciendo comandos `!buscar`, etc., con el mismo formato de respuesta.
+        
+    - Toda nueva funcionalidad debe encajar en uno de los módulos existentes o, de ser muy ajena, en uno nuevo bien separado. Se evita _mezclar_ lógica de distintos niveles. Esta separación por contratos facilita también las pruebas unitarias de cada componente.
+        
+- **Comunicación mediante formatos abiertos:** Para unir los módulos, se usan formatos sencillos y auditables: Markdown para logs legibles, JSON/YAML para datos estructurados, HTTP/REST para servicios locales. Esto no solo hace el sistema más transparente, sino que permite que en un futuro otros programas o incluso otras IA interactúen con ALMA_RESIST fácilmente usando esos mismos archivos o APIs. Por ejemplo, un script externo podría leer los `logs/*.md` o consultar la base SQLite sin necesitar conocer detalles internos.
+    
+- **Autonomía Controlada por Diseño:** Se establecen **políticas claras** de lo que la IA puede y no puede hacer automáticamente. Estas políticas se reflejan tanto en la implementación técnica como en convenciones:
+    
+    - Ciertas acciones (borrar archivos, enviar datos fuera, cambiar configuraciones) estarán explícitamente prohibidas o requerirán confirmación. Incluso se puede programar el LLM con instrucciones de sistema que le recuerden estas reglas cuando proponga algo.
+        
+    - Se implementa un sistema de _confirmaciones_ para acciones sensibles: el agente genera un plan (p. ej. "Mover archivos X a Y"), lo presenta al usuario y solo si recibe confirmación positiva, lo ejecuta. En ausencia de confirmación, la acción se descarta. Esto mantiene al usuario en el asiento del conductor.
+        
+    - La autonomía nunca debe interferir con las órdenes directas del usuario. Si el usuario está trabajando en algo, el agente no interrumpe a menos que sea crítico. Y siempre puede ser pausado o desactivado temporalmente mediante un comando (p. ej. `!autonomia off` para que no haga nada hasta nuevo aviso).
+        
+- **Protecciones a Nivel de Sistema:** Además de las protecciones lógicas, se añaden capas de seguridad en el OS:
+    
+    - Ejecutar los procesos de IA bajo un usuario con mínimos privilegios. Así, incluso si hubiera un desliz en la lógica y el LLM intentara hacer algo fuera de su ámbito, el sistema operativo lo prevendrá (por ejemplo, no tendrá permisos para escribir fuera de su carpeta designada).
+        
+    - Uso de sandboxing cuando sea posible. Por ejemplo, si se invocan scripts externos desde la IA, correrlos en un entorno controlado (Docker, Firejail, etc.) para limitar su impacto.
+        
+    - Auditoría: Mantener logs de auditoría en `logs/` no solo de las conversaciones sino de las acciones del sistema (qué ficheros fueron creados, modificados, por qué módulo y cuándo). Esto crea confianza, ya que el usuario puede revisar en cualquier momento qué ha hecho el sistema por sí solo.
+        
+    - **Backups y Recuperación:** Como medida de protección de datos, incorporar backups regulares. Dado que el disco portátil es el principal contenedor, se podría agendar una tarea (cuando esté conectado a la PC madre, por ejemplo) para volcar ciertos datos críticos a otra ubicación segura o a la nube cuando haya conexión (si la política offline lo permite). Alternativamente, permitir backups manuales fáciles (script para comprimir `logs/` y `user/` en un archivo cifrado externo). La modularidad ayuda a esto: por ejemplo, `logs/` y la base de ALMA_LOADER podrían respaldarse independientemente.
+        
+- **Simplicidad ante todo:** Un estándar transversal será optar por la solución más sencilla que cumpla la función. Muchas veces en ALMA_LIBRE se conceptualizaron múltiples sub-módulos (p.ej. _validador_duplicados_, _sync_bitacora_, _feedback_sugerencia_) que, si bien útiles, añadían complejidad. En ALMA_RESIST se plantea inicialmente **reducir la complejidad integrando funcionalidades** en menos componentes, siempre que no se vulnere la claridad modular. Por ejemplo, en lugar de tener un módulo separado para validar duplicados en memoria, esa función puede ser parte de ALMA_LOADER al insertar nuevos registros. Menos piezas separadas significa menos puntos de fallo y más mantenibilidad, siempre y cuando la modularidad lógica (separación en código) se respete dentro de un mismo componente.
+    
+
+Siguiendo estos estándares, ALMA_RESIST se mantiene **robusto pero flexible**: capaz de crecer y adaptarse, pero acotado por controles que evitan comportamientos indeseados.
+
+## Recomendaciones Futuras y Consideraciones Adicionales
+
+Para asegurar que ALMA_RESIST siga siendo relevante y poderoso en el tiempo, se proponen algunas recomendaciones y caminos a futuro:
+
+- **Actualización de Motores y Modelos:** Mantenerse atento a los avances en modelos open-source. Por ejemplo, si aparece un Mistral 7B v0.2 con mejoras, evaluar su inclusión; o si modelos de 13B se vuelven viables en hardware portátil, considerar su uso para obtener respuestas más sólidas. El diseño actual permite cambiar el modelo en la configuración fácilmente, por lo que probar nuevos lanzamientos es relativamente fácil. Igualmente, monitorear proyectos como OpenAI Whisper (para transcripción de voz, si se desea añadir entrada de voz) u otros modelos especializados (vision, etc.) dado que la modularidad permitiría agregar un módulo de visión por computadora en un futuro (ej: reconocer texto en imágenes offline) sin rediseñar lo existente.
+    
+- **DeepSeek Fine-tuning:** Plantear una estrategia para materializar **DeepSeek-7B** u otro modelo personalizado. Esto podría hacerse reuniendo las memorias almacenadas (que representan conocimiento y estilo del usuario) y realizando un fine-tune del modelo base. Dado que el fine-tune completo puede ser inviable localmente, alternativas incluyen:
+    
+    - Entrenamiento incremental por lotes pequeños (online learning) con frameworks ligeros.
+        
+    - Ajuste por **LoRA** o **QLoRA** que reduce requerimientos[medium.com](https://medium.com/@fradin.antoine17/3-ways-to-set-up-llama-2-locally-on-cpu-part-1-5168d50795ac#:~:text=3,custom%20quantization%20approach%20to).
+        
+    - O bien, enviar los datos (con cuidado de privacidad) a un servidor potente temporalmente para entrenar y luego traer el modelo resultante a local. En todo caso, una vez obtenido, integrarlo como modelo por defecto. Esto haría las respuestas de la IA mucho más adaptadas al usuario, cumpliendo la visión de un _asistente personalizado_.
+        
+- **Optimización de Recursos:** Continuar optimizando el rendimiento. Por ejemplo, si se usa text-generation-webui, investigar modos de ejecución sin Gradio (headless) para ahorrar RAM. Con `llama.cpp`, compilar con instrucciones específicas de CPU (AVX2, FMA, etc.) para sacar el máximo provecho del hardware[github.com](https://github.com/ggml-org/llama.cpp#:~:text=ggml,locally%20and%20in%20the). Evaluar usar **paginar memoria** en disco para modelos más grandes (aunque lento, podría permitir cargar modelos superiores a la RAM disponible). También, si en el futuro se dispone de varios dispositivos (ej. un SoC ARM para llevar de viaje), compilar versiones específicas para cada arquitectura.
+    
+- **Formato de Datos y Compatibilidad:** Estandarizar los formatos usados de modo que puedan interoperar con otras herramientas. Por ejemplo, usar un esquema JSON para memorias que sea fácilmente convertible a formatos populares (CSV, etc.) permite que, si el usuario quiere visualizar sus datos en otra aplicación, lo haga sin esfuerzo. Otra idea es exponer ciertas partes de ALMA_RESIST como _APIs locales REST_ que otras aplicaciones puedan consultar. Por ejemplo, una app móvil (conectada vía WiFi al portátil) podría hacer peticiones al servidor LLM o a ALMA_LOADER para mostrar recordatorios. Esto abre la puerta a un ecosistema de utilidades alrededor de ALMA_RESIST sin comprometer su filosofía offline (serían conexiones locales).
+    
+- **Seguridad Adicional:** Revisar periódicamente la seguridad del sistema. Si bien está offline, un ataque podría ocurrir si alguien accede físicamente al dispositivo o si se introduce software malicioso vía pendrive. Algunas ideas:
+    
+    - Usar 2FA o contraseña maestra al iniciar sesiones sensibles (por ejemplo, para montar el disco cifrado ya habrá que poner una clave).
+        
+    - Rotar claves de cifrado si sospecha de compromisos.
+        
+    - Mantener el OS y software actualizado en la medida de lo posible offline (se pueden descargar updates en otra máquina y luego aplicarlos).
+        
+    - Implementar un _timeout_ de sesión: si el usuario deja el sistema desatendido, bloquear la terminal con contraseña.
+        
+- **Experiencia de Usuario y GUI ligera:** Aunque inicialmente la interfaz es CLI, en el futuro se puede considerar añadir una capa visual minimalista. Por ejemplo, un panel web (accesible en `localhost` sin internet) donde se muestren las sugerencias, gráficas de actividad, o un editor para las memorias. Dado que los datos están en Markdown/JSON, una web o aplicación podría presentarlos de manera amigable. Incluso la integración con Obsidian u otras herramientas de toma de notas podría explorarse, exportando las memorias a esos sistemas.
+    
+- **Uso de Voz y Otros Canales:** Para un enfoque futurista, se puede habilitar entrada y salida de voz totalmente offline. Por ejemplo, usando un motor TTS (text-to-speech) local para leer las respuestas (Festival, eSpeak NG, etc.), o usando Whisper o Coqui-STT para reconocer voz del usuario y convertirla en texto para la CLI. Un "ALMA_RESIST móvil" podría así funcionar casi como un asistente tipo Jarvis pero sin internet. Esto requerirá hardware un poco más potente dependiendo del motor de voz, pero es factible modularmente (sería un módulo adicional de interfaz).
+    
+- **Feedback y Mejora Continua:** Implementar mecanismos para que el sistema se auto-mejore con el usuario. Un ejemplo: después de ejecutar una sugerencia autónoma, el sistema podría pedir feedback: "_¿Esto fue útil? (sí/no)_". Con el tiempo, ese feedback entrena al módulo autónomo para priorizar las sugerencias que el usuario tiende a aceptar y desechar las que siempre rechaza. De manera similar, el usuario podría calificar respuestas del LLM, y si se integra un clasificador de calidad, ajustar la forma en que se genera (por ejemplo cambiando parámetros o prompts del sistema).
+    
+- **Simplificación y Refactoring Periódico:** Ser crítico a intervalos regulares. Cada cierto número de versiones, revisar qué partes del sistema se volvieron demasiado complejas o no aportan valor y simplificarlas. Por ejemplo, si cierta función de ALMA_LOADER no se utiliza, considerar quitarla o fusionarla con otra. La **deuda técnica** hay que pagarla continuamente para que ALMA_RESIST se mantenga limpio y fácil de mantener a largo plazo.
+    
+
+En conclusión, ALMA_RESIST se plantea como un sistema integrador potente pero **manejable**, sustentado en la idea de modularidad y autonomía vigilada. La recomendación general es avanzar iterativamente, probando cada nueva capacidad en escenarios reales (sin internet, en distintas PCs, con diferentes cargas de trabajo) y ajustando en base a eso. Con este plan, ALMA_RESIST estará preparado para funcionar en entornos offline, nómadas y de hardware limitado, sirviendo de asistente inteligente y confiable al usuario en cualquier circunstancia.
+
+
+
+✏️ *Agrega aclaraciones, decisiones personales o ajustes al sistema en tu entorno Obsidian. Este archivo es el punto de partida para la documentación viva de ALMA_RESIST.*
+
+
+
+
+## 🗂️ Arquitectura General del Sistema
+
+### Arquitectura Física
+
+- **Nodos principales:**
+  - **PC madre (ALMA_CORE)**: nodo principal y estación de trabajo fija.
+  - **Disco ALMA_RESIST**: entorno operativo completo, cifrado y ejecutable.
+  - **Pendrive ALMA_KEY**: modo booteable para arrancar cualquier PC, con versión ligera del sistema.
+
+### Arquitectura Lógica
+
+- Comunicación mediante rutas locales, APIs REST, y archivos estructurados.
+- Diagrama sugerido: arquitectura Mermaid.js (pendiente integración).
+- Justificación: uso de Parrot OS por flexibilidad (soporte GPU, herramientas), dejando Tails como opción opcional para anonimato extremo.
+
+
+## 🛠️ Entorno Operativo
+
+- **OS:** Parrot OS persistente, encriptado con LUKS (AES-256).
+- **Clave maestra:** almacenada offline en archivo cifrado GPG manual.
+- **Permisos:** usuario `alma`, sin permisos sudo. Carpetas `system/` protegidas por `chattr +i` o AppArmor.
+
+
+## 🚦 Priorización de Implementación
+
+| Fase | Tarea | Tiempo estimado | Riesgos | Mitigación |
+|------|-------|------------------|---------|-------------|
+| 1 | Montar entorno operativo base | 1 semana | Incompatibilidad hardware | Testear en múltiples PCs |
+| 2 | Servidor LLM básico | 2 semanas | Modelos muy pesados | Usar GGUF 4-bit |
+| 3 | CLI funcional | 1 semana | Fallas de conexión | Manejo de errores robusto |
+| 4 | Memoria básica | 1 semana | Logs corruptos | Validación y backups |
+| 5 | Autonomía inicial | 1 semana | Acción no deseada | Requiere confirmación |
+
+
+## 🔮 Recomendaciones Futuras
+
+- Priorizar:
+  1. DeepSeek LoRA fine-tune
+  2. UI visual ligera
+  3. Integración con Obsidian (`user/` como vault)
+- Verificar licencias (MIT, Apache 2.0).
+- Planificar pruebas en hardware limitado (ej: 4 núcleos, 8GB RAM).
+- Crear glosario en `docs/glossary.md`
+
+
+# ALMA_RESIST_idea_base_0.0.3.md
+
+
+# ALMA_RESIST – Idea Base v0.0.3
+
+## 🧠 Resumen Ejecutivo
+
+**ALMA_RESIST** es un entorno operativo inteligente, portátil y autónomo, diseñado para funcionar offline desde múltiples nodos (PC madre, disco portátil y pendrive de arranque). Integra un servidor LLM local modular, un cliente de terminal IA, un sistema de memoria estructurada (ALMA_LOADER), y mecanismos de autonomía limitada. Esta versión incorpora mejoras clave en seguridad, documentación, recuperación de claves, pruebas de rendimiento y accesibilidad general.
+
+
+## ⚙️ Componentes y Mejoras Clave
+
+### 🔥 Servidor LLM (ALMA_SERVER_LLM)
+
+- Motores soportados: `text-generation-webui`, `llama.cpp`, `llama-cpp-python`, `vLLM`
+- Script modular `launch_llm.sh` que lee `llm_model.json` y lanza el backend apropiado
+- Pruebas de rendimiento: incluir benchmarks con prompts largos y uso en CPU/GPU mixtas
+
+### 💬 CLI Inteligente
+
+- Manejo de errores robusto (timeouts, caídas del servidor)
+- `Modo seguro`: caché local de respuestas frecuentes si el LLM no responde
+- `logs/errors.md` y fallback automáticos
+- Monitor de recursos integrado: RAM, CPU, disco (CLI dashboard en `!estado`)
+
+### 🧠 ALMA_LOADER
+
+- ETL con prompt JSON predefinido
+- `backup_memoria.sh` + `restore_backup.sh` con SHA-256 de integridad
+- Copias en `backups/` y logs de auditoría estructurados
+- Sincronización opcional con vault de Obsidian usando symlinks
+
+### 🛰️ Autonomía Controlada
+
+- Permisos reforzados (`chattr +i` en `system/`, AppArmor)
+- Carpeta `logs/autonomia_audit.md` para rastreo
+- Clasificación de riesgo por acción:
+    - **Bajo riesgo:** ordenar archivos
+    - **Medio riesgo:** mover carpetas
+    - **Alto riesgo (prohibido):** eliminar datos o modificar scripts críticos
+
+
+## 📚 Documentación Modular
+
+- `docs/idea_base/` → idea_base_x.x.x.md
+- `docs/modules/` → `llm.md`, `cli.md`, `loader.md`, `autonomia.md`
+- `docs/user_guide.md` → comandos básicos y solución de errores
+- `LICENSE.md` → compatibilidad revisada (Apache 2.0, MIT, etc.)
+- `docs/glossary.md` → RAG, GGUF, LoRA, etc.
+
+
+# 📋 Changelog v0.0.3 (Respecto a v0.0.2)
+
+### 🔧 Nuevas funcionalidades:
+- Diagrama Mermaid.js para arquitectura física
+- Script `launch_llm.sh` multi-backend
+- Integración con Obsidian via symlinks
+- Protocolo de recuperación de clave (Shamir)
+- Comando CLI `!estado` para monitoreo del sistema
+
+### ✅ Mejoras de seguridad:
+- Encriptado de logs con GPG
+- Carpetas protegidas por `chattr +i`
+- Clasificación de riesgo por acción autónoma
+
+### 📚 Documentación:
+- `user_guide.md` para no técnicos
+- `glossary.md` de términos IA
+- Compatibilidad de licencias documentada
+
+
+
+## 🔍 Ajustes Críticos Integrados
+
+### 📁 Carpeta ALMA_LIBRE
+
+Para alimentar al sistema IA y permitir generación automática de roadmap y mejoras:
+
+- **Scripts base:** `launch_llm.sh`, `backup_memoria.sh`, `restore_backup.sh`, `setup_wizard.py`
+- **Config JSONs:** `llm_model.json`, `autonomy_policy.json`, `schema_memoria.json`
+- **Documentación:** `docs/`, `developer_manual.md`, `pruebas/test_matrix.md`
+- **Recursos externos:** Enlaces a modelos, licencias, dependencias, links oficiales.
+
+
+## 🧪 Plan de Pruebas
+
+- **Matriz de pruebas** documentada: unidad, integración, rendimiento, stress test
+- **Script `test_inferencia.py`**: ejecuta pruebas de inferencia y mide tokens/s, latencia
+- **Hardware cross-test:** validación en:
+  - Ryzen 5 3400G (sin GPU)
+  - i5 + RTX 3060
+  - Intel Celeron 4GB (entorno mínimo)
+
+
+## 👥 Usabilidad Avanzada
+
+- **setup_wizard.py:** script interactivo que guía instalación y configuración inicial (soporte de modelos, modo GPU/CPU, permisos, clave GPG)
+- **Perfiles de usuario:** selección de prompt base + reglas en `config/perfil_X.json`
+
+
+## 🚀 Despliegue Automatizado
+
+- **Script `deploy.sh`**:
+  - Detecta distro Linux
+  - Instala dependencias
+  - Clona estructura de carpetas
+  - Configura entorno virtual
+
+- **Dockerfile + AppImage:**
+  - Entorno ALMA_RESIST portable
+  - Uso en modo "read-only" para entornos hostiles
+
+
+## 🖥️ Interfaz Visual Opcional
+
+- **CLI Dashboard (`!estado`)** con RAM/CPU/disk
+- **Web Panel (FastAPI + Jinja2):**
+  - Visualización de logs y sugerencias
+  - Acceso solo local (`127.0.0.1`)
+  - Opcional según permisos
+
+- **TUI (Textual):**
+  - Interfaz gráfica en terminal para usuarios intermedios
+
+
+# 📋 Changelog v0.0.4 (Respecto a v0.0.3)
+
+### 📦 Estructura:
+- Se añadió carpeta `ALMA_LIBRE/` como núcleo de IA
+- Integración modularizada de configuración y documentación
+
+### 🔧 Técnicos:
+- Requisitos hardware mínimos documentados
+- Versiones específicas de dependencias
+- `test_inferencia.py` + matriz de pruebas
+
+### 🧪 Pruebas y mantenimiento:
+- Estrategia de versiones y parches
+- Plan de mantenimiento mensual
+
+### 👥 Usabilidad:
+- `setup_wizard.py` inicial
+- Perfiles de usuario por JSON
+
+### 🌐 Integraciones:
+- API REST local con FastAPI
+- Plugin bidireccional para Obsidian
+- Dockerfile/AppImage funcional
+
+### 🧑‍💻 Comunidad:
+- Guía de contribuciones (`CONTRIBUTING.md`)
+- Sistema de badges y etiquetas de participación
+
+
+
+
+## 🔗 División Estratégica del Proyecto
+
+### 📘 1. Whitepaper Conciso
+
+**Objetivo:** Comunicar la visión, ética y potencial del proyecto a cualquier lector.
+
+**Contenido:**
+- Filosofía del proyecto (offline-first, autonomía controlada, privacidad radical)
+- Casos de uso realistas (periodismo, investigación en campo, sistemas air-gapped)
+- Diagrama general del sistema (Mermaid.js de alto nivel)
+- Roadmap por fases (estratégico, no técnico)
+- Licencias, sostenibilidad y modelo ético
+
+
+### 🧱 3. Archivo Base Técnico (v0.0.5)
+
+**Objetivo:** Ser el núcleo técnico del sistema, totalmente operativo y rastreable.
+
+**Mejoras incorporadas:**
+
+#### 📊 Documentación Técnica
+- Diagrama de flujo completo en `docs/diagrama_general.mmd`
+- Benchmarks reales (`benchmarks/tokens_por_segundo.md`)
+- Guía de migración (`docs/migracion_v004_a_v005.md`)
+
+#### 🧩 Nueva estructura de carpetas:
+```
+ALMA_LIBRE/
+├── core/               # Scripts principales (LLM, CLI, Loader)
+├── config/             # Modelos, políticas, perfiles
+├── docs/               # Whitepaper, Prompt Técnico, Manual Usuario
+├── tests/              # Scripts de prueba y matriz de validación
+├── logs/
+└── backups/
+```
+
+
+# 📋 Changelog v0.0.5 (Respecto a v0.0.4)
+
+### 🔧 Estructura:
+- División formal del sistema en tres bloques: Whitepaper, Prompt Técnico, Archivo Base
+- Nueva estructura de carpetas `ALMA_LIBRE/`
+
+### 📚 Documentación:
+- Whitepaper con visión, filosofía y roadmap
+- PROMPT_TECNICO.md creado con reglas, formato y ejemplos para IAs
+- Manual de migración entre versiones
+
+### 📈 Técnica:
+- Benchmarks reales de rendimiento documentados
+- Diagrama de flujo general (Mermaid.js)
+- Scripts y configuraciones reorganizados para máxima claridad
+
+
+
+
+## 🔄 Ajustes Estratégicos de la v0.0.6
+
+### 🧭 Separación Conceptual
+
+- El sistema ahora se estructura en tres pilares:
+  1. **Whitepaper** – visión, arquitectura general y filosofía
+  2. **Prompt Técnico** – instrucciones precisas para IAs
+  3. **Archivo Base** – núcleo funcional del sistema
+
+> Se refuerza la independencia entre ellos: cada bloque puede actualizarse sin romper la coherencia general.
+
+
+### 📘 Whitepaper v1.0 (docs/whitepaper.md)
+
+- **Filosofía:** "offline-first", antifrágil, control humano absoluto
+- **Casos de uso:** investigadores, periodistas, operativos en campo
+- **Mermaid.js de alto nivel:** integración visual de módulos
+- **Licencia + ética:** uso no comercial, orientado a libertad y resiliencia
+
+
+### 💡 CONTEXT.md (Nuevo)
+
+Resumen mínimo del sistema, contiene:
+- Objetivo general
+- Requisitos de hardware
+- Cómo iniciar
+- Diagrama resumen en texto
+- Enlace al prompt y al whitepaper
+
+Ideal para que cualquier IA (incluyendo GPT-4.5) o colaborador humano entienda el entorno sin navegar múltiples archivos.
+
+
+### 🧠 Enfoque desde 0 como opción
+
+- Aunque ALMA_LIBRE es la base de referencia, se recomienda (cuando sea útil) iniciar proyectos *desde 0* y luego incorporar componentes de ALMA_LIBRE según compatibilidad.
+
+> Esto favorece flexibilidad, limpieza y un diseño bottom-up, evitando arrastrar herencias innecesarias.
+
+
+# ALMA_RESIST_idea_base_0.0.7.md
+
+
+# ALMA_RESIST – Idea Base v0.0.7
+
+## 🧠 Resumen Ejecutivo
+
+La versión 0.0.7 consolida a ALMA_RESIST como una plataforma modular, escalable y lista para el trabajo colaborativo entre humanos e IAs. Integra una arquitectura flexible que permite tanto la construcción desde cero como la integración selectiva de módulos, y plantea el siguiente salto: distribución vía paquetes, automatización del desarrollo y expansión comunitaria.
+
+
+## 🤝 Comunidad y Escalabilidad
+
+- Espacio GitHub Discussions sugerido para:
+  - Feedback técnico
+  - Publicación de ejemplos y forks
+- Guía de contribución extendida para mantener consistencia entre módulos
+
+
+## 🚀 Objetivo Estratégico
+
+Convertir ALMA_RESIST en un ecosistema modular para IAs offline con soporte a largo plazo, integración simple y comunidad activa.
+
+> Ideal para despliegues tácticos, investigación de campo, infraestructuras aisladas y soberanía tecnológica.
+
+
+# ALMA_RESIST_idea_base_0.0.8.md
+
+
+# ALMA_RESIST – Idea Base v0.0.8
+
+## 🧠 Resumen Ejecutivo
+
+La versión 0.0.8 representa el paso de la fase conceptual a la implementación real del sistema. Se incorporan archivos esqueleto, comentarios orientativos y configuraciones mínimas necesarias para que tanto humanos como IAs (como GPT-4.5) puedan desarrollar componentes de forma coherente, segura y autónoma.
+
+
+### 🧪 Hello World Funcional
+
+```python
+# hello_world.py
+def main():
+    print("Bienvenido a ALMA_RESIST v0.0.8")
+    print("Este módulo se conecta al modelo LLM y responde a tu consulta.")
+    # TODO: conectar con LLM cuando esté disponible
+```
+
+
+### 📚 Enriquecimiento del Prompt Técnico
+
+- Nuevos ejemplos:
+
+```markdown
+## Ejemplo: Crear script de carga de modelo
+**Input:**
+```json
+{"task": "Cargar modelo Mistral-7B en GGUF desde disco", "hardware": "CPU"}
+```
+**Output esperado:**
+- Script en Python usando llama.cpp
+- Configuración de threads y quantización 4-bit
+```
+
+- Nuevas secciones:
+  - Requisitos mínimos por módulo
+  - Errores comunes esperados
+  - Flujos de ejecución por orden (diagrama Mermaid.js)
+
+
+## 📋 Changelog v0.0.8 (Respecto a v0.0.7)
+
+### 📁 Estructura:
+- Se creó la carpeta `ALMA_LIBRE/` como esqueleto funcional inicial
+- Archivos vacíos con comentarios listos para implementación
+
+### 💡 Implementación:
+- Se añadió `hello_world.py` como demo mínima
+- Comentarios orientativos en todos los scripts para GPT-4.5 y humanos
+
+### 📚 Documentación:
+- Se enriqueció `PROMPT_TECNICO.md` con ejemplos estructurados
+- Se añadieron archivos JSON de configuración realistas
+- Se agregó `flujo_secuencial.mmd` para mostrar el camino completo del sistema
+
+
+# ALMA_RESIST_idea_base_0.0.9.md
+
+# ALMA_RESIST – Idea Base v0.0.9
+
+Versión refinada con mejoras menores:
+- Comentarios específicos en `cli.py`
+- Test mínimo en `tests/test_cli.py`
+- Esquema inicial de API REST
+- Confirmación de esta versión como núcleo de trabajo
+
+Documentación IA-Friendly y modular lista para comenzar el desarrollo activo.
+
+

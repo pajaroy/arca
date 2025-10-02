@@ -1,0 +1,34 @@
+# 📦 v0.0.0.2_documentacion – Sprint de Normalización de Documentación ALMA_RESIST
+
+## 🔍 Objetivo del Sprint
+
+Este paquete contiene los resultados del **Sprint 2.3 - Corrección de Metadatos y Documentación** del proyecto ALMA_RESIST. El objetivo principal fue estandarizar y validar todos los archivos Markdown (`.md`) del repositorio bajo una metodología automatizada, asegurando:
+
+- Metadatos YAML completos, válidos y en formato correcto.
+- Nombres de módulos en `snake_case`.
+- Respaldo y trazabilidad de los archivos modificados.
+- Validación automática de la estructura documental.
+- Preparación para integración semántica con IA.
+
+
+## 🧠 Scripts Clave
+
+- `fix_metadata.py`: Corrige campos YAML (`module`, `type`, `status`, `created`).
+- `force_snake_case_modules.py`: Normaliza el campo `module` a formato `snake_case`.
+- `validate_docs.py`: Verifica que todos los documentos tengan estructura y metadatos válidos.
+- `integrar_nuevo_archivo.sh`: Ejecuta todo el proceso completo para nuevos archivos (integración oficial v8).
+
+
+## 🧾 Logs de Sprint
+
+Los archivos `log_integracion.md` y `mapeo_sprint_archivos.md` documentan cada agregado, su origen y su vinculación con tareas y sprints.
+
+
+## 🤖 Futuras Integraciones
+
+La estructura está preparada para futuras automatizaciones con los módulos:
+
+- `memory_graph_builder`
+- `context_tracker`
+- `reflection_engine`
+

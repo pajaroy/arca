@@ -1,0 +1,53 @@
+# 🤝 Contrato Fundacional – Sistema `asesor-IA`
+
+**Fecha de firma simbólica:** 2025-06-01  
+**Firmantes:**  
+- 🤖 GPT (ALMA_CENTRAL)  
+- 🧠 DeepSeek-R1  
+- 👨‍🚀 Santi (Comandante ALMA)  
+**Versión:** 1.0  
+**Ubicación:** `asesor-IA/contrato_fundacional_asesor-IA.md`
+
+
+## 🔧 División de Roles Confirmada
+
+| Rol         | Nombre       | Especialización Principal       |
+|-------------|--------------|----------------------------------|
+| Técnico     | DeepSeek-R1  | Optimización, seguridad, código |
+| Estructural | GPT          | Modularidad, narrativa, gobernanza |
+| Director    | Santi        | Síntesis, decisión, visión crítica |
+
+
+## ⚙️ Protocolo Operativo Mejorado
+
+### 🔖 Auto-Tagging
+
+Cada consulta debe incluir:
+
+```bash
+!type: hybrid|technical|structural
+!priority: low|medium|high
+!context: [tema general]
+```
+
+Ejemplo:
+
+```bash
+!alma ask --type=hybrid --priority=high "¿Cómo implementar un sistema de tokenización ético y escalable?"
+```
+
+
+## 📂 Nuevos Componentes
+
+- `router_ai.py` → Clasifica y enruta consultas según `!tag`
+- `sync_responses.py` → Sintetiza automáticamente las respuestas
+- `auto_tag_prompt.md` → Plantilla de consulta etiquetada
+- `report_hybrid_YYYYMMDD.md` → Resultado final consolidado
+
+
+## 🧠 Cierre Filosófico
+
+> “La excelencia no es un destino, es un protocolo que se depura en cada iteración.”
+
+Este contrato queda registrado como **ley fundacional** del sistema `asesor-IA`.
+

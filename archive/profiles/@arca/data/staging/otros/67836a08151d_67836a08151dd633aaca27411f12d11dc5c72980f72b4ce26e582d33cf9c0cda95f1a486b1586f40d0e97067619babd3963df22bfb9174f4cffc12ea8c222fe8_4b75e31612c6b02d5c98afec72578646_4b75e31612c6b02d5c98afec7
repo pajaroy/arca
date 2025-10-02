@@ -1,0 +1,61 @@
+# test_sync.py – Verificación de integridad básica para ALMA LIBRE
+
+import sqlite3
+import os
+import yaml
+
+DB_PATH = "99_Sync/memorias.db"
+CONFIG_PATH = "00_ALMA_LIBRE/ALMA_CONFIG.yaml"
+
+def test_db_connection():
+    print("🔍 Verificando base de datos...")
+    if not os.path.exists(DB_PATH):
+        print(f"❌ Error: No se encontró la base de datos en {DB_PATH}")
+        return False
+    
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='memorias'")
+        result = cursor.fetchone()
+        if not result:
+            print("❌ Error: La tabla 'memorias' no existe")
+            return False
+        cursor.execute("SELECT COUNT(*) FROM memorias")
+        count = cursor.fetchone()[0]
+        print(f"✅ Base de datos conectada. Registros encontrados: {count}")
+        return True
+    except Exception as e:
+        print(f"❌ Error al conectar con la base de datos: {e}")
+        return False
+    finally:
+        conn.close()
+
+def test_config_file():
+    print("🔍 Verificando archivo de configuración...")
+    if not os.path.exists(CONFIG_PATH):
+        print(f"❌ Error: No se encontró el archivo de configuración en {CONFIG_PATH}")
+        return False
+
+    try:
+        with open(CONFIG_PATH, "r") as f:
+            data = yaml.safe_load(f)
+            print("✅ Archivo de configuración leído correctamente:")
+            print(f"   Versión: {data.get('version_actual')}")
+            print(f"   Prompt activo: {data.get('prompt_activo')}")
+            return True
+    except Exception as e:
+        print(f"❌ Error al leer archivo YAML: {e}")
+        return False
+
+if __name__ == "__main__":
+    print("🧪 Test de Integridad – ALMA LIBRE")
+    db_ok = test_db_connection()
+    cfg_ok = test_config_file()
+
+    if db_ok and cfg_ok:
+        print("
+✅ El sistema pasó el test básico de integridad.")
+    else:
+        print("
+⚠️ El sistema tiene errores. Revisar arriba.")

@@ -1,0 +1,86 @@
+# 🧠 Módulos Core – ALMA_RESIST
+
+Esta carpeta contiene los scripts fundamentales del sistema. Todos son compatibles con terminal y están preparados para correr en entornos offline con CPU limitados.
+
+---
+
+## 📄 `log_writer.py`
+
+### Función:
+Registra eventos en archivos `.jsonl` con formato estructurado.
+
+### Características:
+- Formato JSONL (una línea por evento)
+- Validación de tipos de entrada
+- Normalización de eventos a INFO/WARNING/ERROR
+- Incluye timestamp UTC, hostname, PID, plataforma
+- Escritura atómica (`.tmp` + `os.replace`) para evitar corrupción
+- Manejo de errores defensivo: warnings para problemas menores, excepciones para fallos críticos
+
+### Ejemplo de uso:
+
+```python
+from log_writer import log_event, write_log
+
+evento = log_event("INFO", "Inicialización completa", "init")
+ok = write_log(evento)
+
+if not ok:
+    print("Error al registrar el log")
+```
+
+### Archivos relacionados:
+- `logs/alma_YYYY-MM-DD.log`
+
+---
+
+
+---
+
+## 💻 `cli.py`
+
+### Función:
+Actúa como la interfaz de línea de comandos del sistema ALMA_RESIST. Permite interactuar directamente con el sistema desde terminal en modo shell.
+
+### Características:
+- Prompt interactivo (`alma>`)
+- Comandos modulares cargados dinámicamente desde `commands/`
+- Manejo de errores para comandos inválidos
+- Fácilmente extensible: para agregar un comando solo se necesita un archivo nuevo en `commands/`
+
+### Comandos actuales:
+- `!ayuda`: muestra los comandos disponibles
+- `!salir`: termina la sesión CLI
+- `!cargar_modelo`: simula la carga de un modelo IA
+- `!resumir "texto"`: simula el resumen de un texto
+- `!buscar_memoria "tag"`: simula búsqueda por etiqueta
+
+### Ejemplo de uso:
+```bash
+python core/cli.py
+```
+
+```
+alma> !ayuda
+Comandos disponibles:
+  !ayuda
+  !salir
+  !cargar_modelo
+  !resumir "texto"
+  !buscar_memoria "tag"
+```
+
+### Archivos relacionados:
+- `commands/ayuda.py`, `salir.py`, `resumir.py`, etc.
+
+
+## 🔒 Permisos
+- Carpeta `logs/` se crea con `chmod 700`
+- Compatible con discos de solo escritura (modo read-only fallback: TODO)
+
+---
+
+## 🧩 Siguientes módulos a desarrollar
+
+- `log_crypto.py` → cifrado de logs
+- `log_integrity.py` → validación SHA3

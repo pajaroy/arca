@@ -1,0 +1,170 @@
+# ============================================
+# ALMA_RESIST - Bitácora Institucional v0.4.0
+# ============================================
+descripcion:
+  breve: >
+    Sistema CLI antifallos para registrar entradas en una bitácora institucional,
+    con almacenamiento en Parquet y metadatos YAML, diseñado para ALMA_RESIST.
+  detalles: |
+    - Guarda logs detallados.
+    - Calcula y valida hashes SHA-256 de Parquet y metadata.
+    - Permite restaurar backups.
+    - Genera documentación técnica (Markdown y JSON).
+    - Soporta confirmación interactiva y simulación (dry-run).
+
+autoria: santi@alma.com
+
+estructura_archivos:
+  parquet:
+    path_default: "/home/alma/Documents/Journal/Bitacora/bitacora_viva.parquet"
+    formato: parquet
+    contiene:
+      - id
+      - fecha
+      - accion
+      - descripcion
+      - motivo
+      - ejecutado_por
+      - estado
+      - tags
+
+  metadata:
+    path_default: "/home/alma/Documents/Journal/Bitacora/bitacora_viva.metadata.yaml"
+    formato: yaml
+    campos:
+      - version
+      - tipo
+      - schema
+      - descripcion
+      - estructura
+      - tags
+      - linked_to
+      - responsable
+      - hash_parquet
+      - hash_metadata
+      - historial
+      - last_modified
+      - last_modified_by
+
+  backups:
+    path_default: "/home/alma/Documents/Journal/Bitacora/backups"
+    contenido:
+      - bitacora_backup_<timestamp>.parquet
+      - metadata_backup_<timestamp>.yaml
+
+comandos_cli:
+  agregar:
+    descripcion: >
+      Permite agregar una nueva entrada a la bitácora.
+      Muestra vista previa y confirma la acción.
+    parametros:
+      --accion: Descripción breve de la acción realizada.
+      --descripcion: Texto detallado sobre lo sucedido.
+      --motivo: Motivo por el cual se realiza la entrada.
+      --ejecutado_por: Usuario responsable de la acción.
+      --estado: Estado actual de la acción (ej. registrado, en_progreso, etc.).
+      --tags: Etiquetas separadas por coma.
+      --dry-run: Simula el proceso sin modificar nada.
+      --preview: Muestra resumen antes de guardar.
+
+  validar:
+    descripcion: >
+      Valida la integridad de la bitácora:
+        - Verifica hash del archivo Parquet.
+        - Verifica hash del metadata YAML.
+        - Valida esquema Parquet.
+      Confirma que no haya corrupción ni inconsistencias.
+
+  restaurar:
+    descripcion: >
+      Permite restaurar archivos de la bitácora desde backups.
+    parametros:
+      --list: Lista backups disponibles.
+      --backup-timestamp: Timestamp de backup a restaurar (ej. 20250707_180000).
+
+  generar-docs:
+    descripcion: >
+      Genera documentación técnica:
+        - bitacora_completa.json → contiene metadata + entradas.
+        - bitacora_resumen.md → documento Markdown con resumen.
+
+argumentos_globales:
+  --parquet: Ruta al archivo parquet (opcional).
+  --metadata: Ruta al archivo metadata YAML (opcional).
+  --verbose: Activa logs detallados.
+  --log: Guarda logs en archivo rotativo.
+  --yes: Confirma automáticamente todas las acciones (no interactivo).
+
+clases_y_metodos:
+  BitacoraManager:
+    descripcion: Maneja todas las operaciones de la bitácora.
+    metodos:
+      - cargar_configuracion: Carga configuración opcional desde bitacora_config.yaml.
+      - configurar_logging: Configura logging con consola + archivo rotativo.
+      - validar_entrada: Valida datos antes de agregarlos.
+      - cargar_metadata: Lee metadata YAML y valida integridad.
+      - crear_metadata_vacia: Devuelve metadata vacío con estructura base.
+      - cargar_entradas: Carga y valida el archivo Parquet.
+      - crear_backup: Crea backups de Parquet y metadata.
+      - aplicar_retencion_backups: Elimina backups antiguos o excesivos.
+      - calcular_hash_archivo: Calcula SHA-256 de un archivo (Parquet o YAML).
+      - calcular_hash_metadata: Calcula hash del YAML ignorando el campo hash_metadata.
+      - registrar_cambio: Guarda cambios en historial.
+      - guardar_todo: Persiste Parquet + metadata, recalculando hashes.
+      - generar_documentacion: Genera JSON y Markdown de la bitácora.
+      - generar_markdown: Crea Markdown legible con resumen de entradas.
+      - agregar_entrada: Procesa y agrega nueva entrada.
+      - mostrar_previa: Muestra vista previa de la entrada antes de guardar.
+      - confirmar_accion: Prompt interactivo para confirmar operaciones.
+      - restaurar_backup: Restaura archivos desde backup específico.
+      - validar_bitacora: Ejecuta validaciones de integridad.
+
+  ParquetManager:
+    descripcion: >
+      Clase utilitaria para leer y escribir archivos Parquet.
+    metodos:
+      - read_parquet: Lee Parquet y convierte fechas a datetime UTC.
+      - write_parquet: Escribe DataFrame a Parquet comprimido.
+      - validate_schema: Verifica que el esquema del Parquet sea correcto.
+
+dependencias:
+  - pandas
+  - pyarrow
+  - pyyaml
+  - argparse
+  - logging
+  - uuid
+  - datetime
+  - json
+  - pathlib
+  - re
+  - shutil
+
+uso_rapido:
+  ejemplo_agregar: |
+    python3 Cargar_Bitacoras.py \
+      --log \
+      agregar \
+      --accion "Deploy inicial" \
+      --descripcion "Primer deploy de ALMA_RESIST." \
+      --motivo "Implementación inicial" \
+      --ejecutado_por "santi@alma.com" \
+      --tags "deploy,bitacora,alma" \
+      --preview
+
+  ejemplo_validar: |
+    python3 Cargar_Bitacoras.py \
+      --log \
+      validar
+
+  ejemplo_restaurar: |
+    python3 Cargar_Bitacoras.py \
+      --log \
+      restaurar --list
+
+notas:
+  - El hash del metadata se calcula ignorando el propio campo hash_metadata,
+    para evitar bucles infinitos de cambio de hash.
+  - Si se borra el metadata YAML, se recrea automáticamente vacío.
+  - Si el hash no coincide, se detecta corrupción o edición manual del archivo.
+

@@ -1,0 +1,113 @@
+# Prompt Maestro v2.0.0 – ALMA Loader
+
+## 1. Índice Modular
+
+- **NLP (Procesamiento de Lenguaje Natural):** Módulo encargado de analizar y extraer la semántica de nuevas memorias (extracción de entidades, temas, sentimientos, etc.). Debe ser intercambiable: el usuario puede reemplazar el modelo o librería NLP sin afectar la estructura general del sistema.
+    
+- **Feedback:** Módulo de retroalimentación, registra calificaciones o validaciones de usuarios/sistemas sobre cada memoria. Debe poder sustituirse (p.ej., ajustar criterios de scoring o usar otro sistema de feedback).
+    
+- **Neo4j (Base de Grafo de Conocimiento):** Base de datos en grafo que almacena memorias como nodos y sus relaciones semánticas. Configurado de forma modular para permitir cambiar a otro motor de grafo o esquema sin alterar la lógica superior.
+    
+- **Exportador:** Componente que transforma y expone las memorias actualizadas a sistemas externos o APIs (p.ej. convertir el grafo en JSON de salida). Debe ser configurable (p.ej., distintos formatos o endpoints).
+    
+- **Validador:** Verifica la integridad y formato de cada nueva memoria (por ejemplo, contra un esquema JSON-base). Funciona como filtro inicial y se diseña como unidad aparte para poder adaptar reglas de validación o usar distintos esquemas sin recodificar el resto del sistema.
+    
+
+## 2. Hallazgos Técnicos
+
+- **Redundancias y validación:** Se detectó duplicación de lógica entre componentes (por ejemplo, entre `validador_custom.py` y definiciones en `schema_base.json`), lo que aumenta el riesgo de inconsistencias. Para resolverlo se recomienda centralizar las reglas de validación en un único esquema (por ejemplo, JSON Schema)​[medium.com](https://medium.com/@dsitdikov/single-place-of-form-validation-rules-for-clients-and-services-with-json-schema-98812722dab4#:~:text=To%20perform%20the%20validation%20which,validation%20and%20the%20basic%20one), evitando código duplicado. De esta forma, el sistema de validación puede aplicar un único “punto de verdad” para todas las comprobaciones​[medium.com](https://medium.com/@dsitdikov/single-place-of-form-validation-rules-for-clients-and-services-with-json-schema-98812722dab4#:~:text=To%20perform%20the%20validation%20which,validation%20and%20the%20basic%20one).
+    
+- **Optimización del sistema de relaciones (unificación NLP + Neo4j):** Actualmente las tareas de NLP y la base de datos de relaciones están separadas. Se sugiere integrar el resultado del NLP directamente en el grafo de conocimiento (Neo4j). Neo4j soporta importación de entidades y relaciones semánticas (según tutoriales de Neo4j, se construye un _knowledge graph_ basado en entidades extraídas por NLP​[neo4j.com](https://neo4j.com/apoc/5/nlp/build-knowledge-graph-nlp-ontologies/#:~:text=In%20this%20tutorial%20we%E2%80%99re%20going,Software%20Knowledge%20Graph%20based%20on)). Unificando ambos, los nuevos conceptos extraídos se escriben inmediatamente en el grafo, simplificando el pipeline y potenciando consultas semánticas integradas.
+    
+- **Interoperabilidad (fechas y APIs):** Se observa falta de estandarización en formatos (por ejemplo, formatos de fecha inconsistentes) y ausencia de versionado en las APIs actuales. Es recomendable adoptar fechas estándar (p.ej. ISO 8601 `"2023-04-28T01:52:25Z"`) para evitar ambigüedades de zona horaria y orden de día/mes​[criteria.sh](https://criteria.sh/blog/rest-api-date-format-best-practices#:~:text=Fortunately%2C%20there%20is%20already%20an,times%20as%20strings%3A%20ISO%208601). Asimismo, versionar las APIs desde el inicio es una práctica clave para no romper compatibilidad al futuro​[es.linkedin.com](https://es.linkedin.com/pulse/qu%C3%A9-es-el-versionado-de-apis-y-por-importante-ingesosoftware-2qjbf#:~:text=El%20versionado%20de%20APIs%20es,vean%20afectados%20de%20manera%20negativa)​[salyseo.com](https://salyseo.com/seo/mejores-practicas-api/#:~:text=Una%20de%20las%20mejores%20pr%C3%A1cticas,que%20esto%20podr%C3%ADa%20mejorar%20la). Por ejemplo, usar una ruta base con versión (`/api/v1/...`) permite introducir cambios sin interrumpir a usuarios existentes​[es.linkedin.com](https://es.linkedin.com/pulse/qu%C3%A9-es-el-versionado-de-apis-y-por-importante-ingesosoftware-2qjbf#:~:text=El%20versionado%20de%20APIs%20es,vean%20afectados%20de%20manera%20negativa)​[salyseo.com](https://salyseo.com/seo/mejores-practicas-api/#:~:text=Una%20de%20las%20mejores%20pr%C3%A1cticas,que%20esto%20podr%C3%ADa%20mejorar%20la).
+    
+- **Escalabilidad y caching:** El uso conjunto de SQLite (base de datos local) y almacenamiento en JSON puede limitar la escalabilidad. SQLite es eficiente para cargas medianas, pero al ser un sistema de archivos con locking, puede sufrir en alta concurrencia; la habilitación de _Write-Ahead Logging_ (WAL) mejora la concurrencia de lecturas/escrituras en SQLite​[developer.android.com](https://developer.android.com/topic/performance/sqlite-performance-best-practices#:~:text=Enable%20Write). En sistemas multiusuario, podría considerarse migrar a DB más robusta o distribuida. Por otro lado, carecer de un sistema de cache significa cargar repetidamente los datos; implementar caché en memoria (p.ej. Redis/Memcached) puede reducir drásticamente la carga sobre la BD. De hecho, usar una estrategia de caching adecuada mejora el rendimiento, disponibilidad y escalabilidad de la aplicación​[prisma.io](https://www.prisma.io/dataguide/managing-databases/introduction-database-caching#:~:text=What%20are%20the%20benefits%20of,database%20caching). Finalmente, cabe notar que almacenar datos relacionales en JSON “plano” suele ser menos eficiente para consultas complejas: se recomienda usar SQL/DB relacional o grafo para datos con múltiples relaciones, reservando JSON para transporte o capas de persistencia no relacional​[softwareengineering.stackexchange.com](https://softwareengineering.stackexchange.com/questions/235707/using-a-relational-database-vs-json-objects-for-event-activity-data#:~:text=A%20relational%20database%20makes%20sense,data%20that%20has%20relational%20properties).
+    
+
+## 3. Diseño de Prompt Base 2.0
+
+- **Lectura de memorias existentes:** El modelo IA debe cargar las memorias previas (por ID, etiquetas, prioridad y relaciones) antes de generar respuestas. Es decir, cada entrada debe considerarse en el contexto del grafo de conocimiento: por ejemplo, buscar nodos relacionados en Neo4j o entradas JSON según los `tags` o relaciones semánticas existentes.
+    
+- **Generación de nuevas memorias (salida JSON):** Cuando se cree una nueva memoria, la IA debe producirla en formato JSON estructurado con campos estándar: `id`, `tipo`, `prioridad`, `contenido`, `enlaces` y `acciones`. Por ejemplo, una memoria podría generarse así:
+    
+    json
+    
+    CopiarEditar
+    
+    `{   "id": "mem001",   "tipo": "idea",   "prioridad": 7,   "contenido": "Descripción breve de la nueva memoria",   "enlaces": ["mem045", "mem102"],   "acciones": ["iniciar_tarea"] }`
+    
+    Se sugiere instruir al modelo para que emita un único JSON (p.ej. un arreglo de objetos), tal como se hace en prompts de extracción de grafo de conocimiento​[robert-mcdermott.medium.com](https://robert-mcdermott.medium.com/from-unstructured-text-to-interactive-knowledge-graphs-using-llms-dd02a1f71cd6#:~:text=Your%20task%3A%20Read%20the%20text,objects%2C%20each%20representing%20one%20triple). Esto garantiza una salida consistente y fácil de procesar automáticamente.
+    
+- **Relaciones semánticas:** El prompt debe ordenar al modelo establecer enlaces semánticos con memorias existentes: cada nuevo nodo JSON debe incluir en `enlaces` los IDs de memorias relevantes (por ejemplo, conceptos relacionados o antecedentes). Se deben generar relaciones explícitas (predicados) concisos (idealmente de 1–3 palabras)​[robert-mcdermott.medium.com](https://robert-mcdermott.medium.com/from-unstructured-text-to-interactive-knowledge-graphs-using-llms-dd02a1f71cd6#:~:text=meaningful%20relationships%20in%20text,This%20is%20a%20hard%20limit) para mantener atomicidad de cada relación.
+    
+- **Reglas de generación:** Imponer límites en la longitud y estilo del contenido. Por ejemplo, cada campo `contenido` de la memoria deberá ser breve (menos de 300 caracteres) y conectar conceptos cruzados de manera que aporte valor (evitando redundancias). Se deben usar palabras clave consistentes (sinónimos normalizados) y estructuras paralelas para facilitar la búsqueda e inferencia. En suma, las instrucciones deben enfatizar salidas JSON válidas, relacionales y concisas (siguiendo prácticas de prompts avanzados)​[robert-mcdermott.medium.com](https://robert-mcdermott.medium.com/from-unstructured-text-to-interactive-knowledge-graphs-using-llms-dd02a1f71cd6#:~:text=meaningful%20relationships%20in%20text,This%20is%20a%20hard%20limit)​[robert-mcdermott.medium.com](https://robert-mcdermott.medium.com/from-unstructured-text-to-interactive-knowledge-graphs-using-llms-dd02a1f71cd6#:~:text=Your%20task%3A%20Read%20the%20text,objects%2C%20each%20representing%20one%20triple).
+    
+
+## 4. Flujo de Trabajo
+
+El siguiente diagrama de flujo (mermaid) ilustra el pipeline ideal de ALMA Loader: cada **memoria nueva** pasa primero por el _Validador_, luego por el módulo _NLP_ para extracción semántica, se guarda en la base _Neo4j_, se asigna prioridad, se genera feedback interno y finalmente se exporta a consumidores externos.
+
+mermaid
+
+CopiarEditar
+
+`flowchart TD     M[Nueva Memoria] --> V(Validador)     V --> N[NLP (Procesamiento de Lenguaje Natural)]     N --> G[Neo4j (Grafo de Memorias)]     G --> P[Priorización de Memorias]     P --> F(Feedback)     F --> P     P --> E[Exportador]     E --> S[Memoria Finalizada]`
+
+Este flujo modular permite interceptar y reconfigurar cada paso: p.ej. validar según reglas, enriquecer semánticamente, actualizar el grafo, recalcular scores, recibir retroalimentación (tanto automática como manual) y exponer los datos. El feedback retroalimenta el cálculo de prioridad en un bucle iterativo, asegurando ajuste continuo según nuevas entradas o correcciones.
+
+## 5. Sistema de Prioridades y Recompensas
+
+- **Reglas de puntuación:** Definir una función de scoring para cada memoria basada en criterios cuantificables. Por ejemplo:
+    
+    - **Impacto/Importancia:** Asignar más puntos a memorias con contenido de alto peso (por ej. temas frecuentes o críticos en el dominio).
+        
+    - **Relaciones cruzadas:** Sumar puntos por cada enlace semántico relevante (más relaciones significa mayor centralidad).
+        
+    - **Novedad:** Valorar positivamente conceptos nuevos o inusuales.
+        
+    - **Contradicciones/Errores:** Penalizar entradas que entren en conflicto con memorias existentes o que el validador marque como inconsistente.  
+        Un ejemplo de fórmula podría ser: `puntuación = 5·(#enlaces) + 3·impacto - 10·(contradicciones)`. Esta puntuación orienta al modelo generador a privilegiar memorias que enriquecen el grafo y son coherentes con el contexto.
+        
+- **Integración API REST simulada:** Se debe exponer un endpoint REST para el manejo de memorias, facilitando integraciones futuras. Por ejemplo:
+    
+    http
+    
+    CopiarEditar
+    
+    `POST /api/v1/memorias Content-Type: application/json  {   "id": "mem001",   "tipo": "evento",   "prioridad": 9,   "contenido": "Nueva memoria registrada",   "enlaces": ["mem000"],   "acciones": [] }`
+    
+    Este ejemplo muestra un `POST` a `/api/v1/memorias` con una carga JSON similar al formato interno. En la práctica se podrían definir rutas para CRUD de memorias (`GET`, `PUT`, `DELETE`), seguimiento de puntuaciones y reportes de feedback. Tener una API versionada (v1, v2…) permitirá evolucionar el sistema sin interrumpir clientes existentes.
+    
+
+## 6. Preguntas Clave para GPT-4.5
+
+- ¿Cómo escalar el sistema para servir a múltiples usuarios concurrentes manteniendo consistencia de las memorias compartidas?
+    
+- ¿Cómo detectar y gestionar bifurcaciones conceptuales cuando distintas líneas de razonamiento divergen en el grafo?
+    
+- ¿Qué arquitectura técnica recomendarías para migrar el sistema a un modelo _event-driven_ y así manejar actualizaciones de memoria en tiempo real?
+    
+- ¿Cómo diseñar un mecanismo de cacheo y sincronización para acelerar consultas frecuentes en el grafo y la base de memorias?
+    
+- ¿De qué forma podría la IA autogestionar conflictos semánticos o contradicciones emergentes en las memorias, quizá usando metadatos o versión de las entradas?
+    
+
+Estas preguntas guiarán al modelo avanzado a reflexionar sobre escalabilidad, consistencia, modularidad y resiliencia del sistema a gran escala.
+
+## 7. Checklist Técnico
+
+- Implementar **migrador de esquemas**: herramienta para convertir datos existentes al nuevo formato JSON y/o a Neo4j, preservando relaciones.
+    
+- Actualizar los **prompts del sistema**: incorporar las nuevas instrucciones (lectura de memorias, generación JSON, reglas de prioridad) en el Prompt Maestro.
+    
+- Desarrollar la **API REST**: definir endpoints (versionados) para creación, consulta y gestión de memorias (`/api/v1/memorias`), siguiendo los formatos especificados.
+    
+- Integrar un **sistema de caching** en memoria (p.ej. Redis) para consultas frecuentes de memorias y relaciones, mejorando rendimiento.
+    
+- Configurar **concurrencia en SQLite** (WAL) o migrar a un SGBD escalable (PostgreSQL, MongoDB, etc.) si se prevee alta carga de usuarios.
+    
+- Implementar **monitorización y logging**: usar herramientas (Prometheus, Grafana, Kibana) para analizar la salud del sistema, latencias de API y crecimiento del grafo.
+    
+- Crear un **conjunto de tests automatizados** (unitarios e integración) para validar la ingesta de memorias, aplicación de reglas de validación y consistencia de relaciones.
+    
+- Documentar el **diseño modular** y las nuevas convenciones de datos, asegurando que futuros desarrolladores puedan reemplazar o actualizar módulos (NLP, Validador, etc.) con facilidad.

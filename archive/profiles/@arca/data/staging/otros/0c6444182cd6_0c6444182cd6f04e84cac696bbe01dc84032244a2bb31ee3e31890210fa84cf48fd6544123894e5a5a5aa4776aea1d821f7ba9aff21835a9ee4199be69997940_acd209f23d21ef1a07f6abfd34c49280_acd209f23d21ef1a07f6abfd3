@@ -1,0 +1,54 @@
+Bueno, te voy a hacer un planteo sobre la estructura base de los cultivos y sobre cómo nos vamos a manejar en cuanto a la parte legal. Como primera instancia, el anexo Canavir va a funcionar como parte íntegra de 3CC. O sea que vamos a tener divididos, como no tenemos todavía lo suficiente reprocán a modo cultivador solidario, lo que vamos a hacer es dividir. En el cultivo de 3CC va a ir todo a nombre del cultivador solidario Ariel Abaca y en el cultivo Canavir van a ir todos los reprocán asociados al cultivador solidario Sebastián Calderón Gori. En base a eso tenemos que manejar para llevar la gestión de los socios acomodados de esta manera hasta que pueda asegurarse el tercer cultivador solidario que sería yo.
+
+###### ChatGPT Plus
+
+Perfecto, planteo claro y estratégico. Te dejo un esquema organizativo base legal-operativo a partir de lo que mencionás, con foco en:
+
+
+## 2. **Asignación de Responsabilidad Legal (Reprocann)**
+
+|Cultivo|Responsable Legal|Cultivadores Solidarios Asociados|
+|---|---|---|
+|**3CC**|Ariel Abaca|Todos los socios con Reprocann que se inscriban bajo su nombre|
+|**Canavir**|Sebastián “Gori” Calderón|Todos los socios con Reprocann inscriptos como pacientes bajo su solidario|
+|**Futuro Cultivo**|Santiago Calvo (vos)|En cuanto se habilite tu Reprocann como solidario, nuevos asociados se registrarán bajo tu estructura legal|
+
+
+## 4. **Notas Clave y Recomendaciones**
+
+- **Evitar mezclas** entre socios de distintos solidarios en un mismo lote o cultivo para no generar conflictos legales.
+    
+- Tener siempre accesible la _documentación de respaldo_ por si hay visitas o auditorías (INASE, Reprocann, etc.).
+    
+- Considerar _un documento modelo de cesión solidaria interna_ donde el socio firme su vínculo explícito con el solidario que lo representa.
+    
+- Cuando vos estés habilitado, **reestructurar automáticamente** para redistribuir algunos socios si los cupos de Ariel o Gori están al tope.
+    
+
+
+### **Estructura Base para el Archivo de Gestión de Cultivo por Paciente**
+
+Te propongo esto como estructura inicial del archivo:
+
+# 🧾 Registro de Cultivo Sectorizado por Paciente
+
+## Información General del Paciente
+
+- Nombre completo:
+- DNI:
+- Reprocann vigente: [Sí/No]
+- Vínculo: [Paciente / Cultivador Solidario]
+- Cultivador Solidario: [Ariel / Gori / Santi]
+- Fecha de alta:
+- Observaciones legales:
+
+
+## Seguimiento Diario / Semanal
+
+| Fecha | Fase | Temp. | Humedad | Nutrición | Observaciones |
+|-------|------|-------|---------|-----------|----------------|
+|       |      |       |         |           |                |
+
+
+Esto puede replicarse por cada paciente. Luego lo podemos automatizar con un script para generar un archivo por cada socio, exportable en PDF o compatible con la app ALMA.
+

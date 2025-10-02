@@ -1,0 +1,153 @@
+---
+module: metodologias/metodologia_agregado_archivos
+type: core
+status: in_progress
+created: '2025-05-22'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# Metodología de Agregado de Archivos ALMA\_RESIST (v8)
+
+## Objetivo
+
+Establecer una metodología clara, automatizable y escalable para la integración de nuevos archivos en el ecosistema ALMA\_RESIST, garantizando:
+
+* Consistencia estructural (metadatos, rutas, convenciones)
+* Trazabilidad en los sprints y logs
+* Integración futura con componentes IA: memory\_graph, prompt\_orchestrator, reflection\_engine
+
+---
+
+## Flujo Actual de Trabajo
+
+1. Agregado de archivo manual en la carpeta correspondiente dentro de `/docs`
+2. Corrección de metadatos YAML mediante `fix_metadata.py`
+3. Validación estructural con `validate_docs.py`
+4. Corrección de snake\_case con `force_snake_case_modules.py`
+5. Registro del agregado en:
+
+   * `/logs/log_integracion.md`
+   * `/docs/versiones/mapeo_sprint_archivos.md`
+6. Inclusión en Sprint correspondiente
+
+---
+
+## Scripts Utilizados
+
+* `scripts/fix_metadata.py`: corrige o completa metadatos YAML
+* `scripts/validate_docs.py`: valida estructura, tipos, estados y snake\_case
+* `scripts/force_snake_case_modules.py`: refactoriza metadatos a snake\_case
+
+---
+
+## Proceso de Integración Básica
+
+```bash
+# 1. Activar entorno
+source venv/bin/activate
+
+# 2. Ejecutar scripts de normalización
+python3 scripts/fix_metadata.py --root ./docs --backup --verbose
+python3 scripts/force_snake_case_modules.py --root ./docs --backup --verbose
+
+# 3. Validar documentos
+python3 scripts/validate_docs.py ./docs
+
+# 4. Registrar en logs
+# Editar manualmente log_integracion.md y mapeo_sprint_archivos.md
+
+# 5. Desactivar entorno
+deactivate
+```
+
+---
+
+## Automatización y Validaciones
+
+En futuras versiones (v9+), este proceso se automatizará con un CLI:
+
+```bash
+alma-cli integrate --file ./docs/nuevo/archivo.md --sprint 2.3
+```
+
+Lo que hará:
+
+* Corrección de metadatos
+* Validación completa
+* Registro automático en logs
+* Actualización de grafo semántico
+* Generación de reflexión IA
+
+---
+
+## Proyección Futura (v9+)
+
+* Uso de `memory_graph_builder.py` para actualizar relaciones semánticas post-integración
+* Generación automática de `reflections/` por archivo agregado
+* Agregado de SHA256 y `context_tags` en metadatos
+* Notificación a IA del sistema para sugerencias o actualizaciones
+
+---
+
+## Flujo Visual Propuesto
+
+```mermaid
+graph TD
+  A[Agregar archivo] --> B[Normalizar metadatos]
+  B --> C{Es README.md?}
+  C -->|Sí| D[Usar carpeta padre como módulo]
+  C -->|No| E[Generar módulo desde ruta]
+  E --> F[Validar YAML con reglas estrictas]
+  F --> G[Actualizar grafo semántico]
+  G --> H[Generar reflexión automática]
+  H --> I[Registrar en logs y sprint]
+  I --> J[Notificar a IA para sugerencias]
+```
+
+---
+
+## Integración con IA (planificada)
+
+| Componente            | Función                                              |
+| --------------------- | ---------------------------------------------------- |
+| `memory_graph`        | Vincular a nodos existentes por `linked_to` y `tags` |
+| `context_tracker`     | Asociar al sprint y flujo actual                     |
+| `prompt_orchestrator` | Generar sugerencias de mejora automáticas            |
+| `reflection_engine`   | Producir análisis de impacto y dependencias          |
+
+---
+
+## Ejemplo de Metadatos Enriquecidos
+
+```yaml
+---
+module: ia/context_tracker/actualizacion_sprint
+type: tool
+status: stable
+created: 2025-05-22
+linked_to:
+  - Sprint_2.3
+  - docs/ia/context_tracker.md
+context_tags:
+  - urgency: medium
+  - domain: ia
+  - task: seguimiento
+sha256: 19a43cfab...
+---
+```
+
+---
+
+## Conclusión
+
+Esta versión v8 establece un proceso robusto y automatizable para la integración de archivos, marcando un punto de madurez en la arquitectura documental de ALMA\_RESIST. Se contempla tanto la operación actual como la proyección a una IA contextual consciente.
+
+Este documento queda oficializado como la metodología vigente.
+
+---
+
+**Responsable:** Santi
+**Versión:** 8
+**Fecha de aprobación:** 2025-05-22
+

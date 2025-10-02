@@ -1,0 +1,32 @@
+# 📁 sprints_historicos
+
+Esta carpeta contiene el historial completo de todos los sprints ejecutados dentro del módulo `control_central/control/`.
+
+## 📌 Propósito
+
+- Mantener un registro cronológico de los sprints ya completados.
+- Servir como referencia para futuras auditorías, revisiones o aprendizajes.
+- Conservar un formato estandarizado que facilite búsquedas y navegación por fecha y propósito.
+
+## 🗂️ Convenciones de nombrado
+
+Los archivos deben seguir el siguiente formato:
+
+```
+sprint_<número>_<breve_descripcion>.md
+```
+
+Ejemplos:
+
+- `sprint_0.1_inicio_control.md`
+- `sprint_0.2_sync_total.md`
+
+## 🧠 IA-friendly
+
+Toda esta carpeta está optimizada para lectura y navegación por IA o agentes automatizados. Cada sprint debería tener:
+
+- Encabezado YAML con metadatos (`date`, `status`, `linked_to`, etc.)
+- Estructura clara de checklist, hitos, resultados.
+- Enlace cruzado a bitácoras, changelogs y decisiones clave.
+
+---

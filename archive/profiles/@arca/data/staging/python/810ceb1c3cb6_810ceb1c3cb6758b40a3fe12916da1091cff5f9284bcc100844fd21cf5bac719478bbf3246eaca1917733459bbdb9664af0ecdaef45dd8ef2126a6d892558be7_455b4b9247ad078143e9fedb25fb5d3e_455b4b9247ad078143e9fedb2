@@ -1,0 +1,327 @@
+#!/usr/bin/env python3
+# Validador_Metadata_v0.2.1.py - Valida y corrige metadatos ALMA_RESIST, incluyendo .py y soporte para title
+
+import os
+import sys
+import logging
+import uuid
+import argparse
+from pathlib import Path
+from ruamel.yaml import YAML
+from ruamel.yaml.comments import CommentedMap, CommentedSeq
+from datetime import datetime, timezone
+from typing import Optional, Tuple, Dict, Any
+from io import StringIO
+
+# ========================================
+# Configuración mejorada de logging
+# ========================================
+LOG_FILE = "/home/alma/Alma-Cli/Logs/fix_metadata.log"
+
+def setup_logging():
+    log_dir = os.path.dirname(LOG_FILE)
+    os.makedirs(log_dir, exist_ok=True)
+    logging.basicConfig(
+        filename=LOG_FILE,
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S',
+        encoding='utf-8'
+    )
+    return logging.getLogger('metadata_validator_v0.2.1')
+
+logger = setup_logging()
+
+# ========================================
+# Plantilla ALMA_RESIST con orden específico
+# ========================================
+PLANTILLA_BASE = CommentedMap({
+    "version": "0.1.0",
+    "title": "",
+    "uuid": "",
+    "tipo": "",
+    "schema": "",
+    "estado": "",
+    "descripcion": "",
+    "estructura": CommentedSeq([""]),
+    "tags": CommentedSeq([]),
+    "linked_to": CommentedSeq([]),
+    "responsable": "",
+    "hash_verificacion": "sha256:pending",
+    "historial": CommentedSeq([CommentedMap({"fecha": "", "descripcion": ""})]),
+    "last_modified": "",
+    "last_modified_by": ""
+})
+
+ORDER = [
+    "version", "title", "uuid", "tipo", "schema", "estado", "descripcion", 
+    "estructura", "tags", "linked_to", "responsable", 
+    "hash_verificacion", "historial", "last_modified", "last_modified_by"
+]
+
+CAMPOS_DINAMICOS = ["uuid", "last_modified", "last_modified_by"]
+
+# ========================================
+# Funciones utilitarias
+# ========================================
+def get_system_user() -> str:
+    return os.getenv('USER') or os.getenv('USERNAME') or "alma"
+
+def is_empty(value: Any) -> bool:
+    if value is None:
+        return True
+    if isinstance(value, str) and not value.strip():
+        return True
+    if isinstance(value, (list, dict, CommentedSeq)) and not value:
+        return True
+    return False
+
+def generate_dynamic_value(field: str) -> Any:
+    if field == "uuid":
+        return str(uuid.uuid4())
+    elif field == "last_modified":
+        return datetime.now(timezone.utc).isoformat()
+    elif field == "last_modified_by":
+        return get_system_user()
+    return ""
+
+def dump_yaml_to_string(data: Dict) -> str:
+    yaml = YAML()
+    yaml.preserve_quotes = True
+    yaml.indent(mapping=2, sequence=4, offset=2)
+    stream = StringIO()
+    yaml.dump(data, stream)
+    return stream.getvalue()
+
+# ========================================
+# Núcleo de procesamiento de metadatos
+# ========================================
+def apply_template(
+    existing: Optional[CommentedMap] = None, 
+    force_update: bool = False,
+    cli_title: Optional[str] = None
+) -> CommentedMap:
+    new_metadata = CommentedMap()
+    preserved_existing = {}
+
+    if existing:
+        for key, value in existing.items():
+            if key in ORDER and not is_empty(value):
+                preserved_existing[key] = value
+
+    for key in ORDER:
+        if key in preserved_existing:
+            new_metadata[key] = preserved_existing[key]
+        else:
+            new_metadata[key] = PLANTILLA_BASE[key]
+
+    # Si el usuario pasó un título por CLI, sobrescribe
+    if cli_title is not None:
+        new_metadata["title"] = cli_title
+
+    for field in CAMPOS_DINAMICOS:
+        if field in new_metadata:
+            if force_update or is_empty(new_metadata[field]):
+                new_metadata[field] = generate_dynamic_value(field)
+
+    if existing:
+        for key, value in existing.items():
+            if key not in ORDER:
+                new_metadata[key] = value
+
+    return new_metadata
+
+# ========================================
+# Procesadores de archivos
+# ========================================
+def process_markdown(content: str, force_update: bool, dry_run: bool, cli_title: Optional[str]) -> Tuple[str, bool, bool]:
+    yaml = YAML()
+    yaml.preserve_quotes = True
+    metadata = None
+    rest_content = content
+    recreated = False
+
+    if content.startswith('---\n'):
+        parts = content.split('---\n', 2)
+        if len(parts) >= 3:
+            try:
+                metadata = yaml.load(parts[1])
+                rest_content = '---'.join(parts[2:])
+            except Exception as e:
+                logger.warning(f"YAML inválido en Markdown: {str(e)}")
+                recreated = True
+
+    new_metadata = apply_template(metadata, force_update, cli_title)
+    yaml_output = dump_yaml_to_string(new_metadata)
+    new_content = f"---\n{yaml_output}---{rest_content}"
+    modified = (metadata != new_metadata) or recreated
+
+    if dry_run:
+        print("=" * 80)
+        print(new_content)
+        print("=" * 80)
+
+    return new_content, modified, recreated
+
+def process_yaml(content: str, force_update: bool, dry_run: bool, cli_title: Optional[str]) -> Tuple[str, bool, bool]:
+    yaml = YAML()
+    yaml.preserve_quotes = True
+    metadata = None
+    recreated = False
+
+    try:
+        metadata = yaml.load(content) or CommentedMap()
+    except Exception as e:
+        logger.warning(f"YAML inválido: {str(e)}")
+        recreated = True
+
+    new_metadata = apply_template(metadata, force_update, cli_title)
+    new_content = dump_yaml_to_string(new_metadata)
+    modified = (metadata != new_metadata) or recreated
+
+    if dry_run:
+        print("=" * 80)
+        print(new_content)
+        print("=" * 80)
+
+    return new_content, modified, recreated
+
+def process_python(content: str, force_update: bool, dry_run: bool, cli_title: Optional[str]) -> Tuple[str, bool, bool]:
+    yaml = YAML()
+    yaml.preserve_quotes = True
+    yaml.indent(mapping=2, sequence=4, offset=2)
+    recreated = False
+
+    lines = content.splitlines(keepends=True)
+    metadata_block = None
+    doc_start = None
+    doc_end = None
+
+    if lines and lines[0].strip().startswith(('"""', "'''")):
+        doc_start = 0
+        for i in range(1, len(lines)):
+            if lines[i].strip().startswith(('"""', "'''")):
+                doc_end = i
+                break
+
+    if doc_start is not None and doc_end is not None:
+        old_docstring = ''.join(lines[doc_start+1:doc_end])
+        try:
+            metadata_block = yaml.load(old_docstring)
+        except Exception:
+            metadata_block = None
+    else:
+        metadata_block = None
+
+    new_metadata = apply_template(metadata_block, force_update, cli_title)
+    yaml_output = dump_yaml_to_string(new_metadata)
+    new_docstring = f'"""\n---\n{yaml_output}---\n"""\n'
+
+    if doc_start is not None and doc_end is not None:
+        new_lines = lines[:doc_start] + [new_docstring] + lines[doc_end+1:]
+    else:
+        new_lines = [new_docstring] + lines
+
+    new_content = ''.join(new_lines)
+    modified = (metadata_block != new_metadata) or recreated
+
+    if dry_run:
+        print("=" * 80)
+        print(new_content)
+        print("=" * 80)
+
+    return new_content, modified, recreated
+
+# ========================================
+# Función principal mejorada
+# ========================================
+def validate_metadata(path: str, force_update: bool = False, dry_run: bool = False, cli_title: Optional[str] = None) -> None:
+    try:
+        if not os.path.exists(path):
+            with open(path, 'w', encoding='utf-8') as f:
+                f.write("")
+            logger.info(f"Archivo creado: {path}")
+
+        with open(path, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        filename = os.path.basename(path)
+        ext = os.path.splitext(filename)[1].lower()
+
+        if ext == '.md':
+            new_content, modified, recreated = process_markdown(content, force_update, dry_run, cli_title)
+            file_type = "Markdown"
+        elif ext in ('.yaml', '.yml'):
+            new_content, modified, recreated = process_yaml(content, force_update, dry_run, cli_title)
+            file_type = "YAML"
+        elif ext == '.py':
+            new_content, modified, recreated = process_python(content, force_update, dry_run, cli_title)
+            file_type = "Python"
+        else:
+            logger.error(f"Extensión no soportada: {filename}")
+            print(f"✗ Error: Extensión no soportada - {filename}")
+            return
+
+        if dry_run:
+            logger.info(f"Dry-run ejecutado para {filename} (tipo: {file_type})")
+            print(f"✓ Dry-run completado para {filename}")
+            return
+
+        if modified:
+            with open(path, 'w', encoding='utf-8') as f:
+                f.write(new_content)
+            
+            if recreated:
+                logger.info(f"Metadata recreada en {filename}")
+                print(f"✓ Metadata recreada en {filename}")
+            else:
+                logger.info(f"Metadata actualizada en {filename}")
+                print(f"✓ Metadata actualizada en {filename}")
+        else:
+            logger.info(f"Metadata válida en {filename}")
+            print(f"✓ Metadata válida en {filename}")
+
+    except Exception as e:
+        error_msg = f"Error procesando {path}: {str(e)}"
+        logger.error(error_msg)
+        print(f"✗ {error_msg}")
+
+# ========================================
+# Interfaz de línea de comandos
+# ========================================
+def main():
+    parser = argparse.ArgumentParser(
+        description='Validador y reparador de metadatos ALMA_RESIST v0.2.1',
+        epilog='Ejemplo: python validador_metadata.py archivo.py --force --dry-run --title "Mi Título"'
+    )
+    parser.add_argument(
+        'ruta', 
+        type=str,
+        help='Ruta al archivo a procesar'
+    )
+    parser.add_argument(
+        '--force', 
+        action='store_true',
+        help='Fuerza actualización de campos dinámicos'
+    )
+    parser.add_argument(
+        '--dry-run', 
+        action='store_true',
+        help='Muestra cambios sin guardar en disco'
+    )
+    parser.add_argument(
+        '--title',
+        type=str,
+        help='Título del archivo'
+    )
+
+    args = parser.parse_args()
+
+    if not os.path.exists(args.ruta):
+        print(f"✗ Error: El archivo no existe - {args.ruta}")
+        return
+
+    validate_metadata(args.ruta, args.force, args.dry_run, args.title)
+
+if __name__ == "__main__":
+    main()

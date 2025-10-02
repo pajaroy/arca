@@ -1,0 +1,21 @@
+# 💡 _propuestas/
+
+Esta carpeta contiene propuestas de mejora, evolución o refactor para futuras versiones de metodologías.
+
+## 📜 Propósito
+
+- Explorar nuevas ideas sin alterar el sistema estable.
+- Iterar conceptos antes de formalizarlos como versión activa.
+- Servir como base de revisión por IA (DeepSeek, AlmaCLI, etc).
+
+## 📁 Contenido típico
+
+- `_propuesta_v3_interaccion_ia.md`
+- `_propuesta_v3_doc_ia.md`
+
+## 🧠 Recomendaciones
+
+- Agregar siempre fecha de creación en cada propuesta.
+- Documentar claramente qué versión reemplazaría.
+- Una vez aceptada, mover el archivo a la raíz como `vX.Y.md` y archivar el anterior.
+

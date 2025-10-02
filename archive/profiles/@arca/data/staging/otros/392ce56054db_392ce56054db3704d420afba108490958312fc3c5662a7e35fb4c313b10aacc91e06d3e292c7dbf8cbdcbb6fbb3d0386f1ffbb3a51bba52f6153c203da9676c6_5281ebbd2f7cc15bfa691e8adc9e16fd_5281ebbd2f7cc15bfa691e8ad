@@ -1,0 +1,28 @@
+
+# 📦 MODULOS.zip — Núcleo de Componentes Integrables en ALMA_RESIST
+
+Este paquete contiene módulos desarrollados como base para el sistema ALMA_RESIST v3. Incluye herramientas de memoria, sincronización, validación semántica, cifrado, y auditoría simbiótica.
+
+
+## 📌 Uso recomendado
+
+1. Revisa el archivo `auditoria_modulos_pre_integracion.md`
+2. Abre cada carpeta y analiza su propósito.
+3. Usa el checklist de cada módulo para integrarlo a ALMA_RESIST según el plan v3.
+4. Cualquier módulo experimental debe ir primero a `_STAGING/` antes de subir a producción (`src/`).
+
+
+## 🛡 Seguridad
+
+- Algunos scripts pueden involucrar claves (`fernet.key`, `rsync`, etc.).
+- Asegurate de encriptar y respaldar todo antes de integrar.
+- Usa `alma_keymgmt.sh` y `test_black.sh` para validar cifrado e integridad.
+
+
+## 🧭 Referencia cruzada
+
+Este paquete fue diseñado para integrarse a:  
+➡️ `ALMA_RESIST_v3_arquitectura_ejecutable.md`  
+➡️ `README_ALMA_RESIST.md`  
+➡️ `contract_crypto.yaml` (para cifrado estandarizado)
+

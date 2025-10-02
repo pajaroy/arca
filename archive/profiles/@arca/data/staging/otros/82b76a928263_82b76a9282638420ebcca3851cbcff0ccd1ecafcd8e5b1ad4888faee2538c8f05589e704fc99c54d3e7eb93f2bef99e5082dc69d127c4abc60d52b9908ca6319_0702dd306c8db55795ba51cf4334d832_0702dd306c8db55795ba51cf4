@@ -1,0 +1,26 @@
+# 📚 Carpeta `01_methodologies/` – Metodologías del Sistema ALMA_RESIST
+
+Este directorio contiene las metodologías oficiales que gobiernan la arquitectura, desarrollo, automatización y gobernanza del sistema ALMA_RESIST.
+
+
+## 📘 Metodologías Actuales
+
+| Archivo                                 | Propósito                                                      |
+|----------------------------------------|----------------------------------------------------------------|
+| `metodologia_estructura_modular_v2.md` | Define cómo estructurar módulos, carpetas y documentación base |
+| `metodologia_sprints_v2.md`            | Establece el ciclo de trabajo por sprint con checklist         |
+| `metodologia_versionado_backups_v1.md` | Detalla cómo versionar y respaldar el sistema                  |
+| `metodologia_doc_ia_v2.md`             | Permite navegación semántica de documentos por IA              |
+| `metodologia_adr_v2.md`                | Registra decisiones técnicas estructurales                     |
+| `metodologia_interaccion_ia_v2.md`     | Define cómo Alma (IA) puede operar sobre el sistema            |
+| `Methodology_Index.md`                 | Índice centralizado de metodologías activas                    |
+
+
+## 📁 Relación con el Sistema
+
+Estas metodologías permiten:
+- Navegación de IA por los módulos
+- Control de versiones estables
+- Registro estructurado de decisiones y cambios
+- Automatización futura basada en estructura semántica
+

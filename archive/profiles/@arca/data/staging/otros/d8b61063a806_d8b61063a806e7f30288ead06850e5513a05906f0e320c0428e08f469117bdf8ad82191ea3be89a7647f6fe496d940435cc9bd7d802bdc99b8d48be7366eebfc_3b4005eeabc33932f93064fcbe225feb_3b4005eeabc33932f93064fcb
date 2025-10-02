@@ -1,0 +1,25 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_ae48ab
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Ayuda
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:23027f0e1fbc8d7f980bd1c2e9e7917b7d500df629ff368ba59c4e72a4f50b1a
+---
+from core.cli import AlmaCLI
+
+def run(args):
+    """Muestra lista de comandos disponibles"""
+    print("Comandos disponibles:")
+    for cmd in sorted(AlmaCLI().commands.keys()):
+        print(f"  {cmd}")

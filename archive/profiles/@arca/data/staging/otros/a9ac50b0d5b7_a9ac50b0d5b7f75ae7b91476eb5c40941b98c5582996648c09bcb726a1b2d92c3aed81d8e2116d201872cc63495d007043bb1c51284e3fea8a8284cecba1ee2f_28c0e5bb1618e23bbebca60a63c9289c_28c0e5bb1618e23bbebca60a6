@@ -1,0 +1,10 @@
+### 🔁 Nota sobre `alma-cli` (futuro)
+
+Se planifica automatizar este flujo con el comando:
+
+```bash
+alma-cli ingest archivo.zip
+```
+
+Que realizará clasificación, sugerencia de destino, movimiento, registro automático y renombrado.
+

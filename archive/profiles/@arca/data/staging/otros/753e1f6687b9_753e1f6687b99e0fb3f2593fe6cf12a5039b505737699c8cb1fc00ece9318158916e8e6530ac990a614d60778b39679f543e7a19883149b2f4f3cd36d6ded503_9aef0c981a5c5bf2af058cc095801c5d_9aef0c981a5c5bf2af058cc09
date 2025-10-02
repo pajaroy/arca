@@ -1,0 +1,22 @@
+# 🗃️ Archivos Archivados
+
+Esta carpeta contiene todos los archivos ya utilizados, procesados o integrados al sistema. Sirve como respaldo histórico y traza cada fase de implementación del entorno ALMA_RESIST.
+
+## 📁 Estructura
+
+Cada subcarpeta está nombrada según la fecha de archivado (`YYYY-MM-DD`) y puede incluir:
+
+- Scripts descargados e implementados
+- Respuestas AI utilizadas
+- Markdown base o modificados
+- Logs de instalación o integración
+- Apéndices o protocolos que ya fueron integrados
+
+## 🧠 Reglas
+
+1. No modificar el contenido archivado.
+2. Si es necesario reutilizar, copiar el archivo desde aquí, nunca editar directo.
+3. Usar un README por subcarpeta para registrar qué contiene y qué función cumplió.
+
+---
+

@@ -1,0 +1,91 @@
+---
+module: dependencias
+type: core
+status: in_progress
+created: '2025-05-20'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 📦 Dependencias Técnicas – ALMA RESIST
+
+📝 Versión inicial  
+📅 Creado: 2025-05-20  
+👤 Responsable: Usuario + IA
+
+---
+
+## 🎯 Objetivo
+
+Este documento registra todas las dependencias técnicas necesarias para ejecutar, extender o entender el sistema ALMA RESIST. Incluye:
+
+- Librerías de Python
+- Servicios de sistema (como servidores LLM)
+- Scripts internos requeridos
+- Recursos externos que deben instalarse o clonarse
+
+---
+
+## 🐍 Librerías de Python (mínimas)
+
+```bash
+# requirements.txt mínimo
+cryptodome
+pytest
+rich
+flask           # o fastapi (según backend IA)
+requests
+```
+
+---
+
+## 🧠 Modelos LLM recomendados
+
+- `Mistral-7B-Instruct` (GGUF) – vía `llama.cpp` o `text-generation-webui`
+- `DeepSeek-Coder` (si usás entorno especializado de programación)
+- `LLaMA 2` (opcional, si tenés espacio)
+
+Requiere descarga manual o automatización con scripts desde HuggingFace o repositorios oficiales.
+
+---
+
+## 🧰 Servidores IA soportados
+
+| Motor            | Recomendado | Notas                                    |
+|------------------|-------------|------------------------------------------|
+| `llama.cpp`      | ✅           | Compilado local, portable, rápido        |
+| `text-generation-webui` | ⚠️        | Solo si usás GUI, pesado                |
+| `fastapi + socket` | ✅           | Para arquitectura modular sin frontend   |
+
+---
+
+## 🔧 Scripts internos requeridos
+
+- `core/log_writer.py` – logging estructurado
+- `core/log_crypto.py` – cifrado binario
+- `core/loader.py` – memoria ALMA_LOADER
+- `scripts/start_llm_server.sh` – (futuro) arranque automático
+
+---
+
+## 🔗 Dependencias externas opcionales
+
+| Herramienta    | Uso esperado                     |
+|----------------|----------------------------------|
+| `tmux`         | Multiplexado terminal             |
+| `rclone`       | Sincronización con nube segura    |
+| `Obsidian`     | Visualización y edición de vaults |
+| `NotebookLM`   | IA externa opcional sobre memoria |
+| `drawio`       | Diagramas estructurales           |
+
+---
+
+## 📁 Ubicación recomendada
+
+Guardar como:
+
+```
+ALMA_RESIST/docs/dependencias.md
+```
+
+Actualizar cuando se incorporen nuevas librerías o herramientas clave.

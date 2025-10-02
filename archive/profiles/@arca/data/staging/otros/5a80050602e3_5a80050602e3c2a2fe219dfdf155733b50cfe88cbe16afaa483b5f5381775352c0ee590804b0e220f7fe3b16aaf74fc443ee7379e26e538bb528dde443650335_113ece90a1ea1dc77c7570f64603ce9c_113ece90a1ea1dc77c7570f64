@@ -1,0 +1,54 @@
+---
+tipo: configuracion_json
+id: CONFIGURACION_JSON_2025-06-05_f5f25c
+version: '1.0'
+formato: json
+modulo: ALMA_RESIST
+titulo: Schema Respuesta
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:2a00a37d45483f98635a0604899e4d67201b7494bf5329f16237d43fc3603697
+---
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RespuestaLLM",
+  "description": "Contrato para salida del endpoint /responder",
+  "type": "object",
+  "properties": {
+    "respuesta": {
+      "type": "string",
+      "description": "Texto generado por el modelo LLM"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "modelo": {
+          "type": "string"
+        },
+        "longitud_prompt": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "modelo",
+        "longitud_prompt",
+        "timestamp"
+      ]
+    }
+  },
+  "required": [
+    "respuesta",
+    "metadata"
+  ],
+  "additionalProperties": false
+}

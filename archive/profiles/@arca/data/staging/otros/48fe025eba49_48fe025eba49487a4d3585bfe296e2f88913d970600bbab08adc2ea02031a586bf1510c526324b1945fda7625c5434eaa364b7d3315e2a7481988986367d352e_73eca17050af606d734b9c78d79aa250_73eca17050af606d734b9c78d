@@ -1,0 +1,8 @@
+```mermaid
+graph TD
+    A[Bitácora: "Estrés detectado"] --> B{Psicotrading: Nivel >7/10}
+    B -->|Sí| C[Trading: Bloquear órdenes]
+    C --> D[Health: Generar alerta]
+    B -->|No| E[Trading: Ejecutar Estrategia]
+
+```

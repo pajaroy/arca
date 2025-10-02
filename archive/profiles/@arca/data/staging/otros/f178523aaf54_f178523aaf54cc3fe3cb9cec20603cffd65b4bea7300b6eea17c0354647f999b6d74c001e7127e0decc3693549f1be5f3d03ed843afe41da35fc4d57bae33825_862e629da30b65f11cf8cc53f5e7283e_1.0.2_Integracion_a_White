@@ -1,0 +1,103 @@
+# 4 – Navegación y Organización Funcional
+
+## 4.1 Navegación Funcional del Sistema
+
+El sistema ALMA LIBRE se estructura a través de **cuadernos temáticos** y **módulos funcionales** que trabajan en conjunto para articular pensamiento, ejecución y evolución.
+
+A lo largo del desarrollo, cada área temática del sistema estará dividida en:
+- Un **cuaderno**, donde se planifican, reflexionan y conceptualizan ideas.
+- Un **módulo**, donde se ejecutan, registran y miden esas ideas.
+
+Esta división no es rígida, sino complementaria: los cuadernos alimentan a los módulos, y los módulos retroalimentan a los cuadernos.
+
+
+
+
+### 🔗 Relación entre Cuadernos y Módulos
+
+- **01 – Alma General** ↔️ **Bitácora Central**
+- **02 – Reflexión (psicotrading, introspección)** ↔️ **Psicología del Trading / Salud**
+- **03 – Medicina Alternativa** ↔️ **Salud y RPL**
+- **04 – Geopolítica y Actualidad** ↔️ **Noticias Globales**
+- **05 – Trading** ↔️ **Gestor de Trades**
+- **06 – Finanzas Personales** ↔️ **Control de Finanzas**
+- **07 – Creatividad y Empresas** ↔️ **Fondo de Inversión / Cultivo Cannavir**
+- **08 – Programación** ↔️ **Desarrollo de Apps Internas**
+
+> Esta sección se complementa con la estructura física de carpetas proyectada en la carpeta `1.0.2_Navegacion` y con el prompt base de navegación terminal.
+
+
+El sistema sigue una lógica de dualidad complementaria.  
+A cada **cuaderno temático** le corresponde un **módulo funcional** que convierte la teoría en práctica.
+
+| Cuaderno Temático        | Módulo Funcional                       |
+| ------------------------ | -------------------------------------- |
+| Alma General             | Bitácora Central                       |
+| Reflexión                | Psicología del Trading / Salud         |
+| Medicina Alternativa     | Salud y RPL                            |
+| Geopolítica y Actualidad | Noticias Globales                      |
+| Trading                  | Gestor de Trades                       |
+| Finanzas Personales      | Control de Finanzas                    |
+| Creatividad y Empresas   | Fondo de Inversión / Cultivo Cannabird |
+| Programación             | Desarrollo de Apps Internas            |
+
+> Esta relación no es fija ni limitada. Un cuaderno puede alimentar a varios módulos y viceversa.
+
+
+### 📑 Memorias por tema
+
+Cada área principal del sistema tiene su propia memoria, y cuantas más conexiones entre memorias, mejor.  
+Estas memorias sirven como fuente de contexto, aprendizaje acumulado y referencia transversal entre módulos, cuadernos y decisiones futuras.
+
+El sistema ALMA LIBRE está pensado para operar sobre 4 grandes líneas temáticas:
+
+1. **Trading e Inversiones**
+2. **Historia y Geopolítica**
+3. **Cultivo y Salud**
+4. **Programación**
+
+Estas áreas no son compartimentos estancos, sino rutas de pensamiento y acción que se cruzan constantemente. Ejemplos:
+
+- Noticias globales afectan decisiones de trading.
+- Resultados en cultivo pueden influir en decisiones financieras.
+- La programación construye los módulos que permiten gestionar todo.
+- Procesos de introspección emocional impactan tanto en trading como en salud.
+
+Cada memoria se vincula a través del encabezado YAML con múltiples áreas temáticas, permitiendo una lectura transversal del sistema y facilitando las búsquedas inteligentes desde terminal o IA.
+
+> A futuro, algunas de estas líneas temáticas podrán tener **carpetas propias de memorias cruzadas** o sistemas de etiquetas inteligentes que permitan agrupar experiencias conectadas entre áreas distintas.
+
+
+### 🗂️ Estandarización de módulos
+
+Cada módulo del sistema ALMA LIBRE tendrá su propia carpeta funcional, dentro de la estructura de memorias base.
+
+Dentro de esa carpeta, se incluirá un archivo `README.md` que actúe como manual técnico y de integración, con los siguientes datos:
+
+- Nombre del módulo
+- Versión actual
+- Objetivo principal
+- Relación con cuaderno asociado
+- Estructura de archivos internos
+- Estado del módulo (activo, en desarrollo, obsoleto, etc.)
+- Última actualización
+
+```
+Ejemplo de ubicación:
+
+95_memorias_base/ └── modulos/ └── gestor_trading/ └── README.md
+```
+
+Cada `README.md` incluirá también una sección llamada `conexiones_semanticas`, donde se listarán:
+
+- Cuadernos temáticos relacionados
+- Memorias que lo alimentan
+- Scripts o automatismos que lo utilizan o modifican
+
+Esto permitirá construir un sistema de navegación cruzada e inteligente, tanto para humanos como para IAs conectadas al proyecto.
+
+Además, se proyecta crear una **plantilla base** para que todos los módulos sigan un mismo formato y puedan actualizarse de forma coherente y automatizada en futuras versiones.
+
+> La estructura aquí planteada servirá como base para el diseño físico de carpetas del sistema ALMA LIBRE, desarrollado en la carpeta `1.0.2_Navegacion`.
+
+

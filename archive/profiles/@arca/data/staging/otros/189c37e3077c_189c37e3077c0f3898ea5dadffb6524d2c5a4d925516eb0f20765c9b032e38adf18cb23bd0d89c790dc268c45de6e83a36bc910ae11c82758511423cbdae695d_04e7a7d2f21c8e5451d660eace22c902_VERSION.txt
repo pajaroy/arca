@@ -1,0 +1,4 @@
+v0.0.0.2_CLI_FINAL
+Fecha de cierre: 2025-05-22
+Estado: estable
+Sprint asociado: Sprint_2.2

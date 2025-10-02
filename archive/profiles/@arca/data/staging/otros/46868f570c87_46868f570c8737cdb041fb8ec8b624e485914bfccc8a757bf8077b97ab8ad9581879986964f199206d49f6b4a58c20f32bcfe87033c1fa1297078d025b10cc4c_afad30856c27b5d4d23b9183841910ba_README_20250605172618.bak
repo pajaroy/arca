@@ -1,0 +1,16 @@
+---
+module: arquitectura/idea_base/v0_0_0_0_legacy/readme
+type: core
+status: in_progress
+created: '2025-05-23'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🗃️ _legacy/ – Contenido Archivado
+
+Este directorio contiene elementos antiguos del sistema ALMA_RESIST, archivados por razones de trazabilidad y conservación histórica.
+
+## 📂 Archivos contenidos:
+- `_legacy/` (0.0 KB)
+- `_legacy/idea_base_0.0.0.0.zip` (62.11 KB)

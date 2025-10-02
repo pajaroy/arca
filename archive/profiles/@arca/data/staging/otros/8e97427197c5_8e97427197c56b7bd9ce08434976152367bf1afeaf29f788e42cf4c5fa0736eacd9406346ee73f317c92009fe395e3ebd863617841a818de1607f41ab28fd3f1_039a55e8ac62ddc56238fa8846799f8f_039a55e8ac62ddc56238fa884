@@ -1,0 +1,22 @@
+# ✅ Solicitud de Test – `test_context_tracker.py` – ALMA_RESIST Sprint 2.6
+
+Este test debe cubrir el módulo `context_tracker.py`, que se encarga de registrar interacciones (prompt/respuesta/metadata), recuperarlas y borrarlas de forma segura.
+
+
+## 🧪 Casos de prueba sugeridos
+
+| Caso                                           | Resultado esperado                                     |
+|------------------------------------------------|--------------------------------------------------------|
+| Registro válido con prompt, respuesta y metadata | Se guarda correctamente, archivo `.jsonl` actualizado |
+| Recuperación de historial con `get_history(n)` | Devuelve los últimos `n` registros                     |
+| Borrado del historial                          | Archivo eliminado, nuevo archivo creado vacío         |
+| Manejo de líneas corruptas                     | Se salta la línea, logging indica el error            |
+| Validación contra schema (falta campo)         | No registra interacción inválida                      |
+| Verificación de longitud con `len(tracker)`    | Coincide con número real de líneas en archivo         |
+
+
+## 📂 Archivos relacionados
+
+- `context_tracker.py` (módulo principal)
+- `schema_prompt.json` y `schema_respuesta.json` (validados indirectamente)
+

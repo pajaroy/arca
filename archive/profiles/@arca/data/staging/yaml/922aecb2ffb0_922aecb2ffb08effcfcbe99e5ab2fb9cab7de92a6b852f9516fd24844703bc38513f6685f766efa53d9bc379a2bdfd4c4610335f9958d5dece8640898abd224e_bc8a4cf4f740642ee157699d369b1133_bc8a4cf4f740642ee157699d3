@@ -1,0 +1,17 @@
+# Archivo de aprendizajes metodológicos
+# Generado automáticamente por add_aprendizaje_flujo.py
+
+- fecha: '2025-06-09T08:29:14.857702+00:00'
+  que_aprendi: La importancia de registrar cada acción crítica con bitácora, commit
+    y push antes de avanzar, asegurando trazabilidad total.
+  que_aprendio_sistema: El sistema se vuelve más robusto y auditable cuando cada paso
+    queda documentado antes de cualquier avance técnico.
+  cambio_metodologico: 'Se institucionaliza el flujo: bitácora → commit → push → siguiente
+    paso, como estándar obligatorio en cada ciclo de trabajo técnico.'
+  consejo_futuro: 'Nunca saltear el registro ni avanzar sin commit y push: cualquier
+    salto genera deuda técnica y pérdida de trazabilidad.'
+  error_evitar: Omitir bitácoras, olvidar el commit o dejar pushes pendientes, lo
+    que puede provocar pérdida de información o desincronización.
+  observaciones: ''
+  autor: bird
+  chat_id: ''

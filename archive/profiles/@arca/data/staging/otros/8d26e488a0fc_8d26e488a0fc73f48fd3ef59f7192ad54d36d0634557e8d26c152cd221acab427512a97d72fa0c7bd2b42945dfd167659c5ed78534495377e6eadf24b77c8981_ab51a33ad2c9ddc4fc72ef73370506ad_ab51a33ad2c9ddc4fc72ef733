@@ -1,0 +1,17 @@
+{
+  "files.exclude": {
+    "**/.obsidian": true,
+    "**/__pycache__": true,
+    "**/.git": true
+  },
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1500,
+  "editor.wordWrap": "on",
+  "editor.tabSize": 2,
+  "editor.renderWhitespace": "boundary",
+  "editor.minimap.enabled": false,
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "markdown.preview.breaks": true,
+  "markdown.previewFrontMatter": "show",
+  "explorer.confirmDelete": false
+}

@@ -1,0 +1,21 @@
+---
+tipo: configuracion
+id: CONFIGURACION_2025-06-05_c44bad
+version: '1.0'
+formato: yaml
+modulo: ALMA_RESIST
+titulo: Module
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:081045c57b68174ec96db9c65ac8b03a5ea7ff77ddde16f7c7b6f75488963f4d
+---
+nombre_modulo: raiz_base
+descripcion: Módulo raíz base de ejemplo según la estructura ALMA_RESIST
+version: 1.0.0

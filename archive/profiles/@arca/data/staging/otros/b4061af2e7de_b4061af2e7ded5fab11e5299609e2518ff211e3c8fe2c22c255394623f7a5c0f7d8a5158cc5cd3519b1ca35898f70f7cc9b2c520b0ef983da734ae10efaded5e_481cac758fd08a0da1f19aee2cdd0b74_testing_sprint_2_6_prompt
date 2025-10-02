@@ -1,0 +1,87 @@
+---
+module: prompts/testing_sprint_2_6_prompt
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# ✅ Contexto Técnico – Proyecto ALMA_RESIST – Sprint 2.6
+
+Este es un nuevo hilo exclusivamente dedicado a crear una suite de tests automatizados que valide el funcionamiento de todos los módulos del servidor LLM desarrollado en el Sprint 2.6.
+
+## 📂 Módulos disponibles
+
+Ya contamos con los siguientes archivos .py completamente desarrollados e integrados:
+
+- `main.py` (FastAPI) – endpoint `/responder`
+- `model_wrapper.py` – gestión de modelo llama.cpp y generación
+- `transport_layer.py` – persistencia de prompts/respuestas validadas
+- `context_tracker.py` – historial contextual de interacciones
+- `log_writer.py` – logger estructurado en JSONL
+- `log_crypto.py` – cifrado con AES-256-GCM / ChaCha20
+
+Además, contamos con contratos JSON Schema validados: `schema_prompt.json` y `schema_respuesta.json`.
+
+---
+
+## 🎯 Objetivo
+
+Queremos desarrollar una **suite de tests completa con `pytest`** para validar cada módulo del sistema, cubrir errores comunes, asegurar persistencia, y garantizar trazabilidad.
+
+---
+
+## 🧪 Tareas de testeo por archivo
+
+### `test_model_wrapper.py`
+- Probar carga de modelo correcta
+- Generación de texto funcional
+- Manejo de errores al pasar rutas incorrectas
+- Tiempo de respuesta y longitud mínima
+
+### `test_api_responder.py`
+- Status 200 con prompt válido
+- Status 422 con prompt vacío
+- Status 503 si no hay modelo cargado
+- Validación de estructura de respuesta
+
+### `test_transport_layer.py`
+- Envío de datos válidos → archivo creado
+- Envío de datos inválidos → error controlado
+- Recuperación correcta del último dato
+- Validación contra contratos JSON
+
+### `test_context_tracker.py`
+- Registro de interacción correcto
+- Recuperación del historial
+- Manejo de líneas corruptas
+- Borrado de historial
+
+### `test_log_writer.py`
+- Escritura atómica
+- Validación de campos requeridos
+- Manejo de errores de disco simulado
+- Prueba de rotación de logs
+
+### `test_log_crypto.py`
+- Cifrado y descifrado funcional
+- Validación del contenido cifrado
+- Detección de algoritmo por hardware
+
+---
+
+## 📎 Consideraciones técnicas
+
+- Usar `pytest`
+- Evitar dependencias externas innecesarias
+- Se pueden usar mocks o simulaciones donde no sea viable cargar modelo real
+- Se recomienda estructura `tests/*.py` y que cada archivo tenga su `test_*.py` correspondiente
+
+---
+
+## 🔐 Objetivo final
+
+Completar la Fase 3 del Sprint 2.6 validando que todo el sistema está operativo, seguro y trazable, antes de pasar al empaquetado y documentación final.
+
+**¿Podés comenzar creando `test_model_wrapper.py` como primer test optimizado y luego avanzar uno por uno con los demás módulos?**

@@ -1,0 +1,590 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+ALMA_RESIST - Bitácora Institucional v0.3.0
+Sistema CLI antifallos para gestión segura de bitácoras con gobernanza documental
+"""
+import os
+import sys
+import json
+import uuid
+import argparse
+import hashlib
+import logging
+import shutil
+import glob
+import re
+from datetime import datetime, timezone, timedelta
+from pathlib import Path
+from typing import List, Dict, Tuple, Optional
+import yaml
+from logging.handlers import RotatingFileHandler
+
+# --- CONFIGURACIÓN GLOBAL ---
+DEFAULT_BITACORA_PATH = "docs/journal/bitacora_viva.yaml"
+BACKUP_DIR = "docs/journal/backups"
+LOG_DIR = "/home/bird/alma_core/logs"
+RETENCION_BACKUPS = 30  # Días de retención por defecto
+VALID_ESTADOS = ["registrado", "en_progreso", "completado", "cancelado", "revisión"]
+METADATA_FIELDS = [
+    "version", "tipo", "schema", "descripcion", "estructura", "tags", 
+    "linked_to", "responsable", "hash_verificacion", "historial", 
+    "last_modified", "last_modified_by"
+]
+CONFIG_FILE = "bitacora_config.yaml"
+
+# --- CLASE PRINCIPAL PARA GESTIÓN ANTIFALLOS ---
+class BitacoraManager:
+    def __init__(self, args):
+        self.args = args
+        self.bitacora_path = Path(args.bitacora).absolute()
+        self.config = self.cargar_configuracion()
+        self.logger = self.configurar_logging()
+        self.bitacora = None
+        self.backup_realizado = False
+
+    def cargar_configuracion(self) -> dict:
+        """Carga configuración con valores por defecto"""
+        config_path = Path(CONFIG_FILE)
+        config = {
+            "retencion_backups": RETENCION_BACKUPS,
+            "max_backups": 100,
+            "log_rotacion": "10MB",
+            "log_copias": 5
+        }
+        
+        if config_path.exists():
+            try:
+                with open(config_path, 'r') as f:
+                    user_config = yaml.safe_load(f) or {}
+                config.update(user_config)
+            except Exception as e:
+                print(f"⚠️ Error cargando configuración: {str(e)}")
+        
+        return config
+
+    def configurar_logging(self):
+        """Configura logging avanzado con rotación"""
+        logger = logging.getLogger('bitacora_antifallos')
+        logger.setLevel(logging.DEBUG if self.args.verbose else logging.INFO)
+        
+        # Formato estándar ALMA_RESIST
+        formato = logging.Formatter(
+            '%(asctime)s | %(levelname)s | %(module)s | %(message)s',
+            datefmt='%Y-%m-%dT%H:%M:%SZ'
+        )
+        formato.converter = lambda *args: datetime.now(timezone.utc).timetuple()
+        
+        # Handler de consola
+        consola = logging.StreamHandler()
+        consola.setFormatter(formato)
+        logger.addHandler(consola)
+        
+        # Handler de archivo rotativo
+        if self.args.log:
+            Path(LOG_DIR).mkdir(parents=True, exist_ok=True)
+            log_file = Path(LOG_DIR) / f"bitacora_{datetime.now(timezone.utc).strftime('%Y%m')}.log"
+            rotacion = RotatingFileHandler(
+                log_file,
+                maxBytes=self._parse_log_size(self.config['log_rotacion']),
+                backupCount=self.config['log_copias']
+            )
+            rotacion.setFormatter(formato)
+            logger.addHandler(rotacion)
+        
+        return logger
+
+    def _parse_log_size(self, size_str: str) -> int:
+        """Convierte tamaño de log en bytes (ej: 10MB -> 10485760)"""
+        unidades = {"KB": 1024, "MB": 1024**2, "GB": 1024**3}
+        match = re.match(r"(\d+)\s*([KMG]B)", size_str.upper())
+        if match:
+            valor, unidad = match.groups()
+            return int(valor) * unidades[unidad]
+        return 10 * 1024**2  # 10MB por defecto
+
+    def validar_entrada(self, entrada: dict):
+        """Validación estricta de estructura y tipos de datos"""
+        campos_obligatorios = {
+            "fecha": str,
+            "accion": str,
+            "descripcion": str,
+            "motivo": str,
+            "ejecutado_por": str
+        }
+        
+        # Verificar campos obligatorios
+        for campo, tipo in campos_obligatorios.items():
+            if campo not in entrada:
+                raise ValueError(f"Campo obligatorio faltante: {campo}")
+            if not isinstance(entrada[campo], tipo):
+                raise TypeError(f"Tipo inválido para {campo}. Esperado: {tipo.__name__}")
+        
+        # Validar estado
+        if entrada.get("estado") and entrada["estado"] not in VALID_ESTADOS:
+            raise ValueError(f"Estado inválido: {entrada['estado']}. Validos: {', '.join(VALID_ESTADOS)}")
+        
+        # Validar tags
+        if "tags" in entrada and not isinstance(entrada["tags"], list):
+            raise TypeError("Tags debe ser una lista")
+        
+        # Validar formato fecha ISO
+        try:
+            datetime.fromisoformat(entrada["fecha"])
+        except ValueError:
+            raise ValueError("Formato de fecha inválido. Debe ser ISO 8601")
+
+    def validar_metadata(self, metadata: dict):
+        """Validación completa de metadatos"""
+        for campo in METADATA_FIELDS:
+            if campo not in metadata:
+                raise ValueError(f"Metadato obligatorio faltante: {campo}")
+        
+        # Validar historial de cambios
+        if not isinstance(metadata["historial"], list):
+            raise TypeError("El historial debe ser una lista de registros")
+        
+        # Validar hash de verificación
+        if metadata["hash_verificacion"] and not metadata["hash_verificacion"].startswith("sha256:"):
+            raise ValueError("Formato de hash inválido. Debe ser 'sha256:<hash>'")
+
+    def cargar_bitacora(self) -> dict:
+        """Carga la bitácora con validación estricta"""
+        if not self.bitacora_path.exists():
+            return self.crear_bitacora_vacia()
+        
+        try:
+            with open(self.bitacora_path, 'r') as f:
+                bitacora = yaml.safe_load(f)
+            
+            self.validar_metadata(bitacora.get("metadata", {}))
+            for entrada in bitacora.get("entradas", []):
+                self.validar_entrada(entrada)
+            
+            return bitacora
+        except (yaml.YAMLError, ValueError, TypeError) as e:
+            self.logger.error(f"ERROR DE VALIDACIÓN: {str(e)}")
+            raise RuntimeError(f"Bitácora corrupta: {str(e)}")
+
+    def crear_bitacora_vacia(self) -> dict:
+        """Crea estructura inicial con metadatos de gobernanza"""
+        return {
+            "metadata": {
+                "version": "0.3.0",
+                "tipo": "bitacora",
+                "schema": "almaresist.bitacora_v1",
+                "descripcion": "Bitácora institucional de ALMA_RESIST",
+                "estructura": "metadata + entradas",
+                "tags": ["bitacora", "institucional"],
+                "linked_to": [],
+                "responsable": "Equipo de Operaciones",
+                "hash_verificacion": "",
+                "historial": [],
+                "last_modified": datetime.now(timezone.utc).isoformat(),
+                "last_modified_by": "system"
+            },
+            "entradas": []
+        }
+
+    def crear_backup(self) -> Path:
+        """Crea backup con política de retención"""
+        backup_dir = Path(BACKUP_DIR).absolute()
+        backup_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Crear backup con timestamp
+        timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+        backup_path = backup_dir / f"{self.bitacora_path.stem}_backup_{timestamp}.yaml"
+        
+        try:
+            shutil.copy2(self.bitacora_path, backup_path)
+            self.logger.info(f"Backup creado: {backup_path}")
+            
+            # Aplicar política de retención
+            self.aplicar_retencion_backups(backup_dir)
+            
+            self.backup_realizado = True
+            return backup_path
+        except Exception as e:
+            self.logger.error(f"FALLO EN BACKUP: {str(e)}")
+            raise RuntimeError(f"Error creando backup: {str(e)}")
+
+    def aplicar_retencion_backups(self, backup_dir: Path):
+        """Elimina backups antiguos según política de retención"""
+        backups = sorted(backup_dir.glob(f"{self.bitacora_path.stem}_backup_*.yaml"), key=os.path.getmtime)
+        
+        # Eliminar por antigüedad
+        limite_tiempo = datetime.now(timezone.utc) - timedelta(days=self.config['retencion_backups'])
+        for backup in backups:
+            fecha_backup = datetime.fromtimestamp(backup.stat().st_mtime, tz=timezone.utc)
+            if fecha_backup < limite_tiempo:
+                try:
+                    backup.unlink()
+                    self.logger.info(f"Backup eliminado (retención): {backup.name}")
+                except Exception as e:
+                    self.logger.error(f"Error eliminando backup: {str(e)}")
+        
+        # Eliminar por cantidad máxima
+        if len(backups) > self.config['max_backups']:
+            for backup in backups[:-self.config['max_backups']]:
+                try:
+                    backup.unlink()
+                    self.logger.info(f"Backup eliminado (cantidad): {backup.name}")
+                except Exception as e:
+                    self.logger.error(f"Error eliminando backup: {str(e)}")
+
+    def calcular_hash_archivo(self, file_path: Path) -> str:
+        """Calcula hash SHA-256 institucional"""
+        sha256 = hashlib.sha256()
+        try:
+            with open(file_path, 'rb') as f:
+                while chunk := f.read(4096):
+                    sha256.update(chunk)
+            return f"sha256:{sha256.hexdigest()}"
+        except Exception as e:
+            self.logger.error(f"ERROR DE HASH: {str(e)}")
+            raise RuntimeError(f"Error calculando hash: {str(e)}")
+
+    def registrar_cambio(self, accion: str, entrada_id: str = None, hash_previo: str = None):
+        """Registra en changelog con trazabilidad completa"""
+        if not self.bitacora:
+            return
+            
+        metadata = self.bitacora["metadata"]
+        nuevo_registro = {
+            "fecha": datetime.now(timezone.utc).isoformat(),
+            "accion": accion,
+            "ejecutado_por": self.args.ejecutado_por,
+            "hash_previo": hash_previo,
+            "hash_nuevo": metadata.get("hash_verificacion", ""),
+            "entrada_id": entrada_id
+        }
+        metadata["historial"].append(nuevo_registro)
+        metadata["last_modified"] = nuevo_registro["fecha"]
+        metadata["last_modified_by"] = nuevo_registro["ejecutado_por"]
+        
+        self.logger.info(f"Registro changelog: {accion} | Entrada: {entrada_id or 'N/A'}")
+
+    def guardar_triple_formato(self, forzar: bool = False) -> Tuple[Path, Path, Path]:
+        """Guarda en triple formato con verificación de consistencia"""
+        base_path = self.bitacora_path
+        yaml_path = base_path.with_suffix('.yaml')
+        json_path = base_path.with_suffix('.json')
+        md_path = base_path.with_suffix('.md')
+        
+        # Verificar existencia de archivos
+        if not forzar and yaml_path.exists() and json_path.exists() and md_path.exists():
+            # Verificar coherencia temporal
+            yaml_mtime = yaml_path.stat().st_mtime
+            if (json_path.stat().st_mtime < yaml_mtime) or (md_path.stat().st_mtime < yaml_mtime):
+                self.logger.warning("Archivos desactualizados detectados. Regenerando...")
+                forzar = True
+        
+        try:
+            # Guardar YAML
+            with open(yaml_path, 'w') as f:
+                yaml.dump(self.bitacora, f, sort_keys=False, allow_unicode=True)
+            
+            # Guardar JSON
+            with open(json_path, 'w') as f:
+                json.dump(self.bitacora, f, indent=2, ensure_ascii=False, default=str)
+            
+            # Guardar Markdown
+            self.generar_markdown(md_path)
+            
+            self.logger.info(f"Triple formato actualizado: {yaml_path.name}")
+            return yaml_path, json_path, md_path
+        except Exception as e:
+            self.logger.error(f"FALLO SINCRONIZACIÓN: {str(e)}")
+            if self.backup_realizado:
+                self.logger.warning("⚠️  Restaurando desde último backup...")
+                self.restaurar_backup()
+            raise RuntimeError(f"Error sincronización triple formato: {str(e)}")
+
+    def generar_markdown(self, md_path: Path):
+        """Genera documento Markdown con front matter"""
+        with open(md_path, 'w') as f:
+            # Front matter
+            f.write("---\n")
+            yaml.dump(self.bitacora["metadata"], f, sort_keys=False, allow_unicode=True)
+            f.write("---\n\n")
+            
+            # Cuerpo
+            f.write(f"# Bitácora Institucional: {self.bitacora['metadata']['descripcion']}\n\n")
+            f.write(f"**Última modificación**: {self.bitacora['metadata']['last_modified']} ")
+            f.write(f"por *{self.bitacora['metadata']['last_modified_by']}*\n\n")
+            f.write(f"**Hash verificación**: `{self.bitacora['metadata']['hash_verificacion']}`\n\n")
+            f.write("---\n\n")
+            
+            # Entradas
+            for entrada in self.bitacora["entradas"]:
+                f.write(f"## {entrada['accion']} ({entrada['fecha']})\n")
+                f.write(f"**ID**: `{entrada.get('id', '')}`  \n")
+                f.write(f"**Ejecutado por**: {entrada['ejecutado_por']}  \n")
+                f.write(f"**Estado**: {entrada.get('estado', 'registrado')}  \n")
+                f.write(f"**Motivo**: {entrada['motivo']}\n\n")
+                f.write(f"### Descripción\n{entrada['descripcion']}\n\n")
+                if entrada.get('tags'):
+                    f.write(f"**Tags**: `{', '.join(entrada['tags'])}`\n\n")
+                f.write("---\n\n")
+
+    def agregar_entrada(self, entrada: dict, confirmar: bool = True):
+        """Agrega entrada con sistema antifallos completo"""
+        try:
+            # Paso 1: Validación preliminar
+            self.validar_entrada(entrada)
+            
+            # Paso 2: Cargar bitácora actual
+            self.bitacora = self.cargar_bitacora()
+            hash_previo = self.bitacora["metadata"].get("hash_verificacion", "")
+            
+            # Paso 3: Vista previa
+            if self.args.preview or confirmar:
+                self.mostrar_previa(entrada)
+                if confirmar and not self.confirmar_accion("¿Agregar entrada?"):
+                    self.logger.info("Operación cancelada por el usuario")
+                    return False
+            
+            # Paso 4: Backup y registro
+            if not self.args.dry_run:
+                self.crear_backup()
+                entrada["id"] = str(uuid.uuid4())
+                self.bitacora["entradas"].append(entrada)
+                
+                # Paso 5: Validación completa
+                self.validar_metadata(self.bitacora["metadata"])
+                
+                # Paso 6: Guardado seguro
+                yaml_path, _, _ = self.guardar_triple_formato()
+                nuevo_hash = self.calcular_hash_archivo(yaml_path)
+                self.bitacora["metadata"]["hash_verificacion"] = nuevo_hash
+                
+                # Actualizar con nuevo hash
+                self.guardar_triple_formato(forzar=True)
+                self.registrar_cambio("alta", entrada["id"], hash_previo)
+                
+                self.logger.info(f"✅ Entrada agregada: ID={entrada['id']}")
+                return True
+            else:
+                self.logger.info("✅ Simulación completada (dry-run)")
+                return True
+        except Exception as e:
+            self.logger.error(f"🚨 ERROR CRÍTICO: {str(e)}")
+            if self.backup_realizado:
+                self.logger.warning("Revertiendo cambios...")
+                self.restaurar_backup()
+            return False
+
+    def mostrar_previa(self, entrada: dict):
+        """Muestra vista previa de la entrada"""
+        print("\n--- VISTA PREVIA DE ENTRADA ---")
+        print(f"Acción: {entrada['accion']}")
+        print(f"Descripción: {entrada['descripcion'][:100]}...")
+        print(f"Motivo: {entrada['motivo']}")
+        print(f"Ejecutado por: {entrada['ejecutado_por']}")
+        print(f"Estado: {entrada.get('estado', 'registrado')}")
+        print(f"Tags: {', '.join(entrada.get('tags', []))}")
+        print("-------------------------------\n")
+
+    def confirmar_accion(self, mensaje: str) -> bool:
+        """Confirmación interactiva con el usuario"""
+        if self.args.yes:
+            return True
+        respuesta = input(f"{mensaje} [s/N] ").strip().lower()
+        return respuesta in ['s', 'y', 'si', 'yes']
+
+    def restaurar_backup(self, backup_path: Path = None):
+        """Restaura desde un backup específico"""
+        backups = sorted(Path(BACKUP_DIR).glob(f"{self.bitacora_path.stem}_backup_*.yaml"), reverse=True)
+        
+        if not backups:
+            self.logger.error("No hay backups disponibles")
+            return False
+        
+        if not backup_path:
+            backup_path = backups[0]  # Último backup por defecto
+        
+        try:
+            # Validar backup antes de restaurar
+            with open(backup_path, 'r') as f:
+                backup_data = yaml.safe_load(f)
+                self.validar_metadata(backup_data.get("metadata", {}))
+            
+            shutil.copy2(backup_path, self.bitacora_path)
+            self.logger.info(f"✅ Bitácora restaurada desde: {backup_path.name}")
+            
+            # Regenerar formatos
+            self.bitacora = backup_data
+            self.guardar_triple_formato(forzar=True)
+            return True
+        except Exception as e:
+            self.logger.error(f"FALLO RESTAURACIÓN: {str(e)}")
+            return False
+
+    def validar_bitacora(self) -> bool:
+        """Valida integridad completa de la bitácora"""
+        try:
+            # Validar archivo principal
+            self.bitacora = self.cargar_bitacora()
+            yaml_path = self.bitacora_path.with_suffix('.yaml')
+            
+            # Verificar hash
+            hash_calculado = self.calcular_hash_archivo(yaml_path)
+            if hash_calculado != self.bitacora["metadata"]["hash_verificacion"]:
+                raise ValueError(f"Hash no coincide. Calculado: {hash_calculado}")
+            
+            # Verificar triple formato
+            json_path = yaml_path.with_suffix('.json')
+            md_path = yaml_path.with_suffix('.md')
+            
+            if not json_path.exists() or not md_path.exists():
+                self.logger.warning("Archivos secundarios faltantes. Regenerando...")
+                self.guardar_triple_formato(forzar=True)
+            
+            self.logger.info("✅ Validación exitosa. Integridad confirmada.")
+            return True
+        except Exception as e:
+            self.logger.error(f"🚨 VALIDACIÓN FALLIDA: {str(e)}")
+            return False
+
+# --- COMANDOS CLI ---
+def comando_agregar(args, manager: BitacoraManager):
+    """Maneja el comando de agregar entrada"""
+    entrada = {
+        "fecha": datetime.now(timezone.utc).isoformat(),
+        "accion": args.accion,
+        "descripcion": args.descripcion,
+        "motivo": args.motivo,
+        "ejecutado_por": args.ejecutado_por,
+        "estado": args.estado,
+        "tags": args.tags.split(",") if args.tags else []
+    }
+    return manager.agregar_entrada(entrada, not args.yes)
+
+def comando_validar(args, manager: BitacoraManager):
+    """Valida integridad de la bitácora"""
+    return manager.validar_bitacora()
+
+def comando_restaurar(args, manager: BitacoraManager):
+    """Restaura desde un backup"""
+    backups = sorted(Path(BACKUP_DIR).glob(f"{manager.bitacora_path.stem}_backup_*.yaml"), reverse=True)
+    
+    if args.list:
+        print("\nBackups disponibles:")
+        for i, backup in enumerate(backups[:5]):
+            print(f"[{i+1}] {backup.name} ({backup.stat().st_size/1024:.1f} KB)")
+        return True
+    
+    backup_path = None
+    if args.backup_file:
+        backup_path = Path(args.backup_file).absolute()
+    
+    return manager.restaurar_backup(backup_path)
+
+def comando_generar_docs(args, manager: BitacoraManager):
+    """Genera documentación técnica automática"""
+    try:
+        manager.bitacora = manager.cargar_bitacora()
+        manager.guardar_triple_formato(forzar=True)
+        
+        # Generar README técnico
+        ruta_readme = Path("docs/readme_tecnico/readme_tecnico.yaml")
+        ruta_readme.parent.mkdir(parents=True, exist_ok=True)
+        
+        contenido_readme = {
+            "script": "add_bitacora_entry_v0.3.0.py",
+            "version": "0.3.0",
+            "ultima_ejecucion": datetime.now(timezone.utc).isoformat(),
+            "estadisticas": {
+                "entradas": len(manager.bitacora["entradas"]),
+                "ultima_entrada": manager.bitacora["entradas"][-1]["fecha"] if manager.bitacora["entradas"] else "N/A",
+                "backups": len(list(Path(BACKUP_DIR).glob("*.yaml")))
+            },
+            "configuracion": manager.config
+        }
+        
+        with open(ruta_readme, 'w') as f:
+            yaml.dump(contenido_readme, f)
+        
+        manager.logger.info("✅ Documentación técnica generada")
+        return True
+    except Exception as e:
+        manager.logger.error(f"ERROR GENERANDO DOCS: {str(e)}")
+        return False
+
+# --- FUNCIÓN PRINCIPAL ---
+def main():
+    parser = argparse.ArgumentParser(
+        description="ALMA_RESIST - Sistema de Bitácoras Institucionales v0.3.0",
+        epilog="Ejemplo completo:\n  python add_bitacora_entry_v0.3.0.py agregar \\\n"
+               "    --accion 'Actualización de seguridad' \\\n"
+               "    --descripcion 'Parche contra vulnerabilidad CVE-2023-1234' \\\n"
+               "    --motivo 'Protección de sistemas críticos' \\\n"
+               "    --ejecutado_por 'admin@dominio.com' \\\n"
+               "    --tags 'seguridad,parche,urgente' \\\n"
+               "    --bitacora 'docs/journal/bitacora_operaciones.yaml' \\\n"
+               "    --preview --log",
+        formatter_class=argparse.RawTextHelpFormatter
+    )
+    
+    # Argumentos globales
+    parser.add_argument("--bitacora", default=DEFAULT_BITACORA_PATH, 
+                       help="Ruta al archivo principal de bitácora")
+    parser.add_argument("--verbose", action="store_true", 
+                       help="Salida detallada del proceso")
+    parser.add_argument("--log", action="store_true", 
+                       help="Registrar en archivo de log")
+    parser.add_argument("--yes", "-y", action="store_true",
+                       help="Confirmar automáticamente todas las acciones")
+    
+    subparsers = parser.add_subparsers(dest='comando', required=True, title="Comandos")
+    
+    # Comando: agregar
+    parser_agregar = subparsers.add_parser('agregar', help='Agregar nueva entrada')
+    parser_agregar.add_argument("--accion", required=True, help="Acción realizada")
+    parser_agregar.add_argument("--descripcion", required=True, help="Descripción detallada")
+    parser_agregar.add_argument("--motivo", required=True, help="Motivo de la acción")
+    parser_agregar.add_argument("--ejecutado_por", required=True, help="Responsable de la acción")
+    parser_agregar.add_argument("--estado", default="registrado", choices=VALID_ESTADOS,
+                               help="Estado actual de la acción")
+    parser_agregar.add_argument("--tags", help="Etiquetas asociadas (separadas por comas)")
+    parser_agregar.add_argument("--dry-run", action="store_true", 
+                               help="Simular sin realizar cambios")
+    parser_agregar.add_argument("--preview", action="store_true",
+                               help="Mostrar vista previa antes de guardar")
+    
+    # Comando: validar
+    parser_validar = subparsers.add_parser('validar', help='Validar integridad de la bitácora')
+    
+    # Comando: restaurar
+    parser_restaurar = subparsers.add_parser('restaurar', help='Restaurar desde backup')
+    parser_restaurar.add_argument("--backup-file", help="Ruta específica del backup")
+    parser_restaurar.add_argument("--list", action="store_true", help="Listar backups disponibles")
+    
+    # Comando: generar-docs
+    parser_docs = subparsers.add_parser('generar-docs', help='Generar documentación técnica')
+    
+    args = parser.parse_args()
+    
+    try:
+        manager = BitacoraManager(args)
+        manager.logger.info(f"🚀 Iniciando comando: {args.comando.upper()}")
+        
+        if args.comando == "agregar":
+            resultado = comando_agregar(args, manager)
+        elif args.comando == "validar":
+            resultado = comando_validar(args, manager)
+        elif args.comando == "restaurar":
+            resultado = comando_restaurar(args, manager)
+        elif args.comando == "generar-docs":
+            resultado = comando_generar_docs(args, manager)
+        else:
+            parser.print_help()
+            resultado = False
+        
+        sys.exit(0 if resultado else 1)
+    except Exception as e:
+        logging.error(f"FALLO SISTÉMICO: {str(e)}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()

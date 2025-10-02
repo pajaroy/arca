@@ -1,0 +1,85 @@
+### 🔄 **Diagrama Mejorado** (en formato Mermaid + explicación):
+
+Diagram
+
+Code
+
+Copy
+
+Download
+
+flowchart TD
+    A[Resúmenes Semanales] --> B[📚 Memorias Generales]
+    B -->|Base filosófica| C1(💰 Capital)
+    B -->|Base filosófica| C2(💡 Reflexión)
+    B -->|Base filosófica| C3(📜 Históricas)
+    B -->|Base filosófica| C4(🌍 Geopolítica)
+    B -->|Base filosófica| C5(📊 Económica)
+    B -->|Base filosófica| C6(🏥 Salud)
+    B -->|Base filosófica| C7(💻 Programación)
+    B -->|Base filosófica| C8(📈 Trading)
+
+    %% Conexiones bidireccionales entre módulos
+    C1 <-..->|Presupuesto ↔ Bienestar| C6
+    C2 <-..->|Ética ↔ Estrategia| C8
+    C3 <-..->|Patrones ↔ Riesgos| C4
+    C5 <-..->|Macroeconomía ↔ Trading| C8
+    C7 <-..->|Automatización ↔ Análisis| C3
+    C6 <-..->|Energía ↔ Productividad| C7
+
+    %% Retroalimentación global
+    C8 -->|Experiencias| E[🔄 Núcleo de Retroalimentación]
+    E -->|Actualiza principios| B
+    E -->|Optimiza| C1
+    E -->|Reevalúa| C2
+    E -->|Revisa patrones| C3
+    E -->|Ajusta riesgos| C4
+    E -->|Calibra modelos| C5
+    E -->|Sugiere hábitos| C6
+    E -->|Mejora código| C7
+
+    %% Relaciones emergentes
+    C2 -.->|"Ej: MEMREFLEX-005 (ansiedad) → MEMHEALTH-003 (meditación)"| C6
+    C4 -.->|"Ej: MEMGEO-012 (guerra) → MEMECO-007 (commodities)"| C5
+
+
+### 📊 **Cómo Implementarlo en JSON**:
+
+1. **Estructura de una memoria**:
+    
+    json
+    
+    Copy
+    
+    Download
+    
+    {
+      "id": "MEMGEO-012",
+      "fecha": "2025-09-15T14:30:00Z",
+      "titulo": "Conflicto en el Estrecho de Ormuz",
+      "categoria": "GEO",
+      "contenido": "La escalada militar amenaza el 20% del transporte mundial de crudo...",
+      "tags": ["petróleo", "guerra", "logística"],
+      "relacionadas": ["MEMECO-007", "MEMTRD-033"],
+      "impacto_en": [
+        {
+          "id_memoria": "MEMECO-007",
+          "tipo_impacto": "aumento_precio_commodities",
+          "peso": 0.8
+        }
+      ]
+    }
+    
+2. **Grafo de relaciones**:
+    
+    - Base de datos de grafos (ej: Neo4j) para consultar caminos entre memorias:
+        
+        Copy
+        
+        Download
+        
+        MATCH (m1:Memoria)-[r:IMPACTO_EN]->(m2:Memoria)
+        WHERE m1.id = "MEMGEO-012"
+        RETURN m1, r, m2
+        
+

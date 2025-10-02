@@ -1,0 +1,25 @@
+uuid: ""
+tipo: ""                        # Ej: "bitacora", "nota", "tarea", etc.
+formato: ""
+version: ""
+estado: "draft"                # Opciones: draft, final, archivado, publicado
+
+fecha_creacion: ""             # Ej: "2025-07-25"
+fecha_modificacion: ""         # Se puede autocompletar con script
+
+autor: ""
+descripcion: ""                # Breve resumen del contenido
+
+hash_integridad: ""            # SHA256 o similar si lo calculás
+
+linked_to: []                  # Archivos relacionados, Ej: ["uuid123.yaml", "doc-enero.md"]
+tags: []                       # Ej: ["proyecto", "IA", "infraestructura"]
+relevancia: 3                  # De 1 a 5
+
+contexto: ""                   # Breve explicación del marco o situación
+acciones: []                   # Lista de tareas derivadas
+preguntas_clave: []            # Preguntas que responde el archivo
+
+procesado_por:
+  modelo: ""                   # Ej: "gpt-4o", "mistral-7b"
+  fecha: ""                    # Ej: "2025-07-25"

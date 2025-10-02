@@ -1,0 +1,19 @@
+# 📂 01_Memorias_Ejemplo – Ejemplos de Memorias Modulares
+
+Esta carpeta contiene ejemplos de memorias modulares creadas con el formato estándar del sistema ALMA LIBRE.
+
+Sirve como guía para humanos o inteligencias artificiales que quieran entender cómo se estructura una memoria completa, incluyendo:
+
+- Encabezado YAML con metadatos
+- Cuerpo narrativo con el contenido principal
+- Trazabilidad por bloque, tipo, sección y versión
+
+## 📌 Archivo incluido
+
+- `MEMORIA_EJEMPLO.md`: estructura básica de una memoria emocional
+
+## 🧠 ¿Para qué sirve?
+
+- Usarlo como plantilla para nuevas entradas
+- Mostrarle a una IA cómo están organizadas las memorias
+- Validar formato antes de escribir con `alma_sync.py`

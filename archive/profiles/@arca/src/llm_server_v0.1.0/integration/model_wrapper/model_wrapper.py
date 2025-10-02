@@ -1,0 +1,44 @@
+from schemas import AlmaBaseModel
+import logging
+
+class ModelInteraction(AlmaBaseModel):
+    prompt: str
+    respuesta: str
+
+class ModelWrapper:
+    def __init__(self, model_name: str = "Mistral-7B"):
+        self.model = self._load_model(model_name)
+        self.logger = logging.getLogger('model_wrapper')
+    
+    def generate(self, **kwargs):
+        # Lógica real de generación de LLM
+        response = f"Respuesta modelo para: {kwargs['prompt']}"
+        interaction = ModelInteraction(
+            respuesta=response,
+            **kwargs
+        )
+        self._audit("GENERATE", interaction)
+        return interaction
+    
+    def _load_model(self, model_name):
+        # Implementación real de carga de modelo
+        return {"name": model_name}
+
+    def _audit(self, action: str, record: ModelInteraction):
+        log_data = {
+            "id": record.id,
+            "agente": record.agente,
+            "hash": record.hash[:8],
+            "prompt_len": len(record.prompt)
+        }
+        self.logger.info(f"{action} | {log_data}")
+
+# Ejemplo de uso:
+# wrapper = ModelWrapper()
+# result = wrapper.generate(
+#     id="MW_2025-06-11_003",
+#     agente="centralesis",
+#     prompt="Explica el grafo semántico",
+#     tags=["grafo", "semántica"],
+#     memoria_ref=["MEM_2025-06-11_10"]
+# )

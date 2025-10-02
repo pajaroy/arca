@@ -1,0 +1,1 @@
+Esta carpeta contiene los archivos validados en las reuniones dividio por semana (ej: s19, s20)

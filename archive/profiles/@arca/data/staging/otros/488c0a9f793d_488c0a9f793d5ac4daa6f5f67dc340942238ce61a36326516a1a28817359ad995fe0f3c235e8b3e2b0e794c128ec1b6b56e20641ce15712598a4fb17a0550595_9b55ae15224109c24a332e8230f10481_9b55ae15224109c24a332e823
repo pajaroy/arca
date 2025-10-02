@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Memoria ALMA",
+  "type": "object",
+  "properties": {
+    "id": {"type": "string"},
+    "fecha": {"type": "string", "format": "date-time"},
+    "categoria": {"type": "string"},
+    "contenido": {"type": "string"},
+    "tags": {"type": "array", "items": {"type": "string"}},
+    "relacionadas": {"type": "array", "items": {"type": "string"}},
+    "acciones": {"type": "array", "items": {"type": "string"}},
+    "prioridad": {"type": "integer", "minimum": 1, "maximum": 5}
+  },
+  "required": ["id", "fecha", "categoria", "contenido"]
+}

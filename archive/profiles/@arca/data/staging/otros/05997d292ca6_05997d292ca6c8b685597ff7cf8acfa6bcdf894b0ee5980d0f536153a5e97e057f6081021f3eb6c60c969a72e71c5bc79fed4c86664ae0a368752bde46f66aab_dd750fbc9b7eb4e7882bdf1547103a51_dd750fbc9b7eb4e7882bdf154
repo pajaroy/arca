@@ -1,0 +1,29 @@
+# 🚀 main.py – Punto de entrada para ALMA_LOADER API
+
+"""
+Este archivo define el punto de entrada principal de la API FastAPI del sistema ALMA_LOADER.
+
+✅ Requisitos:
+1. Crear una instancia de `FastAPI()` con parámetros básicos
+2. Incluir el router de memorias ubicado en `api/v1/memorias.py` con `include_router`
+3. Agregar configuración básica de CORS (permitir `*` para desarrollo)
+4. Configurar logging global para usarlo en todos los módulos
+5. Agregar evento `startup` (opcional) para verificar conexión con dependencias críticas:
+   - SQLite
+   - FAISS (si aplica)
+   - Clave Fernet cargada correctamente
+6. La app debe estar lista para ejecutarse con:
+   `uvicorn main:app --reload`
+
+🛡️ Nota:
+- No incluir endpoints raíz como `/` o `/docs` personalizados
+- Usar `tags=["memorias"]` desde los routers ya configurados
+
+📁 Estructura asumida:
+- main.py
+- /api/v1/memorias.py
+- /core/memoria_saver.py
+"""
+
+# Ejemplo mínimo de ejecución:
+# $ uvicorn main:app --reload

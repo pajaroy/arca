@@ -1,0 +1,64 @@
+# 🧠 ALMA_RESIST – Sistema Operativo Modular Asistido por IA Local
+
+📦 Versión: v0.0.0.2 (en desarrollo)  
+📅 Última actualización: 2025-05-20  
+👤 Desarrollado por: Usuario + IA  
+🔌 Estado: Base documental y estructural consolidada. Listo para iniciar Sprint Técnico 0.0.0.2
+
+
+## 🧱 Componentes Actuales
+
+| Módulo                | Estado     | Descripción                                      |
+|-----------------------|------------|--------------------------------------------------|
+| `core/cli.py`           | ✅          | Interfaz CLI modular, extensible, logueada       |
+| `commands/`             | ✅          | Comandos individuales (`run(args)`)              |
+| `core/log_writer.py`  | ✅          | Registro estructurado de eventos (con metadata) |
+| `core/log_crypto.py`  | ✅          | Cifrado de logs con AES/ChaCha20                |
+| `core/loader.py`      | 🧪          | Prototipo ALMA_LOADER (ingesta y vectorización) |
+| `docs/`               | ✅          | Documentación modular, técnica y semántica       |
+| `prompts/`            | 🔜          | En preparación para integración IA              |
+
+
+## 📂 Estructura de Carpetas
+
+```
+ALMA_RESIST/
+├── core/                  # Módulos funcionales
+├── tests/                 # Tests unitarios
+├── prompts/               # Prompts técnicos por módulo
+├── docs/
+│   ├── idea_base/
+│   ├── auditorias/
+│   ├── referencias/
+│   ├── plantillas/
+│   └── ...
+├── logs/                  # Logs cifrados del sistema
+├── scripts/               # Scripts opcionales (arranque, backups)
+```
+
+
+## 📐 Metodologías Implementadas
+
+Con el cierre del Sprint 2.2 se consolidaron las metodologías internas del sistema, fundamentales para asegurar escalabilidad, trazabilidad e integración futura con IA.
+
+| Metodología                           | Versión | Estado    | Propósito principal                                       |
+|--------------------------------------|---------|-----------|------------------------------------------------------------|
+| `estructura_modular_v2.md`           | v2.0    | ✅ Activa  | Estructura de carpetas y archivos para módulos integrables |
+| `sprints_v2.md`                      | v2.0    | ✅ Activa  | Flujo de trabajo estructurado por ciclos                   |
+| `versionado_backups_v1.md`           | v1.0    | ✅ Activa  | Trazabilidad por git tags y backups manuales               |
+| `doc_ia_v2.md`                       | v2.0    | ✅ Activa  | Documentación semántica y legible por IA                   |
+| `adr_v2.md`                          | v2.0    | ✅ Activa  | Registro de decisiones técnicas versionadas                |
+| `interaccion_ia_v2.md`              | v2.0    | ✅ Activa  | Protocolo para navegación, validación y edición por IA     |
+
+📁 Carpeta: `docs/01_methodologies/`
+
+
+
+## 🧩 Contribución futura
+
+Este sistema está pensado para escalar con:
+
+- IA locales y externas
+- Control desde celular por SSH
+- Autonomía progresiva de módulos
+

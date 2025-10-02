@@ -1,0 +1,10 @@
+# README_Modulos
+
+# 🧩 Módulos Funcionales – ALMA LIBRE
+
+Esta carpeta contiene los módulos funcionales del sistema ALMA LIBRE. Cada módulo representa una herramienta autónoma diseñada para registrar, analizar, automatizar o acompañar distintos aspectos del proyecto.
+
+Los módulos son independientes, pero se comunican entre sí a través de cuadernos compartidos, plantillas comunes o flujos de información gestionados por AlmaSync.
+
+
+Cada carpeta contiene su propio `README.md` y será completada con su funcionalidad detallada.

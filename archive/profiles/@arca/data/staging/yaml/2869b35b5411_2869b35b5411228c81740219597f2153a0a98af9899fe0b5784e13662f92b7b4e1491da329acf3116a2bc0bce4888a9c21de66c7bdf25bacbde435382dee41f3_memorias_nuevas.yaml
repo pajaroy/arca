@@ -1,0 +1,17 @@
+- id: MEM_003
+  tipo: "backup"
+  fecha: "2025-06-12"
+  modulo: "almacenamiento"
+  tema: "incremental"
+  status: "completado"
+  responsable: "rabbit"
+  tags: ["disaster-recovery"]
+  resumen: "Backup nocturno ejecutado correctamente"
+
+- id: MEM_004
+  tipo: "error"  # Falta 'modulo' y 'tags'
+  fecha: "2025-06-12"
+  tema: "autenticación"
+  status: "fallido"
+  responsable: "duck"
+  resumen: "Fallo en servicio LDAP"

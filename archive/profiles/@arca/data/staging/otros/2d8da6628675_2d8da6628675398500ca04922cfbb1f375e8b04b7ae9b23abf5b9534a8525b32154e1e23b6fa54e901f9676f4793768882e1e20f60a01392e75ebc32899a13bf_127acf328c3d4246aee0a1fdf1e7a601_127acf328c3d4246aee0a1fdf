@@ -1,0 +1,24 @@
+# 🧠 Tareas de Coordinación General – 13 Cannabis Club
+
+Este archivo agrupa las tareas estratégicas clave del sistema institucional de 13CC.  
+Incluye tags para delegar responsabilidades y facilitar seguimiento por área.
+
+
+## 🗓️ Sistema de reuniones
+- [ ] Registrar la primera minuta semanal en `REUNIONES_SEMANALES`. @responsable: DEG
+- [ ] Registrar la primera acta mensual oficial. @responsable: DEG
+- [ ] Definir calendario trimestral institucional. @responsable: DEG
+
+
+## 📊 Gestión contable y balances
+- [ ] Diseñar hoja de gastos YING (white). @responsable: DEG
+- [ ] Diseñar hoja de ingresos YANG (black). @responsable: DEG
+- [ ] Armar hoja de síntesis general para cierre mensual. @responsable: DEG
+
+
+## 💡 Desarrollo estratégico
+- [ ] Consolidar `contexto_general_13CC.md`. @responsable: DEG
+- [ ] Redactar `PROYECTO_13CC_OVERVIEW.md`. @responsable: DEG
+- [ ] Diseñar app de gestión interna (etapa 0). @responsable: DEG
+- [ ] Evaluar protocolo de expansión para otros clubes. @responsable: DEG
+

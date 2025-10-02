@@ -1,0 +1,26 @@
+# 📎 Apéndice de Corrección – Criterios de Ubicación
+📅 Fecha: 2025-06-03  
+🏷️ Tags: #criterios_ubicacion #estructura #descargas #estandar #archivos  
+
+---
+
+## ✅ Cambios Realizados
+
+- Se integró como estándar que **todos los archivos deben ingresar** por su carpeta `downloads/` correspondiente **a cada módulo**.
+- Se descartó la centralización en `/downloads/` global como punto único de entrada.
+
+---
+
+## 📌 Criterio Final
+
+- `control_central/downloads/` debe recibir únicamente los archivos propios de Control Central.
+- Cada módulo mantiene su propia carpeta `downloads/` para asegurar trazabilidad y modularidad.
+- Este criterio se incorporará como regla en los protocolos internos.
+
+---
+
+## 🧠 Implicancias
+
+- Facilita backups diferenciales.
+- Simplifica el entrenamiento de asesores IA por módulo.
+- Mejora la limpieza lógica al evitar archivos huérfanos o mal ubicados.

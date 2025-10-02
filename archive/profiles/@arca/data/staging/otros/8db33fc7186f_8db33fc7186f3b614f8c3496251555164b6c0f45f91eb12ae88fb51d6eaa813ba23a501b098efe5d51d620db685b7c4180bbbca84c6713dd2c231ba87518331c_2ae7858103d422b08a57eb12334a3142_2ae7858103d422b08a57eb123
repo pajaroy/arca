@@ -1,0 +1,22 @@
+# v0.0.0.2_CLI_FINAL
+
+Esta versión corresponde al cierre del sprint donde se consolidó la estructura CLI modular del proyecto ALMA_RESIST. 
+
+## Contenido del paquete
+
+- prompts base del CLI modular
+- arquitectura general del CLI
+- scripts utilizados durante el sprint 2.2
+- checklist y lecciones aprendidas
+- changelog de la versión
+- documentación técnica asociada
+
+## Ubicación
+
+Este paquete debe alojarse dentro del directorio:
+`docs/versiones/v0.0.0.2_CLI_FINAL/`
+
+## Estado
+
+- Tipo: `core`
+- Estado: `stable`

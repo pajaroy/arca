@@ -1,0 +1,74 @@
+# 🎯 08_Objetivos_Estrategicos_2025.md – Fondo Alma Mía
+
+Documento guía con los objetivos clave por área para el año 2025.  
+Sirve como bitácora de planificación, control y ajuste de rumbo del sistema Alma Mía.
+
+---
+
+## 📆 Versión Inicial
+- **Fecha de creación:** Abril 2025
+- **Última revisión:** Abril 2025
+- **Estado:** Abierto a ajustes mensuales
+
+---
+
+## 🏛️ 1. Institucional
+
+- [ ] Consolidar documentación constitucional (✅)
+- [ ] Establecer sistema de versiones para cada módulo
+- [ ] Generar presentación institucional en PDF para externos
+- [ ] Registrar eventos clave del crecimiento en Bitácora Central
+- [ ] Formalizar la relación interna con ONG Cannabird como inversor fundador
+
+---
+
+## 📈 2. Trading y Operativa
+
+- [ ] Iniciar Bitácora de Trading v1.0 en mayo
+- [ ] Registrar al menos 10 trades documentados por estrategia
+- [ ] Generar estadísticas de rendimiento por setup
+- [ ] Implementar informe mensual desde abril
+- [ ] Desarrollar sistema de gestión de riesgo individual (por inversor)
+- [ ] Integrar todo con la lógica de distribución trimestral
+
+---
+
+## 🤝 3. Contratos y Capital
+
+- [ ] Crear carpeta `06_Contratos_Simbolicos` con README y plantilla base (✅)
+- [ ] Generar contrato individual para Santiago (como inversor y CEO)
+- [ ] Crear contrato para ONG Cannabird
+- [ ] Incluir formulario de ingreso de capital (datos iniciales por cada inversor)
+- [ ] Establecer plantilla oficial de informe trimestral (adjunto a contrato)
+
+---
+
+## 📊 4. Informes y Seguimiento
+
+- [ ] Establecer informe mensual simbólico (empezando por abril)
+- [ ] Crear tabla comparativa entre trimestres
+- [ ] Automatizar cálculo de ganancia trimestral por inversor (vía Excel o script)
+- [ ] Agregar tabla resumen de resultados por setup a cada informe
+
+---
+
+## 🧠 5. Bitácora Emocional / Reflexiones del CEO
+
+- [ ] Empezar la bitácora emocional del CEO (sección en Bitácora Central)
+- [ ] Registrar mínimo 1 entrada semanal con pensamientos, dudas, motivaciones
+- [ ] Realizar cierre emocional de cada mes
+- [ ] Crear manifiesto anual de aprendizajes en diciembre
+
+---
+
+## ⚙️ 6. Automatización y Escalabilidad (fase beta)
+
+- [ ] Plantear versión inicial de App Alma Mía (registro de trades + informes)
+- [ ] Generar mockup visual del sistema (puede ser dibujo, Figma o markdown)
+- [ ] Evaluar migración a Notion integrada con app
+- [ ] Crear script para calcular distribución mensual con tolerancia de riesgo
+
+---
+
+**Archivo simbólico, editable y estratégico.  
+Actualizable por Santiago junto a ALMA.**  

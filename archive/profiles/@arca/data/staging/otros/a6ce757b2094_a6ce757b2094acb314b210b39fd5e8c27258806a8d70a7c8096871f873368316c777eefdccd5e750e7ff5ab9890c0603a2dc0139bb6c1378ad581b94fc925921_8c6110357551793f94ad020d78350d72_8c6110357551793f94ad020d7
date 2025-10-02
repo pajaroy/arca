@@ -1,0 +1,10 @@
+# 📎 Apéndice de Corrección – Contexto CLI Control Central
+📅 Fecha: 2025-06-03  
+🏷️ Tags: #contexto #cli #control_central #estructura #ia-friendly #apendice  
+
+
+## 🧠 Principios Establecidos
+
+- Todos los comandos CLI deben ejecutarse desde `/home/bird/ALMA_RESIST/` (la raíz del sistema), salvo casos muy específicos dentro de entornos aislados.
+- Este criterio se replicará en toda documentación, scripts y prompts futuros.
+

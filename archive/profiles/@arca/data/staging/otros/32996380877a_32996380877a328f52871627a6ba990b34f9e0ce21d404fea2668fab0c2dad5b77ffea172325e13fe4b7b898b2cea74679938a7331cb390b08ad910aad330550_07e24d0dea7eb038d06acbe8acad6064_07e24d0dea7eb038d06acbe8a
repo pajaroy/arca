@@ -1,0 +1,39 @@
+
+# 🧠 ALMA LIBRE – Carpeta 01_Estructura_Memoria_Alma
+
+## Objetivo Principal
+
+Esta carpeta contiene la **estructura modular de memorias** del sistema ALMA LIBRE. Su propósito es establecer una arquitectura de memoria clara, legible por múltiples inteligencias artificiales (GPT, DeepSeek, Ollama), que permita:
+
+- Navegación contextual por parte de cualquier IA
+- Interpretación emocional, técnica y estratégica del sistema
+- Actualización automática de memorias individuales
+- Validación cruzada entre versiones y metadatos
+
+## Subdivisión por versiones
+
+La estructura está organizada en versiones numeradas (`0.1`, `0.2`, `0.3`, etc.), cada una incluyendo:
+
+- `Prompt Base` evolutivo
+- `Changelog` de modificaciones
+- `Speech` explicativo del estado del sistema
+- `Mapas de Memoria` y Objetivos fundacionales
+- Estructuras de prueba para lectura por IA
+
+## Ruta de integración
+
+Esta carpeta forma parte del núcleo del sistema ALMA LIBRE y se vincula con las siguientes áreas:
+
+- 🔸 **Bitácora Central:** para el seguimiento emocional e histórico
+- 🔸 **Gestor de Templates:** para reutilización estructural
+- 🔸 **Programación:** para desarrollo de scripts de validación
+
+## Metadatos
+
+Toda la información de esta carpeta se sincroniza y valida con el archivo:
+`/alma_0.9.4/metadata/memoria_metadata.csv`
+
+## Última actualización
+
+📅 Fecha: 23 de abril de 2025  
+🔧 Versión: `v0.6.x` en evolución hacia `v0.9.4`

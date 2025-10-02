@@ -1,0 +1,24 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_5aa086
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Buscar Memoria
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:ebd184e147e49c8cdb5bcaa67f2208bc073098f079cd68d2094ca84aec4ea69e
+---
+def run(args):
+    """Busca memorias por tag"""
+    if not args:
+        print("Error: Uso correcto -> !buscar_memoria \"tag\"")
+        return
+    print(f"Buscando memorias con tag: '{args}'... (simulado)")

@@ -1,0 +1,27 @@
+# 📝 Plantilla de Documento Estándar – ALMA_RESIST
+
+Este archivo sirve como formato base para cualquier documento técnico o de planificación dentro del sistema.
+
+## 🧾 Encabezado
+
+- `Título:` 
+- `Autor:` 
+- `Fecha:` 
+- `Versión:` 
+- `Ubicación en el sistema:` 
+- `Tipo:` [planificación / bitácora / metodología / implementación / documento auxiliar]
+
+
+## 🗂 Contenido
+
+Enumera las secciones clave que se desarrollarán. Ejemplo:
+
+1. Introducción  
+2. Metodología / Desarrollo  
+3. Resultados / Avances  
+4. Observaciones  
+5. Conclusiones  
+6. Anexos  
+
+
+_Esta plantilla forma parte de `estructura_doc/` y está diseñada para normalizar la redacción técnica en ALMA_RESIST._

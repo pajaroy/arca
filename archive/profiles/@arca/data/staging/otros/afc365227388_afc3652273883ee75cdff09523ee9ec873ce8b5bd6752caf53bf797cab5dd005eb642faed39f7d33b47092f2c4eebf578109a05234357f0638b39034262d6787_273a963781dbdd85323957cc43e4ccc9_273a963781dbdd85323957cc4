@@ -1,0 +1,9 @@
+## 📅 2025-06-02 – Limpieza y reestructuración final del módulo Cannabird
+
+- 🧹 Eliminadas carpetas vacías y redundantes en `_legacy/`
+- 📦 Reubicados archivos `.docx` a `archivo/descartes_raw/docx/`
+- 🗃️ Prompts ya integrados movidos a `archivo/historico/prompts_migrados/`
+- 🧠 Apéndices integrados y archivados en `archivo/historico/contexto_apendices/`
+- ✅ Carpeta `downloads/` vaciada y lista para uso operativo
+
+**Commit sugerido:** `🔧 Limpieza final Cannabird y consolidación de estructura`

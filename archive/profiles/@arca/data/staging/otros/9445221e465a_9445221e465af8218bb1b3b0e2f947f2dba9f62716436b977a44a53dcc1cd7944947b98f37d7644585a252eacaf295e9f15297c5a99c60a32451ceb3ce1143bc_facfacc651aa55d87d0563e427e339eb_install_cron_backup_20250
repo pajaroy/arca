@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Script para instalar el cron de backup automático cada 15 minutos
+
+CRON_JOB="*/15 * * * * /home/bird/ALMA_RESIST/core/scripts/backup_to_git/backup_to_git.sh"
+CRON_EXISTS=$(crontab -l 2>/dev/null | grep -F "$CRON_JOB")
+
+if [ -z "$CRON_EXISTS" ]; then
+    (crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
+    echo "[CRON] Tarea de backup instalada correctamente."
+else
+    echo "[CRON] La tarea de backup ya está configurada."
+fi
+
+# Al final de install_cron_backup.sh
+touch ~/.backup_cron_installed

@@ -1,0 +1,33 @@
+id: readme_alma_core_core_v0.1.1
+version: 0.1.1
+fecha_actualizacion: 2025-06-16T00:00:00Z
+autor: Santi + ALMA
+estado: "activo"
+anterior: null
+hash_actual: sha256:pending
+
+proposito:
+  descripcion: |
+    Motor base y lógica compartida. Contiene notebooks, scripts y tests que sustentan el sistema ALMA_CORE.
+    Es el punto de entrada para desarrollo técnico y pruebas.
+  ultima_revision: 2025-06-16
+
+linked_to:
+  - archivo/README.yaml
+  - config/README.yaml
+  - control/README.yaml
+  - control_central/README.yaml
+  - core/README.yaml
+  - docs/README.yaml
+  - logs/README.yaml
+  - meta/README.yaml
+
+estructura:
+  notebooks/: "Notas técnicas, exploración y prototipos."
+  scripts/: "Automatizaciones, utilidades y CLI."
+  tests/: "Pruebas automatizadas/manuales."
+
+changelog:
+  - fecha: 2025-06-16
+    version: 0.1.1
+    cambios: "README con estructura, proposito y links cruzados para full navegabilidad."

@@ -1,0 +1,27 @@
+{
+  "version": "0.1.0",
+  "tipo": "README",
+  "schema": "almaresist.readme_v1",
+  "descripcion": "Almacenamiento de logs crudos, experimentales o globales que no pertenecen a módulos/agentes específicos. Espacio temporal para desarrollo y debugging.",
+  "estructura": [
+    ".log/.txt: Logs planos y registros experimentales.",
+    ".json: Logs estructurados generados por scripts/notebooks."
+  ],
+  "tags": [
+    "logs",
+    "debug",
+    "buffer",
+    "crudo"
+  ],
+  "linked_to": [
+    "../README.yaml",
+    "../../logs/README.yaml"
+  ],
+  "responsable": "Santi + ALMA",
+  "hash_verificacion": "sha256:pending",
+  "historial": [
+    "2025-06-17: Actualizado a plantilla mínima universal, referenciado como buffer temporal de logs."
+  ],
+  "last_modified": "2025-06-17T04:00:00Z",
+  "last_modified_by": "bird"
+}

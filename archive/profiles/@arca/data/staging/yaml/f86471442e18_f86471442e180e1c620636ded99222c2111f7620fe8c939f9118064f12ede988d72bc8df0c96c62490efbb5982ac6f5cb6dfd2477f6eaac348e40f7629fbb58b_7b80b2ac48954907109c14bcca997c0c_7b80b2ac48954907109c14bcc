@@ -1,0 +1,12 @@
+- id: MEM_KAEL_2025-06-07_01
+  tipo: flujo_base
+  fecha: 2025-06-07
+  autor: kael
+  resumen: >
+    Se estableció el primer flujo base del sistema CLI: bitácora, changelog y memorias automatizados.
+  impacto: >
+    Este paso sienta las bases del registro trazable dentro del ecosistema ALMA.
+  relacionado_con:
+    - flujo_001_registro_bitacora.yaml
+    - flujo_002_registro_changelog.yaml
+    - flujo_003_carga_memorias.yaml

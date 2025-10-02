@@ -1,0 +1,26 @@
+# 📦 Snapshot v0.0.0.3 – Post Sprint 2.4
+
+Este snapshot representa el estado consolidado del sistema documental y de scripts luego del Sprint 2.4.
+
+## 📋 Contenido Clave
+
+- Scripts actualizados:
+  - `validate_docs.py` (v0.3)
+  - `add_linked_to_minimo.py`
+  - `alma-cli.py` (CLI modular)
+  - `alma_valida_v2.sh`
+- Documentos fundamentales:
+  - `README.md` raíz
+  - `Methodology_Index.md`
+  - `tags_recomendados.md`
+  - `utilidades/scripts/README.md`
+- Reporte de auditoría generado por IA (`alma-cli audit`)
+- Metadatos corregidos en 100% de archivos `core`
+
+## 📌 Propósito
+
+Este snapshot permite:
+- Validar evolución del sistema
+- Facilitar rollback en caso de error
+- Auditar coherencia semántica e IA
+

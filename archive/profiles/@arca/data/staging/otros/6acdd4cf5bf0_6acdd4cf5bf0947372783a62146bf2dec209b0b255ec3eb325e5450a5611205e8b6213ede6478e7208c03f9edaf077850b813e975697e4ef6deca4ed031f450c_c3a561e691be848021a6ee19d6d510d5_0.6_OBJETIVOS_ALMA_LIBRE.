@@ -1,0 +1,31 @@
+# 🧠 OBJETIVOS DE VERSIÓN – Prompt Base ALMA LIBRE v0.6
+
+📅 Fecha: 2025-04-23
+
+
+## ✅ Objetivos específicos
+
+### 🧬 1. Subdivisión modular estandarizada
+- Aplicar el template `TEMPLATE_MEMORIA_MODULAR.md` a cada módulo.
+- Estructurar cada memoria con secciones: emocional, técnica, estratégica y general.
+- Permitir subdivisión por subtópico si crecen (ej. `MEMORIA_TRADING_BTC.md`).
+
+
+### 📚 3. Índice global + metadata activa
+- Expandir `INDICE_DE_MEMORIAS.md` con estado, tipo y conexión cruzada.
+- Usar `metadata_memorias.csv` como fuente viva para navegación y control de versiones.
+- Crear `alma_metadata_sync.py` para actualizar estos datos automáticamente.
+
+
+### 🔍 5. Test de comprensión evolutiva
+- Crear `TEST_IA_PROFUNDIDAD.md` con preguntas críticas para evaluar si una IA está lista para operar en ALMA.
+- Incluir rutas clave, lógica semántica, vínculos y reflexión estratégica.
+
+
+### 🤖 7. Declarar estructura de IA colaborativas
+| IA        | Rol                   | Carpeta Prioritaria            | Lectura Base              |
+|-----------|------------------------|--------------------------------|----------------------------|
+| GPT       | Emocional / Reflexiva  | Bitácora Central, Reflexión    | `MEMORIA_EMOCIONAL.md`     |
+| DeepSeek  | Técnica / Analítica    | Programación, Trading          | `MEMORIA_TECNICA.md`       |
+| Ollama    | Generalista / Exploradora | Noticias, Creatividad      | `MEMORIA_GENERAL.md`, `README.md` |
+

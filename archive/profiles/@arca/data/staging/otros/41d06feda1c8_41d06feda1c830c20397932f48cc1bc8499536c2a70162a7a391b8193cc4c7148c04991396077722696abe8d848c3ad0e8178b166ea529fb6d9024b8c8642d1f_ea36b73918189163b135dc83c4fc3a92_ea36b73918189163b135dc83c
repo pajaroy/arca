@@ -1,0 +1,26 @@
+# 🛡️ access_control.py – Sistema base de control de acceso y trazabilidad
+
+"""
+Este módulo prepara la infraestructura base para controlar el acceso a memorias, registrar trazabilidad y aplicar futuras políticas de roles.
+
+✅ Funciones clave requeridas:
+1. verificar_acceso(memoria: dict, user_id: str, rol: str) -> bool
+   - Devuelve True si el usuario tiene permiso de acceso.
+   - Usa la lógica:
+     - Si visibilidad = "publica" → acceso libre
+     - Si visibilidad = "privada" → solo owner puede acceder
+     - Si visibilidad = "solo_sistema" → solo si rol == "sistema"
+
+2. registrar_traza(evento: str, memoria_id: str, user_id: str = None, metadata: dict = None)
+   - Registra eventos en un log estructurado.
+   - Formato: {"evento": "...", "memoria_id": "...", "user_id": "...", "timestamp": "...", ...}
+   - Dejar listo para integrarse con Prometheus, Sentry o motores de auditoría.
+
+💡 Requisitos:
+- Compatible con logging estructurado (`structlog` o `json`).
+- No depender de frameworks externos ni de autenticación real por ahora.
+- Pensar en compatibilidad futura con JWT (`owner_id`, `scopes`, etc.).
+- No escribir a base de datos todavía. Solo log y lógica local.
+
+Este módulo NO maneja autenticación, solo verificación de permisos locales y logging de acciones.
+"""

@@ -1,0 +1,68 @@
+#!/bin/bash
+# @arca-file-classifier.sh
+# Descripción: Clasificador minimalista para archivos @arca
+# Uso: ./classifier.sh
+
+# ==============================================================================
+# CONFIGURACIÓN BÁSICA
+# ==============================================================================
+BASE_DIR="$HOME/@arca"
+SOURCE_DIR="$BASE_DIR/.source/og/archivo"      # Donde están los archivos crudos
+DEST_DIR="$BASE_DIR/.source/og/processed"      # Donde se organizarán
+LOG_FILE="$BASE_DIR/.source/logs/source.log"
+
+# Extensiones a clasificar
+declare -A EXT_MAP=(
+    [".py"]="python"
+    [".yaml"]="yaml"
+    [".yml"]="yaml"
+    [".md"]="markdown"
+    [".sql"]="sql"
+    [".csv"]="csv"
+)
+
+# ==============================================================================
+# FUNCIÓN PRINCIPAL
+# ==============================================================================
+classify_files() {
+    echo "[$(date)] Iniciando clasificación..." | tee -a "$LOG_FILE"
+    
+    # Crear directorios necesarios
+    mkdir -p "$DEST_DIR"/{python,yaml,markdown,sql,csv,otros}
+    
+    # Procesar todos los archivos
+    find "$SOURCE_DIR" -type f | while read -r file; do
+        filename=$(basename "$file")
+        ext=".${filename##*.}"
+        
+        # Determinar categoría
+        category=${EXT_MAP[$ext]:-otros}
+        dest_path="$DEST_DIR/$category/$filename"
+        
+        # Calcular hash antes de mover (evita errores)
+        hash=$(b3sum "$file" | cut -d' ' -f1)
+        
+        # Mover archivo y registrar
+        if mv -n "$file" "$dest_path"; then
+            echo "$(date +%FT%T),$dest_path,$hash" >> "$LOG_FILE"
+            echo "✅ $filename → $category"
+        else
+            echo "⚠️  No se pudo mover $filename (¿duplicado?)" | tee -a "$LOG_FILE"
+        fi
+    done
+    
+    echo "[$(date)] Clasificación completada" | tee -a "$LOG_FILE"
+}
+
+# ==============================================================================
+# EJECUCIÓN
+# ==============================================================================
+main() {
+    echo "=== INICIO DE CLASIFICACIÓN ===" > "$LOG_FILE"
+    classify_files
+    echo "=== RESUMEN ==="
+    echo "Archivos clasificados en: $DEST_DIR"
+    echo "Detalles en log: $LOG_FILE"
+}
+
+main "$@"

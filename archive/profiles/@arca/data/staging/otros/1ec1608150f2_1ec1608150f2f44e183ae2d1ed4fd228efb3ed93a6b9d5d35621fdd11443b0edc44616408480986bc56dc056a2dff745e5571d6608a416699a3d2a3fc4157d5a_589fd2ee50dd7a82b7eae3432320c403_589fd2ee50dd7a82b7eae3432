@@ -1,0 +1,326 @@
+import os
+import sys
+import logging
+import uuid
+import argparse
+from pathlib import Path
+from ruamel.yaml import YAML
+from ruamel.yaml.comments import CommentedMap, CommentedSeq
+from datetime import datetime, timezone
+from typing import Optional, Tuple, Dict, Any
+
+# ========================================
+# Configuración mejorada de logging
+# ========================================
+LOG_FILE = "/home/alma/Alma-Cli/Logs/fix_metadata.log"
+
+def setup_logging():
+    """Configura el sistema de logging de forma robusta"""
+    log_dir = os.path.dirname(LOG_FILE)
+    os.makedirs(log_dir, exist_ok=True)
+    
+    logging.basicConfig(
+        filename=LOG_FILE,
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S',
+        encoding='utf-8'
+    )
+    return logging.getLogger('metadata_validator_v0.2.0')
+
+logger = setup_logging()
+
+# ========================================
+# Plantilla ALMA_RESIST con orden específico
+# ========================================
+PLANTILLA_BASE = CommentedMap({
+    "version": "0.1.0",
+    "uuid": "",
+    "tipo": "",
+    "schema": "",
+    "estado": "",
+    "descripcion": "",
+    "estructura": CommentedSeq([""]),
+    "tags": CommentedSeq([]),
+    "linked_to": CommentedSeq([]),
+    "responsable": "",
+    "hash_verificacion": "sha256:pending",
+    "historial": CommentedSeq([CommentedMap({"fecha": "", "descripcion": ""})]),
+    "last_modified": "",
+    "last_modified_by": ""
+})
+
+ORDER = [
+    "version", "uuid", "tipo", "schema", "estado", "descripcion", 
+    "estructura", "tags", "linked_to", "responsable", 
+    "hash_verificacion", "historial", "last_modified", "last_modified_by"
+]
+
+# Campos dinámicos que se actualizan condicionalmente
+CAMPOS_DINAMICOS = ["uuid", "last_modified", "last_modified_by"]
+
+# ========================================
+# Funciones utilitarias mejoradas
+# ========================================
+def get_system_user() -> str:
+    """Obtiene el usuario del sistema de forma portable"""
+    return os.getenv('USER') or os.getenv('USERNAME') or "alma"
+
+def is_empty(value: Any) -> bool:
+    """Determina si un valor se considera vacío"""
+    if value is None:
+        return True
+    if isinstance(value, str) and not value.strip():
+        return True
+    if isinstance(value, (list, dict, CommentedSeq)) and not value:
+        return True
+    return False
+
+def generate_dynamic_value(field: str) -> Any:
+    """Genera valores para campos dinámicos según su tipo"""
+    if field == "uuid":
+        return str(uuid.uuid4())
+    elif field == "last_modified":
+        return datetime.now(timezone.utc).isoformat()
+    elif field == "last_modified_by":
+        return get_system_user()
+    return ""
+
+def dump_yaml_to_string(data: Dict) -> str:
+    """Serializa YAML a string de forma segura"""
+    yaml = YAML()
+    yaml.preserve_quotes = True
+    yaml.indent(mapping=2, sequence=4, offset=2)
+    stream = StringIO()
+    yaml.dump(data, stream)
+    return stream.getvalue()
+
+# ========================================
+# Núcleo de procesamiento de metadatos
+# ========================================
+def apply_template(
+    existing: Optional[CommentedMap] = None, 
+    force_update: bool = False
+) -> CommentedMap:
+    """
+    Aplica la plantilla ALMA_RESIST:
+    - Preserva valores existentes válidos
+    - Completa campos faltantes
+    - Actualiza campos dinámicos según reglas
+    - Mantiene orden especificado
+    """
+    new_metadata = CommentedMap()
+    preserved_existing = {}
+    
+    # Preservar campos existentes válidos
+    if existing:
+        for key, value in existing.items():
+            if key in ORDER and not is_empty(value):
+                preserved_existing[key] = value
+    
+    # Construir estructura ordenada
+    for key in ORDER:
+        if key in preserved_existing:
+            new_metadata[key] = preserved_existing[key]
+        else:
+            new_metadata[key] = PLANTILLA_BASE[key]
+    
+    # Actualizar campos dinámicos
+    for field in CAMPOS_DINAMICOS:
+        if field in new_metadata:
+            if force_update or is_empty(new_metadata[field]):
+                new_metadata[field] = generate_dynamic_value(field)
+    
+    # Preservar campos adicionales no estándar
+    if existing:
+        for key, value in existing.items():
+            if key not in ORDER:
+                new_metadata[key] = value
+    
+    return new_metadata
+
+# ========================================
+# Procesadores de archivos
+# ========================================
+def process_markdown(
+    content: str, 
+    force_update: bool,
+    dry_run: bool
+) -> Tuple[str, bool, bool]:
+    """Procesa archivos Markdown con frontmatter YAML"""
+    yaml = YAML()
+    yaml.preserve_quotes = True
+    metadata = None
+    rest_content = content
+    recreated = False
+    
+    # Extraer frontmatter existente si está presente
+    if content.startswith('---\n'):
+        parts = content.split('---\n', 2)
+        if len(parts) >= 3:
+            try:
+                metadata = yaml.load(parts[1])
+                rest_content = '---'.join(parts[2:])
+            except Exception as e:
+                logger.warning(f"YAML inválido en Markdown: {str(e)}")
+                recreated = True
+    
+    # Aplicar plantilla
+    new_metadata = apply_template(metadata, force_update)
+    yaml_output = dump_yaml_to_string(new_metadata)
+    
+    # Construir nuevo contenido
+    new_content = f"---\n{yaml_output}---{rest_content}"
+    
+    # Determinar si hubo cambios
+    modified = (metadata != new_metadata) or recreated
+    
+    # Manejar dry-run
+    if dry_run:
+        print("=" * 80)
+        print(new_content)
+        print("=" * 80)
+    
+    return new_content, modified, recreated
+
+def process_yaml(
+    content: str, 
+    force_update: bool,
+    dry_run: bool
+) -> Tuple[str, bool, bool]:
+    """Procesa archivos YAML puros"""
+    yaml = YAML()
+    yaml.preserve_quotes = True
+    metadata = None
+    recreated = False
+    
+    try:
+        metadata = yaml.load(content) or CommentedMap()
+    except Exception as e:
+        logger.warning(f"YAML inválido: {str(e)}")
+        recreated = True
+    
+    # Aplicar plantilla
+    new_metadata = apply_template(metadata, force_update)
+    new_content = dump_yaml_to_string(new_metadata)
+    
+    # Determinar si hubo cambios
+    modified = (metadata != new_metadata) or recreated
+    
+    # Manejar dry-run
+    if dry_run:
+        print("=" * 80)
+        print(new_content)
+        print("=" * 80)
+    
+    return new_content, modified, recreated
+
+# ========================================
+# Función principal mejorada
+# ========================================
+def validate_metadata(
+    path: str, 
+    force_update: bool = False, 
+    dry_run: bool = False
+) -> None:
+    """
+    Valida y repara metadatos según estándar ALMA_RESIST
+    - Preserva datos existentes válidos
+    - Completa campos faltantes
+    - Actualiza campos dinámicos según reglas
+    - Opción dry-run para previsualizar cambios
+    """
+    try:
+        # Crear archivo si no existe
+        if not os.path.exists(path):
+            with open(path, 'w', encoding='utf-8') as f:
+                f.write("")
+            logger.info(f"Archivo creado: {path}")
+        
+        # Leer contenido
+        with open(path, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        filename = os.path.basename(path)
+        ext = os.path.splitext(filename)[1].lower()
+        
+        # Procesar según tipo de archivo
+        if ext == '.md':
+            new_content, modified, recreated = process_markdown(
+                content, force_update, dry_run
+            )
+            file_type = "Markdown"
+        elif ext in ('.yaml', '.yml'):
+            new_content, modified, recreated = process_yaml(
+                content, force_update, dry_run
+            )
+            file_type = "YAML"
+        else:
+            logger.error(f"Extensión no soportada: {filename}")
+            print(f"✗ Error: Extensión no soportada - {filename}")
+            return
+        
+        # Manejar dry-run
+        if dry_run:
+            logger.info(f"Dry-run ejecutado para {filename} (tipo: {file_type})")
+            print(f"✓ Dry-run completado para {filename}")
+            return
+        
+        # Aplicar cambios si son necesarios
+        if modified:
+            with open(path, 'w', encoding='utf-8') as f:
+                f.write(new_content)
+            
+            if recreated:
+                logger.info(f"Metadata recreada en {filename}")
+                print(f"✓ Metadata recreada en {filename}")
+            else:
+                logger.info(f"Metadata actualizada en {filename}")
+                print(f"✓ Metadata actualizada en {filename}")
+        else:
+            logger.info(f"Metadata válida en {filename}")
+            print(f"✓ Metadata válida en {filename}")
+            
+    except Exception as e:
+        error_msg = f"Error procesando {path}: {str(e)}"
+        logger.error(error_msg)
+        print(f"✗ {error_msg}")
+
+# ========================================
+# Interfaz de línea de comandos mejorada
+# ========================================
+def main():
+    """Manejador principal de línea de comandos"""
+    parser = argparse.ArgumentParser(
+        description='Validador y reparador de metadatos ALMA_RESIST v0.2.0',
+        epilog='Ejemplo: python validador_metadata.py documento.md --force --dry-run'
+    )
+    parser.add_argument(
+        'ruta', 
+        type=str,
+        help='Ruta al archivo a procesar'
+    )
+    parser.add_argument(
+        '--force', 
+        action='store_true',
+        help='Fuerza actualización de campos dinámicos'
+    )
+    parser.add_argument(
+        '--dry-run', 
+        action='store_true',
+        help='Muestra cambios sin guardar en disco'
+    )
+    
+    args = parser.parse_args()
+    
+    # Validar ruta
+    if not os.path.exists(args.ruta):
+        print(f"✗ Error: El archivo no existe - {args.ruta}")
+        return
+    
+    validate_metadata(args.ruta, args.force, args.dry_run)
+
+if __name__ == "__main__":
+    # Necesario para dump_yaml_to_string
+    from io import StringIO
+    main()

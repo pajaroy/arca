@@ -1,0 +1,66 @@
+
+gastos:
+id,date,concept_id,entity_id,caja_id,ammount,folio_id,notes,type,
+1,2025-08-14,1,4,2,600000,,sueldo de osmar,salida,
+2,2025-08-15,2,5,2,14000,,,entrada,
+
+concepts:
+id,name,description,
+1,sueldo,sueldos de 13cc,
+2,ventas,ventas generada en withdrawal,
+
+saldos:
+id,caja_id,saldo,
+1,1,900000,
+
+reprocanns:
+id,name,tel,mail,notes,
+1,dhariam calcagno,,,viru,
+2,miguel emir jaime,1158012260,,amigo de viru,
+
+
+## people
+
+entitys:
+id,name,entity_type_id,description,
+1,bird,
+4,osmar,
+5,seba,
+6,enzo,3,
+
+## settings
+
+cajas:
+id,name,description,
+1,chica, caja chica del club,
+2,brubank,cuenta brubank 13,
+
+genetics:
+id,name,description,tag,
+1,mendocino,,MCK,
+2,runtz,,RTZ,
+3,gelato,,GLT,
+4,gorila white,,GW,
+5,y griega,,Y
+6,rainbow,,RB
+7,no identificada n° 2,,NN-2
+8,gastos,fondo comun,G
+9,aval,fondo comun,A
+
+id,cut_date,module_id,description,notes,
+1,2025-08-13,5,primer lote,gastos en conjunto los 3,
+
+harvest_detail:
+id,harvest_id,genetic_id,grams
+1,1,8,300,
+
+modules:
+1,P,propagacion
+2,V-1,vege isla 1
+3,V-2,vege isla 2
+4,V-3,vege isla 3
+5,A-1,galpon A sector uno (derecho)
+6,A-2,galpon A sector dos (izquierdo)
+7,B-1,galpon B sector uno (derecho)
+8,B-2,galpon B sector dos (izquierdo)
+

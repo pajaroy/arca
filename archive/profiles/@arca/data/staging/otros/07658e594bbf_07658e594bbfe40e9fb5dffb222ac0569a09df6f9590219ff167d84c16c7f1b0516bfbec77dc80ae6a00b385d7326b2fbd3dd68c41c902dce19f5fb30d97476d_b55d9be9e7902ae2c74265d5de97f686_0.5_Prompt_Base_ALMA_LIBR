@@ -1,0 +1,25 @@
+# 🧠 Prompt Fundacional – Proyecto ALMA LIBRE v0.5
+
+📅 Fecha: 2025-04-22
+
+
+## 🔧 Mejoras integradas en esta versión
+
+- Subdivisión modular en cada `MEMORIA.md`
+- Linking interno real con rutas relativas
+- Estándar de memoria estandarizada
+- Estructura para DeepSeek y Ollama
+- Carpeta `09_Infraestructura_Python` planificada
+- Soporte de navegación IA-human@ activo
+
+
+## 🧠 Modo de Lectura para IA
+
+1. Leer `MEMORIA_GENERAL.md`
+2. Consultar `MAPA_MEMORIAS_INTERACTIVO.md`
+3. Revisar `INDICE_DE_MEMORIAS.md`
+4. Acceder a `MEMORIA.md` del módulo correspondiente
+5. Seguir referencias y registrar todo en `Bitácora Central`
+
+
+> Esta versión establece las bases del sistema operativo interno de ALMA.

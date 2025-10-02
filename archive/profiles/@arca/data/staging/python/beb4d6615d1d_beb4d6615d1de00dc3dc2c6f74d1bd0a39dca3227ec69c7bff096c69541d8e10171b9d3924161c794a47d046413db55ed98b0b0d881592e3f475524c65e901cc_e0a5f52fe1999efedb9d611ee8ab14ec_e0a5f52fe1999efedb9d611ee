@@ -1,0 +1,119 @@
+#!/usr/bin/env python3
+# validate_docs.py – Valida metadatos YAML según metodología ALMA_RESIST v2
+
+import os
+import re
+import sys
+import argparse
+from datetime import datetime
+import yaml
+
+# Configuración basada en metodologia_doc_ia_v2.md
+REQUIRED_FIELDS = ['module', 'type', 'status', 'created']
+VALID_TYPES = ['core', 'tool', 'external', 'integration', 'draft']
+VALID_STATUSES = ['in_progress', 'stable', 'deprecated']
+DATE_FORMAT = '%Y-%m-%d'
+
+class ValidationError(Exception):
+    """Excepción personalizada para errores de validación"""
+    def __init__(self, message, path, field=None):
+        super().__init__(message)
+        self.path = path
+        self.field = field
+
+def parse_arguments():
+    """Configura y parsea argumentos de línea de comandos"""
+    parser = argparse.ArgumentParser(
+        description='Valida documentos según metodología ALMA_RESIST v2',
+        epilog='Campos requeridos: ' + ', '.join(REQUIRED_FIELDS)
+    )
+    parser.add_argument('path', nargs='?', default='./docs',
+                        help='Ruta a validar (default: ./docs)')
+    parser.add_argument('--verbose', '-v', action='store_true',
+                        help='Muestra detalles de la validación')
+    return parser.parse_args()
+
+def extract_yaml_metadata(content):
+    """Extrae y parsea el bloque YAML frontal"""
+    yaml_block = re.search(r'^---\s*\n(.*?)\n---', content, re.DOTALL | re.MULTILINE)
+    if not yaml_block:
+        raise ValidationError("Falta bloque YAML", "N/A")
+    try:
+        return yaml.safe_load(yaml_block.group(1))
+    except yaml.YAMLError as e:
+        raise ValidationError(f"YAML inválido: {str(e)}", "N/A")
+
+def validate_metadata(metadata, file_path):
+    """Realiza validaciones según la metodología establecida"""
+    errors = []
+
+    # Validar campos obligatorios
+    for field in REQUIRED_FIELDS:
+        if field not in metadata:
+            errors.append(f"Campo requerido faltante: '{field}'")
+
+    # Validar valores permitidos para type
+    if 'type' in metadata and metadata['type'] not in VALID_TYPES:
+        errors.append(f"Tipo inválido: '{metadata['type']}'. Valores permitidos: {', '.join(VALID_TYPES)}")
+
+    # Validar valores permitidos para status
+    if 'status' in metadata and metadata['status'] not in VALID_STATUSES:
+        errors.append(f"Estado inválido: '{metadata['status']}'. Valores permitidos: {', '.join(VALID_STATUSES)}")
+
+    # Validar formato de fecha
+    if 'created' in metadata:
+        try:
+            datetime.strptime(metadata['created'], DATE_FORMAT)
+        except ValueError:
+            errors.append(f"Formato de fecha inválido en 'created'. Debe ser {DATE_FORMAT}")
+
+    # Validar formato del módulo
+    if 'module' in metadata:
+        if not re.match(r'^[a-z0-9_\/]+$', metadata['module']):
+            errors.append("Formato de módulo inválido. Debe usar snake_case y solo caracteres alfanuméricos")
+
+    if errors:
+        raise ValidationError("\n  • " + "\n  • ".join(errors), file_path)
+
+def process_file(file_path, verbose=False):
+    """Procesa y valida un único archivo"""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+        metadata = extract_yaml_metadata(content)
+        validate_metadata(metadata, file_path)
+        if verbose:
+            print(f"✅ {file_path} - Válido")
+        return True
+    except ValidationError as e:
+        print(f"\n❌ {file_path}")
+        print(f"  Error: {str(e)}")
+        return False
+
+def main():
+    args = parse_arguments()
+    valid_count = 0
+    error_count = 0
+
+    print(f"🔍 Validando documentos en: {os.path.abspath(args.path)}")
+
+    for root, dirs, files in os.walk(args.path):
+        if 'archived' in dirs:
+            dirs.remove('archived')  # Excluir versiones archivadas
+        for file in files:
+            if file.endswith('.md'):
+                file_path = os.path.join(root, file)
+                if process_file(file_path, args.verbose):
+                    valid_count += 1
+                else:
+                    error_count += 1
+
+    print(f"\n📊 Resultados:")
+    print(f"  • Documentos válidos: {valid_count}")
+    print(f"  • Documentos con errores: {error_count}")
+
+    if error_count > 0:
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()

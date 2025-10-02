@@ -1,0 +1,20 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_8dbb75
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: '  Init  '
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:3b7d605fd2c9f6cbd074faa4b91affde4aef0eb206445feae0f1e13dabd634ba
+---
+from .memory_graph import MemoryGraph
+

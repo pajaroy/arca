@@ -1,0 +1,45 @@
+## 🧠 Prompt para DeepSeek
+
+Quiero que generes un archivo `__init__.py` para el módulo `llm_server`, que formará parte del sistema ALMA_RESIST.
+
+### 🎯 Objetivo
+- Permitir importar componentes clave del servidor de modelos LLM de forma centralizada.
+- Debe funcionar con importaciones como `from core.llm_server import model_wrapper, transport_layer`
+- Incluir `__all__` para exponer módulos principales del paquete.
+
+### 📁 Estructura actual
+
+```
+llm_server/
+├── contracts/
+│   ├── readme.md
+│   ├── schema_prompt.json
+│   └── schema_respuesta.json
+├── integration/
+│   ├── context_tracker.py
+│   └── memory_graph.py
+├── utils/
+│   ├── log_crypto.py
+│   └── log_writer.py
+├── main.py
+├── model_wrapper.py
+├── transport_layer.py
+```
+
+### 🧩 Requisitos para el `__init__.py`:
+
+- Importar los siguientes módulos en la raíz del paquete:
+    - `model_wrapper`
+    - `transport_layer`
+    - `main`
+- También importar desde submódulos:
+    - `context_tracker` y `memory_graph` desde `integration`
+    - `log_crypto` y `log_writer` desde `utils`
+- Exportar todos estos módulos en `__all__` para facilitar pruebas e integración.
+- Agregar comentarios aclaratorios por bloque de importación.
+- Debe ser compatible con Python 3.8+ y pytest.
+
+### ✅ Resultado esperado
+
+Un único archivo `__init__.py` funcional y limpio, preparado para uso en producción y testing.
+

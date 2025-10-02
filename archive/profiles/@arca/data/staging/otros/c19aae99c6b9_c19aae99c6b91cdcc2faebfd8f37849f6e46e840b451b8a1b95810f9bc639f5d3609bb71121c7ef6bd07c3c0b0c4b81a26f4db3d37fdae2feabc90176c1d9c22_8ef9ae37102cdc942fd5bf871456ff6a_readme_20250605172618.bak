@@ -1,0 +1,29 @@
+---
+module: arquitectura/prompt_tecnico/readme
+type: core
+status: in_progress
+created: '2025-05-28'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# README – prompt_tecnico
+
+Esta carpeta forma parte del sistema modular de ALMA_RESIST y cumple una función clave dentro del entorno de documentación técnica.
+
+## 📁 Ruta
+`docs/arquitectura/prompt_tecnico`
+
+## 📌 Propósito
+
+- **prompt_tecnico**
+
+- prompt_tecnico: Aquí se centraliza toda la lógica de los prompts técnicos, variables de entrada, estructuras, y formatos para interacción con modelos IA.
+
+
+
+## 🧠 Notas
+
+Esta carpeta debe mantenerse ordenada y actualizada. Si algún documento cambia de función, debe reubicarse o marcarse con un `status: deprecated` en su metadata YAML.
+
+---

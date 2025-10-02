@@ -1,0 +1,43 @@
+import os
+import gzip
+import logging
+from . import log_crypto
+
+LOG_DIR = os.getenv("LOG_DIR", "logs")
+ENABLE_ENCRYPTION = os.getenv("LOG_ENCRYPTION_ENABLED", "false").lower() == "true"
+
+def log_rotator(source, dest):
+    """Rotate logs with encryption/gzip compression"""
+    try:
+        if ENABLE_ENCRYPTION:
+            log_crypto.encrypt_file(source, dest)
+        else:
+            with open(source, 'rb') as f_in:
+                with gzip.open(dest, 'wb') as f_out:
+                    f_out.writelines(f_in)
+        os.remove(source)
+    except Exception as e:
+        logging.error(f"Log rotation failed: {str(e)}")
+
+def encrypted_namer(name):
+    return name + ".enc"
+
+def query_logs(module: str, days: int = 7):
+    """CLI log query function"""
+    # Implementation would scan LOG_DIR
+    # and return structured log entries
+    pass
+
+# Example CLI integration
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--rotate", action="store_true")
+    parser.add_argument("--query", type=str)
+    args = parser.parse_args()
+    
+    if args.rotate:
+        # Manual rotation trigger
+        pass
+    elif args.query:
+        query_logs(args.query)

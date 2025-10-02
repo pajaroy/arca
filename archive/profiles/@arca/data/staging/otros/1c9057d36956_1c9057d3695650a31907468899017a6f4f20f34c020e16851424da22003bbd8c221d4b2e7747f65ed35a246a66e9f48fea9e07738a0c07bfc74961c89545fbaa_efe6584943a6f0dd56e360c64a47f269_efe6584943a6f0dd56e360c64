@@ -1,0 +1,87 @@
+# 🧠 Prompt Maestro ALMA_LOADER Individual v2.0.1
+
+## 🎯 Propósito
+
+Este prompt guía una IA (como GPT-4.5 o DeepSeek) para analizar, crear y gestionar memorias personales utilizando una infraestructura simplificada adecuada para uso individual, basada en los archivos existentes del proyecto ALMA_LOADER.
+
+
+## 🛠️ Instrucciones Esenciales para la IA
+
+### Lectura y Contexto
+
+- Leer cada memoria utilizando campos: `id`, `fecha`, `tags`, `contenido`, `relacionadas`, `acciones` y `prioridad`.
+    
+- Priorizar memorias mediante:
+    
+    - Número de tags clave.
+        
+    - Impacto histórico detectado.
+        
+
+### Ejemplo de Memoria JSON Simplificado
+
+```json
+{
+  "id": "MEMGEN-099",
+  "fecha": "2025-09-15T14:30:00Z",
+  "tags": ["#productividad", "#salud"],
+  "contenido": "Reducir horas de trading tras detectar [fatiga>salud]",
+  "relacionadas": ["MEMTRD-045"],
+  "acciones": ["ajustar_horario"],
+  "prioridad": 3
+}
+```
+
+### Generación Automática de Memorias
+
+La IA debe generar memorias JSON siguiendo exactamente este formato.
+
+### Manejo de Errores
+
+Si una memoria falla la validación:
+
+- La IA debe intentar corregir la memoria automáticamente.
+    
+- Registrar la memoria corregida nuevamente.
+    
+
+
+## ⚙️ Configuración Técnica Recomendada (Ejemplos Claros)
+
+### SQLite con JSON1
+
+```python
+import sqlite3
+conn = sqlite3.connect("alma.db")
+conn.execute("CREATE TABLE memorias (data JSON)")
+```
+
+### NLP Local con spaCy
+
+```python
+import spacy
+nlp = spacy.load("es_core_news_sm")
+doc = nlp("Reducir horas de trading por fatiga.")
+```
+
+- **Caching**: Usar `@lru_cache` en Python para acelerar consultas frecuentes.
+    
+- **Logging**: Mantener logs simples (.log).
+    
+
+
+## 🚀 Implementar Ahora (Checklist Prioritario)
+
+1. Migrar memorias al nuevo formato JSON simplificado.
+    
+2. Implementar validador unificado en `schema_base.json`.
+    
+3. Configurar NLP local con spaCy.
+    
+4. Implementar pipeline básico NLP + SQLite.
+    
+5. Configurar `@lru_cache` para optimizar consultas.
+    
+6. Preparar estructura en clases para facilitar futuras migraciones.
+    
+

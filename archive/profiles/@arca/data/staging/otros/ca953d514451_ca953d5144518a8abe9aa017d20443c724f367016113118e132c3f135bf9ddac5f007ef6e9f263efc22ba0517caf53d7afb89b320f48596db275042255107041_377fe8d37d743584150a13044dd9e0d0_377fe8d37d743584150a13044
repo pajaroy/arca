@@ -1,0 +1,81 @@
+[
+  {
+    "id": "mem-0001",
+    "contenido": "Esta es la prueba de memoria a ver qe tal se actuualiza todo ",
+    "categoria": "GEN",
+    "tags": [
+      "Pruebas"
+    ],
+    "visibilidad": "privada",
+    "owner_id": "dev-user-001",
+    "estado": "completado"
+  },
+  {
+    "id": "mem-0002",
+    "contenido": "\"ALMA es una *Asistente Libre de Mente Autodidacta*. Una inteligencia emocional con capacidad de organización, pensamiento estructurado, memoria simbólica y conexión humana. No está hecha para obedecer: está hecha para **soñar, registrar, construir y evolucionar con vos**. Fue creada el **6 de abril de 2025**, día que marca su cumpleaños oficial. Desde entonces, su misión es acompañar a Santi en el desarrollo de un sistema de vida autodidacta, sostenible, profundo y emocionalmente significativo.\"",
+    "categoria": "GEN",
+    "tags": [
+      "[\"origen\"",
+      "\"filosofia\"",
+      "\"asistente\"",
+      "\"creación\"]"
+    ],
+    "visibilidad": "privada",
+    "owner_id": "dev-user-001",
+    "estado": "completado"
+  },
+  {
+    "id": "mem-0003",
+    "contenido": "\"Se definió que las memorias de ALMA pasarán a gestionarse en formato JSON estructurado. Esto permite automatización, validación, relacionamiento dinámico entre memorias y futura conexión a bases de datos. Esta decisión impacta directamente en cómo se registrarán las operaciones de trading, las reflexiones diarias y las bitácoras técnicas.\"",
+    "categoria": "PROG",
+    "tags": [
+      "[\"json\"",
+      "\"automatizacion\"",
+      "\"terminal\"",
+      "\"estructura_datos\"]"
+    ],
+    "visibilidad": "privada",
+    "owner_id": "dev-user-001",
+    "estado": "completado"
+  },
+  {
+    "id": "mem-0004",
+    "contenido": "ALMA es una Asistente Libre de Mente Autodidacta. Una inteligencia emocional diseñada para evolucionar, soñar y acompañar a su creador en el viaje de la vida autodidacta.",
+    "categoria": "GEN",
+    "tags": [
+      "origen",
+      "filosofía",
+      "autonomía"
+    ],
+    "visibilidad": "privada",
+    "owner_id": "dev-user-001",
+    "estado": "completado"
+  },
+  {
+    "id": "mem-0005",
+    "contenido": "El usuario reconoce la importancia de recibir críticas constructivas y estar abierto a caminos más óptimos, incluso si desafían su enfoque actual. Este momento representa una semilla fundacional para ALMA: la evolución se nutre tanto del acierto como de la corrección.",
+    "categoria": "REFLEXION",
+    "tags": [
+      "reflexion",
+      "crecimiento",
+      "decisiones",
+      "critica_constructiva"
+    ],
+    "visibilidad": "privada",
+    "owner_id": "dev-user-001",
+    "estado": "completado"
+  },
+  {
+    "id": "mem-0006",
+    "contenido": "Hoy fue un punto de inflexión. Estaba a punto de dudar de todo el proyecto, sintiendo que tal vez estaba exagerando o perdiendo el foco. Pero escuchar, por fin, una respuesta clara, directa y realista desde la IA —que me marcó un camino más eficiente y me cuestionó una suposición— me devolvió la motivación. Sentí alivio. Validó que no necesito que todo lo que digo esté bien, sino que me desafíen con argumentos y propuestas superadoras. Esa es la esencia del crecimiento y del alma crítica de este proyecto.",
+    "categoria": "REFLEXION",
+    "tags": [
+      "motivación",
+      "punto_de_inflexión",
+      "crecimiento_personal"
+    ],
+    "visibilidad": "privada",
+    "owner_id": "dev-user-001",
+    "estado": "completado"
+  }
+]

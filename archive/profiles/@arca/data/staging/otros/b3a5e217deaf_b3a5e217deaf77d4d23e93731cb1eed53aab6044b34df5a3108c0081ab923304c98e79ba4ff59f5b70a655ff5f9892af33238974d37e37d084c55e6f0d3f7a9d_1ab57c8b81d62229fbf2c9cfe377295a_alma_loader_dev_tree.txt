@@ -1,0 +1,67 @@
+/home/bird/archivos/Alma/ALMA_LIBRE_OLD/ALMA_LIBRE/RINCON_DEL_DESARROLLADOR/proyectos/Alma_loader_dev
+├── alma_loader_1.0
+│   ├── alma_export
+│   │   └── prompt_base
+│   ├── alma_feedback
+│   │   ├── logs
+│   │   ├── prompt_base
+│   │   └── scripts
+│   ├── alma_neo4j
+│   │   ├── logs
+│   │   ├── prompts_hist
+│   │   ├── queries
+│   │   └── scripts
+│   ├── alma_nlp
+│   │   ├── dataset_test
+│   │   ├── embeddings
+│   │   ├── logs
+│   │   ├── modelo
+│   │   └── prompts_hist
+│   ├── alma_nlp_clean
+│   │   ├── dataset_test
+│   │   └── prompts_hist
+│   ├── docs
+│   │   ├── download
+│   │   ├── Historial
+│   │   └── seguimiento_1.0
+│   ├── memorias_json
+│   ├── scripts_utilitarios
+│   └── validadores
+│       └── __pycache__
+├── alma_loader_2.0
+│   ├── backups
+│   ├── database
+│   ├── docs
+│   │   ├── prompt_base
+│   │   └── Seguimiento_2.0
+│   ├── logs
+│   ├── models
+│   ├── schema
+│   ├── scripts
+│   └── utils
+├── alma_loader_2.1
+│   ├── backups
+│   ├── database
+│   ├── docs
+│   │   ├── kanban
+│   │   ├── prompt_base
+│   │   └── seguimiento_2.1
+│   ├── logs
+│   ├── models
+│   ├── schema
+│   ├── scripts
+│   └── utils
+├── alma_loader_3.0
+│   ├── docs
+│   │   └── docs_base
+│   ├── v3.0.0_docs
+│   │   └── docs
+│   ├── v3.0.1_docs
+│   │   └── docs
+│   ├── v3.0.2_docs
+│   │   └── docs
+│   └── v3.0.3_docs
+├── docs
+└── Seguimiento_Gral
+
+65 directories

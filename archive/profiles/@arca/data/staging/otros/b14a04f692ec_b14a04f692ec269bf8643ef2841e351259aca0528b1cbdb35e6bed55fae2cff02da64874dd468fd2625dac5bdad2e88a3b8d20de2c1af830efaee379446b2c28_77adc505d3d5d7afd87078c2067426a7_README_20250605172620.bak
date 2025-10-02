@@ -1,0 +1,48 @@
+---
+module: referencias/externas/readme
+type: core
+status: in_progress
+created: '2025-05-22'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 📚 README – Referencias Externas
+
+📁 Ruta: docs/referencias/externas/  
+📅 Creado: 2025-05-20  
+👤 Responsable: Usuario + IA
+
+---
+
+## 🎯 Propósito
+
+Esta carpeta agrupa toda la documentación técnica **externa al sistema ALMA_RESIST** que haya influido en decisiones de diseño, implementación o arquitectura.
+
+Sirve como respaldo y contexto para mantener trazabilidad profesional de las fuentes utilizadas.
+
+---
+
+## 📂 Subcategorías actuales
+
+- `ia/` → Model cards, comparativas de LLM, pruebas de inferencia
+- `seguridad/` → Cifrado, políticas antifrágiles, estándares tipo LUKS, GPG, OWASP
+- `patrones/` → Patrones de arquitectura (Clean, Hexagonal, Onion)
+
+---
+
+## 📌 Uso correcto
+
+- NO guardar archivos personales ni notas sin relación técnica.
+- NO duplicar contenido que ya esté en `idea_base.md` o `RFC_metodologia.md`.
+- Documentar siempre que un archivo aquí **influyó en un RFC o decisión arquitectónica**.
+
+---
+
+## 🔗 Enlaces relacionados
+
+- [[ALMA_RESIST/docs/decisiones_arquitectonicas]]
+- [[RFC_0001_metodologia]]
+- [[idea_base/idea_base]]
+
+---

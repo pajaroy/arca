@@ -1,0 +1,144 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_03b563
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Context Tracker
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:cea10c817fc98a523f1d9a19df441b32f6fcef372435bfb3ec61d3175abbfdb2
+---
+import json
+from datetime import datetime
+from pathlib import Path
+from typing import List, Dict, Optional
+import logging
+import jsonschema
+
+logger = logging.getLogger("alma_context")
+
+class ContextTracker:
+    def __init__(self, storage_path: str = "context_history.jsonl"):
+        self.storage_path = Path(storage_path)
+        self._history_cache = []
+        self._schema = {
+            "type": "object",
+            "properties": {
+                "timestamp": {"type": "string", "format": "date-time"},
+                "prompt": {"type": "string"},
+                "response": {"type": "string"},
+                "metadata": {
+                    "type": "object",
+                    "properties": {
+                        "model": {"type": "string"},
+                        "module": {"type": "string"},
+                        "tags": {"type": "array", "items": {"type": "string"}}
+                    },
+                    "additionalProperties": True
+                }
+            },
+            "required": ["timestamp", "prompt", "response"]
+        }
+        self._initialize_storage()
+
+    def _initialize_storage(self) -> None:
+        try:
+            if not self.storage_path.exists():
+                self.storage_path.touch(mode=0o600)
+                logger.info(f"Archivo de contexto creado: {self.storage_path}")
+            else:
+                # Cargar caché al iniciar
+                self.get_history()
+        except PermissionError:
+            logger.critical("Sin permisos para crear archivo de contexto")
+            raise
+        except Exception as e:
+            logger.error(f"Error inicializando contexto: {str(e)}")
+            raise
+
+    def _validate_interaction(self, data: Dict) -> bool:
+        try:
+            jsonschema.validate(instance=data, schema=self._schema)
+            return True
+        except jsonschema.ValidationError as e:
+            logger.error(f"Contexto inválido: {e.message}")
+            return False
+
+    def track_interaction(self, prompt: str, response: str, metadata: Optional[Dict] = None) -> Optional[Dict]:
+        interaction = {
+            "timestamp": datetime.utcnow().isoformat() + "Z",
+            "prompt": prompt,
+            "response": response,
+            "metadata": metadata or {}
+        }
+
+        if not self._validate_interaction(interaction):
+            return None
+
+        try:
+            with open(self.storage_path, "a", encoding="utf-8") as f:
+                f.write(json.dumps(interaction, ensure_ascii=False) + "\n")
+            
+            # Actualizar caché
+            self._history_cache.append(interaction)
+            if len(self._history_cache) > 100:
+                self._history_cache.pop(0)
+                
+            logger.debug(f"Contexto registrado: {interaction['timestamp']}")
+            return interaction
+        except (IOError, OSError) as e:
+            logger.error(f"Error guardando contexto: {str(e)}")
+            return None
+        except Exception as e:
+            logger.error(f"Error no controlado: {str(e)}")
+            return None
+
+    def get_history(self, n: int = 10) -> List[Dict]:
+        try:
+            # Si el caché ya tiene suficientes elementos
+            if len(self._history_cache) >= n:
+                return self._history_cache[-n:]
+                
+            # Cargar desde archivo
+            interactions = []
+            with open(self.storage_path, "r", encoding="utf-8") as f:
+                for line in f:
+                    try:
+                        data = json.loads(line)
+                        if self._validate_interaction(data):
+                            interactions.append(data)
+                    except json.JSONDecodeError:
+                        logger.warning("Línea corrupta en historial")
+            
+            # Actualizar caché
+            self._history_cache = interactions[-100:]
+            
+            return interactions[-n:]
+        except FileNotFoundError:
+            logger.error("Archivo de contexto no encontrado")
+            return []
+        except Exception as e:
+            logger.error(f"Error leyendo historial: {str(e)}")
+            return []
+
+    def clear_history(self) -> None:
+        try:
+            if self.storage_path.exists():
+                self.storage_path.unlink()
+            self._history_cache = []
+            self._initialize_storage()
+            logger.warning("Historial contextual borrado completamente")
+        except Exception as e:
+            logger.error(f"Error borrando historial: {str(e)}")
+            raise
+
+    def __len__(self) -> int:
+        return len(self._history_cache)

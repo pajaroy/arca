@@ -1,0 +1,94 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+Script CLI para registro de aprendizajes metodológicos en archivos YAML
+Módulo: flujo_de_trabajo
+Autor: bird
+Versión: 1.0
+"""
+
+import argparse
+import yaml
+import os
+import sys
+from datetime import datetime, timezone
+import fcntl  # Para bloqueo de archivos (Unix)
+
+def main():
+    # Configuración de argumentos CLI
+    parser = argparse.ArgumentParser(description='Registrar aprendizajes metodológicos en YAML')
+    parser.add_argument('--que_aprendi', required=True, help='Lo que aprendió el usuario')
+    parser.add_argument('--que_aprendio_sistema', required=True, help='Lo que aprendió el sistema')
+    parser.add_argument('--cambio_metodologico', required=True, help='Cambio metodológico implementado')
+    parser.add_argument('--consejo_futuro', required=True, help='Consejo para futuras implementaciones')
+    parser.add_argument('--error_evitar', required=True, help='Error a evitar en el futuro')
+    parser.add_argument('--observaciones', default='', help='Observaciones adicionales (opcional)')
+    parser.add_argument('--autor', default='bird', help='Autor del registro (default: bird)')
+    parser.add_argument('--chat_id', default='', help='ID de chat relacionado (opcional)')
+    parser.add_argument('--flujo_aprendizajes', required=True, help='Ruta al archivo YAML destino')
+    
+    args = parser.parse_args()
+
+    # Preparar entrada con fecha UTC
+    entrada = {
+        'fecha': datetime.now(timezone.utc).isoformat(),
+        'que_aprendi': args.que_aprendi,
+        'que_aprendio_sistema': args.que_aprendio_sistema,
+        'cambio_metodologico': args.cambio_metodologico,
+        'consejo_futuro': args.consejo_futuro,
+        'error_evitar': args.error_evitar,
+        'observaciones': args.observaciones,
+        'autor': args.autor,
+        'chat_id': args.chat_id
+    }
+
+    # Manejo del archivo YAML con bloqueo
+    try:
+        # Crear directorio si no existe
+        os.makedirs(os.path.dirname(args.flujo_aprendizajes), exist_ok=True)
+        
+        # Bloquear archivo para evitar concurrencia
+        with open(args.flujo_aprendizajes, 'a+', encoding='utf-8') as f:
+            fcntl.flock(f, fcntl.LOCK_EX)  # Bloqueo exclusivo (Unix)
+            
+            # Posicionar al inicio para lectura
+            f.seek(0)
+            
+            # Cargar datos existentes o inicializar lista
+            try:
+                data = yaml.safe_load(f) or []
+            except yaml.YAMLError:
+                data = []
+            
+            # Agregar nueva entrada
+            data.append(entrada)
+            
+            # Truncar y escribir todo el contenido
+            f.seek(0)
+            f.truncate()
+            f.write("# Archivo de aprendizajes metodológicos\n")
+            f.write("# Generado automáticamente por add_aprendizaje_flujo.py\n\n")
+            yaml.dump(data, f, allow_unicode=True, sort_keys=False)
+            
+            # Liberar bloqueo implícitamente al salir del bloque with
+    
+    except OSError as e:
+        print(f"Error de sistema: {str(e)}", file=sys.stderr)
+        sys.exit(1)
+    except Exception as e:
+        print(f"Error inesperado: {str(e)}", file=sys.stderr)
+        sys.exit(2)
+
+    # Output de confirmación
+    print(f"✅ Entrada registrada exitosamente:")
+    print(f"📅 Fecha: {entrada['fecha']}")
+    print(f"👤 Autor: {entrada['autor']}")
+    print(f"📁 Archivo: {os.path.abspath(args.flujo_aprendizajes)}")
+    print("\nResumen del aprendizaje:")
+    print(f"- Aprendizaje personal: {entrada['que_aprendi']}")
+    print(f"- Aprendizaje del sistema: {entrada['que_aprendio_sistema']}")
+    print(f"- Cambio metodológico: {entrada['cambio_metodologico']}")
+
+if __name__ == "__main__":
+    main()

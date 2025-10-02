@@ -1,0 +1,40 @@
+# 🌀 Sprint 2 – Módulo CLI
+
+📅 Fecha de inicio: 2025-05-18  
+📅 Fecha de cierre: 2025-05-20  
+📦 Versión: v0.0.0.2  
+👤 Responsable: Santiago (pájaro)
+
+
+## ✅ Checklist Técnica
+
+- [x] Rechazar `cmd.Cmd` como base por falta de extensibilidad
+- [x] Crear arquitectura CLI desde cero con router propio
+- [x] Separar comandos en archivos individuales en `commands/`
+- [x] Implementar comandos mínimos: `!ayuda`, `!resumir`, `!buscar_memoria`, `!salir`
+- [x] Agregar `!cargar_modelo` simulado para pruebas
+- [x] Diseñar `parseline()` propio para manejar argumentos con comillas
+- [x] Implementar sistema de logs `logs/cli.log`
+- [x] Crear test manual completo y verificación por consola
+- [x] Documentar CLI en `core/README.md`
+- [x] Integrar estado en `README.md` principal, `hitos.md`, `lecciones_aprendidas.md` y `changelog.md`
+
+
+## 🛠️ Problemas Encontrados
+
+- `cmd.Cmd` no permitía importar dinámicamente funciones `do_` desde archivos separados
+- `MethodType`, `setattr` y otras técnicas no resolvían bien el binding con `self`
+- Necesidad de redefinir la arquitectura desde un enfoque más explícito y controlado
+
+
+## 🧠 Lecciones Aprendidas
+
+- Los frameworks integrados como `cmd.Cmd` son limitantes para sistemas que requieren modularidad real
+- El diseño propio de un router de comandos es más transparente, testeable y flexible
+- Mantener un log desde el inicio es clave para auditoría, debugging y entrenamiento de IA futura
+- Dejar documentación clara en cada módulo (`README.md`) ahorra horas de fricción
+
+
+🏁 **Sprint 2 cerrado oficialmente.**  
+El sistema ahora tiene un núcleo operativo funcional y extensible.
+

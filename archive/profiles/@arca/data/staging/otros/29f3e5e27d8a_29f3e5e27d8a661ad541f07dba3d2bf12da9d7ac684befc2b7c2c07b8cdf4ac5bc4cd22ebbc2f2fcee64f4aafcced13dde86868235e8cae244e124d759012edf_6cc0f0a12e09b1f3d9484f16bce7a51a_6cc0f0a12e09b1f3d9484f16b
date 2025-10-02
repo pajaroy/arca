@@ -1,0 +1,91 @@
+**Sugerencias Finales para Estructura de Carpetas y Cierre del Ciclo**
+
+### 📁 Estructura Recomendada
+
+bash
+
+ALMA_RESIST/  
+├── .gitignore              # Ignorar claves, backups, modelos grandes  
+├── README.md               # Guía de inicio rápido  
+├── requirements.txt        # Dependencias Python  
+├── alma_env.sh             # Configurar variables de entorno  
+│  
+├── src/                    # Código fuente principal  
+│   ├── core/  
+│   │   ├── alma_loader.py  
+│   │   ├── reflection_engine.py  
+│   │   └── memory_graph/  
+│   ├── security/  
+│   │   ├── alma_keymgmt.sh  
+│   │   └── encrypt_tools/  
+│   └── cli/  
+│       ├── alma_resist.py  
+│       └── alma_wizard.py  
+│  
+├── config/                 # Contratos y configuraciones  
+│   ├── contract_crypto.yaml  
+│   ├── prompt_filter.yaml  
+│   └── reflection_engine.yaml  
+│  
+├── tests/                  # Pruebas y validación  
+│   ├── test_basico.sh  
+│   ├── test_black.sh  
+│   └── test_ethics.py  
+│  
+├── docs/                   # Documentación  
+│   ├── quickstart.md  
+│   ├── ethics_backup.md  
+│   └── scalability_report.md  
+│  
+├── backups/                # Backup seguro (encriptado)  
+│   └── ALMA_NODE/          # Montado desde pendrive  
+│  
+└── examples/               # Casos de uso y flujos  
+    ├── local_mode/  
+    └── black_mode/  
+
+### 📌 Checklist de Cierre
+
+1. **Documentación Esencial:**
+    
+    - `README.md` con:
+        
+        - Instalación en 3 pasos.
+            
+        - Diagrama ASCII de flujos.
+            
+        - Enlace a filosofía operativa.
+            
+    - `quickstart.md` para asistentes juniors.
+        
+2. **Seguridad Crítica:**
+    
+    - `.gitignore` excluyendo `*.key`, `memorias.db`, `/backups/`.
+        
+    - Script `alma_env.sh` para variables sensibles (ej: `export ALMA_KEY_PATH=~/.alma/keys`).
+        
+3. **Ejecutables Básicos:**
+    
+    - `alma_resist.py` con `--mode=local` y `--mode=black`.
+        
+    - `alma_wizard.py` interactivo (guía paso a paso).
+        
+4. **Tests Automatizados:**
+    
+    - Ejecutar `test_black.sh` y guardar log en `/tests/logs/`.
+        
+    - Validar al menos 1 reflexión IA en `test_ethics.py`.
+        
+5. **Despliegue Inicial:**
+    
+    - Clonar repo en `ALMA_CORE` (PC madre) y `ALMA_RESIST` (disco externo).
+        
+    - Generar clave maestra: `./src/security/alma_keymgmt.sh --generate`.
+        
+
+
+**Consejo Final:**
+
+> _“No busques la carpeta perfecta. Busca la que permita iterar sin romper lo que ya funciona. ALMA crecerá con el uso, no con la planificación.”_
+
+¡Es hora de codificar! 🔥

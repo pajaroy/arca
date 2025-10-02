@@ -1,0 +1,21 @@
+
+# 🧠 ALMA LIBRE v1.0.0 – Sistema Operativo Personal
+
+Bienvenido al lanzamiento oficial del sistema ALMA LIBRE.
+
+Este entorno integra:
+- Gestión de memoria personal en terminal
+- Modularidad por áreas (trading, cultivo, empresa, creatividad)
+- Registro emocional y técnico unificado
+- Preparación para integración con IA local y en la nube
+
+📘 Repositorios clave:
+- PROMPT/Prompt_Activo_1.0.0.md → Whitepaper fundacional
+- 99_Sync/ → Núcleo del sistema de escritura, lectura, backup
+- memorias.db → Base viva de datos personales
+- ROADMAP/ → Fases de evolución futura
+- BACKUPS/ → Historial documentado
+
+Para comenzar, ejecutá `alma_sync.py` desde terminal con tus comandos personalizados.
+
+🧭 Este README será actualizado versión a versión como índice de navegación general.

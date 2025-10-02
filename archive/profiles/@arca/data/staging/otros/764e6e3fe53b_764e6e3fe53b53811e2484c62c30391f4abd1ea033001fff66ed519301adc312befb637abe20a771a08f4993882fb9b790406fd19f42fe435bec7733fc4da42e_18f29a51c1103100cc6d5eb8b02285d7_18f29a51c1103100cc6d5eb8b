@@ -1,0 +1,24 @@
+# ALMA_RESIST
+
+**ALMA_RESIST** es un sistema modular, portátil y asistido por inteligencia artificial diseñado para gestionar, automatizar y documentar proyectos complejos con trazabilidad total.
+
+> Versión actual: `v0.0.0.5`  
+> Estado: `estable`  
+> Sprint: `2.5` – Auditoría Final y Consolidación  
+> Última actualización: `2025-05-28`
+
+
+## 🔗 Archivos clave
+
+- `docs/version.md` → versión y ciclo de vida actual
+- `docs/changelog.md` → cambios históricos y lecciones aprendidas
+- `docs/control/sprints_activos/sprint_2.5_auditoria_checklist.md` → auditoría estructural
+- `docs/arquitectura/whitepaper/whitepaper_v1.md` → consolidación conceptual
+- `docs/arquitectura/prompt_tecnico/prompt_tecnico_base.md` → entrada técnica para IAs
+
+
+## 👤 Autoría
+
+Desarrollado por **Santiago Calvo**, con asistencia técnica de IA (GPT-4 y variantes locales como Mistral)  
+Contacto / Proyecto: `ALMA_RESIST`, Argentina – 2025
+

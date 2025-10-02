@@ -1,0 +1,18 @@
+# 🧾 Versión v0.0.0.4 – Auditoría Sprint 2.5
+
+Este snapshot marca un **hito de madurez técnica y metodológica** en el proyecto ALMA_RESIST.
+
+## 🎯 Objetivo
+Cerrar el Sprint 2.5 con:
+- Auditoría lógica completa
+- Corrección de frontmatter YAML
+- Validación de estructura modular
+- Automatización de scripts de mantenimiento
+
+## 🔁 Alcance
+
+No se incluye el sistema completo ni archivos funcionales.  
+Solo se documenta el estado final alcanzado, con referencias externas al sistema vivo.
+
+## 📌 Ubicación oficial
+`/docs/versiones/v0.0.0.4_sprint_2.5_auditoria/`

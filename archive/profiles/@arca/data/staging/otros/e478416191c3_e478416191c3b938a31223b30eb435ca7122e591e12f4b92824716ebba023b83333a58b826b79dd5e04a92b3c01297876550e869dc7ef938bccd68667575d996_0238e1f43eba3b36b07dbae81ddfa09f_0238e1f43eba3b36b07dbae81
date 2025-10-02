@@ -1,0 +1,9 @@
+### 📄 `Prompt ALMA_LOADER Individual 2.0.0
+
+- Enfoque: Adaptado para uso de un solo usuario.
+    
+- Infraestructura mínima (SQLite + JSON1, NLP local, sin Redis/API).
+    
+- Diagrama Mermaid, JSON simplificado, instrucciones básicas para la IA.
+    
+- Estado: Versión funcional inicial, reemplazada por v2.0.1.

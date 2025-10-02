@@ -1,0 +1,52 @@
+{
+  "id": "readme_alma_core_core_notebooks_v0.1.0",
+  "version": "0.1.0",
+  "fecha_actualizacion": "2025-06-11T03:45:00+00:00",
+  "autor": "Santi + ALMA",
+  "estado": "activo",
+  "hash_actual": "sha256:pending",
+  "proposito": {
+    "descripcion": "Zona de trabajo intelectual, escritura estructurada y exploración de ideas. \nAquí se documentan conceptos en evolución que aún no forman parte de scripts, módulos o entradas oficiales.\nCumple el rol de “libro de trabajo” del sistema, punto de incubación de nuevas ideas.\n"
+  },
+  "estructura_sugerida": {
+    "carpetas": [
+      {
+        "ideas_generales/": "Notas sueltas, bosquejos conceptuales, ideas libres."
+      },
+      {
+        "drafts_tecnicos/": "Diseños iniciales de scripts, prompts, o YAMLs de módulos."
+      },
+      {
+        "arquitectura/": "Esquemas de diseño del sistema, relaciones entre módulos."
+      }
+    ]
+  },
+  "relacion_rag": {
+    "indexado": true,
+    "tipo": "exploracion_modular",
+    "linked_to": [
+      "alma_core/core/README.yaml",
+      "alma_core/docs/README.yaml",
+      "control_central/bird/README.yaml"
+    ]
+  },
+  "notas_operativas": [
+    "No escribir aquí entradas personales/emocionales → usar `bitacora/` o `journal/`.",
+    "No dejar scripts sin documentar aquí → si maduran, deben migrar a `scripts/`.",
+    "Si una idea se convierte en módulo, debe tener su README propio y migrar a estructura formal."
+  ],
+  "hashing_index": {
+    "descripcion": "No se requiere hash de archivos en esta etapa, salvo que una idea pase a formalización.\n"
+  },
+  "proyeccion_futura": [
+    "Integrar sistema de tags por idea para relacionar este contenido con agentes o módulos.",
+    "Posible exportación automática a flujo_aprendizajes cuando una idea evoluciona."
+  ],
+  "changelog": [
+    {
+      "fecha": "2025-06-11T03:45:00+00:00",
+      "version": "0.1.0",
+      "cambios": "- Establecida lógica interna de `notebooks/` como espacio de incubación intelectual.\n- Documentada separación semántica con scripts, bitácoras y entradas personales.\n"
+    }
+  ]
+}

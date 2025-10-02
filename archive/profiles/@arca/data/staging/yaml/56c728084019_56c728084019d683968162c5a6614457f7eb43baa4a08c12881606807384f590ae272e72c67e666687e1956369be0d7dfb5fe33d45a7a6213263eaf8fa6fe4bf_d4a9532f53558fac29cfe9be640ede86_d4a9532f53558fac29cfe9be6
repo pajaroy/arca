@@ -1,0 +1,12 @@
+id: legacy_yaml2all
+version: "0.1.0"
+tipo: "readme"
+descripcion: |
+  Carpeta de versiones y prompts legacy (anteriores o superados).
+  Aquí se almacena todo lo que no es vigente pero tiene valor histórico o de referencia.
+  No editar ni trabajar sobre estos archivos.
+linked_to: []
+legacy_content:
+  - v0.1.0: "Primera versión funcional de yaml2all. Queda como referencia. Ya no se mantiene."
+last_modified: "2025-06-17T04:00:00Z"
+last_modified_by: "bird"

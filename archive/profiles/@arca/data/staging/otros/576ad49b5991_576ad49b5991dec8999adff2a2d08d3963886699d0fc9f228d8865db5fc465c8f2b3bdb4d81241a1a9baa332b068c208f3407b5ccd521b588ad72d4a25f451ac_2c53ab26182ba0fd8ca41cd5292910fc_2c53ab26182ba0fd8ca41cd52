@@ -1,0 +1,16 @@
+# 1. README.md
+"""
+# 📚 Memoria Loader CLI
+
+Una herramienta de terminal para cargar, almacenar y sincronizar memorias del proyecto ALMA de forma estructurada.
+
+## Objetivo
+Facilitar el registro de memorias en formatos humanos (Markdown para Obsidian) y formatos de máquina (JSON para automatización), asegurando consistencia, escalabilidad y trazabilidad.
+
+## Características principales
+- Carga guiada de memorias.
+- Generación automática de archivos `.md`.
+- Actualización automática del archivo `memorias.json`.
+- Validación de ID único y formato de fecha.
+- Preparado para futura sincronización con repositorios Git.
+

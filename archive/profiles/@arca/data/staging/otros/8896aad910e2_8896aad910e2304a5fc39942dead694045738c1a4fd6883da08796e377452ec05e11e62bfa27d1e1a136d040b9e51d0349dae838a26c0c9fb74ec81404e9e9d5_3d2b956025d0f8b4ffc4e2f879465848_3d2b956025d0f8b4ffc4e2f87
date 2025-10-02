@@ -1,0 +1,47 @@
+
+# 📋 Changelog – `control_central/`
+
+## v0.0.1 – 2025-05-29
+
+- 🧠 Se formaliza la carpeta `control_central/` como núcleo operativo de ALMA_RESIST.
+- 📁 Se define estructura base con carpetas `logs/`, `scripts/`, `checklist/`, `auditorias/`, `planificacion/`, `journal/`.
+- ✍️ Se migran registros de integración desde `logs/auditorias/` y otros orígenes al nuevo estándar.
+- 🛠️ Se prepara la validación modular para nuevas integraciones.
+- 🧾 Se crea este changelog con formato IA-friendly.
+
+
+## 🗓️ 2025-06-01 – Establecimiento de acceso SSH sin contraseña entre ALMA_CORE y ALMA_RESIST
+
+### 🔧 Cambios implementados:
+
+- Configuración de alias `core` y `resist` en ambos nodos para conexión rápida.
+- Generación y copia de claves SSH ed25519 desde ambos extremos.
+- Validación de acceso terminal sin password.
+- Verificación de rutas espejadas en `/home/bird/ALMA_RESIST/` en ambas máquinas.
+- Confirmación de acceso cruzado total vía terminal.
+
+### 🧠 Importancia para el sistema:
+
+Este paso habilita el **control total inter-nodo desde terminal**, clave para futuras automatizaciones, ejecución remota de scripts, balanceo de tareas y backups sincronizados.
+
+## 📅 2025-06-01 – Integración Formal del Sistema `asesor-IA`
+
+### 🔧 Cambios Realizados
+
+- Se creó y formalizó el sistema `asesor-IA` como módulo maestro de asesoramiento simbiótico.
+- Confirmación del contrato fundacional entre GPT (estructura), DeepSeek (técnica) y Santi (dirección).
+- Se generó infraestructura modular IA-ready bajo metodología `estructura_autonoma_v2`.
+- Registro de la primera bitácora `2025-06-01_bitacora_inicio.md` dentro de `asesor-IA/docs/journal/`.
+- Integración con carpeta `control_central/` como dependencia estratégica.
+
+### 📌 Impacto en el sistema
+
+- El módulo `asesor-IA` funcionará como núcleo de debate, síntesis y control transversal entre módulos de ALMA_RESIST.
+- Se establece un protocolo de consultas etiquetadas (`!type`, `!priority`, `!context`) que influirá en futuras interfaces CLI.
+- DeepSeek y GPT operan desde ahora como agentes con responsabilidades autónomas y reglas de colaboración.
+
+### 🧠 Notas
+
+> "Este paso marca el inicio del pensamiento distribuido dentro de ALMA_RESIST. No es solo IA asistida, es IA con propósito."
+
+title: "Prompt Bitacora Control Central"

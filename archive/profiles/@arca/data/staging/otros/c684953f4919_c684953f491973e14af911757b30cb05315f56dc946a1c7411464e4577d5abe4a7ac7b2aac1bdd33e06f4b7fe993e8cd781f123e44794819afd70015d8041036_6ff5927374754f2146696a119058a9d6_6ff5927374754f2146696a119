@@ -1,0 +1,24 @@
+## 📎 Apéndice 2025-06-02 – Limpieza final y consolidación del módulo Cannabird
+
+**Resumen:**
+Se ejecutó un proceso de limpieza profunda y reubicación de archivos para consolidar el entorno operativo del módulo `Cannabird`. Las decisiones incluyeron:
+
+- Eliminación de carpetas vacías o duplicadas dentro de `_legacy/`
+- Reubicación de archivos `.docx` y prompts ya integrados
+- Reorganización de apéndices descargables una vez integrados en `contexto_operativo_cli_cannabird.md`
+- Vaciamiento de la carpeta `archivo/downloads/` para que quede limpia y lista para uso diario temporal
+
+**Rutas afectadas:**
+- `_legacy/resumenes_cannabird/*`
+- `archivo/downloads/`
+- `archivo/historico/`
+- `archivo/descartes_raw/`
+
+**Comando final ejecutado:**  
+Se estableció como convención iniciar toda operación desde:
+
+```bash
+cd /home/bird/ALMA_RESIST/alma_empresa/entidades/cannabird/
+```
+
+**Tags:** `#limpieza-final`, `#estructura`, `#reubicacion`, `#resumen-dia`, `#contexto-operativo`

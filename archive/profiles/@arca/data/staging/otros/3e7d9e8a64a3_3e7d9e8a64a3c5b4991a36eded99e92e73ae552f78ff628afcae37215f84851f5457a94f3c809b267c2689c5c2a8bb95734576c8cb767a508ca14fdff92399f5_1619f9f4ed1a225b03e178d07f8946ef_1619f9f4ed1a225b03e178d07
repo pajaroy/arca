@@ -1,0 +1,115 @@
+---
+module: metodologias/metodologia_adr_v2
+type: core
+status: in_progress
+created: '2025-05-21'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🧠 Metodología de Auditoría y Evolución Técnica (ADRs) – ALMA_RESIST (v2)
+
+📅 Versión: 2.0  
+📁 Archivo: metodologia_adr_v2.md  
+🎯 Objetivo: Registrar decisiones técnicas críticas de forma estructurada, trazable e indexable por IA, sin sobrecargar al operador único.
+
+---
+
+## ✅ ¿Qué es un ADR?
+
+Un Architecture Decision Record (ADR) documenta **una decisión técnica clave** y su justificación.  
+Permite mantener la historia evolutiva del sistema y entender por qué se eligió un camino específico.
+
+---
+
+## 📋 Estructura Base (con metadatos YAML)
+
+```yaml
+---
+adr_id: 002
+status: adopted            # adopted | deprecated | superseded
+tags: ["versionado", "automatización"]
+sprint: "Sprint_2.2"
+module: "core/cli"
+superseded_by: ""          # Si aplica
+---
+```
+
+```markdown
+# ADR 002 – Adopción de versionado SemVer
+
+📅 Fecha: 2025-05-18  
+
+## Decisión  
+Usar `MAJOR.MINOR.PATCH` como convención de versionado global.  
+
+## Contexto  
+Se necesitaba un estándar claro para snapshots y scripts internos.  
+
+## Alternativas consideradas  
+- Fechas (`2025-05-18`)  
+- Commit hashes  
+- Versionado manual ad-hoc  
+
+## Justificación  
+SemVer es ampliamente adoptado y permite automatización futura.  
+
+## Impacto  
+- Afecta carpetas `/versiones/`  
+- Modifica `changelog.md`  
+- Permite validaciones IA por versión
+```
+
+---
+
+## 📁 Ubicación oficial
+
+Todos los ADR deben guardarse en:  
+```
+docs/adr/
+```
+
+Y cuando quedan obsoletos o reemplazados, se mueven a:  
+```
+docs/adr/archived/
+```
+
+---
+
+## 🛠️ Automatización futura
+
+- Se podrá generar con:  
+```bash
+alma-cli create-adr --title "Uso de IA local"
+```
+
+- Este comando inferirá los campos desde el contexto del proyecto.
+
+---
+
+## 🔄 Migración y versiones
+
+| Situación                          | Acción                              |
+|-----------------------------------|-------------------------------------|
+| Nueva decisión técnica            | Crear ADR nuevo                     |
+| Cambio de rumbo                   | Crear nuevo ADR y marcar `superseded_by` |
+| Decisión ya no vigente            | Mover a `/archived/`                |
+
+---
+
+## 📎 Relacionado con
+
+- `metodologia_doc_ia_v2.md`
+- `estructura_modular_v2`
+- `Methodology_Index.md`
+- `alma-cli`
+
+---
+
+## 🧾 Changelog
+
+### 2025-05-21
+- [v2.0] Se integra bloque YAML para trazabilidad IA
+- Se define carpeta `/archived/` para ADRs deprecados
+- Plantilla simplificada con impacto en lista
+- Script `alma-cli create-adr` planificado

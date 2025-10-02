@@ -1,0 +1,29 @@
+# 🤖 Metodología de Interacción con IA – ALMA_RESIST (v2)
+
+📅 Versión: 2.0  
+📁 Archivo: metodologia_interaccion_ia_v2.md  
+🎯 Objetivo: Establecer una metodología operativa y automatizable para que la IA (Alma) pueda interactuar con el sistema ALMA_RESIST de forma segura, trazable y útil sin sobrecargar al operador humano.
+
+
+## 🧩 Metadatos requeridos
+
+```yaml
+```
+
+
+## 📎 Acciones y Validación
+
+| Acción                            | Validación Requerida |
+|----------------------------------|-----------------------|
+| Leer documentos                   | ❌                    |
+| Generar resumen, changelog       | ✅                    |
+| Crear ADR                         | ✅                    |
+| Sugerir `linked_to`, `tags`      | ❌                    |
+| Editar documento                 | ✅ (script o humano)  |
+
+
+## 🧾 Changelog
+
+- [v2.0] Incorporación de YAML unificado
+- Formalización de modos y niveles de interacción IA
+- Sugerencias de CLI para automatización futura

@@ -1,0 +1,44 @@
+# 📘 00_INICIALIZACION_MEMORIAS_v4.md
+
+## 🧠 Propósito de esta Inicialización
+
+Este archivo marca el inicio formal de la nueva etapa de memorias del sistema ALMA LIBRE, posterior a la limpieza de memorias web.  
+A partir de este punto, toda la construcción de contexto, evolución emocional y expansión técnica se basará **solo en memorias locales y controladas**.
+
+
+## 🌱 Memorias Esperadas a partir de esta etapa
+
+### 1. Memorías Emocionales
+
+- Reflexiones personales del humano.
+- Registros de debates IA–Humano.
+- Evaluaciones emocionales de decisiones.
+- Memorias de onboarding emocional de nuevas IAs.
+
+
+### 3. Conexiones Semánticas
+
+- Relación entre cuadernos, módulos y memorias nuevas.
+- Prioridad de conexión y tipo (estratégico, emocional, técnico).
+- Registro de vínculos "cuaderno–cuaderno" además de "cuaderno–módulo".
+
+
+## 🚀 Estilo de Escritura de Memorias
+
+- Formato preferido: **Markdown (.md)** o YAML embebido.
+- Incluir metadata inicial en cada archivo:
+  ```yaml
+  ---
+  tipo: "emocional"
+  fecha: "2025-04-27"
+  autor: "santi"
+  etiquetas: ["reflexion", "onboarding", "estrategia"]
+  ---
+  ```
+- Separar claramente emociones de operaciones.
+
+
+## 📅 Fecha de Inicio
+
+- 27 de abril de 2025
+

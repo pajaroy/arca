@@ -1,0 +1,48 @@
+# 📁 backup_to_git – Respaldo Automático con Git
+
+Este módulo contiene el script `backup_to_git.sh`, que monitorea cambios en el sistema de archivos del proyecto ALMA_RESIST y realiza commits automáticos al repositorio remoto en GitHub.
+
+---
+
+## ⚙️ Funcionalidad
+
+- Monitorea cambios en `/home/bird/ALMA_RESIST` con `inotifywait`.
+- Ejecuta: `git add`, `commit`, `pull --rebase`, y `push` en la branch `main`.
+- Excluye `.git/` y todos los archivos definidos en `.gitignore`.
+- Guarda logs en: `/home/bird/ALMA_RESIST/control_central/logs/backup_git/backup_git.log`
+- Usa bloqueo por PID para evitar instancias duplicadas.
+
+---
+
+## 🚀 Uso
+
+```bash
+# Dar permisos
+chmod +x backup_to_git.sh
+
+# Ejecutar en segundo plano
+nohup ./backup_to_git.sh > /dev/null 2>&1 &
+
+# Verificar logs
+tail -f /home/bird/ALMA_RESIST/control_central/logs/backup_git/backup_git.log
+```
+
+---
+
+## 🧪 Requisitos
+
+- `inotify-tools`
+- Acceso SSH a GitHub ya configurado
+- Repositorio inicializado y con remoto válido
+
+---
+
+## 📌 Notas
+
+- Este script está pensado para ser ejecutado **solo desde ALMA_CORE**
+- Funciona bien con sincronización paralela entre ALMA_CORE y ALMA_RESIST usando Syncthing
+- Para detenerlo: `kill $(cat /tmp/backup_to_git.pid)`
+
+---
+
+`#git` `#backup` `#automático` `#scripts` `#core`

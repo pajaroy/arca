@@ -1,0 +1,9 @@
+# ALMA_CONFIG.yaml – Configuración General del Sistema ALMA LIBRE
+
+version_actual: "0.7.8.1"
+autor: "Santi"
+prompt_activo: "PROMPT/Prompt_Activo.md"
+ruta_base_datos: "99_Sync/memorias.db"
+ultimo_backup: "2024-04-23"
+modo: "local"
+modelo_IA: "GPT / DeepSeek / Ollama"

@@ -1,0 +1,84 @@
+id: RESPUESTA_DS_FIX_METADATA_2025-06-08
+tipo: arquitectura_modular
+origen: deepseek
+modulo_afectado: fix_metadata
+version_propuesta: 0.2.0
+autor_respuesta: deepseek
+descripcion: >
+  Refactorización modular del script fix_metadata con arquitectura profesional
+  escalable, con validación, paralelización, logging automático y CLI robusta.
+fecha: 2025-06-08
+archivos_generados:
+  - bin/fix_metadata.py
+  - lib/metadata/core.py
+  - lib/metadata/validator.py
+  - lib/metadata/diff_tool.py
+  - lib/metadata/logger.py
+  - lib/utils/file_utils.py
+  - lib/utils/concurrency.py
+  - schemas/metadata.schema.json
+  - config/logging_config.yaml
+componentes:
+  bin/fix_metadata.py:
+    descripcion: CLI principal del módulo, con soporte argparse, dry-run, logging, patch y validaciones.
+    funciones:
+      - procesamiento paralelo con thread pool
+      - CLI con flags (--target, --diff, --dry-run, --log-bitacora)
+      - integración completa con todos los módulos
+
+  lib/metadata/core.py:
+    descripcion: Lógica de negocio principal para procesar archivos y aplicar fix.
+    funciones:
+      - parseo de contenido (md/yaml/json)
+      - validación de metadata
+      - aplicación de reglas de corrección
+
+  lib/metadata/validator.py:
+    descripcion: Validación de estructura de metadata usando JSON Schema.
+    funciones:
+      - uso de jsonschema.Draft7Validator
+      - logging de errores
+
+  lib/metadata/diff_tool.py:
+    descripcion: Generación de diferencias legibles entre metadatos originales y corregidos.
+    funciones:
+      - difflib.unified_diff para generar patch legible
+
+  lib/metadata/logger.py:
+    descripcion: Manejo de bitácora y changelog.
+    funciones:
+      - escritura en bitacora.md (markdown)
+      - actualización de changelog.yaml
+
+  lib/utils/file_utils.py:
+    descripcion: Lectura, detección y parseo de archivos.
+    funciones:
+      - soporte para frontmatter, YAML y JSON
+
+  lib/utils/concurrency.py:
+    descripcion: Procesamiento concurrente de múltiples archivos.
+    funciones:
+      - ThreadPoolExecutor para ejecución paralela
+
+  schemas/metadata.schema.json:
+    descripcion: Esquema formal de validación.
+    requisitos:
+      - campos obligatorios: id, autor, version
+      - patrones de validación: id alfanumérico, version semántica
+
+  config/logging_config.yaml:
+    descripcion: Configuración de logs del sistema.
+
+caracteristicas_clave:
+  - Modularización completa
+  - Validación formal
+  - Bitácora y changelog automático
+  - Detección de formato
+  - Procesamiento paralelo
+  - CLI profesional con soporte dry-run y patch
+  - Compatibilidad con sistemas remotos (S3, NFS)
+  - Documentación implícita por estructura
+
+impacto: >
+  Este diseño permite escalar el sistema ALMA_RESIST hacia una arquitectura de
+  automatización robusta, segura, auditable y reutilizable en múltiples módulos.

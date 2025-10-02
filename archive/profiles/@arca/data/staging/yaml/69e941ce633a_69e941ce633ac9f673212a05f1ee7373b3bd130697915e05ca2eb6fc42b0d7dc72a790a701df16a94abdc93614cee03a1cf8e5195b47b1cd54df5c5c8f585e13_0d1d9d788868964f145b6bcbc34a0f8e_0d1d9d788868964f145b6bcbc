@@ -1,0 +1,85 @@
+# =========================================
+# ALMA_CLI_CLEANER v0.1.4 - Prompt Técnico para GENERACIÓN DE SCRIPT PYTHON CLI MEJORADO
+# =========================================
+# Este prompt tiene como propósito la generación de un SCRIPT PYTHON CLI robusto,
+# incorporando **todas** las mejoras de arquitectura, seguridad, control de errores y compatibilidad aquí especificadas.
+# El script debe ser autónomo, auditable, modular y listo para integrarse en el ecosistema ALMA_RESIST.
+# El resultado debe ser un único archivo Python ejecutable por CLI, con lógica real y pruebas de edge-cases.
+# =========================================
+
+objetivos_de_implementacion: |
+  - Refactorizar y robustecer el script CLI de metadatos para ALMA_RESIST.
+  - Incorporar manejo real de archivos YAML con ruamel.yaml para preservar orden y comentarios.
+  - Implementar dry-run **real**: flag que previene cualquier escritura en disco y muestra en consola los cambios propuestos.
+  - Agregar verificación y protección contra archivos binarios/no texto y advertencias para archivos grandes.
+  - Incluir lógica de rollback seguro: todos los writes deben hacerse a archivos temporales, reemplazando solo si el proceso termina OK.
+  - Ampliar migrador de templates: debe poder mapear/convertir campos de templates viejos a los nuevos y dejar registro detallado en log e historial.
+  - Agregar hash de contenido (hash_verificacion) tras cada cambio relevante.
+  - Mejorar validación de docstrings y bloques YAML en Python, soportando imports previos, encoding y docstrings irregulares.
+  - Testear y documentar edge-cases críticos: YAML corrupto, listas vacías, tipos erróneos, campos duplicados, etc.
+  - Mantener compatibilidad y logs centralizados (real Parquet si es posible, o JSON en su defecto).
+  - Agregar docstrings claros, README interno, y sección changelog/versionado en el propio script.
+  - El resultado debe ser usable por humanos y agentes IA (Kael, Centralesis), con políticas de error strict/relaxed, dry-run y force.
+
+mejoras_criticas_a_implementar:
+  - Cambio de PyYAML a **ruamel.yaml** para todos los flujos de YAML.
+  - Implementación real de dry-run (no se modifica ningún archivo, muestra diff por pantalla).
+  - Manejo y warning ante archivos binarios o demasiado grandes (opcional configurable).
+  - Todas las escrituras deben ser atómicas (tmp + move, nunca write directo).
+  - Chequeo estricto de hash_verificacion tras cualquier operación.
+  - Soporte robusto de docstrings en Python (aunque tenga imports previos).
+  - Edge-case tests/documentados: YAML corrupto, lista/string, tipo erróneo, campos extra/no estándar.
+  - Salida JSON opcional (flag --json) para integración con otras IAs o herramientas.
+  - Logs en Parquet real usando pyarrow/pandas (o JSON si no está disponible).
+  - Compatibilidad estricta: abortar si versión de template no es soportada, salvo migración explícita.
+  - Si se migra template, debe mapear campos, no solo cambiar el versionado.
+  - Todo cambio debe dejarse registrado en historial y en log global.
+
+titulo: "ALMA_CLI_CLEANER v0.1.4 - Prompt Técnico para Refactor Robusto"
+descripcion: |
+  CLI profesional y auditable para la limpieza, validación, creación y auditoría de metadatos del sistema ALMA_RESIST.
+  Debe soportar todos los subcomandos originales (crear, validar, limpiar, set_responsable, set_linked, log) y sumar las mejoras críticas mencionadas arriba.
+
+subcomandos:
+  - crear
+  - validar
+  - limpiar
+  - set_responsable
+  - set_linked
+  - log
+
+features_extra:
+  - dry-run real (--dry-run)
+  - force (--force)
+  - salida json (--json)
+  - logs en Parquet/JSON/yaml, según config
+  - hash_verificacion actualizado tras cada operación
+  - rollback seguro (tmp + rename)
+  - hooks pre/post (ej. backup)
+  - edge-case tests/documentados
+  - changelog autoincremental y versión visible en CLI
+
+ejemplo_de_invocacion: |
+  python3 alma_cli_cleaner.py crear /ruta/archivo.md --title "Bitácora" --responsable "Bird" --linked-to "/docs/base.md"
+  python3 alma_cli_cleaner.py validar /ruta/archivo.md --dry-run
+  python3 alma_cli_cleaner.py limpiar /ruta/archivo.md --force
+  python3 alma_cli_cleaner.py set_responsable /ruta/archivo.md --responsable "Kael"
+  python3 alma_cli_cleaner.py log /ruta/archivo.md --json
+
+pendientes:
+  - README/documentación interna y externa
+  - Pruebas automáticas de edge-cases
+  - Ejemplos de integración con agentes IA
+
+notas_finales: |
+  El resultado debe ser **código Python real y funcional**, listo para ser auditado, versionado e integrado en el flujo ALMA_RESIST.  
+  La prioridad es la robustez, la trazabilidad, la auditabilidad y la extensibilidad.
+# =========================================
+# INSTRUCCIÓN DE REFACTORIZACIÓN
+# =========================================
+# A continuación se provee el SCRIPT PYTHON ACTUAL (versión v0.1.3).
+# Tu tarea es **refactorizarlo e implementar todas las mejoras y requisitos arriba especificados**.
+# El output debe ser un **único archivo Python funcional y ejecutable** por CLI, preparado para pruebas y auditoría.
+# NO sumar teoría, ni explicaciones: solo el código final y comentarios/docstrings internos.
+#
+# === PEGAR EL SCRIPT ORIGINAL AQUÍ ABAJO ===

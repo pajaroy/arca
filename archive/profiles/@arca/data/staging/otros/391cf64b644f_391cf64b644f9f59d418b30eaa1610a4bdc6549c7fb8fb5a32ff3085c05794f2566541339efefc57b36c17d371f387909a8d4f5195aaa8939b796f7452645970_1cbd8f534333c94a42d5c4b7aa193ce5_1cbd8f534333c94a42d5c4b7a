@@ -1,0 +1,31 @@
+
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5 (v1.4)
+
+## 🎯 Objetivo General
+
+Diseñar, ejecutar y evolucionar **ALMA_RESIST** como un sistema IA offline robusto, antifrágil y preparado para arquitecturas diversas, priorizando soberanía tecnológica, eficiencia energética y recuperación ante fallos extremos.
+
+
+## 🧩 Fragmento del Roadmap (ejemplo)
+
+```markdown
+| Sprint | Hito                      | Subtareas                                               | Métrica        | Éxito esperado                    |
+|--------|---------------------------|----------------------------------------------------------|----------------|-----------------------------------|
+| 1      | Logging cifrado           | JSON estructurado, AES-256, SHA3, test recuperación     | <1.5s carga    | Sin fallos con 1k logs corruptos |
+| 2      | Chat persistente          | SQLite encriptado, paginación, `--clear-chat`           | <2s respuesta  | Uso RAM <1.8GB con 1k mensajes   |
+| 3      | Autoevaluación + IA       | `alma_auto_eval.py`, `reporte_sprint.md`                | 95% cobertura  | Mejora en cada iteración         |
+```
+
+
+## 🧠 Preguntas guía para IA
+
+- ¿Cómo garantizar compatibilidad entre módulos nuevos y `ALMA_LIBRE/`?
+- ¿Qué estrategia de fallback usar si falla el monitoreo?
+- ¿Cómo optimizar la inferencia sin GPU en CPUs ARMv8?
+
+
+¡Este prompt está listo para iniciar la primera conversación con GPT-4.5!  
+Adjuntá:  
+- `prompt_base_primer_chat_v1.4.md`  
+- `ALMA_LIBRE/`  
+- `idea_base_0.0.9.md`

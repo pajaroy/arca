@@ -1,0 +1,180 @@
+import argparse
+import os
+import sys
+from datetime import datetime
+from ruamel.yaml import YAML
+from io import StringIO
+import pyarrow as pa
+import pyarrow.parquet as pq
+
+def parse_args():
+    parser = argparse.ArgumentParser(description='Actualiza campos last_modified en metadatos YAML.')
+    parser.add_argument('file', help='Ruta del archivo a modificar')
+    parser.add_argument('usuario', help='Nombre de usuario para last_modified_by')
+    return parser.parse_args()
+
+def extract_yaml_block(content, ext):
+    if ext in ['.yaml', '.yml']:
+        return {'yaml_str': content, 'pre': '', 'post': '', 'triple_quotes': None}
+    elif ext == '.md':
+        lines = content.splitlines()
+        if not lines or lines[0].strip() != '---':
+            return None
+        end_idx = None
+        for i in range(1, len(lines)):
+            if lines[i].strip() == '---':
+                end_idx = i
+                break
+        if end_idx is None:
+            return None
+        pre = '\n'.join(lines[:1]) + '\n'
+        yaml_str = '\n'.join(lines[1:end_idx])
+        post = '\n' + '\n'.join(lines[end_idx:])
+        return {'yaml_str': yaml_str, 'pre': pre, 'post': post, 'triple_quotes': None}
+    elif ext == '.py':
+        triple_quotes = None
+        patterns = ['"""', "'''"]
+        for pattern in patterns:
+            start = content.find(pattern)
+            if start != -1:
+                triple_quotes = pattern
+                break
+        if triple_quotes is None:
+            return None
+        end = content.find(triple_quotes, start + len(triple_quotes))
+        if end == -1:
+            return None
+        pre = content[:start]
+        doc_content = content[start + len(triple_quotes):end]
+        lines = doc_content.splitlines()
+        if not lines or not lines[0].strip() == '---':
+            return None
+        yaml_str = '\n'.join(lines[1:])
+        post = content[end + len(triple_quotes):]
+        return {'yaml_str': yaml_str, 'pre': pre, 'post': post, 'triple_quotes': triple_quotes}
+    return None
+
+def log_to_parquet_append(file_path, usuario, timestamp, resultado, mensaje):
+    log_file = "/home/alma/Alma-Cli/Logs/Cleaner.parquet"
+    os.makedirs(os.path.dirname(log_file), exist_ok=True)
+
+    schema = pa.schema([
+        ("ruta_archivo", pa.string()),
+        ("usuario", pa.string()),
+        ("fecha_modificacion", pa.string()),
+        ("accion", pa.string()),
+        ("resultado", pa.string()),
+        ("mensaje", pa.string())
+    ])
+
+    new_data = {
+        "ruta_archivo": file_path,
+        "usuario": usuario,
+        "fecha_modificacion": timestamp,
+        "accion": "update_last_modified",
+        "resultado": resultado,
+        "mensaje": mensaje
+    }
+
+    table = pa.Table.from_pylist([new_data], schema=schema)
+
+    # Parquet append seguro
+    if not os.path.exists(log_file):
+        pq.write_table(table, log_file)
+    else:
+        # Usamos modo append (PyArrow>=8.0.0 soporta 'append_table')
+        try:
+            existing = pq.read_table(log_file)
+            table_all = pa.concat_tables([existing, table])
+            pq.write_table(table_all, log_file)
+        except Exception as e:
+            print(f"Error appending to Parquet: {e}")
+
+def main():
+    args = parse_args()
+    file_path = args.file
+    usuario = args.usuario
+    timestamp = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+    ext = os.path.splitext(file_path)[1].lower()
+    resultado = "error"
+    mensaje = ""
+
+    if ext not in ['.md', '.yaml', '.yml', '.py']:
+        mensaje = "Extensión no soportada"
+        print(mensaje)
+        log_to_parquet_append(file_path, usuario, timestamp, resultado, mensaje)
+        return  # NO sys.exit(1)
+
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+    except Exception as e:
+        mensaje = f"Error leyendo archivo: {e}"
+        print(mensaje)
+        log_to_parquet_append(file_path, usuario, timestamp, resultado, mensaje)
+        return
+
+    yaml_info = extract_yaml_block(content, ext)
+    if not yaml_info:
+        mensaje = "No se encontró encabezado YAML. (Archivo omitido, no bloquea batch)"
+        print(mensaje)
+        log_to_parquet_append(file_path, usuario, timestamp, resultado, mensaje)
+        return
+
+    yaml_rt = YAML(typ='rt')
+    yaml_rt.preserve_quotes = True
+
+    try:
+        yaml_data = yaml_rt.load(yaml_info['yaml_str'])
+    except Exception as e:
+        mensaje = f"Error parseando YAML: {e}"
+        print(mensaje)
+        log_to_parquet_append(file_path, usuario, timestamp, resultado, mensaje)
+        return
+
+    if yaml_data is None:
+        mensaje = "YAML vacío o inválido"
+        print(mensaje)
+        log_to_parquet_append(file_path, usuario, timestamp, resultado, mensaje)
+        return
+
+    yaml_data['last_modified'] = timestamp
+    yaml_data['last_modified_by'] = usuario
+
+    try:
+        stream = StringIO()
+        yaml_rt.dump(yaml_data, stream)
+        new_yaml_str = stream.getvalue()
+    except Exception as e:
+        mensaje = f"Error generando YAML: {e}"
+        print(mensaje)
+        log_to_parquet_append(file_path, usuario, timestamp, resultado, mensaje)
+        return
+
+    if ext in ['.yaml', '.yml']:
+        new_content = new_yaml_str
+    elif ext == '.md':
+        new_content = yaml_info['pre'] + new_yaml_str + yaml_info['post']
+    elif ext == '.py':
+        new_doc = f"{yaml_info['triple_quotes']}---\n{new_yaml_str}{yaml_info['triple_quotes']}"
+        new_content = yaml_info['pre'] + new_doc + yaml_info['post']
+    else:
+        mensaje = "Tipo de archivo no manejado post-validación"
+        print(mensaje)
+        log_to_parquet_append(file_path, usuario, timestamp, resultado, mensaje)
+        return
+
+    try:
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write(new_content)
+        resultado = "ok"
+        mensaje = "Actualizado correctamente"
+        print(mensaje)
+    except Exception as e:
+        mensaje = f"Error guardando archivo: {e}"
+        print(mensaje)
+
+    log_to_parquet_append(file_path, usuario, timestamp, resultado, mensaje)
+
+if __name__ == "__main__":
+    main()

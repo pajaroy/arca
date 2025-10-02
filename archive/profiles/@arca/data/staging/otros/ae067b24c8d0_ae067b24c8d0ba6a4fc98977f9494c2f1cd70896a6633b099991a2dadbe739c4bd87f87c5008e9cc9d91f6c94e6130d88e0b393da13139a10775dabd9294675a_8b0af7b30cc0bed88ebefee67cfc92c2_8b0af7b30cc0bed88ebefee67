@@ -1,0 +1,108 @@
+# ✅ Sprint 2.6 – LLM Server + Roadmap 0.0.0.2 – ALMA_RESIST
+
+📅 Versión objetivo: v0.0.0.2  
+🧠 Objetivo: Implementar el servidor MVP `idea_base_llm_server_0.0.0.4.1` y finalizar todas las tareas del roadmap técnico v0.0.0.2
+
+
+## 🔒 Fase 2 – Logging y Seguridad
+
+- [x] Usar `log_crypto.py` para cifrado AES-GCM
+- [ ] Registrar cada respuesta cifrada en SQLite
+- [ ] Validar contra JSON Schema
+- [x] Integrar con `context_tracker` para logs de actividad
+- [x] Registrar resultados en `memory_graph`
+- [x] Conectar `memory_graph` para indexar embeddings de respuestas
+- [x] Integrar `context_tracker` al registrar actividad/logs
+
+
+
+### ✅ Tests existentes a refactorizar
+
+| Archivo original     | Estado         | Acción recomendada                           |
+|----------------------|----------------|----------------------------------------------|
+| `test_llm.py`        | Obsoleto       | Refactorizar como `test_model_wrapper.py`    |
+| `test_cli.py`        | Parcial        | Migrar a `test_api_responder.py`             |
+| `test_log_crypto.py` | Parcial        | Mantener y extender                          |
+
+
+### 🧱 Requisitos técnicos
+
+- Usar `pytest` como motor principal
+- Evitar dependencias externas (usar mocks para modelo si es necesario)
+- Las rutas de escritura deben apuntar a carpetas temporales (`tmp/` o `tests/data`)
+- Agregar al menos un test por caso de error (input inválido, fallo en carga, etc.)
+- Incluir fixtures o mocks si el modelo no puede ser cargado durante CI
+
+
+### 🧠 Notas finales
+
+Una vez finalizada esta suite, se podrá:
+- Validar automáticamente los endpoints
+- Simular interacciones completas
+- Auditar integridad de archivos
+- Iniciar testeo CI/CD desde CLI o pre-commit
+
+Este plan cumple los requisitos de la Fase 3 del Sprint 2.6 y establece una base sólida para testear futuras versiones del servidor.
+
+
+
+## 🗃️ Fase 5 – Versionado y Cierre
+
+- [ ] Congelar versión `0.0.0.1` en `docs/versiones/`
+- [ ] Registrar hito del Sprint en `docs/hitos/`
+- [ ] Agregar lecciones aprendidas a `lecciones_aprendidas.md`
+- [ ] Confirmar cumplimiento de:
+  - [ ] `python core/cli.py` responde sin errores
+  - [ ] Se levanta modelo `.gguf` desde CLI
+  - [ ] Se guarda memoria como JSON cifrado
+  - [ ] Todas las pruebas pasan
+
+
+# 📎 Apéndice Sprint 2.6 – Feedback Técnico de DeepSeek
+
+Este apéndice resume los ajustes recomendados por DeepSeek para mejorar el Sprint 2.6 de ALMA_RESIST, sin duplicar tareas ya definidas. Aplica como guía adicional para asegurar escalabilidad, foco y realismo.
+
+
+## 📆 Plan Semanal Ajustado
+
+### Semana 1-2:
+- FastAPI + `/responder`
+- `ModelWrapper`
+- Manejo de errores
+
+### Semana 2-3:
+- Logging cifrado
+- `memory_graph`
+- `context_tracker`
+
+### Semana 3:
+- Test end-to-end
+- Validación de logs
+
+### Semana 4:
+- README.md + requisitos
+- Congelar versión + lecciones aprendidas
+
+
+## 📌 Apéndice: Resumen de Avance Técnico – Sprint 2.6 (2025-05-26)
+
+Este resumen agrupa todos los módulos, archivos y tareas ya completadas hasta la fecha, correspondientes a la Fase 1 y parcialmente a la Fase 2 del sprint.
+
+
+### 📁 Documentación estructural
+
+- `docs/contracts/schema_prompt.json`  
+- `docs/contracts/schema_respuesta.json`  
+- `docs/contracts/README.md`  
+
+Todos alineados con los modelos de entrada/salida reales.
+
+
+### 🧩 Pendientes inmediatos
+
+- Finalizar módulo `memory_graph.py`
+- Probar respuesta desde CLI
+- Integrar logging en tiempo real (`log_writer`)
+- Preparar test unitarios de entrada/salida (Fase 3)
+- Iniciar documentación final y cierre del sprint
+

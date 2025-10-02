@@ -1,0 +1,31 @@
+# 🧠 Prompt – Reorganización de la Carpeta ALMA_EMPRESA (v2)
+
+Este prompt inicia una nueva etapa dentro de **este mismo chat**, cambiando el enfoque hacia una reorganización formal y estructurada de la carpeta `ALMA_EMPRESA` bajo criterios de modularidad, claridad y escalabilidad dentro del ecosistema ALMA_RESIST.
+
+## 📁 Contexto
+
+- Proyecto: **ALMA_RESIST**
+- Nodo: `ALMA_EMPRESA`
+- Objetivo: Consolidar y formalizar la estructura interna siguiendo una metodología estándar y reutilizable.
+- Enfoque: Auditoría + Reorganización IA-friendly + Formalización de subcarpetas
+
+## 📎 Archivos que se adjuntarán
+
+1. `ALMA_EMPRESA.zip` – Carpeta original a reorganizar
+2. `metodologia_estructura_autonoma_v2.md` – Metodología base para guiar la reestructuración
+
+## ✅ Objetivos del proceso
+
+- Aplicar la **metodología_estructura_autonoma_v2** como base.
+- Reordenar las carpetas internas, estandarizar nombres, y eliminar ambigüedades o redundancias.
+- Generar `README.md` faltantes dentro de cada subcarpeta crítica (IA, equipo, asesoría, etc.).
+- Documentar los cambios en un changelog si corresponde.
+- Establecer enlaces internos IA-friendly (para Obsidian o futuros indexadores).
+- Dejar todo preparado para escalar la lógica a futuras entidades (Cannabird, 13CC, etc.)
+
+## 🧩 Consideraciones específicas
+
+- `entidades/` ya contiene subcarpetas de Cannabird, 13CC e Inance, pero deberán integrarse mejor.
+- La carpeta `IA_asistente/` debe consolidarse como un módulo funcional que permita en el futuro implementar un sistema de gestión autónoma.
+- El fondo de inversión se discutirá si permanece como entidad o módulo operativo.
+

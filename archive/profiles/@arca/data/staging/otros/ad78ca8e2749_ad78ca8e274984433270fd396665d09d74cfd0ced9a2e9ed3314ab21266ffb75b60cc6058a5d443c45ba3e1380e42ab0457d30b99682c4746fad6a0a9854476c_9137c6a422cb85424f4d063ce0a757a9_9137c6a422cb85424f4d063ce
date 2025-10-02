@@ -1,0 +1,13 @@
+# changelog/
+
+Carpeta centralizada para changelogs y registros de cambios del módulo Centralesis.
+
+Incluye:
+- `changelog.md`: registro detallado de cambios en formato Markdown, apto para revisión humana y auditoría rápida.
+- `changelog.yaml`: changelog estructurado en YAML, pensado para trazabilidad automatizada, integración con scripts y auditoría IA-friendly.
+
+**Ubicación:** `meta/changelog/`  
+**Fecha de creación:** 2025-06-06
+
+Todos los archivos de cambios y versionado del entorno Centralesis deben ubicarse aquí para mantener el orden y la trazabilidad.
+

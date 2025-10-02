@@ -1,0 +1,19 @@
+# 📋 Changelog – ALMA_LOADER Prompt Técnico
+
+## [3.0.1] – 2025-05-06
+
+### ✨ Added
+- Tabla de tecnologías utilizadas por módulo
+- Ejemplo real de `reglas_dinamicas.json`
+- Documentación de coexistencia SQLite–FAISS con `embedding_id`
+- Test unitario `test_validar_memoria()`
+- Test unitario `test_vectorizacion()`
+- Representación de relaciones entre memorias como grafo dirigido
+- Recomendación formal para IDs y versionado de memorias
+
+### 🔄 Changed
+- Se reorganizó la estructura para soportar futuras integraciones modulares
+- El roadmap técnico se movió a un apéndice
+
+### 🧹 Removed
+- N/A

@@ -1,0 +1,76 @@
+
+# 🧠 Bitácora Diario – 2025-06-02
+
+## 🎯 Objetivos del Día
+
+- [x] Consolidar protocolo de ingreso de archivos
+- [x] Crear carpeta `/downloads/` y flujo de archivado
+- [x] Documentar el comportamiento de backup automático Git
+- [x] Generar apéndice diario para `control_central/`
+- [ ] Completar README de `docs/sync/`
+- [ ] Crear script `sync_status.sh` para monitoreo
+- [ ] Continuar documentación del Vault Obsidian
+
+
+## 🧠 Reflexión Personal
+
+Hoy el sistema mostró su capacidad de autorreplicación y autoorganización. Se evidencia cómo el uso de logs, flujos CLI y archivos README ayudan a controlar la complejidad creciente del sistema. Además, el backup a Git ahora actúa como una forma de trazabilidad activa, lo que lleva a un cambio de conducta: trabajar con más consciencia y menos impulsividad.
+
+
+## 📎 Apéndices del Día
+
+- [x] Protocolo ingreso archivos: [`protocolo_ingreso_archivos.md`](../archivados/protocolos/protocolo_)
+- [x] Apendice diario: [`2025-06-01_apendice_bitacora_control_central.md`](../bitacoras/diarios/2025-06-01_apendice_bitacora_control_central.md)
+- [x] Script backup: [`core/scripts/backup_to_git.sh`](../../core/scripts/backup_to_git.sh)
+
+title: Apéndice Tecnológico – Sprint 0.2
+date: 2025-06-02
+type: journal_appendix
+linked_to: bitacora
+tags: [sprint_0.2, tecnologías, sincronización, backup, init, cron, obsidian, vscode]
+
+## 1. Sincronización entre Nodos
+
+### Syncthing
+- **Descripción:** Herramienta de sincronización de archivos en tiempo real y bidireccional.
+- **Configuración:**  
+  - Instalado en ambos nodos (alma-core y alma-resist).  
+  - Carpetas compartidas: `ALMA_RESIST/` y `obsidian_vault/` (si se usa una carpeta separada para documentación).
+  - Aplicamos una plantilla personalizada (`.stignore`) para **ignorar la carpeta `.git/`** y otros archivos innecesarios, evitando corrupción de datos internos.
+
+### Input Leap
+- **Descripción:** Software para compartir mouse y teclado entre dispositivos.
+- **Configuración:**  
+  - Instalado y compilado a partir del repositorio oficial.  
+  - Configuración en `~/.input-leap/input-leap.conf` para vincular las máquinas (ej. alma-core y alma-resist).
+
+
+## 3. Desarrollo y Edición
+
+### VS Code
+- **Descripción:** Editor de código moderno, integrado a Parrot OS, para trabajar sobre el mismo repositorio y archivos de ALMA_RESIST.
+- **Configuración:**  
+  - Se configura como entorno de edición principal abriendo `~/ALMA_RESIST` como workspace.
+  - Se instalan extensiones recomendadas para Markdown, Git, Python, y otros lenguajes.
+  - La configuración (archivo `.vscode/settings.json`, `extensions.json` y `launch.json`) se diseñó para un entorno IA-friendly que facilita la lectura y edición de documentos y scripts.
+
+### Obsidian
+- **Descripción:** Herramienta para la gestión del conocimiento y navegación de notas en Markdown, ideal para visualizar toda la estructura del sistema.
+- **Configuración:**  
+  - Se define `~/ALMA_RESIST` (o una subcarpeta, según necesidad) como el vault raíz.
+  - Se configuró una carpeta `.obsidian/` con un setup básico IA-friendly que incluye apariencias, plugins y workspace predeterminados.
+  - Permite el manejo de backlinks, tags y grafo de notas que facilita la auditoría y el seguimiento de ideas y protocolos.
+
+
+## Conclusión y Siguientes Pasos
+
+Con estas tecnologías y configuraciones, se logra un **ecosistema robusto, seguro y replicable** para el manejo integral de ALMA_RESIST.  
+- **Sincronización:** Se asegura que ambos nodos (alma-core y alma-resist) compartan los mismos archivos en tiempo real.
+- **Respaldo:** Los cambios se respaldan automáticamente en GitHub, manteniendo un historial versionado y seguro.
+- **Edición y Documentación:** VS Code y Obsidian facilitan la edición y la navegación del conocimiento y scripts.
+- **Automatización:** Los init scripts y aliases aseguran que el entorno se configure automáticamente al iniciar la PC.
+
+Este apéndice sirve como una referencia completa para auditorías futuras y para integraciones con módulos IA (como alma-cli).
+
+
+¿Te parece que queda completo y bien detallado para la bitácora? Puedes ajustarlo conforme avancemos, pero ya cubre la mayoría de los aspectos implementados en este sprint.

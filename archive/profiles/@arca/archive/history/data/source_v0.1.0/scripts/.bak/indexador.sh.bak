@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Destinos
+FORMATO_DIR="$HOME/@arca/.source/og/formato"
+OG_DIR="$HOME/@arca/.source/og/archivo"
+METADATA_CSV="$HOME/@arca/.source/database/source.csv"
+
+# Crear estructura
+mkdir -p "$FORMATO_DIR"/{markdown,python,yaml,csv,sql}
+echo "nombre,ruta,hash_blake3,fecha_modificacion,tamano_bytes" > "$METADATA_CSV"
+
+# Clasificar y registrar metadatos
+find "$OG_DIR" -type f | while read -r file; do
+    # Extraer extensión
+    ext="${file##*.}"
+    
+    # Mover a carpeta correspondiente
+    case "$ext" in
+        md) dest="$FORMATO_DIR/markdown" ;;
+        py) dest="$FORMATO_DIR/python" ;;
+        yaml|yml) dest="$FORMATO_DIR/yaml" ;;
+        csv) dest="$FORMATO_DIR/csv" ;;
+        sql) dest="$FORMATO_DIR/sql" ;;
+        *) dest="$OG_DIR/_otros" ;;  # Archivos no clasificados
+    esac
+    
+    mkdir -p "$dest"
+    mv "$file" "$dest/"
+    
+    # Registrar metadatos
+    hash=$(b3sum "$dest/$(basename "$file")" | cut -d' ' -f1)
+    fecha=$(date -r "$dest/$(basename "$file") +"%Y-%m-%d %H:%M:%S")
+    tamano=$(stat -c%s "$dest/$(basename "$file")")
+    
+    echo "$(basename "$file"),$dest/$file,$hash,$fecha,$tamano" >> "$METADATA_CSV"
+done
+
+# Eliminar duplicados (requiere fdupes)
+fdupes -rdN "$FORMATO_DIR"  # -r: recursivo, -d: borra duplicados, -N: modo simulación (quitar para ejecución real)

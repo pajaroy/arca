@@ -1,0 +1,58 @@
+---
+module: versiones/v0_0_0_4_sprint_2_5_auditoria/archivos/checklist_auditoria_inicial
+type: core
+status: in_progress
+created: '2025-05-22'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# ✅ Checklist de Tareas Pendientes – Auditoría y Regularización Inicial
+
+Fecha de generación: 2025-05-20
+
+---
+
+## 📦 Organización del Proyecto
+
+- [x] Crear archivo `docs/auditoria_estructura.md` con el árbol actual y observaciones
+- [x] Crear `docs/resumen_secciones.md` si no existe
+- [x] Crear `docs/hitos.md` para registrar eventos clave
+- [x] Crear `docs/lecciones_aprendidas.md` con lecciones por módulo
+- [x] Crear `docs/post_mortem_tecnico.md` para análisis de cada módulo
+- [x] Crear `docs/decisiones_arquitectonicas.md` para justificación técnica
+- [x] Crear `docs/index.md` como índice general del sistema
+- [x] Crear `docs/referencias/externas/` con subcarpetas: `seguridad/`, `ia/`, `patrones/`
+
+---
+
+## 🧹 Limpieza y Reorganización
+
+- [x] Revisar carpeta `backups/` → mover a `config/backups/` o eliminar si es temporal
+- [x] Revisar carpeta `archivos/` → renombrar con sentido o eliminar
+- [x] Mover cualquier script no vinculado a `core/` o `tests/` o eliminar
+
+---
+
+## 📑 Registro de Cambios y Trazabilidad
+
+- [x] Registrar estructura actual en `docs/changelog.md` con cambios estructurales
+- [x] Ejecutar `tree` + `git diff` y registrar en `docs/auditoria_estructura.md`
+- [x] Agregar nueva entrada a `docs/hitos.md` como “Auditoría de estructura inicial completada”
+
+---
+
+## 🛡️ Gobernanza y Automatización
+
+- [x] Crear `docs/RFC_metodologia.md` para futuras propuestas de cambio
+- [x] Agregar `docs/dependencias.md` si se van a listar módulos o librerías externas
+- [x] Activar `docs/plantillas/` para prompts, scripts, tests y changelogs
+
+---
+
+### 🗂 Ubicación recomendada:
+Guardar este archivo en:
+
+```
+docs/checklists/checklist_auditoria_inicial.md
+```

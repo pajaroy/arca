@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# ⚙️ Script de configuración de acceso SSH sin contraseña entre nodos ALMA
+
+# 👉 Ejecutar desde alma-core para conectar con alma-resist
+
+DEST_USER="bird"
+DEST_IP="192.168.1.36"
+
+echo "🔐 Verificando existencia de clave SSH..."
+
+if [ ! -f ~/.ssh/id_ed25519 ]; then
+    echo "🔧 Generando nueva clave SSH..."
+    ssh-keygen -t ed25519 -C "$USER@alma-core" -f ~/.ssh/id_ed25519 -N ""
+else
+    echo "✅ Clave existente detectada."
+fi
+
+echo "📤 Copiando clave pública a $DEST_USER@$DEST_IP ..."
+ssh-copy-id $DEST_USER@$DEST_IP
+
+echo "🔁 Probando conexión SSH..."
+ssh $DEST_USER@$DEST_IP "echo '✅ Acceso SSH automático exitoso desde alma-core.'"
+
+echo "✅ Finalizado."

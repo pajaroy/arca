@@ -1,0 +1,28 @@
+# 🧭 Flujos Base del Sistema ALMA_CORE
+
+Este módulo contiene los flujos fundacionales automatizados que permiten registrar eventos clave en ALMA de forma estructurada, trazable y auditable.
+
+## Índice
+
+- [Flujo 001 – Registro de Bitácora](flujos_base/flujo_001_registro_bitacora.yaml)
+- [Flujo 002 – Registro de Changelog](flujos_base/flujo_002_registro_changelog.yaml)
+- [Flujo 003 – Carga de Memorias](flujos_base/flujo_003_carga_memorias.yaml)
+
+## Uso
+
+Estos flujos están pensados para ejecutarse desde la terminal mediante scripts CLI ubicados en `core/notebooks/alma-cli/`.
+
+Cada acción importante dentro del ecosistema ALMA debe:
+1. Ser registrada mediante los scripts CLI.
+2. Estar documentada como flujo YAML.
+3. Quedar reflejada en las memorias institucionales.
+
+## Visión
+
+Toda IA o humano que interactúe con este repositorio podrá:
+- Auditar cambios desde el inicio.
+- Reconstruir cronológicamente la evolución del sistema.
+- Extender funcionalidades sin romper trazabilidad.
+
+## a reformar:
+la idea es aqui formular ocmo seran los flujos de trabajo dentro de cada modulo para qe cualquier ia o humano pueda venir aqui y saber todo como evoluciono

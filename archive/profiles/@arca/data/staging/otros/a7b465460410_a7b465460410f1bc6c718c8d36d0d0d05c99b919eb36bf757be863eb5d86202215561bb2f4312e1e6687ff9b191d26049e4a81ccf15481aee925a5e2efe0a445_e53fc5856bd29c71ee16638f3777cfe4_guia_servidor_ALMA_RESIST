@@ -1,0 +1,159 @@
+# 🧠 Guía de Uso – Servidor ALMA_RESIST
+
+## ✅ Paso 1: Instalar dependencias necesarias
+
+```bash
+# Activa tu entorno virtual si no lo está
+source .venv/bin/activate
+
+# Instala las dependencias principales
+pip install fastapi uvicorn llama-cpp-python python-multipart cryptography jsonschema
+```
+
+---
+
+## 🚀 Paso 2: Iniciar el servidor
+
+```bash
+uvicorn core.llm_server.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+---
+
+## 🧪 Endpoints principales
+
+### 1. Generar respuestas (POST /responder)
+
+```bash
+curl -X POST "http://localhost:8000/responder" \
+-H "Content-Type: application/json" \
+-d '{"prompt": "¿Cuál es el sentido de la vida?"}'
+```
+
+Respuesta esperada:
+```json
+{
+  "respuesta": "El sentido de la vida es...",
+  "metadata": {
+    "modelo": "mistral-7b-q4.gguf",
+    "longitud_prompt": 28,
+    "timestamp": "2023-10-15T12:34:56.789Z"
+  }
+}
+```
+
+---
+
+### 2. Verificar salud del sistema (GET /health)
+
+```bash
+curl http://localhost:8000/health
+```
+
+Respuesta esperada:
+```json
+{
+  "status": "OK",
+  "model_loaded": true,
+  "model_info": {
+    "nombre": "mistral-7b-q4.gguf",
+    "cuantización": "Q4",
+    "contexto": 4096,
+    "tokens_maximos": 512,
+    "parametros": "7.0B",
+    "versión_llama.cpp": "0.1.0"
+  },
+  "context_entries": 5,
+  "graph_nodes": 42
+}
+```
+
+---
+
+### 3. Obtener historial de contexto (GET /context/history)
+
+```bash
+curl "http://localhost:8000/context/history?limit=3"
+```
+
+---
+
+### 4. Exportar grafo de memoria (POST /memory/export)
+
+```bash
+curl -X POST "http://localhost:8000/memory/export?format=json"
+```
+
+---
+
+### 5. Cifrar logs (POST /logs/encrypt)
+
+```bash
+curl -X POST http://localhost:8000/logs/encrypt
+```
+
+---
+
+## ⚙️ Configuración del modelo
+
+- **Ubicación del modelo**: `core/llm_server/models/`
+- **Ejemplo de variable en `main.py`**:
+```python
+model_path = "models/tu-modelo.gguf"
+```
+
+---
+
+## 📁 Estructura recomendada del proyecto
+
+```
+ALMA_RESIST/
+├── core/
+│   └── llm_server/
+│       ├── models/              # Modelos GGUF
+│       ├── transport_data/      # Datos de transporte
+│       ├── docs/contracts/      # Esquemas JSON
+│       └── logs/                # Logs cifrados
+```
+
+---
+
+## 🧬 Variables de entorno
+
+Crear archivo `.env`:
+```
+MODEL_PATH=models/mistral-7b-q4.gguf
+QUANTIZATION=Q4
+```
+
+---
+
+## 🛠 Troubleshooting
+
+### Verificar dependencias:
+
+```bash
+pip list | grep -E 'fastapi|uvicorn|llama-cpp-python'
+```
+
+### Logs al iniciar:
+
+```text
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [12345] using WatchFiles
+INFO:     Started server process [12347]
+INFO:     Waiting for application startup.
+INFO:     alma_server: Modelo models/mistral-7b-q4.gguf cargado exitosamente
+INFO:     Application startup complete.
+```
+
+---
+
+## ❗ Problemas comunes
+
+- El modelo no carga:
+  - Asegúrate de que el archivo del modelo existe.
+  - Verifica permisos de lectura.
+  - Proba con un modelo más liviano si tenés poca RAM.
+
+---

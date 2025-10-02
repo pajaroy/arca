@@ -1,0 +1,156 @@
+metadata:
+  version: "0.2.0"
+  tipo: "bitacora"
+  schema: "almaresist.bitacora_v1"
+  descripcion: "Bitácora institucional de ALMA_RESIST"
+  estructura: "metadata + entradas"
+  tags: ["bitacora", "institucional"]
+  linked_to: []
+  responsable: "Equipo de Operaciones"
+  hash_verificacion: ""           # Se actualizará automáticamente con el script
+  historial: []
+  last_modified: "2025-06-16T03:15:35.206150"   # Podés poner el último timestamp real de tus entradas, o dejarlo así
+  last_modified_by: "Kael"
+entradas:
+- fecha: '2025-06-13T02:37:20.692074'
+  accion: Creación del README.yaml modular raíz de ALMA_CORE (v0.1.1)
+  descripcion: Se redactó e implementó el README.yaml maestro modular de la carpeta alma_core. Contiene bloques por módulo, campos index_rag, linked_to, trazabilidad agente-IA y soporte futuro para versión JSON. Reemplaza la versión 0.1.0 que queda archivada.
+  motivo: Era necesario establecer una raíz documental modular y auditable para que el ecosistema ALMA_RESIST pueda ser navegado por agentes IA y humanos sin ambigüedades, promoviendo trazabilidad, documentación viva y control de versiones.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - readme
+  - alma_core
+  - documentacion
+  - modularidad
+  - trazabilidad
+  - v0.1.1
+- fecha: '2025-06-16T00:07:09.129704'
+  accion: Reorganización y estandarización del módulo add_aprendizaje_flujo
+  descripcion: Se reestructuró completamente la carpeta add_aprendizaje_flujo creando subcarpetas para plantillas, prompts y documentación, aplicando encabezados YAML universales con metadatos en todos los archivos. Se definió la estrategia de conversión automática de YAML a JSON y Markdown, y se dejó planificado el desarrollo del script convertidor como próximo paso crítico.
+  motivo: Optimizar la trazabilidad, navegación y escalabilidad futura del repositorio, asegurando compatibilidad IA y workflow profesional. El siguiente paso es automatizar la generación de formatos y hashes para todo el sistema.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - reorganización
+  - metadatos
+  - yaml
+  - flujo_trabajo
+  - cli
+  - scripts
+  - automatización
+  - pendientes
+- fecha: '2025-06-16T00:27:16.373263'
+  accion: Alta e integración del conversor yaml2all.py
+  descripcion: 'Se incorporó el script yaml2all.py en la carpeta core/scripts/yaml2all/, permitiendo la conversión automática de archivos YAML a formatos JSON y Markdown con encabezado YAML. El script refuerza el estándar de documentación y trazabilidad en todo el repositorio, garantizando la existencia de un trío de archivos sincronizados (.yaml, .json, .md) por cada recurso clave. Próximo paso: testeo funcional y adaptación a conversión batch en el futuro.'
+  motivo: Optimizar la portabilidad, lectura, parsing y automatización documental del repositorio. Permite a humanos, IA y sistemas externos trabajar siempre con la versión óptima del recurso.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - yaml
+  - json
+  - markdown
+  - conversor
+  - automatizacion
+  - estandarizacion
+  - scripts
+- fecha: '2025-06-16T00:42:43.856125'
+  accion: Implementación y prueba del script yaml2all.py
+  descripcion: 'Se realizó la integración inicial y la primera prueba funcional del script yaml2all.py, generando automáticamente archivos .json y .md a partir de un archivo README.yaml. El proceso validó la sincronización de formatos, preservando el encabezado YAML como front matter y garantizando compatibilidad con sistemas como Obsidian. Resultado: Archivos generados correctamente y validados visualmente en Obsidian.'
+  motivo: Consolidar el estándar de documentación multiplataforma y asegurar portabilidad máxima de los recursos estructurales.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - yaml2all
+  - conversor
+  - scripts
+  - json
+  - markdown
+  - bitacora
+  - test_funcional
+- fecha: '2025-06-16T01:55:18.360543'
+  accion: Integración y validación del conversor yaml2all v0.1.1
+  descripcion: Se finalizó, testeó y documentó la integración del script yaml2all v0.1.1. El sistema ahora permite triplicar cualquier archivo YAML a .json y .md (con encabezado yaml) de forma automática, asegurando portabilidad y trazabilidad completa en ALMA_CORE.
+  motivo: Se necesitaba una solución robusta para mantener sincronizados los formatos de documentación y metadatos, optimizando el flujo documental y la interoperabilidad IA/humano. El nuevo flujo fue probado sobre todos los scripts y carpetas críticas.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - yaml2all
+  - cli
+  - infraestructura
+  - automatizacion
+  - conversor
+  - v0.1.1
+- fecha: '2025-06-16T02:12:44.210764'
+  accion: Conversión y estandarización de templates y metadatos en META
+  descripcion: Se reorganizó la carpeta META, se crearon subcarpetas para cada template (metadata, module, readme), se actualizaron todos los README con los nuevos encabezados y se generaron copias .json y .md para máxima compatibilidad. Se verificó correcto funcionamiento del script yaml2all v0.1.1 sobre toda la estructura.
+  motivo: Dejar institucionalizada la base de templates y metadatos para ALMA_CORE, asegurando portabilidad y trazabilidad total.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - meta
+  - templates
+  - refactor
+  - yaml2all
+  - v0.1.1
+- fecha: '2025-06-16T02:27:13.494021'
+  accion: Normalización y renombrado masivo de archivos README
+  descripcion: Se realizó el cambio de nombres de todos los archivos readme.* a README.*, asegurando convención uniforme en mayúsculas en toda la estructura raíz. Se corrió yaml2all para sincronizar .json y .md, y se validó la integridad de los archivos generados. El sistema quedó listo para workflows multiplataforma y revisión futura.
+  motivo: Mantener la trazabilidad, portabilidad y buenas prácticas de nomenclatura en el sistema. El objetivo fue evitar inconsistencias y facilitar automatizaciones posteriores.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - readme
+  - normalizacion
+  - mayusculas
+  - automatizacion
+  - yaml2all
+- fecha: '2025-06-16T02:49:40.765858'
+  accion: Reubicación de carpeta CLI
+  descripcion: Se movió la carpeta 'cli/' desde control_central/core/notebooks/cli/ a core/notebooks/cli/ para consolidar todos los scripts CLI en la ubicación principal del core. Se verifica integridad de archivos, se mantiene trazabilidad y se prepara el entorno para nuevas automatizaciones centralizadas.
+  motivo: 'Unificación y estandarización de la estructura: todos los recursos CLI deben residir bajo el core, evitando duplicidades y confusiones en el sistema.'
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - reubicacion
+  - cli
+  - estructura
+  - core
+  - normalizacion
+- fecha: '2025-06-16T02:55:57.712142'
+  accion: Renombrado de carpeta CLI a alma-cli
+  descripcion: Se renombró la carpeta de scripts CLI a 'alma-cli' para otorgar identidad clara a los comandos del ecosistema ALMA. Se actualizó estructura y README correspondiente.
+  motivo: Evitar ambigüedad, mantener nomenclatura profesional y preparar la estructura para nuevos scripts CLI modulares.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - cli
+  - rename
+  - estructura
+  - alma-cli
+- fecha: '2025-06-16T03:10:32.016241'
+  accion: Reorganización del módulo fix_metadata
+  descripcion: Se movieron los archivos correspondientes a la versión 0.1.0 a la subcarpeta _legacy/v0.1.0/ para preservar histórico y dejar el módulo limpio para v0.2.0 en adelante.
+  motivo: Normalizar el repositorio siguiendo prácticas de versionado profesional y preparar el entorno para consolidación CLI modular.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - fix_metadata
+  - refactor
+  - _legacy
+  - v0.1.0
+  - estructura
+  - cli
+- fecha: '2025-06-16T03:15:35.206150'
+  accion: Deprecación completa del módulo fix_metadata v0.2.0
+  descripcion: Se movió toda la versión anterior a legacy/_v0.2.0 y se preparó el entorno para una nueva arquitectura fix_metadata v1.0.0.
+  motivo: La estructura anterior no permite validar, rellenar ni sincronizar correctamente los campos definidos en la plantilla YAML actual.
+  ejecutado_por: Kael
+  estado: registrado
+  tags:
+  - fix_metadata
+  - refactor
+  - reset
+  - v1.0.0
+  - estructura
+  - cli

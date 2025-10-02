@@ -1,0 +1,52 @@
+# 01_Interconexion_Modular
+
+# 🔗 Interconexión Modular – ALMA LIBRE v0.6
+
+Este documento describe cómo se relacionan los módulos entre sí, y cómo fluyen los datos y registros en el ecosistema ALMA LIBRE.
+
+
+### `00_Gestor_de_Trades/`
+
+- 🔗 **Se alimenta de:** Cuaderno de Trading (observación de setups, contexto macro).
+- 🔗 **Conecta con:**
+    - `07_Bitacora_Emocional/` → para registrar la gestión emocional del trade.
+    - `08_Gestor_de_Templates/` → para usar plantillas según estrategia.
+    - `02_Fondo_de_Inversion/` → los resultados de trading impactan el capital del fondo.
+    - `05_Finanzas_Personales/` → actualiza el balance de trading personal.
+
+
+### `02_Fondo_de_Inversion/`
+
+- 🔗 **Se alimenta de:** resultados del módulo de trading y de cultivo.
+- 🔗 **Conecta con:**
+    - `00_Gestor_de_Trades/` → ganancias/pérdidas como entradas del fondo.
+    - `04_Cannabird_Cultivo/` → ventas y entregas generan ingresos para el fondo.
+    - `05_Finanzas_Personales/` → si el usuario es inversor, afecta su balance mensual.
+
+
+### `04_Cannabird_Cultivo/`
+
+- 🔗 **Se alimenta de:** módulos de economía, clima y entregas.
+- 🔗 **Conecta con:**
+    - `02_Fondo_de_Inversion/` → ingresos por producción.
+    - `08_Gestor_de_Templates/` → para usar plantillas de cultivo, entregas y balances.
+    - `07_Bitacora_Emocional/` → registro del vínculo emocional con el cultivo.
+
+
+### `06_Programacion/`
+
+- 🔗 **Se alimenta de:** ideas, problemas y mejoras surgidas desde otros módulos.
+- 🔗 **Conecta con:**
+    - Todos los módulos → para automatización, generación de archivos, bots, etc.
+    - `08_Gestor_de_Templates/` → si se genera un template automáticamente.
+    - AlmaSync → base del motor de automatización futura.
+
+
+### `08_Gestor_de_Templates/`
+
+- 🔗 **Se alimenta de:** plantillas creadas manual o automáticamente.
+- 🔗 **Conecta con:**
+    - Todos los módulos → provee estructura a registros diarios, mensuales y especiales.
+    - AlmaSync → detecta patrones de uso para generar archivos por contexto.
+
+[README](01_Interconexion_Modular%201d8dcc9f5a8a8081a22cdab54ececcce/README%201d8dcc9f5a8a804799f0d130b288a866.md)

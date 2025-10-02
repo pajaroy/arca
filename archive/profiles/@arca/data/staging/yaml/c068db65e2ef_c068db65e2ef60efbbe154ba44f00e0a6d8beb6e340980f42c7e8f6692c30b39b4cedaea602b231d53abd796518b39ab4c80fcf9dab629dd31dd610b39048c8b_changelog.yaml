@@ -1,0 +1,62 @@
+- id: CHANGELOG_2025-06-06_06
+  tipo: reorganizacion
+  modulo: control_central/asesor-ia/agentes
+  autor: Kael
+  fecha: 2025-06-06
+  status: publicado
+  tags:
+    - reorganizacion
+    - agentes
+    - modularidad
+    - asesor-ia
+    - auditoria
+    - bitacora_central
+  resumen: >
+    Centralización de las carpetas de agentes (alma, centralesis, kael, emma) bajo la subcarpeta agentes/ en asesor-ia, siguiendo criterio profesional de modularidad máxima.
+  detalles:
+    - Se creó agentes/ en asesor-ia
+    - Se movieron todas las carpetas de agentes dentro de agentes/
+    - Se ajustaron los README y documentación de ruta
+    - Acción registrada en bitácora y changelog central de control_central
+  protocolo:
+    - Movimiento ejecutado desde la raíz del sistema
+    - Acción documentada y auditable
+- id: CHANGELOG_VIVO_2025-06-06_07
+  tipo: changelog_vivo
+  modulo: control_central/asesor-ia/agentes
+  autor: Kael
+  fecha: 2025-06-06
+  status: publicado
+  tags:
+    - limpieza
+    - duplicados
+    - centralesis
+    - agentes
+    - auditoria
+  entradas:
+    - fecha: 2025-06-06
+      version: 2.2.1
+      cambios: >
+        Eliminación definitiva de la carpeta /control_central/asesor-ia/centralesis/ tras su migración a /control_central/asesor-ia/agentes/centralesis/.
+      impacto: >
+        Unificación de la residencia documental y eliminación de posibles fuentes de error.
+- id: CHANGELOG_VIVO_2025-06-06_08
+  tipo: changelog_vivo
+  modulo: control_central/asesor-ia/archivo/downloads/historico
+  autor: Kael
+  fecha: 2025-06-06
+  status: publicado
+  tags:
+    - movimiento
+    - historico
+    - prompt
+    - limpieza
+    - auditoria
+  entradas:
+    - fecha: 2025-06-06
+      version: 2.2.2
+      cambios: >
+        Se movió el archivo prompt_base.md de asesor-ia/ a archivo/downloads/historico/ para su archivo definitivo.
+      impacto: >
+        Mantiene orden documental y preserva historial de versiones antiguas.
+

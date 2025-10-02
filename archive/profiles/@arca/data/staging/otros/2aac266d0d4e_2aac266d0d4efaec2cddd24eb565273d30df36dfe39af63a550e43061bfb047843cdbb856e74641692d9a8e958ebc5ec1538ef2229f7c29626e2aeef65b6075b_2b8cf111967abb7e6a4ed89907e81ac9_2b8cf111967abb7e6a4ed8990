@@ -1,0 +1,33 @@
+{
+  "id": "readme_alma_core_logs_v0.1.1",
+  "version": "0.1.1",
+  "fecha_actualizacion": "2025-06-16T00:00:00+00:00",
+  "autor": "Santi + ALMA",
+  "estado": "activo",
+  "anterior": null,
+  "hash_actual": "sha256:pending",
+  "proposito": {
+    "descripcion": "Almacenamiento y gestión de logs globales del sistema. Aquí se archivan registros de eventos de alto nivel y logs críticos de agentes o procesos.\n",
+    "ultima_revision": "2025-06-16"
+  },
+  "linked_to": [
+    "archivo/README.yaml",
+    "config/README.yaml",
+    "control/README.yaml",
+    "control_central/README.yaml",
+    "core/README.yaml",
+    "docs/README.yaml",
+    "logs/README.yaml",
+    "meta/README.yaml"
+  ],
+  "estructura": {
+    "kael/": "Logs del agente KAEL y eventos de auditoría."
+  },
+  "changelog": [
+    {
+      "fecha": "2025-06-16",
+      "version": "0.1.1",
+      "cambios": "README actualizado, links cruzados, definición de estructura y lógica de logs."
+    }
+  ]
+}

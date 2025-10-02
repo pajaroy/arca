@@ -1,0 +1,163 @@
+# 🗓️ Seguimiento Semanal – Semana 19 (2025-05-05 al 2025-05-11)
+
+## 📈 Progreso del Sistema  
+- **Tareas completadas:**  
+  - Integración total de versiones anteriores (0.0.1 a 0.0.5) en la versión `0.0.6 corregida`.
+  - Ejecución completa de la checklist de correcciones estructurales.
+  - Implementación de `README.md`, `CHANGELOG.md`, `version.txt`, glosario y estructura de carpetas en su ubicación final.
+  - Eliminación de duplicados, renombrado de archivos y revisión de scripts auxiliares.
+  - Validación de legibilidad para IA y humanos.
+  - Consolidación de documentación viva en `REESTRUCTURACION_0.0.6` y otros nodos clave.
+
+- **Hitos alcanzados:**  
+  - Se declara la versión 0.0.6 como **estructuralmente estable** y lista para uso operativo.
+  - Preparación de revisión final `0.0.6.1` con ajustes mínimos pendientes (referencias internas y nombres con espacios).
+
+- **Pendiente para próxima semana:**  
+  - Aplicar corrección a documentos con referencias a `13_CANNABIS_CLUB`.
+  - Uniformizar nombres de archivo con espacios → usar guiones bajos.
+  - Preparar estructura inicial para seguimiento de versiones modulares futuras (0.0.7+).
+
+## 💡 Propuestas de Mejora  
+- Consolidar estructura `REESTRUCTURACION_0.0.6` dentro de `RECURSOS_Y_AYUDAS/docs/`.
+- Estandarizar uso de guiones bajos `_` en todo el sistema, incluidos documentos internos.
+- Automatizar checklist de validación con script de diagnóstico.
+- Crear script para seguimiento semanal automático desde diario + bitácora técnica.
+
+## ⚙️ Estado del Sistema  
+- **Técnico:** Estable, sin errores ni conflictos en carpetas. Listo para trabajo modular.
+- **Organizativo:** Toda la documentación, bitácoras y versiones sincronizadas y ordenadas.
+- **Operativo:** Flujo de trabajo funcional y navegación clara. Listo para integración futura con AI Studio u Obsidian.
+
+## 🔗 Flujo de Conexión entre Componentes  
+- **Integración de carpetas/módulos:** `CUADERNOS` y `EMPRESAS` ahora sincronizados por referencia, no duplicación. `MODULOS` listos para ser conectados con bitácora técnica.
+- **Decisiones tomadas:** Consolidar glosario + estructura en carpeta fija. Centralizar prompts y plantillas en `RECURSOS_Y_AYUDAS/`.
+- **Próximos pasos de integración:** Conectar memorias IA a través de bitácoras diarias, expandir sistema a módulos de código.
+
+establecimos como sincronizar las carpetas 13cc y alma al mismo tiempo 
+
+Esto hicimos en desarrollo de resumenes 
+
+
+## General
+
+establecimos como sincronizar las carpetas 13cc y alma al mismo tiempo 
+
+### Resumen de Actividades
+
+1. **Resúmenes Semanales (Semana 15 a Semana 19)**
+    
+    - Generamos los resúmenes detallados para las semanas 15, 16, 17 y 18 con la estructura solicitada.
+        
+    - Se integraron todos los archivos de resúmenes diarios para cada semana, alineando la información en un formato organizado.
+        
+    - Los resúmenes semanales se entregaron en formato Markdown y fueron guardados para su descarga.
+        
+2. **Resumen Mensual de Abril**
+    
+    - A partir de los resúmenes semanales de abril (Semana 15, 16 y 17), generamos un **Resumen Mensual de Abril 2025**.
+        
+    - Se siguió la estructura que me proporcionaste para los resúmenes mensuales, y se integraron los logros, avances, obstáculos y tareas en las distintas áreas de trabajo.
+        
+    - El resumen mensual fue guardado en un archivo Markdown.
+        
+3. **Resumen Diario (2025-05-09)**
+    
+    - Generamos un **Resumen Diario** detallado con las actividades realizadas durante el día.
+        
+    - Se abordaron reflexiones personales, tareas de salud y bienestar, cultivo, programación, trading, entre otras.
+        
+    - Este resumen también fue guardado en un archivo Markdown y está disponible para su descarga.
+        
+4. **Semana 19**
+    
+    - Completamos el **Resumen de la Semana 19**, integrando toda la información relevante de los resúmenes diarios y otras tareas.
+        
+    - Este resumen también fue entregado en formato Markdown.
+        
+
+
+## Cannabird Cultivo
+- En cultivo , trasplantamos a 10 litros #002-flora esta listo para entrar a flora el lunes 12
+- Se trasplanto #003-vege a 3lts
+- Se decidio bajar el riego a 8%
+- decision critica: en las mediciones; regar con el exceso que requiere pero despues los riegos siguientes regar con menos proporcion (1er riego 12% posteriores 8%)
+
+### Pendientes:
+Mejorar el excel poniendole una tabla con los parametros establecidos en cuanto a receta y riego 
+
+
+## Empresas
+### 13cc
+en empresas validamos los papeles establecidos en la semana 
+-estructura de reuniones
+- estructura de roles
+- roles y funciones 
+- sistema contable bifurcado
+- estructura de reuniones
+
+#### Pendiente para la semana que viene:
+
+Consolidar lo de la reunión 1
+
+Establecer métodos de facturación 
+
+Establecer formas de reutilizar el suelo
+
+Establecer estructura de cultivadores solidarios
+
+Chat nuevo-Establecer estructura de gastos básicos contemplando darle a gsg para cubrir esto básico , guardándolo en cada cosecha representado en g/$
+
+### Cannabird
+- se completo el pago del mes de marzo a seba
+- - decision critica: en las mediciones; regar con el exceso que requiere pero despues los riegos siguientes regar con menos proporcion (1er riego 12% posteriores 8%)
+
+## Fuente: 2025-05-10_diario.md
+# 📅 Resumen Diario – 2025-05-10
+
+## Cultivo
+En cultivo estuve manicurando todo lo qe qedaba por cortar antes de empezar proyecto-333
+
+Vimos la serie el eternauta 
+
+y descanse como un campeeeeonnn 
+## Fuente: 2025-05-11_diario.md
+# 📅 Resumen Diario – 2025-05-11
+
+- Arrancamos el dia probando herramientas nuevas de trabajo investigando google ai studio y notebook lm 
+- estuvimos reestructurrando todas las carpttas de alma libre para la mejor organizacion y poder trabajar en el flujo de datos y como se conecta cada archivo y moduloi entre si 
+- Avanzamos un poco en la parte del champi compost
+- 
+  
+  
+  
+  
+
+
+# 13CC - 📅 Resumen Diario – 2025-05-11 
+
+## 🧪 Cultivo – Reutilización de Sustrato
+
+Hoy se abordó el análisis técnico sobre **cómo reutilizar sustrato luego de un ciclo de cultivo**. Se planteó la duda sobre si **la harina de hueso** podía cumplir funciones de reactivación del suelo o si era preferible optar por **Bokashi** como reactivador integral. 
+
+A partir de eso, se evaluaron varios **insumos accesibles en Argentina**, como:
+- Harina de hueso
+- Bokashi Comadreja Orgánica
+- Champi Compost (compost de cultivo de hongos)
+
+Se explicaron las propiedades y riesgos de cada uno:
+- Harina de hueso: buen aporte de fósforo y calcio, pero sin efecto biológico.
+- Bokashi: fermento microbiano completo, óptimo para revitalizar la tierra.
+- Champi compost: rico en materia orgánica, útil si se cura bien (puede tener exceso de sales si está fresco).
+
+## 📦 Recetas desarrolladas
+
+Se organizaron **tres recetas escalables** para distintos niveles de acceso y exigencia:
+1. **Económica + funcional**: Bokashi, champi compost, humus, harina de hueso.
+2. **Alta exigencia (indoor o flores premium)**: Bokashi + compost maduro + champi compost + enmiendas minerales + biochar.
+3. **Reactivo básico**: solo Bokashi + tierra usada, como solución de emergencia.
+
+## ✅ Conclusión y recomendación
+
+Se generó un archivo técnico en Markdown (`champicompost_revision.md`) con toda la información resumida, y se concluyó que la **opción recomendada es la mezcla de alta exigencia** por su equilibrio en nutrientes, biología y estructura de suelo. Es ideal para mantener ciclos sostenidos y sanos.
+

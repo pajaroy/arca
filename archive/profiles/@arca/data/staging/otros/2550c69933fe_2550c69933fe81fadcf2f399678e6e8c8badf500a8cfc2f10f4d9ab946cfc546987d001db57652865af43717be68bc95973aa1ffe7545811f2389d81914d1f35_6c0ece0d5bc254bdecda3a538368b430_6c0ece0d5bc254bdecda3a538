@@ -1,0 +1,23 @@
+
+## 🧬 FASE 6 – Escalabilidad y Seguridad (v0.3.0)
+
+| Nº | Implementación | Objetivo | Herramientas | Estado |
+|----|----------------|----------|--------------|--------|
+| 16 | Migración a SQLite | Mejorar rendimiento con >10.000 memorias | SQLite3 | 🔄 |
+| 17 | Indexación por `tags`, `fecha`, `categoría` | Búsqueda instantánea | SQL | 🔜 |
+| 18 | Backup con WAL | Protección ante fallos / recuperación automática | Write-Ahead Logging | 🔜 |
+
+📌 **Destacado**: ALMA se vuelve resistente, veloz y confiable.
+
+
+# ✅ CONCLUSIÓN FINAL
+
+Con este roadmap, ALMA deja de ser un registro pasivo y se convierte en un sistema:
+
+- Escalable
+- Reflexivo
+- Interoperable con IA
+- Navegable como red
+- Y adaptable para uso humano y automatizado
+
+Listo para ser implementado por fases y documentado en el **whitepaper oficial**. 🚀

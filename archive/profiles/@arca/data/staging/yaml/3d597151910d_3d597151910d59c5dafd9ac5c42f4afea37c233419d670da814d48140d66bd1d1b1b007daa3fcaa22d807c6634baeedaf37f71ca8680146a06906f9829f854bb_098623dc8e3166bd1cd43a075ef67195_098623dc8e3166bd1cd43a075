@@ -1,0 +1,83 @@
+# Autonom-ia – Navegación Autónoma y Trazabilidad del Sistema ALMA_RESIST
+
+descripcion: |
+  Este sistema tiene como objetivo permitir a los agentes IA dentro de ALMA_RESIST navegar autónomamente por las carpetas del sistema, tomando decisiones basadas en metadatos, realizando acciones, y manteniendo trazabilidad constante a través de un índice centralizado.
+  Está diseñado para que los agentes interactúen entre sí sin intervención constante del usuario humano, promoviendo la modularidad, escalabilidad y gobernanza autónoma en todo el ecosistema.
+
+objetivo: |
+  Crear un sistema autónomo en ALMA_RESIST que permita a los agentes navegar el sistema de archivos, hacer ajustes y actualizar registros, todo bajo reglas de permisos, trazabilidad y metadatos automatizados.
+
+estructura:
+  - **agentes:** Directorios y archivos de cada agente con metadatos.
+  - **bitacora:** Registro de todas las acciones realizadas por los agentes, con trazabilidad y timestamp.
+  - **memorias_institucionales:** Referencia única para todos los agentes, con acceso readonly para garantizar la coherencia global.
+  - **memorias_personales:** Memorias editables y bidireccionales para cada agente, sincronizadas con su archivo operativo.
+  - **index.json:** El índice centralizado de todos los archivos y agentes, donde se guardan los metadatos, hashes, fechas y autores de cada archivo.
+  
+acciones_autonomas:
+  - **navegar:** Los agentes pueden moverse entre carpetas y archivos, leer y modificar según sus permisos.
+  - **decisiones:** Los agentes toman decisiones basadas en el análisis de los archivos, como actualizar memorias, crear registros de log, o generar nuevas tareas.
+  - **sincronizacion:** Los agentes sincronizan sus memorias personales entre su archivo operativo y el índice central.
+  
+# Protocolo de Navegación y Decisiones Autónomas
+protocolo_navegacion:
+  descripcion: >
+    Los agentes tienen permitido explorar la estructura de carpetas del sistema, pero deben operar dentro de su espacio autorizado.
+    Las decisiones sobre la creación, edición y eliminación de archivos se deben hacer siguiendo las reglas de gobernanza de ALMA_RESIST.
+
+  reglas:
+    - **Lectura**: Los agentes pueden leer cualquier archivo dentro de su directorio y archivos públicos (como `memorias_institucionales.yaml`).
+    - **Escritura**: Los agentes pueden escribir en su propio archivo de memoria y log, pero **no pueden modificar `memorias_institucionales.yaml`** directamente. Cualquier propuesta para cambiar la memoria institucional debe ser derivada y validada por Centralesis.
+    - **Sincronización**: Toda memoria personal será sincronizada con el archivo operativo y el índice central. La huella de sincronización debe ser registrada.
+
+# Ejemplo de Índice de Agentes en el Ecosistema
+index:
+  agentes:
+    - nombre: KAEL
+      directorio: "control_central/agentes/kael/"
+      archivos:
+        - nombre: "README.md"
+          tipo: "documentación"
+          hash: sha256:pending
+        - nombre: "bitacora_personal_agente.yaml"
+          tipo: "bitácora personal"
+          hash: sha256:pending
+    - nombre: CENTRALESIS
+      directorio: "control_central/agentes/centralesis/"
+      archivos:
+        - nombre: "README.md"
+          tipo: "documentación"
+          hash: sha256:pending
+        - nombre: "bitacora_personal_agente.yaml"
+          tipo: "bitácora personal"
+          hash: sha256:pending
+
+  memorias:
+    institucionales:
+      archivo: "memorias_institucionales.yaml"
+      tipo: "readonly"
+      sincronizacion: "unidireccional"
+      hash: sha256:pending
+    kael:
+      archivo: "memorias_kael.yaml"
+      tipo: "editable"
+      sincronizacion: "bidireccional"
+      hash: sha256:pending
+
+# Script de Generación de Hashes Automáticos para Actualizaciones
+script_generacion_hash:
+  descripcion: >
+    Genera y actualiza automáticamente los hashes de los archivos cuando se crean o modifican. Esto garantiza que todos los archivos estén indexados con sus correspondientes hashes.
+  ejemplo_comando: |
+    python3 /path/to/script/generar_hash.py --file "/path/to/file" --output "/path/to/index.json"
+
+# Plantillas de Metadatos para cada Registro
+metadatos:
+  descripcion: >
+    Cada archivo de agente, bitácora y memoria debe tener metadatos claros que incluyan hash, fecha, autor y un enlace a su registro en el índice.
+  ejemplo_metadatos:
+    - nombre: "README.md"
+      hash: sha256:pending
+      fecha_modificacion: "2025-06-08T14:00:00Z"
+      autor: kael
+      referencia_indice: "index.json"

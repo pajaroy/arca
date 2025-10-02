@@ -1,0 +1,21 @@
+# 🧩 08_Gestor_de_Templates
+
+Esta carpeta contiene todas las plantillas maestras del sistema ALMA LIBRE, organizadas por módulo funcional.
+
+## 📁 Estructura
+
+Cada subcarpeta incluye:
+
+- Plantillas mensuales, semanales o diarias
+- README explicativo de uso
+- Archivos `.md` para duplicar y completar
+
+## ✅ Módulos cubiertos
+
+- Trading
+- Finanzas
+- Salud y RPL
+- Cultivo Orgánico
+- Bitácora Emocional
+- Noticias Globales
+- Templates Mensuales/Quincenales

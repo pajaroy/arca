@@ -1,0 +1,83 @@
+# 📁 Guía de Alias SSH entre ALMA_CORE y ALMA_RESIST
+
+**Ubicación sugerida:** `control_central/docs/utilidades/ssh_aliases.md`  
+**Fecha:** 2025-06-01  
+**Autor:** bird
+
+---
+
+## 🎯 Objetivo
+
+Establecer alias SSH simples para facilitar el acceso entre las dos máquinas del sistema:
+
+- Desde **alma-core**, acceder con: `ssh resist`
+- Desde **alma-resist**, acceder con: `ssh core`
+
+---
+
+## ✅ Archivo de configuración SSH
+
+Editar o crear el archivo `~/.ssh/config` en **ambas máquinas** con el siguiente contenido:
+
+```ssh
+Host resist
+    HostName 192.168.1.36
+    User bird
+
+Host core
+    HostName 192.168.1.33
+    User bird
+```
+
+---
+
+## ⚙️ Instalación rápida desde alma-core
+
+Desde `alma-core`, ejecutá:
+
+```bash
+scp ~/.ssh/config resist:~/.ssh/config
+```
+
+Esto copia la configuración directamente al nodo `resist`.
+
+---
+
+## 🧪 Verificación
+
+### En alma-core:
+```bash
+ssh resist
+```
+
+### En alma-resist:
+```bash
+ssh core
+```
+
+✅ Si entrás sin que te pida contraseña, quedó bien configurado.
+
+---
+
+## 🧠 Observaciones
+
+- Los alias son totalmente personalizables. Usamos `core` y `resist` por simplicidad.
+- Podés agregar más hosts SSH en este mismo archivo en el futuro.
+- El archivo `~/.ssh/config` debe tener permisos correctos (`chmod 600 ~/.ssh/config`).
+
+---
+
+## 📌 Estado final esperado
+
+```bash
+# Desde alma-core
+bird@alma-core:~$ ssh resist
+
+# Desde alma-resist
+bird@alma-resist:~$ ssh core
+```
+
+---
+
+> **Tip de automatización:** podés agregar estos alias dentro de un script de post-instalación para futuros despliegues de ALMA.
+

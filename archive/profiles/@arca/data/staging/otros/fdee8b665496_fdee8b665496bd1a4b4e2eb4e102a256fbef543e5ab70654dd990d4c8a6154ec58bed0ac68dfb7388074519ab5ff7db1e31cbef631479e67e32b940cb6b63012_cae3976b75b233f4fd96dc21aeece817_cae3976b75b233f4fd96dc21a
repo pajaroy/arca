@@ -1,0 +1,186 @@
+Aquí tienes la implementación del hook `on_memoria_guardada` con mejoras alineadas al proyecto ALMA_LOADER:
+
+python
+
+Copy
+
+Download
+
+from abc import ABC, abstractmethod
+from typing import Dict
+
+class BaseStorage(ABC):
+    """Interfaz abstracta para sistemas de almacenamiento de memorias.
+    
+    Proporciona hooks para extender funcionalidad sin modificar el núcleo.
+    """
+    
+    @abstractmethod
+    def guardar_memoria(self, memoria: Dict) -> None:
+        """Guarda una memoria validada en el sistema de almacenamiento."""
+        pass
+    
+    @abstractmethod
+    def buscar_memoria(self, query: str) -> Dict:
+        """Busca memorias usando el sistema de consulta nativo."""
+        pass
+    
+    def on_memoria_guardada(self, memoria: Dict) -> None:
+        """Hook ejecutado post-guardado exitoso.
+        
+        Parámetros:
+            memoria (dict): Memoria guardada en formato estandarizado
+            
+        Uso típico:
+            - Disparar análisis automatizados
+            - Actualizar índices secundarios
+            - Registrar en sistemas externos
+            - Activar reglas dinámicas
+        """
+        pass
+
+    # Mantenemos las demás interfaces abstractas...
+
+**Implementación mejorada en SQLiteStorage**:
+
+python
+
+Copy
+
+Download
+
+class SQLiteStorage(BaseStorage):
+    def __init__(self, db_path: str = "memorias.db"):
+        self.conn = sqlite3.connect(db_path)
+        self.cursor = self.conn.cursor()
+        self._setup_database()
+
+    def guardar_memoria(self, memoria: Dict) -> None:
+        """Guarda en SQLite y dispara hook post-guardado."""
+        query = """
+            INSERT INTO memorias (id, categoria, contenido, metadata) 
+            VALUES (?, ?, ?, ?)
+        """
+        metadata = json.dumps({
+            'tags': memoria.get('tags', []),
+            'relaciones': memoria.get('relaciones', [])
+        })
+        
+        self.cursor.execute(query, (
+            memoria['id'],
+            memoria['categoria'],
+            memoria['contenido'],
+            metadata
+        ))
+        self.conn.commit()
+        
+        # Disparar hook con datos completos
+        super().on_memoria_guardada(memoria)
+
+    def on_memoria_guardada(self, memoria: Dict) -> None:
+        """Extensión específica para SQLite:
+        
+        1. Actualiza caché de tags
+        2. Registra en log de operaciones
+        3. Precalienta índices frecuentes
+        """
+        self._actualizar_cache_tags(memoria.get('tags', []))
+        self._registrar_log_operacion('guardado', memoria['id'])
+        
+        if config.USAR_PRECALENTADO:
+            self._precalentar_indices()
+
+**Mejoras clave**:
+
+1. **Patrón Template Method**:
+    
+
+python
+
+Copy
+
+Download
+
+# En BaseStorage
+def guardar(self, memoria: Dict) -> None:
+    self._validar_esquema(memoria)
+    self._guardar_implementacion(memoria)
+    self.on_memoria_guardada(memoria)  # Hook post-guardado
+
+@abstractmethod
+def _guardar_implementacion(self, memoria: Dict) -> None:
+    pass
+
+2. **Registro de Performance**:
+    
+
+python
+
+Copy
+
+Download
+
+def on_memoria_guardada(self, memoria: Dict) -> None:
+    start_time = time.perf_counter()
+    # ... lógica del hook
+    metrics.registrar_tiempo('hook_guardado', time.perf_counter() - start_time)
+
+3. **Manejo Seguro de Excepciones**:
+    
+
+python
+
+Copy
+
+Download
+
+def on_memoria_guardada(self, memoria: Dict) -> None:
+    try:
+        # Lógica del hook
+    except Exception as e:
+        logger.error(f"Error en hook post-guardado: {str(e)}")
+        if config.ENTORNO == 'produccion':
+            notificar_incidente(f"Fallo en hook: {type(e).__name__}")
+
+**Sugerencia de Arquitectura**:
+
+Crea un `HookManager` independiente para manejar múltiples hooks de forma desacoplada:
+
+python
+
+Copy
+
+Download
+
+class HookManager:
+    def __init__(self):
+        self.hooks = []
+    
+    def registrar_hook(self, callback: Callable):
+        self.hooks.append(callback)
+    
+    def ejecutar_hooks(self, memoria: Dict):
+        for hook in self.hooks:
+            try:
+                hook(memoria)
+            except Exception as e:
+                manejar_error_hook(e)
+
+# En BaseStorage
+def __init__(self):
+    self.hook_manager = HookManager()
+
+def on_memoria_guardada(self, memoria: Dict):
+    self.hook_manager.ejecutar_hooks(memoria)
+
+Esta implementación:
+
+- Mantiene el principio de responsabilidad única
+    
+- Permite extensión mediante plugins
+    
+- Provee monitoreo integrado
+    
+- Es compatible con el sistema de módulos existente
+    
+- Sigue los estándares PEP8 y type hints

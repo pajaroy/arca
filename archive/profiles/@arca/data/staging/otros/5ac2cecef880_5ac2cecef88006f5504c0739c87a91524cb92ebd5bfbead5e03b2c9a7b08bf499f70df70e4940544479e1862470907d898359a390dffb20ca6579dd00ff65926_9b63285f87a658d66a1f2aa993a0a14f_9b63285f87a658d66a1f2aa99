@@ -1,0 +1,40 @@
+# 🧠 ALMA_LOADER – Núcleo Operativo del Sistema ALMA
+
+**📅 Estado actualizado al 2025-05-01 – v0.0.4**
+
+
+## 🧱 Estructura Funcional
+
+```
+alma_loader/
+├── memorias_json/          # Base de datos central (JSON)
+├── memorias_md/            # Copias Markdown para Obsidian
+├── validadores/
+│   ├── validador_custom.py
+│   └── reglas.py
+├── scripts_utilitarios/
+│   └── json_to_md.py
+├── alma_nlp/               # Módulo de relaciones semánticas
+│   ├── dataset_test/
+│   ├── logs/
+│   ├── relacionador_nlp.py
+│   ├── prompt_base.md
+│   ├── seguimiento.md
+│   └── ...
+├── logs/
+└── memorias_base_0.0.2.md  # Documento vivo con estructura, filosofía y changelog
+```
+
+
+## 🔍 Próximas Fases
+
+### 🔄 Fase 4
+- Visualización avanzada con **Neo4j** y **Cytoscape.js**
+- Consulta semántica en red con Cypher
+
+### 📦 Fase 5+
+- Autodiagnóstico por contradicciones internas
+- Alertas inteligentes (`riesgo` ↔ `estrés`)
+- Integración con vector DB (`ChromaDB` / `Weaviate`)
+- API REST para acceso externo
+

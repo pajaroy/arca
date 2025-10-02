@@ -1,0 +1,12 @@
+# Prompt para DeepSeek / IA – Validación de módulo para promoción
+
+Dado un módulo en `exploraciones/` o `_STAGING/`, completá la siguiente checklist técnica para evaluar si puede ser promovido al entorno principal `MODULOS/`.
+
+Revisá:
+- documentación
+- estructura
+- integración con flujos
+- control de errores
+- trazabilidad
+
+Devolveme un checklist en formato Markdown rellenado o sugerencias para completarlo.

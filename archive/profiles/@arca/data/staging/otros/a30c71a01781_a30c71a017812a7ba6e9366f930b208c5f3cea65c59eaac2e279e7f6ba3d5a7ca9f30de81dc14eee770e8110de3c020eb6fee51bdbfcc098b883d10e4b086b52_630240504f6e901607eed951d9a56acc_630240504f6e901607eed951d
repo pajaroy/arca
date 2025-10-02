@@ -1,0 +1,47 @@
+
+# 🧠 ALMA RESIST - Sistema de IA Simbiótica Crítica
+
+**Un marco para desarrollar una IA reflexiva, ética y autónoma que evoluciona junto a su creador**
+
+
+## 🚀 Primeros Pasos
+
+### Requisitos Mínimos
+
+- Python 3.10+
+- 16GB RAM
+- Disco externo/Pendrive para `ALMA_NODE`
+
+### Instalación Rápida
+
+```bash
+git clone https://github.com/[usuario]/ALMA_RESIST.git
+cd ALMA_RESIST
+pip install -r requirements.txt
+source alma_env.sh
+```
+
+### Uso Básico
+
+```bash
+# Modo local - Reflexión diaria
+python src/cli/alma_resist.py --mode=local resumen CUADERNOS/idea.md
+
+# Modo black - Procesamiento seguro
+python src/cli/alma_resist.py --mode=black upload documento_confidencial.pdf
+```
+
+
+## 🔐 Seguridad Esencial
+
+- Cifrado AES-256/GPG integrado
+- Gestión de claves con `alma_keymgmt.sh`
+- Validación de integridad automática
+- Política de Seguridad basada en diseño ético
+
+
+## 📬 Soporte y Contacto
+
+- Reportar issues: [GitHub Issues]
+- Discusiones técnicas: [Foro ALMA]
+- Emergencias de seguridad: alma-resist-security@cripto.xyz

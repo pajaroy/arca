@@ -1,0 +1,121 @@
+# 🧠 Prompt Técnico ALMA_LOADER v3.0
+
+## 1. Propósito del Sistema
+
+Este prompt define todas las funciones técnicas, estructuras internas y flujos de interacción del sistema ALMA_LOADER. Su objetivo es que cualquier modelo IA o humano técnico pueda ejecutar, extender o auditar el sistema con claridad total. Consolidado a partir de versiones 2.1.1 y 2.2.0.
+
+## 2. Módulos Funcionales
+
+- `core_nl.py` – Conversión NL → JSON mediante reglas y patrones
+    
+- `validador.py` – Validación con `schema_base.json` y normalización de campos
+    
+- `sqlite_storage.py` – Almacenamiento actual, optimizado con JSON1 para consultas internas
+    
+- `base_storage.py` – Interfaz abstracta de almacenamiento compatible con múltiples motores
+    
+- `vector_storage.py` – Búsqueda semántica con embeddings vía FAISS (alpha)
+    
+- `router_atencional.py` – Enrutamiento según intención detectada (acción, reflexión, memoria)
+    
+- `resumenes.py` – Generación de resumen en Markdown diario o semanal
+    
+- `alma_analytics.py` – Detección de patrones, correlaciones y disparadores
+    
+- `gamificacion.py` – Sistema de motivación por puntos, niveles y hábitos (fase 3)
+    
+
+## 3. JSON Schema de Memoria
+
+```json
+{
+  "id": "MEM-TRD-2025-XXXX",
+  "categoria": "TRD",
+  "contenido": "texto plano",
+  "tags": ["#btc", "#reflexión"],
+  "resumen_inferido": "...",
+  "embedding_id": "EMB-abc123",
+  "vector": [0.123, 0.987, ...],
+  "intencion_detectada": "registro",
+  "origen_input": "usuario",
+  "relaciones": [
+    { "tipo": "temporal", "target_id": "MEM-TRD-2025-XXXX", "peso": 0.8 }
+  ]
+}
+```
+
+## 4. Interfaces y Abstracciones
+
+- `BaseStorage`: permite intercambiar SQLite por FAISS, Neo4j u otros sin modificar el flujo general
+    
+- `router_atencional`: enruta el input al módulo correcto según análisis rápido de intención
+    
+
+## 5. Flujo Conversacional Esperado
+
+1. Entrada NL del usuario o API
+    
+2. Conversión a JSON con `core_nl.py`
+    
+3. Validación semántica con `validador.py`
+    
+4. Almacenamiento (`sqlite_storage` o `vector_storage` según configuración)
+    
+5. Generación de resumen en `resumenes.py`
+    
+6. Activación de reglas automáticas en `alma_analytics.py`
+    
+
+## 6. Automatizaciones
+
+- Generación diaria/semanal de resúmenes en Markdown
+    
+- Backups automáticos del `memorias.db` o vector_index
+    
+- Alertas semánticas según `reglas_dinamicas.json`
+    
+
+## 7. Roadmap Técnico (por fases)
+
+### Fase 1 – Core estable
+
+- Registro estructurado
+    
+- Validación con JSON Schema
+    
+- Guardado en SQLite
+    
+- Resúmenes diarios
+    
+
+### Fase 2 – Semántico
+
+- Embeddings de contenido + FAISS
+    
+- Router atencional
+    
+- Análisis predictivo simple
+    
+- Relaciones entre memorias
+    
+
+### Fase 3 – Expansión
+
+- Gamificación, metas y refuerzos
+    
+- Sistema de reglas con acciones encadenadas
+    
+- Integración con apps externas (API REST, Telegram, Shortcuts, voz)
+    
+
+## 8. Instrucciones de Integración
+
+- Todo input debe ser procesado con `core_nl.py`
+    
+- Las memorias deben validarse contra `schema_base.json`
+    
+- Toda salida debe ser JSON válido, o Markdown estructurado si es resumen
+    
+- DeepSeek, GPT o terminales pueden interactuar directamente con cada módulo
+    
+

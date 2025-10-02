@@ -1,0 +1,42 @@
+# Logs y backups automáticos
+control_central/bitacora/backups/
+*/logs/
+*.log
+
+# Archivos de configuración locales
+config/settings.yaml
+*.env
+*.secret
+*.local
+
+# Archivos temporales, datos de cache y dumps
+tmp/
+*.tmp
+*.bak
+*.swp
+*.swo
+*.DS_Store
+
+# Datasets grandes o sensibles (si no querés versionar)
+archivo/datasets/
+archivo/downloads/
+
+# Archivos de pruebas, outputs o análisis temporales
+core/tests/
+*.out
+*.old
+*.test
+
+# Notebooks o checkpoints intermedios (si no son core)
+core/notebooks/.ipynb_checkpoints/
+
+# Otros patrones útiles
+__pycache__/
+*.pyc
+
+# Carpeta oculta de control de VSCode, PyCharm, etc.
+.vscode/
+.idea/
+
+# ZIPs de plantillas u otros binarios
+*.zip

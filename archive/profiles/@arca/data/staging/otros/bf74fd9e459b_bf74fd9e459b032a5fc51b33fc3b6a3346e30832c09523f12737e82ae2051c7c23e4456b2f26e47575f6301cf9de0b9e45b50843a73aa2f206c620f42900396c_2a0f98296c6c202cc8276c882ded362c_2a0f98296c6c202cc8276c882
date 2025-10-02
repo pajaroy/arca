@@ -1,0 +1,9 @@
+#!/bin/bash
+# Script unificado de inicio autom√°tico de Input Leap para ALMA
+
+if [ "$(hostname)" = "alma-core" ]; then
+    input-leaps --no-tray --disable-crypto --name alma-core --config /home/bird/.input-leap/input-leap.conf &
+elif [ "$(hostname)" = "alma-resist" ]; then
+    input-leapc --no-tray --disable-crypto --name alma-resist 192.168.1.33:24800 &
+fi
+

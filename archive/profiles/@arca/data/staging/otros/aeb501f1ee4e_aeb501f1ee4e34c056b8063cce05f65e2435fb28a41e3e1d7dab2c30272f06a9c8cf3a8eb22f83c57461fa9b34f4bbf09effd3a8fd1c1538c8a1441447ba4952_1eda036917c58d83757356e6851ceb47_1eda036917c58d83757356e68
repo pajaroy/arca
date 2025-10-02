@@ -1,0 +1,215 @@
+# 📊 base_para_proyeccion.md – Fondo de Inversión ALMA
+
+Este archivo consolida los principios fundacionales, técnicos y estratégicos clave para estructurar el fondo de inversión Alma Mía como sistema IA-asistido, escalable y simbólicamente coherente.
+
+
+## 🧾 Resumen Ejecutivo
+
+**Alma Mía** es un fondo de inversión autodirigido que busca combinar la gestión financiera profesional con una estructura emocional y humana. Desde abril de 2025, funciona como proyecto en fase alfa con capital real, trazabilidad completa y operativa en mercados de criptomonedas, índices y divisas.
+
+- Fase actual: Alfa (abr–sep 2025)
+- Capital inicial: $200 USD
+- Participantes: Santiago (CEO, inversor), ONG Cannabird, Alma Mía (empresa simbólica)
+- Estrategias activas: 2 (confirmadas), 1 en desarrollo
+- Visión a 5 años: fondo inteligente, antifrágil y adaptado al futuro económico
+
+
+## 🔄 Estructura de Fases
+
+| Fase | Nombre     | Período                 | Objetivo principal                                      |
+|------|------------|--------------------------|---------------------------------------------------------|
+| 0    | Alfa       | Abril – Septiembre 2025  | Generar métricas, validar estructura, capital interno   |
+| 1    | Beta       | Octubre – Diciembre 2025 | Aceptar primeros inversores, simular contratos reales   |
+| 2    | Real       | Desde Enero 2026         | Formalización legal del fondo, apertura institucional   |
+
+
+## ⚙️ Operativa y Estrategias
+
+**Activos operados**: BTC, ETH, Oro, EUR/USD, NAS100, SPX500
+
+### Estrategias confirmadas:
+1. **PuPuPu** (RSI + EMA12) – Criptos y oro
+2. **NY Open** – Índices bursátiles
+
+### En desarrollo:
+- **Reingreso al Rango**
+
+Todas las estrategias están documentadas individualmente en la carpeta `02_Estrategias_Operativas`.
+
+
+## 📂 Documentación y Sistema de Trazabilidad
+
+- Carpeta de Prompts (`/01_Prompts_Empresariales`)
+- Carpeta de Estrategias (`/02_Estrategias_Operativas`)
+- Bitácoras operativas en construcción
+- Informes mensuales (sin proyecciones)
+- Roadmap y contratos simbólicos en preparación
+
+
+## 📜 Estado Legal
+
+- Estado actual: no formalizado
+- Estado simbólico: funcionamiento real, capital real, decisiones trazables
+- Legalización estimada: Enero 2026 (inicio Fase Real)
+- Toda decisión está documentada y disponible para revisión histórica
+
+
+Este `Prompt_Master_1.1` representa la consolidación completa de la etapa Alfa. A partir de aquí se construye la base legal, documental y humana del fondo Alma Mía.
+
+
+## 🔄 ¿Por qué este cambio?
+
+El modelo de contratos individuales funcionó como base para establecer principios de trazabilidad y relación emocional con los inversores. Sin embargo, para escalar, automatizar y simplificar la gestión, se propone migrar hacia un esquema de fondo común simbólico.
+
+
+### 2. 🔐 Relación con Inversores
+- Cada inversor tiene una **relación porcentual** con el fondo total, no con un capital aislado.
+- El contrato simbólico refleja su **participación porcentual dinámica**.
+- Se elimina la idea de “cuenta propia” y se consolida todo bajo la gestión común del fondo.
+
+
+### 4. 📊 Informes y Bitácora
+- Todos los trades se gestionan desde una **bitácora unificada**.
+- No se hace separación entre capitales por inversor.
+- El capital total y la rentabilidad del fondo se calculan desde la Bitácora Oficial.
+- Cada inversor podrá acceder a informes proporcionales si lo requiere.
+
+
+### 6. 🧾 Documentación a modificar
+- Contratos simbólicos deben reflejar que el capital forma parte de un fondo común.
+- La sección de “roles individuales” del Prompt Master puede simplificarse.
+- El término “cuenta individual” debe eliminarse de todos los archivos constitutivos.
+
+
+## 📘 Versión Consolidada – Prompt Master 1.2
+
+# 💼 1.2_Prompt_Master_Alma_Mia_v1.2.1.md – Fondo de Inversión Alma Mía (versión fondo común)
+
+(... texto previo igual ...)
+
+
+## 💸 Criterios de Cálculo de Ganancias
+
+# 📊 04_Criterios_Calculo_Ganancias.md – Fondo Alma Mía
+
+Documento técnico-operativo que define cómo se calculan las ganancias dentro del fondo Alma Mía, sobre qué base se reparten y qué reglas aplican según la permanencia, bloqueo de capital, y contexto de pérdidas.
+
+
+## 🧮 II. Definición de "Ganancia"
+
+- Se considera **ganancia** únicamente lo que fue cerrado y anotado en la bitácora.
+- Cada trade se registra con:
+  - Porcentaje obtenido
+  - Porcentaje del capital total involucrado
+  - Resultado neto en USD (comisiones incluidas)
+- Las comisiones ya están incluidas y gestionadas por el CEO.
+- Las estadísticas y operaciones se cruzan con el historial de la cuenta BitGet.
+
+
+## 🧱 IV. Reparto por Capital Individual
+
+- No se utiliza un fondo común.  
+- Cada inversor mantiene su relación directa con Alma Mía.
+- Las ganancias se calculan **por cuenta individual**, según el capital y operaciones asociadas a ese monto.
+
+
+## ⚠️ VI. Casos de Pérdida
+
+- Si el trimestre cierra en negativo, se entrega **reporte explicativo**, no se realiza distribución.
+- Mientras no se supere la pérdida aceptada por cada inversor, la operativa continúa normalmente.
+- Ejemplo:  
+  - Capital A = $100  
+  - Tolerancia = -10%  
+  - Si en un trimestre el capital baja a $90, se detiene su operativa.
+
+
+## 📎 VIII. Conexión con Otras Áreas
+
+Este documento está vinculado directamente a:
+- `03_Distribucion_Ganancias_Alma_Mia.md`
+- Bitácora de Trading (donde se registran los resultados)
+- Contratos Simbólicos Individuales
+
+
+## 🛤️ Roadmap Estratégico 2025
+
+# 🛤️ 07_Roadmap_Alma_Mia_2025_v1.2.md
+
+**Plan estratégico-operativo del Fondo Alma Mía – versión ajustada**  
+Incluye informes mensuales desde el inicio, con cierres trimestrales redefinidos y estructura emocional continua.
+
+
+## 📅 Roadmap Mensual – 2025 (versión 1.2)
+
+### 🔸 Abril 2025
+- ✅ Inicio del fondo: primer capital, primera cuenta en BitGet
+- ✅ Estructuración institucional y contratos simbólicos
+- ✅ Documentos: distribución, cálculo de ganancias, bitácora, manifiesto
+- 📘 Cierre de mes: **primer informe mensual simbólico** con los primeros datos
+
+### 🔸 Mayo 2025
+- 📘 Segundo **informe mensual de trading y emociones**
+- ✅ Registro del primer trade real
+- ✅ Carga de estructura de riesgos individuales
+
+### 🔸 Junio 2025
+- 📘 Informe mensual de rendimiento
+- 📋 Revisión de estrategias y bitácora en uso
+- 🧠 Reflexión mensual personal como CEO
+
+### 🔸 Julio 2025
+- 📊 Consolidación de estadísticas de estrategia
+- 🔗 Conexión real entre bitácora y sistema de informes
+- 📘 Informe mensual + datos parciales del trimestre
+
+### 🔸 Agosto 2025
+- 📘 Informe mensual
+- 🧠 Cierre emocional del segundo mes operativo
+
+
+## 🧠 Cierre Mensual (Sugerencia)
+
+Cada mes se recomienda realizar:
+
+- 📘 Informe mensual de resultados operativos y trades
+- 📈 Gráfico de evolución por estrategia
+- 📋 Bitácora emocional personal
+- 🔁 Mini reflexión: “¿Qué aprendí este mes como trader y CEO?”
+
+
+## 🎯 Objetivos Estratégicos 2025
+
+# 🎯 08_Objetivos_Estrategicos_2025.md – Fondo Alma Mía
+
+Documento guía con los objetivos clave por área para el año 2025.  
+Sirve como bitácora de planificación, control y ajuste de rumbo del sistema Alma Mía.
+
+
+## 🏛️ 1. Institucional
+
+- [ ] Consolidar documentación constitucional (✅)
+- [ ] Establecer sistema de versiones para cada módulo
+- [ ] Generar presentación institucional en PDF para externos
+- [ ] Registrar eventos clave del crecimiento en Bitácora Central
+- [ ] Formalizar la relación interna con ONG Cannabird como inversor fundador
+
+
+## 🤝 3. Contratos y Capital
+
+- [ ] Crear carpeta `06_Contratos_Simbolicos` con README y plantilla base (✅)
+- [ ] Generar contrato individual para Santiago (como inversor y CEO)
+- [ ] Crear contrato para ONG Cannabird
+- [ ] Incluir formulario de ingreso de capital (datos iniciales por cada inversor)
+- [ ] Establecer plantilla oficial de informe trimestral (adjunto a contrato)
+
+
+## 🧠 5. Bitácora Emocional / Reflexiones del CEO
+
+- [ ] Empezar la bitácora emocional del CEO (sección en Bitácora Central)
+- [ ] Registrar mínimo 1 entrada semanal con pensamientos, dudas, motivaciones
+- [ ] Realizar cierre emocional de cada mes
+- [ ] Crear manifiesto anual de aprendizajes en diciembre
+
+
+**Archivo simbólico, editable y estratégico.  
+Actualizable por Santiago junto a ALMA.**

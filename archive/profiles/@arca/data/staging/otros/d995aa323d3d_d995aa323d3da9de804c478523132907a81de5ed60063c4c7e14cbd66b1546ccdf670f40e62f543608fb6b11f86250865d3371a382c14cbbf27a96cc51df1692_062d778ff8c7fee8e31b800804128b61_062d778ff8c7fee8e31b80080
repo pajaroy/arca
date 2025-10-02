@@ -1,0 +1,34 @@
+# 🧩 Idea Base – Integración del módulo 13CC en ALMA_RESIST
+
+## 📌 Contexto
+
+El conjunto de documentos y estructuras bajo el nombre `13CC` contiene múltiples componentes relevantes para ALMA_RESIST:
+
+- Documentación sobre cultivo de cannabis y experiencias personales
+- Información administrativa y de gestión de una ONG/empresa emergente
+- Estructuras conceptuales de proyectos futuros (CannaBird, trazabilidad, legalidad)
+- Registros y sprints independientes del núcleo de ALMA_RESIST
+
+Esta idea propone integrar `13CC` como un módulo formal dentro del sistema principal, bajo criterios metodológicos y arquitectónicos ya establecidos.
+
+
+## 🧠 Etapas propuestas
+
+1. **Reestructuración técnica:**
+   - Organizar por áreas (cultivo, empresa, gestión, análisis)
+   - Separar documentación viva de legacy
+
+2. **Creación de documentación estándar:**
+   - `README.md`, `version.md`, bitácoras, changelog
+
+3. **Generación de snapshot de entrada (zip inicial):**
+   - Servirá como base de comparación y backup histórico
+
+4. **Registro formal:**
+   - Agregar entrada en `hitos.md`, `lecciones_aprendidas.md`, `changelog.md`
+
+
+## 📌 Observación
+
+La integración se pospone hasta refinar las metodologías internas. Este documento actúa como ancla de planificación y especificación previa.
+

@@ -1,0 +1,31 @@
+### **Propuesta de bloque de metadata universal para archivos ALMA_RESIST**
+
+_(para .md, .yaml, .py, .sh, .json, etc. — solo adaptando el campo “tipo” y “formato” según necesidad)_
+
+``` yaml
+```
+
+_(Luego del bloque metadata, sigue el contenido, script o desarrollo.)_
+
+
+### **Protocolo mínimo del script `fix_metadata`:**
+
+1. **Recorrer todos los archivos** en la carpeta y subcarpetas.
+    
+2. **Verificar presencia y formato** del bloque metadata.
+    
+3. **Agregar/completar campos faltantes**, usando datos por defecto o solicitando input mínimo.
+    
+4. **Validar unicidad de `id`** y correcta actualización de fechas.
+    
+5. **Generar y/o actualizar `hash_integridad`.**
+    
+6. **Loggear cada cambio** (archivo, acción, resultado, timestamp).
+    
+7. **Reportar archivos que no pueden ser reparados automáticamente** (casos extremos).
+    
+8. **Dejar backup automático previo a toda modificación.**
+    
+9. **Permitir modo “dry run” para solo diagnosticar sin modificar.**
+    
+

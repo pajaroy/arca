@@ -1,0 +1,35 @@
+# Documentación Técnica de ALMA_RESIST
+
+Este directorio contiene toda la documentación estructural, técnica y metodológica del proyecto **ALMA_RESIST**.
+
+## Estructura
+
+- `api_rest.md`: Especificación de endpoints y estructura del backend.
+- `decisiones_arquitectonicas.md`: Registro de decisiones clave del sistema.
+- `dependencias.md`: Lista de dependencias técnicas y su justificación.
+- `faq_ia.md`: Preguntas frecuentes respecto al uso de IA en el sistema.
+- `flujo_secuencial.mmd`: Diagrama Mermaid con el flujo general del sistema.
+- `hitos.md`: Hitos alcanzados durante el desarrollo.
+- `index.md`: Entrada principal al sistema documental.
+- `lecciones_aprendidas.md`: Registro de reflexiones y aprendizajes técnicos.
+- `mapeo_sprint_archivos.md`: Relación entre archivos y sprints.
+- `post_mortem_tecnico.md`: Evaluaciones retrospectivas técnicas.
+- `prompt_inicio_chat_ALMA_RESIST_ASSIST.md`: Prompt base para inicializar ALMA.
+- `resumen_secciones.md`: Guía rápida de secciones claves.
+- `roadmap_tecnico.md`: Hoja de ruta técnica del sistema.
+
+## Metodologías (`01_methodologies/`)
+
+Incluye tanto versiones activas como archivadas y propuestas de metodologías en uso:
+
+- `estructura_modular`, `interaccion_ia`, `versionado_backups`, `doc_ia`, `sprints`, `adr`.
+- Subcarpetas `_archivadas` y `_propuestas` organizan el ciclo de vida de las metodologías.
+
+
+## 📦 Snapshot: v0.0.0.2_estructura_documental
+
+📅 Fecha de cierre: 2025-05-23  
+🔖 Sprint asociado: Sprint_2.1 – Profesionalización de la Estructura Documental  
+🔏 Hash: `0f61c8c5f3ab0b08b1c8c189b2e9a6ef3db47d0d4b0f63b246ac9ef8079d3a35`  
+👤 Responsable: Santi / pájaro
+

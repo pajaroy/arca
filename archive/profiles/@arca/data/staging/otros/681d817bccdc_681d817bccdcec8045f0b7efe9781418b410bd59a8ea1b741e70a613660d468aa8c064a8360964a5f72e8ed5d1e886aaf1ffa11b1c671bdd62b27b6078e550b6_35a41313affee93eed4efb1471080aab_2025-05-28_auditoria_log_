@@ -1,0 +1,35 @@
+
+# 📁 Apéndice – Auditoría Técnica `log_writer` (Sprint 2.6)
+
+## ✅ Módulo auditado
+- `core/llm_server/utils/log_writer.py`
+- `tests/test_log_writer.py`
+
+## 🔍 Objetivo
+Desarrollar y validar un sistema de logging estructurado, resiliente y seguro, orientado a trazabilidad operativa e integridad de datos.
+
+
+## 🧪 Cobertura de Tests
+
+Test unitarios ejecutados exitosamente (100% OK):
+- Estructura de eventos (`test_log_event_structure`)
+- Escritura válida y atómica (`test_valid_write`, `test_atomic_write`)
+- Manejo de errores (`test_invalid_event`, `test_disk_failure`)
+- Validación de tipos y estructura (`test_type_validation`)
+- Persistencia y lectura (`test_log_integrity`)
+- Permisos de directorio (`test_directory_permissions`)
+- Rotación de logs antiguos (`test_log_rotation`)
+- Limpieza automática (`cleanup`)
+
+
+## ⚙️ Decisiones Arquitectónicas
+
+- Logging en formato **JSON plano estructurado**.
+- Uso de `platform`, `pid`, `timestamp` para trazabilidad integral.
+- Modularidad para uso en entornos multiproceso (ideal para CLI, servidores, bots).
+- Posibilidad de extender con cifrado (`CryptoEngine` ya implementado).
+
+
+## 🏁 Conclusión
+
+El módulo cumple con los estándares de seguridad, trazabilidad y resiliencia definidos para ALMA_RESIST. Queda registrado como **componente base del sistema de logging oficial**, aprobado en el Sprint 2.6.

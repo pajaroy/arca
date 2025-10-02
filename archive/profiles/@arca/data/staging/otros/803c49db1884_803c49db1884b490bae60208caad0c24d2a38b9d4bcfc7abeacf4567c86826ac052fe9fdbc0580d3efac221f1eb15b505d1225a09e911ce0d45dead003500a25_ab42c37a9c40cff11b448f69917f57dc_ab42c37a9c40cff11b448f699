@@ -1,0 +1,72 @@
+# 📚 Protocolo de Integración de Equipo – ALMA_EMPRESA
+
+
+## Checklist obligatorio para cada integrante
+
+1. **Bitácora de integración**
+    
+    - Registro de primeras semanas, procesos de onboarding, reflexiones sobre la adaptación, problemas y aprendizajes iniciales.
+        
+    - Ej: `bitacora_integracion.md`
+        
+2. **Reportes diarios**
+    
+    - Carpeta dedicada.
+        
+    - Ej: `reportes_diarios/2025-06-04.md`
+        
+3. **Reportes semanales**
+    
+    - Carpeta dedicada.
+        
+    - Ej: `reportes_semanales/2025_s23.md`
+        
+4. **Changelog personal**
+    
+    - Registro formal de cambios, avances de rol, nuevos permisos, responsabilidades, feedback recibido, etc.
+        
+    - Ej: `changelog.md`
+        
+5. **Perfil personal (README)**
+    
+    - Quién es, experiencia, competencias, intereses, expectativas y proyección en el equipo.
+        
+    - Ej: `README.md` o `perfil.md`
+        
+6. **Plantillas de reporte**
+    
+    - Las mismas plantillas (diaria/semanal) almacenadas para acceso rápido.
+        
+    - Ej: `plantillas/plantilla_resumen_diario.md`, etc.
+        
+7. **Memorias o reflexiones personales**
+    
+    - Espacio opcional para registros privados, reflexiones profundas, aprendizajes personales, etc.
+        
+    - Ej: `memorias_personales.md`
+        
+8. **Archivo de feedback**
+    
+    - Notas de reuniones uno a uno, feedback del líder, de pares, autoevaluación periódica, etc.
+        
+    - Ej: `feedback.md`
+        
+
+
+## Notas y recomendaciones
+
+- Todos los archivos deben tener nombre descriptivo y fecha cuando corresponda.
+    
+- Se recomienda actualizar la bitácora de integración al menos una vez por semana durante el proceso inicial.
+    
+- Los reportes diarios y semanales son **obligatorios** para roles clave o supervisores.
+    
+- El changelog debe reflejar cualquier cambio formal de rol, tareas o permisos.
+    
+- El archivo de feedback es privado pero puede usarse para revisiones 360° o autoevaluación.
+    
+- Las plantillas de reporte deben estar siempre disponibles y actualizadas.
+    
+
+
+**Este protocolo asegura la trazabilidad, escalabilidad y profesionalismo del equipo de ALMA_EMPRESA, y puede ser auditado o expandido a futuro según la evolución del sistema.**

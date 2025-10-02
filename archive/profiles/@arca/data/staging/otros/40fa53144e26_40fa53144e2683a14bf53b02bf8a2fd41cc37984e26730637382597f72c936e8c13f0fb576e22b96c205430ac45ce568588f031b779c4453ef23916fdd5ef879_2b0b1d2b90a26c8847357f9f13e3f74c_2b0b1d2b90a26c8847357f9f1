@@ -1,0 +1,40 @@
+# 🧭 ALMA_RESIST – Carpeta `control/`
+
+---
+
+## 🎯 Propósito
+
+Esta carpeta funciona como **centro de seguimiento técnico** y estado de avance de todo el ecosistema ALMA_RESIST. Aquí se centralizan los **checklists de control**, los **sprints activos por módulo** y los indicadores de evolución estructural de cada parte del sistema.
+
+---
+
+## 🧩 Subcarpetas y componentes
+
+| Carpeta / Archivo                  | Descripción                                                                 |
+|-----------------------------------|-----------------------------------------------------------------------------|
+| `sprints_activos/`                | Enlaces y referencias a los sprints activos dentro de cada módulo          |
+| `checklists/`                     | Listas de verificación por sprint, auditoría o mantenimiento               |
+| `bitacora.md`                     | Registro informal de decisiones, correcciones o eventos no estructurados   |
+| `estado_general.md`               | Estado actual de cada módulo (manual o automático)                         |
+| `sprints_index.md`                | Índice central de todos los sprints activos referenciados desde acá        |
+
+---
+
+## 🧠 Reglas de uso
+
+- Todo nuevo **sprint** activo debe ser registrado en `sprints_index.md`.
+- Toda nueva **verificación o tarea crítica** debe tener su checklist asociado en `checklists/`.
+- Esta carpeta **no contiene código**, solo seguimiento documental y estratégico.
+
+---
+
+## 🔧 Futuro
+
+Este módulo podrá integrarse con:
+- Un script CLI (`cli_cleaner` o `cli_tracker`)
+- Visualizaciones tipo grafo desde Obsidian
+- Automatización parcial de auditorías técnicas y comparativas de versión
+
+---
+
+> 🛡 Este es el núcleo de control del sistema ALMA_RESIST. Nada entra sin pasar por acá.

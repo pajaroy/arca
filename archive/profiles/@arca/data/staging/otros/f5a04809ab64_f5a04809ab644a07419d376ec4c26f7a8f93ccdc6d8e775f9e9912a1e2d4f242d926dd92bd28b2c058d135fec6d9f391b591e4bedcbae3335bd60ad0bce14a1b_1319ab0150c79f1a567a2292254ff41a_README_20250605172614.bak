@@ -1,0 +1,3 @@
+# Chat CLI
+
+Interfaz de chat por terminal con modelo LLM local (Mistral o DeepSeek).

@@ -1,0 +1,34 @@
+# 🎯 Objetivo
+Agregar un hook opcional `on_memoria_guardada()` en la clase `BaseStorage`, que se ejecute automáticamente cada vez que se guarda una memoria.
+
+Este hook servirá para disparar funciones posteriores como:
+- Procesamiento analítico
+- Activación de reglas dinámicas
+- Registro en logs
+- Envío a módulos externos (FAISS, Neo4j, etc.)
+
+# 📦 Contexto del sistema
+- Proyecto: ALMA_LOADER
+- Función general: Gestión semántica de memorias estructuradas
+- Clase base actual: `BaseStorage` (abstracta)
+- Subclases actuales: `SQLiteStorage`, `VectorStorage`, etc.
+
+# 🧱 Requisitos para la implementación
+1. El método `on_memoria_guardada(memoria: dict)` debe ser parte de `BaseStorage`.
+2. No debe interferir con la lógica actual de guardado.
+3. Debe poder ser sobreescrito por subclases si lo desean.
+4. Debe ejecutarse automáticamente **después de cada guardado**.
+5. Por defecto, debe hacer `pass` (no realizar nada si no se implementa).
+
+# 🔁 Ejemplo deseado (en SQLiteStorage)
+```python
+def guardar_memoria(self, memoria: dict):
+    self.cursor.execute("INSERT INTO ...")
+    self.conn.commit()
+    self.on_memoria_guardada(memoria)
+```
+
+# ✍️ Tarea
+Escribí el código completo de `BaseStorage` incluyendo el nuevo hook `on_memoria_guardada`. Mantené la estructura PEP8 y agregá docstrings breves.
+
+El código debe ser simple, limpio y preparado para extensión futura por otros módulos.

@@ -1,0 +1,38 @@
+# 🧠 Prompt de Auditoría – Reestructuración ALMA_RESIST desde comando_central
+
+
+## 📌 Lineamientos críticos
+
+- **Toda carpeta interna relevante debe seguir la misma estructura base definida en la metodología** (`control/`, `docs/`, `archivo/`, `core/`, `config/`, `meta/`), con variantes solo si son justificadas por la función.
+    
+- **No se permite duplicación innecesaria de archivos ni estructuras fuera de estándar.**
+    
+- **La carpeta `ALMA_RESIST/control_central/` debe funcionar como “centro de mando”**, desde donde se pueda visualizar y comandar todos los sprints, auditorías y checklist activos de cada módulo.
+    
+- **Cada módulo debe ser auditable, autocontenible y replicable por sí solo**.
+    
+- **Aplicar el esquema de exclusión de archivos temporales y logs del versionado.**
+    
+- **Todos los readme, changelogs y journals deben tener YAML de metadatos.**
+    
+
+
+## 📄 Archivos Adjuntos
+
+- `ALMA_RESIST.zip` (contenido a auditar y reestructurar)
+    
+- `metodologia_estructura_autonoma_v2.md` (esquema obligatorio)
+    
+
+
+**Al finalizar, entregá:**
+
+- El **nuevo árbol de directorios** en markdown.
+    
+- Un **changelog de todos los cambios estructurales**.
+    
+- Una **justificación breve por cada decisión no trivial**.
+    
+- Sugerencias para automatizar esta auditoría en el futuro (si corresponde).
+    
+

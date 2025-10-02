@@ -1,0 +1,30 @@
+# 📁 status/ – Indicadores y Estado General del Sistema
+
+Esta carpeta contiene los **reportes estructurados de estado** del ecosistema ALMA_RESIST. Es el punto central para:
+
+- Auditorías del sistema por parte del Asesor-IA.
+- Consultas automatizadas desde CLI o dashboards.
+- Monitoreo en tiempo real de sincronización y salud del sistema.
+
+## 📊 Funciones principales
+
+- Registrar el **estado de nodos críticos** (`ALMA_CORE`, `ALMA_RESIST`).
+- Consolidar métricas operativas (estado de sincronización, errores, integridad).
+- Permitir acceso a comandos rápidos como `alma status`.
+
+## 📁 Archivos clave
+
+- `alma_status.yaml`: Reporte general de salud del sistema ALMA.
+- `sync_status.json`: Estado de sincronización de carpetas clave.
+- `heartbeat.log`: Última señal activa de cada módulo o script.
+
+## 🧠 Uso recomendado
+
+Los scripts como `alma_status.sh` y `sync_status.sh` deben actualizar esta carpeta. Es fundamental para validar el funcionamiento completo del sistema sin intervención humana.
+
+💡 Esta carpeta puede ser leída por módulos externos, dashboards locales o IAs embebidas para inferencias, alertas o auditoría programada.
+
+---
+
+`#status` `#alma_resist` `#auditoria` `#cli-ready`
+

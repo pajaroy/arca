@@ -1,0 +1,7 @@
+Esta carpeta contiene el comando para sincronizar la carpeta en google drive
+
+
+```hash
+rclone sync /home/bird/Alma/3.0.0_Alma/cuadernos/cuaderno_empresarial/01_empresas_constituidas/13_CANNABIS_CLUB 13CC:13CC
+```
+

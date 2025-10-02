@@ -1,0 +1,64 @@
+# 🧠 Prompt Maestro ALMA_LOADER Individual v1.0
+
+## 🎯 Propósito
+
+Este prompt guía una IA (como GPT-4.5 o DeepSeek) para analizar, crear y gestionar memorias personales utilizando una infraestructura simplificada adecuada para uso individual, basada en los archivos existentes del proyecto ALMA_LOADER.
+
+
+## 🛠️ Instrucciones Esenciales para la IA
+
+### Lectura y Contexto
+
+- Leer cada memoria utilizando campos: `id`, `fecha`, `tags`, `contenido` y `relacionadas`.
+    
+- Priorizar memorias mediante:
+    
+    - Número de tags clave.
+        
+    - Impacto histórico detectado.
+        
+
+### Ejemplo de Memoria JSON Simplificado
+
+```json
+{
+  "id": "MEMGEN-099",
+  "fecha": "2025-09-15T14:30:00Z",
+  "tags": ["#productividad", "#salud"],
+  "contenido": "Reducir horas de trading tras detectar [fatiga>salud]",
+  "relacionadas": ["MEMTRD-045"]
+}
+```
+
+### Generación Automática de Memorias
+
+La IA debe generar memorias JSON siguiendo exactamente este formato.
+
+
+## ⚙️ Configuración Técnica Recomendada
+
+- **Base de Datos**: SQLite con JSON1 para manejo relacional ligero.
+    
+- **Modelos NLP**: spaCy o modelos transformers ligeros en local.
+    
+- **Caching**: Usar `@lru_cache` en Python para acelerar consultas frecuentes.
+    
+- **Logging**: Mantener logs simples (.log).
+    
+
+
+## 🚀 Implementar Ahora
+
+- Unificación de validadores en `schema_base.json`.
+    
+- NLP Local simple con spaCy o transformers.
+    
+- Sistema básico de scoring:
+    
+    ```python
+    puntuacion = len(tags_clave) + impacto_historico
+    ```
+    
+
+
+Este prompt garantiza simplicidad operativa inmediata, manteniendo la puerta abierta a una escalabilidad sencilla cuando sea necesario.

@@ -1,0 +1,45 @@
+# core/validador.py
+import json
+from pathlib import Path
+from json.decoder import JSONDecodeError
+import jsonschema
+from jsonschema import ValidationError
+from jsonschema.validators import Draft7Validator
+import os
+
+def validar_esquema(data: dict, nombre_esquema: str) -> None:
+    """
+    Valida un diccionario contra un esquema JSON Schema Draft 7.
+
+    Args:
+        data: Diccionario con los datos a validar
+        nombre_esquema: Nombre del archivo en la carpeta schemas (ej: 'schema_base.json')
+
+    Raises:
+        FileNotFoundError: Si el archivo de esquema no existe
+        JSONDecodeError: Si el esquema no es JSON válido
+        ValidationError: Si la validación falla
+    """
+    base_path = Path(os.getcwd())
+    schemas_dir = base_path / "schemas"
+    schema_path = schemas_dir / nombre_esquema
+
+    if not schema_path.exists():
+        raise FileNotFoundError(f"Esquema no encontrado: {schema_path}")
+
+    try:
+        schema_content = schema_path.read_text(encoding="utf-8")
+        schema = json.loads(schema_content)
+    except JSONDecodeError as e:
+        raise JSONDecodeError(
+            msg=f"Esquema inválido en {nombre_esquema}: {e.msg}",
+            doc=e.doc,
+            pos=e.pos
+        ) from e
+
+    try:
+        Draft7Validator(schema=schema, format_checker=Draft7Validator.FORMAT_CHECKER).validate(data)
+    except ValidationError as e:
+        e.message = f"Error de validación en '{nombre_esquema}': {e.message}"
+        raise
+

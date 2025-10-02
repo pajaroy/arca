@@ -1,0 +1,55 @@
+# 🧠 Prompt Maestro ALMA_LOADER Individual v2.0.3
+
+## 🎯 Propósito
+
+Este prompt guía una IA (como GPT-4.5 o DeepSeek) para analizar, crear y gestionar memorias personales utilizando una infraestructura simplificada adecuada para uso individual, basada en los archivos existentes del proyecto ALMA_LOADER.
+
+
+## 📌 Categorías ALMA (Módulos de Memoria)
+
+Cada memoria **debe** clasificarse en una categoría usando su abreviatura oficial:
+
+|Abreviatura|Categoría|Descripción|
+|---|---|---|
+|**GEN**|General|Filosofía base, principios estratégicos, reflexiones fundacionales.|
+|**TRD**|Trading|Operaciones, estrategias, emociones en trading.|
+|**CAP**|Capital|Gestión financiera, inversiones, control de gastos.|
+|**PROG**|Programación|Scripts, arquitectura de software, decisiones técnicas.|
+|**REFLEX**|Reflexión|Dilemas existenciales, decisiones de vida, evolución filosófica.|
+|**HEALTH**|Salud|Bienestar físico/mental, nutrición, rutinas.|
+|**HIST**|Históricas|Eventos históricos relevantes y su análisis.|
+|**GEO**|Geopolítica|Conflictos internacionales, decisiones geopolíticas, riesgos estratégicos.|
+|**ECO**|Económica|Análisis macro/microeconómico, políticas monetarias.|
+
+
+## 📈 Flujo de Trabajo Diario Optimizado
+
+```mermaid
+flowchart TD
+    A[Evento o Reflexión] --> B{{IA}}
+    B --> C[Memoria JSON]
+    C --> D[Validación JSON Schema]
+    D -->|Error| E1[Corrección por IA]
+    E1 --> C
+    D -->|Éxito| E[NLP local]
+    E --> F[SQLite JSON1]
+    F --> G[Generar Resumen Diario]
+    G --> H[Guardar como archivo MD]
+```
+
+
+## 🚀 Checklist de Validación antes de Implementación
+
+-  Implementar validador unificado en `schema_base.json` con categorías y tags recomendados.
+    
+-  Migrar memorias existentes al nuevo formato JSON simplificado.
+    
+-  Configurar NLP local con spaCy para extracción automática de tags.
+    
+-  Implementar pipeline básico NLP + SQLite.
+    
+-  Configurar `@lru_cache` para optimizar consultas.
+    
+-  Preparar estructura en clases para facilitar futuras migraciones.
+    
+

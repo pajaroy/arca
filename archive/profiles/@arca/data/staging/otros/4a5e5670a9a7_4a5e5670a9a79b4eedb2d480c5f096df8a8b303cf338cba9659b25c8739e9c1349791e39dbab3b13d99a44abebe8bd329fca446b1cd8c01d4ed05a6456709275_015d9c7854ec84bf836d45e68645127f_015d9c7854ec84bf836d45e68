@@ -1,0 +1,377 @@
+# 📓 Bitácora Consolidada – 2025-06-01
+
+---
+
+## 🧠 Reinicio Total y Consolidación de Núcleo
+
+**Formateo e instalación:**  
+Se reinstalaron desde cero los entornos ALMA_CORE y ALMA_RESIST sobre Parrot OS.  
+Se configuró el entorno mínimo viable operativo con enfoque CLI: alias, permisos sudo, conexiones remotas seguras.
+
+**Sincronización remota:**  
+SSH configurado para control cruzado entre nodos.  
+Alias definidos para comandos de sincronización rápida.  
+Revisión completa del sistema `syncthing` para compartir carpetas clave.
+
+**Periféricos compartidos:**  
+Se activó `Input Leap` en modo terminal para compartir mouse y teclado entre máquinas.  
+Se preparó script para ejecutar automáticamente esta configuración al iniciar.
+
+**Sistema listo para operar:**  
+Primer inicio exitoso del sistema base con:
+- sincronización funcional
+- CLI operativa
+- conexión a servidores LLM
+- estructura de carpetas formalizada
+
+---
+
+## 🧠 Inicio Formal del Sistema `asesor-IA`
+
+**Confirmación de Roles:**  
+- GPT como auditor estructural  
+- DeepSeek como asesor técnico crítico  
+- Santi como orquestador y juez final  
+
+**Infraestructura creada:**  
+Se generaron las carpetas:
+- `control_central/asesor-ia/`
+- `control_central/asesor-ia/sesiones/`
+- `control_central/asesor-ia/status/`
+
+**Contrato fundacional firmado y activado:**  
+DeepSeek y GPT aceptaron formalmente sus roles con compromiso activo.  
+DeepSeek ya comenzó a operar bajo `tech_mode=strict`. GPT está sincronizado para sesiones híbridas.
+
+**DeepSeek propone mejoras:**  
+- Auto-tagging en consultas con `!type=`, `!priority=`, `!context=`  
+- Plantillas YAML para respuestas técnicas y estructurales  
+- Router AI (`router_ai.py`) para clasificar consultas  
+- Protocolo de conflicto con hasta 3 rondas de debate entre IAs
+
+---
+
+## 🧩 Puntos Abiertos a Debatir (DeepSeek)
+
+- [ ] Estructura de `router_ai.py`
+- [ ] Formato final de `deepseek_response_template.yml`
+- [ ] Ejecutor automático para protocolo de conflicto
+- [ ] Registro de decisiones en `memory_graph` o `bitacora_central`
+- [ ] Centralización de estado del sistema vs. estados internos
+
+---
+
+## ✍️ Reflexión del Día
+
+> “Hoy no solo instalamos sistemas, sino que fundamos el modelo mental de ALMA_RESIST:  
+> un sistema distribuido que no automatiza por reemplazo, sino por colaboración crítica.”
+
+---
+
+## 📌 Siguientes pasos
+
+- [ ] Planificar día 2025-06-02
+- [ ] Confirmar estructura de `asesor-ia/`
+- [ ] Consolidar `alma_status.yaml` general y específicos por módulo
+- [ ] Sincronización automática doble nodo
+- [ ] Iniciar sesiones en `asesor-ia/sesiones/`
+
+# 📎 Apéndice Técnico – Instalación de 0 y Sincronización Inicial
+_Fecha: 2025-06-01_
+
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y git curl tmux vim htop net-tools openssh-server unzip rsync sqlite3 python3 python3-pip
+
+#paso dos sincronizar lso mouse a las dos pc:
+
+#!/bin/bash
+
+# Instalación completa de Input Leap en sistemas tipo Debian (Parrot, Ubuntu, etc.)
+# Compatible con ALMA_CORE y ALMA_RESIST
+
+echo "📦 Instalando dependencias..."
+sudo apt update
+sudo apt install -y git cmake make g++ qt6-base-dev qt6-tools-dev \
+  libx11-dev libxext-dev libxrandr-dev libxinerama-dev libxtst-dev libxi-dev \
+  libssl-dev libavahi-compat-libdnssd-dev libcurl4-openssl-dev \
+  libgl1-mesa-dev pkg-config
+
+echo "🧬 Clonando repositorio input-leap con submódulos..."
+cd ~
+rm -rf input-leap
+git clone --recurse-submodules https://github.com/input-leap/input-leap.git
+cd input-leap
+mkdir build && cd build
+
+echo "🛠️ Corrigiendo compatibilidad con GCC 11+..."
+sed -i '1i#include <cstddef>' ../src/lib/platform/XKBUtil.cpp
+
+echo "⚙️ Compilando Input Leap..."
+cmake ..
+make -j$(nproc)
+sudo make install
+
+echo "✅ Instalación finalizada."
+
+echo "📁 Configurá el servidor con:"
+echo 'nano ~/.input-leap/input-leap.conf'
+echo ""
+echo "Ejemplo:"
+echo "-----------------------------"
+echo "section: screens"
+echo "    alma-core:"
+echo "    alma-resist:"
+echo "end"
+echo ""
+echo "section: links"
+echo "    alma-core:"
+echo "        left = alma-resist"
+echo "    alma-resist:"
+echo "        right = alma-core"
+echo "end"
+echo "-----------------------------"
+
+echo "🚀 Para iniciar manualmente:"
+echo "En alma-core:"
+echo "input-leaps --no-tray --disable-crypto --name alma-core --config ~/.input-leap/input-leap.conf"
+echo ""
+echo "En alma-resist:"
+echo "input-leapc --no-tray --disable-crypto --name alma-resist 192.168.1.33:24800"
+
+# paso 3 - sincronizacion de las dos pcs
+# Apéndice — Instalación, Configuración SSH y Sincronización Inicial (ALMA\_RESIST)
+
+**Fecha:** 2025-06-01
+**Nodos:** ALMA\_CORE (192.168.1.33) y ALMA\_RESIST (192.168.1.36)
+**Usuario:** bird
+**Ruta raíz:** `/home/bird/ALMA_RESIST/`
+
+---
+
+## 1. **Dependencias y paquetes base**
+
+Instalados en ambas máquinas:
+
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y git curl tmux vim htop net-tools openssh-server unzip rsync sqlite3 python3-pip tree
+```
+
+---
+
+## 2. **Estructura de carpetas replicada**
+
+Se creó la estructura `/home/bird/ALMA_RESIST/` en ambos nodos.
+Se verificó igualdad de rutas y archivos mediante:
+
+```bash
+pwd
+ls -lha /home/bird/ALMA_RESIST
+tree -L 2 /home/bird/ALMA_RESIST
+```
+
+---
+
+## 3. **Configuración de red y SSH**
+
+* Se verificó IP de cada nodo:
+
+  * **ALMA\_CORE:** `192.168.1.33`
+  * **ALMA\_RESIST:** `192.168.1.36`
+
+  ```bash
+  hostname -I
+  ```
+* Se verificó conectividad con:
+
+  ```bash
+  ssh bird@192.168.1.36  # desde ALMA_CORE
+  ssh bird@192.168.1.33  # desde ALMA_RESIST
+  ```
+
+---
+
+## 4. **Generación y copia de claves SSH**
+
+**En ALMA\_RESIST:**
+
+```bash
+ssh-keygen -t ed25519 -C "bird@alma-resist"
+```
+
+(Presionar Enter en todas las preguntas para dejar la clave sin passphrase.)
+
+**Luego:**
+
+```bash
+ssh-copy-id bird@192.168.1.33
+```
+
+* Se aceptó la autenticidad del host y se ingresó la contraseña una sola vez.
+* Verificado acceso SSH sin password con:
+
+  ```bash
+  ssh bird@192.168.1.33
+  ```
+
+---
+
+## 5. **Preparación de archivo de exclusiones para rsync**
+
+En `/home/bird/ALMA_RESIST/`:
+
+Archivo `.rsync_exclude` de ejemplo:
+
+```
+__pycache__/
+*.pyc
+*.tmp
+.DS_Store
+# logs/   # Descomentar si no se quieren sincronizar logs
+```
+
+---
+
+## 6. **Primer sincronización con rsync**
+
+**Comando desde ALMA\_CORE a ALMA\_RESIST:**
+
+```bash
+rsync -avz --delete --exclude-from=/home/bird/ALMA_RESIST/.rsync_exclude /home/bird/ALMA_RESIST/ bird@192.168.1.36:/home/bird/ALMA_RESIST/
+```
+
+**Comando en sentido inverso (desde ALMA\_RESIST a ALMA\_CORE):**
+
+```bash
+rsync -avz --delete --exclude-from=/home/bird/ALMA_RESIST/.rsync_exclude /home/bird/ALMA_RESIST/ bird@192.168.1.33:/home/bird/ALMA_RESIST/
+```
+
+* Se validó que la sincronización deja ambas carpetas **idénticas** (salvo exclusiones).
+
+---
+
+## 7. **Bitácora y observaciones**
+
+* SSH automático funcionando en ambos nodos.
+* Carpeta de trabajo espejada y lista para automatización y trabajo distribuido.
+* Todos los comandos fueron ejecutados desde terminal y verificados con logs.
+
+---
+
+> **Recomendación:**
+> Mantener este apéndice actualizado y registrar cada modificación relevante al flujo de instalación o sincronización.
+
+---
+
+# \[FIN DEL APÉNDICE DE INSTALACIÓN Y SINCRONIZACIÓN]
+
+
+# paso 4 instalacion de tmux para tener multiples terminasles (comandos basicos)
+
+🧱 1. Instalación de tmux (en ambas PCs)
+
+sudo apt update
+sudo apt install tmux -y
+
+📚 2. Guía básica de uso de tmux – Nivel inicial
+🧭 Crear una nueva sesión
+
+tmux new -s nombre_de_sesion
+
+Ejemplo:
+
+tmux new -s alma_core
+
+🔀 Comandos clave dentro de tmux
+
+Todos los comandos se inician con la tecla Ctrl + b y luego otra tecla:
+Acción	Comando
+Dividir panel horizontal	Ctrl+b → %
+Dividir panel vertical	Ctrl+b → "
+Cambiar de panel	Ctrl+b → flechas
+Crear nueva ventana	Ctrl+b → c
+Listar ventanas	Ctrl+b → w
+Cerrar panel actual	exit o Ctrl+d
+Renombrar ventana	Ctrl+b → ,
+Separarte de la sesión	Ctrl+b → d
+Reconectarte a la sesión	tmux attach -t nombre
+Listar sesiones activas	tmux ls
+Matar una sesión	tmux kill-session -t nombre
+🚀 Uso típico entre dos PCs
+
+Podés tener en una PC:
+
+tmux new -s alma_core
+
+Y en la otra:
+
+tmux new -s alma_resist
+
+Ambas con múltiples ventanas o paneles divididos para manejar scripts, logs, o conexiones SSH entre sí.
+
+
+# 📦 Instalación de Obsidian (AppImage) en Parrot OS — 100% Terminal
+
+## 1. Instalar dependencias necesarias
+```bash
+sudo apt update
+sudo apt install -y wget libfuse2
+
+2. Crear carpeta de aplicaciones portables
+
+mkdir -p $HOME/apps/obsidian
+cd $HOME/apps/obsidian
+
+3. Descargar la última versión AppImage (actualizado, siempre última versión)
+
+wget $(curl -s https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest | grep "browser_download_url.*AppImage" | grep -v "arm64" | cut -d : -f 2,3 | tr -d \") -O Obsidian.AppImage
+
+4. Dar permisos de ejecución
+
+chmod +x Obsidian.AppImage
+
+5. Ejecutar Obsidian (requiere entorno gráfico)
+
+$HOME/apps/obsidian/Obsidian.AppImage &
+
+Nota: Si querés lanzarlo por SSH, usá:
+
+ssh -X usuario@host
+
+luego ejecutá el AppImage como arriba.
+🚨 Advertencia
+
+    Obsidian solo funciona con entorno gráfico X11 (no CLI puro).
+    No puede ser usado ni instalado en modo headless o sin GUI.
+
+📑 Check de instalación
+
+    Instalación 100% terminal: ✔️
+
+    Listo para backup y restauración: ✔️
+
+    Repetible en cualquier equipo con Parrot/Debian: ✔️
+
+
+---
+
+# 🔧 Fix para Íconos Faltantes/Feos dentro de Obsidian (Parrot OS)
+
+## 1. Instalar fuentes de íconos esenciales
+
+```bash
+sudo apt update
+sudo apt install -y fonts-noto fonts-noto-color-emoji fonts-material-design-icons-iconfont fonts-roboto fonts-font-awesome
+```
+
+## 2. Refrescar caché de fuentes (opcional)
+
+```bash
+fc-cache -fv
+```
+
+## 3. Cerrar y reabrir Obsidian (o reiniciar sesión gráfica)
+
+---
+
+> Esto soluciona el 99% de los iconos faltantes/feos dentro

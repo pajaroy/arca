@@ -1,0 +1,68 @@
+# 🧭 Roadmap Estratégico Final – ALMA MEMORIAS JSON
+
+## 🎯 Objetivo Central  
+Crear un sistema de memorias humano-IA **estructurado, dinámico, semántico y consultable** como grafo y base de conocimiento viva.
+
+
+## 🔁 FASE 2 – Sincronización + Edición GUI (v0.1.1)
+
+| Nº | Implementación | Objetivo | Herramientas | Estado |
+|----|----------------|----------|--------------|--------|
+| 4 | `json_to_md.py` | Renderizar memorias como `.md` para Obsidian | Python | ✅ |
+| 5 | Editor Web GUI | Crear/modificar memorias sin tocar JSON crudo | Streamlit (MVP), luego React + FastAPI | 🧪 |
+| 6 | Sistema de Plantillas | Formularios por categoría (ej: Salud → sueño, suplementos) | JSON dinámico | 🔜 |
+| 7 | API REST básica | `GET /memorias`, `POST /relacionar` para apps externas | FastAPI | 🧪 |
+
+📌 **MVP Editor con Streamlit:**
+```python
+import streamlit as st
+memoria = {
+    "id": st.text_input("ID (auto-generado)"),
+    "titulo": st.text_input("Título"),
+    "tags": st.multiselect("Tags", ["#riesgo", "#bienestar"])
+}
+```
+
+
+## 🌐 FASE 4 – Visualización y Grafo Vivo (v0.2.0)
+
+| Nº | Implementación | Objetivo | Herramientas | Estado |
+|----|----------------|----------|--------------|--------|
+| 11 | Neo4j + Cypher | Grafo de conocimiento | Neo4j Desktop + Browser | 🔄 |
+| 12 | Cytoscape.js / D3.js | Visualizador interactivo web | JS | 🔜 |
+
+📌 **Plantilla de consulta útil:**
+```cypher
+MATCH (m:Memoria)-[r]->(m2:Memoria)
+WHERE "#ansiedad" IN m.tags
+RETURN m, r, m2
+```
+
+
+## 🧬 FASE 6 – Escalabilidad y Seguridad (v0.2.2)
+
+| Nº | Implementación | Objetivo | Herramientas | Estado |
+|----|----------------|----------|--------------|--------|
+| 15 | SQLite + JSON1 | Reemplazo anticipado de archivos JSON planos | `sqlite3` | 🔄 |
+| 16 | Backup en tiempo real (WAL) | Tolerancia a fallos y recuperación | Write-Ahead Logging | 🔜 |
+
+📌 Iniciar desde ya con:
+```python
+import sqlite3
+conn = sqlite3.connect("memorias.db")
+conn.execute("CREATE TABLE memorias (data JSON)")
+```
+
+
+# 📌 Checklist de Implementación Inicial
+
+### 🧱 Estructura
+```bash
+mkdir -p alma_memorias/{memorias_json,validadores,frontend,backups}
+```
+
+### ✅ Módulos clave
+- Crear `validadores/reglas.py` con reglas por categoría
+- Deploy MVP Editor en Streamlit (<200 líneas)
+- Dataset de 50 memorias para NLP y grafo test
+

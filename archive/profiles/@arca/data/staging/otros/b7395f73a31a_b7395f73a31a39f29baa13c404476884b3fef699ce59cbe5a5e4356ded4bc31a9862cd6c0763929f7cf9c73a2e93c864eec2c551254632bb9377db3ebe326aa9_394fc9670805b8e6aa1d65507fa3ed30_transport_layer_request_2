@@ -1,0 +1,64 @@
+---
+module: prompts/transport_layer_request
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# 🧠 Solicitud de Implementación – `TransportLayer` – Sprint 2.6 – ALMA_RESIST
+
+## 🎯 Objetivo
+
+Implementar el archivo `transport_layer.py`, que define la clase `TransportLayer`. Esta clase será responsable de **almacenar y recuperar datos localmente en formato JSON**, actuando como capa de transporte básica entre los componentes del sistema ALMA_RESIST.
+
+Este módulo es parte del MVP del servidor LLM y debe integrarse correctamente con la entrada y salida definida por los contratos JSON.
+
+---
+
+## 📘 Requisitos
+
+### Clase: `TransportLayer`
+
+- Métodos esperados:
+  - `send(data: dict, endpoint: str) -> None`  
+    Guarda localmente un archivo JSON nombrado con `endpoint` y un timestamp.
+  - `receive(endpoint: str) -> dict`  
+    Recupera el último archivo JSON guardado para un endpoint determinado.
+  - `list_entries(endpoint: str) -> list`  
+    Lista todos los archivos almacenados para ese endpoint.
+
+### Condiciones:
+
+- Guardar los datos en una carpeta local llamada `transport_data/`
+- Los archivos deben tener nombre: `{endpoint}_{timestamp}.json`
+- Usar `uuid` o timestamp para unicidad de nombres
+- Manejar errores si no existe el archivo o el endpoint
+- Los datos deben validarse contra:
+  - `schema_prompt.json` al guardar entradas
+  - `schema_respuesta.json` al guardar salidas
+
+> Los archivos `schema_prompt.json` y `schema_respuesta.json` ya están definidos y documentados en la carpeta `docs/contracts/`. Deben usarse como referencia para validar la estructura antes de guardar o recuperar información.
+
+---
+
+## 🧪 Ejemplo de uso
+
+```python
+tl = TransportLayer()
+
+# Guardar una entrada
+tl.send({"prompt": "¿Qué es el tiempo?"}, endpoint="responder")
+
+# Leer la última salida
+data = tl.receive(endpoint="responder")
+```
+
+---
+
+## 📎 Contexto
+
+- Sprint: 2.6 – LLM Server
+- Conectado con: `main.py`, `model_wrapper.py`, `docs/contracts/schema_*.json`
+- Función clave en el MVP para soportar reflexiones y trazabilidad

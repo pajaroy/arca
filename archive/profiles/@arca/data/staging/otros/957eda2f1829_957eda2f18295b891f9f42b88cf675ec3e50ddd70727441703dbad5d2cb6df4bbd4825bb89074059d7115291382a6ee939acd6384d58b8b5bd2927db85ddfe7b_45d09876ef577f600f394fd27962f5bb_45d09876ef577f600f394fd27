@@ -1,0 +1,23 @@
+# ✅ Solicitud de Test – `test_log_crypto.py` – ALMA_RESIST Sprint 2.6
+
+Este test debe cubrir el módulo `log_crypto.py`, el cual implementa cifrado y descifrado de archivos de log usando algoritmos AES-GCM y ChaCha20-Poly1305, con generación segura de claves y validación de integridad.
+
+
+## 🧪 Casos de prueba sugeridos
+
+| Caso                                            | Resultado esperado                                |
+|-------------------------------------------------|---------------------------------------------------|
+| Cifrado de archivo JSON válido                  | Archivo `.enc` creado, contenido cifrado          |
+| Descifrado correcto                             | Archivo JSON recuperado igual al original         |
+| Validación de log cifrado                       | `True` si es válido, `False` si no                |
+| Generación de clave sin password (random)       | Devuelve clave de 32 bytes                        |
+| Generación de clave con password/salt           | Devuelve clave reproducible con los mismos datos  |
+| Descifrado con clave incorrecta                 | Lanza excepción o contenido inválido              |
+| Manejo de errores de lectura/escritura          | Logging de error y control de excepciones         |
+
+
+## 📂 Archivos relacionados
+
+- `log_crypto.py` (módulo a testear)
+- `log_writer.py` (compatible como entrada)
+

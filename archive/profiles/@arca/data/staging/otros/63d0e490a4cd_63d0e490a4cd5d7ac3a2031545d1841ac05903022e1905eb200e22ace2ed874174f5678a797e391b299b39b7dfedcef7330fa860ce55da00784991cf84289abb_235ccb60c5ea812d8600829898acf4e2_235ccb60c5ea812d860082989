@@ -1,0 +1,80 @@
+---
+tipo: script
+id: SCRIPT_2025-06-05_e4fc87
+version: '1.0'
+formato: py
+modulo: ALMA_RESIST
+titulo: Test Metadata
+autor: bird
+fecha_creacion: '2025-06-05'
+status: activo
+version_sistema: Centralesis v2.3
+origen: automatico
+tags: []
+linked_to: []
+descripcion: Documento procesado automáticamente
+fecha_actualizacion: '2025-06-05'
+hash_integridad: sha256:b9b5ceb745fa70421bce289013d123b46afedcbd7dc63cecc7c2ec62fc0a1922
+---
+import os
+import pathlib
+import yaml
+from typing import List, Dict
+
+def parse_frontmatter(file_content: str) -> Dict:
+    """Extrae y parsea el bloque YAML frontmatter del archivo"""
+    frontmatter = {}
+    lines = file_content.split('\n')
+    if lines[0] == '---':
+        end_index = lines[1:].index('---') + 1 if '---' in lines[1:] else 0
+        if end_index > 0:
+            try:
+                frontmatter = yaml.safe_load('\n'.join(lines[1:end_index]))
+            except yaml.YAMLError as e:
+                print(f"Error parsing YAML: {str(e)}")
+    return frontmatter or {}
+
+def validate_metadata(filepath: pathlib.Path, required_fields: List[str]) -> Dict:
+    """Valida los metadatos requeridos en un archivo"""
+    try:
+        content = filepath.read_text(encoding='utf-8')
+        metadata = parse_frontmatter(content)
+        
+        missing = [field for field in required_fields if field not in metadata]
+        return {
+            'filepath': str(filepath),
+            'valid': len(missing) == 0,
+            'missing': missing,
+            'error': None
+        }
+    except Exception as e:
+        return {
+            'filepath': str(filepath),
+            'valid': False,
+            'missing': [],
+            'error': str(e)
+        }
+
+def check_metadata(base_path: str, required_fields: List[str]) -> List[Dict]:
+    """Recorre directorio y valida metadatos"""
+    results = []
+    for md_file in pathlib.Path(base_path).rglob('*.md'):
+        results.append(validate_metadata(md_file, required_fields))
+    return results
+
+def print_results(results: List[Dict]):
+    """Muestra resultados en formato legible"""
+    for result in results:
+        if result['valid']:
+            print(f"{result['filepath']} \033[92mOK ✔️\033[0m")
+        else:
+            if result['error']:
+                print(f"{result['filepath']} \033[91mERROR: {result['error']}\033[0m")
+            else:
+                missing = ', '.join(result['missing'])
+                print(f"{result['filepath']} \033[93mFALTAN: {missing}\033[0m")
+
+if __name__ == '__main__':
+    REQUIRED_FIELDS = ['title', 'author', 'date', 'version', 'type']
+    results = check_metadata('./docs', REQUIRED_FIELDS)
+    print_results(results)

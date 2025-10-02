@@ -1,0 +1,29 @@
+# 🧾 CHANGELOG – ALMA LIBRE v0.0.6.2
+
+📅 Fecha de cierre: 2025-05-14  
+👤 Responsable de integración: santi  
+🧠 Enfoque: Optimización de flujos internos, trazabilidad modular, documentación operativa
+
+
+### 📄 Documentación Agregada
+
+- `docs/modulos_interdependencias.md` – Mapa técnico de dependencias entre módulos
+- `docs/casos_uso_reales.md` – Ejemplos reales de uso del sistema (trading, cultivo, diagnóstico)
+
+
+## 🔁 Mejoras en Flujos Internos
+
+- Actualización de Sección 5.1 en Prompt Técnico: Validación de conflictos por hash
+- Incorporación de pseudocódigo en 5.3: Interacción entre módulos vía CLI
+- Inclusión de sección 5.10: Auditoría y monitoreo de logs por `Alma_Monitor`
+- Inclusión de sección 8.8: Escalabilidad multiusuario y `/tmp/usuarios/`
+
+
+## 📂 Estructura Creada
+
+- [x] `MODULOS/_STAGING/` (estructura definida, carpeta a crear)
+- [x] `BITACORA_CENTRAL/SUGERENCIAS/` (carpeta a crear)
+
+
+🎯 Esta versión representa una transición clave hacia trazabilidad, modularidad controlada y colaboración humano-IA con reglas claras de interacción.
+

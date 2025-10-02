@@ -1,0 +1,31 @@
+id: readme_kael_memorias
+carpeta: memorias
+agente: kael
+fecha: 2025-06-10
+proposito: |
+  Carpeta central de memorias personales del agente KAEL.
+  Contiene los registros YAML y JSON, backups automáticos y la documentación de sincronización entre paper y archivo operativo.
+  Toda memoria es auditable, hash-verificada y sigue el protocolo RAG para consulta por IA y agentes humanos.
+relacion_rag:
+  indexado: true
+  tipo: memoria_personal
+  linked_to:
+    - ../contexto/kael.yaml
+    - memorias_kael.yaml
+    - backups/
+  fix_metadata: true
+hashing:
+  descripcion: >
+    Cada archivo es validado por hash SHA-256. La huella de sincronización se documenta en cada memoria.
+dependencias:
+  - kael.yaml (protocolo de sincronización)
+  - scripts/cargar_memorias_vX.X.X.py
+ejemplo_estructura:
+  archivos:
+    - memorias_kael.yaml
+    - memorias_kael.json
+    - memorias_kael.yaml.backup_YYYYMMDD_HHMMSS
+    - README.yaml
+notas:
+  - No almacenar aquí memorias institucionales (readonly en otro path).
+  - Los backups solo se editan por scripts autorizados.

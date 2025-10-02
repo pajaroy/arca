@@ -1,0 +1,137 @@
+# Estrategia de Pendrives y Seguridad – ALMA_RESIST
+
+---
+
+## 1. Pendrives con Roles Definidos
+
+- **BKPFISICO (32GB):**
+    
+    - Destinado a backups físicos críticos.
+        
+    - Debe estar cifrado si vas a guardar datos sensibles.
+        
+    - Nunca usar para bootear o manipular sistemas.
+        
+- **ALMA_NODE (64GB):**
+    
+    - Pendrive principal para Parrot OS Live con persistencia.
+        
+    - Funciona como “notebook portátil”, permite bootear y trabajar en cualquier PC.
+        
+    - Podés instalar otras herramientas o ISOs (Ventoy recomendado para multiboot).
+        
+- **ALMA_SWAP (16GB):**
+    
+    - Zona sucia/deposito/transferencias.
+        
+    - Usá este para bajar, mover o eliminar archivos.
+        
+    - Ideal como “papelera” o para tareas temporales.
+        
+    - Label sugerido: `ALMA_SWAP`.
+        
+- **ALMA_CRYPT / ALMA_SAFE (opcional, 16–32GB):**
+    
+    - Solo para vault cifrado: credenciales, billeteras, información ultra privada.
+        
+
+---
+
+## 2. Estrategias de Seguridad
+
+- Trabajá siempre que puedas directo desde el disco externo cifrado (ALMA_RESIST):
+    
+    - Todo tu entorno y datos quedan portables y seguros, siempre que no copies nada a la PC anfitriona.
+        
+- Para máxima seguridad:
+    
+    - Booteá desde un LiveUSB (Parrot, Tails, etc.),
+        
+    - Montá el disco externo solo en ese entorno,
+        
+    - Trabajá y desmontá todo antes de apagar.
+        
+- Nunca uses tus pendrives críticos (BKPFISICO, ALMA_CRYPT) para bootear, formatear, o “jugar” en PCs públicas/desconocidas.
+    
+
+---
+
+## 3. Consideraciones técnicas
+
+- Las etiquetas (labels) de los pendrives son permanentes y permiten scripts automáticos para backup y montaje seguro.
+    
+- Cifrado:
+    
+    - Siempre usá LUKS (Linux) o VeraCrypt (multiplataforma) en discos o pendrives con datos sensibles.
+        
+- LiveUSB:
+    
+    - Usá Ventoy para tener varias ISOs, o una persistente si necesitás guardar cambios.
+        
+
+---
+
+## 4. Flujos recomendados
+
+- **Día a día:**
+    
+    - Usá tu disco externo cifrado.
+        
+    - Trabajá desde ahí, no desde el disco local.
+        
+    - Desmontá y guardá el disco al terminar.
+        
+- **Ambientes hostiles o PCs públicas:**
+    
+    - Boot LiveUSB.
+        
+    - Montá y trabajá solo desde el entorno seguro.
+        
+- **Transferencias y “basura”:**
+    
+    - Usá ALMA_SWAP como papelera y para movimientos temporales.
+        
+- **Backups:**
+    
+    - Usá scripts por label (ejemplo: `mount -L BKPFISICO /mnt/backup`).
+        
+    - Hacé backups regulares cifrados, idealmente a dos destinos.
+        
+
+---
+
+## 5. Riesgos y mitigación
+
+- El mayor riesgo es dejar el disco montado y desbloqueado si te alejas de la máquina.
+    
+- No hay riesgo real de que la PC anfitriona acceda a tus archivos si el disco está cifrado y desmontado.
+    
+- En sistemas hostiles, solo usá LiveUSB y cifrado.
+    
+
+---
+
+## 6. Extras útiles
+
+- Scripts automáticos de backup por label.
+    
+- “Panic button” para desmontar todo y apagar el disco rápido.
+    
+- Estructura de carpetas sugerida en cada pendrive según rol.
+    
+- Nunca trabajes con datos críticos desde la partición local del host.
+    
+
+---
+
+**En síntesis:**
+
+- Usá disco externo cifrado como entorno portátil.
+    
+- Usá pendrive LiveUSB para operaciones críticas/extremas.
+    
+- Definí roles claros a cada pendrive con label corto y único.
+    
+- Siempre desmontá y desenchufá tus discos antes de dejar la máquina.
+    
+- Backups y vaults cifrados, nunca todo en un solo dispositivo.

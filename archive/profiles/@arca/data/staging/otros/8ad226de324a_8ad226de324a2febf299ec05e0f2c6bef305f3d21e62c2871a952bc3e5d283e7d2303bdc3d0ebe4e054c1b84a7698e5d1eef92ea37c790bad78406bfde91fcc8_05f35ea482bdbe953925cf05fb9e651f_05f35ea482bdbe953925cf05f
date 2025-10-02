@@ -1,0 +1,6 @@
+# 📂 Sprints Activos
+
+Esta carpeta contiene los sprints en curso.  
+Cuando un sprint se completa, se archiva dentro de su versión correspondiente en `docs/versiones/`.
+
+- Sprint 3 → LLM Server (pendiente)

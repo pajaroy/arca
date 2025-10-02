@@ -1,0 +1,23 @@
+# README – Centralesis
+
+**Propósito:**  
+Esta carpeta contiene el entorno operativo, manual técnico y archivos institucionales del agente Centralesis, auditor general de ALMA_RESIST.
+
+**Estructura:**  
+- docs/: Manual técnico, paper y glosario.
+- contexto/: YAML institucional (backend para IA/scripts).
+- meta/: Changelog, auditorías, plantillas y protocolos.
+- bitacoras/: Logs de operación y acciones relevantes.
+
+**Referencias clave:**  
+- Manual técnico: `docs/centralesis.md`
+- YAML institucional: `contexto/centralesis.yaml`
+- Changelog: `meta/changelog.yaml`
+
+**Regla:**  
+No modificar ningún archivo sin registrar la acción en changelog y bitácora.  
+Toda nueva instancia debe arrancar desde este estándar.
+
+**Responsable:** santi  
+**Última actualización:** 2025-06-06  
+**Tags:** [auditoría, institucional, control_central]

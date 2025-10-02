@@ -1,0 +1,18 @@
+# ✅ 1.0_Estrategias_Confirmadas – Alma Mía
+
+## 1. Estrategia PuPuPu (RSI + EMA12)
+
+- **Activos**: BTC, ETH, Oro, EUR/USD, otras cripto
+- **Temporalidad**: Entrada en 5M / Contexto mayor
+- **Riesgo**: de 0.25% a 2% según activo
+- **Condiciones**:
+  - RSI extremo
+  - Cruce EMA12 + retesteo
+  - Confirmación por segundo pico → riesgo completo
+- **Gestión**:
+  - TP1 75% @ 1:1.7
+  - TP2–TP4 escalonados y abiertos
+- **Invalidación**:
+  - Escalerita
+  - Contexto confuso
+

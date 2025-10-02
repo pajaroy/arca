@@ -1,0 +1,77 @@
+
+# 📡 PROMPT BASE – Investigación Profunda GPT-4.5 (v1.0)
+
+## 🎯 Objetivo General
+
+Desarrollar ALMA_RESIST como un sistema modular, antifrágil y totalmente offline, con IA local, documentación automática, y capacidad de evolución continua.
+
+Debe ser:
+
+- Compatible con hardware limitado
+- Auto-recuperable incluso sin backups
+- Justificable en cada decisión técnica
+- Flexible para futuras arquitecturas (WASM, RISC-V, TPM)
+- Independiente de frameworks o librerías no auditadas
+
+
+## 🧱 Fundamentos Técnicos
+
+- SO: Linux x86_64 (meta: soporte futuro para ARM y RISC-V)
+- RAM mínima: 8 GB (modo survival: 2 GB)
+- CPU: 4 núcleos (meta: 1 núcleo)
+- Python 3.10.12+
+- Sin acceso a internet
+
+
+## 🔮 Futuros Desarrollos
+
+```markdown
+| Objetivo                | Tecnología         | Beneficio                             |
+|-------------------------|--------------------|----------------------------------------|
+| Ejecución WASM          | Rust + WebAssembly | Soporte multiplataforma + seguridad    |
+| Arquitectura RISC-V     | LLVM, OpenTitan    | Independencia de Intel/ARM             |
+| Uso de TPM 2.0          | Firmware seguro    | Protección física de claves            |
+```
+
+
+## 🛠️ Documentación Evolutiva
+
+- [ ] `docs/arquitectura_evolutiva.md`
+  - Nuevos módulos y APIs
+  - Cambios rotulados (deprecado, estable, crítico)
+  - Checklist de transición entre versiones
+
+- [ ] `migrate_v0.9_to_v1.0.sh`
+  - Migra carpetas, nombres, dependencias
+  - Crea snapshot de compatibilidad
+
+
+## 🧠 Recuperación Sin Backups
+
+- [ ] Restaurar DB desde fragmentos de logs encriptados
+- [ ] Derivar clave maestra con frase semilla (BIP-39)
+- [ ] Reconstituir configuraciones desde checksums locales
+
+
+## 📈 Diagrama IA Integrada
+
+```mermaid
+graph TD
+    A[Desarrollador] --> B[CLI]
+    B --> C[IA Copiloto]
+    C --> D[ALMA_LOADER]
+    D --> E[(Backups físicos)]
+    C --> F[Documentación]
+    E --> G{Recuperación sin respaldo}
+    F --> H[arquitectura_evolutiva.md]
+```
+
+
+# 📋 Changelog v1.0
+
+- ✅ Agregado ejemplo de justificación técnica real (Rust, SQLite)
+- ✅ Script de migración v0.9 → v1.0
+- ✅ Compatibilidad retroactiva y modo survival
+- ✅ Política de recuperación sin backups (BIP-39)
+- ✅ Estrategia de actualización de modelos IA (quantización dinámica)
+- ✅ Diagrama de IA integrada como nodo documental

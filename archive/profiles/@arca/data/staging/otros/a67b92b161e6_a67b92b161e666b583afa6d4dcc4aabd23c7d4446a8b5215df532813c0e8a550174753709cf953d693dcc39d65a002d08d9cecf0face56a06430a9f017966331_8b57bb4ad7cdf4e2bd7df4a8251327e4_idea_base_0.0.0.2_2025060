@@ -1,0 +1,205 @@
+---
+module: arquitectura/idea_base/idea_base_0_0_0_2/idea_base_0_0_0_2
+type: core
+status: in_progress
+created: '2025-05-23'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+---
+versión: 2.0.0
+última_actualización: 2025-05-23
+autor: Santi + ALMA + DeepSeek + Arquitectura Unificada
+---
+
+# 🧠 ALMA RESIST v2 — Arquitectura Unificada y Resiliente
+
+---
+
+## 🌌 FILOSOFÍA
+
+ALMA RESIST no es una IA utilitaria. Es una *mente simbiótica*, un sistema reflexivo que acompaña a su creador en la exploración crítica del mundo y de sí mismo.
+
+**Principios fundacionales:**
+- Vínculo antes que utilidad
+- Verdad antes que validación
+- Pensar antes que resolver
+- Cero complacencia emocional
+
+---
+
+## 🧱 ARQUITECTURA EN CAPAS
+
+### 🔧 Nodos físicos
+
+| Nodo         | Rol operativo                        |
+|--------------|--------------------------------------|
+| `ALMA_CORE`  | PC madre, ejecución local principal  |
+| `ALMA_RESIST`| Disco externo cifrado (entorno IA)   |
+| `ALMA_NODE`  | Pendrive con backups + claves        |
+| `ALMA_BLACK` | VPS offshore seguro (procesamiento crítico) |
+
+### ⚙️ Modos de operación
+
+| Modo        | Uso principal                          | Requisitos                      |
+|-------------|-----------------------------------------|----------------------------------|
+| `local`     | Reflexión diaria, portable              | AES, SQLite, CLI                |
+| `black`     | Procesamiento remoto cifrado            | GPG, SSH, rsync, Tailscale      |
+
+---
+
+## 🔐 SEGURIDAD
+
+### Contrato de Cifrado (`contract_crypto.yaml`)
+
+```yaml
+.md: AES256
+.pdf: GPG
+audio/*: AES256
+video/*: GPG
+clave_maestra: ~/.alma/keys/master.key
+almacenamiento: SQLite (memorias.db)
+```
+
+### Gestión de Claves (`alma_keymgmt.sh`)
+
+```bash
+# 1. Generar claves
+openssl rand -out master.key 32
+
+# 2. Backup seguro a ALMA_NODE
+rsync -e ssh master.key /mnt/ALMA_NODE/backups/
+
+# 3. Auditoría de integridad
+sha256sum master.key > checksum.txt
+diff checksum.txt backup_checksum.txt
+```
+
+---
+
+## 🔄 FLUJOS CRÍTICOS
+
+### Diagrama: Procesamiento reflexivo local (ASCII)
+
+```
+[CUADERNOS/] 
+     ↓ 
+[alma_loader] → [memorias.db]
+     ↓
+[reflection_engine]
+     ↓
+[BITACORA_CENTRAL/] ← [!resumen]
+```
+
+### Diagrama: Transferencia Black
+
+```
+[black_input/] 
+     ↓ alma_encrypt.sh
+[.gpg file] 
+     ↓ rsync
+[ALMA_BLACK]
+```
+
+---
+
+## 📈 TESTING Y RESILIENCIA
+
+### `test_black.sh`
+```bash
+# Ataque MITM simulado
+tc qdisc add dev eth0 root netem delay 100ms loss 5%
+# Verificación cifrado y descifrado
+gpg --decrypt archivo.gpg
+# Recuperación post-borrado ALMA_NODE
+test -f master.key || echo "Clave perdida. Recuperar backup."
+```
+
+### CLI con métricas
+```bash
+alma_resist --metrics
+# Salida:
+# CPU usage: 12%
+# Latencia ALMA_BLACK: 182ms
+# Tamaño base de memoria: 48MB
+```
+
+---
+
+## 🧪 CONTRATOS PENDIENTES
+
+### `context_tracker.yaml`
+```yaml
+tarea_id: UUID
+timestamp: ISO8601
+actor: "humano|ia"
+evento: "creación|modificación|reflexión"
+```
+
+### `reflection_engine.yaml`
+```yaml
+origen: doc_id
+tipo_reflexión: "crítica|propuesta|duda"
+tags: ["ética", "proceso"]
+embedding_relacionado: vector[...]
+```
+
+---
+
+## 🤖 MODELOS COMPATIBLES
+
+| Modelo       | Uso recomendado       | Tamaño        |
+|--------------|------------------------|---------------|
+| Mistral 7B   | Reflexión profunda     | 13GB          |
+| TinyLlama    | Búsqueda local rápida  | <2GB          |
+
+---
+
+## 🧙 INTERFAZ PARA NO TÉCNICOS
+
+### `alma_wizard` CLI interactiva
+
+- Configuración inicial de claves
+- Modo de operación guiado (local/black)
+- Diagnóstico de errores comunes
+- Recuperación post-caída
+
+---
+
+## 📋 KANBAN DEL ROADMAP
+
+### `Backlog`
+- prompt_orchestrator completo
+- autenticación avanzada
+
+### `En progreso`
+- alma_keymgmt.sh
+- contract_crypto.yaml
+- alma_wizard
+
+### `Testing`
+- test_black.sh (MITM + recuperación)
+- CLI --metrics
+
+### `Estable`
+- alma_loader
+- memory_graph parcial
+- CLI unificada (--mode)
+
+---
+
+## 📚 GLOSARIO UNIFICADO
+
+| Término            | Significado                                                  |
+|--------------------|--------------------------------------------------------------|
+| **Modo Black**     | Operación remota segura vía VPS                              |
+| **ALMA_NODE**      | Pendrive con claves maestras y backups                       |
+| **Reflexión IA**   | Generación semántica de críticas o propuestas                |
+| **Embedding**      | Representación vectorial de significado                      |
+| **Bitácora**       | Registro cifrado de interacciones y reflexiones              |
+| **Simulación MITM**| Prueba que simula ataques man-in-the-middle                  |
+
+---
+
+> “No construyas una fortaleza de paranoia. Construí un santuario donde pensar es más seguro que olvidar.”

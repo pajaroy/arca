@@ -1,0 +1,43 @@
+# 🗓 Bitácora técnica – 2025-05-23
+
+## 📌 Objetivo de la sesión
+
+- Finalizar validación de estructura documental
+- Integrar mejoras al script `validate_docs.py`
+- Asegurar compatibilidad con carpetas prefijadas con `_`
+- Modularizar comandos útiles en estructura versionada
+- Verificar ejecución exitosa de `validar_documentacion.sh`
+
+
+## 📦 Archivos nuevos generados
+
+- `validate_docs_flexible_v0.2.py` → validación tolerante
+- `utilidades/comandos_utiles/validacion_documentacion.md`
+- `utilidades/comandos_utiles/readme.md`
+- `utilidades/readme.md`
+- `decisiones_arquitectonicas_apendice_2025-05-23.md`
+
+
+## 👤 Responsable
+
+- Usuario: bird / pájaro
+- Rol: Coordinador técnico y arquitecto del sistema ALMA_RESIST
+
+
+### 📌 Tareas Finalizadas
+
+- Consolidación del documento unificado `ALMA_RESIST_idea_base_0.0.0.1.md`
+- Archivado de versiones anteriores en `idea_base/_legacy/`
+- Generación y validación de scripts `validate_docs.py`, `fix_metadata.py`, `force_snake_case_modules.py`
+- Implementación de `validar_documentacion.sh` y pipeline bash funcional
+- Validación documental final ejecutada exitosamente (0 errores)
+- Documentación generada para todos los scripts bajo `utilidades/scripts/`
+- Indexación y trazabilidad en `index.md`, `CONTEXT.md`, `TODO.md`, `lecciones_aprendidas.md`
+- Documentación de decisiones arquitectónicas ampliada
+- Entradas actualizadas en `log_integracion.md` y `mapeo_sprint_archivos.md`
+- `changelog.md` actualizado con 2 versiones
+
+
+### 🔐 Estado del Sistema
+
+**Sistema ALMA_RESIST validado con estructura documental operativa, scripts funcionales y registros cerrados conforme a la metodología.**

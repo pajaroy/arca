@@ -1,0 +1,33 @@
+whitepaper_alma_resist:
+  version: "0.1.0"
+  autor: Bird
+  secciones:
+    - titulo: Resumen Ejecutivo
+      descripcion: Breve descripción del propósito y visión de ALMA_RESIST.
+
+    - titulo: Filosofía y Principios
+      descripcion: Fundamentación conceptual, valores y principios éticos y técnicos que rigen el proyecto.
+
+    - titulo: Arquitectura General
+      descripcion: Diseño modular, componentes principales y su interacción.
+
+    - titulo: Módulos Principales
+      descripcion: Lista de módulos (e.g. Arca) con descripción breve de funciones.
+
+    - titulo: Casos de Uso
+      descripcion: Ejemplos concretos de cómo ALMA_RESIST resuelve problemas reales.
+
+    - titulo: Integración con IA
+      descripcion: Visión de cómo se integran ML, RAG, LLM en el ecosistema.
+
+    - titulo: Seguridad y Resiliencia
+      descripcion: Enfoques para asegurar integridad, privacidad y autonomía del sistema.
+
+    - titulo: Objetivos Futuros
+      descripcion: Funcionalidades y evoluciones previstas para próximas versiones.
+
+    - titulo: Licencia y Comunidad
+      descripcion: Reglas de uso, licencia y lineamientos para contribuciones.
+
+    - titulo: Anexos
+      descripcion: Diagramas, esquemas técnicos, glosario de términos.

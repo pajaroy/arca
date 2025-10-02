@@ -1,0 +1,57 @@
+
+# 📋 Checklist Completa – Roadmap ALMA_LOADER
+
+## ✅ FASE 1 – Core Básico
+
+- [ ] Crear script `/nueva` (entrada conversacional → JSON)
+  - [ ] Procesar entrada de texto simple
+  - [ ] Limpiar y normalizar input
+  - [ ] Identificar comandos `/accion`
+  - [ ] Generar estructura JSON válida
+  - [ ] Validar categoría contra `schema_base.json`
+
+- [ ] Validación de memorias
+  - [ ] Crear `schema_base.json` definitivo
+  - [ ] Implementar validación con `jsonschema`
+  - [ ] Gestionar errores y feedback
+  - [ ] Agregar reglas de corrección automática
+  - [ ] Registrar errores en log
+
+- [ ] Base de datos SQLite
+  - [ ] Diseñar tabla `memorias`
+  - [ ] Agregar soporte JSON1
+  - [ ] Crear función `guardar_memoria()`
+  - [ ] Testear inserción y extracción
+  - [ ] Agregar índice en `fecha` y `categoria`
+
+- [ ] Resumen diario automático
+  - [ ] Filtrar por `fecha_actual`
+  - [ ] Contar memorias por categoría
+  - [ ] Detectar tags críticos (#crítico, #pendiente)
+  - [ ] Generar archivo `.md` de salida
+
+- [ ] Acciones rápidas `/accion`
+  - [ ] Crear diccionario de acciones comunes
+  - [ ] Integrar parser para `/accion nombre`
+  - [ ] Generar memoria automática con contenido predefinido
+
+
+## ✅ FASE 3 – Predictivo + Gamificación
+
+- [ ] Sistema de puntos y niveles
+  - [ ] Asignar puntos por acciones (memoria, resumen, alerta resuelta)
+  - [ ] Registrar progreso en archivo o tabla
+  - [ ] Mostrar nivel actual y umbral de subida
+
+- [ ] Alertas automáticas
+  - [ ] Definir reglas `if-then` en `schema/reglas.json`
+  - [ ] Detectar patrones peligrosos en resumen diario
+  - [ ] Generar sugerencias (ej: revisar MEMHEALTH-022)
+
+- [ ] Modelo predictivo
+  - [ ] Preparar dataset con memorias históricas
+  - [ ] Entrenar regresión logística (features simples)
+  - [ ] Evaluar accuracy
+  - [ ] Guardar modelo en `models/demo.pkl`
+  - [ ] Aplicar modelo a memorias nuevas y emitir alerta
+

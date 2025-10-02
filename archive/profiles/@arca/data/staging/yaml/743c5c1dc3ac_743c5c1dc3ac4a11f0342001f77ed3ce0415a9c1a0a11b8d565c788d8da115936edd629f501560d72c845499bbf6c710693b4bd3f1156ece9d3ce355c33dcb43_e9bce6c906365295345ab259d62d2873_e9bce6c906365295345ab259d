@@ -1,0 +1,14 @@
+id: "meta_module_template"
+version: "0.1.0"
+tipo: "readme"
+fecha_creacion: "2025-06-17"
+autor: "bird"
+estado: "stable"
+descripcion: |
+  Plantilla YAML para definir módulos y su configuración.
+estructura:
+  - module.yaml: "Archivo de plantilla de módulo base."
+uso_basico: |
+  Copiar este archivo, adaptar campos para cada módulo del sistema.
+linked_to:
+  - ../README.yaml

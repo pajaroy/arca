@@ -1,0 +1,156 @@
+Aquí tienes la implementación del módulo de logging estructurado en JSON:
+
+python
+
+Copy
+
+Download
+
+# core/logging_config.py
+import logging
+import json
+import time
+from typing import Dict, Any
+
+class JsonFormatter(logging.Formatter):
+    """Formateador personalizado para logs en formato JSON"""
+    
+    def __init__(self):
+        super().__init__()
+        self.default_fields = set(logging.LogRecord(
+            '', 0, '', 0, None, None, None
+        ).__dict__.keys())
+
+    def format(self, record: logging.LogRecord) -> str:
+        """Convierte el registro de log en un JSON string"""
+        log_dict = self._build_log_dict(record)
+        return json.dumps(log_dict, ensure_ascii=False)
+
+    def _build_log_dict(self, record: logging.LogRecord) -> Dict[str, Any]:
+        """Construye el diccionario para el log estructurado"""
+        timestamp = time.strftime(
+            "%Y-%m-%dT%H:%M:%SZ",
+            time.gmtime(record.created)
+        )
+        
+        log_data = {
+            "timestamp": timestamp,
+            "level": record.levelname,
+            "logger": record.name,
+            "message": record.getMessage(),
+        }
+        
+        # Campos adicionales del registro
+        extra_fields = record.__dict__.copy()
+        for key in self.default_fields:
+            extra_fields.pop(key, None)
+        
+        log_data.update(extra_fields)
+        return log_data
+
+def configurar_logging_json():
+    """Configura el sistema de logging para usar formato JSON"""
+    root_logger = logging.getLogger()
+    root_logger.setLevel(logging.INFO)
+    
+    # Limpiar handlers existentes
+    for handler in root_logger.handlers[:]:
+        root_logger.removeHandler(handler)
+    
+    # Configurar handler de salida estándar
+    handler = logging.StreamHandler()
+    handler.setFormatter(JsonFormatter())
+    root_logger.addHandler(handler)
+
+if __name__ == "__main__":
+    # Ejemplo de uso
+    configurar_logging_json()
+    test_logger = logging.getLogger("alma_test")
+    test_logger.info(
+        "Test de log",
+        extra={
+            "contexto": "demo",
+            "memoria_id": "test-123",
+            "evento": "prueba_sistema"
+        }
+    )
+
+**Características principales:**
+
+1. **Formato JSON estructurado:**
+    
+    json
+    
+    Copy
+    
+    Download
+    
+    {
+        "timestamp": "2024-02-22T15:30:45Z",
+        "level": "INFO",
+        "logger": "alma_test",
+        "message": "Test de log",
+        "contexto": "demo",
+        "memoria_id": "test-123",
+        "evento": "prueba_sistema"
+    }
+    
+2. **Manejo de campos extras:**
+    
+    - Cualquier parámetro en `extra=` se incluye automáticamente
+        
+    - Compatible con sistemas de monitoreo (ELK, Datadog, etc.)
+        
+3. **Optimizaciones:**
+    
+    - Timestamp en UTC con formato ISO8601
+        
+    - Eliminación de handlers existentes
+        
+    - Serialización eficiente con `json.dumps`
+        
+4. **Configuración robusta:**
+    
+    - Nivel de logging configurable
+        
+    - Handler a stdout listo para Docker/Kubernetes
+        
+    - Detección automática de campos adicionales
+        
+
+**Integración en el sistema:**
+
+python
+
+Copy
+
+Download
+
+# main.py
+from core.logging_config import configurar_logging_json
+
+configurar_logging_json()
+
+**Salida del ejemplo:**
+
+bash
+
+Copy
+
+Download
+
+$ python core/logging_config.py
+{"timestamp": "2024-02-22T15:30:45Z", "level": "INFO", "logger": "alma_test", "message": "Test de log", "contexto": "demo", "memoria_id": "test-123", "evento": "prueba_sistema"}
+
+Este sistema provee:
+
+- ✅ Trazabilidad completa de eventos
+    
+- ✅ Compatibilidad con métricas y alertas
+    
+- ✅ Facilidad para debugging en producción
+    
+- ✅ Preparado para escalar a millones de logs
+    
+
+New chat

@@ -1,0 +1,36 @@
+import pandas as pd
+from pathlib import Path
+
+# Rutas base
+BASE_DIR = Path.home() / "trece"
+DATA_DIR = BASE_DIR / "data"
+
+# Cargar CSVs
+expenses = pd.read_csv(DATA_DIR / "expenses.csv")
+entities = pd.read_csv(DATA_DIR / "entities.csv")
+concepts = pd.read_csv(DATA_DIR / "concepts.csv")
+
+# 🔹 Limpiar posibles columnas Unnamed
+expenses = expenses.loc[:, ~expenses.columns.str.contains("^Unnamed")]
+entities = entities.loc[:, ~entities.columns.str.contains("^Unnamed")]
+concepts = concepts.loc[:, ~concepts.columns.str.contains("^Unnamed")]
+
+# 🔹 Agrupar gastos por entitie_id y concept_id
+gastos = expenses.groupby(["entitie_id", "concept_id"])["amount"].sum().reset_index()
+
+# 🔹 Unir con nombres de socios y conceptos
+gastos = pd.merge(gastos, entities, left_on="entitie_id", right_on="id", how="left")
+gastos = pd.merge(gastos, concepts, left_on="concept_id", right_on="id", how="left", suffixes=("_entity", "_concept"))
+
+# 🔹 Seleccionar columnas clave
+gastos = gastos[["entitie_id", "name_entity", "concept_id", "name_concept", "amount"]].rename(
+    columns={
+        "name_entity": "entity_name",
+        "name_concept": "concept_name",
+        "amount": "total_gastado"
+    }
+)
+
+# 🔹 Mostrar en pantalla
+print("📊 Gastos por socio y por concepto:")
+print(gastos.to_string(index=False))

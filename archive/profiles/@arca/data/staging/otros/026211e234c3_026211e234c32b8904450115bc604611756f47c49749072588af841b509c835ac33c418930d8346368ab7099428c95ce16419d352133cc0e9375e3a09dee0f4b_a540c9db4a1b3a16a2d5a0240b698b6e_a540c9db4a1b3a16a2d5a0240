@@ -1,0 +1,11 @@
+# 🧾 ALMA_EMPRESA – Asesoría
+
+Este directorio agrupa las asesorías clave de ALMA_EMPRESA: legal, contable e institucional. Cada una funciona como unidad especializada que puede interactuar con las entidades subordinadas o con el holding en su conjunto.
+
+## Estructura
+- `legal/`: análisis jurídico, cumplimiento normativo, convenios, asesoramiento ONGs.
+- `contable/`: balances, estructura de ingresos/egresos, blackbox financiera, reportes.
+- `institucional/`: relaciones con entes externos, presentación ante INASE, AFIP, universidades, comunidad.
+
+📍 Responsable General: Santiago (Coordinador ALMA)
+    

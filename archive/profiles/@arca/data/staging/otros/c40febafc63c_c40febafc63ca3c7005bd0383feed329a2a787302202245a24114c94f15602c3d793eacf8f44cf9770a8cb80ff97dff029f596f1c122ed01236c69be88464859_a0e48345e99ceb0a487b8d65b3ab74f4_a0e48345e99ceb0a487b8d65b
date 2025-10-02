@@ -1,0 +1,103 @@
+"""
+---
+tipo: script
+---
+"""
+#!/usr/bin/env python3
+# fix_tipo.py - Valida y asigna tipos de documento en metadatos YAML
+
+import sys
+import yaml
+from datetime import datetime, timezone
+from pathlib import Path
+
+# Configuración
+LOG_FILE = "/home/alma/Alma-Cli/Logs/fix_metadata.log"
+TIPOS_PERMITIDOS = ["README", "script", "prompt", "doc", "index", "changelog", "yaml"]
+
+def log_action(file_path, tipo, accion):
+    """Registra la acción en el log central"""
+    timestamp = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
+    log_entry = f"[{timestamp}] Archivo:{Path(file_path).resolve()} Tipo:{tipo} Acción:tipo_{accion}\n"
+    
+    with open(LOG_FILE, 'a', encoding='utf-8') as log:
+        log.write(log_entry)
+
+def inferir_tipo(file_path):
+    """Infere el tipo de documento basado en nombre y ubicación"""
+    path = Path(file_path)
+    nombre = path.name.lower()
+    ruta = str(path.parent).lower()
+    
+    if nombre == "readme.md":
+        return "README"
+    elif path.suffix == '.py' and "src" in ruta:
+        return "script"
+    elif "prompt" in nombre or "prompt" in ruta:
+        return "prompt"
+    elif path.suffix == '.yaml' or path.suffix == '.yml':
+        return "yaml"
+    elif "changelog" in ruta:
+        return "changelog"
+    elif "documents" in ruta and path.suffix == '.md':
+        return "doc"
+    else:
+        return "doc"  # Valor por defecto
+
+def procesar_archivo(file_path):
+    """Procesa el archivo y actualiza el tipo si es necesario"""
+    with open(file_path, 'r', encoding='utf-8') as file:
+        content = file.read().splitlines()
+    
+    # Extraer bloque YAML
+    yaml_block = []
+    content_lines = []
+    in_yaml = False
+    yaml_delimiter_count = 0
+    
+    for line in content:
+        if line.strip() == '---':
+            yaml_delimiter_count += 1
+            if yaml_delimiter_count == 1:
+                in_yaml = True
+                continue
+            elif yaml_delimiter_count == 2:
+                in_yaml = False
+                continue
+        
+        if yaml_delimiter_count < 2 and in_yaml:
+            yaml_block.append(line)
+        else:
+            content_lines.append(line)
+    
+    # Procesar metadatos
+    metadata = yaml.safe_load('\n'.join(yaml_block)) or {}
+    tipo_actual = metadata.get('tipo', '').strip()
+    modificado = False
+    
+    # Validar tipo existente
+    if tipo_actual and tipo_actual in TIPOS_PERMITIDOS:
+        log_action(file_path, tipo_actual, "validado")
+        return
+    
+    # Inferir nuevo tipo
+    tipo_nuevo = inferir_tipo(file_path)
+    metadata['tipo'] = tipo_nuevo
+    modificado = True
+    
+    # Reconstruir archivo si hubo cambios
+    if modificado:
+        with open(file_path, 'w', encoding='utf-8') as file:
+            file.write("---\n")
+            yaml.dump(metadata, file, sort_keys=False, allow_unicode=True)
+            file.write("---\n")
+            file.write('\n'.join(content_lines))
+        
+        log_action(file_path, tipo_nuevo, "cambiado")
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Uso: python3 fix_tipo.py <archivo>")
+        sys.exit(1)
+    
+    procesar_archivo(sys.argv[1])

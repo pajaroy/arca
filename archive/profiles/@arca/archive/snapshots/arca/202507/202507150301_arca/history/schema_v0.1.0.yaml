@@ -1,0 +1,39 @@
+# schema.yaml - Esquemas y templates base de ARCA
+metadatos:
+  id_unico: "sch-YAML-001" 
+  tipo: "esquema_definicion"
+  nombre: "schema.yaml"
+  version: "0.1.0"
+  estado: "archivado"
+  fecha_creacion: "2025-07-15"
+  autor: "Bird"
+
+config_base:
+  version: ""
+  proyecto: ""
+  autor_default: ""
+  ruta_base: ""
+  permisos_default: ""
+  confidencialidad_default: ""
+
+metadatos:
+  id_unico: ""
+  tipo: ""
+  nombre: ""
+  version: ""
+  estado: ""
+  fecha_creacion: ""
+  fecha_modificacion: ""
+  autor: ""
+  colaboradores: []
+  descripcion: ""
+  tags: []
+  dependencia_modulos: []
+  path_fisico: ""
+  hash_integridad: ""
+  origen: ""
+  permisos: ""
+  confidencialidad: ""
+  referencias_externas: []
+  historial: []
+

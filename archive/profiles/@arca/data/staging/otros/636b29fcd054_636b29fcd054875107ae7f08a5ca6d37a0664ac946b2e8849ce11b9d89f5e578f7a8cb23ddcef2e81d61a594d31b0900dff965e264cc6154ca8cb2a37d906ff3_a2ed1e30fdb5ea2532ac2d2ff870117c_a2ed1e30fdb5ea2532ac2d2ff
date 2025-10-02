@@ -1,0 +1,41 @@
+# 🧪 test_memoria_post.py – Prueba E2E para /v1/memorias
+
+"""
+Crear un archivo de test con:
+1. Test POST exitoso con datos completos
+2. Test 400 por campos faltantes
+3. Test 403 por owner_id inválido
+Usar TestClient de FastAPI
+"""
+
+from fastapi.testclient import TestClient
+from main import app
+
+client = TestClient(app)
+
+# Datos válidos
+memoria_valida = {
+    "id": "test-mem-001",
+    "contenido": "Prueba de contenido",
+    "categoria": "test",
+    "tags": ["#test"],
+    "visibilidad": "privada",
+    "owner_id": "dev-user-001"
+}
+
+def test_post_memoria_ok():
+    response = client.post("/v1/memorias", json=memoria_valida)
+    assert response.status_code == 200
+    assert response.json()["resultado"] == "ok"
+
+def test_post_memoria_missing_field():
+    memoria_incompleta = memoria_valida.copy()
+    del memoria_incompleta["contenido"]
+    response = client.post("/v1/memorias", json=memoria_incompleta)
+    assert response.status_code == 422  # Pydantic validation error
+
+def test_post_memoria_owner_mismatch():
+    memoria_falsa = memoria_valida.copy()
+    memoria_falsa["owner_id"] = "otro-user"
+    response = client.post("/v1/memorias", json=memoria_falsa)
+    assert response.status_code == 403

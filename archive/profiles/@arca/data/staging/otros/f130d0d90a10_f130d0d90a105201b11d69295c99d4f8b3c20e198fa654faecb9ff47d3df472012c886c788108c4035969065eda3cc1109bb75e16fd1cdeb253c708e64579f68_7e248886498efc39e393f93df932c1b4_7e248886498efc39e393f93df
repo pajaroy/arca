@@ -1,0 +1,122 @@
+{
+  "descripcion": "Esta seed describe el roadmap para implementar la generación de hashes, la indexación de archivos y la trazabilidad en el sistema ALMA_RESIST.\nEl enfoque modular permitirá trabajar en cada parte del sistema de manera independiente, asegurando flexibilidad y escalabilidad.\n",
+  "modulos": [
+    {
+      "nombre": "Modulo 1: Generación de Hashes",
+      "descripcion": "Este módulo se encargará de generar y almacenar los **hashes** para cada archivo modificado o creado dentro del sistema ALMA_RESIST.\nLos hashes asegurarán la integridad de los archivos y proporcionarán una huella digital única para cada archivo.\n",
+      "pasos": [
+        "Configurar el script de generación de hashes con SHA-256 para cada archivo.",
+        "Integrar el cálculo de hash en la carga o modificación de archivos.",
+        "Registrar los hashes en un archivo de **índice centralizado (index.json)**.",
+        "Verificar la integridad de los archivos utilizando los hashes antes de cada acción crítica."
+      ],
+      "dependencias": [],
+      "objetivos": [
+        "Asegurar la integridad de los archivos a través de una huella digital única.",
+        "Implementar un sistema centralizado de validación y verificación de archivos."
+      ]
+    },
+    {
+      "nombre": "Modulo 2: Automática de Indexación de Archivos",
+      "descripcion": "Este módulo se encargará de **indexar automáticamente** los archivos recién agregados o modificados en el sistema, añadiendo sus hashes, fechas y metadatos en el índice central.\n",
+      "pasos": [
+        "Implementar un script que actualice el índice cada vez que se genere un nuevo hash.",
+        "Usar herramientas como `inotify` para monitorizar la carpeta y detectar nuevos archivos o modificaciones.",
+        "Asegurar que el archivo `index.json` esté siempre actualizado con los nuevos archivos y sus respectivos hashes."
+      ],
+      "dependencias": [
+        {
+          "Modulo 1": "Generación de Hashes"
+        }
+      ],
+      "objetivos": [
+        "Lograr la indexación automática de todos los archivos nuevos y modificados.",
+        "Mantener un registro centralizado y actualizado de todos los archivos y sus metadatos."
+      ]
+    },
+    {
+      "nombre": "Modulo 3: Auditoría y Trazabilidad",
+      "descripcion": "Este módulo será responsable de implementar un sistema de **auditoría y trazabilidad**, registrando todas las acciones realizadas sobre los archivos y agentes dentro del sistema.\n",
+      "pasos": [
+        "Implementar una bitácora que registre todas las modificaciones y acciones de los agentes.",
+        "Asociar cada acción con el hash del archivo modificado para garantizar la trazabilidad.",
+        "Crear un sistema de logs estructurados (por ejemplo, en formato JSON o Parquet) para almacenar las auditorías.",
+        "Integrar un sistema de alertas para cualquier alteración o error crítico detectado en el sistema."
+      ],
+      "dependencias": [
+        {
+          "Modulo 2": "Automática de Indexación de Archivos"
+        }
+      ],
+      "objetivos": [
+        "Asegurar que todas las acciones sobre archivos y agentes sean auditadas y trazables.",
+        "Proveer un sistema robusto para la supervisión continua del sistema."
+      ]
+    },
+    {
+      "nombre": "Modulo 4: Implementación de Recuperación ante Fallos",
+      "descripcion": "Este módulo garantizará que el sistema pueda **recuperarse ante fallos**. Esto incluye la sincronización y el respaldo de los archivos y registros de manera confiable.\n",
+      "pasos": [
+        "Implementar un sistema de **backups automáticos** y **sincronización** para los archivos indexados.",
+        "Añadir **reintentos automáticos** en caso de fallos durante el proceso de escritura o modificación.",
+        "Crear un sistema de **alertas** para detectar y notificar problemas con la recuperación de archivos."
+      ],
+      "dependencias": [
+        {
+          "Modulo 2": "Automática de Indexación de Archivos"
+        }
+      ],
+      "objetivos": [
+        "Garantizar que el sistema pueda recuperarse automáticamente en caso de fallos.",
+        "Minimizar el riesgo de pérdida de datos."
+      ]
+    },
+    {
+      "nombre": "Modulo 5: Optimización y Escalabilidad",
+      "descripcion": "Este módulo se centrará en la **optimización y escalabilidad** del sistema para manejar grandes volúmenes de datos y asegurar que el proceso de indexación y auditoría no se convierta en un cuello de botella.\n",
+      "pasos": [
+        "Optimizar los scripts para **procesar grandes volúmenes de archivos** y **reducir tiempos de ejecución**.",
+        "Implementar un sistema de almacenamiento **distribuido** para los registros y bitácoras (usando Parquet o sistemas distribuidos).",
+        "Desplegar un sistema de **balanceo de carga** y **gestión distribuida** para la carga del sistema."
+      ],
+      "dependencias": [
+        {
+          "Modulo 1": "Generación de Hashes"
+        },
+        {
+          "Modulo 2": "Automática de Indexación de Archivos"
+        }
+      ],
+      "objetivos": [
+        "Escalar el sistema para permitir el manejo de grandes volúmenes de archivos y registros.",
+        "Asegurar la eficiencia y fiabilidad del sistema a medida que crece."
+      ]
+    },
+    {
+      "nombre": "Modulo 6: Seguridad y Control de Accesos",
+      "descripcion": "Este módulo implementará un sistema de **seguridad y control de accesos** para asegurar que solo los agentes y usuarios autorizados puedan realizar modificaciones en los archivos y registros del sistema.\n",
+      "pasos": [
+        "Implementar **middleware de autorización** para validar los permisos antes de realizar cualquier acción.",
+        "Asegurar que cada acción realizada quede registrada en un sistema de logs y auditada para verificar su validez.",
+        "Integrar **firma digital** para garantizar la autenticidad de los registros y modificaciones."
+      ],
+      "dependencias": [
+        {
+          "Modulo 3": "Auditoría y Trazabilidad"
+        }
+      ],
+      "objetivos": [
+        "Controlar y auditar todas las modificaciones y accesos al sistema.",
+        "Proveer un sistema de **seguridad** robusto para el manejo de archivos y memorias."
+      ]
+    }
+  ],
+  "roadmap_completo": [
+    "Modulo 1: Generación de Hashes",
+    "Modulo 2: Automática de Indexación de Archivos",
+    "Modulo 3: Auditoría y Trazabilidad",
+    "Modulo 4: Implementación de Recuperación ante Fallos",
+    "Modulo 5: Optimización y Escalabilidad",
+    "Modulo 6: Seguridad y Control de Accesos"
+  ]
+}

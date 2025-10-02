@@ -1,0 +1,16 @@
+
+# 📝 CHANGELOG – ALMA LIBRE v0.0.6
+
+## 📅 Fecha de Consolidación: 2025-05-11
+
+### ✅ Cambios Principales
+- Se integraron completamente las versiones 0.0.1 a 0.0.5 en una nueva estructura unificada.
+- Se reorganizó el contenido en módulos: EMPRESAS, CUADERNOS, MODULOS, BITÁCORA, etc.
+- Se centralizó la bitácora histórica y se incluyó backlog comprimido.
+- Se definió estructura de carpetas orientada a la interpretación por modelos IA.
+- Se implementó lógica de backups en `00_BACKUPS_HISTORICOS`.
+
+### ⚠️ Pendiente
+- Aplicación completa de la checklist de correcciones.
+- Unificación de nombres y eliminación de duplicados.
+- Creación de carpeta `RECURSOS_Y_AYUDAS`.

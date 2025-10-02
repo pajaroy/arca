@@ -1,0 +1,28 @@
+{
+  "version": "0.2.0",
+  "tipo": "readme",
+  "schema": "almaresist.readme_v1",
+  "descripcion": "Prompt YAML institucional para desarrollo y auditoría del script CLI de bitácoras v0.2.0.",
+  "estructura": [
+    "prompt_add_bitacora_entry_v0.2.0.yaml"
+  ],
+  "tags": [
+    "prompt",
+    "bitacora",
+    "cli",
+    "requerimientos",
+    "docs",
+    "v0.2.0"
+  ],
+  "linked_to": [
+    "../README.yaml",
+    "../../src/README.yaml"
+  ],
+  "responsable": "Equipo de Operaciones ALMA_RESIST",
+  "hash_verificacion": "sha256:pending",
+  "historial": [
+    "2025-06-17: Migración y normalización del prompt bajo protocolo KAEL v0.2.0."
+  ],
+  "last_modified": "2025-06-17T11:22:00Z",
+  "last_modified_by": "Kael"
+}

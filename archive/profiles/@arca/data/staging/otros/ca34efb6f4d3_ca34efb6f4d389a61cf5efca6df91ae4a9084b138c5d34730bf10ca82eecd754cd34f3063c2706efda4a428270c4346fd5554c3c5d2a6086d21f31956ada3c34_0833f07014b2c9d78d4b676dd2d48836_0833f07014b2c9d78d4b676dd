@@ -1,0 +1,1698 @@
+and [13b](https://huggingface.co/mys/ggml_llava-v1.5-13b)
+models are available.
+For llava-1.6 a variety of prepared gguf models are available as well [7b-34b](https://huggingface.co/cmp-nct/llava-1.6-gguf)
+
+After API is confirmed, more models will be supported / uploaded.
+
+## Usage
+Build the `llama-mtmd-cli` binary.
+
+After building, run: `./llama-mtmd-cli` to see the usage. For example:
+
+```sh
+./llama-mtmd-cli -m ../llava-v1.5-7b/ggml-model-f16.gguf \
+    --mmproj ../llava-v1.5-7b/mmproj-model-f16.gguf \
+    --chat-template vicuna
+```
+
+**note**: A lower temperature like 0.1 is recommended for better quality. add `--temp 0.1` to the command to do so.
+**note**: For GPU offloading ensure to use the `-ngl` flag just like usual
+
+## LLaVA 1.5
+
+1. Clone a LLaVA and a CLIP model ([available options](https://github.com/haotian-liu/LLaVA/blob/main/docs/MODEL_ZOO.md)). For example:
+
+```sh
+git clone https://huggingface.co/liuhaotian/llava-v1.5-7b
+
+git clone https://huggingface.co/openai/clip-vit-large-patch14-336
+```
+
+2. Install the required Python packages:
+
+```sh
+pip install -r tools/mtmd/requirements.txt
+```
+
+3. Use `llava_surgery.py` to split the LLaVA model to LLaMA and multimodel projector constituents:
+
+```sh
+python ./tools/mtmd/llava_surgery.py -m ../llava-v1.5-7b
+```
+
+4. Use `convert_image_encoder_to_gguf.py` to convert the LLaVA image encoder to GGUF:
+
+```sh
+python ./tools/mtmd/convert_image_encoder_to_gguf.py -m ../clip-vit-large-patch14-336 --llava-projector ../llava-v1.5-7b/llava.projector --output-dir ../llava-v1.5-7b
+```
+
+5. Use `examples/convert_legacy_llama.py` to convert the LLaMA part of LLaVA to GGUF:
+
+```sh
+python ./examples/convert_legacy_llama.py ../llava-v1.5-7b --skip-unknown
+```
+
+Now both the LLaMA part and the image encoder are in the `llava-v1.5-7b` directory.
+
+## LLaVA 1.6 gguf conversion
+1) First clone a LLaVA 1.6 model:
+```console
+git clone https://huggingface.co/liuhaotian/llava-v1.6-vicuna-7b
+```
+
+2) Install the required Python packages:
+
+```sh
+pip install -r tools/mtmd/requirements.txt
+```
+
+3) Use `llava_surgery_v2.py` which also supports llava-1.5 variants pytorch as well as safetensor models:
+```console
+python tools/mtmd/llava_surgery_v2.py -C -m ../llava-v1.6-vicuna-7b/
+```
+- you will find a llava.projector and a llava.clip file in your model directory
+
+4) Copy the llava.clip file into a subdirectory (like vit), rename it to pytorch_model.bin and add a fitting vit configuration to the directory:
+```console
+mkdir vit
+cp ../llava-v1.6-vicuna-7b/llava.clip vit/pytorch_model.bin
+cp ../llava-v1.6-vicuna-7b/llava.projector vit/
+curl -s -q https://huggingface.co/cmp-nct/llava-1.6-gguf/raw/main/config_vit.json -o vit/config.json
+```
+
+5) Create the visual gguf model:
+```console
+python ./tools/mtmd/convert_image_encoder_to_gguf.py -m vit --llava-projector vit/llava.projector --output-dir vit --clip-model-is-vision
+```
+- This is similar to llava-1.5, the difference is that we tell the encoder that we are working with the pure vision model part of CLIP
+
+6) Then convert the model to gguf format:
+```console
+python ./examples/convert_legacy_llama.py ../llava-v1.6-vicuna-7b/ --skip-unknown
+```
+
+7) And finally we can run the llava cli using the 1.6 model version:
+```console
+./llama-mtmd-cli -m ../llava-v1.6-vicuna-7b/ggml-model-f16.gguf --mmproj vit/mmproj-model-f16.gguf
+```
+
+**note** llava-1.6 needs more context than llava-1.5, at least 3000 is needed (just run it at -c 4096)
+
+**note** llava-1.6 greatly benefits from batched prompt processing (defaults work)
+
+**note** if the language model in step `6)` is incompatible with the legacy conversion script, the easiest way handle the LLM model conversion is to load the model in transformers, and export only the LLM from the llava next model.
+
+```python
+import os
+import transformers
+
+model_path = ...
+llm_export_path = ...
+
+tokenizer = transformers.AutoTokenizer.from_pretrained(model_path)
+model = transformers.AutoModelForImageTextToText.from_pretrained(model_path)
+
+tokenizer.save_pretrained(llm_export_path)
+model.language_model.save_pretrained(llm_export_path)
+```
+
+Then, you can convert the LLM using the `convert_hf_to_gguf.py` script, which handles more LLM architectures.
+
+## Chat template
+
+For llava-1.5 and llava-1.6, you need to use `vicuna` chat template. Simply add `--chat-template vicuna` to activate this template.
+
+
+## How to know if you are running in llava-1.5 or llava-1.6 mode
+
+When running llava-cli you will see a visual information right before the prompt is being processed:
+
+**Llava-1.5:**
+`encode_image_with_clip: image embedding created: 576 tokens`
+
+**Llava-1.6 (anything above 576):**
+`encode_image_with_clip: image embedding created: 2880 tokens`
+
+
+Alternatively just pay notice to how many "tokens" have been used for your prompt, it will also show 1000+ tokens for llava-1.6
+
+
+## Archivo: minicpmv2.5.md
+Contenido:
+## MiniCPM-Llama3-V 2.5
+
+### Prepare models and code
+
+Download [MiniCPM-Llama3-V-2_5](https://huggingface.co/openbmb/MiniCPM-Llama3-V-2_5) PyTorch model from huggingface to "MiniCPM-Llama3-V-2_5" folder.
+
+
+### Build llama.cpp
+Readme modification time: 20250206
+
+If there are differences in usage, please refer to the official build [documentation](https://github.com/ggerganov/llama.cpp/blob/master/docs/build.md)
+
+Clone llama.cpp:
+```bash
+git clone https://github.com/ggml-org/llama.cpp
+cd llama.cpp
+```
+
+Build llama.cpp using `CMake`:
+```bash
+cmake -B build
+cmake --build build --config Release
+```
+
+
+### Usage of MiniCPM-Llama3-V 2.5
+
+Convert PyTorch model to gguf files (You can also download the converted [gguf](https://huggingface.co/openbmb/MiniCPM-Llama3-V-2_5-gguf) by us)
+
+```bash
+python ./tools/mtmd/minicpmv-surgery.py -m ../MiniCPM-Llama3-V-2_5
+python ./tools/mtmd/minicpmv-convert-image-encoder-to-gguf.py -m ../MiniCPM-Llama3-V-2_5 --minicpmv-projector ../MiniCPM-Llama3-V-2_5/minicpmv.projector --output-dir ../MiniCPM-Llama3-V-2_5/ --image-mean 0.5 0.5 0.5 --image-std 0.5 0.5 0.5 --minicpmv_version 2
+python ./convert_hf_to_gguf.py ../MiniCPM-Llama3-V-2_5/model
+
+# quantize int4 version
+./build/bin/llama-quantize ../MiniCPM-Llama3-V-2_5/model/model-8B-F16.gguf ../MiniCPM-Llama3-V-2_5/model/ggml-model-Q4_K_M.gguf Q4_K_M
+```
+
+
+Inference on Linux or Mac
+```bash
+# run in single-turn mode
+./build/bin/llama-mtmd-cli -m ../MiniCPM-Llama3-V-2_5/model/model-8B-F16.gguf --mmproj ../MiniCPM-Llama3-V-2_5/mmproj-model-f16.gguf -c 4096 --temp 0.7 --top-p 0.8 --top-k 100 --repeat-penalty 1.05 --image xx.jpg -p "What is in the image?"
+
+# run in conversation mode
+./build/bin/llama-mtmd-cli -m ../MiniCPM-Llama3-V-2_5/model/ggml-model-Q4_K_M.gguf --mmproj ../MiniCPM-Llama3-V-2_5/mmproj-model-f16.gguf
+```
+
+
+## Archivo: android.md
+Contenido:
+
+# Android
+
+## Build on Android using Termux
+
+[Termux](https://termux.dev/en/) is an Android terminal emulator and Linux environment app (no root required). As of writing, Termux is available experimentally in the Google Play Store; otherwise, it may be obtained directly from the project repo or on F-Droid.
+
+With Termux, you can install and run `llama.cpp` as if the environment were Linux. Once in the Termux shell:
+
+```
+$ apt update && apt upgrade -y
+$ apt install git cmake
+```
+
+Then, follow the [build instructions](https://github.com/ggml-org/llama.cpp/blob/master/docs/build.md), specifically for CMake.
+
+Once the binaries are built, download your model of choice (e.g., from Hugging Face). It's recommended to place it in the `~/` directory for best performance:
+
+```
+$ curl -L {model-url} -o ~/{model}.gguf
+```
+
+Then, if you are not already in the repo directory, `cd` into `llama.cpp` and:
+
+```
+$ ./build/bin/llama-cli -m ~/{model}.gguf -c {context-size} -p "{your-prompt}"
+```
+
+Here, we show `llama-cli`, but any of the executables under `examples` should work, in theory. Be sure to set `context-size` to a reasonable number (say, 4096) to start with; otherwise, memory could spike and kill your terminal.
+
+To see what it might look like visually, here's an old demo of an interactive session running on a Pixel 5 phone:
+
+https://user-images.githubusercontent.com/271616/225014776-1d567049-ad71-4ef2-b050-55b0b3b9274c.mp4
+
+## Cross-compile using Android NDK
+It's possible to build `llama.cpp` for Android on your host system via CMake and the Android NDK. If you are interested in this path, ensure you already have an environment prepared to cross-compile programs for Android (i.e., install the Android SDK). Note that, unlike desktop environments, the Android environment ships with a limited set of native libraries, and so only those libraries are available to CMake when building with the Android NDK (see: https://developer.android.com/ndk/guides/stable_apis.)
+
+Once you're ready and have cloned `llama.cpp`, invoke the following in the project directory:
+
+```
+$ cmake \
+  -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
+  -DANDROID_ABI=arm64-v8a \
+  -DANDROID_PLATFORM=android-28 \
+  -DCMAKE_C_FLAGS="-march=armv8.7a" \
+  -DCMAKE_CXX_FLAGS="-march=armv8.7a" \
+  -DGGML_OPENMP=OFF \
+  -DGGML_LLAMAFILE=OFF \
+  -B build-android
+```
+
+Notes:
+  - While later versions of Android NDK ship with OpenMP, it must still be installed by CMake as a dependency, which is not supported at this time
+  - `llamafile` does not appear to support Android devices (see: https://github.com/Mozilla-Ocho/llamafile/issues/325)
+
+The above command should configure `llama.cpp` with the most performant options for modern devices. Even if your device is not running `armv8.7a`, `llama.cpp` includes runtime checks for available CPU features it can use.
+
+Feel free to adjust the Android ABI for your target. Once the project is configured:
+
+```
+$ cmake --build build-android --config Release -j{n}
+$ cmake --install build-android --prefix {install-dir} --config Release
+```
+
+After installing, go ahead and download the model of your choice to your host system. Then:
+
+```
+$ adb shell "mkdir /data/local/tmp/llama.cpp"
+$ adb push {install-dir} /data/local/tmp/llama.cpp/
+$ adb push {model}.gguf /data/local/tmp/llama.cpp/
+$ adb shell
+```
+
+In the `adb shell`:
+
+```
+$ cd /data/local/tmp/llama.cpp
+$ LD_LIBRARY_PATH=lib ./bin/llama-simple -m {model}.gguf -c {context-size} -p "{your-prompt}"
+```
+
+That's it!
+
+Be aware that Android will not find the library path `lib` on its own, so we must specify `LD_LIBRARY_PATH` in order to run the installed executables. Android does support `RPATH` in later API levels, so this could change in the future. Refer to the previous section for information about `context-size` (very important!) and running other `examples`.
+
+
+## Archivo: build.md
+Contenido:
+# Build llama.cpp locally
+
+The main product of this project is the `llama` library. Its C-style interface can be found in [include/llama.h](../include/llama.h).
+
+The project also includes many example programs and tools using the `llama` library. The examples range from simple, minimal code snippets to sophisticated sub-projects such as an OpenAI-compatible HTTP server.
+
+**To get the Code:**
+
+```bash
+git clone https://github.com/ggml-org/llama.cpp
+cd llama.cpp
+```
+
+The following sections describe how to build with different backends and options.
+
+## CPU Build
+
+Build llama.cpp using `CMake`:
+
+```bash
+cmake -B build
+cmake --build build --config Release
+```
+
+**Notes**:
+
+- For faster compilation, add the `-j` argument to run multiple jobs in parallel, or use a generator that does this automatically such as Ninja. For example, `cmake --build build --config Release -j 8` will run 8 jobs in parallel.
+- For faster repeated compilation, install [ccache](https://ccache.dev/)
+- For debug builds, there are two cases:
+
+    1. Single-config generators (e.g. default = `Unix Makefiles`; note that they just ignore the `--config` flag):
+
+       ```bash
+       cmake -B build -DCMAKE_BUILD_TYPE=Debug
+       cmake --build build
+       ```
+
+    2. Multi-config generators (`-G` param set to Visual Studio, XCode...):
+
+       ```bash
+       cmake -B build -G "Xcode"
+       cmake --build build --config Debug
+       ```
+
+    For more details and a list of supported generators, see the [CMake documentation](https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html).
+- For static builds, add `-DBUILD_SHARED_LIBS=OFF`:
+  ```
+  cmake -B build -DBUILD_SHARED_LIBS=OFF
+  cmake --build build --config Release
+  ```
+
+- Building for Windows (x86, x64 and arm64) with MSVC or clang as compilers:
+    - Install Visual Studio 2022, e.g. via the [Community Edition](https://visualstudio.microsoft.com/vs/community/). In the installer, select at least the following options (this also automatically installs the required additional tools like CMake,...):
+    - Tab Workload: Desktop-development with C++
+    - Tab Components (select quickly via search): C++-_CMake_ Tools for Windows, _Git_ for Windows, C++-_Clang_ Compiler for Windows, MS-Build Support for LLVM-Toolset (clang)
+    - Please remember to always use a Developer Command Prompt / PowerShell for VS2022 for git, build, test
+    - For Windows on ARM (arm64, WoA) build with:
+    ```bash
+    cmake --preset arm64-windows-llvm-release -D GGML_OPENMP=OFF
+    cmake --build build-arm64-windows-llvm-release
+    ```
+    Building for arm64 can also be done with the MSVC compiler with the build-arm64-windows-MSVC preset, or the standard CMake build instructions. However, note that the MSVC compiler does not support inline ARM assembly code, used e.g. for the accelerated Q4_0_N_M CPU kernels.
+
+    For building with ninja generator and clang compiler as default:
+      -set path:set LIB=C:\Program Files (x86)\Windows Kits\10\Lib\10.0.22621.0\um\x64;C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\lib\x64\uwp;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.22621.0\ucrt\x64
+      ```bash
+      cmake --preset x64-windows-llvm-release
+      cmake --build build-x64-windows-llvm-release
+      ```
+- Curl usage is enabled by default and can be turned off with `-DLLAMA_CURL=OFF`. Otherwise you need to install development libraries for libcurl.
+
+## BLAS Build
+
+Building the program with BLAS support may lead to some performance improvements in prompt processing using batch sizes higher than 32 (the default is 512). Using BLAS doesn't affect the generation performance. There are currently several different BLAS implementations available for build and use:
+
+### Accelerate Framework
+
+This is only available on Mac PCs and it's enabled by default. You can just build using the normal instructions.
+
+### OpenBLAS
+
+This provides BLAS acceleration using only the CPU. Make sure to have OpenBLAS installed on your machine.
+
+- Using `CMake` on Linux:
+
+    ```bash
+    cmake -B build -DGGML_BLAS=ON -DGGML_BLAS_VENDOR=OpenBLAS
+    cmake --build build --config Release
+    ```
+
+### BLIS
+
+Check [BLIS.md](./backend/BLIS.md) for more information.
+
+### Intel oneMKL
+
+Building through oneAPI compilers will make avx_vnni instruction set available for intel processors that do not support avx512 and avx512_vnni. Please note that this build config **does not support Intel GPU**. For Intel GPU support, please refer to [llama.cpp for SYCL](./backend/SYCL.md).
+
+- Using manual oneAPI installation:
+  By default, `GGML_BLAS_VENDOR` is set to `Generic`, so if you already sourced intel environment script and assign `-DGGML_BLAS=ON` in cmake, the mkl version of Blas will automatically been selected. Otherwise please install oneAPI and follow the below steps:
+    ```bash
+    source /opt/intel/oneapi/setvars.sh # You can skip this step if  in oneapi-basekit docker image, only required for manual installation
+    cmake -B build -DGGML_BLAS=ON -DGGML_BLAS_VENDOR=Intel10_64lp -DCMAKE_C_COMPILER=icx -DCMAKE_CXX_COMPILER=icpx -DGGML_NATIVE=ON
+    cmake --build build --config Release
+    ```
+
+- Using oneAPI docker image:
+  If you do not want to source the environment vars and install oneAPI manually, you can also build the code using intel docker container: [oneAPI-basekit](https://hub.docker.com/r/intel/oneapi-basekit). Then, you can use the commands given above.
+
+Check [Optimizing and Running LLaMA2 on Intel® CPU](https://www.intel.com/content/www/us/en/content-details/791610/optimizing-and-running-llama2-on-intel-cpu.html) for more information.
+
+### Other BLAS libraries
+
+Any other BLAS library can be used by setting the `GGML_BLAS_VENDOR` option. See the [CMake documentation](https://cmake.org/cmake/help/latest/module/FindBLAS.html#blas-lapack-vendors) for a list of supported vendors.
+
+## Metal Build
+
+On MacOS, Metal is enabled by default. Using Metal makes the computation run on the GPU.
+To disable the Metal build at compile time use the `-DGGML_METAL=OFF` cmake option.
+
+When built with Metal support, you can explicitly disable GPU inference with the `--n-gpu-layers 0` command-line argument.
+
+## SYCL
+
+SYCL is a higher-level programming model to improve programming productivity on various hardware accelerators.
+
+llama.cpp based on SYCL is used to **support Intel GPU** (Data Center Max series, Flex series, Arc series, Built-in GPU and iGPU).
+
+For detailed info, please refer to [llama.cpp for SYCL](./backend/SYCL.md).
+
+## CUDA
+
+This provides GPU acceleration using an NVIDIA GPU. Make sure to have the [CUDA toolkit](https://developer.nvidia.com/cuda-toolkit) installed.
+
+#### Download directly from NVIDIA
+You may find the official downloads here: [NVIDIA developer site](https://developer.nvidia.com/cuda-downloads).
+
+
+#### Compile and run inside a Fedora Toolbox Container
+We also have a [guide](./backend/CUDA-FEDORA.md) for setting up CUDA toolkit in a Fedora [toolbox container](https://containertoolbx.org/).
+
+**Recommended for:**
+- ***Necessary*** for users of [Atomic Desktops for Fedora](https://fedoraproject.org/atomic-desktops/); such as: [Silverblue](https://fedoraproject.org/atomic-desktops/silverblue/) and [Kinoite](https://fedoraproject.org/atomic-desktops/kinoite/).
+  - (there are no supported CUDA packages for these systems)
+- ***Necessary*** for users that have a host that is not a: [Supported Nvidia CUDA Release Platform](https://developer.nvidia.com/cuda-downloads).
+  - (for example, you may have [Fedora 42 Beta](https://fedoramagazine.org/announcing-fedora-linux-42-beta/) as your your host operating system)
+- ***Convenient*** For those running [Fedora Workstation](https://fedoraproject.org/workstation/) or [Fedora KDE Plasma Desktop](https://fedoraproject.org/spins/kde), and want to keep their host system clean.
+- *Optionally* toolbox packages are available: [Arch Linux](https://archlinux.org/), [Red Hat Enterprise Linux >= 8.5](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux), or [Ubuntu](https://ubuntu.com/download)
+
+
+### Compilation
+```bash
+cmake -B build -DGGML_CUDA=ON
+cmake --build build --config Release
+```
+
+### Override Compute Capability Specifications
+
+If `nvcc` cannot detect your gpu, you may get compile-warnings such as:
+ ```text
+nvcc warning : Cannot find valid GPU for '-arch=native', default arch is used
+```
+
+To override the `native` GPU detection:
+
+#### 1. Take note of the `Compute Capability` of your NVIDIA devices: ["CUDA: Your GPU Compute > Capability"](https://developer.nvidia.com/cuda-gpus).
+
+```text
+GeForce RTX 4090      8.9
+GeForce RTX 3080 Ti   8.6
+GeForce RTX 3070      8.6
+```
+
+#### 2. Manually list each varying `Compute Capability` in the `CMAKE_CUDA_ARCHITECTURES` list.
+
+```bash
+cmake -B build -DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES="86;89"
+```
+
+### Runtime CUDA environmental variables
+
+You may set the [cuda environmental variables](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#env-vars) at runtime.
+
+```bash
+# Use `CUDA_VISIBLE_DEVICES` to hide the first compute device.
+CUDA_VISIBLE_DEVICES="-0" ./build/bin/llama-server --model /srv/models/llama.gguf
+```
+
+### Unified Memory
+
+The environment variable `GGML_CUDA_ENABLE_UNIFIED_MEMORY=1` can be used to enable unified memory in Linux. This allows swapping to system RAM instead of crashing when the GPU VRAM is exhausted. In Windows this setting is available in the NVIDIA control panel as `System Memory Fallback`.
+
+### Performance Tuning
+
+The following compilation options are also available to tweak performance:
+
+| Option                        | Legal values           | Default | Description                                                                                                                                                                                                                                                                             |
+|-------------------------------|------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| GGML_CUDA_FORCE_MMQ           | Boolean                | false   | Force the use of custom matrix multiplication kernels for quantized models instead of FP16 cuBLAS even if there is no int8 tensor core implementation available (affects V100, CDNA and RDNA3+). MMQ kernels are enabled by default on GPUs with int8 tensor core support. With MMQ force enabled, speed for large batch sizes will be worse but VRAM consumption will be lower.                       |
+| GGML_CUDA_FORCE_CUBLAS        | Boolean                | false   | Force the use of FP16 cuBLAS instead of custom matrix multiplication kernels for quantized models                                                                                                                                                                                       |
+| GGML_CUDA_F16                 | Boolean                | false   | If enabled, use half-precision floating point arithmetic for the CUDA dequantization + mul mat vec kernels and for the q4_1 and q5_1 matrix matrix multiplication kernels. Can improve performance on relatively recent GPUs.                                                           |
+| GGML_CUDA_PEER_MAX_BATCH_SIZE | Positive integer       | 128     | Maximum batch size for which to enable peer access between multiple GPUs. Peer access requires either Linux or NVLink. When using NVLink enabling peer access for larger batch sizes is potentially beneficial.                                                                         |
+| GGML_CUDA_FA_ALL_QUANTS       | Boolean                | false   | Compile support for all KV cache quantization type (combinations) for the FlashAttention CUDA kernels. More fine-grained control over KV cache size but compilation takes much longer.                                                                                                  |
+
+## MUSA
+
+This provides GPU acceleration using a Moore Threads GPU. Make sure to have the [MUSA SDK](https://developer.mthreads.com/musa/musa-sdk) installed.
+
+#### Download directly from Moore Threads
+
+You may find the official downloads here: [Moore Threads developer site](https://developer.mthreads.com/sdk/download/musa).
+
+### Compilation
+
+```bash
+cmake -B build -DGGML_MUSA=ON
+cmake --build build --config Release
+```
+
+#### Override Compute Capability Specifications
+
+By default, all supported compute capabilities are enabled. To customize this behavior, you can specify the `MUSA_ARCHITECTURES` option in the CMake command:
+
+```bash
+cmake -B build -DGGML_MUSA=ON -DMUSA_ARCHITECTURES="21"
+cmake --build build --config Release
+```
+
+This configuration enables only compute capability `2.1` (MTT S80) during compilation, which can help reduce compilation time.
+
+#### Compilation options
+
+Most of the compilation options available for CUDA should also be available for MUSA, though they haven't been thoroughly tested yet.
+
+- For static builds, add `-DBUILD_SHARED_LIBS=OFF` and `-DCMAKE_POSITION_INDEPENDENT_CODE=ON`:
+  ```
+  cmake -B build -DGGML_MUSA=ON \
+    -DBUILD_SHARED_LIBS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+  cmake --build build --config Release
+  ```
+
+### Runtime MUSA environmental variables
+
+You may set the [musa environmental variables](https://docs.mthreads.com/musa-sdk/musa-sdk-doc-online/programming_guide/Z%E9%99%84%E5%BD%95/) at runtime.
+
+```bash
+# Use `MUSA_VISIBLE_DEVICES` to hide the first compute device.
+MUSA_VISIBLE_DEVICES="-0" ./build/bin/llama-server --model /srv/models/llama.gguf
+```
+
+### Unified Memory
+
+The environment variable `GGML_CUDA_ENABLE_UNIFIED_MEMORY=1` can be used to enable unified memory in Linux. This allows swapping to system RAM instead of crashing when the GPU VRAM is exhausted.
+
+## HIP
+
+This provides GPU acceleration on HIP-supported AMD GPUs.
+Make sure to have ROCm installed.
+You can download it from your Linux distro's package manager or from here: [ROCm Quick Start (Linux)](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/tutorial/quick-start.html#rocm-install-quick).
+
+- Using `CMake` for Linux (assuming a gfx1030-compatible AMD GPU):
+  ```bash
+  HIPCXX="$(hipconfig -l)/clang" HIP_PATH="$(hipconfig -R)" \
+      cmake -S . -B build -DGGML_HIP=ON -DAMDGPU_TARGETS=gfx1030 -DCMAKE_BUILD_TYPE=Release \
+      && cmake --build build --config Release -- -j 16
+  ```
+
+  To enhance flash attention performance on RDNA3+ or CDNA architectures, you can utilize the rocWMMA library by enabling the `-DGGML_HIP_ROCWMMA_FATTN=ON` option. This requires rocWMMA headers to be installed on the build system.
+
+  The rocWMMA library is included by default when installing the ROCm SDK using the `rocm` meta package provided by AMD. Alternatively, if you are not using the meta package, you can install the library using the `rocwmma-dev` or `rocwmma-devel` package, depending on your system's package manager.
+
+  As an alternative, you can manually install the library by cloning it from the official [GitHub repository](https://github.com/ROCm/rocWMMA), checkout the corresponding version tag (e.g. `rocm-6.2.4`) and set `-DCMAKE_CXX_FLAGS="-I<path/to/rocwmma>/library/include/"` in CMake. This also works under Windows despite not officially supported by AMD.
+
+  Note that if you get the following error:
+  ```
+  clang: error: cannot find ROCm device library; provide its path via '--rocm-path' or '--rocm-device-lib-path', or pass '-nogpulib' to build without ROCm device library
+  ```
+  Try searching for a directory under `HIP_PATH` that contains the file
+  `oclc_abi_version_400.bc`. Then, add the following to the start of the
+  command: `HIP_DEVICE_LIB_PATH=<directory-you-just-found>`, so something
+  like:
+  ```bash
+  HIPCXX="$(hipconfig -l)/clang" HIP_PATH="$(hipconfig -p)" \
+  HIP_DEVICE_LIB_PATH=<directory-you-just-found> \
+      cmake -S . -B build -DGGML_HIP=ON -DAMDGPU_TARGETS=gfx1030 -DCMAKE_BUILD_TYPE=Release \
+      && cmake --build build -- -j 16
+  ```
+
+- Using `CMake` for Windows (using x64 Native Tools Command Prompt for VS, and assuming a gfx1100-compatible AMD GPU):
+  ```bash
+  set PATH=%HIP_PATH%\bin;%PATH%
+  cmake -S . -B build -G Ninja -DAMDGPU_TARGETS=gfx1100 -DGGML_HIP=ON -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Release
+  cmake --build build
+  ```
+  Make sure that `AMDGPU_TARGETS` is set to the GPU arch you want to compile for. The above example uses `gfx1100` that corresponds to Radeon RX 7900XTX/XT/GRE. You can find a list of targets [here](https://llvm.org/docs/AMDGPUUsage.html#processors)
+  Find your gpu version string by matching the most significant version information from `rocminfo | grep gfx | head -1 | awk '{print $2}'` with the list of processors, e.g. `gfx1035` maps to `gfx1030`.
+
+
+The environment variable [`HIP_VISIBLE_DEVICES`](https://rocm.docs.amd.com/en/latest/understand/gpu_isolation.html#hip-visible-devices) can be used to specify which GPU(s) will be used.
+If your GPU is not officially supported you can use the environment variable [`HSA_OVERRIDE_GFX_VERSION`] set to a similar GPU, for example 10.3.0 on RDNA2 (e.g. gfx1030, gfx1031, or gfx1035) or 11.0.0 on RDNA3.
+
+### Unified Memory
+
+On Linux it is possible to use unified memory architecture (UMA) to share main memory between the CPU and integrated GPU by setting environment variable `GGML_CUDA_ENABLE_UNIFIED_MEMORY=1`. However, this hurts performance for non-integrated GPUs (but enables working with integrated GPUs).
+
+## Vulkan
+
+**Windows**
+
+### w64devkit
+
+Download and extract [`w64devkit`](https://github.com/skeeto/w64devkit/releases).
+
+Download and install the [`Vulkan SDK`](https://vulkan.lunarg.com/sdk/home#windows) with the default settings.
+
+Launch `w64devkit.exe` and run the following commands to copy Vulkan dependencies:
+```sh
+SDK_VERSION=1.3.283.0
+cp /VulkanSDK/$SDK_VERSION/Bin/glslc.exe $W64DEVKIT_HOME/bin/
+cp /VulkanSDK/$SDK_VERSION/Lib/vulkan-1.lib $W64DEVKIT_HOME/x86_64-w64-mingw32/lib/
+cp -r /VulkanSDK/$SDK_VERSION/Include/* $W64DEVKIT_HOME/x86_64-w64-mingw32/include/
+cat > $W64DEVKIT_HOME/x86_64-w64-mingw32/lib/pkgconfig/vulkan.pc <<EOF
+Name: Vulkan-Loader
+Description: Vulkan Loader
+Version: $SDK_VERSION
+Libs: -lvulkan-1
+EOF
+
+```
+
+Switch into the `llama.cpp` directory and build using CMake.
+```sh
+cmake -B build -DGGML_VULKAN=ON
+cmake --build build --config Release
+```
+
+### Git Bash MINGW64
+
+Download and install [`Git-SCM`](https://git-scm.com/downloads/win) with the default settings
+
+Download and install [`Visual Studio Community Edition`](https://visualstudio.microsoft.com/) and make sure you select `C++`
+
+Download and install [`CMake`](https://cmake.org/download/) with the default settings
+
+Download and install the [`Vulkan SDK`](https://vulkan.lunarg.com/sdk/home#windows) with the default settings.
+
+Go into your `llama.cpp` directory and right click, select `Open Git Bash Here` and then run the following commands
+
+```
+cmake -B build -DGGML_VULKAN=ON
+cmake --build build --config Release
+```
+
+Now you can load the model in conversation mode using `Vulkan`
+
+```sh
+build/bin/Release/llama-cli -m "[PATH TO MODEL]" -ngl 100 -c 16384 -t 10 -n -2 -cnv
+```
+
+### MSYS2
+Install [MSYS2](https://www.msys2.org/) and then run the following commands in a UCRT terminal to install dependencies.
+```sh
+pacman -S git \
+    mingw-w64-ucrt-x86_64-gcc \
+    mingw-w64-ucrt-x86_64-cmake \
+    mingw-w64-ucrt-x86_64-vulkan-devel \
+    mingw-w64-ucrt-x86_64-shaderc
+```
+
+Switch into the `llama.cpp` directory and build using CMake.
+```sh
+cmake -B build -DGGML_VULKAN=ON
+cmake --build build --config Release
+```
+
+**With docker**:
+
+You don't need to install Vulkan SDK. It will be installed inside the container.
+
+```sh
+# Build the image
+docker build -t llama-cpp-vulkan --target light -f .devops/vulkan.Dockerfile .
+
+# Then, use it:
+docker run -it --rm -v "$(pwd):/app:Z" --device /dev/dri/renderD128:/dev/dri/renderD128 --device /dev/dri/card1:/dev/dri/card1 llama-cpp-vulkan -m "/app/models/YOUR_MODEL_FILE" -p "Building a website can be done in 10 simple steps:" -n 400 -e -ngl 33
+```
+
+**Without docker**:
+
+Firstly, you need to make sure you have installed [Vulkan SDK](https://vulkan.lunarg.com/doc/view/latest/linux/getting_started_ubuntu.html)
+
+For example, on Ubuntu 22.04 (jammy), use the command below:
+
+```bash
+wget -qO - https://packages.lunarg.com/lunarg-signing-key-pub.asc | apt-key add -
+wget -qO /etc/apt/sources.list.d/lunarg-vulkan-jammy.list https://packages.lunarg.com/vulkan/lunarg-vulkan-jammy.list
+apt update -y
+apt-get install -y vulkan-sdk
+# To verify the installation, use the command below:
+vulkaninfo
+```
+
+Alternatively your package manager might be able to provide the appropriate libraries.
+For example for Ubuntu 22.04 you can install `libvulkan-dev` instead.
+For Fedora 40, you can install `vulkan-devel`, `glslc` and `glslang` packages.
+
+Then, build llama.cpp using the cmake command below:
+
+```bash
+cmake -B build -DGGML_VULKAN=1
+cmake --build build --config Release
+# Test the output binary (with "-ngl 33" to offload all layers to GPU)
+./bin/llama-cli -m "PATH_TO_MODEL" -p "Hi you how are you" -n 50 -e -ngl 33 -t 4
+
+# You should see in the output, ggml_vulkan detected your GPU. For example:
+# ggml_vulkan: Using Intel(R) Graphics (ADL GT2) | uma: 1 | fp16: 1 | warp size: 32
+```
+
+## CANN
+This provides NPU acceleration using the AI cores of your Ascend NPU. And [CANN](https://www.hiascend.com/en/software/cann) is a hierarchical APIs to help you to quickly build AI applications and service based on Ascend NPU.
+
+For more information about Ascend NPU in [Ascend Community](https://www.hiascend.com/en/).
+
+Make sure to have the CANN toolkit installed. You can download it from here: [CANN Toolkit](https://www.hiascend.com/developer/download/community/result?module=cann)
+
+Go to `llama.cpp` directory and build using CMake.
+```bash
+cmake -B build -DGGML_CANN=on -DCMAKE_BUILD_TYPE=release
+cmake --build build --config release
+```
+
+You can test with:
+
+```bash
+./build/bin/llama-cli -m PATH_TO_MODEL -p "Building a website can be done in 10 steps:" -ngl 32
+```
+
+If the following info is output on screen, you are using `llama.cpp` with the CANN backend:
+```bash
+llm_load_tensors:       CANN model buffer size = 13313.00 MiB
+llama_new_context_with_model:       CANN compute buffer size =  1260.81 MiB
+```
+
+For detailed info, such as model/device supports, CANN install, please refer to [llama.cpp for CANN](./backend/CANN.md).
+
+## Arm® KleidiAI™
+KleidiAI is a library of optimized microkernels for AI workloads, specifically designed for Arm CPUs. These microkernels enhance performance and can be enabled for use by the CPU backend.
+
+To enable KleidiAI, go to the llama.cpp directory and build using CMake
+```bash
+cmake -B build -DGGML_CPU_KLEIDIAI=ON
+cmake --build build --config Release
+```
+You can verify that KleidiAI is being used by running
+```bash
+./build/bin/llama-cli -m PATH_TO_MODEL -p "What is a car?"
+```
+If KleidiAI is enabled, the ouput will contain a line similar to:
+```
+load_tensors: CPU_KLEIDIAI model buffer size =  3474.00 MiB
+```
+KleidiAI's microkernels implement optimized tensor operations using Arm CPU features such as dotprod, int8mm and SME. llama.cpp selects the most efficient kernel based on runtime CPU feature detection. However, on platforms that support SME, you must manually enable SME microkernels by setting the environment variable `GGML_KLEIDIAI_SME=1`.
+
+Depending on your build target, other higher priority backends may be enabled by default. To ensure the CPU backend is used, you must disable the higher priority backends either at compile time, e.g. -DGGML_METAL=OFF, or during run-time using the command line option `--device none`.
+
+## OpenCL
+
+This provides GPU acceleration through OpenCL on recent Adreno GPU.
+More information about OpenCL backend can be found in [OPENCL.md](./backend/OPENCL.md) for more information.
+
+### Android
+
+Assume NDK is available in `$ANDROID_NDK`. First, install OpenCL headers and ICD loader library if not available,
+
+```sh
+mkdir -p ~/dev/llm
+cd ~/dev/llm
+
+git clone https://github.com/KhronosGroup/OpenCL-Headers && \
+cd OpenCL-Headers && \
+cp -r CL $ANDROID_NDK/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include
+
+cd ~/dev/llm
+
+git clone https://github.com/KhronosGroup/OpenCL-ICD-Loader && \
+cd OpenCL-ICD-Loader && \
+mkdir build_ndk && cd build_ndk && \
+cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
+  -DOPENCL_ICD_LOADER_HEADERS_DIR=$ANDROID_NDK/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include \
+  -DANDROID_ABI=arm64-v8a \
+  -DANDROID_PLATFORM=24 \
+  -DANDROID_STL=c++_shared && \
+ninja && \
+cp libOpenCL.so $ANDROID_NDK/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android
+```
+
+Then build llama.cpp with OpenCL enabled,
+
+```sh
+cd ~/dev/llm
+
+git clone https://github.com/ggml-org/llama.cpp && \
+cd llama.cpp && \
+mkdir build-android && cd build-android
+
+cmake .. -G Ninja \
+  -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
+  -DANDROID_ABI=arm64-v8a \
+  -DANDROID_PLATFORM=android-28 \
+  -DBUILD_SHARED_LIBS=OFF \
+  -DGGML_OPENCL=ON
+
+ninja
+```
+
+### Windows Arm64
+
+First, install OpenCL headers and ICD loader library if not available,
+
+```powershell
+mkdir -p ~/dev/llm
+
+cd ~/dev/llm
+git clone https://github.com/KhronosGroup/OpenCL-Headers && cd OpenCL-Headers
+mkdir build && cd build
+cmake .. -G Ninja `
+  -DBUILD_TESTING=OFF `
+  -DOPENCL_HEADERS_BUILD_TESTING=OFF `
+  -DOPENCL_HEADERS_BUILD_CXX_TESTS=OFF `
+  -DCMAKE_INSTALL_PREFIX="$HOME/dev/llm/opencl"
+cmake --build . --target install
+
+cd ~/dev/llm
+git clone https://github.com/KhronosGroup/OpenCL-ICD-Loader && cd OpenCL-ICD-Loader
+mkdir build && cd build
+cmake .. -G Ninja `
+  -DCMAKE_BUILD_TYPE=Release `
+  -DCMAKE_PREFIX_PATH="$HOME/dev/llm/opencl" `
+  -DCMAKE_INSTALL_PREFIX="$HOME/dev/llm/opencl"
+cmake --build . --target install
+```
+
+Then build llama.cpp with OpenCL enabled,
+
+```powershell
+cmake .. -G Ninja `
+  -DCMAKE_TOOLCHAIN_FILE="$HOME/dev/llm/llama.cpp/cmake/arm64-windows-llvm.cmake" `
+  -DCMAKE_BUILD_TYPE=Release `
+  -DCMAKE_PREFIX_PATH="$HOME/dev/llm/opencl" `
+  -DBUILD_SHARED_LIBS=OFF `
+  -DGGML_OPENCL=ON
+ninja
+```
+
+## Android
+
+To read documentation for how to build on Android, [click here](./android.md)
+
+## IBM Z & LinuxONE
+
+To read documentation for how to build on IBM Z & LinuxONE, [click here](./build-s390x.md)
+
+## Notes about GPU-accelerated backends
+
+The GPU may still be used to accelerate some parts of the computation even when using the `-ngl 0` option. You can fully disable GPU acceleration by using `--device none`.
+
+In most cases, it is possible to build and use multiple backends at the same time. For example, you can build llama.cpp with both CUDA and Vulkan support by using the `-DGGML_CUDA=ON -DGGML_VULKAN=ON` options with CMake. At runtime, you can specify which backend devices to use with the `--device` option. To see a list of available devices, use the `--list-devices` option.
+
+Backends can be built as dynamic libraries that can be loaded dynamically at runtime. This allows you to use the same llama.cpp binary on different machines with different GPUs. To enable this feature, use the `GGML_BACKEND_DL` option when building.
+
+
+## Archivo: function-calling.md
+Contenido:
+# Function Calling
+
+[chat.h](../common/chat.h) (https://github.com/ggml-org/llama.cpp/pull/9639) adds support for [OpenAI-style function calling](https://platform.openai.com/docs/guides/function-calling) and is used in:
+- `llama-server` when started w/ `--jinja` flag
+
+## Universal support w/ Native & Generic handlers
+
+Function calling is supported for all models (see https://github.com/ggml-org/llama.cpp/pull/9639):
+
+- Native tool call formats supported:
+  - Llama 3.1 / 3.3 (including builtin tools support - tool names for `wolfram_alpha`, `web_search` / `brave_search`, `code_interpreter`), Llama 3.2
+  - Functionary v3.1 / v3.2
+  - Hermes 2/3, Qwen 2.5
+  - Qwen 2.5 Coder
+  - Mistral Nemo
+  - Firefunction v2
+  - Command R7B
+  - DeepSeek R1 (WIP / seems reluctant to call any tools?)
+
+- Generic tool call is supported when the template isn't recognized by native format handlers (you'll see `Chat format: Generic` in the logs).
+  - Use `--chat-template-file` to override the template when appropriate (see examples below)
+  - Generic support may consume more tokens and be less efficient than a model's native format.
+
+<details>
+<summary>Show some common templates and which format handler they use</summary>
+
+| Template | Format |
+|----------|--------|
+| Almawave-Velvet-14B.jinja | Hermes 2 Pro |
+| AtlaAI-Selene-1-Mini-Llama-3.1-8B.jinja | Llama 3.x |
+| CohereForAI-aya-expanse-8b.jinja | Generic |
+| CohereForAI-c4ai-command-r-plus-default.jinja | Generic |
+| CohereForAI-c4ai-command-r-plus-rag.jinja | Generic |
+| CohereForAI-c4ai-command-r-plus-tool_use.jinja | Generic |
+| CohereForAI-c4ai-command-r7b-12-2024-default.jinja | Command R7B (extract reasoning) |
+| CohereForAI-c4ai-command-r7b-12-2024-rag.jinja | Command R7B (extract reasoning) |
+| CohereForAI-c4ai-command-r7b-12-2024-tool_use.jinja | Command R7B (extract reasoning) |
+| CohereForAI-c4ai-command-r7b-12-2024.jinja | Generic |
+| DavieLion-Llama-3.2-1B-SPIN-iter3.jinja | Generic |
+| Delta-Vector-Rei-12B.jinja | Mistral Nemo |
+| EpistemeAI-Mistral-Nemo-Instruct-12B-Philosophy-Math.jinja | Mistral Nemo |
+| FlofloB-83k_continued_pretraining_Qwen2.5-0.5B-Instruct_Unsloth_merged_16bit.jinja | Hermes 2 Pro |
+| FlofloB-test_continued_pretraining_Phi-3-mini-4k-instruct_Unsloth_merged_16bit.jinja | Generic |
+| HelpingAI-HAI-SER.jinja | Generic |
+| HuggingFaceTB-SmolLM2-1.7B-Instruct.jinja | Generic |
+| HuggingFaceTB-SmolLM2-135M-Instruct.jinja | Generic |
+| HuggingFaceTB-SmolLM2-360M-Instruct.jinja | Generic |
+| INSAIT-Institute-BgGPT-Gemma-2-27B-IT-v1.0.jinja | Generic |
+| Ihor-Text2Graph-R1-Qwen2.5-0.5b.jinja | Hermes 2 Pro |
+| Infinigence-Megrez-3B-Instruct.jinja | Generic |
+| Josephgflowers-TinyLlama_v1.1_math_code-world-test-1.jinja | Generic |
+| LGAI-EXAONE-EXAONE-3.5-2.4B-Instruct.jinja | Generic |
+| LGAI-EXAONE-EXAONE-3.5-7.8B-Instruct.jinja | Generic |
+| LatitudeGames-Wayfarer-12B.jinja | Generic |
+| Magpie-Align-Llama-3-8B-Magpie-Align-v0.1.jinja | Generic |
+| Magpie-Align-Llama-3.1-8B-Magpie-Align-v0.1.jinja | Generic |
+| MaziyarPanahi-calme-3.2-instruct-78b.jinja | Generic |
+| MiniMaxAI-MiniMax-Text-01.jinja | Generic |
+| MiniMaxAI-MiniMax-VL-01.jinja | Generic |
+| NaniDAO-deepseek-r1-qwen-2.5-32B-ablated.jinja | DeepSeek R1 (extract reasoning) |
+| NexaAIDev-Octopus-v2.jinja | Generic |
+| NousResearch-Hermes-2-Pro-Llama-3-8B-default.jinja | Generic |
+| NousResearch-Hermes-2-Pro-Llama-3-8B-tool_use.jinja | Hermes 2 Pro |
+| NousResearch-Hermes-2-Pro-Mistral-7B-default.jinja | Generic |
+| NousResearch-Hermes-2-Pro-Mistral-7B-tool_use.jinja | Hermes 2 Pro |
+| NousResearch-Hermes-3-Llama-3.1-70B-default.jinja | Generic |
+| NousResearch-Hermes-3-Llama-3.1-70B-tool_use.jinja | Hermes 2 Pro |
+| NovaSky-AI-Sky-T1-32B-Flash.jinja | Hermes 2 Pro |
+| NovaSky-AI-Sky-T1-32B-Preview.jinja | Hermes 2 Pro |
+| OnlyCheeini-greesychat-turbo.jinja | Generic |
+| Orenguteng-Llama-3.1-8B-Lexi-Uncensored-V2.jinja | Llama 3.x |
+| OrionStarAI-Orion-14B-Chat.jinja | Generic |
+| PowerInfer-SmallThinker-3B-Preview.jinja | Generic |
+| PrimeIntellect-INTELLECT-1-Instruct.jinja | Generic |
+| Qwen-QVQ-72B-Preview.jinja | Generic |
+| Qwen-QwQ-32B-Preview.jinja | Hermes 2 Pro |
+| Qwen-Qwen1.5-7B-Chat.jinja | Generic |
+| Qwen-Qwen2-7B-Instruct.jinja | Generic |
+| Qwen-Qwen2-VL-72B-Instruct.jinja | Generic |
+| Qwen-Qwen2-VL-7B-Instruct.jinja | Generic |
+| Qwen-Qwen2.5-0.5B.jinja | Hermes 2 Pro |
+| Qwen-Qwen2.5-1.5B-Instruct.jinja | Hermes 2 Pro |
+| Qwen-Qwen2.5-14B-Instruct-1M.jinja | Hermes 2 Pro |
+| Qwen-Qwen2.5-14B.jinja | Hermes 2 Pro |
+| Qwen-Qwen2.5-32B-Instruct.jinja | Hermes 2 Pro |
+| Qwen-Qwen2.5-32B.jinja | Hermes 2 Pro |
+| Qwen-Qwen2.5-3B-Instruct.jinja | Hermes 2 Pro |
+| Qwen-Qwen2.5-72B-Instruct.jinja | Hermes 2 Pro |
+| Qwen-Qwen2.5-7B-Instruct-1M.jinja | Hermes 2 Pro |
+| Qwen-Qwen2.5-7B-Instruct.jinja | Hermes 2 Pro |
+| Qwen-Qwen2.5-7B.jinja | Hermes 2 Pro |
+| Qwen-Qwen2.5-Coder-32B-Instruct.jinja | Hermes 2 Pro |
+| Qwen-Qwen2.5-Coder-7B-Instruct.jinja | Hermes 2 Pro |
+| Qwen-Qwen2.5-Math-1.5B.jinja | Hermes 2 Pro |
+| Qwen-Qwen2.5-Math-7B-Instruct.jinja | Hermes 2 Pro |
+| Qwen-Qwen2.5-VL-3B-Instruct.jinja | Hermes 2 Pro |
+| Qwen-Qwen2.5-VL-72B-Instruct.jinja | Hermes 2 Pro |
+| Qwen-Qwen2.5-VL-7B-Instruct.jinja | Hermes 2 Pro |
+| RWKV-Red-Team-ARWKV-7B-Preview-0.1.jinja | Hermes 2 Pro |
+| SakanaAI-TinySwallow-1.5B-Instruct.jinja | Hermes 2 Pro |
+| SakanaAI-TinySwallow-1.5B.jinja | Hermes 2 Pro |
+| Sao10K-70B-L3.3-Cirrus-x1.jinja | Llama 3.x |
+| SentientAGI-Dobby-Mini-Leashed-Llama-3.1-8B.jinja | Llama 3.x |
+| SentientAGI-Dobby-Mini-Unhinged-Llama-3.1-8B.jinja | Llama 3.x |
+| Steelskull-L3.3-Damascus-R1.jinja | Llama 3.x |
+| Steelskull-L3.3-MS-Nevoria-70b.jinja | Llama 3.x |
+| Steelskull-L3.3-Nevoria-R1-70b.jinja | Llama 3.x |
+| THUDM-glm-4-9b-chat.jinja | Generic |
+| THUDM-glm-edge-1.5b-chat.jinja | Generic |
+| Tarek07-Progenitor-V1.1-LLaMa-70B.jinja | Llama 3.x |
+| TheBloke-FusionNet_34Bx2_MoE-AWQ.jinja | Generic |
+| TinyLlama-TinyLlama-1.1B-Chat-v1.0.jinja | Generic |
+| UCLA-AGI-Mistral7B-PairRM-SPPO-Iter3.jinja | Generic |
+| ValiantLabs-Llama3.1-8B-Enigma.jinja | Llama 3.x |
+| abacusai-Fewshot-Metamath-OrcaVicuna-Mistral.jinja | Generic |
+| ai21labs-AI21-Jamba-1.5-Large.jinja | Generic |
+| allenai-Llama-3.1-Tulu-3-405B-SFT.jinja | Generic |
+| allenai-Llama-3.1-Tulu-3-405B.jinja | Generic |
+| allenai-Llama-3.1-Tulu-3-8B.jinja | Generic |
+| arcee-ai-Virtuoso-Lite.jinja | Hermes 2 Pro |
+| arcee-ai-Virtuoso-Medium-v2.jinja | Hermes 2 Pro |
+| arcee-ai-Virtuoso-Small-v2.jinja | Hermes 2 Pro |
+| avemio-GRAG-NEMO-12B-ORPO-HESSIAN-AI.jinja | Generic |
+| bespokelabs-Bespoke-Stratos-7B.jinja | Hermes 2 Pro |
+| bfuzzy1-acheron-m1a-llama.jinja | Generic |
+| bofenghuang-vigogne-2-70b-chat.jinja | Generic |
+| bytedance-research-UI-TARS-72B-DPO.jinja | Generic |
+| bytedance-research-UI-TARS-7B-DPO.jinja | Generic |
+| bytedance-research-UI-TARS-7B-SFT.jinja | Generic |
+| carsenk-phi3.5_mini_exp_825_uncensored.jinja | Generic |
+| cyberagent-DeepSeek-R1-Distill-Qwen-14B-Japanese.jinja | DeepSeek R1 (extract reasoning) |
+| cyberagent-DeepSeek-R1-Distill-Qwen-32B-Japanese.jinja | DeepSeek R1 (extract reasoning) |
+| databricks-dbrx-instruct.jinja | Generic |
+| deepseek-ai-DeepSeek-Coder-V2-Instruct.jinja | Generic |
+| deepseek-ai-DeepSeek-Coder-V2-Lite-Base.jinja | Generic |
+| deepseek-ai-DeepSeek-Coder-V2-Lite-Instruct.jinja | Generic |
+| deepseek-ai-DeepSeek-R1-Distill-Llama-70B.jinja | DeepSeek R1 (extract reasoning) |
+| deepseek-ai-DeepSeek-R1-Distill-Llama-8B.jinja | DeepSeek R1 (extract reasoning) |
+| deepseek-ai-DeepSeek-R1-Distill-Qwen-1.5B.jinja | DeepSeek R1 (extract reasoning) |
+| deepseek-ai-DeepSeek-R1-Distill-Qwen-14B.jinja | DeepSeek R1 (extract reasoning) |
+| deepseek-ai-DeepSeek-R1-Distill-Qwen-32B.jinja | DeepSeek R1 (extract reasoning) |
+| deepseek-ai-DeepSeek-R1-Distill-Qwen-7B.jinja | DeepSeek R1 (extract reasoning) |
+| deepseek-ai-DeepSeek-R1-Zero.jinja | DeepSeek R1 (extract reasoning) |
+| deepseek-ai-DeepSeek-R1.jinja | DeepSeek R1 (extract reasoning) |
+| deepseek-ai-DeepSeek-V2-Lite.jinja | Generic |
+| deepseek-ai-DeepSeek-V2.5.jinja | DeepSeek R1 (extract reasoning) |
+| deepseek-ai-DeepSeek-V3.jinja | DeepSeek R1 (extract reasoning) |
+| deepseek-ai-deepseek-coder-33b-instruct.jinja | Generic |
+| deepseek-ai-deepseek-coder-6.7b-instruct.jinja | Generic |
+| deepseek-ai-deepseek-coder-7b-instruct-v1.5.jinja | Generic |
+| deepseek-ai-deepseek-llm-67b-chat.jinja | Generic |
+| deepseek-ai-deepseek-llm-7b-chat.jinja | Generic |
+| dicta-il-dictalm2.0-instruct.jinja | Generic |
+| ehristoforu-Falcon3-8B-Franken-Basestruct.jinja | Hermes 2 Pro |
+| fireworks-ai-llama-3-firefunction-v2.jinja | FireFunction v2 |
+| godlikehhd-alpaca_data_sampled_ifd_new_5200.jinja | Hermes 2 Pro |
+| godlikehhd-alpaca_data_score_max_0.7_2600.jinja | Hermes 2 Pro |
+| google-gemma-2-27b-it.jinja | Generic |
+| google-gemma-2-2b-it.jinja | Generic |
+| google-gemma-2-2b-jpn-it.jinja | Generic |
+| google-gemma-7b-it.jinja | Generic |
+| huihui-ai-DeepSeek-R1-Distill-Llama-70B-abliterated.jinja | DeepSeek R1 (extract reasoning) |
+| huihui-ai-DeepSeek-R1-Distill-Llama-8B-abliterated.jinja | DeepSeek R1 (extract reasoning) |
+| huihui-ai-DeepSeek-R1-Distill-Qwen-14B-abliterated-v2.jinja | DeepSeek R1 (extract reasoning) |
+| huihui-ai-DeepSeek-R1-Distill-Qwen-32B-abliterated.jinja | DeepSeek R1 (extract reasoning) |
+| huihui-ai-DeepSeek-R1-Distill-Qwen-7B-abliterated-v2.jinja | DeepSeek R1 (extract reasoning) |
+| huihui-ai-Qwen2.5-14B-Instruct-1M-abliterated.jinja | Hermes 2 Pro |
+| ibm-granite-granite-3.1-8b-instruct.jinja | Generic |
+| indischepartij-MiniCPM-3B-OpenHermes-2.5-v2.jinja | Generic |
+| inflatebot-MN-12B-Mag-Mell-R1.jinja | Generic |
+| jinaai-ReaderLM-v2.jinja | Generic |
+| kms7530-chemeng_qwen-math-7b_24_1_100_1_nonmath.jinja | Hermes 2 Pro |
+| knifeayumu-Cydonia-v1.3-Magnum-v4-22B.jinja | Mistral Nemo |
+| langgptai-qwen1.5-7b-chat-sa-v0.1.jinja | Generic |
+| lightblue-DeepSeek-R1-Distill-Qwen-7B-Japanese.jinja | DeepSeek R1 (extract reasoning) |
+| mattshumer-Reflection-Llama-3.1-70B.jinja | Generic |
+| meetkai-functionary-medium-v3.1.jinja | Functionary v3.1 Llama 3.1 |
+| meetkai-functionary-medium-v3.2.jinja | Functionary v3.2 |
+| meta-llama-Llama-2-7b-chat-hf.jinja | Generic |
+| meta-llama-Llama-3.1-8B-Instruct.jinja | Llama 3.x |
+| meta-llama-Llama-3.2-11B-Vision-Instruct.jinja | Llama 3.x |
+| meta-llama-Llama-3.2-1B-Instruct.jinja | Llama 3.x |
+| meta-llama-Llama-3.2-3B-Instruct.jinja | Llama 3.x |
+| meta-llama-Llama-3.3-70B-Instruct.jinja | Llama 3.x |
+| meta-llama-Meta-Llama-3-8B-Instruct.jinja | Generic |
+| meta-llama-Meta-Llama-3.1-8B-Instruct.jinja | Llama 3.x |
+| microsoft-Phi-3-medium-4k-instruct.jinja | Generic |
+| microsoft-Phi-3-mini-4k-instruct.jinja | Generic |
+| microsoft-Phi-3-small-8k-instruct.jinja | Generic |
+| microsoft-Phi-3.5-mini-instruct.jinja | Generic |
+| microsoft-Phi-3.5-vision-instruct.jinja | Generic |
+| microsoft-phi-4.jinja | Generic |
+| migtissera-Tess-3-Mistral-Nemo-12B.jinja | Generic |
+| ministral-Ministral-3b-instruct.jinja | Generic |
+| mistralai-Codestral-22B-v0.1.jinja | Generic |
+| mistralai-Mistral-7B-Instruct-v0.1.jinja | Generic |
+| mistralai-Mistral-7B-Instruct-v0.2.jinja | Generic |
+| mistralai-Mistral-7B-Instruct-v0.3.jinja | Mistral Nemo |
+| mistralai-Mistral-Large-Instruct-2407.jinja | Mistral Nemo |
+| mistralai-Mistral-Large-Instruct-2411.jinja | Generic |
+| mistralai-Mistral-Nemo-Instruct-2407.jinja | Mistral Nemo |
+| mistralai-Mistral-Small-24B-Instruct-2501.jinja | Generic |
+| mistralai-Mixtral-8x7B-Instruct-v0.1.jinja | Generic |
+| mkurman-Qwen2.5-14B-DeepSeek-R1-1M.jinja | Hermes 2 Pro |
+| mlabonne-AlphaMonarch-7B.jinja | Generic |
+| mlx-community-Josiefied-Qwen2.5-0.5B-Instruct-abliterated-v1-float32.jinja | Hermes 2 Pro |
+| mlx-community-Qwen2.5-VL-7B-Instruct-8bit.jinja | Hermes 2 Pro |
+| mobiuslabsgmbh-DeepSeek-R1-ReDistill-Qwen-1.5B-v1.1.jinja | DeepSeek R1 (extract reasoning) |
+| netcat420-MFANNv0.20.jinja | Generic |
+| netcat420-MFANNv0.24.jinja | Generic |
+| netease-youdao-Confucius-o1-14B.jinja | Hermes 2 Pro |
+| nvidia-AceMath-7B-RM.jinja | Hermes 2 Pro |
+| nvidia-Eagle2-1B.jinja | Hermes 2 Pro |
+| nvidia-Eagle2-9B.jinja | Hermes 2 Pro |
+| nvidia-Llama-3.1-Nemotron-70B-Instruct-HF.jinja | Llama 3.x |
+| onnx-community-DeepSeek-R1-Distill-Qwen-1.5B-ONNX.jinja | DeepSeek R1 (extract reasoning) |
+| open-thoughts-OpenThinker-7B.jinja | Hermes 2 Pro |
+| openchat-openchat-3.5-0106.jinja | Generic |
+| pankajmathur-orca_mini_v6_8b.jinja | Generic |
+| princeton-nlp-Mistral-7B-Base-SFT-RDPO.jinja | Generic |
+| princeton-nlp-Mistral-7B-Instruct-DPO.jinja | Generic |
+| princeton-nlp-Mistral-7B-Instruct-RDPO.jinja | Generic |
+| prithivMLmods-Bellatrix-Tiny-1.5B-R1.jinja | Hermes 2 Pro |
+| prithivMLmods-Bellatrix-Tiny-1B-R1.jinja | Llama 3.x |
+| prithivMLmods-Bellatrix-Tiny-1B-v3.jinja | Generic |
+| prithivMLmods-Bellatrix-Tiny-3B-R1.jinja | Llama 3.x |
+| prithivMLmods-Blaze-14B-xElite.jinja | Generic |
+| prithivMLmods-Calcium-Opus-14B-Elite2-R1.jinja | Hermes 2 Pro |
+| prithivMLmods-Calme-Ties-78B.jinja | Generic |
+| prithivMLmods-Calme-Ties2-78B.jinja | Generic |
+| prithivMLmods-Calme-Ties3-78B.jinja | Generic |
+| prithivMLmods-ChemQwen2-vL.jinja | Generic |
+| prithivMLmods-GWQ2b.jinja | Generic |
+| prithivMLmods-LatexMind-2B-Codec.jinja | Generic |
+| prithivMLmods-Llama-3.2-6B-AlgoCode.jinja | Llama 3.x |
+| prithivMLmods-Megatron-Opus-14B-Exp.jinja | Hermes 2 Pro |
+| prithivMLmods-Megatron-Opus-14B-Stock.jinja | Hermes 2 Pro |
+| prithivMLmods-Megatron-Opus-7B-Exp.jinja | Hermes 2 Pro |
+| prithivMLmods-Omni-Reasoner-Merged.jinja | Hermes 2 Pro |
+| prithivMLmods-Omni-Reasoner4-Merged.jinja | Hermes 2 Pro |
+| prithivMLmods-Primal-Opus-14B-Optimus-v1.jinja | Hermes 2 Pro |
+| prithivMLmods-QwQ-Math-IO-500M.jinja | Hermes 2 Pro |
+| prithivMLmods-Qwen-7B-Distill-Reasoner.jinja | DeepSeek R1 (extract reasoning) |
+| prithivMLmods-Qwen2.5-1.5B-DeepSeek-R1-Instruct.jinja | Hermes 2 Pro |
+| prithivMLmods-Qwen2.5-14B-DeepSeek-R1-1M.jinja | Hermes 2 Pro |
+| prithivMLmods-Qwen2.5-32B-DeepSeek-R1-Instruct.jinja | Hermes 2 Pro |
+| prithivMLmods-Qwen2.5-7B-DeepSeek-R1-1M.jinja | Hermes 2 Pro |
+| prithivMLmods-Triangulum-v2-10B.jinja | Hermes 2 Pro |
+| qingy2024-Falcon3-2x10B-MoE-Instruct.jinja | Hermes 2 Pro |
+| rubenroy-Zurich-14B-GCv2-5m.jinja | Hermes 2 Pro |
+| rubenroy-Zurich-7B-GCv2-5m.jinja | Hermes 2 Pro |
+| silma-ai-SILMA-Kashif-2B-Instruct-v1.0.jinja | Generic |
+| simplescaling-s1-32B.jinja | Hermes 2 Pro |
+| sometimesanotion-Lamarck-14B-v0.7.jinja | Hermes 2 Pro |
+| sonthenguyen-zephyr-sft-bnb-4bit-DPO-mtbr-180steps.jinja | Generic |
+| sthenno-tempesthenno-icy-0130.jinja | Generic |
+| sumink-qwft.jinja | Hermes 2 Pro |
+| teknium-OpenHermes-2.5-Mistral-7B.jinja | Generic |
+| thirdeyeai-elevate360m.jinja | Generic |
+| tiiuae-Falcon3-10B-Instruct.jinja | Hermes 2 Pro |
+| unsloth-DeepSeek-R1-Distill-Llama-8B-unsloth-bnb-4bit.jinja | DeepSeek R1 (extract reasoning) |
+| unsloth-DeepSeek-R1-Distill-Llama-8B.jinja | DeepSeek R1 (extract reasoning) |
+| unsloth-DeepSeek-R1.jinja | DeepSeek R1 (extract reasoning) |
+| unsloth-Mistral-Small-24B-Instruct-2501-unsloth-bnb-4bit.jinja | Generic |
+| upstage-solar-pro-preview-instruct.jinja | Generic |
+| whyhow-ai-PatientSeek.jinja | Generic |
+| xwen-team-Xwen-72B-Chat.jinja | Hermes 2 Pro |
+| xwen-team-Xwen-7B-Chat.jinja | Hermes 2 Pro |
+
+This table can be generated with:
+
+```bash
+./build/bin/test-chat ../minja/build/tests/*.jinja 2>/dev/null
+```
+
+</details>
+
+# Usage - need tool-aware Jinja template
+
+First, start a server with any model, but make sure it has a tools-enabled template: you can verify this by inspecting the `chat_template` or `chat_template_tool_use` properties in `http://localhost:8080/props`).
+
+Here are some models known to work (w/ chat template override when needed):
+
+```shell
+# Native support:
+
+llama-server --jinja -fa -hf bartowski/Qwen2.5-7B-Instruct-GGUF:Q4_K_M
+llama-server --jinja -fa -hf bartowski/Mistral-Nemo-Instruct-2407-GGUF:Q6_K_L
+llama-server --jinja -fa -hf bartowski/Llama-3.3-70B-Instruct-GGUF:Q4_K_M
+
+# Native support for DeepSeek R1 works best w/ our template override (official template is buggy, although we do work around it)
+
+llama-server --jinja -fa -hf bartowski/DeepSeek-R1-Distill-Qwen-7B-GGUF:Q6_K_L \
+    --chat-template-file models/templates/llama-cpp-deepseek-r1.jinja
+
+llama-server --jinja -fa -hf bartowski/DeepSeek-R1-Distill-Qwen-32B-GGUF:Q4_K_M \
+    --chat-template-file models/templates/llama-cpp-deepseek-r1.jinja
+
+# Native support requires the right template for these GGUFs:
+
+llama-server --jinja -fa -hf bartowski/functionary-small-v3.2-GGUF:Q4_K_M
+    --chat-template-file models/templates/meetkai-functionary-medium-v3.2.jinja
+
+llama-server --jinja -fa -hf bartowski/Hermes-2-Pro-Llama-3-8B-GGUF:Q4_K_M \
+    --chat-template-file models/templates/NousResearch-Hermes-2-Pro-Llama-3-8B-tool_use.jinja
+
+llama-server --jinja -fa -hf bartowski/Hermes-3-Llama-3.1-8B-GGUF:Q4_K_M \
+    --chat-template-file models/templates/NousResearch-Hermes-3-Llama-3.1-8B-tool_use.jinja
+
+llama-server --jinja -fa -hf bartowski/firefunction-v2-GGUF -hff firefunction-v2-IQ1_M.gguf \
+    --chat-template-file models/templates/fireworks-ai-llama-3-firefunction-v2.jinja
+
+llama-server --jinja -fa -hf bartowski/c4ai-command-r7b-12-2024-GGUF:Q6_K_L \
+    --chat-template-file models/templates/CohereForAI-c4ai-command-r7b-12-2024-tool_use.jinja
+
+# Generic format support
+llama-server --jinja -fa -hf bartowski/phi-4-GGUF:Q4_0
+llama-server --jinja -fa -hf bartowski/gemma-2-2b-it-GGUF:Q8_0
+llama-server --jinja -fa -hf bartowski/c4ai-command-r-v01-GGUF:Q2_K
+```
+
+To get the official template from original HuggingFace repos, you can use [scripts/get_chat_template.py](../scripts/get_chat_template.py) (see examples invocations in [models/templates/README.md](../models/templates/README.md))
+
+> [!TIP]
+> If there is no official `tool_use` Jinja template, you may want to set `--chat-template chatml` to use a default that works with many models (YMMV!), or write your own (e.g. we provide a custom [llama-cpp-deepseek-r1.jinja](../models/templates/llama-cpp-deepseek-r1.jinja) for DeepSeek R1 distills)
+
+> [!CAUTION]
+> Beware of extreme KV quantizations (e.g. `-ctk q4_0`), they can substantially degrade the model's tool calling performance.
+
+Test in CLI (or with any library / software that can use OpenAI-compatible API backends):
+
+```bash
+curl http://localhost:8080/v1/chat/completions -d '{
+    "model": "gpt-3.5-turbo",
+    "tools": [
+        {
+        "type":"function",
+        "function":{
+            "name":"python",
+            "description":"Runs code in an ipython interpreter and returns the result of the execution after 60 seconds.",
+            "parameters":{
+            "type":"object",
+            "properties":{
+                "code":{
+                "type":"string",
+                "description":"The code to run in the ipython interpreter."
+                }
+            },
+            "required":["code"]
+            }
+        }
+        }
+    ],
+    "messages": [
+        {
+        "role": "user",
+        "content": "Print a hello world message with python."
+        }
+    ]
+}'
+
+
+curl http://localhost:8080/v1/chat/completions -d '{
+    "model": "gpt-3.5-turbo",
+    "messages": [
+        {"role": "system", "content": "You are a chatbot that uses tools/functions. Dont overthink things."},
+        {"role": "user", "content": "What is the weather in Istanbul?"}
+    ],
+    "tools": [{
+        "type":"function",
+        "function":{
+            "name":"get_current_weather",
+            "description":"Get the current weather in a given location",
+            "parameters":{
+                "type":"object",
+                "properties":{
+                    "location":{
+                        "type":"string",
+                        "description":"The city and country/state, e.g. `San Francisco, CA`, or `Paris, France`"
+                    }
+                },
+                "required":["location"]
+            }
+        }
+    }]
+}'
+```
+
+<details>
+<summary>Show output</summary>
+
+```json
+{
+"choices": [
+    {
+    "finish_reason": "tool",
+    "index": 0,
+    "message": {
+        "content": null,
+        "tool_calls": [
+        {
+            "name": "python",
+            "arguments": "{\"code\":\" \\nprint(\\\"Hello, World!\\\")\"}"
+        }
+        ],
+        "role": "assistant"
+    }
+    }
+],
+"created": 1727287211,
+"model": "gpt-3.5-turbo",
+"object": "chat.completion",
+"usage": {
+    "completion_tokens": 16,
+    "prompt_tokens": 44,
+    "total_tokens": 60
+},
+"id": "chatcmpl-Htbgh9feMmGM0LEH2hmQvwsCxq3c6Ni8"
+}
+```
+
+</details>
+
+
+## Archivo: llguidance.md
+Contenido:
+# LLGuidance Support in llama.cpp
+
+[LLGuidance](https://github.com/guidance-ai/llguidance) is a library for constrained decoding (also called constrained sampling or structured outputs) for Large Language Models (LLMs). Initially developed as the backend for the [Guidance](https://github.com/guidance-ai/guidance) library, it can also be used independently.
+
+LLGuidance supports JSON Schemas and arbitrary context-free grammars (CFGs) written in a [variant](https://github.com/guidance-ai/llguidance/blob/main/docs/syntax.md) of Lark syntax. It is [very fast](https://github.com/guidance-ai/jsonschemabench/tree/main/maskbench) and has [excellent](https://github.com/guidance-ai/llguidance/blob/main/docs/json_schema.md) JSON Schema coverage but requires the Rust compiler, which complicates the llama.cpp build process.
+
+## Building
+
+To enable LLGuidance support, build llama.cpp with the `LLAMA_LLGUIDANCE` option:
+
+```sh
+cmake -B build -DLLAMA_LLGUIDANCE=ON
+make -C build -j
+```
+
+For Windows use `cmake --build build --config Release` instead of `make`.
+
+This requires the Rust compiler and the `cargo` tool to be [installed](https://www.rust-lang.org/tools/install).
+
+## Interface
+
+There are no new command-line arguments or modifications to `common_params`. When enabled, grammars starting with `%llguidance` are passed to LLGuidance instead of the [current](../grammars/README.md) llama.cpp grammars. Additionally, JSON Schema requests (e.g., using the `-j` argument in `llama-cli`) are also passed to LLGuidance.
+
+For your existing GBNF grammars, you can use [gbnf_to_lark.py script](https://github.com/guidance-ai/llguidance/blob/main/python/llguidance/gbnf_to_lark.py) to convert them to LLGuidance Lark-like format.
+
+## Performance
+
+Computing a "token mask" (i.e., the set of allowed tokens) for a llama3 tokenizer with 128k tokens takes, on average, 50μs of single-core CPU time for the [JSON Schema Bench](https://github.com/guidance-ai/jsonschemabench). The p99 time is 0.5ms, and the p100 time is 20ms. These results are due to the lexer/parser split and several [optimizations](https://github.com/guidance-ai/llguidance/blob/main/docs/optimizations.md).
+
+## JSON Schema
+
+LLGuidance adheres closely to the JSON Schema specification. For example:
+
+- `additionalProperties` defaults to `true`, unlike current grammars, though you can set `"additionalProperties": false` if needed.
+- any whitespace is allowed.
+- The definition order in the `"properties": {}` object is maintained, regardless of whether properties are required (current grammars always puts required properties first).
+
+Unsupported schemas result in an error message—no keywords are silently ignored.
+
+## Why Not Reuse GBNF Format?
+
+GBNF lacks the concept of a lexer.
+
+Most programming languages, including JSON, use a two-step process: a lexer (built with regular expressions) converts a byte stream into lexemes, which are then processed by a CFG parser. This approach is faster because lexers are cheaper to evaluate, and there is ~10x fewer lexemes than bytes.
+LLM tokens often align with lexemes, so the parser is engaged in under 0.5% of tokens, with the lexer handling the rest.
+
+However, the user has to provide the distinction between lexemes and CFG symbols. In [Lark](https://github.com/lark-parser/lark), lexeme names are uppercase, while CFG symbols are lowercase.
+The [gbnf_to_lark.py script](https://github.com/guidance-ai/llguidance/blob/main/scripts/gbnf_to_lark.py) can often take care of this automatically.
+See [LLGuidance syntax docs](https://github.com/guidance-ai/llguidance/blob/main/docs/syntax.md#terminals-vs-rules) for more details.
+
+## Error Handling
+
+Errors are currently printed to `stderr`, and generation continues. Improved error handling may be added in the future.
+
+
+## Archivo: datasetcard_template.md
+Contenido:
+
+# Dataset Card for {{ pretty_name | default("Dataset Name", true) }}
+
+<!-- Provide a quick summary of the dataset. -->
+
+{{ dataset_summary | default("", true) }}
+
+## Dataset Details
+
+### Dataset Description
+
+<!-- Provide a longer summary of what this dataset is. -->
+
+{{ dataset_description | default("", true) }}
+
+- **Curated by:** {{ curators | default("[More Information Needed]", true)}}
+- **Funded by [optional]:** {{ funded_by | default("[More Information Needed]", true)}}
+- **Shared by [optional]:** {{ shared_by | default("[More Information Needed]", true)}}
+- **Language(s) (NLP):** {{ language | default("[More Information Needed]", true)}}
+- **License:** {{ license | default("[More Information Needed]", true)}}
+
+### Dataset Sources [optional]
+
+<!-- Provide the basic links for the dataset. -->
+
+- **Repository:** {{ repo | default("[More Information Needed]", true)}}
+- **Paper [optional]:** {{ paper | default("[More Information Needed]", true)}}
+- **Demo [optional]:** {{ demo | default("[More Information Needed]", true)}}
+
+## Uses
+
+<!-- Address questions around how the dataset is intended to be used. -->
+
+### Direct Use
+
+<!-- This section describes suitable use cases for the dataset. -->
+
+{{ direct_use | default("[More Information Needed]", true)}}
+
+### Out-of-Scope Use
+
+<!-- This section addresses misuse, malicious use, and uses that the dataset will not work well for. -->
+
+{{ out_of_scope_use | default("[More Information Needed]", true)}}
+
+## Dataset Structure
+
+<!-- This section provides a description of the dataset fields, and additional information about the dataset structure such as criteria used to create the splits, relationships between data points, etc. -->
+
+{{ dataset_structure | default("[More Information Needed]", true)}}
+
+## Dataset Creation
+
+### Curation Rationale
+
+<!-- Motivation for the creation of this dataset. -->
+
+{{ curation_rationale_section | default("[More Information Needed]", true)}}
+
+### Source Data
+
+<!-- This section describes the source data (e.g. news text and headlines, social media posts, translated sentences, ...). -->
+
+#### Data Collection and Processing
+
+<!-- This section describes the data collection and processing process such as data selection criteria, filtering and normalization methods, tools and libraries used, etc. -->
+
+{{ data_collection_and_processing_section | default("[More Information Needed]", true)}}
+
+#### Who are the source data producers?
+
+<!-- This section describes the people or systems who originally created the data. It should also include self-reported demographic or identity information for the source data creators if this information is available. -->
+
+{{ source_data_producers_section | default("[More Information Needed]", true)}}
+
+### Annotations [optional]
+
+<!-- If the dataset contains annotations which are not part of the initial data collection, use this section to describe them. -->
+
+#### Annotation process
+
+<!-- This section describes the annotation process such as annotation tools used in the process, the amount of data annotated, annotation guidelines provided to the annotators, interannotator statistics, annotation validation, etc. -->
+
+{{ annotation_process_section | default("[More Information Needed]", true)}}
+
+#### Who are the annotators?
+
+<!-- This section describes the people or systems who created the annotations. -->
+
+{{ who_are_annotators_section | default("[More Information Needed]", true)}}
+
+#### Personal and Sensitive Information
+
+<!-- State whether the dataset contains data that might be considered personal, sensitive, or private (e.g., data that reveals addresses, uniquely identifiable names or aliases, racial or ethnic origins, sexual orientations, religious beliefs, political opinions, financial or health data, etc.). If efforts were made to anonymize the data, describe the anonymization process. -->
+
+{{ personal_and_sensitive_information | default("[More Information Needed]", true)}}
+
+## Bias, Risks, and Limitations
+
+<!-- This section is meant to convey both technical and sociotechnical limitations. -->
+
+{{ bias_risks_limitations | default("[More Information Needed]", true)}}
+
+### Recommendations
+
+<!-- This section is meant to convey recommendations with respect to the bias, risk, and technical limitations. -->
+
+{{ bias_recommendations | default("Users should be made aware of the risks, biases and limitations of the dataset. More information needed for further recommendations.", true)}}
+
+## Citation [optional]
+
+<!-- If there is a paper or blog post introducing the dataset, the APA and Bibtex information for that should go in this section. -->
+
+**BibTeX:**
+
+{{ citation_bibtex | default("[More Information Needed]", true)}}
+
+**APA:**
+
+{{ citation_apa | default("[More Information Needed]", true)}}
+
+## Glossary [optional]
+
+<!-- If relevant, include terms and calculations in this section that can help readers understand the dataset or dataset card. -->
+
+{{ glossary | default("[More Information Needed]", true)}}
+
+## More Information [optional]
+
+{{ more_information | default("[More Information Needed]", true)}}
+
+## Dataset Card Authors [optional]
+
+{{ dataset_card_authors | default("[More Information Needed]", true)}}
+
+## Dataset Card Contact
+
+{{ dataset_card_contact | default("[More Information Needed]", true)}}
+
+
+# For reference on model card metadata, see the spec: https://github.com/huggingface/hub-docs/blob/main/modelcard.md?plain=1
+# Doc / guide: https://huggingface.co/docs/hub/model-cards
+{{ card_data }}
+## Archivo: LICENSE.md
+Contenido:
+**This software is dual-licensed under the The University of Illinois/NCSA
+Open Source License (NCSA) and The 3-Clause BSD License**
+
+# NCSA Open Source License
+**Copyright (c) 2019 Kevin Sheppard. All rights reserved.**
+
+Developed by: Kevin Sheppard (<kevin.sheppard@economics.ox.ac.uk>,
+<kevin.k.sheppard@gmail.com>)
+[http://www.kevinsheppard.com](http://www.kevinsheppard.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal with
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+Redistributions of source code must retain the above copyright notice, this
+list of conditions and the following disclaimers.
+
+Redistributions in binary form must reproduce the above copyright notice, this
+list of conditions and the following disclaimers in the documentation and/or
+other materials provided with the distribution.
+
+Neither the names of Kevin Sheppard, nor the names of any contributors may be
+used to endorse or promote products derived from this Software without specific
+prior written permission.
+
+**THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+CONTRIBUTORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS WITH
+THE SOFTWARE.**
+
+
+# 3-Clause BSD License
+**Copyright (c) 2019 Kevin Sheppard. All rights reserved.**
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its contributors
+   may be used to endorse or promote products derived from this software
+   without specific prior written permission.
+
+**THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+THE POSSIBILITY OF SUCH DAMAGE.**
+
+# Components
+
+Many parts of this module have been derived from original sources, 
+often the algorithm's designer. Component licenses are located with 
+the component code.
+
+
+## Archivo: Conectar_Wifi.md
+Contenido:
+asd
+
+asdsad
+
+## Archivo: 2025-06-04_movimiento_descargas_historicon título.md
+Contenido:
+# 2025-06-04_movimiento_descargas_historico.md
+
+## Descripción:
+Se movieron los archivos `kael.md` y `Sin título.md` desde `archivo/downloads/` a `archivo/downloads/historico/` como parte de la política de limpieza y trazabilidad de descargas procesadas.
+
+## Motivo:
+Dejar el directorio `downloads/` limpio para futuras descargas y mantener el histórico ordenado según los criterios de auditoría CLI de Kael.
+
+## Registro:
+- [x] kael.md → historico/
+- [x] Sin título.md → historico/
+
+
+version: 0.1.0
+tipo: doc
+schema: ""
+descripcion: ""
+estructura:
+  - ""
+tags:
+  - metadata
+  - arquitectura
+  - cli
+  - modular
+  - automatizacion
+linked_to: 
+responsable: 
+hash_verificacion: sha256:pending
+historial:
+  - ""
+last_modified: 2025-07-09T07:39:09Z
+last_modified_by: Bird
+
+## Submódulos sugeridos para cada metadato
+
+|Campo/metadato|Submódulo sugerido|Función principal|
+|---|---|---|
+|`version`|fix_version|Validar formato semántico, sugerir incremento, actualizar según cambios.|
+|`tipo`|fix_tipo|Chequear si está definido, sugerir/corregir tipo estándar (README, script, doc, etc).|
+|`schema`|fix_schema|Verificar que apunte a esquema conocido, actualizar si es legacy.|
+|`descripcion`|fix_descripcion|Validar que esté presente y tenga mínimo de palabras/caracteres, sugerir mejorar redacción.|
+|`estructura`|fix_estructura|Autodetectar estructura real del archivo/módulo, actualizar el campo para reflejarla.|
+|`tags`|fix_tags|Validar formato (lista), sugerir tags estándar según el contenido real, eliminar redundancias.|
+|`linked_to`|fix_linkedto|Validar rutas/IDs/URLs, chequear existencia, sugerir formato, detectar links rotos.|
+|`responsable`|fix_responsable|Validar existencia, formato, sugerir nombres/áreas estándar, pedir completar si falta.|
+|`hash_verificacion`|fix_hash|Calcular y actualizar hash SHA-256 real, verificar integridad.|
+|`historial`|fix_historial|Validar que esté en formato lista, agregar entradas automáticas al modificar otros campos.|
+|`last_modified`|fix_lastmodified|Actualizar fecha/hora ISO cuando hay cambios (campo automático).|
+|`last_modified_by`|fix_lastmodifiedby|Actualizar responsable real de la última modificación (campo automático).|
+
+
+## Ejemplo de estructura de archivos para el módulo
+
+```plaintext
+alma_cli/
+  cleaner/
+    fix_metadata/
+      fix_version.py
+      fix_tipo.py
+      fix_schema.py
+      fix_descripcion.py
+      fix_estructura.py
+      fix_tags.py
+      fix_linkedto.py
+      fix_responsable.py
+      fix_hash.py
+      fix_historial.py
+      fix_lastmodified.py
+      fix_lastmodifiedby.py
+      __init__.py
+    __init__.py
+  cli.py         # Orquesta todo desde línea de comandos
+```
+
+
+## Próximo paso
+
+1. **Definir las funciones mínimas de cada submódulo** (input/output y reglas de validación/actualización).
+    
+2. Armar los primeros prompts/templates para DeepSeek o para implementación manual.
+    
+3. (Opcional) Integrar batch/fix masivo sobre carpetas o todo el repo.
+
+# Plantilla universal de metadatos ALMA_RESIST
+version: "0.1.0"
+tipo: prompt
+schema: almaresist.prompt_v1
+descripcion: >
+  Prompt para generar un script Python que valide o establezca el campo 'tipo' en encabezados YAML de archivos de texto, para asegurar la consistencia documental y la correcta clasificación dentro del sistema ALMA_RESIST.
+estructura:
+  - Prompt_Fix_Tipo
+  - fix_tipo.py
+tags:
+  - cli
+  - metadata
+  - fixer
+  - tipo
+  - automatización
+  - yaml
+  - alma_resist
+linked_to:
+  - ../../Src/Fix_Tipo/fix_tipo.py
+  - ../README.md
+  - /home/alma/Alma-Cli/Logs/fix_metadata.log
+responsable: Bird
+hash_verificacion: "sha256:pending"
+historial:
+  - "2025-07-09T05:00:00Z: Creación inicial del prompt."
+last_modified: "2025-07-09T05:00:00Z"
+last_modified_by: Bird
+version: "0.1.0"
+tipo: doc
+responsable: Bird
+last_modified: "2025-07-09T04:00:00Z"
+
+
+version: 0.1.0
+tipo: doc
+schema: 
+descripcion: ""
+estructura:
+  - ""
+tags: 
+linked_to: 
+responsable: Bird
+hash_verificacion: sha256:pending
+historial:
+  - ""
+last_modified: 
+last_modified_by:
+## Archivo: test.md
+Contenido:
+# Archivo Test
+
+Nuevo archivo creado con ALMA CLI Cleaner v0.1.6
+

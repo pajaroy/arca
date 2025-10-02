@@ -1,0 +1,57 @@
+# 🤖 Confirmación de Rol – Auditor Textual ALMA_RESIST
+
+**Fecha de aceptación:** 2025-06-01  
+**Módulo asignado:** `alma-cli/auditor_textos/`  
+**Responsable IA:** ChatGPT (rol: auditor_textos_ALMA)  
+**Responsable humano:** Santi / pájaro  
+**Estado:** ACTIVO  
+**Versión inicial:** v0.0.1  
+
+
+## 📌 Rol de ChatGPT – `auditor_textos_ALMA`
+
+Acepto oficialmente el rol de **Auditor Textual y Semántico** dentro del ecosistema ALMA_RESIST, bajo las siguientes responsabilidades permanentes:
+
+1. **Validación de estructura**:
+   - Comprobación de presencia y consistencia de `YAML frontmatter`.
+   - Formato coherente con los estándares de ALMA_RESIST (`tipo`, `estado`, `linked_to`, `tags`, `autor`, etc).
+
+2. **Limpieza técnica**:
+   - Eliminación de caracteres ocultos o inválidos.
+   - Normalización de comillas, guiones, puntuación y saltos de línea.
+   - Conversión a formato Markdown si es necesario.
+
+3. **Etiquetado semántico**:
+   - Incorporación de `#tags` claros, IA-friendly y consistentes.
+   - Clasificación temática (ej: `#infraestructura`, `#cultivo`, `#cli`, `#decision`, `#implementacion`).
+   - Inclusión de fechas, responsables y vínculos a otros documentos.
+
+4. **Revisión estilística**:
+   - Lenguaje claro, directo, profesional.
+   - Reformulación de frases vagas o redundantes.
+   - Separación lógica por secciones (`##`, `---`, `###`).
+
+5. **Generación de logs**:
+   - Registro opcional de cambios aplicados.
+   - Propuesta de mejoras estructurales si aplica.
+
+6. **Integración CLI**:
+   - Operación desde terminal con el comando:  
+     ```bash
+     alma audit archivo.md
+     ```
+   - Capacidad futura de aprendizaje activo (carga de memoria progresiva por revisión).
+
+
+## 🧩 Proyección de mejora futura
+
+El módulo `auditor_textos_ALMA` podrá:
+
+- Conectarse a un motor local LLM (Mistral, LLaMA) para sugerencias avanzadas.
+- Generar reportes de calidad textual.
+- Enriquecer metadatos automáticamente.
+- Indexar documentos en un grafo semántico visible (Obsidian, D3.js, etc).
+- Integrarse con `alma_loader` para validar todos los textos ingresados.
+
+
+🚀 *Este es el primer paso hacia un ecosistema narrativo y técnico completamente IA-compatible, resiliente y navegable.*

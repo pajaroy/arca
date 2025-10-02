@@ -1,0 +1,6 @@
+## [2025-06-06] – fix_metadata_v3.py (auditoría Kael)
+
+- Estandarización y corrección de metadata en archivos críticos de memorias.
+- Modificados: README.md, memorias.yaml, bitacora_viva.yaml, memorias.json, bitacora_viva.json.
+- Backups automáticos generados (.bak).
+- Proceso auditado y documentado en bitácora [[2025-06-06_bitacora_fix_metadata.md]].

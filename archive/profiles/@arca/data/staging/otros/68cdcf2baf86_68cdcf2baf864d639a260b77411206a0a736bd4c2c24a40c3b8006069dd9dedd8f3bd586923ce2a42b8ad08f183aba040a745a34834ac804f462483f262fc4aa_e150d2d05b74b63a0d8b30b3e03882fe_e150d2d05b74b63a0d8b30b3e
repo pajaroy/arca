@@ -1,0 +1,82 @@
+import os
+import json
+import itertools
+import glob
+import logging
+from datetime import datetime
+
+# Configuración inicial
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MEMORIAS_PATH = os.path.join(BASE_DIR, '../alma_loader/memorias_json/*.json')
+CONFIG_PATH = os.path.join(BASE_DIR, 'config_alertas.json')
+LOGS_DIR = os.path.join(BASE_DIR, '../logs')
+
+# Configurar logging
+os.makedirs(LOGS_DIR, exist_ok=True)
+logging.basicConfig(
+    filename=os.path.join(LOGS_DIR, 'monitor_alertas.log'),
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+
+def cargar_memorias():
+    memorias = []
+    try:
+        for file_path in glob.glob(MEMORIAS_PATH):
+            with open(file_path, 'r', encoding='utf-8') as f:
+                memorias.append(json.load(f))
+        logging.info(f"Cargadas {len(memorias)} memorias")
+        return memorias
+    except Exception as e:
+        logging.error(f"Error cargando memorias: {str(e)}")
+        raise
+
+def cargar_configuracion():
+    try:
+        with open(CONFIG_PATH, 'r', encoding='utf-8') as f:
+            config = json.load(f)
+            logging.info("Configuración cargada correctamente")
+            return config.get('alertas_activas', [])
+    except Exception as e:
+        logging.error(f"Error cargando configuración: {str(e)}")
+        return []
+
+def ejecutar_monitor():
+    alertas = []
+    total_alertas = 0
+
+    try:
+        memorias = cargar_memorias()
+        reglas_activas = cargar_configuracion()
+
+        from reglas_alerta import __dict__ as reglas
+
+        for m1, m2 in itertools.combinations(memorias, 2):
+            try:
+                for regla_nombre in reglas_activas:
+                    if regla_nombre in reglas and callable(reglas[regla_nombre]):
+                        resultados = reglas[regla_nombre](m1, m2)
+                        if resultados:
+                            alertas.extend(resultados)
+                            total_alertas += len(resultados)
+            except Exception as e:
+                logging.error(f"Error procesando combinación {m1['id']}-{m2['id']}: {str(e)}")
+
+        with open(os.path.join(LOGS_DIR, 'alertas.json'), 'w', encoding='utf-8') as f:
+            json.dump({"alertas": alertas, "total": total_alertas}, f, indent=2, ensure_ascii=False)
+
+        logging.info(f"Proceso completado. Alertas generadas: {total_alertas}")
+        print(f"✅ Proceso completado: {total_alertas} alertas generadas.")
+
+    except Exception as e:
+        logging.critical(f"Error crítico: {str(e)}")
+        print("❌ Error en la ejecución. Ver logs para detalles.")
+
+if __name__ == "__main__":
+    start_time = datetime.now()
+    logging.info("\n" + "="*50)
+    logging.info(f"Iniciando ejecución: {start_time}")
+    ejecutar_monitor()
+    end_time = datetime.now()
+    duration = end_time - start_time
+    logging.info(f"Ejecución completada en {duration.total_seconds():.2f} segundos")

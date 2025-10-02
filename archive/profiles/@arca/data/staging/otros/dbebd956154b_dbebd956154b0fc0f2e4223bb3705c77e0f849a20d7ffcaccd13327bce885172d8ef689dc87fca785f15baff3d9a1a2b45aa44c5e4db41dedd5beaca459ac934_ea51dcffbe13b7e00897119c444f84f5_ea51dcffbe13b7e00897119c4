@@ -1,0 +1,11 @@
+# Comando base para sincronyzar carpetas con rsync
+
+´´´bash
+-rsync -avh /ruta/origen/ /ruta/destino/
+´´´
+
+ -a modo archivar (permite copiar recursivamente, mantiene permisos, fechas, etc. )
+
+ -v verbose (muesta lo que hace)
+
+ -h human-readeable (tamaños fáciles de leer)

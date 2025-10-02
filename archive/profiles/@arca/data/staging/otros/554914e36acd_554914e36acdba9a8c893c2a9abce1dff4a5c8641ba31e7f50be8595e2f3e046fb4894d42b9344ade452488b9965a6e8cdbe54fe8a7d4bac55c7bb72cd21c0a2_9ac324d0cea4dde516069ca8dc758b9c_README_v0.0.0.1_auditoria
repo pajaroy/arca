@@ -1,0 +1,32 @@
+---
+module: versiones/v0_0_0_1_auditoria/readme_v0_0_0_1_auditoria
+type: core
+status: in_progress
+created: '2025-05-22'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# Documentación de la Versión v0.0.0.1 - Auditoría
+
+Esta versión incluye la documentación correspondiente al proceso de auditoría inicial de la arquitectura y funcionamiento del sistema ALMA_RESIST.
+
+## Archivos incluidos
+
+- `README.md`: Descripción general de esta versión.
+- `Sprint_1_Logging.md`: Documento del Sprint 1 enfocado en logging y trazabilidad.
+- `auditoria_estructura.md`: Revisión de la estructura general del sistema.
+- `changelog.md`: Historial de cambios realizados durante esta etapa.
+- `decisiones_arquitectonicas.md`: Registro de decisiones arquitectónicas clave.
+- `hello_world.py`: Archivo inicial de prueba para validar integración CLI.
+- `index.md`: Índice de contenidos vinculados a auditoría.
+- `lecciones_aprendidas.md`: Reflexiones y mejoras derivadas del Sprint.
+- `version.json`: Metadatos de control de versión.
+
+## Propósito
+
+Establecer una base sólida de revisión y trazabilidad desde la etapa inicial del sistema. Este paquete constituye una fotografía de estado tras la primera fase de auditoría técnica y metodológica del proyecto.
+
+## Estado
+
+✅ Completado y documentado

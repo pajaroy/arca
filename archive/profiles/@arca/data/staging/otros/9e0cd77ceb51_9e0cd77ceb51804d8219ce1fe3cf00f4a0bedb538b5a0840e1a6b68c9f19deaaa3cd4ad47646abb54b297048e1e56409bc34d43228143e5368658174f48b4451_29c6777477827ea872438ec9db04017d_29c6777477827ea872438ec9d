@@ -1,0 +1,21 @@
+# 📦 _archivadas/
+
+Esta carpeta contiene versiones anteriores o reemplazadas de metodologías utilizadas en el sistema ALMA_RESIST.
+
+## 📜 Propósito
+
+- Conservar el historial completo de evolución de decisiones metodológicas.
+- Mantener trazabilidad sin saturar la vista principal del sistema.
+- Evitar pérdida de información que pueda ser útil para auditoría o comparación futura.
+
+## 📁 Contenido típico
+
+- `metodologia_estructura_modular_v1.md`
+- `metodologia_adr_v1.md`
+- `metodologia_sprints_v1.md`
+
+## 📌 Notas
+
+- Las versiones aquí contenidas **no están activas** en el sistema actual.
+- Toda migración debe registrarse en el changelog del sistema o en `Methodology_Index.md`.
+

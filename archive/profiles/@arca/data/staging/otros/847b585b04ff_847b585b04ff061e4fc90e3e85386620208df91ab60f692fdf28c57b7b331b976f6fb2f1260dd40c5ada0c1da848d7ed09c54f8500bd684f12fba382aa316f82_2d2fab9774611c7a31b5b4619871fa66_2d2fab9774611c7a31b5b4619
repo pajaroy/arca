@@ -1,0 +1,18 @@
+# ✅ Checklist de Tareas Pendientes – Auditoría y Regularización Inicial
+
+Fecha de generación: 2025-05-20
+
+
+## 🧹 Limpieza y Reorganización
+
+- [x] Revisar carpeta `backups/` → mover a `config/backups/` o eliminar si es temporal
+- [x] Revisar carpeta `archivos/` → renombrar con sentido o eliminar
+- [ ] Mover cualquier script no vinculado a `core/` o `tests/` o eliminar
+
+
+## 🛡️ Gobernanza y Automatización
+
+- [x] Crear `docs/RFC_metodologia.md` para futuras propuestas de cambio
+- [x] Agregar `docs/dependencias.md` si se van a listar módulos o librerías externas
+- [x] Activar `docs/plantillas/` para prompts, scripts, tests y changelogs
+

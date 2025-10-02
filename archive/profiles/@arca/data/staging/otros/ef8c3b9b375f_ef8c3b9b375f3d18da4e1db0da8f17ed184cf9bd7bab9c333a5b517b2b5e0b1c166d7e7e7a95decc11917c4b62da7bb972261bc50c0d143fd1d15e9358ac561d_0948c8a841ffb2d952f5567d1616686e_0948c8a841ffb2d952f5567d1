@@ -1,0 +1,26 @@
+
+# 📄 Changelog - Prompt ALMA_LOADER Individual v2.0.6
+
+## ✅ Mejoras Implementadas
+
+### 🔍 Integración de Capacidad Analítica para Trading
+- Se introdujo la sección “Futura Implementación para Trading y Predicción”.
+- Propuesta del módulo `alma_analytics.py` para detectar patrones y correlaciones entre memorias.
+- Planificación para entrenar modelos de machine learning con datos históricos de trading (ej: regresión logística, Random Forest).
+
+### 📊 Dashboard e Insights
+- Se describieron componentes clave de un futuro dashboard analítico:
+  - Métricas de win rate.
+  - Relación entre tags emocionales (ej: #ansiedad) y resultados.
+
+### 📏 Reglas de Decisión Inteligente
+- Se plantearon reglas heurísticas básicas en JSON para generar alertas (ej: sobreoperación → descanso).
+
+### 🧠 Flujo Predictivo
+- Añadido diagrama de flujo que describe cómo una IA puede usar relaciones históricas para sugerir o evitar operaciones.
+
+### ✅ Checklist Actualizado
+- Se añadieron tareas clave a implementar en Fase 3:
+  - Desarrollo de `alma_analytics.py`.
+  - Integración de modelo predictivo básico.
+

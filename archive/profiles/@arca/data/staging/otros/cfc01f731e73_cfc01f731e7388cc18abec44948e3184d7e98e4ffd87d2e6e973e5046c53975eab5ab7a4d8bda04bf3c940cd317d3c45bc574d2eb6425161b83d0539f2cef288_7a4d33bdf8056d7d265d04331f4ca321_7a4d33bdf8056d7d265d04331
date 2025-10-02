@@ -1,0 +1,121 @@
+Aquí están los módulos API para trading y cultivo:
+
+python
+
+Copy
+
+Download
+
+# api/v1/trading.py
+from fastapi import APIRouter
+
+router = APIRouter(
+    prefix="/v1/trading",
+    tags=["trading"]
+)
+
+@router.get(
+    "/status",
+    summary="Estado del módulo de Trading",
+    description="Verifica el estado operativo del subsistema de trading"
+)
+async def obtener_estado_trading():
+    """Endpoint de verificación de estado"""
+    return {
+        "modulo": "trading",
+        "estado": "operativo",
+        "detalles": {
+            "versión": "1.0.0",
+            "caracteristicas": [
+                "Base para análisis de memorias de trading",
+                "Estructura lista para extensión"
+            ]
+        }
+    }
+
+# 🚀 Espacio para futuros endpoints:
+# - /analisis-mercado
+# - /estrategias
+# - /operaciones
+
+python
+
+Copy
+
+Download
+
+# api/v1/cultivo.py
+from fastapi import APIRouter
+
+router = APIRouter(
+    prefix="/v1/cultivo",
+    tags=["cultivo"]
+)
+
+@router.get(
+    "/status",
+    summary="Estado del módulo de Cultivo",
+    description="Verifica el estado operativo del subsistema de agricultura"
+)
+async def obtener_estado_cultivo():
+    """Endpoint de monitoreo de salud del módulo"""
+    return {
+        "modulo": "cultivo",
+        "estado": "operativo",
+        "detalles": {
+            "versión": "1.0.0",
+            "metricas": {
+                "sectores": ["hidroponia", "permacultura"],
+                "parametros": ["ph", "humedad"]
+            }
+        }
+    }
+
+# 🌱 Espacio para futuros endpoints:
+# - /parametros-cultivo
+# - /alertas-riego
+# - /calendario-siembra
+
+**Características comunes:**
+
+1. **Estructura modular:** Cada módulo vive en su propio archivo
+    
+2. **Documentación integrada:** Descripciones listas para OpenAPI/Swagger
+    
+3. **Escalabilidad:** Secciones comentadas para futuras rutas
+    
+4. **Estado extendido:** Respuestas con metadata útil
+    
+5. **Tags específicos:** Facilitan navegación en la documentación
+    
+
+**Integración en main.py:**
+
+python
+
+Copy
+
+Download
+
+# main.py (extensión)
+from api.v1.trading import router as trading_router
+from api.v1.cultivo import router as cultivo_router
+
+app = FastAPI()
+app.include_router(memorias_router)
+app.include_router(trading_router)
+app.include_router(cultivo_router)
+
+**Ejemplo de uso:**
+
+bash
+
+Copy
+
+Download
+
+# Verificar estado de módulos
+curl http://localhost:8000/v1/trading/status
+curl http://localhost:8000/v1/cultivo/status
+
+Esta estructura permite una fácil expansión por dominios específicos manteniendo coherencia en la API y facilitando el mantenimiento.

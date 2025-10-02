@@ -1,0 +1,29 @@
+```yaml
+changelog:
+  validador_schema: "campos_obligatorios: [version, fecha, cambios]"
+  registros:
+    - version: "1.0"
+      fecha: 2025-06-10
+      cambios: >
+        Primera versión del template base para Agentes IA institucionales de ALMA_RESIST.
+        Arquitectura modular con bloques YAML (memorias, bitácoras, changelog).
+        Inclusión de glosario, rangos, apéndice y protocolos mínimos.
+
+    - version: "1.1"
+      fecha: 2025-06-10
+      cambios: >
+        Mejora de estructura y presentación. Integración de sugerencias de auditoría.
+        Agregado campo de firmas y validaciones.
+        Ejemplos ampliados y normalización de referencias.
+
+    - version: "2.0"
+      fecha: 2025-06-10
+      cambios: >
+        Correcciones críticas según auditoría DeepSeek/Centralesis v1.2.
+        Inclusión de campo validador_schema en bloques YAML.
+        Normalización de resultado en bitácoras (éxito/error/código).
+        Incorporación de ejemplo de registro de error/alerta.
+        Inclusión de campo ultima_verificacion en el apéndice de Agentes.
+        Protocolo explícito de relación .md/.yaml y automatización.
+        Template final validado como fuente primaria, listo para parsing y sincronización automática.
+```

@@ -1,0 +1,20 @@
+living_soil_cannabird_v1.0:
+  base:
+    - 30% turba rubia (pH 4.5)
+    - 30% compost maduro (de buena fuente, o lo hacés vos)
+    - 20% perlita gruesa
+    - 10% vermiculita
+    - 10% humus de lombriz
+
+  corrección_pH:
+    - 0.5% ácido húmico en polvo (o vinagre/ácido cítrico líquido al momento de uso)
+    - no usar dolomita
+
+  activadores:
+    - micorrizas
+    - bacterias ácido-lácticas (LactoBacillus)
+    - trichoderma
+
+  notas:
+    - madurar al menos 10–15 días antes del uso con humedad y riegos suaves
+    - mantener entre 6.2 y 6.5 medido con sonda de suelo

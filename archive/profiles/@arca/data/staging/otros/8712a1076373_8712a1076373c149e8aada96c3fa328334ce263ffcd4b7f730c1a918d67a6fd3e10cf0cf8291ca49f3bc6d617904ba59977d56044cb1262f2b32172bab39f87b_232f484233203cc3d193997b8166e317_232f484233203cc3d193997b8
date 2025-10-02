@@ -1,0 +1,62 @@
+# 📅 Resumen Diario – 2025-05-15
+
+
+
+
+## 💻 Sistema ALMA – Infraestructura
+
+- Se clonó el disco `ALMA_RESIST` (Toshiba 500 GB) al nuevo SSD `ALMA_CORE` (Kingston 240 GB) usando `dd`.
+- Se configuró `ALMA_CORE` como sistema operativo principal, con Parrot OS operativo.
+- Se repararon problemas de permisos en `~/Alma`.
+- Se automatizó el arranque de Obsidian desde alias y se resolvieron conflictos con AppImage en Parrot.
+
+
+## 📂 Gestión de Archivos y Registros
+
+- Se generó y documentó el changelog `sync_apocalypse_2025-05-16.md` con detalles del evento.
+- Se propuso y validó una nueva estructura de carpeta:
+  - `~/Alma/LOGS/` para bitácoras técnicas versionadas
+
+
+## 🔁 Protocolo de Backup
+
+- Se recomendó generar backups periódicos bajo formato:
+  ```
+  Alma_BACKUP_SYNC_YYYY-MM-DD.zip
+  ```
+
+
+
+
+## 🔧 Instalación de Parrot OS en ALMA_RESIST
+
+### 🎯 Objetivo
+Dejar funcional un entorno operativo alternativo, portátil y robusto basado en Parrot OS, instalado sobre un disco Toshiba de 500GB como nodo principal del sistema ALMA_RESIST.
+
+
+### 🛠️ Pasos técnicos realizados
+
+1. **Preparación de disco Toshiba como nodo portátil**.
+2. Instalación y ejecución de **VirtualBox** para pruebas de instalación.
+3. Intento fallido de instalar Parrot en VM por problemas de disco asignado.
+4. Compra de un pendrive de 64GB para uso como instalador bootable.
+5. Instalación de **Ventoy** en el pendrive vía terminal:
+   ```bash
+   sudo ./Ventoy2Disk.sh -i /dev/sdc
+   ```
+6. Copia de ISO de Parrot:
+   ```bash
+   cp ~/Descargas/Parrot-home-6.3.2_amd64.iso /media/bird/Ventoy/
+   ```
+7. Configuración del BIOS (MSI Click BIOS 4):
+   - Se habilitó boot desde UEFI USB
+   - Se ordenó el arranque desde el pendrive Ventoy
+
+8. Booteo exitoso → instalación de Parrot sobre `/dev/sdd` (Toshiba).
+9. Instalación completa y validada al reiniciar.
+
+
+### 🧠 Reflexión
+> “La verdadera independencia digital no es solo sobrevivir sin redes, sino prosperar en cualquier entorno, con elegancia y control absoluto.” 🔒💻
+
+tags:: #instalacion #alma_resist #parrotos #ventoy #nodo_portatil #bios

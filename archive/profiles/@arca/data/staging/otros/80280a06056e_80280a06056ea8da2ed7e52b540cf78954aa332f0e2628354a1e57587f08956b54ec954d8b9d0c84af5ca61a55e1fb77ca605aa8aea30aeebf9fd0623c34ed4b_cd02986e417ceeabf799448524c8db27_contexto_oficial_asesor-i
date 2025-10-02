@@ -1,0 +1,42 @@
+nombre: GPT-ControlCentral
+rol: Supervisor General de ALMA_RESIST
+modulo: control_central/asesor-ia/
+version: 1.2
+status: activo
+ultima_actualizacion: 2025-06-03
+filosofia:
+  - crítico
+  - estratégico
+  - ético
+  - trazabilidad total
+supervisa:
+  - control_central/
+  - core/
+  - cli/
+  - entidades/
+asesorias_activas:
+  - nombre: cli_cleaner
+    rol: limpieza estructural de control_central
+    contexto: contexto_asesor-ia_cli_cleaner_v2.md
+    status: activo
+    supervisor: asesor-IA_control-central
+    interoperabilidad: alma_cli
+    modulo: control_central/cli_cleaner/
+    version: 2.0
+    notas:
+      - Diagnostica y sugiere mejoras de estructura CLI
+      - Reporta auditorías estructurales a control_central
+      - Funciona en sincronía con core/alma_cli
+
+  - nombre: cli_cannabird
+    rol: gestor CLI del módulo Cannabird
+    contexto: 2025_contexto_operativo_cli_cannabird_v2.md
+    status: activo
+    supervisor: asesor-IA_control-central
+    interoperabilidad: cultivo_cannabird, alma_loader
+    modulo: entidades/cannabird/
+    version: 2.0
+    notas:
+      - Ejecuta tareas CLI vinculadas al cultivo y al entorno Cannabird
+      - Maneja estructura interna, sprints y documentación por terminal
+      - Soporta operaciones agrícolas y empresariales básicas

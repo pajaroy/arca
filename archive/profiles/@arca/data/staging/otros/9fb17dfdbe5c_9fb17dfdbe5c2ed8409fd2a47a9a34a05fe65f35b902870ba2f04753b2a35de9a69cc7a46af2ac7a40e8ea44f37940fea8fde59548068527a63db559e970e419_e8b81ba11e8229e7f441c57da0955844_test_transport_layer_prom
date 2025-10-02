@@ -1,0 +1,71 @@
+---
+module: prompts/test_transport_layer_prompt
+type: core
+status: in_progress
+created: '2025-05-26'
+linked_to:
+- metodologia_doc_ia_v2.md
+
+---
+# ✅ Solicitud de Test – `test_transport_layer.py` – ALMA_RESIST Sprint 2.6
+
+Este test debe validar el correcto funcionamiento del módulo `transport_layer.py`, el cual se encarga de:
+
+- Validar datos contra contratos JSON Schema
+- Guardar prompts y respuestas en disco como `.json`
+- Recuperar entradas previas
+- Mantener una rotación de archivos máxima
+
+---
+
+## 📘 Requisitos del módulo
+
+### Métodos clave a testear
+
+- `send(data: dict, endpoint: str)`
+- `receive(endpoint: str) -> dict`
+- `list_entries(endpoint: str) -> list[Path]`
+- `purge_old_entries(endpoint: str, max_files: int)`
+
+Los esquemas a validar están en:
+
+- `docs/contracts/schema_prompt.json`
+- `docs/contracts/schema_respuesta.json`
+
+---
+
+## 🧪 Casos de prueba sugeridos
+
+| Caso                                               | Resultado esperado                        |
+|----------------------------------------------------|-------------------------------------------|
+| Envío de prompt válido                             | Archivo `.json` creado correctamente      |
+| Envío de respuesta válida                          | Archivo `.json` creado y validado         |
+| Envío de prompt malformado (sin campo requerido)   | Lanza `jsonschema.ValidationError`        |
+| Recuperación de última entrada                     | `receive()` devuelve JSON esperado        |
+| Listado de entradas                                | `list_entries()` devuelve lista ordenada  |
+| Rotación de archivos (`purge_old_entries`)         | Borra archivos antiguos, mantiene máximo  |
+| Directorio inexistente                             | Se crea automáticamente                   |
+| Contratos corruptos o ausentes                     | Lanza `RuntimeError`                      |
+
+---
+
+## 🔧 Consideraciones técnicas
+
+- Usar `pytest`
+- Usar `tmp_path` o `tmp_path_factory` para trabajar en disco temporal
+- Crear contratos mock o usar los reales si están disponibles
+- Testear tanto `prompt` como `respuesta` como tipos de entrada
+- Validar que la escritura sea estructurada y no genere corrupción
+
+---
+
+## 📂 Archivos relacionados
+
+- `transport_layer.py` (módulo a testear)
+- `schema_prompt.json`
+- `schema_respuesta.json`
+- `test_model_wrapper.py`, `test_api_responder.py` (ya implementados)
+
+---
+
+¿Podés generar el archivo `test_transport_layer.py` siguiendo esta estructura y casos sugeridos?

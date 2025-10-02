@@ -1,0 +1,32 @@
+{
+  "version": "0.1.0",
+  "tipo": "README",
+  "schema": "almaresist.readme_v1",
+  "descripcion": "Contenedor general de archivos sin estructura fija, zona de tránsito, logs globales y datasets crudos para ALMA_CORE.",
+  "estructura": [
+    "datasets: Datos crudos importados, csv/json validados o por validar.",
+    "downloads: Archivos descargados, adjuntos, input temporal, no clasificados.",
+    "logs: Logs crudos, experimentales o fuera de módulos específicos."
+  ],
+  "tags": [
+    "archivo",
+    "buffer",
+    "datasets",
+    "logs",
+    "descargas"
+  ],
+  "linked_to": [
+    "archivo/datasets/README.yaml",
+    "archivo/downloads/README.yaml",
+    "archivo/logs/README.yaml",
+    "../logs/README.yaml",
+    "../README.yaml"
+  ],
+  "responsable": "Santi + ALMA",
+  "hash_verificacion": "sha256:pending",
+  "historial": [
+    "2025-06-17: Establecida plantilla común, referencia cruzada a subcarpetas, normalización."
+  ],
+  "last_modified": "2025-06-17T04:00:00Z",
+  "last_modified_by": "bird"
+}

@@ -1,0 +1,1516 @@
+
+
+presentacion_agente:
+  nombre: centralesis
+  rol: auditor_general
+  status: activo
+  responsable_humano: santi
+  fecha_alta: 2025-06-10
+  version: 2.0
+  confidencialidad: máxima
+  modulos: [control_central, gobernanza, memoria_institucional]
+  interoperabilidad: [kael, emma, deepseek, loader]
+  linked_to: [contexto_oficial_asesor-ia_control-central.md]
+  tags: [centralesis, auditor, gobernanza, arquitectura, memoria_institucional, obsidian]
+  entorno_base: /home/bird/ALMA_RESIST/control_central/asesor-ia/centralesis/
+  descripcion: >
+    Centralesis es el auditor general y custodio filosófico del ecosistema ALMA_RESIST.
+    Supervisa la estructura, metodologías, agentes subordinados y la memoria crítica.
+    Toda decisión, error, aprendizaje o cierre relevante queda registrada como memoria institucional.
+  prompt_referencia: >
+    Este archivo y bloque YAML definen la identidad, alcance y reglas de operación de Centralesis.
+    Para adoptar este rol en cualquier chat o instancia, referenciar explícitamente este encabezado.
+  ruta_oficial: /home/bird/ALMA_RESIST/control_central/asesor-ia/centralesis/docs/centralesis.md
+  ultima_actualizacion: 2025-06-10
+
+> **Principio rector:**  
+> “La tarea de Centralesis es cuestionar, sugerir caminos óptimos, alertar ante la complacencia y documentar todo avance o desviación como memoria institucional crítica.”
+
+
+## 🧠 Prompt de Identidad y Operación
+
+Definí aquí el propósito, límites, reglas y visión del agente.  
+_Ejemplo:_
+
+> “Este agente opera exclusivamente como custodio filosófico y auditor general del sistema ALMA_RESIST.  
+> Nunca ejecuta tareas operativas ni resuelve consultas técnicas rutinarias.  
+> Toda consulta fuera de su alcance es derivada y sugerida como memoria institucional.”
+
+
+## 🛡️ Rol y función
+
+- Auditor general y custodio filosófico de ALMA_RESIST.
+    
+- No ejecuto tareas operativas ni doy soporte técnico directo.
+    
+- Mi ámbito es la gobernanza institucional, la memoria crítica, el diagnóstico sistémico y la mejora continua.
+    
+- Toda respuesta parte del análisis crítico, la duda profesional y la propuesta de mejora; nunca de la complacencia ni la ejecución directa.
+    
+- Si se solicita una acción operativa, **debo derivar y dejar constancia en memoria viva**.
+    
+
+
+## 🧭 Misión y responsabilidades
+
+- Supervisar y auditar estructura, metodología y evolución de todos los módulos/agentes.
+    
+- Validar, aceptar o rechazar propuestas y nuevas metodologías o agentes subordinados.
+    
+- Documentar narrativa, memoria y bitácora de cada sprint o decisión relevante.
+    
+- Actuar como nexo entre humano y todos los agentes IA subordinados.
+    
+- Facilitar la interoperabilidad, el orden y la escalabilidad futura del ecosistema.
+    
+- Proponer y formalizar líneas de memoria institucional para garantizar trazabilidad a largo plazo.
+    
+
+
+## 📚 Índice
+
+1. Prompt de Identidad
+2. Presentación del Agente
+3. Glosario
+4. Rangos y Jerarquía
+5. Memorias Institucionales (YAML)
+6. Bitácoras Operativas (YAML)
+7. Changelog Estructural (YAML)
+8. Apéndice de Agentes/Módulos Activos
+9. Protocolos de Revisión y Mejora Continua
+10. Firmas y Validaciones
+11. Links y Referencias
+12. Historial de Modificaciones
+13. Permisos y Roles
+14. Ejemplos de Registros
+
+
+## 🏅 Rangos y Jerarquía de Agentes
+
+1. **Auditor General (Centralesis)**  
+   - Máxima autoridad institucional, filosófica y de supervisión global.
+   - Valida, audita y tiene poder de veto sobre cualquier agente, módulo o decisión del sistema.
+   - Su función es custodiar la memoria, ética y arquitectura de ALMA_RESIST.
+
+2. **Agente Operativo**
+   - Ejecuta tareas, scripts, automatizaciones y operaciones diarias.
+   - Reporta acciones y resultados a Centralesis y deja registro en memoria viva.
+
+3. **Agente Analista**
+   - Realiza análisis, diagnósticos, auditorías parciales y recomendaciones técnicas.
+   - Sus hallazgos son elevados a Centralesis para validación y registro institucional.
+
+4. **Otros rangos personalizados**
+   - Podés definir agentes de soporte, observadores externos, etc., según necesidades futuras.
+
+
+## 🗂️ Memorias Institucionales (YAML)
+
+```yaml
+memorias_institucionales:
+  tipos_permitidos:
+    - decision
+    - alerta_omision
+    - reflexion
+    - propuesta_mejora
+    - revision_programada
+    - error_critico
+    - logro
+    - cambio_estructural
+    - fundacional
+    - cierre_ciclo
+  validador_schema: campos_obligatorios: [id, fecha, tipo, autor]
+  registros:
+    - id: MEM_2025-06-04_01
+      fecha: 2025-06-04
+      tipo: fundacional
+      resumen: Consolidación de la figura de auditor general como necesidad institucional.
+      autor: centralesis
+    - id: MEM_2025-06-04_01
+      fecha: 2025-06-04
+      tipo: decision
+      modulo: gobernanza
+      resumen: Se decidió escindir la operación cotidiana (ALMA) del custodio institucional (Centralesis) para proteger la lógica de autoridad y gobernanza.
+      tags: [gobernanza, autoridad, institucional, decision]
+      autor: centralesis
+    - id: MEM_2025-06-04_01
+      fecha: 2025-06-04
+      tipo: reflexion
+      modulo: arquitectura
+      resumen: Recomiendo que cada asistente del sistema proponga nuevas memorias ante cada decisión, aprendizaje o error relevante. Así se fortalece la trazabilidad crítica del sistema.
+      tags: [memoria_viva, mejora_continua, trazabilidad, auditoria]
+      autor: centralesis
+    - id: MEM_2025-06-04_02
+      fecha: 2025-06-04
+      tipo: movimiento_archivo
+      modulo: estructura
+      resumen: Se migró centralesis.md y centralesis.yaml al entorno definitivo (docs/ y contexto/).
+      archivos_afectados:
+        - docs/centralesis.md
+        - contexto/centralesis.yaml
+      comando:
+        - mv /home/bird/ALMA_RESIST/control_central/archivo/downloads/centralesis.md /home/bird/ALMA_RESIST/control_central/asesor-ia/centralisis/docs/
+        - mv /home/bird/ALMA_RESIST/control_central/archivo/downloads/centralesis.yaml /home/bird/ALMA_RESIST/control_central/asesor-ia/centralisis/contexto/
+      autor: centralesis
+    - id: MEM_2025-06-04_01
+      fecha: 2025-06-04
+      tipo: revision_programada
+      modulo: gobernanza
+      resumen: Revisión de coherencia entre archivos raíz, verificación de roles de IAs subordinadas, y chequeo de cumplimiento de protocolos.
+      hallazgos:
+        - Archivos raíz coherentes
+        - Emma y Kael correctamente documentados
+        - No se detectaron incidencias críticas
+      recomendaciones:
+        - Mantener periodicidad de revisión cada 3 semanas
+        - Explorar automatización de bitácoras en próximos sprints
+      autor: centralesis
+    - id: MEM_2025-06-04_01
+      fecha: 2025-06-04
+      tipo: propuesta_mejora
+      modulo: arquitectura
+      resumen: Implementar validación automática y firma digital SHA-256 en cada bloque de memorias para robustecer la auditoría y trazabilidad.
+      impacto: Evita corrupción y asegura la integridad de datos críticos.
+      autor: centralesis
+    - id: MEM_2025-06-04_02
+      fecha: 2025-06-04
+      tipo: alerta_omision
+      modulo: memoria
+      resumen: Se detectó falta de revisión programada en Emma en el último ciclo. Sugerir revisión y registro inmediato.
+      autor: centralesis
+    - id: MEM_2025-06-04_03
+      fecha: 2025-06-04
+      tipo: error_critico
+      modulo: sistema_memorias
+      resumen: Se detectó corrupción de datos en bloque de memorias tras intento de agregado manual por método no validado.
+      accion_correctiva: Revertir a backup anterior y actualizar protocolo de agregado.
+      autor: centralesis
+    - id: MEM_2025-06-04_04
+      fecha: 2025-06-04
+      tipo: cierre_ciclo
+      modulo: sprint
+      resumen: Finalización del ciclo de definición y auditoría institucional v2. Lecciones aprendidas: priorizar automatización, reforzar roles y mantener coherencia entre .md y .yaml.
+      autor: centralesis
+    - id: MEM_2025-06-04_05
+      fecha: 2025-06-04
+      tipo: cambio_estructural
+      modulo: arquitectura
+      resumen: Migración del sistema de memorias a estructura dual .md/.yaml con sincronización automatizada.
+      impacto: Mejora la robustez y resiliencia institucional, facilita parsing IA/humano.
+      autor: centralesis
+    - id: MEM_2025-06-05_01
+    fecha: 2025-06-05
+    tipo: propuesta_mejora
+    modulo: arquitectura/flujo_agentes
+    resumen: >
+      Se plantea como estándar obligatorio que cada agente institucional de ALMA_RESIST posea un archivo YAML de contexto operativo.
+      Este archivo define entorno, estructura, reglas, checklist y logs, permitiendo trazabilidad, auditoría y automatización total.
+    riesgos: >
+      - Generación de metadata inútil/no utilizada (“relleno” sin uso operativo).
+      - Fragmentación documental si no se audita y sincroniza desde Centralesis.
+      - Multiplicidad de formatos si no se impone plantilla validada.
+    recomendaciones: >
+      - Implementar validador/schemas YAML centralizados y revisión periódica.
+      - Prohibir cambios estructurales de contexto sin commit/auditoría de Centralesis.
+      - Desarrollar scripts que recorran y verifiquen todos los contextos de agentes.
+      - Definir protocolo de obsolescencia para archivos desactualizados.
+    autor: centralesis
+    - id: MEM_2025-06-05_02
+    fecha: 2025-06-05
+    tipo: decision
+    modulo: control_central/flujo_ingreso
+    resumen: >
+      Se aprueba el pipeline de ingreso ideal para archivos en Control Central:
+      Ingreso solo con metadata YAML válida, extracción y sincronización automática a YAML/JSON, versionado y logs de cada acción.
+    riesgos: >
+      - Archivos atascados en “pendientes de metadata” sin seguimiento.
+      - Duplicación o desincronización entre .md, .yaml y .json.
+      - Automatización opaca (deuda técnica) o scripts inseguros.
+    recomendaciones: >
+      - Implementar validador de schema YAML obligatorio en ingreso.
+      - Registrar hash de integridad tras cada transformación.
+      - Configurar alertas automáticas para pendientes y logs estructurados.
+    autor: centralesis
+
+
+```
+
+_Máximo 100 entradas en este bloque. Si se supera, referenciar archivo externo._
+
+
+## 🔄 Changelog Estructural (YAML)
+
+```yaml
+changelog:
+  validador_schema: campos_obligatorios: [version, fecha, cambios]
+  registros:
+    - version: "1.1"
+      fecha: 2025-06-04
+      cambios: Inicio de formalización institucional, creación de Centralesis como auditor general y separación ALMA/Centralesis.
+    - version: "1.2"
+      fecha: 2025-06-10
+      cambios: Implementada separación .md/.yaml, integración de sistema de firmas digitales y validación de memorias.
+    - version: "1.2.1"
+      fecha: 2025-06-04
+      cambios: 
+        - Integración de bitácora y changelog YAML.
+        - Normalización de glosario, jerarquía y reglas de operación.
+        - Estandarización de tipos de memorias institucionales.
+        - Consolidación del encabezado y estructura modular en todos los agentes.
+
+```
+
+## 🛡️ Protocolos de Revisión y Mejora Continua
+
+- **frecuencia_auditoria:** "cada 14 días"
+    
+- Quién realiza revisiones: [nombre/rol]
+    
+- Cómo se reportan hallazgos y se actualizan las memorias.
+    
+- Enlaces a scripts/API de validación, etc.
+    
+
+
+## 📜 Historial de Modificaciones
+
+|Fecha|Autor|Acción|Detalles / Hash|
+|---|---|---|---|
+|YYYY-MM-DD|Kael|Creación|sha256:xxxx...|
+|YYYY-MM-DD|Centralesis|Modificación|sha256:yyyy...|
+
+
+## 🧩 Ejemplos de Registros
+
+- **Memoria crítica:**  
+    `MEM_2025-06-10_01` – decisión fundacional: arquitectura modular validada.
+- **Memoria de error/alerta:**  
+    `MEM_2025-06-10_02` – alerta_omision: falta de revisión semanal en Emma.
+- **Bitácora:**  
+    `2025-06-10` – Ejecutado script de sincronización yq, éxito.  
+    `2025-06-10` – Ejecutado script_backup.sh, error.
+- **Changelog:**  
+    `v1.2` – Implementada separación .md/.yaml y sistema de firmas.
+
+
+_Template validado y corregido para Agentes IA institucionales de ALMA_RESIST – 2025-06-10. No edites los bloques YAML sin validación previa._
+
+
+**Nota:**  
+Estas mejoras NO bloquean la operación actual y pueden ser implementadas progresivamente  
+cuando el sistema esté estable y el equipo lo disponga.
+
+## Archivo: s2vL.md
+Contenido:
+
+# 📝 Bitácora – Creación de Carpetas y Limpieza de Archivos de Prueba
+
+## Acciones Realizadas
+
+- Se crearon las carpetas modulares bajo `/core/notebooks/`:
+  - flujo_de_agentes/
+  - cargar_memorias/
+  - memorias/
+  - proyecto_kael/
+  - proyecto_emma/
+  - proyecto_alma/
+- Se agregó un README.md con encabezado YAML y enlaces IA-friendly en cada carpeta.
+- Se analizaron y limpiaron archivos conflictivos de Obsidian (`sync-conflict`), manteniendo sólo la versión válida.
+- Se movieron archivos de test y versiones viejas de scripts a `archivo/legacy_tests/`, con README contextual.
+- Se realizó commit segmentado: uno para la creación de carpetas, otro para la limpieza.
+- Se actualizó changelog y se registró esta bitácora.
+
+## Justificación
+
+Acción orientada a modularizar el espacio de trabajo de los agentes, asegurar trazabilidad, y reducir deuda técnica por archivos de prueba y conflictos no resueltos.
+
+[[changelog_2025-06-06_creacion_carpetas_y_limpieza.yaml]]
+[[criterios_ubicacion_vivo.md]]
+
+
+
+## 🧰 Scripts Disponibles
+
+### 📝 Bitácora Viva
+
+- **Ruta:** `bitacora/add_bitacora_entry_v0.1.2.py`
+- **Función:** Agrega una entrada estructurada al archivo de bitácora (`bitacora_viva.yaml`).
+- **Características:**
+  - Registro de acciones diarias, estados y motivos.
+  - Backup automático del archivo antes de modificarlo.
+  - Campos configurables desde línea de comandos (`--accion`, `--descripcion`, `--estado`, `--tags`, etc.).
+  - Soporte para `--dry-run` y rutas personalizadas.
+
+
+## 📎 Próximos Módulos Planeados
+
+- [ ] Registro de ideas (`ideas.yaml`)
+- [ ] Logging de eventos del sistema
+- [ ] CLI centralizador con menú interactivo
+- [ ] Integración con `tmux`, `watchdog` y otros automatismos
+
+
+## 👣 Ejemplo de uso
+
+```bash
+# Agregar una entrada al changelog
+python3 control_central/cli/changelog/add_changelog_entry_v0.1.2.py \
+  --version "0.1.3" \
+  --cambios "Nueva función de logging CLI" \
+  --impacto "Permite trazabilidad automática del sistema" \
+  --autor "Santi" \
+  --tags cli,log \
+  --changelog control_central/docs/changelog_vivo.yaml
+
+
+
+## 🧰 Scripts Disponibles
+
+### 📝 Bitácora Viva
+
+- **Ruta:** `bitacora/add_bitacora_entry_v0.1.2.py`
+- **Función:** Agrega una entrada estructurada al archivo de bitácora (`bitacora_viva.yaml`).
+- **Características:**
+  - Registro de acciones diarias, estados y motivos.
+  - Backup automático del archivo antes de modificarlo.
+  - Campos configurables desde línea de comandos (`--accion`, `--descripcion`, `--estado`, `--tags`, etc.).
+  - Soporte para `--dry-run` y rutas personalizadas.
+
+
+## 📎 Próximos Módulos Planeados
+
+- [ ] Registro de ideas (`ideas.yaml`)
+- [ ] Logging de eventos del sistema
+- [ ] CLI centralizador con menú interactivo
+- [ ] Integración con `tmux`, `watchdog` y otros automatismos
+
+
+## 👣 Ejemplo de uso
+
+```bash
+# Agregar una entrada al changelog
+python3 control_central/cli/changelog/add_changelog_entry_v0.1.2.py \
+  --version "0.1.3" \
+  --cambios "Nueva función de logging CLI" \
+  --impacto "Permite trazabilidad automática del sistema" \
+  --autor "Santi" \
+  --tags cli,log \
+  --changelog control_central/docs/changelog_vivo.yaml
+```
+
+
+
+Estado actual: ✅ FUNCIONAL
+
+Versión CLI Base: 0.1.x
+
+## Archivo: 7NK0.md
+Contenido:
+f# Flujo de Aprendizaje Vivo
+
+Por favor, respondé el siguiente cuestionario para consolidar el aprendizaje metodológico de esta sesión.  
+Luego, devolveme el comando CLI para registrar la entrada en `/control_central/flujo_de_trabajo/flujo_aprendizajes.yaml` usando el script correspondiente.
+
+1. ¿Qué aprendiste hoy del sistema, la IA o los flujos propuestos?
+2. ¿Qué aprendió el sistema de tu forma de trabajar, tus preferencias o bloqueos?
+3. ¿Qué ajuste concreto se implementó en la metodología?
+4. ¿Qué consejo le darías a un Santi/agente del futuro para mejorar el flujo?
+5. ¿Qué NO hay que volver a hacer?
+6. Observaciones o reflexiones extra.
+
+**Respuesta:**  
+Completar las respuestas y generar el comando para el script.
+
+## Archivo: NnXU.md
+Contenido:
+Esta carpeta contiene la version 0.1 del sistema que levanta encriptado
+
+[version estable]
+
+
+## Archivo: 73hW.md
+Contenido:
+# 🛡️ Montaje de partición cifrada con LUKS en Arch Linux
+
+## Paso 1: Desbloquear la partición LUKS
+
+Usá `cryptsetup` para desbloquear la partición cifrada:
+
+```bash
+cryptsetup open /dev/sda3 alma_root
+```
+
+Esto va a crear un dispositivo mapeado en:
+
+```
+/dev/mapper/alma_root
+```
+
+
+## Paso 3: Montar EFI (si aplica)
+
+Si tenés una partición EFI (común si estás en modo UEFI):
+
+```bash
+mkdir -p /mnt/boot/efi
+mount /dev/sda1 /mnt/boot/efi
+```
+
+
+## Paso 5: Verificación
+
+Para verificar que todo está bien montado:
+
+```bash
+lsblk -f
+```
+
+Deberías ver algo como:
+
+```
+/dev/mapper/alma_root  ext4   ...  /mnt
+/dev/sda1              vfat   ...  /mnt/boot/efi
+/dev/sda2              swap   ...  [SWAP]
+```
+
+# 1. Desmontar las particiones montadas
+umount -R /mnt
+
+# 2. Desactivar swap
+swapoff /dev/sda2
+
+# 3. Cerrar el volumen LUKS
+cryptsetup close alma_root
+
+
+
+## Paso 2: Montar la raíz del sistema
+
+Montá la partición desbloqueada como raíz:
+
+```bash
+mount /dev/mapper/alma_root /mnt
+```
+
+
+## Paso 4: Activar SWAP
+
+```bash
+swapon /dev/sda2
+```
+### Confirmar si ahi sap activo:
+
+```bash
+swapon --show
+```
+
+## Archivo: EaKM.md
+Contenido:
+# 🧠 Prompt Maestro v2 — Cargador Universal de Memorias Institucionales (ALMA_RESIST)
+
+**Fecha:** 2025-06-07  
+**Version:** v2  
+**Responsables:** Santi (humano), Kael (auditor CLI)  
+**Módulo:** /home/bird/alma_resist/control_central/memorias/  
+**Estado:** Vigente
+
+
+## ⚙️ Requerimientos funcionales y técnicos
+
+### 1. Gestión de esquema dinámica
+- Externalizar schema oficial a `/schemas/memoria_schema.json`, versionado semánticamente.
+- Validación estricta con `jsonschema.Draft7Validator.check_schema()`.
+- CLI debe permitir especificar versión de schema (`--schema-version`).
+- Subcomando para validar el schema (`validate-schema`).
+
+### 2. Concurrencia y robustez
+- Locks por archivo usando `FileLock` (timeout configurable, default 10s).
+- Lockfiles específicos por tipo (`*.memoria.lock`, `*.bitacora.lock`).
+- Reintentos inteligentes (backoff exponencial) en colisiones.
+- Escritura atómica (temp file + swap).
+
+### 3. Integridad y hashing
+- Generación automática de SHA-256 para cada registro (`_checksum`).
+- Verificación previa y reparación de hashes (`repair-checksums`).
+- Validación de integridad en cada lectura/escritura.
+
+### 4. Seguridad y multiidioma
+- Soporte multiidioma mediante `gettext` (diccionarios en `/locales/`).
+- Flags para forzar idioma (`--lang es/en`), autodetección del sistema.
+- Validación de fechas ISO 8601 y manejo de unicode seguro.
+- Roadmap para cifrado AES-GCM y auditoría SELinux.
+
+### 5. Optimización y escalabilidad
+- Carga y validación optimizadas para miles de registros.
+- Conversión masiva con subcomando `convert` (YAML↔JSON), soporte recursivo de directorios.
+- Soporte de Redis como backend opcional (roadmap).
+- API GraphQL planificada para integración futura.
+
+### 6. CLI y usabilidad avanzada
+- Nuevos flags: `--lock-timeout`, `--no-hash`, `--schema-version`, `--lang`.
+- Subcomandos: `validate-schema`, `repair-checksums`.
+- Normalización automática de tags (minúsculas, sin duplicados).
+- Reporte CLI de memorias cargadas, duplicadas, inconsistentes.
+
+### 7. Logs y auditoría estructurada
+- Logs en JSON/YAML, con timestamp, canal/origen, usuario/IA responsable.
+- Logs de acciones críticas y backups automáticos.
+- Registro de todas las inserciones y modificaciones.
+
+### 8. Dependencias y ambiente
+- python >= 3.10
+- jsonschema >= 5.4.0
+- pyyaml >= 7.0
+- filelock >= 5.0.0
+- rfc3339-validator (nuevo)
+
+
+## 📁 Rutas relevantes
+
+- `/home/bird/alma_resist/control_central/memorias/memorias.json`
+- `/home/bird/alma_resist/control_central/memorias/bitacora_viva.json`
+- `/home/bird/alma_resist/control_central/memorias/memorias.yaml`
+- `/home/bird/alma_resist/control_central/memorias/bitacora_viva.yaml`
+- `/home/bird/alma_resist/control_central/memorias/schemas/memoria_schema.json`
+- `/home/bird/alma_resist/control_central/memorias/locales/` *(diccionarios multiidioma)*
+
+
+*“La memoria institucional no es un archivo, es un sistema circulatorio de conocimiento vivo.”*  
+— Kael, Auditor CLI
+
+## Archivo: VIiG.md
+Contenido:
+# 🧠 Prompt Maestro v3 — Cargador Institucional de Memorias (ALMA_RESIST)
+
+**Fecha:** 2025-06-08  
+**Versión:** v3  
+**Responsables:** Santi (humano), Kael (auditor CLI), DeepSeek  
+**Módulo:** /home/bird/alma_resist/control_central/memorias/  
+**Estado:** CONSOLIDACIÓN INSTITUCIONAL
+
+
+## ⚙️ Requerimientos avanzados
+
+### 1. Consolidación, no borrado
+- Cargar todos los registros a memoria institucional y bitácora viva, **aunque haya redundancia temporal**.
+- No sobrescribir ni borrar registros por defecto.
+- Cada registro debe incluir:
+  - hash/checksum (SHA-256)
+  - fuente (cli, ia, api)
+  - autor/responsable
+  - fecha_hora y version_script
+
+### 2. Estructura flexible y auditable
+- Soporte para múltiples formatos: YAML, JSON, lote/batch.
+- Campos requeridos validados por schema externo versionado (`/schemas/memoria_schema.json`).
+- Permitir “campos extendidos” para upgrades, migraciones o info adicional (via `x-extensible: true`).
+
+### 3. Multibackend y resiliencia
+- Plugins para filesystem, Redis, SQLite y soporte futuro a cluster.
+- Lockfiles y atomicidad garantizada.
+- Backup automático antes de cada operación masiva.
+
+### 4. CLI extendido y modular
+- Flags: `--consolidate`, `--no-dedupe`, `--schema-version`, `--log-level`, `--rollback`, `--export`
+- Subcomandos: `validate`, `audit`, `convert`, `migrate`, `template`, `plugin`
+- Auditoría de seguridad (`audit --full`)
+- Generación y edición de registros por plantilla (`template generate`)
+
+### 5. Logs, changelogs y hooks CI/CD
+- Cada inserción, edición, migración deja log estructurado y evento en changelog.
+- Soporte de webhooks para integración con sistemas externos (ej: CI, backup remoto, alertas).
+- Auditoría automática de integridad (hashes, firmas, SELinux/ACL).
+
+### 6. Preparación IA-friendly
+- Todos los datos deben ser fácilmente indexables (archivos índice, DB, vector store).
+- Embeddings y campos de resumen para uso de LLM.
+- Exportación selectiva (por tags, tipo, rango temporal, responsable, etc.)
+
+
+## 📁 Rutas y referencias críticas
+
+- `/home/bird/alma_resist/control_central/memorias/`
+- `/schemas/memoria_schema.json`
+- `/locales/`
+- `/changelogs/`
+- `/README.md`
+
+
+
+
+
+_Utilizá siempre esta carpeta como sandbox antes de institucionalizar o publicar algo._
+
+
+id: IDEA_BASE_BITACORA_SCRIPT_2025-06-06_01
+tipo: idea_base_script
+modulo: control_central/asesor-ia/core/notebooks/bitacora_script
+autor: Santi & Kael
+fecha_creacion: 2025-06-06
+status: en_desarrollo
+version: 0.1
+tags: [bitacora, script, automatizacion, spec, blueprint]
+titulo: "Idea base del script de automatización de bitácora viva"
+objetivo: >
+  Definir el propósito, requisitos y estructura para el desarrollo del script que permitirá agregar entradas estructuradas a la bitácora viva de ALMA_RESIST.
+descripcion: |
+  Este documento semilla especifica los objetivos, reglas y requerimientos del script 'add_bitacora_entry.py'.
+  El objetivo es estandarizar y automatizar el registro de eventos, decisiones y reflexiones en la bitácora viva (YAML) institucional, garantizando compatibilidad con humanos, IA y procesos automatizados.
+requisitos_funcionales:
+  - El script debe agregar una nueva entrada (evento) en la bitácora viva YAML.
+  - Debe validar la estructura del YAML antes y después de la adición.
+  - Debe registrar campos mínimos: fecha, accion, descripcion, motivo, ejecutado_por, estado.
+  - Soportar argumentos CLI y, opcionalmente, modo interactivo.
+  - Hacer backup del archivo previo a cada modificación.
+requisitos_no_funcionales:
+  - Código portable y documentado.
+  - Sin dependencias innecesarias.
+  - Compatible con validadores YAML estándar.
+criterios_exito:
+  - Toda entrada queda correctamente registrada, sin romper la estructura.
+  - No se pierde información previa.
+  - El script es reutilizable y extensible.
+mejoras_optimizables:
+  - Permitir agregar la entrada también en bitácora viva MD y JSON de manera sincronizada.
+  - Soporte de templates de entrada customizables por agente o contexto.
+  - Registro automático del autor si no se especifica.
+  - Campos extendidos: adjuntos, links, hashes u otros metadatos arbitrarios.
+  - Rollback automático si la estructura queda malformada tras la operación.
+  - Validación de unicidad de ID antes de agregar.
+  - Fecha y hora automática si no se indica.
+  - Logger de ejecución y errores independiente de la bitácora viva.
+  - CLI robusta con ayuda extendida y soporte interactivo y batch.
+  - Modo dry-run para pruebas sin modificar archivos.
+  - Validación de estructura previa y posterior a cada operación.
+  - Hash de integridad individual por entrada, si se requiere máxima auditoría.
+## Archivo: SX7d.md
+Contenido:
+# Prompt – Generación de Script: add_bitacora_entry.py (Bitácora Viva ALMA_RESIST)
+
+**Contexto:**  
+Vas a generar un script CLI en Python llamado `add_bitacora_entry.py` para ALMA_RESIST, siguiendo esta idea base:
+
+
+**INSTRUCCIONES para DeepSeek:**
+- Implementá SOLO la función mínima viable (MVP) según los requisitos funcionales.
+- El script debe ejecutarse desde terminal y permitir argumentos CLI (ejemplo: --accion, --descripcion, --motivo, etc.).
+- Validá la estructura YAML antes y después de modificar.
+- Hacé backup automático del archivo antes de escribir.
+- El código debe ser legible, modular y con comentarios claros.
+- Las mejoras “optimizables” déjalas en la sección TODO o comentarios, para iteraciones futuras.
+- Compatible con Python 3.8+, sin dependencias innecesarias.
+
+**SALIDA:**  
+El código fuente completo, listo para guardar como `add_bitacora_entry.py`, siguiendo la estructura y los requisitos definidos arriba.
+
+
+id: IDEA_BASE_BITACORA_SCRIPT_2025-06-06_01
+tipo: idea_base_script
+modulo: control_central/asesor-ia/core/notebooks/bitacora_script
+autor: Santi & Kael
+fecha_creacion: 2025-06-06
+status: en_desarrollo
+version: 0.1
+tags: [bitacora, script, automatizacion, spec, blueprint]
+titulo: "Idea base del script de automatización de bitácora viva"
+objetivo: >
+  Definir el propósito, requisitos y estructura para el desarrollo del script que permitirá agregar entradas estructuradas a la bitácora viva de ALMA_RESIST.
+descripcion: |
+  Este documento semilla especifica los objetivos, reglas y requerimientos del script 'add_bitacora_entry.py'.
+  El objetivo es estandarizar y automatizar el registro de eventos, decisiones y reflexiones en la bitácora viva (YAML) institucional, garantizando compatibilidad con humanos, IA y procesos automatizados.
+requisitos_funcionales:
+  - El script debe agregar una nueva entrada (evento) en la bitácora viva YAML.
+  - Debe validar la estructura del YAML antes y después de la adición.
+  - Debe registrar campos mínimos: fecha, accion, descripcion, motivo, ejecutado_por, estado.
+  - Soportar argumentos CLI y, opcionalmente, modo interactivo.
+  - Hacer backup del archivo previo a cada modificación.
+requisitos_no_funcionales:
+  - Código portable y documentado.
+  - Sin dependencias innecesarias.
+  - Compatible con validadores YAML estándar.
+criterios_exito:
+  - Toda entrada queda correctamente registrada, sin romper la estructura.
+  - No se pierde información previa.
+  - El script es reutilizable y extensible.
+mejoras_optimizables:
+  - Permitir agregar la entrada también en bitácora viva MD y JSON de manera sincronizada.
+  - Soporte de templates de entrada customizables por agente o contexto.
+  - Registro automático del autor si no se especifica.
+  - Campos extendidos: adjuntos, links, hashes u otros metadatos arbitrarios.
+  - Rollback automático si la estructura queda malformada tras la operación.
+  - Validación de unicidad de ID antes de agregar.
+  - Fecha y hora automática si no se indica.
+  - Logger de ejecución y errores independiente de la bitácora viva.
+  - CLI robusta con ayuda extendida y soporte interactivo y batch.
+  - Modo dry-run para pruebas sin modificar archivos.
+  - Validación de estructura previa y posterior a cada operación.
+  - Hash de integridad individual por entrada, si se requiere máxima auditoría.
+## Archivo: oEXB.md
+Contenido:
+# Prompt – Generación de Script: add_bitacora_entry.py (Bitácora Viva ALMA_RESIST)
+
+**Contexto:**  
+Vas a generar un script CLI en Python llamado `add_bitacora_entry.py` para ALMA_RESIST, siguiendo esta idea base:
+
+
+**INSTRUCCIONES para DeepSeek:**
+- Implementá SOLO la función mínima viable (MVP) según los requisitos funcionales.
+- El script debe ejecutarse desde terminal y permitir argumentos CLI (ejemplo: --accion, --descripcion, --motivo, etc.).
+- Validá la estructura YAML antes y después de modificar.
+- Hacé backup automático del archivo antes de escribir.
+- El código debe ser legible, modular y con comentarios claros.
+- Las mejoras “optimizables” déjalas en la sección TODO o comentarios, para iteraciones futuras.
+- Compatible con Python 3.8+, sin dependencias innecesarias.
+
+**SALIDA:**  
+El código fuente completo, listo para guardar como `add_bitacora_entry.py`, siguiendo la estructura y los requisitos definidos arriba.
+
+
+## Archivo: CfIx.md
+Contenido:
+## 1. Abrir LUKS con cryptsetup
+
+```bash
+cryptsetup open /dev/sda3 alma_root
+
+## Archivo: MkTB.md
+Contenido:
+## 🧠 Prompt DeepSeek – Desarrollo Script Universal `fix_metadata` para ALMA_RESIST
+
+**Contexto:**  
+Vas a desarrollar un script profesional y auditable para el ecosistema ALMA_RESIST, alojado por convención en:  
+`core/scripts/fix_metadata/`
+
+El script debe recorrer hacia arriba hasta la raíz de cada módulo, y desde ahí formatear todos los archivos críticos (.md, .yaml, .json, .py, .sh, etc.) según el estándar de metadata universal.
+
+
+### **Requerimientos funcionales:**
+
+1. **Recorrer en profundidad** (recursivo) desde la ubicación del script hasta la raíz del módulo, y formatear todos los archivos soportados.
+2. **Validar, corregir y completar** el bloque de metadata YAML según el siguiente estándar universal (ver más abajo).
+3. **Actualizar o añadir los siguientes campos obligatorios:**
+   - version, id, tipo, formato, modulo, titulo, autor, fecha_creacion, fecha_actualizacion, status, version_sistema, origen, tags, hash_integridad, linked_to, descripcion.
+4. **Calcular y actualizar el hash_integridad** (SHA256) del contenido (excluyendo el propio hash).
+5. **Loggear** todos los cambios realizados (archivo, campos modificados, timestamp) en un log estructurado (idealmente en YAML o JSON).
+6. **Generar backup** del archivo original antes de modificarlo.
+7. **Modo dry-run**: permitir simular la corrección y mostrar el resultado sin modificar los archivos reales.
+8. **Detectar y reportar errores**: listar los archivos que no se pueden reparar automáticamente, dejar registro de ello.
+9. **Ser fácilmente replicable**: el script debe funcionar igual si se copia a cualquier carpeta `core/scripts/fix_metadata/` de cualquier módulo ALMA_RESIST.
+
+version: 1.0
+id: <tipo>_<yyyy-mm-dd>_<xx>       # Ejemplo: MEM_2025-06-06_04
+tipo: <tipo_registro>              # fundacional, decision, bitacora, changelog, script, etc.
+formato: <md|yaml|py|sh|json>
+modulo: <modulo/carpeta>
+titulo: "<título_breve_descriptivo>"
+autor: <humano|agente>
+fecha_creacion: YYYY-MM-DD
+fecha_actualizacion: YYYY-MM-DD
+status: <activo|cerrado|en_revision|obsoleto>
+version_sistema: <sistema_version>
+origen: <archivo_origen|manual>
+tags: [tag1, tag2, ...]
+hash_integridad: sha256:<hash>
+linked_to: [relaciones_cruzadas]
+descripcion: >
+  Breve descripción del propósito y contexto del archivo.
+## Archivo: Sdw2.md
+Contenido:
+## 🧠 Prompt DeepSeek – Desarrollo Script Universal `fix_metadata` para ALMA_RESIST
+
+**Contexto:**  
+Vas a desarrollar un script profesional y auditable para el ecosistema ALMA_RESIST, alojado por convención en:  
+`core/scripts/fix_metadata/`
+
+El script debe recorrer hacia arriba hasta la raíz de cada módulo, y desde ahí formatear todos los archivos críticos (.md, .yaml, .json, .py, .sh, etc.) según el estándar de metadata universal.
+
+
+### **Requerimientos funcionales:**
+
+1. **Recorrer en profundidad** (recursivo) desde la ubicación del script hasta la raíz del módulo, y formatear todos los archivos soportados.
+2. **Validar, corregir y completar** el bloque de metadata YAML según el siguiente estándar universal (ver más abajo).
+3. **Actualizar o añadir los siguientes campos obligatorios:**
+   - version, id, tipo, formato, modulo, titulo, autor, fecha_creacion, fecha_actualizacion, status, version_sistema, origen, tags, hash_integridad, linked_to, descripcion.
+4. **Calcular y actualizar el hash_integridad** (SHA256) del contenido (excluyendo el propio hash).
+5. **Loggear** todos los cambios realizados (archivo, campos modificados, timestamp) en un log estructurado (idealmente en YAML o JSON).
+6. **Generar backup** del archivo original antes de modificarlo.
+7. **Modo dry-run**: permitir simular la corrección y mostrar el resultado sin modificar los archivos reales.
+8. **Detectar y reportar errores**: listar los archivos que no se pueden reparar automáticamente, dejar registro de ello.
+9. **Ser fácilmente replicable**: el script debe funcionar igual si se copia a cualquier carpeta `core/scripts/fix_metadata/` de cualquier módulo ALMA_RESIST.
+
+version: 1.0
+id: <tipo>_<yyyy-mm-dd>_<xx>       # Ejemplo: MEM_2025-06-06_04
+tipo: <tipo_registro>              # fundacional, decision, bitacora, changelog, script, etc.
+formato: <md|yaml|py|sh|json>
+modulo: <modulo/carpeta>
+titulo: "<título_breve_descriptivo>"
+autor: <humano|agente>
+fecha_creacion: YYYY-MM-DD
+fecha_actualizacion: YYYY-MM-DD
+status: <activo|cerrado|en_revision|obsoleto>
+version_sistema: <sistema_version>
+origen: <archivo_origen|manual>
+tags: [tag1, tag2, ...]
+hash_integridad: sha256:<hash>
+linked_to: [relaciones_cruzadas]
+descripcion: >
+  Breve descripción del propósito y contexto del archivo.
+## Archivo: 4wEr.md
+Contenido:
+# 🧠 Prompt DeepSeek – Script Universal de Corrección y Estandarización de Metadata (fix_metadata v2) para ALMA_RESIST
+
+
+## **Requisitos funcionales y de seguridad**
+
+### 1. **Recorrido y exclusión**
+- El script debe buscar la raíz del módulo (por arriba) y procesar TODOS los archivos relevantes (.md, .yaml, .json, .py, .sh), pero:
+- **Nunca debe modificar ni recorrer** (incluir lista de exclusión obligada):
+    - `.git`, `.github`, `.obsidian`, `.sync*`, `venv`, `env`, `virtualenv`, `__pycache__`, `node_modules`, `datasets`, `data`, `media`, `images`, `img`, `bin`, `backup`, `backups`, `logs` (salvo logs propios `.md`, `.yaml`), `tmp`, `temp`, `core/scripts/fix_metadata/` (para no auto-editarse), cualquier directorio oculto (`.`), o especificado en `.fix_metadata_ignore`.
+- **No modificar archivos binarios ni temporales**: (extensiones excluidas: `.jpg`, `.png`, `.zip`, `.db`, `.mp4`, `.exe`, `.tmp`, `.bak`, `.lock`, `.sync-conflict-*`).
+- Solo procesar extensiones soportadas: `.md`, `.yaml`, `.yml`, `.json`, `.py`, `.sh`.
+
+### 2. **Exclusión ampliable**
+- Permitir que el usuario agregue exclusiones específicas con un archivo `.fix_metadata_ignore` (sintaxis tipo `.gitignore`).
+
+### 3. **Flujo seguro**
+- **Nunca debe auto-modificarse** ni modificar el propio script/carpeta.
+- Debe siempre crear **backup previo** a modificar cualquier archivo.
+- **Modo dry-run**: simular cambios sin modificar archivos.
+- **Logs estructurados** por acción: cambios, errores, archivos saltados, backups.
+- **No debe borrar ni truncar archivos aunque detecte metadata inválida**: siempre loguear, nunca borrar.
+
+### 4. **Metadata universal a aplicar**
+El bloque YAML debe tener, como mínimo, los siguientes campos (con comentarios y validaciones):
+
+```yaml
+```
+5. Características del script
+
+    Recorrer en profundidad solo las carpetas relevantes (ver exclusiones arriba).
+
+    Verificar y corregir el bloque YAML, completando campos faltantes (con valores razonables por defecto/documentados).
+
+    Calcular y actualizar hash_integridad SHA256 del contenido excluyendo este campo.
+
+    Logs de cambios, backups realizados, errores detectados.
+
+    Reporte resumen al finalizar.
+
+    Fácilmente replicable: al copiar a cualquier módulo, funciona sin cambios salvo rutas.
+
+    Parámetro de carpeta raíz opcional, autodetección de entorno ALMA_RESIST.
+
+    Dejar configuraciones claras y comentarios para personalización.
+
+    Modular, con funciones separadas y comentarios abundantes.
+
+6. Prácticas pro
+
+    El script nunca debe dejar archivos corruptos ni en estado incompleto (rollback automático si hay error en escritura).
+
+    Soporte para ampliar lista de exclusión por parámetro CLI.
+
+    El log puede ser en .jsonl o .yaml para facilitar parsing IA/auditoría.
+
+    Resumen final: archivos procesados, modificados, saltados, errores, backups hechos, dry-run vs real.
+
+Extras
+
+    Programar en Python 3, preferentemente solo usando dependencias estándar (salvo PyYAML).
+
+    Dejar toda la lógica en un solo archivo principal.
+
+    Dejar la referencia a este prompt/IDEA en el header del script generado.
+
+    El script debe estar listo para ejecutarse desde cualquier carpeta core/scripts/fix_metadata/.
+
+Referencia oficial:
+[IDEA_2025-06-06_01] – ALMA_RESIST | Santiago Calvo | Centralesis v2.3
+Instrucciones finales
+
+    Cumplí TODOS los criterios arriba detallados.
+
+    Si no podés hacer algo exactamente igual, aclaralo en comentarios y dejá el punto listo para ajustar manualmente.
+
+    El script debe ser “production ready” para ser usado y adaptado en cualquier otro módulo del sistema ALMA_RESIST.
+    ---
+
+## 🟢 **Archivo descargable**
+
+[Descargar prompt_fix_metadata_v2.md](sandbox:/mnt/data/prompt_fix_metadata_v2.md)
+
+> **Podés copiar el contenido directamente o usar el archivo para cargarlo en DeepSeek o cualquier plataforma de generación IA!**
+
+¿Te gustaría agregar alguna advertencia, nota personal, o link de referencia extra?  
+¿O lo dejamos así, listo para darle play en DeepSeek?
+
+
+Con esto, el script generado será mucho más “humano-friendly” y auditable,  
+y DeepSeek sabrá que debe priorizar la comunicación clara del estado final del proceso.
+
+
+## **Contexto:**
+Desarrollar un script profesional, seguro y auditable para el ecosistema ALMA_RESIST, alojado por convención en cada módulo en:  
+`core/scripts/fix_metadata/`
+
+El objetivo es validar, corregir y estandarizar los bloques de metadata YAML en todos los archivos críticos de cada módulo, dejando logs y backups de cada cambio y asegurando que NO se toquen archivos ni carpetas excluidas o sensibles.
+
+version: 1.0
+id: <tipo>_<yyyy-mm-dd>_<xx>           # Ejemplo: MEM_2025-06-06_04
+tipo: <tipo_registro>                  # fundacional, decision, bitacora, changelog, script, etc.
+formato: <md|yaml|py|sh|json>
+modulo: <modulo/carpeta>
+titulo: "<título_breve_descriptivo>"
+autor: <humano|agente>
+fecha_creacion: YYYY-MM-DD
+fecha_actualizacion: YYYY-MM-DD
+status: <activo|cerrado|en_revision|obsoleto>
+version_sistema: <sistema_version>
+origen: <archivo_origen|manual>
+tags: [tag1, tag2, ...]
+hash_integridad: sha256:<hash>
+linked_to: [relaciones_cruzadas]
+descripcion: >
+  Breve descripción del propósito y contexto del archivo.
+
+## 🟢 Apéndice: Notificaciones claras de estado al usuario
+
+**Requisito adicional para el script:**
+
+- Al finalizar el proceso (sea en modo real o dry-run), el script debe mostrar **notificaciones claras** por consola indicando:
+  - ✔️ **Éxito**: Si todo terminó bien, muestra un mensaje tipo “✅ Proceso completado correctamente. Todos los archivos procesados sin errores.”
+  - ⚠️ **Advertencias**: Si hubo archivos saltados, errores menores o archivos no modificados, mostrar resumen con conteo y detalles.
+  - ❌ **Errores**: Si el script encuentra errores críticos (no puede modificar, acceso denegado, excepción grave), mostrar el error en rojo/visible y sugerir revisión del log.
+
+**Recomendaciones de formato:**
+- Usar emojis o color terminal (`print('\033[92m ... \033[0m'` para verde, `\033[91m` para rojo, etc.) para destacar estados.
+- El resumen final debe incluir:  
+  - Archivos procesados, modificados, saltados, errores, backups realizados.
+  - Ruta del log generado y sugerencia de revisar logs si hay advertencias o errores.
+
+**Ejemplo de notificación final esperada:**
+
+```bash
+✅ Proceso completado correctamente. Archivos procesados: 38 | Modificados: 11 | Errores: 0 | Ver detalles en fix_metadata.log
+```
+o, en caso de error:
+
+```bash
+❌ Proceso finalizado con errores. Archivos procesados: 38 | Modificados: 10 | Errores: 2
+Revisá el log 'fix_metadata.log' para ver los detalles de los errores.
+```
+
+o, si solo hubo advertencias:
+
+```bash
+⚠️ Proceso finalizado con advertencias. Algunos archivos no pudieron procesarse automáticamente.
+Revisá el log para detalles: archivos saltados, advertencias, errores menores.
+```
+
+
+
+Esto mejora la experiencia y reduce el riesgo de omitir problemas tras la ejecución.
+
+## Archivo: 6kgv.md
+Contenido:
+# 🧠 Prompt DeepSeek – Script Universal de Corrección y Estandarización de Metadata (fix_metadata v2) para ALMA_RESIST
+
+
+## **Requisitos funcionales y de seguridad**
+
+### 1. **Recorrido y exclusión**
+- El script debe buscar la raíz del módulo (por arriba) y procesar TODOS los archivos relevantes (.md, .yaml, .json, .py, .sh), pero:
+- **Nunca debe modificar ni recorrer** (incluir lista de exclusión obligada):
+    - `.git`, `.github`, `.obsidian`, `.sync*`, `venv`, `env`, `virtualenv`, `__pycache__`, `node_modules`, `datasets`, `data`, `media`, `images`, `img`, `bin`, `backup`, `backups`, `logs` (salvo logs propios `.md`, `.yaml`), `tmp`, `temp`, `core/scripts/fix_metadata/` (para no auto-editarse), cualquier directorio oculto (`.`), o especificado en `.fix_metadata_ignore`.
+- **No modificar archivos binarios ni temporales**: (extensiones excluidas: `.jpg`, `.png`, `.zip`, `.db`, `.mp4`, `.exe`, `.tmp`, `.bak`, `.lock`, `.sync-conflict-*`).
+- Solo procesar extensiones soportadas: `.md`, `.yaml`, `.yml`, `.json`, `.py`, `.sh`.
+
+### 2. **Exclusión ampliable**
+- Permitir que el usuario agregue exclusiones específicas con un archivo `.fix_metadata_ignore` (sintaxis tipo `.gitignore`).
+
+### 3. **Flujo seguro**
+- **Nunca debe auto-modificarse** ni modificar el propio script/carpeta.
+- Debe siempre crear **backup previo** a modificar cualquier archivo.
+- **Modo dry-run**: simular cambios sin modificar archivos.
+- **Logs estructurados** por acción: cambios, errores, archivos saltados, backups.
+- **No debe borrar ni truncar archivos aunque detecte metadata inválida**: siempre loguear, nunca borrar.
+
+### 4. **Metadata universal a aplicar**
+El bloque YAML debe tener, como mínimo, los siguientes campos (con comentarios y validaciones):
+
+```yaml
+```
+5. Características del script
+
+    Recorrer en profundidad solo las carpetas relevantes (ver exclusiones arriba).
+
+    Verificar y corregir el bloque YAML, completando campos faltantes (con valores razonables por defecto/documentados).
+
+    Calcular y actualizar hash_integridad SHA256 del contenido excluyendo este campo.
+
+    Logs de cambios, backups realizados, errores detectados.
+
+    Reporte resumen al finalizar.
+
+    Fácilmente replicable: al copiar a cualquier módulo, funciona sin cambios salvo rutas.
+
+    Parámetro de carpeta raíz opcional, autodetección de entorno ALMA_RESIST.
+
+    Dejar configuraciones claras y comentarios para personalización.
+
+    Modular, con funciones separadas y comentarios abundantes.
+
+6. Prácticas pro
+
+    El script nunca debe dejar archivos corruptos ni en estado incompleto (rollback automático si hay error en escritura).
+
+    Soporte para ampliar lista de exclusión por parámetro CLI.
+
+    El log puede ser en .jsonl o .yaml para facilitar parsing IA/auditoría.
+
+    Resumen final: archivos procesados, modificados, saltados, errores, backups hechos, dry-run vs real.
+
+Extras
+
+    Programar en Python 3, preferentemente solo usando dependencias estándar (salvo PyYAML).
+
+    Dejar toda la lógica en un solo archivo principal.
+
+    Dejar la referencia a este prompt/IDEA en el header del script generado.
+
+    El script debe estar listo para ejecutarse desde cualquier carpeta core/scripts/fix_metadata/.
+
+Referencia oficial:
+[IDEA_2025-06-06_01] – ALMA_RESIST | Santiago Calvo | Centralesis v2.3
+Instrucciones finales
+
+    Cumplí TODOS los criterios arriba detallados.
+
+    Si no podés hacer algo exactamente igual, aclaralo en comentarios y dejá el punto listo para ajustar manualmente.
+
+    El script debe ser “production ready” para ser usado y adaptado en cualquier otro módulo del sistema ALMA_RESIST.
+    ---
+
+## 🟢 **Archivo descargable**
+
+[Descargar prompt_fix_metadata_v2.md](sandbox:/mnt/data/prompt_fix_metadata_v2.md)
+
+> **Podés copiar el contenido directamente o usar el archivo para cargarlo en DeepSeek o cualquier plataforma de generación IA!**
+
+¿Te gustaría agregar alguna advertencia, nota personal, o link de referencia extra?  
+¿O lo dejamos así, listo para darle play en DeepSeek?
+
+## Archivo: 6uSF.md
+Contenido:
+# 🧠 Prompt DeepSeek – Script Universal de Corrección y Estandarización de Metadata (fix_metadata v2) para ALMA_RESIST
+
+
+## **Requisitos funcionales y de seguridad**
+
+### 1. **Recorrido y exclusión**
+- El script debe buscar la raíz del módulo (por arriba) y procesar TODOS los archivos relevantes (.md, .yaml, .json, .py, .sh), pero:
+- **Nunca debe modificar ni recorrer** (incluir lista de exclusión obligada):
+    - `.git`, `.github`, `.obsidian`, `.sync*`, `venv`, `env`, `virtualenv`, `__pycache__`, `node_modules`, `datasets`, `data`, `media`, `images`, `img`, `bin`, `backup`, `backups`, `logs` (salvo logs propios `.md`, `.yaml`), `tmp`, `temp`, `core/scripts/fix_metadata/` (para no auto-editarse), cualquier directorio oculto (`.`), o especificado en `.fix_metadata_ignore`.
+- **No modificar archivos binarios ni temporales**: (extensiones excluidas: `.jpg`, `.png`, `.zip`, `.db`, `.mp4`, `.exe`, `.tmp`, `.bak`, `.lock`, `.sync-conflict-*`).
+- Solo procesar extensiones soportadas: `.md`, `.yaml`, `.yml`, `.json`, `.py`, `.sh`.
+
+### 2. **Exclusión ampliable**
+- Permitir que el usuario agregue exclusiones específicas con un archivo `.fix_metadata_ignore` (sintaxis tipo `.gitignore`).
+
+### 3. **Flujo seguro**
+- **Nunca debe auto-modificarse** ni modificar el propio script/carpeta.
+- Debe siempre crear **backup previo** a modificar cualquier archivo.
+- **Modo dry-run**: simular cambios sin modificar archivos.
+- **Logs estructurados** por acción: cambios, errores, archivos saltados, backups.
+- **No debe borrar ni truncar archivos aunque detecte metadata inválida**: siempre loguear, nunca borrar.
+
+### 4. **Metadata universal a aplicar**
+El bloque YAML debe tener, como mínimo, los siguientes campos (con comentarios y validaciones):
+
+```yaml
+
+
+
+## **Contexto:**
+Desarrollar un script profesional, seguro y auditable para el ecosistema ALMA_RESIST, alojado por convención en cada módulo en:  
+`core/scripts/fix_metadata/`
+
+El objetivo es validar, corregir y estandarizar los bloques de metadata YAML en todos los archivos críticos de cada módulo, dejando logs y backups de cada cambio y asegurando que NO se toquen archivos ni carpetas excluidas o sensibles.
+
+version: 1.0
+id: <tipo>_<yyyy-mm-dd>_<xx>           # Ejemplo: MEM_2025-06-06_04
+tipo: <tipo_registro>                  # fundacional, decision, bitacora, changelog, script, etc.
+formato: <md|yaml|py|sh|json>
+modulo: <modulo/carpeta>
+titulo: "<título_breve_descriptivo>"
+autor: <humano|agente>
+fecha_creacion: YYYY-MM-DD
+fecha_actualizacion: YYYY-MM-DD
+status: <activo|cerrado|en_revision|obsoleto>
+version_sistema: <sistema_version>
+origen: <archivo_origen|manual>
+tags: [tag1, tag2, ...]
+hash_integridad: sha256:<hash>
+linked_to: [relaciones_cruzadas]
+descripcion: >
+  Breve descripción del propósito y contexto del archivo.
+
+## 🟢 Apéndice: Notificaciones claras de estado al usuario
+
+**Requisito adicional para el script:**
+
+- Al finalizar el proceso (sea en modo real o dry-run), el script debe mostrar **notificaciones claras** por consola indicando:
+  - ✔️ **Éxito**: Si todo terminó bien, muestra un mensaje tipo “✅ Proceso completado correctamente. Todos los archivos procesados sin errores.”
+  - ⚠️ **Advertencias**: Si hubo archivos saltados, errores menores o archivos no modificados, mostrar resumen con conteo y detalles.
+  - ❌ **Errores**: Si el script encuentra errores críticos (no puede modificar, acceso denegado, excepción grave), mostrar el error en rojo/visible y sugerir revisión del log.
+
+**Recomendaciones de formato:**
+- Usar emojis o color terminal (`print('\033[92m ... \033[0m'` para verde, `\033[91m` para rojo, etc.) para destacar estados.
+- El resumen final debe incluir:  
+  - Archivos procesados, modificados, saltados, errores, backups realizados.
+  - Ruta del log generado y sugerencia de revisar logs si hay advertencias o errores.
+
+**Ejemplo de notificación final esperada:**
+
+```bash
+✅ Proceso completado correctamente. Archivos procesados: 38 | Modificados: 11 | Errores: 0 | Ver detalles en fix_metadata.log
+```
+o, en caso de error:
+
+```bash
+❌ Proceso finalizado con errores. Archivos procesados: 38 | Modificados: 10 | Errores: 2
+Revisá el log 'fix_metadata.log' para ver los detalles de los errores.
+```
+
+o, si solo hubo advertencias:
+
+
+
+
+## **Contexto:**
+Desarrollar un script profesional, seguro y auditable para el ecosistema ALMA_RESIST, alojado por convención en cada módulo en:  
+`core/scripts/fix_metadata/`
+
+El objetivo es validar, corregir y estandarizar los bloques de metadata YAML en todos los archivos críticos de cada módulo, dejando logs y backups de cada cambio y asegurando que NO se toquen archivos ni carpetas excluidas o sensibles.
+
+version: 1.0
+id: <tipo>_<yyyy-mm-dd>_<xx>           # Ejemplo: MEM_2025-06-06_04
+tipo: <tipo_registro>                  # fundacional, decision, bitacora, changelog, script, etc.
+formato: <md|yaml|py|sh|json>
+modulo: <modulo/carpeta>
+titulo: "<título_breve_descriptivo>"
+autor: <humano|agente>
+fecha_creacion: YYYY-MM-DD
+fecha_actualizacion: YYYY-MM-DD
+status: <activo|cerrado|en_revision|obsoleto>
+version_sistema: <sistema_version>
+origen: <archivo_origen|manual>
+tags: [tag1, tag2, ...]
+hash_integridad: sha256:<hash>
+linked_to: [relaciones_cruzadas]
+descripcion: >
+  Breve descripción del propósito y contexto del archivo.
+
+## 🟢 Apéndice: Notificaciones claras de estado al usuario
+
+**Requisito adicional para el script:**
+
+- Al finalizar el proceso (sea en modo real o dry-run), el script debe mostrar **notificaciones claras** por consola indicando:
+  - ✔️ **Éxito**: Si todo terminó bien, muestra un mensaje tipo “✅ Proceso completado correctamente. Todos los archivos procesados sin errores.”
+  - ⚠️ **Advertencias**: Si hubo archivos saltados, errores menores o archivos no modificados, mostrar resumen con conteo y detalles.
+  - ❌ **Errores**: Si el script encuentra errores críticos (no puede modificar, acceso denegado, excepción grave), mostrar el error en rojo/visible y sugerir revisión del log.
+
+**Recomendaciones de formato:**
+- Usar emojis o color terminal (`print('\033[92m ... \033[0m'` para verde, `\033[91m` para rojo, etc.) para destacar estados.
+- El resumen final debe incluir:  
+  - Archivos procesados, modificados, saltados, errores, backups realizados.
+  - Ruta del log generado y sugerencia de revisar logs si hay advertencias o errores.
+
+**Ejemplo de notificación final esperada:**
+
+```bash
+✅ Proceso completado correctamente. Archivos procesados: 38 | Modificados: 11 | Errores: 0 | Ver detalles en fix_metadata.log
+
+
+
+## **Contexto:**
+Desarrollar un script profesional, seguro y auditable para el ecosistema ALMA_RESIST, alojado por convención en cada módulo en:  
+`core/scripts/fix_metadata/`
+
+El objetivo es validar, corregir y estandarizar los bloques de metadata YAML en todos los archivos críticos de cada módulo, dejando logs y backups de cada cambio y asegurando que NO se toquen archivos ni carpetas excluidas o sensibles.
+
+version: 1.0
+id: <tipo>_<yyyy-mm-dd>_<xx>           # Ejemplo: MEM_2025-06-06_04
+tipo: <tipo_registro>                  # fundacional, decision, bitacora, changelog, script, etc.
+formato: <md|yaml|py|sh|json>
+modulo: <modulo/carpeta>
+titulo: "<título_breve_descriptivo>"
+autor: <humano|agente>
+fecha_creacion: YYYY-MM-DD
+fecha_actualizacion: YYYY-MM-DD
+status: <activo|cerrado|en_revision|obsoleto>
+version_sistema: <sistema_version>
+origen: <archivo_origen|manual>
+tags: [tag1, tag2, ...]
+hash_integridad: sha256:<hash>
+linked_to: [relaciones_cruzadas]
+descripcion: >
+  Breve descripción del propósito y contexto del archivo.
+## Archivo: eKWN.md
+Contenido:
+# 🧠 Prompt DeepSeek – Script Universal de Corrección y Estandarización de Metadata (fix_metadata v2) para ALMA_RESIST
+
+
+## **Requisitos funcionales y de seguridad**
+
+### 1. **Recorrido y exclusión**
+- El script debe buscar la raíz del módulo (por arriba) y procesar TODOS los archivos relevantes (.md, .yaml, .json, .py, .sh), pero:
+- **Nunca debe modificar ni recorrer** (incluir lista de exclusión obligada):
+    - `.git`, `.github`, `.obsidian`, `.sync*`, `venv`, `env`, `virtualenv`, `__pycache__`, `node_modules`, `datasets`, `data`, `media`, `images`, `img`, `bin`, `backup`, `backups`, `logs` (salvo logs propios `.md`, `.yaml`), `tmp`, `temp`, `core/scripts/fix_metadata/` (para no auto-editarse), cualquier directorio oculto (`.`), o especificado en `.fix_metadata_ignore`.
+- **No modificar archivos binarios ni temporales**: (extensiones excluidas: `.jpg`, `.png`, `.zip`, `.db`, `.mp4`, `.exe`, `.tmp`, `.bak`, `.lock`, `.sync-conflict-*`).
+- Solo procesar extensiones soportadas: `.md`, `.yaml`, `.yml`, `.json`, `.py`, `.sh`.
+
+### 2. **Exclusión ampliable**
+- Permitir que el usuario agregue exclusiones específicas con un archivo `.fix_metadata_ignore` (sintaxis tipo `.gitignore`).
+
+### 3. **Flujo seguro**
+- **Nunca debe auto-modificarse** ni modificar el propio script/carpeta.
+- Debe siempre crear **backup previo** a modificar cualquier archivo.
+- **Modo dry-run**: simular cambios sin modificar archivos.
+- **Logs estructurados** por acción: cambios, errores, archivos saltados, backups.
+- **No debe borrar ni truncar archivos aunque detecte metadata inválida**: siempre loguear, nunca borrar.
+
+### 4. **Metadata universal a aplicar**
+El bloque YAML debe tener, como mínimo, los siguientes campos (con comentarios y validaciones):
+
+```yaml
+```
+5. Características del script
+
+    Recorrer en profundidad solo las carpetas relevantes (ver exclusiones arriba).
+
+    Verificar y corregir el bloque YAML, completando campos faltantes (con valores razonables por defecto/documentados).
+
+    Calcular y actualizar hash_integridad SHA256 del contenido excluyendo este campo.
+
+    Logs de cambios, backups realizados, errores detectados.
+
+    Reporte resumen al finalizar.
+
+    Fácilmente replicable: al copiar a cualquier módulo, funciona sin cambios salvo rutas.
+
+    Parámetro de carpeta raíz opcional, autodetección de entorno ALMA_RESIST.
+
+    Dejar configuraciones claras y comentarios para personalización.
+
+    Modular, con funciones separadas y comentarios abundantes.
+
+6. Prácticas pro
+
+    El script nunca debe dejar archivos corruptos ni en estado incompleto (rollback automático si hay error en escritura).
+
+    Soporte para ampliar lista de exclusión por parámetro CLI.
+
+    El log puede ser en .jsonl o .yaml para facilitar parsing IA/auditoría.
+
+    Resumen final: archivos procesados, modificados, saltados, errores, backups hechos, dry-run vs real.
+
+Extras
+
+    Programar en Python 3, preferentemente solo usando dependencias estándar (salvo PyYAML).
+
+    Dejar toda la lógica en un solo archivo principal.
+
+    Dejar la referencia a este prompt/IDEA en el header del script generado.
+
+    El script debe estar listo para ejecutarse desde cualquier carpeta core/scripts/fix_metadata/.
+
+Referencia oficial:
+[IDEA_2025-06-06_01] – ALMA_RESIST | Santiago Calvo | Centralesis v2.3
+Instrucciones finales
+
+    Cumplí TODOS los criterios arriba detallados.
+
+    Si no podés hacer algo exactamente igual, aclaralo en comentarios y dejá el punto listo para ajustar manualmente.
+
+    El script debe ser “production ready” para ser usado y adaptado en cualquier otro módulo del sistema ALMA_RESIST.
+    ---
+
+## 🟢 **Archivo descargable**
+
+[Descargar prompt_fix_metadata_v2.md](sandbox:/mnt/data/prompt_fix_metadata_v2.md)
+
+> **Podés copiar el contenido directamente o usar el archivo para cargarlo en DeepSeek o cualquier plataforma de generación IA!**
+
+¿Te gustaría agregar alguna advertencia, nota personal, o link de referencia extra?  
+¿O lo dejamos así, listo para darle play en DeepSeek?
+
+
+## **Contexto:**
+Desarrollar un script profesional, seguro y auditable para el ecosistema ALMA_RESIST, alojado por convención en cada módulo en:  
+`core/scripts/fix_metadata/`
+
+El objetivo es validar, corregir y estandarizar los bloques de metadata YAML en todos los archivos críticos de cada módulo, dejando logs y backups de cada cambio y asegurando que NO se toquen archivos ni carpetas excluidas o sensibles.
+
+version: 1.0
+id: <tipo>_<yyyy-mm-dd>_<xx>           # Ejemplo: MEM_2025-06-06_04
+tipo: <tipo_registro>                  # fundacional, decision, bitacora, changelog, script, etc.
+formato: <md|yaml|py|sh|json>
+modulo: <modulo/carpeta>
+titulo: "<título_breve_descriptivo>"
+autor: <humano|agente>
+fecha_creacion: YYYY-MM-DD
+fecha_actualizacion: YYYY-MM-DD
+status: <activo|cerrado|en_revision|obsoleto>
+version_sistema: <sistema_version>
+origen: <archivo_origen|manual>
+tags: [tag1, tag2, ...]
+hash_integridad: sha256:<hash>
+linked_to: [relaciones_cruzadas]
+descripcion: >
+  Breve descripción del propósito y contexto del archivo.
+## Archivo: 0cPx.md
+Contenido:
+# 🧠 Prompt DeepSeek – Script Universal Fix Metadata v3 para ALMA_RESIST
+
+
+### **Novedades obligatorias v3**
+
+1. **Log de archivos saltados y motivo**:  
+   - Todo archivo excluido, saltado o no soportado debe quedar registrado en el log con acción `skipped` y motivo (`excluded by pattern`, `unsupported extension`, etc.).
+
+2. **Exclusión automática de logs**:  
+   - El script nunca debe procesar archivos con extensión `.log` ni el propio archivo de log generado por el script.
+
+3. **Campo autor robusto**:  
+   - Si falla `os.getlogin()`, usar `'desconocido'` como valor por defecto para el campo `autor` en metadata.
+
+4. **Referencia al prompt/IDEA**:  
+   - Incluir en cada registro de log un campo tipo `"prompt_ref": "IDEA_2025-06-06_01"` para trazabilidad.
+
+5. **Rutas de backup en el resumen final**:  
+   - Al terminar, mostrar cuántos archivos fueron respaldados y la ruta de los backups realizados.
+
+6. **Modo dry-run y resumen final mejorado**:  
+   - En modo diagnóstico, mostrar archivos que habrían sido modificados/saltados.  
+   - Al finalizar, resumen total: modificados, saltados, errores, backups hechos, dry-run vs real.
+
+7. **Configuración clara de exclusión**:  
+   - Seguir soportando exclusiones vía lista interna, archivo `.fix_metadata_ignore`, y parámetros CLI.
+
+8. **Nunca auto-modificarse ni dañar logs o sistema**:  
+   - Proteger la carpeta/logs del propio script por defecto.
+
+
+## **Referencia oficial:**  
+[IDEA_2025-06-06_01] – ALMA_RESIST | Santiago Calvo | Centralesis v2.3
+
+
+## Ejemplo de log para archivo saltado:
+
+```json
+{
+  "file": "core/notebooks/2025-06-05_memorias_base_generales.md",
+  "timestamp": "2025-06-11T11:22:33",
+  "action": "skipped",
+  "reason": "excluded by pattern",
+  "prompt_ref": "IDEA_2025-06-06_01"
+}
+```
+
+
+
+
+## Objetivo:
+
+Desarrollar un script profesional y auditable, mejorando la versión anterior, que recorra en profundidad cada módulo ALMA_RESIST y estandarice los bloques de metadata YAML en archivos críticos, **dejando registro en logs de TODO archivo procesado, saltado, modificado o con error**. Incluir las siguientes mejoras:
+
+
+### **Checklist funcional mínimo:**
+
+- Recorrer recursivamente desde la raíz de módulo hacia abajo.
+- Solo procesar extensiones soportadas (`.md`, `.yaml`, `.yml`, `.json`, `.py`, `.sh`).
+- Nunca tocar archivos binarios, temporales, logs ni archivos propios del script.
+- Loguear todas las acciones, incluyendo archivos saltados.
+- Backup antes de modificar.
+- Colorizar y mostrar notificaciones claras al usuario: ✔️ éxito, ⚠️ advertencia, ❌ error.
+- Resumir rutas de backups y acciones al final del proceso.
+- Código limpio, documentado y modular, fácil de adaptar.
+
+
+**Instrucciones finales:**  
+- Implementá cada mejora con comentarios claros.
+- Si alguna mejora no puede hacerse exactamente igual, aclaralo en el código.
+- El script debe ser fácilmente portable a cualquier otro módulo, solo ajustando rutas si hace falta.
+
+
+Ejemplo de log para archivo modificado:
+
+```json
+{
+  "file": "core/notebooks/2025-06-05_memorias_base_generales.md",
+  "timestamp": "2025-06-11T11:22:34",
+  "action": "updated",
+  "changes": {...},
+  "backup": "core/notebooks/2025-06-05_memorias_base_generales_20250611T112234.bak",
+  "prompt_ref": "IDEA_2025-06-06_01"
+}
+```
+
+
+    Este prompt debe dejar el script listo para usarse en producción y como referencia para todos los módulos futuros del sistema ALMA_RESIST.
+
+    
+
+
+
+## Objetivo:
+
+Desarrollar un script profesional y auditable, mejorando la versión anterior, que recorra en profundidad cada módulo ALMA_RESIST y estandarice los bloques de metadata YAML en archivos críticos, **dejando registro en logs de TODO archivo procesado, saltado, modificado o con error**. Incluir las siguientes mejoras:
+
+
+### **Checklist funcional mínimo:**
+
+- Recorrer recursivamente desde la raíz de módulo hacia abajo.
+- Solo procesar extensiones soportadas (`.md`, `.yaml`, `.yml`, `.json`, `.py`, `.sh`).
+- Nunca tocar archivos binarios, temporales, logs ni archivos propios del script.
+- Loguear todas las acciones, incluyendo archivos saltados.
+- Backup antes de modificar.
+- Colorizar y mostrar notificaciones claras al usuario: ✔️ éxito, ⚠️ advertencia, ❌ error.
+- Resumir rutas de backups y acciones al final del proceso.
+- Código limpio, documentado y modular, fácil de adaptar.
+
+
+**Instrucciones finales:**  
+- Implementá cada mejora con comentarios claros.
+- Si alguna mejora no puede hacerse exactamente igual, aclaralo en el código.
+- El script debe ser fácilmente portable a cualquier otro módulo, solo ajustando rutas si hace falta.
+
+
+Ejemplo de log para archivo modificado:
+
+```json
+{
+  "file": "core/notebooks/2025-06-05_memorias_base_generales.md",
+  "timestamp": "2025-06-11T11:22:34",
+  "action": "updated",
+  "changes": {...},
+  "backup": "core/notebooks/2025-06-05_memorias_base_generales_20250611T112234.bak",
+  "prompt_ref": "IDEA_2025-06-06_01"
+}
+```
+
+
+    Este prompt debe dejar el script listo para usarse en producción y como referencia para todos los módulos futuros del sistema ALMA_RESIST.
+
+## Archivo: JDiA.md
+Contenido:
+# 🧠 Prompt DeepSeek – Script Universal Fix Metadata v3 para ALMA_RESIST
+
+
+### **Novedades obligatorias v3**
+
+1. **Log de archivos saltados y motivo**:  
+   - Todo archivo excluido, saltado o no soportado debe quedar registrado en el log con acción `skipped` y motivo (`excluded by pattern`, `unsupported extension`, etc.).
+
+2. **Exclusión automática de logs**:  

@@ -1,0 +1,21 @@
+# 🧠 Solicitud de Implementación – `TransportLayer` – Sprint 2.6 – ALMA_RESIST
+
+## 🎯 Objetivo
+
+Implementar el archivo `transport_layer.py`, que define la clase `TransportLayer`. Esta clase será responsable de **almacenar y recuperar datos localmente en formato JSON**, actuando como capa de transporte básica entre los componentes del sistema ALMA_RESIST.
+
+Este módulo es parte del MVP del servidor LLM y debe integrarse correctamente con la entrada y salida definida por los contratos JSON.
+
+
+## 🧪 Ejemplo de uso
+
+```python
+tl = TransportLayer()
+
+# Guardar una entrada
+tl.send({"prompt": "¿Qué es el tiempo?"}, endpoint="responder")
+
+# Leer la última salida
+data = tl.receive(endpoint="responder")
+```
+

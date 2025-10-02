@@ -1,0 +1,24 @@
+
+# 🧠 Auditoría IA – Sprint Unificación Metadatos
+
+## 📌 Objetivo
+Verificar coherencia entre campos `domain`, `tags` y `linked_to` en todos los documentos `type: core`, conforme a las reglas de `metodologia_interaccion_ia_v2.md`.
+
+
+## ⚠️ Sugerencias Automáticas (IA)
+
+1. `docs/api_rest.md`
+   - Dominio: `infraestructura` → Falta en tags
+   - Sugerir `tags: [infraestructura, REST, api]`
+
+2. `docs/hitos.md`
+   - linked_to actual: `["metodologia_doc_ia_v2.md"]`
+   - Sugerir agregar: `["metodologia_sprints_v2.md", "metodologia_versionado_backups_v1.md"]`
+
+...
+
+
+## 📂 Registro
+
+Este archivo fue generado como parte del cierre del sprint `UnificacionMetadatos`.
+Guardar este reporte en: `docs/auditorias/`.

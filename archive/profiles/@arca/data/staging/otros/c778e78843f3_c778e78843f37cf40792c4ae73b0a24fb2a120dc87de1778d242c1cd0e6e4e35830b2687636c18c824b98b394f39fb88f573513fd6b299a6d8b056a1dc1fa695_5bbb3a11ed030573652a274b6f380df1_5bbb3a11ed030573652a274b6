@@ -1,0 +1,47 @@
+# `idea_base_ALMA_COIN.md`  
+**Versión 0.0.1 – Semilla económica para un sistema distribuido de IA soberana**
+
+
+## **Propósito**
+
+- Crear una criptomoneda soberana, limitada y útil, que funcione como medio de valor interno dentro de una red ALMA distribuida.
+- Empezar la fase fundacional con minería de bots propios, simulando el nacimiento de Bitcoin en su etapa temprana.
+- Permitir que tareas, validaciones, memorias y nodos en ALMA puedan ser recompensados en ALMA_COIN.
+- Diseñar una red P2P que pueda operar offline o en redes privadas.
+
+
+## **Fases del sistema**
+
+### **Fase 1 – Bootstrap fundacional**
+- Minería por bots de ALMA_RESIST en red cerrada
+- Validación local con baja dificultad
+- Registro de primeros bloques e identidades internas
+
+### **Fase 2 – Expansión nodal**
+- Incorporación de PCs amigas, nodos remotos, Raspberrys
+- Aumento de dificultad progresiva
+- Emisión controlada por crecimiento real del ecosistema
+
+### **Fase 3 – Utilidad interna**
+- Recompensas por tareas realizadas, validación de resúmenes, contribución al sistema
+- Transacciones internas entre sectores (ej: cultivo, gestión, IA)
+- Registro automático de movimientos mediante scripts
+
+### **Fase 4 – Apertura**
+- Publicación del repositorio
+- Nodo puente hacia posibles exchanges (opcional y descentralizado)
+- Fijación de políticas de gobernanza: emisión, staking, quorum
+
+
+## **Futuras posibilidades**
+
+- Proof of Memoria: minería ligada a almacenamiento/verificación real de memorias del sistema
+- Proof of IA: recompensa por procesamiento real de inferencias o resúmenes
+- Vinculación con cultivos, energía, logística o producción descentralizada
+- Recompensas por uptime de nodos o participación en flujos críticos
+
+
+## **Siguiente paso sugerido**
+- Armar `ALMA_COIN_v0.1.md` con parámetros concretos
+- Iniciar repositorio Git para versión forked
+- Crear nodo inicial de minería en red ALMA local

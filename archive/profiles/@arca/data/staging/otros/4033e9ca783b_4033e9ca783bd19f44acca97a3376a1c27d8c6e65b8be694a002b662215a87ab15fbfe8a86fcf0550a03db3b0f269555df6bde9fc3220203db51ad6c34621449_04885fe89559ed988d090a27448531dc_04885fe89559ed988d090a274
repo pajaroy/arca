@@ -1,0 +1,52 @@
+# 📌 Checklist Roadmap Técnico – ALMA_RESIST v0.0.0.2
+
+📅 Versión objetivo: v0.0.0.2  
+📂 Ubicación: `docs/checklists/roadmap_0.0.0.2.md`  
+🔧 Tipo de bloque: TÁCTICO  
+🧠 Objetivo: Implementar funcionalidades mínimas viables + corregir inconsistencias críticas detectadas en auditoría
+
+
+## ✅ 2. Implementación de Módulos Críticos
+
+### 📦 `core/cli.py`
+
+- [x] Implementar CLI mínima con comandos:
+  - `!ayuda`, `!cargar_modelo`, `!buscar_memoria`
+- [x] Usar `argparse` o `cmd.Cmd` como base
+- [x] Permitir redireccionamiento de logs de uso
+
+### 📦 `core/llm_server.py`
+
+- [ ] Implementar servidor local IA con FastAPI o sockets
+- [ ] Integrar inferencia simple vía llama.cpp (carga de modelo `.gguf`)
+- [ ] Exponer endpoint `/responder` para pruebas desde CLI
+
+### 📦 `core/loader.py`
+
+- [ ] Implementar lógica para transformar texto de LLM → JSON memoria
+- [ ] Validar contra `config/schema_memoria.json`
+- [ ] Conexión con `log_writer.py` para registrar nueva memoria
+
+
+## ✅ 4. Tests Automatizados
+
+- [ ] Convertir `test_log_writer.py` y `test_log_crypto.py` a `pytest`
+- [ ] Crear `test_cli.py` con pruebas básicas de comandos
+- [ ] Crear `test_llm.py` con mock de servidor IA
+- [ ] Validar integración: `cli → servidor → loader → memoria`
+
+
+## ✅ 6. Documentación Estratégica
+
+- [ ] Congelar versión v0.0.0.1 en carpeta `versiones/`
+- [ ] Registrar Sprint completo como hito en `docs/hitos/`
+- [ ] Agregar sección en `lecciones_aprendidas.md` (fallos detectados y abordados)
+
+
+## 🏁 Criterios de Cierre para v0.0.0.2
+
+- [ ] El comando `python core/cli.py` responde sin errores
+- [ ] El LLM local se levanta con modelo `.gguf` desde CLI
+- [ ] Una memoria puede registrarse desde CLI → JSON estructurado → logueado y cifrado
+- [ ] Todas las pruebas automáticas pasan
+- [ ] El changelog y README reflejan el estado real del sistema

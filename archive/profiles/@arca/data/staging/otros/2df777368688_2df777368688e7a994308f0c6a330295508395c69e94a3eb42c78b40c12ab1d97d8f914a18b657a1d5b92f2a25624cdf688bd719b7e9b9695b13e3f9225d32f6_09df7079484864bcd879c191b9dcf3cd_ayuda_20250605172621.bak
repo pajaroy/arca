@@ -1,0 +1,7 @@
+from core.cli import AlmaCLI
+
+def run(args):
+    """Muestra lista de comandos disponibles"""
+    print("Comandos disponibles:")
+    for cmd in sorted(AlmaCLI().commands.keys()):
+        print(f"  {cmd}")

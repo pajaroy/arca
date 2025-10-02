@@ -1,0 +1,37 @@
+# ✅ Solicitud de Test – `test_api_responder.py` – ALMA_RESIST Sprint 2.6
+
+Este test debe validar completamente el endpoint `/responder` expuesto por `main.py` (FastAPI), el cual está integrado con los siguientes módulos:
+
+- `model_wrapper.py` → Generación con llama.cpp
+- `transport_layer.py` → Validación contra `schema_prompt.json` y persistencia
+- `context_tracker.py` → Registro de interacciones
+- `log_writer.py` (opcional) → Logging estructurado
+
+
+## 📘 Requisitos funcionales
+
+### Endpoint: `POST /responder`
+
+- ✅ Devuelve 200 OK con prompt válido
+- ✅ Devuelve un `dict` con:
+  - `"respuesta"`: `str`
+  - `"metadata"`: `{ modelo: str, longitud_prompt: int, timestamp: float }`
+
+### Validaciones esperadas:
+- ❌ Prompt vacío → `422 Unprocessable Entity` (por validación Pydantic)
+- ❌ Modelo no cargado → `503 Service Unavailable`
+- ❌ Error interno (simulado) → `500 Internal Server Error`
+
+
+## 🧪 Casos de prueba sugeridos
+
+| Caso                                 | Esperado                        |
+|--------------------------------------|----------------------------------|
+| `POST /responder` con prompt válido  | 200 OK, estructura válida        |
+| Prompt vacío                         | 422 (Pydantic)                   |
+| Modelo no cargado                    | 503, mensaje: "modelo no cargado"|
+| Respuesta sin metadata               | ❌ (debe incluirla siempre)      |
+| Errores internos simulados           | 500 con mensaje de error         |
+
+
+¿Podés generar el archivo `test_api_responder.py` siguiendo esta estructura y cubriendo todos los casos mencionados con `pytest` + `TestClient`?

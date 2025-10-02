@@ -1,0 +1,77 @@
+Feedback: Deepseek
+**Respuesta Estructurada a la Auditoría Técnica de ALMA_RESIST**
+
+
+### **2. Cuellos de Botella en la Idea Base v0.0.0.4.0**
+
+**Problemas críticos:**
+
+- **RAM:** Cargar Mistral 7B (~13GB) + TinyLlama (~2GB) en paralelo exige >16GB de RAM.
+    
+    - _Solución:_ Usar modelos cuantizados (GGUF Q4) y limitar modelos concurrentes según hardware.
+        
+- **Comunicación lenta:** El event bus JSON y multiprocessing añaden latencia.
+    
+    - _Solución:_ Reemplazar JSON con Protocol Buffers para mensajes internos.
+        
+- **Asincronía bloqueante:** FastAPI maneja requests HTTP, pero los LLMs son bloqueantes.
+    
+    - _Solución:_ Ejecutar inferencias en threads separados con `asyncio.to_thread`.
+        
+
+
+### **4. Mejoras sin Perder Simplicidad**
+
+**Acciones inmediatas:**
+
+- **Abstraer la carga de modelos:** Crear una clase `ModelLoader` que gestione formatos (GGUF, safetensors) y dependencias (llama.cpp, vLLM).
+    
+- **Simplificar Docker:** Usar un solo contenedor con todos los modelos (para MVP), no uno por modelo.
+    
+- **Reemplazar SQLite con DuckDB:** Solo si se requiere paralelismo en logging (ej: >100 transacciones/segundo). Para el MVP, SQLite es suficiente.
+    
+- **Eliminar el event bus JSON temporal:** Usar llamadas directas entre módulos (vía funciones) hasta que se necesite escalar.
+    
+
+
+### **Conclusión y Pasos Clave**
+
+1. **MVP del servidor (2 semanas):**
+    
+    - FastAPI + 1 modelo (Mistral 7B cuantizado).
+        
+    - Integración básica con `context_tracker` y `memory_graph`.
+        
+    - Logging en SQLite con cifrado AES-GCM.
+        
+2. **Post-MVP (versión 0.5.0):**
+    
+    - Migrar a gRPC + NATS.
+        
+    - Dockerizar modelos individualmente.
+        
+    - Implementar `ModelRouter` con embeddings.
+        
+
+```python
+
+# Ejemplo de ModelLoader simplificado (MVP)
+class ModelLoader:
+    def __init__(self, model_path: str, quantization: str = "Q4"):
+        self.model = self._load_gguf(model_path, quantization)
+    
+    def _load_gguf(self, path: str, quantization: str):
+        # Implementación con llama.cpp
+        return llama_model
+    
+    def generate(self, prompt: str) -> str:
+        return self.model(prompt)
+```
+
+**Cita final:**
+
+> _“La escalabilidad no es un lujo, sino una consecuencia de módulos bien definidos y contratos claros.”_
+
+New chat
+
+AI-generated, for reference only

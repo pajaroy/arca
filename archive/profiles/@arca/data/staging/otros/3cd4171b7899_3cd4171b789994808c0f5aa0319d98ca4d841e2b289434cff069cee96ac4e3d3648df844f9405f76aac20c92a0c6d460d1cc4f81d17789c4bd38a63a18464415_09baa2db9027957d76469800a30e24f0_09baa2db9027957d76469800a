@@ -1,0 +1,19 @@
+# 🧱 RFC 0001 v2 – Metodología de Gobernanza Modular del Sistema ALMA_RESIST
+
+## 📌 Propósito
+
+Establecer una metodología formal y escalable para la gestión de módulos, carpetas, versiones, decisiones técnicas y documentación integrada con IA. Esta versión reemplaza la propuesta inicial y consolida las decisiones tomadas en el Sprint 2.2.
+
+
+## 🔄 Diferencias con la versión anterior
+
+- Añadido bloque de metadatos YAML estructurado
+- Se vincula directamente con metodologías versionadas por archivo
+- Define explícitamente cómo interactúan los RFC con Sprints y versiones
+- Integra flujo de archivado y trazabilidad viva (Methodology_Index.md)
+
+
+## 🧠 Conclusión
+
+Este RFC es el eje rector para mantener un sistema gobernable, extensible y automatizable, aún bajo operación individual. Su estructura es IA-friendly y humano-sustentable.
+

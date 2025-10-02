@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Ruta del zip final
+OUTPUT="/home/bird/Alma/ALMA_RESIST/alma_resist_compressed.zip"
+
+# Nos movemos al root del proyecto
+cd /home/bird/Alma/ALMA_RESIST || exit 1
+
+# Creamos el zip solamente con los archivos que no estén ignorados por Git
+git ls-files > /tmp/files_to_zip.txt
+
+# Comprimimos
+zip -r "$OUTPUT" -@ < /tmp/files_to_zip.txt
+
+echo "✅ Proyecto comprimido correctamente en: $OUTPUT"
+

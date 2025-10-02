@@ -1,0 +1,47 @@
+prompt: |
+  Quiero refactorizar el siguiente script (adjunto abajo) para mi sistema ALMA-CLI.
+
+  Necesito que la nueva versión (v0.1.1) cumpla los siguientes puntos, con mejoras profesionales y visión a futuro:
+
+  1. **Parser:** Usar exclusivamente `ruamel.yaml` para leer y escribir YAML, de modo que:
+      - Se preserve el orden original de los campos.
+      - Se conserven comentarios y formato.
+      - Soporte correctamente YAML embebido en `.md` (entre líneas `---`), `.yaml`, `.yml` (archivo completo) y en `.py` (en bloque docstring triple-comilla al principio).
+      - El parser debe ser robusto ante errores, avisando siempre si el YAML es inválido o el encabezado no existe, sin nunca sobreescribir archivos en esos casos.
+
+  2. **Modificación de campos:**
+      - Permitir modificar los campos `responsable`, `last_modified`, `last_modified_by` con argumentos CLI.
+      - Los campos deben poder pasarse de manera explícita, ej:
+        --responsable Bird Kael
+        --last-modified-by Centralesis
+        --last-modified "2025-07-09T21:00:00Z"
+      - Si no se especifican en la CLI, se actualizan automáticamente:
+        - `last_modified`: fecha y hora actual en ISO UTC.
+        - `last_modified_by`: usuario del sistema (`USER`/`USERNAME` o "alma" por defecto).
+      - El campo `responsable` debe ser siempre una lista de strings, incluso si es uno solo.
+      - **Agregar validación y autocompletado del campo `title`:**
+          - Si no existe, agregarlo vacío o con “pending”.
+          - Si existe, dejarlo igual (no modificar a menos que se pase explícitamente como argumento).
+
+  3. **Soporte de argumentos:**
+      - Agregar argumentos opcionales para todos los campos editables futuros (ej: --title, --estado).
+      - Implementar `--dry-run` (muestra cambios por consola, no guarda el archivo).
+      - Implementar `--force` (fuerza la actualización aunque los valores sean iguales).
+      - Mensajes claros: éxito, sin cambios, error, dry-run, YAML inválido, encabezado no encontrado.
+
+  4. **Logging:**  
+      - Log mínimo a archivo (info, warning, error), escribiendo en un log con nombre consistente (`fix_responsable.log`).
+      - Mostrar errores siempre por consola, nunca solo en el log.
+
+  5. **Código limpio y modular:**  
+      - Que la función principal pueda llamarse como módulo desde otros scripts.
+      - No hace falta comentarios en el código (solo el código completo y listo para usar).
+
+  6. **Robustez:**  
+      - El script nunca debe romper ni sobreescribir un archivo con YAML inválido.
+      - Si el encabezado YAML no existe, abortar e indicar: “No se encontró encabezado YAML. Corré primero Validador_Metadata.py”
+      - El script debe aceptar nombres de campo configurables a futuro.
+
+  **Devolver solo el código Python completo, sin explicaciones ni comentarios.**
+
+  **Adjunto el script base a refactorizar:**

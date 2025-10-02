@@ -1,0 +1,37 @@
+entradas:
+- fecha: '2025-06-06T03:53:41.784141'
+  accion: Alta de entrada de prueba desde alma-resist
+  descripcion: Testeo de script funcionalidad CLI tras restaurar archivo
+  motivo: Verificar funcionamiento tras copiar código correcto
+  ejecutado_por: Santi
+  estado: registrado
+  tags:
+  - debug
+  - test
+  - bitacora
+- fecha: '2025-06-06T03:58:11.787283'
+  accion: Test exitoso de automatización
+  descripcion: Se logró automatizar y validar el registro en bitácora viva YAML, resolviendo
+    problemas de archivos vacíos y sincronización.
+  motivo: Cierre de ciclo de debugging y validación del flujo CLI
+  ejecutado_por: Santi
+  estado: registrado
+  tags:
+  - debug
+  - bitacora
+  - exito
+  - automatizacion
+- fecha: '2025-06-06T04:05:57.417043'
+  accion: Creación de estructura scripts_bitacora
+  descripcion: Se creó la carpeta scripts_bitacora con subcarpetas docs y src, y archivos
+    README para alojar los scripts de automatización de bitácora y changelog de ALMA_RESIST.
+  motivo: Centralizar y automatizar la gestión documental viva de ALMA_RESIST.
+  ejecutado_por: Kael (CLI, con Santi)
+  estado: Finalizado, estructura lista para cargar scripts.
+  tags:
+  - scripts
+  - bitacora
+  - changelog
+  - automatizacion
+  - cli
+  - modularidad

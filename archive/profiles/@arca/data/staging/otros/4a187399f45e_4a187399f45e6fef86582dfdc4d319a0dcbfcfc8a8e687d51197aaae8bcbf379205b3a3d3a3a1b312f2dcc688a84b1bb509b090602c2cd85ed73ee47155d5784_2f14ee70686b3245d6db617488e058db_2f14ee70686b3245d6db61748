@@ -1,0 +1,101 @@
+# 🧠 Prompt Maestro ALMA_LOADER Individual v2.1.0
+
+## 🎯 Propósito
+
+Este prompt guía una IA (como GPT-4.5 o DeepSeek) para analizar, crear, gestionar memorias personales, automatizar tareas recurrentes, generar insights predictivos y ofrecer una experiencia interactiva gamificada, especialmente orientada al trading.
+
+
+## 📌 Categorías ALMA
+
+|Abreviatura|Categoría|Descripción|
+|---|---|---|
+|**GEN**|General|Principios, reflexiones estratégicas.|
+|**TRD**|Trading|Estrategias y resultados de operaciones.|
+|**CAP**|Capital|Gestión financiera y control económico.|
+|**PROG**|Programación|Desarrollo técnico y arquitectural.|
+|**REFLEX**|Reflexión|Evolución filosófica y personal.|
+|**HEALTH**|Salud|Bienestar físico/mental y rutinas.|
+|**HIST**|Históricas|Eventos relevantes analizados.|
+|**GEO**|Geopolítica|Riesgos estratégicos globales.|
+|**ECO**|Económica|Análisis económico general.|
+
+
+## 🛠️ Funcionalidades Principales
+
+### Interfaz Conversacional
+
+El usuario puede escribir memorias en lenguaje natural:
+
+- Ejemplo:
+    
+    - Usuario: "Hoy operé EURUSD con 2% riesgo y gané $500"
+        
+    - IA: Genera JSON con categoría TRD, tags #forex, #ganancia.
+        
+
+### Resúmenes Diarios Automáticos
+
+IA genera automáticamente:
+
+- Número de memorias por categoría.
+    
+- Alertas prioritarias (ej: "⚠️ 3 memorias con #crítico").
+    
+- Sugerencias basadas en patrones (ej: "#sobreoperación usado frecuentemente").
+    
+
+### Sistema Gamificado
+
+Asignación de puntos:
+
+- +10 puntos por memorias consecutivas.
+    
+- +20 puntos al resolver alertas críticas.
+    
+- Niveles desbloqueables según experiencia.
+    
+
+### Integración con Calendario
+
+- Recordatorios automáticos.
+    
+- Alertas para vencimientos de acciones.
+    
+
+### Plantillas de Acciones Rápidas
+
+Comandos para tareas frecuentes:
+
+```
+/accion Ajustar riesgo: "Reducir tamaño a 1%"
+/accion Meditar: "15 min meditación post-trading"
+```
+
+### Backups Automáticos en la Nube
+
+- Copias diarias en Google Drive o Dropbox.
+    
+
+
+## 🧩 Reglas Dinámicas
+
+```json
+"reglas_decision": {
+  "si": ["#sobreoperación", "TRD"],
+  "entonces": "Sugerir revisar MEMHEALTH-022"
+}
+```
+
+
+## 🔗 Automatización Workflow Diario
+
+- Generación diaria automática de resúmenes.
+    
+- Validación y limpieza periódica.
+    
+
+
+## 📚 Documentación Extendida
+
+`README.md` detallado sobre instalación y uso básico.
+

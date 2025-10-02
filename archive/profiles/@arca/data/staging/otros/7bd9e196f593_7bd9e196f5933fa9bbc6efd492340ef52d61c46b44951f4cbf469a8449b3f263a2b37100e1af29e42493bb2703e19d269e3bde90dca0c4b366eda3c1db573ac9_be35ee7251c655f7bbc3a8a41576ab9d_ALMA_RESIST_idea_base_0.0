@@ -1,0 +1,67 @@
+
+# ALMA_RESIST – Idea Base v0.0.3
+
+## 🧠 Resumen Ejecutivo
+
+**ALMA_RESIST** es un entorno operativo inteligente, portátil y autónomo, diseñado para funcionar offline desde múltiples nodos (PC madre, disco portátil y pendrive de arranque). Integra un servidor LLM local modular, un cliente de terminal IA, un sistema de memoria estructurada (ALMA_LOADER), y mecanismos de autonomía limitada. Esta versión incorpora mejoras clave en seguridad, documentación, recuperación de claves, pruebas de rendimiento y accesibilidad general.
+
+
+## ⚙️ Componentes y Mejoras Clave
+
+### 🔥 Servidor LLM (ALMA_SERVER_LLM)
+
+- Motores soportados: `text-generation-webui`, `llama.cpp`, `llama-cpp-python`, `vLLM`
+- Script modular `launch_llm.sh` que lee `llm_model.json` y lanza el backend apropiado
+- Pruebas de rendimiento: incluir benchmarks con prompts largos y uso en CPU/GPU mixtas
+
+### 💬 CLI Inteligente
+
+- Manejo de errores robusto (timeouts, caídas del servidor)
+- `Modo seguro`: caché local de respuestas frecuentes si el LLM no responde
+- `logs/errors.md` y fallback automáticos
+- Monitor de recursos integrado: RAM, CPU, disco (CLI dashboard en `!estado`)
+
+### 🧠 ALMA_LOADER
+
+- ETL con prompt JSON predefinido
+- `backup_memoria.sh` + `restore_backup.sh` con SHA-256 de integridad
+- Copias en `backups/` y logs de auditoría estructurados
+- Sincronización opcional con vault de Obsidian usando symlinks
+
+### 🛰️ Autonomía Controlada
+
+- Permisos reforzados (`chattr +i` en `system/`, AppArmor)
+- Carpeta `logs/autonomia_audit.md` para rastreo
+- Clasificación de riesgo por acción:
+    - **Bajo riesgo:** ordenar archivos
+    - **Medio riesgo:** mover carpetas
+    - **Alto riesgo (prohibido):** eliminar datos o modificar scripts críticos
+
+
+## 📚 Documentación Modular
+
+- `docs/idea_base/` → idea_base_x.x.x.md
+- `docs/modules/` → `llm.md`, `cli.md`, `loader.md`, `autonomia.md`
+- `docs/user_guide.md` → comandos básicos y solución de errores
+- `LICENSE.md` → compatibilidad revisada (Apache 2.0, MIT, etc.)
+- `docs/glossary.md` → RAG, GGUF, LoRA, etc.
+
+
+# 📋 Changelog v0.0.3 (Respecto a v0.0.2)
+
+### 🔧 Nuevas funcionalidades:
+- Diagrama Mermaid.js para arquitectura física
+- Script `launch_llm.sh` multi-backend
+- Integración con Obsidian via symlinks
+- Protocolo de recuperación de clave (Shamir)
+- Comando CLI `!estado` para monitoreo del sistema
+
+### ✅ Mejoras de seguridad:
+- Encriptado de logs con GPG
+- Carpetas protegidas por `chattr +i`
+- Clasificación de riesgo por acción autónoma
+
+### 📚 Documentación:
+- `user_guide.md` para no técnicos
+- `glossary.md` de términos IA
+- Compatibilidad de licencias documentada

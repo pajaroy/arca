@@ -1,0 +1,234 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+Script CLI mejorado para bitácora de ALMA_RESIST
+(Versión modularizada con rutas configurables y logging)
+"""
+
+import os
+import sys
+import argparse
+import yaml
+import shutil
+import logging
+from datetime import datetime
+from pathlib import Path
+
+# Configuración básica de logging
+logging.basicConfig(level=logging.WARNING, format='%(levelname)s: %(message)s')
+logger = logging.getLogger('bitacora')
+
+# Valores por defecto
+DEFAULT_BITACORA_FILE = "/home/bird/alma_core/control_central/bitacora/bitacora_viva.yaml"
+DEFAULT_BACKUP_DIR = "/home/bird/alma_core/control_central/bitacora/backups"
+MINIMAL_ENTRY_FIELDS = ['fecha', 'accion', 'descripcion', 'motivo', 'ejecutado_por', 'estado']
+
+def configurar_logging(verbose=False, debug=False):
+    """Configura niveles de logging según parámetros"""
+    if debug:
+        logger.setLevel(logging.DEBUG)
+    elif verbose:
+        logger.setLevel(logging.INFO)
+    else:
+        logger.setLevel(logging.WARNING)
+
+def validar_estructura_bitacora(data):
+    """Valida la estructura básica del archivo de bitácora"""
+    logger.debug("=== VALIDACION DE ESTRUCTURA ===")
+    logger.debug(f"Tipo: {type(data)}")
+    logger.debug(f"Contenido: {data}")
+    
+    if not isinstance(data, dict):
+        raise ValueError("La bitácora debe ser un diccionario")
+    if 'entradas' not in data:
+        raise ValueError("Falta sección 'entradas' en la bitácora")
+    if not isinstance(data['entradas'], list):
+        raise ValueError("Las entradas deben ser una lista")
+    
+    logger.debug("Estructura válida")
+    return True
+
+def hacer_backup(archivo, backup_dir):
+    """Crea un backup del archivo antes de modificarlo"""
+    logger.info(f"Realizando backup de: {archivo}")
+    
+    try:
+        os.makedirs(backup_dir, exist_ok=True)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        nombre_backup = f"bitacora_backup_{timestamp}.yaml"
+        backup_file = os.path.join(backup_dir, nombre_backup)
+        shutil.copy2(archivo, backup_file)
+        logger.info(f"Backup creado en: {backup_file}")
+        return backup_file
+    except Exception as e:
+        logger.error(f"Error en backup: {str(e)}")
+        raise
+
+def cargar_bitacora(archivo):
+    """Carga y valida el archivo de bitácora"""
+    logger.info(f"Cargando bitácora desde: {archivo}")
+    
+    try:
+        # Crear archivo si no existe
+        if not os.path.exists(archivo):
+            logger.warning(f"Archivo no existe, creando nuevo: {archivo}")
+            with open(archivo, 'w') as f:
+                yaml.dump({'entradas': []}, f)
+        
+        with open(archivo, 'r') as f:
+            data = yaml.safe_load(f) or {'entradas': []}
+        
+        validar_estructura_bitacora(data)
+        logger.debug(f"Datos cargados: {data}")
+        return data
+    except Exception as e:
+        logger.error(f"Error cargando bitácora: {str(e)}")
+        raise
+
+def guardar_bitacora(archivo, data, dry_run=False):
+    """Guarda los datos en el archivo de bitácora con validación"""
+    if dry_run:
+        logger.info("MODO DRY-RUN: No se guardarán cambios")
+        return True
+    
+    logger.info(f"Guardando bitácora en: {archivo}")
+    
+    try:
+        validar_estructura_bitacora(data)
+        directorio = os.path.dirname(archivo)
+        if directorio and not os.path.exists(directorio):
+            os.makedirs(directorio, exist_ok=True)
+        
+        with open(archivo, 'w') as f:
+            yaml.dump(data, f, sort_keys=False, allow_unicode=True)
+            f.flush()
+            os.fsync(f.fileno())
+        
+        logger.info("Guardado exitoso")
+        return True
+    except Exception as e:
+        logger.error(f"Error guardando: {str(e)}")
+        raise
+
+def crear_nueva_entrada(args):
+    """Crea un diccionario con los datos de la nueva entrada"""
+    entrada = {
+        'fecha': args.fecha or datetime.now().isoformat(),
+        'accion': args.accion,
+        'descripcion': args.descripcion,
+        'motivo': args.motivo,
+        'ejecutado_por': args.ejecutado_por,
+        'estado': args.estado or 'registrado'
+    }
+    
+    if args.tags:
+        entrada['tags'] = args.tags.split(',')
+    
+    logger.debug(f"Nueva entrada creada: {entrada}")
+    return entrada
+
+def agregar_entrada_bitacora(
+    accion, 
+    descripcion, 
+    motivo, 
+    ejecutado_por,
+    fecha=None, 
+    estado=None, 
+    tags=None,
+    bitacora_file=DEFAULT_BITACORA_FILE,
+    backup_dir=DEFAULT_BACKUP_DIR,
+    dry_run=False
+):
+    """Función modular para agregar entradas a la bitácora"""
+    # Crear estructura de argumentos compatible
+    class Args:
+        pass
+    args = Args()
+    args.accion = accion
+    args.descripcion = descripcion
+    args.motivo = motivo
+    args.ejecutado_por = ejecutado_por
+    args.fecha = fecha
+    args.estado = estado or 'registrado'
+    args.tags = tags
+    args.bitacora = bitacora_file
+    
+    # Proceso principal
+    bitacora_data = cargar_bitacora(bitacora_file)
+    nueva_entrada = crear_nueva_entrada(args)
+    bitacora_data['entradas'].append(nueva_entrada)
+    
+    # Backup solo si no es dry-run y el archivo existe
+    if not dry_run and os.path.exists(bitacora_file):
+        hacer_backup(bitacora_file, backup_dir)
+    
+    guardar_bitacora(bitacora_file, bitacora_data, dry_run)
+    return nueva_entrada
+
+def main():
+    # Configuración del parser de argumentos
+    parser = argparse.ArgumentParser(
+        description="Agrega una entrada a la bitácora viva de ALMA_RESIST",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
+    
+    # Argumentos requeridos
+    parser.add_argument('--accion', required=True, help="Acción realizada o evento registrado")
+    parser.add_argument('--descripcion', required=True, help="Descripción detallada de la acción/evento")
+    parser.add_argument('--motivo', required=True, help="Motivo o justificación de la acción")
+    parser.add_argument('--ejecutado_por', required=True, help="Persona o sistema que ejecutó la acción")
+    
+    # Argumentos opcionales
+    parser.add_argument('--fecha', help="Fecha en formato ISO (por defecto: ahora)")
+    parser.add_argument('--estado', help="Estado inicial de la entrada", default="registrado")
+    parser.add_argument('--tags', help="Tags separados por comas para categorización")
+    
+    # Nuevos argumentos configurables
+    parser.add_argument('--bitacora', help="Ruta al archivo de bitácora", default=DEFAULT_BITACORA_FILE)
+    parser.add_argument('--backup-dir', help="Directorio para backups", default=DEFAULT_BACKUP_DIR)
+    
+    # Argumentos de control
+    parser.add_argument('--dry-run', action='store_true', help="Simula la operación sin modificar archivos")
+    parser.add_argument('--verbose', action='store_true', help="Muestra información detallada del proceso")
+    parser.add_argument('--debug', action='store_true', help="Habilita modo debug con máxima verbosidad")
+    
+    args = parser.parse_args()
+    
+    # Configurar logging
+    configurar_logging(args.verbose, args.debug)
+    logger.debug(f"Argumentos recibidos: {vars(args)}")
+    
+    try:
+        # Proceso principal
+        nueva_entrada = agregar_entrada_bitacora(
+            accion=args.accion,
+            descripcion=args.descripcion,
+            motivo=args.motivo,
+            ejecutado_por=args.ejecutado_por,
+            fecha=args.fecha,
+            estado=args.estado,
+            tags=args.tags,
+            bitacora_file=args.bitacora,
+            backup_dir=args.backup_dir,
+            dry_run=args.dry_run
+        )
+        
+        if args.dry_run:
+            print("\nDRY-RUN: Simulación exitosa. No se realizaron cambios permanentes.")
+        else:
+            print("\nENTRADA AGREGADA EXITOSAMENTE")
+        
+        print("="*50)
+        print(f"Acción:    {nueva_entrada['accion']}")
+        print(f"Ejecutado: {nueva_entrada['ejecutado_por']}")
+        print(f"Fecha:     {nueva_entrada['fecha']}")
+        print(f"Estado:    {nueva_entrada['estado']}")
+        print("="*50)
+        
+    except Exception as e:
+        logger.error(f"Error crítico: {str(e)}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()
